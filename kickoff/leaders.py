@@ -61,16 +61,17 @@ def top_clean_sheets(cs_state, league):
 
 
 def leaders_html(scorers, assists, sheets):
-    """Each argument is a list of {"name", "club", "value"}, where club is a short code.
-    One leader reads 'Haaland (MCI) 9'. A tie reads '4 Tied: Gross (BHA), Evanilson (BOU), Rice (ARS)'."""
+    """Each argument is a list of {"name", "club", "value"}, where club is the club's code.
+    One leader shows the full name, 'Erling Haaland (MCI)'. A tie shows surnames, 'Gross (BHA), Rice (ARS)'.
+    Each player is kept together on one line, so a long list wraps between players, never inside one."""
     def line(label, entries):
         if not entries:
             return ""
-        who = ", ".join(f"{r.esc(surname(e['name']))} ({r.esc(e['club'])})" for e in entries)
-        value = entries[0]["value"]
-        body = f'<span class="n">{value} Tied</span>: {who}' if len(entries) > 1 else f'{who} <span class="n">{value}</span>'
-        return f'<li><span class="lbl">{label}</span><span>{body}</span></li>'
-    rows = line("Top Scorer", scorers) + line("Top Assists", assists) + line("Top Clean Sheets", sheets)
+        names = [e["name"] if len(entries) == 1 else surname(e["name"]) for e in entries]
+        who = ", ".join(f'<span class="p">{r.esc(n)} ({r.esc(e["club"])})</span>' for n, e in zip(names, entries))
+        return (f'<li><span class="lbl">{label}</span><span class="n">{entries[0]["value"]:02d}</span>'
+                f'<span class="who">{who}</span></li>')
+    rows = line("Top Scorer", scorers) + line("Top Assists", assists) + line("Top CS", sheets)
     return f'<ul class="leaders">{rows}</ul>' if rows else ""
 
 

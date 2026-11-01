@@ -120,10 +120,13 @@ tr.z-rose td:first-child { box-shadow: inset 4px 0 0 var(--rose); }
 .legend .z-lilac { background: var(--lilac); }
 .legend .z-rose { background: var(--rose); }
 
-.leaders { list-style: none; margin: 4px 0 18px; padding: 0; font-size: 16px; }
-.leaders li { display: flex; gap: 12px; padding: 4px 0; }
-.leaders .lbl { flex: 0 0 8.5em; padding-top: 3px; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-.leaders .n { color: var(--gold); font-weight: 600; font-variant-numeric: tabular-nums; }
+/* Three fixed columns (label, number, names) so every row lines up exactly */
+.leaders { list-style: none; margin: 4px 0 18px; padding: 0; font-size: 15px; }
+.leaders li { display: grid; grid-template-columns: 7.4em 2.2ch 1fr; column-gap: 10px; align-items: baseline; padding: 4px 0; }
+.leaders .lbl { min-width: 0; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.leaders .n { color: var(--gold); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.leaders .who { min-width: 0; }
+.leaders .p { white-space: nowrap; }
 
 .nodata { display: inline-block; padding: 4px 12px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; color: var(--muted); font-size: 16px; }
 

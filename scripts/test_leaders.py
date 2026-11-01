@@ -62,18 +62,24 @@ check("no data gives an empty list", leaders.top_clean_sheets({}, "eng.1") == []
 
 # ---- Display ----
 one = lambda n, c, v: [{"name": n, "club": c, "value": v}]  # noqa: E731
-html = leaders.leaders_html(one("Erling Haaland", "Man City", 9), one("Florian Wirtz", "Liverpool", 6), one("Mark Flekken", "Brighton", 6))
-check("three labelled lines in order", html.index("Top Scorer") < html.index("Top Assists") < html.index("Top Clean Sheets"))
-check("a single leader reads: Surname (CODE) number", "Haaland (Man City) <span" in html and '<span class="n">9</span>' in html, html)
-tied = leaders.leaders_html([{"name": "Pascal Gross", "club": "BHA", "value": 4}, {"name": "Evanilson", "club": "BOU", "value": 4},
-                             {"name": "Declan Rice", "club": "ARS", "value": 4}, {"name": "Dan Ndoye", "club": "BOU", "value": 4}], [], [])
-check("a tie reads: 4 Tied: Surname (CODE), ... and lists everyone", '4 Tied</span>: Gross (BHA), Evanilson (BOU), Rice (ARS), Ndoye (BOU)' in tied, tied)
-check("empty stats are left out", "Top Assists" not in tied)
+html = leaders.leaders_html(one("Erling Haaland", "MCI", 9), one("Florian Wirtz", "LIV", 6), one("Bart Verbruggen", "BHA", 6))
+check("three labelled lines in order, with Top CS", html.index("Top Scorer") < html.index("Top Assists") < html.index("Top CS"))
+check("single leader: number first, then full name and club code",
+      '<span class="n">09</span><span class="who"><span class="p">Erling Haaland (MCI)</span></span>' in html, html)
+check("every club shows as a code, never a full club name", "Manchester" not in html and "(BHA)" in html)
+tied = leaders.leaders_html([], [{"name": "Pascal Gross", "club": "BHA", "value": 4}, {"name": "Evanilson", "club": "BOU", "value": 4},
+                                {"name": "Declan Rice", "club": "ARS", "value": 4}, {"name": "Dan Ndoye", "club": "BOU", "value": 4}], [])
+check("a tie: number first, then surnames with codes, each player kept together",
+      '<span class="n">04</span><span class="who"><span class="p">Gross (BHA)</span>, <span class="p">Evanilson (BOU)</span>, '
+      '<span class="p">Rice (ARS)</span>, <span class="p">Ndoye (BOU)</span></span>' in tied, tied)
+check("numbers are zero-padded to two digits, so 9 and 15 line up",
+      '<span class="n">09</span>' in html and '<span class="n">15</span>' in leaders.leaders_html(one("A B", "X", 15), [], []))
+check("no 'Tied' wording", "Tied" not in tied)
+check("empty stats are left out", "Top Scorer" not in tied and "Top CS" not in tied)
 check("surnames", [leaders.surname(n) for n in ("Erling Haaland", "Kevin De Bruyne", "Virgil van Dijk", "Ederson", "Vinícius Júnior",
       "Trent Alexander-Arnold", "Marc-André ter Stegen", "Yvon Mvogo")] ==
-      ["Haaland", "De Bruyne", "van Dijk", "Ederson", "Vinícius Júnior", "Alexander-Arnold", "ter Stegen", "Mvogo"],
-      [leaders.surname(n) for n in ("Erling Haaland", "Kevin De Bruyne", "Virgil van Dijk", "Ederson", "Vinícius Júnior", "Trent Alexander-Arnold", "Marc-André ter Stegen", "Yvon Mvogo")])
-check("escapes odd characters", "&amp;" in leaders.leaders_html(one("Ann Lee", "A&B", 1), [], []))
+      ["Haaland", "De Bruyne", "van Dijk", "Ederson", "Vinícius Júnior", "Alexander-Arnold", "ter Stegen", "Mvogo"])
+check("escapes odd characters", "A&amp;B" in leaders.leaders_html(one("Ann Lee", "A&B", 1), [], []))
 
 # ---- In the tables ----
 espn.get_json = lambda url, params=None, **kw: json.loads((FIX / "espn_pl_table.json").read_text())
