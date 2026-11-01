@@ -140,6 +140,7 @@ tr.mine td:nth-child(2) { font-weight: 700; }
 .scores .gh { grid-column: 1; text-align: right; }
 .scores .ga { grid-column: 3; }
 .scores .mine { font-weight: 700; }
+.scores .p { white-space: nowrap; }
 
 .nodata { display: inline-block; padding: 4px 12px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; color: var(--muted); font-size: 16px; }
 

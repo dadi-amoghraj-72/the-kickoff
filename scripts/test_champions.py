@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from kickoff import champions, notes  # noqa: E402
+from kickoff import champions  # noqa: E402
 from kickoff import render as r  # noqa: E402
 from kickoff.sources import espn  # noqa: E402
 
@@ -49,24 +49,24 @@ como = next(m for m in wed if m["home"]["short"] == "Como")
 check("a line reads home, score, away", '<span class="h">Como</span><span class="s">4–1</span><span>Man Utd</span>' in html, html[:300])
 check("no matches, no scoreboard", champions.scores_html([]) == "")
 
-# ---- Which matches get a note ----
-picked = champions.note_facts(wed, rows)
-tiers = {m["id"]: f["length"] for m, f in picked}
-check("Como v Man Utd (two listed clubs) gets the fuller length", tiers.get(como["id"]) == notes.TIERS["derby"][0], tiers)
-check("Arsenal's match is left to the Arsenal section", all("Arsenal" not in (m["home"]["name"], m["away"]["name"]) for m, _ in picked))
-check("every note is about a listed club", all(any(champions.is_listed(i) for i in (m["home"]["id"], m["away"]["id"])) for m, _ in picked))
-check("facts name the competition and carry both teams' positions", all(f["competition"] == champions.COMPETITION and "table" in f for _, f in picked))
-
 # ---- Scorecard for Arsenal ----
 bay = next(m for m in wed if m["home"]["name"] == "Bayern Munich")
 check("scorers: each side lists its own goals, with penalties tagged",
       (champions.scorers(bay, "home"), champions.scorers(bay, "away")) == ("Davies 35', Kane 61' (pen)", "Eze 25', Rice 82'"),
       (champions.scorers(bay, "home"), champions.scorers(bay, "away")))
 og = {"goals": [{"side": "home", "player": "Nikola Milenkovic", "minute": "30'", "own_goal": True, "penalty": False}]}
-check("an own goal is listed under the team it counted for, tagged (og)", champions.scorers(og, "home") == "Milenkovic 30' (og)" and champions.scorers(og, "away") == "")
-check("the scoreboard gives only Arsenal's match a scorecard", html.count('class="gh"') + html.count('class="ga"') == 2, (html.count('class="gh"'), html.count('class="ga"')))
+two = {"goals": [{"side": "home", "player": "Nico Paz", "minute": "2'", "own_goal": False, "penalty": False},
+                 {"side": "home", "player": "Anastasios Douvikas", "minute": "49'", "own_goal": False, "penalty": False},
+                 {"side": "home", "player": "Nico Paz", "minute": "57'", "own_goal": False, "penalty": True}]}
+check("a player who scores twice is listed once, with both minutes (tags per goal)", champions.scorers(two, "home") == "Paz 2', 57' (pen), Douvikas 49'", champions.scorers(two, "home"))
+check("each scorer is kept together on one line", champions.scorers_html(two, "home").count('class="p"') == 2)
+check("an own goal is listed under the team it counted for, tagged (OG)", champions.scorers(og, "home") == "Milenkovic 30' (OG)" and champions.scorers(og, "away") == "")
+with_goals = sum(1 for m in wed for side in ("home", "away") if champions.scorers(m, side))
+check("every match with goals gets a scorecard, each side under its own team",
+      html.count('class="gh"') + html.count('class="ga"') == with_goals and with_goals >= 12, (html.count('class="gh"'), html.count('class="ga"'), with_goals))
+row = next(x for x in html.split("<li>") if "Arsenal" in x)
 check("Arsenal's scorecard shows both teams' scorers under their own side",
-      "Davies 35&#x27;, Kane 61&#x27; (pen)" in html.split('class="ga"')[0] and "Eze 25&#x27;, Rice 82&#x27;" in html and html.index("Davies") < html.index("Eze"))
+      "Davies 35&#x27;</span>, <span class=\"p\">Kane 61&#x27; (pen)" in row.split('class="ga"')[0] and "Eze 25&#x27;</span>, <span class=\"p\">Rice 82&#x27;" in row.split('class="ga"')[1], row)
 check("Arsenal's name is marked in the scoreboard", '<span class="mine">Arsenal</span>' in html and html.count('class="mine"') == 1)
 check("a goalless scorecard side shows nothing", "<span class=\"ga\">" not in champions.scores_html([{**bay, "goals": [g for g in bay["goals"] if g["side"] == "home"]}]))
 
@@ -88,17 +88,24 @@ check("bold_names bolds both clubs, wherever they appear",
       "<strong>Como</strong> beat <strong>Manchester United</strong>. <strong>Como</strong> led.")
 check("bold_names copes with possessives and ampersands",
       r.bold_names("Brighton & Hove Albion's win.", ("Brighton & Hove Albion",)) == "<strong>Brighton &amp; Hove Albion</strong>&#x27;s win.")
+check("bold_names also bolds an unambiguous first word ('LASK' for 'LASK Linz')",
+      r.bold_names("LASK came from behind.", ("LASK Linz", "Sporting CP")) == "<strong>LASK</strong> came from behind.")
+check("bold_names does not bold an ambiguous first word (two Manchester clubs)",
+      "<strong>" not in r.bold_names("Manchester was busy.", ("Manchester City", "Manchester United")))
+check("bold_names does not bold a bare 'Real' or 'Inter'", "<strong>" not in r.bold_names("Real and Inter won.", ("Real Madrid", "Real Betis", "Internazionale")))
 check("bold_names never double-bolds overlapping names", r.bold_names("Manchester United won.", ("United", "Manchester United")).count("<strong>") == 1)
 check("bold_names escapes everything else", r.bold_names("<b>x</b> Como", ("Como",)) == "&lt;b&gt;x&lt;/b&gt; <strong>Como</strong>")
 check("render.table adds row classes after the zone", 'class="z-blue cut mine"' in r.table("t", [("a", False)], [["x"]], zones=["blue"], row_classes=["cut mine"]))
 
 # ---- The whole block ----
-written = {m["id"]: {"note": "Como beat Manchester United 4-1."} for m, _ in picked[:1]}
-full = champions.section_html(wed, rows, written)
-check("block: heading, scoreboard, the note with bold names, then the table",
-      full.index("Champions League") < full.index('class="scores"') < full.index("<strong>Como</strong> beat <strong>Manchester United</strong>") < full.index("<table"))
-check("no matches, no block", champions.section_html([], rows, {}) == "")
-ko = champions.section_html([{**m, "stage": "round-of-16"} for m in wed], rows, {})
+text = "Como beat Manchester United 4-1, and Sporting went down to LASK."
+full = champions.section_html(wed, rows, text)
+check("block: heading, then the overview with bold team names, then the scoreboard, then the table",
+      full.index("Champions League") < full.index("<strong>Como</strong> beat <strong>Manchester United</strong>") < full.index('class="scores"') < full.index("<table"))
+check("short names are bolded in the overview too", "<strong>Sporting</strong> went down to <strong>LASK</strong>" in full, full[:400])
+check("no overview given: the scoreboard and table still appear", 'class="scores"' in champions.section_html(wed, rows) and "<strong>" not in champions.section_html(wed, rows)[:60])
+check("no matches, no block", champions.section_html([], rows, text) == "")
+ko = champions.section_html([{**m, "stage": "round-of-16"} for m in wed], rows)
 check("knockout matchday: scores but no league-phase table", 'class="scores"' in ko and "<table" not in ko)
 
 print(f"\n{sum(results)} of {len(results)} passed")

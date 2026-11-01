@@ -74,10 +74,24 @@ def no_data(sport=None):
     return f'<p><span class="nodata">{esc(who)}No data this morning</span></p>'
 
 
+def _name_variants(names):
+    """The names to bold: each full name, plus its first word when that is unambiguous (so 'LASK' for 'LASK Linz'
+    and 'Sporting' for 'Sporting CP', but not 'Manchester' when City and United both appear, or a bare 'Real')."""
+    names = {n for n in names if n}
+    firsts = {}
+    for n in names:
+        firsts.setdefault(n.split()[0], set()).add(n)
+    variants = set(names)
+    for first, owners in firsts.items():
+        if len(owners) == 1 and len(first) >= 4 and first.lower() not in {"real", "club", "city", "united", "inter", "sporting cp"}:
+            variants.add(first)
+    return variants
+
+
 def bold_names(text, names):
     """Escape a note for the page and put the given team names in bold, wherever they appear."""
     out = esc(text)
-    for name in sorted({n for n in names if n}, key=len, reverse=True):
+    for name in sorted(_name_variants(names), key=len, reverse=True):
         out = re.sub(rf"(?<![\w>]){re.escape(esc(name))}(?![\w<])", lambda m: f"<strong>{m.group(0)}</strong>", out)
     return out
 

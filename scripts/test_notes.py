@@ -56,7 +56,12 @@ good = f"Chelsea beat Manchester United 2-0, with {scorer} scoring in the {minut
 check("a faithful note passes", notes.check_note(good, f) == [], notes.check_note(good, f))
 check("an invented number is caught", any("number 61000" in p for p in notes.check_note("Chelsea won 2-0 in front of 61000 fans.", f)))
 check("an invented name is caught", any("Mourinho" in p for p in notes.check_note("Chelsea won 2-0 and Mourinho smiled.", f)))
-check("possessives and hyphenated facts don't cause false alarms", notes.check_note("Chelsea's win over Manchester United finished 2-0.", f) == [])
+check("an invented name at the START of a sentence is caught", any("Mourinho" in p for p in notes.check_note("Chelsea won 2-0. Mourinho was pleased.", f)))
+check("ordinary sentence openers and -ing words are not mistaken for names",
+      notes.check_note("Overall, Chelsea won 2-0. Scoring twice, they never looked back. Meanwhile United struggled.", f) == [],
+      notes.check_note("Overall, Chelsea won 2-0. Scoring twice, they never looked back. Meanwhile United struggled.", f))
+check("club nicknames such as Spurs are allowed", notes.check_note("Spurs won 2-0.", f) == [])
+check("possessives and hyphenated facts don\'t cause false alarms", notes.check_note("Chelsea's win over Manchester United finished 2-0.", f) == [])
 nomove = {k: v for k, v in f["table"].items()}
 stay = "Chelsea won 2-0 and stay fourth."
 check("claiming a table move without a previous position is caught",

@@ -14,7 +14,8 @@ BIG_SIX_ORDER = ["382", "360", "364", "363", "367"]  # Arsenal has its own secti
 TIERS = {"short": ("one sentence, at most 25 words", 30), "standard": ("two to three sentences, at most 55 words", 65),
          "derby": ("three to four sentences, at most 80 words", 95),
          "arsenal": ("four to six sentences, at most 110 words; cover the result, the scorers and assists, the table or recent form", 125),
-         "women": ("two sentences, at most 45 words", 55)}
+         "women": ("two sentences, at most 45 words", 55),
+         "overview": ("four to six sentences, at most 110 words", 125)}
 
 SYSTEM = """You write the match notes for The Kickoff, a personal daily sports digest read by one football fan in Singapore.
 
@@ -49,7 +50,23 @@ MOVEMENT = re.compile(r"\b(stay(?:s|ed)?|remain(?:s|ed)?|climb(?:s|ed|ing)?|ris(
 HYPE = re.compile(r"thrash|hammer|demolish|humiliat|masterclass|clinical|thriller|stunning|sensational|annihilat", re.I)
 LIMITS = {desc: limit for desc, limit in TIERS.values()}
 
-ALLOWED_WORDS = {"premier", "league", "champions", "europa", "conference", "cup", "monday", "tuesday", "wednesday",
+# Words a sentence may start with. A first word outside this list, outside the facts and without an ordinary
+# word ending is treated as a possible invented name.
+STARTERS = set("""the a an this that these those it its they their there here in on at by for from with without after before
+during while when where as but and or so yet if though although despite both each every all most some many few several one
+two three four five six seven eight nine ten eleven twelve first second third last next another other others nobody
+everyone someone nothing everything something only just even still also then now today tonight yesterday overall meanwhile
+elsewhere otherwise instead however nevertheless together between among across against behind beyond within under over
+through throughout into onto out up down off about around along early late earlier later finally ultimately perhaps maybe
+indeed clearly simply more less much no not neither either whatever whoever what which who whose how why he she we you i
+his her our your half full goal goals win wins defeat result results victory draw draws""".split())
+ORDINARY_ENDINGS = ("ing", "ed", "ly", "ness", "tion", "sion", "ment", "ous", "ful", "ity", "ive", "able")
+
+# Well-known club nicknames: not invented names, so they are allowed even when the facts say "Tottenham Hotspur".
+NICKNAMES = {"spurs", "gunners", "citizens", "blues", "reds", "toffees", "magpies", "hammers", "villans", "seagulls",
+             "cherries", "eagles", "foxes", "bees", "wolves", "saints", "blades", "canaries", "lions", "red", "devils"}
+
+ALLOWED_WORDS = NICKNAMES | {"premier", "league", "champions", "europa", "conference", "cup", "monday", "tuesday", "wednesday",
                  "thursday", "friday", "saturday", "sunday", "british", "english", "spanish", "german", "french",
                  "italian", "turkish", "uefa", "fa", "var"}
 
@@ -111,7 +128,7 @@ def plain_note(f):
     line = f"{f['home']} {f['final_score']} {f['away']}."
     parts = []
     for g in f["goals"]:
-        tag = {"penalty": " (pen)", "own goal": " (og)"}.get(g["type"], "")
+        tag = {"penalty": " (pen)", "own goal": " (OG)"}.get(g["type"], "")
         parts.append(f"{g['scorer']} {g['minute']}{tag}")
     if parts:
         line += " Goals: " + ", ".join(parts) + "."
@@ -149,7 +166,11 @@ def check_note(note, f):
             problems.append(f"number {n} is not in the facts")
     for sentence in re.split(r"(?<=[.!?])\s+", note):
         words = re.findall(r"[\w'’-]+", sentence)
-        for w in words[1:]:  # the first word of a sentence is capitalised anyway
+        first = re.sub(r"['’]s$", "", words[0]) if words else ""
+        if (first.isalpha() and len(first) > 2 and first.lower() not in vocab and first.lower() not in STARTERS
+                and first.lower() not in ALLOWED_WORDS and not first.lower().endswith(ORDINARY_ENDINGS)):
+            problems.append(f"name {first} is not in the facts")
+        for w in words[1:]:  # later capitalised words are names; the first word was handled above
             base = re.sub(r"['’]s$", "", w)  # "Villa's" is checked as "Villa"
             if base[0].isupper() and base.lower() not in vocab and base.lower() not in ALLOWED_WORDS \
                     and not all(p.lower() in vocab for p in base.split("-")):
@@ -177,12 +198,13 @@ def cost(usage, model=None):
     return (usage["input"] * price[0] + usage["output"] * price[1]) / 1_000_000
 
 
-def _ask(client, facts_list, extra=""):
-    """One call. Returns ({id: note}, usage). Any failure returns ({}, usage so far) and a warning."""
+def call_json(client, system, schema, content):
+    """One Claude call that must return JSON matching the schema. Returns (parsed object or None, usage).
+    Any failure (API error, refusal, cut-off, unreadable reply) returns None and a warning, never an exception."""
     import anthropic
-    body = {"model": settings.CLAUDE_MODEL, "max_tokens": 16000, "system": SYSTEM,
-            "messages": [{"role": "user", "content": extra + "Matches:\n" + json.dumps(facts_list, ensure_ascii=False, indent=1)}],
-            "output_config": {"effort": settings.CLAUDE_EFFORT, "format": {"type": "json_schema", "schema": SCHEMA}}}
+    body = {"model": settings.CLAUDE_MODEL, "max_tokens": 16000, "system": system,
+            "messages": [{"role": "user", "content": content}],
+            "output_config": {"effort": settings.CLAUDE_EFFORT, "format": {"type": "json_schema", "schema": schema}}}
     try:
         try:
             resp = client.beta.messages.create(betas=["server-side-fallback-2026-07-01"], fallbacks="default", **body)
@@ -191,16 +213,25 @@ def _ask(client, facts_list, extra=""):
             resp = client.messages.create(**body)
     except Exception as e:
         print(f"WARN  Claude call failed: {type(e).__name__}", file=sys.stderr)
-        return {}, {"input": 0, "output": 0}
+        return None, {"input": 0, "output": 0}
     usage = {"input": resp.usage.input_tokens, "output": resp.usage.output_tokens}
     if resp.stop_reason != "end_turn":
-        print(f"WARN  Claude stopped early ({resp.stop_reason}); using plain notes", file=sys.stderr)
-        return {}, usage
+        print(f"WARN  Claude stopped early ({resp.stop_reason}); using the fallback", file=sys.stderr)
+        return None, usage
     try:
-        text = next(b.text for b in resp.content if b.type == "text")
-        return {n["id"]: n["note"] for n in json.loads(text)["notes"]}, usage
+        return json.loads(next(b.text for b in resp.content if b.type == "text")), usage
     except Exception:
-        print("WARN  Claude's reply could not be read; using plain notes", file=sys.stderr)
+        print("WARN  Claude's reply could not be read; using the fallback", file=sys.stderr)
+        return None, usage
+
+
+def _ask(client, facts_list, extra=""):
+    """Match notes: ({id: note}, usage). Any failure gives an empty dict."""
+    obj, usage = call_json(client, SYSTEM, SCHEMA,
+                           extra + "Matches:\n" + json.dumps(facts_list, ensure_ascii=False, indent=1))
+    try:
+        return {n["id"]: n["note"] for n in obj["notes"]}, usage
+    except Exception:
         return {}, usage
 
 

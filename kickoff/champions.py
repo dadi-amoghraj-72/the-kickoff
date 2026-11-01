@@ -1,5 +1,4 @@
 """Champions League: matchday scores, notes for the listed clubs, and the full league-phase table."""
-from kickoff import notes
 from kickoff import render as r
 from kickoff.clubs import ARSENAL_ID, is_listed
 from kickoff.leaders import surname
@@ -18,31 +17,41 @@ def in_league_phase(matches):
     return any(m.get("stage") == "league-phase" for m in matches)
 
 
-def scorers(m, side):
-    """'Eze 25', Rice 82'' for one side. An own goal is listed under the team it counted for."""
-    parts = []
+def scorer_entries(m, side):
+    """['Paz 2', 57'', 'Douvikas 49''] for one side: surname, then all that player's minutes. A penalty is tagged
+    (pen) and an own goal (OG); an own goal is listed under the team it counted for."""
+    order, minutes = [], {}
     for g in m["goals"]:
         if g["side"] == side:
-            tag = " (og)" if g["own_goal"] else (" (pen)" if g["penalty"] else "")
-            parts.append(f"{surname(g['player'])} {g['minute']}{tag}")
-    return ", ".join(parts)
+            if g["player"] not in minutes:
+                order.append(g["player"])
+            tag = " (OG)" if g["own_goal"] else (" (pen)" if g["penalty"] else "")
+            minutes.setdefault(g["player"], []).append(f"{g['minute']}{tag}")
+    return [f"{surname(p)} {', '.join(minutes[p])}" for p in order]
 
 
-def scores_html(matches, scorecard_for=(ARSENAL_ID,)):
-    """One line per match: home team (right-aligned), score, away team (left-aligned).
-    A match involving a club in scorecard_for also gets its scorers underneath, each under its own team."""
+def scorers(m, side):
+    return ", ".join(scorer_entries(m, side))
+
+
+def scorers_html(m, side):
+    """Each scorer kept together on one line, so a long list wraps between players, never inside one."""
+    return ", ".join(f'<span class="p">{r.esc(e)}</span>' for e in scorer_entries(m, side))
+
+
+def scores_html(matches, highlight=(ARSENAL_ID,)):
+    """One line per match: home team (right-aligned), score, away team (left-aligned), with the scorers
+    underneath, each under their own team. Clubs in `highlight` (Arsenal) have their name in bold."""
     if not matches:
         return ""
     items = []
     for m in matches:
-        card = bool({m["home"]["id"], m["away"]["id"]} & set(scorecard_for))
         name = lambda side: (f'<span class="mine">{r.esc(m[side]["short"])}</span>'  # noqa: E731
-                             if card and m[side]["id"] in scorecard_for else r.esc(m[side]["short"]))
+                             if m[side]["id"] in highlight else r.esc(m[side]["short"]))
         row = (f'<span class="h">{name("home")}</span><span class="s">{m["home_score"]}–{m["away_score"]}</span>'
                f'<span>{name("away")}</span>')
-        if card:
-            home, away = scorers(m, "home"), scorers(m, "away")
-            row += (f'<span class="gh">{r.esc(home)}</span>' if home else "") + (f'<span class="ga">{r.esc(away)}</span>' if away else "")
+        home, away = scorers_html(m, "home"), scorers_html(m, "away")
+        row += (f'<span class="gh">{home}</span>' if home else "") + (f'<span class="ga">{away}</span>' if away else "")
         items.append(f"<li>{row}</li>")
     return f'<ul class="scores">{"".join(items)}</ul>'
 
@@ -64,21 +73,16 @@ def table_html(rows):
                    body, zones=[zone(x["rank"]) for x in rows], row_classes=classes)
 
 
-def note_facts(matches, rows, previous=None):
-    """[(match, facts)] for the matches that get a written note: those with a listed club, Arsenal's excluded."""
-    return [(m, notes.match_facts(m, tier, rows, previous, COMPETITION))
-            for m, tier in notes.select(espn.CHAMPIONS_LEAGUE, matches)]
-
-
-def section_html(matches, rows, written):
-    """The full Champions League block. written: {match id: {"note": ...}} from notes.write_notes.
+def section_html(matches, rows, overview_text=None):
+    """The full Champions League block: the overview first, then the scoreboard, then the league-phase table.
     Returns '' when there were no matches, so the block is simply left out."""
     if not matches:
         return ""
-    html = "<h3>Champions League</h3>" + scores_html(matches)
-    for m in matches:
-        if m["id"] in written:
-            html += f"<p>{r.bold_names(written[m['id']]['note'], (m['home']['name'], m['away']['name']))}</p>"
+    names = [n for m in matches for side in ("home", "away") for n in (m[side]["name"], m[side]["short"])]
+    html = "<h3>Champions League</h3>"
+    if overview_text:
+        html += f"<p>{r.bold_names(overview_text, names)}</p>"
+    html += scores_html(matches)
     if rows and in_league_phase(matches):
         html += table_html(rows)
     return html

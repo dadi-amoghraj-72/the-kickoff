@@ -43,8 +43,10 @@ def parse_match(event, league):
         elif d.get("redCard"):
             reds.append({"minute": d["clock"]["displayValue"], "player": who, "side": side})
     status = event["status"]["type"]
+    recap = next((h for h in (comp.get("headlines") or []) if h and h.get("type") == "Recap"), None)
     return {
         "id": event["id"], "league": league, "kickoff": event["date"], "stage": (event.get("season") or {}).get("slug", ""),
+        "recap": {"headline": recap.get("shortLinkText", ""), "summary": recap.get("description", "")} if recap else None,
         "home": team("home"), "away": team("away"),
         "home_score": int(teams["home"].get("score") or 0), "away_score": int(teams["away"].get("score") or 0),
         "completed": bool(status.get("completed")), "status": status.get("description", ""),
@@ -212,3 +214,9 @@ def get_match_details(event_id, league="all"):
         elif d.get("redCard"):
             reds.append({"minute": minute, "player": people[0] if people else "Unknown", "side": side})
     return {"goals": goals, "reds": reds}
+
+
+def get_odds(event_id, league="all"):
+    """The pre-match betting lines (a list of records) for one match, from its summary. May be empty."""
+    data = get_json(SUMMARY.format(league=league), {"event": event_id})
+    return data.get("pickcenter") or data.get("odds") or []
