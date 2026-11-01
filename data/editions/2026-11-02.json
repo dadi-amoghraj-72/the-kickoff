@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-02",
+  "dummy": true,
+  "headlines": [
+    "Dummy headline one: placeholder for the biggest story",
+    "Dummy headline two: placeholder for the second story",
+    "Dummy headline three: placeholder for the third story"
+  ],
+  "sections": [
+    {
+      "id": "big-stuff",
+      "title": "The Big Stuff",
+      "html": "<div class=\"potd\"><span class=\"label\">Performance of the Day</span><strong>Player One, Home FC</strong><p>Placeholder for the one standout performance across all sports. This is placeholder text so the page is long enough to scroll and the progress rail has something to measure. Real editions will have short summaries in our own words, each with a link to the original story.</p></div><h3>Key Overnight Scores</h3><p><strong>Home FC 2–1 Away FC.</strong> A placeholder result. This is placeholder text so the page is long enough to scroll and the progress rail has something to measure. Real editions will have short summaries in our own words, each with a link to the original story.</p><h3>Biggest News</h3><p>Placeholder news item. <a href=\"https://example.com\" rel=\"noopener\">Read the original</a></p><h3>Major Injuries</h3><p>Placeholder injury note for a key player. Back in about three weeks.</p>"
+    },
+    {
+      "id": "on-today",
+      "title": "On Today",
+      "html": "<ul class=\"today\"><li><time>5:30pm</time><span>Placeholder: a Premier League early kick-off.</span><span class=\"tag\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/></svg>While you're up</span></li><li><time>8:00pm</time><span>Placeholder: a Champions League match.</span><span class=\"tag\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/></svg>While you're up</span></li><li><time>2:00am</time><span>Placeholder: an NBA game, results in tomorrow's edition.</span><span class=\"tag\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z\"/></svg>Overnight</span></li></ul><h3>Games To Watch This Week</h3><p>Mondays carry the week's big games, with every time in Singapore time. This is a placeholder for the picks.</p>"
+    },
+    {
+      "id": "arsenal",
+      "title": "Arsenal",
+      "html": "<p><strong>Placeholder result.</strong> Scorers, injuries, next fixture and news go here. This is placeholder text so the page is long enough to scroll and the progress rail has something to measure. Real editions will have short summaries in our own words, each with a link to the original story.</p><p><strong>Transfer rumour (unconfirmed):</strong> placeholder, clearly labelled as a rumour.</p><h3>Arsenal Women</h3><p>A short placeholder block for the women's team.</p>"
+    },
+    {
+      "id": "football",
+      "title": "Football",
+      "html": "<h3>Results</h3><p>League results and club one-liners go here. This is placeholder text so the page is long enough to scroll and the progress rail has something to measure. Real editions will have short summaries in our own words, each with a link to the original story.</p><div class=\"table-wrap\"><table><caption>Placeholder league table</caption><thead><tr><th class=\"\">Team</th><th class=\"n\">P</th><th class=\"n\">GD</th><th class=\"n\">Pts</th></tr></thead><tbody><tr class=\"z-blue\"><td class=\"\">AAA</td><td class=\"n\">10</td><td class=\"n\">+14</td><td class=\"n\">25</td></tr><tr class=\"z-blue\"><td class=\"\">BBB</td><td class=\"n\">10</td><td class=\"n\">+9</td><td class=\"n\">22</td></tr><tr class=\"z-lilac\"><td class=\"\">CCC</td><td class=\"n\">10</td><td class=\"n\">+7</td><td class=\"n\">20</td></tr><tr><td class=\"\">DDD</td><td class=\"n\">10</td><td class=\"n\">+3</td><td class=\"n\">17</td></tr><tr><td class=\"\">EEE</td><td class=\"n\">10</td><td class=\"n\">-2</td><td class=\"n\">12</td></tr><tr class=\"z-rose\"><td class=\"\">FFF</td><td class=\"n\">10</td><td class=\"n\">-8</td><td class=\"n\">6</td></tr></tbody></table></div><ul class=\"legend\"><li><i class=\"z-blue\"></i>Quarter-final places</li><li><i class=\"z-lilac\"></i>Play-off place</li><li><i class=\"z-rose\"></i>Relegated</li></ul><h3>FPL Corner</h3><p>Team news, deadline reminder and the gameweek's top scorers will go here.</p>"
+    },
+    {
+      "id": "other-sports",
+      "title": "Cricket, F1, Tennis, NFL And NBA",
+      "html": "<h3>Cricket</h3><ol class=\"standouts\"><li><strong>Player Two</strong>, 112 off 98 balls. Placeholder context.</li><li><strong>Player Three</strong>, 5 for 31. Placeholder context.</li></ol><h3>F1</h3><p>Race, sprint and qualifying results plus standings go here. This is placeholder text so the page is long enough to scroll and the progress rail has something to measure. Real editions will have short summaries in our own words, each with a link to the original story.</p><h3>Tennis</h3><p><span class=\"nodata\">Tennis: No data this morning</span></p><h3>NFL</h3><p>Mondays carry the early-game scores. This is placeholder text so the page is long enough to scroll and the progress rail has something to measure. Real editions will have short summaries in our own words, each with a link to the original story.</p><h3>NBA</h3><p>Tracked players first, then the compact scores. Placeholder.</p>"
+    },
+    {
+      "id": "young-guns",
+      "title": "Young Guns",
+      "html": "<p><strong>Player Four</strong> (football, age 19): placeholder note, such as \"his third big game this month.\"</p><p><strong>Player Five</strong> (NBA rookie): placeholder note.</p>"
+    },
+    {
+      "id": "around",
+      "title": "Around The Sporting World",
+      "html": "<p>Rugby, golf, UFC, badminton, athletics and more appear here only when something major happened. Placeholder.</p><p>This is placeholder text so the page is long enough to scroll and the progress rail has something to measure. Real editions will have short summaries in our own words, each with a link to the original story.</p>"
+    },
+    {
+      "id": "stories",
+      "title": "Interesting Stories",
+      "html": "<p><strong>Placeholder story one.</strong> Two or three sentences in our own words. <a href=\"https://example.com\" rel=\"noopener\">Original</a></p><p><strong>Placeholder story two.</strong> Another short summary. <a href=\"https://example.com\" rel=\"noopener\">Original</a></p>"
+    }
+  ]
+}

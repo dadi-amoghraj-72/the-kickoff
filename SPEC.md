@@ -44,7 +44,7 @@ Every edition follows the same order, and a section appears only when it has som
 2. **On today:** today's events in Singapore time, each tagged "While you're up" (sun icon) or "Overnight" (moon icon). Mondays add Games to Watch for the week.
 3. **Arsenal:** the men's team in full, plus Arsenal Women.
 4. **Football:** results by league, club one-liners, Champions League, international football during breaks, tables and the FPL corner.
-5. **Cricket, F1, tennis, NFL and NBA:** each with its own standouts.
+5. **Cricket, F1, tennis, NFL, NBA and baseball:** each with its own standouts.
 6. **Young Guns:** rookie and young star watch across all sports.
 7. **Around the sporting world:** the general section.
 8. **Interesting stories:** three to five picks from across everything covered.
@@ -60,6 +60,13 @@ Every edition follows the same order, and a section appears only when it has som
 **Standouts rule (all sports):** picked by clear stat thresholds, not just each game's leader. Show three to five per sport per edition, ranked, one line each with context. Defensive performances count too: goalkeepers, defenders, bowlers, NFL defence, and NBA blocks and steals.
 
 **Games to Watch picks:** D's clubs' big games, top-of-the-table clashes and derbies, deciding Tests in a series, title-deciding races, and tracked NBA stars facing each other. All times in SGT.
+
+**Lead sport (which full sport section comes first):** The Big Stuff and On Today always stay on top. Below them, the sport sections keep the order above, except that one lead sport moves to the front. Plain rules in code decide it, not Claude, so the order is predictable.
+
+1. **Your teams first.** If one of D's teams or players had a match or notable performance since the last edition, their sport leads: Arsenal (men and women), Sunrisers Hyderabad, the India men's cricket team, the tracked NBA stars, the Jaguars (Trevor Lawrence), the Steelers (Aaron Rodgers), and the Dodgers only when an Ohtani or Yamamoto trigger from the Baseball section happens.
+2. **If several of those happened, the most important match leads.** Importance scale, highest first: finals and title deciders, knockouts, derbies and clashes at the top of a table, then ordinary league or group games. Exact scoring to be tuned during the build.
+3. **If none did, a big competition moment leads:** a Champions League matchday, the NBA playoffs or the IPL.
+4. **Otherwise** the normal order stays.
 
 ## Football
 
@@ -163,6 +170,17 @@ The NFL gets a full Wednesday wrap; the NBA shows every game, with marquee playe
 
 Source: [NBA.com 2026-27 season previews](https://www.nba.com/2026-27-season-preview/features).
 
+## Baseball
+
+Baseball is a short, focused block on the Los Angeles Dodgers' two Japanese stars, not full MLB coverage. It appears only when one of the triggers below happens.
+
+- **Shohei Ohtani, batting:** a home run, a stolen base or a game-winning hit.
+- **Shohei Ohtani, pitching:** every start. All pitching performances count as noteworthy whenever he is the starting pitcher.
+- **Yoshinobu Yamamoto:** every start.
+- **What each entry holds:** the Dodgers' score, the player's stat line and a one-line story. Postseason games count the same as regular-season ones.
+- **Timing:** US night games finish late in the Singapore morning, so many land in the next day's edition, like the NBA.
+- **Lead sport:** a trigger above makes baseball eligible to lead, under the lead-sport rule.
+
 ## Young Guns
 
 Young Guns is one dedicated section for rookies and young stars across every sport, with a running watchlist so each player's rise reads like a story.
@@ -214,6 +232,7 @@ No single repo does this job, so The Kickoff combines several free sources, with
 | [Jolpica F1 API](https://github.com/jolpica/jolpica-f1) | F1 results, qualifying and standings | Community-run successor to the old Ergast API; respect its rate limits |
 | [CricketData.org](https://cricketdata.org/), main cricket source | Cricket results and scorecards, international and franchise | Running since 2015 as CricAPI; permanent free tier of 100 calls a day, ample for one run; women's coverage may be thinner |
 | [Big Balls Data](https://bigballsdata.com/cricket-api), backup cricket source | Women's competitions and cross-checks | 250 free calls a day, 500 with a linked GitHub account; covers WBBL and the women's Hundred, but its live data looked weeks old when checked, so test freshness first |
+| MLB Stats API or ESPN | Dodgers games, Ohtani and Yamamoto stat lines | Source to confirm and test during the baseball checkpoint |
 | FPL public data | D's classic team and Draft league | Unofficial; needs D's team and league IDs |
 | RSS feeds: BBC Sport, The Guardian, governing bodies | News, injuries, transfer reports, the general section, interesting stories | Summaries only, always linked to the original |
 | FIFA ranking | The top-30 list before each international break | Exact source to confirm during the build |
@@ -227,6 +246,7 @@ The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark
 
 - **Masthead:** "The Kickoff" in Newsreader, styled as an old-school newspaper nameplate.
 - **Everything else:** Josefin Sans for headlines, body text and tables. Body text at 18px with 1.7 line spacing, never below regular weight; headlines in semibold. If long paragraphs feel tiring after a week, switch only the body text to Jost.
+- **Headings:** section and sub-section headings (such as The Big Stuff and Key Overnight Scores) are in trophy gold, bold (700) and have every word capitalised, so they stand apart from the chalk body text.
 - **Numbers:** right-aligned table cells so columns line up.
 
 | Colour | Hex | Use |
@@ -266,10 +286,11 @@ The whole build happens in one project, in this order. Each checkpoint is tested
 7. **Tennis.**
 8. **NFL,** including the weekly rhythm.
 9. **NBA,** including tracked players.
-10. **Young Guns** and the watchlist.
-11. **Around the sporting world.**
-12. **Cross-sport sections:** The big stuff, On today, Games to Watch and interesting stories.
-13. **Test runs:** three mornings run by hand, then switch on the daily 7:15am SGT schedule.
+10. **Baseball:** Ohtani and Yamamoto triggers, Dodgers scores.
+11. **Young Guns** and the watchlist.
+12. **Around the sporting world.**
+13. **Cross-sport sections:** The big stuff, On today, Games to Watch, interesting stories and the lead-sport ordering.
+14. **Test runs:** three mornings run by hand, then switch on the daily 7:15am SGT schedule.
 
 ## Open items
 
@@ -279,3 +300,5 @@ Four small things to settle, none of which blocks starting the build.
 - [ ] Light-mode colour values: set during the build.
 - [ ] FIFA ranking source: choose during the build after testing.
 - [ ] FPL classic team ID and Draft league ID: collect during the build.
+- [ ] Baseball data source: choose between the MLB Stats API and ESPN during the baseball checkpoint, after testing both.
+- [ ] Baseball scope: the spec assumes only Ohtani and Yamamoto trigger an entry. Widen it if D wants other Dodgers or MLB news.

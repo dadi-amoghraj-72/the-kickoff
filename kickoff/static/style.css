@@ -1,0 +1,145 @@
+/* The Kickoff design system: floodlit pitch, chalk text, trophy gold. Dark first. */
+:root {
+  color-scheme: dark light;
+  --pitch: #13251E;
+  --surface: #1A2F27;
+  --hairline: #2A4238;
+  --chalk: #E8E3D6;
+  --muted: #A3B0A6;
+  --gold: #CFB06E;
+  --blue: #8DB4CC;
+  --lilac: #B3A6CC;
+  --rose: #C99590;
+}
+
+/* Light mode follows the phone's setting. Same accents, darkened to pass 4.5:1. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --pitch: #E9EFEA;
+    --surface: #DCE6DF;
+    --hairline: #B7C6BB;
+    --chalk: #13251E;
+    --muted: #44574B;
+    --gold: #7A5C14;
+    --blue: #2F6280;
+    --lilac: #5E4F8A;
+    --rose: #9A4A43;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--pitch);
+  color: var(--chalk);
+  font: 400 18px/1.7 "Josefin Sans", system-ui, -apple-system, sans-serif;
+}
+
+/* Top bar: holds the reading chip so it never sits on top of the text */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  height: 40px; padding: 0 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--pitch);
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px; color: var(--muted);
+}
+.topbar a { color: var(--muted); }
+.chip {
+  padding: 1px 12px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  color: var(--chalk);
+  font-variant-numeric: tabular-nums;
+}
+
+/* One column, left-aligned, about 62 characters wide. Right padding keeps the rail clear of text. */
+main { max-width: calc(62ch + 64px); margin: 0 auto; padding: 0 48px 96px 20px; }
+
+.masthead { text-align: center; padding: 40px 0 8px; }
+.masthead h1 {
+  margin: 0;
+  font: 600 clamp(40px, 11vw, 60px)/1.05 "Newsreader", Georgia, serif;
+  letter-spacing: 0.01em;
+}
+.masthead .rule {
+  margin: 14px 0 8px;
+  border-top: 3px double var(--gold);
+}
+.masthead .dateline { margin: 0; font-size: 15px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+a { color: var(--gold); text-underline-offset: 3px; }
+/* Headings: trophy gold, bold, every word capitalised, so they stand apart from chalk body text */
+h2, h3 { color: var(--gold); font-weight: 700; line-height: 1.25; text-transform: capitalize; }
+h2 { font-size: 30px; margin: 0 0 12px; }
+h3 { font-size: 21px; margin: 28px 0 6px; }
+p { margin: 0 0 14px; }
+.muted { color: var(--muted); }
+strong { font-weight: 600; }
+
+section { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--hairline); scroll-margin-top: 52px; }
+section > :last-child { margin-bottom: 0; }
+
+.banner {
+  margin: 24px 0 0; padding: 10px 14px;
+  background: var(--surface); border: 1px dashed var(--gold); border-radius: 8px;
+  font-size: 15px; color: var(--muted);
+}
+
+/* Performance of the Day */
+.potd { margin: 18px 0; padding: 16px 18px; background: var(--surface); border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; }
+.potd .label { display: block; color: var(--gold); font-size: 14px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* On today */
+.today { list-style: none; margin: 0; padding: 0; }
+.today li { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; padding: 12px 0; border-bottom: 1px solid var(--hairline); }
+.today time { font-variant-numeric: tabular-nums; font-weight: 600; }
+.tag { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+.tag svg { width: 16px; height: 16px; }
+
+/* Standouts, ranked */
+.standouts { margin: 0 0 14px; padding-left: 1.3em; }
+.standouts li { margin-bottom: 6px; padding-left: 4px; }
+
+/* Tables: numbers right-aligned, zone bars on the left edge of a row */
+.table-wrap { margin: 14px 0 6px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 16px; font-variant-numeric: tabular-nums; }
+caption { text-align: left; padding: 0 0 6px; font-weight: 600; background: transparent; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+th.n, td.n { text-align: right; }
+tr[class^="z-"] td:first-child { padding-left: 14px; }
+tr.z-blue td:first-child { box-shadow: inset 4px 0 0 var(--blue); }
+tr.z-lilac td:first-child { box-shadow: inset 4px 0 0 var(--lilac); }
+tr.z-rose td:first-child { box-shadow: inset 4px 0 0 var(--rose); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0 0 14px; padding: 0; list-style: none; font-size: 14px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 2px; }
+.legend .z-blue { background: var(--blue); }
+.legend .z-lilac { background: var(--lilac); }
+.legend .z-rose { background: var(--rose); }
+
+.nodata { display: inline-block; padding: 4px 12px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; color: var(--muted); font-size: 16px; }
+
+footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 15px; color: var(--muted); }
+
+/* Archive list */
+.archive { list-style: none; margin: 24px 0 0; padding: 0; }
+.archive li { padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+.archive .d { display: block; font-weight: 600; }
+
+/* Progress rail: thin, right edge, one tick per section, fills gold as you read */
+.rail { position: fixed; right: 16px; top: 64px; bottom: 24px; width: 4px; background: var(--hairline); border-radius: 2px; z-index: 5; }
+.rail-fill { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: var(--gold); border-radius: 2px; }
+.rail-tick { position: absolute; left: -12px; width: 28px; height: 28px; margin-top: -14px; display: block; }
+.rail-tick::after { content: ""; position: absolute; left: 8px; top: 13px; width: 12px; height: 2px; border-radius: 1px; background: var(--muted); }
+.rail-tick.done::after { background: var(--gold); }
+.rail-tick[aria-current="true"]::after { left: 5px; width: 18px; height: 3px; top: 12px; background: var(--gold); }
+.rail-tick:focus-visible { outline: 2px solid var(--gold); border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+@media (min-width: 900px) { main { padding-right: 20px; } }
