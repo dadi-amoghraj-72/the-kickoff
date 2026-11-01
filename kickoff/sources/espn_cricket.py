@@ -180,6 +180,18 @@ def parse_scorecard(page):
     return innings
 
 
+def parse_meta(page):
+    """What sits above the scorecard: {"status": the result or state line, "potm": [{"name", "team"}]} (potm empty until awarded)."""
+    page = _clean(page)
+    status = re.search(r'cscore_notes_game">(.*?)</', page, re.S)
+    block = re.search(r'player-match__title">Player of the Match</div>(.*?)(?:<div id="gamepackage-links-wrap"|$)', page, re.S)
+    potm = []
+    if block:
+        for name, team in re.findall(r'player-match__player__detail__link">(.*?)<span>(.*?)</span></a>', block.group(1), re.S):
+            potm.append({"name": _text(name), "team": _text(team)})
+    return {"status": htmllib.unescape(_text(status.group(1))) if status else "", "potm": potm}
+
+
 # ---- A points table -----------------------------------------------------------------------------------
 
 def table_url(series):
@@ -238,8 +250,9 @@ class Source:
     def card(self, match):
         try:
             game = self._game(match, True)
-            innings = parse_scorecard(self._page(game["scorecard"])) if game else None
-            return {"scorecard": innings} if innings else None
+            page = self._page(game["scorecard"]) if game else None
+            innings = parse_scorecard(page) if page else None
+            return {"scorecard": innings, **parse_meta(page)} if innings else None
         except Exception:
             return None
 

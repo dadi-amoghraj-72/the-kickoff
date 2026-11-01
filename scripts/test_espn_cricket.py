@@ -174,5 +174,63 @@ check("without a table source nothing changes", "<caption>" not in ck.run(NOW, S
 check("a failing table fetch leaves the results and no table", "<caption>" not in ck.run(NOW, START, {}, lambda: (M, 17), paid, src.scorecards_affordable, espn_card=fresh_card,
                                                                                           espn_table=ec.Source(lambda u: (_ for _ in ()).throw(OSError("down")), pause=0).table)["html"])
 
+# ---- Player of the match, standouts under the scorecard, Tests every day, World Cups ----
+META = (FX / "espn_cricket_scorecard_meta.html").read_text()
+meta = ec.parse_meta(META)
+check("the page gives the result line and the Player of the Match with his team", meta == {"status": "New Zealand won by 7 wkts (12b rem)", "potm": [{"name": "Adam Milne", "team": "New Zealand"}]}, meta)
+check("no Player of the Match section (not awarded yet) gives an empty list, not an error", ec.parse_meta("<html></html>") == {"status": "", "potm": []})
+MULTI = (FX / "espn_cricket_scorecard_multiday.html").read_text()
+mm = ec.parse_meta(MULTI)
+check("a first-class match's page: result line with '&' unescaped, Jake Doran of Tasmania is Player of the Match", mm["status"] == "Tasmania won by an inns & 81 runs" and mm["potm"] == [{"name": "Jake Doran", "team": "Tasmania"}], mm)
+multi = ec.parse_scorecard(MULTI)
+check("three innings parse, 427 all out, 202 all out, 144 all out, each passing the cross-checks", [i["espn"]["total"]["r"] for i in multi] == [427, 202, 144]
+      and all(sum(b["r"] for b in i["batting"]) + i["espn"]["extras"]["total"] == i["espn"]["total"]["r"] for i in multi))
+tas = {"id": "x", "name": "Tasmania vs New South Wales, 8th Match, Sheffield Shield 2026", "matchType": "test", "teams": ["Tasmania", "New South Wales"], "score": [],
+       "status": "Day 3: Stumps - Tasmania lead", "matchStarted": True, "matchEnded": False}
+sl = ck.slim_card({"scorecard": multi}, tas)
+check("in a Test each innings is labelled: Tasmania 1st innings, New South Wales 1st innings, New South Wales 2nd innings",
+      [(i["team"], i["label"]) for i in sl] == [("Tasmania", "1st innings"), ("New South Wales", "1st innings"), ("New South Wales", "2nd innings")], [(i["team"], i["label"]) for i in sl])
+check("the label shows on the page; a T20 has none", "New South Wales</strong> 2nd innings 144" in ck.full_scorecard_html(sl) and all(not i["label"] for i in ck.slim_card({"scorecard": inn}, nzind)))
+live_test = {"id": "t9", "name": "England vs Pakistan, 2nd Test, Pakistan tour of England 2027", "matchType": "test", "status": "Day 3: Stumps - England lead by 40 runs",
+             "dateTimeGMT": "2026-11-01T10:00:00", "teams": ["England", "Pakistan"], "score": [], "matchStarted": True, "matchEnded": False}
+check("every men's Test gets a full scorecard, even between two non-big-six sides (Sri Lanka v Bangladesh)", ck.scorecard_tier(live_test) == 1
+      and ck.scorecard_tier({"name": "Sri Lanka vs Bangladesh, 1st Test, 2027", "matchType": "test", "teams": ["Sri Lanka", "Bangladesh"]}) == 1)
+check("a women's Test is not a full-scorecard match", ck.scorecard_tier({"name": "India Women vs England Women, Only Test, 2027", "matchType": "test", "teams": ["India Women", "England Women"]}) == 3)
+wc = {"name": "Nepal vs Namibia, 12th Match, Group C, ICC Men's T20 World Cup 2026", "matchType": "t20", "teams": ["Nepal", "Namibia"]}
+check("a men's World Cup match is recognised and gets a full scorecard whoever plays", ck.classify(wc)["kind"] == "international" and ck.scorecard_tier(wc) == 1, ck.classify(wc))
+check("a women's World Cup match is recognised but gets the result line only", ck.classify({**wc, "name": wc["name"].replace("Men's", "Women's"), "teams": ["Nepal Women", "Namibia Women"]})["kind"] == "international"
+      and ck.scorecard_tier({**wc, "name": wc["name"].replace("Men's", "Women's"), "teams": ["Nepal Women", "Namibia Women"]}) == 3)
+check("World Cup qualifiers, pathway events and ICC 'League Two' games are not the World Cup", all(ck.classify({**wc, "name": n})["kind"] is None for n in (
+    "Nepal vs Namibia, 3rd Match, ICC Men's T20 World Cup Qualifier 2026", "Nepal vs Namibia, 4th Match, ICC Cricket World Cup League Two 2023-27",
+    "Nepal vs Namibia, 5th Match, ICC T20 World Cup Africa Sub Regional Qualifier 2026")))
+
+eng_pak = [dict(i, inning=i["inning"].replace("Tasmania", "England").replace("New South Wales", "Pakistan")) for i in multi]
+everyday = ck.run(NOW, START, {"status": {"t9": live_test["status"]}}, lambda: ([live_test], 17), paid, src.scorecards_affordable,
+                  espn_card=lambda m: {"scorecard": eng_pak, "status": "Day 3: Stumps", "potm": []})
+check("a Test in progress appears with a 'Test · Day 3' flag at the top of its block, before the teams", everyday["html"].index("Test · Day 3") < everyday["html"].index("England v Pakistan"), everyday["html"][:300])
+check("the Test's scorecard is shown but not saved (it changes every day)", "Pakistan</strong> 2nd innings" in everyday["html"] and "t9" not in everyday["state"]["cards"])
+check("with no day in the status, ESPN's line gives it; with neither it says 'in progress'",
+      ck.day_of({"status": ""}, {"status": "Day 4: Lunch"}) == 4 and ck.day_of({"status": "Stumps"}, {}) is None and "Test · in progress" in ck.result_html({**live_test, "status": "Stumps"}))
+
+# Standouts go under the scorecard they belong to; matches without a scorecard feed the closing list
+hundred = {"scorecard": [{"inning": "India Innings", "batting": [{"batsman": {"name": "Star Batter"}, "dismissal-text": "not out", "r": 120, "b": 60, "4s": 10, "6s": 5, "sr": 200.0}], "bowling": [], "espn": {}}]}
+with_potm = {**{"scorecard": inn}, "potm": [{"name": "Adam Milne", "team": "New Zealand"}], "status": "New Zealand won by 7 wkts"}
+noor = {"scorecard": [{"inning": "Zimbabwe Innings", "batting": [], "bowling": [{"bowler": {"name": "Noor Ahmad"}, "o": 3.3, "m": 0, "r": 13, "w": 5, "eco": 3.71, "wd": 0, "nb": 0}], "espn": {}}],
+        "potm": [{"name": "Noor Ahmad", "team": "Afghanistan"}], "status": ""}
+nam = {"scorecard": [{"inning": "Ireland Innings", "batting": [], "bowling": [], "espn": {}}], "potm": [{"name": "Jan Frylinck", "team": "Namibia"}], "status": ""}
+per_match = lambda m: with_potm if "India" in m["teams"] and "New Zealand" in m["teams"] else noor if "Afghanistan" in m["teams"] else nam if "Namibia" in m["teams"] else None  # noqa: E731
+blk = ck.run(NOW, START, {}, lambda: (M, 17), paid, src.scorecards_affordable, espn_card=per_match)
+h = blk["html"]
+i_nz = h.index("New Zealand v <strong>India</strong>")
+i_next = h.index("Namibia v Ireland")
+check("NZ v India: result, then Player of the match, then the scorecard, then its own standouts, all before the next match",
+      i_nz < h.index("Player of the match: <strong>Adam Milne</strong> (New Zealand)", i_nz) < h.index("<table class=\"sc\">", i_nz) < h.index("<strong>Standouts</strong>", i_nz) < i_next, h[i_nz:i_nz + 200])
+check("the standouts under NZ v India are about that match and do not repeat the series and result", "Adam Milne</strong> (New Zealand) · four-wicket haul: 4 for 19 off 4 overs against India</li>" in h[i_nz:i_next])
+check("matches with only a result line still show Player of the match when we have it (Namibia v Ireland)", h.index("Player of the match", i_next) < h.index("Afghanistan v Zimbabwe"), h[i_next:i_next + 400])
+check("their standouts (Noor Ahmad's five-for) are in the closing list, with the series and result", h.index("<h3>Standouts</h3>") > h.index("Afghanistan v Zimbabwe") and "Noor Ahmad" in h[h.index("<h3>Standouts</h3>"):], h[-600:])
+check("the closing list holds only the no-scorecard matches' standouts, not NZ v India's", "Adam Milne" not in h[h.index("<h3>Standouts</h3>"):] and "Shreyas Iyer" not in h[h.index("<h3>Standouts</h3>"):])
+no_potm = ck.run(NOW, START, {}, lambda: ([nzind], 17), paid, src.scorecards_affordable, espn_card=lambda m: {"scorecard": inn})["html"]
+check("when no Player of the match is known, no line appears", "Player of the match" not in no_potm)
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

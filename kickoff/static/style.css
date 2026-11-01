@@ -184,6 +184,10 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket .cs { font-variant-numeric: tabular-nums; }
 .cricket .cr { color: var(--gold); font-weight: 600; font-size: 15px; }
 .cricket .ct { color: var(--muted); font-size: 14px; }
+.cricket .dayflag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.cricket .potm { font-size: 14px; color: var(--muted); }
+.cricket .potm strong { color: var(--chalk); font-weight: 600; }
+.cricket ul.standouts.in { margin: 2px 0 6px; padding-left: 18px; font-size: 14px; line-height: 1.5; }
 .cricket .cd { color: var(--muted); font-size: 14px; line-height: 1.5; }
 .cricket .cd strong { color: var(--chalk); font-weight: 600; }
 

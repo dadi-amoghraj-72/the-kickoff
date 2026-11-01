@@ -14,6 +14,8 @@ LEAGUES = [("WPL", r"women'?s premier league", 50), ("WBBL", r"women'?s big bash
            ("IPL", r"indian premier league", 60), ("BBL", r"big bash league", 60), ("The Hundred", r"the hundred", 60)]
 FORMAT = re.compile(r"\b(T20I|ODI|Test|Tri-Series|World Cup|Asia Cup|Ashes|Champions Trophy)\b", re.I)
 EXCLUDE = re.compile(r"\b(sixes|unofficial|under[- ]?19|u19|emerging|legends|masters|academy)\b", re.I)
+WORLD_CUP = re.compile(r"\bworld cup\b", re.I)
+QUALIFIER = re.compile(r"\b(qualifier|qualifying|pathway|challenge|league\s*(2|two|1|one))\b", re.I)
 HIGHLIGHT = {"india", "sunrisers hyderabad"}
 DURATION = {"t20": timedelta(hours=4), "odi": timedelta(hours=9)}
 
@@ -32,7 +34,8 @@ def classify(m):
     for label, pattern, priority in LEAGUES:
         if re.search(pattern, name, re.I):
             return {"kind": "league", "women": women or label in ("WPL", "WBBL", "Women's Hundred"), "label": label, "priority": priority}
-    if m.get("matchType") in ("t20", "odi", "test") and FORMAT.search(name) and any(strip_women(t).lower() in TEST_NATIONS for t in teams):
+    world_cup = bool(WORLD_CUP.search(name)) and not QUALIFIER.search(name)  # the tournament proper, whoever plays
+    if m.get("matchType") in ("t20", "odi", "test") and FORMAT.search(name) and (world_cup or any(strip_women(t).lower() in TEST_NATIONS for t in teams)):
         is_test = m.get("matchType") == "test"
         return {"kind": "international", "women": women, "label": "Women's international" if women else "International",
                 "priority": (95 if women else 100) if is_test else (70 if women else 80)}
@@ -68,7 +71,7 @@ def started(m):
 def pick(matches, now, window_start, seen=None, last_status=None):
     """The matches for this edition, most important first, each with its classification.
     - finished matches that ended since the last edition (estimated from the start time and format) and are not seen before;
-    - live men's or women's Tests whose status line has changed since last time (each day's play is reported once)."""
+    - every Test still in progress, every day (the day of the Test is shown on the block)."""
     seen, last_status, out = set(seen or ()), last_status or {}, []
     for m in matches:
         c = classify(m)
@@ -80,8 +83,7 @@ def pick(matches, now, window_start, seen=None, last_status=None):
             if m["id"] in seen or not (window_start <= ends <= now):
                 continue
         elif m.get("matchStarted") and m["matchType"] == "test" and c["kind"] == "international":
-            if last_status.get(m["id"]) == m.get("status"):
-                continue
+            pass
         else:
             continue
         out.append({**m, "class": c})
@@ -95,6 +97,22 @@ def title(m):
     return teams, ", ".join(parts[1:])
 
 
+def day_of(m, entry=None):
+    """The day of a Test in progress: from the match's status line ('Day 2: Stumps - ...'), else from ESPN's."""
+    for text in (m.get("status"), (entry or {}).get("status")):
+        found = re.search(r"\bDay\s*(\d)\b", text or "", re.I)
+        if found:
+            return int(found.group(1))
+    return None
+
+
+def potm_html(entry):
+    people = (entry or {}).get("potm") or []
+    if not people:
+        return ""
+    return '<span class="potm">Player of the match: ' + ", ".join(f"<strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])})" for p in people) + "</span>"
+
+
 def result_html(m, entry=None):
     teams, rest = title(m)
     names = r.esc(teams)
@@ -103,8 +121,14 @@ def result_html(m, entry=None):
             names = names.replace(r.esc(t), f"<strong>{r.esc(t)}</strong>")
     scores = " · ".join(r.esc(innings_line(s, m.get("teams") or [])) for s in m.get("score") or [])
     live = "" if m.get("matchEnded") else '<span class="tag">Live</span> '
-    return (f'<li><span class="cm">{names}</span><span class="cs">{scores}</span>'
-            f'<span class="cr">{live}{r.esc(m.get("status") or "")}</span><span class="ct">{r.esc(rest)}</span>{full_scorecard_html(entry["innings"]) if entry and scorecard_tier(m) < 3 else ""}</li>')
+    flag = ""
+    if m.get("matchType") == "test" and not m.get("matchEnded"):
+        day = day_of(m, entry)
+        flag = f'<span class="dayflag">Test · {"Day " + str(day) if day else "in progress"}</span>'
+    full = bool(entry) and scorecard_tier(m) < 3
+    return (f'<li>{flag}<span class="cm">{names}</span><span class="cs">{scores}</span>'
+            f'<span class="cr">{live}{r.esc(m.get("status") or "")}</span><span class="ct">{r.esc(rest)}</span>{potm_html(entry)}'
+            f'{full_scorecard_html(entry["innings"]) if full else ""}{standouts_html(entry["standouts"], inline=True) if full else ""}</li>')
 
 
 def table_html(label, rows):
@@ -140,11 +164,12 @@ FULL_SCORECARD_TEAMS = {"india", "australia", "england", "pakistan", "new zealan
 
 
 def scorecard_tier(m):
-    """1: a men's match involving India, Australia, England, Pakistan, New Zealand or South Africa (full scorecard).
-    2: any men's IPL match (full scorecard). 3: everything else (the result line only)."""
+    """1: a men's international involving India, Australia, England, Pakistan, New Zealand or South Africa, any men's Test, or any
+    men's World Cup match (full scorecard). 2: any men's IPL match (full scorecard). 3: everything else (the result line only)."""
     c = m.get("class") or classify(m)
     teams = m.get("teams") or []
-    if c.get("kind") == "international" and not c.get("women") and any(strip_women(t).lower() in FULL_SCORECARD_TEAMS for t in teams):
+    if c.get("kind") == "international" and not c.get("women") and (
+            any(strip_women(t).lower() in FULL_SCORECARD_TEAMS for t in teams) or m.get("matchType") == "test" or WORLD_CUP.search(m.get("name", ""))):
         return 1
     if c.get("label") == "IPL" and not c.get("women"):
         return 2
@@ -193,7 +218,9 @@ def slim_card(card, match):
             wides, noballs = sum(b["wd"] for b in bowl), sum(b["nb"] for b in bowl)
             if total_extras >= wides + noballs >= 0:
                 extras = {"total": total_extras, "w": wides, "nb": noballs, "b_lb": total_extras - wides - noballs}
-        out.append({"team": team, "bowling_team": next((t for t in teams if t != team), ""), "runs": runs, "wickets": sc.get("w"),
+        number = re.search(r"\b(\d)(?:st|nd|rd|th)\s+innings\b", inn.get("inning", ""), re.I) or re.search(r"\binning\s*(\d)\b", inn.get("inning", ""), re.I)
+        label = {"1": "1st", "2": "2nd", "3": "3rd", "4": "4th"}.get(number.group(1), "") + " innings" if number and match.get("matchType") == "test" else ""
+        out.append({"team": team, "label": label.strip(), "bowling_team": next((t for t in teams if t != team), ""), "runs": runs, "wickets": sc.get("w"),
                     "overs": sc.get("o"), "extras": extras, "batting": bat, "bowling": bowl,
                     "dnb": espn.get("dnb") or [], "fow": espn.get("fow") or ""})
     return out
@@ -212,7 +239,7 @@ def full_scorecard_html(innings):
         wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}"
         total = f"{inn['runs']}{wickets}" if inn["runs"] is not None else ""
         overs = f" ({inn['overs']:g} ov)" if isinstance(inn["overs"], (int, float)) else ""
-        out += f'<p class="inn"><strong>{r.esc(inn["team"])}</strong> {total}{overs}</p>'
+        out += f'<p class="inn"><strong>{r.esc(inn["team"])}</strong>{" " + r.esc(inn["label"]) if inn.get("label") else ""} {total}{overs}</p>'
         rows = ""
         for b in inn["batting"]:
             rows += (f'<tr><td class="name">{r.esc(b["name"])}{r.esc(" " + b["mark"] if b.get("mark") else "")}<span class="dis">{r.esc(b["out"])}</span></td><td class="n"><strong>{b["r"]}</strong></td>'
@@ -290,9 +317,9 @@ def rank(items, limit=MAX_STANDOUTS):
     return sorted(items, key=key)[:limit]
 
 
-def standout_html(o):
+def standout_html(o, context=True):
     series = ", ".join(o["match"].split(",")[1:]).strip()
-    context = f" ({r.esc(series)}; {r.esc(o['result'])})" if o["result"] else f" ({r.esc(series)})"
+    context = (f" ({r.esc(series)}; {r.esc(o['result'])})" if o["result"] else f" ({r.esc(series)})") if context else ""
     if o["kind"] in ("century", "fast fifty"):
         label = "century" if o["kind"] == "century" else f"fifty off {o['balls']} balls"
         figures = f"{o['runs']}{'*' if o['not_out'] else ''} off {o['balls']} balls, {o['fours']} fours and {o['sixes']} sixes"
@@ -303,8 +330,13 @@ def standout_html(o):
             f"against {r.esc(o['against'])}{context}</li>")
 
 
-def standouts_html(items):
-    return '<h3>Standouts</h3><ol class="standouts">' + "".join(standout_html(o) for o in items) + "</ol>" if items else ""
+def standouts_html(items, inline=False):
+    """Under a match's own scorecard (inline: no series or result repeated), or as the closing list for matches without a scorecard."""
+    if not items:
+        return ""
+    if inline:
+        return '<p class="muted fow"><strong>Standouts</strong></p><ul class="standouts in">' + "".join(standout_html(o, context=False) for o in rank(items)) + "</ul>"
+    return '<h3>Standouts</h3><ol class="standouts">' + "".join(standout_html(o) for o in items) + "</ol>"
 
 
 # ---- The whole cricket block, within the daily call budget -------------------------------------
@@ -321,19 +353,26 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
     found, checked, skipped, shown_cards = [], 0, 0, {}
     cards = {k: v for k, v in st.get("cards", {}).items() if "innings" in v}  # scorecards already bought: paid for once, never twice
     # Buy in this order: full-scorecard matches first (tier 1, then the IPL), then the rest for their standouts.
+    total_standouts = 0
+
+    def take(m, entry):
+        """Standouts of a match with a full scorecard sit under it; the others join the closing list."""
+        nonlocal checked, total_standouts
+        checked += 1
+        total_standouts += len(entry["standouts"])
+        if scorecard_tier(m) == 3:
+            found.extend(entry["standouts"])
+        shown_cards[m["id"]] = entry
+
     for m in sorted(picked, key=lambda x: (scorecard_tier(x), -x["class"]["priority"], x["dateTimeGMT"])):
         cached = cards.get(m["id"]) if m.get("matchEnded") else None  # a card saved mid-match would be out of date
-        # A card saved before did-not-bat and fall of wickets existed is only a fallback: ESPN's richer one is tried first.
-        if cached and (not espn_card or all("dnb" in i for i in cached["innings"])):
-            found += cached["standouts"]
-            shown_cards[m["id"]] = cached
-            checked += 1
+        # A card saved before did-not-bat, fall of wickets and Player of the Match existed is only a fallback: ESPN's richer one is tried first.
+        if cached and (not espn_card or ("potm" in cached and all("dnb" in i for i in cached["innings"]))):
+            take(m, cached)
             continue
         card = espn_card(m) if espn_card else None  # free: no calls used
         if card is None and cached:
-            found += cached["standouts"]
-            shown_cards[m["id"]] = cached
-            checked += 1
+            take(m, cached)
             continue
         if card is None:
             if affordable(used) < 1:  # not even one more scorecard fits in what is left of today's calls
@@ -344,14 +383,12 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
             except Exception:  # a failed scorecard costs us the standouts for that match, never the result
                 skipped += 1
                 continue
-        checked += 1
-        entry = {"innings": slim_card(card, m), "standouts": standouts(card, m)}
+        entry = {"innings": slim_card(card, m), "standouts": standouts(card, m), "potm": card.get("potm") or [], "status": card.get("status") or ""}
         if m.get("matchEnded"):
             cards[m["id"]] = entry
         else:
             cards.pop(m["id"], None)
-        found += entry["standouts"]
-        shown_cards[m["id"]] = entry
+        take(m, entry)
     top = rank(found)
     tables = {}
     for m in picked:  # a points table for each league that played, once per league
@@ -365,7 +402,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
     new = {"seen": sorted(seen | {m["id"] for m in picked if m.get("matchEnded")})[-400:],
            "status": {**st.get("status", {}), **{m["id"]: m.get("status") for m in picked if not m.get("matchEnded")}},
            "cards": dict(list(cards.items())[-60:])}
-    return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": len(found)}}
+    return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": total_standouts}}
 
 
 def persist_cards(new_cards, directory=None):

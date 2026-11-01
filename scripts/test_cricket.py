@@ -56,7 +56,7 @@ check("a match that has not finished by now is left out (an early 'now')", len(c
 live = {"id": "t1", "name": "England vs Pakistan, 1st Test, Pakistan tour of England 2027", "matchType": "test", "status": "Day 2: Stumps - England lead by 40 runs",
         "dateTimeGMT": "2026-11-01T10:00:00", "teams": ["England", "Pakistan"], "score": [], "matchStarted": True, "matchEnded": False}
 check("a live Test is reported when its status has changed", any(m["id"] == "t1" for m in ck.pick(M + [live], NOW, START, last_status={"t1": "Day 1: Stumps"})))
-check("and not again when the status is the same as last time", not any(m["id"] == "t1" for m in ck.pick(M + [live], NOW, START, last_status={"t1": live["status"]})))
+check("and again the next day even when nothing changed: a Test in progress is shown every day", any(m["id"] == "t1" for m in ck.pick(M + [live], NOW, START, last_status={"t1": live["status"]})))
 check("live matches that are not Test-nation Tests (Sheffield Shield, an A-team Test) are never reported", not any("Shield" in m["name"] or "Unofficial" in m["name"] for m in picked))
 
 # ---- How a result reads ----
@@ -185,8 +185,8 @@ check("with 80 calls used only 1 scorecard fits: the most important match is che
 check("the page says how many matches had their standouts checked", "checked in 1 of 5 matches" in tight["html"])
 check("a failing scorecard loses only the standouts for that match: the results are all still shown", block(17, fail=True)["html"].count('<li><span class="cm">') == 5 and block(17, fail=True)["stats"]["checked"] == 0)
 check("no matches in the window means no cricket block", block(17, matches=[])["html"] == "")
-check("a live Test's status is remembered so an unchanged day is skipped", block(17, matches=M + [live])["state"]["status"].get("t1") == live["status"]
-      and block(17, st={"status": {"t1": live["status"]}}, matches=[live])["html"] == "")
+check("a live Test is in the block every day, even with the same status as yesterday",
+      block(17, st={"status": {"t1": live["status"]}}, matches=[live])["html"].count("Test · Day 2") == 1)
 
 # ---- Which matches get a full scorecard ----
 T = lambda name, teams, typ="odi": {"name": name, "matchType": typ, "teams": teams}  # noqa: E731
