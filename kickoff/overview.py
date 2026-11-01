@@ -214,7 +214,7 @@ def write_overview(client, f):
     """{"note", "source": "claude" | "plain", "problems"} and usage. One retry that names the problems; then the
     plain overview. Nothing unchecked is ever returned as Claude's."""
     import json
-    total, problems, sent = {"input": 0, "output": 0}, [], f
+    total, problems, sent, rejected = {"input": 0, "output": 0}, [], f, []
     for attempt in (1, 2):
         extra = "" if attempt == 1 else ("Your earlier overview broke these rules: " + "; ".join(problems) +
                                          ". Rewrite it so that it fixes them, using only the facts.\n")
@@ -223,5 +223,6 @@ def write_overview(client, f):
         note = (obj or {}).get("overview", "").strip() if isinstance(obj, dict) else ""
         problems = check_overview(note, f) if note else ["no overview returned"]
         if note and not problems:
-            return {"note": note, "source": "claude", "problems": []}, total
-    return {"note": plain_overview(f), "source": "plain", "problems": problems}, total
+            return {"note": note, "source": "claude", "problems": [], "rejected": rejected}, total
+        rejected.append({"attempt": attempt, "note": note, "problems": problems})
+    return {"note": plain_overview(f), "source": "plain", "problems": problems, "rejected": rejected}, total

@@ -121,6 +121,8 @@ check("a rejected overview is retried once, and the retry names the problem",
 check("usage is added across both calls", usage == {"input": 4000, "output": 300})
 res, _ = overview.write_overview(Fake([reply(bad), reply(bad)]), nof)
 check("still bad after the retry: the plain overview, with the problems recorded", res["source"] == "plain" and res["problems"] and "shock" not in res["note"], res)
+check("both rejected attempts are kept, with their text and reasons, for diagnosis",
+      [r["attempt"] for r in res["rejected"]] == [1, 2] and all(r["note"] == bad and r["problems"] for r in res["rejected"]), res["rejected"])
 res, _ = overview.write_overview(Fake([RuntimeError("down")] * 2), f)
 check("an API failure gives the plain overview", res["source"] == "plain" and res["note"] == overview.plain_overview(f))
 res, _ = overview.write_overview(Fake([reply("not json"), reply("not json")]), f)

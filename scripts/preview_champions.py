@@ -48,9 +48,12 @@ if "tally" in facts:
     print("Tally:", facts["tally"])
 print("Game of the night:", facts.get("game_of_the_night"))
 print(f"\n[{result['source']}] {result['note']}")
-if result["problems"]:
-    print(f"   (Claude's overview was rejected: {'; '.join(result['problems'])})")
+for r in result.get("rejected", []):
+    print(f"\n   REJECTED attempt {r['attempt']}: {r['note']!r}\n      because: {'; '.join(r['problems'])}")
 if not facts_only:
     print(f"\nTokens: {total['input']} in, {total['output']} out | estimated cost: ${notes.cost(total):.3f}")
-(ROOT / "preview" / f"overview-{'plain' if facts_only else settings.CLAUDE_MODEL}.txt").write_text(result["note"] + "\n")
+detail = [f"[{result['source']}] {result['note']}"]
+for r in result.get("rejected", []):
+    detail.append(f"\nREJECTED attempt {r['attempt']}: {r['note']!r}\n   because: {'; '.join(r['problems'])}")
+(ROOT / "preview" / f"overview-{'plain' if facts_only else settings.CLAUDE_MODEL}.txt").write_text("\n".join(detail) + "\n")
 print("Wrote preview/champions.html")
