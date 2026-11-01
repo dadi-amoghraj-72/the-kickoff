@@ -188,41 +188,69 @@ check("no matches in the window means no cricket block", block(17, matches=[])["
 check("a live Test's status is remembered so an unchanged day is skipped", block(17, matches=M + [live])["state"]["status"].get("t1") == live["status"]
       and block(17, st={"status": {"t1": live["status"]}}, matches=[live])["html"] == "")
 
-# ---- The scorecard shown under a result ----
-sm = ck.summary(CARD, CARD)
-ind, nz_inn = sm[0], sm[1]
-check("India's top three batters, best first: Kishan 61 (32), Iyer 50 (23), Dhir 33 (23)", [(n, r, b) for n, r, b, _ in ind["batting"]] == [("Ishan Kishan", 61, 32), ("Shreyas Iyer", 50, 23), ("Naman Dhir", 33, 23)], ind["batting"])
-check("New Zealand's bowlers against India: Milne 4-19, then Smith 2-28 and Tickner 2-38 (fewer runs first on equal wickets)", ind["bowling"] == [("Adam Milne", 4, 19), ("Nathan Smith", 2, 28), ("Blair Tickner", 2, 38)], ind["bowling"])
-check("the bowling side is the other team", (ind["team"], ind["bowling_team"], nz_inn["team"], nz_inn["bowling_team"]) == ("India", "New Zealand", "New Zealand", "India"))
-check("New Zealand's batters: Seifert 93 (50), Phillips 65 not out (38), Mitchell 29 (16)", nz_inn["batting"] == [("Tim Seifert", 93, 50, False), ("Glenn Phillips", 65, 38, True), ("Daryl Mitchell", 29, 16, False)], nz_inn["batting"])
-check("only bowlers who took a wicket are listed", all(w >= 1 for _, w, _ in ind["bowling"] + nz_inn["bowling"]))
-check("short names: initial and surname, one-word names unchanged, particles kept", [ck.short_name(n) for n in ("Ishan Kishan", "Rashid", "Marc-André ter Stegen", "Nitish Kumar Reddy")] == ["I Kishan", "Rashid", "M ter Stegen", "N Reddy"], [ck.short_name(n) for n in ("Ishan Kishan", "Rashid", "Marc-André ter Stegen", "Nitish Kumar Reddy")])
-sh = ck.scorecard_html(sm)
-check("the scorecard reads: team batting, then the other team bowling, for each innings (four lines)",
-      sh.count('class="cd"') == 4 and "<strong>India</strong> batting: I Kishan 61 (32), S Iyer 50 (23), N Dhir 33 (23)" in sh
-      and "<strong>New Zealand</strong> bowling: A Milne 4-19, N Smith 2-28, B Tickner 2-38" in sh and "G Phillips 65* (38)" in sh, sh)
-check("a result with a scorecard shows it between the result and the series line", ck.result_html(nz, sm).index("New Zealand won by 7 wkts") < ck.result_html(nz, sm).index("batting:") < ck.result_html(nz, sm).index("5th T20I, India tour"))
-check("a result without a scorecard shows none (no empty lines)", 'class="cd"' not in ck.result_html(nz))
-check("an innings with no batters or no wicket-takers adds no empty line", ck.scorecard_html([{"team": "A", "bowling_team": "B", "batting": [], "bowling": []}]) == "")
-check("names in the scorecard are escaped", "&lt;" in ck.scorecard_html([{"team": "A", "bowling_team": "B", "batting": [("<b> Name", 1, 1, False)], "bowling": []}]))
-bb = block(17)
-check("in the whole block, every match with a scorecard shows its batting and bowling lines", bb["html"].count('class="cd"') == 5 * 4, bb["html"].count('class="cd"'))
-tt = block(80)
-check("when only one scorecard fits, only that match has the scorecard lines; the other four show just their results", tt["html"].count('class="cd"') == 4, tt["html"].count('class="cd"'))
+# ---- Which matches get a full scorecard ----
+T = lambda name, teams, typ="odi": {"name": name, "matchType": typ, "teams": teams}  # noqa: E731
+check("men's matches with India, Australia, England, Pakistan, New Zealand or South Africa are tier 1",
+      [ck.scorecard_tier(by(n)) for n in ("5th T20I", "Sri Lanka vs England, 6th Match")] == [1, 1]
+      and ck.scorecard_tier(T("Pakistan vs Bangladesh, 1st Test, Series 2027", ["Pakistan", "Bangladesh"], "test")) == 1
+      and ck.scorecard_tier(T("South Africa vs Zimbabwe, 2nd T20I, tour", ["South Africa", "Zimbabwe"], "t20")) == 1)
+check("Namibia v Ireland, Afghanistan v Zimbabwe and Sri Lanka v West Indies are tier 3 (result line only)",
+      [ck.scorecard_tier(by("Namibia vs Ireland, 5th ODI")), ck.scorecard_tier(by("Afghanistan vs Zimbabwe, 3rd T20I")),
+       ck.scorecard_tier(T("Sri Lanka vs West Indies, 1st ODI, tour", ["Sri Lanka", "West Indies"]))] == [3, 3, 3])
+check("every men's IPL match is tier 2, whoever plays", ck.scorecard_tier({"name": "Punjab Kings vs Rajasthan Royals, 5th Match, Indian Premier League 2027", "matchType": "t20", "teams": ["Punjab Kings", "Rajasthan Royals"]}) == 2)
+check("women's matches are never tier 1 or 2, even India Women v England Women or the WBBL",
+      ck.scorecard_tier(T("India Women vs England Women, 1st ODI, tour", ["India Women", "England Women"])) == 3 and ck.scorecard_tier(by("Womens Big Bash")) == 3)
+check("India A and unofficial matches are excluded altogether", ck.classify(by("Unofficial Test"))["kind"] is None)
+
+# ---- The slimmed scorecard, checked against the screenshots of the real match ----
+sl = ck.slim_card(CARD, CARD)
+ind, nzi = sl
+check("two innings: India 191/8 in 20 overs, New Zealand 195/3 in 18", (ind["team"], ind["runs"], ind["wickets"], ind["overs"], nzi["team"], nzi["runs"], nzi["wickets"], nzi["overs"])
+      == ("India", 191, 8, 20, "New Zealand", 195, 3, 18), (ind["runs"], nzi["runs"]))
+check("India's extras are 7: wides 4, no-balls 1, and 2 byes or leg-byes (the screenshot says b 1, lb 1, nb 1, w 4)", ind["extras"] == {"total": 7, "w": 4, "nb": 1, "b_lb": 2}, ind["extras"])
+check("New Zealand's extras are 5: wides 3 and 2 leg-byes (the screenshot says lb 2, w 3)", nzi["extras"] == {"total": 5, "w": 3, "nb": 0, "b_lb": 2}, nzi["extras"])
+check("batting: 10 India batters with how each was out; the bowlers belong to the other team", len(ind["batting"]) == 10 and ind["batting"][0]["out"] == "c Bracewell b Milne" and ind["bowling_team"] == "New Zealand")
+check("run rates from runs and overs: India 9.55 and New Zealand 10.83, as on the screenshots", f"{ind['runs'] / ck.overs_decimal(ind['overs']):.2f}" == "9.55" and f"{nzi['runs'] / ck.overs_decimal(nzi['overs']):.2f}" == "10.83")
+check("dismissals use surnames, as on a real scorecard: 'c Bracewell b Milne', 'c and b Nathan Smith' stays readable, 'not out' is untouched",
+      ck.short_dismissal("c Michael Bracewell b Adam Milne", ["Adam Milne", "Michael Bracewell"]) == "c Bracewell b Milne"
+      and ck.short_dismissal("not out", [None, None]) == "not out" and ck.short_dismissal("c & b Nathan Smith", ["Nathan Smith", None]) == "c & b Smith"
+      and ck.short_dismissal("b Nitish Kumar Reddy", ["Nitish Kumar Reddy"]) == "b Reddy")
+check("17.4 overs is 17 overs and 4 balls: 17.667 for a run rate", abs(ck.overs_decimal(17.4) - 17.6667) < 0.001 and ck.overs_decimal(20) == 20)
+
+# ---- The scorecard as HTML ----
+fh = ck.full_scorecard_html(sl)
+check("India's innings: heading with total and overs, then each batter's R B 4s 6s SR", "<strong>India</strong> 191/8 (20 ov)" in fh and "Ishan Kishan" in fh and "c Smith b Tickner" in fh
+      and '<td class="n"><strong>61</strong></td><td class="n">32</td><td class="n">5</td><td class="n">5</td><td class="n">190.63</td>' in fh, fh[:400])
+check("extras and total rows, with the run rate", "Extras" in fh and "w 4, nb 1, b/lb 2" in fh and "Total" in fh and "20 ov, run rate 9.55" in fh and "18 ov, run rate 10.83" in fh)
+check("a not-out batter reads 'not out'", ">not out<" in fh)
+check("the bowling table has O M R W Econ WD NB: Milne 4-0-19-4, economy 4.75 as on the scorecard (computed exactly, not the API's 4.8)",
+      "New Zealand bowling" in fh and '<td class="n">4</td><td class="n">0</td><td class="n">19</td><td class="n"><strong>4</strong></td><td class="n">4.75</td><td class="n">1</td><td class="n">0</td>' in fh,
+      fh[fh.index("New Zealand bowling"):][:700])
+check("economy matches the real scorecard for Bhuvneshwar (10.25), Chakravarthy (11.25) and Bracewell (19.00)", all(x in fh for x in ("10.25", "11.25", "19.00")))
+check("an all-out innings shows its total without '/10'", "/10" not in ck.full_scorecard_html([{**ind, "wickets": 10, "runs": 150}]))
+check("names are escaped", "&lt;" in ck.full_scorecard_html([{**ind, "batting": [{**ind["batting"][0], "name": "<b>"}]}]))
+check("no innings, no HTML", ck.full_scorecard_html([]) == "" and ck.full_scorecard_html(None) == "")
+check("what the data does not carry is not invented: no fall of wickets, did not bat or minutes", all(w not in fh.lower() for w in ("fall of wickets", "did not bat", "minutes")))
+entry = {"innings": sl, "standouts": []}
+check("a tier 1 result carries its scorecard, under the series line", ck.result_html(nz, entry).index("5th T20I, India tour") < ck.result_html(nz, entry).index('<table class="sc">'))
+check("a tier 3 result never shows a scorecard, even if one was bought", '<table class="sc">' not in ck.result_html(by("Namibia vs Ireland, 5th ODI"), entry))
+check("with no scorecard bought a tier 1 result shows only the result", '<table class="sc">' not in ck.result_html(nz))
 
 # ---- Scorecards are paid for once ----
 first = block(17)
-check("the first run stores each scorecard's summary and standouts", len(first["state"]["cards"]) == 5 and all({"summary", "standouts"} <= set(c) for c in first["state"]["cards"].values()))
+check("the first run stores each scorecard's innings and standouts", len(first["state"]["cards"]) == 5 and all({"innings", "standouts"} <= set(c) for c in first["state"]["cards"].values()))
 state_no_seen = {"cards": first["state"]["cards"]}
 second = block(95, state_no_seen)
 check("a second run of the same matches buys nothing, even with only 5 calls left, and shows the same scorecards", len(cards) == 0 and second["stats"]["checked"] == 5
-      and second["html"].count('class="cd"') == 5 * 4 and second["used"] == 95, (len(cards), second["stats"]))
+      and second["html"].count('<table class="sc">') > 0 and second["used"] == 95, (len(cards), second["stats"]))
 check("the cached standouts are used too (the test feeds one card to five matches, so the top five are all Iyer)", second["html"].count("Shreyas Iyer") >= 5 and "<h3>Standouts</h3>" in second["html"])
 mixed = block(80, {"cards": {nz["id"]: first["state"]["cards"][nz["id"]]}})
 check("one cached match plus one new purchase fits the budget: 2 of 5 checked, calls = 80 + 10", mixed["stats"]["checked"] == 2 and mixed["used"] == 90 and len(cards) == 1, mixed["stats"])
-many = {"cards": {f"m{i}": {"summary": [], "standouts": []} for i in range(80)}}
+many = {"cards": {f"m{i}": {"innings": [], "standouts": []} for i in range(80)}}
 check("the cache keeps only the 60 most recent scorecards", len(block(17, many)["state"]["cards"]) == 60)
-check("the cache survives being saved as JSON and read back", block(95, json.loads(json.dumps(state_no_seen)))["html"].count('class="cd"') == 5 * 4)
+check("the cache survives being saved as JSON and read back", block(95, json.loads(json.dumps(state_no_seen)))["html"].count('<table class="sc">') == second["html"].count('<table class="sc">'))
+old_format = {"cards": {nz["id"]: {"summary": [], "standouts": []}}}
+check("an old-format cache entry (from before full scorecards) is ignored and bought again, not shown broken", block(17, old_format)["stats"]["checked"] == 5 and len(cards) == 5)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

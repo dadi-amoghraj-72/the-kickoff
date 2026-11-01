@@ -95,43 +95,7 @@ def title(m):
     return teams, ", ".join(parts[1:])
 
 
-def short_name(name):
-    """'Ishan Kishan' -> 'I Kishan'; one-word names stay as they are."""
-    from kickoff.leaders import surname
-    parts = name.split()
-    return name if len(parts) < 2 else f"{parts[0][0]} {surname(name)}"
-
-
-def summary(card, match, top_bat=3, top_bowl=3):
-    """A compact scorecard per innings: the best batters, and the wicket-takers from the other side.
-    [{"team", "batting": [(name, runs, balls, not_out)], "bowling_team", "bowling": [(name, wickets, runs)]}]"""
-    teams = match.get("teams") or []
-    out = []
-    for inn in card.get("scorecard") or []:
-        team = team_of(inn.get("inning", ""), teams)
-        other = next((t for t in teams if t != team), "")
-        bats = sorted(inn.get("batting") or [], key=lambda b: (-(b.get("r") or 0), b.get("b") or 0))[:top_bat]
-        bowls = sorted((b for b in inn.get("bowling") or [] if (b.get("w") or 0) >= 1), key=lambda b: (-(b.get("w") or 0), b.get("r") or 0))[:top_bowl]
-        out.append({"team": team, "bowling_team": other,
-                    "batting": [(b["batsman"]["name"], b.get("r") or 0, b.get("b") or 0, (b.get("dismissal-text") or "").lower() == "not out") for b in bats],
-                    "bowling": [(b["bowler"]["name"], b.get("w") or 0, b.get("r") or 0) for b in bowls]})
-    return out
-
-
-def scorecard_html(summ):
-    """Muted scorecard lines under a result: per innings, the top batters, then the bowlers who took wickets."""
-    out = ""
-    for inn in summ or []:
-        bat = ", ".join(f"{r.esc(short_name(n))} {runs}{'*' if no else ''} ({b})" for n, runs, b, no in inn["batting"])
-        bowl = ", ".join(f"{r.esc(short_name(n))} {w}-{rr}" for n, w, rr in inn["bowling"])
-        if bat:
-            out += f'<span class="cd"><strong>{r.esc(inn["team"])}</strong> batting: {bat}</span>'
-        if bowl:
-            out += f'<span class="cd"><strong>{r.esc(inn["bowling_team"])}</strong> bowling: {bowl}</span>'
-    return out
-
-
-def result_html(m, summ=None):
+def result_html(m, entry=None):
     teams, rest = title(m)
     names = r.esc(teams)
     for t in m.get("teams") or []:
@@ -140,10 +104,10 @@ def result_html(m, summ=None):
     scores = " · ".join(r.esc(innings_line(s, m.get("teams") or [])) for s in m.get("score") or [])
     live = "" if m.get("matchEnded") else '<span class="tag">Live</span> '
     return (f'<li><span class="cm">{names}</span><span class="cs">{scores}</span>'
-            f'<span class="cr">{live}{r.esc(m.get("status") or "")}</span>{scorecard_html(summ)}<span class="ct">{r.esc(rest)}</span></li>')
+            f'<span class="cr">{live}{r.esc(m.get("status") or "")}</span><span class="ct">{r.esc(rest)}</span>{full_scorecard_html(entry["innings"]) if entry and scorecard_tier(m) < 3 else ""}</li>')
 
 
-def results_html(picked, summaries=None):
+def results_html(picked, cards=None):
     """Matches grouped under International, Women's international, and each league, in priority order. '' if none."""
     groups, order = {}, []
     for m in picked:
@@ -154,7 +118,104 @@ def results_html(picked, summaries=None):
         groups[label].append(m)
     out = ""
     for label in order:
-        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m, (summaries or {}).get(m['id'])) for m in groups[label])}</ul>"
+        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m, (cards or {}).get(m['id'])) for m in groups[label])}</ul>"
+    return out
+
+
+# ---- Which matches get a full scorecard ---------------------------------------------------------
+
+FULL_SCORECARD_TEAMS = {"india", "australia", "england", "pakistan", "new zealand", "south africa"}
+
+
+def scorecard_tier(m):
+    """1: a men's match involving India, Australia, England, Pakistan, New Zealand or South Africa (full scorecard).
+    2: any men's IPL match (full scorecard). 3: everything else (the result line only)."""
+    c = m.get("class") or classify(m)
+    teams = m.get("teams") or []
+    if c.get("kind") == "international" and not c.get("women") and any(strip_women(t).lower() in FULL_SCORECARD_TEAMS for t in teams):
+        return 1
+    if c.get("label") == "IPL" and not c.get("women"):
+        return 2
+    return 3
+
+
+def overs_decimal(overs):
+    """17.4 overs (17 and 4 balls) is 17.667 for run-rate sums."""
+    whole = int(overs)
+    return whole + round((overs - whole) * 10) / 6
+
+
+def short_dismissal(text, names):
+    """'c Michael Bracewell b Adam Milne' -> 'c Bracewell b Milne': the bowler's and catcher's full names become surnames."""
+    from kickoff.leaders import surname
+    for name in sorted({n for n in names if n}, key=len, reverse=True):
+        text = text.replace(name, surname(name))
+    return text
+
+
+def slim_card(card, match):
+    """The parts of a scorecard we show and keep, per innings. Totals come from the match's own score list. Extras are
+    worked out: total minus the batters' runs, with wides and no-balls counted from the bowlers and the rest as byes
+    and leg-byes together (the data does not split those two)."""
+    teams = match.get("teams") or []
+    score = match.get("score") or []
+    out = []
+    for i, inn in enumerate(card.get("scorecard") or []):
+        team = team_of(inn.get("inning", ""), teams)
+        sc = score[i] if i < len(score) else {}
+        bat = [{"name": b["batsman"]["name"],
+                "out": short_dismissal(b.get("dismissal-text") or "", [(b.get("bowler") or {}).get("name"), (b.get("catcher") or {}).get("name")]),
+                "r": b.get("r") or 0, "b": b.get("b") or 0,
+                "fours": b.get("4s") or 0, "sixes": b.get("6s") or 0, "sr": b.get("sr")} for b in inn.get("batting") or []]
+        bowl = [{"name": b["bowler"]["name"], "o": b.get("o"), "m": b.get("m") or 0, "r": b.get("r") or 0, "w": b.get("w") or 0,
+                 "eco": b.get("eco"), "wd": b.get("wd") or 0, "nb": b.get("nb") or 0} for b in inn.get("bowling") or []]
+        runs = sc.get("r")
+        extras = None
+        if runs is not None:
+            total_extras = runs - sum(b["r"] for b in bat)
+            wides, noballs = sum(b["wd"] for b in bowl), sum(b["nb"] for b in bowl)
+            if total_extras >= wides + noballs >= 0:
+                extras = {"total": total_extras, "w": wides, "nb": noballs, "b_lb": total_extras - wides - noballs}
+        out.append({"team": team, "bowling_team": next((t for t in teams if t != team), ""), "runs": runs, "wickets": sc.get("w"),
+                    "overs": sc.get("o"), "extras": extras, "batting": bat, "bowling": bowl})
+    return out
+
+
+def _num(value, places=2):
+    return f"{float(value):.{places}f}" if isinstance(value, (int, float)) else ""
+
+
+def full_scorecard_html(innings):
+    """A conventional scorecard for each innings: batting (with how each batter was out), extras and total with the run
+    rate, then the other side's bowling. Left out because the data does not carry it: fall of wickets, did-not-bat,
+    minutes, dot balls and captain or keeper marks."""
+    out = ""
+    for inn in innings or []:
+        wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}"
+        total = f"{inn['runs']}{wickets}" if inn["runs"] is not None else ""
+        overs = f" ({inn['overs']:g} ov)" if isinstance(inn["overs"], (int, float)) else ""
+        out += f'<p class="inn"><strong>{r.esc(inn["team"])}</strong> {total}{overs}</p>'
+        rows = ""
+        for b in inn["batting"]:
+            rows += (f'<tr><td class="name">{r.esc(b["name"])}<span class="dis">{r.esc(b["out"])}</span></td><td class="n"><strong>{b["r"]}</strong></td>'
+                     f'<td class="n">{b["b"]}</td><td class="n">{b["fours"]}</td><td class="n">{b["sixes"]}</td><td class="n">{_num(b["sr"])}</td></tr>')
+        ex = inn["extras"]
+        if ex is not None:
+            parts = [f"{label} {n}" for label, n in (("w", ex["w"]), ("nb", ex["nb"]), ("b/lb", ex["b_lb"])) if n]
+            rows += f'<tr class="sum"><td class="name">Extras<span class="dis">{r.esc(", ".join(parts))}</span></td><td class="n">{ex["total"]}</td><td colspan="4"></td></tr>'
+        if inn["runs"] is not None and isinstance(inn["overs"], (int, float)) and inn["overs"] > 0:
+            rr = inn["runs"] / overs_decimal(inn["overs"])
+            rows += (f'<tr class="sum"><td class="name">Total<span class="dis">{inn["overs"]:g} ov, run rate {rr:.2f}</span></td>'
+                     f'<td class="n">{total}</td><td colspan="4"></td></tr>')
+        out += ('<div class="table-wrap"><table class="sc"><thead><tr><th>Batting</th><th class="n">R</th><th class="n">B</th><th class="n">4s</th>'
+                f'<th class="n">6s</th><th class="n">SR</th></tr></thead><tbody>{rows}</tbody></table></div>')
+        econ = lambda b: _num(b["r"] / overs_decimal(b["o"]) if b["o"] else b["eco"])  # exact, not the API's one-decimal figure  # noqa: E731
+        brows = "".join(f'<tr><td class="name">{r.esc(b["name"])}</td><td class="n">{b["o"]:g}</td><td class="n">{b["m"]}</td><td class="n">{b["r"]}</td>'
+                        f'<td class="n"><strong>{b["w"]}</strong></td><td class="n">{econ(b)}</td><td class="n">{b["wd"]}</td><td class="n">{b["nb"]}</td></tr>'
+                        for b in inn["bowling"] if isinstance(b["o"], (int, float)))
+        if brows:
+            out += (f'<div class="table-wrap"><table class="sc"><thead><tr><th>{r.esc(inn["bowling_team"])} bowling</th><th class="n">O</th><th class="n">M</th>'
+                    f'<th class="n">R</th><th class="n">W</th><th class="n">Econ</th><th class="n">WD</th><th class="n">NB</th></tr></thead><tbody>{brows}</tbody></table></div>')
     return out
 
 
@@ -232,12 +293,13 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable):
     matches, used = get_matches()
     seen = set(st.get("seen", []))
     picked = pick(matches, now, window_start, seen, st.get("status", {}))
-    found, checked, skipped, summaries = [], 0, 0, {}
-    cards = dict(st.get("cards", {}))  # scorecards already bought: a match is paid for once, never twice
-    for m in picked:  # most important first
+    found, checked, skipped, shown_cards = [], 0, 0, {}
+    cards = {k: v for k, v in st.get("cards", {}).items() if "innings" in v}  # scorecards already bought: paid for once, never twice
+    # Buy in this order: full-scorecard matches first (tier 1, then the IPL), then the rest for their standouts.
+    for m in sorted(picked, key=lambda x: (scorecard_tier(x), -x["class"]["priority"], x["dateTimeGMT"])):
         if m["id"] in cards:
             found += cards[m["id"]]["standouts"]
-            summaries[m["id"]] = cards[m["id"]]["summary"]
+            shown_cards[m["id"]] = cards[m["id"]]
             checked += 1
             continue
         if affordable(used) < 1:  # not even one more scorecard fits in what is left of today's calls
@@ -249,11 +311,11 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable):
             skipped += 1
             continue
         checked += 1
-        cards[m["id"]] = {"summary": summary(card, m), "standouts": standouts(card, m)}
+        cards[m["id"]] = {"innings": slim_card(card, m), "standouts": standouts(card, m)}
         found += cards[m["id"]]["standouts"]
-        summaries[m["id"]] = cards[m["id"]]["summary"]
+        shown_cards[m["id"]] = cards[m["id"]]
     top = rank(found)
-    html = results_html(picked, summaries) + standouts_html(top)
+    html = results_html(picked, shown_cards) + standouts_html(top)
     if html and skipped:
         html += (f'<p class="muted">Standouts were checked in {checked} of {len(picked)} matches: the free cricket data allows only '
                  f"about eight scorecards a day.</p>")

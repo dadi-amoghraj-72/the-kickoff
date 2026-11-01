@@ -186,3 +186,13 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket .ct { color: var(--muted); font-size: 14px; }
 .cricket .cd { color: var(--muted); font-size: 14px; line-height: 1.5; }
 .cricket .cd strong { color: var(--chalk); font-weight: 600; }
+
+/* Full cricket scorecard */
+.cricket .inn { margin: 10px 0 2px; font-size: 17px; }
+.cricket table.sc { font-size: 14px; }
+.cricket table.sc td.name { white-space: normal; min-width: 7em; }
+.cricket table.sc .dis { display: block; color: var(--muted); font-size: 13px; line-height: 1.3; }
+.cricket table.sc tr.sum td { font-weight: 600; background: var(--pitch); }
+.cricket table.sc th, .cricket table.sc td { padding: 5px 3px; }
+.cricket table.sc th:first-child, .cricket table.sc td:first-child { padding-left: 6px; }
+.cricket table.sc th { font-size: 11px; letter-spacing: 0; }
