@@ -48,9 +48,10 @@ cricket_stats = None
 if os.environ.get("CRICKET_DATA_API_KEY") and "--no-cricket" not in sys.argv:
     try:
         now = datetime.now(timezone.utc)
-        c = cricket.run(now, espn.window_start(day), st.get("cricket") or {}, cricket_source.get_matches, cricket_source.get_scorecard,
+        c = cricket.run(now, espn.window_start(day), {"cards": state.load("cricket").get("cards", {})}, cricket_source.get_matches, cricket_source.get_scorecard,
                         cricket_source.scorecards_affordable)
         cricket_stats = {**c["stats"], "calls_used_today": c["used"]}
+        cricket.persist_cards(c["state"]["cards"])  # into the real state: bought scorecards are never paid for twice
         if c["html"]:
             out["sections"].append({"id": "cricket", "title": "Cricket", "html": c["html"]})
     except Exception as e:

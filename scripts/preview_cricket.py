@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from kickoff import cricket, render  # noqa: E402
+from kickoff import cricket, render, state  # noqa: E402
 from kickoff.envfile import load_env  # noqa: E402
 from kickoff.sources import cricket as src  # noqa: E402
 from kickoff.sources import espn  # noqa: E402
@@ -22,8 +22,9 @@ if "--live" in sys.argv:
     now = datetime.now(timezone.utc)
     day = now.astimezone(__import__("zoneinfo").ZoneInfo("Asia/Singapore")).date()
     start = espn.window_start(day)
-    out = cricket.run(now, start, {}, src.get_matches, src.get_scorecard, src.scorecards_affordable)
-    note = "Built live from CricketData.org."
+    out = cricket.run(now, start, {"cards": state.load("cricket").get("cards", {})}, src.get_matches, src.get_scorecard, src.scorecards_affordable)
+    cricket.persist_cards(out["state"]["cards"])  # keep what was bought, so re-running never pays twice
+    note = "Built live from CricketData.org (scorecards already bought are reused, not paid for again)."
 else:
     fx = ROOT / "tests" / "fixtures"
     matches = json.loads((fx / "cricket_current.json").read_text())

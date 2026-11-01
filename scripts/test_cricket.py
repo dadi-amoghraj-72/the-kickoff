@@ -210,5 +210,19 @@ check("in the whole block, every match with a scorecard shows its batting and bo
 tt = block(80)
 check("when only one scorecard fits, only that match has the scorecard lines; the other four show just their results", tt["html"].count('class="cd"') == 4, tt["html"].count('class="cd"'))
 
+# ---- Scorecards are paid for once ----
+first = block(17)
+check("the first run stores each scorecard's summary and standouts", len(first["state"]["cards"]) == 5 and all({"summary", "standouts"} <= set(c) for c in first["state"]["cards"].values()))
+state_no_seen = {"cards": first["state"]["cards"]}
+second = block(95, state_no_seen)
+check("a second run of the same matches buys nothing, even with only 5 calls left, and shows the same scorecards", len(cards) == 0 and second["stats"]["checked"] == 5
+      and second["html"].count('class="cd"') == 5 * 4 and second["used"] == 95, (len(cards), second["stats"]))
+check("the cached standouts are used too (the test feeds one card to five matches, so the top five are all Iyer)", second["html"].count("Shreyas Iyer") >= 5 and "<h3>Standouts</h3>" in second["html"])
+mixed = block(80, {"cards": {nz["id"]: first["state"]["cards"][nz["id"]]}})
+check("one cached match plus one new purchase fits the budget: 2 of 5 checked, calls = 80 + 10", mixed["stats"]["checked"] == 2 and mixed["used"] == 90 and len(cards) == 1, mixed["stats"])
+many = {"cards": {f"m{i}": {"summary": [], "standouts": []} for i in range(80)}}
+check("the cache keeps only the 60 most recent scorecards", len(block(17, many)["state"]["cards"]) == 60)
+check("the cache survives being saved as JSON and read back", block(95, json.loads(json.dumps(state_no_seen)))["html"].count('class="cd"') == 5 * 4)
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

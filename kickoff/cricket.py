@@ -233,7 +233,13 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable):
     seen = set(st.get("seen", []))
     picked = pick(matches, now, window_start, seen, st.get("status", {}))
     found, checked, skipped, summaries = [], 0, 0, {}
+    cards = dict(st.get("cards", {}))  # scorecards already bought: a match is paid for once, never twice
     for m in picked:  # most important first
+        if m["id"] in cards:
+            found += cards[m["id"]]["standouts"]
+            summaries[m["id"]] = cards[m["id"]]["summary"]
+            checked += 1
+            continue
         if affordable(used) < 1:  # not even one more scorecard fits in what is left of today's calls
             skipped += 1
             continue
@@ -243,13 +249,24 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable):
             skipped += 1
             continue
         checked += 1
-        found += standouts(card, m)
-        summaries[m["id"]] = summary(card, m)
+        cards[m["id"]] = {"summary": summary(card, m), "standouts": standouts(card, m)}
+        found += cards[m["id"]]["standouts"]
+        summaries[m["id"]] = cards[m["id"]]["summary"]
     top = rank(found)
     html = results_html(picked, summaries) + standouts_html(top)
     if html and skipped:
         html += (f'<p class="muted">Standouts were checked in {checked} of {len(picked)} matches: the free cricket data allows only '
                  f"about eight scorecards a day.</p>")
     new = {"seen": sorted(seen | {m["id"] for m in picked if m.get("matchEnded")})[-400:],
-           "status": {**st.get("status", {}), **{m["id"]: m.get("status") for m in picked if not m.get("matchEnded")}}}
+           "status": {**st.get("status", {}), **{m["id"]: m.get("status") for m in picked if not m.get("matchEnded")}},
+           "cards": dict(list(cards.items())[-60:])}
     return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": len(found)}}
+
+
+def persist_cards(new_cards, directory=None):
+    """Save bought scorecards into the real state file, so a match is never paid for twice across runs. Only the 'cards'
+    entry is touched: what has been reported and each live Test's last status stay as they were."""
+    from kickoff import state
+    saved = state.load("cricket", directory=directory)
+    merged = {**saved.get("cards", {}), **new_cards}
+    state.save("cricket", {**saved, "cards": dict(list(merged.items())[-60:])}, directory)

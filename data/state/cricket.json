@@ -1,0 +1,117 @@
+{
+  "cards": {
+    "936348e9-608f-4ca8-9cc5-5d3082ab0b90": {
+      "standouts": [
+        {
+          "against": "New Zealand",
+          "balls": 23,
+          "fours": 3,
+          "kind": "fast fifty",
+          "match": "New Zealand vs India, 5th T20I, India tour of New Zealand 2026",
+          "name": "Shreyas Iyer",
+          "not_out": false,
+          "result": "New Zealand won by 7 wkts",
+          "runs": 50,
+          "sixes": 4,
+          "team": "India"
+        },
+        {
+          "against": "India",
+          "kind": "four-for",
+          "maidens": 0,
+          "match": "New Zealand vs India, 5th T20I, India tour of New Zealand 2026",
+          "name": "Adam Milne",
+          "overs": 4,
+          "result": "New Zealand won by 7 wkts",
+          "runs_conceded": 19,
+          "team": "New Zealand",
+          "wickets": 4
+        }
+      ],
+      "summary": [
+        {
+          "batting": [
+            [
+              "Ishan Kishan",
+              61,
+              32,
+              false
+            ],
+            [
+              "Shreyas Iyer",
+              50,
+              23,
+              false
+            ],
+            [
+              "Naman Dhir",
+              33,
+              23,
+              false
+            ]
+          ],
+          "bowling": [
+            [
+              "Adam Milne",
+              4,
+              19
+            ],
+            [
+              "Nathan Smith",
+              2,
+              28
+            ],
+            [
+              "Blair Tickner",
+              2,
+              38
+            ]
+          ],
+          "bowling_team": "New Zealand",
+          "team": "India"
+        },
+        {
+          "batting": [
+            [
+              "Tim Seifert",
+              93,
+              50,
+              false
+            ],
+            [
+              "Glenn Phillips",
+              65,
+              38,
+              true
+            ],
+            [
+              "Daryl Mitchell",
+              29,
+              16,
+              false
+            ]
+          ],
+          "bowling": [
+            [
+              "Nitish Kumar Reddy",
+              1,
+              19
+            ],
+            [
+              "Arshdeep Singh",
+              1,
+              40
+            ],
+            [
+              "Varun Chakaravarthy",
+              1,
+              45
+            ]
+          ],
+          "bowling_team": "India",
+          "team": "New Zealand"
+        }
+      ]
+    }
+  }
+}
