@@ -77,7 +77,7 @@ def get_table(league):
     for e in groups[0]["standings"]["entries"]:
         s = {x["name"]: x.get("value") for x in e["stats"]}
         rows.append({
-            "rank": int(s.get("rank") or 0), "team": e["team"]["displayName"],
+            "rank": int(s.get("rank") or 0), "id": e["team"]["id"], "team": e["team"]["displayName"],
             "abbr": e["team"].get("abbreviation", ""), "played": int(s.get("gamesPlayed") or 0),
             "won": int(s.get("wins") or 0), "drawn": int(s.get("ties") or 0), "lost": int(s.get("losses") or 0),
             "gf": int(s.get("pointsFor") or 0), "ga": int(s.get("pointsAgainst") or 0),
