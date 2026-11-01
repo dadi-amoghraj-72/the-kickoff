@@ -259,13 +259,8 @@ def check_overview(note, f):
             for minute in MINUTE.findall(sentence):
                 if int(minute) not in real_winners:
                     problems.append(f"calls a goal in the {minute}th minute decisive, but no winning goal was scored then")
-    note_words = _words(note)
-    for r in f["matches"]:
-        for source in (r.get("recap") or {}).values():
-            theirs = _words(source)
-            grams = {tuple(theirs[i:i + 6]) for i in range(len(theirs) - 5)}
-            if any(tuple(note_words[i:i + 6]) in grams for i in range(len(note_words) - 5)):
-                problems.append("copies a run of six or more words from an ESPN report")
+    if notes.copied_run(note, [s for r in f["matches"] for s in (r.get("recap") or {}).values()]):
+        problems.append("copies a run of six or more words from an ESPN report")
     return sorted(set(problems))
 
 

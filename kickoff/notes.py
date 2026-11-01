@@ -15,7 +15,8 @@ TIERS = {"short": ("one sentence, at most 25 words", 30), "standard": ("two to t
          "derby": ("three to four sentences, at most 80 words", 95),
          "arsenal": ("four to six sentences, at most 110 words; cover the result, the scorers and assists, the table or recent form", 125),
          "women": ("two sentences, at most 45 words", 55),
-         "overview": ("four to six sentences, at most 110 words", 125)}
+         "overview": ("four to six sentences, at most 110 words", 125),
+         "news": ("one sentence, at most 30 words", 36)}
 
 SYSTEM = """You write the match notes for The Kickoff, a personal daily sports digest read by one football fan in Singapore.
 
@@ -166,6 +167,17 @@ def _vocab(value, words=None):
             words.update(part.lower() for part in re.split(r"[-_]", token))
         words.update(re.findall(r"\d+", text))  # "2-0" gives 2 and 0, "90'+11'" gives 90 and 11
     return words
+
+
+def copied_run(note, sources, n=6):
+    """True if the note repeats a run of n or more words from any of the source texts (no copied article text)."""
+    note_words = re.findall(r"[a-z0-9']+", note.lower())
+    for source in sources:
+        theirs = re.findall(r"[a-z0-9']+", (source or "").lower())
+        grams = {tuple(theirs[i:i + n]) for i in range(len(theirs) - n + 1)}
+        if any(tuple(note_words[i:i + n]) in grams for i in range(len(note_words) - n + 1)):
+            return True
+    return False
 
 
 def check_note(note, f):
