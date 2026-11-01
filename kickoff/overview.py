@@ -211,8 +211,11 @@ def matchday_facts(competition, matches, odds_by_id, table_rows=None):
     if known:
         count = lambda *v: sum(1 for r in known if r["result_vs_expectation"] in v)  # noqa: E731
         facts["expectations"] = "from pre-match betting odds"
-        facts["tally"] = {"matches": len(rows), "favourite_won": count("favourite_won"), "favourite_held": count("favourite_held"),
-                          "upsets": count("upset", "big_upset"), "close_matches": count("close_match")}
+        draws = sum(1 for m in matches if winner_side(m) == "draw")
+        facts["tally"] = {"matches": len(rows), "decided_matches": len(rows) - draws, "draws": draws,
+                          "clear_favourites": count("favourite_won", "favourite_held", "upset", "big_upset"),
+                          "favourite_won": count("favourite_won"), "favourite_held": count("favourite_held"),
+                          "upsets": count("upset", "big_upset"), "close_matches_no_clear_favourite": count("close_match")}
     else:
         facts["expectations"] = "unavailable"
     if rows:

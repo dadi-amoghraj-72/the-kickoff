@@ -60,7 +60,9 @@ check("game of the night ranking: Sporting-LASK, then Lille-Galatasaray, then Ba
 
 # ---- Facts ----
 f = overview.matchday_facts("UEFA Champions League", MS, ODDS_BY_ID, ROWS)
-check("tally: 5 favourites won, 1 upset, 3 close matches", f["tally"] == {"matches": 9, "favourite_won": 5, "favourite_held": 0, "upsets": 1, "close_matches": 3}, f["tally"])
+check("tally gives exact counts: 9 matches, 8 decided, 1 draw; 6 clear favourites, 5 won, 1 upset; 3 with no clear favourite",
+      f["tally"] == {"matches": 9, "decided_matches": 8, "draws": 1, "clear_favourites": 6, "favourite_won": 5, "favourite_held": 0,
+                     "upsets": 1, "close_matches_no_clear_favourite": 3}, f["tally"])
 check("game of the night is Sporting CP 2-3 LASK Linz", f["game_of_the_night"] == "Sporting CP 2-3 LASK Linz", f["game_of_the_night"])
 como = next(r for r in f["matches"] if r["match"].startswith("Como"))
 check("each match carries named chances, the label and ESPN's report headline",
