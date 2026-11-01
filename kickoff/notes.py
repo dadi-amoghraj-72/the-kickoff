@@ -43,7 +43,7 @@ SCHEMA = {"type": "object", "properties": {"notes": {"type": "array", "items": {
 # Words that claim a table movement or continuity. They need a "position_before" in the facts to be true.
 MOVEMENT = re.compile(r"\b(stay(?:s|ed)?|remain(?:s|ed)?|climb(?:s|ed|ing)?|ris(?:e|es|en|ing)|rose|jump(?:s|ed)?|"
                       r"drop(?:s|ped)?|fall(?:s|en)?|fell|slip(?:s|ped)?|leapfrog\w*|overtak\w*|overtook|"
-                      r"(?:up|down) to|(?:up|down) from|unchanged|now|still|again)\b", re.I)
+                      r"(?:up|down) to|(?:up|down) from|unchanged|still|again)\b", re.I)
 
 # Hype the voice rules ban, and the word limit for each length instruction.
 HYPE = re.compile(r"thrash|hammer|demolish|humiliat|masterclass|clinical|thriller|stunning|sensational|annihilat", re.I)
@@ -208,12 +208,17 @@ def write_notes(client, facts_list):
     """{match id: {"note", "source": "claude" | "plain", "problems"}} plus total usage.
     Nothing unchecked is ever returned as a Claude note."""
     result, total = {}, {"input": 0, "output": 0}
-    pending = list(facts_list)
+    pending, problems_by_id = list(facts_list), {}
     for attempt in (1, 2):
         if not pending:
             break
-        notes, usage = _ask(client, pending, "" if attempt == 1 else
-                            "Some earlier notes added details that are not in the facts. Rewrite these using only the facts.\n")
+        if attempt == 1:
+            sent, extra = pending, ""
+        else:  # the retry names the exact problems; the check below still uses the original facts
+            sent = [{**f, "problems_with_your_last_note": problems_by_id[f["id"]]} for f in pending]
+            extra = ("Your earlier note for each match below broke a rule. Rewrite it so that it fixes the listed problems, "
+                     "using only the facts.\n")
+        notes, usage = _ask(client, sent, extra)
         total = {k: total[k] + usage[k] for k in total}
         failed = []
         for f in pending:
@@ -223,6 +228,7 @@ def write_notes(client, facts_list):
                 result[f["id"]] = {"note": note.strip(), "source": "claude", "problems": []}
             else:
                 result[f["id"]] = {"note": plain_note(f), "source": "plain", "problems": problems}
+                problems_by_id[f["id"]] = problems
                 failed.append(f)
         pending = failed if attempt == 1 else []
     return result, total

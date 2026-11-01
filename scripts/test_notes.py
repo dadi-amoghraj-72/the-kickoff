@@ -80,7 +80,8 @@ check("raw minute symbols are rejected", any("minute symbols" in p for p in note
       and any("minute symbols" in p for p in notes.check_note("Adli scored in 90+4 minutes.", big)))
 check("written-out minutes are fine", not any("minute symbols" in p for p in notes.check_note("Grimaldo scored in the 36th minute.", big)))
 check("hype words are rejected", any("hype word" in p for p in notes.check_note("Barcelona thrashed Alavés 6-1.", big)))
-check("'now' implies movement and needs a previous position", any("implies" in p for p in notes.check_note("Milan are now fifth.", big)))
+check("'still' implies continuity and needs a previous position", any("implies" in p for p in notes.check_note("Milan are still fifth.", big)))
+check("'now' is just a time word and is allowed", not any("implies" in p for p in notes.check_note("Arsenal are now top of the table.", big)))
 check("plain fallback note has the score and scorers", notes.plain_note(f).startswith("Chelsea 2-0 Manchester United.") and scorer in notes.plain_note(f))
 
 # ---- Talking to Claude (fake) ----
@@ -127,6 +128,8 @@ c = Fake([reply(bad), reply({ids[0]: faithful(facts[0])})])
 res, _ = notes.write_notes(c, facts)
 check("a bad note is retried once, and the fixed version is used",
       len(c.calls) == 2 and res[ids[0]]["source"] == "claude" and res[ids[0]]["problems"] == [], (len(c.calls), res))
+check("the retry tells Claude exactly what was wrong",
+      "problems_with_your_last_note" in c.calls[1]["messages"][0]["content"] and "Mourinho" in c.calls[1]["messages"][0]["content"])
 check("the retry asks only about the match that failed",
       f'"id": "{ids[0]}"' in c.calls[1]["messages"][0]["content"] and f'"id": "{ids[1]}"' not in c.calls[1]["messages"][0]["content"])
 c = Fake([reply(bad), reply(bad)])
