@@ -1,0 +1,281 @@
+# The Kickoff: build spec
+
+Nov 1, 2026 · @D
+
+## Overview
+
+The Kickoff is D's personal daily sports digest: one web page every morning at 8:00am Singapore time, linked from a Telegram ping. It covers the sports, clubs and players D follows, with summaries, tables, standouts and what's on today.
+
+- **Reader:** one person in Singapore (SGT, UTC+8), reading mostly on an iPhone in dark mode. A long read is welcome.
+- **Owner:** a beginner coder building with Claude Code on a MacBook. Every setup step must spell out each click, such as where to find Terminal.
+- **Build approach:** one complete build, wired and tested one sport at a time. The daily schedule is switched on only after full test runs pass.
+- **Voice:** plain, warm and specific. Summaries are written in our own words, short, with a link to the original. No copied article text.
+- **Images:** no club crests or logos. Use team names or three-letter codes.
+
+## Architecture and hosting
+
+The Kickoff runs entirely on GitHub: a scheduled job builds the page, publishes it and pings Telegram, with no computer needing to be switched on.
+
+&#91;embedded content: daily run · 5 steps, secrets and state\]
+
+Every step reads its keys from the secrets vault, and the build reads and updates the state files so it knows what changed since yesterday.
+
+- **Repo:** a public GitHub repo holding the code, the page template and the state files. Keys never go in the code.
+- **Secrets:** ANTHROPIC\_API\_KEY, TELEGRAM\_BOT\_TOKEN, TELEGRAM\_CHAT\_ID and the data-source keys live in GitHub's encrypted secrets. For testing on the MacBook, a local .env file that git ignores.
+- **Pages:** each edition at its own dated address, plus an archive page. A noindex tag and robots.txt keep it out of search engines.
+- **State files:** small JSON files for the last published tables, the Young Guns watchlist, the key-player list, the FIFA top-30 list and stories featured in the last week.
+- **Fallbacks:** if a source fails, its section shows a short "No data this morning" line. If the whole run fails, the bot sends D an alert instead of the edition.
+- **Claude:** writes the summaries, standout lines, what's-at-stake lines and Young Guns notes, and picks the stories. Use a current Claude model; check its exact name in Anthropic's docs during the build.
+
+## Schedule and delivery
+
+The edition lands at 8:00am SGT every day, seven days a week. The job starts around 7:15am SGT (23:15 UTC the previous day), because GitHub's scheduled runs can start late when GitHub is busy.
+
+- **Telegram ping:** a plain message from a dedicated The Kickoff bot, separate from D's other bots. It holds the date, the top three headlines and the link to that day's page.
+- **Page:** each edition gets its own address by date, plus an archive page listing past editions.
+- **What makes it in time:** European football, the Champions League, F1 races in the Americas and West Indies Test days all finish before 8am SGT.
+- **What lands a day later:** NFL late-afternoon games, Sunday Night Football and Monday Night Football finish later in the Singapore morning. Most NBA games do too, so their results appear in the next day's edition.
+
+## Edition structure and weekly rhythm
+
+Every edition follows the same order, and a section appears only when it has something in it. Sunday, Monday and Tuesday are the heavy editions; a quiet midweek day may be half the length.
+
+1. **The big stuff:** key overnight scores, the biggest news, major injuries and one Performance of the Day across all sports.
+2. **On today:** today's events in Singapore time, each tagged "While you're up" (sun icon) or "Overnight" (moon icon). Mondays add Games to Watch for the week.
+3. **Arsenal:** the men's team in full, plus Arsenal Women.
+4. **Football:** results by league, club one-liners, Champions League, international football during breaks, tables and the FPL corner.
+5. **Cricket, F1, tennis, NFL and NBA:** each with its own standouts.
+6. **Young Guns:** rookie and young star watch across all sports.
+7. **Around the sporting world:** the general section.
+8. **Interesting stories:** three to five picks from across everything covered.
+
+| Day | What's extra |
+| --- | --- |
+| Every day | Tables appear only when changed: top 6 plus D's clubs outside it, or "No change since Tuesday" |
+| Monday | Weekend wrap, Games to Watch for the week, NFL early-game scores |
+| Tuesday | Table day: full tables for the six leagues and the WSL, NBA conference standings, NFL late-game and Sunday Night Football scores |
+| Wednesday | NFL wrap: every game by division, standouts, Player of the Week, division tables |
+| Saturday | Thursday Night Football score |
+
+**Standouts rule (all sports):** picked by clear stat thresholds, not just each game's leader. Show three to five per sport per edition, ranked, one line each with context. Defensive performances count too: goalkeepers, defenders, bowlers, NFL defence, and NBA blocks and steals.
+
+**Games to Watch picks:** D's clubs' big games, top-of-the-table clashes and derbies, deciding Tests in a series, title-deciding races, and tracked NBA stars facing each other. All times in SGT.
+
+## Football
+
+Football is the core of every edition: six leagues, Arsenal in full and 16 other clubs in one-liners.
+
+- **Leagues:** Premier League, La Liga, Ligue 1, Serie A, Bundesliga and Turkish Süper Lig. The WSL table joins on Tuesdays.
+- **Arsenal, in full:** result, scorers, injuries, next fixture and news, plus credible transfer rumours from reliable journalists, clearly labelled as rumours. Arsenal Women get their own short block.
+- **Other clubs, one line each, only when something happened:** Manchester City, Manchester United, Tottenham, Liverpool, Chelsea, Bayern Munich, Borussia Dortmund, PSG, Juventus, Napoli, Inter, AC Milan, Como, Barcelona, Real Madrid and Atlético Madrid. Covers every competition, including the Europa League, Conference League and domestic cups. Transfers: confirmed deals only.
+- **Tables:** full tables every Tuesday. Other days, only when a table has changed: top 6, plus one line showing where D's clubs outside the top 6 sit. If unchanged: "No change since Tuesday." Change is detected by comparing against the last published table, saved in the state files.
+- **Champions League:** results after each matchday, and the league-phase table shown as the top 8, the 24th-place cut line and where D's clubs sit.
+- **Injuries:** a key player averages 70+ league minutes for a top 6 side in any of the six leagues, or for any listed club. Report injuries expected to last two weeks or more, or that put a player in doubt for a big game that week, plus key players returning. The key-player list is rebuilt weekly from API-Football player minutes.
+- **Standouts:** hat-tricks, three or more goal contributions in one game, standout goalkeeping such as penalty saves, and milestones or records.
+- **FPL corner:** team news and injuries that matter for FPL, deadline reminders and each gameweek's top scorers. Reads D's classic team and Draft league from the FPL site's public data (IDs collected during the build).
+
+## International football
+
+International football appears only during international breaks and major tournaments, and only for competitive games.
+
+- **Which games:** qualifiers, the UEFA Nations League and final tournaments. Friendlies are excluded.
+- **Which teams:** men's sides in the FIFA top 30, refreshed before each international break, plus Singapore and India always.
+- **Women's football:** the Women's World Cup and Women's Euro finals only, as headline events in Around the sporting world.
+- **Nations League tables:** all four League A groups, plus any League B or C group containing a top-30 side. Each row carries a zone colour with a legend: quarter-finals (blue), play-off (lilac), relegated (rose).
+- **What's at stake:** two or three lines per group before and after each matchday. Code works out every possible finish from the remaining fixtures; Claude only phrases what that calculation supports. Where a finish depends on goal difference or head-to-head, say so rather than guess.
+- **Where each place leads (League A):** 1st and 2nd go to two-legged quarter-finals in March 2027, then the Finals in June 2027. 3rd plays a two-legged play-off against a League B runner-up. 4th is relegated to League B.
+- **League B:** 1st is promoted, 2nd plays the promotion play-off, 3rd plays a relegation play-off against a League C runner-up, and 4th is relegated.
+- **Euro 2028 link:** the best-ranked group winners who don't qualify through the main route are expected to get a play-off place. This is pending UEFA's formal approval.
+
+Source: [2026–27 UEFA Nations League format](https://en.wikipedia.org/wiki/2026%E2%80%9327_UEFA_Nations_League).
+
+## Cricket, F1 and tennis
+
+Each of these appears only when there's play, and each gets its own standouts.
+
+**Cricket**
+
+- **International:** the 12 Test-playing nations (Australia, England, India, New Zealand, Pakistan, South Africa, Sri Lanka, West Indies, Bangladesh, Zimbabwe, Afghanistan and Ireland), men's and women's, all formats.
+- **Leagues:** IPL, BBL and The Hundred, plus the women's competitions: WPL, WBBL and the women's Hundred.
+- **Standouts:** centuries, five-wicket hauls, T20 hat-tricks and four-wicket hauls, fifties off 25 balls or fewer, and milestones.
+
+**F1**
+
+- Race, sprint and qualifying results each race weekend, with driver and constructor standings after each race.
+- **Standouts:** big recoveries through the field, first podiums or wins, and standout qualifying laps. Rookies feed Young Guns.
+
+**Tennis**
+
+- Grand Slams only: Australian Open, Roland-Garros, Wimbledon and US Open. Men's and women's singles.
+- **Rounds 1 to 3:** only matches involving seeded players. **From the last 16:** every match.
+- Top-10 players withdrawing before a Slam.
+- **Standouts:** top-10 seeds knocked out, comebacks from two sets down, and milestones.
+
+## NFL and NBA
+
+The NFL gets a full Wednesday wrap; the NBA shows every game, with marquee players' games first.
+
+**NFL**
+
+- Games grouped by division, each with the score and a one-line story.
+- Quick scores on Monday and Tuesday as games finish. Wednesday has the full wrap: every game by division, standouts, Player of the Week and the division tables. Saturday carries the Thursday Night Football score.
+- Three to five standouts per week, ranked, each with one line of context.
+
+| Position | Standout threshold |
+| --- | --- |
+| Quarterback | 350+ passing yards, 4+ touchdown passes, 300+ yards with 3+ touchdowns and no interceptions, or 100+ rushing yards |
+| Running back | 150+ rushing yards, or 3+ total touchdowns |
+| Receiver or tight end | 150+ receiving yards, or 3 receiving touchdowns |
+| Defence | 3+ sacks, 2+ interceptions, or any defensive touchdown |
+| Special teams | Return touchdowns, field goals of 55+ yards, game-winning kicks |
+| Any player | Franchise records, career milestones, rookie breakout games |
+
+**NBA**
+
+- Every game gets a score, in two tiers. Games with a tracked player come first: score, the star's stat line and a one-line story. All other games follow as compact one-line scores.
+- **Extra focus:** LeBron James and James Harden always get their stat line and a milestone watch, win or lose.
+- **Standouts from any game:** 40+ points, triple-doubles, 20-point and 20-rebound games, game-winning shots and milestones.
+- **Defence counts too:** 5+ blocks, 5+ steals, or shutting down an opposing star earns a standout line or a short comment.
+- **Players join automatically:** anyone off the list with three standout games in 30 days is added. Auto-added players drop off after eight weeks without a standout; D's picks stay on permanently.
+- Conference standings every Tuesday.
+- Players are tracked by player ID, so a traded player is followed automatically.
+
+| Player | Team (2026-27) |
+| --- | --- |
+| Victor Wembanyama | San Antonio Spurs |
+| Shai Gilgeous-Alexander | Oklahoma City Thunder |
+| Nikola Jokić | Denver Nuggets |
+| Luka Dončić | Los Angeles Lakers |
+| Jalen Brunson, Karl-Anthony Towns | New York Knicks |
+| Giannis Antetokounmpo | Miami Heat |
+| LeBron James, Joel Embiid, Jaylen Brown | Philadelphia 76ers |
+| Donovan Mitchell, James Harden | Cleveland Cavaliers |
+| Stephen Curry | Golden State Warriors |
+| Kevin Durant | Houston Rockets |
+| Anthony Edwards | Minnesota Timberwolves |
+| Jayson Tatum | Boston Celtics |
+| Ja Morant, Damian Lillard | Portland Trail Blazers |
+| Trae Young, Anthony Davis | Washington Wizards |
+| Tyrese Haliburton | Indiana Pacers |
+| Zion Williamson | New Orleans Pelicans |
+| Cooper Flagg | Dallas Mavericks |
+| Cade Cunningham | Detroit Pistons |
+
+Source: [NBA.com 2026-27 season previews](https://www.nba.com/2026-27-season-preview/features).
+
+## Young Guns
+
+Young Guns is one dedicated section for rookies and young stars across every sport, with a running watchlist so each player's rise reads like a story.
+
+| Sport | Who counts |
+| --- | --- |
+| Football | Under-21s in the six leagues and the Champions League, with extra attention on D's clubs |
+| NFL | Rookies |
+| NBA | Rookies and second-year players |
+| F1 | Rookies |
+| Cricket | Under-23s or players in their first year of international cricket, plus uncapped players at the IPL |
+| Tennis | 21 and under |
+
+- **Watchlist:** saved in the state files. Each entry records the player, sport, team and a dated log of standout games, so lines can say things like "his third big game this month."
+- **Who makes the cut:** a young player who hits that sport's standout threshold joins the watchlist. Players drop off after about eight weeks without a standout.
+- **Spotlight:** young Southeast Asian and Indian athletes get extra attention, matching the rule in Around the sporting world.
+
+## Around the sporting world and interesting stories
+
+The general section covers major events only and is built from news feeds, since these sports lack good free data. Women's events are included throughout.
+
+| Sport | What's covered |
+| --- | --- |
+| Rugby | Men's and women's internationals and World Cups |
+| Golf | The four men's majors, the five women's majors, the Ryder Cup and the Solheim Cup |
+| UFC | Numbered events only, main and co-main events only, ranked fighters only |
+| Badminton | BWF Super 1000s, World Championships and World Tour Finals |
+| Athletics | Diamond League and World Championships |
+| Handball | World Championships, Euros and the EHF Champions League Final Four, men's and women's |
+| Field hockey | FIH Pro League, World Cup and Asia Cup, men's and women's |
+| Chess | World Championship match, Candidates, Chess Olympiad, Women's World Championship, and elite invitationals such as Tata Steel and Norway Chess |
+| Darts | PDC World Championship, World Matchplay, Grand Slam of Darts and Premier League finals night |
+| Multi-sport games | Olympics, Asian Games, SEA Games and Commonwealth Games |
+| Women's football | Women's World Cup and Women's Euro finals |
+
+- **Spotlight rule:** any Southeast Asian or Indian athlete reaching a semi-final, final or podium at a notable event gets a line, even if the event is below the usual bar. A Super 750 badminton semi-final counts, for example.
+- **Not covered:** MotoGP (for now), cycling, snooker and ONE Championship.
+- **Interesting stories:** three to five stories from across everything covered, each summarised in two or three sentences in our own words, with a link to the original. Avoid repeating a story already featured in the last week.
+
+## Data sources
+
+No single repo does this job, so The Kickoff combines several free sources, with backups where one might break. Free-tier limits change, so check each provider's current terms during the build.
+
+| Source | Used for | Caveat |
+| --- | --- | --- |
+| [ESPN unofficial API](https://gist.github.com/akeaswaran/b48b02f1c94f873c6655e7129910fc3b) | Backbone: football scores and news (including the Turkish league, Champions League and Nations League), NFL, NBA, tennis, F1 news, NFL and NBA injuries | Undocumented, no guarantee, can break at any time; needs fallbacks |
+| football-data.org, free tier | Backup tables for the top five leagues and the Champions League | 12 free competitions, no Turkish league, 10 requests a minute |
+| API-Football, free tier | Player minutes for the key-player list; backup for the Turkish league | 100 requests a day |
+| [Jolpica F1 API](https://github.com/jolpica/jolpica-f1) | F1 results, qualifying and standings | Community-run successor to the old Ergast API; respect its rate limits |
+| [CricketData.org](https://cricketdata.org/), main cricket source | Cricket results and scorecards, international and franchise | Running since 2015 as CricAPI; permanent free tier of 100 calls a day, ample for one run; women's coverage may be thinner |
+| [Big Balls Data](https://bigballsdata.com/cricket-api), backup cricket source | Women's competitions and cross-checks | 250 free calls a day, 500 with a linked GitHub account; covers WBBL and the women's Hundred, but its live data looked weeks old when checked, so test freshness first |
+| FPL public data | D's classic team and Draft league | Unofficial; needs D's team and league IDs |
+| RSS feeds: BBC Sport, The Guardian, governing bodies | News, injuries, transfer reports, the general section, interesting stories | Summaries only, always linked to the original |
+| FIFA ranking | The top-30 list before each international break | Exact source to confirm during the build |
+| Anthropic API | Summaries, standout lines, what's-at-stake lines, Young Guns notes, picking stories | Dedicated key in its own workspace with a monthly spend limit |
+
+Ruled out for cricket: [Roanuz](https://www.cricketapi.com/docs/guides/Free-APIs/), whose free tier is only sample matches from 2013 and 2014, and the [Cricbuzz scraper on GitHub](https://github.com/mskian/live-cricket-score-api), which is unofficial and returns just one match's live score.
+
+## Design system
+
+The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark-mode first, with two fonts in clear roles.
+
+- **Masthead:** "The Kickoff" in Newsreader, styled as an old-school newspaper nameplate.
+- **Everything else:** Josefin Sans for headlines, body text and tables. Body text at 18px with 1.7 line spacing, never below regular weight; headlines in semibold. If long paragraphs feel tiring after a week, switch only the body text to Jost.
+- **Numbers:** right-aligned table cells so columns line up.
+
+| Colour | Hex | Use |
+| --- | --- | --- |
+| Pitch | #13251E | Page background |
+| Surface | #1A2F27 | Tables and chips |
+| Hairline | #2A4238 | Dividers and the rail track |
+| Chalk | #E8E3D6 | Main text |
+| Muted | #A3B0A6 | Secondary text |
+| Trophy gold | #CFB06E | Accent: rail fill, Performance of the Day, masthead rule |
+| Zone blue | #8DB4CC | Qualifying and quarter-final places |
+| Zone lilac | #B3A6CC | Play-off places |
+| Zone rose | #C99590 | Relegation places |
+
+- **Light mode:** switches automatically with the phone's setting. Pale grey-green background, deep green text, and the same accents darkened to meet 4.5:1 contrast. Exact values set during the build.
+- **Rules:** no pure black or pure white, no strong red, no crests or logos.
+- **Layout:** one column, left-aligned, about 62 characters per line on wide screens and full width with comfortable margins on phones. Generous space between sections. Tables carry coloured zone bars and a legend.
+- **On today tags:** "While you're up" with a sun icon, "Overnight" with a moon icon.
+
+**Progress rail**
+
+- A thin vertical rail on the right edge with one tick per section; tapping a tick jumps to that section.
+- The rail fills gold as you read.
+- A corner chip shows the percentage read (such as 43%) and minutes left, estimated from the word count at about 230 words a minute.
+- It must never cover text, and it respects the phone's reduced-motion setting.
+
+## Build checkpoints
+
+The whole build happens in one project, in this order. Each checkpoint is tested on the MacBook before it's committed, and a failing source must never break the rest of the edition.
+
+1. **Accounts and setup:** GitHub account (the username appears in the web address), a new public repo, and GitHub Pages switched on. In the Anthropic Console, a new workspace called The Kickoff with a monthly spend limit, then a new API key inside it. A new Telegram bot via BotFather, plus D's chat ID.
+2. **Skeleton:** page template, design system and progress rail. Publish a dummy edition and send the Telegram ping.
+3. **Football:** leagues, results, tables and change detection, clubs, Arsenal and Arsenal Women, Champions League, injuries and the key-player list, transfers, FPL corner.
+4. **International football:** Nations League tables, zones and what's at stake.
+5. **Cricket.**
+6. **F1.**
+7. **Tennis.**
+8. **NFL,** including the weekly rhythm.
+9. **NBA,** including tracked players.
+10. **Young Guns** and the watchlist.
+11. **Around the sporting world.**
+12. **Cross-sport sections:** The big stuff, On today, Games to Watch and interesting stories.
+13. **Test runs:** three mornings run by hand, then switch on the daily 7:15am SGT schedule.
+
+## Open items
+
+Four small things to settle, none of which blocks starting the build.
+
+- [ ] WPL coverage: confirm CricketData.org or Big Balls Data carries it before the next season starts.
+- [ ] Light-mode colour values: set during the build.
+- [ ] FIFA ranking source: choose during the build after testing.
+- [ ] FPL classic team ID and Draft league ID: collect during the build.
