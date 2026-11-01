@@ -23,6 +23,15 @@ ROWS = RACE18["Results"]
 results = []
 
 
+def shift(ds, rows, label, sign):
+    """Standings with this race's points taken off (sign -1) or added (+1): the round before or after."""
+    got = {x["Driver"]["driverId"]: float(x["points"]) for x in rows}
+    return {**ds, "round": label, "DriverStandings": [{**x, "points": str(int(float(x["points"]) + sign * got.get(x["Driver"]["driverId"], 0)))} for x in ds["DriverStandings"]]}
+
+
+DS17 = shift(DS18, ROWS, "17", -1)
+
+
 def check(name, ok, detail=""):
     ok = bool(ok)
     print(("PASS  " if ok else "FAIL  ") + name + ("" if ok else f"  -> {str(detail)[:300]}"))
@@ -36,9 +45,10 @@ def utc(*a):
 class FakeApi:
     """Answers from the fixtures. results_for / qualifying_for / sprint_for: {round: race dict}; raises for rounds in `broken`."""
 
-    def __init__(self, results_for=None, qualifying_for=None, sprint_for=None, standings_round="18", broken=()):
+    def __init__(self, results_for=None, qualifying_for=None, sprint_for=None, dstand=None, broken=()):
         self.results_for, self.qualifying_for, self.sprint_for = results_for or {}, qualifying_for or {}, sprint_for or {}
-        self.standings_round, self.broken, self.calls, self.log = standings_round, set(broken), 0, []
+        self.dstand = {18: DS18, 17: DS17} if dstand is None else dstand
+        self.broken, self.calls, self.log = set(broken), 0, []
 
     def _hit(self, what, rnd):
         self.calls += 1
@@ -52,23 +62,23 @@ class FakeApi:
 
     def results(self, season, rnd):
         self._hit("results", rnd)
-        return self.results_for.get(rnd)
+        return self.results_for.get(int(rnd))
 
     def qualifying(self, season, rnd):
         self._hit("qualifying", rnd)
-        return self.qualifying_for.get(rnd)
+        return self.qualifying_for.get(int(rnd))
 
     def sprint(self, season, rnd):
         self._hit("sprint", rnd)
-        return self.sprint_for.get(rnd)
+        return self.sprint_for.get(int(rnd))
 
     def driver_standings(self, season, rnd):
         self._hit("dstand", rnd)
-        return {**DS18, "round": self.standings_round}
+        return self.dstand.get(int(rnd))
 
     def constructor_standings(self, season, rnd):
         self._hit("cstand", rnd)
-        return {**CS18, "round": self.standings_round}
+        return {**CS18, "round": str(rnd)} if int(rnd) in self.dstand else None
 
     def finishes(self, did, pos):
         self._hit("finishes", (did, pos))
@@ -151,7 +161,7 @@ out = f1.run(SGT_MORNING, W, {}, api)
 check("the US GP race edition: heading, race line, race table, both standings, no waiting note", "<h3>United States Grand Prix</h3>" in out["html"] and "won from pole" in out["html"]
       and "<caption>Race</caption>" in out["html"] and "Drivers&#x27; standings after round 18: top 10" in out["html"].replace("'", "&#x27;") and "Constructors" in out["html"] and "Not published" not in out["html"], out["html"][:400])
 check("it is remembered as reported, nothing is pending", out["state"]["reported"] == ["2026-18-race"] and out["state"]["pending"] == {}, out["state"])
-check("calls: schedule, results, 3 podium checks, 2 standings = 7", api.calls == 7, api.log)
+check("calls: schedule, results, 3 podium checks, 3 standings (this round, the one before, constructors) = 8", api.calls == 8, api.log)
 check("and tomorrow it is not shown again", f1.run(utc(2026, 10, 27, 2, 0), utc(2026, 10, 26, 15, 15), out["state"], api)["html"] == "")
 
 # The real situation on 2 November 2026: Mexico City's race is over but its results are not published yet
@@ -159,7 +169,8 @@ RAW_NOW, RAW_W = utc(2026, 11, 2, 3, 0), utc(2026, 10, 31, 23, 15)
 pend = f1.run(RAW_NOW, RAW_W, {}, FakeApi())
 check("race over but no results yet: no table, a clear note, and it stays pending", "Mexico City Grand Prix race" in pend["html"] and "<table" not in pend["html"]
       and list(pend["state"]["pending"]) == ["2026-19-race"] and pend["state"]["reported"] == [], pend)
-later = f1.run(utc(2026, 11, 3, 3, 0), utc(2026, 11, 2, 15, 15), pend["state"], FakeApi(results_for={19: {**RACE18, "round": "19", "raceName": "Mexico City Grand Prix"}}, standings_round="19"))
+DS19 = shift(DS18, ROWS, "19", 1)  # round 19 really adds this race's points on top of round 18
+later = f1.run(utc(2026, 11, 3, 3, 0), utc(2026, 11, 2, 15, 15), pend["state"], FakeApi(results_for={19: {**RACE18, "round": "19", "raceName": "Mexico City Grand Prix"}}, dstand={18: DS18, 19: DS19}))
 check("the next edition picks the pending race up as soon as it is published, and clears the pending entry", "<caption>Race</caption>" in later["html"] and "Mexico City Grand Prix" in later["html"]
       and later["state"]["pending"] == {} and later["state"]["reported"] == ["2026-19-race"], later["state"])
 stale = f1.run(utc(2026, 11, 10, 3, 0), utc(2026, 11, 9, 15, 15), {"pending": {"2026-19-race": "2026-11-01T22:30:00+00:00"}}, FakeApi())
@@ -169,8 +180,27 @@ check("qualifying published but race not: the qualifying table shows, the race w
       and "Mexico City Grand Prix race" in mixed["html"] and mixed["state"]["reported"] == ["2026-19-qualifying"], mixed["state"])
 down = f1.run(SGT_MORNING, W, {}, FakeApi(results_for={18: RACE18}, broken=[("results", 18)]))
 check("a source failure on one session is kept pending, counted, and does not raise", down["stats"]["failed"] == 1 and "2026-18-race" in down["state"]["pending"] and "Not published" in down["html"], down["stats"])
-wrong = f1.run(SGT_MORNING, W, {}, FakeApi(results_for={18: RACE18}, standings_round="17"))
-check("standings from the wrong round are not shown as if current", "Drivers" not in wrong["html"] and "standings for this round are not published yet" in wrong["html"], wrong["html"][-300:])
+wrong = f1.run(SGT_MORNING, W, {}, FakeApi(results_for={18: RACE18}, dstand={17: DS17}))
+check("standings labelled for another round are not shown as if current", "Drivers" not in wrong["html"] and "not up to date at the source" in wrong["html"], wrong["html"][-300:])
+# What the source did on 2 Nov 2026: standings already labelled round 19, but still holding round 18's totals
+MEX = {**RACE18, "round": "19", "raceName": "Mexico City Grand Prix"}
+lag = f1.run(utc(2026, 11, 2, 3, 0), utc(2026, 10, 31, 23, 15), {}, FakeApi(results_for={19: MEX}, dstand={18: DS18, 19: {**DS18, "round": "19"}}))
+check("round-19 label with round-18 points: the race table shows, the standings are withheld with a note, and they are queued",
+      "<caption>Race</caption>" in lag["html"] and "Drivers" not in lag["html"] and "not up to date at the source" in lag["html"] and "2026-19-standings" in lag["state"]["pending"]
+      and "2026-19-race" in lag["state"]["reported"], lag["state"])
+check("the stale standings are not retried in the same run (calls stay low)", lag["stats"]["calls"] <= 9, lag["stats"])
+caught = f1.run(utc(2026, 11, 3, 3, 0), utc(2026, 11, 2, 15, 15), lag["state"], FakeApi(results_for={19: MEX}, dstand={18: DS18, 19: DS19}))
+check("when the source catches up, the next edition shows just the standings, under the race's name, and clears the queue",
+      "Mexico City Grand Prix" in caught["html"] and "Drivers" in caught["html"] and "<caption>Race</caption>" not in caught["html"] and caught["state"]["pending"] == {}
+      and "2026-19-standings" in caught["state"]["reported"], caught["state"])
+still = f1.run(utc(2026, 11, 3, 3, 0), utc(2026, 11, 2, 15, 15), lag["state"], FakeApi(results_for={19: MEX}, dstand={18: DS18, 19: {**DS18, "round": "19"}}))
+check("if it is still stale, nothing is shown but a muted line, and it stays queued", "Drivers" not in still["html"] and "Mexico City Grand Prix standings" in still["html"] and "2026-19-standings" in still["state"]["pending"], still["html"])
+check("standings_match: exact points added passes, one driver off by a point fails, no previous round fails", f1.standings_match(DS18, DS17, ROWS) and not f1.standings_match(DS18, DS18, ROWS)
+      and not f1.standings_match(DS18, None, ROWS) and not f1.standings_match(DS18, shift(DS17, [dict(ROWS[0], points="1")], "17", 1), ROWS))
+sprint_w = [dict(x, points="1") for x in ROWS[:2]]
+with_sprint = shift(shift(DS17, ROWS, "18", 1), sprint_w, "18", 1)  # round 18 = round 17 + the race + a sprint
+check("on a sprint weekend the sprint's points count too: standings that include them match, and fail when the sprint is left out",
+      f1.standings_match(with_sprint, DS17, ROWS, sprint_w) and not f1.standings_match(with_sprint, DS17, ROWS), "sprint")
 sprint = f1.run(utc(2026, 10, 11, 2, 0), utc(2026, 10, 10, 8, 0), {}, FakeApi(sprint_for={17: SPR17}))
 sc = cells(sprint["html"][sprint["html"].index("<caption>Sprint"):sprint["html"].index("</table>", sprint["html"].index("<caption>Sprint"))])
 check("a sprint is shown as its own table with points 8 to 1 adding to 36; the qualifying that is not published waits (the race is not over yet)",
@@ -178,6 +208,16 @@ check("a sprint is shown as its own table with points 8 to 1 adding to 36; the q
       (sprint["stats"], sprint["html"][-200:]))
 check("in the whole block the standings use the race's teams for each driver", lawson(out["html"][out["html"].index("Drivers"):]) == "Racing Bulls")
 check("no sessions in the window means no F1 block", f1.run(utc(2026, 10, 30, 2, 0), utc(2026, 10, 29, 15, 15), {}, FakeApi())["html"] == "")
+
+# A whole sprint weekend through run(): Singapore, round 17 (real race and sprint results)
+RACE17 = L("jolpica_results_17.json")["RaceTable"]["Races"][0]
+spr_rows = SPR17["SprintResults"]
+DS16 = DS18
+DS17b = shift(shift(DS16, RACE17["Results"], "17", 1), spr_rows, "17", 1)
+sw = f1.run(utc(2026, 10, 12, 2, 0), utc(2026, 10, 11, 12, 0), {}, FakeApi(results_for={17: RACE17}, sprint_for={17: SPR17}, dstand={16: DS16, 17: DS17b}))
+check("sprint weekend: the race's standings include the sprint's points and are accepted", "Drivers" in sw["html"] and "2026-17-standings" not in sw["state"]["pending"] and "2026-17-race" in sw["state"]["reported"], sw["state"])
+nosprint = f1.run(utc(2026, 10, 12, 2, 0), utc(2026, 10, 11, 12, 0), {}, FakeApi(results_for={17: RACE17}, sprint_for={}, dstand={16: DS16, 17: DS17b}))
+check("if the sprint's points cannot be found, those standings do not add up and are held back", "Drivers" not in nosprint["html"] and "2026-17-standings" in nosprint["state"]["pending"], nosprint["state"])
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

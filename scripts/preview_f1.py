@@ -35,7 +35,12 @@ else:
         results = lambda self, season, rnd: race if int(rnd) == 18 else None  # noqa: E731
         qualifying = lambda self, season, rnd: quali if int(rnd) == 18 else None  # noqa: E731
         sprint = lambda self, season, rnd: None  # noqa: E731
-        driver_standings = lambda self, season, rnd: load("jolpica_dstand_18.json")["StandingsTable"]["StandingsLists"][0]  # noqa: E731
+        def driver_standings(self, season, rnd):
+            ds = load("jolpica_dstand_18.json")["StandingsTable"]["StandingsLists"][0]
+            if int(rnd) == 18:
+                return ds
+            earned = {x["Driver"]["driverId"]: float(x["points"]) for x in race["Results"]}  # the round before: this race's points taken off
+            return {**ds, "round": str(rnd), "DriverStandings": [{**x, "points": str(int(float(x["points"]) - earned.get(x["Driver"]["driverId"], 0)))} for x in ds["DriverStandings"]]}
         constructor_standings = lambda self, season, rnd: load("jolpica_cstand_18.json")["StandingsTable"]["StandingsLists"][0]  # noqa: E731
         finishes = lambda self, did, pos: counts[did]["results"][str(pos)]  # noqa: E731
         poles = lambda self, did: counts[did]["poles"]  # noqa: E731

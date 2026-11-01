@@ -192,31 +192,65 @@ def _list(items):
     return '<ul class="standouts">' + "".join(f"<li>{r.esc(i)}</li>" for i in items) + "</ul>" if items else ""
 
 
+def standings_match(ds, prev, *result_sets):
+    """True when the standings after a round are really that round's: every driver's points have risen by exactly what he scored in
+    the race (and the sprint, on a sprint weekend). The API sometimes labels the new round while still holding last round's totals."""
+    if not ds or not prev:
+        return False
+    earned = {}
+    for rows in result_sets:
+        for x in rows or []:
+            earned[x["Driver"]["driverId"]] = earned.get(x["Driver"]["driverId"], 0) + float(x["points"])
+    before = {x["Driver"]["driverId"]: float(x["points"]) for x in prev.get("DriverStandings") or []}
+    rows = ds.get("DriverStandings") or []
+    return bool(rows) and all(round(float(x["points"]) - before.get(x["Driver"]["driverId"], 0), 3) == round(earned.get(x["Driver"]["driverId"], 0), 3) for x in rows)
+
+
+def fresh_standings(api, season, rnd, race, race_rows, sprint_rows=None):
+    """(driver standings, constructor standings) once they are verified to be this round's, else None."""
+    ds = api.driver_standings(season, rnd)
+    if not ds or str(ds.get("round")) != str(rnd):
+        return None
+    if "Sprint" in race and sprint_rows is None:
+        sprint_rows = ((api.sprint(season, rnd)) or {}).get("SprintResults")
+    if rnd > 1 and not standings_match(ds, api.driver_standings(season, rnd - 1), race_rows, sprint_rows):
+        return None
+    cs = api.constructor_standings(season, rnd)
+    return ds, (cs if cs and str(cs.get("round")) == str(rnd) else None)
+
+
+def standings_html(ds, cs, rnd, race_rows):
+    teams = {x["Driver"]["driverId"]: x["Constructor"]["name"] for x in race_rows}
+    return driver_standings_table(ds, rnd, teams=teams) + constructor_standings_table(cs, rnd)
+
+
 # ---- One session, and the whole block ------------------------------------------------------------
 
 def session_html(due, api):
-    """HTML for one due session, or None when its results are not published yet. Raises when the source fails."""
+    """(HTML, standings still to come) for one due session, or (None, False) when its results are not published yet. Raises when the source fails."""
     season, rnd, kind = due["season"], due["round"], due["session"]
     if kind == "qualifying":
         data = api.qualifying(season, rnd)
         rows = (data or {}).get("QualifyingResults")
         if not rows:
-            return None
+            return None, False
         return (f'<p class="f1sum">{r.esc(quali_summary(rows))}</p>' + qualifying_table(rows)
-                + _list(quali_standouts(rows, api.poles)))
+                + _list(quali_standouts(rows, api.poles))), False
     data = api.sprint(season, rnd) if kind == "sprint" else api.results(season, rnd)
     rows = (data or {}).get("SprintResults" if kind == "sprint" else "Results")
     if not rows:
-        return None
+        return None, False
     html = f'<p class="f1sum">{r.esc(race_summary(rows))}</p>' + results_table(LABEL[kind], rows)
     html += _list(recoveries(rows) + (firsts(rows, api.finishes) if kind == "race" else []))
+    stale = False
     if kind == "race":
-        ds, cs = api.driver_standings(season, rnd), api.constructor_standings(season, rnd)
-        if ds and str(ds.get("round")) == str(rnd):  # standings for another round would be wrong: leave them out
-            html += driver_standings_table(ds, rnd, teams={x["Driver"]["driverId"]: x["Constructor"]["name"] for x in rows}) + constructor_standings_table(cs if cs and str(cs.get("round")) == str(rnd) else None, rnd)
-        else:
-            html += '<p class="muted">The standings for this round are not published yet.</p>'
-    return html
+        got = fresh_standings(api, season, rnd, due["race"], rows)
+        if got:
+            html += standings_html(got[0], got[1], rnd, rows)
+        else:  # stale or missing: shown in a later edition, once the source has caught up
+            stale = True
+            html += '<p class="muted">The standings for this round are not up to date at the source yet; they will follow in a later edition.</p>'
+    return html, stale
 
 
 def run(now, window_start, st, api, season="current"):
@@ -225,10 +259,11 @@ def run(now, window_start, st, api, season="current"):
     reported, pending = list(st.get("reported", [])), dict(st.get("pending", {}))
     schedule = api.schedule(season)
     due = due_sessions(schedule, now, window_start, reported, pending)
-    parts, waiting, failed, shown = {}, [], 0, 0
+    parts, waiting, failed, shown, queued_now = {}, [], 0, 0, set()
     for d in due:
+        stale = False
         try:
-            html = session_html(d, api)
+            html, stale = session_html(d, api)
         except Exception:
             failed += 1
             html = None
@@ -239,8 +274,28 @@ def run(now, window_start, st, api, season="current"):
             continue
         pending.pop(d["id"], None)
         reported.append(d["id"])
+        if stale:
+            pending[f"{d['season']}-{d['round']}-standings"] = d["end"].isoformat()
+            queued_now.add(f"{d['season']}-{d['round']}-standings")
         shown += 1
         parts.setdefault(d["round"], [name, []])[1].append(html)
+    for sid in sorted(k for k in pending if k.endswith("-standings") and k not in reported):  # standings held back from an earlier edition
+        season_, rnd_, _ = sid.split("-")
+        race = next((x for x in schedule if x["season"] == season_ and x["round"] == rnd_), None)
+        if not race or sid in queued_now:
+            continue
+        try:
+            rows = ((api.results(season_, rnd_)) or {}).get("Results")
+            got = fresh_standings(api, season_, int(rnd_), race, rows) if rows else None
+        except Exception:
+            got = None
+        if got:
+            pending.pop(sid)
+            reported.append(sid)
+            shown += 1
+            parts.setdefault(int(rnd_), [race["raceName"], []])[1].append(standings_html(got[0], got[1], int(rnd_), rows))
+        else:
+            waiting.append(f"{race['raceName']} standings")
     out = "".join(f"<h3>{r.esc(name)}</h3>" + "".join(blocks) for _, (name, blocks) in sorted(parts.items()))
     if waiting:
         out += (f'<p class="muted">Not published by the data source yet, so they will appear in a later edition: {r.esc(", ".join(waiting))}.</p>')
