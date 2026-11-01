@@ -75,6 +75,8 @@ a { color: var(--gold); text-underline-offset: 3px; }
 h2, h3 { color: var(--gold); font-weight: 700; line-height: 1.25; text-transform: capitalize; }
 h2 { font-size: 30px; margin: 0 0 12px; }
 h3 { font-size: 21px; margin: 28px 0 6px; }
+h4 { margin: 20px 0 4px; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.f1sum { margin: 6px 0 4px; }
 p { margin: 0 0 14px; }
 .muted { color: var(--muted); }
 strong { font-weight: 600; }
@@ -200,8 +202,8 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket table.sc th, .cricket table.sc td { padding: 5px 3px; }
 .cricket table.sc th:first-child, .cricket table.sc td:first-child { padding-left: 6px; }
 .cricket table.sc th { font-size: 11px; letter-spacing: 0; }
-.pts table { font-size: 15px; }
-.pts th, .pts td { padding: 8px 5px; }
+.pts table { font-size: 14px; }
+.pts th, .pts td { padding: 7px 4px; }
 .pts th { font-size: 11px; letter-spacing: 0; }
 .pts th:first-child, .pts td:first-child { padding-left: 8px; }
 .cricket p.fow { font-size: 14px; line-height: 1.5; margin: 8px 0 4px; }

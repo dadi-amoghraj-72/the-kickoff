@@ -26,6 +26,8 @@ from kickoff.sources import espn_cricket  # noqa: E402
 
 _espn = espn_cricket.Source()
 from kickoff.sources import espn  # noqa: E402
+from kickoff import f1  # noqa: E402
+from kickoff.sources import jolpica  # noqa: E402
 from kickoff.envfile import load_env  # noqa: E402
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
@@ -59,6 +61,15 @@ if os.environ.get("CRICKET_DATA_API_KEY") and "--no-cricket" not in sys.argv:
             out["sections"].append({"id": "cricket", "title": "Cricket", "html": c["html"]})
     except Exception as e:
         out["problems"].append(f"cricket ({type(e).__name__})")
+# F1: free, no key. Reads the real API; nothing is saved (a demo never uses up what the daily edition would report).
+if "--no-f1" not in sys.argv:
+    try:
+        api = jolpica.Api()
+        got = f1.run(datetime.now(timezone.utc), espn.window_start(day), {}, api)
+        if got["html"]:
+            out["sections"].append({"id": "f1", "title": "F1", "html": got["html"]})
+    except Exception as e:
+        out["problems"].append(f"f1 ({type(e).__name__})")
 if not out["sections"]:
     sys.exit("Nothing to show for this date. Problems: " + ", ".join(out["problems"]))
 banner = (f"Football preview built from real data for {render.nice_date(day.isoformat())}. "
