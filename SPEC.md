@@ -7,7 +7,7 @@ Nov 1, 2026 · @D
 The Kickoff is D's personal daily sports digest: one web page every morning at 8:00am Singapore time, linked from a Telegram ping. It covers the sports, clubs and players D follows, with summaries, tables, standouts and what's on today.
 
 - **Reader:** one person in Singapore (SGT, UTC+8), reading mostly on an iPhone in dark mode. A long read is welcome.
-- **Owner:** a beginner coder building with Claude Code on a MacBook. Every setup step must spell out each click, such as where to find Terminal.
+- **Owner:** a beginner coder building with Claude Code on a Mac Mini. Every setup step must spell out each click, such as where to find Terminal.
 - **Build approach:** one complete build, wired and tested one sport at a time. The daily schedule is switched on only after full test runs pass.
 - **Voice:** plain, warm and specific. Summaries are written in our own words, short, with a link to the original. No copied article text.
 - **Images:** no club crests or logos. Use team names or three-letter codes.
@@ -21,7 +21,7 @@ The Kickoff runs entirely on GitHub: a scheduled job builds the page, publishes 
 Every step reads its keys from the secrets vault, and the build reads and updates the state files so it knows what changed since yesterday.
 
 - **Repo:** a public GitHub repo holding the code, the page template and the state files. Keys never go in the code.
-- **Secrets:** ANTHROPIC\_API\_KEY, TELEGRAM\_BOT\_TOKEN, TELEGRAM\_CHAT\_ID and the data-source keys live in GitHub's encrypted secrets. For testing on the MacBook, a local .env file that git ignores.
+- **Secrets:** ANTHROPIC\_API\_KEY, TELEGRAM\_BOT\_TOKEN, TELEGRAM\_CHAT\_ID and the data-source keys live in GitHub's encrypted secrets. For testing on the Mac Mini, a local .env file that git ignores.
 - **Pages:** each edition at its own dated address, plus an archive page. A noindex tag and robots.txt keep it out of search engines.
 - **State files:** small JSON files for the last published tables, the Young Guns watchlist, the key-player list, the FIFA top-30 list and stories featured in the last week.
 - **Fallbacks:** if a source fails, its section shows a short "No data this morning" line. If the whole run fails, the bot sends D an alert instead of the edition.
@@ -43,10 +43,10 @@ Every edition follows the same order, and a section appears only when it has som
 1. **The big stuff:** key overnight scores, the biggest news, major injuries and one Performance of the Day across all sports.
 2. **On today:** today's events in Singapore time, each tagged "While you're up" (sun icon) or "Overnight" (moon icon). Mondays add Games to Watch for the week.
 3. **Arsenal:** the men's team in full, plus Arsenal Women.
-4. **Football:** results by league, club one-liners, Champions League, international football during breaks, tables and the FPL corner.
-5. **Cricket, F1, tennis, NFL, NBA and baseball:** each with its own standouts.
+4. **Football:** Premier League notes, other-league one-liners, sackings, Champions League, international football during breaks, tables and the FPL corner.
+5. **Cricket, NBA, NFL and baseball:** each its own section with its own standouts, shown only when there is play.
 6. **Young Guns:** rookie and young star watch across all sports.
-7. **Around the sporting world:** the general section.
+7. **Around the sporting world:** the general section. F1 and Grand Slam tennis come first, then the other sports.
 8. **Interesting stories:** three to five picks from across everything covered.
 
 | Day | What's extra |
@@ -68,13 +68,18 @@ Every edition follows the same order, and a section appears only when it has som
 3. **If none did, a big competition moment leads:** a Champions League matchday, the NBA playoffs or the IPL.
 4. **Otherwise** the normal order stays.
 
+**Major events (F1 and Grand Slam tennis), built from the start:** when an actual F1 race has happened, or a Grand Slam has reached the quarter-finals or later, two things always happen. (1) It gets a headline line under "Major Events" in The Big Stuff. (2) Its block leaves Around the Sporting World and becomes its own section, placed right after the lead sport group (Arsenal and Football together, unless another sport leads), with F1 before Tennis. On other days F1 and Tennis stay at the top of Around the Sporting World, ahead of the other sports. The ordering rules live in `kickoff/order.py` and are tested by `scripts/test_order.py`.
+
 ## Football
 
-Football is the core of every edition: six leagues, Arsenal in full and 16 other clubs in one-liners.
+Football is the core of every edition: six leagues and 17 "listed clubs": Arsenal in full, the other five big-six clubs with full Premier League notes, and 11 clubs in other leagues with one-liners.
 
 - **Leagues:** Premier League, La Liga, Ligue 1, Serie A, Bundesliga and Turkish Süper Lig. The WSL table joins on Tuesdays.
 - **Arsenal, in full:** result, scorers, injuries, next fixture and news, plus credible transfer rumours from reliable journalists, clearly labelled as rumours. Arsenal Women get their own short block.
-- **Other clubs, one line each, only when something happened:** Manchester City, Manchester United, Tottenham, Liverpool, Chelsea, Bayern Munich, Borussia Dortmund, PSG, Juventus, Napoli, Inter, AC Milan, Como, Barcelona, Real Madrid and Atlético Madrid. Covers every competition, including the Europa League, Conference League and domestic cups. Transfers: confirmed deals only.
+- **Premier League, full coverage:** a proper note on every game played, starting with the big six (Arsenal in its own section, then Manchester City, Manchester United, Liverpool, Chelsea and Tottenham), then all the other games, then the table.
+- **Other leagues, listed clubs only:** a one-line note for each of Bayern Munich, Borussia Dortmund, PSG, Juventus, Napoli, Inter, AC Milan, Como, Barcelona, Real Madrid and Atlético Madrid when they played, plus the table. No notes on other clubs' games. **Exception:** a match between two of these clubs, which is usually a derby, gets a fuller note. The Süper Lig has no listed club, so it gets the table only.
+- **Cups and Europe:** the big six and the listed clubs get a line in every competition, including the Europa League, Conference League and domestic cups. Transfers: confirmed deals only.
+- **Sackings and appointments:** manager changes at clubs in the six leagues, head coach and coordinator changes in the NFL, and head coach changes in the NBA are reported in that sport's own section under "Sackings and Appointments". If it involves the big six, a listed club or an NFL head coach, it also gets a line in The Big Stuff.
 - **Tables:** full tables every Tuesday. Other days, only when a table has changed: top 6, plus one line showing where D's clubs outside the top 6 sit. If unchanged: "No change since Tuesday." Change is detected by comparing against the last published table, saved in the state files.
 - **Champions League:** results after each matchday, and the league-phase table shown as the top 8, the 24th-place cut line and where D's clubs sit.
 - **Injuries:** a key player averages 70+ league minutes for a top 6 side in any of the six leagues, or for any listed club. Report injuries expected to last two weeks or more, or that put a player in doubt for a big game that week, plus key players returning. The key-player list is rebuilt weekly from API-Football player minutes.
@@ -261,7 +266,7 @@ The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark
 | Zone lilac | #B3A6CC | Play-off places |
 | Zone rose | #C99590 | Relegation places |
 
-- **Light mode:** switches automatically with the phone's setting. Pale grey-green background, deep green text, and the same accents darkened to meet 4.5:1 contrast. Exact values set during the build.
+- **Light mode:** switches automatically with the phone's setting. Pale grey-green background, deep green text, and the same accents darkened to meet 4.5:1 contrast. Values: background #E9EFEA, surface #DCE6DF, hairline #B7C6BB, text #13251E, muted #44574B, gold #7A5C14, blue #2F6280, lilac #5E4F8A, rose #9A4A43. Lowest contrast checked: 4.78:1.
 - **Rules:** no pure black or pure white, no strong red, no crests or logos.
 - **Layout:** one column, left-aligned, about 62 characters per line on wide screens and full width with comfortable margins on phones. Generous space between sections. Tables carry coloured zone bars and a legend.
 - **On today tags:** "While you're up" with a sun icon, "Overnight" with a moon icon.
@@ -270,12 +275,12 @@ The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark
 
 - A thin vertical rail on the right edge with one tick per section; tapping a tick jumps to that section.
 - The rail fills gold as you read.
-- A corner chip shows the percentage read (such as 43%) and minutes left, estimated from the word count at about 230 words a minute.
+- A chip in the top bar's right corner shows the percentage read (such as 43%) and minutes left, estimated from the word count at about 230 words a minute. It sits in a thin bar so it never covers text.
 - It must never cover text, and it respects the phone's reduced-motion setting.
 
 ## Build checkpoints
 
-The whole build happens in one project, in this order. Each checkpoint is tested on the MacBook before it's committed, and a failing source must never break the rest of the edition.
+The whole build happens in one project, in this order. Each checkpoint is tested on the Mac Mini before it's committed, and a failing source must never break the rest of the edition.
 
 1. **Accounts and setup:** GitHub account (the username appears in the web address), a new public repo, and GitHub Pages switched on. In the Anthropic Console, a new workspace called The Kickoff with a monthly spend limit, then a new API key inside it. A new Telegram bot via BotFather, plus D's chat ID.
 2. **Skeleton:** page template, design system and progress rail. Publish a dummy edition and send the Telegram ping.
@@ -294,10 +299,9 @@ The whole build happens in one project, in this order. Each checkpoint is tested
 
 ## Open items
 
-Four small things to settle, none of which blocks starting the build.
+Small things to settle, none of which blocks starting the build.
 
 - [ ] WPL coverage: confirm CricketData.org or Big Balls Data carries it before the next season starts.
-- [ ] Light-mode colour values: set during the build.
 - [ ] FIFA ranking source: choose during the build after testing.
 - [ ] FPL classic team ID and Draft league ID: collect during the build.
 - [ ] Baseball data source: choose between the MLB Stats API and ESPN during the baseball checkpoint, after testing both.
