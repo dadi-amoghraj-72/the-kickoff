@@ -56,6 +56,13 @@ check("a faithful note passes", notes.check_note(good, f) == [], notes.check_not
 check("an invented number is caught", any("number 61000" in p for p in notes.check_note("Chelsea won 2-0 in front of 61000 fans.", f)))
 check("an invented name is caught", any("Mourinho" in p for p in notes.check_note("Chelsea won 2-0 and Mourinho smiled.", f)))
 check("possessives and hyphenated facts don't cause false alarms", notes.check_note("Chelsea's win over Manchester United finished 2-0.", f) == [])
+nomove = {k: v for k, v in f["table"].items()}
+stay = "Chelsea won 2-0 and stay fourth."
+check("claiming a table move without a previous position is caught",
+      any("implies a table move" in p for p in notes.check_note(stay, {**f, "table": {k: {kk: vv for kk, vv in v.items() if kk != "position_before"} for k, v in nomove.items()}})))
+withprev = {**f, "table": {"Chelsea": {"position_now": 4, "position_before": 8, "points": 16, "played": 9}}}
+check("the same wording is fine when the facts give the previous position", not any("implies" in p for p in notes.check_note("Chelsea climb to fourth.", withprev)), notes.check_note("Chelsea climb to fourth.", withprev))
+check("plain wording about position is not mistaken for a move", notes.check_note("Chelsea are fourth on 16 points.", {**f, "table": {"Chelsea": {"position_now": 4, "points": 16, "played": 9}}}) == [])
 check("plain fallback note has the score and scorers", notes.plain_note(f).startswith("Chelsea 2-0 Manchester United.") and scorer in notes.plain_note(f))
 
 # ---- Talking to Claude (fake) ----

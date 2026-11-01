@@ -25,7 +25,8 @@ Hard rules:
 - Use club and player names exactly as they appear in the facts. Every number you write must come from the facts.
 - If the facts are thin, write less. A short accurate note beats a long invented one.
 - Each match has a "length" instruction. Follow it.
-- Mention a red card whenever there is one. Mention the table position or movement only if the facts give it.
+- Mention a red card whenever there is one. State a team's table position and points as they are now. Say a team
+  moved, climbed, dropped or stayed only if the facts include "position_before" for that team.
 
 Return one note for every match id supplied."""
 
@@ -33,6 +34,11 @@ SCHEMA = {"type": "object", "properties": {"notes": {"type": "array", "items": {
     "type": "object", "properties": {"id": {"type": "string"}, "note": {"type": "string"}},
     "required": ["id", "note"], "additionalProperties": False}}},
     "required": ["notes"], "additionalProperties": False}
+
+# Words that claim a table movement or continuity. They need a "position_before" in the facts to be true.
+MOVEMENT = re.compile(r"\b(stay(?:s|ed)?|remain(?:s|ed)?|climb(?:s|ed|ing)?|ris(?:e|es|en|ing)|rose|jump(?:s|ed)?|"
+                      r"drop(?:s|ped)?|fall(?:s|en)?|fell|slip(?:s|ped)?|leapfrog\w*|overtak\w*|overtook|"
+                      r"(?:up|down) to|(?:up|down) from|unchanged)\b", re.I)
 
 ALLOWED_WORDS = {"premier", "league", "champions", "europa", "conference", "cup", "monday", "tuesday", "wednesday",
                  "thursday", "friday", "saturday", "sunday", "british", "english", "spanish", "german", "french",
@@ -139,6 +145,10 @@ def check_note(note, f):
             if base[0].isupper() and base.lower() not in vocab and base.lower() not in ALLOWED_WORDS \
                     and not all(p.lower() in vocab for p in base.split("-")):
                 problems.append(f"name {base} is not in the facts")
+    moved = any("position_before" in t for t in (f.get("table") or {}).values())
+    for m in MOVEMENT.finditer(note):
+        if not moved:
+            problems.append(f'"{m.group(0)}" implies a table move, but no previous position was given')
     return sorted(set(problems))
 
 
