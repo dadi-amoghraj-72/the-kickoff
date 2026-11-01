@@ -24,7 +24,8 @@ Hard rules:
   predictions or comparisons. Do not guess at how a goal was scored.
 - Use club and player names exactly as they appear in the facts. Every number you write must come from the facts.
 - If the facts are thin, write less. A short accurate note beats a long invented one.
-- Each match has a "length" instruction. Follow it.
+- Each match has a "length" instruction. Follow it strictly: a short note is ONE sentence.
+- Write minutes in plain words ("the 38th minute", "stoppage time"). Never copy symbols such as ' or +.
 - Mention a red card whenever there is one. State a team's table position and points as they are now. Say a team
   moved, climbed, dropped or stayed only if the facts include "position_before" for that team.
 
@@ -38,7 +39,11 @@ SCHEMA = {"type": "object", "properties": {"notes": {"type": "array", "items": {
 # Words that claim a table movement or continuity. They need a "position_before" in the facts to be true.
 MOVEMENT = re.compile(r"\b(stay(?:s|ed)?|remain(?:s|ed)?|climb(?:s|ed|ing)?|ris(?:e|es|en|ing)|rose|jump(?:s|ed)?|"
                       r"drop(?:s|ped)?|fall(?:s|en)?|fell|slip(?:s|ped)?|leapfrog\w*|overtak\w*|overtook|"
-                      r"(?:up|down) to|(?:up|down) from|unchanged)\b", re.I)
+                      r"(?:up|down) to|(?:up|down) from|unchanged|now|still|again)\b", re.I)
+
+# Hype the voice rules ban, and the word limit for each length instruction.
+HYPE = re.compile(r"thrash|hammer|demolish|humiliat|masterclass|clinical|thriller|stunning|sensational|annihilat", re.I)
+LIMITS = {desc: limit for desc, limit in TIERS.values()}
 
 ALLOWED_WORDS = {"premier", "league", "champions", "europa", "conference", "cup", "monday", "tuesday", "wednesday",
                  "thursday", "friday", "saturday", "sunday", "british", "english", "spanish", "german", "french",
@@ -145,6 +150,13 @@ def check_note(note, f):
             if base[0].isupper() and base.lower() not in vocab and base.lower() not in ALLOWED_WORDS \
                     and not all(p.lower() in vocab for p in base.split("-")):
                 problems.append(f"name {base} is not in the facts")
+    limit = LIMITS.get(f.get("length"))
+    if limit and len(note.split()) > limit:
+        problems.append(f"{len(note.split())} words, over the limit of {limit}")
+    if re.search(r"\d['’]|\d\+\d", note):
+        problems.append("minute symbols such as 36' or 90+4: write 'the 36th minute' or 'stoppage time'")
+    if HYPE.search(note):
+        problems.append(f'hype word "{HYPE.search(note).group(0)}"')
     moved = any("position_before" in t for t in (f.get("table") or {}).values())
     for m in MOVEMENT.finditer(note):
         if not moved:

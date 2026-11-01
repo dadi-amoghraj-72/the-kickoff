@@ -25,7 +25,7 @@ Every step reads its keys from the secrets vault, and the build reads and update
 - **Pages:** each edition at its own dated address, plus an archive page. A noindex tag and robots.txt keep it out of search engines.
 - **State files:** small JSON files for the last published tables, the Young Guns watchlist, the key-player list, the FIFA top-30 list and stories featured in the last week.
 - **Fallbacks:** if a source fails, its section shows a short "No data this morning" line. If the whole run fails, the bot sends D an alert instead of the edition.
-- **Claude:** writes the summaries, standout lines, what's-at-stake lines and Young Guns notes, and picks the stories. Use a current Claude model; check its exact name in Anthropic's docs during the build.
+- **Claude:** writes the summaries, standout lines, what's-at-stake lines and Young Guns notes, and picks the stories. Use a current Claude model; check its exact name in Anthropic's docs during the build. The model is a setting per task. Match notes use Claude Sonnet 5.5 (`claude-sonnet-5-5`): on 12 real notes it matched Claude Opus 5.5 on accuracy and rule-following at about half the cost, while Claude Haiku 5.5 broke the length rule. Judgment-heavy tasks, such as picking stories and the what's-at-stake lines, may use Opus 5.5 and will be compared the same way. Claude only ever sees a facts sheet and is told to use nothing else. Code then checks every note: any number or name that isn't in the facts, a table-move claim ("climbed", "stay", "now") without a previous position, hype words, raw minute symbols and any note over its word limit are rejected, retried once, and then replaced by a plain scoreline written by code.
 
 ## Schedule and delivery
 

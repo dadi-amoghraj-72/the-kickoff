@@ -63,6 +63,23 @@ check("claiming a table move without a previous position is caught",
 withprev = {**f, "table": {"Chelsea": {"position_now": 4, "position_before": 8, "points": 16, "played": 9}}}
 check("the same wording is fine when the facts give the previous position", not any("implies" in p for p in notes.check_note("Chelsea climb to fourth.", withprev)), notes.check_note("Chelsea climb to fourth.", withprev))
 check("plain wording about position is not mistaken for a move", notes.check_note("Chelsea are fourth on 16 points.", {**f, "table": {"Chelsea": {"position_now": 4, "points": 16, "played": 9}}}) == [])
+SHORT = {"length": notes.TIERS["short"][0]}
+STANDARD = {"length": notes.TIERS["standard"][0]}
+haiku_barca = ("Barcelona thrashed Alavés 6-1 at home. Raphinha scored twice, in the 8th and 41st minutes, Fermín López added one in the 23rd, "
+               "and Lamine Yamal scored twice, in first-half stoppage time and the 64th minute. Anthony Gordon made it six in the 81st, "
+               "and Mariano Díaz replied for Alavés in the 84th.")
+opus_atletico = "Alejandro Grimaldo and Giuliano Simeone scored as Atlético Madrid won 2-0 at Levante; Atlético are second on 28 points, Levante 18th on 10."
+big = {**SHORT, "home": "Barcelona", "away": "Alavés", "final_score": "6-1", "goals": [{"minute": "8", "scorer": "Raphinha", "for": "Barcelona", "type": "goal"}],
+       "table": {"Barcelona": {"position_now": 1, "points": 30, "played": 11}}}
+check("a one-liner that runs to several sentences is rejected for length", any("over the limit" in p for p in notes.check_note(haiku_barca, big)), notes.check_note(haiku_barca, big))
+check("a real one-sentence Opus note is within the one-liner limit",
+      not any("over the limit" in p for p in notes.check_note(opus_atletico, {**big, "home": "Atlético Madrid", "away": "Levante"})))
+check("a standard note has room for several sentences", not any("over the limit" in p for p in notes.check_note(" ".join(["word"] * 60), STANDARD)))
+check("raw minute symbols are rejected", any("minute symbols" in p for p in notes.check_note("Grimaldo scored (36') in the 2-0 win.", big))
+      and any("minute symbols" in p for p in notes.check_note("Adli scored in 90+4 minutes.", big)))
+check("written-out minutes are fine", not any("minute symbols" in p for p in notes.check_note("Grimaldo scored in the 36th minute.", big)))
+check("hype words are rejected", any("hype word" in p for p in notes.check_note("Barcelona thrashed Alavés 6-1.", big)))
+check("'now' implies movement and needs a previous position", any("implies" in p for p in notes.check_note("Milan are now fifth.", big)))
 check("plain fallback note has the score and scorers", notes.plain_note(f).startswith("Chelsea 2-0 Manchester United.") and scorer in notes.plain_note(f))
 
 # ---- Talking to Claude (fake) ----
