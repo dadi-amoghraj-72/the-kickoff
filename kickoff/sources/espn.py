@@ -23,6 +23,11 @@ def _utc(text):
     return datetime.strptime(text, "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc)
 
 
+def parse_time(kickoff):
+    """A match's kick-off text like '2026-11-12T19:45Z' as a UTC datetime."""
+    return _utc(kickoff)
+
+
 def parse_match(event, league):
     comp = event["competitions"][0]
     teams = {c["homeAway"]: c for c in comp["competitors"]}

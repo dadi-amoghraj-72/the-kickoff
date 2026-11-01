@@ -6,7 +6,7 @@ State is passed in and handed back, never written here, so a test run can't dist
 import copy
 from datetime import datetime, timezone
 
-from kickoff import champions, focus, fplcorner, injuries, leaders, news, notes, overview, roundup, scoreboard, settings, tables
+from kickoff import champions, focus, fplcorner, injuries, international, leaders, news, notes, overview, roundup, scoreboard, settings, tables
 from kickoff import render as r
 from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
@@ -135,6 +135,15 @@ def run(day, client=None, st=None, now=None, demo=False):
         cl_box = guard("Champions League round-up", round_up, "Champions League", champions.COMPETITION, cl_matches,
                        espn.CHAMPIONS_LEAGUE, rows[espn.CHAMPIONS_LEAGUE], "night") or ""
         football += champions.section_html(cl_matches, rows[espn.CHAMPIONS_LEAGUE], None, cl_box)
+
+    # ---- International football: only around a break, only competitive games ----
+    intl = guard("international football", international.run, day, now, client, st.get("top30"))
+    if intl:
+        football += intl["html"]
+        ledger.add("Nations League lines", settings.NEWS_MODEL, intl["usage"])
+        problems += intl["problems"]
+        if intl["top30"]:
+            new["top30"] = intl["top30"]
 
     # ---- Injuries (Premier League, official FPL status) ----
     boot = guard("FPL data", fpl.get_bootstrap)

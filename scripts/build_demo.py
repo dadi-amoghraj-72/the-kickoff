@@ -30,7 +30,7 @@ demo_state = ROOT / "preview" / "demo-state"
 shutil.rmtree(demo_state, ignore_errors=True)
 if (ROOT / "data" / "state").exists():
     shutil.copytree(ROOT / "data" / "state", demo_state)
-names = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs"]
+names = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs", "top30"]
 st = {n: state.load(n, directory=demo_state) for n in names}
 
 client = None

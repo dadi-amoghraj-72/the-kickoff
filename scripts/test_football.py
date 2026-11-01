@@ -8,7 +8,7 @@ from types import SimpleNamespace as NS
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from kickoff import football, settings  # noqa: E402
+from kickoff import football, rankings, settings  # noqa: E402
 from kickoff.http import SourceError  # noqa: E402
 from kickoff.sources import espn, feeds, fpl  # noqa: E402
 
@@ -52,6 +52,7 @@ def espn_get(url, params=None, **kw):
 
 
 espn.get_json = espn_get
+rankings.load = lambda today, saved=None: ({"source": "test list", "teams": ["Spain", "England"], "updated": today.isoformat()}, None)
 BOOT = {"events": [{"id": 9, "is_current": True, "is_next": False, "finished": False, "deadline_time": "2026-10-31T11:00:00Z", "average_entry_score": 31},
                    {"id": 10, "is_current": False, "is_next": True, "finished": False, "deadline_time": "2026-11-06T18:30:00Z", "average_entry_score": 0}],
         "teams": [{"id": 1, "name": "Arsenal", "short_name": "ARS", "position": 1, "played": 0}],
@@ -173,6 +174,9 @@ check("when Arsenal played, an Arsenal section comes first, then Football", ids[
 check("the Arsenal section has the result, the next fixtures in Singapore time and Arsenal Women", "Liverpool 0-1 Arsenal" in re.sub(r"<[^>]+>", "", ars) and "Next up:" in ars and "SGT" in ars and "Arsenal Women" in ars, ars[:300])
 check("Arsenal's own injury news goes in the Arsenal section, not Football", "Bukayo Saka" in ars and "Bukayo Saka" not in next(s["html"] for s in out5["sections"] if s["id"] == "football").split("FPL Corner")[0])
 check("the first headline is Arsenal's result", out5["headlines"][0] == "Arsenal: Liverpool 0–1 Arsenal", out5["headlines"])
+
+# ---- International football stays out of the way when there is no break ----
+check("outside an international break the section has no International Football block", "International Football" not in html3 and "International Football" not in html)
 
 # ---- Everything broken ----
 espn.get_json = lambda *a, **k: (_ for _ in ()).throw(SourceError("HTTP 500"))
