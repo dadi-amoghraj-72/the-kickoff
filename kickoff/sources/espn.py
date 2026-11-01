@@ -30,7 +30,8 @@ def parse_match(event, league):
 
     def team(s):
         t = teams[s]["team"]
-        return {"id": t["id"], "name": t["displayName"], "abbr": t.get("abbreviation", t["displayName"][:3].upper())}
+        return {"id": t["id"], "name": t["displayName"], "abbr": t.get("abbreviation", t["displayName"][:3].upper()),
+                "short": t.get("shortDisplayName") or t["displayName"]}
 
     goals, reds = [], []
     for d in comp.get("details", []):
@@ -43,7 +44,7 @@ def parse_match(event, league):
             reds.append({"minute": d["clock"]["displayValue"], "player": who, "side": side})
     status = event["status"]["type"]
     return {
-        "id": event["id"], "league": league, "kickoff": event["date"],
+        "id": event["id"], "league": league, "kickoff": event["date"], "stage": (event.get("season") or {}).get("slug", ""),
         "home": team("home"), "away": team("away"),
         "home_score": int(teams["home"].get("score") or 0), "away_score": int(teams["away"].get("score") or 0),
         "completed": bool(status.get("completed")), "status": status.get("description", ""),

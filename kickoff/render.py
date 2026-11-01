@@ -39,6 +39,9 @@ def table(caption, columns, rows, zones=None, legend=None):
     head = "".join(f'<th class="{"n" if num else ""}">{esc(label)}</th>' for label, num in columns)
     body = []
     for i, row in enumerate(rows):
+        if row is None:
+            body.append(f'<tr class="gap"><td colspan="{len(columns)}">···</td></tr>')
+            continue
         zone = zones[i] if zones and zones[i] else None
         cells = "".join(f'<td class="{"n" if columns[j][1] else ""}">{esc(v)}</td>' for j, v in enumerate(row))
         body.append(f'<tr class="z-{zone}">{cells}</tr>' if zone else f"<tr>{cells}</tr>")
