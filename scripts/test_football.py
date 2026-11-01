@@ -110,7 +110,12 @@ html = " ".join(s["html"] for s in out["sections"])
 check("an Arsenal section (Saka's injury only) and a Football section with the Premier League block",
       [s["id"] for s in out["sections"]] == ["arsenal", "football"] and "<h3>Premier League</h3>" in html, [s["id"] for s in out["sections"]])
 check("every league that has no data is just skipped, and the failures are listed", "La Liga" not in html and any("La Liga table" in p for p in out["problems"]), out["problems"])
-check("the plain notes cover all 8 Premier League games, names in bold", html.count("<strong>Chelsea</strong>") >= 1 and html.count("Goals:") >= 6, html.count("Goals:"))
+check("with no Claude the league blocks do not repeat the scoreboard as plain notes", "Goals:" not in html.split("<h3>Premier League</h3>")[1].split("<h3>")[0], "")
+pl = html.split("<h3>Premier League</h3>")[1].split("<h3>")[0]
+check("the Premier League block shows all 8 games as a scoreboard, each with its scorers, between the box and the table",
+      pl.count('<li><span class="h">') == 8 and pl.index("roundup") < pl.index('class="scores"') < pl.index("<table"), pl.count('<li><span class="h">'))
+check("scorers are shown under each team (Rogers for Chelsea, with the minute)", "Rogers" in pl and 'class="gh"' in pl and 'class="ga"' in pl)
+check("the listed clubs are in bold in the scoreboard (Chelsea, Manchester United)", '<span class="mine">Chelsea</span>' in pl and '<span class="mine">Man Utd</span>' in pl, pl[:400])
 check("the full table appears, with the top scorer, assists and clean-sheet lines under it", "<table" in html and "Top Scorer" in html and "Top CS" in html)
 check("with no Claude, nothing is spent and nothing is written as AI", out["ledger"].total() == 0 and out["ledger"].rows == [])
 check("the FPL corner is built from the (fake) public data", "FPL Corner" in html and "merino parade fc" in html and "Gabi III" in html, html[-400:])
@@ -132,12 +137,33 @@ html3 = " ".join(s["html"] for s in out3["sections"])
 labels = [x["label"] for x in out3["ledger"].rows]
 check("Claude writes only the notes (Sonnet): no Opus overview is bought any more", "Premier League notes" in labels
       and settings.OVERVIEW_MODEL not in {x["model"] for x in out3["ledger"].rows} and not any("overview" in x for x in labels), labels)
-check("the round-up box comes first in the league block: games played 8/10 (a 20-team league), then the notes, then the table",
-      "Games played" in html3 and "8/10" in html3 and html3.index("roundup") < html3.index("<strong>Chelsea</strong>") < html3.index("<table"), html3[:300])
+pl3 = html3.split("<h3>Premier League</h3>")[1].split("<h3>")[0]
+check("with Claude the order is: round-up box (8/10), scoreboard, Claude's notes with names in bold, then the table",
+      "8/10" in pl3 and pl3.index("roundup") < pl3.index('class="scores"') < pl3.index("<strong>Chelsea</strong>") < pl3.index("<table"), pl3[:300])
 check("the box is identical with and without Claude (it is built by code)", "8/10" in html and "Favourites won" in html and "Biggest upset" in html and "Game of the day" in html)
 check("the cost is totalled and recorded in the monthly state", out3["new_state"]["costs"]["2026-11"]["spent"] == out3["ledger"].total() > 0 and out3["new_state"]["costs"]["2026-11"]["calls"] == len(labels))
 check("news candidates are sent to Claude and remembered, so they are never sent twice",
       out3["stats"]["news_candidates"] == 0 or ("news classification" in labels and len(out3["new_state"]["news_seen"]) == out3["stats"]["news_candidates"]), out3["stats"])
+
+# ---- The WSL: its own block, with box, scoreboard and table, on a day that is not a Tuesday ----
+plain_get = espn.get_json
+
+
+def wsl_get(url, params=None, **kw):
+    if "/eng.w.1/" in url:
+        return load("espn_pl_table.json") if "/standings" in url else plain_get(url.replace("/eng.w.1/", "/eng.1/"), params, **kw)
+    return plain_get(url, params, **kw)
+
+
+espn.get_json = wsl_get
+w = football.run(DAY, client=None, st={}, now=NOW)
+wh = " ".join(x["html"] for x in w["sections"])
+wsl = wh.split("<h3>Women's Super League</h3>")[1] if "<h3>Women's Super League</h3>" in wh else ""
+check("the Women's Super League has its own block, after the Premier League, on a Sunday", wsl != "" and wh.index("<h3>Premier League</h3>") < wh.index("<h3>Women's Super League</h3>"), wh[:80])
+check("the WSL block has a box, a scoreboard and a table, in that order", "roundup" in wsl and wsl.index("roundup") < wsl.index('class="scores"') < wsl.index("<table"), wsl[:200])
+check("the WSL box uses its own season length (a 20-team table here: 38 rounds)", "Game week" in wsl)
+check("the WSL table is remembered so the next unchanged day says so", "eng.w.1" in w["new_state"]["tables"])
+espn.get_json = plain_get
 
 # ---- Arsenal played (the Liverpool game) ----
 out5 = football.run(date(2026, 11, 2), client=None, st={}, now=NOW)

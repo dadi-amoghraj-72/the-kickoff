@@ -1,7 +1,8 @@
 """Champions League: matchday scores, notes for the listed clubs, and the full league-phase table."""
 from kickoff import render as r
-from kickoff.clubs import ARSENAL_ID, is_listed
-from kickoff.leaders import surname
+from kickoff.clubs import is_listed
+from kickoff.scoreboard import HIGHLIGHT as scoreboard_highlight  # noqa: F401
+from kickoff.scoreboard import scorer_entries, scorers, scorers_html, scores_html  # noqa: F401  (the scoreboard moved; kept importable here)
 from kickoff.sources import espn
 
 COMPETITION = "UEFA Champions League"
@@ -15,45 +16,6 @@ def results(day):
 
 def in_league_phase(matches):
     return any(m.get("stage") == "league-phase" for m in matches)
-
-
-def scorer_entries(m, side):
-    """['Paz 2', 57'', 'Douvikas 49''] for one side: surname, then all that player's minutes. A penalty is tagged
-    (pen) and an own goal (OG); an own goal is listed under the team it counted for."""
-    order, minutes = [], {}
-    for g in m["goals"]:
-        if g["side"] == side:
-            if g["player"] not in minutes:
-                order.append(g["player"])
-            tag = " (OG)" if g["own_goal"] else (" (pen)" if g["penalty"] else "")
-            minutes.setdefault(g["player"], []).append(f"{g['minute']}{tag}")
-    return [f"{surname(p)} {', '.join(minutes[p])}" for p in order]
-
-
-def scorers(m, side):
-    return ", ".join(scorer_entries(m, side))
-
-
-def scorers_html(m, side):
-    """Each scorer kept together on one line, so a long list wraps between players, never inside one."""
-    return ", ".join(f'<span class="p">{r.esc(e)}</span>' for e in scorer_entries(m, side))
-
-
-def scores_html(matches, highlight=(ARSENAL_ID,)):
-    """One line per match: home team (right-aligned), score, away team (left-aligned), with the scorers
-    underneath, each under their own team. Clubs in `highlight` (Arsenal) have their name in bold."""
-    if not matches:
-        return ""
-    items = []
-    for m in matches:
-        name = lambda side: (f'<span class="mine">{r.esc(m[side]["short"])}</span>'  # noqa: E731
-                             if m[side]["id"] in highlight else r.esc(m[side]["short"]))
-        row = (f'<span class="h">{name("home")}</span><span class="s">{m["home_score"]}–{m["away_score"]}</span>'
-               f'<span>{name("away")}</span>')
-        home, away = scorers_html(m, "home"), scorers_html(m, "away")
-        row += (f'<span class="gh">{home}</span>' if home else "") + (f'<span class="ga">{away}</span>' if away else "")
-        items.append(f"<li>{row}</li>")
-    return f'<ul class="scores">{"".join(items)}</ul>'
 
 
 def zone(rank):

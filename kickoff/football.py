@@ -6,7 +6,7 @@ State is passed in and handed back, never written here, so a test run can't dist
 import copy
 from datetime import datetime, timezone
 
-from kickoff import champions, focus, fplcorner, injuries, leaders, news, notes, overview, roundup, settings, tables
+from kickoff import champions, focus, fplcorner, injuries, leaders, news, notes, overview, roundup, scoreboard, settings, tables
 from kickoff import render as r
 from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
@@ -40,8 +40,8 @@ def _paragraphs(written, match_by_id):
     return out
 
 
-def run(day, client=None, st=None, now=None):
-    """Build both sections. st: {"tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs"} (copied, not changed).
+def run(day, client=None, st=None, now=None, demo=False):
+    """Build both sections. demo=True makes the FPL corner show everything it can, whatever the deadline. st: {"tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs"} (copied, not changed).
     Returns {"sections", "headlines", "new_state", "ledger", "problems", "stats"}."""
     now = now or datetime.now(timezone.utc)
     st = copy.deepcopy(st or {})
@@ -71,7 +71,9 @@ def run(day, client=None, st=None, now=None):
             cs = leaders.count_clean_sheets(cs, lg, results[lg], lambda m, lg=lg: espn.get_starting_keepers(lg, m["id"]))
     new["clean_sheets"] = cs
 
-    def write_notes_for(label, facts, match_by_id):
+    def write_notes_for(label, facts, match_by_id, claude_only=False):
+        """Paragraphs of notes. claude_only=True (league blocks) shows only notes Claude wrote and that passed the
+        checks: the scoreboard already shows every fact a plain note would repeat. Arsenal keeps its plain fallback."""
         if not facts:
             return ""
         if client:
@@ -79,6 +81,8 @@ def run(day, client=None, st=None, now=None):
             ledger.add(label, settings.CLAUDE_MODEL, usage)
         else:
             written = {f["id"]: {"note": notes.plain_note(f), "source": "plain", "problems": []} for f in facts}
+        if claude_only:
+            written = {k: v for k, v in written.items() if v["source"] == "claude"}
         return _paragraphs(written, match_by_id)
 
     def round_up(label, competition, matches, league_slug, table_rows, period="day"):
@@ -100,10 +104,11 @@ def run(day, client=None, st=None, now=None):
         parts = ""
         if res:
             parts += guard(f"{name} round-up", round_up, name, name, res, lg, tbl) or ""
+            parts += scoreboard.scores_html(res)
         chosen = notes.select(lg, res)
         if chosen:
             facts = [notes.match_facts(m, t, tbl, previous[lg], name) for m, t in chosen]
-            parts += write_notes_for(f"{name} notes", facts, {m["id"]: m for m, _ in chosen})
+            parts += write_notes_for(f"{name} notes", facts, {m["id"]: m for m, _ in chosen}, claude_only=True)
         if tbl:
             html, entry = tables.one("Table", tbl, saved_tables.get(lg), day,
                                      leaders_fn=lambda lg=lg, tbl=tbl: guard(f"{leagues[lg]} leaders", leaders.league_block, lg,
@@ -113,12 +118,19 @@ def run(day, client=None, st=None, now=None):
                 new.setdefault("tables", {})[lg] = entry
         if parts:
             football += f"<h3>{r.esc(name)}</h3>{parts}"
+    wsl_res = guard("Women's Super League results", espn.recent_results, espn.WSL, day) or []
+    wsl_parts = ""
+    if wsl_res:
+        wsl_parts += guard("Women's Super League round-up", round_up, "Women's Super League", "Women's Super League", wsl_res, espn.WSL,
+                           rows[espn.WSL]) or ""
+        wsl_parts += scoreboard.scores_html(wsl_res)
     if rows[espn.WSL]:
-        html, entry = tables.one("Table", rows[espn.WSL], saved_tables.get(espn.WSL), day, tuesday_only=True)
-        if html:
-            football += f"<h3>Women's Super League</h3>{html}"
+        html, entry = tables.one("Table", rows[espn.WSL], saved_tables.get(espn.WSL), day)
+        wsl_parts += html
         if entry:
             new.setdefault("tables", {})[espn.WSL] = entry
+    if wsl_parts:
+        football += f"<h3>Women's Super League</h3>{wsl_parts}"
     if cl_matches:
         cl_box = guard("Champions League round-up", round_up, "Champions League", champions.COMPETITION, cl_matches,
                        espn.CHAMPIONS_LEAGUE, rows[espn.CHAMPIONS_LEAGUE], "night") or ""
@@ -165,7 +177,7 @@ def run(day, client=None, st=None, now=None):
             return {gw: v for gw, v in got.items() if v}
 
         html, new["fpl"] = fplcorner.build(boot, players, entry, picks, history, live, draft, settings.FPL_DRAFT_ENTRY_ID,
-                                           st.get("fpl", {}), now, trend_fn=trend)
+                                           st.get("fpl", {}), now, trend_fn=trend, demo=demo)
         football += html
 
     # ---- The Arsenal section ----
@@ -204,6 +216,8 @@ def run(day, client=None, st=None, now=None):
         f = overviews.get(leagues[lg])
         if f and f.get("game_of_the_night"):
             heads.append(f"{leagues[lg]}: {f['game_of_the_night']}")
+    own = (headline_result or "").replace("–", "-")
+    heads = [h for h in heads if not (own and h.split(": ", 1)[-1].replace("–", "-") == own and not h.startswith("Arsenal"))]
     unique = list(dict.fromkeys(heads))[:3]
 
     sections = []
@@ -216,6 +230,7 @@ def run(day, client=None, st=None, now=None):
     costs["spent"] = round(costs["spent"] + ledger.total(), 5)
     costs["calls"] += len(ledger.rows)
     costs["days"][day.isoformat()] = {"spent": ledger.total(), "calls": len(ledger.rows)}
-    stats = {"matches": {leagues[lg]: len(results[lg] or []) for lg in LEAGUE_ORDER}, "cl_matches": len(cl_matches),
+    stats = {"matches": {**{leagues[lg]: len(results[lg] or []) for lg in LEAGUE_ORDER}, "Women's Super League": len(wsl_res)},
+             "cl_matches": len(cl_matches),
              "news_candidates": len(cands), "news_shown": len(shown_news), "injury_items": len(inj_items)}
     return {"sections": sections, "headlines": unique, "new_state": new, "ledger": ledger, "problems": problems, "stats": stats}

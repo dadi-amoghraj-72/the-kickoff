@@ -46,7 +46,7 @@ check("the table has 36 teams", len(rows) == 36, len(rows))
 html = champions.scores_html(wed)
 check("one scoreboard line per match", html.count("<li>") == 9)
 como = next(m for m in wed if m["home"]["short"] == "Como")
-check("a line reads home, score, away", '<span class="h">Como</span><span class="s">4–1</span><span>Man Utd</span>' in html, html[:300])
+check("a line reads home, score, away (both listed clubs in bold)", '<span class="h"><span class="mine">Como</span></span><span class="s">4–1</span><span><span class="mine">Man Utd</span></span>' in html, html[:300])
 check("no matches, no scoreboard", champions.scores_html([]) == "")
 
 # ---- Scorecard for Arsenal ----
@@ -67,7 +67,9 @@ check("every match with goals gets a scorecard, each side under its own team",
 row = next(x for x in html.split("<li>") if "Arsenal" in x)
 check("Arsenal's scorecard shows both teams' scorers under their own side",
       "Davies 35&#x27;</span>, <span class=\"p\">Kane 61&#x27; (pen)" in row.split('class="ga"')[0] and "Eze 25&#x27;</span>, <span class=\"p\">Rice 82&#x27;" in row.split('class="ga"')[1], row)
-check("Arsenal's name is marked in the scoreboard", '<span class="mine">Arsenal</span>' in html and html.count('class="mine"') == 1)
+listed_sides = sum(1 for m in wed for side in ("home", "away") if m[side]["id"] in champions.scoreboard_highlight)
+check("every listed club's name is in bold in the scoreboard, and nobody else's",
+      '<span class="mine">Arsenal</span>' in html and html.count('class="mine"') == listed_sides >= 5 and '<span class="mine">Lille</span>' not in html, (html.count('class="mine"'), listed_sides))
 check("a goalless scorecard side shows nothing", "<span class=\"ga\">" not in champions.scores_html([{**bay, "goals": [g for g in bay["goals"] if g["side"] == "home"]}]))
 
 # ---- Table: the whole thing ----

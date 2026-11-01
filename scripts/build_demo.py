@@ -1,13 +1,17 @@
 """Build a demo page of the Arsenal and Football sections from live data, into docs/demo/index.html.
 
-  .venv/bin/python scripts/build_demo.py                      plain text, free, no Claude (shows layout and all the data)
-  .venv/bin/python scripts/build_demo.py --claude             with Claude's notes, overviews and news (a few cents to ~30 cents)
+  .venv/bin/python scripts/build_demo.py                      plain text, free, no Claude: builds the page and OPENS it in your browser
+  .venv/bin/python scripts/build_demo.py --claude             with Claude's notes and news (a few cents to ~30 cents)
+  .venv/bin/python scripts/build_demo.py --claude --publish   ... and also puts it on the website (the phone link)
   .venv/bin/python scripts/build_demo.py 2026-10-22 --claude  a past date, e.g. a Champions League night
+  add --no-open to build without opening the browser
 
+The demo shows the FPL deadline reminder, squad alerts and transfer hints even when the deadline is far off.
 The demo uses a private copy of the state in preview/demo-state/, so the real state files are never changed.
 Tables and FPL data are always as of now, so a past date mixes old results with current tables.
 """
 import shutil
+import subprocess
 import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -34,12 +38,13 @@ if use_claude:
     import anthropic
     load_env()
     client = anthropic.Anthropic()
-out = football.run(day, client=client, st=st, now=datetime.now(timezone.utc))
+out = football.run(day, client=client, st=st, now=datetime.now(timezone.utc), demo=True)
 
 if not out["sections"]:
     sys.exit("Nothing to show for this date. Problems: " + ", ".join(out["problems"]))
 banner = (f"Football preview built from real data for {render.nice_date(day.isoformat())}. "
           + ("Written with Claude. " if use_claude else "Plain text, no AI. ")
+          + "The FPL deadline reminder and transfer hints are shown here even if the deadline is far off. "
           + "Cricket, F1, tennis, NFL, NBA and the other sections are not built yet.")
 edition = {"date": day.isoformat(), "dummy": False, "banner": banner, "home": "../index.html",
            "headlines": out["headlines"], "sections": out["sections"]}
@@ -57,4 +62,22 @@ if led.rows:
     print("\nClaude calls:")
     print("\n".join(led.lines()))
 print(f"Total cost this build: ${led.total():.4f}")
-print("\nWrote docs/demo/index.html  (open it on this Mac with: open docs/demo/index.html)")
+page = ROOT / "docs" / "demo" / "index.html"
+print(f"\nWrote {page.relative_to(ROOT)}")
+if "--no-open" not in sys.argv and sys.platform == "darwin":
+    subprocess.run(["open", str(page)])
+    print("Opened it in your browser.")
+if "--publish" in sys.argv:
+    def git(*a):
+        return subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True)
+    git("add", "docs/demo/index.html")
+    done = git("commit", "-m", f"Update demo page ({day})")
+    if done.returncode != 0 and "nothing to commit" in (done.stdout + done.stderr):
+        print("Nothing new to publish: the page is the same as the one already online.")
+    elif done.returncode != 0:
+        print("Could not commit:", (done.stderr or done.stdout).strip()[:300])
+    else:
+        pushed = git("push", "origin", "main")
+        print("Published." if pushed.returncode == 0 else "Committed, but the push failed: " + pushed.stderr.strip()[:300])
+        if pushed.returncode == 0:
+            print("It goes live in about 30 seconds at: https://dadi-amoghraj-72.github.io/the-kickoff/demo/")

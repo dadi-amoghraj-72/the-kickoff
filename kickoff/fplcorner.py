@@ -20,11 +20,11 @@ def current_event(bootstrap):
     return next((e for e in bootstrap["events"] if e["is_current"]), None) or next(e for e in bootstrap["events"] if e["is_next"])
 
 
-def deadline(bootstrap, now):
-    """The next gameweek deadline if it is within 72 hours, else None. {'gw', 'when'}."""
+def deadline(bootstrap, now, window=DEADLINE_WINDOW):
+    """The next gameweek deadline if it is within the window (72 hours), else None. {'gw', 'when'}."""
     nxt = next((e for e in bootstrap["events"] if e["is_next"]), None)
     when = parse_time(nxt["deadline_time"]) if nxt else None
-    if not when or not (timedelta(0) <= when - now <= DEADLINE_WINDOW):
+    if not when or not (timedelta(0) <= when - now <= window):
         return None
     return {"gw": nxt["id"], "when": when_sgt(when.strftime("%Y-%m-%dT%H:%MZ"))}
 
@@ -75,7 +75,7 @@ def is_recent(added, now):
 def alerts_html(items):
     lis = "".join(f"<li><strong>{r.esc(i['name'])}</strong> ({r.esc(i['team'])}) <span class=\"muted\">{FLAGGED[i['status']]}</span>"
                   f"{(': ' + r.esc(i['news'])) if i['news'] else ''}"
-                  f"{(' (' + str(i['chance']) + '% chance of playing)') if i['chance'] is not None and i['status'] == 'd' else ''}</li>"
+                  f"{(' (' + str(i['chance']) + '% chance of playing)') if i['chance'] is not None and i['status'] == 'd' and 'chance of playing' not in i['news'] else ''}</li>"
                   for i in items)
     return f'<p><strong>Your squad:</strong></p><ul class="team-news">{lis}</ul>' if lis else ""
 
@@ -86,11 +86,12 @@ def draft_table(league, my_entry_id, gw):
     rows, mine, sig = [], [], []
     for s in sorted(league["standings"], key=lambda s: s["rank"]):
         e = by[s["league_entry"]]
-        rows.append([s["rank"], e["entry_name"], s["event_total"], s["total"]])
+        moved = (s.get("last_rank") or s["rank"]) - s["rank"]
+        rows.append([s["rank"], e["entry_name"], f"▲{moved}" if moved > 0 else (f"▼{-moved}" if moved < 0 else "–"), s["event_total"], s["total"]])
         mine.append("mine" if e["entry_id"] == my_entry_id else "")
         sig.append([s["league_entry"], s["rank"], s["total"]])
     html = r.table(f"{league['league']['name']} After Gameweek {gw}",
-                   [("#", True), ("Team", False), ("GW", True), ("Total", True)], rows, row_classes=mine)
+                   [("#", True), ("Team", False), ("Move", True), ("GW", True), ("Total", True)], rows, row_classes=mine)
     return sig, html
 
 
@@ -178,13 +179,15 @@ def watch_items(players, seen, now):
     return out
 
 
-def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry_id, state, now, trend_fn=None):
-    """The FPL corner HTML and the new state. Pieces that have nothing to say are left out."""
+def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry_id, state, now, trend_fn=None, demo=False):
+    """The FPL corner HTML and the new state. Pieces that have nothing to say are left out.
+    demo=True shows the deadline reminder, squad alerts and transfer hints even when the deadline is far off,
+    so the demo page can show everything the corner can do."""
     by_id = {p["id"]: p for p in players}
     event = current_event(bootstrap)
     new_state = dict(state)
     parts = []
-    dl = deadline(bootstrap, now)
+    dl = deadline(bootstrap, now) or (deadline(bootstrap, now, window=timedelta(days=400)) if demo else None)
     if dl:
         parts.append(f"<p><strong>Deadline:</strong> Gameweek {dl['gw']} closes {dl['when']}.</p>")
     if entry and picks and live is not None:

@@ -72,6 +72,8 @@ al = fc.squad_alerts(PICKS, BY)
 check("squad alerts: only your players who are not fit (Saka injured, Doubtful Dan)", [a["name"] for a in al] == ["Bukayo Saka", "Doubtful Dan"], al)
 h = fc.alerts_html(al)
 check("alerts show FPL's note, and the chance only for a doubt", "Thigh injury - Unknown return date" in h and "(50% chance of playing)" in h and h.count("chance of playing") == 1, h)
+check("a chance already in FPL's note is not repeated",
+      fc.alerts_html([{"name": "A", "team": "T", "status": "d", "news": "Calf injury - 50% chance of playing", "chance": 50, "added": None}]).count("chance of playing") == 1)
 check("alerts escape text", "&lt;" in fc.alerts_html([{"name": "<x>", "team": "T", "status": "i", "news": "", "chance": None, "added": None}]))
 check("nothing flagged, no alerts block", fc.alerts_html([]) == "")
 
@@ -80,6 +82,10 @@ sig, table = fc.draft_table(DRAFT, 186059, 9)
 check("draft table: sorted by rank, caption names the league and gameweek", table.index("Oinkata") < table.index("Gabi III") and "Hong Hu Express SuperLiga After Gameweek 9" in table)
 check("your Draft team is marked so it shows in bold", table.count("mine") == 1 and table.index("mine") < table.index("Gabi III"), table)
 check("the table shows team names only, no managers' names (the site is public)", "Rohan" not in table and "Dadi" not in table and "Manager" not in table)
+check("the draft table shows rank movement from last gameweek's rank (up, down or level)",
+      "▲" in fc.draft_table({**DRAFT, "standings": [{"league_entry": 11, "rank": 1, "last_rank": 3, "event_total": 5, "total": 9}, {"league_entry": 10, "rank": 2, "last_rank": 1, "event_total": 5, "total": 8}]}, 1, 9)[1]
+      and "▼" in fc.draft_table({**DRAFT, "standings": [{"league_entry": 11, "rank": 1, "last_rank": 3, "event_total": 5, "total": 9}, {"league_entry": 10, "rank": 2, "last_rank": 1, "event_total": 5, "total": 8}]}, 1, 9)[1]
+      and "–" in fc.draft_table({**DRAFT, "standings": [{"league_entry": 11, "rank": 1, "last_rank": 1, "event_total": 5, "total": 9}, {"league_entry": 10, "rank": 2, "last_rank": 2, "event_total": 5, "total": 8}]}, 1, 9)[1])
 check("the signature changes when a total changes", fc.draft_table({**DRAFT, "standings": [{**DRAFT["standings"][0], "total": 310}, DRAFT["standings"][1]]}, 186059, 9)[0] != sig)
 
 # ---- Top scorers and the watch list ----
@@ -145,6 +151,13 @@ check("an injured starter is left to the squad alerts, not hinted", not any(h["p
 check("a quiet starter reads as the three weekly scores", "0, 1, 0 points in the last 3 gameweeks" in fc.hints_html(qh, [7, 8, 9]), fc.hints_html(qh, [7, 8, 9]))
 check("two gameweeks of data are not enough for the 'under 2 in each of 3' rule", not any(h.get("reason") == "quiet" for h in fc.transfer_hints(QUIET, {7: QT[7], 8: QT[8]}, HQ)))
 check("quiet players come ahead of merely low-scoring ones", [h["reason"] for h in hints if h["kind"] == "out"] == sorted((h["reason"] for h in hints if h["kind"] == "out"), key=lambda r: r != "quiet"), [h.get("reason") for h in hints])
+
+# ---- Demo mode shows everything ----
+far = T(2026, 11, 2, 9)
+plain, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, far, trend_fn=lambda: TREND)
+demo, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, far, trend_fn=lambda: TREND, demo=True)
+check("normally, four days before the deadline there is no reminder and no hints", "Deadline:" not in plain and "Transfer hints" not in plain)
+check("in demo mode the deadline reminder and the hints appear anyway", "Deadline:" in demo and "Transfer hints" in demo, demo[:200])
 
 # ---- The whole corner ----
 html, st = fc.build(BOOT, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 4, 9))
