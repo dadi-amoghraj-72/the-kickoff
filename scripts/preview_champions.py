@@ -16,7 +16,11 @@ from kickoff.envfile import load_env  # noqa: E402
 from kickoff.http import safe  # noqa: E402
 from kickoff.sources import espn  # noqa: E402
 
-args = [a for a in sys.argv[1:] if not a.startswith("--")]
+args = sys.argv[1:]
+if "--model" in args:
+    settings.CLAUDE_MODEL = args[args.index("--model") + 1]  # for this run only
+    args = [a for a in args if a not in ("--model", settings.CLAUDE_MODEL)]
+args = [a for a in args if not a.startswith("--")]
 day = date.fromisoformat(args[0]) if args else datetime.now(ZoneInfo("Asia/Singapore")).date()
 facts_only = "--facts-only" in sys.argv
 
@@ -48,4 +52,5 @@ if result["problems"]:
     print(f"   (Claude's overview was rejected: {'; '.join(result['problems'])})")
 if not facts_only:
     print(f"\nTokens: {total['input']} in, {total['output']} out | estimated cost: ${notes.cost(total):.3f}")
+(ROOT / "preview" / f"overview-{'plain' if facts_only else settings.CLAUDE_MODEL}.txt").write_text(result["note"] + "\n")
 print("Wrote preview/champions.html")
