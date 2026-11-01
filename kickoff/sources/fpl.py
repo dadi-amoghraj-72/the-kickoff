@@ -63,9 +63,15 @@ def get_history(entry_id):
     return get_json(HISTORY.format(id=entry_id))
 
 
+def get_live_stats(gw):
+    """{player id: {"points", "minutes"}} for one gameweek."""
+    return {e["id"]: {"points": e["stats"]["total_points"], "minutes": e["stats"].get("minutes", 0)}
+            for e in get_json(LIVE.format(gw=gw)).get("elements", [])}
+
+
 def get_live(gw):
     """{player id: points this gameweek}."""
-    return {e["id"]: e["stats"]["total_points"] for e in get_json(LIVE.format(gw=gw)).get("elements", [])}
+    return {pid: v["points"] for pid, v in get_live_stats(gw).items()}
 
 
 def get_draft_league(league_id):

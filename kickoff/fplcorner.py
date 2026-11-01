@@ -99,6 +99,74 @@ def top_scorers(live, by_id, n=5):
     return [[i + 1, by_id[pid]["name"], by_id[pid]["team"], pts] for i, (pid, pts) in enumerate(best)]
 
 
+HINT_LIMIT = 3
+OUT_AVERAGE = 2.0  # points per appearance
+SWAP_GAP = 4       # points a bench player must beat his position's worst starter by, over the window
+
+
+def _totals(trend, pid):
+    """(points, appearances) for a player across the gameweeks in trend. An appearance is any minutes played."""
+    points = sum(trend[g].get(pid, {}).get("points", 0) for g in trend)
+    apps = sum(1 for g in trend if trend[g].get(pid, {}).get("minutes", 0) > 0)
+    return points, apps
+
+
+def transfer_hints(picks, trend, by_id, limit=HINT_LIMIT):
+    """A nudge from the last gameweeks in trend ({gw: {player id: {"points", "minutes"}}}), never advice.
+    'out' (quiet): a starter who scored under 2 points in each of the last 3 gameweeks, which in practice means he is
+        not playing or not doing anything. 'out' (low): a starter who played in at least two of them and averaged
+        2 points an appearance or less. Players already flagged injured, suspended or unavailable are left to the
+        squad alerts.
+    'swap': a bench outfield player who beat the worst starter in his position by 4 or more points."""
+    squad = picks["picks"]
+    starters = [p for p in squad if p["position"] <= 11]
+    bench = [p for p in squad if p["position"] > 11 and p["element_type"] != 1]
+    outs, swaps = [], []
+    for p in starters:
+        pl = by_id[p["element"]]
+        if pl["status"] in ("i", "s", "u"):
+            continue
+        pts, apps = _totals(trend, p["element"])
+        weekly = [trend[g].get(p["element"], {}).get("points", 0) for g in sorted(trend)]
+        if len(weekly) >= 3 and all(w < 2 for w in weekly):
+            outs.append({"kind": "out", "reason": "quiet", "player": pl, "points": pts, "apps": apps, "weekly": weekly, "avg": pts / max(apps, 1)})
+        elif apps >= 2 and pts / apps <= OUT_AVERAGE:
+            outs.append({"kind": "out", "reason": "low", "player": pl, "points": pts, "apps": apps, "weekly": weekly, "avg": pts / apps})
+    for b in bench:
+        peers = [s for s in starters if s["element_type"] == b["element_type"]]
+        if not peers:
+            continue
+        worst = min(peers, key=lambda s: _totals(trend, s["element"])[0])
+        bpts, wpts = _totals(trend, b["element"])[0], _totals(trend, worst["element"])[0]
+        if bpts - wpts >= SWAP_GAP:
+            swaps.append({"kind": "swap", "player": by_id[b["element"]], "over": by_id[worst["element"]], "points": bpts,
+                          "over_points": wpts, "gap": bpts - wpts})
+    outs.sort(key=lambda x: (x["reason"] != "quiet", x["points"], x["player"]["name"]))
+    swaps.sort(key=lambda x: (-x["gap"], x["player"]["name"]))
+    return (outs + swaps)[:limit]
+
+
+def hints_html(hints, gws):
+    if not hints:
+        return ""
+    span = f"{len(gws)} gameweeks"
+    lis = ""
+    for h in hints:
+        p = h["player"]
+        if h["kind"] == "out" and h["reason"] == "quiet":
+            lis += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">Move out?</span>: "
+                    f"{', '.join(str(w) for w in h['weekly'])} points in the last {span}</li>")
+        elif h["kind"] == "out":
+            lis += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">Move out?</span>: "
+                    f"{h['points']} points in {h['apps']} appearances over the last {span}</li>")
+        else:
+            o = h["over"]
+            lis += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">Bench player outscoring a starter</span>: "
+                    f"{h['points']} points against {r.esc(o['name'])}'s {h['over_points']} over the last {span}</li>")
+    return ('<p><strong>Transfer hints</strong> <span class="muted">(a nudge from recent form, not advice)</span></p>'
+            f'<ul class="team-news">{lis}</ul>')
+
+
 def watch_items(players, seen, now):
     """Heavily owned players with new injury or suspension news, each shown once."""
     out = []
@@ -110,7 +178,7 @@ def watch_items(players, seen, now):
     return out
 
 
-def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry_id, state, now):
+def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry_id, state, now, trend_fn=None):
     """The FPL corner HTML and the new state. Pieces that have nothing to say are left out."""
     by_id = {p["id"]: p for p in players}
     event = current_event(bootstrap)
@@ -125,6 +193,10 @@ def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry
         shown = alerts if dl else [a for a in alerts if is_recent(a["added"], now)]
         if shown:
             parts.append(alerts_html(shown))
+        if dl and trend_fn:  # only near the deadline, when a transfer decision is due
+            trend = trend_fn()
+            if trend:
+                parts.append(hints_html(transfer_hints(picks, trend, by_id), list(trend)))
     watch = watch_items(players, state.get("watch_seen", {}), now)
     if watch:
         lis = "".join(f"<li><strong>{r.esc(w['name'])}</strong> ({r.esc(w['team'])}) <span class=\"muted\">{FLAGGED[w['status']]}</span>"

@@ -10,11 +10,26 @@ def _favourite(row):
     return team, chances[team]
 
 
-def lines(facts, round_size, period="day"):
+def round_info(table_rows, label="Game week", total=None):
+    """Where we are in the season, worked out from the table. The current round is the most games any team has
+    played; the games finished in it so far are the teams on that number, halved. total: rounds in the season
+    (a double round-robin has 2 x (teams - 1)). None if there is no table."""
+    if not table_rows:
+        return None
+    teams = len(table_rows)
+    current = max(x["played"] for x in table_rows)
+    so_far = sum(1 for x in table_rows if x["played"] == current) // 2
+    return {"label": label, "number": current, "total": total or 2 * (teams - 1), "so_far": so_far, "size": teams // 2}
+
+
+def lines(facts, round_size, period="day", info=None):
     """[(label, figure, text)] for the box. figure is the highlighted part (may be empty)."""
     rows = facts["matches"]
     known = "tally" in facts
-    out = [("Games played", f"{len(rows)}/{round_size}", "")]
+    out = []
+    if info and info["number"]:
+        out.append((info["label"], f"{info['number']}/{info['total']}", ""))
+    out.append(("Games played", f"{len(rows)}/{round_size}", f"[{info['so_far']}/{info['size']} so far this {info['label'].lower()}]" if info else ""))
     if known and facts["tally"]["clear_favourites"]:
         out.append(("Favourites won", f"{facts['tally']['favourite_won']}/{facts['tally']['clear_favourites']}", ""))
     elif known:
@@ -39,12 +54,12 @@ def lines(facts, round_size, period="day"):
     return out
 
 
-def html(facts, round_size, period="day"):
+def html(facts, round_size, period="day", info=None):
     """The box. Empty when there were no matches, so a league with nothing to report has no box."""
     if not facts or not facts["matches"]:
         return ""
     items = ""
-    for label, fig, text in lines(facts, round_size, period):
+    for label, fig, text in lines(facts, round_size, period, info):
         figure = '<span class="n">' + r.esc(fig) + "</span> " if fig else ""
         items += f'<li><span class="lbl">{r.esc(label)}</span><span class="who">{figure}{r.esc(text)}</span></li>'
 

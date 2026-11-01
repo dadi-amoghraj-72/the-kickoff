@@ -43,6 +43,25 @@ h = roundup.html(FACTS, 18, "night")
 check("the box is a four-row list with the figures highlighted", h.count("<li>") == 4 and h.count('class="n"') == 2 and h.startswith('<ul class="roundup">'), h[:200])
 check("it reads cleanly as text", text(h).startswith("Games played 9/18 Favourites won 5/6 Biggest upset Sporting CP 2-3 LASK Linz"), text(h))
 
+# ---- Where we are in the season ----
+league = lambda played: [{"played": p} for p in played]  # noqa: E731
+mon = roundup.round_info(league([9] * 18 + [8] * 2), "Game week")
+check("Monday: 18 of 20 teams are on 9 games, so Game week 9/38 and 9 of 10 played", (mon["number"], mon["total"], mon["so_far"], mon["size"]) == (9, 38, 9, 10), mon)
+check("the round is finished when every team is on the same number: 10/10", roundup.round_info(league([9] * 20))["so_far"] == 10)
+check("a new round has begun: two teams on 10 games, so Game week 10 and 1 of 10", (lambda i: (i["number"], i["so_far"]))(roundup.round_info(league([10] * 2 + [9] * 18))) == (10, 1))
+check("a postponed game does not break the count: 19 teams on 9 games is still 9 of 10", roundup.round_info(league([9] * 19 + [8]))["so_far"] == 9)
+check("an 18-team league has 34 rounds and 9 games a round", (lambda i: (i["total"], i["size"]))(roundup.round_info(league([5] * 18))) == (34, 9))
+cl = roundup.round_info(ROWS, "Matchday", 8)
+check("Champions League: Matchday 3/8 with all 18 games of the matchday played", (cl["label"], cl["number"], cl["total"], cl["so_far"], cl["size"]) == ("Matchday", 3, 8, 18, 18), cl)
+check("no table, no season row", roundup.round_info([]) is None and roundup.round_info(None) is None)
+L2 = roundup.lines(FACTS, 18, "night", cl)
+check("with the season info the box gets a first row, and games played shows today's and the round's count",
+      L2[0] == ("Matchday", "3/8", "") and L2[1] == ("Games played", "9/18", "[18/18 so far this matchday]"), L2[:2])
+sunday = roundup.lines({**FACTS, "matches": FACTS["matches"][:3]}, 10, "day", mon)
+check("D's example: a Monday with 3 games played and 9 of 10 done this game week", sunday[1] == ("Games played", "3/10", "[9/10 so far this game week]"), sunday[1])
+check("the box is the same five rows in the same order", [x[0] for x in roundup.lines(FACTS, 18, "night", cl)] == ["Matchday", "Games played", "Favourites won", "Biggest upset", "Game of the night"])
+check("without season info the box is the old four rows", len(roundup.lines(FACTS, 18, "night")) == 4)
+
 # ---- Edge cases ----
 no_upset = {**FACTS, "matches": [x for x in FACTS["matches"] if x.get("result_vs_expectation") != "big_upset"]}
 no_upset["tally"] = {**FACTS["tally"], "upsets": 0}

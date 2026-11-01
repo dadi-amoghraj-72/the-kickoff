@@ -87,7 +87,11 @@ def run(day, client=None, st=None, now=None):
         facts = overview.matchday_facts(competition, matches, odds, table_rows)
         overviews[competition] = facts
         size = max(1, len(table_rows) // 2) if table_rows else len(matches)
-        return roundup.html(facts, size, period)
+        info = None
+        if table_rows and (league_slug != espn.CHAMPIONS_LEAGUE or champions.in_league_phase(matches)):
+            info = roundup.round_info(table_rows, "Matchday" if league_slug == espn.CHAMPIONS_LEAGUE else "Game week",
+                                      8 if league_slug == espn.CHAMPIONS_LEAGUE else None)
+        return roundup.html(facts, size, period, info)
 
     # ---- The Football section ----
     football = ""
@@ -154,8 +158,14 @@ def run(day, client=None, st=None, now=None):
         history = guard("FPL history", fpl.get_history, eid)
         live = guard("FPL live points", fpl.get_live, event["id"])
         draft = guard("FPL draft league", fpl.get_draft_league, did)
+        def trend():
+            """Points and minutes for the last three finished gameweeks (fetched only when the hints are due)."""
+            done = sorted(e["id"] for e in boot["events"] if e["finished"])[-3:]
+            got = {gw: guard(f"FPL gameweek {gw}", fpl.get_live_stats, gw) for gw in done}
+            return {gw: v for gw, v in got.items() if v}
+
         html, new["fpl"] = fplcorner.build(boot, players, entry, picks, history, live, draft, settings.FPL_DRAFT_ENTRY_ID,
-                                           st.get("fpl", {}), now)
+                                           st.get("fpl", {}), now, trend_fn=trend)
         football += html
 
     # ---- The Arsenal section ----

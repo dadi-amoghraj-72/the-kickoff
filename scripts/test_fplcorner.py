@@ -92,6 +92,60 @@ w = fc.watch_items(PLAYERS, {}, NOW)
 check("watch: heavily owned players with new news (Cash, 20% owned) - but not Saka (old news) or Dan (3% owned)", [x["name"] for x in w] == ["Matty Cash"], w)
 check("watch: shown once", fc.watch_items(PLAYERS, {"3": "2026-11-03T09:00:00Z"}, NOW) == [])
 
+# ---- Transfer hints (a nudge near the deadline) ----
+def pick(el, pos, typ):
+    return {"element": el, "position": pos, "element_type": typ, "is_captain": False, "multiplier": 1 if pos <= 11 else 0}
+
+
+HP = {i: player(i, f"Player {i}", f"P{i}", "ARS") for i in range(101, 120)}
+SQUAD = {"picks": [pick(101, 1, 1), pick(102, 2, 2), pick(103, 3, 2), pick(104, 4, 3), pick(105, 5, 3), pick(106, 6, 3), pick(107, 7, 4),
+                   pick(108, 12, 1), pick(109, 13, 2), pick(110, 14, 3), pick(111, 15, 4)]}
+G = lambda pts, mins: {"points": pts, "minutes": mins}  # noqa: E731
+TREND = {7: {101: G(3, 90), 102: G(1, 60), 103: G(6, 90), 104: G(2, 90), 105: G(8, 90), 106: G(7, 90), 107: G(1, 0), 109: G(2, 90), 110: G(9, 90), 111: G(0, 0)},
+         8: {101: G(3, 90), 102: G(1, 70), 103: G(5, 90), 104: G(2, 90), 105: G(6, 90), 106: G(5, 90), 107: G(0, 0), 109: G(2, 90), 110: G(8, 90), 111: G(0, 0)},
+         9: {101: G(3, 90), 102: G(0, 0), 103: G(7, 90), 104: G(2, 90), 105: G(9, 90), 106: G(6, 90), 107: G(9, 90), 109: G(2, 90), 110: G(7, 90), 111: G(0, 0)}}
+hints = fc.transfer_hints(SQUAD, TREND, HP)
+outs = [h for h in hints if h["kind"] == "out"]
+swaps = [h for h in hints if h["kind"] == "swap"]
+check("a starter with 2 points in 2 appearances (1.0 a game) is a 'move out?' candidate", any(h["player"]["id"] == 102 and h["points"] == 2 and h["apps"] == 2 for h in outs), hints)
+check("a starter averaging 2.0 over three appearances (104: 2, 2, 2) is flagged; one averaging 6 is not", any(h["player"]["id"] == 104 for h in outs) and not any(h["player"]["id"] == 103 for h in outs), outs)
+check("a starter who barely played (107: one appearance) is not flagged: injuries are covered elsewhere", not any(h["player"]["id"] == 107 for h in outs), outs)
+check("the quietest (fewest points) comes first", outs[0]["player"]["id"] == 102 and outs[0]["points"] <= outs[-1]["points"], outs)
+check("a bench midfielder with 24 points against the worst starting midfielder's 6 is a swap (gap 18)",
+      any(h["player"]["id"] == 110 and h["over"]["id"] == 104 and (h["points"], h["over_points"], h["gap"]) == (24, 6, 18) for h in swaps), swaps)
+check("a bench defender with 6 points against a starter's 8 is not", not any(h["player"]["id"] == 109 for h in swaps), swaps)
+check("the bench goalkeeper is never suggested", not any(h["player"]["id"] == 108 for h in hints))
+check("a bench forward with 0 points is not a swap", not any(h["player"]["id"] == 111 for h in swaps))
+check("at most three hints, with 'move out' ahead of swaps", len(hints) <= 3 and [h["kind"] for h in hints] == sorted((h["kind"] for h in hints), key=lambda k: k != "out"), [h["kind"] for h in hints])
+check("a tight squad with nothing to flag gives no hints", fc.transfer_hints(SQUAD, {7: {102: G(8, 90)}, 8: {102: G(8, 90)}}, HP) == [])
+hh = fc.hints_html(hints, [7, 8, 9])
+check("hints read: name, team, the point totals and 'last 3 gameweeks', labelled a nudge not advice",
+      "Transfer hints" in hh and "not advice" in hh and "last 3 gameweeks" in hh and "Move out?" in hh and "P" in hh, hh[:300])
+check("no hints, no block", fc.hints_html([], [7]) == "")
+calls = []
+SQ_PICKS = {**PICKS, **SQUAD, "entry_history": PICKS["entry_history"]}
+BY2 = {**BY, **HP}
+PL2 = PLAYERS + list(HP.values())
+fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 2, 9), trend_fn=lambda: calls.append(1) or TREND)
+check("far from the deadline, the hints are not worked out at all (no wasted requests)", calls == [])
+html_near, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 4, 9), trend_fn=lambda: TREND)
+check("within 72 hours of the deadline the corner includes the hints", "Transfer hints" in html_near)
+html_none, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 4, 9), trend_fn=lambda: {})
+check("if the gameweek data is unavailable the corner still builds without hints", "Transfer hints" not in html_none and "merino parade fc" in html_none)
+
+# ---- The rule as D first asked for it: under 2 points in each of the last 3 gameweeks ----
+QUIET = {"picks": [pick(101, 1, 1), pick(120, 2, 3), pick(121, 3, 3), pick(122, 4, 3), pick(123, 12, 3)]}
+HQ = {**HP, 120: player(120, "Never Plays", "Plays", "ARS"), 121: player(121, "One Cameo", "Cameo", "LIV"), 122: player(122, "Injured Starter", "Inj", "ARS", status="i"),
+      123: player(123, "Bench Guy", "Bench", "ARS")}
+QT = {7: {120: G(0, 0), 121: G(0, 0), 122: G(0, 0)}, 8: {120: G(0, 0), 121: G(1, 31), 122: G(0, 0)}, 9: {120: G(0, 0), 121: G(0, 0), 122: G(1, 0)}}
+qh = fc.transfer_hints(QUIET, QT, HQ)
+check("a starter with 0, 0, 0 points (no minutes at all) is flagged: the Tzolis case", any(h["player"]["id"] == 120 and h["reason"] == "quiet" for h in qh), qh)
+check("a starter with 0, 1, 0 points and a 31-minute cameo is flagged: the Szoboszlai case", any(h["player"]["id"] == 121 and h["weekly"] == [0, 1, 0] for h in qh), qh)
+check("an injured starter is left to the squad alerts, not hinted", not any(h["player"]["id"] == 122 for h in qh))
+check("a quiet starter reads as the three weekly scores", "0, 1, 0 points in the last 3 gameweeks" in fc.hints_html(qh, [7, 8, 9]), fc.hints_html(qh, [7, 8, 9]))
+check("two gameweeks of data are not enough for the 'under 2 in each of 3' rule", not any(h.get("reason") == "quiet" for h in fc.transfer_hints(QUIET, {7: QT[7], 8: QT[8]}, HQ)))
+check("quiet players come ahead of merely low-scoring ones", [h["reason"] for h in hints if h["kind"] == "out"] == sorted((h["reason"] for h in hints if h["kind"] == "out"), key=lambda r: r != "quiet"), [h.get("reason") for h in hints])
+
 # ---- The whole corner ----
 html, st = fc.build(BOOT, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 4, 9))
 check("the corner has a heading, the deadline, your team, your squad, the draft table",
