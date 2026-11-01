@@ -130,16 +130,14 @@ c = Fake()
 out3 = football.run(DAY, client=c, st={}, now=NOW)
 html3 = " ".join(s["html"] for s in out3["sections"])
 labels = [x["label"] for x in out3["ledger"].rows]
-check("Claude is used for the Premier League overview (Opus) and the notes (Sonnet), and each is logged",
-      "Premier League overview" in labels and "Premier League notes" in labels and {x["model"] for x in out3["ledger"].rows} >= {settings.OVERVIEW_MODEL, settings.CLAUDE_MODEL}, labels)
-check("the overview appears above the notes, with team names in bold", html3.index("The standout game was") < html3.index("<table") and "<strong>" in html3.split("The standout game was")[1][:300])
+check("Claude writes only the notes (Sonnet): no Opus overview is bought any more", "Premier League notes" in labels
+      and settings.OVERVIEW_MODEL not in {x["model"] for x in out3["ledger"].rows} and not any("overview" in x for x in labels), labels)
+check("the round-up box comes first in the league block: games played 8/10 (a 20-team league), then the notes, then the table",
+      "Games played" in html3 and "8/10" in html3 and html3.index("roundup") < html3.index("<strong>Chelsea</strong>") < html3.index("<table"), html3[:300])
+check("the box is identical with and without Claude (it is built by code)", "8/10" in html and "Favourites won" in html and "Biggest upset" in html and "Game of the day" in html)
 check("the cost is totalled and recorded in the monthly state", out3["new_state"]["costs"]["2026-11"]["spent"] == out3["ledger"].total() > 0 and out3["new_state"]["costs"]["2026-11"]["calls"] == len(labels))
 check("news candidates are sent to Claude and remembered, so they are never sent twice",
       out3["stats"]["news_candidates"] == 0 or ("news classification" in labels and len(out3["new_state"]["news_seen"]) == out3["stats"]["news_candidates"]), out3["stats"])
-football.MIN_FOR_OVERVIEW = 99
-out4 = football.run(DAY, client=Fake(), st={}, now=NOW)
-check("a league with too few results gets no overview", "Premier League overview" not in [x["label"] for x in out4["ledger"].rows])
-football.MIN_FOR_OVERVIEW = 4
 
 # ---- Arsenal played (the Liverpool game) ----
 out5 = football.run(date(2026, 11, 2), client=None, st={}, now=NOW)

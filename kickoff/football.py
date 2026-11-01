@@ -6,12 +6,11 @@ State is passed in and handed back, never written here, so a test run can't dist
 import copy
 from datetime import datetime, timezone
 
-from kickoff import champions, focus, fplcorner, injuries, leaders, news, notes, overview, settings, tables
+from kickoff import champions, focus, fplcorner, injuries, leaders, news, notes, overview, roundup, settings, tables
 from kickoff import render as r
 from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
 
-MIN_FOR_OVERVIEW = 4  # a league needs this many results in the window to earn a written overview
 LEAGUE_ORDER = ["eng.1", "esp.1", "ita.1", "ger.1", "fra.1", "tur.1"]
 
 
@@ -82,26 +81,21 @@ def run(day, client=None, st=None, now=None):
             written = {f["id"]: {"note": notes.plain_note(f), "source": "plain", "problems": []} for f in facts}
         return _paragraphs(written, match_by_id)
 
-    def overview_text(label, competition, matches, league_slug, table_rows):
+    def round_up(label, competition, matches, league_slug, table_rows, period="day"):
+        """The round-up box. Odds are fetched here; the numbers and the game of the day come from code, not Claude."""
         odds = overview.collect_odds(league_slug, matches)
         facts = overview.matchday_facts(competition, matches, odds, table_rows)
         overviews[competition] = facts
-        if client:
-            res, usage = overview.write_overview(client, facts)
-            ledger.add(label, settings.OVERVIEW_MODEL, usage)
-            return res["note"]
-        return overview.plain_overview(facts)
+        size = max(1, len(table_rows) // 2) if table_rows else len(matches)
+        return roundup.html(facts, size, period)
 
     # ---- The Football section ----
     football = ""
     for lg in LEAGUE_ORDER:
         name, res, tbl = leagues[lg], results[lg] or [], rows[lg]
         parts = ""
-        if len(res) >= MIN_FOR_OVERVIEW:
-            text = guard(f"{name} overview", overview_text, f"{name} overview", name, res, lg, tbl)
-            if text:
-                names = [n for m in res for n in (m["home"]["name"], m["away"]["name"], m["home"]["short"], m["away"]["short"])]
-                parts += f"<p>{r.bold_names(text, names)}</p>"
+        if res:
+            parts += guard(f"{name} round-up", round_up, name, name, res, lg, tbl) or ""
         chosen = notes.select(lg, res)
         if chosen:
             facts = [notes.match_facts(m, t, tbl, previous[lg], name) for m, t in chosen]
@@ -122,9 +116,9 @@ def run(day, client=None, st=None, now=None):
         if entry:
             new.setdefault("tables", {})[espn.WSL] = entry
     if cl_matches:
-        cl_text = guard("Champions League overview", overview_text, "Champions League overview", champions.COMPETITION,
-                        cl_matches, espn.CHAMPIONS_LEAGUE, rows[espn.CHAMPIONS_LEAGUE])
-        football += champions.section_html(cl_matches, rows[espn.CHAMPIONS_LEAGUE], cl_text)
+        cl_box = guard("Champions League round-up", round_up, "Champions League", champions.COMPETITION, cl_matches,
+                       espn.CHAMPIONS_LEAGUE, rows[espn.CHAMPIONS_LEAGUE], "night") or ""
+        football += champions.section_html(cl_matches, rows[espn.CHAMPIONS_LEAGUE], None, cl_box)
 
     # ---- Injuries (Premier League, official FPL status) ----
     boot = guard("FPL data", fpl.get_bootstrap)

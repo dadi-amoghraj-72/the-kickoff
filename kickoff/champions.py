@@ -73,13 +73,13 @@ def table_html(rows):
                    body, zones=[zone(x["rank"]) for x in rows], row_classes=classes)
 
 
-def section_html(matches, rows, overview_text=None):
+def section_html(matches, rows, overview_text=None, box=""):
     """The full Champions League block: the overview first, then the scoreboard, then the league-phase table.
     Returns '' when there were no matches, so the block is simply left out."""
     if not matches:
         return ""
     names = [n for m in matches for side in ("home", "away") for n in (m[side]["name"], m[side]["short"])]
-    html = "<h3>Champions League</h3>"
+    html = "<h3>Champions League</h3>" + box
     if overview_text:
         html += f"<p>{r.bold_names(overview_text, names)}</p>"
     html += scores_html(matches)

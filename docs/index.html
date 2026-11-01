@@ -142,6 +142,11 @@ tr.mine td:nth-child(2) { font-weight: 700; }
 .scores .mine { font-weight: 700; }
 .scores .p { white-space: nowrap; }
 
+.roundup { list-style: none; margin: 4px 0 16px; padding: 10px 14px; background: var(--surface); border-radius: 8px; font-size: 16px; }
+.roundup li { display: grid; grid-template-columns: 9em 1fr; column-gap: 10px; align-items: baseline; padding: 3px 0; }
+.roundup .lbl { color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.roundup .n { color: var(--gold); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+
 .nodata { display: inline-block; padding: 4px 12px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; color: var(--muted); font-size: 16px; }
 
 footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 15px; color: var(--muted); }
