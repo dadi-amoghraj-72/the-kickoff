@@ -66,6 +66,12 @@ ORDINARY_ENDINGS = ("ing", "ed", "ly", "ness", "tion", "sion", "ment", "ous", "f
 NICKNAMES = {"spurs", "gunners", "citizens", "blues", "reds", "toffees", "magpies", "hammers", "villans", "seagulls",
              "cherries", "eagles", "foxes", "bees", "wolves", "saints", "blades", "canaries", "lions", "red", "devils"}
 
+# Claims about history, form or reputation. Each is rejected unless the word itself appears in the facts, so
+# "unbeaten" is fine when the facts carry an unbeaten_run and "former" is never fine.
+HISTORY = re.compile(r"\b(former(?:ly)?|ex-\w+|previous(?:ly)?|last (?:season|year|term)|old club|reunit\w*|reunion|returning|"
+                     r"history|historic\w*|record|first time|streak|winning run|consecutive|in a row|perfect|unbeaten|"
+                     r"invincible|hat-trick|debut|legend\w*)\b", re.I)
+
 ALLOWED_WORDS = NICKNAMES | {"premier", "league", "champions", "europa", "conference", "cup", "monday", "tuesday", "wednesday",
                  "thursday", "friday", "saturday", "sunday", "british", "english", "spanish", "german", "french",
                  "italian", "turkish", "uefa", "fa", "var"}
@@ -152,7 +158,7 @@ def _vocab(value, words=None):
         text = str(value)
         for token in re.findall(r"[\w'’-]+", text):
             words.add(token.lower())
-            words.update(part.lower() for part in token.split("-"))
+            words.update(part.lower() for part in re.split(r"[-_]", token))
         words.update(re.findall(r"\d+", text))  # "2-0" gives 2 and 0, "90'+11'" gives 90 and 11
     return words
 
@@ -182,6 +188,10 @@ def check_note(note, f):
         problems.append("minute symbols such as 36' or 90+4: write 'the 36th minute' or 'stoppage time'")
     if HYPE.search(note):
         problems.append(f'hype word "{HYPE.search(note).group(0)}"')
+    for m in HISTORY.finditer(note):
+        word = m.group(0).lower()
+        if not all(part in vocab for part in re.split(r"[\s-]+", word) if part != "ex"):
+            problems.append(f'"{m.group(0)}" is a claim about history or form that is not in the facts')
     moved = any("position_before" in t for t in (f.get("table") or {}).values())
     for m in MOVEMENT.finditer(note):
         if not moved:

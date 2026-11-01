@@ -30,7 +30,7 @@ if not matches:
     sys.exit(f"No Champions League matches in the edition for {day}." if matches == [] else "Results unavailable.")
 
 odds = overview.collect_odds(espn.CHAMPIONS_LEAGUE, matches)
-facts = overview.matchday_facts(champions.COMPETITION, matches, odds)
+facts = overview.matchday_facts(champions.COMPETITION, matches, odds, rows)
 total = {"input": 0, "output": 0}
 if facts_only:
     result = {"note": overview.plain_overview(facts), "source": "plain", "problems": []}

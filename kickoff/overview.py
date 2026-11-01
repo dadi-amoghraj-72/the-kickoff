@@ -26,6 +26,9 @@ Hard rules:
 - You may quote pre-match chances only as the whole percentages given.
 - For context about managers, pressure or reputation, use ONLY what appears in a match's "recap". Paraphrase it:
   never copy a run of more than five words from a recap.
+- Say nothing about anyone's history, form or reputation unless the facts state it: no "former club", no "perfect start"
+  (use it only when a team's "perfect_start" is true), no records or streaks. Describe goals only from each match's "goals"
+  list; the "winning_goal" is the goal that decided the match, and a late goal that only reduced a deficit decided nothing.
 - Use club and player names exactly as they appear in the facts. Every number must come from the facts.
 - Write minutes in words ("the 88th minute"), never with symbols such as ' or +.
 - Follow the "length" instruction: one short paragraph, no lists."""
@@ -33,6 +36,8 @@ Hard rules:
 SCHEMA = {"type": "object", "properties": {"overview": {"type": "string"}},
           "required": ["overview"], "additionalProperties": False}
 
+DECIDING = re.compile(r"\b(decisive|decider|winner|winning|clinch\w*|sealed|settled)\b", re.I)
+MINUTE = re.compile(r"\b(\d+)(?:st|nd|rd|th) minute\b", re.I)
 UPSET_WORDS = re.compile(r"\b(upsets?|shocks?|shocked|stunn\w*|surpris\w*|sensation\w*)\b", re.I)
 FAVOURITE_WORDS = re.compile(r"\b(favourites?|favoured|underdogs?|expected|expectations?)\b", re.I)
 
@@ -137,19 +142,63 @@ def collect_odds(league, matches):
     return out
 
 
-def matchday_facts(competition, matches, odds_by_id):
+def goal_timeline(m):
+    """Every goal in order, with who scored, for which team and the score right after it. Own goals count for the
+    team that benefits. Built by code so a model can never misread who scored when."""
+    score, out = {"home": 0, "away": 0}, []
+    for _, g in sorted(enumerate(m["goals"]), key=lambda ig: (minute_number(ig[1]["minute"]), ig[0])):
+        if g["side"] not in score:
+            continue
+        score[g["side"]] += 1
+        out.append({"minute": minute_number(g["minute"]), "scored_by": g["player"],
+                    "for": m[g["side"]]["name"], "score_after": f"{score['home']}-{score['away']}",
+                    **({"stoppage_time": True} if "+" in g["minute"] else {}),
+                    **({"penalty": True} if g["penalty"] else {}), **({"own_goal": True} if g["own_goal"] else {})})
+    return out
+
+
+def winning_goal(m, timeline):
+    """The goal that decided the match: the winner's goal number (loser's total + 1). None for a draw."""
+    side = winner_side(m)
+    if side == "draw":
+        return None
+    need = (m["away_score"] if side == "home" else m["home_score"]) + 1
+    mine = [g for g in timeline if g["for"] == m[side]["name"]]
+    g = mine[need - 1] if len(mine) >= need else None
+    return {k: g[k] for k in ("minute", "scored_by", "for")} if g else None
+
+
+def league_records(m, rows):
+    """Each team's league-phase record, from the table now. perfect_start is only present when it is true."""
+    by_id = {x["id"]: x for x in rows or []}
+    out = {}
+    for side in ("home", "away"):
+        x = by_id.get(m[side]["id"])
+        if x:
+            out[m[side]["name"]] = {"position": x["rank"], "points": x["points"], "played": x["played"], "won": x["won"],
+                                    "drawn": x["drawn"], "lost": x["lost"],
+                                    **({"perfect_start": True} if x["played"] >= 2 and x["won"] == x["played"] else {})}
+    return out
+
+
+def matchday_facts(competition, matches, odds_by_id, table_rows=None):
     rows, scored = [], []
     for m in matches:
         pct, d = odds_by_id.get(m["id"]), drama(m)
         v = verdict(m, pct)
-        row = {"match": label(m), "total_goals": d["total_goals"], "lead_changes": d["lead_changes"]}
+        timeline = goal_timeline(m)
+        row = {"match": label(m), "total_goals": d["total_goals"], "lead_changes": d["lead_changes"], "goals": timeline}
+        win = winning_goal(m, timeline)
+        if win:
+            row["winning_goal"] = win
+        records = league_records(m, table_rows)
+        if records:
+            row["league_table_now"] = records
         if pct:
             row["pre_match_chances_pct"] = {m["home"]["name"]: pct["home"], "draw": pct["draw"], m["away"]["name"]: pct["away"]}
             row["result_vs_expectation"] = v
         if d["comeback"]:
             row["comeback"] = True
-        if d["late_goal_minute"]:
-            row["late_goal_minute"] = d["late_goal_minute"]
         if d["red_cards"]:
             row["red_cards"] = d["red_cards"]
         if m.get("recap"):
@@ -200,6 +249,12 @@ def check_overview(note, f):
         problems.append(f'"{UPSET_WORDS.search(note).group(0)}" is not supported: no result was labelled an upset')
     if f.get("expectations") == "unavailable" and FAVOURITE_WORDS.search(note):
         problems.append("mentions favourites or expectations, but no odds were available")
+    real_winners = {r["winning_goal"]["minute"] for r in f["matches"] if r.get("winning_goal")}
+    for sentence in re.split(r"(?<=[.!?])\s+", note):
+        if DECIDING.search(sentence):
+            for minute in MINUTE.findall(sentence):
+                if int(minute) not in real_winners:
+                    problems.append(f"calls a goal in the {minute}th minute decisive, but no winning goal was scored then")
     note_words = _words(note)
     for r in f["matches"]:
         for source in (r.get("recap") or {}).values():
@@ -215,7 +270,7 @@ def write_overview(client, f):
     plain overview. Nothing unchecked is ever returned as Claude's."""
     import json
     total, problems, sent, rejected = {"input": 0, "output": 0}, [], f, []
-    for attempt in (1, 2):
+    for attempt in (1, 2, 3):
         extra = "" if attempt == 1 else ("Your earlier overview broke these rules: " + "; ".join(problems) +
                                          ". Rewrite it so that it fixes them, using only the facts.\n")
         obj, usage = notes.call_json(client, SYSTEM, SCHEMA, extra + "Facts:\n" + json.dumps(sent, ensure_ascii=False, indent=1))
