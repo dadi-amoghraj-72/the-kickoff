@@ -51,7 +51,8 @@ check("facts hold no player or club that isn't in the match", "Arsenal" not in j
 
 # ---- The safety check ----
 scorer = f["goals"][0]["scorer"]
-good = f"Chelsea beat Manchester United 2-0, with {scorer} scoring on {f['goals'][0]['minute']}."
+minute = f["goals"][0]["minute"].rstrip("'’")
+good = f"Chelsea beat Manchester United 2-0, with {scorer} scoring in the {minute}th minute."
 check("a faithful note passes", notes.check_note(good, f) == [], notes.check_note(good, f))
 check("an invented number is caught", any("number 61000" in p for p in notes.check_note("Chelsea won 2-0 in front of 61000 fans.", f)))
 check("an invented name is caught", any("Mourinho" in p for p in notes.check_note("Chelsea won 2-0 and Mourinho smiled.", f)))
