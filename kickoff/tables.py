@@ -5,8 +5,6 @@ from kickoff import render as r
 from kickoff.clubs import code, is_listed
 
 COLUMNS = [("#", True), ("Team", False), ("P", True), ("GD", True), ("Pts", True)]
-LEGEND = {"blue": "Champions League places", "lilac": "Europa and Conference League places, play-offs",
-          "rose": "Relegation"}
 
 
 def zone_for(note):
@@ -42,30 +40,29 @@ def decide(rows, saved, edition_date, tuesday_only=False):
 
 def _table_html(name, rows):
     zones = [zone_for(x["zone"]) for x in rows]
-    legend = [(z, LEGEND[z]) for z in ("blue", "lilac", "rose") if z in zones]
     body = [[x["rank"], x["team"], x["played"], f"{x['gd']:+d}", x["points"]] for x in rows]
-    return r.table(name, COLUMNS, body, zones=zones, legend=legend)
+    return r.table(name, COLUMNS, body, zones=zones)
 
 
-def block(name, rows, decision):
-    """The HTML for one league's table, following the decision."""
+def block(name, rows, decision, leaders=""):
+    """The HTML for one league's table, following the decision. Leaders go under a table that is shown."""
     mode = decision["mode"]
     if mode == "skip":
         return ""
     if mode == "unchanged":
         return f'<p class="muted"><strong>{r.esc(name)}:</strong> No change since {decision["since"]}.</p>'
     if mode == "full":
-        return _table_html(name, rows)
+        return _table_html(name, rows) + leaders
     top, rest = rows[:6], rows[6:]
     html = _table_html(f"{name}: top 6", top)
     yours = [x for x in rest if is_listed(x["id"])]
     if yours:
         line = ", ".join(f"{code(x['id'], x['abbr'])} {ordinal(x['rank'])} ({x['points']} pts)" for x in yours)
         html += f"<p>Your clubs outside the top 6: {r.esc(line)}.</p>"
-    return html
+    return html + leaders
 
 
-def tables_html(tables, state, edition_date, leagues, tuesday_only=()):
+def tables_html(tables, state, edition_date, leagues, tuesday_only=(), leaders=None):
     """tables: {league_id: rows or None if the source failed}. leagues: {league_id: display name}.
     Returns (html, new_state). State changes only for tables that were actually shown."""
     new_state, parts = dict(state), []
@@ -75,7 +72,7 @@ def tables_html(tables, state, edition_date, leagues, tuesday_only=()):
             parts.append(r.no_data(f"{name} table"))
             continue
         decision = decide(rows, state.get(league), edition_date, tuesday_only=league in tuesday_only)
-        parts.append(block(name, rows, decision))
+        parts.append(block(name, rows, decision, (leaders or {}).get(league, "")))
         if decision["mode"] in ("full", "changed"):
             new_state[league] = {"published": edition_date.isoformat(), "rows": signature(rows)}
     return "".join(parts), new_state

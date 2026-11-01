@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from kickoff import render, state, tables  # noqa: E402
+from kickoff import leaders, render, state, tables  # noqa: E402
 from kickoff.http import safe  # noqa: E402
 from kickoff.sources import espn  # noqa: E402
 
@@ -27,7 +27,11 @@ if "--reset" in sys.argv:
 leagues = {**espn.LEAGUES, espn.WSL: "WSL"}
 fetched = {lg: safe(f"{name} table", espn.get_table, lg) for lg, name in leagues.items()}
 saved = state.load("tables", directory=preview / "state")
-html, new_state = tables.tables_html(fetched, saved, day, leagues, tuesday_only=(espn.WSL,))
+cs = state.load("clean_sheets")  # the real running count (read only here)
+lead = {lg: safe(f"{name} leaders", leaders.league_block, lg, espn.season_year(day), fetched[lg], cs)
+        for lg, name in leagues.items() if fetched[lg] and lg in espn.LEAGUES}
+html, new_state = tables.tables_html(fetched, saved, day, leagues, tuesday_only=(espn.WSL,),
+                                     leaders={lg: h for lg, h in lead.items() if h})
 state.save("tables", new_state, preview / "state")
 
 for lg, name in leagues.items():

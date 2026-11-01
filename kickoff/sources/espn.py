@@ -1,10 +1,13 @@
 """ESPN's unofficial public API: football scores and tables. No key needed. Can change without notice."""
+import time
 from datetime import datetime, timedelta, timezone
 
 from kickoff.http import SourceError, get_json
 
 SCORES = "https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/scoreboard"
 TABLES = "https://site.api.espn.com/apis/v2/sports/soccer/{league}/standings"
+CORE = "https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/seasons/{year}"
+SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/summary"
 
 LEAGUES = {
     "eng.1": "Premier League", "esp.1": "La Liga", "fra.1": "Ligue 1",
@@ -78,10 +81,62 @@ def get_table(league):
         s = {x["name"]: x.get("value") for x in e["stats"]}
         rows.append({
             "rank": int(s.get("rank") or 0), "id": e["team"]["id"], "team": e["team"]["displayName"],
-            "abbr": e["team"].get("abbreviation", ""), "played": int(s.get("gamesPlayed") or 0),
+            "abbr": e["team"].get("abbreviation", ""), "short": e["team"].get("shortDisplayName") or e["team"]["displayName"], "played": int(s.get("gamesPlayed") or 0),
             "won": int(s.get("wins") or 0), "drawn": int(s.get("ties") or 0), "lost": int(s.get("losses") or 0),
             "gf": int(s.get("pointsFor") or 0), "ga": int(s.get("pointsAgainst") or 0),
             "gd": int(s.get("pointDifferential") or 0), "points": int(s.get("points") or 0),
             "zone": (e.get("note") or {}).get("description"),
         })
     return sorted(rows, key=lambda r: r["rank"])
+
+
+# ---- Season leaders and goalkeepers ---------------------------------------------------------
+
+def season_year(day):
+    """ESPN names a European season by the year it starts: 2026-27 is 2026."""
+    return day.year if day.month >= 7 else day.year - 1
+
+
+def _id_from_ref(ref):
+    return ref.split("?")[0].rstrip("/").split("/")[-1]
+
+
+def get_leaders(league, year, max_tied=10):
+    """The season's top scorer(s) and top assist-maker(s). Ties at the top are all returned (up to max_tied).
+    Each entry: {"athlete_id", "team_id", "value"}."""
+    data = get_json(CORE.format(league=league, year=year) + "/types/1/leaders")
+    cats = {c["name"]: c for c in data.get("categories", [])}
+    out = {}
+    for key, cat in (("goals", "goalsLeaders"), ("assists", "assistsLeaders")):
+        leaders = sorted(cats.get(cat, {}).get("leaders", []), key=lambda x: -x["value"])
+        if not leaders:
+            raise SourceError(f"no {key} leaders in response")
+        out[key] = [{"athlete_id": _id_from_ref(x["athlete"]["$ref"]), "team_id": _id_from_ref(x["team"]["$ref"]),
+                     "value": int(x["value"])} for x in leaders if x["value"] == leaders[0]["value"]][:max_tied]
+    return out
+
+
+def get_athlete_name(league, year, athlete_id):
+    data = get_json(CORE.format(league=league, year=year) + f"/athletes/{athlete_id}")
+    return data.get("displayName") or data.get("fullName") or "Unknown"
+
+
+def get_starting_keepers(league, event_id):
+    """{team_id: (athlete_id, name)} for the goalkeepers who started a match."""
+    data = get_json(SUMMARY.format(league=league), {"event": event_id})
+    out = {}
+    for side in data.get("rosters", []):
+        for p in side.get("roster", []):
+            if p.get("starter") and (p.get("position") or {}).get("abbreviation") == "G":
+                out[side["team"]["id"]] = (p["athlete"]["id"], p["athlete"]["displayName"])
+    return out
+
+
+def results_between(league, start, end, pause=0.1):
+    """Every finished match from start to end (UTC dates, inclusive), one day at a time."""
+    out, day = [], start
+    while day <= end:
+        out += [m for m in get_matches_on(league, day) if m["completed"]]
+        day += timedelta(days=1)
+        time.sleep(pause)
+    return out

@@ -60,8 +60,8 @@ check("WSL skipped on a Wednesday", tables.tables_html({"eng.w.1": PL}, {}, WED,
 check("WSL shown on a Tuesday", "<table" in tables.tables_html({"eng.w.1": PL}, {}, TUE, wsl, tuesday_only=("eng.w.1",))[0])
 
 # 7. Zone bars and legend
-check("zones: blue, lilac and rose bars with a legend",
-      all(k in html for k in ("z-blue", "z-lilac", "z-rose", "Relegation")))
+check("zones: blue, lilac and rose bars, and no legend",
+      all(k in html for k in ("z-blue", "z-lilac", "z-rose")) and 'class="legend"' not in html)
 check("zone_for maps the labels", [tables.zone_for(x) for x in
       ("Champions League qualifying", "Conference League qualifying", "Relegation playoff", "Relegation", "Relegated", None)]
       == ["blue", "lilac", "lilac", "rose", "rose", None])

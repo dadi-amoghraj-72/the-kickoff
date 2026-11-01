@@ -80,7 +80,8 @@ Football is the core of every edition: six leagues and 17 "listed clubs": Arsena
 - **Other leagues, listed clubs only:** a one-line note for each of Bayern Munich, Borussia Dortmund, PSG, Juventus, Napoli, Inter, AC Milan, Como, Barcelona, Real Madrid and Atlético Madrid when they played, plus the table. No notes on other clubs' games. **Exception:** a match between two of these clubs, which is usually a derby, gets a fuller note. The Süper Lig has no listed club, so it gets the table only.
 - **Cups and Europe:** the big six and the listed clubs get a line in every competition, including the Europa League, Conference League and domestic cups. Transfers: confirmed deals only.
 - **Sackings and appointments:** manager changes at clubs in the six leagues, head coach and coordinator changes in the NFL, and head coach changes in the NBA are reported in that sport's own section under "Sackings and Appointments". If it involves the big six, a listed club or an NFL head coach, it also gets a line in The Big Stuff.
-- **Tables:** full tables every Tuesday. Other days, only when a table has changed: top 6, plus one line showing where D's clubs outside the top 6 sit. If unchanged: "No change since Tuesday." Change is detected by comparing against the last published table, saved in the state files.
+- **Tables:** full tables every Tuesday. Other days, only when a table has changed: top 6, plus one line showing where D's clubs outside the top 6 sit. If unchanged: "No change since Tuesday." Change is detected by comparing against the last published table, saved in the state files. League tables have coloured zone bars and no legend.
+- **Under each league table (six leagues, not the WSL):** three lines: Top Scorer, Top Assists and Top Clean Sheets, shown whenever the table is shown. Format: surname only, then the club's three-letter code in brackets, then the number, for example "Haaland (MCI) 9". A tie reads "4 Tied: Gross (BHA), Evanilson (BOU), Rice (ARS)" and lists everyone. Scorers and assists come from ESPN's season leaders (official counts). Clean sheets are counted by us: each shutout goes to the team's starting goalkeeper, built from a season scan and topped up each run, checked against FPL's public data for the Premier League.
 - **Champions League:** results after each matchday, and the league-phase table shown as the top 8, the 24th-place cut line and where D's clubs sit.
 - **Injuries:** a key player averages 70+ league minutes for a top 6 side in any of the six leagues, or for any listed club. Report injuries expected to last two weeks or more, or that put a player in doubt for a big game that week, plus key players returning. The key-player list is rebuilt weekly from API-Football player minutes.
 - **Standouts:** hat-tricks, three or more goal contributions in one game, standout goalkeeping such as penalty saves, and milestones or records.
@@ -113,7 +114,7 @@ Each of these appears only when there's play, and each gets its own standouts.
 
 **F1**
 
-- Race, sprint and qualifying results each race weekend, with driver and constructor standings after each race.
+- Results tables appear only after Qualifying and after the Race, each race weekend, with driver and constructor standings after each race. Free practice is not covered. Sprint results stay as in the original plan.
 - **Standouts:** big recoveries through the field, first podiums or wins, and standout qualifying laps. Rookies feed Young Guns.
 
 **Tennis**
@@ -268,7 +269,7 @@ The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark
 
 - **Light mode:** switches automatically with the phone's setting. Pale grey-green background, deep green text, and the same accents darkened to meet 4.5:1 contrast. Values: background #E9EFEA, surface #DCE6DF, hairline #B7C6BB, text #13251E, muted #44574B, gold #7A5C14, blue #2F6280, lilac #5E4F8A, rose #9A4A43. Lowest contrast checked: 4.78:1.
 - **Rules:** no pure black or pure white, no strong red, no crests or logos.
-- **Layout:** one column, left-aligned, about 62 characters per line on wide screens and full width with comfortable margins on phones. Generous space between sections. Tables carry coloured zone bars and a legend.
+- **Layout:** one column, left-aligned, about 62 characters per line on wide screens and full width with comfortable margins on phones. Generous space between sections. League tables carry coloured zone bars and no legend. Nations League tables keep a legend, as their zones are less obvious.
 - **On today tags:** "While you're up" with a sun icon, "Overnight" with a moon icon.
 
 **Progress rail**
