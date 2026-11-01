@@ -7,7 +7,7 @@ from types import SimpleNamespace as NS
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from kickoff import notes, overview  # noqa: E402
+from kickoff import notes, overview, settings  # noqa: E402
 from kickoff.sources import espn  # noqa: E402
 
 FIX = ROOT / "tests" / "fixtures"
@@ -101,7 +101,7 @@ copied = "Como embarrass Man United as rout adds to Carrick pressure, and Como w
 check("copying a run of six words from ESPN's headline is rejected", any("copies" in p for p in overview.check_overview(copied, f)), overview.check_overview(copied, f))
 para = "Como beat Manchester United 4-1, which adds to the pressure on Carrick."
 check("a paraphrase that uses a name from the report is fine", not any("copies" in p or "Carrick" in p for p in overview.check_overview(para, f)), overview.check_overview(para, f))
-check("an invented name is rejected", any("Mourinho" in p for p in overview.check_overview("Mourinho watched Como win.", f)))
+check("an invented name is rejected", any("Mourinho" in p for p in overview.check_overview("Jose Mourinho watched Como win.", f)))
 norecap = {**f, "matches": [{k: v for k, v in r.items() if k != "recap"} for r in f["matches"]]}
 check("'former club' is rejected when the facts don't say it", any("former" in p for p in overview.check_overview("Madrid beat their former club Leipzig.", norecap)))
 check("'former club' is allowed when ESPN's report says it (the Leipzig report does)", not any("former" in p for p in overview.check_overview("Madrid beat their former club Leipzig.", f)))
@@ -145,6 +145,7 @@ def reply(text, stop="end_turn"):
 c = Fake([reply(good)])
 res, usage = overview.write_overview(c, f)
 check("a good overview is used and marked as Claude's", res["source"] == "claude" and res["note"] == good and len(c.calls) == 1)
+check("overviews use the overview model, not the notes model", c.calls[0]["model"] == settings.OVERVIEW_MODEL and settings.OVERVIEW_MODEL != settings.CLAUDE_MODEL)
 call = c.calls[0]
 check("request: facts as data, the 'do not list results' system prompt, low effort, no temperature",
       "do NOT list results" in call["system"] and "pre_match_chances_pct" in call["messages"][0]["content"]

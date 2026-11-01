@@ -46,6 +46,10 @@ MOVEMENT = re.compile(r"\b(stay(?:s|ed)?|remain(?:s|ed)?|climb(?:s|ed|ing)?|ris(
                       r"drop(?:s|ped)?|fall(?:s|en)?|fell|slip(?:s|ped)?|leapfrog\w*|overtak\w*|overtook|"
                       r"(?:up|down) to|(?:up|down) from|unchanged|still|again)\b", re.I)
 
+# A movement word only matters when the sentence is about the table or a position ("fell behind" is a match event).
+TABLE_TALK = re.compile(r"\b(table|position|positions|placed|ranked|ranking|top|bottom|points|first|second|third|fourth|fifth|"
+                        r"sixth|seventh|eighth|ninth|tenth|\d+(?:st|nd|rd|th))\b", re.I)
+
 # Hype the voice rules ban, and the word limit for each length instruction.
 HYPE = re.compile(r"thrash|hammer|demolish|humiliat|masterclass|clinical|thriller|stunning|sensational|annihilat", re.I)
 LIMITS = {desc: limit for desc, limit in TIERS.values()}
@@ -59,7 +63,8 @@ everyone someone nothing everything something only just even still also then now
 elsewhere otherwise instead however nevertheless together between among across against behind beyond within under over
 through throughout into onto out up down off about around along early late earlier later finally ultimately perhaps maybe
 indeed clearly simply more less much no not neither either whatever whoever what which who whose how why he she we you i
-his her our your half full goal goals win wins defeat result results victory draw draws""".split())
+his her our your half full goal goals win wins defeat result results victory draw draws given backed led beaten held hosts visitors
+away home big""".split())
 ORDINARY_ENDINGS = ("ing", "ed", "ly", "ness", "tion", "sion", "ment", "ous", "ful", "ity", "ive", "able")
 
 # Well-known club nicknames: not invented names, so they are allowed even when the facts say "Tottenham Hotspur".
@@ -173,8 +178,11 @@ def check_note(note, f):
     for sentence in re.split(r"(?<=[.!?])\s+", note):
         words = re.findall(r"[\w'’-]+", sentence)
         first = re.sub(r"['’]s$", "", words[0]) if words else ""
-        if (first.isalpha() and len(first) > 2 and first.lower() not in vocab and first.lower() not in STARTERS
-                and first.lower() not in ALLOWED_WORDS and not first.lower().endswith(ORDINARY_ENDINGS)):
+        # A sentence's first word is capitalised anyway, so it is only checked when it looks like the start of a
+        # name: followed by another capitalised word ("Jose Mourinho ..."). A lone invented name here can slip through.
+        if (len(words) > 1 and words[1][0].isupper() and first.isalpha() and len(first) > 2 and first.lower() not in vocab
+                and first.lower() not in STARTERS and first.lower() not in ALLOWED_WORDS
+                and not first.lower().endswith(ORDINARY_ENDINGS)):
             problems.append(f"name {first} is not in the facts")
         for w in words[1:]:  # later capitalised words are names; the first word was handled above
             base = re.sub(r"['’]s$", "", w)  # "Villa's" is checked as "Villa"
@@ -193,9 +201,11 @@ def check_note(note, f):
         if not all(part in vocab for part in re.split(r"[\s-]+", word) if part != "ex"):
             problems.append(f'"{m.group(0)}" is a claim about history or form that is not in the facts')
     moved = any("position_before" in t for t in (f.get("table") or {}).values())
-    for m in MOVEMENT.finditer(note):
-        if not moved:
-            problems.append(f'"{m.group(0)}" implies a table move, but no previous position was given')
+    for sentence in re.split(r"(?<=[.!?])\s+", note):
+        if TABLE_TALK.search(sentence):
+            for m in MOVEMENT.finditer(sentence):
+                if not moved:
+                    problems.append(f'"{m.group(0)}" implies a table move, but no previous position was given')
     return sorted(set(problems))
 
 
@@ -208,11 +218,11 @@ def cost(usage, model=None):
     return (usage["input"] * price[0] + usage["output"] * price[1]) / 1_000_000
 
 
-def call_json(client, system, schema, content):
+def call_json(client, system, schema, content, model=None):
     """One Claude call that must return JSON matching the schema. Returns (parsed object or None, usage).
     Any failure (API error, refusal, cut-off, unreadable reply) returns None and a warning, never an exception."""
     import anthropic
-    body = {"model": settings.CLAUDE_MODEL, "max_tokens": 16000, "system": system,
+    body = {"model": model or settings.CLAUDE_MODEL, "max_tokens": 16000, "system": system,
             "messages": [{"role": "user", "content": content}],
             "output_config": {"effort": settings.CLAUDE_EFFORT, "format": {"type": "json_schema", "schema": schema}}}
     try:

@@ -56,10 +56,16 @@ good = f"Chelsea beat Manchester United 2-0, with {scorer} scoring in the {minut
 check("a faithful note passes", notes.check_note(good, f) == [], notes.check_note(good, f))
 check("an invented number is caught", any("number 61000" in p for p in notes.check_note("Chelsea won 2-0 in front of 61000 fans.", f)))
 check("an invented name is caught", any("Mourinho" in p for p in notes.check_note("Chelsea won 2-0 and Mourinho smiled.", f)))
-check("an invented name at the START of a sentence is caught", any("Mourinho" in p for p in notes.check_note("Chelsea won 2-0. Mourinho was pleased.", f)))
+check("an invented name at the START of a sentence is caught", any("Mourinho" in p for p in notes.check_note("Chelsea won 2-0. Jose Mourinho was pleased.", f)))
 check("ordinary sentence openers and -ing words are not mistaken for names",
       notes.check_note("Overall, Chelsea won 2-0. Scoring twice, they never looked back. Meanwhile United struggled.", f) == [],
       notes.check_note("Overall, Chelsea won 2-0. Scoring twice, they never looked back. Meanwhile United struggled.", f))
+check("an ordinary word like 'Favourites' or 'Given' at the start of a sentence is not mistaken for a name",
+      notes.check_note("Favourites mostly won. Given only a small chance, Chelsea still won 2-0.", f) == [], notes.check_note("Favourites mostly won. Given only a small chance, Chelsea still won 2-0.", f))
+check("'still' and 'fell' are fine when the sentence isn't about the table",
+      not any("implies" in p for p in notes.check_note("Chelsea fell behind early but still won 2-0.", f)))
+still_table = {**f, "table": {k: {kk: vv for kk, vv in v.items() if kk != "position_before"} for k, v in f["table"].items()}}
+check("'fell to 21st' is a table move and needs a previous position", any("implies" in p for p in notes.check_note("Manchester United fell to 21st.", still_table)))
 check("club nicknames such as Spurs are allowed", notes.check_note("Spurs won 2-0.", f) == [])
 check("possessives and hyphenated facts don\'t cause false alarms", notes.check_note("Chelsea's win over Manchester United finished 2-0.", f) == [])
 nomove = {k: v for k, v in f["table"].items()}

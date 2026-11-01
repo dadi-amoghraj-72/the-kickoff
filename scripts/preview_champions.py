@@ -18,8 +18,8 @@ from kickoff.sources import espn  # noqa: E402
 
 args = sys.argv[1:]
 if "--model" in args:
-    settings.CLAUDE_MODEL = args[args.index("--model") + 1]  # for this run only
-    args = [a for a in args if a not in ("--model", settings.CLAUDE_MODEL)]
+    settings.OVERVIEW_MODEL = args[args.index("--model") + 1]  # for this run only
+    args = [a for a in args if a not in ("--model", settings.OVERVIEW_MODEL)]
 args = [a for a in args if not a.startswith("--")]
 day = date.fromisoformat(args[0]) if args else datetime.now(ZoneInfo("Asia/Singapore")).date()
 facts_only = "--facts-only" in sys.argv
@@ -43,7 +43,7 @@ html = champions.section_html(matches, rows, result["note"])
 body = f'<main>{render._masthead(render.nice_date(day.isoformat()))}<section><h2>Football</h2>{html}</section></main>'
 (ROOT / "preview").mkdir(exist_ok=True)
 (ROOT / "preview" / "champions.html").write_text(render._page("Champions League preview", "", body))
-print(f"Edition {day}: {len(matches)} matches | expectations: {facts['expectations']}" + ("" if facts_only else f" | model {settings.CLAUDE_MODEL}"))
+print(f"Edition {day}: {len(matches)} matches | expectations: {facts['expectations']}" + ("" if facts_only else f" | model {settings.OVERVIEW_MODEL}"))
 if "tally" in facts:
     print("Tally:", facts["tally"])
 print("Game of the night:", facts.get("game_of_the_night"))
@@ -51,9 +51,9 @@ print(f"\n[{result['source']}] {result['note']}")
 for r in result.get("rejected", []):
     print(f"\n   REJECTED attempt {r['attempt']}: {r['note']!r}\n      because: {'; '.join(r['problems'])}")
 if not facts_only:
-    print(f"\nTokens: {total['input']} in, {total['output']} out | estimated cost: ${notes.cost(total):.3f}")
+    print(f"\nTokens: {total['input']} in, {total['output']} out | estimated cost: ${notes.cost(total, settings.OVERVIEW_MODEL):.3f}")
 detail = [f"[{result['source']}] {result['note']}"]
 for r in result.get("rejected", []):
     detail.append(f"\nREJECTED attempt {r['attempt']}: {r['note']!r}\n   because: {'; '.join(r['problems'])}")
-(ROOT / "preview" / f"overview-{'plain' if facts_only else settings.CLAUDE_MODEL}.txt").write_text("\n".join(detail) + "\n")
+(ROOT / "preview" / f"overview-{'plain' if facts_only else settings.OVERVIEW_MODEL}.txt").write_text("\n".join(detail) + "\n")
 print("Wrote preview/champions.html")

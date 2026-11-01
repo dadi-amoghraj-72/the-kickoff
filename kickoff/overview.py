@@ -6,7 +6,7 @@ ESPN's own match-report headlines for context, and is not allowed to claim anyth
 """
 import re
 
-from kickoff import notes
+from kickoff import notes, settings
 from kickoff.http import safe
 from kickoff.sources import espn
 
@@ -26,6 +26,7 @@ Hard rules:
 - You may quote pre-match chances only as the whole percentages given.
 - For context about managers, pressure or reputation, use ONLY what appears in a match's "recap". Paraphrase it:
   never copy a run of more than five words from a recap.
+- Do not mention cities, stadiums or countries unless they appear in the facts (no "in Lisbon", no "at the Allianz").
 - Say nothing about anyone's history, form or reputation unless the facts state it: no "former club", no "perfect start"
   (use it only when a team's "perfect_start" is true), no records or streaks. Describe goals only from each match's "goals"
   list; the "winning_goal" is the goal that decided the match, and a late goal that only reduced a deficit decided nothing.
@@ -273,7 +274,8 @@ def write_overview(client, f):
     for attempt in (1, 2, 3):
         extra = "" if attempt == 1 else ("Your earlier overview broke these rules: " + "; ".join(problems) +
                                          ". Rewrite it so that it fixes them, using only the facts.\n")
-        obj, usage = notes.call_json(client, SYSTEM, SCHEMA, extra + "Facts:\n" + json.dumps(sent, ensure_ascii=False, indent=1))
+        obj, usage = notes.call_json(client, SYSTEM, SCHEMA, extra + "Facts:\n" + json.dumps(sent, ensure_ascii=False, indent=1),
+                                     model=settings.OVERVIEW_MODEL)
         total = {k: total[k] + usage[k] for k in total}
         note = (obj or {}).get("overview", "").strip() if isinstance(obj, dict) else ""
         problems = check_overview(note, f) if note else ["no overview returned"]
