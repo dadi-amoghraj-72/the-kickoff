@@ -66,5 +66,40 @@ def check_telegram():
     print(f"PASS  Found your chat ID ({chat_id}) and saved it to .env")
 
 
+def check_football_data():
+    key = os.environ.get("FOOTBALL_DATA_API_KEY", "")
+    if not key:
+        print("FAIL  FOOTBALL_DATA_API_KEY is empty in .env")
+        return
+    try:
+        data = get_json("https://api.football-data.org/v4/competitions", {"X-Auth-Token": key})
+        print(f"PASS  football-data.org key works ({data.get('count', '?')} competitions on your plan)")
+    except urllib.error.HTTPError as e:
+        print(f"FAIL  football-data.org key rejected (HTTP {e.code})")
+    except Exception as e:
+        print(f"FAIL  Could not reach football-data.org: {type(e).__name__}")
+
+
+def check_api_football():
+    key = os.environ.get("API_FOOTBALL_KEY", "")
+    if not key:
+        print("FAIL  API_FOOTBALL_KEY is empty in .env")
+        return
+    try:
+        data = get_json("https://v3.football.api-sports.io/status", {"x-apisports-key": key})
+        if data.get("errors"):
+            print("FAIL  API-Football key rejected")
+            return
+        info = data["response"]
+        print(f"PASS  API-Football key works (plan: {info['subscription']['plan']}, "
+              f"{info['requests']['current']} of {info['requests']['limit_day']} requests used today)")
+    except urllib.error.HTTPError as e:
+        print(f"FAIL  API-Football key rejected (HTTP {e.code})")
+    except Exception as e:
+        print(f"FAIL  Could not reach API-Football: {type(e).__name__}")
+
+
 check_anthropic()
 check_telegram()
+check_football_data()
+check_api_football()
