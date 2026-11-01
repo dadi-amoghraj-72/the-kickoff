@@ -33,18 +33,16 @@ def esc(text):
 
 # ---- Building blocks used inside sections -------------------------------------------------
 
-def table(caption, columns, rows, zones=None, legend=None):
+def table(caption, columns, rows, zones=None, legend=None, row_classes=None):
     """columns: [(label, is_number)]. rows: list of lists. zones: per-row 'blue'/'lilac'/'rose'/None.
     legend: [(zone, text)] shown under the table."""
     head = "".join(f'<th class="{"n" if num else ""}">{esc(label)}</th>' for label, num in columns)
     body = []
     for i, row in enumerate(rows):
-        if row is None:
-            body.append(f'<tr class="gap"><td colspan="{len(columns)}">···</td></tr>')
-            continue
         zone = zones[i] if zones and zones[i] else None
+        classes = ([f"z-{zone}"] if zone else []) + ((row_classes[i] or "").split() if row_classes else [])
         cells = "".join(f'<td class="{"n" if columns[j][1] else ""}">{esc(v)}</td>' for j, v in enumerate(row))
-        body.append(f'<tr class="z-{zone}">{cells}</tr>' if zone else f"<tr>{cells}</tr>")
+        body.append(f'<tr class="{" ".join(classes)}">{cells}</tr>' if classes else f"<tr>{cells}</tr>")
     out = (f'<div class="table-wrap"><table><caption>{esc(caption)}</caption>'
            f"<thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table></div>")
     if legend:
@@ -74,6 +72,14 @@ def potd(title, text):
 def no_data(sport=None):
     who = f"{sport}: " if sport else ""
     return f'<p><span class="nodata">{esc(who)}No data this morning</span></p>'
+
+
+def bold_names(text, names):
+    """Escape a note for the page and put the given team names in bold, wherever they appear."""
+    out = esc(text)
+    for name in sorted({n for n in names if n}, key=len, reverse=True):
+        out = re.sub(rf"(?<![\w>]){re.escape(esc(name))}(?![\w<])", lambda m: f"<strong>{m.group(0)}</strong>", out)
+    return out
 
 
 def link(url, text):

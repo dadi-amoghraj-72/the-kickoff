@@ -57,27 +57,49 @@ check("Arsenal's match is left to the Arsenal section", all("Arsenal" not in (m[
 check("every note is about a listed club", all(any(champions.is_listed(i) for i in (m["home"]["id"], m["away"]["id"])) for m, _ in picked))
 check("facts name the competition and carry both teams' positions", all(f["competition"] == champions.COMPETITION and "table" in f for _, f in picked))
 
-# ---- Table ----
+# ---- Scorecard for Arsenal ----
+bay = next(m for m in wed if m["home"]["name"] == "Bayern Munich")
+check("scorers: each side lists its own goals, with penalties tagged",
+      (champions.scorers(bay, "home"), champions.scorers(bay, "away")) == ("Davies 35', Kane 61' (pen)", "Eze 25', Rice 82'"),
+      (champions.scorers(bay, "home"), champions.scorers(bay, "away")))
+og = {"goals": [{"side": "home", "player": "Nikola Milenkovic", "minute": "30'", "own_goal": True, "penalty": False}]}
+check("an own goal is listed under the team it counted for, tagged (og)", champions.scorers(og, "home") == "Milenkovic 30' (og)" and champions.scorers(og, "away") == "")
+check("the scoreboard gives only Arsenal's match a scorecard", html.count('class="gh"') + html.count('class="ga"') == 2, (html.count('class="gh"'), html.count('class="ga"')))
+check("Arsenal's scorecard shows both teams' scorers under their own side",
+      "Davies 35&#x27;, Kane 61&#x27; (pen)" in html.split('class="ga"')[0] and "Eze 25&#x27;, Rice 82&#x27;" in html and html.index("Davies") < html.index("Eze"))
+check("Arsenal's name is marked in the scoreboard", '<span class="mine">Arsenal</span>' in html and html.count('class="mine"') == 1)
+check("a goalless scorecard side shows nothing", "<span class=\"ga\">" not in champions.scores_html([{**bay, "goals": [g for g in bay["goals"] if g["side"] == "home"]}]))
+
+# ---- Table: the whole thing ----
 t = champions.table_html(rows)
-check("table: header + 8 + gap + cut line = 11 rows", t.count("<tr") == 11, t.count("<tr"))
-check("table has a gap row and caption with the matchday", 'class="gap"' in t and "League Phase After Matchday 3" in t)
-check("zone bars: top 8 blue, 24th lilac", t.count("z-blue") == 8 and t.count("z-lilac") == 1, (t.count("z-blue"), t.count("z-lilac")))
-check("24th place is named in full as the cut line", rows[23]["team"] in t and f"{rows[23]['points']} points" in t and "cut line" in t)
-shown = {x["id"] for x in rows[:8]} | {rows[23]["id"]}
-elsewhere = [x for x in rows if champions.is_listed(x["id"]) and x["id"] not in shown]
-check("'your clubs' lists only listed clubs the table doesn't already show",
-      all(champions.code(x["id"], x["abbr"]) in t for x in elsewhere) and ("Your clubs elsewhere" in t) == bool(elsewhere), [x["team"] for x in elsewhere])
+check("the full table: header + 36 rows", t.count("<tr") == 37, t.count("<tr"))
+check("zone bars: 8 blue, 16 lilac, 12 rose", (t.count("z-blue"), t.count("z-lilac"), t.count("z-rose")) == (8, 16, 12), (t.count("z-blue"), t.count("z-lilac"), t.count("z-rose")))
+check("a heavier line marks the cuts after 8th and 24th only", t.count("cut") == 2 and rows[7]["team"] in t.split("cut")[0][-400:] + t.split("cut")[1][:400])
+listed = [x for x in rows if champions.is_listed(x["id"])]
+check("listed clubs are bold-marked, nobody else", t.count("mine") == len(listed) and len(listed) >= 5, (t.count("mine"), len(listed)))
+check("caption has the matchday", "League Phase After Matchday 3" in t)
+check("no legend and none of the old text lines", all(x not in t for x in ("legend", "Your clubs", "cut line", "play off")))
 check("a table that is too short is left out", champions.table_html(rows[:10]) == "")
 check("zones", [champions.zone(n) for n in (1, 8, 9, 24, 25, 36)] == ["blue", "blue", "lilac", "lilac", "rose", "rose"])
+
+# ---- Bold team names ----
+check("bold_names bolds both clubs, wherever they appear",
+      r.bold_names("Como beat Manchester United. Como led.", ("Como", "Manchester United")) ==
+      "<strong>Como</strong> beat <strong>Manchester United</strong>. <strong>Como</strong> led.")
+check("bold_names copes with possessives and ampersands",
+      r.bold_names("Brighton & Hove Albion's win.", ("Brighton & Hove Albion",)) == "<strong>Brighton &amp; Hove Albion</strong>&#x27;s win.")
+check("bold_names never double-bolds overlapping names", r.bold_names("Manchester United won.", ("United", "Manchester United")).count("<strong>") == 1)
+check("bold_names escapes everything else", r.bold_names("<b>x</b> Como", ("Como",)) == "&lt;b&gt;x&lt;/b&gt; <strong>Como</strong>")
+check("render.table adds row classes after the zone", 'class="z-blue cut mine"' in r.table("t", [("a", False)], [["x"]], zones=["blue"], row_classes=["cut mine"]))
 
 # ---- The whole block ----
 written = {m["id"]: {"note": "Como beat Manchester United 4-1."} for m, _ in picked[:1]}
 full = champions.section_html(wed, rows, written)
-check("block: heading, scoreboard, the note, then the table", full.index("Champions League") < full.index('class="scores"') < full.index("Como beat") < full.index("<table"))
+check("block: heading, scoreboard, the note with bold names, then the table",
+      full.index("Champions League") < full.index('class="scores"') < full.index("<strong>Como</strong> beat <strong>Manchester United</strong>") < full.index("<table"))
 check("no matches, no block", champions.section_html([], rows, {}) == "")
 ko = champions.section_html([{**m, "stage": "round-of-16"} for m in wed], rows, {})
 check("knockout matchday: scores but no league-phase table", 'class="scores"' in ko and "<table" not in ko)
-check("render.table draws a gap row for None", '<tr class="gap">' in r.table("t", [("a", False)], [["x"], None, ["y"]]))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

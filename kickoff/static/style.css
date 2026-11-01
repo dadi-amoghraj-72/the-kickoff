@@ -128,13 +128,18 @@ tr.z-rose td:first-child { box-shadow: inset 4px 0 0 var(--rose); }
 .leaders .who { min-width: 0; }
 .leaders .p { white-space: nowrap; }
 
-.gap td { padding: 0 10px; text-align: center; color: var(--muted); letter-spacing: 0.3em; line-height: 1; }
+tr.cut td { border-bottom: 2px solid var(--muted); }
+tr.mine td:nth-child(2) { font-weight: 700; }
 
 /* Scoreboard: home team right-aligned, score in the middle, away team left-aligned, so scores line up */
 .scores { list-style: none; margin: 8px 0 14px; padding: 0; font-size: 16px; }
 .scores li { display: grid; grid-template-columns: 1fr 3.6em 1fr; column-gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--hairline); }
 .scores .h { text-align: right; }
 .scores .s { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--gold); }
+.scores .gh, .scores .ga { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.scores .gh { grid-column: 1; text-align: right; }
+.scores .ga { grid-column: 3; }
+.scores .mine { font-weight: 700; }
 
 .nodata { display: inline-block; padding: 4px 12px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; color: var(--muted); font-size: 16px; }
 
