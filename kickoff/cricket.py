@@ -95,7 +95,43 @@ def title(m):
     return teams, ", ".join(parts[1:])
 
 
-def result_html(m):
+def short_name(name):
+    """'Ishan Kishan' -> 'I Kishan'; one-word names stay as they are."""
+    from kickoff.leaders import surname
+    parts = name.split()
+    return name if len(parts) < 2 else f"{parts[0][0]} {surname(name)}"
+
+
+def summary(card, match, top_bat=3, top_bowl=3):
+    """A compact scorecard per innings: the best batters, and the wicket-takers from the other side.
+    [{"team", "batting": [(name, runs, balls, not_out)], "bowling_team", "bowling": [(name, wickets, runs)]}]"""
+    teams = match.get("teams") or []
+    out = []
+    for inn in card.get("scorecard") or []:
+        team = team_of(inn.get("inning", ""), teams)
+        other = next((t for t in teams if t != team), "")
+        bats = sorted(inn.get("batting") or [], key=lambda b: (-(b.get("r") or 0), b.get("b") or 0))[:top_bat]
+        bowls = sorted((b for b in inn.get("bowling") or [] if (b.get("w") or 0) >= 1), key=lambda b: (-(b.get("w") or 0), b.get("r") or 0))[:top_bowl]
+        out.append({"team": team, "bowling_team": other,
+                    "batting": [(b["batsman"]["name"], b.get("r") or 0, b.get("b") or 0, (b.get("dismissal-text") or "").lower() == "not out") for b in bats],
+                    "bowling": [(b["bowler"]["name"], b.get("w") or 0, b.get("r") or 0) for b in bowls]})
+    return out
+
+
+def scorecard_html(summ):
+    """Muted scorecard lines under a result: per innings, the top batters, then the bowlers who took wickets."""
+    out = ""
+    for inn in summ or []:
+        bat = ", ".join(f"{r.esc(short_name(n))} {runs}{'*' if no else ''} ({b})" for n, runs, b, no in inn["batting"])
+        bowl = ", ".join(f"{r.esc(short_name(n))} {w}-{rr}" for n, w, rr in inn["bowling"])
+        if bat:
+            out += f'<span class="cd"><strong>{r.esc(inn["team"])}</strong> batting: {bat}</span>'
+        if bowl:
+            out += f'<span class="cd"><strong>{r.esc(inn["bowling_team"])}</strong> bowling: {bowl}</span>'
+    return out
+
+
+def result_html(m, summ=None):
     teams, rest = title(m)
     names = r.esc(teams)
     for t in m.get("teams") or []:
@@ -104,10 +140,10 @@ def result_html(m):
     scores = " · ".join(r.esc(innings_line(s, m.get("teams") or [])) for s in m.get("score") or [])
     live = "" if m.get("matchEnded") else '<span class="tag">Live</span> '
     return (f'<li><span class="cm">{names}</span><span class="cs">{scores}</span>'
-            f'<span class="cr">{live}{r.esc(m.get("status") or "")}</span><span class="ct">{r.esc(rest)}</span></li>')
+            f'<span class="cr">{live}{r.esc(m.get("status") or "")}</span>{scorecard_html(summ)}<span class="ct">{r.esc(rest)}</span></li>')
 
 
-def results_html(picked):
+def results_html(picked, summaries=None):
     """Matches grouped under International, Women's international, and each league, in priority order. '' if none."""
     groups, order = {}, []
     for m in picked:
@@ -118,7 +154,7 @@ def results_html(picked):
         groups[label].append(m)
     out = ""
     for label in order:
-        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m) for m in groups[label])}</ul>"
+        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m, (summaries or {}).get(m['id'])) for m in groups[label])}</ul>"
     return out
 
 
@@ -196,7 +232,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable):
     matches, used = get_matches()
     seen = set(st.get("seen", []))
     picked = pick(matches, now, window_start, seen, st.get("status", {}))
-    found, checked, skipped = [], 0, 0
+    found, checked, skipped, summaries = [], 0, 0, {}
     for m in picked:  # most important first
         if affordable(used) < 1:  # not even one more scorecard fits in what is left of today's calls
             skipped += 1
@@ -208,8 +244,9 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable):
             continue
         checked += 1
         found += standouts(card, m)
+        summaries[m["id"]] = summary(card, m)
     top = rank(found)
-    html = results_html(picked) + standouts_html(top)
+    html = results_html(picked, summaries) + standouts_html(top)
     if html and skipped:
         html += (f'<p class="muted">Standouts were checked in {checked} of {len(picked)} matches: the free cricket data allows only '
                  f"about eight scorecards a day.</p>")

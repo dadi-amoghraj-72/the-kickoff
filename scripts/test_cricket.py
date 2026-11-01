@@ -188,5 +188,27 @@ check("no matches in the window means no cricket block", block(17, matches=[])["
 check("a live Test's status is remembered so an unchanged day is skipped", block(17, matches=M + [live])["state"]["status"].get("t1") == live["status"]
       and block(17, st={"status": {"t1": live["status"]}}, matches=[live])["html"] == "")
 
+# ---- The scorecard shown under a result ----
+sm = ck.summary(CARD, CARD)
+ind, nz_inn = sm[0], sm[1]
+check("India's top three batters, best first: Kishan 61 (32), Iyer 50 (23), Dhir 33 (23)", [(n, r, b) for n, r, b, _ in ind["batting"]] == [("Ishan Kishan", 61, 32), ("Shreyas Iyer", 50, 23), ("Naman Dhir", 33, 23)], ind["batting"])
+check("New Zealand's bowlers against India: Milne 4-19, then Smith 2-28 and Tickner 2-38 (fewer runs first on equal wickets)", ind["bowling"] == [("Adam Milne", 4, 19), ("Nathan Smith", 2, 28), ("Blair Tickner", 2, 38)], ind["bowling"])
+check("the bowling side is the other team", (ind["team"], ind["bowling_team"], nz_inn["team"], nz_inn["bowling_team"]) == ("India", "New Zealand", "New Zealand", "India"))
+check("New Zealand's batters: Seifert 93 (50), Phillips 65 not out (38), Mitchell 29 (16)", nz_inn["batting"] == [("Tim Seifert", 93, 50, False), ("Glenn Phillips", 65, 38, True), ("Daryl Mitchell", 29, 16, False)], nz_inn["batting"])
+check("only bowlers who took a wicket are listed", all(w >= 1 for _, w, _ in ind["bowling"] + nz_inn["bowling"]))
+check("short names: initial and surname, one-word names unchanged, particles kept", [ck.short_name(n) for n in ("Ishan Kishan", "Rashid", "Marc-André ter Stegen", "Nitish Kumar Reddy")] == ["I Kishan", "Rashid", "M ter Stegen", "N Reddy"], [ck.short_name(n) for n in ("Ishan Kishan", "Rashid", "Marc-André ter Stegen", "Nitish Kumar Reddy")])
+sh = ck.scorecard_html(sm)
+check("the scorecard reads: team batting, then the other team bowling, for each innings (four lines)",
+      sh.count('class="cd"') == 4 and "<strong>India</strong> batting: I Kishan 61 (32), S Iyer 50 (23), N Dhir 33 (23)" in sh
+      and "<strong>New Zealand</strong> bowling: A Milne 4-19, N Smith 2-28, B Tickner 2-38" in sh and "G Phillips 65* (38)" in sh, sh)
+check("a result with a scorecard shows it between the result and the series line", ck.result_html(nz, sm).index("New Zealand won by 7 wkts") < ck.result_html(nz, sm).index("batting:") < ck.result_html(nz, sm).index("5th T20I, India tour"))
+check("a result without a scorecard shows none (no empty lines)", 'class="cd"' not in ck.result_html(nz))
+check("an innings with no batters or no wicket-takers adds no empty line", ck.scorecard_html([{"team": "A", "bowling_team": "B", "batting": [], "bowling": []}]) == "")
+check("names in the scorecard are escaped", "&lt;" in ck.scorecard_html([{"team": "A", "bowling_team": "B", "batting": [("<b> Name", 1, 1, False)], "bowling": []}]))
+bb = block(17)
+check("in the whole block, every match with a scorecard shows its batting and bowling lines", bb["html"].count('class="cd"') == 5 * 4, bb["html"].count('class="cd"'))
+tt = block(80)
+check("when only one scorecard fits, only that match has the scorecard lines; the other four show just their results", tt["html"].count('class="cd"') == 4, tt["html"].count('class="cd"'))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

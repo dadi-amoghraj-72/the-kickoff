@@ -184,3 +184,5 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket .cs { font-variant-numeric: tabular-nums; }
 .cricket .cr { color: var(--gold); font-weight: 600; font-size: 15px; }
 .cricket .ct { color: var(--muted); font-size: 14px; }
+.cricket .cd { color: var(--muted); font-size: 14px; line-height: 1.5; }
+.cricket .cd strong { color: var(--chalk); font-weight: 600; }
