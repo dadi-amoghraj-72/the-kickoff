@@ -75,5 +75,118 @@ check("text from the data is escaped", "&lt;" in ck.result_html({**nz, "status":
 check("with 17 calls used, 7 scorecards fit (100 minus a 10 reserve, minus 17, over 10)", src.scorecards_affordable(17) == 7)
 check("near the limit none fit, and an unknown count assumes none used", src.scorecards_affordable(95) == 0 and src.scorecards_affordable(None) == 9)
 
+# ---- The data's messy innings labels ----
+tn = ["Namibia", "Ireland"]
+check("an upper-case-less label is matched to the real team name", ck.team_of("ireland Inning 1", tn) == "Ireland")
+check("a joined label ('Namibia,Ireland Inning 1') gives the first team", ck.team_of("Namibia,Ireland Inning 1", tn) == "Namibia")
+check("a label for a team not in the list is returned cleaned, not lost", ck.team_of("Mystery XI Inning 2", tn) == "Mystery XI")
+check("innings lines use the proper team name", ck.innings_line({"r": 129, "w": 10, "o": 33.1, "inning": "ireland Inning 1"}, tn) == "Ireland 129 (33.1)"
+      and ck.innings_line({"r": 131, "w": 5, "o": 21.2, "inning": "Namibia,Ireland Inning 1"}, tn) == "Namibia 131/5 (21.2)")
+nam = by("Namibia vs Ireland, 5th ODI")
+check("the real Namibia v Ireland result now reads cleanly", "Ireland 129 (33.1) · Namibia 131/5 (21.2)" in ck.result_html(nam), ck.result_html(nam))
+wb = by("Sydney Thunder Women vs Brisbane Heat Women")
+check("and so does the real WBBL result", "Brisbane Heat Women 178/5 (20) · Sydney Thunder Women 180/4 (16.4)" in ck.result_html(wb), ck.result_html(wb))
+def bat(name, r, b, out="b X"):
+    return {"batsman": {"name": name}, "r": r, "b": b, "4s": 1, "6s": 1, "sr": 100, "dismissal-text": out}
+
+
+def bowl(name, w, r=30, o=4):
+    return {"bowler": {"name": name}, "o": o, "m": 0, "r": r, "w": w}
+
+
+messy = {"matchType": "odi", "teams": ["Namibia", "Ireland"], "name": "Namibia vs Ireland, 5th ODI, tour", "status": "x",
+         "scorecard": [{"inning": "Namibia,Ireland Inning 1", "batting": [bat("N Batter", 104, 90)], "bowling": [bowl("I Bowler", 5)]}]}
+so2 = ck.standouts(messy, messy)
+check("with a garbled label the bowler is still credited to the right side (Ireland bowled to Namibia's batters)",
+      {(o["name"], o["team"], o["against"]) for o in so2} == {("N Batter", "Namibia", "Ireland"), ("I Bowler", "Ireland", "Namibia")}, so2)
+
+# ---- Standouts from a real scorecard ----
+CARD = json.loads((ROOT / "tests" / "fixtures" / "cricket_scorecard_nz_ind.json").read_text())
+so = ck.standouts(CARD, CARD)
+check("the real NZ v India scorecard has exactly two standouts: Iyer's fast fifty and Milne's T20 four-for", sorted((o["name"], o["kind"]) for o in so) ==
+      [("Adam Milne", "four-for"), ("Shreyas Iyer", "fast fifty")], [(o["name"], o["kind"]) for o in so])
+iyer = next(o for o in so if o["name"] == "Shreyas Iyer")
+milne = next(o for o in so if o["name"] == "Adam Milne")
+check("Iyer: 50 off 23 balls for India, against New Zealand", (iyer["runs"], iyer["balls"], iyer["team"], iyer["against"]) == (50, 23, "India", "New Zealand"), iyer)
+check("Milne: 4 for 19 for New Zealand (the bowling side is the other team), against India", (milne["wickets"], milne["runs_conceded"], milne["team"], milne["against"]) == (4, 19, "New Zealand", "India"), milne)
+check("Seifert's 93 off 50, Kishan's 61 off 32 and Phillips' 65 off 38 are not standouts", not any(o["name"] in ("Tim Seifert", "Ishan Kishan", "Glenn Phillips") for o in so))
+
+# ---- The thresholds, exactly ----
+def bat(name, r, b, out="b X"):
+    return {"batsman": {"name": name}, "r": r, "b": b, "4s": 1, "6s": 1, "sr": 100, "dismissal-text": out}
+
+
+def bowl(name, w, r=30, o=4):
+    return {"bowler": {"name": name}, "o": o, "m": 0, "r": r, "w": w}
+
+
+def card_of(batting=(), bowling=(), fmt="t20"):
+    c = {"matchType": fmt, "name": "A vs B, 1st T20I, Series 2026", "status": "A won", "teams": ["A", "B"],
+         "scorecard": [{"inning": "A Inning 1", "batting": list(batting), "bowling": list(bowling)}]}
+    return c, c
+
+
+kinds = lambda batting=(), bowling=(), fmt="t20": [(o["name"], o["kind"]) for o in ck.standouts(*card_of(batting, bowling, fmt))]  # noqa: E731
+check("100 is a century, 99 is not", kinds([bat("P", 100, 60)]) == [("P", "century")] and kinds([bat("P", 99, 60)]) == [])
+check("a century that is also fast is a century, not a fast fifty", kinds([bat("P", 104, 22)]) == [("P", "century")])
+check("50 off 25 balls is a fast fifty, 50 off 26 is not, 49 off 20 is not", kinds([bat("P", 50, 25)]) == [("P", "fast fifty")] and kinds([bat("P", 50, 26)]) == [] and kinds([bat("P", 49, 20)]) == [])
+check("a missing ball count (0) never counts as a fast fifty", kinds([bat("P", 60, 0)]) == [])
+check("five wickets is a five-wicket haul in any format; four is not in an ODI", kinds(bowling=[bowl("Q", 5)], fmt="odi") == [("Q", "five-for")] and kinds(bowling=[bowl("Q", 4)], fmt="odi") == [])
+check("four wickets is a standout in a T20 only", kinds(bowling=[bowl("Q", 4)], fmt="t20") == [("Q", "four-for")] and kinds(bowling=[bowl("Q", 3)], fmt="t20") == [])
+check("a five-wicket haul in a T20 is a five-for, not a four-for", kinds(bowling=[bowl("Q", 5)], fmt="t20") == [("Q", "five-for")])
+check("a not-out century is marked", ck.standouts(*card_of([bat("P", 120, 70, "not out")]))[0]["not_out"] is True)
+
+# ---- Ranking ----
+pool = [{"kind": "four-for", "wickets": 4, "runs_conceded": 12, "name": "D"}, {"kind": "fast fifty", "balls": 20, "runs": 55, "name": "C"},
+        {"kind": "five-for", "wickets": 5, "runs_conceded": 20, "name": "B"}, {"kind": "century", "runs": 101, "balls": 60, "name": "A"},
+        {"kind": "century", "runs": 140, "balls": 80, "name": "A2"}, {"kind": "five-for", "wickets": 6, "runs_conceded": 30, "name": "B2"}]
+check("ranked: centuries (biggest first), five-fors (most wickets first), fast fifties, then four-fors", [o["name"] for o in ck.rank(pool, 10)] == ["A2", "A", "B2", "B", "C", "D"], [o["name"] for o in ck.rank(pool, 10)])
+check("at most five are shown", len(ck.rank(pool * 2)) == 5)
+check("fast fifties: fewer balls first, then more runs", [o["name"] for o in ck.rank([{"kind": "fast fifty", "balls": 24, "runs": 51, "name": "X"}, {"kind": "fast fifty", "balls": 24, "runs": 70, "name": "Y"},
+      {"kind": "fast fifty", "balls": 18, "runs": 50, "name": "Z"}])] == ["Z", "Y", "X"])
+
+# ---- How a standout reads ----
+hi, hm = ck.standout_html(iyer), ck.standout_html(milne)
+check("a fast fifty line: name, team, the figures, the opponent, the series and the result", "<strong>Shreyas Iyer</strong> (India) · fifty off 23 balls: 50 off 23 balls, 3 fours and 4 sixes against New Zealand" in hi
+      and "5th T20I" in hi and "New Zealand won by 7 wkts" in hi, hi)
+check("a bowling line: wickets for runs off overs", "<strong>Adam Milne</strong> (New Zealand) · four-wicket haul: 4 for 19 off 4 overs against India" in hm, hm)
+check("no standouts, no heading", ck.standouts_html([]) == "" and 'class="standouts"' in ck.standouts_html(so))
+check("names are escaped", "&lt;" in ck.standout_html({**iyer, "name": "<b>"}) and "<b>" not in ck.standout_html({**iyer, "name": "<b>"}).replace("<strong>", ""))
+
+# ---- The whole block, within the call budget ----
+cards = []
+
+
+def fake_card(mid, used_ref):
+    cards.append(mid)
+    used_ref[0] += 10
+    return CARD, used_ref[0]
+
+
+def block(used0, st=None, matches=None, fail=False):
+    used = [used0]
+    cards.clear()
+
+    def get_card(mid):
+        if fail:
+            raise RuntimeError("scorecard unavailable")
+        return fake_card(mid, used)
+    return ck.run(NOW, START, st or {}, lambda: (matches if matches is not None else M, used[0]), get_card, src.scorecards_affordable)
+
+
+b = block(17)
+check("with plenty of budget every picked match is checked: 5 matches, 5 scorecards", b["stats"]["picked"] == 5 and b["stats"]["checked"] == 5 and len(cards) == 5 and b["stats"]["skipped"] == 0, b["stats"])
+check("the block has International and WBBL results, then a Standouts list", b["html"].index("<h3>International</h3>") < b["html"].index("<h3>WBBL</h3>") < b["html"].index("<h3>Standouts</h3>"))
+check("the calls used are carried back (17 + 5 x 10 = 67)", b["used"] == 67, b["used"])
+check("the matches shown are remembered, so tomorrow does not repeat them", len(b["state"]["seen"]) == 5 and block(17, b["state"])["html"] == "")
+tight = block(80)
+check("with 80 calls used only 1 scorecard fits: the most important match is checked, the rest are skipped but their results still show",
+      tight["stats"]["checked"] == 1 and tight["stats"]["skipped"] == 4 and tight["html"].count("<li><span class=\"cm\">") == 5, tight["stats"])
+check("the page says how many matches had their standouts checked", "checked in 1 of 5 matches" in tight["html"])
+check("a failing scorecard loses only the standouts for that match: the results are all still shown", block(17, fail=True)["html"].count('<li><span class="cm">') == 5 and block(17, fail=True)["stats"]["checked"] == 0)
+check("no matches in the window means no cricket block", block(17, matches=[])["html"] == "")
+check("a live Test's status is remembered so an unchanged day is skipped", block(17, matches=M + [live])["state"]["status"].get("t1") == live["status"]
+      and block(17, st={"status": {"t1": live["status"]}}, matches=[live])["html"] == "")
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
