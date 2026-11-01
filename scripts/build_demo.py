@@ -22,6 +22,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from kickoff import cricket, football, render, settings, state  # noqa: E402
 from kickoff.sources import cricket as cricket_source  # noqa: E402
+from kickoff.sources import espn_cricket  # noqa: E402
+
+_espn = espn_cricket.Source()
 from kickoff.sources import espn  # noqa: E402
 from kickoff.envfile import load_env  # noqa: E402
 
@@ -49,7 +52,7 @@ if os.environ.get("CRICKET_DATA_API_KEY") and "--no-cricket" not in sys.argv:
     try:
         now = datetime.now(timezone.utc)
         c = cricket.run(now, espn.window_start(day), {"cards": state.load("cricket").get("cards", {})}, cricket_source.get_matches, cricket_source.get_scorecard,
-                        cricket_source.scorecards_affordable)
+                        cricket_source.scorecards_affordable, espn_card=_espn.card, espn_table=_espn.table)
         cricket_stats = {**c["stats"], "calls_used_today": c["used"]}
         cricket.persist_cards(c["state"]["cards"])  # into the real state: bought scorecards are never paid for twice
         if c["html"]:

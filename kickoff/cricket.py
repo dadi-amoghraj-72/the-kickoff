@@ -107,8 +107,20 @@ def result_html(m, entry=None):
             f'<span class="cr">{live}{r.esc(m.get("status") or "")}</span><span class="ct">{r.esc(rest)}</span>{full_scorecard_html(entry["innings"]) if entry and scorecard_tier(m) < 3 else ""}</li>')
 
 
-def results_html(picked, cards=None):
-    """Matches grouped under International, Women's international, and each league, in priority order. '' if none."""
+def table_html(label, rows):
+    """A league's points table, shown after its results. '' when the rows do not add up (played = won + lost + tied + no result,
+    positions 1..n in order): better no table than a wrong one. A Ties column appears only when some team has a tie."""
+    if not rows or [x["pos"] for x in rows] != list(range(1, len(rows) + 1)) or any(x["p"] != x["w"] + x["l"] + x["t"] + x["nr"] for x in rows):
+        return ""
+    ties = any(x["t"] for x in rows)
+    columns = [("#", True), ("Team", False), ("P", True), ("W", True), ("L", True)] + ([("T", True)] if ties else []) + [("NR", True), ("Pts", True), ("NRR", True)]
+    body = [[x["pos"], x["team"], x["p"], x["w"], x["l"]] + ([x["t"]] if ties else []) + [x["nr"], x["pts"], f"{x['nrr']:+.3f}" if x["nrr"] is not None else ""] for x in rows]
+    return f'<div class="pts">{r.table(f"{label} table", columns, body)}</div>'
+
+
+def results_html(picked, cards=None, tables=None):
+    """Matches grouped under International, Women's international, and each league, in priority order. '' if none.
+    tables: {league label: points table html}, shown straight after that league's results."""
     groups, order = {}, []
     for m in picked:
         label = m["class"]["label"]
@@ -118,7 +130,7 @@ def results_html(picked, cards=None):
         groups[label].append(m)
     out = ""
     for label in order:
-        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m, (cards or {}).get(m['id'])) for m in groups[label])}</ul>"
+        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m, (cards or {}).get(m['id'])) for m in groups[label])}</ul>{(tables or {}).get(label, '')}"
     return out
 
 
@@ -163,21 +175,27 @@ def slim_card(card, match):
     for i, inn in enumerate(card.get("scorecard") or []):
         team = team_of(inn.get("inning", ""), teams)
         sc = score[i] if i < len(score) else {}
-        bat = [{"name": b["batsman"]["name"],
-                "out": short_dismissal(b.get("dismissal-text") or "", [(b.get("bowler") or {}).get("name"), (b.get("catcher") or {}).get("name")]),
+        bowler_names = [b["bowler"]["name"] for b in inn.get("bowling") or []]
+        bat = [{"name": b["batsman"]["name"], "mark": b.get("mark") or "",
+                "out": short_dismissal(b.get("dismissal-text") or "", bowler_names + [(b.get("bowler") or {}).get("name"), (b.get("catcher") or {}).get("name")]),
                 "r": b.get("r") or 0, "b": b.get("b") or 0,
                 "fours": b.get("4s") or 0, "sixes": b.get("6s") or 0, "sr": b.get("sr")} for b in inn.get("batting") or []]
         bowl = [{"name": b["bowler"]["name"], "o": b.get("o"), "m": b.get("m") or 0, "r": b.get("r") or 0, "w": b.get("w") or 0,
                  "eco": b.get("eco"), "wd": b.get("wd") or 0, "nb": b.get("nb") or 0} for b in inn.get("bowling") or []]
+        espn = inn.get("espn") or {}
+        total = espn.get("total")
+        if total:  # the page's own total beats the match's score list
+            sc = {"r": total["r"], "w": total["w"], "o": total["o"]}
         runs = sc.get("r")
-        extras = None
-        if runs is not None:
+        extras = espn.get("extras")  # the real split, when the source has it; otherwise worked out below
+        if extras is None and runs is not None:
             total_extras = runs - sum(b["r"] for b in bat)
             wides, noballs = sum(b["wd"] for b in bowl), sum(b["nb"] for b in bowl)
             if total_extras >= wides + noballs >= 0:
                 extras = {"total": total_extras, "w": wides, "nb": noballs, "b_lb": total_extras - wides - noballs}
         out.append({"team": team, "bowling_team": next((t for t in teams if t != team), ""), "runs": runs, "wickets": sc.get("w"),
-                    "overs": sc.get("o"), "extras": extras, "batting": bat, "bowling": bowl})
+                    "overs": sc.get("o"), "extras": extras, "batting": bat, "bowling": bowl,
+                    "dnb": espn.get("dnb") or [], "fow": espn.get("fow") or ""})
     return out
 
 
@@ -187,8 +205,8 @@ def _num(value, places=2):
 
 def full_scorecard_html(innings):
     """A conventional scorecard for each innings: batting (with how each batter was out), extras and total with the run
-    rate, then the other side's bowling. Left out because the data does not carry it: fall of wickets, did-not-bat,
-    minutes, dot balls and captain or keeper marks."""
+    rate, then did-not-bat and fall of wickets (when the source has them), then the other side's bowling. Left out to fit a
+    phone: minutes and dot balls."""
     out = ""
     for inn in innings or []:
         wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}"
@@ -197,11 +215,12 @@ def full_scorecard_html(innings):
         out += f'<p class="inn"><strong>{r.esc(inn["team"])}</strong> {total}{overs}</p>'
         rows = ""
         for b in inn["batting"]:
-            rows += (f'<tr><td class="name">{r.esc(b["name"])}<span class="dis">{r.esc(b["out"])}</span></td><td class="n"><strong>{b["r"]}</strong></td>'
+            rows += (f'<tr><td class="name">{r.esc(b["name"])}{r.esc(" " + b["mark"] if b.get("mark") else "")}<span class="dis">{r.esc(b["out"])}</span></td><td class="n"><strong>{b["r"]}</strong></td>'
                      f'<td class="n">{b["b"]}</td><td class="n">{b["fours"]}</td><td class="n">{b["sixes"]}</td><td class="n">{_num(b["sr"])}</td></tr>')
         ex = inn["extras"]
         if ex is not None:
-            parts = [f"{label} {n}" for label, n in (("w", ex["w"]), ("nb", ex["nb"]), ("b/lb", ex["b_lb"])) if n]
+            kinds = (("w", "w"), ("nb", "nb"), ("b", "b"), ("lb", "lb"), ("pen", "pen")) if "b_lb" not in ex else (("w", "w"), ("nb", "nb"), ("b_lb", "b/lb"))
+            parts = [f"{label} {ex[key]}" for key, label in kinds if ex.get(key)]
             rows += f'<tr class="sum"><td class="name">Extras<span class="dis">{r.esc(", ".join(parts))}</span></td><td class="n">{ex["total"]}</td><td colspan="4"></td></tr>'
         if inn["runs"] is not None and isinstance(inn["overs"], (int, float)) and inn["overs"] > 0:
             rr = inn["runs"] / overs_decimal(inn["overs"])
@@ -209,12 +228,16 @@ def full_scorecard_html(innings):
                      f'<td class="n">{total}</td><td colspan="4"></td></tr>')
         out += ('<div class="table-wrap"><table class="sc"><thead><tr><th>Batting</th><th class="n">R</th><th class="n">B</th><th class="n">4s</th>'
                 f'<th class="n">6s</th><th class="n">SR</th></tr></thead><tbody>{rows}</tbody></table></div>')
+        if inn.get("dnb"):
+            out += f'<p class="muted fow"><strong>Did not bat:</strong> {r.esc(", ".join(inn["dnb"]))}</p>'
+        if inn.get("fow"):
+            out += f'<p class="muted fow"><strong>Fall of wickets:</strong> {r.esc(inn["fow"])}</p>'
         econ = lambda b: _num(b["r"] / overs_decimal(b["o"]) if b["o"] else b["eco"])  # exact, not the API's one-decimal figure  # noqa: E731
         brows = "".join(f'<tr><td class="name">{r.esc(b["name"])}</td><td class="n">{b["o"]:g}</td><td class="n">{b["m"]}</td><td class="n">{b["r"]}</td>'
                         f'<td class="n"><strong>{b["w"]}</strong></td><td class="n">{econ(b)}</td><td class="n">{b["wd"]}</td><td class="n">{b["nb"]}</td></tr>'
                         for b in inn["bowling"] if isinstance(b["o"], (int, float)))
         if brows:
-            out += (f'<div class="table-wrap"><table class="sc"><thead><tr><th>{r.esc(inn["bowling_team"])} bowling</th><th class="n">O</th><th class="n">M</th>'
+            out += (f'<div class="table-wrap"><table class="sc"><thead><tr><th>Bowling</th><th class="n">O</th><th class="n">M</th>'
                     f'<th class="n">R</th><th class="n">W</th><th class="n">Econ</th><th class="n">WD</th><th class="n">NB</th></tr></thead><tbody>{brows}</tbody></table></div>')
     return out
 
@@ -286,9 +309,11 @@ def standouts_html(items):
 
 # ---- The whole cricket block, within the daily call budget -------------------------------------
 
-def run(now, window_start, st, get_matches, get_scorecard, affordable):
+def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card=None, espn_table=None):
     """Build the cricket section. get_matches() -> (matches, calls used); get_scorecard(id) -> (card, calls used);
-    affordable(used) -> how many scorecards fit. st: {"seen": [match ids], "status": {id: last status}}.
+    affordable(used) -> how many scorecards fit. espn_card(match) -> a free scorecard or None: tried first, costs no calls.
+    espn_table(match) -> the league's points table rows or None.
+    st: {"seen": [match ids], "status": {id: last status}}.
     Returns {"html", "state", "used", "stats"}; html is '' when there is no cricket to report."""
     matches, used = get_matches()
     seen = set(st.get("seen", []))
@@ -297,28 +322,46 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable):
     cards = {k: v for k, v in st.get("cards", {}).items() if "innings" in v}  # scorecards already bought: paid for once, never twice
     # Buy in this order: full-scorecard matches first (tier 1, then the IPL), then the rest for their standouts.
     for m in sorted(picked, key=lambda x: (scorecard_tier(x), -x["class"]["priority"], x["dateTimeGMT"])):
-        if m["id"] in cards:
-            found += cards[m["id"]]["standouts"]
-            shown_cards[m["id"]] = cards[m["id"]]
+        cached = cards.get(m["id"]) if m.get("matchEnded") else None  # a card saved mid-match would be out of date
+        # A card saved before did-not-bat and fall of wickets existed is only a fallback: ESPN's richer one is tried first.
+        if cached and (not espn_card or all("dnb" in i for i in cached["innings"])):
+            found += cached["standouts"]
+            shown_cards[m["id"]] = cached
             checked += 1
             continue
-        if affordable(used) < 1:  # not even one more scorecard fits in what is left of today's calls
-            skipped += 1
+        card = espn_card(m) if espn_card else None  # free: no calls used
+        if card is None and cached:
+            found += cached["standouts"]
+            shown_cards[m["id"]] = cached
+            checked += 1
             continue
-        try:
-            card, used = get_scorecard(m["id"])
-        except Exception:  # a failed scorecard costs us the standouts for that match, never the result
-            skipped += 1
-            continue
+        if card is None:
+            if affordable(used) < 1:  # not even one more scorecard fits in what is left of today's calls
+                skipped += 1
+                continue
+            try:
+                card, used = get_scorecard(m["id"])
+            except Exception:  # a failed scorecard costs us the standouts for that match, never the result
+                skipped += 1
+                continue
         checked += 1
-        cards[m["id"]] = {"innings": slim_card(card, m), "standouts": standouts(card, m)}
-        found += cards[m["id"]]["standouts"]
-        shown_cards[m["id"]] = cards[m["id"]]
+        entry = {"innings": slim_card(card, m), "standouts": standouts(card, m)}
+        if m.get("matchEnded"):
+            cards[m["id"]] = entry
+        else:
+            cards.pop(m["id"], None)
+        found += entry["standouts"]
+        shown_cards[m["id"]] = entry
     top = rank(found)
-    html = results_html(picked, shown_cards) + standouts_html(top)
+    tables = {}
+    for m in picked:  # a points table for each league that played, once per league
+        label = m["class"]["label"]
+        if espn_table and m["class"]["kind"] == "league" and label not in tables:
+            tables[label] = table_html(label, espn_table(m))
+    html = results_html(picked, shown_cards, tables) + standouts_html(top)
     if html and skipped:
         html += (f'<p class="muted">Standouts were checked in {checked} of {len(picked)} matches: the free cricket data allows only '
-                 f"about eight scorecards a day.</p>")
+                 f"about eight scorecards a day when ESPN's pages are not available.</p>")
     new = {"seen": sorted(seen | {m["id"] for m in picked if m.get("matchEnded")})[-400:],
            "status": {**st.get("status", {}), **{m["id"]: m.get("status") for m in picked if not m.get("matchEnded")}},
            "cards": dict(list(cards.items())[-60:])}

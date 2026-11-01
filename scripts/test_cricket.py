@@ -224,8 +224,8 @@ check("India's innings: heading with total and overs, then each batter's R B 4s 
 check("extras and total rows, with the run rate", "Extras" in fh and "w 4, nb 1, b/lb 2" in fh and "Total" in fh and "20 ov, run rate 9.55" in fh and "18 ov, run rate 10.83" in fh)
 check("a not-out batter reads 'not out'", ">not out<" in fh)
 check("the bowling table has O M R W Econ WD NB: Milne 4-0-19-4, economy 4.75 as on the scorecard (computed exactly, not the API's 4.8)",
-      "New Zealand bowling" in fh and '<td class="n">4</td><td class="n">0</td><td class="n">19</td><td class="n"><strong>4</strong></td><td class="n">4.75</td><td class="n">1</td><td class="n">0</td>' in fh,
-      fh[fh.index("New Zealand bowling"):][:700])
+      "<th>Bowling</th>" in fh and '<td class="n">4</td><td class="n">0</td><td class="n">19</td><td class="n"><strong>4</strong></td><td class="n">4.75</td><td class="n">1</td><td class="n">0</td>' in fh,
+      fh[fh.index("<th>Bowling</th>"):][:700])
 check("economy matches the real scorecard for Bhuvneshwar (10.25), Chakravarthy (11.25) and Bracewell (19.00)", all(x in fh for x in ("10.25", "11.25", "19.00")))
 check("an all-out innings shows its total without '/10'", "/10" not in ck.full_scorecard_html([{**ind, "wickets": 10, "runs": 150}]))
 check("names are escaped", "&lt;" in ck.full_scorecard_html([{**ind, "batting": [{**ind["batting"][0], "name": "<b>"}]}]))
