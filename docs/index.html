@@ -120,6 +120,28 @@ tr.z-rose td:first-child { box-shadow: inset 4px 0 0 var(--rose); }
 .legend .z-lilac { background: var(--lilac); }
 .legend .z-rose { background: var(--rose); }
 
+/* Three fixed columns (label, number, names) so every row lines up exactly */
+.leaders { list-style: none; margin: 4px 0 18px; padding: 0; font-size: 15px; }
+.leaders li { display: grid; grid-template-columns: 7.4em 2.2ch 1fr; column-gap: 10px; align-items: baseline; padding: 4px 0; }
+.leaders .lbl { min-width: 0; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.leaders .n { color: var(--gold); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.leaders .who { min-width: 0; }
+.leaders .p { white-space: nowrap; }
+
+tr.cut td { border-bottom: 2px solid var(--muted); }
+tr.mine td:nth-child(2) { font-weight: 700; }
+
+/* Scoreboard: home team right-aligned, score in the middle, away team left-aligned, so scores line up */
+.scores { list-style: none; margin: 8px 0 14px; padding: 0; font-size: 16px; }
+.scores li { display: grid; grid-template-columns: 1fr 3.6em 1fr; column-gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--hairline); }
+.scores .h { text-align: right; }
+.scores .s { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--gold); }
+.scores .gh, .scores .ga { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.scores .gh { grid-column: 1; text-align: right; }
+.scores .ga { grid-column: 3; }
+.scores .mine { font-weight: 700; }
+.scores .p { white-space: nowrap; }
+
 .nodata { display: inline-block; padding: 4px 12px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; color: var(--muted); font-size: 16px; }
 
 footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 15px; color: var(--muted); }
@@ -143,4 +165,9 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 @media (min-width: 900px) { main { padding-right: 20px; } }
+
+/* News and team-news lists */
+.news, .team-news { list-style: none; margin: 4px 0 14px; padding: 0; font-size: 16px; }
+.news li, .team-news li { padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+.tag { margin-right: 6px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 </style></head><body><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Archive</p></header><section style="border-top:0;margin-top:24px"><ul class="archive"><li><a class="d" href="editions/2026-11-02/index.html">Monday 2 November 2026 (dummy)</a><span class="muted">Dummy headline one: placeholder for the biggest story</span></li></ul></section></main></body></html>

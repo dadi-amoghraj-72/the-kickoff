@@ -133,10 +133,12 @@ def render_edition(ed):
     n = len(sections)
     total_words = sum(word_count(s["html"]) for s in sections)
     minutes = max(1, math.ceil(total_words / WORDS_PER_MINUTE))
-    topbar = ('<div class="topbar"><a href="../../index.html">Archive</a>'
+    home = ed.get("home", "../../index.html")
+    topbar = (f'<div class="topbar"><a href="{home}">Archive</a>'
               f'<span class="chip" id="chip">{minutes} min read</span></div>')
-    banner = ('<p class="banner">Dummy edition. Everything below is placeholder text to test the '
-              "design. No real scores or news.</p>") if ed.get("dummy") else ""
+    banner = (f'<p class="banner">{esc(ed["banner"])}</p>' if ed.get("banner") else
+              ('<p class="banner">Dummy edition. Everything below is placeholder text to test the '
+               "design. No real scores or news.</p>") if ed.get("dummy") else "")
     secs = "".join(f'<section id="{esc(s["id"])}"><h2>{esc(s["title"])}</h2>{s["html"]}</section>'
                    for s in sections)
     ticks = "".join(
@@ -144,7 +146,7 @@ def render_edition(ed):
         f'aria-label="Jump to {esc(s["title"])}" title="{esc(s["title"])}"></a>'
         for i, s in enumerate(sections))
     rail = f'<nav class="rail" aria-label="Sections"><div class="rail-fill" id="rail-fill"></div>{ticks}</nav>'
-    footer = '<footer><a href="../../index.html">All editions</a> · The Kickoff, your daily sports digest.</footer>'
+    footer = f'<footer><a href="{home}">All editions</a> · The Kickoff, your daily sports digest.</footer>'
     body = f"<main>{_masthead(nice_date(ed['date']))}{banner}{secs}{footer}</main>{rail}"
     script = f"<script>{(STATIC / 'rail.js').read_text()}</script>"
     return _page(f"The Kickoff · {nice_date(ed['date'])}", topbar, body, script)

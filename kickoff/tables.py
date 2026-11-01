@@ -62,6 +62,16 @@ def block(name, rows, decision, leaders=""):
     return html + leaders
 
 
+def one(name, rows, saved_entry, edition_date, tuesday_only=False, leaders_fn=None):
+    """One league's table block and its new state entry (None if nothing was published).
+    leaders_fn is called only when the table is actually shown, so no requests are wasted."""
+    decision = decide(rows, saved_entry, edition_date, tuesday_only=tuesday_only)
+    shown = decision["mode"] in ("full", "changed")
+    html = block(name, rows, decision, (leaders_fn() or "") if (shown and leaders_fn) else "")
+    entry = {"published": edition_date.isoformat(), "rows": signature(rows)} if shown else None
+    return html, entry
+
+
 def tables_html(tables, state, edition_date, leagues, tuesday_only=(), leaders=None):
     """tables: {league_id: rows or None if the source failed}. leagues: {league_id: display name}.
     Returns (html, new_state). State changes only for tables that were actually shown."""

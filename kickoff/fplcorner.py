@@ -86,11 +86,11 @@ def draft_table(league, my_entry_id, gw):
     rows, mine, sig = [], [], []
     for s in sorted(league["standings"], key=lambda s: s["rank"]):
         e = by[s["league_entry"]]
-        rows.append([s["rank"], e["entry_name"], e["player_first_name"], s["event_total"], s["total"]])
+        rows.append([s["rank"], e["entry_name"], s["event_total"], s["total"]])
         mine.append("mine" if e["entry_id"] == my_entry_id else "")
         sig.append([s["league_entry"], s["rank"], s["total"]])
     html = r.table(f"{league['league']['name']} After Gameweek {gw}",
-                   [("#", True), ("Team", False), ("Manager", False), ("GW", True), ("Total", True)], rows, row_classes=mine)
+                   [("#", True), ("Team", False), ("GW", True), ("Total", True)], rows, row_classes=mine)
     return sig, html
 
 

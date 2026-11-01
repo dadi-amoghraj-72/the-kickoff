@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="color-scheme" content="dark light"><title>The Kickoff · Monday 2 November 2026</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Newsreader:wght@600&display=swap"><style>/* The Kickoff design system: floodlit pitch, chalk text, trophy gold. Dark first. */
+:root {
+  color-scheme: dark light;
+  --pitch: #13251E;
+  --surface: #1A2F27;
+  --hairline: #2A4238;
+  --chalk: #E8E3D6;
+  --muted: #A3B0A6;
+  --gold: #CFB06E;
+  --blue: #8DB4CC;
+  --lilac: #B3A6CC;
+  --rose: #C99590;
+}
+
+/* Light mode follows the phone's setting. Same accents, darkened to pass 4.5:1. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --pitch: #E9EFEA;
+    --surface: #DCE6DF;
+    --hairline: #B7C6BB;
+    --chalk: #13251E;
+    --muted: #44574B;
+    --gold: #7A5C14;
+    --blue: #2F6280;
+    --lilac: #5E4F8A;
+    --rose: #9A4A43;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--pitch);
+  color: var(--chalk);
+  font: 400 18px/1.7 "Josefin Sans", system-ui, -apple-system, sans-serif;
+}
+
+/* Top bar: holds the reading chip so it never sits on top of the text */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  height: 40px; padding: 0 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--pitch);
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px; color: var(--muted);
+}
+.topbar a { color: var(--muted); }
+.chip {
+  padding: 1px 12px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  color: var(--chalk);
+  font-variant-numeric: tabular-nums;
+}
+
+/* One column, left-aligned, about 62 characters wide. Right padding keeps the rail clear of text. */
+main { max-width: calc(62ch + 64px); margin: 0 auto; padding: 0 48px 96px 20px; }
+
+.masthead { text-align: center; padding: 40px 0 8px; }
+.masthead h1 {
+  margin: 0;
+  font: 600 clamp(40px, 11vw, 60px)/1.05 "Newsreader", Georgia, serif;
+  letter-spacing: 0.01em;
+}
+.masthead .rule {
+  margin: 14px 0 8px;
+  border-top: 3px double var(--gold);
+}
+.masthead .dateline { margin: 0; font-size: 15px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+a { color: var(--gold); text-underline-offset: 3px; }
+/* Headings: trophy gold, bold, every word capitalised, so they stand apart from chalk body text */
+h2, h3 { color: var(--gold); font-weight: 700; line-height: 1.25; text-transform: capitalize; }
+h2 { font-size: 30px; margin: 0 0 12px; }
+h3 { font-size: 21px; margin: 28px 0 6px; }
+p { margin: 0 0 14px; }
+.muted { color: var(--muted); }
+strong { font-weight: 600; }
+
+section { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--hairline); scroll-margin-top: 52px; }
+section > :last-child { margin-bottom: 0; }
+
+.banner {
+  margin: 24px 0 0; padding: 10px 14px;
+  background: var(--surface); border: 1px dashed var(--gold); border-radius: 8px;
+  font-size: 15px; color: var(--muted);
+}
+
+/* Performance of the Day */
+.potd { margin: 18px 0; padding: 16px 18px; background: var(--surface); border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; }
+.potd .label { display: block; color: var(--gold); font-size: 14px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* On today */
+.today { list-style: none; margin: 0; padding: 0; }
+.today li { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; padding: 12px 0; border-bottom: 1px solid var(--hairline); }
+.today time { font-variant-numeric: tabular-nums; font-weight: 600; }
+.tag { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+.tag svg { width: 16px; height: 16px; }
+
+/* Standouts, ranked */
+.standouts { margin: 0 0 14px; padding-left: 1.3em; }
+.standouts li { margin-bottom: 6px; padding-left: 4px; }
+
+/* Tables: numbers right-aligned, zone bars on the left edge of a row */
+.table-wrap { margin: 14px 0 6px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 16px; font-variant-numeric: tabular-nums; }
+caption { text-align: left; padding: 0 0 6px; font-weight: 600; background: transparent; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+th.n, td.n { text-align: right; }
+tr[class^="z-"] td:first-child { padding-left: 14px; }
+tr.z-blue td:first-child { box-shadow: inset 4px 0 0 var(--blue); }
+tr.z-lilac td:first-child { box-shadow: inset 4px 0 0 var(--lilac); }
+tr.z-rose td:first-child { box-shadow: inset 4px 0 0 var(--rose); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0 0 14px; padding: 0; list-style: none; font-size: 14px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 2px; }
+.legend .z-blue { background: var(--blue); }
+.legend .z-lilac { background: var(--lilac); }
+.legend .z-rose { background: var(--rose); }
+
+/* Three fixed columns (label, number, names) so every row lines up exactly */
+.leaders { list-style: none; margin: 4px 0 18px; padding: 0; font-size: 15px; }
+.leaders li { display: grid; grid-template-columns: 7.4em 2.2ch 1fr; column-gap: 10px; align-items: baseline; padding: 4px 0; }
+.leaders .lbl { min-width: 0; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.leaders .n { color: var(--gold); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.leaders .who { min-width: 0; }
+.leaders .p { white-space: nowrap; }
+
+tr.cut td { border-bottom: 2px solid var(--muted); }
+tr.mine td:nth-child(2) { font-weight: 700; }
+
+/* Scoreboard: home team right-aligned, score in the middle, away team left-aligned, so scores line up */
+.scores { list-style: none; margin: 8px 0 14px; padding: 0; font-size: 16px; }
+.scores li { display: grid; grid-template-columns: 1fr 3.6em 1fr; column-gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--hairline); }
+.scores .h { text-align: right; }
+.scores .s { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--gold); }
+.scores .gh, .scores .ga { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.scores .gh { grid-column: 1; text-align: right; }
+.scores .ga { grid-column: 3; }
+.scores .mine { font-weight: 700; }
+.scores .p { white-space: nowrap; }
+
+.nodata { display: inline-block; padding: 4px 12px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; color: var(--muted); font-size: 16px; }
+
+footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 15px; color: var(--muted); }
+
+/* Archive list */
+.archive { list-style: none; margin: 24px 0 0; padding: 0; }
+.archive li { padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+.archive .d { display: block; font-weight: 600; }
+
+/* Progress rail: thin, right edge, one tick per section, fills gold as you read */
+.rail { position: fixed; right: 16px; top: 64px; bottom: 24px; width: 4px; background: var(--hairline); border-radius: 2px; z-index: 5; }
+.rail-fill { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: var(--gold); border-radius: 2px; }
+.rail-tick { position: absolute; left: -12px; width: 28px; height: 28px; margin-top: -14px; display: block; }
+.rail-tick::after { content: ""; position: absolute; left: 8px; top: 13px; width: 12px; height: 2px; border-radius: 1px; background: var(--muted); }
+.rail-tick.done::after { background: var(--gold); }
+.rail-tick[aria-current="true"]::after { left: 5px; width: 18px; height: 3px; top: 12px; background: var(--gold); }
+.rail-tick:focus-visible { outline: 2px solid var(--gold); border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+@media (min-width: 900px) { main { padding-right: 20px; } }
+
+/* News and team-news lists */
+.news, .team-news { list-style: none; margin: 4px 0 14px; padding: 0; font-size: 16px; }
+.news li, .team-news li { padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+.tag { margin-right: 6px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+</style></head><body><div class="topbar"><a href="../index.html">Archive</a><span class="chip" id="chip">5 min read</span></div><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Monday 2 November 2026</p></header><p class="banner">Football preview built from real data for Monday 2 November 2026. Plain text, no AI. Cricket, F1, tennis, NFL, NBA and the other sections are not built yet.</p><section id="arsenal"><h2>Arsenal</h2><p><strong>Liverpool</strong> 0-1 <strong>Arsenal</strong>. Goals: Kai Havertz 16&#x27;.</p><p><strong>Next up:</strong> Slavia Prague (away), UEFA Champions League, Thursday 5 November, 4:00am SGT. Then Hull City (home), English Premier League, Saturday 7 November, 11:00pm SGT.</p><h3>Arsenal Women</h3><p><strong>Arsenal</strong> 1-1 <strong>Aston Villa</strong>. Goals: Chasity Grant 25&#x27;, Alessia Russo 85&#x27;.</p><p><strong>Next up:</strong> Liverpool (away), English Women&#x27;s Super League, Sunday 8 November, 8:00pm SGT. Then Barcelona (away), UEFA Women&#x27;s Champions League, Friday 13 November, 1:45am SGT.</p></section><section id="football"><h2>Football</h2><h3>Premier League</h3><div class="table-wrap"><table><caption>Table</caption><thead><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">GD</th><th class="n">Pts</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">Arsenal</td><td class="n">9</td><td class="n">+9</td><td class="n">24</td></tr><tr class="z-blue"><td class="n">2</td><td class="">Manchester City</td><td class="n">9</td><td class="n">+10</td><td class="n">21</td></tr><tr class="z-blue"><td class="n">3</td><td class="">Brighton &amp; Hove Albion</td><td class="n">9</td><td class="n">+17</td><td class="n">19</td></tr><tr class="z-blue"><td class="n">4</td><td class="">Chelsea</td><td class="n">9</td><td class="n">+4</td><td class="n">16</td></tr><tr class="z-lilac"><td class="n">5</td><td class="">Liverpool</td><td class="n">9</td><td class="n">+2</td><td class="n">15</td></tr><tr><td class="n">6</td><td class="">Brentford</td><td class="n">9</td><td class="n">+7</td><td class="n">14</td></tr><tr><td class="n">7</td><td class="">AFC Bournemouth</td><td class="n">9</td><td class="n">+1</td><td class="n">12</td></tr><tr><td class="n">8</td><td class="">Tottenham Hotspur</td><td class="n">9</td><td class="n">+0</td><td class="n">12</td></tr><tr><td class="n">9</td><td class="">Aston Villa</td><td class="n">9</td><td class="n">-3</td><td class="n">12</td></tr><tr><td class="n">10</td><td class="">Hull City</td><td class="n">9</td><td class="n">+1</td><td class="n">11</td></tr><tr><td class="n">11</td><td class="">Leeds United</td><td class="n">9</td><td class="n">+1</td><td class="n">11</td></tr><tr><td class="n">12</td><td class="">Newcastle United</td><td class="n">8</td><td class="n">-2</td><td class="n">11</td></tr><tr><td class="n">13</td><td class="">Ipswich Town</td><td class="n">9</td><td class="n">-4</td><td class="n">11</td></tr><tr><td class="n">14</td><td class="">Everton</td><td class="n">8</td><td class="n">-1</td><td class="n">10</td></tr><tr><td class="n">15</td><td class="">Fulham</td><td class="n">9</td><td class="n">-2</td><td class="n">9</td></tr><tr><td class="n">16</td><td class="">Coventry City</td><td class="n">9</td><td class="n">-7</td><td class="n">9</td></tr><tr><td class="n">17</td><td class="">Manchester United</td><td class="n">9</td><td class="n">-5</td><td class="n">7</td></tr><tr class="z-rose"><td class="n">18</td><td class="">Crystal Palace</td><td class="n">9</td><td class="n">-12</td><td class="n">7</td></tr><tr class="z-rose"><td class="n">19</td><td class="">Nottingham Forest</td><td class="n">9</td><td class="n">-6</td><td class="n">6</td></tr><tr class="z-rose"><td class="n">20</td><td class="">Sunderland</td><td class="n">9</td><td class="n">-10</td><td class="n">5</td></tr></tbody></table></div><ul class="leaders"><li><span class="lbl">Top Scorer</span><span class="n">09</span><span class="who"><span class="p">Erling Haaland (MCI)</span></span></li><li><span class="lbl">Top Assists</span><span class="n">04</span><span class="who"><span class="p">Gross (BHA)</span>, <span class="p">Evanilson (BOU)</span>, <span class="p">Rice (ARS)</span></span></li><li><span class="lbl">Top CS</span><span class="n">06</span><span class="who"><span class="p">Verbruggen (BHA)</span>, <span class="p">Raya (ARS)</span></span></li></ul><h3>La Liga</h3><p><strong>Racing Santander</strong> 0-3 <strong>Real Madrid</strong>. Goals: Kylian Mbappé 11&#x27; (pen), Jude Bellingham 21&#x27;, Yan Diomande 36&#x27;.</p><div class="table-wrap"><table><caption>Table</caption><thead><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">GD</th><th class="n">Pts</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">Barcelona</td><td class="n">11</td><td class="n">+34</td><td class="n">30</td></tr><tr class="z-blue"><td class="n">2</td><td class="">Atlético Madrid</td><td class="n">11</td><td class="n">+14</td><td class="n">28</td></tr><tr class="z-blue"><td class="n">3</td><td class="">Real Madrid</td><td class="n">11</td><td class="n">+18</td><td class="n">27</td></tr><tr class="z-blue"><td class="n">4</td><td class="">Real Betis</td><td class="n">11</td><td class="n">+3</td><td class="n">23</td></tr><tr class="z-blue"><td class="n">5</td><td class="">Real Sociedad</td><td class="n">10</td><td class="n">+1</td><td class="n">19</td></tr><tr class="z-lilac"><td class="n">6</td><td class="">Sevilla</td><td class="n">11</td><td class="n">-2</td><td class="n">17</td></tr><tr class="z-lilac"><td class="n">7</td><td class="">Athletic Club</td><td class="n">9</td><td class="n">+3</td><td class="n">12</td></tr><tr><td class="n">8</td><td class="">Villarreal</td><td class="n">11</td><td class="n">+0</td><td class="n">12</td></tr><tr><td class="n">9</td><td class="">Celta Vigo</td><td class="n">11</td><td class="n">+0</td><td class="n">12</td></tr><tr class="z-lilac"><td class="n">10</td><td class="">Alavés</td><td class="n">11</td><td class="n">-2</td><td class="n">12</td></tr><tr><td class="n">11</td><td class="">Rayo Vallecano</td><td class="n">10</td><td class="n">-5</td><td class="n">12</td></tr><tr><td class="n">12</td><td class="">Getafe</td><td class="n">11</td><td class="n">-8</td><td class="n">12</td></tr><tr><td class="n">13</td><td class="">Deportivo</td><td class="n">10</td><td class="n">+0</td><td class="n">11</td></tr><tr><td class="n">14</td><td class="">Espanyol</td><td class="n">11</td><td class="n">-1</td><td class="n">11</td></tr><tr><td class="n">15</td><td class="">Osasuna</td><td class="n">10</td><td class="n">-10</td><td class="n">11</td></tr><tr><td class="n">16</td><td class="">Racing Santander</td><td class="n">11</td><td class="n">-14</td><td class="n">11</td></tr><tr><td class="n">17</td><td class="">Elche</td><td class="n">11</td><td class="n">-4</td><td class="n">10</td></tr><tr class="z-rose"><td class="n">18</td><td class="">Levante</td><td class="n">11</td><td class="n">-5</td><td class="n">10</td></tr><tr class="z-rose"><td class="n">19</td><td class="">Valencia</td><td class="n">11</td><td class="n">-9</td><td class="n">9</td></tr><tr class="z-rose"><td class="n">20</td><td class="">Málaga</td><td class="n">11</td><td class="n">-13</td><td class="n">5</td></tr></tbody></table></div><ul class="leaders"><li><span class="lbl">Top Scorer</span><span class="n">15</span><span class="who"><span class="p">Raphinha (BAR)</span></span></li><li><span class="lbl">Top Assists</span><span class="n">07</span><span class="who"><span class="p">Lamine Yamal (BAR)</span></span></li><li><span class="lbl">Top CS</span><span class="n">06</span><span class="who"><span class="p">Jan Oblak (ATM)</span></span></li></ul><h3>Serie A</h3><p>The favourites won 2 of 4 matches. Game of the night: <strong>Lazio</strong> 2-1 <strong>Cagliari</strong>, with 3 goals.</p><p><strong>Como</strong> 1-0 <strong>Venezia</strong>. Goals: Lucas Da Cunha 43&#x27; (pen).</p><div class="table-wrap"><table><caption>Table</caption><thead><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">GD</th><th class="n">Pts</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">Lazio</td><td class="n">10</td><td class="n">+16</td><td class="n">28</td></tr><tr class="z-blue"><td class="n">2</td><td class="">Internazionale</td><td class="n">10</td><td class="n">+13</td><td class="n">25</td></tr><tr class="z-blue"><td class="n">3</td><td class="">AS Roma</td><td class="n">10</td><td class="n">+18</td><td class="n">24</td></tr><tr class="z-blue"><td class="n">4</td><td class="">Como</td><td class="n">10</td><td class="n">+10</td><td class="n">23</td></tr><tr class="z-lilac"><td class="n">5</td><td class="">AC Milan</td><td class="n">10</td><td class="n">+9</td><td class="n">21</td></tr><tr class="z-lilac"><td class="n">6</td><td class="">Frosinone</td><td class="n">10</td><td class="n">+10</td><td class="n">20</td></tr><tr class="z-lilac"><td class="n">7</td><td class="">Napoli</td><td class="n">9</td><td class="n">+6</td><td class="n">14</td></tr><tr><td class="n">8</td><td class="">Juventus</td><td class="n">9</td><td class="n">+1</td><td class="n">14</td></tr><tr><td class="n">9</td><td class="">Bologna</td><td class="n">10</td><td class="n">+1</td><td class="n">14</td></tr><tr><td class="n">10</td><td class="">Torino</td><td class="n">10</td><td class="n">-2</td><td class="n">13</td></tr><tr><td class="n">11</td><td class="">Genoa</td><td class="n">10</td><td class="n">-4</td><td class="n">13</td></tr><tr><td class="n">12</td><td class="">Cagliari</td><td class="n">10</td><td class="n">-6</td><td class="n">13</td></tr><tr><td class="n">13</td><td class="">Atalanta</td><td class="n">9</td><td class="n">-1</td><td class="n">11</td></tr><tr><td class="n">14</td><td class="">Lecce</td><td class="n">10</td><td class="n">-10</td><td class="n">9</td></tr><tr><td class="n">15</td><td class="">Sassuolo</td><td class="n">9</td><td class="n">-8</td><td class="n">8</td></tr><tr><td class="n">16</td><td class="">Monza</td><td class="n">10</td><td class="n">-7</td><td class="n">7</td></tr><tr><td class="n">17</td><td class="">Fiorentina</td><td class="n">9</td><td class="n">-10</td><td class="n">5</td></tr><tr class="z-rose"><td class="n">18</td><td class="">Parma</td><td class="n">9</td><td class="n">-10</td><td class="n">5</td></tr><tr class="z-rose"><td class="n">19</td><td class="">Udinese</td><td class="n">10</td><td class="n">-12</td><td class="n">5</td></tr><tr class="z-rose"><td class="n">20</td><td class="">Venezia</td><td class="n">10</td><td class="n">-14</td><td class="n">3</td></tr></tbody></table></div><ul class="leaders"><li><span class="lbl">Top Scorer</span><span class="n">09</span><span class="who"><span class="p">Gustavo Varela (MON)</span></span></li><li><span class="lbl">Top Assists</span><span class="n">05</span><span class="who"><span class="p">Zaccagni (LAZ)</span>, <span class="p">Miranda (BOL)</span></span></li><li><span class="lbl">Top CS</span><span class="n">04</span><span class="who"><span class="p">Mandas (LAZ)</span>, <span class="p">Vicario (JUV)</span></span></li></ul><h3>Bundesliga</h3><div class="table-wrap"><table><caption>Table</caption><thead><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">GD</th><th class="n">Pts</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">Bayern Munich</td><td class="n">8</td><td class="n">+19</td><td class="n">18</td></tr><tr class="z-blue"><td class="n">2</td><td class="">Borussia Dortmund</td><td class="n">8</td><td class="n">+8</td><td class="n">18</td></tr><tr class="z-blue"><td class="n">3</td><td class="">SC Freiburg</td><td class="n">8</td><td class="n">+8</td><td class="n">16</td></tr><tr class="z-blue"><td class="n">4</td><td class="">RB Leipzig</td><td class="n">8</td><td class="n">+11</td><td class="n">15</td></tr><tr class="z-lilac"><td class="n">5</td><td class="">Werder Bremen</td><td class="n">8</td><td class="n">+3</td><td class="n">15</td></tr><tr class="z-lilac"><td class="n">6</td><td class="">Bayer Leverkusen</td><td class="n">8</td><td class="n">+2</td><td class="n">13</td></tr><tr class="z-lilac"><td class="n">7</td><td class="">SV Elversberg</td><td class="n">8</td><td class="n">+0</td><td class="n">13</td></tr><tr><td class="n">8</td><td class="">Eintracht Frankfurt</td><td class="n">8</td><td class="n">-5</td><td class="n">11</td></tr><tr><td class="n">9</td><td class="">Mainz</td><td class="n">8</td><td class="n">+0</td><td class="n">10</td></tr><tr><td class="n">10</td><td class="">FC Augsburg</td><td class="n">8</td><td class="n">+3</td><td class="n">9</td></tr><tr><td class="n">11</td><td class="">VfB Stuttgart</td><td class="n">8</td><td class="n">-1</td><td class="n">9</td></tr><tr><td class="n">12</td><td class="">TSG Hoffenheim</td><td class="n">8</td><td class="n">-2</td><td class="n">9</td></tr><tr><td class="n">13</td><td class="">FC Cologne</td><td class="n">8</td><td class="n">-3</td><td class="n">9</td></tr><tr><td class="n">14</td><td class="">SC Paderborn 07</td><td class="n">8</td><td class="n">-3</td><td class="n">9</td></tr><tr><td class="n">15</td><td class="">Hamburg SV</td><td class="n">8</td><td class="n">-12</td><td class="n">9</td></tr><tr class="z-lilac"><td class="n">16</td><td class="">1. FC Union Berlin</td><td class="n">8</td><td class="n">-12</td><td class="n">7</td></tr><tr class="z-rose"><td class="n">17</td><td class="">Schalke 04</td><td class="n">8</td><td class="n">-5</td><td class="n">6</td></tr><tr class="z-rose"><td class="n">18</td><td class="">Borussia Mönchengladbach</td><td class="n">8</td><td class="n">-11</td><td class="n">4</td></tr></tbody></table></div><ul class="leaders"><li><span class="lbl">Top Scorer</span><span class="n">09</span><span class="who"><span class="p">Niclas Füllkrug (SVW)</span></span></li><li><span class="lbl">Top Assists</span><span class="n">06</span><span class="who"><span class="p">Grüll (SVW)</span>, <span class="p">Nusa (RBL)</span>, <span class="p">Kane (BAY)</span></span></li><li><span class="lbl">Top CS</span><span class="n">05</span><span class="who"><span class="p">Gregor Kobel (BVB)</span></span></li></ul><h3>Ligue 1</h3><div class="table-wrap"><table><caption>Table</caption><thead><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">GD</th><th class="n">Pts</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">Paris Saint-Germain</td><td class="n">9</td><td class="n">+11</td><td class="n">20</td></tr><tr class="z-blue"><td class="n">2</td><td class="">Lille</td><td class="n">9</td><td class="n">+6</td><td class="n">18</td></tr><tr class="z-blue"><td class="n">3</td><td class="">Lyon</td><td class="n">9</td><td class="n">+8</td><td class="n">17</td></tr><tr class="z-blue"><td class="n">4</td><td class="">Paris FC</td><td class="n">9</td><td class="n">+6</td><td class="n">17</td></tr><tr class="z-lilac"><td class="n">5</td><td class="">Stade Rennais</td><td class="n">9</td><td class="n">+1</td><td class="n">16</td></tr><tr class="z-lilac"><td class="n">6</td><td class="">AS Monaco</td><td class="n">9</td><td class="n">+2</td><td class="n">15</td></tr><tr class="z-lilac"><td class="n">7</td><td class="">Nice</td><td class="n">9</td><td class="n">+1</td><td class="n">14</td></tr><tr><td class="n">8</td><td class="">Lens</td><td class="n">9</td><td class="n">+3</td><td class="n">13</td></tr><tr><td class="n">9</td><td class="">Marseille</td><td class="n">8</td><td class="n">+5</td><td class="n">12</td></tr><tr><td class="n">10</td><td class="">Lorient</td><td class="n">8</td><td class="n">+1</td><td class="n">12</td></tr><tr><td class="n">11</td><td class="">Toulouse</td><td class="n">8</td><td class="n">+1</td><td class="n">10</td></tr><tr><td class="n">12</td><td class="">Strasbourg</td><td class="n">9</td><td class="n">-2</td><td class="n">10</td></tr><tr><td class="n">13</td><td class="">AJ Auxerre</td><td class="n">9</td><td class="n">-10</td><td class="n">10</td></tr><tr><td class="n">14</td><td class="">Brest</td><td class="n">8</td><td class="n">+2</td><td class="n">9</td></tr><tr><td class="n">15</td><td class="">Angers</td><td class="n">9</td><td class="n">-8</td><td class="n">8</td></tr><tr class="z-lilac"><td class="n">16</td><td class="">Troyes</td><td class="n">9</td><td class="n">-9</td><td class="n">8</td></tr><tr class="z-rose"><td class="n">17</td><td class="">Le Mans</td><td class="n">9</td><td class="n">-7</td><td class="n">7</td></tr><tr class="z-rose"><td class="n">18</td><td class="">Le Havre AC</td><td class="n">9</td><td class="n">-11</td><td class="n">2</td></tr></tbody></table></div><ul class="leaders"><li><span class="lbl">Top Scorer</span><span class="n">07</span><span class="who"><span class="p">Esteban Lepaul (REN)</span></span></li><li><span class="lbl">Top Assists</span><span class="n">07</span><span class="who"><span class="p">Florian Thauvin (RCL)</span></span></li><li><span class="lbl">Top CS</span><span class="n">05</span><span class="who"><span class="p">Özer (LILL)</span>, <span class="p">Mvogo (LOR)</span></span></li></ul><h3>Süper Lig</h3><p>The favourites won 2 of 4 matches. Game of the night: <strong>Istanbul Basaksehir</strong> 5-2 <strong>Samsunspor</strong>, with 7 goals.</p><div class="table-wrap"><table><caption>Table</caption><thead><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">GD</th><th class="n">Pts</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">Galatasaray</td><td class="n">10</td><td class="n">+11</td><td class="n">25</td></tr><tr class="z-blue"><td class="n">2</td><td class="">Amed SFK</td><td class="n">10</td><td class="n">+14</td><td class="n">23</td></tr><tr class="z-lilac"><td class="n">3</td><td class="">Trabzonspor</td><td class="n">10</td><td class="n">+16</td><td class="n">22</td></tr><tr class="z-lilac"><td class="n">4</td><td class="">Besiktas</td><td class="n">10</td><td class="n">+8</td><td class="n">19</td></tr><tr><td class="n">5</td><td class="">Kasimpasa</td><td class="n">10</td><td class="n">+4</td><td class="n">17</td></tr><tr><td class="n">6</td><td class="">Fenerbahce</td><td class="n">10</td><td class="n">+14</td><td class="n">16</td></tr><tr><td class="n">7</td><td class="">Çorum FK</td><td class="n">10</td><td class="n">+5</td><td class="n">16</td></tr><tr><td class="n">8</td><td class="">Kocaelispor</td><td class="n">10</td><td class="n">+2</td><td class="n">16</td></tr><tr><td class="n">9</td><td class="">Goztepe</td><td class="n">10</td><td class="n">+4</td><td class="n">15</td></tr><tr><td class="n">10</td><td class="">Istanbul Basaksehir</td><td class="n">10</td><td class="n">+1</td><td class="n">14</td></tr><tr><td class="n">11</td><td class="">Erzurum BB</td><td class="n">10</td><td class="n">-6</td><td class="n">14</td></tr><tr><td class="n">12</td><td class="">Alanyaspor</td><td class="n">9</td><td class="n">-2</td><td class="n">12</td></tr><tr><td class="n">13</td><td class="">Caykur Rizespor</td><td class="n">10</td><td class="n">-4</td><td class="n">11</td></tr><tr><td class="n">14</td><td class="">Konyaspor</td><td class="n">10</td><td class="n">-7</td><td class="n">8</td></tr><tr><td class="n">15</td><td class="">Gaziantep FK</td><td class="n">10</td><td class="n">-8</td><td class="n">8</td></tr><tr class="z-rose"><td class="n">16</td><td class="">Genclerbirligi</td><td class="n">9</td><td class="n">-11</td><td class="n">8</td></tr><tr class="z-rose"><td class="n">17</td><td class="">Samsunspor</td><td class="n">10</td><td class="n">-16</td><td class="n">4</td></tr><tr class="z-rose"><td class="n">18</td><td class="">Eyupspor</td><td class="n">10</td><td class="n">-25</td><td class="n">3</td></tr></tbody></table></div><ul class="leaders"><li><span class="lbl">Top Scorer</span><span class="n">09</span><span class="who"><span class="p">Victor Osimhen (GAL)</span></span></li><li><span class="lbl">Top Assists</span><span class="n">05</span><span class="who"><span class="p">Ernest Muçi (TRAB)</span></span></li><li><span class="lbl">Top CS</span><span class="n">05</span><span class="who"><span class="p">Onana (TRAB)</span>, <span class="p">Ederson (FEN)</span></span></li></ul><h3>Injuries And Returns</h3><ul class="team-news"><li><strong>Jorrel Hato</strong> (CHE) <span class="muted">Out</span>: Unspecified injury - Unknown return date</li><li><strong>Maxence Lacroix</strong> (CHE) <span class="muted">Out</span>: Hamstring injury - Unknown return date</li><li><strong>Lisandro Martínez</strong> (MUN) <span class="muted">Suspended</span>: Suspended until 22 Nov</li></ul><p class="muted">From the Premier League's official player status updates.</p><h3>FPL Corner</h3><p><strong>merino parade fc</strong> · Gameweek 9 so far: 25 pts (average 31) · overall rank 2,729,094, down 629,867 · captain Haaland 4 pts · 2 on the bench</p><div class="table-wrap"><table><caption>Hong Hu Express SuperLiga After Gameweek 9</caption><thead><tr><th class="n">#</th><th class="">Team</th><th class="n">GW</th><th class="n">Total</th></tr></thead><tbody><tr><td class="n">1</td><td class="">Oinkata Wanderers</td><td class="n">62</td><td class="n">435</td></tr><tr><td class="n">2</td><td class="">Mbaldmo</td><td class="n">21</td><td class="n">430</td></tr><tr><td class="n">3</td><td class="">Pedro Pepporonibble</td><td class="n">28</td><td class="n">429</td></tr><tr><td class="n">4</td><td class="">Useless dog</td><td class="n">41</td><td class="n">396</td></tr><tr><td class="n">5</td><td class="">M.I.L.Fernandes</td><td class="n">48</td><td class="n">356</td></tr><tr><td class="n">6</td><td class="">KopiSeweyDai</td><td class="n">40</td><td class="n">348</td></tr><tr class="mine"><td class="n">7</td><td class="">Gabi III</td><td class="n">25</td><td class="n">307</td></tr></tbody></table></div></section><footer><a href="../index.html">All editions</a> · The Kickoff, your daily sports digest.</footer></main><nav class="rail" aria-label="Sections"><div class="rail-fill" id="rail-fill"></div><a class="rail-tick" href="#arsenal" style="top:0.00%" aria-label="Jump to Arsenal" title="Arsenal"></a><a class="rail-tick" href="#football" style="top:50.00%" aria-label="Jump to Football" title="Football"></a></nav><script>/* Progress rail: fills as you read, highlights the current section, drives the corner chip. */
+(function () {
+  var secs = [].slice.call(document.querySelectorAll("main section[id]"));
+  var ticks = [].slice.call(document.querySelectorAll(".rail-tick"));
+  var fill = document.getElementById("rail-fill");
+  var chip = document.getElementById("chip");
+  if (!secs.length || !fill || !chip) return;
+
+  var WPM = 230;
+  var words = document.querySelector("main").innerText.trim().split(/\s+/).length;
+  var tops = [], max = 1, queued = false;
+
+  function measure() {
+    max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    tops = secs.map(function (s) {
+      return Math.min(max, Math.max(0, s.getBoundingClientRect().top + window.scrollY - 52));
+    });
+    tops[0] = 0;
+    for (var i = 1; i < tops.length; i++) tops[i] = Math.max(tops[i], tops[i - 1]);
+  }
+
+  function update() {
+    queued = false;
+    var n = secs.length;
+    var y = Math.min(max, Math.max(0, window.scrollY));
+    var cur = 0;
+    for (var k = 0; k < n; k++) if (tops[k] <= y + 1) cur = k;
+    var end = cur + 1 < n ? tops[cur + 1] : max;
+    var span = end - tops[cur];
+    var frac = span > 0 ? Math.min(1, (y - tops[cur]) / span) : 0;
+    var p = y >= max - 1 ? 1 : (cur + frac) / n;
+    fill.style.height = (p * 100).toFixed(2) + "%";
+    ticks.forEach(function (t, i) {
+      t.classList.toggle("done", i <= cur);
+      if (i === cur) t.setAttribute("aria-current", "true");
+      else t.removeAttribute("aria-current");
+    });
+    var read = y / max;
+    var pct = Math.round(read * 100);
+    var mins = Math.ceil((words * (1 - read)) / WPM);
+    chip.textContent = pct >= 100 ? "100% · finished" : pct + "% · " + Math.max(1, mins) + " min left";
+  }
+
+  function queue() {
+    if (!queued) { queued = true; window.requestAnimationFrame(update); }
+  }
+
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", function () { measure(); queue(); });
+  window.addEventListener("load", function () { measure(); queue(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); queue(); });
+  measure();
+  update();
+})();
+</script></body></html>
