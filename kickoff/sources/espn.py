@@ -8,6 +8,7 @@ SCORES = "https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/scoreboa
 TABLES = "https://site.api.espn.com/apis/v2/sports/soccer/{league}/standings"
 CORE = "https://sports.core.api.espn.com/v2/sports/soccer/leagues/{league}/seasons/{year}"
 SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/summary"
+SCHEDULE = "https://site.api.espn.com/apis/site/v2/sports/soccer/{league}/teams/{team}/schedule"
 
 LEAGUES = {
     "eng.1": "Premier League", "esp.1": "La Liga", "fra.1": "Ligue 1",
@@ -58,11 +59,16 @@ def get_matches_on(league, utc_date):
     return [parse_match(e, league) for e in data["events"]]
 
 
+def window_start(edition_date):
+    """When the previous edition's run happened: 7:15am Singapore time the day before = 23:15 UTC two days before."""
+    return datetime.combine(edition_date - timedelta(days=2), datetime.min.time(), tzinfo=timezone.utc) \
+        + timedelta(hours=23, minutes=15)
+
+
 def recent_results(league, edition_date):
     """Finished matches that belong in the edition for edition_date (a date in Singapore time).
     That means everything that finished since the previous edition's run (7:15am SGT the day before)."""
-    prev_run = datetime.combine(edition_date - timedelta(days=2), datetime.min.time(), tzinfo=timezone.utc) \
-        + timedelta(hours=23, minutes=15)
+    prev_run = window_start(edition_date)
     found = []
     for back in (2, 1):
         found += get_matches_on(league, edition_date - timedelta(days=back))
@@ -140,3 +146,68 @@ def results_between(league, start, end, pause=0.1):
         day += timedelta(days=1)
         time.sleep(pause)
     return out
+
+
+# ---- One team's games, in every competition ---------------------------------------------------
+
+def _score(c):
+    sc = c.get("score")
+    if isinstance(sc, dict):
+        sc = sc.get("value", sc.get("displayValue"))
+    try:
+        return int(float(sc))
+    except (TypeError, ValueError):
+        return 0
+
+
+def parse_schedule_event(e):
+    comp = e["competitions"][0]
+    teams = {c["homeAway"]: c for c in comp["competitors"]}
+    team = lambda s: {"id": teams[s]["team"]["id"], "name": teams[s]["team"]["displayName"],  # noqa: E731
+                      "abbr": teams[s]["team"].get("abbreviation", "")}
+    lg = e.get("league") or {}
+    return {"id": e["id"], "kickoff": e["date"], "league": lg.get("slug") or "all", "competition": lg.get("name") or "",
+            "home": team("home"), "away": team("away"), "home_score": _score(teams["home"]), "away_score": _score(teams["away"]),
+            "completed": comp["status"]["type"]["state"] == "post"}
+
+
+def get_team_games(team_id, domestic_league, upcoming=False, today=None):
+    """One team's games across every competition, oldest first. ESPN's all-competitions list can miss recent
+    league games, so the domestic league's own list is merged in. upcoming=True gives fixtures still to play."""
+    year = season_year(today or datetime.now(timezone.utc).date())
+    if upcoming:
+        requests = [("all", {"fixture": "true"})]
+    else:
+        requests = [("all", {}), (domestic_league, {"season": year})]
+    games, failures = {}, 0
+    for league, params in requests:
+        try:
+            data = get_json(SCHEDULE.format(league=league, team=team_id), params)
+        except SourceError:
+            failures += 1
+            continue
+        for e in data.get("events", []):
+            g = parse_schedule_event(e)
+            games[g["id"]] = g
+    if failures == len(requests):
+        raise SourceError("team schedule unavailable")
+    return sorted(games.values(), key=lambda g: g["kickoff"])
+
+
+def get_match_details(event_id, league="all"):
+    """Goals (with assists) and red cards from a match summary. Works for any competition."""
+    data = get_json(SUMMARY.format(league=league), {"event": event_id})
+    comp = data["header"]["competitions"][0]
+    side_of = {c["id"]: c["homeAway"] for c in comp["competitors"]}
+    goals, reds = [], []
+    for d in comp.get("details", []):
+        people = [p["athlete"]["displayName"] for p in d.get("participants", []) if p.get("athlete")]
+        minute = d["clock"]["displayValue"] + ((d.get("addedClock") or {}).get("displayValue") or "")
+        side = side_of.get((d.get("team") or {}).get("id"))
+        if d.get("scoringPlay"):
+            goals.append({"minute": minute, "player": people[0] if people else "Unknown", "side": side,
+                          "penalty": bool(d.get("penaltyKick")), "own_goal": bool(d.get("ownGoal")),
+                          "assist": people[1] if len(people) > 1 and not d.get("ownGoal") else None})
+        elif d.get("redCard"):
+            reds.append({"minute": minute, "player": people[0] if people else "Unknown", "side": side})
+    return {"goals": goals, "reds": reds}

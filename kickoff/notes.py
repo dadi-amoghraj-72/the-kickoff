@@ -12,7 +12,9 @@ from kickoff.clubs import ARSENAL_ID, CLUBS, is_big6, is_listed
 
 BIG_SIX_ORDER = ["382", "360", "364", "363", "367"]  # Arsenal has its own section
 TIERS = {"short": ("one sentence, at most 25 words", 30), "standard": ("two to three sentences, at most 55 words", 65),
-         "derby": ("three to four sentences, at most 80 words", 95)}
+         "derby": ("three to four sentences, at most 80 words", 95),
+         "arsenal": ("four to six sentences, at most 110 words; cover the result, the scorers and assists, the table or recent form", 125),
+         "women": ("two sentences, at most 45 words", 55)}
 
 SYSTEM = """You write the match notes for The Kickoff, a personal daily sports digest read by one football fan in Singapore.
 
@@ -23,6 +25,8 @@ Hard rules:
 - Use ONLY the facts supplied for each match. Add nothing from memory: no form, history, records, injuries, opinions,
   predictions or comparisons. Do not guess at how a goal was scored.
 - Use club and player names exactly as they appear in the facts. Every number you write must come from the facts.
+- Where a goal has an "assist", you may credit it. If the facts include "form", you may describe recent form and
+  the unbeaten run exactly as given there.
 - If the facts are thin, write less. A short accurate note beats a long invented one.
 - Each match has a "length" instruction. Follow it strictly: a short note is ONE sentence.
 - Write minutes in plain words ("the 38th minute", "stoppage time"). Never copy symbols such as ' or +.
@@ -83,8 +87,8 @@ def match_facts(m, tier, rows=None, previous=None, competition="Premier League")
     facts = {
         "id": m["id"], "competition": competition, "length": TIERS[tier][0],
         "home": names["home"], "away": names["away"], "final_score": f"{m['home_score']}-{m['away_score']}",
-        "goals": [{"minute": g["minute"], "scorer": g["player"], "for": names.get(g["side"], "?"), "type": kind(g)}
-                  for g in m["goals"]],
+        "goals": [dict({"minute": g["minute"], "scorer": g["player"], "for": names.get(g["side"], "?"), "type": kind(g)},
+                       **({"assist": g["assist"]} if g.get("assist") else {})) for g in m["goals"]],
         "red_cards": [{"minute": r["minute"], "player": r["player"], "team": names.get(r["side"], "?")} for r in m["reds"]],
     }
     if rows:
