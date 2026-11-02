@@ -122,16 +122,26 @@ for gid, b in BOXES.items():
                 continue
             v = dict(zip(t["labels"], a["stats"]))
             pts, reb, ast, stl, blk = (int(v[k]) for k in ("PTS", "REB", "AST", "STL", "BLK"))
-            if pts >= 40 or sum(x >= 10 for x in (pts, reb, ast, stl, blk)) >= 3 or (pts >= 20 and reb >= 20) or blk >= 5 or stl >= 5:
+            if pts >= 40 or sum(x >= 10 for x in (pts, reb, ast, stl, blk)) >= 3 or (pts >= 20 and reb >= 20) or blk >= 5 or stl >= 5 \
+                    or reb >= (10 if a["pos"] == "G" else 15) or ast >= 15:
                 raw_hits.add((a["id"], gid))
 texts, hits = nba.standouts(ALL, BYID, BOXES)
 check("independent: the standout hits equal a separate scan of the raw box scores (40 pts, triple-double, 20-20, 5 blocks, 5 steals, game-winner)", set(hits) >= raw_hits and len(set(hits) - raw_hits) <= 1, (set(hits) ^ raw_hits))
-check("the real standouts are Doncic (45), Wembanyama (43) and Dunn (7 steals), best first", [t.split(" (")[0] for t in texts[:3]] == ["Luka Doncic", "Victor Wembanyama", "Kris Dunn"], texts)
-check("a standout line gives the stat line and the result from the player's side (Dunn's team lost)", "Kris Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl; 124-112 loss to Warriors" in texts[2] and "131-125 win over Raptors" in texts[0], texts)
+check("the real standouts are Doncic (45 points, a guard with 15 rebounds), Wembanyama (43), Kessler (15 rebounds, a center) and Dunn (7 steals), best first",
+      [t.split(" (")[0] for t in texts[:4]] == ["Luka Doncic", "Victor Wembanyama", "Walker Kessler", "Kris Dunn"] and len(texts) == 4, texts)
+check("a standout line gives the stat line and the result from the player's side (Dunn's team lost)", "Kris Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl; 124-112 loss to Warriors" in texts[3] and "131-125 win over Raptors" in texts[0], texts)
 check("no standout line repeats its own stat as a tag (no '40-point game' text)", not any("point game" in t or "blocks)" in t for t in texts))
 one = dict(wem, PTS=12, REB=10, AST=10, BLK=0)
 check("a triple-double is a standout and is named; a double-double is not; 20 points and 20 rebounds counts, 19 rebounds does not",
       "triple-double" in nba.kinds_of(one) and not nba.kinds_of(dict(one, AST=9)) and "20-20 game" in nba.kinds_of(dict(wem, PTS=20, REB=20, BLK=0)) and "20-20 game" not in nba.kinds_of(dict(wem, PTS=22, REB=19, BLK=0)))
+def kd(**k):
+    return nba.kinds_of({**dict(wem, PTS=3, REB=1, AST=1, BLK=0, STL=0, pos="F"), **k})
+
+
+check("rebounds by position: a guard (G) needs 10 (9 no, 10 yes), a forward or center needs 15 (14 no, 15 yes)", not kd(pos="G", REB=9) and kd(pos="G", REB=10) and not kd(pos="F", REB=14) and kd(pos="F", REB=15) and not kd(pos="C", REB=14) and kd(pos="C", REB=15) and kd(pos="PG", REB=10) and kd(pos="SG", REB=10))
+check("15 assists is a standout for anyone (14 no); an unknown position is treated as not a guard", not kd(AST=14) and kd(AST=15) and kd(pos="G", AST=15) and not kd(pos="", REB=10) and kd(pos="", REB=15))
+check("no double counting: a triple-double or a 20-20 game is not also listed as a rebounds or assists standout", kd(pos="G", PTS=12, REB=12, AST=10) == ["triple-double"] and kd(pos="C", PTS=22, REB=21) == ["20-20 game"] and kd(pos="G", PTS=10, REB=3, AST=16) == ["16 assists"])
+check("marks: the rebounds or assists that earned the line are coloured, nothing else", nba.marks_of(dict(wem, PTS=3, REB=10, AST=2, BLK=0, STL=0, pos="G"), ["10 rebounds"]) == {"reb"} and nba.marks_of(dict(wem, PTS=3, REB=1, AST=15, BLK=0, STL=0, pos="F"), ["15 assists"]) == {"ast"})
 check("thresholds are exact: 39 points no, 40 yes; 4 blocks no, 5 yes; 4 steals no, 5 yes", not nba.kinds_of(dict(wem, PTS=39, BLK=4, STL=4, REB=1, AST=1)) and nba.kinds_of(dict(wem, PTS=40, BLK=0, STL=0, REB=1, AST=1))
       and nba.kinds_of(dict(wem, PTS=3, BLK=5, STL=0, REB=1, AST=1)) and nba.kinds_of(dict(wem, PTS=3, BLK=0, STL=5, REB=1, AST=1)))
 
@@ -140,7 +150,8 @@ check("thresholds are exact: 39 points no, 40 yes; 4 blocks no, 5 yes; 4 steals 
 rows_, _ = nba.standouts_marked(ALL, BYID, BOXES)
 by_name = {t.split(" (")[0]: (t, m) for t, m in rows_}
 check("Dunn's standout: only the 7 steals (the reason he is a standout) is marked; his 12 points are plain", by_name["Kris Dunn"][1] == {"stl"} and nba.standout_html(*by_name["Kris Dunn"]).count('class="hl"') == 1 and '<span class="hl">7 stl</span>' in nba.standout_html(*by_name["Kris Dunn"]))
-check("Doncic's standout: his 45 points and 5 steals are marked, his 15 rebounds and 6 assists are not", by_name["Luka Doncic"][1] == {"pts", "stl"} and '<span class="hl">45 pts</span>' in nba.standout_html(*by_name["Luka Doncic"]) and '<span class="hl">5 stl</span>' in nba.standout_html(*by_name["Luka Doncic"]) and 'class="hl">15 reb' not in nba.standout_html(*by_name["Luka Doncic"]))
+check("Doncic's standout: his 45 points, 15 rebounds (a guard needs 10) and 5 steals are marked, his 6 assists are not", by_name["Luka Doncic"][1] == {"pts", "reb", "stl"} and all(f'<span class="hl">{x}</span>' in nba.standout_html(*by_name["Luka Doncic"]) for x in ("45 pts", "15 reb", "5 stl")) and 'class="hl">6 ast' not in nba.standout_html(*by_name["Luka Doncic"]))
+check("Kessler (a center) is a standout for his 15 rebounds, and only the rebounds are marked", by_name["Walker Kessler"][1] == {"reb"})
 check("Wembanyama's: the 43 points and the 6 blocks are marked", by_name["Victor Wembanyama"][1] == {"pts", "blk"})
 td_p = dict(wem, PTS=12, REB=10, AST=10, BLK=0, STL=3)
 check("a triple-double marks the three categories of 10 or more and the tag, not the 3 steals", nba.marks_of(td_p, nba.kinds_of(td_p)) == {"pts", "reb", "ast", "tag"})
@@ -470,7 +481,7 @@ def fake_get(url):
 src = espn_nba.Source(fake_get, pause=0)
 b = src.box("1")
 check("source: a box score is trimmed to players, team totals, the pre-game line, ESPN's injury list and only the scoring plays",
-      b["players"][0]["athletes"][0] == {"id": "1", "name": "P One", "starter": True, "dnp": False, "reason": "R", "stats": ["30", "12"]} and b["teams"] == {"AAA": {"blocks": "4"}}
+      b["players"][0]["athletes"][0] == {"id": "1", "name": "P One", "pos": "", "starter": True, "dnp": False, "reason": "R", "stats": ["30", "12"]} and b["teams"] == {"AAA": {"blocks": "4"}}
       and b["injuries"] == {"2": {"status": "Out", "type": "Knee"}, "3": {"status": "Out", "type": ""}} and b["odds"]["home_dog"] is True and len(b["plays"]) == 1 and b["plays"][0]["athlete"] == "1", b)
 sc = src.schedule("8", 2026)
 check("source: a team's playoff schedule is trimmed to id, date, status, the round note, and both sides with scores; the season is passed through", sc == [{"id": "9", "date": "2026-04-19T22:30Z", "status": "STATUS_FINAL", "headline": "East 1st Round - Game 1",

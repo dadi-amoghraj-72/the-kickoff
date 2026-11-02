@@ -36,7 +36,8 @@ class Source:
         for t in j["boxscore"]["players"]:
             st = (t.get("statistics") or [{}])[0]
             players.append({"team": t["team"]["abbreviation"], "labels": st.get("labels", []), "athletes": [
-                {"id": a["athlete"]["id"], "name": a["athlete"]["displayName"], "starter": bool(a.get("starter")), "dnp": bool(a.get("didNotPlay")),
+                {"id": a["athlete"]["id"], "name": a["athlete"]["displayName"], "pos": (a["athlete"].get("position") or {}).get("abbreviation", ""),
+                 "starter": bool(a.get("starter")), "dnp": bool(a.get("didNotPlay")),
                  "reason": a.get("reason") or "", "stats": a.get("stats", [])} for a in st.get("athletes", [])]})
         teams = {t["team"]["abbreviation"]: {s["name"]: s["displayValue"] for s in t["statistics"]} for t in j["boxscore"]["teams"]}
         pc = (j.get("pickcenter") or [None])[0]

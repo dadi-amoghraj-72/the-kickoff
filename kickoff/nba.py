@@ -29,6 +29,8 @@ TEAMS = {  # where each starts the season; the state keeps the latest team seen,
     "4279888": "POR", "6606": "POR", "4277905": "WSH", "6583": "WSH", "4396993": "IND", "4395628": "NO", "5041939": "DAL", "4432166": "DET"}
 FIRST = ("LAL", "PHI", "CLE", "SA", "BOS")  # D's teams: their games always come first, in this order; every other game follows by tip-off time
 POINTS, BIG_REB, BLOCKS, STEALS = 40, 20, 5, 5   # standout thresholds
+REBOUNDS, GUARD_REBOUNDS, ASSISTS = 15, 10, 15   # rebounds (10 for a guard, 15 for anyone else) and assists; D's choice, to be reviewed after a month of real use
+GUARDS = ("G", "PG", "SG")                       # ESPN's box score lists positions as G, F or C
 AUTO_HITS, AUTO_DAYS, AUTO_DROP_DAYS = 3, 30, 56  # three standouts in 30 days joins; eight weeks without one drops
 CLUTCH_SECONDS = 5.0                       # a go-ahead score in the last five seconds of the fourth quarter or overtime is a game-winner
 MAX_STANDOUTS = 5
@@ -138,7 +140,7 @@ def players_of(box, game):
             d = dict(zip(t["labels"], a["stats"]))
             played = not a["dnp"] and bool(a["stats"]) and num(d.get("MIN")) > 0
             out.append({"id": a["id"], "name": a["name"], "team": t["team"], "opp": opp, "mine": mine, "game": game["id"], "dnp": not played,
-                        "reason": (a.get("reason") or "").capitalize(), "starter": a["starter"],
+                        "reason": (a.get("reason") or "").capitalize(), "starter": a["starter"], "pos": a.get("pos", ""),
                         **{k: num(d.get(k)) for k in ("MIN", "PTS", "REB", "AST", "STL", "BLK", "TO")},
                         "fg": d.get("FG", ""), "tp": d.get("3PT", ""), "ft": d.get("FT", "")})
     return out
@@ -159,6 +161,10 @@ def kinds_of(p, deciding_ids=()):
         k.append("triple-double")
     if p["PTS"] >= BIG_REB and p["REB"] >= BIG_REB:
         k.append("20-20 game")
+    if p["REB"] >= (GUARD_REBOUNDS if p.get("pos") in GUARDS else REBOUNDS) and "triple-double" not in k and "20-20 game" not in k:
+        k.append(f"{p['REB']} rebounds")
+    if p["AST"] >= ASSISTS and "triple-double" not in k:
+        k.append(f"{p['AST']} assists")
     if p["BLK"] >= BLOCKS:
         k.append(f"{p['BLK']} blocks")
     if p["STL"] >= STEALS:
@@ -214,6 +220,10 @@ def marks_of(p, kinds):
         m |= {lab for key, lab in STAT_KEYS if p[key] >= 10}
     if "20-20 game" in kinds:
         m |= {"pts", "reb"}
+    if any(k.endswith(" rebounds") for k in kinds):
+        m.add("reb")
+    if any(k.endswith(" assists") for k in kinds):
+        m.add("ast")
     if p["BLK"] >= BLOCKS:
         m.add("blk")
     if p["STL"] >= STEALS:
