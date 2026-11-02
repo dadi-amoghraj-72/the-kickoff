@@ -26,7 +26,7 @@ TRACKED = {  # D's list (SPEC.md, Source: NBA.com 2026-27 season previews): ESPN
 TEAMS = {  # where each starts the season; the state keeps the latest team seen, so a trade is followed
     "5104157": "SAS", "4278073": "OKC", "3112335": "DEN", "3945274": "LAL", "3934672": "NYK", "3136195": "NYK", "3032977": "MIA", "1966": "PHI",
     "3059318": "PHI", "3917376": "PHI", "3908809": "CLE", "3992": "CLE", "3975": "GSW", "3202": "HOU", "4594268": "MIN", "4065648": "BOS",
-    "4279888": "POR", "6606": "POR", "4277905": "WAS", "6583": "WAS", "4396993": "IND", "4395628": "NOP", "5041939": "DAL", "4432166": "DET"}
+    "4279888": "POR", "6606": "POR", "4277905": "WSH", "6583": "WSH", "4396993": "IND", "4395628": "NOP", "5041939": "DAL", "4432166": "DET"}
 FIRST = ("LAL", "PHI", "CLE", "SAS", "BOS")  # D's teams: their games always come first, in this order; every other game follows by tip-off time
 POINTS, BIG_REB, BLOCKS, STEALS = 40, 20, 5, 5   # standout thresholds
 REBOUNDS, GUARD_REBOUNDS, ASSISTS = 15, 10, 15   # rebounds (10 for a guard, 15 for anyone else) and assists; D's choice, to be reviewed after a month of real use
@@ -40,7 +40,7 @@ CUP_SCAN = (date(2026, 10, 20), date(2026, 12, 20))   # the Cup's group stage an
 CUP_HOME = ("Quarterfinals", "Semifinals")            # Cup rounds that are played in a home arena (group games and the final are not)
 
 
-CODE_FIX = {"GS": "GSW", "NO": "NOP", "NY": "NYK", "SA": "SAS", "UTAH": "UTA", "WSH": "WAS"}   # ESPN's odd team codes, made the standard NBA three letters
+CODE_FIX = {"GS": "GSW", "NO": "NOP", "NY": "NYK", "SA": "SAS", "UTAH": "UTA"}   # the five ESPN team codes that are not three letters, made three (WSH is already three: left as ESPN has it)
 
 
 def code(abbr):

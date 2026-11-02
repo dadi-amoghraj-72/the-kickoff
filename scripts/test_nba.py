@@ -17,8 +17,8 @@ FX = ROOT / "tests" / "fixtures"
 L = lambda n: json.loads((FX / n).read_text())  # noqa: E731
 SBS, BOXES, STAND, WINDOW = L("nba_scoreboards.json"), L("nba_boxes.json"), L("nba_standings.json"), L("nba_window.json")
 SCHED, SBOXES, STAND26 = L("nba_series_schedule.json"), L("nba_series_boxes.json"), L("nba_standings_2026.json")
-STD_FIX = {"GS": "GSW", "NO": "NOP", "NY": "NYK", "SA": "SAS", "UTAH": "UTA", "WSH": "WAS"}   # a separate copy, written out here, of the six ESPN codes the module fixes
-OFFICIAL = {"ATL", "BKN", "BOS", "CHA", "CHI", "CLE", "DAL", "DEN", "DET", "GSW", "HOU", "IND", "LAC", "LAL", "MEM", "MIA", "MIL", "MIN", "NOP", "NYK", "OKC", "ORL", "PHI", "PHX", "POR", "SAC", "SAS", "TOR", "UTA", "WAS"}
+STD_FIX = {"GS": "GSW", "NO": "NOP", "NY": "NYK", "SA": "SAS", "UTAH": "UTA"}   # a separate copy, written out here, of the five ESPN codes the module fixes (the ones that are not three letters)
+OFFICIAL = {"ATL", "BKN", "BOS", "CHA", "CHI", "CLE", "DAL", "DEN", "DET", "GSW", "HOU", "IND", "LAC", "LAL", "MEM", "MIA", "MIL", "MIN", "NOP", "NYK", "OKC", "ORL", "PHI", "PHX", "POR", "SAC", "SAS", "TOR", "UTA", "WSH"}
 fixc = lambda a: STD_FIX.get(a, a)  # noqa: E731
 EMPTY_BOX = {"players": [], "teams": {}, "odds": None, "plays": [], "injuries": {}}
 results = []
@@ -295,12 +295,12 @@ check("games already reported are skipped: 9 new with two in the state", part["s
 # ---- Team codes ----
 raw_codes = {x["team"]["abbreviation"] for e in EVENTS for x in e["competitions"][0]["competitors"]}
 std_codes = {e["team"]["abbreviation"] for c in STAND["children"] for e in c["standings"]["entries"]}
-check("independent: ESPN's own codes include six non-standard ones (GS, NO, NY, SA, UTAH, WSH); the module's fix turns the 30 into the official NBA three-letter codes",
-      {"GS", "NO", "NY", "SA", "UTAH", "WSH"} <= std_codes and {nba.code(c) for c in std_codes} == OFFICIAL and len(OFFICIAL) == 30 and nba.code("GS") == "GSW" and nba.code("BOS") == "BOS")
-check("in the page every team code is official: no GS, NY, SA, NO, UTAH or WSH token anywhere, and GSW is there", not re.search(r"\b(GS|NY|SA|NO|UTAH|WSH)\b", text(out["html"]).replace("NO ", "")) and "GSW" in text(out["html"]) and {c for c in re.findall(r"\(([A-Z]{2,4})\)", text(out["html"]))} <= OFFICIAL, sorted({c for c in re.findall(r"\(([A-Z]{2,4})\)", text(out["html"]))} - OFFICIAL))
+check("independent: ESPN's own codes include five that are not three letters (GS, NO, NY, SA, UTAH); the module's fix makes all 30 three letters, leaving WSH as ESPN has it",
+      {"GS", "NO", "NY", "SA", "UTAH", "WSH"} <= std_codes and nba.code("WSH") == "WSH" and all(len(c) == 3 for c in OFFICIAL) and {nba.code(c) for c in std_codes} == OFFICIAL and len(OFFICIAL) == 30 and nba.code("GS") == "GSW" and nba.code("BOS") == "BOS")
+check("in the page every team code is official: no GS, NY, SA, NO or UTAH token anywhere, and GSW is there", not re.search(r"\b(GS|NY|SA|NO|UTAH)\b", text(out["html"]).replace("NO ", "")) and "GSW" in text(out["html"]) and {c for c in re.findall(r"\(([A-Z]{2,4})\)", text(out["html"]))} <= OFFICIAL, sorted({c for c in re.findall(r"\(([A-Z]{2,4})\)", text(out["html"]))} - OFFICIAL))
 check("every player line carries a team code in brackets, D's own players and the DNP lines included", all(re.match(r".+ \([A-Z]{3}\): ", n) for gid in BOXES for n in notes_for(gid)) and sum(1 for gid in BOXES for n in notes_for(gid)) > 20)
 check("Curry's line shows GSW and the Spurs game uses SAS: 'Stephen Curry (GSW): DNP' and 'Victor Wembanyama (SAS)'", any(n.startswith("Stephen Curry (GSW): DNP") for n in notes_for("401909905")) and nba.TEAMS["3975"] == "GSW" and nba.TEAMS["5104157"] == "SAS" and nba.FIRST[3] == "SAS")
-check("all of D's players' starting teams and the order list use official codes", set(nba.TEAMS.values()) <= OFFICIAL and set(nba.FIRST) <= OFFICIAL)
+check("all of D's players' starting teams and the order list use three-letter codes (Trae Young and Anthony Davis are WSH)", set(nba.TEAMS.values()) <= OFFICIAL and set(nba.FIRST) <= OFFICIAL and nba.TEAMS["4277905"] == nba.TEAMS["6583"] == "WSH")
 
 # ---- Standings and arrows ----
 east = next(c for c in STAND["children"] if c["name"].startswith("East"))
