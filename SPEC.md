@@ -35,7 +35,7 @@ The edition lands at 8:00am SGT every day, seven days a week. The job starts aro
 - **Telegram ping:** a plain message from a dedicated The Kickoff bot, separate from D's other bots. It holds the date, the top three headlines and the link to that day's page.
 - **Page:** each edition gets its own address by date, plus an archive page listing past editions.
 - **What makes it in time:** European football, the Champions League, F1 races in the Americas and West Indies Test days all finish before 8am SGT.
-- **What lands a day later:** NFL late-afternoon games, Sunday Night Football and Monday Night Football finish later in the Singapore morning. Most NBA games do too, so their results appear in the next day's edition.
+- **What lands a day later:** NFL late-afternoon games, Sunday Night Football and Monday Night Football finish later in the Singapore morning. Most NBA games do too, so their results appear in the next day's edition; a game still being played when an edition goes out is shown as "In progress" and appears as a final in the next one.
 
 ## Edition structure and weekly rhythm
 
@@ -54,7 +54,7 @@ Every edition follows the same order, and a section appears only when it has som
 | --- | --- |
 | Every day | Tables appear only when changed: top 6 plus D's clubs outside it, or "No change since Tuesday" |
 | Monday | Weekend wrap, Games to Watch for the week, NFL early-game scores |
-| Tuesday | Table day: full tables for the six leagues and the WSL, NBA conference standings, NFL late-game and Sunday Night Football scores |
+| Tuesday | Table day: full tables for the six leagues and the WSL, NFL late-game and Sunday Night Football scores (NBA standings come every day, with movement arrows) |
 | Wednesday | NFL wrap: every game by division, standouts, Player of the Week, division tables |
 | Saturday | Thursday Night Football score |
 
@@ -70,6 +70,56 @@ Every edition follows the same order, and a section appears only when it has som
 4. **Otherwise** the normal order stays.
 
 **Major events (F1 and Grand Slam tennis), built from the start:** when an actual F1 race has happened, or a Grand Slam has reached the quarter-finals or later, two things always happen. (1) It gets a headline line under "Major Events" in The Big Stuff. (2) Its block leaves Around the Sporting World and becomes its own section, placed right after the lead sport group (Arsenal and Football together, unless another sport leads), with F1 before Tennis. On other days F1 and Tennis stay at the top of Around the Sporting World, ahead of the other sports. The ordering rules live in `kickoff/order.py` and are tested by `scripts/test_order.py`.
+
+## Cross-sport conventions
+
+Rules that came out of building the F1, tennis, NFL and NBA sections with D, written so the remaining sports (baseball, Young Guns, Around the sporting world) and any later retrofit follow the same house style. "Applied" means already in the code; "proposal" means D has not decided yet (see the last list).
+
+**Tables and layout**
+
+1. **Title and counts:** a table's title is a centred header row inside the table; a small muted line under it carries any counts ("13/14 games played", "* 2 underdog wins"). No separate heading that repeats the title, and no count that tells nothing ("8 of 11 games").
+2. **Names:** full team names only on game/scoreboard lines (they wrap onto two lines when long; type is never shrunk to fit); every other table uses three-letter codes and "initial + surname" for people; notes lines use full player names with the team code in brackets. Team codes are always three letters: where ESPN's code is not (NBA: GS, NO, NY, SA, UTAH) a small fix map makes it three (GSW, NOP, NYK, SAS, UTA); a code that is already three letters is left as ESPN has it (WSH). Odd names get a fix map too (LA Clippers shown as Los Angeles Clippers). A test lists every name and code, so a new oddity fails loudly.
+3. **Type size:** tables use the body scale, not a shrunken one: names 15 to 16px, scores 18px bold (24px in a series table), notes lines 14px (never bigger than the team names), table titles 16 to 18px. Let long names wrap. (The older F1, tennis, cricket, football and NFL tables are 13 to 14px: see the proposals.)
+4. **Columns:** fixed widths in a colgroup, numbers right-aligned or centred as D asks, zero-padded where columns must line up (F1 points), tight gaps, a small buffer after the last column, 360px phone width first.
+5. **Lines:** a hairline only between items (between games), never inside one (never between a score and its notes). No double lines, no legends on league tables.
+6. **Markers beat words:** a white asterisk for an outright underdog win (NFL and NBA) with the count in the table header; the house icon for the home team only where home advantage matters (NFL always except at a neutral site; NBA only from the play-in on and for home Cup knockouts); a small gold diamond bullet with a hanging indent for each notes line; ▲n / ▼n / – for movement; gold numbers for the stat values on a notes line; coloured team codes for tonight's games in the tables below.
+7. **Game colours (applied in the NBA):** each game shown above gets one of 15 locked pastel colours and both of its teams carry it as a coloured team code in the tables below, so a night of 10 to 12 games reads at a glance; the colour is not used in the games table itself and teams that did not play stay plain.
+8. **No favourites:** winner in bold, but no colour or bold for D's own teams, except through an explicit order list (NBA: Lakers, 76ers, Cavaliers, Spurs, Celtics first) or where D asks (NFL: Lawrence and Rodgers always listed).
+9. **No repetition:** an item appears once. Standouts do not repeat the score (the games are just above); highlights are not repeated as player lines; a series table replaces its rows in the games list.
+
+**Editions and state**
+
+10. **New means "not yet shown":** each sport keeps the ids it has reported in the state files and shows what finished since; the clock only cuts off stale items (60 hours in the NBA, 6 days in the NFL), so a missed day catches up and a first run does not dump a month. State is kept in small JSON files under `data/state/` (see `kickoff/state.py`); the NFL and NBA sections are not yet wired into the daily build, so their state is still passed in by the previews and tests.
+11. **In progress:** a game being played when the edition goes out is shown with the score so far and an "In progress" tag, no winner and no notes, is not marked as reported, and appears as a final in the next edition. (The NFL still says LIVE: see the proposals.)
+12. **Tables appear on the days they matter:** NBA standings every day with movement arrows against the last table shown; NBA Cup tables only on days Cup group games are in the edition; the regular-season standings stop once the playoffs start; football tables on change and on Tuesdays; the Champions League table only on league-phase matchdays.
+13. **Tag line above a game** for the competition or stage, small and uppercase ("NBA Cup · Group Play", "East 1st Round · Game 3"); the day label joins it when one edition spans two US dates.
+14. **Tracked players:** always shown when their team played, with the stat line or "Name (TEAM): DNP (status, reason)" from ESPN's injury listing (else the box score's reason, else a plain DNP); DNP lines sit below every player who played; one best performer per game is added when he is not already shown; players are followed by id; off-list players join after three standouts in 30 days and drop after 56 days without one; D's list never drops.
+15. **Standouts:** clear thresholds only (position-aware where position matters, as for NBA guards' rebounds), ranked, three to five, never padded; only the qualifying stat is coloured gold; thresholds are reviewed after a month of real editions.
+16. **Series tables (NBA playoffs, reusable):** header = the two teams (full names, with seeds) and the series score in large numbers either side of the word "series"; a row for every possible game made in advance (number and date, the score once played with the notes under it, Singapore time for scheduled games, "if necessary", "–" when the series is over); notes cached in the state. Reuse this for baseball postseason series, two-legged football ties (aggregate in the header, one row per leg, extra time and penalties), Test series and tennis team events.
+17. **A failing source never breaks the edition:** that part is left out and counted; nothing raises. Everything is code-only unless the text really needs language (only the F1 race story uses Claude).
+
+**How we build and test (D's way)**
+
+18. D sends numbered design points: answer each. "Comment first" means discuss and wait; otherwise build. Show a 360px picture and a live link every time; D reads on the iPhone in dark mode, so check light mode only for readability.
+19. Each sport has a saver script for real fixtures (`scripts/save_nba_fixtures.py`, `scripts/save_nfl_fixtures.py`), a preview script with a `--publish` flag and demo pages, and a test file whose numbers are cross-checked against the raw data by a separate read, never by the module's own code. No test may be vacuous (`or True`, empty lists); the full gate `scripts/run_all_tests.py` and the secret scan run before every commit.
+20. Known traps: Python 3.9 forbids the same quote inside a nested f-string; a CSS `em` inside a small-font pseudo-element is relative to that small font; GitHub Pages needs a minute or two after a push (a fresh page can briefly 404); the Mac's `sed -i` needs a backup suffix.
+
+**Carry-forward to the remaining sports**
+
+- **Baseball (checkpoint 10):** the Dodgers and D's two players follow rules 11 and 14 (a line for Ohtani and Yamamoto whenever the Dodgers played, with a reason when they did not pitch or bat); the postseason uses the series table (best of 5 or 7) and the house icon, the regular season does not; the underdog asterisk comes from ESPN's odds if the MLB feed carries them; three-letter team codes with a fix map (ESPN uses SD, SF, TB, KC and CWS style codes: check at build); thresholds position-aware (batters against pitchers); an overnight game in progress follows rule 11. Test ESPN and the MLB Stats API as the spec already says, preferring ESPN if it serves everything (one familiar source, one saver pattern).
+- **Young Guns (checkpoint 11):** the tracked-player machinery (auto-join, drop-off, hits in the state) lives in `kickoff/nba.py` today; move it into a shared module before reusing it for the watchlist, and keep one standout definition per sport.
+- **Around the sporting world (checkpoint 12):** news-fed, so the same table, tag and marker rules apply but no stat tables; keep the spotlight rule.
+- **Cross-sport ordering (checkpoint 13):** the order lists (NBA's five teams first) are the model for D's priorities in every sport; keep them as short, tested lists.
+
+**Proposals awaiting D's decision (nothing below is built)**
+
+1. NFL codes: ESPN uses two letters for seven teams (GB, KC, LV, NE, NO, SF, TB). Keep (they are the NFL's own) or make three letters?
+2. Type size: bring the F1, tennis, cricket, football and NFL tables up to the NBA scale (16px names, 18px scores).
+3. Notes style: use the diamond bullet, gold numbers and team codes in the NFL Players of the Week, highlights and leaders, and wherever a player line appears.
+4. Wording: "In progress" instead of the NFL's LIVE tag and for football and cricket matches under way.
+5. Game colours: apply the pastel pairs to the football league tables (up to 10 games a round) and the NFL division tables (up to 16 games a week).
+6. Movement arrows (▲n / ▼n) in the football league tables and the NFL standings, as in the NBA.
+7. Series-style tables for the Champions League knockout ties and for Test series.
 
 ## Football
 
@@ -174,13 +224,9 @@ Each of these appears only when there's play, and each gets its own standouts.
 
 ## NFL and NBA
 
-The NFL gets a full Wednesday wrap; the NBA shows every game, with marquee players' games first.
+The NFL gets a full Wednesday wrap; the NBA shows every game finished since the last edition, D's teams first. Both are built by code (no Claude cost) from ESPN's unofficial API; the sections below describe what is actually built.
 
 **NFL**
-
-- Games grouped by division, each with the score and a one-line story.
-- Quick scores on Monday and Tuesday as games finish. Wednesday has the full wrap: every game by division, standouts, Player of the Week and the division tables. Saturday carries the Thursday Night Football score.
-- Three to five standouts per week, ranked, each with one line of context.
 
 - **How it is built (checkpoint 8, supersedes the division grouping above):** `kickoff/sources/espn_nfl.py` (ESPN's unofficial scoreboard, one box score per game, rosters for positions, standings by division) and `kickoff/nfl.py`, all by code, so no Claude cost. The NFL is its own section, not part of "Around the sporting world".
 - **Scoreboard:** a "Week 8" table (large centred title, "12/14 games played" under it) of every game of the week, so the whole week is in view: two rows per game (away above home), full team names (the only place full names are used; every other table uses 3-letter codes), the home team marked with a white house icon (an inline SVG, not an emoji; none at neutral sites), the winner in bold, records and an OT tag; a game in progress shows its score with LIVE; a game still to come shows YTP (yet to play) centred between the two teams where the score would be; a thicker line between kickoff groups (Thursday, Sunday morning/early/late, night, Monday: decided by kickoff time in US Eastern, no labels); then "On bye:" with the teams that do not play. No team is singled out or highlighted (D's wish): D's quarterbacks are handled in the leaders below.
@@ -203,13 +249,7 @@ The NFL gets a full Wednesday wrap; the NBA shows every game, with marquee playe
 
 **NBA**
 
-- Every game gets a score, in two tiers. Games with a tracked player come first: score, the star's stat line and a one-line story. All other games follow as compact one-line scores.
-- **Extra focus:** LeBron James and James Harden always get their stat line and a milestone watch, win or lose.
-- **Standouts from any game:** 40+ points, triple-doubles, 20-point and 20-rebound games, game-winning shots and milestones.
-- **Defence counts too:** 5+ blocks, 5+ steals, or shutting down an opposing star earns a standout line or a short comment.
-- **Players join automatically:** anyone off the list with three standout games in 30 days is added. Auto-added players drop off after eight weeks without a standout; D's picks stay on permanently.
-- Conference standings every Tuesday.
-- Players are tracked by player ID, so a traded player is followed automatically.
+- Players are tracked by ESPN player id, so a traded player is followed automatically; D's list stays for good and others join and drop automatically (see below).
 
 - **How it is built (checkpoint 9, supersedes the two-tier list above; D's 11 edits applied 2026-11-03):** `kickoff/sources/espn_nba.py` (ESPN's unofficial scoreboard by US date, a box score per new game with ESPN's injury list, standings, a team's playoff schedule) and `kickoff/nba.py`, all by code, so no Claude cost. The NBA is its own section. Players are tracked by ESPN id (24 ids resolved from the team rosters, each matching the team in the table below).
 - **Last Night's Games** (one table, no star/other split, no counts in the title; under the title only "* N underdog wins" when there are some): every game finished since the last edition (state = reported game ids; the scoreboard is read for the last three US dates; an unreported game older than 60 hours is ignored; a game whose box score fails is left out and tried again next run). **Order:** Lakers, 76ers, Cavaliers, Spurs, Celtics games first, in that order, then every other game by tip-off time. Each game is one compact line (away full name, score, home full name, wrapping onto two lines when long; winner in bold, OT after the score, a white asterisk on an outright underdog winner, as in the NFL) with a small tag line above it for the day (when the games span two US dates), the NBA Cup round or ESPN's playoff note. **Edition-to-edition logic and games in progress:** a game is new when it is final and not yet in the state's reported ids, so each edition carries exactly what finished since the last one (a usual edition is one US date; the 60-hour cut only stops a first run or a long gap from dumping a month). A game being played when the edition goes out is shown with the score so far and an "In progress" tag (no winner, no notes, no box score fetched), is not marked reported, and appears as a final in the next edition; a playoff game on now shows in its series row. **No line between the score and the notes; the separator is only between games. No "won by" sentence.** Under each game: every tracked player's stat line (points, rebounds, assists, steals and blocks when 2+, field goals; the numbers of points, rebounds, assists, steals and blocks in gold), then the single best performer of the game (weighted stat line) with his team code unless he is already shown, each line led by a small gold diamond bullet and carrying the player's team code in brackets, D's players and the DNP lines included ("Stephen Curry (GSW): DNP (Out, Knee)"); **team codes are always three letters** (the five ESPN codes that are not, GS, NO, NY, SA and UTAH, are shown as GSW, NOP, NYK, SAS and UTA; WSH is already three letters and stays WSH) everywhere: notes, standouts, standings, Cup tables, and with a hanging indent, in 14px type (smaller than the 15px team names); team names are standardised (ESPN's "LA Clippers" is shown as "Los Angeles Clippers"); and last, always below every player who played, each tracked player of the two teams who did not play as "Name: DNP (status, reason)" from ESPN's injury list (e.g. "DNP (Out, Knee)"; else the box score's reason; else plain "DNP"). ESPN's box score leaves inactive players out, so the DNP is inferred from the player's team (kept in the state, so a trade is followed). LeBron James and James Harden are ordinary tracked players now: the career milestone watch was dropped.
@@ -325,6 +365,7 @@ The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark
 - **Team names in match notes** are in bold, so each note is easy to scan.
 - **Headings:** section and sub-section headings (such as The Big Stuff and Key Overnight Scores) are in trophy gold, bold (700) and have every word capitalised, so they stand apart from the chalk body text.
 - **Numbers:** right-aligned table cells so columns line up.
+- **Sports tables and notes (from the F1, tennis, NFL and NBA work):** see Cross-sport conventions for type sizes (names 15 to 16px, scores 18px bold, notes 14px), the white underdog asterisk, the gold diamond bullet, gold stat numbers, ▲n/▼n movement and the 15 locked pastel game colours (soft pastels on the dark theme, the same hues muted and deeper on the light theme).
 
 | Colour | Hex | Use |
 | --- | --- | --- |
@@ -354,6 +395,8 @@ The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark
 
 The whole build happens in one project, in this order. Each checkpoint is tested on the Mac Mini before it's committed, and a failing source must never break the rest of the edition.
 
+*Status on 2026-11-03: checkpoints 1 to 9 are built and approved or awaiting D's final review (8 NFL and 9 NBA); 10 to 14 are not started; the daily schedule is off.*
+
 1. **Accounts and setup:** GitHub account (the username appears in the web address), a new public repo, and GitHub Pages switched on. In the Anthropic Console, a new workspace called The Kickoff with a monthly spend limit, then a new API key inside it. A new Telegram bot via BotFather, plus D's chat ID.
 2. **Skeleton:** page template, design system and progress rail. Publish a dummy edition and send the Telegram ping.
 3. **Football:** leagues, results, tables and change detection, clubs, Arsenal and Arsenal Women, Champions League, injuries and the key-player list, transfers, FPL corner.
@@ -376,5 +419,5 @@ Small things to settle, none of which blocks starting the build.
 - [ ] WPL coverage: confirm CricketData.org or Big Balls Data carries it before the next season starts.
 - [ ] FIFA ranking: World Football Elo is the labelled stand-in; D can supply the real FIFA top 30 in data/top30_manual.json before each break.
 - [ ] FPL classic team ID and Draft league ID: collect during the build.
-- [ ] Baseball data source: choose between the MLB Stats API and ESPN during the baseball checkpoint, after testing both.
+- [ ] Baseball data source: choose between the MLB Stats API and ESPN during the baseball checkpoint, after testing both (ESPN has served the NFL, NBA, tennis and football well, with odds, injuries and box scores, so it is the default if it covers MLB).
 - [ ] Baseball scope: the spec assumes only Ohtani and Yamamoto trigger an entry. Widen it if D wants other Dodgers or MLB news.
