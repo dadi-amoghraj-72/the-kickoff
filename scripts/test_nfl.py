@@ -428,5 +428,65 @@ check("source: a box score keeps the players, the team totals (rushing, net pass
 check("source: rosters give athlete id to position; week asks for the week and season type; standings ask for divisions", src.roster("2") == {"1": "QB", "2": "WR"} and (src.scoreboard(7, 2) and "week=7&seasontype=2" in CALLS[-1]) and (src.standings() and "level=3" in CALLS[-1]) and src.calls == 4)
 check("NFL needs no Claude: neither module imports anthropic", "anthropic" not in (ROOT / "kickoff" / "nfl.py").read_text() and "anthropic" not in (ROOT / "kickoff" / "sources" / "espn_nfl.py").read_text())
 
+# ---- Real Tuesday-morning state of week 8 (taken Tuesday 3 November 03:30 SGT: Sunday night final, Monday night still to play) ----
+TSB, TBOX, TPOS, TSTD = L("nfl_w8_tue_scoreboard.json"), L("nfl_w8_tue_boxes.json"), L("nfl_w8_tue_positions.json"), L("nfl_w8_tue_standings.json")
+
+
+class TueSource:
+    calls = 0
+    scoreboard = lambda self, week=None, season_type=None: TSB  # noqa: E731
+    box = lambda self, event_id: TBOX[event_id]  # noqa: E731
+    roster = lambda self, team_id: {}  # noqa: E731
+    standings = lambda self: TSTD  # noqa: E731
+
+
+TG = [nfl.parse_game(e) for e in TSB["events"]]
+t_final = [g for g in TG if g["status"] == "final"]
+t_snf = next(e for e in TSB["events"] if "WSH" in [c["team"]["abbreviation"] for c in e["competitions"][0]["competitors"]])
+t_rep = [g["id"] for g in t_final if g["id"] != t_snf["id"]]
+TUE_NOW, WED_NOW = datetime(2026, 11, 3, 0, 0, tzinfo=timezone.utc), datetime(2026, 11, 4, 0, 0, tzinfo=timezone.utc)
+mon_state = nfl.run(NOW, MON, {"positions": TPOS}, TueSource())["state"]
+check("real Tuesday state: 14 games, 13 final (Sunday night Eagles at Commanders is final now), 1 scheduled (Monday night Bears at Seahawks), none live", [g["status"] for g in TG].count("final") == 13 and [g["status"] for g in TG].count("scheduled") == 1 and len(TG) == 14)
+ok = True
+for gid, b in TBOX.items():
+    g = next(x for x in TG if x["id"] == gid)
+    last = b["plays"][-1]
+    ok &= (g["away"]["score"], g["home"]["score"]) == (last["away"], last["home"])
+check("independent: all 13 final scores equal the running score of the last scoring play in their own box score (Sunday night: Commanders 27, Eagles 10)", ok and next(g for g in TG if g["id"] == t_snf["id"])["home"]["score"] == 27)
+tue = nfl.run(TUE_NOW, TUE, {"reported": t_rep, "positions": TPOS}, TueSource())
+tt = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", tue["html"]))
+raw_byes = sorted(t["shortDisplayName"] for t in TSB["teamsOnBye"])
+check("Tuesday edition on the real data: only Sunday night is new, the scoreboard shows 13/14 games played, Monday night as YTP, the four byes (Saints, Giants, 49ers, Texans) as the raw feed lists them",
+      tue["stats"]["new"] == 1 and "13/14 games played" in tt and tt.count("YTP") == 1 and sorted(x.strip() for x in tt.split("On bye:")[1].strip(" .").split(",")) == raw_byes, (tue["stats"], raw_byes))
+dogs_raw = 0
+for gid, b in TBOX.items():
+    o = b["odds"]
+    g = next(x for x in TG if x["id"] == gid)
+    dog = "away" if o["away_dog"] else "home" if o["home_dog"] else None
+    dogs_raw += bool(dog and dog == nfl.winner(g))
+check("independent: the outright underdog wins counted from the raw odds flags equal the header's number (week 8 has 2: Cardinals and Raiders), and Sunday night (Commanders) was not one", dogs_raw == 2 and "* 2 underdog wins" in tt and not nfl.underdog_win({**next(g for g in TG if g["id"] == t_snf["id"]), "dog": nfl.dog_of(TBOX[t_snf["id"]])}), dogs_raw)
+check("Tuesday has the scoreboard and Sunday night's highlights only: no weekly leaders, no Players of the Week, no division tables", "Weekly Leaders" not in tt and "Players of the Week" not in tt and "Division Standings" not in tt)
+snf_box = TBOX[t_snf["id"]]
+snf_g = next(g for g in TG if g["id"] == t_snf["id"])
+turn = [int(v["turnovers"]) for v in snf_box["teamStats"].values()]
+deficit = max([0] + [(p["away"] - p["home"]) if snf_g["home"]["score"] > snf_g["away"]["score"] else (p["home"] - p["away"]) for p in snf_box["plays"]])
+longest = max([int(m.group(1)) for p in snf_box["plays"] for m in [re.search(r"(\d+) Yd", p["text"])] if m] + [0])
+expects_hl = abs(snf_g["home"]["score"] - snf_g["away"]["score"]) >= 24 or (t_snf["status"].get("period") or 0) > 4 or deficit >= 14 or max(turn) >= 4 or longest >= 60
+check("independent: Sunday night (27-10, no overtime, not a 14-point comeback, fewer than 4 giveaways, no 60-yard score) qualifies for no highlight, and the page has none, from a separate read of the raw box", (("Highlights" in tt) == expects_hl) and not expects_hl, (turn, deficit, longest))
+tue_all = nfl.run(TUE_NOW, TUE, {"positions": TPOS}, TueSource())
+check("a first run with no state on Tuesday reports all 13 finished games as new (the state, not the clock, decides) and shows the same scoreboard", tue_all["stats"]["new"] == 13 and "13/14 games played" in re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", tue_all["html"])))
+wed_real = nfl.run(WED_NOW, WED, {**mon_state, "reported": t_rep}, TueSource())
+wt = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", wed_real["html"]))
+check("Wednesday on the real data (Monday night still to play): 13 of 14 games, Sunday night changed none of the top-three lists so it says so in one line, and Players of the Week and the division tables are there", "From 13 of 14 games played." in wt and "No change in the top three of any group since Monday." in wt and "Players of the Week" in wt and "Division Standings" in wt, wt[:200])
+raw_fg = []
+for tm in snf_box["players"]:
+    for cat in tm["statistics"]:
+        if cat["name"] == "kicking":
+            for a in cat["athletes"]:
+                lab = dict(zip(cat["labels"], a["stats"]))
+                raw_fg.append((a["athlete"]["displayName"], lab["FG"]))
+check("independent: by the raw box one kicker made 4 of 5 field goals on Sunday night, a Stevens, and he is the special-teams Player of the Week in the page", [n for n, f in raw_fg if f == "4/5"] != [] and all(n.endswith("Stevens") for n, f in raw_fg if f == "4/5") and "Special teams: D. Stevens (WSH): 4/5 field goals in the 27-10 win over PHI" in wt, raw_fg)
+check("the only unplayed game (Monday night) is still YTP on Wednesday, once", wt.count("YTP") == 1)
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
