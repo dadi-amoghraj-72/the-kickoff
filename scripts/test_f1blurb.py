@@ -142,7 +142,7 @@ try:
     NOW, W = datetime(2026, 10, 26, 2, 0, tzinfo=timezone.utc), datetime(2026, 10, 24, 20, 0, tzinfo=timezone.utc)
     withs = f1.run(NOW, W, {}, Api(), story=story)
     h = withs["html"]
-    check("the story sits right after the race line and before the table", h.index("f1sum") < h.index("STORY") < h.index("<caption>Race</caption>"), h[:300])
+    check("the story sits right after the race line and before the table", h.index("f1sum") < h.index("STORY") < h.index(">Race</th>"), h[:300])
     check("it is called once, for the race only (not qualifying), with the race's start and its standouts", len(seen) == 1 and seen[0][1] == START and seen[0][0] == "United States Grand Prix", seen)
     check("its tokens are reported in the stats", withs["stats"]["claude_tokens"] == {"input": 300, "output": 40}, withs["stats"])
     plain = f1.run(NOW, W, {}, Api())

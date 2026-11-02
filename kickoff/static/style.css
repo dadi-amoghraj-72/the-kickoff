@@ -206,14 +206,9 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .pts th, .pts td { padding: 7px 4px; }
 .pts th { font-size: 11px; letter-spacing: 0; }
 .pts th:first-child, .pts td:first-child { padding-left: 8px; }
-.pts.f1 table { font-size: 13px; width: 100%; max-width: 520px; }
-.pts.f1.race table { table-layout: fixed; }
-.pts.f1.race th:last-child, .pts.f1.race td:last-child { padding-right: 16px; }
-.pts.f1.race th:nth-child(1) { width: 11%; }
-.pts.f1.race th:nth-child(2) { width: 37%; }
-.pts.f1.race th:nth-child(3) { width: 14%; }
-.pts.f1.race th:nth-child(4) { width: 22%; }
-.pts.f1.race th:nth-child(5) { width: 16%; }
+.pts.f1 table { font-size: 13px; width: 100%; max-width: 520px; table-layout: fixed; }
+.pts.f1 th:last-child, .pts.f1 td:last-child { padding-right: 16px; }
+.pts.f1 th.tt { font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--text); padding: 10px 3px 8px 8px; }
 .pts.f1 th, .pts.f1 td { padding-left: 3px; padding-right: 3px; }
 .pts.f1 th:nth-child(n+3), .pts.f1 td:nth-child(n+3) { padding-left: 9px; }
 .cricket p.fow { font-size: 14px; line-height: 1.5; margin: 8px 0 4px; }

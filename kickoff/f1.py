@@ -37,6 +37,12 @@ def short_name(d):
     return f"{given[-1][0]}. {family}" if given and family else d.get("code") or family
 
 
+def heading(race, total):
+    """'Race 19/24: Mexico City Grand Prix, Mexico City'."""
+    place = ((race.get("Circuit") or {}).get("Location") or {}).get("locality")
+    return f"Race {int(race['round'])}/{total}: {race['raceName']}" + (f", {place}" if place else "")
+
+
 def team(name):
     name = TEAM.get(name, name)
     return re.sub(r"\s+F1 Team$", "", name)
@@ -53,6 +59,7 @@ def start_of(race, key):
 def due_sessions(schedule, now, window_start, reported=(), pending=()):
     """Sessions whose results should be in this edition: ended inside the window, or still waiting from an earlier edition."""
     out = []
+    rounds = max((int(x["round"]) for x in schedule), default=0)
     for race in schedule:
         for key, name, took in SESSIONS:
             begin = start_of(race, key)
@@ -63,7 +70,7 @@ def due_sessions(schedule, now, window_start, reported=(), pending=()):
             if sid in set(reported) or end > now:
                 continue
             if end >= window_start or (sid in set(pending) and now - end <= LOOKBACK):
-                out.append({"id": sid, "season": race["season"], "round": int(race["round"]), "session": name, "race": race, "end": end})
+                out.append({"id": sid, "season": race["season"], "round": int(race["round"]), "session": name, "race": race, "end": end, "rounds": rounds})
     return sorted(out, key=lambda s: (s["round"], ORDER[s["session"]]))
 
 
@@ -83,8 +90,11 @@ def _gap(row, winner_laps):
     return {"Disqualified": "DSQ", "Did not start": "DNS"}.get(status, "DNF")
 
 
-def _tight(html, extra=""):
-    """The compact table style (shared with the cricket points tables) so a phone shows every column."""
+def _tight(html, widths, extra=""):
+    """The compact F1 table style (a fixed layout with even column widths, in per cent). The caption becomes a title row across the top of
+    the table, and the widths go in a colgroup (a fixed layout reads them from the first row, which is the title)."""
+    cols = "".join(f'<col style="width:{w}%">' for w in widths)
+    html = re.sub(r"<caption>(.*?)</caption><thead>", lambda m: f'<colgroup>{cols}</colgroup><thead><tr><th class="tt" colspan="{len(widths)}">{m.group(1)}</th></tr>', html, count=1)
     return f'<div class="pts f1{extra}">{html}</div>'
 
 
@@ -107,7 +117,7 @@ def results_table(caption, rows):
     """Race or sprint: position, driver, places gained, gap to the winner (or why out), points."""
     laps = int(rows[0]["laps"]) if rows and rows[0].get("laps") else 0
     body = [[x["position"], short_name(x["Driver"]), moved(x), _gap(x, laps), f"{int(float(x['points'])):02d}"] for x in rows]
-    return _tight(r.table(caption, [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body), " race")
+    return _tight(r.table(caption, [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body), (11, 37, 14, 22, 16), " race")
 
 
 def best_time(row):
@@ -118,7 +128,7 @@ def best_time(row):
 
 def qualifying_table(rows):
     body = [[x["position"], short_name(x["Driver"]), *best_time(x)] for x in rows]
-    return _tight(r.table("Qualifying", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body))
+    return _tight(r.table("Qualifying", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body), (12, 44, 16, 28))
 
 
 def driver_standings_table(standings, rnd, limit=10, teams=None):
@@ -128,13 +138,13 @@ def driver_standings_table(standings, rnd, limit=10, teams=None):
     teams = teams or {}
     body = [[x["position"], short_name(x["Driver"]), abbr(teams.get(x["Driver"]["driverId"]) or (x.get("Constructors") or [{"name": ""}])[0]["name"]), int(float(x["points"]))]
             for x in rows[:limit]]
-    return _tight(r.table(f"Drivers' standings after round {rnd}: top {min(limit, len(rows))}", [("P", True), ("Driver", False), ("Team", False), ("Pts", True)], body)) if body else ""
+    return _tight(r.table(f"Drivers' standings after round {rnd}: top {min(limit, len(rows))}", [("P", True), ("Driver", False), ("Team", False), ("Pts", True)], body), (12, 44, 20, 24)) if body else ""
 
 
 def constructor_standings_table(standings, rnd):
     rows = (standings or {}).get("ConstructorStandings") or []
     body = [[x["position"], team(x["Constructor"]["name"]), int(float(x["points"]))] for x in rows]
-    return _tight(r.table(f"Constructors' standings after round {rnd}", [("P", True), ("Team", False), ("Pts", True)], body)) if body else ""
+    return _tight(r.table(f"Constructors' standings after round {rnd}", [("P", True), ("Team", False), ("Pts", True)], body), (12, 60, 28)) if body else ""
 
 
 # ---- Round-up lines and standouts ----------------------------------------------------------------
@@ -347,6 +357,7 @@ def run(now, window_start, st, api, season="current", story=None):
             failed += 1
             html = None
         name = d["race"]["raceName"]
+        title = heading(d["race"], d["rounds"])
         if html is None:
             pending.setdefault(d["id"], d["end"].isoformat())
             waiting.append(f"{name} {LABEL[d['session']].lower()}")
@@ -357,7 +368,7 @@ def run(now, window_start, st, api, season="current", story=None):
             pending[f"{d['season']}-{d['round']}-standings"] = d["end"].isoformat()
             queued_now.add(f"{d['season']}-{d['round']}-standings")
         shown += 1
-        parts.setdefault(d["round"], [name, []])[1].append(html)
+        parts.setdefault(d["round"], [title, []])[1].append(html)
     for sid in sorted(k for k in pending if k.endswith("-standings") and k not in reported):  # standings held back from an earlier edition
         season_, rnd_, _ = sid.split("-")
         race = next((x for x in schedule if x["season"] == season_ and x["round"] == rnd_), None)
@@ -372,7 +383,7 @@ def run(now, window_start, st, api, season="current", story=None):
             pending.pop(sid)
             reported.append(sid)
             shown += 1
-            parts.setdefault(int(rnd_), [race["raceName"], []])[1].append(standings_html(got[0], got[1], int(rnd_), rows))
+            parts.setdefault(int(rnd_), [heading(race, max(int(x["round"]) for x in schedule)), []])[1].append(standings_html(got[0], got[1], int(rnd_), rows))
         else:
             waiting.append(f"{race['raceName']} standings")
     out = "".join(f"<h3>{r.esc(name)}</h3>" + "".join(blocks) for _, (name, blocks) in sorted(parts.items()))

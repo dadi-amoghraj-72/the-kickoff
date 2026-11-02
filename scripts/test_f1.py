@@ -108,7 +108,7 @@ check("practice sessions and sprint qualifying are never due", all(d["session"] 
 tbl = f1.results_table("Race", ROWS)
 cells = lambda html: [re.sub(r"<[^>]+>", "", c) for c in re.findall(r"<td[^>]*>.*?</td>", html)]  # noqa: E731
 c = cells(tbl)
-check("the race table has all 22 drivers, 5 columns each (P, Driver, +/-, Gap, Pts)", len(c) == 22 * 5 and tbl.count("<tr>") == 22 + 1, len(c))
+check("the race table has all 22 drivers, 5 columns each (P, Driver, +/-, Gap, Pts)", len(c) == 22 * 5 and tbl.count("<tr>") == 22 + 2, len(c))
 check("points in the table add up to the 101 the top ten scored", sum(int(c[i * 5 + 4]) for i in range(22)) == 101, sum(int(c[i * 5 + 4]) for i in range(22)))
 check("winner row: K. Antonelli, level, race time to the second, 25 points; second row is a gap", c[:5] == ["1", "K. Antonelli", "–", "1:35:16", "25"] and c[5:7] == ["2", "C. Leclerc"] and c[8:10] == ["+13.078", "18"], c[:10])
 check("lapped cars show laps down, retirements show DNF", c[11 * 5 + 3] == "+1 lap" and c[19 * 5 + 3] == "DNF" and c[21 * 5 + 3] == "DNF", [c[i * 5 + 3] for i in (11, 19, 21)])
@@ -121,12 +121,12 @@ check("qualifying table: pole is ANT, Q3, 1:34.035; a Q1 exit shows its Q1 time 
 check("Lawson, 10th with no Q3 time, shows his Q2 time marked Q2 (so 9th Lindblad's slower Q3 lap does not look out of order)", qt[9 * 4:9 * 4 + 4] == ["10", "L. Lawson", "Q2", "1:35.058"], qt[36:40])
 check("the tables use the compact style", f1.qualifying_table(Q18["QualifyingResults"]).startswith('<div class="pts f1">') and tbl.startswith('<div class="pts f1') and f1.driver_standings_table(DS18, 18).startswith('<div class="pts f1">'))
 ds = f1.driver_standings_table(DS18, 18)
-check("driver standings: top 10, leader Antonelli on 365", ds.count("<tr>") == 11 and cells(ds)[:4][1] == "K. Antonelli" and cells(ds)[3] == "365" and "top 10" in ds, cells(ds)[:4])
+check("driver standings: top 10, leader Antonelli on 365", ds.count("<tr>") == 12 and cells(ds)[:4][1] == "K. Antonelli" and cells(ds)[3] == "365" and "top 10" in ds, cells(ds)[:4])
 lawson = lambda html: cells(html)[cells(html).index("L. Lawson") + 1]  # noqa: E731
 check("a driver listed under two teams in the standings (Lawson) shows the team from the race: Racing Bulls, not Red Bull", lawson(f1.driver_standings_table(DS18, 18, teams={x["Driver"]["driverId"]: x["Constructor"]["name"] for x in ROWS})) == "RB"
       and lawson(ds) in ("RB", "RBR"))
 cs = f1.constructor_standings_table(CS18, 18)
-check("constructor standings: all 11 teams, Mercedes first on 607", cs.count("<tr>") == 12 and cells(cs)[:3] == ["1", "Mercedes", "607"], cells(cs)[:3])
+check("constructor standings: all 11 teams, Mercedes first on 607", cs.count("<tr>") == 13 and cells(cs)[:3] == ["1", "Mercedes", "607"], cells(cs)[:3])
 
 # ---- Round-up lines ----
 check("race line: winner, start, margin, fastest lap, retirements", f1.race_summary(ROWS) == "Antonelli (Mercedes) won from pole, 13.078s ahead of Leclerc. Fastest lap: Leclerc, 1:37.976. 3 did not finish.", f1.race_summary(ROWS))
@@ -174,8 +174,8 @@ check("a first pole is called out", f1.quali_standouts(q, lambda d: 1) == ["Anto
 SGT_MORNING = utc(2026, 10, 26, 2, 0)
 api = FakeApi(results_for={18: RACE18}, qualifying_for={18: Q18})
 out = f1.run(SGT_MORNING, W, {}, api)
-check("the US GP race edition: heading, race line, race table, both standings, no waiting note", "<h3>United States Grand Prix</h3>" in out["html"] and "won from pole" in out["html"]
-      and "<caption>Race</caption>" in out["html"] and "Drivers&#x27; standings after round 18: top 10" in out["html"].replace("'", "&#x27;") and "Constructors" in out["html"] and "Not published" not in out["html"], out["html"][:400])
+check("the US GP race edition: heading, race line, race table, both standings, no waiting note", "<h3>Race 18/23: United States Grand Prix, Austin</h3>" in out["html"] and "won from pole" in out["html"]
+      and ">Race</th>" in out["html"] and "Drivers&#x27; standings after round 18: top 10" in out["html"].replace("'", "&#x27;") and "Constructors" in out["html"] and "Not published" not in out["html"], out["html"][:400])
 check("it is remembered as reported, nothing is pending", out["state"]["reported"] == ["2026-18-race"] and out["state"]["pending"] == {}, out["state"])
 check("calls: schedule, results, 3 podium checks, 3 standings (this round, the one before, constructors) = 8", api.calls == 8, api.log)
 check("and tomorrow it is not shown again", f1.run(utc(2026, 10, 27, 2, 0), utc(2026, 10, 26, 15, 15), out["state"], api)["html"] == "")
@@ -187,12 +187,12 @@ check("race over but no results yet: no table, a clear note, and it stays pendin
       and list(pend["state"]["pending"]) == ["2026-19-race"] and pend["state"]["reported"] == [], pend)
 DS19 = shift(DS18, ROWS, "19", 1)  # round 19 really adds this race's points on top of round 18
 later = f1.run(utc(2026, 11, 3, 3, 0), utc(2026, 11, 2, 15, 15), pend["state"], FakeApi(results_for={19: {**RACE18, "round": "19", "raceName": "Mexico City Grand Prix"}}, dstand={18: DS18, 19: DS19}))
-check("the next edition picks the pending race up as soon as it is published, and clears the pending entry", "<caption>Race</caption>" in later["html"] and "Mexico City Grand Prix" in later["html"]
+check("the next edition picks the pending race up as soon as it is published, and clears the pending entry", ">Race</th>" in later["html"] and "Mexico City Grand Prix" in later["html"]
       and later["state"]["pending"] == {} and later["state"]["reported"] == ["2026-19-race"], later["state"])
 stale = f1.run(utc(2026, 11, 10, 3, 0), utc(2026, 11, 9, 15, 15), {"pending": {"2026-19-race": "2026-11-01T22:30:00+00:00"}}, FakeApi())
 check("a session still unpublished after 6 days is given up on, quietly", stale["state"]["pending"] == {} and stale["html"] == "", stale)
 mixed = f1.run(utc(2026, 11, 2, 3, 0), utc(2026, 10, 31, 20, 0), {}, FakeApi(qualifying_for={19: Q19}, results_for={}))
-check("qualifying published but race not: the qualifying table shows, the race waits (Mexico City today)", "<caption>Qualifying</caption>" in mixed["html"] and "Pole:" in mixed["html"]
+check("qualifying published but race not: the qualifying table shows, the race waits (Mexico City today)", ">Qualifying</th>" in mixed["html"] and "Pole:" in mixed["html"]
       and "Mexico City Grand Prix race" in mixed["html"] and mixed["state"]["reported"] == ["2026-19-qualifying"], mixed["state"])
 down = f1.run(SGT_MORNING, W, {}, FakeApi(results_for={18: RACE18}, broken=[("results", 18)]))
 check("a source failure on one session is kept pending, counted, and does not raise", down["stats"]["failed"] == 1 and "2026-18-race" in down["state"]["pending"] and "Not published" in down["html"], down["stats"])
@@ -202,12 +202,12 @@ check("standings labelled for another round are not shown as if current", "Drive
 MEX = {**RACE18, "round": "19", "raceName": "Mexico City Grand Prix"}
 lag = f1.run(utc(2026, 11, 2, 3, 0), utc(2026, 10, 31, 23, 15), {}, FakeApi(results_for={19: MEX}, dstand={18: DS18, 19: {**DS18, "round": "19"}}))
 check("round-19 label with round-18 points: the race table shows, the standings are withheld with a note, and they are queued",
-      "<caption>Race</caption>" in lag["html"] and "Drivers" not in lag["html"] and "not up to date at the source" in lag["html"] and "2026-19-standings" in lag["state"]["pending"]
+      ">Race</th>" in lag["html"] and "Drivers" not in lag["html"] and "not up to date at the source" in lag["html"] and "2026-19-standings" in lag["state"]["pending"]
       and "2026-19-race" in lag["state"]["reported"], lag["state"])
 check("the stale standings are not retried in the same run (calls stay low)", lag["stats"]["calls"] <= 9, lag["stats"])
 caught = f1.run(utc(2026, 11, 3, 3, 0), utc(2026, 11, 2, 15, 15), lag["state"], FakeApi(results_for={19: MEX}, dstand={18: DS18, 19: DS19}))
 check("when the source catches up, the next edition shows just the standings, under the race's name, and clears the queue",
-      "Mexico City Grand Prix" in caught["html"] and "Drivers" in caught["html"] and "<caption>Race</caption>" not in caught["html"] and caught["state"]["pending"] == {}
+      "Mexico City Grand Prix" in caught["html"] and "Drivers" in caught["html"] and ">Race</th>" not in caught["html"] and caught["state"]["pending"] == {}
       and "2026-19-standings" in caught["state"]["reported"], caught["state"])
 still = f1.run(utc(2026, 11, 3, 3, 0), utc(2026, 11, 2, 15, 15), lag["state"], FakeApi(results_for={19: MEX}, dstand={18: DS18, 19: {**DS18, "round": "19"}}))
 check("if it is still stale, nothing is shown but a muted line, and it stays queued", "Drivers" not in still["html"] and "Mexico City Grand Prix standings" in still["html"] and "2026-19-standings" in still["state"]["pending"], still["html"])
@@ -218,7 +218,7 @@ with_sprint = shift(shift(DS17, ROWS, "18", 1), sprint_w, "18", 1)  # round 18 =
 check("on a sprint weekend the sprint's points count too: standings that include them match, and fail when the sprint is left out",
       f1.standings_match(with_sprint, DS17, ROWS, sprint_w) and not f1.standings_match(with_sprint, DS17, ROWS), "sprint")
 sprint = f1.run(utc(2026, 10, 11, 2, 0), utc(2026, 10, 10, 8, 0), {}, FakeApi(sprint_for={17: SPR17}))
-sc = cells(sprint["html"][sprint["html"].index("<caption>Sprint"):sprint["html"].index("</table>", sprint["html"].index("<caption>Sprint"))])
+sc = cells(sprint["html"][sprint["html"].index(">Sprint"):sprint["html"].index("</table>", sprint["html"].index(">Sprint"))])
 check("a sprint is shown as its own table with points 8 to 1 adding to 36; the qualifying that is not published waits (the race is not over yet)",
       sum(int(sc[i * 5 + 4]) for i in range(len(sc) // 5)) == 36 and sprint["stats"]["shown"] == 1 and sprint["stats"]["waiting"] == 1 and "Singapore Grand Prix qualifying" in sprint["html"],
       (sprint["stats"], sprint["html"][-200:]))
