@@ -69,7 +69,7 @@ class Source:
 
     def schedule(self, team_id, season=None, season_type=3):
         """One team's games of a season type (3 = playoffs), played and still to come, trimmed:
-        [{"id", "date", "status", "headline", "home": {"id", "abbr", "short", "score"}, "away": {...}}]. season: the year the season ends in."""
+        [{"id", "date", "status", "headline", "home": {"id", "abbr", "short", "name", "score"}, "away": {...}}]. season: the year the season ends in."""
         extra = f"&season={season}" if season else ""
         out = []
         for e in self._call(SITE + f"teams/{team_id}/schedule?seasontype={season_type}{extra}")["events"]:
@@ -79,6 +79,7 @@ class Source:
                 sc = x.get("score")
                 sc = sc.get("displayValue") if isinstance(sc, dict) else sc
                 side[x["homeAway"]] = {"id": x["team"]["id"], "abbr": x["team"]["abbreviation"], "short": x["team"].get("shortDisplayName", x["team"]["abbreviation"]),
+                                       "name": x["team"].get("displayName", x["team"].get("shortDisplayName", x["team"]["abbreviation"])),
                                        "score": int(sc) if str(sc or "").isdigit() else None}
             out.append({"id": e["id"], "date": e["date"], "status": c["status"]["type"]["name"],
                         "headline": next((n["headline"] for n in c.get("notes", [])), ""), "home": side["home"], "away": side["away"]})

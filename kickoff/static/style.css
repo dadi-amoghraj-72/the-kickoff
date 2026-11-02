@@ -263,7 +263,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nflsb th.tt .prog .dog { font-size: 15px; }
 .nbaone td { padding: 5px 4px; }
 .nbaone td.aw { text-align: right; }
-.nbaone td.mid { text-align: center; color: var(--muted); white-space: nowrap; }
+.nbaone td.mid { text-align: center; color: var(--muted); white-space: nowrap; font-size: 13px; }
 .nbaone td.hm { text-align: left; }
 .nbaone td.w { font-weight: 700; color: var(--chalk); }
 .pts.f1.nba th.tt { font-size: 16px; padding: 12px 8px 10px; }
@@ -280,3 +280,5 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone.ser .ws { color: var(--gold); font-size: 16px; }
 .nbaone.ser td.aw { text-align: left; padding-left: 12px; }
 .nbaone.ser td.hm { text-align: right; padding-right: 12px; }
+.nflsb .pl .n { color: var(--gold); font-weight: 600; }
+.nbaone td.aw, .nbaone td.hm { white-space: normal; line-height: 1.25; }

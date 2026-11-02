@@ -47,7 +47,7 @@ def parse_game(e):
     status = "final" if t["name"] == "STATUS_FINAL" else {"in": "live", "pre": "scheduled"}.get(t["state"], "other")
     sides = {x["homeAway"]: x for x in c["competitors"]}
     side = lambda x: {"id": x["team"]["id"], "abbr": x["team"]["abbreviation"], "name": x["team"]["displayName"], "short": x["team"]["shortDisplayName"],  # noqa: E731
-                      "score": int(x["score"]) if status == "final" and str(x.get("score", "")).isdigit() else None,
+                      "score": int(x["score"]) if status in ("final", "live") and str(x.get("score", "")).isdigit() else None,
                       "record": next((rec["summary"] for rec in x.get("records", []) if rec.get("type", rec.get("name")) in ("total", "overall")), "")}
     headline = next((n.get("headline", "") for n in c.get("notes", [])), "")
     season_type = (e.get("season") or {}).get("type")
@@ -57,7 +57,7 @@ def parse_game(e):
         cup = headline.split(" - ", 1)[1] if " - " in headline else "Championship"
     series = c.get("series") or {}
     return {"id": e["id"], "date": utc(e["date"]), "status": status, "ot": status == "final" and (e["status"].get("period") or 0) > 4,
-            "neutral": bool(c.get("neutralSite")), "headline": headline, "cup": cup, "season": (e.get("season") or {}).get("year"),
+            "neutral": bool(c.get("neutralSite")), "detail": t.get("shortDetail", ""), "headline": headline, "cup": cup, "season": (e.get("season") or {}).get("year"),
             "phase": "playin" if playin else "playoffs" if season_type == 3 else "regular",
             "series": series.get("summary") if series.get("type") == "playoff" else None,
             "home": side(sides["home"]), "away": side(sides["away"])}
@@ -246,28 +246,33 @@ def dnp_text(pid, name, box, p=None):
 
 
 def game_notes(g, box, players, tracked, info):
-    """The lines under a game: each tracked player's stat line (best first), each tracked player of the two teams who did not play (DNP and the
-    reason), then the best performer of the game when he is not one of those. `players`: everyone in this game's box score;
+    """The lines under a game: each tracked player's stat line (best first), then the best performer of the game when he is not one of those, and
+    last each tracked player of the two teams who did not play (DNP and the reason): the DNP lines always sit below every player who played. `players`: everyone in this game's box score;
     info: {"teams": latest team of each tracked player, "auto": names of the auto-added players}."""
     here = {p["id"]: p for p in players}
     mine = sorted((p for p in players if p["id"] in tracked and not p["dnp"]), key=lambda p: -weight(p, kinds_of(p)))
     out = [full_line(p) for p in mine]
-    teams = {g["home"]["abbr"], g["away"]["abbr"]}
-    for pid in sorted(tracked, key=lambda x: list(TRACKED).index(x) if x in TRACKED else 999):
-        p = here.get(pid)
-        if p and not p["dnp"]:
-            continue
-        if p or info["teams"].get(pid) in teams:
-            out.append(dnp_text(pid, TRACKED.get(pid) or info["auto"].get(pid, pid), box, p))
     played = [p for p in players if not p["dnp"]]
     if played:
         best = max(played, key=lambda p: (weight(p, kinds_of(p)), p["name"]))
         if best["id"] not in {p["id"] for p in mine}:
             out.append(full_line(best, with_team=True))
+    teams = {g["home"]["abbr"], g["away"]["abbr"]}
+    for pid in sorted(tracked, key=lambda x: list(TRACKED).index(x) if x in TRACKED else 999):  # the DNP lines come last, below every player who played
+        p = here.get(pid)
+        if p and not p["dnp"]:
+            continue
+        if p or info["teams"].get(pid) in teams:
+            out.append(dnp_text(pid, TRACKED.get(pid) or info["auto"].get(pid, pid), box, p))
     return out
 
 
 # ---- Rendering ----------------------------------------------------------------------------------
+
+def note_html(text):
+    """A note line as HTML: the numbers of pts, reb, ast, stl and blk in the accent colour."""
+    return re.sub(r"(\d+) (pts|reb|ast|stl|blk)\b", r'<span class="n">\1</span> \2', r.esc(text))
+
 
 def day_label(d):
     return f"{d:%a} {d.day} {d:%b}"
@@ -278,6 +283,8 @@ def tag_text(g, many_days):
     bits = []
     if many_days:
         bits.append(day_label(day_of(g)))
+    if g["status"] == "live":
+        bits.append("In progress" + (f" · {g['detail']}" if g.get("detail") else ""))
     if g["cup"]:
         bits.append("NBA Cup" if g["cup"] == "Championship" else f"NBA Cup · {g['cup']}")
     elif g["headline"]:
@@ -290,14 +297,16 @@ def game_rows(g, notes, many_days):
     star = DOG if underdog_win(g) else ""
     a, h = g["away"], g["home"]
     score = f'{a["score"]}–{h["score"]}' + (" OT" if g["ot"] else "")
+    if g["status"] == "live":
+        w = None
     icon = f" {HOME_SVG}" if house(g) else ""
     tag = tag_text(g, many_days)
     rows = [f'<tr class="tag"><td colspan="3">{r.esc(tag)}</td></tr>'] if tag else []
     cls = "one" + ("" if notes else " end")
-    rows.append(f'<tr class="{cls}"><td class="aw{" w" if w == "away" else ""}">{r.esc(a["short"])}{star if w == "away" else ""}</td>'
-                f'<td class="mid">{score}</td><td class="hm{" w" if w == "home" else ""}">{r.esc(h["short"])}{star if w == "home" else ""}{icon}</td></tr>')
+    rows.append(f'<tr class="{cls}"><td class="aw{" w" if w == "away" else ""}">{r.esc(a["name"])}{star if w == "away" else ""}</td>'
+                f'<td class="mid">{score}</td><td class="hm{" w" if w == "home" else ""}">{r.esc(h["name"])}{star if w == "home" else ""}{icon}</td></tr>')
     if notes:
-        rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl">{r.esc(x)}</div>' for x in notes) + "</td></tr>")
+        rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl">{note_html(x)}</div>' for x in notes) + "</td></tr>")
     return rows
 
 
@@ -305,7 +314,7 @@ def games_html(items, many_days, dogs):
     """items: [(game, notes)] already in order. One table titled Last Night's Games; the underdog count sits under the title."""
     rows = [x for g, notes in items for x in game_rows(g, notes, many_days)]
     sub = f'<span class="prog">{DOG} {dogs} underdog win{"s" if dogs != 1 else ""}</span>' if dogs else ""
-    return (f'<div class="nflsb nbaone"><table><colgroup><col style="width:38%"><col style="width:24%"><col style="width:38%"></colgroup>'
+    return (f'<div class="nflsb nbaone"><table><colgroup><col style="width:37%"><col style="width:26%"><col style="width:37%"></colgroup>'
             f'<thead><tr><th class="tt" colspan="3">Last Night\'s Games{sub}</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
 
 
@@ -429,7 +438,10 @@ def series_html(g0, sched, notes_by_game):
             note = notes_by_game.get(x["id"], [])
             rows.append(f'<tr class="one{"" if note else " end"}"><td class="aw {lw}">{sc[top["id"]]}</td><td class="mid">G{n} · {day_label(d)}</td><td class="hm {rw}">{sc[bot["id"]]}</td></tr>')
             if note:
-                rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl">{r.esc(t)}</div>' for t in note) + "</td></tr>")
+                rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl">{note_html(t)}</div>' for t in note) + "</td></tr>")
+        elif x and "IN_PROGRESS" in x["status"] and x["home"]["score"] is not None:   # on now: the score so far, and the game is shown final next edition
+            sc = {x["home"]["id"]: x["home"]["score"], x["away"]["id"]: x["away"]["score"]}
+            rows.append(f'<tr class="one end"><td class="aw">{sc[top["id"]]}</td><td class="mid">G{n} · In progress</td><td class="hm">{sc[bot["id"]]}</td></tr>')
         else:
             if x:
                 when = utc(x["date"]).astimezone(SGT)
@@ -438,8 +450,8 @@ def series_html(g0, sched, notes_by_game):
                 mid = f"G{n} · " + ("–" if over else "if necessary" if n >= 5 else "to be scheduled")
             rows.append(f'<tr class="one end pre"><td class="mid" colspan="3">{r.esc(mid)}</td></tr>')
     head = (f'<tr><th class="tt" colspan="3">{r.esc(rnd)}</th></tr>'
-            f'<tr class="sh"><th class="aw">{r.esc(top["short"])} <span class="ws">{wins[top["id"]]}</span></th><th class="mid">series</th>'
-            f'<th class="hm"><span class="ws">{wins[bot["id"]]}</span> {r.esc(bot["short"])}</th></tr>')
+            f'<tr class="sh"><th class="aw">{r.esc(top.get("name", top["short"]))} <span class="ws">{wins[top["id"]]}</span></th><th class="mid">series</th>'
+            f'<th class="hm"><span class="ws">{wins[bot["id"]]}</span> {r.esc(bot.get("name", bot["short"]))}</th></tr>')
     return (f'<div class="nflsb nbaone ser"><table><colgroup><col style="width:30%"><col style="width:40%"><col style="width:30%"></colgroup>'
             f'<thead>{head}</thead><tbody>{"".join(rows)}</tbody></table></div>')
 
@@ -449,7 +461,7 @@ def series_html(g0, sched, notes_by_game):
 def run(now, day, st, source):
     """{"html", "state", "stats"}. now: UTC; day: the edition's date in Singapore; st: {"reported", "auto", "hits", "dogs", "teams", "seeds", "cup_games",
     "series_notes"}. A failing source never raises: that part is left out and counted in stats["failed"]."""
-    stats = {"games": 0, "new": 0, "boxes": 0, "failed": 0, "standouts": 0, "series": 0, "cup_new": 0, "calls": 0}
+    stats = {"games": 0, "new": 0, "boxes": 0, "failed": 0, "standouts": 0, "series": 0, "cup_new": 0, "live": 0, "calls": 0}
     reported, dogs = list(st.get("reported", [])), dict(st.get("dogs", {}))
     keep = {"reported": reported, "auto": st.get("auto", {}), "hits": st.get("hits", {}), "dogs": dogs, "teams": dict(TEAMS, **st.get("teams", {})),
             "seeds": st.get("seeds"), "cup_games": dict(st.get("cup_games", {})), "series_notes": dict(st.get("series_notes", {}))}
@@ -507,13 +519,16 @@ def run(now, day, st, source):
     stats["standouts"] = len(texts)
     info = {"teams": keep["teams"], "auto": {k: v["name"] for k, v in keep["auto"].items()}}
     html = ""
-    playoff_new = [g for g in new if g["phase"] == "playoffs"]
+    live = [g for g in games.values() if g["status"] == "live"]   # on now: shown with the score so far, and as a final in the next edition
+    stats["live"] = len(live)
+    playoff_new = [g for g in new + live if g["phase"] == "playoffs"]
     plain = [g for g in new if g["phase"] != "playoffs"]
-    if plain:
-        many_days = len({day_of(g) for g in plain}) > 1
-        items = [(g, game_notes(g, boxes[g["id"]], players[g["id"]], tracked, info)) for g in sorted(plain, key=order_key)]
+    plain_live = [g for g in live if g["phase"] != "playoffs"]
+    if plain or plain_live:
+        many_days = len({day_of(g) for g in plain + plain_live}) > 1
+        items = [(g, game_notes(g, boxes[g["id"]], players[g["id"]], tracked, info) if g["id"] in boxes else []) for g in sorted(plain + plain_live, key=order_key)]
         html += games_html(items, many_days, sum(1 for g in plain if underdog_win(g)))
-    if playoff_new:                                         # one table per series that had a game finish
+    if playoff_new:                                         # one table per series that had a game finish (or is on now)
         done = {}
         for g in sorted(playoff_new, key=order_key):
             done.setdefault(series_of(g), g)
@@ -535,7 +550,7 @@ def run(now, day, st, source):
                     except Exception:
                         stats["failed"] += 1
                         continue
-                    gg = {"id": x["id"], "home": {**x["home"], "name": x["home"]["short"]}, "away": {**x["away"], "name": x["away"]["short"]}, "ot": False,
+                    gg = {"id": x["id"], "home": dict(x["home"]), "away": dict(x["away"]), "ot": False,
                           "status": "final", "phase": "playoffs", "cup": None, "headline": x["headline"], "neutral": False}
                 keep["series_notes"][x["id"]] = game_notes(gg, bx, players_of(bx, gg), tracked, info)
             html += series_html(g0, sched, keep["series_notes"])
@@ -548,15 +563,14 @@ def run(now, day, st, source):
             std = source.standings()
         except Exception:
             stats["failed"] += 1
-    cup_new = [g for g in new if g["cup"] == "Group Play"]
+    cup_new = [g for g in new + live if g["cup"] == "Group Play"]
     stats["cup_new"] = len(cup_new)
     conf_of = {}
     if std and standings_ok(std):
         html += "<h4>Standings</h4>" + standings_html(std, keep["seeds"])
         keep["seeds"] = seeds_of(std)
         conf_of = {t: c.replace(" Conference", "") for c, ts in keep["seeds"].items() for t in ts}
-    unfinished = any(v[2] is None for v in cup_games.values())
-    if cup_games and (cup_new or (day.weekday() == 1 and unfinished and (games or new))):
+    if cup_games and cup_new:                               # the Cup tables come only on days Cup group games are in the edition
         html += "<h4>NBA Cup</h4>" + cup_html(cup_groups(cup_games), cup_games, conf_of)
     if new:
         reported += [g["id"] for g in new]
