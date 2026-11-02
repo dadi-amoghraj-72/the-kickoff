@@ -160,7 +160,7 @@ def seconds(text):
 
 
 def race_summary(rows):
-    """One factual line: who won (and from where), the margin, the fastest lap, how many did not finish."""
+    """Who won (and from where), the margin and how many did not finish; then, on a second line, the fastest lap."""
     if not rows:
         return ""
     win = rows[0]
@@ -170,12 +170,12 @@ def race_summary(rows):
     if len(rows) > 1 and seconds((rows[1].get("Time") or {}).get("time")) is not None and rows[1].get("status") == "Finished":
         out += f", {(rows[1]['Time']['time']).lstrip('+')}s ahead of {_name(rows[1])}"
     out += "."
-    fastest = next((x for x in rows if (x.get("FastestLap") or {}).get("rank") == "1"), None)
-    if fastest:
-        out += f" Fastest lap: {_name(fastest)}, {fastest['FastestLap']['Time']['time']}."
     out_n = sum(1 for x in rows if x.get("status") not in ("Finished", "Lapped") and not re.match(r"\+\d+ Lap", x.get("status", "")))
     if out_n:
         out += f" {out_n} did not finish."
+    fastest = next((x for x in rows if (x.get("FastestLap") or {}).get("rank") == "1"), None)
+    if fastest:  # always on a line of its own
+        out += f"\nFastest lap: {_name(fastest)}, {fastest['FastestLap']['Time']['time']}."
     return out
 
 
@@ -320,7 +320,7 @@ def session_html(due, api, story=None, used=None):
     if not rows:
         return None, False
     standouts = biggest_mover(rows) + big_moments(rows) + (firsts(rows, api.finishes) if kind == "race" else [])
-    html = f'<p class="f1sum">{r.esc(race_summary(rows))}</p>'
+    html = f'<p class="f1sum">{r.esc(race_summary(rows)).replace(chr(10), "<br>")}</p>'
     if kind == "race" and story:
         try:
             text, usage = story(due["race"], rows, start_of(due["race"], "race"), standouts)
