@@ -108,20 +108,21 @@ check("practice sessions and sprint qualifying are never due", all(d["session"] 
 tbl = f1.results_table("Race", ROWS)
 cells = lambda html: [re.sub(r"<[^>]+>", "", c) for c in re.findall(r"<td[^>]*>.*?</td>", html)]  # noqa: E731
 c = cells(tbl)
-check("the race table has all 22 drivers, 6 columns each (P, Driver, Team, +/-, Gap, Pts)", len(c) == 22 * 6 and tbl.count("<tr>") == 22 + 1, len(c))
-check("points in the table add up to the 101 the top ten scored", sum(int(c[i * 6 + 5]) for i in range(22)) == 101, sum(int(c[i * 6 + 5]) for i in range(22)))
-check("winner row: ANT, Mercedes, race time, 25 points; second row is a gap", c[:6] == ["1", "ANT", "MER", "–", "1:35:16.650", "25"] and c[6:9] == ["2", "LEC", "FER"] and c[10:12] == ["+13.078", "18"], c[:12])
-check("lapped cars show laps down, retirements show DNF", c[11 * 6 + 4] == "+1 lap" and c[19 * 6 + 4] == "DNF" and c[21 * 6 + 4] == "DNF", [c[i * 6 + 4] for i in (11, 19, 21)])
+check("the race table has all 22 drivers, 5 columns each (P, Driver, +/-, Gap, Pts)", len(c) == 22 * 5 and tbl.count("<tr>") == 22 + 1, len(c))
+check("points in the table add up to the 101 the top ten scored", sum(int(c[i * 5 + 4]) for i in range(22)) == 101, sum(int(c[i * 5 + 4]) for i in range(22)))
+check("winner row: K. Antonelli, level, race time to the second, 25 points; second row is a gap", c[:5] == ["1", "K. Antonelli", "–", "1:35:16", "25"] and c[5:7] == ["2", "C. Leclerc"] and c[8:10] == ["+13.078", "18"], c[:10])
+check("lapped cars show laps down, retirements show DNF", c[11 * 5 + 3] == "+1 lap" and c[19 * 5 + 3] == "DNF" and c[21 * 5 + 3] == "DNF", [c[i * 5 + 3] for i in (11, 19, 21)])
 check("driver tables use three-letter team codes (RB is Racing Bulls; unknown teams get their first three letters)", f1.abbr("RB F1 Team") == "RB" and f1.abbr("Red Bull") == "RBR" and f1.abbr("Aston Martin") == "AMR" and f1.abbr("Haas F1 Team") == "HAA" and f1.abbr("Zeta Racing") == "ZET")
+check("short_name: initial and surname; a double given name uses the last part (Andrea Kimi is K.); no names falls back to the code; accents kept", f1.short_name({"givenName": "Max", "familyName": "Verstappen"}) == "M. Verstappen" and f1.short_name({"givenName": "Andrea Kimi", "familyName": "Antonelli"}) == "K. Antonelli" and f1.short_name({"code": "XYZ"}) == "XYZ" and f1.short_name({"givenName": "Nico", "familyName": "Hülkenberg"}) == "N. Hülkenberg")
 check("team names are short ('RB F1 Team' is Racing Bulls, '... F1 Team' loses the suffix)", f1.team("RB F1 Team") == "Racing Bulls" and f1.team("Haas F1 Team") == "Haas" and f1.team("Aston Martin") == "Aston Martin")
 check("the number columns are right-aligned like every other table", tbl.count('<th class="n">') == 4 and tbl.count('<td class="n">') == 22 * 4)
 qt = cells(f1.qualifying_table(Q18["QualifyingResults"]))
-check("qualifying table: pole is ANT, Q3, 1:34.035; a Q1 exit shows its Q1 time (Bottas 22nd); 5 columns each", qt[:5] == ["1", "ANT", "MER", "Q3", "1:34.035"] and qt[-5:] == ["22", "BOT", "CAD", "Q1", "1:37.523"] and len(qt) == 22 * 5, (qt[:5], qt[-5:]))
-check("Lawson, 10th with no Q3 time, shows his Q2 time marked Q2 (so 9th Lindblad's slower Q3 lap does not look out of order)", qt[9 * 5:9 * 5 + 5] == ["10", "LAW", "RB", "Q2", "1:35.058"], qt[45:50])
-check("the tables use the compact style", f1.qualifying_table(Q18["QualifyingResults"]).startswith('<div class="pts">') and tbl.startswith('<div class="pts">') and f1.driver_standings_table(DS18, 18).startswith('<div class="pts">'))
+check("qualifying table: pole is ANT, Q3, 1:34.035; a Q1 exit shows its Q1 time (Bottas 22nd); 4 columns each", qt[:4] == ["1", "K. Antonelli", "Q3", "1:34.035"] and qt[-4:] == ["22", "V. Bottas", "Q1", "1:37.523"] and len(qt) == 22 * 4, (qt[:4], qt[-4:]))
+check("Lawson, 10th with no Q3 time, shows his Q2 time marked Q2 (so 9th Lindblad's slower Q3 lap does not look out of order)", qt[9 * 4:9 * 4 + 4] == ["10", "L. Lawson", "Q2", "1:35.058"], qt[36:40])
+check("the tables use the compact style", f1.qualifying_table(Q18["QualifyingResults"]).startswith('<div class="pts f1">') and tbl.startswith('<div class="pts f1">') and f1.driver_standings_table(DS18, 18).startswith('<div class="pts f1">'))
 ds = f1.driver_standings_table(DS18, 18)
-check("driver standings: top 10, leader Antonelli on 365", ds.count("<tr>") == 11 and cells(ds)[:4][1] == "ANT" and cells(ds)[3] == "365" and "top 10" in ds, cells(ds)[:4])
-lawson = lambda html: cells(html)[cells(html).index("LAW") + 1]  # noqa: E731
+check("driver standings: top 10, leader Antonelli on 365", ds.count("<tr>") == 11 and cells(ds)[:4][1] == "K. Antonelli" and cells(ds)[3] == "365" and "top 10" in ds, cells(ds)[:4])
+lawson = lambda html: cells(html)[cells(html).index("L. Lawson") + 1]  # noqa: E731
 check("a driver listed under two teams in the standings (Lawson) shows the team from the race: Racing Bulls, not Red Bull", lawson(f1.driver_standings_table(DS18, 18, teams={x["Driver"]["driverId"]: x["Constructor"]["name"] for x in ROWS})) == "RB"
       and lawson(ds) in ("RB", "RBR"))
 cs = f1.constructor_standings_table(CS18, 18)
@@ -135,7 +136,7 @@ check("seconds() reads lap times and gaps", f1.seconds("1:34.035") == 94.035 and
 # ---- Standouts ----
 mk = lambda pos, grid, status="Finished", code="X": {"position": str(pos), "grid": str(grid), "status": status, "laps": "50", "Driver": {"givenName": "Gi", "familyName": code, "driverId": code.lower(), "code": code},  # noqa: E731
                                                        "Constructor": {"name": "Haas F1 Team"}}
-pm = lambda i: c[i * 6 + 3]  # noqa: E731
+pm = lambda i: c[i * 5 + 2]  # noqa: E731
 check("arrows in the table: gained places ▲, lost places ▼, retirements –", all(pm(i) == "–" for i in (19, 20, 21)) and pm(0) == "–" and
       {x["Driver"]["code"]: pm(i) for i, x in enumerate(ROWS)}["BOR"] == "▲8", [pm(i) for i in range(22)])
 check("every arrow equals grid minus finish, checked against the saved results", all(
@@ -219,7 +220,7 @@ check("on a sprint weekend the sprint's points count too: standings that include
 sprint = f1.run(utc(2026, 10, 11, 2, 0), utc(2026, 10, 10, 8, 0), {}, FakeApi(sprint_for={17: SPR17}))
 sc = cells(sprint["html"][sprint["html"].index("<caption>Sprint"):sprint["html"].index("</table>", sprint["html"].index("<caption>Sprint"))])
 check("a sprint is shown as its own table with points 8 to 1 adding to 36; the qualifying that is not published waits (the race is not over yet)",
-      sum(int(sc[i * 6 + 5]) for i in range(len(sc) // 6)) == 36 and sprint["stats"]["shown"] == 1 and sprint["stats"]["waiting"] == 1 and "Singapore Grand Prix qualifying" in sprint["html"],
+      sum(int(sc[i * 5 + 4]) for i in range(len(sc) // 5)) == 36 and sprint["stats"]["shown"] == 1 and sprint["stats"]["waiting"] == 1 and "Singapore Grand Prix qualifying" in sprint["html"],
       (sprint["stats"], sprint["html"][-200:]))
 check("in the whole block the standings use the race's teams for each driver", lawson(out["html"][out["html"].index("Drivers"):]) == "RB")
 check("no sessions in the window means no F1 block", f1.run(utc(2026, 10, 30, 2, 0), utc(2026, 10, 29, 15, 15), {}, FakeApi())["html"] == "")

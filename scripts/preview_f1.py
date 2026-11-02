@@ -2,6 +2,8 @@
 
   .venv/bin/python scripts/preview_f1.py            from saved real data: the United States Grand Prix (round 18) edition of 26 October 2026
   .venv/bin/python scripts/preview_f1.py --live     from the Jolpica API right now (free, no key): whatever F1 has happened since yesterday's edition
+add --story to have Claude write the race story from the day's reports (needs your key; costs about half a cent), or --story-dry to show
+what would be sent to Claude without calling it. Stories only work with --live (they use the last two days' reports).
 add --publish to put it at https://dadi-amoghraj-72.github.io/the-kickoff/demo/f1.html, --no-open to skip opening it.
 Nothing is saved either way: a preview never uses up what the daily edition would report.
 """
@@ -14,7 +16,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from kickoff import f1, render  # noqa: E402
+from kickoff import f1, f1blurb, notes, render, settings  # noqa: E402
 from kickoff.sources import espn, jolpica  # noqa: E402
 
 if "--live" in sys.argv:
@@ -22,7 +24,25 @@ if "--live" in sys.argv:
     day = now.astimezone(ZoneInfo("Asia/Singapore")).date()
     api = jolpica.Api()
     note = "Built live from the Jolpica F1 API."
-    out = f1.run(now, espn.window_start(day), {}, api)
+    story = None
+    if "--story" in sys.argv:
+        import anthropic
+        from kickoff.envfile import load_env
+        load_env()
+        story = f1blurb.story(anthropic.Anthropic())
+    elif "--story-dry" in sys.argv:
+        def story(race, rows, start, extras=()):
+            from kickoff.sources import feeds
+            picked = f1blurb.pick_reports(feeds.fetch_all(f1blurb.FEEDS), race, rows, start)
+            print("FACTS:", json.dumps(f1blurb.facts(race, rows, extras), ensure_ascii=False, indent=1))
+            print(f"REPORTS ({len(picked)}):")
+            for i in picked:
+                print(f"  {i['published']:%d %b %H:%M} {i['source']}: {i['title']} | {i['text'][:90]}")
+            return "", {"input": 0, "output": 0}
+    out = f1.run(now, espn.window_start(day), {}, api, story=story)
+    used = out["stats"].get("claude_tokens", {"input": 0, "output": 0})
+    if used["input"]:
+        print(f"Claude: {used['input']} tokens in, {used['output']} out, about ${notes.cost(used, settings.NEWS_MODEL):.4f}")
 else:
     fx = ROOT / "tests" / "fixtures"
     load = lambda n: json.loads((fx / n).read_text())["MRData"]  # noqa: E731

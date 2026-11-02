@@ -206,4 +206,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .pts th, .pts td { padding: 7px 4px; }
 .pts th { font-size: 11px; letter-spacing: 0; }
 .pts th:first-child, .pts td:first-child { padding-left: 8px; }
+.pts.f1 table { font-size: 13px; }
+.pts.f1 th, .pts.f1 td { padding-left: 3px; padding-right: 3px; }
 .cricket p.fow { font-size: 14px; line-height: 1.5; margin: 8px 0 4px; }
+.f1story { margin: 0 0 12px; line-height: 1.55; }

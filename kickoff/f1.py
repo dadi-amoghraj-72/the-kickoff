@@ -30,6 +30,13 @@ def abbr(name):
     return ABBR.get(full, full[:3].upper())
 
 
+def short_name(d):
+    """'M. Verstappen': first initial and surname. A double given name uses its last part (Andrea Kimi Antonelli is K. Antonelli, as he is
+    known). Falls back to the three-letter code if the source sent no names."""
+    given, family = (d.get("givenName") or "").split(), d.get("familyName") or ""
+    return f"{given[-1][0]}. {family}" if given and family else d.get("code") or family
+
+
 def team(name):
     name = TEAM.get(name, name)
     return re.sub(r"\s+F1 Team$", "", name)
@@ -65,7 +72,8 @@ def due_sessions(schedule, now, window_start, reported=(), pending=()):
 def _gap(row, winner_laps):
     status = row.get("status", "")
     if status == "Finished":
-        return (row.get("Time") or {}).get("time", "")
+        t = (row.get("Time") or {}).get("time", "")
+        return re.sub(r"^(\d+:\d+:\d+)\.\d+$", r"\1", t)  # the winner's race time to the second: the full 2:20:28.772 is too wide for a phone
     behind = re.match(r"\+(\d+) Lap", status)
     if behind:
         return f"+{behind.group(1)} lap" + ("s" if behind.group(1) != "1" else "")
@@ -77,7 +85,7 @@ def _gap(row, winner_laps):
 
 def _tight(html):
     """The compact table style (shared with the cricket points tables) so a phone shows every column."""
-    return f'<div class="pts">{html}</div>'
+    return f'<div class="pts f1">{html}</div>'
 
 
 def classified(x):
@@ -96,10 +104,10 @@ def moved(x):
 
 
 def results_table(caption, rows):
-    """Race or sprint: position, driver code, team, gap to the winner (or why out), points."""
+    """Race or sprint: position, driver, places gained, gap to the winner (or why out), points."""
     laps = int(rows[0]["laps"]) if rows and rows[0].get("laps") else 0
-    body = [[x["position"], x["Driver"]["code"], abbr(x["Constructor"]["name"]), moved(x), _gap(x, laps), int(float(x["points"]))] for x in rows]
-    return _tight(r.table(caption, [("P", True), ("Driver", False), ("Team", False), ("+/-", True), ("Gap", True), ("Pts", True)], body))
+    body = [[x["position"], short_name(x["Driver"]), moved(x), _gap(x, laps), int(float(x["points"]))] for x in rows]
+    return _tight(r.table(caption, [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body))
 
 
 def best_time(row):
@@ -109,8 +117,8 @@ def best_time(row):
 
 
 def qualifying_table(rows):
-    body = [[x["position"], x["Driver"]["code"], abbr(x["Constructor"]["name"]), *best_time(x)] for x in rows]
-    return _tight(r.table("Qualifying", [("P", True), ("Driver", False), ("Team", False), ("Q", False), ("Time", True)], body))
+    body = [[x["position"], short_name(x["Driver"]), *best_time(x)] for x in rows]
+    return _tight(r.table("Qualifying", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body))
 
 
 def driver_standings_table(standings, rnd, limit=10, teams=None):
@@ -118,7 +126,7 @@ def driver_standings_table(standings, rnd, limit=10, teams=None):
     no order we can rely on, so the race's own result decides; the first listed team is only the fallback."""
     rows = (standings or {}).get("DriverStandings") or []
     teams = teams or {}
-    body = [[x["position"], x["Driver"]["code"], abbr(teams.get(x["Driver"]["driverId"]) or (x.get("Constructors") or [{"name": ""}])[0]["name"]), int(float(x["points"]))]
+    body = [[x["position"], short_name(x["Driver"]), abbr(teams.get(x["Driver"]["driverId"]) or (x.get("Constructors") or [{"name": ""}])[0]["name"]), int(float(x["points"]))]
             for x in rows[:limit]]
     return _tight(r.table(f"Drivers' standings after round {rnd}: top {min(limit, len(rows))}", [("P", True), ("Driver", False), ("Team", False), ("Pts", True)], body)) if body else ""
 
@@ -285,8 +293,10 @@ def standings_html(ds, cs, rnd, race_rows):
 
 # ---- One session, and the whole block ------------------------------------------------------------
 
-def session_html(due, api):
-    """(HTML, standings still to come) for one due session, or (None, False) when its results are not published yet. Raises when the source fails."""
+def session_html(due, api, story=None, used=None):
+    """(HTML, standings still to come) for one due session, or (None, False) when its results are not published yet. Raises when the source fails.
+    story: optional, for Sunday races only: story(race, rows, start, extras) -> (html, usage). Its tokens are added into `used`.
+    A failing story is left out; it never costs the tables."""
     season, rnd, kind = due["season"], due["round"], due["session"]
     if kind == "qualifying":
         data = api.qualifying(season, rnd)
@@ -299,8 +309,18 @@ def session_html(due, api):
     rows = (data or {}).get("SprintResults" if kind == "sprint" else "Results")
     if not rows:
         return None, False
-    html = f'<p class="f1sum">{r.esc(race_summary(rows))}</p>' + results_table(LABEL[kind], rows)
-    html += _list(biggest_mover(rows) + big_moments(rows) + (firsts(rows, api.finishes) if kind == "race" else []))
+    standouts = biggest_mover(rows) + big_moments(rows) + (firsts(rows, api.finishes) if kind == "race" else [])
+    html = f'<p class="f1sum">{r.esc(race_summary(rows))}</p>'
+    if kind == "race" and story:
+        try:
+            text, usage = story(due["race"], rows, start_of(due["race"], "race"), standouts)
+        except Exception:
+            text, usage = "", {"input": 0, "output": 0}
+        html += text
+        if used is not None:
+            used["input"] += usage["input"]
+            used["output"] += usage["output"]
+    html += results_table(LABEL[kind], rows) + _list(standouts)
     stale = False
     if kind == "race":
         got = fresh_standings(api, season, rnd, due["race"], rows)
@@ -312,17 +332,17 @@ def session_html(due, api):
     return html, stale
 
 
-def run(now, window_start, st, api, season="current"):
+def run(now, window_start, st, api, season="current", story=None):
     """{"html", "state", "stats"}. st: {"reported": [session ids], "pending": {id: iso end}}. A failing or not-yet-published session
     is kept as pending (and mentioned) rather than lost; one failure never stops the others."""
     reported, pending = list(st.get("reported", [])), dict(st.get("pending", {}))
     schedule = api.schedule(season)
     due = due_sessions(schedule, now, window_start, reported, pending)
-    parts, waiting, failed, shown, queued_now = {}, [], 0, 0, set()
+    parts, waiting, failed, shown, queued_now, used = {}, [], 0, 0, set(), {"input": 0, "output": 0}
     for d in due:
         stale = False
         try:
-            html, stale = session_html(d, api)
+            html, stale = session_html(d, api, story, used)
         except Exception:
             failed += 1
             html = None
@@ -361,4 +381,4 @@ def run(now, window_start, st, api, season="current"):
     horizon = now - LOOKBACK
     pending = {k: v for k, v in pending.items() if datetime.fromisoformat(v) >= horizon}
     return {"html": out, "state": {"reported": reported[-60:], "pending": pending},
-            "stats": {"due": len(due), "shown": shown, "waiting": len(waiting), "failed": failed, "calls": api.calls}}
+            "stats": {"due": len(due), "shown": shown, "waiting": len(waiting), "failed": failed, "calls": api.calls, "claude_tokens": used}}
