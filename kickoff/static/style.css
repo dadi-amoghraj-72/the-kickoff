@@ -259,17 +259,24 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .pts.f1.nfl.po th:first-child, .pts.f1.nfl.po td:first-child { text-align: center; padding-left: 3px; }
 .pts.f1.nfl.po th:last-child, .pts.f1.nfl.po td:last-child { text-align: center; padding-left: 3px; }
 .pts.f1.nfl tr.bye td { color: var(--gold); font-weight: 700; }
-.nflsb .dog { color: var(--gold); font-weight: 700; margin-left: 1px; }
+.nflsb .dog { color: var(--chalk); font-weight: 700; margin-left: 1px; }
 .nflsb th.tt .prog .dog { font-size: 15px; }
-.nflsb tr.day td { padding: 10px 10px 2px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
-.nflsb tr.note td { padding: 2px 10px 10px; font-size: 13px; white-space: normal; overflow-wrap: anywhere; border-bottom: 1px solid var(--hairline); }
-.nflsb tr.note .pl { color: var(--chalk); padding-top: 3px; }
-.nflsb tr.note .story { color: var(--muted); padding-top: 3px; }
 .nbaone td { padding: 5px 4px; }
 .nbaone td.aw { text-align: right; }
 .nbaone td.mid { text-align: center; color: var(--muted); white-space: nowrap; }
 .nbaone td.hm { text-align: left; }
 .nbaone td.w { font-weight: 700; color: var(--chalk); }
-.nbaone tr.one { border-bottom: 1px solid var(--hairline); }
 .pts.f1.nba th.tt { font-size: 16px; padding: 12px 8px 10px; }
 .pts.f1.nba td:nth-child(2) { font-weight: 600; }
+.nflsb tr.tag td { padding: 10px 10px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-align: center; }
+.nflsb tr.note td { padding: 0 10px 10px; font-size: 13px; white-space: normal; overflow-wrap: anywhere; }
+.nflsb tr.note .pl { color: var(--chalk); padding-top: 3px; }
+.nbaone tr.end td { border-bottom: 1px solid var(--hairline); }
+.nbaone tr.pre td { color: var(--muted); }
+.nbaone.ser th { padding: 6px 4px 8px; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--chalk); font-weight: 600; }
+.nbaone.ser th.aw { text-align: left; padding-left: 10px; }
+.nbaone.ser th.hm { text-align: right; padding-right: 10px; }
+.nbaone.ser th.mid { text-align: center; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.nbaone.ser .ws { color: var(--gold); font-size: 16px; }
+.nbaone.ser td.aw { text-align: left; padding-left: 12px; }
+.nbaone.ser td.hm { text-align: right; padding-right: 12px; }

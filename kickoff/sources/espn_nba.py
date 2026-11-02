@@ -29,7 +29,8 @@ class Source:
 
     def box(self, event_id):
         """One game, trimmed: {"players": [per team: {"team": code, "labels": [...], "athletes": [{"id", "name", "starter", "dnp", "stats": [...]}]}],
-        "teams": {code: {blocks, steals, ...}}, "odds": the pre-game DraftKings line or None, "plays": the scoring plays in order}."""
+        "teams": {code: {blocks, steals, ...}}, "odds": the pre-game DraftKings line or None, "plays": the scoring plays in order, "injuries": {athlete id: {"status", "type"}}
+        as ESPN lists them for the two teams (the reason a player who did not play was out)}."""
         j = self._call(SITE + f"summary?event={event_id}")
         players = []
         for t in j["boxscore"]["players"]:
@@ -44,11 +45,15 @@ class Source:
             away, home = pc.get("awayTeamOdds") or {}, pc.get("homeTeamOdds") or {}
             odds = {"details": pc.get("details"), "spread": pc.get("spread"), "away_dog": away.get("underdog"), "home_dog": home.get("underdog"),
                     "away_ml": away.get("moneyLine"), "home_ml": home.get("moneyLine")}
+        injuries = {}
+        for t in j.get("injuries", []):
+            for i in t.get("injuries", []):
+                injuries[i["athlete"]["id"]] = {"status": i.get("status", ""), "type": (i.get("details") or {}).get("type", "")}
         plays = [{"text": p["text"], "value": p.get("scoreValue", 0), "period": p["period"]["number"], "clock": p["clock"]["displayValue"],
                   "away": p["awayScore"], "home": p["homeScore"], "team": (p.get("team") or {}).get("id"),
                   "athlete": ((p.get("participants") or [{}])[0].get("athlete") or {}).get("id")}
                  for p in j.get("plays", []) if p.get("scoringPlay")]
-        return {"players": players, "teams": teams, "odds": odds, "plays": plays}
+        return {"players": players, "teams": teams, "odds": odds, "plays": plays, "injuries": injuries}
 
     def standings(self):
         """Both conferences with every team's record, seed and streak."""
@@ -62,13 +67,19 @@ class Source:
         """{team id: abbreviation}."""
         return {t["team"]["id"]: t["team"]["abbreviation"] for t in self._call(SITE + "teams")["sports"][0]["leagues"][0]["teams"]}
 
-    def career(self, athlete_id):
-        """Career regular-season totals {"PTS": int, "REB": int, "AST": int, ...} (only the whole-number columns)."""
-        j = self._call(f"https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/{athlete_id}/stats")
-        cat = next(c for c in j["categories"] if c["name"] == "totals")
-        out = {}
-        for label, v in zip(cat["labels"], cat["totals"]):
-            v = str(v).replace(",", "")
-            if v.isdigit():
-                out[label] = int(v)
+    def schedule(self, team_id, season=None, season_type=3):
+        """One team's games of a season type (3 = playoffs), played and still to come, trimmed:
+        [{"id", "date", "status", "headline", "home": {"id", "abbr", "short", "score"}, "away": {...}}]. season: the year the season ends in."""
+        extra = f"&season={season}" if season else ""
+        out = []
+        for e in self._call(SITE + f"teams/{team_id}/schedule?seasontype={season_type}{extra}")["events"]:
+            c = e["competitions"][0]
+            side = {}
+            for x in c["competitors"]:
+                sc = x.get("score")
+                sc = sc.get("displayValue") if isinstance(sc, dict) else sc
+                side[x["homeAway"]] = {"id": x["team"]["id"], "abbr": x["team"]["abbreviation"], "short": x["team"].get("shortDisplayName", x["team"]["abbreviation"]),
+                                       "score": int(sc) if str(sc or "").isdigit() else None}
+            out.append({"id": e["id"], "date": e["date"], "status": c["status"]["type"]["name"],
+                        "headline": next((n["headline"] for n in c.get("notes", [])), ""), "home": side["home"], "away": side["away"]})
         return out
