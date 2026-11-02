@@ -201,8 +201,52 @@ def standout_text(p, kinds, games, plays):
     return f"{text}; {result_of(p, games)}"
 
 
+STAT_KEYS = (("PTS", "pts"), ("REB", "reb"), ("AST", "ast"), ("STL", "stl"), ("BLK", "blk"))
+
+
+def marks_of(p, kinds):
+    """Which parts of a standout line earned it, so they can be shown in colour: stat labels ('pts', 'stl', ...), 'tag' for a named tag such as
+    triple-double, 'gw' for the game-winner. 40 points marks points; a triple-double marks each category of 10 or more; 5 steals marks steals."""
+    m = set()
+    if f"{POINTS}-point game" in kinds:
+        m.add("pts")
+    if "triple-double" in kinds:
+        m |= {lab for key, lab in STAT_KEYS if p[key] >= 10}
+    if "20-20 game" in kinds:
+        m |= {"pts", "reb"}
+    if p["BLK"] >= BLOCKS:
+        m.add("blk")
+    if p["STL"] >= STEALS:
+        m.add("stl")
+    if [k for k in kinds if k in TAGGED]:
+        m.add("tag")
+    if "game-winner" in kinds:
+        m.add("gw")
+    return m
+
+
+def standout_html(text, marks):
+    """A standout line as HTML with the marked parts (see marks_of) in the accent colour; the result after the ';' stays plain."""
+    head, sep, tail = text.partition("; ")
+    out = r.esc(head)
+    for lab in ("pts", "reb", "ast", "stl", "blk"):
+        if lab in marks:
+            out = re.sub(rf"(\d+ {lab})\b", r'<span class="hl">\1</span>', out, count=1)
+    if "tag" in marks:
+        out = re.sub(r"(\((?:triple-double|20-20 game)[^)]*\))", r'<span class="hl">\1</span>', out, count=1)
+    if "gw" in marks:
+        out = re.sub(r"(the game-winner with [^;]*)$", r'<span class="hl">\1</span>', out, count=1)
+    return out + (sep + r.esc(tail) if sep else "")
+
+
 def standouts(players, games, boxes, limit=MAX_STANDOUTS):
     """The ranked standout lines, best first, and the hits as [(player id, game id)] for the auto-join count."""
+    rows, hits = standouts_marked(players, games, boxes, limit)
+    return [t for t, _ in rows], hits
+
+
+def standouts_marked(players, games, boxes, limit=MAX_STANDOUTS):
+    """The same as standouts(), but each line comes with its marks: [(text, marks)]."""
     plays, deciders = {}, {}
     for gid, g in games.items():
         pl = deciding_play(g, boxes.get(gid))
@@ -215,7 +259,7 @@ def standouts(players, games, boxes, limit=MAX_STANDOUTS):
         if kinds:
             found.append((weight(p, kinds), p, kinds))
     found.sort(key=lambda x: (-x[0], x[1]["name"]))
-    return [standout_text(p, k, games, plays) for _, p, k in found[:limit]], [(p["id"], p["game"]) for _, p, _ in found]
+    return [(standout_text(p, k, games, plays), marks_of(p, k)) for _, p, k in found[:limit]], [(p["id"], p["game"]) for _, p, _ in found]
 
 
 def update_tracking(st, hits, names, day):
@@ -526,7 +570,8 @@ def run(now, day, st, source):
     players = {g["id"]: players_of(boxes[g["id"]], g) for g in new}
     flat = [p for ps in players.values() for p in ps]
     names = {p["id"]: p["name"] for p in flat}
-    texts, hits = standouts(flat, by_id, boxes)
+    rows, hits = standouts_marked(flat, by_id, boxes)
+    texts = [t for t, _ in rows]
     tracked = update_tracking(keep, hits, names, day)
     for p in flat:                                         # the latest team of every tracked player (a trade is followed)
         if p["id"] in tracked:
@@ -576,7 +621,7 @@ def run(now, day, st, source):
             html += series_html(g0, sched, keep["series_notes"], seeds)
             stats["series"] += 1
     if texts:
-        html += "<h4>Standouts</h4>" + _list(texts)
+        html += "<h4>Standouts</h4>" + '<ul class="standouts">' + "".join(f"<li>{standout_html(t, m)}</li>" for t, m in rows) + "</ul>"
     std = None
     playoffs_on = any(g["phase"] == "playoffs" for g in games.values())   # once the playoffs are on, the regular-season tables are not needed
     if (games or new) and not playoffs_on:                  # the standings come every day there is basketball until then

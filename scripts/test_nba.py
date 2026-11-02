@@ -136,6 +136,20 @@ check("thresholds are exact: 39 points no, 40 yes; 4 blocks no, 5 yes; 4 steals 
       and nba.kinds_of(dict(wem, PTS=3, BLK=5, STL=0, REB=1, AST=1)) and nba.kinds_of(dict(wem, PTS=3, BLK=0, STL=5, REB=1, AST=1)))
 
 
+# ---- Standout highlighting ----
+rows_, _ = nba.standouts_marked(ALL, BYID, BOXES)
+by_name = {t.split(" (")[0]: (t, m) for t, m in rows_}
+check("Dunn's standout: only the 7 steals (the reason he is a standout) is marked; his 12 points are plain", by_name["Kris Dunn"][1] == {"stl"} and nba.standout_html(*by_name["Kris Dunn"]).count('class="hl"') == 1 and '<span class="hl">7 stl</span>' in nba.standout_html(*by_name["Kris Dunn"]))
+check("Doncic's standout: his 45 points and 5 steals are marked, his 15 rebounds and 6 assists are not", by_name["Luka Doncic"][1] == {"pts", "stl"} and '<span class="hl">45 pts</span>' in nba.standout_html(*by_name["Luka Doncic"]) and '<span class="hl">5 stl</span>' in nba.standout_html(*by_name["Luka Doncic"]) and 'class="hl">15 reb' not in nba.standout_html(*by_name["Luka Doncic"]))
+check("Wembanyama's: the 43 points and the 6 blocks are marked", by_name["Victor Wembanyama"][1] == {"pts", "blk"})
+td_p = dict(wem, PTS=12, REB=10, AST=10, BLK=0, STL=3)
+check("a triple-double marks the three categories of 10 or more and the tag, not the 3 steals", nba.marks_of(td_p, nba.kinds_of(td_p)) == {"pts", "reb", "ast", "tag"})
+check("20 and 20 marks points and rebounds and the tag; a game-winner marks its phrase", nba.marks_of(dict(wem, PTS=21, REB=20, AST=2, BLK=0, STL=0), ["20-20 game"]) == {"pts", "reb", "tag"} and nba.marks_of(dict(wem, PTS=10, REB=2, AST=2, BLK=0, STL=0), ["game-winner"]) == {"gw"})
+gw_line = "A B (X): 10 pts, 2 reb, 2 ast, the game-winner with 2.5s left; 100-99 win over Y"
+check("the game-winner phrase is coloured as a whole and the result after the semicolon stays plain", nba.standout_html(gw_line, {"gw"}) == 'A B (X): 10 pts, 2 reb, 2 ast, <span class="hl">the game-winner with 2.5s left</span>; 100-99 win over Y')
+check("the named tag is coloured with its brackets", '<span class="hl">(triple-double)</span>' in nba.standout_html("A (X): 12 pts, 10 reb, 10 ast (triple-double); 1-0 win over Y", {"pts", "reb", "ast", "tag"}))
+check("highlighting escapes the text first", "&lt;i&gt;" in nba.standout_html("<i>A</i> (X): 41 pts, 1 reb, 1 ast; 1-0 win over Y", {"pts"}))
+
 def synth(plays):
     return {"plays": [{"text": t, "value": 2, "period": per, "clock": clk, "away": a, "home": h, "team": "1", "athlete": "9"} for t, per, clk, a, h in plays]}
 
@@ -214,6 +228,8 @@ check("independent: Wembanyama's line is built from the raw stats: '43 pts, 7 re
 check("standouts section lists Doncic first", "Standouts Luka Doncic (LAL)" in t)
 check("state: the 11 games are reported, underdogs saved, tracked players' teams remembered, standings saved for next time", len(out["state"]["reported"]) == 11 and set(out["state"]["dogs"]) == set(BOXES)
       and out["state"]["teams"]["1966"] == "PHI" and out["state"]["teams"]["3945274"] == "LAL" and out["state"]["seeds"]["Eastern Conference"]["PHI"] == 1)
+
+check("in the page the standouts list carries the highlights, and the colour rule exists", out["html"].count('<span class="hl">') >= 5 and ".standouts .hl { color: var(--gold)" in (ROOT / "kickoff" / "static" / "style.css").read_text())
 
 # ---- Rhythm and state ----
 again = nba.run(NOW, MON, copy.deepcopy(out["state"]), Saved())
