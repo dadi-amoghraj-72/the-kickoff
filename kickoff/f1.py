@@ -91,11 +91,7 @@ def _gap(row, winner_laps):
 
 
 def _tight(html, widths, extra=""):
-    """The compact F1 table style (a fixed layout with even column widths, in per cent). The caption becomes a title row across the top of
-    the table, and the widths go in a colgroup (a fixed layout reads them from the first row, which is the title)."""
-    cols = "".join(f'<col style="width:{w}%">' for w in widths)
-    html = re.sub(r"<caption>(.*?)</caption><thead>", lambda m: f'<colgroup>{cols}</colgroup><thead><tr><th class="tt" colspan="{len(widths)}">{m.group(1)}</th></tr>', html, count=1)
-    return f'<div class="pts f1{extra}">{html}</div>'
+    return r.compact(html, widths, extra)
 
 
 def classified(x):

@@ -51,6 +51,14 @@ def table(caption, columns, rows, zones=None, legend=None, row_classes=None):
     return out
 
 
+def compact(html, widths, extra=""):
+    """Wrap a table from table() in the compact fixed-layout style (even column widths in per cent): the caption becomes a centred title
+    row across the top of the table, and the widths go in a colgroup because a fixed layout reads them from the first row (the title)."""
+    cols = "".join(f'<col style="width:{w}%">' for w in widths)
+    html = re.sub(r"<caption>(.*?)</caption><thead>", lambda m: f'<colgroup>{cols}</colgroup><thead><tr><th class="tt" colspan="{len(widths)}">{m.group(1)}</th></tr>', html, count=1)
+    return f'<div class="pts f1{extra}">{html}</div>'
+
+
 def on_today(items):
     """items: [(kind 'up'|'overnight', time text, description)]."""
     rows = []

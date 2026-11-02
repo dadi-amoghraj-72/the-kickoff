@@ -208,7 +208,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .pts th:first-child, .pts td:first-child { padding-left: 8px; }
 .pts.f1 table { font-size: 13px; width: 100%; max-width: 520px; table-layout: fixed; }
 .pts.f1 th:last-child, .pts.f1 td:last-child { padding-right: 16px; }
-.pts.f1 th.tt { text-align: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--text); padding: 10px 3px 8px 8px; }
+.pts.f1 th.tt { text-align: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 3px 8px 8px; }
 .pts.f1 th, .pts.f1 td { padding-left: 3px; padding-right: 3px; }
 .pts.f1 th:nth-child(n+3), .pts.f1 td:nth-child(n+3) { padding-left: 9px; }
 .cricket p.fow { font-size: 14px; line-height: 1.5; margin: 8px 0 4px; }
@@ -217,15 +217,39 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 /* Tennis: each match is two rows (winner above), one column per set */
 .tennis { margin: 14px 0 6px; }
 .tennis table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 14px; }
-.tennis th.tt { white-space: normal; text-align: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--text); padding: 10px 8px 8px; }
+.tennis th.tt { white-space: normal; text-align: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 8px 8px; }
 .tennis td { padding: 4px 3px; border-bottom: 0; white-space: normal; vertical-align: middle; }
 .tennis td.pl { padding-left: 8px; overflow-wrap: anywhere; }
 .tennis td.s { text-align: center; color: var(--muted); }
 .tennis tr.w td.pl { font-weight: 700; }
-.tennis tr.w td.s { color: var(--text); }
+.tennis tr.w td.s { color: var(--chalk); }
 .tennis tr.l { border-bottom: 1px solid var(--hairline); }
 .tennis tr.l td { padding-bottom: 7px; }
 .tennis tr.w td { padding-top: 7px; }
 .tennis sup { font-size: 9px; margin-left: 1px; }
 .tennis td.tag { text-align: left; color: var(--muted); padding-left: 0; white-space: nowrap; overflow: visible; }
 .tennis th.tt .prog { display: block; margin-top: 2px; font-weight: 400; font-size: 12px; color: var(--muted); }
+
+/* NFL: two rows per game (away above home), the house marks the home team, a thicker line between kickoff groups */
+.nflsb { margin: 14px 0 6px; }
+.nflsb table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 15px; }
+.nflsb th.tt { white-space: normal; text-align: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 8px 8px; }
+.nflsb th.tt .prog { display: block; margin-top: 2px; font-weight: 400; font-size: 12px; color: var(--muted); }
+.nflsb td { padding: 4px 3px; border-bottom: 0; vertical-align: middle; }
+.nflsb td.tm { padding-left: 10px; }
+.nflsb td.sc { text-align: right; color: var(--muted); padding-right: 6px; }
+.nflsb td.ot { text-align: left; font-size: 12px; padding-left: 4px; }
+.nflsb tr.w td.tm, .nflsb tr.w td.sc { font-weight: 700; color: var(--chalk); }
+.nflsb tr.h { border-bottom: 1px solid var(--hairline); }
+.nflsb tr.h td { padding-bottom: 8px; }
+.nflsb tr.a td { padding-top: 8px; }
+.nflsb tr.gap { border-bottom: 2px solid var(--muted); }
+.nflsb tr.gap td { padding: 0; height: 2px; }
+.nflsb tr.mine td.tm { color: var(--gold); }
+.nflsb .home { font-size: 12px; }
+.nflsb .rec { font-size: 12px; font-weight: 400; color: var(--muted); }
+.pts.f1.nfl td:nth-child(2) { font-weight: 600; }
+.pts.f1.nfl.div td:first-child { font-weight: 700; }
+.pts.f1.nfl tr.mine td:nth-child(2), .pts.f1.nfl.div tr.mine td:first-child { color: var(--gold); }
+.pts.f1.nfl.div td:nth-child(2) { font-weight: 400; }
+.pts.f1.nfl .new, .new { font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); margin-left: 2px; }

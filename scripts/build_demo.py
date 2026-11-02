@@ -26,8 +26,8 @@ from kickoff.sources import espn_cricket  # noqa: E402
 
 _espn = espn_cricket.Source()
 from kickoff.sources import espn  # noqa: E402
-from kickoff import f1, tennis  # noqa: E402
-from kickoff.sources import espn_tennis, feeds, jolpica  # noqa: E402
+from kickoff import f1, nfl, tennis  # noqa: E402
+from kickoff.sources import espn_nfl, espn_tennis, feeds, jolpica  # noqa: E402
 from kickoff.envfile import load_env  # noqa: E402
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
@@ -78,12 +78,20 @@ if "--no-tennis" not in sys.argv:
             out["sections"].append({"id": "tennis", "title": "Tennis", "html": got["html"]})
     except Exception as e:
         out["problems"].append(f"tennis ({type(e).__name__})")
+# NFL: free, no key, no Claude. Real data; nothing is saved. What shows depends on today's Singapore weekday (Monday, Tuesday, Wednesday, Saturday).
+if "--no-nfl" not in sys.argv:
+    try:
+        got = nfl.run(datetime.now(timezone.utc), day, {}, espn_nfl.Source())
+        if got["html"]:
+            out["sections"].append({"id": "nfl", "title": "NFL", "html": got["html"]})
+    except Exception as e:
+        out["problems"].append(f"nfl ({type(e).__name__})")
 if not out["sections"]:
     sys.exit("Nothing to show for this date. Problems: " + ", ".join(out["problems"]))
 banner = (f"Football preview built from real data for {render.nice_date(day.isoformat())}. "
           + ("Written with Claude. " if use_claude else "Plain text, no AI. ")
           + "The FPL deadline reminder and transfer hints are shown here even if the deadline is far off. "
-          + "NFL, NBA and the other sections are not built yet.")
+          + "NBA and the other sections are not built yet.")
 edition = {"date": day.isoformat(), "dummy": False, "banner": banner, "home": "../index.html",
            "headlines": out["headlines"], "sections": out["sections"]}
 (ROOT / "docs" / "demo").mkdir(parents=True, exist_ok=True)
