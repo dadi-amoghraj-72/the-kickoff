@@ -99,7 +99,8 @@ if not out["sections"]:
 banner = (f"Football preview built from real data for {render.nice_date(day.isoformat())}. "
           + ("Written with Claude. " if use_claude else "Plain text, no AI. ")
           + "The FPL deadline reminder and transfer hints are shown here even if the deadline is far off. "
-          + "NBA and the other sections are not built yet.")
+          + "Football, cricket, F1, tennis, NFL and NBA are built; baseball, Young Guns, Around the sporting world and the cross-sport sections are not yet, "
+          + "and this demo lists the sports in the order they were built, not the final order.")
 edition = {"date": day.isoformat(), "dummy": False, "banner": banner, "home": "../index.html",
            "headlines": out["headlines"], "sections": out["sections"]}
 (ROOT / "docs" / "demo").mkdir(parents=True, exist_ok=True)

@@ -1,5 +1,420 @@
 {
   "cards": {
+    "1988bf46-6ee2-4af0-88e5-559ae4b89a76": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 17,
+              "fours": 1,
+              "mark": "",
+              "name": "Katie Mack",
+              "out": "c †Jones b Day",
+              "r": 12,
+              "sixes": 0,
+              "sr": 70.58
+            },
+            {
+              "b": 15,
+              "fours": 1,
+              "mark": "(c) †",
+              "name": "Beth Mooney",
+              "out": "c †Jones b DR Gibson",
+              "r": 17,
+              "sixes": 0,
+              "sr": 113.33
+            },
+            {
+              "b": 13,
+              "fours": 2,
+              "mark": "",
+              "name": "Sophie Devine",
+              "out": "c Sutherland b Dean",
+              "r": 11,
+              "sixes": 0,
+              "sr": 84.61
+            },
+            {
+              "b": 5,
+              "fours": 2,
+              "mark": "",
+              "name": "Freya Kemp",
+              "out": "c †Jones b McKenna",
+              "r": 10,
+              "sixes": 0,
+              "sr": 200.0
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Mikayla Hinkley",
+              "out": "lbw b Day",
+              "r": 3,
+              "sixes": 0,
+              "sr": 75.0
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Chloe Piparo",
+              "out": "c †Jones b ML Gibson",
+              "r": 1,
+              "sixes": 0,
+              "sr": 25.0
+            },
+            {
+              "b": 6,
+              "fours": 0,
+              "mark": "",
+              "name": "Fatima Sana",
+              "out": "c Day b ML Gibson",
+              "r": 1,
+              "sixes": 0,
+              "sr": 16.66
+            },
+            {
+              "b": 17,
+              "fours": 2,
+              "mark": "",
+              "name": "Chloe Ainsworth",
+              "out": "b Dean",
+              "r": 16,
+              "sixes": 0,
+              "sr": 94.11
+            },
+            {
+              "b": 21,
+              "fours": 2,
+              "mark": "",
+              "name": "Alana King",
+              "out": "run out (Sutherland)",
+              "r": 18,
+              "sixes": 0,
+              "sr": 85.71
+            },
+            {
+              "b": 16,
+              "fours": 0,
+              "mark": "",
+              "name": "Lilly Mills",
+              "out": "not out",
+              "r": 13,
+              "sixes": 0,
+              "sr": 81.25
+            },
+            {
+              "b": 2,
+              "fours": 0,
+              "mark": "",
+              "name": "Amy Edgar",
+              "out": "not out",
+              "r": 1,
+              "sixes": 0,
+              "sr": 50.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 6.0,
+              "m": 0,
+              "name": "Kim Garth",
+              "nb": 0,
+              "o": 3.0,
+              "r": 18,
+              "w": 0,
+              "wd": 2
+            },
+            {
+              "eco": 6.66,
+              "m": 0,
+              "name": "Annabel Sutherland",
+              "nb": 0,
+              "o": 3.0,
+              "r": 20,
+              "w": 0,
+              "wd": 1
+            },
+            {
+              "eco": 7.25,
+              "m": 0,
+              "name": "Charlie Dean",
+              "nb": 0,
+              "o": 4.0,
+              "r": 29,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 4.25,
+              "m": 0,
+              "name": "Sophie Day",
+              "nb": 0,
+              "o": 4.0,
+              "r": 17,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 9.0,
+              "m": 0,
+              "name": "Rhys McKenna",
+              "nb": 0,
+              "o": 2.0,
+              "r": 18,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 3.0,
+              "m": 0,
+              "name": "Dani Gibson",
+              "nb": 0,
+              "o": 1.0,
+              "r": 3,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 3.33,
+              "m": 0,
+              "name": "Maisy Gibson",
+              "nb": 0,
+              "o": 3.0,
+              "r": 10,
+              "w": 2,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Melbourne Stars Women",
+          "dnb": [],
+          "extras": {
+            "lb": 4,
+            "pen": 5,
+            "total": 21,
+            "w": 12
+          },
+          "fow": "1-37 (Mack, 4.2), 2-55 (Mooney, 6.4), 3-70 (Kemp, 7.6), 4-70 (Devine, 8.2), 5-74 (Hinkley, 9.2), 6-75 (Sana, 10.2), 7-76 (Piparo, 10.6), 8-96 (Ainsworth, 15.2), 9-121 (King, 19.1)",
+          "label": "",
+          "overs": 20.0,
+          "runs": 124,
+          "team": "Perth Scorchers Women",
+          "wickets": 9
+        },
+        {
+          "batting": [
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Rhys McKenna",
+              "out": "c †Mooney b Ainsworth",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 36,
+              "fours": 3,
+              "mark": "(c)",
+              "name": "Meg Lanning",
+              "out": "c Sana b Edgar",
+              "r": 41,
+              "sixes": 1,
+              "sr": 113.88
+            },
+            {
+              "b": 16,
+              "fours": 3,
+              "mark": "†",
+              "name": "Amy Jones",
+              "out": "c Ainsworth b Devine",
+              "r": 18,
+              "sixes": 0,
+              "sr": 112.5
+            },
+            {
+              "b": 2,
+              "fours": 0,
+              "mark": "",
+              "name": "Annabel Sutherland",
+              "out": "c Ainsworth b Devine",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Naomi Stalenberg",
+              "out": "c & b King",
+              "r": 1,
+              "sixes": 0,
+              "sr": 25.0
+            },
+            {
+              "b": 18,
+              "fours": 0,
+              "mark": "",
+              "name": "Charlie Dean",
+              "out": "st †Mooney b Devine",
+              "r": 13,
+              "sixes": 0,
+              "sr": 72.22
+            },
+            {
+              "b": 11,
+              "fours": 1,
+              "mark": "",
+              "name": "Dani Gibson",
+              "out": "c †Mooney b Devine",
+              "r": 8,
+              "sixes": 0,
+              "sr": 72.72
+            },
+            {
+              "b": 13,
+              "fours": 0,
+              "mark": "",
+              "name": "Georgia Prestwidge",
+              "out": "c Kemp b Mills",
+              "r": 13,
+              "sixes": 1,
+              "sr": 100.0
+            },
+            {
+              "b": 4,
+              "fours": 1,
+              "mark": "",
+              "name": "Kim Garth",
+              "out": "lbw b King",
+              "r": 6,
+              "sixes": 0,
+              "sr": 150.0
+            },
+            {
+              "b": 5,
+              "fours": 0,
+              "mark": "",
+              "name": "Maisy Gibson",
+              "out": "b King",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 0,
+              "fours": 0,
+              "mark": "",
+              "name": "Sophie Day",
+              "out": "not out",
+              "r": 0,
+              "sixes": 0,
+              "sr": null
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 5.0,
+              "m": 0,
+              "name": "Chloe Ainsworth",
+              "nb": 0,
+              "o": 3.0,
+              "r": 15,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 10.5,
+              "m": 0,
+              "name": "Fatima Sana",
+              "nb": 0,
+              "o": 2.0,
+              "r": 21,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 4.75,
+              "m": 0,
+              "name": "Sophie Devine",
+              "nb": 0,
+              "o": 4.0,
+              "r": 19,
+              "w": 4,
+              "wd": 2
+            },
+            {
+              "eco": 4.25,
+              "m": 1,
+              "name": "Alana King",
+              "nb": 0,
+              "o": 4.0,
+              "r": 17,
+              "w": 3,
+              "wd": 1
+            },
+            {
+              "eco": 6.66,
+              "m": 0,
+              "name": "Amy Edgar",
+              "nb": 1,
+              "o": 3.0,
+              "r": 20,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 5.53,
+              "m": 0,
+              "name": "Lilly Mills",
+              "nb": 0,
+              "o": 2.1,
+              "r": 12,
+              "w": 1,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Perth Scorchers Women",
+          "dnb": [],
+          "extras": {
+            "lb": 5,
+            "nb": 1,
+            "total": 9,
+            "w": 3
+          },
+          "fow": "1-0 (McKenna, 0.1), 2-30 (Jones, 3.4), 3-30 (Sutherland, 3.6), 4-43 (Stalenberg, 6.3), 5-79 (Dean, 12.4), 6-79 (Lanning, 13.1), 7-102 (Gibson, 16.2), 8-109 (Garth, 17.1), 9-109 (Gibson, 17.6), 10-109 (Prestwidge, 18.1)",
+          "label": "",
+          "overs": 18.1,
+          "runs": 109,
+          "team": "Melbourne Stars Women",
+          "wickets": 10
+        }
+      ],
+      "potm": [
+        {
+          "name": "Sophie Devine",
+          "team": "Perth Scorchers Women"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "Melbourne Stars Women",
+          "kind": "four-for",
+          "maidens": 0,
+          "match": "Melbourne Stars Women vs Perth Scorchers Women, 8th Match, Womens Big Bash League 2026",
+          "name": "Sophie Devine",
+          "overs": 4.0,
+          "result": "Perth Scorchers Women won by 15 runs",
+          "runs_conceded": 19,
+          "team": "Perth Scorchers Women",
+          "wickets": 4
+        }
+      ],
+      "status": "Scorchers won by 15 runs"
+    },
     "936348e9-608f-4ca8-9cc5-5d3082ab0b90": {
       "innings": [
         {
