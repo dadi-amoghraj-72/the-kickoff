@@ -208,6 +208,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .pts th:first-child, .pts td:first-child { padding-left: 8px; }
 .pts.f1 table { font-size: 13px; width: 100%; max-width: 520px; }
 .pts.f1.race table { table-layout: fixed; }
+.pts.f1.race th:last-child, .pts.f1.race td:last-child { padding-right: 16px; }
 .pts.f1.race th:nth-child(1) { width: 11%; }
 .pts.f1.race th:nth-child(2) { width: 37%; }
 .pts.f1.race th:nth-child(3) { width: 14%; }
