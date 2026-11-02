@@ -2,7 +2,7 @@
 constructor standings after each race. Everything is built by code from exact data (no Claude), and a session whose
 results are not published yet is retried in later editions instead of being dropped.
 
-Standouts (D's spec): big recoveries through the field, first wins and podiums, and standout qualifying laps."""
+Standouts (D's spec): Biggest Mover, Big Moment (early or front-runner retirements), first wins and podiums, and standout qualifying laps."""
 import re
 from datetime import datetime, timedelta, timezone
 
@@ -12,10 +12,22 @@ from kickoff import render as r
 SESSIONS = (("Qualifying", "qualifying", timedelta(minutes=75)), ("Sprint", "sprint", timedelta(minutes=60)), ("race", "race", timedelta(minutes=150)))
 ORDER = {"qualifying": 0, "sprint": 1, "race": 2}
 LABEL = {"qualifying": "Qualifying", "sprint": "Sprint", "race": "Race"}
-RECOVERY_PLACES = 8        # places gained from the grid, for a finish in the points
+MOVER_PLACES = 4           # places gained from the grid, for a driver to be named Biggest Mover
+EARLY_LAPS = 5             # a retirement within this many laps is an early exit
+FRONT_GRID = 5             # a retirement from this grid slot or better is worth a line
 POLE_MARGIN = 0.300        # seconds: a pole this far clear is called out
 LOOKBACK = timedelta(days=6)  # a session whose results never arrive is given up on after this long
 TEAM = {"RB F1 Team": "Racing Bulls"}
+
+
+ABBR = {"Red Bull": "RBR", "Ferrari": "FER", "Mercedes": "MER", "McLaren": "MCL", "Alpine": "ALP", "Racing Bulls": "RB", "Haas": "HAA",
+        "Williams": "WIL", "Audi": "AUD", "Cadillac": "CAD", "Aston Martin": "AMR"}
+
+
+def abbr(name):
+    """Three-letter team code for the driver tables, where the full name will not fit a phone beside the +/- column."""
+    full = team(name)
+    return ABBR.get(full, full[:3].upper())
 
 
 def team(name):
@@ -68,11 +80,26 @@ def _tight(html):
     return f'<div class="pts">{html}</div>'
 
 
+def classified(x):
+    return x.get("status") in ("Finished", "Lapped") or bool(re.match(r"\+\d+ Lap", x.get("status", "")))
+
+
+def places_gained(x):
+    """Places gained from the grid (negative: lost); None for a driver who did not finish, or started from the pit lane."""
+    grid = int(x.get("grid") or 0)
+    return grid - int(x["position"]) if grid > 0 and classified(x) else None
+
+
+def moved(x):
+    n = places_gained(x)
+    return "–" if not n else (f"▲{n}" if n > 0 else f"▼{-n}")
+
+
 def results_table(caption, rows):
     """Race or sprint: position, driver code, team, gap to the winner (or why out), points."""
     laps = int(rows[0]["laps"]) if rows and rows[0].get("laps") else 0
-    body = [[x["position"], x["Driver"]["code"], team(x["Constructor"]["name"]), _gap(x, laps), int(float(x["points"]))] for x in rows]
-    return _tight(r.table(caption, [("P", True), ("Driver", False), ("Team", False), ("Gap", True), ("Pts", True)], body))
+    body = [[x["position"], x["Driver"]["code"], abbr(x["Constructor"]["name"]), moved(x), _gap(x, laps), int(float(x["points"]))] for x in rows]
+    return _tight(r.table(caption, [("P", True), ("Driver", False), ("Team", False), ("+/-", True), ("Gap", True), ("Pts", True)], body))
 
 
 def best_time(row):
@@ -82,7 +109,7 @@ def best_time(row):
 
 
 def qualifying_table(rows):
-    body = [[x["position"], x["Driver"]["code"], team(x["Constructor"]["name"]), *best_time(x)] for x in rows]
+    body = [[x["position"], x["Driver"]["code"], abbr(x["Constructor"]["name"]), *best_time(x)] for x in rows]
     return _tight(r.table("Qualifying", [("P", True), ("Driver", False), ("Team", False), ("Q", False), ("Time", True)], body))
 
 
@@ -91,7 +118,7 @@ def driver_standings_table(standings, rnd, limit=10, teams=None):
     no order we can rely on, so the race's own result decides; the first listed team is only the fallback."""
     rows = (standings or {}).get("DriverStandings") or []
     teams = teams or {}
-    body = [[x["position"], x["Driver"]["code"], team(teams.get(x["Driver"]["driverId"]) or (x.get("Constructors") or [{"name": ""}])[0]["name"]), int(float(x["points"]))]
+    body = [[x["position"], x["Driver"]["code"], abbr(teams.get(x["Driver"]["driverId"]) or (x.get("Constructors") or [{"name": ""}])[0]["name"]), int(float(x["points"]))]
             for x in rows[:limit]]
     return _tight(r.table(f"Drivers' standings after round {rnd}: top {min(limit, len(rows))}", [("P", True), ("Driver", False), ("Team", False), ("Pts", True)], body)) if body else ""
 
@@ -153,13 +180,40 @@ def pole_margin(rows):
     return round(b - a, 3) if a is not None and b is not None else None
 
 
-def recoveries(rows):
-    out = []
-    for x in rows:
-        grid, pos = int(x.get("grid") or 0), int(x["position"])
-        if grid > 0 and pos <= 10 and grid - pos >= RECOVERY_PLACES and x.get("status") in ("Finished", "Lapped"):
-            out.append(f"{_name(x)} ({team(x['Constructor']['name'])}) came through the field: P{grid} on the grid to P{pos}, {grid - pos} places gained.")
-    return out
+def _full(row):
+    return f"{row['Driver']['givenName']} {row['Driver']['familyName']}"
+
+
+def biggest_mover(rows):
+    """The driver who gained most places from the grid, if it is worth a line."""
+    best = max((x for x in rows if (places_gained(x) or 0) >= MOVER_PLACES), key=lambda x: places_gained(x), default=None)
+    if not best:
+        return []
+    return [f"Biggest Mover: {_full(best)} ({team(best['Constructor']['name'])}), P{best['grid']} on the grid to P{best['position']} (▲{places_gained(best)})."]
+
+
+def big_moments(rows):
+    """What the results alone can show: drivers out in the first laps, and a front-row-to-top-five starter who did not finish. The
+    source gives no cause (it just says 'Retired'), so none is claimed."""
+    winner_laps = int(rows[0]["laps"]) if rows and rows[0].get("laps") else 0
+    out = [x for x in rows if not classified(x) and x.get("status") not in ("Disqualified", "Did not start")]
+    lines, used = [], set()
+    early = {}
+    for x in out:
+        if int(x.get("laps") or 0) <= EARLY_LAPS:
+            early.setdefault(int(x.get("laps") or 0), []).append(x)
+    for laps, group in sorted(early.items()):
+        names = " and ".join(_name(x) for x in group) if len(group) < 3 else f"{len(group)} drivers"
+        teams = {team(x["Constructor"]["name"]) for x in group}
+        tail = f" (both {teams.copy().pop()})" if len(group) == 2 and len(teams) == 1 else ""
+        when = "on lap 1" if laps == 0 else f"after {laps} lap" + ("s" if laps != 1 else "")
+        lines.append(f"Big Moment: {names}{tail} out {when}.")
+        used.update(id(x) for x in group)
+    for x in out:
+        grid = int(x.get("grid") or 0)
+        if id(x) not in used and 0 < grid <= FRONT_GRID and winner_laps and int(x.get("laps") or 0) < winner_laps:
+            lines.append(f"Big Moment: {_name(x)} ({team(x['Constructor']['name'])}), who started P{grid}, out after {x['laps']} laps.")
+    return lines[:2]
 
 
 def firsts(rows, finishes):
@@ -188,8 +242,13 @@ def quali_standouts(rows, poles):
     return out
 
 
+def _label(text):
+    head, sep, rest = text.partition(": ")
+    return f"<strong>{r.esc(head)}:</strong> {r.esc(rest)}" if sep and head in ("Biggest Mover", "Big Moment") else r.esc(text)
+
+
 def _list(items):
-    return '<ul class="standouts">' + "".join(f"<li>{r.esc(i)}</li>" for i in items) + "</ul>" if items else ""
+    return '<ul class="standouts">' + "".join(f"<li>{_label(i)}</li>" for i in items) + "</ul>" if items else ""
 
 
 def standings_match(ds, prev, *result_sets):
@@ -241,7 +300,7 @@ def session_html(due, api):
     if not rows:
         return None, False
     html = f'<p class="f1sum">{r.esc(race_summary(rows))}</p>' + results_table(LABEL[kind], rows)
-    html += _list(recoveries(rows) + (firsts(rows, api.finishes) if kind == "race" else []))
+    html += _list(biggest_mover(rows) + big_moments(rows) + (firsts(rows, api.finishes) if kind == "race" else []))
     stale = False
     if kind == "race":
         got = fresh_standings(api, season, rnd, due["race"], rows)
