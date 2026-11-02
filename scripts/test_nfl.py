@@ -94,9 +94,9 @@ for gid, b in BOXES.items():
                 raw.setdefault(a["athlete"]["id"], {"name": a["athlete"]["displayName"], "team": side["team"]["abbreviation"], "cats": {}})["cats"][cat["name"]] = dict(zip(cat["labels"], a["stats"]))
 lead = nfl.leaders(ALL)
 byname = lambda ps: [p["name"] for p in ps]  # noqa: E731
-want_qb = sorted([(nfl.num(v["cats"]["passing"]["RTG"]), v["name"]) for i, v in raw.items() if POS.get(i) == "QB" and "passing" in v["cats"] and nfl.pair(v["cats"]["passing"]["C/ATT"])[1] >= 15], reverse=True)[:3]
-check("top 3 QBs by passer rating (15+ attempts) equal the top 3 by ESPN's own RTG", byname(lead["qb"]) == [w[1] for w in want_qb] and len(want_qb) == 3, (byname(lead["qb"]), want_qb))
-check("QB list: ratings descend, and a 2-attempt cameo cannot appear", [nfl._rating(p) for p in lead["qb"]] == sorted([nfl._rating(p) for p in lead["qb"]], reverse=True) and all(nfl.pair(nfl.stat(p, "passing", "C/ATT"))[1] >= 15 for p in lead["qb"]))
+want_qb = sorted([(nfl.num(v["cats"]["passing"]["RTG"]), v["name"]) for i, v in raw.items() if POS.get(i) == "QB" and "passing" in v["cats"] and nfl.pair(v["cats"]["passing"]["C/ATT"])[1] >= 10], reverse=True)[:3]
+check("top 3 QBs by passer rating (10+ attempts) equal the top 3 by ESPN's own RTG", byname(lead["qb"]) == [w[1] for w in want_qb] and len(want_qb) == 3, (byname(lead["qb"]), want_qb))
+check("QB list: ratings descend, and a 2-attempt cameo cannot appear", [nfl._rating(p) for p in lead["qb"]] == sorted([nfl._rating(p) for p in lead["qb"]], reverse=True) and all(nfl.pair(nfl.stat(p, "passing", "C/ATT"))[1] >= 10 for p in lead["qb"]))
 for key, pool, cat, label in (("rb", ("RB", "FB"), "rushing", "YDS"), ("wr", ("WR",), "receiving", "YDS"), ("te", ("TE",), "receiving", "YDS")):
     want = sorted([(nfl.num(v["cats"][cat][label]), v["name"]) for i, v in raw.items() if POS.get(i) in pool and cat in v["cats"]], reverse=True)[:3]
     check(f"top 3 {key.upper()}s by yards equal the top 3 found from the raw box scores", [nfl.n(p, cat, label) for p in lead[key]] == [w[0] for w in want] and len(lead[key]) == 3, ([nfl.n(p, cat, label) for p in lead[key]], want))
@@ -107,10 +107,34 @@ want = sorted([nfl.num(v["cats"]["interceptions"]["INT"]) for i, v in raw.items(
 check("top secondary: the interception counts equal the three highest found from the raw data", [nfl.n(p, "interceptions", "INT") for p in lead["back"]] == want and want[0] >= 1, want)
 want = sorted([nfl.pair(v["cats"]["kicking"]["FG"])[0] for i, v in raw.items() if POS.get(i) in ("K", "PK") and "kicking" in v["cats"]], reverse=True)[:3]
 check("top kickers: the field goals made equal the three highest found from the raw data", [nfl.pair(nfl.stat(p, "kicking", "FG"))[0] for p in lead["kick"]] == want and want[0] >= 3, want)
-ret = nfl.best_returner(ALL)
-want_ret = max((nfl.num((v["cats"].get("kickReturns") or {}).get("TD", 0)) + nfl.num((v["cats"].get("puntReturns") or {}).get("TD", 0)), nfl.num((v["cats"].get("kickReturns") or {}).get("YDS", 0)) + nfl.num((v["cats"].get("puntReturns") or {}).get("YDS", 0)), v["name"]) for v in raw.values())
-check("best returner has the most return touchdowns, then yards, in the data (D. Laube: a touchdown and 144 yards); best punter has 3+ punts", (nfl.returns(ret)[1], nfl.returns(ret)[0], ret["name"]) == want_ret and ret["short"] == "D. Laube" and nfl.best_punter(ALL)["pos"] == "P" and nfl.n(nfl.best_punter(ALL), "punting", "NO") >= 3)
+rawret = sorted([(nfl.num((v["cats"].get("kickReturns") or {}).get("TD", 0)) + nfl.num((v["cats"].get("puntReturns") or {}).get("TD", 0)),
+                  nfl.num((v["cats"].get("kickReturns") or {}).get("YDS", 0)) + nfl.num((v["cats"].get("puntReturns") or {}).get("YDS", 0)), v["name"]) for v in raw.values()], reverse=True)
+want_ret = [x for x in rawret if x[0] >= 1 or x[1] >= 100][:3]
+check("returners: anyone with a return touchdown or 100+ return yards, touchdowns first then yards, top three, equal to a second reading of the raw data (D. Laube first)",
+      [(nfl.returns(p)[1], nfl.returns(p)[0], p["name"]) for p in lead["ret"]] == want_ret and len(want_ret) == 3 and lead["ret"][0]["short"] == "D. Laube", (want_ret, [p["name"] for p in lead["ret"]]))
+want_pt = sorted([(nfl.num(v["cats"]["punting"]["AVG"]), v["name"]) for i, v in raw.items() if POS.get(i) == "P" and "punting" in v["cats"] and nfl.num(v["cats"]["punting"]["NO"]) >= 3], reverse=True)[:3]
+check("punters: the top three by average with 3+ punts equal a second reading of the raw data", [nfl.n(p, "punting", "AVG") for p in lead["punt"]] == [w[0] for w in want_pt] and len(want_pt) == 3, want_pt)
+lh = nfl.leaders_html(lead, ALL)
+check("special teams is one table with three sub-heading rows in order Kickers, Punters, Returners (9 player rows), and the old one-line returner and punter lines are gone", lh.count("Top Special Teams") == 1
+      and lh.index(">Kickers<") < lh.index(">Punters<") < lh.index(">Returners<") and lh.count('<tr class="sub">') == 3 and "Returner:" not in lh and "Punter:" not in lh, lh.count('<tr class="sub">'))
 check("every leader group has its three rows and no group mixes positions", all(len(lead[g]) == 3 for g in nfl.GROUPS) and all(p["pos"] in nfl.RUSH_POS for p in lead["rush"]) and all(p["pos"] in nfl.BACK_POS for p in lead["back"]))
+
+# ---- D's quarterbacks under the top three ----
+rated = sorted([(nfl.num(v["cats"]["passing"]["RTG"]), i) for i, v in raw.items() if POS.get(i) == "QB" and "passing" in v["cats"] and nfl.pair(v["cats"]["passing"]["C/ATT"])[1] >= 10], reverse=True)
+rank_raw = {i: k + 1 for k, (_, i) in enumerate(rated)}
+mine = lead["mine"]
+lawrence = next(i for i, v in raw.items() if v["name"] == "Trevor Lawrence" and v["team"] == "JAX")
+rodgers = next(i for i, v in raw.items() if v["name"] == "Aaron Rodgers" and v["team"] == "PIT")
+check("Lawrence threw 14 passes for a 153.3 rating in the 42-7 win: with a 10-attempt minimum he is ranked first of the week, so he is in the top three and not added again", rank_raw[lawrence] == 1 and lawrence in {p["id"] for p in lead["qb"]} and all(p["id"] != lawrence for _, p in mine))
+check("Rodgers (Steelers) is not in the top three, so he is added under it with his rank among all rated quarterbacks, equal to a second reading of ESPN's own ratings", [(r_, p["id"]) for r_, p in mine] == [(rank_raw[rodgers], rodgers)] and rank_raw[rodgers] > 3, (mine and [(r_, p["name"]) for r_, p in mine], rank_raw.get(rodgers)))
+qh = re.search(r"<table>.*?</table>", nfl.leaders_html(lead, ALL), re.S).group(0)
+check("the quarterback table has 4 player rows here (top three, a line, then Rodgers) and Lawrence appears once", qh.count("<tr") == 2 + 4 and qh.count('class="cut"') == 1 and qh.count("T. Lawrence") == 1 and qh.count("A. Rodgers") == 1 and "Top QBs" in qh, (qh.count("<tr"), qh.count("T. Lawrence")))
+weak = [{**p, "stats": {**p["stats"], "passing": {**p["stats"]["passing"], "C/ATT": "10/20", "YDS": "100", "TD": "0", "INT": "2"}}} if p["id"] == lawrence else p for p in ALL]
+wm = nfl.leaders(weak)["mine"]
+check("if Lawrence has a poor day he is added under the top three with his rank, and Rodgers too: both listed, in D's order, no duplicates", [p["id"] for _, p in wm] == [lawrence, rodgers] and all(isinstance(r_, int) and r_ > 3 for r_, _ in wm), [(r_, p["name"]) for r_, p in wm])
+few = [{**p, "stats": {**p["stats"], "passing": {**p["stats"]["passing"], "C/ATT": "4/8"}}} if p["id"] == rodgers else p for p in ALL]
+check("a quarterback who threw fewer than 10 passes is still shown but with a dash for the rank", [r_ for r_, p in nfl.leaders(few)["mine"] if p["id"] == rodgers] == ["–"])
+check("a quarterback who did not play is simply not listed", [p["id"] for _, p in nfl.my_qbs([p for p in ALL if p["id"] != rodgers], lead["qb"])] == [] and nfl.my_qbs([p for p in ALL if p["id"] not in (lawrence, rodgers)], lead["qb"]) == [])
 
 # ---- Highlights and Player of the Week ----
 def raw_kinds(v, pos):
@@ -150,13 +174,20 @@ check("its line carries the stat line and the result", "(CIN)" in potw[0][2] and
 
 # ---- Scoreboard page ----
 sb = nfl.scoreboard_html(FINAL, "Week 8", 12, 14, ["Saints", "Giants"])
-check("scoreboard: two rows per game (24), a house on each home row only (12), the winner row bold-marked (12)", sb.count('<tr class="a') == 12 and sb.count('<tr class="h') == 12 and sb.count(nfl.HOME) == 12 and sb.count(" w") >= 12
-      and all(nfl.HOME in row for row in re.findall(r'<tr class="h[^"]*">.*?</tr>', sb)) and not any(nfl.HOME in row for row in re.findall(r'<tr class="a[^"]*">.*?</tr>', sb)), sb.count(nfl.HOME))
-check("scoreboard: a thick line between kickoff groups (2 here), the games-played line, overtime tags, and the bye line", sb.count('<tr class="gap">') == 2 and "12/14 games played" in sb and sb.count(">OT<") == 2 and "On bye: Saints, Giants." in sb, sb.count('<tr class="gap">'))
-check("scoreboard: D's teams (Jaguars, Steelers) are marked", len(re.findall(r'class="[^"]*mine[^"]*"><td class="tm">(Jaguars|Steelers)', sb)) == 2)
+rows_of = lambda html, k: re.findall(rf'<tr class="{k}[^"]*">.*?</tr>', html)  # noqa: E731
+check("scoreboard: two rows per game (24), a white house icon on each home row only (12), the winner row marked (12)", len(rows_of(sb, "a")) == 12 and len(rows_of(sb, "h")) == 12 and sb.count('<svg class="home"') == 12
+      and all('class="home"' in row for row in rows_of(sb, "h")) and not any('class="home"' in row for row in rows_of(sb, "a")) and len(re.findall(r'<tr class="[ah] w">', sb)) == 12, sb.count('class="home"'))
+check("scoreboard: no emoji, full team names, a thick line between kickoff groups (2 for the finished games), overtime tags, the bye line", "🏠" not in sb and "Green Bay Packers" in sb and 'class="tm">Packers' not in sb and sb.count('<tr class="gap">') == 2
+      and "12/14 games played" in sb and sb.count(">OT<") == 2 and "On bye: Saints, Giants." in sb, sb[:200])
+check("scoreboard: nobody is highlighted for being D's team (no gold, no mine class)", "mine" not in sb and "Jacksonville Jaguars" in sb and "Pittsburgh Steelers" in sb)
+full = nfl.scoreboard_html(GAMES, "Week 8", 12, 14, ["Saints"])
+check("the whole week: all 14 games (28 rows), YTP once in the middle of the Monday-night game with no scores, LIVE on the Sunday-night game with its score, 4 group lines",
+      len(rows_of(full, "a")) == 14 and len(rows_of(full, "h")) == 14 and full.count("YTP") == 1 and 'class="sc ytp" rowspan="2">YTP<' in full and full.count(">LIVE<") == 1 and full.count('<tr class="gap">') == 4, (full.count("YTP"), full.count("LIVE")))
+live = next(g for g in GAMES if g["status"] == "live")
+check("the live game shows its current score (WSH 16, PHI 10 when saved) and is not bold; the unplayed game shows no number at all", ">16<" in full and ">10<" in full and " w" not in "".join(re.findall(r'<tr class="[ah]([^"]*)">', "".join(r_ for r_ in rows_of(full, "a") + rows_of(full, "h") if "Commanders" in r_ or "Eagles" in r_ or "Seahawks" in r_ or "Bears" in r_))))
 neutral = copy.deepcopy(FINAL[0])
 neutral["neutral"] = True
-check("a neutral-site game has no house for either team", nfl.HOME not in nfl.scoreboard_html([neutral], "Week 1", 1, 1))
+check("a neutral-site game has no house for either team", 'class="home"' not in nfl.scoreboard_html([neutral], "Week 1", 1, 1))
 tie = copy.deepcopy(FINAL[0])
 tie["home"]["score"] = tie["away"]["score"]
 tie_html = nfl.scoreboard_html([tie], "W", 1, 1)
@@ -174,7 +205,7 @@ pa = sum(nfl.num(nfl._stat(e, "pointsAgainst", "value")) for d in divs for e in 
 check("independent: the league's points scored equal its points allowed (every point is scored by one team and allowed by another)", pf == pa and pf > 3000, (pf, pa))
 check("record_of equals ESPN's own overall record string for all 32 teams", all(nfl.record_of(e) == nfl._stat(e, "overall") for d in divs for e in d["standings"]["entries"]), [(nfl.record_of(e), nfl._stat(e, "overall")) for d in divs for e in d["standings"]["entries"] if nfl.record_of(e) != nfl._stat(e, "overall")][:3])
 dh = nfl.division_html(STAND)
-check("division tables: eight, each titled with its division, each with four teams, D's teams marked", dh.count('<th class="tt"') == 8 and all(d["name"] in dh for d in divs) and dh.count("<tr") == 8 * 6 and dh.count('class="mine"') == 2, dh.count('class="mine"'))
+check("division tables: eight, each titled with its division, each with four teams as 3-letter codes, nobody highlighted", dh.count('<th class="tt"') == 8 and all(d["name"] in dh for d in divs) and dh.count("<tr") == 8 * 6 and "mine" not in dh and ">BUF<" in dh and "Buffalo" not in dh, dh.count("<tr"))
 check("division order: wins never rise down a division", all([nfl.num(nfl._stat(e, "wins", "value")) for e in d["standings"]["entries"]] == sorted([nfl.num(nfl._stat(e, "wins", "value")) for e in d["standings"]["entries"]], reverse=True) for d in divs))
 for conf in STAND["children"]:
     seeds = sorted(int(nfl._stat(e, "playoffSeed", "value")) for d in conf["children"] for e in d["standings"]["entries"] if nfl._stat(e, "playoffSeed"))
@@ -254,6 +285,7 @@ check("Monday: scoreboard of the 12 finished games, the bye line, weekly leaders
       "Week 8" in h and "12/14 games played" in h and "On bye:" in h and "Weekly Leaders" in h and "Highlights" in h and "Player of the Week" not in h and "Division" not in h and "AFC East" not in h and "Playoff" not in h, mon["stats"])
 check("Monday: 1 scoreboard call plus 12 box scores and no roster calls (positions were known); all 12 games remembered, leaders snapshot saved", [x[0] for x in f.log].count("scoreboard") == 1 and [x[0] for x in f.log].count("box") == 12
       and "roster" not in [x[0] for x in f.log] and len(mon["state"]["reported"]) == 12 and mon["state"]["leaders"]["week"] == 8 and set(mon["state"]["leaders"]["ids"]) == set(nfl.GROUPS), f.log[:3])
+check("Monday's scoreboard lists the whole week: 14 games, the Sunday-night game LIVE, the Monday-night game YTP", mon["html"].count('<tr class="a') == 14 and mon["html"].count("YTP") == 1 and mon["html"].count(">LIVE<") == 1 and "12/14 games played" in mon["html"], mon["stats"])
 again = nfl.run(NOW, MON, mon["state"], Fake())
 check("running Monday again shows nothing new (no scoreboard, no leaders, no highlights)", again["html"] == "" and again["stats"]["new"] == 0, again["stats"])
 nopos = nfl.run(NOW, MON, {}, f3 := Fake())
@@ -262,7 +294,7 @@ check("rosters are asked for only when a position is missing: 24 teams, none rep
 
 # Tuesday: the Sunday-night game finishes
 tue = nfl.run(NOW2, TUE, copy.deepcopy(mon["state"]), Fake(sb=late_scoreboard(mnf=False), late=LATE_SNF))
-check("Tuesday: only the newly finished Sunday-night game on the scoreboard, its highlight (a 400-yard quarterback), and no weekly leaders", tue["stats"]["new"] == 1 and tue["html"].count('<tr class="a') == 1 and "13/14 games played" in tue["html"]
+check("Tuesday: the week's scoreboard with the Sunday-night game now final (13 of 14 played, Monday night still YTP), its highlight (a 400-yard quarterback), and no weekly leaders", tue["stats"]["new"] == 1 and tue["html"].count('<tr class="a') == 14 and tue["html"].count("YTP") == 1 and "13/14 games played" in tue["html"]
       and "Weekly Leaders" not in tue["html"] and "Late QB WSH" not in tue["html"] and "L. QBWSH (WSH): 30/35 for 400 yards, 4 touchdowns and 0 interceptions in the 27-17 win over PHI." in tue["html"].replace("&#x27;", "'"), tue["html"][:200])
 # Wednesday: Monday night also done; the wrap
 wed = nfl.run(NOW2, WED, copy.deepcopy(mon["state"]), Fake(sb=SB_LATE, late=LATE_BOTH))
@@ -270,7 +302,7 @@ hw = wed["html"]
 check("Wednesday: the whole week's scoreboard (all 14 games), the leaders again, highlights, Player of the Week and the eight division tables", hw.count('<tr class="a') == 14 and "14/14 games played" in hw and "Weekly Leaders" in hw
       and "Player of the Week" in hw and hw.count("Division Standings") == 1 and "AFC East" in hw and "NFC West" in hw, wed["stats"])
 check("Wednesday: the two late-game quarterbacks (158.3 rating) enter the top three and are tagged new, and nobody else is", hw.count('class="new">new</span>') == 2 and "L. QBSEA" in hw and "L. QBWSH" in hw, hw.count('class="new"'))
-check("Wednesday: no playoff picture before week 14", "Playoff Picture" not in hw)
+check("Wednesday: no playoff picture before week 14, and once every game is final no YTP and no LIVE are left", "Playoff Picture" not in hw and "YTP" not in hw and ">LIVE<" not in hw)
 wed_quiet = nfl.run(NOW2, WED, copy.deepcopy(mon["state"]), Fake(sb=SB_LATE, late=[(snf_id, synth_box("WSH", "PHI", stars=(False, False))), (mnf_id, synth_box("SEA", "CHI", stars=(False, False)))]))
 check("Wednesday with nothing changed in any top three: one line says so instead of repeating the seven tables", "No change in the top three of any group since Monday." in wed_quiet["html"] and "Top QBs" not in wed_quiet["html"], wed_quiet["stats"])
 fresh = nfl.run(NOW2, WED, {"positions": POS_LATE}, Fake(sb=SB_LATE, late=LATE_BOTH))
@@ -282,7 +314,7 @@ check("playoff picture: none in week 13; from week 14 a heading plus an AFC and 
 sat_sb = copy.deepcopy(SB)
 sat_sb["week"]["number"] = 9
 sat = nfl.run(NOW, SAT, copy.deepcopy(st0), Fake(sb=sat_sb))
-check("Saturday (and any day): finished games not yet shown appear with a scoreboard only; no leaders on a Saturday", sat["html"].count('<tr class="a') == 12 and "Weekly Leaders" not in sat["html"] and "Week 9" in sat["html"], sat["stats"])
+check("Saturday (and any day): finished games not yet shown appear with a scoreboard only; no leaders on a Saturday", sat["html"].count('<tr class="a') == 14 and "Weekly Leaders" not in sat["html"] and "Week 9" in sat["html"], sat["stats"])
 # Scoreboard has moved on to the next week by Wednesday
 nxt = copy.deepcopy(SB)
 nxt["week"] = {"number": 9, "teamsOnBye": []}
@@ -296,7 +328,7 @@ check("if the scoreboard has already moved to the next week, the finished week i
 dead = nfl.run(NOW, MON, copy.deepcopy(st0), Fake(broken=[("scoreboard", None)]))
 check("scoreboard down: nothing shown, no exception, state kept, failure counted", dead["html"] == "" and dead["stats"]["failed"] == 1 and dead["state"]["positions"] == POS_LATE)
 one = nfl.run(NOW, MON, copy.deepcopy(st0), Fake(broken=[("box", next(iter(BOXES)))]))
-check("one box score down: that game is still on the scoreboard, leaders use the other eleven, failure counted", one["stats"]["failed"] == 1 and one["html"].count('<tr class="a') == 12 and one["stats"]["boxes"] == 11 and "Top QBs" in one["html"], one["stats"])
+check("one box score down: that game is still on the scoreboard, leaders use the other eleven, failure counted", one["stats"]["failed"] == 1 and one["html"].count('<tr class="a') == 14 and one["stats"]["boxes"] == 11 and "Top QBs" in one["html"], one["stats"])
 stand_down = nfl.run(NOW2, WED, copy.deepcopy(st0), Fake(sb=SB_LATE, late=LATE_BOTH, broken=[("standings", None)]))
 check("standings down on Wednesday: the rest of the wrap still shows", "Division Standings" not in stand_down["html"] and "Player of the Week" in stand_down["html"] and stand_down["stats"]["failed"] == 1)
 pre = nfl.run(NOW, MON, copy.deepcopy(st0), Fake(season_type=1))
