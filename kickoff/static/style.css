@@ -259,3 +259,5 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .pts.f1.nfl.po th:first-child, .pts.f1.nfl.po td:first-child { text-align: center; padding-left: 3px; }
 .pts.f1.nfl.po th:last-child, .pts.f1.nfl.po td:last-child { text-align: center; padding-left: 3px; }
 .pts.f1.nfl tr.bye td { color: var(--gold); font-weight: 700; }
+.nflsb .dog { color: var(--gold); font-weight: 700; margin-left: 1px; }
+.nflsb th.tt .prog .dog { font-size: 15px; }

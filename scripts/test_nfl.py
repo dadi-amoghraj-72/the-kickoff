@@ -157,10 +157,8 @@ def raw_kinds(v, pos):
 expected = sorted(v["name"] for i, v in raw.items() if raw_kinds(v, POS.get(i)))
 found = sorted(p["name"] for p in ALL if nfl.kinds_of(p))
 check("independent: the players meeting a spec threshold (350+ yards, 150+ rushing, 3+ sacks, return touchdowns and so on) are the same ones found from the raw data", found == expected and len(found) >= 8, (found, expected))
-hl = nfl.highlights(ALL, BYID)
-check("highlights: at most five, best first, each one line naming the player, the team, the score and the opponent", 0 < len(hl) <= 5 and [t[0] for t in hl] == sorted([t[0] for t in hl], reverse=True)
-      and all(re.search(r"\([A-Z]{2,3}\): .+ in the \d+-\d+ (win over|loss to|tie with) [A-Z]{2,3}\.$", t) for _, t in hl), [t for _, t in hl])
-check("the best highlight is the Bengals' quarterback (462 yards, 5 touchdowns, 3 interceptions in the 43-36 win over TEN)", "J. Burrow (CIN): 38/48 for 462 yards, 5 touchdowns and 3 interceptions in the 43-36 win over TEN." == hl[0][1], hl[0][1])
+BOX = {gid: BOXES[gid] for gid in BOXES}
+hl = nfl.game_highlights(FINAL, BOX)
 mk = lambda **cats: {"id": "x", "short": "A. Test", "name": "A Test", "team": "AAA", "pos": cats.pop("pos", "QB"), "game": "g", "stats": {k: dict(zip(("C/ATT", "YDS", "AVG", "TD", "INT", "SACKS", "QBR", "RTG"), v)) if k == "passing" else v for k, v in cats.items()}}  # noqa: E731
 check("points formula: QB 300 yds 3 TD 1 INT = 22; RB 100+20 yds, 1 TD, 3 catches = 19.5; defender 2 sacks + 1 INT = 16; kicker 3 FG with a 52-yarder = 11; return TD = 8",
       nfl.points(mk(passing=("20/30", "300", "10", "3", "1", "0-0", "0", "0"))) == 22.0
@@ -168,9 +166,70 @@ check("points formula: QB 300 yds 3 TD 1 INT = 22; RB 100+20 yds, 1 TD, 3 catche
       and nfl.points(mk(pos="DE", defensive={"SACKS": "2", "TFL": "0", "PD": "0", "QB HTS": "0", "TD": "0"}, interceptions={"INT": "1", "TD": "0"})) == 16.0
       and nfl.points(mk(pos="K", kicking={"FG": "3/3", "LONG": "52", "PTS": "9"})) == 11.0
       and nfl.points(mk(pos="WR", kickReturns={"NO": "1", "YDS": "99", "TD": "1"})) == 8.0)
-potw = nfl.player_of_the_week(ALL, BYID)
-check("Player of the Week: three players, the highest points first, and it is the maximum over every player in the week", len(potw) == 3 and potw[0][0] == max(nfl.points(p) for p in ALL) and potw[0][0] >= potw[1][0] >= potw[2][0], [(a, p["short"]) for a, p, _ in potw])
-check("its line carries the stat line and the result", "(CIN)" in potw[0][2] and potw[0][2].endswith("."), potw[0][2])
+# ---- Underdogs, from the pre-game line ----
+check("dog_of: ESPN's underdog flag first, then the moneylines, a pick-em and a missing line give none", nfl.dog_of({"odds": {"away_dog": True, "home_dog": False}}) == "away" and nfl.dog_of({"odds": {"away_dog": False, "home_dog": True}}) == "home"
+      and nfl.dog_of({"odds": {"away_ml": -150, "home_ml": 130}}) == "home" and nfl.dog_of({"odds": {"away_ml": 120, "home_ml": -140}}) == "away" and nfl.dog_of({"odds": {"away_ml": -110, "home_ml": -110}}) is None
+      and nfl.dog_of({"odds": None}) is None and nfl.dog_of({}) is None)
+raw_dogs = {}
+for gid, b in BOXES.items():  # second reading: the underdog is the side with the longer moneyline in ESPN's own numbers
+    o = b["odds"]
+    raw_dogs[gid] = "away" if o["away_ml"] > o["home_ml"] else "home"
+for g in GAMES:
+    g["dog"] = nfl.dog_of(BOXES.get(g["id"])) if g["id"] in BOXES else None
+check("the underdog found from the flags equals the one found from the moneylines for all 12 finished games (no game without a line)", all(BYID[gid]["dog"] == raw_dogs[gid] for gid in BOXES) and len(raw_dogs) == 12, [(gid, BYID[gid]["dog"], raw_dogs[gid]) for gid in BOXES if BYID[gid]["dog"] != raw_dogs[gid]])
+won = sorted(f'{g["away"]["abbr"]}@{g["home"]["abbr"]}' for g in FINAL if (g["away"]["score"] > g["home"]["score"]) == (raw_dogs[g["id"]] == "away"))
+check("this week's underdog wins, found from the raw scores and moneylines: the Raiders at the Jets and the Cardinals at the Cowboys (overtime)", won == ["ARI@DAL", "LV@NYJ"] and sorted(f'{g["away"]["abbr"]}@{g["home"]["abbr"]}' for g in FINAL if nfl.underdog_win(g)) == won, won)
+sbd = nfl.scoreboard_html(GAMES, "Week 8", 12, 14)
+check("the scoreboard header counts underdog wins, and a gold asterisk follows each underdog winner's name (2) and nobody else's; no list, no big-upset category", "2 underdog wins" in sbd and sbd.count('class="dog"') == 3 and len(re.findall(r'<td class="tm">[^<]*<span class="dog"', sbd)) == 2
+      and "big upset" not in sbd.lower(), sbd.count('class="dog"'))
+one = [g for g in GAMES if nfl.underdog_win(g)][:1] + [g for g in GAMES if g["status"] != "final"]
+check("one underdog win reads '1 underdog win'; a game still to play or live is never starred; with none the header says nothing about underdogs", "1 underdog win<" in nfl.scoreboard_html(one, "W", 1, 3) and "underdog" not in nfl.scoreboard_html([{**g, "dog": None} for g in GAMES], "W", 12, 14))
+
+# ---- Highlights: games, teams and plays (not players, not underdogs) ----
+shut = [g for g in FINAL if min(g["home"]["score"], g["away"]["score"]) == 0]
+blow = [g for g in FINAL if abs(g["home"]["score"] - g["away"]["score"]) >= 24]
+hl_all = nfl.game_highlights(FINAL, BOX, limit=99)
+texts = [t for _, t in hl_all]
+check("highlights: the shutout (Buccaneers 16-0 Falcons) and the two blowouts of 24+ points (Jaguars 42-7, Bills 36-10) are found from the raw scores, each once", len(shut) == 1 and len(blow) == 2 and sum(t.startswith("Shutout:") for t in texts) == 1
+      and sum(t.startswith("Blowout:") for t in texts) == 2 and "Shutout: Buccaneers blanked Falcons 16-0." in texts, texts)
+
+
+def raw_deficit(gid, win_side):
+    other = "home" if win_side == "away" else "away"
+    return max(p[other] - p[win_side] for p in BOXES[gid]["plays"])
+
+
+comebacks = {g["id"]: raw_deficit(g["id"], nfl.winner(g)) for g in FINAL if raw_deficit(g["id"], nfl.winner(g)) >= 14}
+check("highlights: comebacks from 14+ points down match an independent reading of the scoring plays (the Cardinals came back from 14 in Dallas, and the winning kick shares the line)", len(comebacks) >= 1
+      and sum(t.startswith("Comeback:") for t in texts) == len(comebacks) and any("Comeback: Cardinals came back from 14 points down to beat Cowboys 33-30 in overtime, Chad Ryland kicking the 42-yard winner." == t for t in texts), (comebacks, [t for t in texts if "Comeback" in t]))
+check("highlights: a comeback and a winning kick in one game make one line, never two", sum("Cowboys" in t for t in texts) == 1 and not any(t.startswith("Game-winner:") and "Cowboys" in t for t in texts))
+long_raw = max(((int(re.search(r"(\d+) Yd", p["text"]).group(1)), p["text"]) for b in BOXES.values() for p in b["plays"] if "Touchdown" in p["type"] and re.search(r"(\d+) Yd", p["text"])), default=None)
+check("highlights: the longest scoring play of the week (a 95-yard kickoff return, Raiders) equals the longest found by reading every scoring play", long_raw[0] == 95 and any(t.startswith("Longest play:") and "95 Yd Kickoff Return" in t for t in texts), long_raw)
+check("highlights: at most five by default, best first, none about underdogs or individual stat lines", len(nfl.game_highlights(FINAL, BOX)) == 5 and not any("underdog" in t.lower() or "interception" in t.lower() for t in texts))
+for_giveaways = {"1": {"turnovers": "5"}}
+gwin = copy.deepcopy(FINAL[0])
+check("giveaways: a team with 4+ turnovers is a highlight, 3 is not", any(t.startswith("Giveaways:") for _, t in nfl.game_highlights([gwin], {gwin["id"]: {"teamStats": {gwin["away"]["id"]: {"turnovers": "5"}, gwin["home"]["id"]: {"turnovers": "1"}}, "plays": []}}))
+      and not any(t.startswith("Giveaways:") for _, t in nfl.game_highlights([gwin], {gwin["id"]: {"teamStats": {gwin["away"]["id"]: {"turnovers": "3"}, gwin["home"]["id"]: {"turnovers": "3"}}, "plays": []}})))
+tie_g = copy.deepcopy(FINAL[0])
+tie_g["home"]["score"] = tie_g["away"]["score"]
+check("a tied game produces no highlight and no error", nfl.game_highlights([tie_g], BOX) == [])
+
+# ---- Players of the Week: offence, defence, special teams, then the rest ----
+potw = nfl.players_of_the_week(ALL, BYID)
+labels = [l for l, _ in potw]
+check("players of the week: Offence, Defence and Special teams first, then 'Also' lines, at most 3 + 4", labels[:3] == ["Offence", "Defence", "Special teams"] and set(labels[3:]) == {"Also"} and 3 < len(labels) <= 7, labels)
+check("offence is the Bengals' quarterback (the highest-points offensive player); defence is the Titans' safety with three interceptions", potw[0][1].startswith("J. Burrow (CIN)") and potw[1][1].startswith("A. Hooker (TEN): 3 interceptions"), [x[1][:40] for x in potw[:3]])
+off_best = max((p for p in ALL if p["pos"] in nfl.OFF_POS), key=lambda p: (nfl.points(p), p["short"]))
+def_plain = max((p for p in ALL if p["pos"] in nfl.DEF_POS), key=lambda p: (nfl.points(p), p["short"]))
+hooker = next(p for p in ALL if p["short"] == "A. Hooker")
+check("without the rare-feat bonus a different defender would win on points (R. Lane III, interception plus a touchdown); the 3-interception bonus is what puts Hooker first, as D expected", def_plain["short"] == "R. Lane III" and nfl.rare_bonus(hooker) == 6 and nfl.points(hooker) + 6 > nfl.points(def_plain) and off_best["short"] == "J. Burrow", (def_plain["short"], nfl.points(hooker), nfl.points(def_plain)))
+sp = max((p for p in ALL if nfl.st_points(p) > 0), key=lambda p: (nfl.st_points(p), p["short"]))
+check("special teams is the best of field goals and return touchdowns, found a second way; its line names him", potw[2][1].startswith(sp["short"]), (sp["short"], potw[2][1][:30]))
+check("no player appears twice in the bullets, and none is a winner repeated under Also", len({l.split(" (")[0] for _, l in potw}) == len(potw))
+check("the bonus is for 3+ interceptions or 4+ sacks only", nfl.rare_bonus(mk(pos="S", interceptions={"INT": "3", "TD": "0"})) == 6 and nfl.rare_bonus(mk(pos="DE", defensive={"SACKS": "4", "TFL": "0", "PD": "0", "QB HTS": "0", "TD": "0"})) == 6
+      and nfl.rare_bonus(mk(pos="S", interceptions={"INT": "2", "TD": "0"})) == 0 and nfl.rare_bonus(mk(pos="DE", defensive={"SACKS": "3", "TFL": "0", "PD": "0", "QB HTS": "0", "TD": "0"})) == 0)
+check("a defender or kicker with a quiet day is not named a winner (floors of 12 and 6 points)", len(nfl.players_of_the_week([p for p in ALL if p["pos"] in nfl.OFF_POS][:3] + [mk(pos="S", defensive={"SACKS": "0", "TFL": "0", "PD": "1", "QB HTS": "0", "TD": "0", "TOT": "2"})], BYID)) >= 1
+      and "Defence" not in [l for l, _ in nfl.players_of_the_week([p for p in ALL if p["pos"] in nfl.OFF_POS], BYID)])
 
 # ---- Scoreboard page ----
 sb = nfl.scoreboard_html(FINAL, "Week 8", 12, 14, ["Saints", "Giants"])
@@ -296,13 +355,16 @@ check("rosters are asked for only when a position is missing: 24 teams, none rep
 
 # Tuesday: the Sunday-night game finishes
 tue = nfl.run(NOW2, TUE, copy.deepcopy(mon["state"]), Fake(sb=late_scoreboard(mnf=False), late=LATE_SNF))
-check("Tuesday: the week's scoreboard with the Sunday-night game now final (13 of 14 played, Monday night still YTP), its highlight (a 400-yard quarterback), and no weekly leaders", tue["stats"]["new"] == 1 and tue["html"].count('<tr class="a') == 14 and tue["html"].count("YTP") == 1 and "13/14 games played" in tue["html"]
-      and "Weekly Leaders" not in tue["html"] and "Late QB WSH" not in tue["html"] and "L. QBWSH (WSH): 30/35 for 400 yards, 4 touchdowns and 0 interceptions in the 27-17 win over PHI." in tue["html"].replace("&#x27;", "'"), tue["html"][:200])
+check("Tuesday: the week's scoreboard with the Sunday-night game now final (13 of 14 played, Monday night still YTP), no weekly leaders and no players of the week (Wednesday only)", tue["stats"]["new"] == 1 and tue["html"].count('<tr class="a') == 14 and tue["html"].count("YTP") == 1
+      and "13/14 games played" in tue["html"] and "Weekly Leaders" not in tue["html"] and "Players of the Week" not in tue["html"], tue["html"][:200])
+tue_calls = Fake(sb=late_scoreboard(mnf=False), late=LATE_SNF)
+nfl.run(NOW2, TUE, copy.deepcopy(mon["state"]), tue_calls)
+check("Tuesday costs one box score (the new game): the underdogs of Monday's games were kept in the state, so the others are not fetched again", [x[0] for x in tue_calls.log].count("box") == 1 and len(mon["state"]["dogs"]) == 12 and all(v in ("home", "away") for v in mon["state"]["dogs"].values()), tue_calls.log)
 # Wednesday: Monday night also done; the wrap
 wed = nfl.run(NOW2, WED, copy.deepcopy(mon["state"]), Fake(sb=SB_LATE, late=LATE_BOTH))
 hw = wed["html"]
-check("Wednesday: the whole week's scoreboard (all 14 games), the leaders again, highlights, Player of the Week and the eight division tables", hw.count('<tr class="a') == 14 and "14/14 games played" in hw and "Weekly Leaders" in hw
-      and "Player of the Week" in hw and hw.count("Division Standings") == 1 and "AFC East" in hw and "NFC West" in hw, wed["stats"])
+check("Wednesday: the whole week's scoreboard (all 14 games), the leaders again, Players of the Week and the eight division tables", hw.count('<tr class="a') == 14 and "14/14 games played" in hw and "Weekly Leaders" in hw
+      and "Players of the Week" in hw and hw.count("Division Standings") == 1 and "AFC East" in hw and "NFC West" in hw, wed["stats"])
 check("Wednesday: the two late-game quarterbacks (158.3 rating) enter the top three and are tagged new, and nobody else is", hw.count('class="new">new</span>') == 2 and "L. QBSEA" in hw and "L. QBWSH" in hw, hw.count('class="new"'))
 check("Wednesday: no playoff picture before week 14, and once every game is final no YTP and no LIVE are left", "Playoff Picture" not in hw and "YTP" not in hw and ">LIVE<" not in hw)
 wed_quiet = nfl.run(NOW2, WED, copy.deepcopy(mon["state"]), Fake(sb=SB_LATE, late=[(snf_id, synth_box("WSH", "PHI", stars=(False, False))), (mnf_id, synth_box("SEA", "CHI", stars=(False, False)))]))
@@ -332,7 +394,7 @@ check("scoreboard down: nothing shown, no exception, state kept, failure counted
 one = nfl.run(NOW, MON, copy.deepcopy(st0), Fake(broken=[("box", next(iter(BOXES)))]))
 check("one box score down: that game is still on the scoreboard, leaders use the other eleven, failure counted", one["stats"]["failed"] == 1 and one["html"].count('<tr class="a') == 14 and one["stats"]["boxes"] == 11 and "Top QBs" in one["html"], one["stats"])
 stand_down = nfl.run(NOW2, WED, copy.deepcopy(st0), Fake(sb=SB_LATE, late=LATE_BOTH, broken=[("standings", None)]))
-check("standings down on Wednesday: the rest of the wrap still shows", "Division Standings" not in stand_down["html"] and "Player of the Week" in stand_down["html"] and stand_down["stats"]["failed"] == 1)
+check("standings down on Wednesday: the rest of the wrap still shows", "Division Standings" not in stand_down["html"] and "Players of the Week" in stand_down["html"] and stand_down["stats"]["failed"] == 1)
 pre = nfl.run(NOW, MON, copy.deepcopy(st0), Fake(season_type=1))
 check("preseason is not covered", pre["html"] == "" and pre["week"] is None)
 post = nfl.run(NOW2, WED, copy.deepcopy(st0), Fake(sb=SB_LATE, late=LATE_BOTH, season_type=3, week=1))
@@ -348,7 +410,11 @@ def fake_get(url):
         return SB
     if "summary" in url:
         gid = url.rsplit("=", 1)[1]
-        return {"boxscore": {"teams": [{"team": {"id": tid}, "statistics": [{"name": k, "displayValue": v} for k, v in st.items()]} for tid, st in BOXES[gid]["teamStats"].items()], "players": BOXES[gid]["players"]}}
+        b = BOXES[gid]
+        o = b["odds"]
+        return {"boxscore": {"teams": [{"team": {"id": tid}, "statistics": [{"name": k, "displayValue": v} for k, v in st.items()]} for tid, st in b["teamStats"].items()], "players": b["players"]},
+                "pickcenter": [{"details": o["details"], "spread": o["spread"], "awayTeamOdds": {"underdog": o["away_dog"], "moneyLine": o["away_ml"]}, "homeTeamOdds": {"underdog": o["home_dog"], "moneyLine": o["home_ml"]}}],
+                "scoringPlays": [{"text": p["text"], "type": {"text": p["type"]}, "period": {"number": p["period"]}, "clock": {"displayValue": p["clock"]}, "awayScore": p["away"], "homeScore": p["home"], "team": {"abbreviation": p["team"]}} for p in b["plays"]]}
     if "roster" in url:
         return {"athletes": [{"items": [{"id": "1", "position": {"abbreviation": "QB"}}, {"id": "2", "position": {"abbreviation": "WR"}}]}]}
     return STAND
@@ -357,7 +423,8 @@ def fake_get(url):
 src = espn_nfl.Source(fake_get, pause=0)
 gid0 = next(iter(BOXES))
 bx = src.box(gid0)
-check("source: a box score keeps the players and the two team totals we cross-check with", bx["players"] == BOXES[gid0]["players"] and set(next(iter(bx["teamStats"].values()))) == {"rushingYards", "netPassingYards"})
+check("source: a box score keeps the players, the team totals (rushing, net passing, turnovers), the pre-game line and the scoring plays, exactly as saved", bx["players"] == BOXES[gid0]["players"] and set(next(iter(bx["teamStats"].values()))) == {"rushingYards", "netPassingYards", "turnovers"}
+      and bx["odds"] == BOXES[gid0]["odds"] and bx["plays"] == BOXES[gid0]["plays"] and len(bx["plays"]) > 3, bx["odds"])
 check("source: rosters give athlete id to position; week asks for the week and season type; standings ask for divisions", src.roster("2") == {"1": "QB", "2": "WR"} and (src.scoreboard(7, 2) and "week=7&seasontype=2" in CALLS[-1]) and (src.standings() and "level=3" in CALLS[-1]) and src.calls == 4)
 check("NFL needs no Claude: neither module imports anthropic", "anthropic" not in (ROOT / "kickoff" / "nfl.py").read_text() and "anthropic" not in (ROOT / "kickoff" / "sources" / "espn_nfl.py").read_text())
 

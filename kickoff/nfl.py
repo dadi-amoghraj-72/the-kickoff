@@ -17,6 +17,12 @@ ET = ZoneInfo("America/New_York")
 HOME_SVG = ('<svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team">'
             '<path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg>')
 MY_QBS = (("Trevor Lawrence", "JAX"), ("Aaron Rodgers", "PIT"))   # always shown under the top three quarterbacks, with their rank
+BLOWOUT = 24                               # a win by this many points or more is a highlight
+COMEBACK = 14                              # a win after trailing by this many points or more is a highlight
+LONG_PLAY = 60                             # a scoring play of this many yards or more can be the longest play of the week
+TURNOVERS = 4                              # a team with this many giveaways is a highlight
+OFF_POS, DEF_POS, ST_POS = ("QB", "RB", "FB", "WR", "TE"), ("DE", "DT", "LB", "OLB", "ILB", "MLB", "EDGE", "NT", "DL", "CB", "S", "FS", "SS", "DB"), ("K", "PK", "P")
+DOG = '<span class="dog" title="Underdog win">*</span>'
 RETURN_YARDS = 100                         # a returner is listed for a touchdown or for this many return yards in the game
 LOOKBACK = timedelta(days=6)
 PLAYOFF_PICTURE_FROM = 14                  # week of the regular season
@@ -118,6 +124,26 @@ def winner(g):
     return None if a == h else ("away" if a > h else "home")
 
 
+def dog_of(box):
+    """Which side was the underdog before kickoff, 'away' or 'home', from the pre-game line (ESPN's flag, else the moneylines); None when unknown or a pick-em."""
+    o = (box or {}).get("odds")
+    if not o:
+        return None
+    if o.get("away_dog"):
+        return "away"
+    if o.get("home_dog"):
+        return "home"
+    a, h = o.get("away_ml"), o.get("home_ml")
+    if isinstance(a, (int, float)) and isinstance(h, (int, float)) and a != h:
+        return "away" if a > h else "home"
+    return None
+
+
+def underdog_win(g):
+    """True when the pre-game underdog won outright."""
+    return g["status"] == "final" and bool(g.get("dog")) and winner(g) == g["dog"]
+
+
 def week_name(week, season_type):
     return POST_ROUNDS.get(week, f"Playoffs {week}") if season_type == 3 else f"Week {week}"
 
@@ -140,6 +166,7 @@ def scoreboard_html(games, title, played, total, byes=()):
             t = g[side]
             mark = f" {HOME_SVG}" if side == "home" and not g["neutral"] else ""
             rec = f' <span class="rec">{r.esc(t["record"])}</span>' if t["record"] else ""
+            star = DOG if side == w and underdog_win(g) else ""
             if yet:
                 score = '<td class="sc ytp" rowspan="2">YTP</td>' if side == "away" else ""
             else:
@@ -150,8 +177,9 @@ def scoreboard_html(games, title, played, total, byes=()):
             elif side == "away" and g["status"] == "live":
                 tag = "LIVE"
             cls = " ".join(x for x in (side[0], "w" if w == side else "") if x)
-            rows.append(f'<tr class="{cls}"><td class="tm">{r.esc(t["name"])}{mark}{rec}</td>{score}<td class="ot">{tag}</td></tr>')
-    sub = f'<span class="prog">{played}/{total} games played</span>' if total else ""
+            rows.append(f'<tr class="{cls}"><td class="tm">{r.esc(t["name"])}{star}{mark}{rec}</td>{score}<td class="ot">{tag}</td></tr>')
+    dogs = sum(1 for g in games if underdog_win(g))
+    sub = f'<span class="prog">{played}/{total} games played' + (f' · {DOG} {dogs} underdog win{"s" if dogs != 1 else ""}' if dogs else "") + "</span>" if total else ""
     html = (f'<div class="nflsb"><table><colgroup><col style="width:75%"><col style="width:12%"><col style="width:13%"></colgroup>'
             f'<thead><tr><th class="tt" colspan="3">{r.esc(title)}{sub}</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
     if byes:
@@ -386,16 +414,88 @@ def kinds_of(p):
     return k
 
 
-def highlights(players, games, limit=5):
-    """The ranked standouts (spec thresholds), at most five, best first: [(points, line)]."""
-    out = [(points(p), standout_text(p, kinds_of(p), games)) for p in players if kinds_of(p)]
-    return sorted(out, key=lambda t: -t[0])[:limit]
+def st_points(p):
+    """Special-teams points only: field goals (50+ yarders worth more) and return touchdowns."""
+    made, _ = pair(stat(p, "kicking", "FG"))
+    return round(made * 3 + (2 if n(p, "kicking", "LONG") >= 50 and made else 0) + returns(p)[1] * 8, 1)
 
 
-def player_of_the_week(players, games, k=3):
-    """The top scorers of the week by `points`: [(points, player, line)], the first is the Player of the Week."""
-    top = sorted(players, key=lambda p: (-points(p), p["short"]))[:k]
-    return [(points(p), p, _pline(p, games)) for p in top]
+def rare_bonus(p):
+    """Defensive feats rare enough to outweigh the points scale: three or more interceptions, or four or more sacks."""
+    return 6 if n(p, "interceptions", "INT") >= 3 or n(p, "defensive", "SACKS") >= 4 else 0
+
+
+def players_of_the_week(players, games, extras=4):
+    """Bullets for the week's best individual games: [(label, line)]. The best offensive player, the best defender (rare feats such as three
+    interceptions get a bonus so a defender is not outscored by a quarterback's yards) and the best special-teams player, then up to
+    four more who met a spec threshold, best first. Nobody appears twice."""
+    best = lambda pool, key: max(pool, key=lambda p: (key(p), p["short"]), default=None)  # noqa: E731
+    off = best([p for p in players if p["pos"] in OFF_POS], points)
+    dfn = best([p for p in players if p["pos"] in DEF_POS], lambda p: points(p) + rare_bonus(p))
+    st = best([p for p in players if st_points(p) > 0], st_points)
+    out, used = [], set()
+    for label, p, floor, score in (("Offence", off, 0, points), ("Defence", dfn, 12, lambda q: points(q) + rare_bonus(q)), ("Special teams", st, 6, st_points)):
+        if p and score(p) >= floor:
+            out.append((label, _pline(p, games)))
+            used.add(p["id"])
+    more = sorted([p for p in players if kinds_of(p) and p["id"] not in used], key=lambda p: -points(p))[:extras]
+    return out + [("Also", standout_text(p, kinds_of(p), games)) for p in more]
+
+
+def _plain(text):
+    """A scoring play's description without the kick in brackets: 'Joe Burrow 9 Yd Rush'."""
+    return re.sub(r"\s*\(.*?\)\s*$", "", text).strip()
+
+
+def game_highlights(games, boxes, limit=5):
+    """Game-level and team-level highlights of the given finished games, ranked by interest, at most five: [(interest, line)]. Comebacks,
+    game-winning kicks, shutouts, blowouts, overtime, giveaways and the longest scoring play. Underdog wins are not listed here: they are
+    marked on the scoreboard. Individual performances are in Players of the Week."""
+    items, longest = [], None
+    for g in games:
+        w = winner(g)
+        if g["status"] != "final" or w is None:
+            continue
+        win, lose = g[w], g["home" if w == "away" else "away"]
+        hi, lo = win["score"], lose["score"]
+        box = boxes.get(g["id"]) or {}
+        plays = box.get("plays") or []
+        if lo == 0:
+            items.append((3.0, f"Shutout: {win['short']} blanked {lose['short']} {hi}-0."))
+        if hi - lo >= BLOWOUT:
+            items.append((2 + (hi - lo) / 100, f"Blowout: {win['short']} beat {lose['short']} {hi}-{lo}."))
+        comeback = winning_kick = None
+        if plays:
+            other = "home" if w == "away" else "away"
+            deficit = max(p[other] - p[w] for p in plays)
+            if deficit >= COMEBACK:
+                comeback = deficit
+            last = plays[-1]
+            m = re.match(r"(.+?) (\d+) Yd Field Goal", last["text"])
+            if m and last["team"] == win["abbr"] and hi - lo <= 3:
+                winning_kick = (m.group(1), m.group(2), "in overtime" if last["period"] > 4 else f"with {last['clock']} left")
+            for pl in plays:
+                y = re.search(r"(\d+) Yd", pl["text"])
+                if y and "Touchdown" in pl["type"] and (longest is None or int(y.group(1)) > longest[0]):
+                    longest = (int(y.group(1)), pl)
+        ot = " in overtime" if g["ot"] else ""
+        if comeback and winning_kick:  # one line, not two, for the same game
+            items.append((5.5 + comeback / 100, f"Comeback: {win['short']} came back from {comeback} points down to beat {lose['short']} {hi}-{lo}{ot}, {winning_kick[0]} kicking the {winning_kick[1]}-yard winner."))
+        elif comeback:
+            items.append((5 + comeback / 100, f"Comeback: {win['short']} came back from {comeback} points down to beat {lose['short']} {hi}-{lo}{ot}."))
+        elif winning_kick:
+            items.append((4.5, f"Game-winner: {winning_kick[0]} ({win['abbr']}) kicked a {winning_kick[1]}-yard field goal {winning_kick[2]} to beat {lose['short']} {hi}-{lo}."))
+        elif g["ot"]:
+            items.append((2.0, f"Overtime: {win['short']} beat {lose['short']} {hi}-{lo}."))
+        for side in (win, lose):
+            t = (box.get("teamStats") or {}).get(side["id"]) or {}
+            giveaways = int(num(t.get("turnovers", 0)))
+            if giveaways >= TURNOVERS:
+                opp = lose if side is win else win
+                items.append((2.0 + giveaways / 100, f"Giveaways: {side['short']} turned the ball over {giveaways} times in the {hi}-{lo} {'win over' if side is win else 'loss to'} {opp['short']}."))
+    if longest and longest[0] >= LONG_PLAY:
+        items.append((3.5, f"Longest play: {_plain(longest[1]['text'])} for a touchdown ({longest[1]['team']})."))
+    return sorted(items, key=lambda t: -t[0])[:limit]
 
 
 def _pline(p, games):
@@ -456,7 +556,7 @@ def playoff_html(standings, seeds_shown=10):
 
 # ---- Page -----------------------------------------------------------------------------------------
 
-LABELS = ("Player of the Week", "Also")
+LABELS = ("Offence", "Defence", "Special teams", "Also", "Shutout", "Blowout", "Overtime", "Comeback", "Game-winner", "Giveaways", "Longest play")
 
 
 def _list(items):
@@ -477,8 +577,8 @@ def run(now, day, st, source):
     st: {"reported": [game ids], "positions": {athlete id: position}, "leaders": {"week", "ids"}}. A failing source never raises:
     that part is left out and counted in stats["failed"]."""
     stats = {"week": None, "games": 0, "completed": 0, "new": 0, "shown": 0, "boxes": 0, "failed": 0, "unknown_positions": 0, "calls": 0}
-    reported, positions = list(st.get("reported", [])), dict(st.get("positions", {}))
-    keep = {"reported": reported, "positions": positions, "leaders": st.get("leaders")}
+    reported, positions, dogs = list(st.get("reported", [])), dict(st.get("positions", {})), dict(st.get("dogs", {}))
+    keep = {"reported": reported, "positions": positions, "leaders": st.get("leaders"), "dogs": dogs}
     empty = {"html": "", "state": keep, "stats": stats, "week": None}
     try:
         sb = source.scoreboard()
@@ -505,7 +605,7 @@ def run(now, day, st, source):
     stats.update(week=week, games=len(games), completed=len(completed), new=len(new))
     wed, wrap_days = day.weekday() == 2, (0, 2)
     show_board = bool(new) or wed
-    need_boxes = completed if day.weekday() in wrap_days else new
+    need_boxes = completed if day.weekday() in wrap_days else new + [g for g in completed if g["id"] not in dogs and g not in new]  # a scoreboard needs every finished game's underdog
     boxes = {}
     for g in need_boxes:
         try:
@@ -513,6 +613,10 @@ def run(now, day, st, source):
         except Exception:
             stats["failed"] += 1
     stats["boxes"] = len(boxes)
+    for gid, b in boxes.items():  # the underdog of each game is kept in the state: it does not change, and it costs a box score to find
+        dogs[gid] = dog_of(b) or ""
+    for g in games:
+        g["dog"] = dogs.get(g["id"]) or None
     for b in boxes.values():  # positions for anyone new (the box score has none): one roster per team, only when needed
         for team_id in unknown_ids(b, positions):
             try:
@@ -536,12 +640,12 @@ def run(now, day, st, source):
         else:
             html += head + leaders_html(lead, all_players, fresh)
         leaders_shown = {"week": week, "ids": ids}
-    hl = highlights(new_players, by_id) if new_players else []
+    hl = game_highlights([g for g in new if g["id"] in boxes], boxes)
     if hl:
         html += "<h4>Highlights</h4>" + _list([t for _, t in hl])
     if wed and all_players:
-        potw = player_of_the_week(all_players, by_id)
-        html += "<h4>Player of the Week</h4>" + _list([("Player of the Week: " if i == 0 else "Also: ") + line for i, (_, _, line) in enumerate(potw)])
+        potw = players_of_the_week(all_players, by_id)
+        html += "<h4>Players of the Week</h4>" + _list([f"{label}: {line}" for label, line in potw])
     if wed and season_type == 2:
         try:
             standings = source.standings()

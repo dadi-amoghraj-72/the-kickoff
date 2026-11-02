@@ -30,11 +30,20 @@ class Source:
         return self._call(SITE + "scoreboard" + extra)
 
     def box(self, event_id):
-        """{"teamStats": {team id: {...}}, "players": [per team: {"team", "statistics": [...]}]} for one game."""
-        j = self._call(SITE + f"summary?event={event_id}")["boxscore"]
-        keep = ("rushingYards", "netPassingYards")
-        return {"teamStats": {t["team"]["id"]: {s["name"]: s["displayValue"] for s in t["statistics"] if s["name"] in keep} for t in j["teams"]},
-                "players": j["players"]}
+        """One game: {"teamStats": {team id: {rushingYards, netPassingYards, turnovers}}, "players": [per team: {"team", "statistics"}],
+        "odds": the pre-game DraftKings line or None, "plays": the scoring plays in order}."""
+        j = self._call(SITE + f"summary?event={event_id}")
+        bx, keep = j["boxscore"], ("rushingYards", "netPassingYards", "turnovers")
+        pc = (j.get("pickcenter") or [None])[0]
+        odds = None
+        if pc:
+            away, home = pc.get("awayTeamOdds") or {}, pc.get("homeTeamOdds") or {}
+            odds = {"details": pc.get("details"), "spread": pc.get("spread"), "away_dog": away.get("underdog"), "home_dog": home.get("underdog"),
+                    "away_ml": away.get("moneyLine"), "home_ml": home.get("moneyLine")}
+        plays = [{"text": p["text"], "type": p["type"]["text"], "period": p["period"]["number"], "clock": p["clock"]["displayValue"],
+                  "away": p["awayScore"], "home": p["homeScore"], "team": p["team"]["abbreviation"]} for p in j.get("scoringPlays", [])]
+        return {"teamStats": {t["team"]["id"]: {s["name"]: s["displayValue"] for s in t["statistics"] if s["name"] in keep} for t in bx["teams"]},
+                "players": bx["players"], "odds": odds, "plays": plays}
 
     def roster(self, team_id):
         """{athlete id: position abbreviation} for one team."""
