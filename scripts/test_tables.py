@@ -71,5 +71,49 @@ with tempfile.TemporaryDirectory() as d:
     state.save("tables", st4, Path(d))
     check("state file saves and loads back identically", state.load("tables", directory=Path(d)) == st4)
 
+# ---- Movement arrows and game colours (retrofit of 2026-11-03) ----
+import re  # noqa: E402
+import colorsys  # noqa: E402,F401
+txt = lambda h: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h)).strip()  # noqa: E731
+first_html, first_state = tables.tables_html({"eng.1": PL}, {}, WED, LEAGUES)
+check("the table shows the short club names (Man City, Spurs) so six columns fit a 360px screen: 'Manchester City' is not in the page, 'Man City' is", "Man City" in first_html and "Manchester City" not in first_html and "Tottenham Hotspur" not in first_html)
+check("the first table ever shown has a +/- column and no arrows (nothing to compare with)", "+/-" in first_html and "▲" not in first_html and "▼" not in first_html)
+old_rank = {x["id"]: x["rank"] for x in PL}
+ids = [x["id"] for x in PL]
+prev_state = {"eng.1": {"published": "2026-11-03", "rows": [[x["id"], x["rank"], x["points"], x["played"]] for x in PL]}}
+# last time the teams in places 3 and 4 were swapped and the team in 10th was 12th
+a_, b_, c_ = PL[2]["id"], PL[3]["id"], PL[9]["id"]
+for e in prev_state["eng.1"]["rows"]:
+    if e[0] == a_:
+        e[1] = 4
+    elif e[0] == b_:
+        e[1] = 3
+    elif e[0] == c_:
+        e[1] = 12
+    elif e[0] in (PL[10]["id"], PL[11]["id"]):
+        e[1] = e[1] - 1   # shifted by the 10th-for-12th move
+        e[3] = e[3] - 1
+moved_html, _ = tables.tables_html({"eng.1": PL}, prev_state, TUE, LEAGUES)   # Tuesday: the full table
+exp_up = sum(1 for e in prev_state["eng.1"]["rows"] if e[1] > old_rank[e[0]])
+exp_dn = sum(1 for e in prev_state["eng.1"]["rows"] if e[1] < old_rank[e[0]])
+check("independent: arrows equal last table's rank minus today's, counted separately from the saved rows: as many up arrows as teams that were lower before, as many down arrows as teams that were higher", moved_html.count("▲") == exp_up and moved_html.count("▼") == exp_dn and (exp_up + exp_dn) > 0, (exp_up, exp_dn, moved_html.count("▲"), moved_html.count("▼")))
+check("a team that did not move shows a dash (20 rows minus the 5 that moved = 15 dashes); the team in 3rd that was 4th last time shows ▲1 and the one in 10th that was 12th shows ▲2", moved_html.count("–") == 20 - exp_up - exp_dn == 15 and "▲1" in moved_html and "▲2" in moved_html, moved_html.count("–"))
+check("an unchanged table is still just 'No change since', no arrows", "No change since" in tables.tables_html({"eng.1": PL}, first_state, THU, LEAGUES)[0])
+top6, _ = tables.tables_html({"eng.1": PL}, prev_state, THU, LEAGUES)
+check("movement works with the pure helper: movement(x, {id: 4}) for a team now 3rd is ▲1, for one now 3rd that was 3rd is –, with no earlier table it is blank", tables.movement({"id": "a", "rank": 3}, {"a": 4}) == "▲1" and tables.movement({"id": "a", "rank": 3}, {"a": 3}) == "–" and tables.movement({"id": "a", "rank": 3}, None) == "" and tables.movement({"id": "a", "rank": 3}, {"b": 1}) == "" and tables.movement({"id": "a", "rank": 5}, {"a": 2}) == "▼3")
+ms = [{"home": {"id": PL[0]["id"]}, "away": {"id": PL[5]["id"]}}, {"home": {"id": PL[7]["id"]}, "away": {"id": PL[12]["id"]}}, {"home": {"id": PL[3]["id"]}, "away": {"id": PL[19]["id"]}}]
+from kickoff import football  # noqa: E402
+cmap = football.game_colours(ms)
+painted_html, _ = tables.tables_html({"eng.1": PL}, {}, WED, LEAGUES, colours={"eng.1": cmap})
+sp = re.findall(r'<span class="gc(\d+)">([^<]+)</span>', painted_html)
+check("independent: exactly the six teams of the three matches are coloured, once each, and nobody else", len(sp) == 6 and {n for _, n in sp} == {PL[i]["short"] for i in (0, 5, 7, 12, 3, 19)}, sp)
+by_col = {}
+for c_, n_ in sp:
+    by_col.setdefault(c_, set()).add(n_)
+check("both teams of a match share a colour and the three matches have three different colours", len(by_col) == 3 and {frozenset(v) for v in by_col.values()} == {frozenset({PL[0]["short"], PL[5]["short"]}), frozenset({PL[7]["short"], PL[12]["short"]}), frozenset({PL[3]["short"], PL[19]["short"]})})
+check("without matches nothing is coloured", 'class="gc' not in tables.tables_html({"eng.1": PL}, {}, WED, LEAGUES)[0] and 'class="gc' not in tables.tables_html({"eng.1": PL}, {}, WED, LEAGUES, colours={"eng.1": {}})[0])
+check("the colour numbers wrap after 15 matches (a 16th match reuses colour 0) so a long matchday can never fail", football.game_colours([{"home": {"id": f"h{i}"}, "away": {"id": f"a{i}"}} for i in range(18)])["h15"] == 0)
+check("the 'top 6' (changed) view paints and shows arrows too", 'class="gc' in tables.tables_html({"eng.1": PL}, prev_state, THU, LEAGUES, colours={"eng.1": cmap})[0] and "▲" in top6)
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

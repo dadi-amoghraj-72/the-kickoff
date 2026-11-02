@@ -84,6 +84,20 @@ check("no legend and none of the old text lines", all(x not in t for x in ("lege
 check("a table that is too short is left out", champions.table_html(rows[:10]) == "")
 check("zones", [champions.zone(n) for n in (1, 8, 9, 24, 25, 36)] == ["blue", "blue", "lilac", "lilac", "rose", "rose"])
 
+# ---- Movement arrows and game colours in the league-phase table (retrofit of 2026-11-03) ----
+import re as _re  # noqa: E402
+t0 = champions.table_html(rows)
+check("the league-phase table has a +/- column, blank when there is no earlier table", "+/-" in t0 and "▲" not in t0 and "▼" not in t0)
+before = {x["id"]: x["rank"] for x in rows}
+before[rows[0]["id"]], before[rows[1]["id"]] = 2, 1   # last time the top two were the other way round
+before[rows[20]["id"]] = 25                           # and the team now 21st was 25th
+t1 = champions.table_html(rows, before)
+check("arrows against the last table: 1st is up 1, 2nd down 1, 21st up 4, everyone else level (33 dashes)", t1.count("▲1") == 1 and t1.count("▼1") == 1 and t1.count("▲4") == 1 and t1.count("–") == 33, (t1.count("▲"), t1.count("▼"), t1.count("–")))
+cm = {rows[0]["id"]: 0, rows[17]["id"]: 0, rows[3]["id"]: 1, rows[30]["id"]: 1}
+t2 = champions.table_html(rows, None, cm)
+sp = _re.findall(r'<span class="gc(\d)">([^<]+)</span>', t2)
+check("teams of tonight's matches are coloured in pairs: 4 teams, two colours, nobody else", len(sp) == 4 and {n for _, n in sp} == {rows[i]["short"] for i in (0, 17, 3, 30)} and len({c for c, _ in sp}) == 2, sp)
+
 # ---- Bold team names ----
 check("bold_names bolds both clubs, wherever they appear",
       r.bold_names("Como beat Manchester United. Como led.", ("Como", "Manchester United")) ==

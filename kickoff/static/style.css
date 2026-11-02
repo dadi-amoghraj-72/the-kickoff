@@ -109,7 +109,10 @@ section > :last-child { margin-bottom: 0; }
 .table-wrap { margin: 14px 0 6px; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 16px; font-variant-numeric: tabular-nums; }
 caption { text-align: left; padding: 0 0 6px; font-weight: 600; background: transparent; }
-th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+th:first-child, td:first-child { padding-left: 10px; }
+th:last-child, td:last-child { padding-right: 10px; }
+.table-wrap td:not(.n) { white-space: normal; }   /* a long club name wraps instead of pushing the numbers off a 360px screen */
 th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 th.n, td.n { text-align: right; }
 tr[class^="z-"] td:first-child { padding-left: 14px; }
@@ -336,3 +339,9 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
   .gc13 { color: #367870; }
   .gc14 { color: #563678; }
 }
+/* Notes lines outside a table (NFL Players of the Week and highlights): the same gold diamond bullet and hanging indent as the NBA notes */
+.dlist { margin: 6px 0 14px; }
+.dlist .pl { display: flex; align-items: flex-start; padding: 5px 0; font-size: 16px; line-height: 1.4; }
+.dlist .pl::before { content: "\25C6"; flex: 0 0 20px; box-sizing: border-box; height: 22px; padding-left: 4px; display: flex; align-items: center; font-size: 9px; line-height: 1; color: var(--gold); }
+.dlist .pl .t { flex: 1 1 auto; min-width: 0; }
+.dlist .n { color: var(--gold); font-weight: 600; }

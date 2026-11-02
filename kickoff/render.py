@@ -51,6 +51,28 @@ def table(caption, columns, rows, zones=None, legend=None, row_classes=None):
     return out
 
 
+def paint(html, colours):
+    """Colour team cells in a table: colours is {cell text: colour number}; the text is wrapped in <span class="gcN"> (the 15 locked pastel
+    colours of the stylesheet, one per game of the day, shared by both teams of a game). Only a team cell of the form <td class="">TEXT</td> changes."""
+    for text, n in colours.items():
+        cell = f'<td class="">{esc(text)}</td>'
+        html = html.replace(cell, f'<td class=""><span class="gc{n % 15}">{esc(text)}</span></td>')
+    return html
+
+
+def game_colour_map(matches, key):
+    """{key(team): colour number}: the matches in the order shown, each with one colour for both its teams. key(match, 'home'|'away') names the team."""
+    out = {}
+    for i, m in enumerate(matches):
+        out[key(m, "home")] = out[key(m, "away")] = i % 15
+    return out
+
+
+def move(n):
+    """Places moved since the last table shown: ▲n up, ▼n down, – level."""
+    return "–" if not n else (f"▲{n}" if n > 0 else f"▼{-n}")
+
+
 def compact(html, widths, extra=""):
     """Wrap a table from table() in the compact fixed-layout style (even column widths in per cent): the caption becomes a centred title
     row across the top of the table, and the widths go in a colgroup because a fixed layout reads them from the first row (the title)."""

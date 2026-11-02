@@ -65,7 +65,7 @@ h = ck.result_html(nz)
 check("a result shows the teams (India in bold), both innings, the result and the series", "New Zealand v <strong>India</strong>" in h and "India 191/8 (20) · New Zealand 195/3 (18)" in h
       and "New Zealand won by 7 wkts" in h and "5th T20I, India tour of New Zealand 2026" in h, h)
 check("an all-out innings has no '/10' and overs keep their decimal", ck.innings_line({"r": 109, "w": 10, "o": 17.4, "inning": "Hobart Hurricanes Women Inning 1"}) == "Hobart Hurricanes Women 109 (17.4)")
-check("a live match carries a Live tag", '<span class="tag">Live</span>' in ck.result_html(live))
+check("a live match carries an In progress tag", '<span class="tag">In progress</span>' in ck.result_html(live))
 grouped = ck.results_html(picked)
 check("results are grouped under International and then WBBL, each with its matches", grouped.index("<h3>International</h3>") < grouped.index("<h3>WBBL</h3>") and grouped.count("<li>") == 5, grouped[:200])
 check("no matches, no block", ck.results_html([]) == "")

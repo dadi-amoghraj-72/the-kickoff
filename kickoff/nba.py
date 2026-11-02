@@ -348,10 +348,8 @@ def game_colours(games):
 
 
 def paint(html, colours):
-    """Colour the team codes in a standings or Cup table that played in tonight's games: the code is wrapped in a coloured span, nothing else changes."""
-    for abbr, n in colours.items():
-        html = html.replace(f'<td class="">{abbr}</td>', f'<td class=""><span class="gc{n}">{abbr}</span></td>')
-    return html
+    """Colour the team codes in a standings or Cup table that played in tonight's games (see render.paint)."""
+    return r.paint(html, colours)
 
 
 def day_label(d):
@@ -402,8 +400,7 @@ def _list(items):
     return '<ul class="standouts">' + "".join(f"<li>{r.esc(i)}</li>" for i in items) + "</ul>" if items else ""
 
 
-def move(n):
-    return "–" if not n else (f"▲{n}" if n > 0 else f"▼{-n}")
+move = r.move
 
 
 def standings_ok(std):

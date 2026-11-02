@@ -240,8 +240,8 @@ check("scoreboard: no emoji, full team names, a thick line between kickoff group
       and "12/14 games played" in sb and sb.count(">OT<") == 2 and "On bye: Saints, Giants." in sb, sb[:200])
 check("scoreboard: nobody is highlighted for being D's team (no gold, no mine class)", "mine" not in sb and "Jacksonville Jaguars" in sb and "Pittsburgh Steelers" in sb)
 full = nfl.scoreboard_html(GAMES, "Week 8", 12, 14, ["Saints"])
-check("the whole week: all 14 games (28 rows), YTP once in the middle of the Monday-night game with no scores, LIVE on the Sunday-night game with its score, 4 group lines",
-      len(rows_of(full, "a")) == 14 and len(rows_of(full, "h")) == 14 and full.count("YTP") == 1 and 'class="sc ytp" rowspan="2">YTP<' in full and full.count(">LIVE<") == 1 and full.count('<tr class="gap">') == 4, (full.count("YTP"), full.count("LIVE")))
+check("the whole week: all 14 games (28 rows), YTP once in the middle of the Monday-night game with no scores, an 'In progress' tag line (no LIVE) above the Sunday-night game with its score, 4 group lines",
+      len(rows_of(full, "a")) == 14 and len(rows_of(full, "h")) == 14 and full.count("YTP") == 1 and 'class="sc ytp" rowspan="2">YTP<' in full and full.count(">LIVE<") == 0 and full.count('<tr class="tag"><td colspan="3">In progress') == 1 and full.count('<tr class="gap">') == 4, (full.count("YTP"), full.count("LIVE")))
 live = next(g for g in GAMES if g["status"] == "live")
 check("the live game shows its current score (WSH 16, PHI 10 when saved) and is not bold; the unplayed game shows no number at all", ">16<" in full and ">10<" in full and " w" not in "".join(re.findall(r'<tr class="[ah]([^"]*)">', "".join(r_ for r_ in rows_of(full, "a") + rows_of(full, "h") if "Commanders" in r_ or "Eagles" in r_ or "Seahawks" in r_ or "Bears" in r_))))
 neutral = copy.deepcopy(FINAL[0])
@@ -346,7 +346,7 @@ check("Monday: scoreboard of the 12 finished games, the bye line, weekly leaders
       "Week 8" in h and "12/14 games played" in h and "On bye:" in h and "Weekly Leaders" in h and "Highlights" in h and "Player of the Week" not in h and "Division" not in h and "AFC East" not in h and "Playoff" not in h, mon["stats"])
 check("Monday: 1 scoreboard call plus 12 box scores and no roster calls (positions were known); all 12 games remembered, leaders snapshot saved", [x[0] for x in f.log].count("scoreboard") == 1 and [x[0] for x in f.log].count("box") == 12
       and "roster" not in [x[0] for x in f.log] and len(mon["state"]["reported"]) == 12 and mon["state"]["leaders"]["week"] == 8 and set(mon["state"]["leaders"]["ids"]) == set(nfl.GROUPS), f.log[:3])
-check("Monday's scoreboard lists the whole week: 14 games, the Sunday-night game LIVE, the Monday-night game YTP", mon["html"].count('<tr class="a') == 14 and mon["html"].count("YTP") == 1 and mon["html"].count(">LIVE<") == 1 and "12/14 games played" in mon["html"], mon["stats"])
+check("Monday's scoreboard lists the whole week: 14 games, the Sunday-night game 'In progress', the Monday-night game YTP", mon["html"].count('<tr class="a') == 14 and mon["html"].count("YTP") == 1 and mon["html"].count(">LIVE<") == 0 and mon["html"].count("In progress") == 1 and "12/14 games played" in mon["html"], mon["stats"])
 again = nfl.run(NOW, MON, mon["state"], Fake())
 check("running Monday again shows nothing new (no scoreboard, no leaders, no highlights)", again["html"] == "" and again["stats"]["new"] == 0, again["stats"])
 nopos = nfl.run(NOW, MON, {}, f3 := Fake())
@@ -366,7 +366,7 @@ hw = wed["html"]
 check("Wednesday: the whole week's scoreboard (all 14 games), the leaders again, Players of the Week and the eight division tables", hw.count('<tr class="a') == 14 and "14/14 games played" in hw and "Weekly Leaders" in hw
       and "Players of the Week" in hw and hw.count("Division Standings") == 1 and "AFC East" in hw and "NFC West" in hw, wed["stats"])
 check("Wednesday: the two late-game quarterbacks (158.3 rating) enter the top three and are tagged new, and nobody else is", hw.count('class="new">new</span>') == 2 and "L. QBSEA" in hw and "L. QBWSH" in hw, hw.count('class="new"'))
-check("Wednesday: no playoff picture before week 14, and once every game is final no YTP and no LIVE are left", "Playoff Picture" not in hw and "YTP" not in hw and ">LIVE<" not in hw)
+check("Wednesday: no playoff picture before week 14, and once every game is final no YTP and no LIVE are left", "Playoff Picture" not in hw and "YTP" not in hw and "In progress" not in hw)
 wed_quiet = nfl.run(NOW2, WED, copy.deepcopy(mon["state"]), Fake(sb=SB_LATE, late=[(snf_id, synth_box("WSH", "PHI", stars=(False, False))), (mnf_id, synth_box("SEA", "CHI", stars=(False, False)))]))
 check("Wednesday with nothing changed in any top three: one line says so instead of repeating the seven tables", "No change in the top three of any group since Monday." in wed_quiet["html"] and "Top QBs" not in wed_quiet["html"], wed_quiet["stats"])
 fresh = nfl.run(NOW2, WED, {"positions": POS_LATE}, Fake(sb=SB_LATE, late=LATE_BOTH))
@@ -487,6 +487,37 @@ for tm in snf_box["players"]:
                 raw_fg.append((a["athlete"]["displayName"], lab["FG"]))
 check("independent: by the raw box one kicker made 4 of 5 field goals on Sunday night, a Stevens, and he is the special-teams Player of the Week in the page", [n for n, f in raw_fg if f == "4/5"] != [] and all(n.endswith("Stevens") for n, f in raw_fg if f == "4/5") and "Special teams: D. Stevens (WSH): 4/5 field goals in the 27-10 win over PHI" in wt, raw_fg)
 check("the only unplayed game (Monday night) is still YTP on Wednesday, once", wt.count("YTP") == 1)
+
+# ---- Notes style, In progress line, movement arrows (retrofit of 2026-11-03) ----
+ptxt = lambda h: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h)).strip()  # noqa: E731
+live_html = nfl.run(NOW, MON, {"positions": POS}, type("S", (), {"calls": 0, "scoreboard": lambda self, week=None, season_type=None: SB, "box": lambda self, i: BOXES[i], "roster": lambda self, t: {}, "standings": lambda self: STAND})())["html"]
+live_g = next(g for g in GAMES if g["status"] == "live")
+check("the live game has one 'In progress' tag line with ESPN's clock text, placed straight above its two team rows; nothing says LIVE", live_html.count("In progress") == 1 and f'In progress · {nfl.r.esc(live_g["detail"])}' in live_html and "LIVE" not in live_html and live_g["detail"], live_g["detail"])
+wed_html = nfl.run(WED_NOW, WED, {**mon_state, "reported": t_rep}, TueSource())["html"]
+check("Players of the Week use the house notes style: a dlist of lines (diamond bullet by CSS), the label in bold, no old bullet list", wed_html.count('<div class="dlist">') >= 1 and '<div class="pl"><span class="t"><strong>Offence:</strong>' in wed_html and '<ul class="standouts">' not in wed_html)
+check("independent: the stat figures of the Offence line are in gold, from a separate read of the raw box (Burrow 38/48, 462 yards, 5 TD, 3 INT) and the result after 'in the' is plain",
+      all(f'<span class="n">{x}</span>' in wed_html for x in ("38/48", "462", "5", "3")) and "in the 43-36 win over TEN" in wed_html and '<span class="n">43</span>' not in wed_html)
+burrow = next(a for t in TBOX[next(e["id"] for e in TSB["events"] if "CIN" in [c["team"]["abbreviation"] for c in e["competitions"][0]["competitors"]] and "TEN" in [c["team"]["abbreviation"] for c in e["competitions"][0]["competitors"]])]["players"] for cat in t["statistics"] if cat["name"] == "passing" for a in cat["athletes"] if a["athlete"]["displayName"].endswith("Burrow"))
+check("independent: the raw box has Burrow at 38/48 for 462 yards", burrow["stats"][0] == "38/48" and burrow["stats"][1] == "462", burrow["stats"][:2])
+check("gold_numbers: numbers before the result are wrapped; a team code or hyphenated score is not", nfl.gold_numbers("A. B (X): 3 sacks, 2/4 attempts in the 27-10 win over PHI") == 'A. B (X): <span class="n">3</span> sacks, <span class="n">2/4</span> attempts in the 27-10 win over PHI')
+hl_g = nfl._list(["Blowout: X won 30-3 over Y"])
+check("highlights get the bullet style but no gold numbers", '<span class="t"><strong>Blowout:</strong> X won 30-3 over Y' in hl_g and 'class="n"' not in hl_g)
+R0 = nfl.ranks_of(TSTD)
+check("independent: ranks_of gives every team its place in the division (1 to 4, 8 divisions of 4) and the seeds by ESPN's own playoffSeed entries", len(R0["div"]) == 32 and sorted(R0["div"].values()) == sorted([1, 2, 3, 4] * 8) and len(R0["seeds"]) == 32 and all(1 <= v <= 16 for v in R0["seeds"].values()), (len(R0["seeds"]), sorted(set(R0["seeds"].values()))))
+import copy as _cp
+swapped = _cp.deepcopy(R0)
+east = TSTD["children"][0]["children"][0]["standings"]["entries"]
+t1, t2 = east[0]["team"]["abbreviation"], east[1]["team"]["abbreviation"]
+swapped["div"][t1], swapped["div"][t2] = 2, 1  # last time they were the other way round
+tbl = ptxt(nfl.division_html(TSTD, swapped))
+check("division arrows: with the top two of AFC East having been the other way round, the leader is up 1 and the second down 1, every other team level; the first table has no arrows", f"{t1} " in tbl and tbl.count("▲1") == 1 and tbl.count("▼1") == 1 and tbl.count("–") >= 28 and "▲" not in ptxt(nfl.division_html(TSTD)) and "▼" not in ptxt(nfl.division_html(TSTD)))
+sw2 = _cp.deepcopy(R0)
+top2 = sorted(R0["seeds"].items(), key=lambda kv: kv[1])
+sw2["seeds"][top2[0][0]] = top2[0][1] + 2
+po_txt = ptxt(nfl.playoff_html(TSTD, before=sw2))
+check("playoff picture arrows: a team that was two seeds lower last time is up 2", "▲2" in po_txt and "+/-" in po_txt and "▲" not in ptxt(nfl.playoff_html(TSTD)))
+wk1 = nfl.run(WED_NOW, WED, {**mon_state, "reported": t_rep}, TueSource())
+check("the run saves the ranks of the tables it showed; a later Wednesday shows arrows against them (a changed record moves nobody here, so all level)", wk1["state"]["ranks"] == R0 and "–" in ptxt(nfl.run(WED_NOW, WED, {**wk1["state"], "reported": t_rep}, TueSource())["html"]))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

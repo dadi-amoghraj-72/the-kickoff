@@ -152,7 +152,7 @@ def week_name(week, season_type):
 
 def scoreboard_html(games, title, played, total, byes=()):
     """Every game of the week, two rows per game (away above home): full team names, the home team marked with a house (none at neutral
-    sites), the winner in bold, records and an OT tag, LIVE for a game in progress, YTP (yet to play) in the middle of the score for a game
+    sites), the winner in bold, records and an OT tag, an "In progress" tag line above a game being played, YTP (yet to play) in the middle of the score for a game
     still to come, and a thicker line between kickoff groups."""
     if not games:
         return ""
@@ -162,6 +162,8 @@ def scoreboard_html(games, title, played, total, byes=()):
             rows.append('<tr class="gap"><td></td><td></td><td></td></tr>')
         prev, w = slot(g), (winner(g) if g["status"] == "final" else None)
         yet = g["status"] in ("scheduled", "other")
+        if g["status"] == "live":  # on now: the score so far; it shows as a final in the next edition
+            rows.append(f'<tr class="tag"><td colspan="3">In progress{" · " + r.esc(g["detail"]) if g.get("detail") else ""}</td></tr>')
         for side in ("away", "home"):
             t = g[side]
             mark = f" {HOME_SVG}" if side == "home" and not g["neutral"] else ""
@@ -174,8 +176,6 @@ def scoreboard_html(games, title, played, total, byes=()):
             tag = ""
             if side == "away" and g["status"] == "final" and g["ot"]:
                 tag = "OT"
-            elif side == "away" and g["status"] == "live":
-                tag = "LIVE"
             cls = " ".join(x for x in (side[0], "w" if w == side else "") if x)
             rows.append(f'<tr class="{cls}"><td class="tm">{r.esc(t["name"])}{star}{mark}{rec}</td>{score}<td class="ot">{tag}</td></tr>')
     dogs = sum(1 for g in games if underdog_win(g))
@@ -532,25 +532,43 @@ def record_of(entry):
     return f"{w}-{l}" + (f"-{t}" if t else "")
 
 
-def division_html(standings):
-    """Eight small tables, AFC then NFC, in ESPN's order inside each division."""
+def ranks_of(standings):
+    """{"div": {team code: place in its division}, "seeds": {team code: playoff seed}}: what the +/- arrows are measured against next time."""
+    div, seeds = {}, {}
+    for conf in standings["children"]:
+        for d in conf["children"]:
+            for i, e in enumerate(d["standings"]["entries"], 1):
+                div[e["team"]["abbreviation"]] = i
+                if _stat(e, "playoffSeed"):
+                    seeds[e["team"]["abbreviation"]] = int(_stat(e, "playoffSeed", "value") or 0)
+    return {"div": div, "seeds": seeds}
+
+
+def division_html(standings, before=None):
+    """Eight small tables, AFC then NFC, in ESPN's order inside each division. +/- is the places moved within the division since the last
+    table shown (`before`, from ranks_of); empty the first time."""
     out = ""
+    prev = (before or {}).get("div") or {}
     for conf in standings["children"]:
         for div in conf["children"]:
             ents = div["standings"]["entries"]
-            rows = [[e["team"]["abbreviation"], record_of(e), _stat(e, "pointsFor"), _stat(e, "pointsAgainst"), _stat(e, "streak") or "-"] for e in ents]
-            out += r.compact(r.table(div["name"], [("Team", False), ("W-L", True), ("PF", True), ("PA", True), ("Strk", True)], rows), (20, 20, 20, 20, 20), " nfl div")
+            rows = []
+            for i, e in enumerate(ents, 1):
+                abbr = e["team"]["abbreviation"]
+                rows.append([abbr, record_of(e), _stat(e, "pointsFor"), _stat(e, "pointsAgainst"), _stat(e, "streak") or "-", r.move(prev[abbr] - i) if abbr in prev else ""])
+            out += r.compact(r.table(div["name"], [("Team", False), ("W-L", True), ("PF", True), ("PA", True), ("Strk", True), ("+/-", True)], rows), (18, 18, 16, 16, 16, 16), " nfl div")
     return out
 
 
-def playoff_html(standings, seeds_shown=10):
+def playoff_html(standings, seeds_shown=10, before=None):
     """Each conference's seeds 1 to 10 with a line after the seventh: seed 1 (gold, BYE) gets the first-round bye, 2 to 4 lead their divisions, 5 to 7 are wild cards."""
     out = ""
     for conf in standings["children"]:
         ents = sorted((e for d in conf["children"] for e in d["standings"]["entries"] if _stat(e, "playoffSeed")), key=lambda e: int(_stat(e, "playoffSeed", "value") or 99))[:seeds_shown]
-        rows = [[_stat(e, "playoffSeed"), e["team"]["abbreviation"], record_of(e), "BYE" if int(_stat(e, "playoffSeed", "value")) == 1 else ("DIV" if int(_stat(e, "playoffSeed", "value")) <= 4 else ("WC" if int(_stat(e, "playoffSeed", "value")) <= 7 else ""))] for e in ents]
+        prev = (before or {}).get("seeds") or {}
+        rows = [[_stat(e, "playoffSeed"), e["team"]["abbreviation"], record_of(e), r.move(prev[e["team"]["abbreviation"]] - int(_stat(e, "playoffSeed", "value"))) if e["team"]["abbreviation"] in prev else "", "BYE" if int(_stat(e, "playoffSeed", "value")) == 1 else ("DIV" if int(_stat(e, "playoffSeed", "value")) <= 4 else ("WC" if int(_stat(e, "playoffSeed", "value")) <= 7 else ""))] for e in ents]
         classes = [" ".join(x for x in ("bye" if i == 0 else "", "cut" if i == 6 else "") if x) for i, e in enumerate(ents)]
-        out += r.compact(r.table(f"{''.join(w[0] for w in conf['name'].split())} Playoff Picture", [("Seed", True), ("Team", False), ("W-L", True), ("", False)], rows, row_classes=classes), (16, 34, 26, 24), " nfl div po")
+        out += r.compact(r.table(f"{''.join(w[0] for w in conf['name'].split())} Playoff Picture", [("Seed", True), ("Team", False), ("W-L", True), ("+/-", True), ("", False)], rows, row_classes=classes), (14, 26, 22, 18, 20), " nfl div po")
     return out
 
 
@@ -559,11 +577,23 @@ def playoff_html(standings, seeds_shown=10):
 LABELS = ("Offence", "Defence", "Special teams", "Also", "Shutout", "Blowout", "Overtime", "Comeback", "Game-winner", "Giveaways", "Longest play")
 
 
-def _list(items):
+def gold_numbers(text):
+    """The stat figures of a Players-of-the-Week line in gold: every number before the result ('in the 43-36 win over TEN') is wrapped."""
+    stats, sep, result = text.rpartition(" in the ")
+    if not sep:
+        stats, result = text, ""
+    marked = re.sub(r"(?<![\w-])(\d+(?:/\d+)?)(?![\w-])", r'<span class="n">\1</span>', r.esc(stats))
+    return marked + (" in the " + r.esc(result) if sep else "")
+
+
+def _list(items, numbers=False):
+    """Notes lines in the house style: a gold diamond bullet with a hanging indent; a leading label (Offence:, Comeback:) in bold; the stat
+    figures in gold when `numbers` is set (Players of the Week)."""
     def one(text):
         head, sep, rest = text.partition(": ")
-        return f"<strong>{r.esc(head)}:</strong> {r.esc(rest)}" if sep and head in LABELS else r.esc(text)
-    return '<ul class="standouts">' + "".join(f"<li>{one(i)}</li>" for i in items) + "</ul>" if items else ""
+        body = gold_numbers(rest) if numbers else r.esc(rest)
+        return f"<strong>{r.esc(head)}:</strong> {body}" if sep and head in LABELS else (gold_numbers(text) if numbers else r.esc(text))
+    return '<div class="dlist">' + "".join(f'<div class="pl"><span class="t">{one(i)}</span></div>' for i in items) + "</div>" if items else ""
 
 
 def standings_ok(standings):
@@ -578,7 +608,7 @@ def run(now, day, st, source):
     that part is left out and counted in stats["failed"]."""
     stats = {"week": None, "games": 0, "completed": 0, "new": 0, "shown": 0, "boxes": 0, "failed": 0, "unknown_positions": 0, "calls": 0}
     reported, positions, dogs = list(st.get("reported", [])), dict(st.get("positions", {})), dict(st.get("dogs", {}))
-    keep = {"reported": reported, "positions": positions, "leaders": st.get("leaders"), "dogs": dogs}
+    keep = {"reported": reported, "positions": positions, "leaders": st.get("leaders"), "dogs": dogs, "ranks": st.get("ranks")}
     empty = {"html": "", "state": keep, "stats": stats, "week": None}
     try:
         sb = source.scoreboard()
@@ -645,14 +675,15 @@ def run(now, day, st, source):
         html += "<h4>Highlights</h4>" + _list([t for _, t in hl])
     if wed and all_players:
         potw = players_of_the_week(all_players, by_id)
-        html += "<h4>Players of the Week</h4>" + _list([f"{label}: {line}" for label, line in potw])
+        html += "<h4>Players of the Week</h4>" + _list([f"{label}: {line}" for label, line in potw], numbers=True)
     if wed and season_type == 2:
         try:
             standings = source.standings()
             if standings_ok(standings):
-                html += "<h4>Division Standings</h4>" + division_html(standings)
+                html += "<h4>Division Standings</h4>" + division_html(standings, st.get("ranks"))
                 if week >= PLAYOFF_PICTURE_FROM:
-                    html += "<h4>Playoff Picture</h4>" + playoff_html(standings)
+                    html += "<h4>Playoff Picture</h4>" + playoff_html(standings, before=st.get("ranks"))
+                keep["ranks"] = ranks_of(standings)
         except Exception:
             stats["failed"] += 1
     stats["shown"] = len(completed) if show_board else 0

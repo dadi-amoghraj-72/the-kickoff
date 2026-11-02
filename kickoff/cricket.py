@@ -120,7 +120,7 @@ def result_html(m, entry=None):
         if strip_women(t).lower() in HIGHLIGHT:
             names = names.replace(r.esc(t), f"<strong>{r.esc(t)}</strong>")
     scores = " · ".join(r.esc(innings_line(s, m.get("teams") or [])) for s in m.get("score") or [])
-    live = "" if m.get("matchEnded") else '<span class="tag">Live</span> '
+    live = "" if m.get("matchEnded") else '<span class="tag">In progress</span> '
     flag = ""
     if m.get("matchType") == "test" and not m.get("matchEnded"):
         day = day_of(m, entry)
