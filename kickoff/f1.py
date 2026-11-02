@@ -83,9 +83,9 @@ def _gap(row, winner_laps):
     return {"Disqualified": "DSQ", "Did not start": "DNS"}.get(status, "DNF")
 
 
-def _tight(html):
+def _tight(html, extra=""):
     """The compact table style (shared with the cricket points tables) so a phone shows every column."""
-    return f'<div class="pts f1">{html}</div>'
+    return f'<div class="pts f1{extra}">{html}</div>'
 
 
 def classified(x):
@@ -107,7 +107,7 @@ def results_table(caption, rows):
     """Race or sprint: position, driver, places gained, gap to the winner (or why out), points."""
     laps = int(rows[0]["laps"]) if rows and rows[0].get("laps") else 0
     body = [[x["position"], short_name(x["Driver"]), moved(x), _gap(x, laps), int(float(x["points"]))] for x in rows]
-    return _tight(r.table(caption, [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body))
+    return _tight(r.table(caption, [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body), " race")
 
 
 def best_time(row):

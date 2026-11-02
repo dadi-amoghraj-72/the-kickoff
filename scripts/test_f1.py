@@ -119,7 +119,7 @@ check("the number columns are right-aligned like every other table", tbl.count('
 qt = cells(f1.qualifying_table(Q18["QualifyingResults"]))
 check("qualifying table: pole is ANT, Q3, 1:34.035; a Q1 exit shows its Q1 time (Bottas 22nd); 4 columns each", qt[:4] == ["1", "K. Antonelli", "Q3", "1:34.035"] and qt[-4:] == ["22", "V. Bottas", "Q1", "1:37.523"] and len(qt) == 22 * 4, (qt[:4], qt[-4:]))
 check("Lawson, 10th with no Q3 time, shows his Q2 time marked Q2 (so 9th Lindblad's slower Q3 lap does not look out of order)", qt[9 * 4:9 * 4 + 4] == ["10", "L. Lawson", "Q2", "1:35.058"], qt[36:40])
-check("the tables use the compact style", f1.qualifying_table(Q18["QualifyingResults"]).startswith('<div class="pts f1">') and tbl.startswith('<div class="pts f1">') and f1.driver_standings_table(DS18, 18).startswith('<div class="pts f1">'))
+check("the tables use the compact style", f1.qualifying_table(Q18["QualifyingResults"]).startswith('<div class="pts f1">') and tbl.startswith('<div class="pts f1') and f1.driver_standings_table(DS18, 18).startswith('<div class="pts f1">'))
 ds = f1.driver_standings_table(DS18, 18)
 check("driver standings: top 10, leader Antonelli on 365", ds.count("<tr>") == 11 and cells(ds)[:4][1] == "K. Antonelli" and cells(ds)[3] == "365" and "top 10" in ds, cells(ds)[:4])
 lawson = lambda html: cells(html)[cells(html).index("L. Lawson") + 1]  # noqa: E731
