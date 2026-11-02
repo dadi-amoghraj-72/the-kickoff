@@ -24,10 +24,10 @@ TRACKED = {  # D's list (SPEC.md, Source: NBA.com 2026-27 season previews): ESPN
     "4277905": "Trae Young", "6583": "Anthony Davis", "4396993": "Tyrese Haliburton", "4395628": "Zion Williamson",
     "5041939": "Cooper Flagg", "4432166": "Cade Cunningham"}
 TEAMS = {  # where each starts the season; the state keeps the latest team seen, so a trade is followed
-    "5104157": "SA", "4278073": "OKC", "3112335": "DEN", "3945274": "LAL", "3934672": "NY", "3136195": "NY", "3032977": "MIA", "1966": "PHI",
-    "3059318": "PHI", "3917376": "PHI", "3908809": "CLE", "3992": "CLE", "3975": "GS", "3202": "HOU", "4594268": "MIN", "4065648": "BOS",
-    "4279888": "POR", "6606": "POR", "4277905": "WSH", "6583": "WSH", "4396993": "IND", "4395628": "NO", "5041939": "DAL", "4432166": "DET"}
-FIRST = ("LAL", "PHI", "CLE", "SA", "BOS")  # D's teams: their games always come first, in this order; every other game follows by tip-off time
+    "5104157": "SAS", "4278073": "OKC", "3112335": "DEN", "3945274": "LAL", "3934672": "NYK", "3136195": "NYK", "3032977": "MIA", "1966": "PHI",
+    "3059318": "PHI", "3917376": "PHI", "3908809": "CLE", "3992": "CLE", "3975": "GSW", "3202": "HOU", "4594268": "MIN", "4065648": "BOS",
+    "4279888": "POR", "6606": "POR", "4277905": "WAS", "6583": "WAS", "4396993": "IND", "4395628": "NOP", "5041939": "DAL", "4432166": "DET"}
+FIRST = ("LAL", "PHI", "CLE", "SAS", "BOS")  # D's teams: their games always come first, in this order; every other game follows by tip-off time
 POINTS, BIG_REB, BLOCKS, STEALS = 40, 20, 5, 5   # standout thresholds
 REBOUNDS, GUARD_REBOUNDS, ASSISTS = 15, 10, 15   # rebounds (10 for a guard, 15 for anyone else) and assists; D's choice, to be reviewed after a month of real use
 GUARDS = ("G", "PG", "SG")                       # ESPN's box score lists positions as G, F or C
@@ -38,6 +38,13 @@ TAGGED = ("triple-double", "20-20 game")   # kinds worth naming in a standout li
 SERIES_GAMES = 7
 CUP_SCAN = (date(2026, 10, 20), date(2026, 12, 20))   # the Cup's group stage and knockouts fall in this window; scanned once to learn the groups
 CUP_HOME = ("Quarterfinals", "Semifinals")            # Cup rounds that are played in a home arena (group games and the final are not)
+
+
+CODE_FIX = {"GS": "GSW", "NO": "NOP", "NY": "NYK", "SA": "SAS", "UTAH": "UTA", "WSH": "WAS"}   # ESPN's odd team codes, made the standard NBA three letters
+
+
+def code(abbr):
+    return CODE_FIX.get(abbr, abbr)
 
 
 NAME_FIX = {"LA Clippers": "Los Angeles Clippers"}   # ESPN calls only this team "LA"; every other team is City + nickname, so the Lakers' neighbour follows suit
@@ -55,7 +62,7 @@ def parse_game(e):
     c, t = e["competitions"][0], e["status"]["type"]
     status = "final" if t["name"] == "STATUS_FINAL" else {"in": "live", "pre": "scheduled"}.get(t["state"], "other")
     sides = {x["homeAway"]: x for x in c["competitors"]}
-    side = lambda x: {"id": x["team"]["id"], "abbr": x["team"]["abbreviation"], "name": team_name(x["team"]["displayName"]), "short": x["team"]["shortDisplayName"],  # noqa: E731
+    side = lambda x: {"id": x["team"]["id"], "abbr": code(x["team"]["abbreviation"]), "name": team_name(x["team"]["displayName"]), "short": x["team"]["shortDisplayName"],  # noqa: E731
                       "score": int(x["score"]) if status in ("final", "live") and str(x.get("score", "")).isdigit() else None,
                       "record": next((rec["summary"] for rec in x.get("records", []) if rec.get("type", rec.get("name")) in ("total", "overall")), "")}
     headline = next((n.get("headline", "") for n in c.get("notes", [])), "")
@@ -134,12 +141,12 @@ def players_of(box, game):
     """Everyone in a box score as plain data; `dnp` is true for anyone who did not play."""
     out = []
     for t in box["players"]:
-        mine = game["home"] if t["team"] == game["home"]["abbr"] else game["away"]
+        mine = game["home"] if code(t["team"]) == game["home"]["abbr"] else game["away"]
         opp = game["away"] if mine is game["home"] else game["home"]
         for a in t["athletes"]:
             d = dict(zip(t["labels"], a["stats"]))
             played = not a["dnp"] and bool(a["stats"]) and num(d.get("MIN")) > 0
-            out.append({"id": a["id"], "name": a["name"], "team": t["team"], "opp": opp, "mine": mine, "game": game["id"], "dnp": not played,
+            out.append({"id": a["id"], "name": a["name"], "team": code(t["team"]), "opp": opp, "mine": mine, "game": game["id"], "dnp": not played,
                         "reason": (a.get("reason") or "").capitalize(), "starter": a["starter"], "pos": a.get("pos", ""),
                         **{k: num(d.get(k)) for k in ("MIN", "PTS", "REB", "AST", "STL", "BLK", "TO")},
                         "fg": d.get("FG", ""), "tp": d.get("3PT", ""), "ft": d.get("FT", "")})
@@ -185,9 +192,8 @@ def line(p):
     return ", ".join(bits)
 
 
-def full_line(p, with_team=False):
-    team = " (" + p["team"] + ")" if with_team else ""
-    return f"{p['name']}{team}: {line(p)} · {p['fg']}\u00a0FG"
+def full_line(p):
+    return f"{p['name']} ({p['team']}): {line(p)} · {p['fg']}\u00a0FG"
 
 
 def standout_text(p, kinds, games, plays):
@@ -288,15 +294,15 @@ def update_tracking(st, hits, names, day):
     return set(TRACKED) | set(auto)
 
 
-def dnp_text(pid, name, box, p=None):
-    """'LeBron James: DNP (Out, Knee)': ESPN's injury listing for the game, else the box score's own reason, else a plain DNP."""
+def dnp_text(pid, name, team, box, p=None):
+    """'LeBron James (PHI): DNP (Out, Knee)': ESPN's injury listing for the game, else the box score's own reason, else a plain DNP."""
     inj = (box or {}).get("injuries", {}).get(pid)
     if inj and inj.get("status"):
         reason = f"{inj['status']}, {inj['type']}" if inj.get("type") else inj["status"]
-        return f"{name}: DNP ({reason})"
+        return f"{name} ({team}): DNP ({reason})"
     if p and p.get("reason"):
-        return f"{name}: DNP ({p['reason']})"
-    return f"{name}: DNP"
+        return f"{name} ({team}): DNP ({p['reason']})"
+    return f"{name} ({team}): DNP"
 
 
 def game_notes(g, box, players, tracked, info):
@@ -310,14 +316,14 @@ def game_notes(g, box, players, tracked, info):
     if played:
         best = max(played, key=lambda p: (weight(p, kinds_of(p)), p["name"]))
         if best["id"] not in {p["id"] for p in mine}:
-            out.append(full_line(best, with_team=True))
+            out.append(full_line(best))
     teams = {g["home"]["abbr"], g["away"]["abbr"]}
     for pid in sorted(tracked, key=lambda x: list(TRACKED).index(x) if x in TRACKED else 999):  # the DNP lines come last, below every player who played
         p = here.get(pid)
         if p and not p["dnp"]:
             continue
         if p or info["teams"].get(pid) in teams:
-            out.append(dnp_text(pid, TRACKED.get(pid) or info["auto"].get(pid, pid), box, p))
+            out.append(dnp_text(pid, TRACKED.get(pid) or info["auto"].get(pid, pid), p["team"] if p else info["teams"][pid], box, p))
     return out
 
 
@@ -410,7 +416,7 @@ def _stat(e, name):
 
 def seeds_of(std):
     """{conference name: {team code: seed}}."""
-    return {c["name"]: {e["team"]["abbreviation"]: num(_stat(e, "playoffSeed")) for e in c["standings"]["entries"]} for c in std["children"]}
+    return {c["name"]: {code(e["team"]["abbreviation"]): num(_stat(e, "playoffSeed")) for e in c["standings"]["entries"]} for c in std["children"]}
 
 
 def standings_html(std, before=None):
@@ -421,7 +427,7 @@ def standings_html(std, before=None):
         rows, zones = [], []
         prev = (before or {}).get(c["name"])
         for e in sorted(c["standings"]["entries"], key=lambda e: num(_stat(e, "playoffSeed")) or 99):
-            seed, abbr = num(_stat(e, "playoffSeed")), e["team"]["abbreviation"]
+            seed, abbr = num(_stat(e, "playoffSeed")), code(e["team"]["abbreviation"])
             rows.append([seed, abbr, _stat(e, "overall"), _stat(e, "gamesBehind") if seed > 1 else "-", _stat(e, "streak"),
                          move(prev[abbr] - seed) if prev and abbr in prev else ""])
             zones.append("blue" if seed <= 6 else "lilac" if seed <= 10 else None)
@@ -628,7 +634,8 @@ def run(now, day, st, source):
             except Exception:
                 stats["failed"] += 1
                 continue
-            sched = [x for x in sched if {x["home"]["id"], x["away"]["id"]} == set(key)]
+            sched = [{**x, "home": {**x["home"], "abbr": code(x["home"]["abbr"])}, "away": {**x["away"], "abbr": code(x["away"]["abbr"])}}
+                     for x in sched if {x["home"]["id"], x["away"]["id"]} == set(key)]
             for x in sched:                                 # notes for every finished game of the series, kept in the state once made
                 if x["status"] != "STATUS_FINAL" or x["id"] in keep["series_notes"]:
                     continue
