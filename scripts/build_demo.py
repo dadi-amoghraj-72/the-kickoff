@@ -26,8 +26,8 @@ from kickoff.sources import espn_cricket  # noqa: E402
 
 _espn = espn_cricket.Source()
 from kickoff.sources import espn  # noqa: E402
-from kickoff import f1, nfl, tennis  # noqa: E402
-from kickoff.sources import espn_nfl, espn_tennis, feeds, jolpica  # noqa: E402
+from kickoff import f1, nba, nfl, tennis  # noqa: E402
+from kickoff.sources import espn_nba, espn_nfl, espn_tennis, feeds, jolpica  # noqa: E402
 from kickoff.envfile import load_env  # noqa: E402
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
@@ -86,6 +86,14 @@ if "--no-nfl" not in sys.argv:
             out["sections"].append({"id": "nfl", "title": "NFL", "html": got["html"]})
     except Exception as e:
         out["problems"].append(f"nfl ({type(e).__name__})")
+# NBA: free, no key, no Claude. Real data; nothing is saved (so every finished game of the last 60 hours counts as new).
+if "--no-nba" not in sys.argv:
+    try:
+        got = nba.run(datetime.now(timezone.utc), day, {}, espn_nba.Source())
+        if got["html"]:
+            out["sections"].append({"id": "nba", "title": "NBA", "html": got["html"]})
+    except Exception as e:
+        out["problems"].append(f"nba ({type(e).__name__})")
 if not out["sections"]:
     sys.exit("Nothing to show for this date. Problems: " + ", ".join(out["problems"]))
 banner = (f"Football preview built from real data for {render.nice_date(day.isoformat())}. "
