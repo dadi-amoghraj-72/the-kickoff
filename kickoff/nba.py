@@ -190,13 +190,6 @@ def full_line(p, with_team=False):
     return f"{p['name']}{team}: {line(p)} · {p['fg']}\u00a0FG"
 
 
-def result_of(p, games):
-    """'121-111 win over Minnesota' from the player's side."""
-    g = games[p["game"]]
-    mine, opp = p["mine"]["score"], p["opp"]["score"]
-    return f"{max(mine, opp)}-{min(mine, opp)} {'win over' if mine > opp else 'loss to'} {p['opp']['short']}" + (" in overtime" if g["ot"] else "")
-
-
 def standout_text(p, kinds, games, plays):
     text = f"{p['name']} ({p['team']}): {line(p)}"
     if "game-winner" in kinds:
@@ -204,7 +197,7 @@ def standout_text(p, kinds, games, plays):
         text += f", the game-winner with {clock}s left" if ":" not in clock else f", the game-winner with {clock} left"
     elif [k for k in kinds if k in TAGGED]:
         text += f" ({', '.join(k for k in kinds if k in TAGGED)})"
-    return f"{text}; {result_of(p, games)}"
+    return text
 
 
 STAT_KEYS = (("PTS", "pts"), ("REB", "reb"), ("AST", "ast"), ("STL", "stl"), ("BLK", "blk"))
@@ -333,6 +326,24 @@ def game_notes(g, box, players, tracked, info):
 def note_html(text):
     """A note line as HTML: the numbers of pts, reb, ast, stl and blk in the accent colour."""
     return re.sub(r"(\d+) (pts|reb|ast|stl|blk)\b", r'<span class="n">\1</span> \2', r.esc(text))
+
+
+GAME_COLOURS = 15   # one colour per game of the day (a full NBA night is at most 15 games); colours are defined in the stylesheet as .gc0 to .gc14
+
+
+def game_colours(games):
+    """{team code: colour number}: the games shown above, in their order, each get a colour and both of its teams share it."""
+    out = {}
+    for i, g in enumerate(games):
+        out[g["away"]["abbr"]] = out[g["home"]["abbr"]] = i % GAME_COLOURS
+    return out
+
+
+def paint(html, colours):
+    """Colour the team codes in a standings or Cup table that played in tonight's games: the code is wrapped in a coloured span, nothing else changes."""
+    for abbr, n in colours.items():
+        html = html.replace(f'<td class="">{abbr}</td>', f'<td class=""><span class="gc{n}">{abbr}</span></td>')
+    return html
 
 
 def day_label(d):
@@ -589,6 +600,7 @@ def run(now, day, st, source):
     stats["standouts"] = len(texts)
     info = {"teams": keep["teams"], "auto": {k: v["name"] for k, v in keep["auto"].items()}}
     html = ""
+    colours = {}
     live = [g for g in games.values() if g["status"] == "live"]   # on now: shown with the score so far, and as a final in the next edition
     stats["live"] = len(live)
     playoff_new = [g for g in new + live if g["phase"] == "playoffs"]
@@ -597,7 +609,8 @@ def run(now, day, st, source):
     if plain or plain_live:
         many_days = len({day_of(g) for g in plain + plain_live}) > 1
         items = [(g, game_notes(g, boxes[g["id"]], players[g["id"]], tracked, info) if g["id"] in boxes else []) for g in sorted(plain + plain_live, key=order_key)]
-        html += games_html(items, many_days, sum(1 for g in plain if underdog_win(g)))
+        html += games_html(items, many_days, sum(1 for g in plain + plain_live if underdog_win(g)))
+        colours = game_colours([g for g, _ in items])
     if playoff_new:                                         # one table per series that had a game finish (or is on now)
         seeds = {}
         try:                                                # the regular-season seeds of the two teams go beside their names
@@ -643,11 +656,11 @@ def run(now, day, st, source):
     stats["cup_new"] = len(cup_new)
     conf_of = {}
     if std and standings_ok(std):
-        html += "<h4>Standings</h4>" + standings_html(std, keep["seeds"])
+        html += "<h4>Standings</h4>" + paint(standings_html(std, keep["seeds"]), colours)
         keep["seeds"] = seeds_of(std)
         conf_of = {t: c.replace(" Conference", "") for c, ts in keep["seeds"].items() for t in ts}
     if cup_games and cup_new:                               # the Cup tables come only on days Cup group games are in the edition
-        html += "<h4>NBA Cup</h4>" + cup_html(cup_groups(cup_games), cup_games, conf_of)
+        html += "<h4>NBA Cup</h4>" + paint(cup_html(cup_groups(cup_games), cup_games, conf_of), colours)
     if new:
         reported += [g["id"] for g in new]
     keep["reported"] = reported[-400:]

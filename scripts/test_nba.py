@@ -129,7 +129,8 @@ texts, hits = nba.standouts(ALL, BYID, BOXES)
 check("independent: the standout hits equal a separate scan of the raw box scores (40 pts, triple-double, 20-20, 5 blocks, 5 steals, game-winner)", set(hits) >= raw_hits and len(set(hits) - raw_hits) <= 1, (set(hits) ^ raw_hits))
 check("the real standouts are Doncic (45 points, a guard with 15 rebounds), Wembanyama (43), Kessler (15 rebounds, a center) and Dunn (7 steals), best first",
       [t.split(" (")[0] for t in texts[:4]] == ["Luka Doncic", "Victor Wembanyama", "Walker Kessler", "Kris Dunn"] and len(texts) == 4, texts)
-check("a standout line gives the stat line and the result from the player's side (Dunn's team lost)", "Kris Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl; 124-112 loss to Warriors" in texts[3] and "131-125 win over Raptors" in texts[0], texts)
+check("a standout line is the name, team code and stat line only: no score or result (the games are just above)", texts[3] == "Kris Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl" and texts[0] == "Luka Doncic (LAL): 45 pts, 15 reb, 6 ast, 5 stl"
+      and not any(";" in t or " win over" in t or "loss to" in t or re.search(r"\d+-\d+", t) for t in texts), texts)
 check("no standout line repeats its own stat as a tag (no '40-point game' text)", not any("point game" in t or "blocks)" in t for t in texts))
 one = dict(wem, PTS=12, REB=10, AST=10, BLK=0)
 check("a triple-double is a standout and is named; a double-double is not; 20 points and 20 rebounds counts, 19 rebounds does not",
@@ -241,6 +242,27 @@ check("state: the 11 games are reported, underdogs saved, tracked players' teams
       and out["state"]["teams"]["1966"] == "PHI" and out["state"]["teams"]["3945274"] == "LAL" and out["state"]["seeds"]["Eastern Conference"]["PHI"] == 1)
 
 check("in the page the standouts list carries the highlights, and the colour rule exists", out["html"].count('<span class="hl">') >= 5 and ".standouts .hl { color: var(--gold)" in (ROOT / "kickoff" / "static" / "style.css").read_text())
+
+# ---- Game colours in the tables below ----
+shown = sorted([g for g in GAMES if g["id"] in [e["id"] for e in SBS["2026-11-01"]["events"]]], key=nba.order_key)
+sun = nba.run(NOW, TUE, {"reported": [e["id"] for e in SBS["2026-10-31"]["events"]]}, Saved())
+cols = nba.game_colours(shown)
+raw_teams = {t for e in SBS["2026-11-01"]["events"] for x in e["competitions"][0]["competitors"] for t in [x["team"]["abbreviation"]]}
+painted = re.findall(r'<span class="gc(\d+)">([A-Z]+)</span>', sun["html"])
+check("independent: the teams painted in the standings are exactly the 8 that played in tonight's 4 games (from the raw scoreboard), each once", len(painted) == 8 and {a for _, a in painted} == raw_teams and len({a for _, a in painted}) == 8, painted)
+pairs = {}
+for n, a in painted:
+    pairs.setdefault(n, set()).add(a)
+raw_pairs = {frozenset(x["team"]["abbreviation"] for x in e["competitions"][0]["competitors"]) for e in SBS["2026-11-01"]["events"]}
+check("both teams of a game share one colour, and each of the 4 games has its own colour: 4 colours, each used by exactly the two teams that played each other", len(pairs) == 4 and {frozenset(v) for v in pairs.values()} == raw_pairs, pairs)
+check("the colour follows the order of the games shown (Lakers game first = colour 0, then 76ers/Cavaliers/Spurs/Celtics order, then by tip-off)", cols["LAL"] == cols["TOR"] == 0 and cols["BOS"] == cols["ORL"] == 1 and len(set(cols.values())) == 4, cols)
+check("the colours are NOT in the games table above, only in the tables below", "gc" not in sun["html"].split("<h4>")[0])
+check("teams that did not play are not coloured: 22 of the 30 team codes stay plain in the standings", len(re.findall(r'<td class="">[A-Z]+</td>', sun["html"])) == 22, len(re.findall(r'<td class="">[A-Z]+</td>', sun["html"])))
+check("a run with no games above paints nothing: the standings come plain", 'class="gc' not in nba.run(NOW, TUE, {"reported": [g["id"] for g in GAMES]}, Saved())["html"])
+check("with more than 15 games the colours wrap round instead of failing", len(nba.game_colours([{"away": {"abbr": f"A{i}"}, "home": {"abbr": f"H{i}"}} for i in range(18)])) == 36 and nba.game_colours([{"away": {"abbr": f"A{i}"}, "home": {"abbr": f"H{i}"}} for i in range(18)])["A15"] == 0)
+check("paint() changes only the team cell of a listed team and nothing else", nba.paint('<td class="">PHI</td><td class="">DET</td><td class="n">6-1</td>', {"PHI": 3}) == '<td class=""><span class="gc3">PHI</span></td><td class="">DET</td><td class="n">6-1</td>')
+css2 = (ROOT / "kickoff" / "static" / "style.css").read_text()
+check("the stylesheet defines all 15 game colours, for dark and for light, with 15 different hues", all(f".gc{n} {{ --h:" in css2 for n in range(15)) and len(set(re.findall(r"\.gc\d+ \{ --h: (\d+);", css2))) == 15 and "hsl(var(--h) 78% 66%)" in css2 and "hsl(var(--h) 75% 30%)" in css2)
 
 # ---- Rhythm and state ----
 again = nba.run(NOW, MON, copy.deepcopy(out["state"]), Saved())

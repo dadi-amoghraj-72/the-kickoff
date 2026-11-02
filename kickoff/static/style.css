@@ -303,3 +303,23 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone.ser tr.sc .ws { font-size: 30px; font-weight: 800; color: var(--gold); }
 .nbaone.ser tr.sc .lab { margin: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .standouts .hl { color: var(--gold); font-weight: 600; }
+/* NBA: each game of the day gets a colour; both of its teams carry it in the tables below (15 hues a golden-angle step apart, so the first games of a night are far apart on the wheel; lighter on dark, darker on light) */
+.gc0 { --h: 30; }
+.gc1 { --h: 168; }
+.gc2 { --h: 305; }
+.gc3 { --h: 82; }
+.gc4 { --h: 220; }
+.gc5 { --h: 358; }
+.gc6 { --h: 135; }
+.gc7 { --h: 272; }
+.gc8 { --h: 50; }
+.gc9 { --h: 188; }
+.gc10 { --h: 325; }
+.gc11 { --h: 102; }
+.gc12 { --h: 240; }
+.gc13 { --h: 18; }
+.gc14 { --h: 155; }
+.gc0, .gc1, .gc2, .gc3, .gc4, .gc5, .gc6, .gc7, .gc8, .gc9, .gc10, .gc11, .gc12, .gc13, .gc14 { color: hsl(var(--h) 78% 66%); font-weight: 800; }
+@media (prefers-color-scheme: light) {
+  .gc0, .gc1, .gc2, .gc3, .gc4, .gc5, .gc6, .gc7, .gc8, .gc9, .gc10, .gc11, .gc12, .gc13, .gc14 { color: hsl(var(--h) 75% 30%); }
+}
