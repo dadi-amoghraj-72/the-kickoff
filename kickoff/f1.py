@@ -117,7 +117,7 @@ def results_table(caption, rows):
     """Race or sprint: position, driver, places gained, gap to the winner (or why out), points."""
     laps = int(rows[0]["laps"]) if rows and rows[0].get("laps") else 0
     body = [[x["position"], short_name(x["Driver"]), moved(x), _gap(x, laps), f"{int(float(x['points'])):02d}"] for x in rows]
-    return _tight(r.table(caption, [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body), (11, 37, 14, 22, 16), " race")
+    return _tight(r.table(f"{caption} Results", [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body), (11, 37, 14, 22, 16), " race")
 
 
 def best_time(row):
@@ -128,7 +128,7 @@ def best_time(row):
 
 def qualifying_table(rows):
     body = [[x["position"], short_name(x["Driver"]), *best_time(x)] for x in rows]
-    return _tight(r.table("Qualifying", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body), (12, 44, 16, 28))
+    return _tight(r.table("Qualifying Results", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body), (12, 44, 16, 28))
 
 
 def driver_standings_table(standings, rnd, limit=10, teams=None):
@@ -138,13 +138,13 @@ def driver_standings_table(standings, rnd, limit=10, teams=None):
     teams = teams or {}
     body = [[x["position"], short_name(x["Driver"]), abbr(teams.get(x["Driver"]["driverId"]) or (x.get("Constructors") or [{"name": ""}])[0]["name"]), int(float(x["points"]))]
             for x in rows[:limit]]
-    return _tight(r.table(f"Drivers' standings after round {rnd}: top {min(limit, len(rows))}", [("P", True), ("Driver", False), ("Team", False), ("Pts", True)], body), (12, 44, 20, 24)) if body else ""
+    return _tight(r.table(f"Drivers' standings: top {min(limit, len(rows))}", [("P", True), ("Driver", False), ("Team", False), ("Pts", True)], body), (12, 44, 20, 24)) if body else ""
 
 
 def constructor_standings_table(standings, rnd):
     rows = (standings or {}).get("ConstructorStandings") or []
     body = [[x["position"], team(x["Constructor"]["name"]), int(float(x["points"]))] for x in rows]
-    return _tight(r.table(f"Constructors' standings after round {rnd}", [("P", True), ("Team", False), ("Pts", True)], body), (12, 60, 28)) if body else ""
+    return _tight(r.table("Constructors' standings", [("P", True), ("Team", False), ("Pts", True)], body), (12, 60, 28)) if body else ""
 
 
 # ---- Round-up lines and standouts ----------------------------------------------------------------
