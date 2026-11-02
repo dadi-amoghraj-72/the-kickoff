@@ -262,7 +262,16 @@ check("a run with no games above paints nothing: the standings come plain", 'cla
 check("with more than 15 games the colours wrap round instead of failing", len(nba.game_colours([{"away": {"abbr": f"A{i}"}, "home": {"abbr": f"H{i}"}} for i in range(18)])) == 36 and nba.game_colours([{"away": {"abbr": f"A{i}"}, "home": {"abbr": f"H{i}"}} for i in range(18)])["A15"] == 0)
 check("paint() changes only the team cell of a listed team and nothing else", nba.paint('<td class="">PHI</td><td class="">DET</td><td class="n">6-1</td>', {"PHI": 3}) == '<td class=""><span class="gc3">PHI</span></td><td class="">DET</td><td class="n">6-1</td>')
 css2 = (ROOT / "kickoff" / "static" / "style.css").read_text()
-check("the stylesheet defines all 15 game colours, for dark and for light, with 15 different hues", all(f".gc{n} {{ --h:" in css2 for n in range(15)) and len(set(re.findall(r"\.gc\d+ \{ --h: (\d+);", css2))) == 15 and "hsl(var(--h) 78% 66%)" in css2 and "hsl(var(--h) 75% 30%)" in css2)
+dark_css = re.findall(r"^\.gc(\d+) \{ color: (#[0-9A-F]{6}); font-weight: 700; \}$", css2, re.M)
+light_css = re.findall(r"^  \.gc(\d+) \{ color: (#[0-9A-F]{6}); \}$", css2, re.M)
+import colorsys  # noqa: E402
+hls = lambda hx: colorsys.rgb_to_hls(*(int(hx[i:i + 2], 16) / 255 for i in (1, 3, 5)))  # noqa: E731
+check("the 15 game colours are locked: the stylesheet and the code's palette hold the same 15 hex values for dark and light, all different", [c for _, c in dark_css] == list(nba.PALETTE_DARK) and [c for _, c in light_css] == list(nba.PALETTE_LIGHT)
+      and len(set(nba.PALETTE_DARK)) == 15 and len(set(nba.PALETTE_LIGHT)) == 15 and nba.GAME_COLOURS == 15 == len(dark_css), (len(dark_css), len(light_css)))
+check("pastel only: every dark-theme colour is light and soft (lightness 75-82%, saturation at most 60%), no bright shades; the light-theme set is muted (saturation at most 45%)",
+      all(0.75 <= hls(c)[1] <= 0.82 and hls(c)[2] <= 0.60 for c in nba.PALETTE_DARK) and all(hls(c)[2] <= 0.45 for c in nba.PALETTE_LIGHT), [(c, [round(x, 2) for x in hls(c)]) for c in nba.PALETTE_DARK][:3])
+check("the 15 pastel colours are kept apart: no two dark-theme hues are closer than 15 degrees", all(min(abs(hls(a)[0] - hls(b)[0]) % 1, 1 - abs(hls(a)[0] - hls(b)[0]) % 1) * 360 >= 15 for i_, a in enumerate(nba.PALETTE_DARK) for b in nba.PALETTE_DARK[i_ + 1:]))
+check("every game number from 0 to 14 has a colour, so a 15-game night can never run out", all(f".gc{n} " in css2 for n in range(15)))
 
 # ---- Rhythm and state ----
 again = nba.run(NOW, MON, copy.deepcopy(out["state"]), Saved())

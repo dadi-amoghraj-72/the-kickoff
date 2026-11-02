@@ -328,7 +328,9 @@ def note_html(text):
     return re.sub(r"(\d+) (pts|reb|ast|stl|blk)\b", r'<span class="n">\1</span> \2', r.esc(text))
 
 
-GAME_COLOURS = 15   # one colour per game of the day (a full NBA night is at most 15 games); colours are defined in the stylesheet as .gc0 to .gc14
+GAME_COLOURS = 15   # one colour per game of the day (a full NBA night is at most 15 games); locked pastel palette, defined in the stylesheet as .gc0 to .gc14
+PALETTE_DARK = ('#E3A6A0', '#C8EAB8', '#A0D0E3', '#E4B8EA', '#E3C1A0', '#B8EABC', '#A0B5E3', '#EAB8DC', '#E3DCA0', '#B8EAD0', '#A6A0E3', '#EAB8C8', '#D0E3A0', '#B8EAE4', '#C1A0E3')    # on the dark theme (soft pastels)
+PALETTE_LIGHT = ('#783B36', '#4B7836', '#366578', '#703678', '#785636', '#36783B', '#364B78', '#783665', '#787036', '#367856', '#3B3678', '#78364B', '#657836', '#367870', '#563678')   # on the light theme (the same hues, muted and deeper so they read on a pale page)
 
 
 def game_colours(games):
