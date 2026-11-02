@@ -155,12 +155,28 @@ check("men's tables have 5 set columns, women's 3", men.count("<col ") == 6 and 
 check("the tie-break points sit small on the loser's side of that set only (the 6-7(5) set: 6 over 7 with a small 5 beside the 6)", "6<sup>5</sup>" in men and men.count("<sup>") == 1, men)
 check("winner rows are marked for bold, with the seed in brackets", '<tr class="w"><td class="pl">(2) A. Zverev</td>' in men, men[:400])
 chk = tennis.stage_table("mens-singles", "R1", [ret, wo])
-check("a retirement and a walkover are tagged on the loser's row, in the empty set cells (colspan 2 after three sets, 5 for a walkover)", chk.count('class="tag" colspan="2">ret.<') == 1 and chk.count('class="tag" colspan="5">w/o<') == 1, chk)
+check("a retirement and a walkover are tagged on the loser's row, in the first empty set cell (a walkover has all five empty)", chk.count('<td class="tag">ret.</td><td class="s"></td></tr>') == 1 and chk.count('<td class="tag">w/o</td>' + '<td class="s"></td>' * 4 + '</tr>') == 1, chk)
 full = {**ret, "status": "retired", "sets": [{"w": 6, "l": 4, "tb": None, "won": True}] * 5}
 check("a retirement in a full five-set match has no empty cell, so the tag goes after the name", '<span class="muted">ret.</span>' in tennis.stage_table("mens-singles", "R1", [full]) and 'class="tag"' not in tennis.stage_table("mens-singles", "R1", [full]))
 evil = {**sample[0], "winner": {**sample[0]["winner"], "short": "<script>alert(1)</script>"}}
 check("player names are escaped", "<script>" not in tennis.stage_table("mens-singles", "F", [evil]) and "&lt;script&gt;" in tennis.stage_table("mens-singles", "F", [evil]))
 check("the standouts list has bold labels", '<strong>Top Seed Out:</strong>' in tennis._list(["Top Seed Out: x."]) and '<strong>Withdrawal:</strong>' in tennis._list(["Withdrawal: y (BBC Sport)"]))
+
+
+# ---- Round progress in the title ----
+for key in ("ao", "rg"):
+    done = tennis.progress_of(MS[key])
+    check(f"{key}: in the finished Slam every round of both draws is complete, so the fixed draw sizes (64, 32, 16, 8, 4, 2, 1) match the real data",
+          all(done.get((d, st)) == n for d in tennis.DRAW for st, n in tennis.PER_DRAW.items()), done)
+NOWP = utc(2026, 1, 27, 6, 0)
+raw_done = {}
+for g in AO["groupings"]:
+    for c in g["competitions"]:
+        st = tennis.STAGES.get(c["round"]["displayName"])
+        if st and c["status"]["type"]["name"] in tennis.COMPLETED and tennis.utc(c["date"]) <= NOWP:
+            raw_done[(g["grouping"]["slug"], st)] = raw_done.get((g["grouping"]["slug"], st), 0) + 1
+check("progress at a chosen time equals a count made straight from the raw ESPN data (matches started by then)", tennis.progress_of(MS["ao"], NOWP) == raw_done and 0 < raw_done[("mens-singles", "QF")] < 4, (tennis.progress_of(MS["ao"], NOWP), raw_done))
+check("progress text: played while the round is going, complete when all are done", tennis.progress_text("QF", 3) == "3/4 played" and tennis.progress_text("R4", 8) == "8/8 complete" and tennis.progress_text("F", 1) == "1/1 complete")
 
 
 # ---- The whole block, with a fake source ----
@@ -180,7 +196,7 @@ class FakeSource:
 
 
 out = tennis.run(NOW_END, {}, FakeSource())
-check("run: the finished Slam's last days appear: heading, tables, standouts", "<h3>Australian Open</h3>" in out["html"] and "Final</th>" in out["html"] and "Milestone:" in out["html"] and out["stats"]["shown"] == len(shown_all), out["stats"])
+check("run: the finished Slam's last days appear: heading, tables, standouts", "<h3>Australian Open</h3>" in out["html"] and "Final<span class=\"prog\">1/1 complete</span></th>" in out["html"] and "Milestone:" in out["html"] and out["stats"]["shown"] == len(shown_all), out["stats"])
 check("run: it reports the Slam's stage and that it is a major event (quarter-finals or later)", out["slams"] == [{"name": "Australian Open", "stage": "F", "major": True}], out["slams"])
 check("run: shown matches are remembered, and the next run shows nothing new", len(out["state"]["reported"]) == len(shown_all) and tennis.run(NOW_END, out["state"], FakeSource())["html"] == "")
 early = tennis.run(utc(2026, 1, 19, 12, 0), {}, FakeSource())
@@ -193,6 +209,10 @@ second = tennis.run(utc(2026, 1, 23, 12, 0), mid["state"], FakeSource())
 check("run: day by day, a later edition shows only matches not shown before", set(mid["state"]["reported"]).isdisjoint(set(second["state"]["reported"]) - set(mid["state"]["reported"])) and second["stats"]["shown"] > 0 and len(second["state"]["reported"]) == len(mid["state"]["reported"]) + second["stats"]["shown"], (mid["stats"], second["stats"]))
 down = tennis.run(NOW_END, {"reported": ["keep"]}, FakeSource(broken=True))
 check("run: a broken source leaves tennis out, says so, and keeps the state", down["html"] == "" and down["stats"]["failed"] == 1 and down["state"]["reported"] == ["keep"] and down["slams"] == [])
+prog = tennis.run(NOWP, {}, FakeSource())
+qf_done = raw_done[("mens-singles", "QF")]
+check("run: the page titles carry each round's progress, from the same count (the quarter-finals still being played, the last 16 complete)",
+      f'Men&#x27;s Singles · Quarter-finals<span class="prog">{qf_done}/4 played</span>' in prog["html"] and 'Fourth Round<span class="prog">8/8 complete</span>' in prog["html"], re.findall(r'colspan="\d">([^<]*)<', prog["html"]))
 check("run: no Slam running gives nothing", tennis.run(NOW_END, {}, FakeSource(events=[]))["html"] == "")
 
 # ---- Withdrawals ----

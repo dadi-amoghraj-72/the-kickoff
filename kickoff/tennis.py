@@ -21,6 +21,7 @@ TOP_SEED = 10
 STAGES = {"Round 1": "R1", "Round 2": "R2", "Round 3": "R3", "Round 4": "R4", "Quarterfinal": "QF", "Semifinal": "SF", "Final": "F"}
 ORDER = ["R1", "R2", "R3", "R4", "QF", "SF", "F"]
 STAGE_NAME = {"R1": "First Round", "R2": "Second Round", "R3": "Third Round", "R4": "Fourth Round", "QF": "Quarter-finals", "SF": "Semi-finals", "F": "Final"}
+PER_DRAW = {"R1": 64, "R2": 32, "R3": 16, "R4": 8, "QF": 4, "SF": 2, "F": 1}  # matches in each round of a 128-player singles draw
 REACHES = {"R4": "the quarter-finals", "QF": "the semi-finals", "SF": "the final"}  # what winning that round means
 DRAW = {"mens-singles": "Men's Singles", "womens-singles": "Women's Singles"}
 LABELS = ("Top Seed Out", "Comeback", "Milestone", "Withdrawal")
@@ -201,7 +202,22 @@ def _games(s, winner_row):
     return f"{mine}{sup}"
 
 
-def stage_table(draw, stage, matches):
+def progress_of(matches, now=None):
+    """{(draw, stage): matches finished so far}, counting only matches that have started by `now`."""
+    done = {}
+    for m in matches:
+        if now is None or m["date"] <= now:
+            done[(m["draw"], m["stage"])] = done.get((m["draw"], m["stage"]), 0) + 1
+    return done
+
+
+def progress_text(stage, done):
+    """'2/4 played', or '4/4 complete' once the round is finished."""
+    total = PER_DRAW[stage]
+    return f"{done}/{total} {'complete' if done >= total else 'played'}"
+
+
+def stage_table(draw, stage, matches, done=None):
     """One table for a draw and round: two rows per match (winner above), a column for each possible set. A retirement or walkover is
     tagged in the empty set cells of the loser's row, or after his name when every set cell is used."""
     n = 5 if draw == "mens-singles" else 3
@@ -215,18 +231,18 @@ def stage_table(draw, stage, matches):
             tag = {"retired": "ret.", "walkover": "w/o"}.get(m["status"]) if not winner_row else None
             cells = "".join(f'<td class="s">{_games(m["sets"][i], winner_row)}</td>' for i in range(played))
             after = ""
-            if tag and played < n:
-                cells += f'<td class="tag" colspan="{n - played}">{tag}</td>'
+            if tag and played < n:  # the tag sits in the first empty set cell and may spill over the empty ones beside it
+                cells += f'<td class="tag">{tag}</td>' + "".join('<td class="s"></td>' for _ in range(n - played - 1))
             else:
                 cells += "".join('<td class="s"></td>' for _ in range(n - played))
                 after = f' <span class="muted">{tag}</span>' if tag else ""
             rows.append(f'<tr class="{"w" if winner_row else "l"}"><td class="pl">{r.esc(name(p))}{after}</td>{cells}</tr>')
-    title = f"{DRAW[draw]} · {STAGE_NAME[stage]}"
-    return (f'<div class="tennis"><table><colgroup>{cols}</colgroup><thead><tr><th class="tt" colspan="{n + 1}">{r.esc(title)}</th></tr></thead>'
+    sub = f'<span class="prog">{progress_text(stage, done)}</span>' if done is not None else ""
+    return (f'<div class="tennis"><table><colgroup>{cols}</colgroup><thead><tr><th class="tt" colspan="{n + 1}">{r.esc(f"{DRAW[draw]} · {STAGE_NAME[stage]}")}{sub}</th></tr></thead>'
             f'<tbody>{"".join(rows)}</tbody></table></div>')
 
 
-def event_html(event, new):
+def event_html(event, new, progress=None):
     html = f"<h3>{r.esc(event['name'])}</h3>"
     for draw in DRAW:
         mine = [m for m in new if m["draw"] == draw]
@@ -235,7 +251,7 @@ def event_html(event, new):
         for stage in reversed(ORDER):
             part = [m for m in mine if m["stage"] == stage]
             if part:
-                html += stage_table(draw, stage, part)
+                html += stage_table(draw, stage, part, (progress or {}).get((draw, stage)))
         html += _list(seeds_out(mine) + comebacks(mine) + milestones(mine, event))
     return html
 
@@ -260,7 +276,7 @@ def run(now, st, source, fetch_news=None):
         stats["matches"] += len(matches)
         new = pick(matches, now, reported)
         if new:
-            html += event_html(e, new)
+            html += event_html(e, new, progress_of(matches, now))
             reported += [m["id"] for m in new]
             stats["shown"] += len(new)
     if fetch_news:
