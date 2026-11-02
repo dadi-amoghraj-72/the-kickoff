@@ -68,6 +68,28 @@ def game_colour_map(matches, key):
     return out
 
 
+def series_table(title, left, right, left_n, right_n, word, rows, cls=""):
+    """A series-style table (the house pattern for anything played in several games: NBA playoff series, two-legged ties, Test series): a title row,
+    the two sides' names, their running score in large numbers either side of `word` ('series', 'aggregate'), then one row per game made in
+    advance. rows: [{"mid": text between the scores, "a": left score or None, "b": right score or None, "win": "a" | "b" | None,
+    "notes": [html lines under the game], "pre": True for a game still to play (one centred line)}]."""
+    body = []
+    for x in rows:
+        notes = x.get("notes") or []
+        if x.get("pre"):
+            body.append(f'<tr class="one end pre"><td class="mid" colspan="3">{esc(x["mid"])}</td></tr>')
+            continue
+        w = lambda side: " w" if x.get("win") == side else ""  # noqa: E731
+        body.append(f'<tr class="one{"" if notes else " end"}"><td class="aw{w("a")}">{esc(x["a"])}</td><td class="mid">{esc(x["mid"])}</td><td class="hm{w("b")}">{esc(x["b"])}</td></tr>')
+        if notes:
+            body.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl"><span class="t">{n}</span></div>' for n in notes) + "</td></tr>")
+    head = (f'<tr><th class="tt" colspan="3">{esc(title)}</th></tr>'
+            f'<tr class="sh"><th class="aw" colspan="3"><span class="tn">{esc(left)}</span><span class="tn r">{esc(right)}</span></th></tr>'
+            f'<tr class="sc"><th colspan="3"><span class="ws">{esc(left_n)}</span><span class="lab">{esc(word)}</span><span class="ws">{esc(right_n)}</span></th></tr>')
+    return (f'<div class="nflsb nbaone ser{" " + cls if cls else ""}"><table><colgroup><col style="width:30%"><col style="width:40%"><col style="width:30%"></colgroup>'
+            f'<thead>{head}</thead><tbody>{"".join(body)}</tbody></table></div>')
+
+
 def move(n):
     """Places moved since the last table shown: ▲n up, ▼n down, – level."""
     return "–" if not n else (f"▲{n}" if n > 0 else f"▼{-n}")

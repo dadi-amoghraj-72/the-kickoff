@@ -113,7 +113,36 @@ def potm_html(entry):
     return '<span class="potm">Player of the match: ' + ", ".join(f"<strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])})" for p in people) + "</span>"
 
 
-def result_html(m, entry=None):
+SERIES_FORMATS = ("test", "odi")   # D: series tables for Test and ODI series (add "t20" to widen it to T20I series)
+FORMAT_LABEL = {"test": "Test", "odi": "ODI", "t20": "T20I"}
+
+
+def series_html(rows, fmt):
+    """A bilateral series as a series-style table (render.series_table) for one format: the two teams (the first listed match's order) with
+    their wins either side of the word 'series', and a row for every match of the series made in advance: its number and date, both scores
+    and the result under it once played (the winner in bold), 'Starts at ...' for a match still to come. rows: espn_cricket.parse_series."""
+    label = FORMAT_LABEL.get(fmt, fmt)
+    games = [g for g in rows or [] if g["format"] == label]
+    if not games:
+        return ""
+    left, right = (t["name"] for t in games[0]["teams"])
+    wins = {left: 0, right: 0}
+    body = []
+    for g in games:
+        when = datetime.strptime(g["date"], "%b %d %Y")
+        day = f"{when.day} {when:%b}"
+        if g["result"]:
+            sc = {t["name"]: t["score"] for t in g["teams"]}
+            won = next((n for n in (left, right) if g["result"].startswith(n + " won")), None)
+            if won:
+                wins[won] += 1
+            body.append({"mid": f"{g['n']} {label} · {day}", "a": sc.get(left, ""), "b": sc.get(right, ""), "win": "a" if won == left else "b" if won == right else None, "notes": [r.esc(g["result"])]})
+        else:
+            body.append({"mid": f"{g['n']} {label} · {day}" + (f" · {g['starts']}" if g["starts"] else ""), "pre": True})
+    return r.series_table(f"{left} v {right} · {label} series", left, right, wins[left], wins[right], "series", body, "sm")
+
+
+def result_html(m, entry=None, series=""):
     teams, rest = title(m)
     names = r.esc(teams)
     for t in m.get("teams") or []:
@@ -128,10 +157,20 @@ def result_html(m, entry=None):
     full = bool(entry) and scorecard_tier(m) < 3
     return (f'<li>{flag}<span class="cm">{names}</span><span class="cs">{scores}</span>'
             f'<span class="cr">{live}{r.esc(m.get("status") or "")}</span><span class="ct">{r.esc(rest)}</span>{potm_html(entry)}'
-            f'{full_scorecard_html(entry["innings"]) if full else ""}{standouts_html(entry["standouts"], inline=True) if full else ""}</li>')
+            f'{full_scorecard_html(entry["innings"]) if full else ""}{standouts_html(entry["standouts"], inline=True) if full else ""}{series}</li>')
 
 
-def table_html(label, rows):
+def league_colours(matches):
+    """{team name, lower case: colour number} for the matches of one league shown above its table: one colour per match, shared by both teams
+    (the 15 locked pastels of the stylesheet; a league plays at most a few matches a day, so they never run out)."""
+    out = {}
+    for i, m in enumerate(matches):
+        for t in m.get("teams") or []:
+            out[strip_women(t).lower()] = i % 15
+    return out
+
+
+def table_html(label, rows, colours=None):
     """A league's points table, shown after its results. '' when the rows do not add up (played = won + lost + tied + no result,
     positions 1..n in order): better no table than a wrong one. A Ties column appears only when some team has a tie."""
     if not rows or [x["pos"] for x in rows] != list(range(1, len(rows) + 1)) or any(x["p"] != x["w"] + x["l"] + x["t"] + x["nr"] for x in rows):
@@ -139,10 +178,13 @@ def table_html(label, rows):
     ties = any(x["t"] for x in rows)
     columns = [("#", True), ("Team", False), ("P", True), ("W", True), ("L", True)] + ([("T", True)] if ties else []) + [("NR", True), ("Pts", True), ("NRR", True)]
     body = [[x["pos"], x["team"], x["p"], x["w"], x["l"]] + ([x["t"]] if ties else []) + [x["nr"], x["pts"], f"{x['nrr']:+.3f}" if x["nrr"] is not None else ""] for x in rows]
-    return f'<div class="pts">{r.table(f"{label} table", columns, body)}</div>'
+    html = r.table(f"{label} table", columns, body)
+    if colours:  # the teams that played in the matches above, in pair colours (match the table's team by full name)
+        html = r.paint(html, {x["team"]: colours[strip_women(x["name"]).lower()] for x in rows if strip_women(x["name"]).lower() in colours})
+    return f'<div class="pts">{html}</div>'
 
 
-def results_html(picked, cards=None, tables=None):
+def results_html(picked, cards=None, tables=None, series=None):
     """Matches grouped under International, Women's international, and each league, in priority order. '' if none.
     tables: {league label: points table html}, shown straight after that league's results."""
     groups, order = {}, []
@@ -154,7 +196,7 @@ def results_html(picked, cards=None, tables=None):
         groups[label].append(m)
     out = ""
     for label in order:
-        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m, (cards or {}).get(m['id'])) for m in groups[label])}</ul>{(tables or {}).get(label, '')}"
+        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m, (cards or {}).get(m['id']), (series or {}).get(m['id'], '')) for m in groups[label])}</ul>{(tables or {}).get(label, '')}"
     return out
 
 
@@ -341,10 +383,11 @@ def standouts_html(items, inline=False):
 
 # ---- The whole cricket block, within the daily call budget -------------------------------------
 
-def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card=None, espn_table=None):
+def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card=None, espn_table=None, espn_series=None):
     """Build the cricket section. get_matches() -> (matches, calls used); get_scorecard(id) -> (card, calls used);
     affordable(used) -> how many scorecards fit. espn_card(match) -> a free scorecard or None: tried first, costs no calls.
     espn_table(match) -> the league's points table rows or None.
+    espn_series(match) -> every match of the match's bilateral series (espn_cricket.parse_series) or None: a Test or ODI series gets a series table under its first match.
     st: {"seen": [match ids], "status": {id: last status}}.
     Returns {"html", "state", "used", "stats"}; html is '' when there is no cricket to report."""
     matches, used = get_matches()
@@ -394,8 +437,16 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
     for m in picked:  # a points table for each league that played, once per league
         label = m["class"]["label"]
         if espn_table and m["class"]["kind"] == "league" and label not in tables:
-            tables[label] = table_html(label, espn_table(m))
-    html = results_html(picked, shown_cards, tables) + standouts_html(top)
+            tables[label] = table_html(label, espn_table(m), league_colours([x for x in picked if x["class"]["label"] == label]))
+    series, done = {}, set()
+    for m in picked:  # one series table per Test or ODI series, under the first of its matches shown
+        key = (frozenset(strip_women(t).lower() for t in m.get("teams") or []), m.get("matchType"))
+        if espn_series and m.get("matchType") in SERIES_FORMATS and len(key[0]) == 2 and key not in done:
+            done.add(key)
+            table = series_html(espn_series(m), m["matchType"])
+            if table:
+                series[m["id"]] = table
+    html = results_html(picked, shown_cards, tables, series) + standouts_html(top)
     if html and skipped:
         html += (f'<p class="muted">Standouts were checked in {checked} of {len(picked)} matches: the free cricket data allows only '
                  f"about eight scorecards a day when ESPN's pages are not available.</p>")

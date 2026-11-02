@@ -202,6 +202,42 @@ def get_team_games(team_id, domestic_league, upcoming=False, today=None):
     return sorted(games.values(), key=lambda g: g["kickoff"])
 
 
+def _leg_score(c):
+    """(goals, penalty shoot-out goals or None, aggregate or None) from one competitor of a team-schedule event, where the score is a dict."""
+    sc = c.get("score")
+    if isinstance(sc, dict):
+        return _score({"score": sc.get("displayValue")}), sc.get("shootoutScore"), sc.get("aggregateScore")
+    return _score(c), None, None
+
+
+def get_tie_legs(match, league=CHAMPIONS_LEAGUE):
+    """Every leg of the knockout tie a match belongs to, oldest first, from one team's schedule: the played legs with their scores (and a
+    shoot-out when there was one) and any leg still to come. A final is a tie of one match. Each leg: {"id", "kickoff", "home", "away"
+    (id, name, abbr), "home_score", "away_score", "completed", "status" (ESPN's name, e.g. STATUS_FULL_TIME, STATUS_FINAL_AET, STATUS_FINAL_PEN),
+    "pens": (home, away) or None, "agg": {team id: ESPN's aggregate} or None, "note": ESPN's note}."""
+    team, opp = match["home"]["id"], match["away"]["id"]
+    kick = parse_time(match["kickoff"])
+    year = kick.year if kick.month >= 7 else kick.year - 1
+    data = get_json(SCHEDULE.format(league=league, team=team), {"season": year})
+    legs = []
+    for e in data.get("events", []):
+        comp = e["competitions"][0]
+        sides = {c["homeAway"]: c for c in comp["competitors"]}
+        ids = {sides["home"]["team"]["id"], sides["away"]["team"]["id"]}
+        when = parse_time(e["date"])
+        note = next((n.get("headline") or n.get("text") or "" for n in comp.get("notes", [])), "")
+        if ids != {team, opp} or abs((when - kick).days) > 75 or not ("Leg" in note or when.date() == kick.date() or "penalties" in note.lower() or "extra time" in note.lower()):
+            continue
+        hs, hp, ha = _leg_score(sides["home"])
+        as_, ap, aa = _leg_score(sides["away"])
+        team_of = lambda s: {"id": sides[s]["team"]["id"], "name": sides[s]["team"]["displayName"], "abbr": sides[s]["team"].get("abbreviation", "")}  # noqa: E731
+        legs.append({"id": e["id"], "kickoff": e["date"], "home": team_of("home"), "away": team_of("away"), "home_score": hs, "away_score": as_,
+                     "completed": comp["status"]["type"]["state"] == "post", "status": comp["status"]["type"]["name"],
+                     "pens": (int(hp), int(ap)) if hp is not None and ap is not None else None,
+                     "agg": {sides["home"]["team"]["id"]: ha, sides["away"]["team"]["id"]: aa} if ha is not None else None, "note": note})
+    return sorted(legs, key=lambda g: g["kickoff"])
+
+
 def get_match_details(event_id, league="all"):
     """Goals (with assists) and red cards from a match summary. Works for any competition."""
     data = get_json(SUMMARY.format(league=league), {"event": event_id})

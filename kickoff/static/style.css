@@ -102,8 +102,9 @@ section > :last-child { margin-bottom: 0; }
 .tag svg { width: 16px; height: 16px; }
 
 /* Standouts, ranked */
-.standouts { margin: 0 0 14px; padding-left: 1.3em; }
-.standouts li { margin-bottom: 6px; padding-left: 4px; }
+.standouts { margin: 0 0 14px; padding-left: 0; list-style: none; }
+.standouts li { margin-bottom: 6px; padding-left: 20px; }
+.standouts li::before { content: "\25C6"; display: inline-block; width: 20px; margin-left: -20px; padding-left: 4px; box-sizing: border-box; font-size: 9px; color: var(--gold); vertical-align: middle; }   /* the house gold diamond bullet, on every standouts list */
 
 /* Tables: numbers right-aligned, zone bars on the left edge of a row */
 .table-wrap { margin: 14px 0 6px; overflow-x: auto; }
@@ -192,7 +193,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket .dayflag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .cricket .potm { font-size: 15px; color: var(--muted); }
 .cricket .potm strong { color: var(--chalk); font-weight: 600; }
-.cricket ul.standouts.in { margin: 2px 0 6px; padding-left: 18px; font-size: 15px; line-height: 1.5; }
+.cricket ul.standouts.in { margin: 2px 0 6px; padding-left: 0; font-size: 15px; line-height: 1.5; }
 .cricket .cd { color: var(--muted); font-size: 15px; line-height: 1.5; }
 .cricket .cd strong { color: var(--chalk); font-weight: 600; }
 
@@ -345,3 +346,5 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .dlist .pl::before { content: "\25C6"; flex: 0 0 20px; box-sizing: border-box; height: 22px; padding-left: 4px; display: flex; align-items: center; font-size: 9px; line-height: 1; color: var(--gold); }
 .dlist .pl .t { flex: 1 1 auto; min-width: 0; }
 .dlist .n { color: var(--gold); font-weight: 600; }
+.nbaone.ser.sm td.aw, .nbaone.ser.sm td.hm { font-size: 18px; }
+.nbaone.ser.sm td.mid { font-size: 13px; }

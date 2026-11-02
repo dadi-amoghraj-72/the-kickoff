@@ -27,7 +27,7 @@ if "--live" in sys.argv:
     day = now.astimezone(__import__("zoneinfo").ZoneInfo("Asia/Singapore")).date()
     start = espn.window_start(day)
     out = cricket.run(now, start, {"cards": state.load("cricket").get("cards", {})}, src.get_matches, src.get_scorecard, src.scorecards_affordable,
-                       espn_card=_espn.card, espn_table=_espn.table)
+                       espn_card=_espn.card, espn_table=_espn.table, espn_series=_espn.series)
     cricket.persist_cards(out["state"]["cards"])  # keep what was bought, so re-running never pays twice
     note = "Built live: match list from CricketData.org, scorecards from ESPN's pages (CricketData scorecards only as a fallback)."
 else:
@@ -42,7 +42,7 @@ else:
         return card, 40
     live_espn = "--espn" in sys.argv
     out = cricket.run(now, start, {}, lambda: (matches, 30), get_card, lambda used: 1 if used < 50 else 0,
-                      **({"espn_card": _espn.card, "espn_table": _espn.table} if live_espn else {}))
+                      **({"espn_card": _espn.card, "espn_table": _espn.table, "espn_series": _espn.series} if live_espn else {}))
     note = ("Built from the saved match list for 2 November 2026, with scorecards and league tables read live from ESPN." if live_espn
             else "Built from saved real data for 2 November 2026: only the NZ v India match has its scorecard checked.")
 if not out["html"]:

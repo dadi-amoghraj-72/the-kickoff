@@ -156,6 +156,15 @@ check("the table block: caption, numbers right-aligned, signed three-place NRR, 
 tied = [dict(x) for x in rows]
 tied[0].update(t=1, p=3, pts=5)
 check("a Ties column appears when a team has tied", "<th class=\"n\">T</th>" in ck.table_html("WBBL", tied))
+import re as _re  # noqa: E402
+two = [{"teams": ["Sydney Sixers Women", "Melbourne Stars Women"]}, {"teams": ["Perth Scorchers Women", "Adelaide Strikers Women"]}]
+cols = ck.league_colours(two)
+tp = ck.table_html("WBBL", rows, cols)
+spans = _re.findall(r'<span class="gc(\d)">([A-Z]+)</span>', tp)
+check("independent: the four teams of the two matches above the table are coloured by their official abbreviations (SS, MS, PS, AS), in two colours, once each, nobody else", sorted(a for _, a in spans) == ["AS", "MS", "PS", "SS"] and len({c for c, _ in spans}) == 2, spans)
+check("both teams of a match share a colour (SS with MS, PS with AS)", dict((a, c) for c, a in spans)["SS"] == dict((a, c) for c, a in spans)["MS"] != dict((a, c) for c, a in spans)["PS"] == dict((a, c) for c, a in spans)["AS"])
+check("a table with no colours given is unchanged, and a team name that does not match any row is simply ignored", 'class="gc' not in ck.table_html("WBBL", rows) and 'class="gc' not in ck.table_html("WBBL", rows, ck.league_colours([{"teams": ["Nobody FC", "Nowhere United"]}])))
+check("the women's suffix is ignored when matching: 'Sydney Sixers' and 'Sydney Sixers Women' are the same team", ck.league_colours([{"teams": ["Sydney Sixers Women", "Brisbane Heat"]}]) == {"sydney sixers": 0, "brisbane heat": 0})
 broken = [dict(x) for x in rows]
 broken[2]["w"] = 5
 check("a table whose rows do not add up, is out of order, or is empty is left out, not shown wrong",
@@ -231,6 +240,57 @@ check("their standouts (Noor Ahmad's five-for) are in the closing list, with the
 check("the closing list holds only the no-scorecard matches' standouts, not NZ v India's", "Adam Milne" not in h[h.index("<h3>Standouts</h3>"):] and "Shreyas Iyer" not in h[h.index("<h3>Standouts</h3>"):])
 no_potm = ck.run(NOW, START, {}, lambda: ([nzind], 17), paid, src.scorecards_affordable, espn_card=lambda m: {"scorecard": inn})["html"]
 check("when no Player of the match is known, no line appears", "Player of the match" not in no_potm)
+
+# ---- Series pages and series tables (the real NZ v India series page: five T20Is played, five ODIs still to come) ----
+import copy as _cp  # noqa: E402
+import re as _re3  # noqa: E402
+SER = (FX / "espn_cricket_series_nz_ind.html").read_text()
+srows = ec.parse_series(SER)
+txt3 = lambda h: _re3.sub(r"\s+", " ", _re3.sub(r"<[^>]+>", " ", h)).strip()  # noqa: E731
+raw_results = _re3.findall(r'"note":"((?:India|New Zealand) won by [^"]+)"', SER)
+check("independent: the page's own embedded data lists five finished results (3 India, 2 New Zealand), and the parser finds exactly those five, in order, plus five ODIs with no result",
+      len(srows) == 10 and [g["result"] for g in srows if g["result"]] == list(dict.fromkeys(raw_results))[:5] and sum(g["result"] is not None for g in srows) == 5
+      and [g["format"] for g in srows] == ["T20I"] * 5 + ["ODI"] * 5, [(g["n"], g["format"], g["result"]) for g in srows])
+check("the parser reads each match's teams, abbreviations and scores (1st T20I: New Zealand 225/4, India 230/6) and its venue and date; the 5th T20I lists India first",
+      (srows[0]["teams"][0]["name"], srows[0]["teams"][0]["abbr"], srows[0]["teams"][0]["score"], srows[0]["teams"][1]["score"], srows[0]["venue"], srows[0]["date"]) == ("New Zealand", "NZ", "225/4", "230/6", "Christchurch", "Oct 22 2026") and srows[4]["teams"][0]["name"] == "India")
+check("a match still to come has no scores and carries its start line", srows[5]["teams"][0]["score"] == "" and srows[5]["starts"] == "Starts at 15:00 local time" and srows[5]["result"] is None and srows[5]["venue"] == "Auckland")
+check("a page with no series list gives an empty list, never an error", ec.parse_series("<html>nothing</html>") == [] and ec.parse_series("") == [])
+t20 = ck.series_html(srows, "t20")
+tt3 = txt3(t20)
+wins = {"India": sum(1 for g in srows if g["result"] and g["result"].startswith("India won")), "New Zealand": sum(1 for g in srows if g["result"] and g["result"].startswith("New Zealand won"))}
+check("independent: counting the raw result lines, India won 3 and New Zealand 2 of the T20Is; the table header shows 'New Zealand v India · T20I series', New Zealand 2 on the left, India 3 on the right, the word 'series' between",
+      wins == {"India": 3, "New Zealand": 2} and "New Zealand v India · T20I series" in tt3 and "2 series 3" in tt3, tt3[:200])
+check("five rows made from the page (the 5th T20I's scores are put in the right columns although India is listed first): 1st T20I 225/4 v 230/6, 5th T20I New Zealand 195/3 on the left and India 191/8 on the right", t20.count('<tr class="one') == 5 and "225/4 1st T20I · 22 Oct 230/6" in tt3 and "195/3 5th T20I · 1 Nov 191/8" in tt3, tt3)
+check("each played match shows its result line under it and the winning side in bold: 3 matches won by India (right), 2 by New Zealand (left)", t20.count('class="hm w"') == 3 and t20.count('class="aw w"') == 2 and tt3.count("won by") == 5)
+odi = ck.series_html(srows, "odi")
+ot = txt3(odi)
+check("the ODI series, not started: 0 series 0, five rows made in advance each with its date and 'Starts at 15:00 local time', no scores", "0 series 0" in ot and odi.count('class="one end pre"') == 5 and ot.count("Starts at 15:00 local time") == 5 and "1st ODI · 4 Nov" in ot and "5th ODI · 15 Nov" in ot)
+check("a format with no matches in the page gives nothing", ck.series_html(srows, "test") == "" and ck.series_html([], "odi") == "" and ck.series_html(None, "odi") == "")
+tied_rows = _cp.deepcopy(srows[:5])
+tied_rows[0]["result"] = "Match tied"
+tsv = ck.series_html(tied_rows, "t20")
+check("a tied match counts for neither side and has no bold side: 4 bold sides in the five rows, and the series stands 2-2 (the tied match was one of India's three wins)", tsv.count('class="aw w"') + tsv.count('class="hm w"') == 4 and "2 series 2" in txt3(tsv), txt3(tsv)[:120])
+odi_match = _cp.deepcopy(nzind)
+odi_match["matchType"] = "odi"
+odi_match["name"] = odi_match["name"].replace("5th T20I", "1st ODI")
+fed = []
+r_odi = ck.run(NOW, START, {}, lambda: ([odi_match], 17), paid, src.scorecards_affordable, espn_card=lambda m: None, espn_series=lambda m: (fed.append(m["id"]) or srows))
+check("run(): a Test or ODI result gets its series table under it (once), built from the series feed", r_odi["html"].count('class="nflsb nbaone ser sm"') == 1 and "5th ODI · 15 Nov" in txt3(r_odi["html"]) and fed == [odi_match["id"]])
+r_t20 = ck.run(NOW, START, {}, lambda: ([nzind], 17), paid, src.scorecards_affordable, espn_card=lambda m: None, espn_series=lambda m: srows)
+check("a T20I series gets no series table (D asked for Tests and ODIs), and neither does a run without a series feed", 'class="nflsb' not in r_t20["html"] and 'class="nflsb' not in ck.run(NOW, START, {}, lambda: ([odi_match], 17), paid, src.scorecards_affordable, espn_card=lambda m: None)["html"])
+two = [_cp.deepcopy(odi_match), _cp.deepcopy(odi_match)]
+two[1]["id"] = "second-odi"
+two[1]["name"] = odi_match["name"].replace("1st ODI", "2nd ODI")
+calls = []
+r_two = ck.run(NOW, START, {}, lambda: (two, 17), paid, src.scorecards_affordable, espn_card=lambda m: None, espn_series=lambda m: (calls.append(1) or srows))
+check("two matches of the same series on one day get one series table, and the feed is asked once", r_two["html"].count('class="nflsb nbaone ser sm"') == 1 and len(calls) == 1, (r_two["html"].count("ser sm"), len(calls)))
+r_fail = ck.run(NOW, START, {}, lambda: ([odi_match], 17), paid, src.scorecards_affordable, espn_card=lambda m: None, espn_series=lambda m: None)
+check("when the series feed has nothing the result still shows without a table", "nbaone" not in r_fail["html"] and "India" in r_fail["html"])
+page_calls = []
+fsrc = ec.Source(lambda url: (page_calls.append(url) or (SER if "scores/series" in url else SCORES)), pause=0)
+sr = fsrc.series(nzind)
+check("the live source finds the series id from the day's scores page, fetches that series' page once, and returns its 10 matches; a second call uses the cache", sr is not None and len(sr) == 10 and any(u.endswith("/cricket/scores/series/24469") for u in page_calls) and (fsrc.series(nzind) is not None) and sum("scores/series" in u for u in page_calls) == 1, page_calls)
+check("a source that fails returns None, not an error", ec.Source(lambda url: 1 / 0, pause=0).series(nzind) is None)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

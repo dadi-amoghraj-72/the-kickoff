@@ -141,7 +141,8 @@ def run(day, client=None, st=None, now=None, demo=False):
         cl_box = guard("Champions League round-up", round_up, "Champions League", champions.COMPETITION, cl_matches,
                        espn.CHAMPIONS_LEAGUE, rows[espn.CHAMPIONS_LEAGUE], "night") or ""
         cl_rows = rows[espn.CHAMPIONS_LEAGUE]
-        football += champions.section_html(cl_matches, cl_rows, None, cl_box, tables.before_of(saved_tables.get(espn.CHAMPIONS_LEAGUE)), game_colours(cl_matches))
+        football += champions.section_html(cl_matches, cl_rows, None, cl_box, tables.before_of(saved_tables.get(espn.CHAMPIONS_LEAGUE)), game_colours(cl_matches),
+                                           legs_fn=espn.get_tie_legs, goals_fn=lambda leg_id: espn.get_match_details(leg_id, espn.CHAMPIONS_LEAGUE))
         if cl_rows and champions.in_league_phase(cl_matches):   # remembered so the next league-phase table can show who moved
             new.setdefault("tables", {})[espn.CHAMPIONS_LEAGUE] = {"published": day.isoformat(), "rows": tables.signature(cl_rows)}
 

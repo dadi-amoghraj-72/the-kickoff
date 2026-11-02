@@ -222,6 +222,45 @@ def parse_table(page):
     return rows or None
 
 
+# ---- A series page: every match of a bilateral series, played and still to come ----------------------
+
+SERIES_URL = BASE + "/cricket/scores/series/{series}"
+SERIES_HEADER = re.compile(r"^(\d+(?:st|nd|rd|th)) (T20I|ODI|Test),\s+(?:\([^)]*\)\s+)?at (.+), ([A-Z][a-z]{2} \d{1,2} \d{4})$")
+
+
+def parse_series(page):
+    """The matches of a series page, in the order the page lists them: [{"n": '1st', "format": 'ODI', "venue", "date": 'Nov 4 2026',
+    "teams": [{"name", "abbr", "score"}, {...}], "result": 'India won by 4 wkts' or None, "starts": 'Starts at 15:00 local time' or None}].
+    The page prints every match's header line twice (before the teams and before the result), which is how a match is delimited; a match
+    with no result yet carries a 'Starts at ...' line instead. Anything not in that pattern is skipped rather than guessed."""
+    tokens = [t.strip() for t in re.sub(r"<[^>]+>", "|", _clean(page)).split("|") if t.strip()]
+    out, i = [], 0
+    while i < len(tokens):
+        m = SERIES_HEADER.match(tokens[i])
+        if not m or (i and tokens[i - 1] == tokens[i]):
+            i += 1
+            continue
+        j, teams = i + 1, []
+        while j < len(tokens) and tokens[j] != tokens[i]:
+            t = tokens[j]
+            if re.search(r"\d", t):
+                if teams and not t.startswith("("):
+                    teams[-1]["score"] = (teams[-1]["score"] + " " + t).strip()
+            elif re.fullmatch(r"[A-Z]{2,5}", t) and teams and not teams[-1]["abbr"]:
+                teams[-1]["abbr"] = t
+            else:
+                teams.append({"name": t, "abbr": "", "score": ""})
+            j += 1
+        if j >= len(tokens) or len(teams) != 2:
+            i += 1
+            continue
+        after = tokens[j + 1] if j + 1 < len(tokens) else ""
+        out.append({"n": m.group(1), "format": m.group(2), "venue": m.group(3), "date": m.group(4), "teams": teams,
+                    "result": None if after.startswith("Starts at") or not after else after, "starts": after if after.startswith("Starts at") else None})
+        i = j + 1
+    return out
+
+
 # ---- Fetching ----------------------------------------------------------------------------------------
 
 def _get(url):
@@ -253,6 +292,18 @@ class Source:
             page = self._page(game["scorecard"]) if game else None
             innings = parse_scorecard(page) if page else None
             return {"scorecard": innings, **parse_meta(page)} if innings else None
+        except Exception:
+            return None
+
+    def series(self, match):
+        """Every match of the series this match belongs to (see parse_series), or None."""
+        try:
+            game = self._game(match, False)
+            if not game:
+                return None
+            if ("series", game["series"]) not in self.tables:
+                self.tables[("series", game["series"])] = parse_series(self._page(SERIES_URL.format(series=game["series"])))
+            return self.tables[("series", game["series"])] or None
         except Exception:
             return None
 

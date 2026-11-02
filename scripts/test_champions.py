@@ -98,6 +98,59 @@ t2 = champions.table_html(rows, None, cm)
 sp = _re.findall(r'<span class="gc(\d)">([^<]+)</span>', t2)
 check("teams of tonight's matches are coloured in pairs: 4 teams, two colours, nobody else", len(sp) == 4 and {n for _, n in sp} == {rows[i]["short"] for i in (0, 17, 3, 30)} and len({c for c, _ in sp}) == 2, sp)
 
+# ---- Knockout ties as series tables (last season's real Arsenal v Leverkusen round of 16 and the final, saved from ESPN) ----
+import re as _re2  # noqa: E402
+from kickoff.sources import espn as _espn  # noqa: E402
+KS = json.loads((FIX / "espn_cl_ko_schedule.json").read_text())
+KSUM = json.loads((FIX / "espn_cl_ko_summaries.json").read_text())
+LEG2 = json.loads((FIX / "espn_cl_ko_20260317.json").read_text())["events"][0]
+FINAL = json.loads((FIX / "espn_cl_final_20260530.json").read_text())["events"][0]
+_old_get = _espn.get_json
+
+
+def _fake_get(url, params=None, **kw):
+    if "schedule" in url:
+        return KS
+    if "summary" in url:
+        return KSUM[params["event"]]
+    raise AssertionError(url)
+
+
+_espn.get_json = _fake_get
+m2 = _espn.parse_match(LEG2, _espn.CHAMPIONS_LEAGUE)
+legs = _espn.get_tie_legs(m2)
+raw_ties = [e for e in KS["events"] if {c["team"]["abbreviation"] for c in e["competitions"][0]["competitors"]} == {"ARS", "B04"}]
+check("independent: ESPN's own schedule has exactly two Arsenal v Leverkusen matches (11 and 17 March 2026) and the code finds those two legs, in date order", len(raw_ties) == 2 and [g["id"] for g in legs] == [e["id"] for e in sorted(raw_ties, key=lambda e: e["date"])], [g["id"] for g in legs])
+check("the first leg was at Leverkusen (1-1) and the second at Arsenal (2-0), as the raw scores say", (legs[0]["home"]["abbr"], legs[0]["home_score"], legs[0]["away_score"]) == ("B04", 1, 1) and (legs[1]["home"]["abbr"], legs[1]["home_score"], legs[1]["away_score"]) == ("ARS", 2, 0), legs)
+agg = champions.aggregate(legs)
+esp = {k: v for k, v in legs[1]["agg"].items()}
+check("independent: the aggregate counted from the legs (Arsenal 3, Leverkusen 1) equals ESPN's own aggregateScore on the second leg", {k: float(v) for k, v in agg.items()} == esp and sorted(agg.values()) == [1, 3], (agg, esp))
+tie = champions.tie_html("round-of-16", legs, lambda leg_id: _espn.get_match_details(leg_id, _espn.CHAMPIONS_LEAGUE)["goals"])
+tt = _re2.sub(r"\s+", " ", _re2.sub(r"<[^>]+>", " ", tie)).strip()
+check("the tie table: title 'Round of 16', the first leg's hosts (Bayer 04 Leverkusen) on the left with their aggregate 1, the word 'aggregate', Arsenal's 3 on the right", tt.startswith("Round of 16 ") and "1 aggregate 3" in tt and tt.index("Leverkusen") < tt.index("Arsenal"), tt[:160])
+check("two game rows with the matchday as played in Europe (11 March, 17 March), the scores 1-1 and 0-2 in the left/right order (left = Leverkusen), the winner of the second leg in bold", "1st leg · 11 Mar" in tt and "2nd leg · 17 Mar" in tt and tie.count('<tr class="one') == 2 and tie.count('class="hm w"') == 1 and tie.count('class="aw w"') == 0 and "1 1st leg · 11 Mar 1" in tt and "0 2nd leg · 17 Mar 2" in tt, tt[:300])
+raw_goals = sum(1 for d in KSUM[legs[0]["id"]]["header"]["competitions"][0]["details"] if d.get("scoringPlay")) + sum(1 for d in KSUM[legs[1]["id"]]["header"]["competitions"][0]["details"] if d.get("scoringPlay"))
+check("independent: the scorers under the legs are every scoring play of the two raw summaries (4 goals), the 1-1 leg's goals listed under their own teams", raw_goals == 4 and tie.count('class="p"') == 4, (raw_goals, tie.count('class="p"')))
+first_only = champions.tie_html("round-of-16", legs[:1], None)
+ft_ = _re2.sub(r"\s+", " ", _re2.sub(r"<[^>]+>", " ", first_only))
+check("after the first leg only: the aggregate is that leg's score (1 aggregate 1) and the second leg's row is already there, marked 'to be scheduled' when no date is known", "1 aggregate 1" in ft_ and first_only.count("pre") == 1 and "2nd leg · to be scheduled" in ft_, ft_)
+sched_leg = dict(legs[1], completed=False, home_score=0, away_score=0, kickoff="2026-03-17T20:00Z")
+upcoming = _re2.sub(r"\s+", " ", _re2.sub(r"<[^>]+>", " ", champions.tie_html("round-of-16", [legs[0], sched_leg], None)))
+check("a second leg still to play shows its date and kick-off in Singapore time (17 March 20:00 UTC is 4:00am on 18 March)", "2nd leg · 18 Mar, 4:00am SGT" in upcoming, upcoming)
+fm = _espn.parse_match(FINAL, _espn.CHAMPIONS_LEAGUE)
+fl = _espn.get_tie_legs(fm)
+ftie = champions.tie_html("final", fl, None)
+fts = _re2.sub(r"\s+", " ", _re2.sub(r"<[^>]+>", " ", ftie))
+raw_final = FINAL["competitions"][0]["competitors"]
+check("independent: the final is one match, 1-1 after extra time, Paris Saint-Germain winning the shoot-out 4-3 by the raw feed; the table says 'final', not 'aggregate', and shows a Penalties row 4-3", fl[0]["pens"] is not None and sorted(fl[0]["pens"]) == [3, 4] and len(fl) == 1 and "final" in fts and "aggregate" not in fts and "Penalties" in fts and ftie.count('<tr class="one') == 2, fts[:200])
+check("the winning shoot-out side is in bold on the Penalties row (PSG, the home team in the final)", ftie.count('class="aw w"') + ftie.count('class="hm w"') >= 1)
+_espn.get_json = _old_get
+sec = champions.section_html([m2], rows, None, "", legs_fn=lambda m: legs, goals_fn=lambda i: {"goals": []})
+check("in the Champions League block a knockout match gets its tie table and no separate scoreboard line", 'class="nflsb nbaone ser"' in sec and "<ul class=\"scores\">" not in sec and "aggregate" in sec)
+check("without a schedule feed (legs_fn None) the old scoreboard line is shown, and so it is when the feed fails or finds nothing", "<ul class=\"scores\">" in champions.section_html([m2], rows) and "<ul class=\"scores\">" in champions.section_html([m2], rows, legs_fn=lambda m: 1 / 0) and "<ul class=\"scores\">" in champions.section_html([m2], rows, legs_fn=lambda m: []))
+lp = [x for x in wed][:2]
+check("league-phase matches are untouched: with a feed available they still get the scoreboard lines and no tie table", 'class="nflsb' not in champions.section_html(lp, rows, legs_fn=lambda m: legs) and champions.section_html(lp, rows, legs_fn=lambda m: legs).count("<li>") == 2)
+
 # ---- Bold team names ----
 check("bold_names bolds both clubs, wherever they appear",
       r.bold_names("Como beat Manchester United. Como led.", ("Como", "Manchester United")) ==
