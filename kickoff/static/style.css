@@ -213,3 +213,18 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .pts.f1 th:nth-child(n+3), .pts.f1 td:nth-child(n+3) { padding-left: 9px; }
 .cricket p.fow { font-size: 14px; line-height: 1.5; margin: 8px 0 4px; }
 .f1story { margin: 0 0 12px; line-height: 1.55; }
+
+/* Tennis: each match is two rows (winner above), one column per set */
+.tennis { margin: 14px 0 6px; }
+.tennis table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 14px; }
+.tennis th.tt { text-align: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--text); padding: 10px 8px 8px; }
+.tennis td { padding: 4px 3px; border-bottom: 0; white-space: normal; vertical-align: middle; }
+.tennis td.pl { padding-left: 8px; overflow-wrap: anywhere; }
+.tennis td.s { text-align: center; color: var(--muted); }
+.tennis tr.w td.pl { font-weight: 700; }
+.tennis tr.w td.s { color: var(--text); }
+.tennis tr.l { border-bottom: 1px solid var(--hairline); }
+.tennis tr.l td { padding-bottom: 7px; }
+.tennis tr.w td { padding-top: 7px; }
+.tennis sup { font-size: 9px; margin-left: 1px; }
+.tennis td.tag { text-align: left; color: var(--muted); padding-left: 4px; white-space: nowrap; }
