@@ -38,6 +38,13 @@ CUP_SCAN = (date(2026, 10, 20), date(2026, 12, 20))   # the Cup's group stage an
 CUP_HOME = ("Quarterfinals", "Semifinals")            # Cup rounds that are played in a home arena (group games and the final are not)
 
 
+NAME_FIX = {"LA Clippers": "Los Angeles Clippers"}   # ESPN calls only this team "LA"; every other team is City + nickname, so the Lakers' neighbour follows suit
+
+
+def team_name(name):
+    return NAME_FIX.get(name, name)
+
+
 # ---- Games ----------------------------------------------------------------------------------------
 
 def parse_game(e):
@@ -46,7 +53,7 @@ def parse_game(e):
     c, t = e["competitions"][0], e["status"]["type"]
     status = "final" if t["name"] == "STATUS_FINAL" else {"in": "live", "pre": "scheduled"}.get(t["state"], "other")
     sides = {x["homeAway"]: x for x in c["competitors"]}
-    side = lambda x: {"id": x["team"]["id"], "abbr": x["team"]["abbreviation"], "name": x["team"]["displayName"], "short": x["team"]["shortDisplayName"],  # noqa: E731
+    side = lambda x: {"id": x["team"]["id"], "abbr": x["team"]["abbreviation"], "name": team_name(x["team"]["displayName"]), "short": x["team"]["shortDisplayName"],  # noqa: E731
                       "score": int(x["score"]) if status in ("final", "live") and str(x.get("score", "")).isdigit() else None,
                       "record": next((rec["summary"] for rec in x.get("records", []) if rec.get("type", rec.get("name")) in ("total", "overall")), "")}
     headline = next((n.get("headline", "") for n in c.get("notes", [])), "")
@@ -455,8 +462,8 @@ def series_html(g0, sched, notes_by_game, seeds=None):
                 mid = f"G{n} · " + ("–" if over else "if necessary" if n >= 5 else "to be scheduled")
             rows.append(f'<tr class="one end pre"><td class="mid" colspan="3">{r.esc(mid)}</td></tr>')
     seed = lambda t: (seeds or {}).get(t["abbr"])  # noqa: E731
-    left = (f'({seed(top)})\u00a0' if seed(top) else "") + top.get("name", top["short"])
-    right = bot.get("name", bot["short"]) + (f'\u00a0({seed(bot)})' if seed(bot) else "")
+    left = (f'({seed(top)})\u00a0' if seed(top) else "") + team_name(top.get("name", top["short"]))
+    right = team_name(bot.get("name", bot["short"])) + (f'\u00a0({seed(bot)})' if seed(bot) else "")
     head = (f'<tr><th class="tt" colspan="3">{r.esc(rnd)}</th></tr>'
             f'<tr class="sh"><th class="aw" colspan="3"><span class="tn">{r.esc(left)}</span><span class="tn r">{r.esc(right)}</span></th></tr>'
             f'<tr class="sc"><th colspan="3"><span class="ws">{wins[top["id"]]}</span><span class="lab">series</span><span class="ws">{wins[bot["id"]]}</span></th></tr>')
