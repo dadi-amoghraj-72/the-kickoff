@@ -138,7 +138,7 @@ tr.mine td:nth-child(2) { font-weight: 700; }
 .scores li { display: grid; grid-template-columns: 1fr 3.6em 1fr; column-gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--hairline); }
 .scores .h { text-align: right; }
 .scores .s { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--gold); }
-.scores .gh, .scores .ga { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.scores .gh, .scores .ga { font-size: 14px; color: var(--muted); line-height: 1.5; }
 .scores .gh { grid-column: 1; text-align: right; }
 .scores .ga { grid-column: 3; }
 .scores .mine { font-weight: 700; }
@@ -185,50 +185,157 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket .cm strong { font-weight: 700; }
 .cricket .cs { font-variant-numeric: tabular-nums; }
 .cricket .cr { color: var(--gold); font-weight: 600; font-size: 15px; }
-.cricket .ct { color: var(--muted); font-size: 14px; }
+.cricket .ct { color: var(--muted); font-size: 15px; }
 .cricket .dayflag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.cricket .potm { font-size: 14px; color: var(--muted); }
+.cricket .potm { font-size: 15px; color: var(--muted); }
 .cricket .potm strong { color: var(--chalk); font-weight: 600; }
-.cricket ul.standouts.in { margin: 2px 0 6px; padding-left: 18px; font-size: 14px; line-height: 1.5; }
-.cricket .cd { color: var(--muted); font-size: 14px; line-height: 1.5; }
+.cricket ul.standouts.in { margin: 2px 0 6px; padding-left: 18px; font-size: 15px; line-height: 1.5; }
+.cricket .cd { color: var(--muted); font-size: 15px; line-height: 1.5; }
 .cricket .cd strong { color: var(--chalk); font-weight: 600; }
 
 /* Full cricket scorecard */
 .cricket .inn { margin: 10px 0 2px; font-size: 17px; }
-.cricket table.sc { font-size: 14px; }
+.cricket table.sc { font-size: 15px; }
 .cricket table.sc td.name { white-space: normal; min-width: 7em; }
-.cricket table.sc .dis { display: block; color: var(--muted); font-size: 13px; line-height: 1.3; }
+.cricket table.sc .dis { display: block; color: var(--muted); font-size: 14px; line-height: 1.3; }
 .cricket table.sc tr.sum td { font-weight: 600; background: var(--pitch); }
 .cricket table.sc th, .cricket table.sc td { padding: 5px 3px; }
 .cricket table.sc th:first-child, .cricket table.sc td:first-child { padding-left: 6px; }
-.cricket table.sc th { font-size: 11px; letter-spacing: 0; }
-.pts table { font-size: 14px; }
+.cricket table.sc th { font-size: 12px; letter-spacing: 0; }
+.pts table { font-size: 16px; }
 .pts th, .pts td { padding: 7px 4px; }
-.pts th { font-size: 11px; letter-spacing: 0; }
+.pts th { font-size: 12px; letter-spacing: 0; }
 .pts th:first-child, .pts td:first-child { padding-left: 8px; }
-.pts.f1 table { font-size: 13px; width: 100%; max-width: 520px; table-layout: fixed; }
+.pts.f1 table { font-size: 15px; width: 100%; max-width: 520px; table-layout: fixed; }
 .pts.f1 th:last-child, .pts.f1 td:last-child { padding-right: 16px; }
-.pts.f1 th.tt { text-align: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--text); padding: 10px 3px 8px 8px; }
+.pts.f1 th.tt { text-align: center; font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 3px 8px 8px; }
 .pts.f1 th, .pts.f1 td { padding-left: 3px; padding-right: 3px; }
 .pts.f1 th:nth-child(n+3), .pts.f1 td:nth-child(n+3) { padding-left: 9px; }
-.cricket p.fow { font-size: 14px; line-height: 1.5; margin: 8px 0 4px; }
+.cricket p.fow { font-size: 15px; line-height: 1.5; margin: 8px 0 4px; }
 .f1story { margin: 0 0 12px; line-height: 1.55; }
 
 /* Tennis: each match is two rows (winner above), one column per set */
 .tennis { margin: 14px 0 6px; }
-.tennis table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 14px; }
-.tennis th.tt { white-space: normal; text-align: center; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--text); padding: 10px 8px 8px; }
+.tennis table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 16px; }
+.tennis th.tt { white-space: normal; text-align: center; font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 8px 8px; }
 .tennis td { padding: 4px 3px; border-bottom: 0; white-space: normal; vertical-align: middle; }
 .tennis td.pl { padding-left: 8px; overflow-wrap: anywhere; }
 .tennis td.s { text-align: center; color: var(--muted); }
 .tennis tr.w td.pl { font-weight: 700; }
-.tennis tr.w td.s { color: var(--text); }
+.tennis tr.w td.s { color: var(--chalk); }
 .tennis tr.l { border-bottom: 1px solid var(--hairline); }
 .tennis tr.l td { padding-bottom: 7px; }
 .tennis tr.w td { padding-top: 7px; }
-.tennis sup { font-size: 9px; margin-left: 1px; }
+.tennis sup { font-size: 10px; margin-left: 1px; }
 .tennis td.tag { text-align: left; color: var(--muted); padding-left: 0; white-space: nowrap; overflow: visible; }
-.tennis th.tt .prog { display: block; margin-top: 2px; font-weight: 400; font-size: 12px; color: var(--muted); }
+.tennis th.tt .prog { display: block; margin-top: 2px; font-weight: 400; font-size: 14px; color: var(--muted); }
+
+/* NFL: two rows per game (away above home), a white house marks the home team, a thicker line between kickoff groups, YTP in the middle of a game not yet played */
+.nflsb { margin: 14px 0 6px; }
+.nflsb table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 16px; }
+.nflsb th.tt { white-space: normal; text-align: center; font-size: 18px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 12px 8px 10px; }
+.nflsb th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 14px; color: var(--muted); }
+.nflsb td { padding: 4px 3px; border-bottom: 0; vertical-align: middle; }
+.nflsb td.tm { padding-left: 10px; padding-right: 8px; white-space: normal; }
+.nflsb td.sc { text-align: right; color: var(--muted); padding-right: 6px; }
+.nflsb td.ytp { text-align: center; padding-right: 3px; font-size: 15px; font-weight: 600; letter-spacing: 0.08em; }
+.nflsb td.ot { text-align: left; font-size: 13px; padding-left: 4px; color: var(--muted); }
+.nflsb tr.w td.tm, .nflsb tr.w td.sc { font-weight: 700; color: var(--chalk); }
+.nflsb tr.h { border-bottom: 1px solid var(--hairline); }
+.nflsb tr.h td { padding-bottom: 8px; }
+.nflsb tr.a td { padding-top: 8px; }
+.nflsb tr.gap { border-bottom: 2px solid var(--muted); }
+.nflsb tr.gap td { padding: 0; height: 2px; }
+.nflsb svg.home { color: var(--chalk); vertical-align: -1px; margin-left: 2px; }
+.nflsb .rec { font-size: 13px; font-weight: 400; color: var(--muted); white-space: nowrap; }
+.pts.f1.nfl th.tt { font-size: 16px; padding: 12px 8px 10px; }
+.pts.f1.nfl td:nth-child(2) { font-weight: 600; }
+.pts.f1.nfl.div td:first-child { font-weight: 700; }
+.pts.f1.nfl.div td:nth-child(2) { font-weight: 400; }
+.pts.f1.nfl tr.sub td { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); background: rgba(255, 255, 255, 0.04); }
+.pts.f1.nfl .new, .new { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); margin-left: 2px; }
+.pts.f1.nfl.st thead tr:nth-child(2) { display: none; }
+.pts.f1.nfl.div th:first-child, .pts.f1.nfl.div td:first-child { padding-left: 14px; }
+.pts.f1.nfl.po th:first-child, .pts.f1.nfl.po td:first-child { text-align: center; padding-left: 3px; }
+.pts.f1.nfl.po th:last-child, .pts.f1.nfl.po td:last-child { text-align: center; padding-left: 3px; }
+.pts.f1.nfl tr.bye td { color: var(--gold); font-weight: 700; }
+.nflsb .dog { color: var(--chalk); font-weight: 700; margin-left: 1px; }
+.nflsb th.tt .prog .dog { font-size: 15px; }
+.nbaone td { padding: 5px 4px; }
+.nbaone td.aw { text-align: right; }
+.nbaone td.mid { text-align: center; color: var(--muted); white-space: nowrap; font-size: 13px; }
+.nbaone td.hm { text-align: left; }
+.nbaone td.w { font-weight: 700; color: var(--chalk); }
+.pts.f1.nba th.tt { font-size: 16px; padding: 12px 8px 10px; }
+.pts.f1.nba td:nth-child(2) { font-weight: 600; }
+.nflsb tr.tag td { padding: 10px 10px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-align: center; }
+.nflsb tr.note td { padding: 0 10px 10px; font-size: 13px; white-space: normal; overflow-wrap: anywhere; }
+.nflsb tr.note .pl { color: var(--chalk); }
+.nbaone tr.end td { border-bottom: 1px solid var(--hairline); }
+.nbaone tr.pre td { color: var(--muted); }
+.nbaone.ser th { padding: 6px 4px 8px; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--chalk); font-weight: 600; }
+.nbaone.ser th.aw { text-align: left; padding-left: 10px; }
+.nbaone.ser th.hm { text-align: right; padding-right: 10px; }
+.nbaone.ser th.mid { text-align: center; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.nbaone.ser .ws { color: var(--gold); font-size: 16px; }
+.nbaone.ser td.aw { text-align: left; padding-left: 12px; }
+.nbaone.ser td.hm { text-align: right; padding-right: 12px; }
+.nflsb .pl .n { color: var(--gold); font-weight: 600; }
+.nbaone td.aw, .nbaone td.hm { white-space: normal; line-height: 1.25; }
+/* NBA: bigger type (the tables are what D checks the games and series with) */
+.nbaone table { font-size: 16px; }
+.nbaone td { padding: 7px 4px; }
+.nbaone td.mid { font-size: 18px; font-weight: 700; color: var(--chalk); padding-left: 2px; padding-right: 2px; }
+.nbaone td.aw, .nbaone td.hm { font-size: 15px; }
+.nflsb tr.note td { font-size: 14px; padding: 2px 10px 12px; }
+.nflsb tr.note .pl { display: flex; align-items: flex-start; padding-top: 5px; line-height: 1.35; }
+.nflsb tr.note .pl::before { content: "\25C6"; flex: 0 0 16px; box-sizing: border-box; height: 19px; padding-left: 3px; display: flex; align-items: center; font-size: 8px; line-height: 1; color: var(--gold); }
+.nflsb tr.note .pl .t { flex: 1 1 auto; min-width: 0; }
+.nflsb tr.tag td { font-size: 12px; }
+.nbaone.ser td.aw, .nbaone.ser td.hm { font-size: 24px; font-weight: 600; padding-top: 9px; padding-bottom: 6px; }
+.nbaone.ser td.aw.w, .nbaone.ser td.hm.w { color: var(--chalk); font-weight: 800; }
+.nbaone.ser td.aw:not(.w), .nbaone.ser td.hm:not(.w) { color: var(--muted); }
+.nbaone.ser td.mid { font-size: 14px; font-weight: 400; color: var(--muted); }
+.nbaone.ser th.sh .tn, .nbaone.ser tr.sh th .tn { display: inline-block; width: 50%; font-size: 17px; font-weight: 700; color: var(--chalk); }
+.nbaone.ser tr.sh th .tn.r { text-align: right; }
+.nbaone.ser tr.sh th { text-align: left; padding: 8px 10px 2px; white-space: normal; }
+.nbaone.ser tr.sc th { text-align: center; padding: 2px 4px 10px; }
+.nbaone.ser tr.sc .ws { font-size: 30px; font-weight: 800; color: var(--gold); }
+.nbaone.ser tr.sc .lab { margin: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.standouts .hl { color: var(--gold); font-weight: 600; }
+/* NBA: each game of the day gets one of 15 locked pastel colours; both of its teams carry it in the tables below (15 hues 24 degrees apart taken in steps of 4, so the first four games of a night are a quarter-turn apart: coral, green, blue, violet; soft pastels on dark, muted deeper tones on light) */
+.gc0 { color: #E3A6A0; font-weight: 700; }
+.gc1 { color: #C8EAB8; font-weight: 700; }
+.gc2 { color: #A0D0E3; font-weight: 700; }
+.gc3 { color: #E4B8EA; font-weight: 700; }
+.gc4 { color: #E3C1A0; font-weight: 700; }
+.gc5 { color: #B8EABC; font-weight: 700; }
+.gc6 { color: #A0B5E3; font-weight: 700; }
+.gc7 { color: #EAB8DC; font-weight: 700; }
+.gc8 { color: #E3DCA0; font-weight: 700; }
+.gc9 { color: #B8EAD0; font-weight: 700; }
+.gc10 { color: #A6A0E3; font-weight: 700; }
+.gc11 { color: #EAB8C8; font-weight: 700; }
+.gc12 { color: #D0E3A0; font-weight: 700; }
+.gc13 { color: #B8EAE4; font-weight: 700; }
+.gc14 { color: #C1A0E3; font-weight: 700; }
+@media (prefers-color-scheme: light) {
+  .gc0 { color: #783B36; }
+  .gc1 { color: #4B7836; }
+  .gc2 { color: #366578; }
+  .gc3 { color: #703678; }
+  .gc4 { color: #785636; }
+  .gc5 { color: #36783B; }
+  .gc6 { color: #364B78; }
+  .gc7 { color: #783665; }
+  .gc8 { color: #787036; }
+  .gc9 { color: #367856; }
+  .gc10 { color: #3B3678; }
+  .gc11 { color: #78364B; }
+  .gc12 { color: #657836; }
+  .gc13 { color: #367870; }
+  .gc14 { color: #563678; }
+}
 </style></head><body><div class="topbar"><a href="../index.html">Archive</a><span class="chip" id="chip">2 min read</span></div><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Tuesday 27 January 2026</p></header><p class="banner">Tennis preview. Built from saved real data: the 2026 Australian Open as the edition of 27 January would show it (matches from the three days before, all in one go).</p><section id="tennis"><h2>Tennis</h2><h3>Australian Open</h3><div class="tennis"><table><colgroup><col style="width:55%"><col style="width:9%"><col style="width:9%"><col style="width:9%"><col style="width:9%"><col style="width:9%"></colgroup><thead><tr><th class="tt" colspan="6">Men&#x27;s Singles · Quarter-finals<span class="prog">2/4 played</span></th></tr></thead><tbody><tr class="w"><td class="pl">(1) C. Alcaraz</td><td class="s">7</td><td class="s">6</td><td class="s">6</td><td class="s"></td><td class="s"></td></tr><tr class="l"><td class="pl">(6) A. de Minaur</td><td class="s">5</td><td class="s">2</td><td class="s">1</td><td class="s"></td><td class="s"></td></tr><tr class="w"><td class="pl">(3) A. Zverev</td><td class="s">6</td><td class="s">6<sup>5</sup></td><td class="s">6</td><td class="s">7</td><td class="s"></td></tr><tr class="l"><td class="pl">(25) L. Tien</td><td class="s">3</td><td class="s">7</td><td class="s">1</td><td class="s">6<sup>3</sup></td><td class="s"></td></tr></tbody></table></div><div class="tennis"><table><colgroup><col style="width:55%"><col style="width:9%"><col style="width:9%"><col style="width:9%"><col style="width:9%"><col style="width:9%"></colgroup><thead><tr><th class="tt" colspan="6">Men&#x27;s Singles · Fourth Round<span class="prog">8/8 complete</span></th></tr></thead><tbody><tr class="w"><td class="pl">(1) C. Alcaraz</td><td class="s">7</td><td class="s">6</td><td class="s">7</td><td class="s"></td><td class="s"></td></tr><tr class="l"><td class="pl">(19) T. Paul</td><td class="s">6<sup>6</sup></td><td class="s">4</td><td class="s">5</td><td class="s"></td><td class="s"></td></tr><tr class="w"><td class="pl">(2) J. Sinner</td><td class="s">6</td><td class="s">6</td><td class="s">7</td><td class="s"></td><td class="s"></td></tr><tr class="l"><td class="pl">(22) L. Darderi</td><td class="s">1</td><td class="s">3</td><td class="s">6<sup>2</sup></td><td class="s"></td><td class="s"></td></tr><tr class="w"><td class="pl">(3) A. Zverev</td><td class="s">6</td><td class="s">6</td><td class="s">6</td><td class="s"></td><td class="s"></td></tr><tr class="l"><td class="pl">(18) F. Cerundolo</td><td class="s">2</td><td class="s">4</td><td class="s">4</td><td class="s"></td><td class="s"></td></tr><tr class="w"><td class="pl">(4) N. Djokovic</td><td class="s"></td><td class="s"></td><td class="s"></td><td class="s"></td><td class="s"></td></tr><tr class="l"><td class="pl">(16) J. Mensik</td><td class="tag">w/o</td><td class="s"></td><td class="s"></td><td class="s"></td><td class="s"></td></tr><tr class="w"><td class="pl">(5) L. Musetti</td><td class="s">6</td><td class="s">7</td><td class="s">6</td><td class="s"></td><td class="s"></td></tr><tr class="l"><td class="pl">(9) T. Fritz</td><td class="s">2</td><td class="s">5</td><td class="s">4</td><td class="s"></td><td class="s"></td></tr><tr class="w"><td class="pl">(6) A. de Minaur</td><td class="s">6</td><td class="s">6</td><td class="s">6</td><td class="s"></td><td class="s"></td></tr><tr class="l"><td class="pl">(10) A. Bublik</td><td class="s">4</td><td class="s">1</td><td class="s">1</td><td class="s"></td><td class="s"></td></tr><tr class="w"><td class="pl">(8) B. Shelton</td><td class="s">3</td><td class="s">6</td><td class="s">6</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">(12) C. Ruud</td><td class="s">6</td><td class="s">4</td><td class="s">3</td><td class="s">4</td><td class="s"></td></tr><tr class="w"><td class="pl">(25) L. Tien</td><td class="s">6</td><td class="s">6</td><td class="s">6</td><td class="s"></td><td class="s"></td></tr><tr class="l"><td class="pl">(11) D. Medvedev</td><td class="s">4</td><td class="s">0</td><td class="s">3</td><td class="s"></td><td class="s"></td></tr></tbody></table></div><ul class="standouts"><li><strong>Top Seed Out:</strong> (6) A. de Minaur beaten by (1) C. Alcaraz in the quarter-finals, 7-5 6-2 6-1.</li><li><strong>Top Seed Out:</strong> (9) T. Fritz beaten by (5) L. Musetti in the fourth round, 6-2 7-5 6-4.</li><li><strong>Top Seed Out:</strong> (10) A. Bublik beaten by (6) A. de Minaur in the fourth round, 6-4 6-1 6-1.</li></ul><div class="tennis"><table><colgroup><col style="width:64%"><col style="width:12%"><col style="width:12%"><col style="width:12%"></colgroup><thead><tr><th class="tt" colspan="4">Women&#x27;s Singles · Quarter-finals<span class="prog">2/4 played</span></th></tr></thead><tbody><tr class="w"><td class="pl">(1) A. Sabalenka</td><td class="s">6</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">(29) I. Jovic</td><td class="s">3</td><td class="s">0</td><td class="s"></td></tr><tr class="w"><td class="pl">(12) E. Svitolina</td><td class="s">6</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">(3) C. Gauff</td><td class="s">1</td><td class="s">2</td><td class="s"></td></tr></tbody></table></div><div class="tennis"><table><colgroup><col style="width:64%"><col style="width:12%"><col style="width:12%"><col style="width:12%"></colgroup><thead><tr><th class="tt" colspan="4">Women&#x27;s Singles · Fourth Round<span class="prog">8/8 complete</span></th></tr></thead><tbody><tr class="w"><td class="pl">(1) A. Sabalenka</td><td class="s">6</td><td class="s">7</td><td class="s"></td></tr><tr class="l"><td class="pl">(17) V. Mboko</td><td class="s">1</td><td class="s">6<sup>1</sup></td><td class="s"></td></tr><tr class="w"><td class="pl">(2) I. Swiatek</td><td class="s">6</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">M. Inglis</td><td class="s">0</td><td class="s">3</td><td class="s"></td></tr><tr class="w"><td class="pl">(3) C. Gauff</td><td class="s">6</td><td class="s">3</td><td class="s">6</td></tr><tr class="l"><td class="pl">(19) K. Muchova</td><td class="s">1</td><td class="s">6</td><td class="s">3</td></tr><tr class="w"><td class="pl">(4) A. Anisimova</td><td class="s">7</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">W. Xinyu</td><td class="s">6<sup>4</sup></td><td class="s">4</td><td class="s"></td></tr><tr class="w"><td class="pl">(5) E. Rybakina</td><td class="s">6</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">(21) E. Mertens</td><td class="s">1</td><td class="s">3</td><td class="s"></td></tr><tr class="w"><td class="pl">(6) J. Pegula</td><td class="s">6</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">(9) M. Keys</td><td class="s">3</td><td class="s">4</td><td class="s"></td></tr><tr class="w"><td class="pl">(12) E. Svitolina</td><td class="s">6</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">(8) M. Andreeva</td><td class="s">2</td><td class="s">4</td><td class="s"></td></tr><tr class="w"><td class="pl">(29) I. Jovic</td><td class="s">6</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">Y. Putintseva</td><td class="s">0</td><td class="s">1</td><td class="s"></td></tr></tbody></table></div><ul class="standouts"><li><strong>Top Seed Out:</strong> (3) C. Gauff beaten by (12) E. Svitolina in the quarter-finals, 6-1 6-2.</li><li><strong>Top Seed Out:</strong> (9) M. Keys beaten by (6) J. Pegula in the fourth round, 6-3 6-4.</li><li><strong>Top Seed Out:</strong> (8) M. Andreeva beaten by (12) E. Svitolina in the fourth round, 6-2 6-4.</li><li><strong>Milestone:</strong> defending champion Madison Keys is out in the fourth round.</li></ul></section><footer><a href="../index.html">All editions</a> · The Kickoff, your daily sports digest.</footer></main><nav class="rail" aria-label="Sections"><div class="rail-fill" id="rail-fill"></div><a class="rail-tick" href="#tennis" style="top:0.00%" aria-label="Jump to Tennis" title="Tennis"></a></nav><script>/* Progress rail: fills as you read, highlights the current section, drives the corner chip.
    Written to stay cheap while scrolling on a phone: it measures only when the page width changes (iPhone Safari
    fires a resize every time the address bar slides), moves the fill with a transform, and touches the page

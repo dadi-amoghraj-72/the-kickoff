@@ -113,7 +113,7 @@ def results_table(caption, rows):
     """Race or sprint: position, driver, places gained, gap to the winner (or why out), points."""
     laps = int(rows[0]["laps"]) if rows and rows[0].get("laps") else 0
     body = [[x["position"], short_name(x["Driver"]), moved(x), _gap(x, laps), f"{int(float(x['points'])):02d}"] for x in rows]
-    return _tight(r.table(f"{caption} Results", [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body), (11, 37, 14, 22, 16), " race")
+    return _tight(r.table(f"{caption} Results", [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body), (9, 34, 12, 29, 16), " race")
 
 
 def best_time(row):
