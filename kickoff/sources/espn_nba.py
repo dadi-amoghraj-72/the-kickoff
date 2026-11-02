@@ -55,9 +55,9 @@ class Source:
                  for p in j.get("plays", []) if p.get("scoringPlay")]
         return {"players": players, "teams": teams, "odds": odds, "plays": plays, "injuries": injuries}
 
-    def standings(self):
-        """Both conferences with every team's record, seed and streak."""
-        return self._call(V2 + "standings")
+    def standings(self, season=None):
+        """Both conferences with every team's record, seed and streak (the current season, or the season ESPN labels with that year)."""
+        return self._call(V2 + "standings" + (f"?season={season}" if season else ""))
 
     def roster(self, team_id):
         """{athlete id: name} for one team."""

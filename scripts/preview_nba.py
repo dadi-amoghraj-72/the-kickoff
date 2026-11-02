@@ -29,7 +29,7 @@ if "--live" in sys.argv:
     note = f"Built live from ESPN for {day:%A %-d %B}."
 elif any(a.startswith("--playoffs") for a in sys.argv):
     load = lambda n: json.loads((FX / n).read_text())  # noqa: E731
-    sched, boxes, std = load("nba_series_schedule.json"), load("nba_series_boxes.json"), load("nba_standings.json")
+    sched, boxes, std = load("nba_series_schedule.json"), load("nba_series_boxes.json"), load("nba_standings_2026.json")
     mid = "--playoffs-mid" in sys.argv
     if mid:  # keep games 1 to 3 as played; the rest are still to come
         sched = [g if i < 3 else {**g, "status": "STATUS_SCHEDULED", "home": {**g["home"], "score": None}, "away": {**g["away"], "score": None}} for i, g in enumerate(sched)]
@@ -48,7 +48,7 @@ elif any(a.startswith("--playoffs") for a in sys.argv):
         scoreboard = lambda self, d: {"events": [event(g) for g in sched if utc(g["date"]).astimezone(nba.ET).date() == d]}  # noqa: E731
         box = lambda self, event_id: boxes[event_id]  # noqa: E731
         schedule = lambda self, team_id, season=None, season_type=3: sched  # noqa: E731
-        standings = lambda self: std  # noqa: E731
+        standings = lambda self, season=None: std  # noqa: E731
     source, st = Saved(), {}
     note = f"Built from last season's real data: the 2026 Detroit-Orlando first-round series as it stood on {day:%A %-d %B %Y} (" + ("after game 3, later games still to come" if mid else "after game 7") + ")."
 else:
@@ -61,7 +61,7 @@ else:
         calls = 0
         scoreboard = lambda self, d: sbs.get(str(d)) or window.get(str(d), {"events": []})  # noqa: E731
         box = lambda self, event_id: boxes[event_id]  # noqa: E731
-        standings = lambda self: std  # noqa: E731
+        standings = lambda self, season=None: std  # noqa: E731
     sunday = [g for g in sbs["2026-11-01"]["events"]]
     if "--inprogress" in sys.argv:  # the last Sunday game is still being played when the edition goes out
         live = copy.deepcopy(sunday[-1])

@@ -314,7 +314,7 @@ def games_html(items, many_days, dogs):
     """items: [(game, notes)] already in order. One table titled Last Night's Games; the underdog count sits under the title."""
     rows = [x for g, notes in items for x in game_rows(g, notes, many_days)]
     sub = f'<span class="prog">{DOG} {dogs} underdog win{"s" if dogs != 1 else ""}</span>' if dogs else ""
-    return (f'<div class="nflsb nbaone"><table><colgroup><col style="width:37%"><col style="width:26%"><col style="width:37%"></colgroup>'
+    return (f'<div class="nflsb nbaone"><table><colgroup><col style="width:35%"><col style="width:30%"><col style="width:35%"></colgroup>'
             f'<thead><tr><th class="tt" colspan="3">Last Night\'s Games{sub}</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
 
 
@@ -414,7 +414,12 @@ def series_of(g):
     return frozenset((g["home"]["id"], g["away"]["id"]))
 
 
-def series_html(g0, sched, notes_by_game):
+def seeds_by_team(std):
+    """{team code: playoff seed} across both conferences, from a standings feed."""
+    return {abbr: seed for conf in seeds_of(std).values() for abbr, seed in conf.items()}
+
+
+def series_html(g0, sched, notes_by_game, seeds=None):
     """One table for one series: the two teams as headers with their series wins beside them, then SERIES_GAMES rows made in advance: the
     game number and date, the score once played (winner in bold) with the player notes under it, 'if necessary' for games not yet scheduled.
     g0: a game of the series (names and round); sched: the series' games (schedule rows)."""
@@ -449,9 +454,12 @@ def series_html(g0, sched, notes_by_game):
             else:
                 mid = f"G{n} · " + ("–" if over else "if necessary" if n >= 5 else "to be scheduled")
             rows.append(f'<tr class="one end pre"><td class="mid" colspan="3">{r.esc(mid)}</td></tr>')
+    seed = lambda t: (seeds or {}).get(t["abbr"])  # noqa: E731
+    left = (f'({seed(top)})\u00a0' if seed(top) else "") + top.get("name", top["short"])
+    right = bot.get("name", bot["short"]) + (f'\u00a0({seed(bot)})' if seed(bot) else "")
     head = (f'<tr><th class="tt" colspan="3">{r.esc(rnd)}</th></tr>'
-            f'<tr class="sh"><th class="aw">{r.esc(top.get("name", top["short"]))} <span class="ws">{wins[top["id"]]}</span></th><th class="mid">series</th>'
-            f'<th class="hm"><span class="ws">{wins[bot["id"]]}</span> {r.esc(bot.get("name", bot["short"]))}</th></tr>')
+            f'<tr class="sh"><th class="aw" colspan="3"><span class="tn">{r.esc(left)}</span><span class="tn r">{r.esc(right)}</span></th></tr>'
+            f'<tr class="sc"><th colspan="3"><span class="ws">{wins[top["id"]]}</span><span class="lab">series</span><span class="ws">{wins[bot["id"]]}</span></th></tr>')
     return (f'<div class="nflsb nbaone ser"><table><colgroup><col style="width:30%"><col style="width:40%"><col style="width:30%"></colgroup>'
             f'<thead>{head}</thead><tbody>{"".join(rows)}</tbody></table></div>')
 
@@ -529,6 +537,11 @@ def run(now, day, st, source):
         items = [(g, game_notes(g, boxes[g["id"]], players[g["id"]], tracked, info) if g["id"] in boxes else []) for g in sorted(plain + plain_live, key=order_key)]
         html += games_html(items, many_days, sum(1 for g in plain if underdog_win(g)))
     if playoff_new:                                         # one table per series that had a game finish (or is on now)
+        seeds = {}
+        try:                                                # the regular-season seeds of the two teams go beside their names
+            seeds = seeds_by_team(source.standings(playoff_new[0]["season"]))
+        except Exception:
+            stats["failed"] += 1
         done = {}
         for g in sorted(playoff_new, key=order_key):
             done.setdefault(series_of(g), g)
@@ -553,12 +566,13 @@ def run(now, day, st, source):
                     gg = {"id": x["id"], "home": dict(x["home"]), "away": dict(x["away"]), "ot": False,
                           "status": "final", "phase": "playoffs", "cup": None, "headline": x["headline"], "neutral": False}
                 keep["series_notes"][x["id"]] = game_notes(gg, bx, players_of(bx, gg), tracked, info)
-            html += series_html(g0, sched, keep["series_notes"])
+            html += series_html(g0, sched, keep["series_notes"], seeds)
             stats["series"] += 1
     if texts:
         html += "<h4>Standouts</h4>" + _list(texts)
     std = None
-    if games or new:                                        # the standings come every day there is basketball
+    playoffs_on = any(g["phase"] == "playoffs" for g in games.values())   # once the playoffs are on, the regular-season tables are not needed
+    if (games or new) and not playoffs_on:                  # the standings come every day there is basketball until then
         try:
             std = source.standings()
         except Exception:

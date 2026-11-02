@@ -282,3 +282,21 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone.ser td.hm { text-align: right; padding-right: 12px; }
 .nflsb .pl .n { color: var(--gold); font-weight: 600; }
 .nbaone td.aw, .nbaone td.hm { white-space: normal; line-height: 1.25; }
+/* NBA: bigger type (the tables are what D checks the games and series with) */
+.nbaone table { font-size: 16px; }
+.nbaone td { padding: 7px 4px; }
+.nbaone td.mid { font-size: 18px; font-weight: 700; color: var(--chalk); padding-left: 2px; padding-right: 2px; }
+.nbaone td.aw, .nbaone td.hm { font-size: 15px; }
+.nflsb tr.note td { font-size: 15.5px; padding: 0 10px 12px; }
+.nflsb tr.note .pl { padding-top: 4px; line-height: 1.35; }
+.nflsb tr.tag td { font-size: 12px; }
+.nbaone.ser td.aw, .nbaone.ser td.hm { font-size: 24px; font-weight: 600; padding-top: 9px; padding-bottom: 6px; }
+.nbaone.ser td.aw.w, .nbaone.ser td.hm.w { color: var(--chalk); font-weight: 800; }
+.nbaone.ser td.aw:not(.w), .nbaone.ser td.hm:not(.w) { color: var(--muted); }
+.nbaone.ser td.mid { font-size: 14px; font-weight: 400; color: var(--muted); }
+.nbaone.ser th.sh .tn, .nbaone.ser tr.sh th .tn { display: inline-block; width: 50%; font-size: 17px; font-weight: 700; color: var(--chalk); }
+.nbaone.ser tr.sh th .tn.r { text-align: right; }
+.nbaone.ser tr.sh th { text-align: left; padding: 8px 10px 2px; white-space: normal; }
+.nbaone.ser tr.sc th { text-align: center; padding: 2px 4px 10px; }
+.nbaone.ser tr.sc .ws { font-size: 30px; font-weight: 800; color: var(--gold); }
+.nbaone.ser tr.sc .lab { margin: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
