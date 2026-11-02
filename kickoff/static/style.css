@@ -288,8 +288,9 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone td.mid { font-size: 18px; font-weight: 700; color: var(--chalk); padding-left: 2px; padding-right: 2px; }
 .nbaone td.aw, .nbaone td.hm { font-size: 15px; }
 .nflsb tr.note td { font-size: 14px; padding: 2px 10px 12px; }
-.nflsb tr.note .pl { position: relative; padding: 5px 0 0 16px; line-height: 1.35; }
-.nflsb tr.note .pl::before { content: "\25C6"; position: absolute; left: 3px; top: 12px; font-size: 8px; line-height: 1; color: var(--gold); }
+.nflsb tr.note .pl { display: flex; align-items: flex-start; padding-top: 5px; line-height: 1.35; }
+.nflsb tr.note .pl::before { content: "\25C6"; flex: 0 0 16px; box-sizing: border-box; height: 19px; padding-left: 3px; display: flex; align-items: center; font-size: 8px; line-height: 1; color: var(--gold); }
+.nflsb tr.note .pl .t { flex: 1 1 auto; min-width: 0; }
 .nflsb tr.tag td { font-size: 12px; }
 .nbaone.ser td.aw, .nbaone.ser td.hm { font-size: 24px; font-weight: 600; padding-top: 9px; padding-bottom: 6px; }
 .nbaone.ser td.aw.w, .nbaone.ser td.hm.w { color: var(--chalk); font-weight: 800; }

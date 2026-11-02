@@ -313,7 +313,7 @@ def game_rows(g, notes, many_days):
     rows.append(f'<tr class="{cls}"><td class="aw{" w" if w == "away" else ""}">{r.esc(a["name"])}{star if w == "away" else ""}</td>'
                 f'<td class="mid">{score}</td><td class="hm{" w" if w == "home" else ""}">{r.esc(h["name"])}{star if w == "home" else ""}{icon}</td></tr>')
     if notes:
-        rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl">{note_html(x)}</div>' for x in notes) + "</td></tr>")
+        rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl"><span class="t">{note_html(x)}</span></div>' for x in notes) + "</td></tr>")
     return rows
 
 
@@ -450,7 +450,7 @@ def series_html(g0, sched, notes_by_game, seeds=None):
             note = notes_by_game.get(x["id"], [])
             rows.append(f'<tr class="one{"" if note else " end"}"><td class="aw {lw}">{sc[top["id"]]}</td><td class="mid">G{n} · {day_label(d)}</td><td class="hm {rw}">{sc[bot["id"]]}</td></tr>')
             if note:
-                rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl">{note_html(t)}</div>' for t in note) + "</td></tr>")
+                rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl"><span class="t">{note_html(t)}</span></div>' for t in note) + "</td></tr>")
         elif x and "IN_PROGRESS" in x["status"] and x["home"]["score"] is not None:   # on now: the score so far, and the game is shown final next edition
             sc = {x["home"]["id"]: x["home"]["score"], x["away"]["id"]: x["away"]["score"]}
             rows.append(f'<tr class="one end"><td class="aw">{sc[top["id"]]}</td><td class="mid">G{n} · In progress</td><td class="hm">{sc[bot["id"]]}</td></tr>')
