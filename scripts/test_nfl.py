@@ -211,8 +211,10 @@ for conf in STAND["children"]:
     seeds = sorted(int(nfl._stat(e, "playoffSeed", "value")) for d in conf["children"] for e in d["standings"]["entries"] if nfl._stat(e, "playoffSeed"))
     check(f"{conf['name']}: ESPN gives every team a distinct playoff seed from 1 to 16", seeds == list(range(1, 17)), seeds)
 ph = nfl.playoff_html(STAND)
-check("playoff picture: a table per conference, seeds 1 to 10 in order, a line after the seventh, seeds 1-4 marked DIV and 5-7 WC", ph.count('<th class="tt"') == 2 and "AFC Playoff Picture" in ph and "NFC Playoff Picture" in ph and ph.count('class="cut"') == 2
-      and ph.count(">DIV<") == 8 and ph.count(">WC<") == 6 and ph.count("<tr") == 2 * 12, (ph.count(">DIV<"), ph.count(">WC<"), ph.count("<tr")))
+check("playoff picture: a table per conference, seeds 1 to 10 in order, a line after the seventh, seed 1 marked BYE, seeds 2-4 DIV and 5-7 WC", ph.count('<th class="tt"') == 2 and "AFC Playoff Picture" in ph and "NFC Playoff Picture" in ph and ph.count('class="cut"') == 2
+      and ph.count(">DIV<") == 6 and ph.count(">WC<") == 6 and ph.count(">BYE<") == 2 and ph.count("<tr") == 2 * 12, (ph.count(">DIV<"), ph.count(">WC<"), ph.count("<tr")))
+bye_rows = re.findall(r'<tr class="bye[^"]*">.*?</tr>', ph)
+check("only the 1 seed of each conference is the gold bye row (2 in all), it says BYE, and it is the first row of its table", len(bye_rows) == 2 and all(">1<" in x and ">BYE<" in x for x in bye_rows) and all(ph.index(x) < ph.index(">2<", ph.index(x)) for x in bye_rows), bye_rows[:1])
 
 
 # ---- The whole block, with a fake source ----

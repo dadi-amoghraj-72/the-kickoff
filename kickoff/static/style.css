@@ -255,3 +255,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .pts.f1.nfl tr.sub td { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); background: rgba(255, 255, 255, 0.04); }
 .pts.f1.nfl .new, .new { font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); margin-left: 2px; }
 .pts.f1.nfl.st thead tr:nth-child(2) { display: none; }
+.pts.f1.nfl.div th:first-child, .pts.f1.nfl.div td:first-child { padding-left: 14px; }
+.pts.f1.nfl.po th:first-child, .pts.f1.nfl.po td:first-child { text-align: center; padding-left: 3px; }
+.pts.f1.nfl.po th:last-child, .pts.f1.nfl.po td:last-child { text-align: center; padding-left: 3px; }
+.pts.f1.nfl tr.bye td { color: var(--gold); font-weight: 700; }

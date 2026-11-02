@@ -439,18 +439,18 @@ def division_html(standings):
         for div in conf["children"]:
             ents = div["standings"]["entries"]
             rows = [[e["team"]["abbreviation"], record_of(e), _stat(e, "pointsFor"), _stat(e, "pointsAgainst"), _stat(e, "streak") or "-"] for e in ents]
-            out += r.compact(r.table(div["name"], [("Team", False), ("W-L", True), ("PF", True), ("PA", True), ("Strk", True)], rows), (28, 18, 18, 18, 18), " nfl div")
+            out += r.compact(r.table(div["name"], [("Team", False), ("W-L", True), ("PF", True), ("PA", True), ("Strk", True)], rows), (20, 20, 20, 20, 20), " nfl div")
     return out
 
 
 def playoff_html(standings, seeds_shown=10):
-    """Each conference's seeds 1 to 10 with a line after the seventh: seeds 1 to 4 lead their divisions, 5 to 7 are wild cards."""
+    """Each conference's seeds 1 to 10 with a line after the seventh: seed 1 (gold, BYE) gets the first-round bye, 2 to 4 lead their divisions, 5 to 7 are wild cards."""
     out = ""
     for conf in standings["children"]:
         ents = sorted((e for d in conf["children"] for e in d["standings"]["entries"] if _stat(e, "playoffSeed")), key=lambda e: int(_stat(e, "playoffSeed", "value") or 99))[:seeds_shown]
-        rows = [[_stat(e, "playoffSeed"), e["team"]["abbreviation"], record_of(e), "DIV" if int(_stat(e, "playoffSeed", "value")) <= 4 else ("WC" if int(_stat(e, "playoffSeed", "value")) <= 7 else "")] for e in ents]
-        classes = ["cut" if i == 6 else "" for i, e in enumerate(ents)]
-        out += r.compact(r.table(f"{''.join(w[0] for w in conf['name'].split())} Playoff Picture", [("Seed", True), ("Team", False), ("W-L", True), ("", False)], rows, row_classes=classes), (16, 34, 26, 24), " nfl div")
+        rows = [[_stat(e, "playoffSeed"), e["team"]["abbreviation"], record_of(e), "BYE" if int(_stat(e, "playoffSeed", "value")) == 1 else ("DIV" if int(_stat(e, "playoffSeed", "value")) <= 4 else ("WC" if int(_stat(e, "playoffSeed", "value")) <= 7 else ""))] for e in ents]
+        classes = [" ".join(x for x in ("bye" if i == 0 else "", "cut" if i == 6 else "") if x) for i, e in enumerate(ents)]
+        out += r.compact(r.table(f"{''.join(w[0] for w in conf['name'].split())} Playoff Picture", [("Seed", True), ("Team", False), ("W-L", True), ("", False)], rows, row_classes=classes), (16, 34, 26, 24), " nfl div po")
     return out
 
 
