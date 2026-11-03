@@ -45,7 +45,7 @@ Every edition follows the same order, and a section appears only when it has som
 2. **On today:** today's events in Singapore time, each tagged "While you're up" (sun icon) or "Overnight" (moon icon). Mondays add Games to Watch for the week.
 3. **Arsenal:** the men's team in full, plus Arsenal Women.
 4. **Football:** Premier League notes, other-league one-liners, sackings, Champions League, international football during breaks, tables and the FPL corner.
-5. **Cricket, NBA, NFL and baseball:** each its own section with its own standouts, shown only when there is play.
+5. **Cricket, NBA, NFL and MLB:** each its own section with its own standouts, shown only when there is play (MLB: weekly on Thursdays, daily from the Dodgers' 155th game and in the postseason).
 6. **Young Guns:** rookie and young star watch across all sports.
 7. **Around the sporting world:** the general section. F1 and Grand Slam tennis come first, then the other sports.
 8. **Interesting stories:** three to five picks from across everything covered.
@@ -64,7 +64,7 @@ Every edition follows the same order, and a section appears only when it has som
 
 **Lead sport (which full sport section comes first):** The Big Stuff and On Today always stay on top. Below them, the sport sections keep the order above, except that one lead sport moves to the front. Plain rules in code decide it, not Claude, so the order is predictable.
 
-1. **Your teams first.** If one of D's teams or players had a match or notable performance since the last edition, their sport leads: Arsenal (men and women), Sunrisers Hyderabad, the India men's cricket team, the tracked NBA stars, the Jaguars (Trevor Lawrence), the Steelers (Aaron Rodgers), and the Dodgers only when an Ohtani or Yamamoto trigger from the Baseball section happens.
+1. **Your teams first.** If one of D's teams or players had a match or notable performance since the last edition, their sport leads: Arsenal (men and women), Sunrisers Hyderabad, the India men's cricket team, the tracked NBA stars, the Jaguars (Trevor Lawrence), the Steelers (Aaron Rodgers), and the Dodgers only in the MLB postseason on days they played (see the MLB section).
 2. **If several of those happened, the most important match leads.** Importance scale, highest first: finals and title deciders, knockouts, derbies and clashes at the top of a table, then ordinary league or group games. Exact scoring to be tuned during the build.
 3. **If none did, a big competition moment leads:** a Champions League matchday, the NBA playoffs or the IPL.
 4. **Otherwise** the normal order stays.
@@ -73,7 +73,7 @@ Every edition follows the same order, and a section appears only when it has som
 
 ## Cross-sport conventions
 
-Rules that came out of building the F1, tennis, NFL and NBA sections with D, written so the remaining sports (baseball, Young Guns, Around the sporting world) follow the same house style. On 2026-11-03 D decided the retrofit questions and the older sports were brought into line (see "Decisions" at the end of this section).
+Rules that came out of building the F1, tennis, NFL and NBA sections with D, written so the remaining sports (Young Guns, Around the sporting world; MLB was built to them) follow the same house style. On 2026-11-03 D decided the retrofit questions and the older sports were brought into line (see "Decisions" at the end of this section).
 
 **Tables and layout**
 
@@ -95,7 +95,7 @@ Rules that came out of building the F1, tennis, NFL and NBA sections with D, wri
 13. **Tag line above a game** for the competition or stage, small and uppercase ("NBA Cup · Group Play", "East 1st Round · Game 3"); the day label joins it when one edition spans two US dates.
 14. **Tracked players:** always shown when their team played, with the stat line or "Name (TEAM): DNP (status, reason)" from ESPN's injury listing (else the box score's reason, else a plain DNP); DNP lines sit below every player who played; one best performer per game is added when he is not already shown; players are followed by id; off-list players join after three standouts in 30 days and drop after 56 days without one; D's list never drops.
 15. **Standouts:** clear thresholds only (position-aware where position matters, as for NBA guards' rebounds), ranked, three to five, never padded; only the qualifying stat is coloured gold; thresholds are reviewed after a month of real editions.
-16. **Series tables (NBA playoffs, reusable):** header = the two teams (full names, with seeds) and the series score in large numbers either side of the word "series"; a row for every possible game made in advance (number and date, the score once played with the notes under it, Singapore time for scheduled games, "if necessary", "–" when the series is over); notes cached in the state. Built and in use: the NBA playoffs, **Champions League knockout ties** (aggregate either side of the word "aggregate", a 1st and 2nd leg row made in advance with the matchday as played, scorers under each played leg, a Penalties row after a shoot-out; the final shows its own score under "final"; the legs come from the team's ESPN schedule, and a failing feed falls back to the plain scoreboard line) and **cricket Test and ODI series** (see Cricket below). Still to reuse: the baseball postseason and tennis team events.
+16. **Series tables (NBA playoffs, reusable):** header = the two teams (full names, with seeds) and the series score in large numbers either side of the word "series"; a row for every possible game made in advance (number and date, the score once played with the notes under it, Singapore time for scheduled games, "if necessary", "–" when the series is over); notes cached in the state. Built and in use: the NBA playoffs, **Champions League knockout ties** (aggregate either side of the word "aggregate", a 1st and 2nd leg row made in advance with the matchday as played, scorers under each played leg, a Penalties row after a shoot-out; the final shows its own score under "final"; the legs come from the team's ESPN schedule, and a failing feed falls back to the plain scoreboard line) and **cricket Test and ODI series** (see Cricket below). **the MLB postseason** (best of 3, 5 or 7). Still to reuse: tennis team events.
 17. **A failing source never breaks the edition:** that part is left out and counted; nothing raises. Everything is code-only unless the text really needs language (only the F1 race story uses Claude).
 
 **How we build and test (D's way)**
@@ -106,7 +106,7 @@ Rules that came out of building the F1, tennis, NFL and NBA sections with D, wri
 
 **Carry-forward to the remaining sports**
 
-- **Baseball (checkpoint 10):** the Dodgers and D's two players follow rules 11 and 14 (a line for Ohtani and Yamamoto whenever the Dodgers played, with a reason when they did not pitch or bat); the postseason uses the series table (best of 5 or 7) and the house icon, the regular season does not; the underdog asterisk comes from ESPN's odds if the MLB feed carries them; three-letter team codes with a fix map (ESPN uses SD, SF, TB, KC and CWS style codes: check at build); thresholds position-aware (batters against pitchers); an overnight game in progress follows rule 11. Test ESPN and the MLB Stats API as the spec already says, preferring ESPN if it serves everything (one familiar source, one saver pattern).
+- **MLB (checkpoint 10, built 2026-11-03):** see the MLB section. It follows rules 11 and 14 for the Dodgers, rule 16 for the postseason, three-letter codes with a fix map, the underdog asterisk from ESPN's line, and surnames for the two pitchers in the weekly tables. One decision still open for D: tables for Ohtani and Yamamoto use surnames only, not initial + surname (rule 2), because "Y. Yamamoto" would wrap on a phone.
 - **Young Guns (checkpoint 11):** the tracked-player machinery (auto-join, drop-off, hits in the state) lives in `kickoff/nba.py` today; move it into a shared module before reusing it for the watchlist, and keep one standout definition per sport.
 - **Around the sporting world (checkpoint 12):** news-fed, so the same table, tag and marker rules apply but no stat tables; keep the spotlight rule.
 - **Cross-sport ordering (checkpoint 13):** the order lists (NBA's five teams first) are the model for D's priorities in every sport; keep them as short, tested lists.
@@ -286,16 +286,21 @@ The NFL gets a full Wednesday wrap; the NBA shows every game finished since the 
 
 Source: [NBA.com 2026-27 season previews](https://www.nba.com/2026-27-season-preview/features).
 
-## Baseball
+## MLB
 
-Baseball is a short, focused block on the Los Angeles Dodgers' two Japanese stars, not full MLB coverage. It appears only when one of the triggers below happens.
+*Rewritten on 2026-11-03 at D's direction (he is less interested in baseball and daily coverage of 162 games a season would be spam). Built in `kickoff/mlb.py` and `kickoff/sources/espn_mlb.py`; ESPN serves everything, so the MLB Stats API is not used.*
 
-- **Shohei Ohtani, batting:** a home run, a stolen base or a game-winning hit.
-- **Shohei Ohtani, pitching:** every start. All pitching performances count as noteworthy whenever he is the starting pitcher.
-- **Yoshinobu Yamamoto:** every start.
-- **What each entry holds:** the Dodgers' score, the player's stat line and a one-line story. Postseason games count the same as regular-season ones.
-- **Timing:** US night games finish late in the Singapore morning, so many land in the next day's edition, like the NBA.
-- **Lead sport:** a trigger above makes baseball eligible to lead, under the lead-sport rule.
+MLB is a quiet weekly round-up for most of the season, then daily coverage for the last week and the postseason, then a closing note. The mode is worked out from the data (ESPN's season type and the Dodgers' number of games played); nothing is switched on or off by hand.
+
+1. **Regular season, weekly (Thursday edition, until the Dodgers have played 155 games):** the Dodgers' games since the last round-up (state-based, 8-day lookback). Tables: the **Dodgers** (one row per game with the opponent and score; under the title "Wk: 3-3 · Season: 23-14 · G37/162"), **Ohtani · Batting** (one row per game: H-AB, HR, RBI, SB; a Week row with the sums; season AVG and OPS under the title; a line saying so, with ESPN's reason, when he did not bat in a game and did not pitch), **Pitching** (one row per start by Yamamoto or Ohtani: IP, ER, K, decision; each one's ERA under the title; "No starts this week" when there are none), then the **six division tables** (the National League first, the Dodgers' division first; blue for the leader, lilac for a wild-card place; +/- arrows against the last table shown) and **both wild-card races** (seeds 4 to 9 numbered 1 to 6, games ahead of or behind the third wild card, ✓ clinched, ✗ out). A week with no Dodgers games shows nothing. The first Thursday of a season also says "The 2026 MLB season is under way."
+2. **From the Dodgers' 155th game to the end of the regular season, daily:** every game of the league finished since the last edition, Dodgers first then by first pitch; a score in extra innings shows the innings, e.g. 8–5 (11); a white asterisk for an underdog win (ESPN's DraftKings line) with the count under the title; under a game only when a batter or pitcher stood out (batter: 2+ homers, 4+ hits or 5+ RBI; pitcher: 10+ strikeouts, or a starter with 7+ scoreless innings; at most two lines, thresholds to be reviewed after a month of real use). The Dodgers' game always carries Ohtani's and Yamamoto's lines. Then **each league's playoff race** (seeds 1 to 8, blue for division winners, lilac for wild cards, ✓/✗, games from the sixth seed, +/- arrows).
+3. **Postseason, daily whenever a game is on:** one series table per series that had a game (rule 16: best of 3 for the wild-card round, 5 for the division series, 7 for the championship series and the World Series; the higher seed, who hosts game 1, in the first column; regular-season seeds beside the names; the Dodgers' series first). Notes under a game: Ohtani's and Yamamoto's lines for a Dodgers game and any standout individual game. Notes are kept in the state, so earlier games cost no further requests. No home icon (the series table already shows the order), no regular-season tables.
+4. **The season ends:** when the World Series is decided the edition adds one closing note (the champions and the series score, then how the Dodgers' season ended with their record and the round they lost). The state is marked closed and the section stays silent until the next season.
+5. **Ohtani and Yamamoto:** Ohtani's pitching starts and his batting are read from ESPN's game logs (stolen bases, decisions, running averages); the box score is the fallback when the game log is down (no stolen bases). Ohtani gets a line whenever the Dodgers played (DNP with ESPN's reason when he did not play); Yamamoto only when he pitched, or when ESPN lists him injured. Tables use surnames for these two.
+6. **Codes:** ESPN's four codes that are not three letters are fixed (KC to KCR, SD to SDP, SF to SFG, TB to TBR); WSH, CHW and ATH are left as ESPN has them.
+7. **Lead sport:** baseball never leads in the regular season; in the postseason it is eligible to lead only on days the Dodgers played.
+8. **Failures:** a failing source leaves that part out and counts it (game logs down: player tables dropped, the rest stays; standings down: no tables; a game whose box score failed is retried next run).
+9. **Known limits:** ESPN has no historical standings, so the previews and tests show the final 2026 table whatever the week; a game that is in progress at edition time is shown as "In progress" in the daily mode but the weekly round-up only shows finished games; the exact ESPN wording for wild-card games was confirmed on 2026 data (ALWC, NLWC).
 
 ## Young Guns
 
@@ -349,7 +354,7 @@ No single repo does this job, so The Kickoff combines several free sources, with
 | [Jolpica F1 API](https://github.com/jolpica/jolpica-f1) | F1 results, qualifying and standings | Community-run successor to the old Ergast API; respect its rate limits |
 | [CricketData.org](https://cricketdata.org/), main cricket source | Cricket results and scorecards, international and franchise | Running since 2015 as CricAPI; permanent free tier of 100 calls a day, ample for one run; women's coverage may be thinner |
 | [Big Balls Data](https://bigballsdata.com/cricket-api), backup cricket source | Women's competitions and cross-checks | 250 free calls a day, 500 with a linked GitHub account; covers WBBL and the women's Hundred, but its live data looked weeks old when checked, so test freshness first |
-| MLB Stats API or ESPN | Dodgers games, Ohtani and Yamamoto stat lines | Source to confirm and test during the baseball checkpoint |
+| ESPN (unofficial, free, no key) | MLB scoreboard, box scores, standings, team schedules and player game logs | Built and tested on the 2026 season; the MLB Stats API is not needed |
 | FPL public data | D's classic team and Draft league | Unofficial; needs D's team and league IDs |
 | RSS feeds: BBC Sport, The Guardian, governing bodies, the Premier League's official site and club sites | News, injuries, transfer reports, the general section, interesting stories | Summaries only, always linked to the original. Whether the Premier League and club sites offer usable feeds is tested in the news step |
 | ESPN match odds | Pre-match win chances for overviews (favourites, upsets) | DraftKings lines carried by ESPN; undocumented like the rest of ESPN; ClubElo is the untested backup |
@@ -397,7 +402,7 @@ The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark
 
 The whole build happens in one project, in this order. Each checkpoint is tested on the Mac Mini before it's committed, and a failing source must never break the rest of the edition.
 
-*Status on 2026-11-03: checkpoints 1 to 9 are built and approved or awaiting D's final review (8 NFL and 9 NBA); 10 to 14 are not started; the daily schedule is off.*
+*Status on 2026-11-03: checkpoints 1 to 10 are built (8 NFL, 9 NBA and 10 MLB await D's final review); 11 to 14 are not started; the daily schedule is off.*
 
 1. **Accounts and setup:** GitHub account (the username appears in the web address), a new public repo, and GitHub Pages switched on. In the Anthropic Console, a new workspace called The Kickoff with a monthly spend limit, then a new API key inside it. A new Telegram bot via BotFather, plus D's chat ID.
 2. **Skeleton:** page template, design system and progress rail. Publish a dummy edition and send the Telegram ping.
@@ -408,7 +413,7 @@ The whole build happens in one project, in this order. Each checkpoint is tested
 7. **Tennis.**
 8. **NFL,** including the weekly rhythm.
 9. **NBA,** including tracked players.
-10. **Baseball:** Ohtani and Yamamoto triggers, Dodgers scores.
+10. **MLB:** weekly Dodgers round-up, daily league coverage from the Dodgers' 155th game, the postseason series tables and the season closing note.
 11. **Young Guns** and the watchlist.
 12. **Around the sporting world.**
 13. **Cross-sport sections:** The big stuff, On today, Games to Watch, interesting stories and the lead-sport ordering.
@@ -421,5 +426,5 @@ Small things to settle, none of which blocks starting the build.
 - [ ] WPL coverage: confirm CricketData.org or Big Balls Data carries it before the next season starts.
 - [ ] FIFA ranking: World Football Elo is the labelled stand-in; D can supply the real FIFA top 30 in data/top30_manual.json before each break.
 - [ ] FPL classic team ID and Draft league ID: collect during the build.
-- [ ] Baseball data source: choose between the MLB Stats API and ESPN during the baseball checkpoint, after testing both (ESPN has served the NFL, NBA, tennis and football well, with odds, injuries and box scores, so it is the default if it covers MLB).
-- [ ] Baseball scope: the spec assumes only Ohtani and Yamamoto trigger an entry. Widen it if D wants other Dodgers or MLB news.
+- [x] MLB data source: ESPN, tested on the whole 2026 season (decided 2026-11-03).
+- [ ] MLB: review the standout thresholds (2 homers, 4 hits, 5 RBI, 10 strikeouts, 7 scoreless innings) after a month of real use next spring; confirm the weekly Thursday timing once the season starts.

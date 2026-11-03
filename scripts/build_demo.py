@@ -26,8 +26,8 @@ from kickoff.sources import espn_cricket  # noqa: E402
 
 _espn = espn_cricket.Source()
 from kickoff.sources import espn  # noqa: E402
-from kickoff import f1, nba, nfl, tennis  # noqa: E402
-from kickoff.sources import espn_nba, espn_nfl, espn_tennis, feeds, jolpica  # noqa: E402
+from kickoff import f1, mlb, nba, nfl, tennis  # noqa: E402
+from kickoff.sources import espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica  # noqa: E402
 from kickoff.envfile import load_env  # noqa: E402
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
@@ -94,12 +94,20 @@ if "--no-nba" not in sys.argv:
             out["sections"].append({"id": "nba", "title": "NBA", "html": got["html"]})
     except Exception as e:
         out["problems"].append(f"nba ({type(e).__name__})")
+# MLB: free, no key, no Claude. Real data; nothing is saved. Quiet except on Thursdays in the season, from the Dodgers' 155th game, and in the postseason.
+if "--no-mlb" not in sys.argv:
+    try:
+        got = mlb.run(datetime.now(timezone.utc), day, {}, espn_mlb.Source())
+        if got["html"]:
+            out["sections"].append({"id": "mlb", "title": "MLB", "html": got["html"]})
+    except Exception as e:
+        out["problems"].append(f"mlb ({type(e).__name__})")
 if not out["sections"]:
     sys.exit("Nothing to show for this date. Problems: " + ", ".join(out["problems"]))
 banner = (f"Football preview built from real data for {render.nice_date(day.isoformat())}. "
           + ("Written with Claude. " if use_claude else "Plain text, no AI. ")
           + "The FPL deadline reminder and transfer hints are shown here even if the deadline is far off. "
-          + "Football, cricket, F1, tennis, NFL and NBA are built; baseball, Young Guns, Around the sporting world and the cross-sport sections are not yet, "
+          + "Football, cricket, F1, tennis, NFL, NBA and MLB are built (MLB is quiet out of season); Young Guns, Around the sporting world and the cross-sport sections are not yet, "
           + "and this demo lists the sports in the order they were built, not the final order.")
 edition = {"date": day.isoformat(), "dummy": False, "banner": banner, "home": "../index.html",
            "headlines": out["headlines"], "sections": out["sections"]}

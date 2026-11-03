@@ -270,7 +270,8 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone td.mid { text-align: center; color: var(--muted); white-space: nowrap; font-size: 13px; }
 .nbaone td.hm { text-align: left; }
 .nbaone td.w { font-weight: 700; color: var(--chalk); }
-.pts.f1.nba th.tt { font-size: 16px; padding: 12px 8px 10px; }
+.pts.f1.nba th.tt { font-size: 16px; padding: 12px 8px 10px; white-space: normal; }
+.pts.f1.nba th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 14px; color: var(--muted); }   /* the small line under a table title: season numbers (Dodgers, Ohtani) */
 .pts.f1.nba td:nth-child(2) { font-weight: 600; }
 .nflsb tr.tag td { padding: 10px 10px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-align: center; }
 .nflsb tr.note td { padding: 0 10px 10px; font-size: 13px; white-space: normal; overflow-wrap: anywhere; }
