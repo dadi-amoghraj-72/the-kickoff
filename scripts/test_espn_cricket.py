@@ -394,7 +394,7 @@ def fetcher(first, plain_page, log):
         log.append(u)
         if u == ec.SCORES_URL:
             return SCORES
-        return first if u.endswith(link) else plain_page if (u.endswith(plain) or "?t=" in u) else (_ for _ in ()).throw(OSError(u))
+        return first if u.endswith(link) and "espn.in" not in u else plain_page if (u.endswith(plain) or "?t=" in u or "espn.in" in u) else (_ for _ in ()).throw(OSError(u))
     return f
 
 
@@ -404,7 +404,10 @@ check("when the scores page's own link gives a card that agrees with the match, 
 c_retry = ec.Source(fetcher(STALE, CARD_PAGE, log2), pause=0).card(nzind)
 check("ESPN served a stale page on the link (a card that contradicts the match, as India's 54/1 on 4 November): the plain /scorecard/<id> address is tried next and its card, which agrees, is used", c_retry and c_retry["scorecard"] == raw_card and len(log2) == 3 and log2[2].endswith(plain), log2)
 c_none = ec.Source(fetcher(STALE, STALE, log3), pause=0).card(nzind)
-check("when every address gives a card that contradicts the match there is no card at all, rather than a wrong one (link, plain and plain with a cache-busting query were all tried)", c_none is None and len(log3) == 4 and "?t=" in log3[3], log3)
+check("when every address gives a card that contradicts the match there is no card at all, rather than a wrong one (the link, the plain address, a cache-busting query and ESPN's India host were all tried)", c_none is None and len(log3) == 5 and "?t=" in log3[3] and "espn.in" in log3[4], log3)
+potm_feed = ck.espn_matches(ec.Feed(feed_get, pause=0))
+odi_p = next(m for m in potm_feed if m["event"] == "1539437")["_card"]["potm"]
+check("the player of the match carries his team from the feed (Anshul Kamboj, India), so the page never shows empty brackets; a person with no team shows just his name", odi_p == [{"name": "Anshul Kamboj", "team": "India"}] and "()" not in ck.potm_html({"potm": [{"name": "X Y", "team": ""}]}) and "(India)" in ck.potm_html({"potm": odi_p}))
 old = {"cards": {"a": {"built": "2026-10-20T00:00:00Z", "scorecard": []}, "b": {"built": "2026-11-01T00:00:00Z", "scorecard": []}, "c": {"scorecard": []}}, "tables": {}, "series": {}}
 check("entries older than four days, and entries with no valid stamp, are ignored: only 'b' (a day old) survives", list(cc.fresh(old, NOW_C)["cards"]) == ["b"])
 card_f, table_f, series_f = cc.getters(cache, None)

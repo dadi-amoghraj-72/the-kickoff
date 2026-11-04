@@ -201,7 +201,7 @@ def potm_html(entry):
     people = (entry or {}).get("potm") or []
     if not people:
         return ""
-    return '<span class="potm">Player of the match: ' + ", ".join(f"<strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])})" for p in people) + "</span>"
+    return '<span class="potm">Player of the match: ' + ", ".join(f"<strong>{r.esc(p['name'])}</strong>" + (f" ({r.esc(p['team'])})" if p.get("team") else "") for p in people) + "</span>"
 
 
 SERIES_FORMATS = ("test", "odi")   # D: series tables for Test and ODI series (add "t20" to widen it to T20I series)

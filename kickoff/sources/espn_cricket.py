@@ -303,8 +303,8 @@ class Source:
             if not game:
                 return None
             found = re.search(r"/series/(\d+)/scorecard/(\d+)", game["scorecard"])
-            urls = [game["scorecard"]] + ([GAME_URL.format(series=found.group(1), game=found.group(2)), GAME_URL.format(series=found.group(1), game=found.group(2)) + f"?t={int(time.time())}"]
-                                           if found else [])
+            plain = GAME_URL.format(series=found.group(1), game=found.group(2)) if found else None
+            urls = [game["scorecard"]] + ([plain, plain + f"?t={int(time.time())}", plain.replace("www.espn.com", "www.espn.in")] if plain else [])   # the link, the plain address, a cache-buster, ESPN's India host (its own cache)
             for url in urls:
                 page = self._page(url)
                 innings = parse_scorecard(page) if page else None
@@ -412,9 +412,10 @@ class Feed:
                 if not d:
                     continue
                 st = e.get("status") or {}
-                potm = [{"name": f["athlete"].get("displayName") or f["athlete"].get("name", ""), "team": ""} for f in (e["competitions"][0].get("status") or {}).get("featuredAthletes", [])
-                        if f.get("abbreviation") == "POTM"] or [{"name": f["athlete"].get("displayName") or f["athlete"].get("name", ""), "team": ""} for f in st.get("featuredAthletes", [])
-                                                                if f.get("abbreviation") == "POTM"]
+                names = {c["team"]["id"]: c["team"]["displayName"] for c in e["competitions"][0]["competitors"]}
+                fa = (e["competitions"][0].get("status") or {}).get("featuredAthletes") or st.get("featuredAthletes") or []
+                potm = [{"name": f["athlete"].get("displayName") or f["athlete"].get("name", ""), "team": names.get(str((f["athlete"].get("team") or {}).get("id")), "")}
+                        for f in fa if f.get("abbreviation") == "POTM"]
                 status = st.get("summary") or d["status"]
                 out.append({**d, "status": status, "matchEnded": (st.get("type") or {}).get("state") == "post", "score": _scores(e),
                             "_card": {"scorecard": [], "status": status, "potm": potm}})
