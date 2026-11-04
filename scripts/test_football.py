@@ -131,7 +131,7 @@ check("run again with the saved state: the table is 'No change', and Saka's inju
       "No change since Sunday" in html2 and "<table" not in html2.split("Premier League")[1][:6000].split("FPL Corner")[0] and "Bukayo Saka" not in html2.split("FPL Corner")[0], html2[:300])
 out3 = football.run(date(2026, 11, 4), client=None, st=st, now=datetime(2026, 11, 4, 0, 30, tzinfo=timezone.utc))
 html3 = " ".join(s["html"] for s in out3["sections"])
-check("a day with no games and an unchanged table: one 'No new games: Premier League.' line at the end, not a heading and a 'No change since' line per league", "No new games: Premier League." in html3 and "No change since" not in html3 and "<h3>Premier League</h3>" not in html3, html3[:300])
+check("a day with no games and an unchanged table: one yellow 'Other football leagues' heading at the end with 'No new games: Premier League.' under it, not a heading and a 'No change since' line per league", "<h3>Other football leagues</h3><p class=\"muted\">No new games: Premier League.</p>" in html3 and "No change since" not in html3 and "<h3>Premier League</h3>" not in html3, html3[:300])
 check("a day with games still shows the league's own heading and its table notice (the first run above)", "<h3>Premier League</h3>" in html2)
 from kickoff import render as _r  # noqa: E402
 check("the list of quiet leagues reads 'A', 'A and B', 'A, B and C'", [_r.join_names(x) for x in (["A"], ["A", "B"], ["A", "B", "C"], [])] == ["A", "A and B", "A, B and C", ""])

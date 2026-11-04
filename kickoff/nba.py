@@ -185,10 +185,15 @@ def weight(p, kinds=()):
     return p["PTS"] + 1.2 * p["REB"] + 1.5 * p["AST"] + 3 * p["STL"] + 3 * p["BLK"] + 8 * len(kinds)
 
 
+SHOW_GUARD = {"REB": 7, "AST": 7, "STL": 3, "BLK": 2}    # a stat is shown beside the points only when it is notable for the player's position
+SHOW_OTHER = {"REB": 10, "AST": 6, "STL": 3, "BLK": 3}    # (D, 2026-11-04: "if a guard got two rebounds I don't need to know"); points are always shown
+
+
 def line(p):
-    """'43 pts, 7 reb, 4 ast, 6 blk'; steals and blocks only when they are 2 or more."""
-    bits = [f"{p['PTS']} pts", f"{p['REB']} reb", f"{p['AST']} ast"]
-    bits += [f"{p[k]} {lab}" for k, lab in (("STL", "stl"), ("BLK", "blk")) if p[k] >= 2]
+    """'42 pts, 7 reb, 13 ast': the points, then rebounds, assists, steals and blocks only when each is notable for a guard (7 rebounds, 7 assists, 3 steals,
+    2 blocks) or for a forward or centre (10 rebounds, 6 assists, 3 steals, 3 blocks)."""
+    need = SHOW_GUARD if p.get("pos") in GUARDS else SHOW_OTHER
+    bits = [f"{p['PTS']} pts"] + [f"{p[k]} {lab}" for k, lab in (("REB", "reb"), ("AST", "ast"), ("STL", "stl"), ("BLK", "blk")) if p[k] >= need[k]]
     return ", ".join(bits)
 
 
@@ -377,12 +382,41 @@ def game_rows(g, notes, many_days):
     return rows
 
 
-def games_html(items, many_days, dogs):
-    """items: [(game, notes)] already in order. One table titled Last Night's Games; the underdog count sits under the title."""
+def us_dates(games):
+    """The US (Eastern) calendar date or dates of the games, for the heading: '2 Nov', '2–3 Nov' or '31 Oct–1 Nov'."""
+    days = sorted({day_of(g) for g in games})
+    a, z = days[0], days[-1]
+    if a == z:
+        return f"{a.day} {a:%b}"
+    return f"{a.day}–{z.day} {z:%b}" if a.month == z.month else f"{a.day} {a:%b}–{z.day} {z:%b}"
+
+
+def best_game(games):
+    """The best finished game by code: a close finish and overtime count most, an underdog winning counts a little, a rout does not. None without a final."""
+    finals = [g for g in games if g["status"] == "final" and g["home"]["score"] is not None]
+    drama = lambda g: ((5 if g["ot"] else 0) + max(0, 10 - abs(g["home"]["score"] - g["away"]["score"])) * 0.6 + (2 if underdog_win(g) else 0))  # noqa: E731
+    return max(finals, key=lambda g: (drama(g), g["home"]["score"] + g["away"]["score"], g["date"])) if finals else None
+
+
+def summary_html(games):
+    """The box above the table, the same as the NFL's: underdogs won (of the games with a clear underdog) and the best game (teams and score only)."""
+    items = []
+    known = [g for g in games if g["status"] == "final" and g.get("dog")]
+    if known:
+        items.append(("Underdogs won", f"{sum(1 for g in known if underdog_win(g))}/{len(known)}", "", ""))
+    best = best_game(games)
+    if best:
+        items.append(("Best game", "", f"{best['away']['abbr']} {best['away']['score']}-{best['home']['score']} {best['home']['abbr']}", ""))
+    return r.summary_box(items)
+
+
+def games_html(items, many_days):
+    """items: [(game, notes)] already in order. A summary box, then one table titled Last Night's Games (with the US date of the games in brackets: the games
+    are played on that date in America, whatever the date is in Singapore)."""
     rows = [x for g, notes in items for x in game_rows(g, notes, many_days)]
-    sub = f'<span class="prog">{DOG} {dogs} underdog win{"s" if dogs != 1 else ""}</span>' if dogs else ""
-    return (f'<div class="nflsb nbaone"><table><colgroup><col style="width:35%"><col style="width:30%"><col style="width:35%"></colgroup>'
-            f'<thead><tr><th class="tt" colspan="3">Last Night\'s Games{sub}</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
+    games = [g for g, _ in items]
+    return (summary_html(games) + f'<div class="nflsb nbaone"><table><colgroup><col style="width:35%"><col style="width:30%"><col style="width:35%"></colgroup>'
+            f'<thead><tr><th class="tt" colspan="3">Last Night\'s Games ({us_dates(games)}, US time)</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
 
 
 def _list(items):
@@ -611,7 +645,7 @@ def run(now, day, st, source):
     if plain or plain_live:
         many_days = len({day_of(g) for g in plain + plain_live}) > 1
         items = [(g, game_notes(g, boxes[g["id"]], players[g["id"]], tracked, info) if g["id"] in boxes else []) for g in sorted(plain + plain_live, key=order_key)]
-        html += games_html(items, many_days, sum(1 for g in plain + plain_live if underdog_win(g)))
+        html += games_html(items, many_days)
     if playoff_new:                                         # one table per series that had a game finish (or is on now)
         seeds = {}
         try:                                                # the regular-season seeds of the two teams go beside their names

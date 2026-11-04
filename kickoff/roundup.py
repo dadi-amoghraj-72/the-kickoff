@@ -24,7 +24,7 @@ def round_info(table_rows, label="Game week", total=None):
 
 def lines(facts, round_size, period="day", info=None):
     """[(label, figure, text, sub)] for the box. figure is the highlighted part (may be empty); sub is a small second line under the row (may be empty).
-    Rows: the round (Matchday 4/8), Games played, Underdogs won, Biggest upset (only when there was one), Best game (team codes, the goals and a comeback below)."""
+    Rows: the round (Matchday 4/8), Games played, Underdogs won, Biggest upset (only when there was one), Best game (team codes and score, nothing underneath: D's choice)."""
     rows = facts["matches"]
     known = "tally" in facts
     out = []
@@ -50,9 +50,7 @@ def lines(facts, round_size, period="day", info=None):
             out.append(("Biggest upset", "", top.get("codes") or top["match"], f"{team} had a {pct}% chance"))
     game = next((x for x in rows if x["match"] == facts.get("game_of_the_night")), None)
     if game:
-        extra = " · comeback" if game.get("comeback") else ""
-        goals = f"{game['total_goals']} goal" + ("" if game["total_goals"] == 1 else "s")
-        out.append(("Best game", "", game.get("codes") or game["match"], f"{goals}{extra}"))
+        out.append(("Best game", "", game.get("codes") or game["match"], ""))
     return out
 
 

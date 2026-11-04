@@ -146,7 +146,7 @@ def run(day, client=None, st=None, now=None, demo=False):
         if cl_rows and champions.in_league_phase(cl_matches):   # remembered so the next league-phase table can show who moved
             new.setdefault("tables", {})[espn.CHAMPIONS_LEAGUE] = {"published": day.isoformat(), "rows": tables.signature(cl_rows)}
     if quiet:
-        football += '<p class="muted">No new games: ' + r.esc(r.join_names(quiet)) + ".</p>"
+        football += '<h3>Other football leagues</h3><p class="muted">No new games: ' + r.esc(r.join_names(quiet)) + ".</p>"
 
     # ---- International football: only around a break, only competitive games ----
     intl = guard("international football", international.run, day, now, client, st.get("top30"))

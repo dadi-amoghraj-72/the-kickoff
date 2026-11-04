@@ -160,7 +160,7 @@ def best_game(games):
 
 def summary_html(games, played, total):
     """The box above the week's scoreboard: games played (with the rest still to come), underdog wins out of the games that had a clear underdog, and the
-    best game with its points and any overtime on the line below."""
+    best game (teams and score only)."""
     if not total:
         return ""
     items = [("Games played", f"{played}/{total}", "", "Rest still to play" if played < total else "")]
@@ -169,8 +169,7 @@ def summary_html(games, played, total):
         items.append(("Underdogs won", f"{sum(1 for g in known if underdog_win(g))}/{len(known)}", "", ""))
     best = best_game(games)
     if best:
-        pts = best["home"]["score"] + best["away"]["score"]
-        items.append(("Best game", "", f"{best['away']['abbr']} {best['away']['score']}-{best['home']['score']} {best['home']['abbr']}", f"{pts} points" + (" · OT" if best["ot"] else "")))
+        items.append(("Best game", "", f"{best['away']['abbr']} {best['away']['score']}-{best['home']['score']} {best['home']['abbr']}", ""))
     return r.summary_box(items)
 
 
@@ -328,7 +327,7 @@ def special_html(lead, new=frozenset()):
             classes.append("")
     if not rows:
         return ""
-    return _board("Top Special Teams", [("#", True), ("Player", False), ("", True), ("", True), ("", True)], (7, 47, 15, 15, 16), rows, classes, " nfl st")
+    return _board("Top special teams performances", [("#", True), ("Player", False), ("", True), ("", True), ("", True)], (7, 47, 15, 15, 16), rows, classes, " nfl st")
 
 
 def leaders_html(lead, players, new=frozenset()):
@@ -339,19 +338,19 @@ def leaders_html(lead, players, new=frozenset()):
     qb_rows = [[i + 1, _name(p, new), p["team"], stat(p, "passing", "C/ATT"), int(n(p, "passing", "YDS")), f"{int(n(p, 'passing', 'TD'))}-{int(n(p, 'passing', 'INT'))}", f"{_rating(p):.1f}"] for i, p in enumerate(qb)]
     qb_rows += [[rank, p["short"], p["team"], stat(p, "passing", "C/ATT"), int(n(p, "passing", "YDS")), f"{int(n(p, 'passing', 'TD'))}-{int(n(p, 'passing', 'INT'))}", f"{_rating(p):.1f}"] for rank, p in extra]
     qb_classes = ["cut" if (extra and i == len(qb) - 1) else "" for i in range(len(qb_rows))]
-    html += _board("Top QBs · Passer Rating", [("#", True), ("Player", False), ("Tm", False), ("C/ATT", True), ("YDS", True), ("TD-INT", True), ("RTG", True)], (7, 27, 10, 14, 10, 14, 18), qb_rows, qb_classes) if qb_rows else ""
+    html += _board("Top QB performances", [("#", True), ("Player", False), ("Tm", False), ("C/ATT", True), ("YDS", True), ("TD-INT", True), ("RTG", True)], (7, 27, 10, 14, 10, 14, 18), qb_rows, qb_classes) if qb_rows else ""
     rb = lead["rb"]
-    html += _board("Top RBs · Rushing", [("#", True), ("Player", False), ("Tm", False), ("CAR", True), ("YDS", True), ("AVG", True), ("TD", True)], (6, 31, 10, 13, 14, 13, 13),
+    html += _board("Top RB performances", [("#", True), ("Player", False), ("Tm", False), ("CAR", True), ("YDS", True), ("AVG", True), ("TD", True)], (6, 31, 10, 13, 14, 13, 13),
                    [[i + 1, _name(p, new), p["team"], int(n(p, "rushing", "CAR")), int(n(p, "rushing", "YDS")), stat(p, "rushing", "AVG"), int(n(p, "rushing", "TD"))] for i, p in enumerate(rb)]) if rb else ""
-    for key, title in (("wr", "Top WRs · Receiving"), ("te", "Top TEs · Receiving")):
+    for key, title in (("wr", "Top WR performances"), ("te", "Top TE performances")):
         ps = lead[key]
         html += _board(title, [("#", True), ("Player", False), ("Tm", False), ("REC", True), ("YDS", True), ("TD", True), ("LNG", True)], (6, 31, 10, 13, 14, 13, 13),
                        [[i + 1, _name(p, new), p["team"], int(n(p, "receiving", "REC")), int(n(p, "receiving", "YDS")), int(n(p, "receiving", "TD")), int(n(p, "receiving", "LONG"))] for i, p in enumerate(ps)]) if ps else ""
     ps = lead["rush"]
-    html += _board("Top Pass Rushers · Sacks", [("#", True), ("Player", False), ("Pos", False), ("Tm", False), ("SACK", True), ("TFL", True), ("QBH", True)], (5, 28, 10, 11, 15, 14, 17),
+    html += _board("Top pass rusher performances", [("#", True), ("Player", False), ("Pos", False), ("Tm", False), ("SACK", True), ("TFL", True), ("QBH", True)], (5, 28, 10, 11, 15, 14, 17),
                    [[i + 1, _name(p, new), p["pos"], p["team"], f"{n(p, 'defensive', 'SACKS'):g}", f"{n(p, 'defensive', 'TFL'):g}", int(n(p, "defensive", "QB HTS"))] for i, p in enumerate(ps)]) if ps else ""
     ps = lead["back"]
-    html += _board("Top Secondary · Interceptions", [("#", True), ("Player", False), ("Pos", False), ("Tm", False), ("INT", True), ("PD", True), ("TOT", True)], (5, 28, 10, 11, 15, 14, 17),
+    html += _board("Top secondary performances", [("#", True), ("Player", False), ("Pos", False), ("Tm", False), ("INT", True), ("PD", True), ("TOT", True)], (5, 28, 10, 11, 15, 14, 17),
                    [[i + 1, _name(p, new), p["pos"], p["team"], int(n(p, "interceptions", "INT")), int(n(p, "defensive", "PD")), int(n(p, "defensive", "TOT"))] for i, p in enumerate(ps)]) if ps else ""
     return html + special_html(lead, new)
 
@@ -619,13 +618,25 @@ def gold_numbers(text):
     return marked + (" in the " + r.esc(result) if sep else "")
 
 
-def _list(items, numbers=False, cls=""):
+def emphasise(text, teams):
+    """A highlight line with something to catch the eye: the team names in bold and the key figures in gold (scores like 33-30, '14 points', '42-yard',
+    '95 Yd', '4 times') and the runner of a longest play in bold. Long runs of plain white text get skipped on a phone, so every highlight carries both."""
+    out = r.esc(text)
+    out = re.sub(r"(?<![\w-])(\d+-\d+)(?![\w-])", r'<span class="n">\1</span>', out)
+    out = re.sub(r"(?<![\w>-])(\d+)(?=-yard|\s+(?:points|Yd|yards|times)\b)", r'<span class="n">\1</span>', out)
+    out = re.sub(r"(?<![\w>])([A-Z][\w.'-]+(?: [A-Z][\w.'-]+)+)(?= <span class=\"n\">\d+</span> Yd)", r"<strong>\1</strong>", out)   # the player of a longest play
+    for name in sorted(teams, key=len, reverse=True):
+        out = re.sub(rf"(?<![\w>]){re.escape(r.esc(name))}(?![\w<])", lambda m: f"<strong>{m.group(0)}</strong>", out)
+    return out
+
+
+def _list(items, numbers=False, cls="", teams=None):
     """Notes lines in the house style: a gold diamond bullet with a hanging indent; a leading label (Offence:, Comeback:) in bold; the stat
-    figures in gold when `numbers` is set (Top performances)."""
+    figures in gold when `numbers` is set (Top performances); `teams` (a set of team names) switches on emphasise() for the highlights."""
     def one(text):
         head, sep, rest = text.partition(": ")
-        body = gold_numbers(rest) if numbers else r.esc(rest)
-        return f"<strong>{r.esc(head)}:</strong> {body}" if sep and head in LABELS else (gold_numbers(text) if numbers else r.esc(text))
+        fmt = (lambda t: emphasise(t, teams)) if teams else (lambda t: gold_numbers(t) if numbers else r.esc(t))
+        return f"<strong>{r.esc(head)}:</strong> {fmt(rest)}" if sep and head in LABELS else fmt(text)
     return f'<div class="dlist{" " + cls if cls else ""}">' + "".join(f'<div class="pl"><span class="t">{one(i)}</span></div>' for i in items) + "</div>" if items else ""
 
 
@@ -705,7 +716,7 @@ def run(now, day, st, source):
         leaders_shown = {"week": week, "ids": ids}
     hl = game_highlights([g for g in new if g["id"] in boxes], boxes)
     if hl:
-        html += "<h4>Highlights</h4>" + _list([t for _, t in hl])
+        html += "<h4>Highlights</h4>" + _list([t for _, t in hl], teams={g[side]["short"] for g in games for side in ("home", "away")})
     if wed and all_players:
         potw = players_of_the_week(all_players, by_id)
         html += ("<h4>Top performances</h4>" + _list([f"{label}: {line}" for label, line in potw if label != "Mention"], numbers=True)

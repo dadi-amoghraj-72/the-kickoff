@@ -132,7 +132,7 @@ texts, hits = nba.standouts(ALL, BYID, BOXES)
 check("independent: the standout hits equal a separate scan of the raw box scores (40 pts, triple-double, 20-20, 5 blocks, 5 steals, game-winner)", set(hits) >= raw_hits and len(set(hits) - raw_hits) <= 1, (set(hits) ^ raw_hits))
 check("the real standouts are Doncic (45 points, a guard with 15 rebounds), Wembanyama (43), Kessler (15 rebounds, a center) and Dunn (7 steals), best first",
       [t.split(" (")[0] for t in texts[:4]] == ["Luka Doncic", "Victor Wembanyama", "Walker Kessler", "Kris Dunn"] and len(texts) == 4, texts)
-check("a standout line is the name, team code and stat line only: no score or result (the games are just above)", texts[3] == "Kris Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl" and texts[0] == "Luka Doncic (LAL): 45 pts, 15 reb, 6 ast, 5 stl"
+check("a standout line is the name, team code and stat line only: no score or result (the games are just above)", texts[3] == "Kris Dunn (LAC): 12 pts, 7 stl" and texts[0] == "Luka Doncic (LAL): 45 pts, 15 reb, 5 stl"
       and not any(";" in t or " win over" in t or "loss to" in t or re.search(r"\d+-\d+", t) for t in texts), texts)
 check("no standout line repeats its own stat as a tag (no '40-point game' text)", not any("point game" in t or "blocks)" in t for t in texts))
 one = dict(wem, PTS=12, REB=10, AST=10, BLK=0)
@@ -219,7 +219,7 @@ check("dnp_text: status only when ESPN gives no type; plain DNP when ESPN says n
 moved = notes_for("401909900", info={"teams": {**nba.TEAMS, "1966": "MIL"}, "auto": {}})
 check("a traded player is followed: with LeBron's team set to Milwaukee, his DNP line is under the Cavaliers-Bucks game and no longer under the 76ers game", "L. James (MIL): DNP" in moved and not any(n.startswith("L. James") for n in notes_for("401909897", info={"teams": {**nba.TEAMS, "1966": "MIL"}, "auto": {}})))
 auto_p = next(p["id"] for p in ALL if p["name"] == "Kris Dunn")
-check("an auto-added player is followed like D's own: his stat line is under his game", any(n.startswith("K. Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl") for n in notes_for("401909905", tracked=TR | {auto_p})))
+check("an auto-added player is followed like D's own: his stat line is under his game", any(n.startswith("K. Dunn (LAC): 12 pts, 7 stl") for n in notes_for("401909905", tracked=TR | {auto_p})))
 
 # ---- The whole run ----
 out = nba.run(NOW, TUE, {}, Saved())
@@ -227,10 +227,11 @@ html, t = out["html"], text(out["html"])
 S = out["stats"]
 games_part = html.split("<h4>")[0]
 check("run: 11 new games, 11 box scores, nothing failed", S["new"] == 11 and S["boxes"] == 11 and S["failed"] == 0, S)
-check("one table titled Last Night's Games: no Star Games / Other Games tables, no '8 of 11' counts, no 'won by' sentences, no career lines", t.startswith("Last Night's Games") and not any(x in t for x in ("Star Games", "Other Games", "of 11 games", "won by", "held on", "ran away", "Career")), t[:200])
-check("the underdog count is the only thing under the title: '* 2 underdog wins'", "Last Night's Games * 2 underdog wins" in t)
+check("one table titled Last Night's Games with the US dates of the games in brackets (31 Oct–1 Nov, US time): no Star Games / Other Games tables, no '8 of 11' counts, no 'won by' sentences, no career lines", "Last Night's Games (31 Oct–1 Nov, US time)" in t and not any(x in t for x in ("Star Games", "Other Games", "of 11 games", "won by", "held on", "ran away", "Career")), t[:200])
+raw_known = sum(1 for b in BOXES.values() if b["odds"]["away_dog"] or b["odds"]["home_dog"])
+check("the underdog count is in the summary box above the table (Underdogs won 2/N, N the games with a clear underdog by the raw odds flags), not as an asterisk line under the title", re.search(rf"Underdogs won\s+2/{raw_known}\s+Best game", t) and "* 2 underdog wins" not in t and t.index("Underdogs won") < t.index("Last Night's Games"), (raw_known, t[:160]))
 raw_dogs = sum(1 for gid, b in BOXES.items() if (("away" if b["odds"]["away_dog"] else "home" if b["odds"]["home_dog"] else None) == nba.winner(BYID[gid])))
-check("independent: underdog wins counted straight from the odds flags are 2, with one asterisk per winner plus one in the header", raw_dogs == 2 and html.count('class="dog"') == 3, raw_dogs)
+check("independent: underdog wins counted straight from the odds flags are 2, with one asterisk per winner and none in the title", raw_dogs == 2 and html.count('class="dog"') == 2, raw_dogs)
 css = (ROOT / "kickoff" / "static" / "style.css").read_text()
 check("the asterisk is white (the chalk text colour, shared by the NFL and NBA), not gold", re.search(r"\.nflsb \.dog \{ color: var\(--chalk\);", css) and "--gold" not in re.search(r"\.nflsb \.dog \{[^}]*\}", css).group(0))
 pos = [t.index(x) for x in ("Lakers", "76ers", "Cavaliers", "Spurs", "Celtics", "Trail Blazers")]
@@ -239,12 +240,34 @@ check("regular season: no house icon anywhere", html.count('class="home"') == 0)
 check("both US days get a label because the games span two dates; the Cup tag is not on regular games", "Sat 31 Oct" in t and "Sun 1 Nov" in t and "NBA Cup" not in games_part)
 check("a game's line is not cut off from its notes: every score row that has notes is followed straight by the notes row, and the separator is only after the notes",
       len(re.findall(r'<tr class="one"><td[^>]*>[^<]*(?:<[^>]+>[^<]*)*?</tr><tr class="note end">', games_part)) == 11 and games_part.count(' end"') == 11 and "one end" not in games_part, games_part.count(' end"'))
-check("independent: Wembanyama's line is built from the raw stats and carries his team: 'V. Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk' (no shooting line)", "V. Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk" in text(out["html"]).replace("\u00a0", " ") and "17-34" not in text(out["html"]))
+check("independent: Wembanyama's line is built from the raw stats and carries his team: 'V. Wembanyama (SAS): 43 pts, 6 blk' (a center's 7 rebounds and 4 assists are not notable; no shooting line)", "V. Wembanyama (SAS): 43 pts, 6 blk" in text(out["html"]).replace("\u00a0", " ") and "17-34" not in text(out["html"]))
 check("standouts section lists Doncic first", "Standouts Luka Doncic (LAL)" in t)
 check("state: the 11 games are reported, underdogs saved, tracked players' teams remembered, standings saved for next time", len(out["state"]["reported"]) == 11 and set(out["state"]["dogs"]) == set(BOXES)
       and out["state"]["teams"]["1966"] == "PHI" and out["state"]["teams"]["3945274"] == "LAL" and out["state"]["seeds"]["Eastern Conference"]["PHI"] == 1)
 
 check("in the page the standouts list carries the highlights, and the colour rule exists", out["html"].count('<span class="hl">') >= 5 and ".standouts .hl { color: var(--gold)" in (ROOT / "kickoff" / "static" / "style.css").read_text())
+
+# ---- The Last Night's Games heading and box (D, 2026-11-04) ----
+from datetime import datetime as _dt, timezone as _tz  # noqa: E402
+mkg = lambda iso, a, h, ot=False, dog=None: {"id": iso, "date": _dt.fromisoformat(iso).replace(tzinfo=_tz.utc), "status": "final", "ot": ot, "dog": dog, "away": {"abbr": "AAA", "score": a}, "home": {"abbr": "HHH", "score": h}}  # noqa: E731
+check("the US date in the heading: one date, a range in one month, a range across two months (Eastern dates: a 02:00 UTC game belongs to the evening before)",
+      [nba.us_dates(x) for x in ([mkg("2026-11-03T01:00:00", 1, 2)], [mkg("2026-11-02T23:00:00", 1, 2), mkg("2026-11-04T23:00:00", 1, 2)], [mkg("2026-10-31T23:00:00", 1, 2), mkg("2026-11-02T01:00:00", 1, 2)])] == ["2 Nov", "2–4 Nov", "31 Oct–1 Nov"])
+check("best game: an overtime game decided by a point beats a 1-point regulation game, which beats a 3-point game; a 25-point rout never wins; live and unplayed games are ignored",
+      nba.best_game([mkg("2026-11-02T23:00:00", 100, 101), mkg("2026-11-02T23:00:00", 110, 111, ot=True), mkg("2026-11-02T23:00:00", 90, 93)])["home"]["score"] == 111
+      and nba.best_game([mkg("2026-11-02T23:00:00", 100, 125), mkg("2026-11-02T23:00:00", 90, 99)])["home"]["score"] == 99
+      and nba.best_game([{**mkg("2026-11-02T23:00:00", 1, 2), "status": "live"}]) is None and nba.best_game([]) is None)
+check("a close underdog win edges out an equally close favourite win (both by a point, the home team being the underdog: it wins the first game and loses the second)", nba.best_game([mkg("2026-11-02T23:00:00", 100, 101, dog="home"), mkg("2026-11-02T23:00:00", 101, 100, dog="home")])["home"]["score"] == 101)
+check("the summary box has no best game and no rows when nothing has finished", nba.summary_html([]) == "" and "Best game" in nba.summary_html([mkg("2026-11-02T23:00:00", 100, 101)]) and "Underdogs won" not in nba.summary_html([mkg("2026-11-02T23:00:00", 100, 101)]))
+
+# ---- Which stats are shown beside the points (D, 2026-11-04): only those notable for the position ----
+mkp = lambda pos, pts, reb, ast, stl, blk: {"pos": pos, "PTS": pts, "REB": reb, "AST": ast, "STL": stl, "BLK": blk}  # noqa: E731
+check("D's five examples exactly: Doncic 42-7-13-2 (guard) keeps 7 rebounds and 13 assists; Shai 43-3-8-2 keeps only the assists; Cade 33-5-7-5 keeps assists and steals; Ty Jerome 40-5-5-2 is just points; Barnes 22-15-8-2 (forward) keeps rebounds and assists",
+      [nba.line(mkp(*a)) for a in (("G", 42, 7, 13, 2, 0), ("G", 43, 3, 8, 2, 0), ("G", 33, 5, 7, 5, 0), ("G", 40, 5, 5, 2, 0), ("F", 22, 15, 8, 2, 0))]
+      == ["42 pts, 7 reb, 13 ast", "43 pts, 8 ast", "33 pts, 7 ast, 5 stl", "40 pts", "22 pts, 15 reb, 8 ast"])
+check("the guard thresholds: 7 rebounds, 7 assists, 3 steals, 2 blocks show; one less does not", nba.line(mkp("PG", 20, 7, 7, 3, 2)) == "20 pts, 7 reb, 7 ast, 3 stl, 2 blk" and nba.line(mkp("SG", 20, 6, 6, 2, 1)) == "20 pts")
+check("the forward and center thresholds: 10 rebounds, 6 assists, 3 steals, 3 blocks show; one less does not (a forward's 7 rebounds is not notable)", nba.line(mkp("C", 20, 10, 6, 3, 3)) == "20 pts, 10 reb, 6 ast, 3 stl, 3 blk" and nba.line(mkp("F", 20, 9, 5, 2, 2)) == "20 pts" and nba.line(mkp("F", 20, 7, 4, 0, 0)) == "20 pts")
+check("a player with no known position is judged as a forward (the stricter list); points are always there", nba.line(mkp("", 15, 8, 4, 0, 0)) == "15 pts")
+check("every stat that makes a standout is still shown: a 10-rebound guard, a 5-steal guard, a 5-block forward, a 15-assist guard", all(f"{lab}" in nba.line(mkp(pos, 12, reb, ast, stl, blk)) for pos, reb, ast, stl, blk, lab in (("G", 10, 0, 0, 0, "reb"), ("G", 0, 0, 5, 0, "stl"), ("F", 0, 0, 0, 5, "blk"), ("G", 0, 15, 0, 0, "ast"))))
 
 # ---- Short names under each game (D, 2026-11-04): first initial and surname, so every line fits one line at 360px ----
 check("short_name: initial and surname; hyphenated surnames, suffixes and names that already have initials are kept whole after the first initial", [nba.short_name(n) for n in ("Shai Gilgeous-Alexander", "Wendell Carter Jr.", "P.J. Washington", "Karl-Anthony Towns", "Nene")] == ["S. Gilgeous-Alexander", "W. Carter Jr.", "P.J. Washington", "K. Towns", "Nene"])
@@ -400,7 +423,7 @@ check("unplayed games that will certainly be played show their date in Singapore
 bx = SBOXES["401869193"]
 cade = next(a for t in bx["players"] for a in t["athletes"] if a["id"] == "4432166")
 cv = dict(zip(bx["players"][0]["labels"], cade["stats"]))
-check("independent: Cade Cunningham's note under game 1 is built from the raw box score", f"C. Cunningham (DET): {cv['PTS']} pts, {cv['REB']} reb, {cv['AST']} ast" in mt and cv["FG"] not in mt.replace(" ", " "), cv)
+check("independent: Cade Cunningham's note under game 1 is built from the raw box score: a guard with 39 points, 5 rebounds and 4 assists shows only the points (neither is notable for a guard)", re.search(rf"C\. Cunningham \(DET\): {cv['PTS']} pts(?!,)", mt.replace("\u00a0", " ")) and cv["FG"] not in mt.replace("\u00a0", " "), cv)
 check("the best performer of game 3 who is not tracked appears with his team (Banchero, ORL)", "P. Banchero (ORL):" in mt)
 raw_seed = {e["team"]["abbreviation"]: int(next(x["displayValue"] for x in e["stats"] if x["name"] == "playoffSeed")) for c in STAND26["children"] for e in c["standings"]["entries"]}
 check("independent: ESPN's final 2025-26 standings give Detroit seed 1 and Orlando seed 8 (the real 1-8 series), and the seeds sit beside the team names", raw_seed["DET"] == 1 and raw_seed["ORL"] == 8 and nba.seeds_by_team(STAND26)["DET"] == 1 and "(1) Detroit Pistons" in mt and "Orlando Magic (8)" in mt)
@@ -438,7 +461,7 @@ check("team names are standardised: all 30 are City + nickname, ESPN's 'LA Clipp
 check("the same fix applies in a playoff header", "Los Angeles Clippers" in text(nba.series_html({**po, "home": {**po["home"], "name": "LA Clippers"}}, [], {})))
 css_ = (ROOT / "kickoff" / "static" / "style.css").read_text()
 check("player lines carry a small gold diamond bullet (a flex box whose bullet cell is one line tall and centres the diamond on the first line, so wrapped lines align) and are 14px, smaller than the 15px team names", 'content: "\\25C6"' in css_ and re.search(r"\.nflsb tr\.note td \{ font-size: 14px", css_) and re.search(r"\.nbaone td\.aw, \.nbaone td\.hm \{ font-size: 15px", css_) and "align-items: center; font-size: 8px" in css_ and '<div class="pl"><span class="t">' in out["html"])
-check("the numbers of points, rebounds, assists, steals and blocks are in the accent colour (<span class=n>), the labels and the shooting line are not", '<span class="n">45</span> pts, <span class="n">15</span> reb, <span class="n">6</span> ast, <span class="n">5</span> stl' in out["html"] and '<span class="n">12-23' not in out["html"] and out["html"].count('class="n"') >= 40)
+check("the numbers of points, rebounds, assists, steals and blocks are in the accent colour (<span class=n>), the labels and the shooting line are not", '<span class="n">45</span> pts, <span class="n">15</span> reb, <span class="n">5</span> stl' in out["html"] and '<span class="n">12-23' not in out["html"] and out["html"].count('class="n"') >= 40)
 check("note_html escapes text first: an ampersand or tag in a name cannot break the page", "&lt;b&gt;" in nba.note_html("<b>Bob</b>: 3 pts") and '<span class="n">3</span> pts' in nba.note_html("<b>Bob</b>: 3 pts"))
 live_sbs = copy.deepcopy(SBS)
 lv = live_sbs["2026-11-01"]["events"][-1]
@@ -481,7 +504,7 @@ for i, h in enumerate(("1966", "5104157")):
     nba.update_tracking(st3, [(h, f"a{i}"), (h, f"b{i}"), (h, f"c{i}")], {}, d0)
 check("D's own list never goes into the auto list, and cannot be dropped", st3["auto"] == {} and set(nba.TRACKED) <= nba.update_tracking(st3, [], {}, d0 + timedelta(days=400)))
 dunn = {"auto": {auto_p: {"name": "Kris Dunn", "last": "2026-11-01"}}}
-check("an auto-added player is followed in the run: Kris Dunn's line is in the Clippers-Warriors notes", "K. Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl" in text(nba.run(NOW, MON, dunn, Saved())["html"]))
+check("an auto-added player is followed in the run: Kris Dunn's line is in the Clippers-Warriors notes", "K. Dunn (LAC): 12 pts, 7 stl" in text(nba.run(NOW, MON, dunn, Saved())["html"]))
 
 # ---- Failures and edge cases ----
 bad = nba.run(NOW, MON, {}, Saved(fail_box=["401909896"]))
