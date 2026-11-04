@@ -107,14 +107,23 @@ def abbreviate(names):
     return {n: (n if s in clash else s) for n, s in shorts.items()}
 
 
-def numbered(pairs):
-    """[(position, name)] -> [(label, name)]: a position that appears more than once is numbered ('WR 1', 'WR 2'); 'APU' reads 'Utility'."""
-    pairs = [("Utility" if p == "APU" else SHORT_POS.get(p.lower(), p), n) for p, n in pairs]
-    total = {p: sum(1 for q, _ in pairs if q == p) for p, _ in pairs}
+NFL_CODES = {   # the clubs' names as Wikipedia's season links give them -> ESPN's codes (what the rest of the NFL section uses)
+    "Arizona Cardinals": "ARI", "Atlanta Falcons": "ATL", "Baltimore Ravens": "BAL", "Buffalo Bills": "BUF", "Carolina Panthers": "CAR", "Chicago Bears": "CHI",
+    "Cincinnati Bengals": "CIN", "Cleveland Browns": "CLE", "Dallas Cowboys": "DAL", "Denver Broncos": "DEN", "Detroit Lions": "DET", "Green Bay Packers": "GB",
+    "Houston Texans": "HOU", "Indianapolis Colts": "IND", "Jacksonville Jaguars": "JAX", "Kansas City Chiefs": "KC", "Las Vegas Raiders": "LV", "Los Angeles Chargers": "LAC",
+    "Los Angeles Rams": "LAR", "Miami Dolphins": "MIA", "Minnesota Vikings": "MIN", "New England Patriots": "NE", "New Orleans Saints": "NO", "New York Giants": "NYG",
+    "New York Jets": "NYJ", "Philadelphia Eagles": "PHI", "Pittsburgh Steelers": "PIT", "San Francisco 49ers": "SF", "Seattle Seahawks": "SEA", "Tampa Bay Buccaneers": "TB",
+    "Tennessee Titans": "TEN", "Washington Commanders": "WSH"}
+
+
+def numbered(rows):
+    """[(position, name[, team])] -> [(label, name[, team])]: a position that appears more than once is numbered ('WR 1', 'WR 2'); 'APU' reads 'Utility'."""
+    rows = [("Utility" if r_[0] == "APU" else SHORT_POS.get(r_[0].lower(), r_[0]), *r_[1:]) for r_ in rows]
+    total = {r_[0]: sum(1 for q in rows if q[0] == r_[0]) for r_ in rows}
     seen, out = {}, []
-    for p, n in pairs:
-        seen[p] = seen.get(p, 0) + 1
-        out.append((f"{p} {seen[p]}" if total[p] > 1 else p, n))
+    for r_ in rows:
+        seen[r_[0]] = seen.get(r_[0], 0) + 1
+        out.append((f"{r_[0]} {seen[r_[0]]}" if total[r_[0]] > 1 else r_[0], *r_[1:]))
     return out
 
 
@@ -148,7 +157,7 @@ def block_html(row):
             return f'<div class="col"><div class="ch">{title}</div>{items}</div>'
         body = f'<div class="asg">{col("Starters", d["starters"])}{col("Reserves", d["reserves"])}</div>'
     else:
-        body = '<table class="pos"><tbody>' + "".join(f'<tr><td class="pp">{_esc(p)}</td><td><span class="wn">{_esc(n)}</span></td></tr>' for p, n in d["rows"]) + "</tbody></table>"
+        body = '<table class="pos"><tbody>' + "".join(f'<tr><td class="pp">{_esc(row[0])}</td><td><span class="wn">{_esc(row[1])}</span>' + (f' <span class="tc">({_esc(row[2])})</span>' if len(row) > 2 and row[2] else "") + "</td></tr>" for row in d["rows"]) + "</tbody></table>"
     sub = f'<div class="bs muted">{_esc(d["sub"])}</div>' if d.get("sub") else ""
     return f'<tr class="blk"><td colspan="2"><div class="bt">{_esc(row["label"])}{note}</div>{sub}{body}</td></tr>'
 
@@ -162,7 +171,7 @@ def table_html(title, rows, show_blocks=True):
                 body += block_html(x)
             continue
         note = f' <span class="muted">· {_esc(x["note"])}</span>' if x.get("note") and x["note"] != "updated" else ""
-        cell = winner_cell(x) if x.get("data") else f'<span class="wn">{_esc(x["text"])}</span>'
+        cell = winner_cell(x) if x.get("data") else _esc(x["text"])
         body += f'<tr><td>{_esc(x["label"])}</td><td class="win">{cell}{note}</td></tr>'
     if not body:
         return ""
@@ -218,7 +227,7 @@ def wiki_items(league, season, wiki):
                     rows = ap.get(team, {}).get(unit) or []
                     if rows:
                         out.append({"key": f"wiki:ap:{team}:{unit}", "label": f"All-Pro {team.capitalize()} Team — {unit}", "sig": "|".join(n for _, n in rows), "kind": "pos",
-                                    "data": {"rows": numbered(rows)}, "text": ", ".join(n for _, n in rows)})
+                                    "data": {"rows": numbered([(p, n, NFL_CODES.get(ap.get("teams", {}).get(n), "")) for p, n in rows])}, "text": ", ".join(n for _, n in rows)})
             return out
 
         def probowl():
@@ -226,7 +235,7 @@ def wiki_items(league, season, wiki):
             if not p:
                 return []
             names = p["AFC"] + p["NFC"]
-            return [{"key": "wiki:pb", "label": "Pro Bowl selections", "sig": "|".join(names), "names": names,
+            return [{"key": "wiki:pb", "label": "Pro Bowl", "sig": "|".join(names), "names": names,
                      "text": f"AFC {len(p['AFC'])} players, NFC {len(p['NFC'])}. Games: {_day(p['date'])} (US)."}]
         attempt(allpro)
         attempt(probowl)

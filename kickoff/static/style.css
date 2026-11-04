@@ -343,7 +343,8 @@ p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
 .awards tr:not(.blk) td { font-size: 13.5px; }
 .awards th, .awards td { white-space: normal; overflow-wrap: break-word; }
 .awards td.win .tc { white-space: nowrap; }
-.awards td.win { text-align: left; }
+.awards td.win { text-align: left; padding-left: 10px; }
+.awards th:nth-child(2) { padding-left: 10px; }
 .awards .wn { color: var(--gold); font-weight: 600; }
 .awards .wn.silver { color: #c5ccd6; }
 .awards .wn.bronze { color: #d08a52; }
@@ -359,7 +360,7 @@ p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
 .awards .asg .col { flex: 1; min-width: 0; }
 .awards .asg .ch { text-align: center; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--hairline); margin-bottom: 4px; padding-bottom: 2px; }
 .awards table.pos { width: 100%; margin-top: 2px; }
-.awards table.pos td { padding: 3px 4px; border: 0; }
+.awards table.pos td { padding: 3px 4px 3px 6px; border: 0; }
 .awards table.pos td.pp { width: 28%; color: var(--muted); font-size: 13px; }
 @media (prefers-color-scheme: light) {
   .awards .wn.silver { color: #6c7683; }

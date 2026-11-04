@@ -137,7 +137,7 @@ check("an All-Star block has Starters and Reserves columns, one player a line, a
       "Starters" in ah and "Reserves" in ah and "G. Antetokounmpo <span class=\"fl\">(Out)</span>" in ah and "B. Ingram <span class=\"fl\">(In)</span>" in ah and ah.count('class="pl"') == 13 and "K-A. Towns" in ah, ah[:700])
 ap_item = awards.wiki_items("nfl", 2025, type("W", (), {"wikitext": lambda self, page: (FX / "wiki_all_pro_2025.txt").read_text() if "All-Pro" in page else ""})())
 ap_h = awards.table_html("NFL Awards", [{**next(i for i in ap_item if i["key"] == "wiki:ap:first:Offense"), "note": ""}])
-check("an All-Pro block is a Position / Player table: one row each, 'WR 1' to 'WR 3', 'Utility', full names in gold", ap_h.count("<tr><td class=\"pp\">") == 13 and "<td class=\"pp\">Utility</td><td><span class=\"wn\">Christian McCaffrey</span>" in ap_h and "WR 3" in ap_h, ap_h[:500])
+check("an All-Pro block is a Position / Player table: one row each, 'WR 1' to 'WR 3', 'Utility', full names in gold", ap_h.count("<tr><td class=\"pp\">") == 13 and "<td class=\"pp\">Utility</td><td><span class=\"wn\">Christian McCaffrey</span> <span class=\"tc\">(SF)</span>" in ap_h and "(LAR)" in ap_h and "WR 3" in ap_h, ap_h[:500])
 
 # the blocks are shown on the day they land and on the final awards day (the MVP), not between
 hide4 = {i for i in ids if i not in (by_name["Sixth Man of the Year"],)}

@@ -75,9 +75,9 @@ def _entries(cell):
 
 
 def all_pro(text):
-    """The AP All-Pro teams: {"first": {"Offense": [(pos, name)], "Defense": [...], "Special teams": [...]}, "second": {...}}, or {} when the page is not the expected one.
+    """The AP All-Pro teams: {"first": {"Offense": [(pos, name)], "Defense": [...], "Special teams": [...]}, "second": {...}, "teams": {name: full team name}}, or {} when the page is not the expected one.
     A player is on the AP first team when 'AP' is among the selectors listed after his name, on the second team when 'AP-2' is."""
-    first, second = {}, {}
+    first, second, teams = {}, {}, {}
     for t in tables(text):
         head = next((r["cells"][0] for r in t["rows"] if r["head"] and len(r["cells"]) == 1), "")
         unit = re.sub(r"\s+", " ", head).strip().capitalize()
@@ -87,11 +87,15 @@ def all_pro(text):
             if r["head"] or len(r["cells"]) != 3:
                 continue
             pos = _pos(r["cells"][0])
+            for part in re.split(r"<br\s*/?>", r["cells"][1] + "<br>" + r["cells"][2]):          # the team each player played for, from its season page link
+                who, club = link_text(part), re.search(r"\[\[\d{4} ([^\]|]+?) season", part)
+                if who and club:
+                    teams[who] = club.group(1)
             first.setdefault(unit, []).extend((pos, n) for n, tags in _entries(r["cells"][1]) if "AP" in tags)
             second.setdefault(unit, []).extend((pos, n) for n, tags in _entries(r["cells"][2]) if "AP-2" in tags)
     if not all(first.get(u) for u in ("Offense", "Defense")):
         return {}
-    return {"first": first, "second": second}
+    return {"first": first, "second": second, "teams": teams}
 
 
 def _first_names(rows, col):

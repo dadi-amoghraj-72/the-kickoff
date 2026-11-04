@@ -81,11 +81,11 @@ nfl_w = Wiki({"2025 All-Pro Team": AP, "2026 Pro Bowl Games": PB})
 nitems = awards.wiki_items("nfl", 2025, nfl_w)
 check("NFL 2025: six All-Pro rows (AP first and second team by unit) and the Pro Bowl; the Pro Bowl page asked for is the following year's", len(nitems) == 7 and "2026 Pro Bowl Games" in nfl_w.asked and sum(1 for i in nitems if i["key"].startswith("wiki:ap:")) == 6, [i["key"] for i in nitems])
 off = next(i for i in nitems if i["key"] == "wiki:ap:first:Offense")
-check("the All-Pro first-team offense is one row per position: QB, RB, FB, Utility (the source's APU), WR 1-3, TE, then LT, LG, C, RG, RT, each with its player, 13 in all", off["label"] == "All-Pro First Team — Offense" and [p for p, _ in off["data"]["rows"]] == ["QB", "RB", "FB", "Utility", "WR 1", "WR 2", "WR 3", "TE", "LT", "LG", "C", "RG", "RT"] and off["data"]["rows"][0] == ("QB", "Matthew Stafford"), off["data"]["rows"])
+check("the All-Pro first-team offense is one row per position: QB, RB, FB, Utility (the source's APU), WR 1-3, TE, then LT, LG, C, RG, RT, each with its player, 13 in all", off["label"] == "All-Pro First Team — Offense" and [r_[0] for r_ in off["data"]["rows"]] == ["QB", "RB", "FB", "Utility", "WR 1", "WR 2", "WR 3", "TE", "LT", "LG", "C", "RG", "RT"] and off["data"]["rows"][0] == ("QB", "Matthew Stafford", "LAR"), off["data"]["rows"])
 dfn = next(i for i in nitems if i["key"] == "wiki:ap:first:Defense")
-check("the defense: EDGE 1-3, DT 1-2, LB 1-2, CB 1-2 with the slot corner as 'Slot CB', S 1-2: exactly the source's twelve, numbered only where a position repeats", [p for p, _ in dfn["data"]["rows"]] == ["EDGE 1", "EDGE 2", "EDGE 3", "DT 1", "DT 2", "LB 1", "LB 2", "CB 1", "CB 2", "Slot CB", "S 1", "S 2"], [p for p, _ in dfn["data"]["rows"]])
+check("the defense: EDGE 1-3, DT 1-2, LB 1-2, CB 1-2 with the slot corner as 'Slot CB', S 1-2: exactly the source's twelve, numbered only where a position repeats", [r_[0] for r_ in dfn["data"]["rows"]] == ["EDGE 1", "EDGE 2", "EDGE 3", "DT 1", "DT 2", "LB 1", "LB 2", "CB 1", "CB 2", "Slot CB", "S 1", "S 2"], [r_[0] for r_ in dfn["data"]["rows"]])
 st_ = next(i for i in nitems if i["key"] == "wiki:ap:first:Special teams")
-check("special teams: K, P, KR, PR, ST, LS (each once, so no numbers)", [p for p, _ in st_["data"]["rows"]] == ["K", "P", "KR", "PR", "ST", "LS"], st_["data"]["rows"])
+check("special teams: K, P, KR, PR, ST, LS (each once, so no numbers)", [r_[0] for r_ in st_["data"]["rows"]] == ["K", "P", "KR", "PR", "ST", "LS"], st_["data"]["rows"])
 
 
 class Boom:
@@ -114,6 +114,12 @@ check("season_of: NBA 2026-27 is 2027 from August 2026 (and 2026 until July); NF
       S("nba", dt.date(2026, 11, 4)) == 2027 and S("nba", dt.date(2027, 4, 20)) == 2027 and S("nba", dt.date(2026, 7, 31)) == 2026
       and S("nfl", dt.date(2026, 11, 4)) == 2026 and S("nfl", dt.date(2027, 1, 20)) == 2026 and S("nfl", dt.date(2027, 3, 1)) == 2027
       and S("mlb", dt.date(2026, 11, 4)) == 2026 and S("mlb", dt.date(2027, 2, 1)) == 2026 and S("mlb", dt.date(2027, 3, 5)) == 2027)
+
+raw_clubs = {m.group(1) for m in re.finditer(r"\[\[\d{4} ([^\]|]+?) season\|", table_text)}
+allp = honours.all_pro(AP)
+every = {n for k in ("first", "second") for u in allp[k].values() for _, n in u}
+check("independent: every club the page links to has a code, so every All-Pro player (60) gets his team's code, none guessed", raw_clubs <= set(awards.NFL_CODES) and all(awards.NFL_CODES.get(allp["teams"].get(n)) for n in every) and len(every) == 60, (raw_clubs - set(awards.NFL_CODES), len(every)))
+check("a few real teams: Stafford LAR, Robinson ATL, McCaffrey SF, Chase CIN, Garrett CLE, Sewell DET", [awards.NFL_CODES[allp["teams"][n]] for n in ("Matthew Stafford", "Bijan Robinson", "Christian McCaffrey", "Ja\u2019Marr Chase", "Myles Garrett", "Penei Sewell")] == ["LAR", "ATL", "SF", "CIN", "CLE", "DET"])
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
