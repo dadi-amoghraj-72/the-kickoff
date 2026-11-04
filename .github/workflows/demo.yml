@@ -1,0 +1,48 @@
+# One combined preview of everything built so far, from live data plus saved real days, optionally with Claude, optionally pinged to Telegram.
+# Publishes only docs/demo/index.html (the demo page). It never touches an edition, the saved state or the daily schedule. Started by hand only.
+name: Demo page
+
+on:
+  workflow_dispatch:
+    inputs:
+      claude:
+        description: "Use Claude for the football notes and overviews (true or false)"
+        required: false
+        default: "true"
+      ping:
+        description: "Send the link to Telegram (true or false)"
+        required: false
+        default: "true"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kickoff-demo
+  cancel-in-progress: false
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      CRICKET_DATA_API_KEY: ${{ secrets.CRICKET_DATA_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build and publish the demo page
+        run: |
+          git config user.name "the-kickoff-bot"
+          git config user.email "the-kickoff-bot@users.noreply.github.com"
+          mkdir -p .venv/bin && ln -sf "$(which python)" .venv/bin/python
+          ARGS="--now --showcase"
+          if [ "${{ github.event.inputs.claude }}" = "true" ]; then ARGS="$ARGS --claude"; fi
+          if [ "${{ github.event.inputs.ping }}" != "true" ]; then ARGS="$ARGS --no-telegram"; fi
+          python scripts/send_demo_copy.py $ARGS

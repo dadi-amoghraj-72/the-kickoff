@@ -5,6 +5,8 @@
   .venv/bin/python scripts/build_demo.py --claude --publish   ... and also puts it on the website (the phone link)
   .venv/bin/python scripts/build_demo.py 2026-10-22 --claude  a past date, e.g. a Champions League night
   add --no-open to build without opening the browser
+  add --showcase to show EVERYTHING on one page whatever day it is: football, cricket, F1 and tennis are live as usual, and the NFL (a Wednesday wrap),
+    the NBA (Sunday 1 November's games) and MLB (a weekly round-up) are replayed from saved real days, so their sections are always there
 
 The demo shows the FPL deadline reminder, squad alerts and transfer hints even when the deadline is far off.
 The demo uses a private copy of the state in preview/demo-state/, so the real state files are never changed.
@@ -102,13 +104,23 @@ if "--no-mlb" not in sys.argv:
             out["sections"].append({"id": "mlb", "title": "MLB", "html": got["html"]})
     except Exception as e:
         out["problems"].append(f"mlb ({type(e).__name__})")
+if "--showcase" in sys.argv:
+    import re
+    for sid, title, cmd, page in (("nfl", "NFL", ["preview_nfl.py", "--day", "wed"], "nfl-wed.html"), ("nba", "NBA", ["preview_nba.py"], "nba.html"),
+                                  ("mlb", "MLB", ["preview_mlb.py", "--weekly"], "mlb-weekly.html")):
+        subprocess.run([sys.executable, str(ROOT / "scripts" / cmd[0])] + cmd[1:] + ["--no-open"], cwd=ROOT, capture_output=True, text=True)
+        m = re.search(rf'<section id="{sid}"><h2>[^<]*</h2>(.*?)</section>', (ROOT / "docs" / "demo" / page).read_text(), re.S)
+        if m:
+            out["sections"] = [x for x in out["sections"] if x["id"] != sid] + [{"id": sid, "title": title, "html": m.group(1)}]
+    rank = {k: i for i, k in enumerate(("arsenal", "football", "cricket", "nba", "nfl", "mlb", "f1", "tennis"))}
+    out["sections"].sort(key=lambda x: rank.get(x["id"], 99))
 if not out["sections"]:
     sys.exit("Nothing to show for this date. Problems: " + ", ".join(out["problems"]))
 banner = (f"Football preview built from real data for {render.nice_date(day.isoformat())}. "
           + ("Written with Claude. " if use_claude else "Plain text, no AI. ")
           + "The FPL deadline reminder and transfer hints are shown here even if the deadline is far off. "
-          + "Football, cricket, F1, tennis, NFL, NBA and MLB are built (MLB is quiet out of season); Young Guns, Around the sporting world and the cross-sport sections are not yet, "
-          + "and this demo lists the sports in the order they were built, not the final order.")
+          + ("Showcase: football, cricket, F1 and tennis are live from today; the NFL, NBA and MLB are replayed from saved real days so they are always shown. " if "--showcase" in sys.argv else "")
+          + "Football, cricket, F1, tennis, NFL, NBA and MLB are built (MLB is quiet out of season); Young Guns, Around the sporting world and the cross-sport sections are not yet.")
 edition = {"date": day.isoformat(), "dummy": False, "banner": banner, "home": "../index.html",
            "headlines": out["headlines"], "sections": out["sections"]}
 (ROOT / "docs" / "demo").mkdir(parents=True, exist_ok=True)

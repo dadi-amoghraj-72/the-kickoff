@@ -3,6 +3,8 @@
   .venv/bin/python scripts/send_demo_copy.py --dry-run   build the page here and show the message; publish nothing, send nothing
   .venv/bin/python scripts/send_demo_copy.py --now       build, publish and send straight away
   .venv/bin/python scripts/send_demo_copy.py --now --claude   the same, with Claude's notes and overviews (a few cents up to about 30 cents; uses your key)
+  add --no-telegram to publish the page without sending the message
+  add --showcase to put the NFL, NBA and MLB (replayed from saved real days) on the same page as today's live football, cricket, F1 and tennis
   .venv/bin/python scripts/send_demo_copy.py --scheduled run by the one-off Mac job (only on 4 November 2026 Singapore time; removes the job afterwards)
 To switch the one-off job on (7:15am Singapore time on 4 November 2026, once):
   launchctl bootstrap gui/$(id -u) scripts/com.thekickoff.democopy.plist
@@ -52,7 +54,7 @@ def main():
     if scheduled and today != TARGET:
         log(f"not the day ({today}): doing nothing")
         return 0
-    cmd = [str(ROOT / ".venv" / "bin" / "python"), str(ROOT / "scripts" / "build_demo.py"), "--no-open"] + (["--claude"] if "--claude" in sys.argv else []) + ([] if dry else ["--publish"])
+    cmd = [str(ROOT / ".venv" / "bin" / "python"), str(ROOT / "scripts" / "build_demo.py"), "--no-open"] + (["--claude"] if "--claude" in sys.argv else []) + (["--showcase"] if "--showcase" in sys.argv else []) + ([] if dry else ["--publish"])
     log("building the demo page" + (" (dry run: not published)" if dry else ""))
     run = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
     tail = "\n".join((run.stdout or "").strip().splitlines()[-8:])
@@ -61,9 +63,9 @@ def main():
     found = re.search(r"sections: (.*)", run.stdout or "")
     names = {"football": "football", "cricket": "cricket", "f1": "F1", "tennis": "tennis", "nfl": "NFL", "nba": "NBA", "mlb": "MLB"}
     have = ", ".join(names.get(x.strip(), x.strip()) for x in found.group(1).split(",")) if found else "everything built so far"
-    message = (f"The Kickoff · {today:%a} {today.day} {today:%b} (demo copy)\n\n"
-               f"A live copy of everything built so far, from live data. Today's page has: {have}. "
-               "The daily schedule is still off.\n\n" + URL)
+    body = ("A combined copy of everything built so far: football, cricket, F1 and tennis live from today, the NFL, NBA and MLB replayed from saved real days. " if "--showcase" in sys.argv
+            else "A live copy of everything built so far, from live data. ")
+    message = f"The Kickoff · {today:%a} {today.day} {today:%b} (demo copy)\n\n{body}Today's page has: {have}. The daily schedule is still off.\n\n" + URL
     if "--claude" in sys.argv:
         message = message.replace("(demo copy)", "(demo copy, with Claude)", 1)
     if run.returncode != 0:
@@ -83,7 +85,9 @@ def main():
             time.sleep(15)
         else:
             log("the page is not showing the new date yet; sending the link anyway")
-    if dry:
+    if dry or "--no-telegram" in sys.argv:
+        if not dry:
+            log("published, no Telegram message (--no-telegram)")
         return 0
     load_env()
     try:
