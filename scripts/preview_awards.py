@@ -36,15 +36,23 @@ class Wiki:
         return t
 
 
+HIST = json.loads((FX / "espn_allnba_history.json").read_text())
+
+
+class Replay(espn_awards.Source):
+    """ESPN's awards as the replay shows them on one morning: only the awards named in `show` have their winners; the All-NBA history is the saved real one."""
+    def winners(self, season, award_id):
+        return HIST.get(str(season), {}).get(award_id) or []
+
+
 def source(sport, league, show):
-    """ESPN's awards as the replay shows them on one morning: only the awards named in `show` have their winners."""
     def get(url):
         j = copy.deepcopy(REC[url])
         m = re.search(r"/awards/(\d+)$", url.split("?")[0])
         if m and j.get("winners") and j["name"] not in show:
             j["winners"] = []
         return j
-    return espn_awards.Source(sport, league, get_json=get, pause=0)
+    return Replay(sport, league, get_json=get, pause=0)
 
 
 def days(league, sport, title, season, schedule, wiki_days=None):
@@ -62,15 +70,10 @@ def days(league, sport, title, season, schedule, wiki_days=None):
 nba_sched = [("start", set()), ("Morning 1: Rookie and Sixth Man announced", {"Rookie of the Year", "Sixth Man of the Year"}),
              ("Morning 2: Defensive Player and Most Improved added", {"Rookie of the Year", "Sixth Man of the Year", "Defensive Player of the Year", "Most Improved Player"}),
              ("Morning 3: the All-NBA teams, MVP and the conference finals MVPs", {"Rookie of the Year", "Sixth Man of the Year", "Defensive Player of the Year", "Most Improved Player", "MVP",
-              "All-NBA 1st Team", "All-NBA 2nd Team", "All-NBA 3rd Team", "NBA Eastern Conference Finals MVP", "NBA Western Conference Finals MVP", "Twyman-Stokes Teammate of the Year Award"})]
-nba_html = days("nba", "basketball", "NBA Awards", 2026, nba_sched, wiki_days=[None, None, None, Wiki()])
-# An All-Star replacement: the selections are in the table, then a player is replaced after an injury
-st = {}
-plain = Wiki({})
-asg_items = lambda w: [i for i in awards.wiki_items("nba", 2026, w) if i["key"] == "wiki:asg"]  # noqa: E731
-st, _ = awards.update({}, 2026, asg_items(plain))
-_, new = awards.update(st, 2026, asg_items(Wiki({"[[Kevin Durant]]": "[[Zion Williamson]]"})))
-nba_html += "<h4>Later: an All-Star replaced after an injury (made-up swap, to show the wording)</h4>" + awards.table_html("NBA Awards", new)
+              "All-NBA 1st Team", "All-NBA 2nd Team", "All-NBA 3rd Team", "NBA Eastern Conference Finals MVP", "NBA Western Conference Finals MVP", "Twyman-Stokes Teammate of the Year Award"}),
+             ("Morning 4: Finals MVP lands later (the team lists are not repeated between announcements)", {"Rookie of the Year", "Sixth Man of the Year", "Defensive Player of the Year", "Most Improved Player", "MVP",
+              "All-NBA 1st Team", "All-NBA 2nd Team", "All-NBA 3rd Team", "NBA Eastern Conference Finals MVP", "NBA Western Conference Finals MVP", "Twyman-Stokes Teammate of the Year Award", "Finals MVP"})]
+nba_html = days("nba", "basketball", "NBA Awards", 2026, nba_sched, wiki_days=[None, None, None, Wiki(), Wiki()])
 nba_html += "<h4>The closing note when the Finals are decided (real 2026 Finals)</h4>" + nba.closing_html(
     2026, [x for x in json.loads((FX / "nba_finals_2026_schedule.json").read_text()) if x["headline"].startswith("NBA Finals")])
 

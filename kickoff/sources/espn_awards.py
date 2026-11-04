@@ -15,6 +15,7 @@ class Source:
 
     def __init__(self, sport, league, get_json=http.get_json, pause=PAUSE):
         self.base, self._get, self.pause, self.calls = CORE.format(sport=sport, league=league), get_json, pause, 0
+        self._teams, self._athletes = {}, {}
 
     def _call(self, url):
         if self.calls:
@@ -38,11 +39,25 @@ class Source:
         return out
 
     def athlete(self, season, athlete_id):
-        """{"name": 'Shai Gilgeous-Alexander', "short": 'S. Gilgeous-Alexander'}"""
-        j = self._call(self.base + f"seasons/{season}/athletes/{athlete_id}")
-        return {"name": j.get("displayName") or j.get("fullName") or "", "short": j.get("shortName") or j.get("displayName") or ""}
+        """{"name": 'Shai Gilgeous-Alexander', "short": 'S. Gilgeous-Alexander'}; asked once per player and season (a player wins several awards)."""
+        if (season, athlete_id) not in self._athletes:
+            j = self._call(self.base + f"seasons/{season}/athletes/{athlete_id}")
+            self._athletes[(season, athlete_id)] = {"name": j.get("displayName") or j.get("fullName") or "", "short": j.get("shortName") or j.get("displayName") or ""}
+        return self._athletes[(season, athlete_id)]
 
     def team(self, season, team_id):
-        """The team's abbreviation ('OKC')."""
-        j = self._call(self.base + f"seasons/{season}/teams/{team_id}")
-        return j.get("abbreviation") or j.get("shortDisplayName") or ""
+        """The team's abbreviation ('OKC'); asked once per team and season."""
+        if (season, team_id) not in self._teams:
+            j = self._call(self.base + f"seasons/{season}/teams/{team_id}")
+            self._teams[(season, team_id)] = j.get("abbreviation") or j.get("shortDisplayName") or ""
+        return self._teams[(season, team_id)]
+
+    def winners(self, season, award_id):
+        """The athlete ids that won one award in one season (a team award has five); [] when ESPN has no such award that season (a 404)."""
+        try:
+            j = self._call(self.base + f"seasons/{season}/awards/{award_id}")
+        except http.SourceError as e:
+            if "404" in str(e):
+                return []
+            raise
+        return [(w.get("athlete") or {}).get("$ref", "").split("/athletes/")[-1].split("?")[0] for w in j.get("winners") or [] if (w.get("athlete") or {}).get("$ref")]

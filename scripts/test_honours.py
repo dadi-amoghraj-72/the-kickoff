@@ -41,8 +41,11 @@ check("a page that is not an All-Pro page gives nothing", honours.all_pro(ASG) =
 a = honours.all_stars(ASG)
 east_region = ASG[ASG.index("|+Eastern Conference All-Stars"):ASG.index("|+Western Conference All-Stars")]
 raw_east = len(re.findall(r'^\|style="text-align:left"\|', east_region, re.M)) // 2
-check("independent: the East list has as many players as the page's East table has rows", len(a["East"]) == raw_east and raw_east >= 12, (len(a["East"]), raw_east))
-check("the starters are there: Giannis Antetokounmpo, Jaylen Brown, Jalen Brunson, Cade Cunningham, Tyrese Maxey (East), with the game date", a["East"][:5] == ["Giannis Antetokounmpo", "Jaylen Brown", "Jalen Brunson", "Cade Cunningham", "Tyrese Maxey"] and a["date"] == "February 15, 2026", a)
+check("independent: the East selections (starters and reserves) are as many as the page's East table has rows", len(a["East"]["starters"]) + len(a["East"]["reserves"]) == raw_east and raw_east >= 12, (len(a["East"]["starters"]) + len(a["East"]["reserves"]), raw_east))
+check("the East starters are Giannis Antetokounmpo, Jaylen Brown, Jalen Brunson, Cade Cunningham, Tyrese Maxey, with the game date", [x["name"] for x in a["East"]["starters"]] == ["Giannis Antetokounmpo", "Jaylen Brown", "Jalen Brunson", "Cade Cunningham", "Tyrese Maxey"] and a["date"] == "February 15, 2026", a["East"]["starters"])
+check("the page's notes become flags: Giannis (injured) is Out, Brandon Ingram (his co-replacement for Curry) and Alperen Şengün are In, nobody else is flagged", {x["name"]: x["flag"] for c in ("East", "West") for g in ("starters", "reserves") for x in a[c][g] if x["flag"]} == {"Giannis Antetokounmpo": "out", "Brandon Ingram": "in", "Stephen Curry": "out", "Shai Gilgeous-Alexander": "out", "Alperen Şengün": "in", "De'Aaron Fox": "in"}, {x["name"]: x["flag"] for c in ("East", "West") for g in ("starters", "reserves") for x in a[c][g] if x["flag"]})
+raw_flags = len(re.findall(r"\{\{ref\|(?:inj|rep)\d", ASG[ASG.index("|+Eastern"):ASG.index("|+USA Stars")]))
+check("independent: as many flags as the raw conference tables have INJ and REP notes", sum(1 for c in ("East", "West") for g in ("starters", "reserves") for x in a[c][g] if x["flag"]) == raw_flags, raw_flags)
 check("a page without the conference tables gives nothing", honours.all_stars(AP) == {})
 
 # ---- Pro Bowl ----
@@ -71,13 +74,18 @@ class Wiki:
 nba_w = Wiki({"NBA Coach of the Year Award": COY, "2026 NBA All-Star Game": ASG})
 items = awards.wiki_items("nba", 2026, nba_w)
 by = {i["key"]: i for i in items}
-check("NBA 2026 (the 2025-26 season): the Coach of the Year and the All-Star selections are items; the coach reads 'Joe Mazzulla (Boston Celtics)'", set(by) == {"wiki:coy", "wiki:asg"} and by["wiki:coy"]["text"] == "Joe Mazzulla (Boston Celtics)", [i["key"] for i in items])
-check("the All-Star item names both conferences with initials and gives the game date", "East: G. Antetokounmpo" in by["wiki:asg"]["text"] and "West:" in by["wiki:asg"]["text"] and "Game: 15 Feb (US)" in by["wiki:asg"]["text"], by["wiki:asg"]["text"][:200])
+check("NBA 2026 (the 2025-26 season): the Coach of the Year and the East and West All-Star selections are items; the coach is Joe Mazzulla of the Boston Celtics", set(by) == {"wiki:coy", "wiki:asg:East", "wiki:asg:West"} and by["wiki:coy"]["data"] == {"name": "Joe Mazzulla", "team": "Boston Celtics"}, [i["key"] for i in items])
+check("each All-Star row is its own item, titled 'NBA All-Star Selections — East' / '— West', with Starters and Reserves and the game date", by["wiki:asg:East"]["label"] == "NBA All-Star Selections — East" and by["wiki:asg:East"]["kind"] == "asg" and len(by["wiki:asg:East"]["data"]["starters"]) == 5 and by["wiki:asg:West"]["data"]["sub"] == "Game: 15 Feb (US)", by["wiki:asg:East"]["data"])
 check("NBA 2027 (the season that starts in October): last season's coach is not this season's, and there is no 2027 All-Star page yet, so no items", awards.wiki_items("nba", 2027, Wiki({"NBA Coach of the Year Award": COY})) == [])
 nfl_w = Wiki({"2025 All-Pro Team": AP, "2026 Pro Bowl Games": PB})
 nitems = awards.wiki_items("nfl", 2025, nfl_w)
 check("NFL 2025: six All-Pro rows (AP first and second team by unit) and the Pro Bowl; the Pro Bowl page asked for is the following year's", len(nitems) == 7 and "2026 Pro Bowl Games" in nfl_w.asked and sum(1 for i in nitems if i["key"].startswith("wiki:ap:")) == 6, [i["key"] for i in nitems])
-check("the All-Pro offense row starts 'QB M. Stafford, RB B. Robinson'", next(i for i in nitems if i["key"] == "wiki:ap:first:Offense")["text"].startswith("QB M. Stafford, RB B. Robinson"), nitems[0]["text"][:80])
+off = next(i for i in nitems if i["key"] == "wiki:ap:first:Offense")
+check("the All-Pro first-team offense is one row per position: QB, RB, FB, Utility (the source's APU), WR 1-3, TE, then LT, LG, C, RG, RT, each with its player, 13 in all", off["label"] == "All-Pro First Team — Offense" and [p for p, _ in off["data"]["rows"]] == ["QB", "RB", "FB", "Utility", "WR 1", "WR 2", "WR 3", "TE", "LT", "LG", "C", "RG", "RT"] and off["data"]["rows"][0] == ("QB", "Matthew Stafford"), off["data"]["rows"])
+dfn = next(i for i in nitems if i["key"] == "wiki:ap:first:Defense")
+check("the defense: EDGE 1-3, DT 1-2, LB 1-2, CB 1-2 with the slot corner as 'Slot CB', S 1-2: exactly the source's twelve, numbered only where a position repeats", [p for p, _ in dfn["data"]["rows"]] == ["EDGE 1", "EDGE 2", "EDGE 3", "DT 1", "DT 2", "LB 1", "LB 2", "CB 1", "CB 2", "Slot CB", "S 1", "S 2"], [p for p, _ in dfn["data"]["rows"]])
+st_ = next(i for i in nitems if i["key"] == "wiki:ap:first:Special teams")
+check("special teams: K, P, KR, PR, ST, LS (each once, so no numbers)", [p for p, _ in st_["data"]["rows"]] == ["K", "P", "KR", "PR", "ST", "LS"], st_["data"]["rows"])
 
 
 class Boom:
@@ -94,8 +102,8 @@ cut = ASG.index("|+Western Conference All-Stars")
 swapped = ASG[:cut] + ASG[cut:].replace("[[Kevin Durant]]", "[[Zion Williamson]]", 1)
 asg_after = awards.wiki_items("nba", 2026, Wiki({"2026 NBA All-Star Game": swapped}))
 st2, new = awards.update(st, 2026, asg_after)
-check("an injury replacement: the selection row comes back on top with 'In: Z. Williamson · out: K. Durant'", len(new) == 1 and new[0]["note"] == "In: Z. Williamson · out: K. Durant" and st2["rows"][0]["key"] == "wiki:asg", new)
-check("independent: the replacement text really differs (Durant gone, Williamson present)", "K. Durant" not in new[0]["text"] and "Z. Williamson" in new[0]["text"])
+check("a changed page (Durant replaced): only the West row comes back, on top, with no wordy note (the In/Out flags are in the table)", [n["key"] for n in new] == ["wiki:asg:West"] and new[0]["note"] == "" and st2["rows"][0]["key"] == "wiki:asg:West", new)
+check("independent: the West list has Zion Williamson and not Kevin Durant now", "Zion Williamson" in new[0]["text"] and "Kevin Durant" not in new[0]["text"])
 st3, new3 = awards.update(st2, 2026, asg_after)
 check("the same page again: no news", new3 == [])
 

@@ -79,19 +79,22 @@ t = text(html)
 check("day 1: three awards announced (Sixth Man, All-NBA first team, Western Conference Finals MVP); the Cup MVP is skipped; the table says NBA Awards", "NBA Awards" in t and "Sixth Man of the Year" in t and "All-NBA 1st Team" in t and "Western Conference Finals MVP" in t and "Cup" not in t and "Most Valuable Player" not in t, t)
 raw_p = REC[next(u for u in REC if f"/awards/{by_name['Sixth Man of the Year']}" in u)]["winners"][0]["athlete"]["$ref"]
 raw_name = REC[raw_p.replace("http://", "https://").split("?")[0]]["displayName"]
-check("independent: the Sixth Man's name is the one in the raw athlete record, with his team code", f"{raw_name} (" in t and raw_name, (raw_name, t[:300]))
+tn = re.sub(r"\s+", " ", t)
+check("independent: the Sixth Man's name is the one in the raw athlete record, with his team code beside it", f"{raw_name} (" in tn and raw_name, (raw_name, tn[:300]))
 a1 = REC[next(u for u in REC if f"/awards/{by_name['All-NBA 1st Team']}" in u)]["winners"]
-shorts = [REC[w["athlete"]["$ref"].replace("http://", "https://").split("?")[0]]["shortName"] for w in a1]
-check("the All-NBA first team is the five raw short names, in ESPN's order", ", ".join(shorts) in re.sub(r"\s+", " ", t), (shorts, t[:400]))
+raw_names = [REC[w["athlete"]["$ref"].replace("http://", "https://").split("?")[0]]["displayName"] for w in a1]
+raw_teams = [REC[w["team"]["$ref"].replace("http://", "https://").split("?")[0]]["abbreviation"] for w in a1]
+check("the All-NBA first team is five lines in ESPN's order, each the full raw name with that season's team: 'Nikola Jokic — DEN' (the count is left out when ESPN's history cannot be read)",
+      all(f"{n} — {tm}" in tn for n, tm in zip(raw_names, raw_teams)) and tn.index(raw_names[0]) < tn.index(raw_names[4]) and len(raw_names) == 5, (raw_names, raw_teams))
 check("day 1 order: the table starts with the awards announced today and not with the older ones (MVP is not shown: it was announced before)", "Most Valuable" not in t and re.sub(r"\s+", " ", t).count("Rookie of the Year") == 0, t)
 need = [u for u in calls if "/athletes/" in u or "/teams/" in u]
-check("only new awards cost name lookups: 3 awards = at most 5+1+1 athletes and 2 teams", len(need) <= 9, len(need))
+check("only new awards cost name lookups, and no team or athlete is asked for twice: 6 different athletes (Wembanyama won two awards), each team once", len(need) == len(set(need)) and len([u for u in need if "/athletes/" in u]) == 6, (len(need), len(set(need)), [u[-45:] for u in need]))
 html2, st2 = awards.run(src("basketball", "nba", hide=hide2), "NBA Awards", st, 2026)
 check("run again with nothing new: no table", html2 == "" and st2 == st)
 hide3 = hide2 - {by_name["Defensive Player of the Year"]}
 html3, st3 = awards.run(src("basketball", "nba", hide=hide3), "NBA Awards", st2, 2026)
 t3 = re.sub(r"\s+", " ", text(html3))
-check("day 2: Defensive Player on top, the three from day 1 still below it", t3.index("Defensive Player") < t3.index("Sixth Man") and "All-NBA 1st Team" in t3 and "Western Conference Finals MVP" in t3, t3[:500])
+check("day 2: Defensive Player on top, the one-winner awards from day 1 still below it; the All-NBA team block is not repeated on a day it is not new", t3.index("Defensive Player") < t3.index("Sixth Man") and "Western Conference Finals MVP" in t3 and "All-NBA 1st Team" not in t3, t3[:500])
 html_bad, st_bad = awards.run(espn_awards.Source("basketball", "nba", get_json=lambda u: 1 / 0, pause=0), "NBA Awards", st3, 2026)
 check("a failing source shows nothing and keeps the state", html_bad == "" and st_bad == st3)
 
@@ -109,6 +112,85 @@ check("first run on a season that has its awards: remembered silently", nh2 == "
 mlb_src = src("baseball", "mlb")
 got = mlb_src.awards(2026)
 check("MLB: the 2026 awards announced so far include the Gold Glove (20 winners) and the Roberto Clemente Award", any(a["name"] == "Gold Glove" and len(a["winners"]) == 20 for a in got) and any(a["name"] == "Roberto Clemente Award" for a in got), [a["name"] for a in got])
+
+# ---- D's presentation round (2026-11-04): gold winners, iridescent MVPs, medal tones, blocks, abbreviations ----
+check("every MVP is iridescent, whatever its name; other winners are plain gold", [awards.is_mvp(x) for x in ("MVP", "Finals MVP", "Western Conference Finals MVP", "All-Star MVP", "Super Bowl MVP", "Rookie of the Year", "Most Valuable Player")] == [True, True, True, True, True, False, True])
+check("medal tones: 1st gold, 2nd silver, 3rd bronze (All-NBA, All-Defensive, All-Rookie alike); anything else gold", [awards.tone_of(x) for x in ("All-NBA 1st Team", "All-NBA 2nd Team", "All-NBA 3rd Team", "All-Defensive 2nd Team", "Coach of the Year")] == ["gold", "silver", "bronze", "silver", "gold"])
+rows1 = [{"key": "1", "label": "MVP", "kind": "single", "data": {"name": "Shai Gilgeous-Alexander", "team": "OKC"}, "text": "", "note": ""},
+         {"key": "2", "label": "Rookie of the Year", "kind": "single", "data": {"name": "Cooper Flagg", "team": "DAL"}, "text": "", "note": ""},
+         {"key": "3", "label": "Defensive Player of the Year", "kind": "single", "data": {"name": "Victor Wembanyama", "team": "SA"}, "text": "", "note": ""}]
+th = awards.table_html("NBA Awards", rows1)
+check("the MVP winner carries the iridescent class and the others plain gold; the team code sits beside each name", '<span class="wn mvp">Shai Gilgeous-Alexander</span> <span class="tc">(OKC)</span>' in th and '<span class="wn">Cooper Flagg</span>' in th and th.count("wn mvp") == 1, th)
+check("the label column is wider than the winner column (60% / 40%) so 'Defensive Player of the Year' has room", '<col style="width:60%"><col style="width:40%">' in th)
+team_row = {"key": "t", "label": "All-NBA 2nd Team", "kind": "team", "data": {"tone": "silver", "players": [{"name": "Kevin Durant", "team": "HOU", "count": 15}, {"name": "Kawhi Leonard", "team": "LAC", "count": None}]}, "text": "", "note": ""}
+tb = awards.table_html("NBA Awards", [team_row])
+check("a team row is a full-width block with one line per player: the name in the tone colour, the count in brackets only when known, then '— TEAM'", 'colspan="2"' in tb and '<span class="wn silver">Kevin Durant</span> <span class="ct">(15)</span> <span class="tc">— HOU</span>' in tb and '<span class="wn silver">Kawhi Leonard</span> <span class="tc">— LAC</span>' in tb and tb.count('class="pl"') == 2, tb)
+check("blocks are left out unless asked for (a day they are not new)", awards.table_html("NBA Awards", rows1 + [team_row], show_blocks=False).count("Kevin Durant") == 0 and awards.table_html("NBA Awards", rows1 + [team_row]).count("Kevin Durant") == 1)
+check("abbreviations: initial and surname, hyphenated first names as 'K-A.', two players who would clash keep their full names",
+      awards.abbreviate(["Victor Wembanyama", "Karl-Anthony Towns", "Jalen Johnson", "Jaylen Johnson", "Luka Dončić"]) == {"Victor Wembanyama": "V. Wembanyama", "Karl-Anthony Towns": "K-A. Towns", "Jalen Johnson": "Jalen Johnson", "Jaylen Johnson": "Jaylen Johnson", "Luka Dončić": "L. Dončić"})
+check("numbered positions: a repeat is numbered, a single position is not, APU reads Utility", awards.numbered([("QB", "A"), ("WR", "B"), ("WR", "C"), ("APU", "D")]) == [("QB", "A"), ("WR 1", "B"), ("WR 2", "C"), ("Utility", "D")])
+asg = awards.wiki_items("nba", 2026, type("W", (), {"wikitext": lambda self, page: (FX / "wiki_nba_asg_2026.txt").read_text() if "All-Star" in page else ""})())
+east = next(i for i in asg if i["key"] == "wiki:asg:East")
+ah = awards.table_html("NBA Awards", [{**east, "note": ""}])
+check("an All-Star block has Starters and Reserves columns, one player a line, abbreviated, with (Out) after the injured Giannis and (In) after the replacement Ingram",
+      "Starters" in ah and "Reserves" in ah and "G. Antetokounmpo <span class=\"fl\">(Out)</span>" in ah and "B. Ingram <span class=\"fl\">(In)</span>" in ah and ah.count('class="pl"') == 13 and "K-A. Towns" in ah, ah[:700])
+ap_item = awards.wiki_items("nfl", 2025, type("W", (), {"wikitext": lambda self, page: (FX / "wiki_all_pro_2025.txt").read_text() if "All-Pro" in page else ""})())
+ap_h = awards.table_html("NFL Awards", [{**next(i for i in ap_item if i["key"] == "wiki:ap:first:Offense"), "note": ""}])
+check("an All-Pro block is a Position / Player table: one row each, 'WR 1' to 'WR 3', 'Utility', full names in gold", ap_h.count("<tr><td class=\"pp\">") == 13 and "<td class=\"pp\">Utility</td><td><span class=\"wn\">Christian McCaffrey</span>" in ap_h and "WR 3" in ap_h, ap_h[:500])
+
+# the blocks are shown on the day they land and on the final awards day (the MVP), not between
+hide4 = {i for i in ids if i not in (by_name["Sixth Man of the Year"],)}
+_, sx = awards.run(src("basketball", "nba", hide=hide4), "NBA Awards", {}, 2026)
+h_a, sx = awards.run(src("basketball", "nba", hide=hide4 - {by_name["All-NBA 1st Team"]}), "NBA Awards", sx, 2026)
+check("the morning the All-NBA team lands: its block is in the table", "All-NBA 1st Team" in text(h_a))
+h_b, sx = awards.run(src("basketball", "nba", hide=hide4 - {by_name["All-NBA 1st Team"], by_name["Rookie of the Year"]}), "NBA Awards", sx, 2026)
+check("a later morning (Rookie of the Year lands): the one-winner rows are listed, the All-NBA block is not repeated", "Rookie of the Year" in text(h_b) and "All-NBA 1st Team" not in text(h_b) and "Sixth Man" not in text(h_b))
+h_c, sx = awards.run(src("basketball", "nba", hide=hide4 - {by_name["All-NBA 1st Team"], by_name["Rookie of the Year"], by_name["MVP"]}), "NBA Awards", sx, 2026)
+check("the MVP morning is the final awards day: the full list returns, the All-NBA block included", "All-NBA 1st Team" in text(h_c) and "MVP" in text(h_c) and "wn mvp" in h_c)
+
+# ---- All-NBA selection counts: ESPN's lists back to 1947, checked against Wikipedia's independent 'most selections' table ----
+HIST = json.loads((FX / "espn_allnba_history.json").read_text())
+
+
+class HistSource:
+    """winners(season, award id) from the saved lists; a season in `broken` raises."""
+    def __init__(self, broken=()):
+        self.asked, self.broken = [], set(broken)
+
+    def winners(self, season, award_id):
+        self.asked.append(season)
+        if season in self.broken:
+            raise RuntimeError("down")
+        return HIST.get(str(season), {}).get(award_id) or []
+
+
+hs = HistSource()
+counts, cache = awards.allnba_counts(hs, 2026, {})
+WIKI = (FX / "wiki_all_nba_team.txt").read_text()
+KNOWN = {"1966": ("LeBron", "James"), "215": ("Tim", "Duncan"), "110": ("Kobe", "Bryant"), "4145": ("Kareem", "Abdul-Jabbar"), "614": ("Shaquille", "O'Neal"), "501": ("Karl", "Malone"), "3202": ("Kevin", "Durant")}
+raw_total = lambda f, l: int(re.search(r"sortname\|%s\|%s\}\}[^\n]*\n[^\d\n]*(\d+)" % (re.escape(f), re.escape(l)), WIKI).group(1))  # noqa: E731
+check("independent: ESPN's history reproduces Wikipedia's career All-NBA totals for LeBron, Duncan, Kobe, Kareem, Shaq, Malone and Durant", all(counts[i] == raw_total(*n) for i, n in KNOWN.items()), {n[1]: (counts.get(i), raw_total(*n)) for i, n in KNOWN.items()})
+check("the count includes the current season (Durant's 2026 second-team selection is in his 12)", counts["3202"] == 12 and "3202" in HIST["2026"]["45"])
+check("history covers the 80 seasons from 1947 and is cached for the next time", len(cache["seasons"]) == 80 and "1947" in cache["seasons"], len(cache["seasons"]))
+hs2 = HistSource()
+counts2, cache2 = awards.allnba_counts(hs2, 2026, cache)
+check("with the history cached only the current season is asked for again (three lists)", hs2.asked == [2026, 2026, 2026] and counts2 == counts, hs2.asked)
+bad_counts, bad_cache = awards.allnba_counts(HistSource(broken={1990}), 2026, {})
+check("a season that cannot be read means no counts at all (never a count that is too low), and the cache is untouched", bad_counts is None and bad_cache == {})
+
+class SrcWithHistory(espn_awards.Source):
+    def winners(self, season, award_id):
+        return HIST.get(str(season), {}).get(award_id) or []
+
+
+hide5 = {i for i in ids if i != by_name["Sixth Man of the Year"]}
+_, sh = awards.run(src("basketball", "nba", hide=hide5), "NBA Awards", {}, 2026)
+sh_src = SrcWithHistory("basketball", "nba", get_json=replay(hide=hide5 - {by_name["All-NBA 1st Team"]}), pause=0)
+h_cnt, sh = awards.run(sh_src, "NBA Awards", sh, 2026)
+jokic_seasons = sum(1 for y, d in HIST.items() if int(y) <= 2026 and "3112335" in {i for w in d.values() for i in w})
+jokic_line = re.search(r"Nikola Jokic</span> <span class=\"ct\">\((\d+)\)</span> <span class=\"tc\">— DEN", h_cnt)
+check("end to end: the All-NBA first team shows each player's career count in brackets (Jokic's matches a count made straight from the raw lists)", jokic_line and int(jokic_line.group(1)) == jokic_seasons and jokic_seasons >= 8, (jokic_line and jokic_line.group(0), jokic_seasons))
+check("the history is kept in the state so tomorrow does not fetch it again", len(sh["allnba"]["seasons"]) == 80)
 
 # ---- the whole block for a morning, and the wrapper the daily run uses ----
 import datetime as dt  # noqa: E402

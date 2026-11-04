@@ -99,15 +99,26 @@ def _first_names(rows, col):
 
 
 def all_stars(text):
-    """The NBA All-Star selections from the 'Eastern Conference All-Stars' and 'Western Conference All-Stars' tables: {"date": 'February 15, 2026', "East": [names],
-    "West": [names]}, or {} when those tables are not on the page. Replacements show up as a changed list (the caller compares with what it saved)."""
+    """The NBA All-Star selections from the 'Eastern Conference All-Stars' and 'Western Conference All-Stars' tables, as the page splits them:
+    {"date": 'February 15, 2026', "East": {"starters": [{"name", "flag"}], "reserves": [...]}, "West": {...}}, or {} when those tables are not on the page.
+    flag is 'out' for a player the page marks as unable to play (an INJ note), 'in' for a replacement (a REP note), else ''."""
     out = {}
     for t in tables(text):
         m = re.match(r"(Eastern|Western) Conference All-Stars", t["caption"])
-        if m:
-            out["East" if m.group(1) == "Eastern" else "West"] = _first_names(t["rows"], 1)
+        if not m:
+            continue
+        groups, which = {"starters": [], "reserves": []}, "starters"
+        for r in t["rows"]:
+            if r["head"]:
+                which = "reserves" if r["cells"][0].lower().startswith("reserve") else "starters"
+                continue
+            name = link_text(r["cells"][1]) if len(r["cells"]) > 1 else None
+            if name:
+                cell = r["cells"][1]
+                groups[which].append({"name": name, "flag": "out" if re.search(r"\{\{ref\|inj", cell) else "in" if re.search(r"\{\{ref\|rep", cell) else ""})
+        out["East" if m.group(1) == "Eastern" else "West"] = groups
     date = re.search(r"^\|\s*date\s*=\s*(.+)$", text, re.M)
-    if not (out.get("East") and out.get("West")):
+    if not all(out.get(c, {}).get("starters") and out.get(c, {}).get("reserves") for c in ("East", "West")):
         return {}
     return {"date": date.group(1).strip() if date else "", **out}
 
