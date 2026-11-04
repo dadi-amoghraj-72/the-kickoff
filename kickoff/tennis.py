@@ -120,6 +120,20 @@ def pick(matches, now, reported):
     return sorted(new, key=lambda m: (-ORDER.index(m["stage"]), best(m), m["date"]))
 
 
+SGT = timezone(timedelta(hours=8))
+
+
+def dates_line(matches):
+    """'Sun 13 – Mon 14 Sep SGT' (a muted line under a tournament's heading): the first and last day, in Singapore time, of the matches shown; one day when they share it."""
+    if not matches:
+        return ""
+    days = sorted({m["date"].astimezone(SGT).date() for m in matches})
+    first, last = days[0], days[-1]
+    fmt = lambda d: f"{d:%a} {d.day}"  # noqa: E731
+    text = f"{fmt(first)} {first:%b}" if first == last else (f"{fmt(first)} – {fmt(last)} {last:%b}" if first.month == last.month else f"{fmt(first)} {first:%b} – {fmt(last)} {last:%b}")
+    return f'<p class="muted">{text} SGT</p>'
+
+
 def name(p, short=True):
     return (f"({p['seed']}) " if p["seed"] else "") + (p["short"] if short else p["name"])
 
@@ -244,7 +258,7 @@ def stage_table(draw, stage, matches, done=None, title=None, sets=None):
 
 
 def event_html(event, new, progress=None):
-    html = f"<h3>{r.esc(event['name'])}</h3>"
+    html = f"<h3>{r.esc(event['name'])}</h3>" + dates_line(new)
     for draw in DRAW:
         mine = [m for m in new if m["draw"] == draw]
         if not mine:
@@ -362,7 +376,7 @@ def finals_closing(event, matches):
 def finals_html(event, new, all_matches):
     """The ATP Finals or WTA Finals block for a morning: the new matches by stage (the latest first), with the group tables after any new group-stage match."""
     tour = finals_tour(event)
-    html = f"<h3>{r.esc(tour)}</h3>"
+    html = f"<h3>{r.esc(tour)}</h3>" + dates_line(new)
     draw = "mens-singles" if tour == "ATP Finals" else "womens-singles"
     for stage in reversed(TOUR_ORDER):
         part = [m for m in new if m["stage"] == stage]

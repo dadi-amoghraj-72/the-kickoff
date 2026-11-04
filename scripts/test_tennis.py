@@ -329,5 +329,18 @@ check("the WTA Finals the same way: 15 matches, two groups of four, and the top 
 check("a tour-finals table has three set columns (best of three), the tour in the heading", 'colspan="4"' in tennis.finals_html(WTAF, wm[-1:], wm) and "WTA Finals" in tennis.finals_html(WTAF, wm[-1:], wm))
 check("a source that has no finals_events method or fails costs the Slam coverage nothing", tennis.run(M2, {}, type("S", (), {"slam_events": lambda self, now: [], "calls": 0})())["html"] == "" and tennis.run(M2, {}, type("S", (), {"slam_events": lambda self, now: [], "finals_events": lambda self, now: 1 / 0, "calls": 0})())["stats"]["failed"] == 1)
 
+# ---- D, 2026-11-04: a dates line under each tournament heading, in Singapore time ----
+mk = lambda *a: {"date": datetime(*a, tzinfo=timezone.utc)}  # noqa: E731
+check("dates_line: one day when the matches share it (a US Open final at 01:00 UTC is 09:00 Monday in Singapore)", tennis.dates_line([mk(2026, 9, 14, 1, 0)]) == '<p class="muted">Mon 14 Sep SGT</p>')
+check("a range in one month: 'Sun 13 – Mon 14 Sep'; across two months both months are named; the day is the Singapore day, so 17:00 UTC on the 13th is already the 14th", tennis.dates_line([mk(2026, 9, 13, 3, 0), mk(2026, 9, 13, 17, 0)]) == '<p class="muted">Sun 13 – Mon 14 Sep SGT</p>' and tennis.dates_line([mk(2026, 8, 31, 3, 0), mk(2026, 9, 1, 3, 0)]) == '<p class="muted">Mon 31 Aug – Tue 1 Sep SGT</p>' and tennis.dates_line([]) == "")
+sf_f = [m for m in tennis.finals_matches_of(ATPF) if m["stage"] in ("SF", "F")]
+check("the real 2025 ATP Finals semi-finals (15 Nov, 13:40 and 19:40 UTC) and final (16 Nov, 17:15 UTC): 'Sat 15 – Mon 17 Nov SGT' because the final ended after midnight in Singapore", tennis.dates_line(sf_f) == '<p class="muted">Sat 15 – Mon 17 Nov SGT</p>', tennis.dates_line(sf_f))
+check("the tour finals' block carries the line under its heading, before the first table", tennis.finals_html(ATPF, sf_f, am).startswith("<h3>ATP Finals</h3><p class=\"muted\">Sat 15 – Mon 17 Nov SGT</p><div class=\"tennis\">"))
+ao_finals = [m for m in MS["ao"] if m["stage"] == "F"]
+raw_final_dates = sorted({tennis.utc(c["date"]).astimezone(timezone(timedelta(hours=8))).date() for g in AO["groupings"] if g["grouping"]["slug"] in tennis.DRAW for c in g["competitions"] if (c.get("round") or {}).get("displayName") == "Final" and c["status"]["type"]["name"] == "STATUS_FINAL"})
+ao_html = tennis.event_html(AO, ao_finals, tennis.progress_of(MS["ao"]))
+expected = tennis.dates_line([{"date": datetime(d.year, d.month, d.day, 4, 0, tzinfo=timezone.utc)} for d in raw_final_dates])
+check("a Slam's block carries it too: the Australian Open's two finals (men's and women's), dated from the raw ESPN final dates in Singapore time, sit under the heading", ao_html.startswith("<h3>Australian Open</h3>" + expected) and expected.startswith('<p class="muted">') and len(raw_final_dates) >= 1, (ao_html[:160], raw_final_dates))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

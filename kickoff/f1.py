@@ -129,7 +129,7 @@ def best_time(row):
 
 def qualifying_table(rows):
     body = [[x["position"], short_name(x["Driver"]), *best_time(x)] for x in rows]
-    return _tight(r.table("Qualifying Results", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body), (12, 44, 16, 28))
+    return _tight(r.table("Qualifying Results", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body, row_classes=["p1"] + [""] * (len(body) - 1)), (12, 44, 16, 28))   # pole in gold (D)
 
 
 def _plat(v):

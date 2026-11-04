@@ -287,5 +287,8 @@ check("without a schedule (old callers) the leader is simply gold", f1.standings
 css = (ROOT / "kickoff" / "static" / "style.css").read_text()
 check("the css has purple, the podium metals and the platinum text", ".f1sum .fl { color: #b57bf0" in css and "tr.p1 td" in css and "tr.p2 td" in css and "tr.p3 td" in css and ".plat {" in css)
 
+qt = f1.qualifying_table(Q18["QualifyingResults"])
+check("D, 2026-11-04: in the qualifying table only pole is gold (the first row's class p1), nobody else", re.findall(r'<tr class="(p\d)">', qt) == ["p1"] and len(re.findall(r"<tr[ >]", qt)) == len(Q18["QualifyingResults"]) + 2, re.findall(r'<tr class="(p\d)">', qt))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
