@@ -267,6 +267,9 @@ def _get(url):
     return http.get_bytes(url).decode("utf-8", "replace")
 
 
+GAME_URL = BASE + "/cricket/series/{series}/scorecard/{game}"      # the plain address of a scorecard; ESPN redirects it to the full page
+
+
 class Source:
     """Reads the day's scores page once, then a scorecard or points table per match. Nothing here raises: any problem gives
     None, and the caller falls back to the other source (or leaves the table out)."""
@@ -287,11 +290,27 @@ class Source:
         return find_game(self.index, match.get("teams") or [], match.get("name", ""), need_scorecard)
 
     def card(self, match):
+        """The scorecard of a match in CricketData's shape (+ "status", "potm"), or None. ESPN serves some scorecard pages from an old cache (on 4 November the
+        scores page's own link gave India 54/1 after the match had finished 143/5, while the plain /scorecard/<id> address was right), so when the match has a score
+        line to compare with, the first address whose card agrees with it is used (the link, the plain address, the plain address with a cache-busting query);
+        when none does, there is no card rather than a wrong one."""
         try:
+            from kickoff import cricket
             game = self._game(match, True)
-            page = self._page(game["scorecard"]) if game else None
-            innings = parse_scorecard(page) if page else None
-            return {"scorecard": innings, **parse_meta(page)} if innings else None
+            if not game:
+                return None
+            found = re.search(r"/series/(\d+)/scorecard/(\d+)", game["scorecard"])
+            urls = [game["scorecard"]] + ([GAME_URL.format(series=found.group(1), game=found.group(2)), GAME_URL.format(series=found.group(1), game=found.group(2)) + f"?t={int(time.time())}"]
+                                           if found else [])
+            for url in urls:
+                page = self._page(url)
+                innings = parse_scorecard(page) if page else None
+                if not innings:
+                    continue
+                card = {"scorecard": innings, **parse_meta(page)}
+                if cricket.card_consistent(card, match):
+                    return card
+            return None
         except Exception:
             return None
 
