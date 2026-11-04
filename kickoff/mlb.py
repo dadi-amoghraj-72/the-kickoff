@@ -317,11 +317,12 @@ def behind(t, ref):
 
 def race_table(teams, league, first, last, title, before=None):
     """One league's seeds `first` to `last` (1 to 6 are in the playoffs): blue for a division winner (1 to 3), lilac for a wild card, plain for the teams
-    out. ✓ after a code: the team has clinched a place; ✗: it is out. The GB column counts from the sixth seed."""
+    out. ✓ after a code: the team has clinched a place. A team mathematically out is left out of the table (no ✗: D's choice). The GB column counts from
+    the sixth seed."""
     rows = sorted((t for t in teams if t["league"] == league), key=lambda t: t["seed"])
     ref = next(t for t in rows if t["seed"] == 6)
-    show = [t for t in rows if first <= t["seed"] <= last]
-    mark = lambda t: t["abbr"] + (" ✓" if t["mark"] in ("*", "x", "y", "z") else " ✗" if t["mark"] == "e" else "")  # noqa: E731
+    show = [t for t in rows if first <= t["seed"] <= last and t["mark"] != "e"]
+    mark = lambda t: t["abbr"] + (" ✓" if t["mark"] in ("*", "x", "y", "z") else "")  # noqa: E731
     body = [[t["seed"], mark(t), t["overall"], behind(t, ref), r.move(before[t["abbr"]] - t["seed"]) if before and t["abbr"] in before else ""] for t in show]
     zones = ["blue" if t["seed"] <= 3 else "lilac" if t["seed"] <= 6 else None for t in show]
     return r.compact(r.table(title, [("#", True), ("Team", False), ("W-L", True), ("GB", True), ("+/-", True)], body, zones=zones), (10, 30, 22, 20, 18), " nba")
@@ -329,7 +330,7 @@ def race_table(teams, league, first, last, title, before=None):
 
 def races(teams, first, last, before=None):
     """Both leagues' playoff race tables, the National League first: the three division leaders (blue, seeds 1 to 3, so the order for home field is
-    visible), the three wild cards (lilac, seeds 4 to 6), then the chasers down to seed `last`."""
+    visible), the three wild cards (lilac, seeds 4 to 6), then the chasers still alive down to seed `last`."""
     return "".join(race_table(teams, league, first, last, f"{short_league(league)} Playoff Race", before) for league in LEAGUE_FIRST)
 
 

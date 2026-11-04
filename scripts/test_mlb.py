@@ -129,13 +129,13 @@ divs = re.findall(r"\n(NL|AL) (West|Central|East) \|", TXT_W)
 check("six division tables, the National League first and the Dodgers' division first within it", divs == [("NL", "West"), ("NL", "Central"), ("NL", "East"), ("AL", "West"), ("AL", "Central"), ("AL", "East")], divs)
 check("each division table lists its five teams; the Dodgers lead the NL West at 100-62 on the raw standings", "1 | LAD | 100-62 | - |" in TXT_W and len(re.findall(r"\n[1-5] \| [A-Z]{3} \| \d+-\d+ \|", TXT_W)) == 30)
 check("a division table has no movement arrows the first time (nothing to compare with)", "▲" not in TXT_W and "▼" not in TXT_W)
-check("both playoff races come after the divisions, each listing seeds 1 to 9 in order", [m for m in re.findall(r"\n(NL|AL) Playoff Race \|", TXT_W)] == ["NL", "AL"] and TXT_W.index("NL Playoff Race") > TXT_W.index("AL East")
-      and all(re.findall(r"\n(\d) \| [A-Z]{3}(?: [✓✗])? \| \d+-\d+ \| [+\d–.]+ \|", TXT_W[TXT_W.index(f"{lg} Playoff Race"):][:600])[:9] == [str(i) for i in range(1, 10)] for lg in ("NL", "AL")), TXT_W[TXT_W.index("NL Playoff"):][:300])
+check("both playoff races come after the divisions, each listing the six playoff seeds in order (the teams already out are not listed)", [m for m in re.findall(r"\n(NL|AL) Playoff Race \|", TXT_W)] == ["NL", "AL"] and TXT_W.index("NL Playoff Race") > TXT_W.index("AL East")
+      and re.findall(r"\n(\d) \| [A-Z]{3}(?: ✓)? \| \d+-\d+ \| [+\d–.]+ \|", TXT_W[TXT_W.index("NL Playoff Race"):]) == [str(i) for i in range(1, 7)] * 2, TXT_W[TXT_W.index("NL Playoff"):][:300])
 flat = {e["team"]["abbreviation"]: {s["name"]: s["displayValue"] for s in e["stats"]} for lg in STD["children"] for dv in lg["children"] for e in dv["standings"]["entries"]}
 nl = sorted((a for a in flat if any(a == e["team"]["abbreviation"] for dv in STD["children"][1]["children"] for e in dv["standings"]["entries"])), key=lambda a: int(flat[a]["playoffSeed"]))
 ref = flat[nl[5]]    # the sixth seed
 ahead = int(flat[nl[3]]["wins"]) - int(ref["wins"]) + int(ref["losses"]) - int(flat[nl[3]]["losses"])
-check("the playoff race counts games from the sixth seed: the fourth seed is that many games ahead, the sixth is level (–), a team out is behind; the division leaders are seeds 1 to 3", f"4 | {mlb.code(nl[3])} ✓ | {flat[nl[3]]['overall']} | +{ahead / 2:g} |" in TXT_W and f"6 | {mlb.code(nl[5])} ✓ | {ref['overall']} | – |" in TXT_W and "ARI ✗ | 86-76 | 2 |" in TXT_W and all(f"{i + 1} | {mlb.code(nl[i])}" in TXT_W for i in range(3)), (nl, TXT_W[TXT_W.index('NL Playoff'):][:300]))
+check("the playoff race counts games from the sixth seed: the fourth seed is that many games ahead, the sixth is level (–), the division leaders are seeds 1 to 3", f"4 | {mlb.code(nl[3])} ✓ | {flat[nl[3]]['overall']} | +{ahead / 2:g} |" in TXT_W and f"6 | {mlb.code(nl[5])} ✓ | {ref['overall']} | – |" in TXT_W and "ARI" not in TXT_W.split("NL Playoff Race")[1] and "✗" not in TXT_W.split("NL Playoff Race")[1] and all(f"{i + 1} | {mlb.code(nl[i])}" in TXT_W for i in range(3)), (nl, TXT_W[TXT_W.index('NL Playoff'):][:300]))
 check("the season opener line comes only when the state has not seen this season", "season is under way" not in TXT_W and "The 2026 MLB season is under way." in text(run(NOW_W, {k: v for k, v in WSTATE.items() if k != "opened"})["html"]))
 second = run(NOW_W, OUT_W["state"])
 check("run twice: the same Thursday gives nothing the second time, so nothing is shown twice", second["html"] == "" and OUT_W["state"]["week_reported"][-6:] == [g["id"] for g in WEEK], second["stats"])
@@ -186,7 +186,7 @@ nl_div = OUT_W["html"].split("NL Playoff Race")[0].count('class="z-blue"')
 check("zones: each of the six divisions has exactly one blue row (the leader); the lilac rows are exactly the six teams ESPN seeds 4 to 6 (the wild cards)",
       nl_div == 6 and OUT_W["html"].split("NL Playoff Race")[0].count('class="z-lilac"') == sum(1 for a in flat if int(flat[a]["playoffSeed"]) in (4, 5, 6)) == 6)
 race_nl = OUT_W["html"].split("NL Playoff Race")[1].split("AL Playoff Race")[0]
-check("zones in a playoff race: seeds 1 to 3 (the division leaders) blue, 4 to 6 (wild cards) lilac, the three teams out plain: nine rows", race_nl.count('class="z-blue"') == 3 and race_nl.count('class="z-lilac"') == 3 and race_nl.split("<tbody>")[1].split("</tbody>")[0].count("<tr") == 9)
+check("zones in a playoff race: seeds 1 to 3 (the division leaders) blue, 4 to 6 (wild cards) lilac, nobody else is listed (the other three are mathematically out): six rows", race_nl.count('class="z-blue"') == 3 and race_nl.count('class="z-lilac"') == 3 and race_nl.split("<tbody>")[1].split("</tbody>")[0].count("<tr") == 6)
 
 # ---- Daily mode (from the Dodgers' 155th game) --------------------------------------------------------------
 NOW_D = at("2026-09-21T00:00:00")
@@ -231,14 +231,17 @@ blocks = [x for x in OUT_D["html"].split('<tr class="tag">')[1:] if "Los Angeles
 check("never more than two standout lines under a game other than the Dodgers' (and some game does carry two)", max(x.count('class="pl"') for x in blocks) == 2, [x.count('class="pl"') for x in blocks])
 lad_part = OUT_D["html"].split('<tr class="tag">')[1]
 check("the Dodgers' game: Ohtani sat out, his DNP line sits below the player who played (never above)", "Shohei Ohtani (LAD): DNP" in lad_part and lad_part.index("Mookie Betts") < lad_part.index("Shohei Ohtani"), text(lad_part))
-check("NL and AL playoff races follow the games, eight teams each, the National League first", [m for m in re.findall(r"\n(NL|AL) Playoff Race \|", TXT_D)] == ["NL", "AL"] and len(re.findall(r"\n[1-8] \| [A-Z]{3} [✓✗] \|", TXT_D)) == 16)
-check("clinched teams carry a ✓ and eliminated teams a ✗, from ESPN's own marks: Arizona (e) is out, Milwaukee (*) is in", "ARI ✗" in TXT_D and "MIL ✓" in TXT_D and "TEX ✗" in TXT_D)
+check("NL and AL playoff races follow the games, the six playoff teams each (those mathematically out are not listed), the National League first", [m for m in re.findall(r"\n(NL|AL) Playoff Race \|", TXT_D)] == ["NL", "AL"] and len(re.findall(r"\n[1-6] \| [A-Z]{3} ✓ \|", TXT_D)) == 12)
+check("clinched teams carry a ✓ from ESPN's own marks (Milwaukee *); eliminated teams (Arizona, Texas: e) are not in the race tables and no ✗ is shown there", "MIL ✓" in TXT_D and "ARI" not in TXT_D.split("NL Playoff Race")[1] and "TEX" not in TXT_D.split("AL Playoff Race")[1] and "✗" not in TXT_D.split("NL Playoff Race")[1])
+alive = [dict(t, mark="") if t["abbr"] == "ARI" else t for t in mlb.teams_of(STD)]
+race_alive = text(mlb.race_table(alive, "National League", 1, 9, "NL Playoff Race"))
+check("a team still alive (no clincher mark) below the cut is listed as a chaser, with no tick and no cross; the ones out stay off", "7 | ARI | 86-76 | 2 |" in race_alive and "PIT" not in race_alive and "✗" not in race_alive and "✓" in race_alive, race_alive)
 nl_race = OUT_D["html"].split("NL Playoff Race")[1].split("AL Playoff Race")[0]
-check("zones in a playoff race: seeds 1 to 3 (division winners) blue, 4 to 6 lilac, the two teams out plain, in both leagues", nl_race.count('class="z-blue"') == 3 and nl_race.count('class="z-lilac"') == 3 and nl_race.split("<tbody>")[1].split("</tbody>")[0].count("<tr>") == 2
+check("zones in a playoff race: seeds 1 to 3 (division winners) blue, 4 to 6 lilac, nobody else, in both leagues", nl_race.count('class="z-blue"') == 3 and nl_race.count('class="z-lilac"') == 3 and nl_race.split("<tbody>")[1].split("</tbody>")[0].count("<tr>") == 0
       and OUT_D["html"].split("AL Playoff Race")[1].count('class="z-blue"') == 3)
 check("state: the shown games are marked reported; the places are saved for the arrows; a second run shows nothing new", set(OUT_D["state"]["reported"]) == {e["id"] for e in expected} and OUT_D["state"]["seeds"]["MIL"] == 1 and run(NOW_D, OUT_D["state"])["html"] == "")
 more = text(run(NOW_D, {"seeds": {"ARI": 6, "PHI": 7}})["html"])
-check("arrows in the playoff race: Arizona was 6th and is now 7th (▼1), Philadelphia 7th now 6th (▲1)", "7 | ARI ✗ | 86-76 | 2 | ▼1 |" in more and "6 | PHI ✓ | 88-74 | – | ▲1 |" in more, more[more.index("NL Playoff"):][:400])
+check("arrows in the playoff race: Philadelphia was 7th and is now 6th (▲1)", "6 | PHI ✓ | 88-74 | – | ▲1 |" in more, more[more.index("NL Playoff"):][:400])
 # the trigger itself: the Dodgers' 155th finished game
 t155 = sorted(iso(g["date"]) for g in FINAL)[154] + timedelta(hours=4)
 check("the 154th game was not enough: daily mode starts only after the Dodgers' 155th finished game", run(t155 - timedelta(minutes=2))["stats"]["mode"] == "" and run(t155 + timedelta(minutes=2))["stats"]["mode"] == "daily", (run(t155 - timedelta(minutes=2))["stats"], t155))
