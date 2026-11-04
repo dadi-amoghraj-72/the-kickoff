@@ -105,16 +105,18 @@ def merged_awards(wiki_page, yahoo_page=""):
     return {k: got[k] for k in ORDER if k in got}
 
 
-def caps_html(st, limit=3):
-    """Two small tables, 'Orange Cap · most runs' in orange and 'Purple Cap · most wickets' in purple (D: they are named after colours), the top `limit` of each. No gold
-    here: Sunrisers Hyderabad's gold row is for the official league table only."""
-    out = ""
-    for key, title, unit, tone in (("runs", "Orange Cap · most runs", "Runs", "orange"), ("wickets", "Purple Cap · most wickets", "Wkts", "purple")):
-        rows = st.get(key, [])[:limit]
-        if not rows:
-            continue
-        out += r.compact(r.table(title, [(unit, True), ("Player", False), ("Team", False)], [[n, who, team] for n, who, team in rows]), (22, 52, 26), f" caps {tone}")
-    return out
+def caps_html(st):
+    """The two cap holders only (D, 2026-11-04: just the top person of each, not the table): one small table, 'Orange' with the leading run-scorer and his runs in orange,
+    'Purple' with the leading wicket-taker and his wickets in purple. No gold row here (Sunrisers Hyderabad's gold is for the official league table only)."""
+    rows, classes = [], []
+    for key, label, unit, tone in (("runs", "Orange", "runs", "orange"), ("wickets", "Purple", "wkts", "purple")):
+        top = (st.get(key) or [None])[0]
+        if top:
+            rows.append([label, f"{top[1]} ({top[2]})" if top[2] else top[1], f"{top[0]} {unit}"])
+            classes.append(tone)
+    if not rows:
+        return ""
+    return r.compact(r.table("IPL Cap Leaders", [("Cap", False), ("Leader", False), ("Total", True)], rows, row_classes=classes), (16, 62, 22), " caps")
 
 
 def closing_html(m):

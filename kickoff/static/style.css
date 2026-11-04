@@ -385,3 +385,7 @@ tr.hl td { color: var(--gold); font-weight: 600; }   /* D's favourites' rows in 
 .awards .asg.three { gap: 6px; }
 .awards .asg.three .pl { font-size: 12.5px; }   /* three columns on a phone: a smaller size keeps names such as D. Rasmussen on one line */
 .awards .asg.three .ch { font-size: 11px; }
+.caps tr.orange td { color: #f2994a; }
+.caps tr.purple td { color: #b58be6; }
+@media (prefers-color-scheme: light) { .caps tr.orange td { color: #b3560d; } .caps tr.purple td { color: #6b3fa8; } }
+.caps td { font-size: 13.5px; }
