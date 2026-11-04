@@ -74,7 +74,7 @@ check("no transfer cost and no chip: those two rows are left out", "Transfer cos
 
 # ---- Squad alerts ----
 al = fc.squad_alerts(PICKS, BY)
-check("squad alerts: only your players who are not fit (Saka injured, Doubtful Dan)", [a["name"] for a in al] == ["Bukayo Saka", "Doubtful Dan"], al)
+check("squad alerts: only your players who are not fit (Saka injured, Doubtful Dan, who FPL calls Dan), shown by FPL's short name (web_name: Saka, not Bukayo Saka)", [a["name"] for a in al] == ["Saka", "Dan"], al)
 h = fc.alerts_html(al)
 check("alerts show FPL's note, and the chance only for a doubt", "Thigh injury - Unknown return date" in h and "(50% chance of playing)" in h and h.count("chance of playing") == 1, h)
 check("a chance already in FPL's note is not repeated",
@@ -148,11 +148,14 @@ check("each carries the squad's average for its position: DEF 3.0, MID 1.5 (all 
 check("not suggested: squad members, the injured and doubtful, a one-appearance cameo, a defender below the squad's 3.0, or a third midfielder", not {200, 210, 220, 305, 306, 308, 309, 303, 304} & {u["player"]["id"] for u in pu})
 check("positions the squad has nobody in (GKP, FWD) get no pick ups", {u["pos"] for u in pu} == {"DEF", "MID"})
 ph = fc.review_html(fc.transfer_review(UPS, UT, UH, CANDS))
-check("pick up format: 'Name (Avg. points, last 3 GWs: 8.0 | My squad DEF avg.: 3.0)' in a numbered list", "<strong>Hot Def</strong> (Avg. points, last 3 GWs: 8.0 | My squad DEF avg.: 3.0)" in ph and "My squad MID avg.: 1.5)" in ph and '<ol class="inj">' in ph, ph)
-check("the only header is 'Potential Pick Ups', with no explanations or sub lines", "<strong>Potential Pick Ups</strong>" in ph and "Transfer Suggestions" not in ph and "Pick-up" not in ph and 'class="sub"' not in ph and "muted" not in ph, ph)
+check("Pick Ups are grouped by position, in the order Defenders then Midfielders here (Goalkeepers and Attackers only when the squad has them): a sub heading with the position and the squad's average for it once, then numbered entries 'Name (Avg. points, last 3 GWs: 8.0)'",
+      "<strong>Potential Pick Ups</strong>" in ph and '<p class="sub"><strong>Defenders</strong> <span class="muted">(my squad avg.: 3.0)</span></p>' in ph and '<p class="sub"><strong>Midfielders</strong> <span class="muted">(my squad avg.: 1.5)</span></p>' in ph
+      and "<strong>Hot Def</strong> (Avg. points, last 3 GWs: 8.0)</li>" in ph and ph.index("Defenders") < ph.index("Midfielders") and "Goalkeepers" not in ph and "Attackers" not in ph, ph)
+check("the entries no longer repeat the squad average, and the old 'Transfer Suggestions' wording is gone", "My squad" not in ph and "Transfer Suggestions" not in ph and "Pick-up" not in ph, ph)
+check("each group numbers from 1 (two entries in the midfield group: 1 and 2)", ph.count('<ol class="inj tight">') >= 2 and ph.split("Midfielders")[1].count("<li>") == 2, ph)
 hh = fc.review_html(rv)
-check("underperforming format: 'Name (Avg. points, last 3 GWs: 0.7)', numbered, header 'Underperforming Players' only", "<strong>Underperforming Players</strong>" in hh and "<strong>Player 102</strong> (Avg. points, last 3 GWs: 0.7)" in hh and "<strong>Player 104</strong> (Avg. points, last 3 GWs: 2.0)" in hh and "Move out" not in hh and "Underperformers" not in hh, hh)
-check("bench swaps come first: 'Bench Swaps' ahead of 'Underperforming Players', 'Name over Starter (Avg. points, last 3 GWs: 8.0 | 2.0)'", hh.index("Bench Swaps") < hh.index("Underperforming Players") and "<strong>Player 110</strong> over <strong>Player 104</strong> (Avg. points, last 3 GWs: 8.0 | 2.0)" in hh, hh)
+check("underperforming format: 'Name (Avg. points, last 3 GWs: 0.7)', numbered, header 'Underperforming Players' only", "<strong>Underperforming Players</strong>" in hh and "<strong>P102</strong> (Avg. points, last 3 GWs: 0.7)" in hh and "<strong>P104</strong> (Avg. points, last 3 GWs: 2.0)" in hh and "Move out" not in hh and "Underperformers" not in hh, hh)
+check("bench swaps come first: 'Bench Swaps' ahead of 'Underperforming Players', 'Name over Starter (Avg. points, last 3 GWs: 8.0 | 2.0)'", hh.index("Bench Swaps") < hh.index("Underperforming Players") and "<strong>P110</strong> over <strong>P104</strong> (Avg. points, last 3 GWs: 8.0 | 2.0)" in hh, hh)
 check("an empty list leaves out its heading; nothing at all gives no block", "Potential Pick Ups" not in hh and fc.review_html({"swaps": [], "outs": [], "pickups": []}) == "")
 calls = []
 SQ_PICKS = {**PICKS, **SQUAD, "entry_history": PICKS["entry_history"]}

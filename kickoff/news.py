@@ -161,7 +161,24 @@ def apply_rules(cands, results):
 
 
 TAG = {"transfer_confirmed": "Transfer", "transfer_rumour": "Rumour", "manager_sacked": "Sacked", "manager_appointed": "Appointed",
-       "injury": "Injury"}
+       "injury": "Injury", "manager_news": "Manager"}
+
+
+def plain_managerial(cands, limit=4):
+    """Without Claude (D, 2026-11-04: Scott Parker's appointment at West Ham was missing from a run made with Claude off): the manager stories among the candidates, shown as
+    the source's own headline under a neutral 'Manager' tag (no summary: code cannot tell a sacking from an appointment, so it does not say which). One story per club, the newest;
+    at most `limit`. Same item shape as apply_rules gives."""
+    best = {}
+    for c in cands:
+        if c.get("hint") != "managerial" or not c.get("clubs"):
+            continue
+        club = c["clubs"][0]
+        if club not in best or c["published"] > best[club]["published"]:
+            best[club] = c
+    out = [{"kind": "manager_news", "club": club, "summary": None, "headline": c["title"], "source": c["source"], "link": c["link"],
+            "listed": club in {n for n, _, _ in CLUBS.values()}, "published": c["published"], "section": "arsenal" if club == "Arsenal" else "football"}
+           for club, c in best.items()]
+    return sorted(out, key=lambda i: i["published"], reverse=True)[:limit]
 
 
 def item_html(i):

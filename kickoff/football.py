@@ -192,8 +192,12 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         verdicts, usage = news.classify(client, cands)
         ledger.add("news classification", settings.NEWS_MODEL, usage)
         shown_news = news.apply_rules(cands, verdicts)
+    elif cands:                                          # no Claude (off, no key, budget used up): at least the manager stories, as the source's headline
+        shown_news = news.plain_managerial(cands)
+    shown_links = {i["link"] for i in shown_news}
     for c in cands:
-        seen[c["link"]] = now.isoformat()
+        if client or c["link"] in shown_links:           # an item nobody has judged is not "seen": a run with Claude may still want it (36 hours)
+            seen[c["link"]] = now.isoformat()
     cutoff = (now.timestamp() - 14 * 86400)
     new["news_seen"] = {k: v for k, v in seen.items() if datetime.fromisoformat(v).timestamp() >= cutoff}
     football += news.html(shown_news, "football", "Transfers And Managers")

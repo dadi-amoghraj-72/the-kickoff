@@ -562,5 +562,11 @@ for x in FIN:
 check("independent: counting the five raw scores gives New York 4, San Antonio 1", raw_wins == {"New York Knicks": 4, "San Antonio Spurs": 1}, raw_wins)
 check("a Finals tied 2-2 after four games gets no note, and neither does an empty series", nba.closing_html(2026, FIN[:4]) == "" and nba.closing_html(2026, []) == "")
 
+# ---- D, 2026-11-04: the NBA's standouts are no bigger than the NFL's highlights ----
+css = (ROOT / "kickoff" / "static" / "style.css").read_text()
+nba_size = re.search(r"\.standouts li \{[^}]*font-size: (\d+)px", css)
+nfl_size = re.search(r"\.dlist \.pl \{[^}]*font-size: (\d+)px", css)
+check("the NBA standouts list and the NFL highlights list have the same font size (16px; the standouts used to inherit the page's 18px)", nba_size and nfl_size and nba_size.group(1) == nfl_size.group(1) == "16", (nba_size and nba_size.group(1), nfl_size and nfl_size.group(1)))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

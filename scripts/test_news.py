@@ -154,5 +154,18 @@ check("with no summary the headline is shown as the fallback", "Forest sack Glas
 check("no items for a section means no block", news.html(items, "arsenal", "x") != "" and news.html([], "arsenal", "x") == "")
 check("rumours are clearly tagged", "Rumour" in news.html(news.apply_rules([A], {A["link"]: {"kind": "transfer_rumour", "club": "Arsenal", "summary": "Arsenal are reportedly interested."}}), "arsenal", "Team News"))
 
+# ---- Without Claude: the manager stories still show (D, 2026-11-04: Scott Parker was missing from a run made with Claude off) ----
+from datetime import datetime as _dt, timezone as _tz  # noqa: E402
+T4 = _dt(2026, 11, 4, 12, 0, tzinfo=_tz.utc)
+real = [{"title": "West Ham confirm Parker as boss", "text": "West Ham confirm the appointment of former midfielder Scott Parker as their head coach on a two-and-a-half-year deal.", "source": "BBC Sport", "link": "https://bbc/1", "published": _dt(2026, 11, 4, 11, 54, tzinfo=_tz.utc)},
+        {"title": "West Ham confirm Scott Parker as head coach after sacking Nuno Espírito Santo", "text": "Parker takes over team eighth in Championship He has overseen three promotions to Premier League Scott Parker has been confirmed as West Ham’s head coach, taking over from Nuno Espírito Santo", "source": "The Guardian", "link": "https://gdn/1", "published": _dt(2026, 11, 4, 9, 30, tzinfo=_tz.utc)},
+        {"title": "Arsenal sign a new goalkeeper", "text": "The club have completed the signing.", "source": "BBC Sport", "link": "https://bbc/2", "published": _dt(2026, 11, 4, 10, 0, tzinfo=_tz.utc)}]
+cs = news.candidates(real, {"West Ham", "Arsenal"}, T4)
+plain = news.plain_managerial(cs)
+check("the two real 4 November West Ham headlines (BBC and Guardian, with their real blurbs) and an Arsenal transfer line are candidates; only the two manager stories are kept without Claude, and as one West Ham item (the newest: BBC's)", len(cs) == 3 and len(plain) == 1 and plain[0]["club"] == "West Ham" and plain[0]["source"] == "BBC Sport" and plain[0]["kind"] == "manager_news", plain)
+ph = news.html(plain, "football", "Transfers And Managers")
+check("it reads 'Manager' (not 'Appointed': code cannot tell), the source's own headline and a link", 'class="tag">Manager</span> West Ham confirm Parker as boss' in ph and "https://bbc/1" in ph and "Appointed" not in ph, ph)
+check("a transfer item is not shown without Claude, and nothing gives nothing", all(i["kind"] == "manager_news" for i in plain) and news.plain_managerial([]) == [] and news.plain_managerial([c for c in cs if c["hint"] != "managerial"]) == [])
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

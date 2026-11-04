@@ -103,7 +103,7 @@ section > :last-child { margin-bottom: 0; }
 
 /* Standouts, ranked */
 .standouts { margin: 0 0 14px; padding-left: 0; list-style: none; }
-.standouts li { margin-bottom: 6px; padding-left: 20px; }
+.standouts li { margin-bottom: 6px; padding-left: 20px; font-size: 16px; line-height: 1.4; }   /* the same size as the NFL highlights (.dlist .pl): the NBA's standouts used to inherit the page's 18px */
 .standouts li::before { content: "\25C6"; display: inline-block; width: 20px; margin-left: -20px; padding-left: 4px; box-sizing: border-box; font-size: 9px; color: var(--gold); vertical-align: middle; }   /* the house gold diamond bullet, on every standouts list */
 
 /* Tables: numbers right-aligned, zone bars on the left edge of a row */
@@ -183,6 +183,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .news li, .team-news li { padding: 8px 0; border-bottom: 1px solid var(--hairline); }
 ol.inj { margin: 4px 0 14px; padding-left: 1.7em; font-size: 16px; }   /* the FPL Injuries list, numbered */
 ol.inj li { padding: 6px 0; }
+ol.inj.tight li { padding: 2px 0; }       /* the FPL review lists are compact (D) */
 p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
 .tag { margin-right: 6px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 

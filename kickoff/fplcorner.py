@@ -65,7 +65,7 @@ def squad_alerts(picks, by_id):
     for p in picks["picks"]:
         pl = by_id[p["element"]]
         if pl["status"] in FLAGGED:
-            out.append({"name": pl["name"], "team": pl["team"], "status": pl["status"], "news": pl["news"],
+            out.append({"name": pl.get("web_name") or pl["name"], "team": pl["team"], "status": pl["status"], "news": pl["news"],
                         "chance": pl["chance_next"], "added": pl["news_added"]})
     return out
 
@@ -157,17 +157,29 @@ def transfer_review(picks, trend, by_id, players):
     return {"gws": gws, "swaps": swaps, "outs": outs, "pickups": pickups}
 
 
+GROUPS = {"GKP": "Goalkeepers", "DEF": "Defenders", "MID": "Midfielders", "FWD": "Attackers"}
+
+
 def review_html(review):
-    """Three numbered lists, each with only its heading: Bench Swaps, Underperforming Players, Potential Pick Ups. A list with nothing in it is left out."""
+    """The FPL lists, each with only its heading (D, 2026-11-04): Bench Swaps, Underperforming Players (numbered lists), and Potential Pick Ups grouped by position (Goalkeepers,
+    Defenders, Midfielders, Attackers: two numbered entries each, the squad's average for that position once in the group's heading). Players are shown by FPL's own short name
+    (web_name: Raya, Szoboszlai, Gabriel), the established one. A list with nothing in it is left out."""
     lab = "Avg. points, last 3 GWs"
     n = lambda v: f"{v:.1f}"  # noqa: E731
-    name = lambda p: f"<strong>{r.esc(p['name'])}</strong>"  # noqa: E731
+    name = lambda p: f"<strong>{r.esc(p.get('web_name') or p['name'])}</strong>"  # noqa: E731
+    ol = lambda items: '<ol class="inj tight">' + "".join(f"<li>{x}</li>" for x in items) + "</ol>"  # noqa: E731
     blocks = [
         ("Bench Swaps", [f"{name(s['player'])} over {name(s['over'])} ({lab}: {n(s['avg'])} | {n(s['over_avg'])})" for s in review["swaps"]]),
         ("Underperforming Players", [f"{name(o['player'])} ({lab}: {n(o['avg'])})" for o in review["outs"]]),
-        ("Potential Pick Ups", [f"{name(u['player'])} ({lab}: {n(u['avg'])} | My squad {u['pos']} avg.: {n(u['pos_avg'])})" for u in review["pickups"]]),
     ]
-    return "".join(f'<p><strong>{t}</strong></p><ol class="inj">' + "".join(f"<li>{x}</li>" for x in items) + "</ol>" for t, items in blocks if items)
+    out = "".join(f'<p><strong>{t}</strong></p>{ol(items)}' for t, items in blocks if items)
+    if review["pickups"]:
+        out += "<p><strong>Potential Pick Ups</strong></p>"
+        for pos, title in GROUPS.items():
+            group = [u for u in review["pickups"] if u["pos"] == pos]
+            if group:
+                out += f'<p class="sub"><strong>{title}</strong> <span class="muted">(my squad avg.: {n(group[0]["pos_avg"])})</span></p>' + ol(f"{name(u['player'])} ({lab}: {n(u['avg'])})" for u in group)
+    return out
 
 
 def watch_items(players, seen, now):
