@@ -614,7 +614,334 @@
      "venue": "Mount Maunganui"
     }
    ]
+  },
+  "espn-1539437": {
+   "built": "2026-11-04T11:59:32Z",
+   "rows": [
+    {
+     "date": "Oct 22 2026",
+     "format": "T20I",
+     "n": "1st",
+     "result": "India won by 4 wkts (2b rem)",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": "225/4"
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": "230/6"
+      }
+     ],
+     "venue": "Christchurch"
+    },
+    {
+     "date": "Oct 24 2026",
+     "format": "T20I",
+     "n": "2nd",
+     "result": "India won by 4 wkts (1b rem)",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": "180/5"
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": "181/6"
+      }
+     ],
+     "venue": "Christchurch"
+    },
+    {
+     "date": "Oct 27 2026",
+     "format": "T20I",
+     "n": "3rd",
+     "result": "India won by 6 wkts (40b rem)",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": "198/3"
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": "199/4"
+      }
+     ],
+     "venue": "Wellington"
+    },
+    {
+     "date": "Oct 30 2026",
+     "format": "T20I",
+     "n": "4th",
+     "result": "New Zealand won by 87 runs",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": "259/7"
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": "172/9"
+      }
+     ],
+     "venue": "Auckland"
+    },
+    {
+     "date": "Nov 1 2026",
+     "format": "T20I",
+     "n": "5th",
+     "result": "New Zealand won by 7 wkts (12b rem)",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": "191/8"
+      },
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": "195/3"
+      }
+     ],
+     "venue": "Hamilton"
+    },
+    {
+     "date": "Nov 4 2026",
+     "format": "ODI",
+     "n": "1st",
+     "result": "India won by 5 wkts (56b rem) (DLS)",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": "185"
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": "143/5"
+      }
+     ],
+     "venue": "Auckland"
+    },
+    {
+     "date": "Nov 7 2026",
+     "format": "ODI",
+     "n": "2nd",
+     "result": null,
+     "starts": "Starts at 15:00 local time",
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": ""
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": ""
+      }
+     ],
+     "venue": "Wellington"
+    },
+    {
+     "date": "Nov 10 2026",
+     "format": "ODI",
+     "n": "3rd",
+     "result": null,
+     "starts": "Starts at 15:00 local time",
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": ""
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": ""
+      }
+     ],
+     "venue": "Hamilton"
+    },
+    {
+     "date": "Nov 13 2026",
+     "format": "ODI",
+     "n": "4th",
+     "result": null,
+     "starts": "Starts at 15:00 local time",
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": ""
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": ""
+      }
+     ],
+     "venue": "Mount Maunganui"
+    },
+    {
+     "date": "Nov 15 2026",
+     "format": "ODI",
+     "n": "5th",
+     "result": null,
+     "starts": "Starts at 15:00 local time",
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": ""
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": ""
+      }
+     ],
+     "venue": "Mount Maunganui"
+    },
+    {
+     "date": "Nov 19-23 2026",
+     "format": "Test",
+     "n": "1st",
+     "result": null,
+     "starts": "Starts at 11:00 local time",
+     "teams": [
+      {
+       "abbr": "NZ",
+       "name": "New Zealand",
+       "score": ""
+      },
+      {
+       "abbr": "IND",
+       "name": "India",
+       "score": ""
+      }
+     ],
+     "venue": "Wellington"
+    }
+   ]
   }
  },
- "tables": {}
+ "tables": {
+  "WBBL": {
+   "built": "2026-11-04T11:59:32Z",
+   "rows": [
+    {
+     "l": 0,
+     "name": "Sydney Sixers Women",
+     "nr": 0,
+     "nrr": 2.25,
+     "p": 2,
+     "pos": 1,
+     "pts": 4,
+     "t": 0,
+     "team": "SS",
+     "w": 2
+    },
+    {
+     "l": 0,
+     "name": "Perth Scorchers Women",
+     "nr": 0,
+     "nrr": 1.696,
+     "p": 2,
+     "pos": 2,
+     "pts": 4,
+     "t": 0,
+     "team": "PS",
+     "w": 2
+    },
+    {
+     "l": 0,
+     "name": "Sydney Thunder Women",
+     "nr": 0,
+     "nrr": 1.605,
+     "p": 2,
+     "pos": 3,
+     "pts": 4,
+     "t": 0,
+     "team": "ST",
+     "w": 2
+    },
+    {
+     "l": 0,
+     "name": "Adelaide Strikers Women",
+     "nr": 0,
+     "nrr": 1.05,
+     "p": 1,
+     "pos": 4,
+     "pts": 2,
+     "t": 0,
+     "team": "AS",
+     "w": 1
+    },
+    {
+     "l": 2,
+     "name": "Melbourne Stars Women",
+     "nr": 0,
+     "nrr": -0.3,
+     "p": 3,
+     "pos": 5,
+     "pts": 2,
+     "t": 0,
+     "team": "MS",
+     "w": 1
+    },
+    {
+     "l": 2,
+     "name": "Melbourne Renegades Women",
+     "nr": 0,
+     "nrr": -1.385,
+     "p": 3,
+     "pos": 6,
+     "pts": 2,
+     "t": 0,
+     "team": "MR",
+     "w": 1
+    },
+    {
+     "l": 2,
+     "name": "Brisbane Heat Women",
+     "nr": 0,
+     "nrr": -0.891,
+     "p": 2,
+     "pos": 7,
+     "pts": 0,
+     "t": 0,
+     "team": "BH",
+     "w": 0
+    },
+    {
+     "l": 3,
+     "name": "Hobart Hurricanes Women",
+     "nr": 0,
+     "nrr": -1.792,
+     "p": 3,
+     "pos": 8,
+     "pts": 0,
+     "t": 0,
+     "team": "HH",
+     "w": 0
+    }
+   ]
+  }
+ }
 }
