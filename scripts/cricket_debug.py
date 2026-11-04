@@ -34,6 +34,9 @@ try:
     stubs = esrc.pseudo_matches()
     print(f"\nESPN scores page read: {len(esrc.games())} matches, {len(stubs)} with 'team vs team' slugs")
     extra = cricket.espn_extras(stubs, matches, esrc.page_of, now)
+    raw = esrc.fetch(espn_cricket.SCORES_URL)
+    import re as _re
+    print(f"raw scores page: {len(raw)} characters; title: {(_re.search(r'<title>(.*?)</title>', raw, _re.S) or [None, '?'])[1][:100]!r}; links to /cricket/series/: {raw.count('/cricket/series/')}")
     print(f"ESPN-only matches added: {len(extra)}")
     for m in extra:
         print(f"  {m['dateTimeGMT'][:16]}  ended={m['matchEnded']}  {m['name']}  | {m['status']}")
