@@ -51,21 +51,26 @@ check("a missing time is None", fc.parse_time(None) is None and fc.parse_time(""
 check("recent news with a fractional-second timestamp is recognised", fc.is_recent("2026-11-03T09:00:09.115906Z", T(2026, 11, 3, 12)) and not fc.is_recent("2026-10-24T17:00:09.115906Z", T(2026, 11, 3, 12)))
 
 # ---- Deadline reminder ----
-d = fc.deadline(BOOT, T(2026, 11, 4, 12))
-check("within 72 hours of the deadline: the reminder, in Singapore time", d == {"gw": 10, "when": "Saturday 7 November, 2:30am SGT"}, d)
-check("more than 72 hours out: no reminder", fc.deadline(BOOT, T(2026, 11, 2, 12)) is None)
+FRIDAY = T(2026, 11, 5, 23, 15)     # the Friday 7:15am Singapore edition: 19 hours and 15 minutes before the deadline (Saturday 2:30am SGT = 18:30 UTC on Friday)
+d = fc.deadline(BOOT, FRIDAY)
+check("within 24 hours of the deadline (the Friday morning edition): the reminder, in Singapore time", d == {"gw": 10, "when": "Saturday 7 November, 2:30am SGT"}, d)
+check("more than 24 hours out (the Thursday morning edition, 43 hours before) and the Wednesday one: no reminder", fc.deadline(BOOT, T(2026, 11, 4, 23, 15)) is None and fc.deadline(BOOT, T(2026, 11, 3, 23, 15)) is None)
+check("the edition after the deadline (Saturday 7:15am Singapore time, 23:15 UTC on Friday) is past it, so exactly one edition falls inside the 24 hours", fc.deadline(BOOT, T(2026, 11, 6, 23, 15)) is None and fc.deadline(BOOT, T(2026, 11, 6, 18, 31)) is None)
 check("after the deadline: no reminder", fc.deadline(BOOT, T(2026, 11, 7)) is None)
 check("the reminder never shows once there is no next gameweek", fc.deadline({"events": [EVENT9]}, T(2026, 11, 4)) is None)
 
 # ---- Your team ----
-line = fc.classic_line(ENTRY, PICKS, HISTORY, LIVE, BY, EVENT9)
-check("your team line: name, points vs average, 'so far' while the gameweek runs", "<strong>merino parade fc</strong>" in line and "Gameweek 9 so far: 25 pts (average 31)" in line, line)
-check("overall rank with thousands separators and its move", "overall rank 2,729,094, down 629,867" in line, line)
-check("captain's points include the multiplier", "captain Haaland 18 pts" in line, line)
-check("bench points and a transfer cost are mentioned", "2 on the bench" in line and "4 pt transfer cost" in line)
-fin = fc.classic_line(ENTRY, {**PICKS, "active_chip": "wildcard"}, {"current": [{"event": 8, "overall_rank": 3000000}, {"event": 9, "overall_rank": 2729094}]}, LIVE, BY, {**EVENT9, "finished": True})
-check("a finished gameweek drops 'so far'; rank improving says 'up'; a chip is named", "so far" not in fin and "up 270,906" in fin and "chip: wildcard" in fin, fin)
-check("no history: the rank is given without a move", ", down" not in fc.classic_line(ENTRY, PICKS, {}, LIVE, BY, EVENT9) and "overall rank 2,729,094" in fc.classic_line(ENTRY, PICKS, {}, LIVE, BY, EVENT9))
+import re as _re  # noqa: E402
+tx = lambda h: _re.sub(r"\s+", " ", _re.sub(r"<[^>]+>", " ", h)).strip()  # noqa: E731
+box = fc.classic_box(ENTRY, PICKS, HISTORY, LIVE, BY, EVENT9)
+check("your team box: the team, the gameweek's points against the average ('so far' while it runs), the overall rank with its move arrow, captain with his points, bench points",
+      tx(box) == "Team merino parade fc Gameweek 9 so far 25 pts average 31 Overall rank 2,729,094 ▼629,867 Captain 18 pts Haaland Bench 2 pts Transfer cost -4 pts", tx(box))
+check("it is the shared summary box (labels, gold figures), not a paragraph of white text", box.startswith('<ul class="roundup">') and box.count('class="n"') == 4 and "<p>" not in box, box[:120])
+fin = fc.classic_box(ENTRY, {**PICKS, "active_chip": "wildcard"}, {"current": [{"event": 8, "overall_rank": 3000000}, {"event": 9, "overall_rank": 2729094}]}, LIVE, BY, {**EVENT9, "finished": True})
+check("a finished gameweek drops 'so far'; a rank that improved shows ▲ with the places gained; a chip is named", "so far" not in tx(fin) and "▲270,906" in tx(fin) and "Chip wildcard" in tx(fin), tx(fin))
+nohist = fc.classic_box(ENTRY, PICKS, {}, LIVE, BY, EVENT9)
+check("no history: the rank is given without a move arrow", "▼" not in nohist and "▲" not in nohist and "2,729,094" in nohist)
+check("no transfer cost and no chip: those two rows are left out", "Transfer cost" not in fc.classic_box(ENTRY, {**PICKS, "entry_history": {**PICKS["entry_history"], "event_transfers_cost": 0}}, HISTORY, LIVE, BY, EVENT9) and "Chip" not in box)
 
 # ---- Squad alerts ----
 al = fc.squad_alerts(PICKS, BY)
@@ -134,9 +139,9 @@ BY2 = {**BY, **HP}
 PL2 = PLAYERS + list(HP.values())
 fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 2, 9), trend_fn=lambda: calls.append(1) or TREND)
 check("far from the deadline, the hints are not worked out at all (no wasted requests)", calls == [])
-html_near, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 4, 9), trend_fn=lambda: TREND)
-check("within 72 hours of the deadline the corner includes the hints", "Transfer hints" in html_near)
-html_none, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 4, 9), trend_fn=lambda: {})
+html_near, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, FRIDAY, trend_fn=lambda: TREND)
+check("within 24 hours of the deadline the corner includes the hints", "Transfer hints" in html_near)
+html_none, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, FRIDAY, trend_fn=lambda: {})
 check("if the gameweek data is unavailable the corner still builds without hints", "Transfer hints" not in html_none and "merino parade fc" in html_none)
 
 # ---- The rule as D first asked for it: under 2 points in each of the last 3 gameweeks ----
@@ -156,27 +161,33 @@ check("quiet players come ahead of merely low-scoring ones", [h["reason"] for h 
 far = T(2026, 11, 2, 9)
 plain, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, far, trend_fn=lambda: TREND)
 demo, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, far, trend_fn=lambda: TREND, demo=True)
-check("normally, four days before the deadline there is no reminder and no hints", "Deadline:" not in plain and "Transfer hints" not in plain)
+check("normally, four days before the deadline the corner is left out altogether: no reminder, no hints, no heading", plain == "")
 check("in demo mode the deadline reminder and the hints appear anyway", "Deadline:" in demo and "Transfer hints" in demo, demo[:200])
 
 # ---- The whole corner ----
-html, st = fc.build(BOOT, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 4, 9))
-check("the corner has a heading, the deadline, your team, your squad, the draft table",
-      html.startswith("<h3>FPL Corner</h3>") and "Deadline:" in html and "merino parade fc" in html and "Your squad:" in html and "Hong Hu" in html, html[:200])
-check("the first build records the draft table and the watch items it showed", "draft" in st and st.get("watch_seen", {}).get("3") == "2026-11-03T09:00:00Z", st)
-html2, st2 = fc.build(BOOT, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, st, T(2026, 11, 4, 9))
-check("next time: the draft table is skipped when nothing changed; your team line stays", "Hong Hu" not in html2 and "merino parade fc" in html2)
-quiet, _ = fc.build(BOOT, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, None, 186059, {}, T(2026, 11, 2, 9))
-check("far from the deadline, only squad news from the last 36 hours is shown (Dan's, not Saka's)", "Doubtful Dan" in quiet and "Bukayo Saka" not in quiet, quiet)
-done = {**BOOT, "events": [{**EVENT9, "finished": True}, EVENT10]}
-fin_html, fin_st = fc.build(done, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 3, 9))
-check("a finished gameweek shows its top scorers", "Gameweek 9 Top Scorers" in fin_html and "Top Scorer" in fin_html)
-again, _ = fc.build(done, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, fin_st, T(2026, 11, 4, 9))
-check("and only once", "Top Scorers" not in again)
-partial, _ = fc.build(BOOT, PLAYERS, None, None, None, None, DRAFT, 186059, {}, T(2026, 11, 2, 9))
-check("if your team's data is unavailable, the rest still appears", "Hong Hu" in partial and "merino" not in partial)
-empty, _ = fc.build(BOOT, [player(1, "A", "A")], None, None, None, None, None, 186059, {}, T(2026, 11, 2, 9))
-check("nothing to say means no corner at all", empty == "", empty)
+FRESH = [dict(p, news_added="2026-11-05T09:00:00Z") if p["id"] == 3 else p for p in PLAYERS]      # Cash's suspension news is a few hours old on Friday morning
+html, st = fc.build(BOOT, FRESH, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, FRIDAY)
+check("the Friday corner has a heading, the deadline, your team box, your squad, the draft table", html.startswith("<h3>FPL Corner</h3>") and "Deadline:" in html and "merino parade fc" in html and "Your squad:" in html and "Hong Hu" in html, html[:200])
+check("the first build records the draft table and the watch items it showed", "draft" in st and st.get("watch_seen", {}).get("3") == "2026-11-05T09:00:00Z", st)
+html2, st2 = fc.build(BOOT, FRESH, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, st, FRIDAY)
+check("the Draft table is part of every corner (even when its standings are unchanged since the last time), and so is your team box", "Hong Hu" in html2 and "merino parade fc" in html2)
+check("the Draft table has the league's name with the gameweek, your team highlighted, the move arrows and both team names", "Hong Hu Express SuperLiga After Gameweek 9" in html and 'class="mine"' in html and "Gabi III" in html and "Oinkata" in html, html[:100])
+for quiet_day in (T(2026, 11, 2, 23, 15), T(2026, 11, 3, 23, 15), T(2026, 11, 4, 23, 15), T(2026, 11, 6, 23, 15)):
+    q, _ = fc.build(BOOT, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, quiet_day)
+    check(f"on the morning of {quiet_day:%a %-d %b} (not within 24 hours of the deadline, no gameweek just finished) the corner is not shown at all, not even a squad news line", q == "", q[:80])
+done = {**BOOT, "events": [{**EVENT9, "finished": True, "data_checked": True}, EVENT10]}
+fin_html, fin_st = fc.build(done, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 3, 23, 15))
+check("the morning after the gameweek's bonus points are final (data_checked) the recap shows once: your box, the Draft table, the gameweek's top scorers; no deadline, no squad alerts, no hints", "Gameweek 9 Top Scorers" in fin_html and "Top Scorer" in fin_html and "Hong Hu" in fin_html and "merino parade fc" in fin_html
+      and "Deadline:" not in fin_html and "Your squad:" not in fin_html and fin_st.get("recap_gw") == 9, fin_html[:200])
+again, _ = fc.build(done, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, fin_st, T(2026, 11, 4, 23, 15))
+check("and only once: the next morning it is gone", again == "")
+unchecked = {**BOOT, "events": [{**EVENT9, "finished": True, "data_checked": False}, EVENT10]}
+check("a finished gameweek whose bonus points are not yet final (data_checked false: the last match was played but FPL is still adding bonus) does not trigger it yet", fc.build(unchecked, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 3, 23, 15))[0] == "")
+mid = {**BOOT, "events": [{**EVENT9, "finished": False, "data_checked": False}, EVENT10]}
+check("a gameweek still being played does not trigger it", fc.build(mid, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 3, 23, 15))[0] == "")
+both, _ = fc.build({**BOOT, "events": [{**EVENT9, "finished": True, "data_checked": True}, EVENT10]}, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, FRIDAY)
+check("when the deadline morning is also the first morning after the bonus points are final, one corner has both: the deadline and the top scorers", "Deadline:" in both and "Top Scorers" in both and both.count("<h3>FPL Corner</h3>") == 1)
+check("FPL Watch (new injury news on heavily owned players) belongs to the deadline morning only", "FPL Watch" in html and "FPL Watch" not in fin_html)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

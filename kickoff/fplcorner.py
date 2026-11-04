@@ -1,11 +1,14 @@
-"""The FPL corner: D's classic team and Draft league, deadline reminders, squad alerts and gameweek top scorers.
-All built by code from FPL's public data. No Claude, no cost."""
+"""The FPL corner: D's classic team and Draft league, the deadline reminder, squad alerts, transfer hints and gameweek top scorers.
+All built by code from FPL's public data. No Claude, no cost.
+
+It appears on two mornings only (D, 2026-11-04): the one edition that falls within 24 hours before a gameweek's deadline, and once after a gameweek's last match
+when FPL has added the bonus points and marked the data checked (usually the day after the last Premier League game of the week). Every other morning it is left out."""
 from datetime import datetime, timedelta, timezone
 
 from kickoff import render as r
 from kickoff.focus import when_sgt
 
-DEADLINE_WINDOW = timedelta(hours=72)
+DEADLINE_WINDOW = timedelta(hours=24)
 RECENT = timedelta(hours=36)
 WATCH_OWNERSHIP = 15.0  # per cent of managers who own the player
 FLAGGED = {"i": "Injured", "d": "Doubtful", "s": "Suspended", "u": "Unavailable"}
@@ -21,7 +24,7 @@ def current_event(bootstrap):
 
 
 def deadline(bootstrap, now, window=DEADLINE_WINDOW):
-    """The next gameweek deadline if it is within the window (72 hours), else None. {'gw', 'when'}."""
+    """The next gameweek deadline if it is within the window (24 hours), else None. {'gw', 'when'}."""
     nxt = next((e for e in bootstrap["events"] if e["is_next"]), None)
     when = parse_time(nxt["deadline_time"]) if nxt else None
     if not when or not (timedelta(0) <= when - now <= window):
@@ -33,27 +36,27 @@ def number(n):
     return f"{n:,}"
 
 
-def classic_line(entry, picks, history, live, by_id, event):
-    """Your team's gameweek in one line: points, average, rank and its move, captain, bench, transfers."""
+def classic_box(entry, picks, history, live, by_id, event):
+    """Your team's gameweek as a small summary box (the same box as the other sports): the team, the gameweek's points with the average, the overall rank with its move
+    (▼ down, ▲ up), the captain and his points, the points left on the bench, and a transfer cost or chip when there is one."""
     eh, gw = picks["entry_history"], event["id"]
     cap = next((p for p in picks["picks"] if p["is_captain"]), None)
     ranks = {c["event"]: c["overall_rank"] for c in history.get("current", [])}
     move = ""
     if gw - 1 in ranks and gw in ranks and ranks[gw] != ranks[gw - 1]:
         diff = ranks[gw] - ranks[gw - 1]
-        move = f", {'down' if diff > 0 else 'up'} {number(abs(diff))}"
-    parts = [f"<strong>{r.esc(entry['name'])}</strong>",
-             f"Gameweek {gw}{'' if event['finished'] else ' so far'}: {eh['points']} pts (average {event['average_entry_score']})",
-             f"overall rank {number(eh['overall_rank'])}{move}"]
+        move = f"{'▼' if diff > 0 else '▲'}{number(abs(diff))}"
+    items = [("Team", "", entry["name"], ""),
+             (f"Gameweek {gw}{'' if event['finished'] else ' so far'}", f"{eh['points']} pts", f"average {event['average_entry_score']}", ""),
+             ("Overall rank", "", number(eh["overall_rank"]), move)]
     if cap:
-        parts.append(f"captain {r.esc(by_id[cap['element']]['web_name'])} {live.get(cap['element'], 0) * cap['multiplier']} pts")
-    if eh.get("points_on_bench"):
-        parts.append(f"{eh['points_on_bench']} on the bench")
+        items.append(("Captain", f"{live.get(cap['element'], 0) * cap['multiplier']} pts", by_id[cap["element"]]["web_name"], ""))
+    items.append(("Bench", f"{eh.get('points_on_bench') or 0} pts", "", ""))
     if eh.get("event_transfers_cost"):
-        parts.append(f"{eh['event_transfers_cost']} pt transfer cost")
+        items.append(("Transfer cost", f"-{eh['event_transfers_cost']} pts", "", ""))
     if picks.get("active_chip"):
-        parts.append(f"chip: {r.esc(picks['active_chip'])}")
-    return "<p>" + " · ".join(parts) + "</p>"
+        items.append(("Chip", "", str(picks["active_chip"]), ""))
+    return r.summary_box(items)
 
 
 def squad_alerts(picks, by_id):
@@ -180,41 +183,44 @@ def watch_items(players, seen, now):
 
 
 def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry_id, state, now, trend_fn=None, demo=False):
-    """The FPL corner HTML and the new state. Pieces that have nothing to say are left out.
-    demo=True shows the deadline reminder, squad alerts and transfer hints even when the deadline is far off,
-    so the demo page can show everything the corner can do."""
+    """The FPL corner HTML and the new state: '' on every morning except the one within 24 hours before a deadline and the one after a gameweek's bonus points are
+    final. Before the deadline: the deadline, your summary box, squad alerts, transfer hints, FPL Watch and the Draft table. After the gameweek: your summary box,
+    the Draft table and the gameweek's top scorers (once per gameweek: state["recap_gw"]). demo=True shows everything the corner can do whatever the date."""
     by_id = {p["id"]: p for p in players}
     event = current_event(bootstrap)
     new_state = dict(state)
-    parts = []
     dl = deadline(bootstrap, now) or (deadline(bootstrap, now, window=timedelta(days=400)) if demo else None)
+    recap = bool(event.get("data_checked")) and event["finished"] and state.get("recap_gw") != event["id"]
+    if demo:
+        recap = bool(live) and state.get("recap_gw") != event["id"]
+    if not (dl or recap):
+        return "", new_state
+    parts = []
     if dl:
         parts.append(f"<p><strong>Deadline:</strong> Gameweek {dl['gw']} closes {dl['when']}.</p>")
     if entry and picks and live is not None:
-        parts.append(classic_line(entry, picks, history or {}, live, by_id, event))
+        parts.append(classic_box(entry, picks, history or {}, live, by_id, event))
         alerts = squad_alerts(picks, by_id)
-        shown = alerts if dl else [a for a in alerts if is_recent(a["added"], now)]
-        if shown:
-            parts.append(alerts_html(shown))
+        if dl and alerts:
+            parts.append(alerts_html(alerts))
         if dl and trend_fn:  # only near the deadline, when a transfer decision is due
             trend = trend_fn()
             if trend:
                 parts.append(hints_html(transfer_hints(picks, trend, by_id), list(trend)))
-    watch = watch_items(players, state.get("watch_seen", {}), now)
-    if watch:
-        lis = "".join(f"<li><strong>{r.esc(w['name'])}</strong> ({r.esc(w['team'])}) <span class=\"muted\">{FLAGGED[w['status']]}</span>"
-                      f"{(': ' + r.esc(w['news'])) if w['news'] else ''} <span class=\"muted\">· owned by {w['owned']:.0f}%</span></li>" for w in watch)
-        parts.append(f'<p><strong>FPL Watch:</strong></p><ul class="team-news">{lis}</ul>')
-        seen = dict(state.get("watch_seen", {}))
-        seen.update({str(p["id"]): p["news_added"] for p in players if p["owned"] >= WATCH_OWNERSHIP and p["news_added"]})
-        new_state["watch_seen"] = seen
+    if dl:
+        watch = watch_items(players, state.get("watch_seen", {}), now)
+        if watch:
+            lis = "".join(f"<li><strong>{r.esc(w['name'])}</strong> ({r.esc(w['team'])}) <span class=\"muted\">{FLAGGED[w['status']]}</span>"
+                          f"{(': ' + r.esc(w['news'])) if w['news'] else ''} <span class=\"muted\">· owned by {w['owned']:.0f}%</span></li>" for w in watch)
+            parts.append(f'<p><strong>FPL Watch:</strong></p><ul class="team-news">{lis}</ul>')
+            seen = dict(state.get("watch_seen", {}))
+            seen.update({str(p["id"]): p["news_added"] for p in players if p["owned"] >= WATCH_OWNERSHIP and p["news_added"]})
+            new_state["watch_seen"] = seen
     if draft:
         sig, table = draft_table(draft, my_draft_entry_id, event["id"])
-        if sig != state.get("draft"):
-            parts.append(table)
-            new_state["draft"] = sig
-    if live and event["finished"] and state.get("topscorers_gw") != event["id"]:
-        parts.append(r.table(f"Gameweek {event['id']} Top Scorers", [("#", True), ("Player", False), ("Team", False), ("Pts", True)],
-                             top_scorers(live, by_id)))
-        new_state["topscorers_gw"] = event["id"]
-    return ("<h3>FPL Corner</h3>" + "".join(parts) if parts else ""), new_state
+        parts.append(table)
+        new_state["draft"] = sig
+    if recap and live:
+        parts.append(r.table(f"Gameweek {event['id']} Top Scorers", [("#", True), ("Player", False), ("Team", False), ("Pts", True)], top_scorers(live, by_id)))
+        new_state["recap_gw"] = event["id"]
+    return "<h3>FPL Corner</h3>" + "".join(parts), new_state

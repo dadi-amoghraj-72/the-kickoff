@@ -119,7 +119,12 @@ check("scorers are shown under each team (Rogers for Chelsea, with the minute)",
 check("the listed clubs are in bold in the scoreboard (Chelsea, Manchester United)", '<span class="mine">Chelsea</span>' in pl and '<span class="mine">Man Utd</span>' in pl, pl[:400])
 check("the full table appears, with the top scorer, assists and clean-sheet lines under it", "<table" in html and "Top Scorer" in html and "Top CS" in html)
 check("with no Claude, nothing is spent and nothing is written as AI", out["ledger"].total() == 0 and out["ledger"].rows == [])
-check("the FPL corner is built from the (fake) public data", "FPL Corner" in html and "merino parade fc" in html and "Gabi III" in html, html[-400:])
+check("on this Monday (the deadline is four days away) the FPL corner is left out altogether", "FPL Corner" not in html and "merino parade fc" not in html, html[-200:])
+out_fri = football.run(date(2026, 11, 6), client=None, st={}, now=datetime(2026, 11, 5, 23, 15, tzinfo=timezone.utc))
+html_fri = " ".join(x["html"] for x in out_fri["sections"])
+check("on the Friday morning within 24 hours of the deadline the FPL corner is built from the (fake) public data: your team box and the Draft table", "FPL Corner" in html_fri and "merino parade fc" in html_fri and "Gabi III" in html_fri and "Deadline:" in html_fri, html_fri[-300:])
+out_demo = football.run(DAY, client=None, st={}, now=NOW, demo=True)
+check("in demo mode the corner shows whatever the date, so the demo page can show everything it can do", "FPL Corner" in " ".join(x["html"] for x in out_demo["sections"]))
 check("injuries: Saka's thigh injury (30 Oct, 3 days old) is shown", "Injuries And Returns" in html and "Bukayo Saka" in html)
 st = out["new_state"]
 check("state to save: tables, clean sheets, injuries, FPL, seen news, costs", {"tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs"} <= set(st), set(st))
