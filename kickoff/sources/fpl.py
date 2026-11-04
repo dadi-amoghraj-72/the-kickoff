@@ -46,7 +46,7 @@ def players(data, fixtures=None):
                     "team": t["short_name"], "team_name": t["name"], "team_position": t.get("position"),
                     "team_played": played.get(e["team"], t.get("played") or 0), "status": e["status"], "news": e.get("news") or "",
                     "news_added": e.get("news_added"), "chance_next": e.get("chance_of_playing_next_round"),
-                    "minutes": e.get("minutes") or 0, "starts": e.get("starts") or 0,
+                    "minutes": e.get("minutes") or 0, "starts": e.get("starts") or 0, "type": e.get("element_type"), "cost": e.get("now_cost") or 0,
                     "owned": float(e.get("selected_by_percent") or 0)})
     return out
 

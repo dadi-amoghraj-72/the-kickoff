@@ -23,9 +23,13 @@ from kickoff.sources import espn, espn_cricket  # noqa: E402
 load_env()
 now = datetime.now(timezone.utc)
 day = now.astimezone(ZoneInfo("Asia/Singapore")).date()
-matches, used = src.get_matches()
+try:
+    matches, used = src.get_matches()           # the free list is only the backup now
+except Exception:
+    matches, used = [], 0
 matches = cricket.normalise(matches)
-matches += cricket.espn_extras(matches, espn_cricket.Feed())
+theirs = cricket.espn_matches(espn_cricket.Feed())
+matches = [m for m in matches if not any(cricket.same_match(m, t) for t in theirs)] + theirs
 picked = cricket.pick(matches, now, espn.window_start(day))
 print(f"{now:%Y-%m-%d %H:%M} UTC | {len(picked)} matches for the edition of {day}: " + "; ".join(m["name"].split(",")[0] for m in picked) + f" | CricketData calls used today: {used}")
 cache = cricketcache.collect(picked, espn_cricket.Source(), now, cricketcache.load())

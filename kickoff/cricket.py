@@ -108,21 +108,25 @@ def pick(matches, now, window_start, seen=None, last_status=None):
 MAX_EXTRA_SERIES = 6
 
 
-def espn_extras(matches, feed):
-    """Matches that ESPN's cricket feed has and the free CricketData list does not (it can run behind: on 4 November 2026 it lacked a finished New Zealand v India
-    ODI that ESPN already had). Only matches in scope that are not already in `matches` (same two teams and the same ordinal, '1st ODI') are read from
-    `feed` (espn_cricket.Feed); each comes back CricketData-shaped with its result line, scores and player of the match."""
-    ordinal = lambda name: (re.search(r"\b(\d+(?:st|nd|rd|th))\b", name or "", re.I) or [None, ""])[1].lower()  # noqa: E731
-    have = {}
-    for m in matches:
-        have.setdefault(frozenset(strip_women(t).lower() for t in m.get("teams") or []), set()).add(ordinal(m.get("name")))
+def ordinal_of(name):
+    return (re.search(r"\b(\d+(?:st|nd|rd|th))\b", name or "", re.I) or [None, ""])[1].lower()
 
-    def wanted(draft):
-        if classify(draft)["kind"] is None:
-            return False
-        pair = frozenset(strip_women(t).lower() for t in draft["teams"])
-        return not (pair in have and (ordinal(draft["name"]) in have[pair] or not ordinal(draft["name"])))
-    return feed.matches(wanted, MAX_EXTRA_SERIES)
+
+def pair_of(m):
+    return frozenset(strip_women(t).lower() for t in m.get("teams") or [])
+
+
+def same_match(a, b):
+    """The two entries are the same match: the same two teams and the same number ('1st ODI'), or no number on either (a final)."""
+    return pair_of(a) == pair_of(b) and ordinal_of(a.get("name")) == ordinal_of(b.get("name"))
+
+
+def espn_matches(feed):
+    """The current in-scope matches from ESPN's cricket JSON feed (espn_cricket.Feed): CricketData-shaped, each with ESPN's result line, scores and player of
+    the match, ids 'espn-<event>'. ESPN is the main source (D, 2026-11-04): fresher than the free CricketData list, which runs behind (on 4 November it lacked
+    the finished New Zealand v India ODI, then listed it without a matchType), has no daily call limit, and works from GitHub's servers like the other sports'
+    ESPN feeds. At most MAX_EXTRA_SERIES series are read."""
+    return feed.matches(lambda draft: classify(draft)["kind"] is not None, MAX_EXTRA_SERIES)
 
 
 def title(m):
@@ -166,6 +170,15 @@ def team_scores(m):
         per.setdefault(team, []).append((f"{sc.get('r')}{w}", sc.get("o")))
     test = m.get("matchType") == "test"
     return {t: " & ".join(x[0] for x in v) if test or len(v) > 1 else v[0][0] + (f" ({v[0][1]:g})" if isinstance(v[0][1], (int, float)) else "") for t, v in per.items()}
+
+
+def scores_html(m):
+    """The scores line with each side's score in bold (the winner's in gold, the other in white), the team names plain: 'New Zealand <b>185 (40.2)</b> · India
+    <b class="w">143/5 (22.4)</b>'. A match with no winner (live, drawn, tied) has every score in bold white."""
+    per = team_scores(m)
+    order = [t for t in (m.get("teams") or []) if t in per] + [t for t in per if t not in (m.get("teams") or [])]
+    winner = next((t for t in order if (m.get("status") or "").startswith(t + " won")), None)
+    return " · ".join(f'{r.esc(t)} <b class="{"w" if t == winner else "n"}">{r.esc(per[t])}</b>' for t in order)
 
 
 def scores_line(m):
@@ -261,8 +274,9 @@ def result_html(m, entry=None, series="", from_innings=0):
         flag = f'<span class="dayflag">Test · {"Day " + str(day) if day else "in progress"}</span>'
     full = bool(entry) and scorecard_tier(m) < 3
     return (f'<li>{flag}<span class="cm">{names}{" · " + r.esc(first) if first else ""}</span>'
-            f'<span class="cr">{live}{r.esc(short_result(m.get("status")))}</span><span class="cs">{r.esc(scores_line(m))}</span>{potm_html(entry)}'
-            f'{full_scorecard_html(entry["innings"], from_innings) if full else ""}{standouts_html(entry["standouts"], inline=True) if full else ""}{series}</li>')
+            f'<span class="cr">{live}{r.esc(short_result(m.get("status")))}</span><span class="cs">{scores_html(m)}</span>{potm_html(entry)}'
+            f'{full_scorecard_html(entry["innings"], from_innings) if full else ""}{match_summary_html(entry["innings"]) if full and m.get("matchType") == "test" and m.get("matchEnded") else ""}'
+            f'{standouts_html(entry["standouts"], inline=True) if full else ""}{series}</li>')
 
 
 def table_html(label, rows):
@@ -390,17 +404,31 @@ def _num(value, places=2):
     return f"{float(value):.{places}f}" if isinstance(value, (int, float)) else ""
 
 
+def match_summary_html(innings):
+    """The Test's match summary, as a broadcaster prints it when the match ends: one pair of rows per innings, the batting team with its score and 'Nst innings', then
+    that innings' top batter (his runs, a * when not out) and the best bowler of the side in the field (wickets-runs). Built from the slimmed scorecard (slim_card)."""
+    rows = ""
+    for inn in innings or []:
+        if inn.get("runs") is None:
+            continue
+        wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}"
+        rows += (f'<tr class="sum"><td class="name"><strong>{r.esc(inn["team"])}</strong></td><td class="n"><strong>{inn["runs"]}{wickets}</strong></td>'
+                 f'<td class="name" colspan="2">{r.esc(inn.get("label") or "")}</td></tr>')
+        bats = [b for b in inn["batting"] if b.get("b") or b.get("r")]
+        bowls = [b for b in inn["bowling"] if b.get("w")]
+        bat = max(bats, key=lambda b: (b["r"], -b["b"]), default=None)
+        bowl = min(bowls, key=lambda b: (-b["w"], b["r"]), default=None)
+        left = f'<td class="name">{r.esc(bat["name"])}</td><td class="n"><strong>{bat["r"]}{"*" if (bat["out"] or "").strip().lower() in NOT_OUT else ""}</strong></td>' if bat else '<td colspan="2"></td>'
+        right = f'<td class="name">{r.esc(bowl["name"])}</td><td class="n">{bowl["w"]}-{bowl["r"]}</td>' if bowl else '<td colspan="2"></td>'
+        rows += f"<tr>{left}{right}</tr>"
+    return f'<div class="table-wrap"><table class="sc ms"><thead><tr><th colspan="4">Match summary</th></tr></thead><tbody>{rows}</tbody></table></div>' if rows else ""
+
+
 def full_scorecard_html(innings, from_index=0):
     """A conventional scorecard for each innings: batting (with how each batter was out), then extras and a bold total with the run rate as the last two rows of the
     same table, then did-not-bat and fall of wickets (when the source has them), then the other side's bowling. Left out to fit a phone: minutes and dot balls.
-    The innings before `from_index` (a Test's earlier innings, shown in full on an earlier day) come first as a single line each."""
+    The innings before `from_index` (a Test's earlier innings, already shown in full on an earlier day) are not shown again: the scores line carries their totals."""
     out = ""
-    for inn in (innings or [])[:from_index]:
-        wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}"
-        runs = inn["runs"] if inn["runs"] is not None else ""
-        overs = f" ({inn['overs']:g} ov)" if isinstance(inn["overs"], (int, float)) else ""
-        label = " " + r.esc(inn["label"]) if inn.get("label") else ""
-        out += f'<p class="muted fow"><strong>{r.esc(inn["team"])}</strong>{label} {runs}{wickets}{overs}</p>'
     for inn in (innings or [])[from_index:]:
         wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}"
         total = f"{inn['runs']}{wickets}" if inn["runs"] is not None else ""
@@ -514,11 +542,15 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
     espn_series(match) -> every match of the match's bilateral series (espn_cricket.parse_series) or None: a Test or ODI series gets a series table under its first match.
     st: {"seen": [match ids], "status": {id: last status}}.
     Returns {"html", "state", "used", "stats"}; html is '' when there is no cricket to report."""
-    matches, used = get_matches()
+    try:
+        matches, used = get_matches()
+    except Exception:                                   # the free list is only the backup now: without it (no key, no calls left) ESPN's own list carries the day
+        matches, used = [], 0
     matches = normalise(matches)
-    if espn_extra:                                      # ESPN's scores page can have a match the free list has not caught up with yet
+    if espn_extra:                                      # ESPN is the main source: its version of a match replaces CricketData's; CricketData adds what ESPN no longer lists
         try:
-            matches = matches + (espn_extra(matches) or [])
+            theirs = espn_extra(matches) or []
+            matches = [m for m in matches if not any(same_match(m, t) for t in theirs)] + theirs
         except Exception:
             pass
     seen = set(st.get("seen", []))
@@ -580,20 +612,24 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
             table = series_html(espn_series(m), m.get("matchType"), current=m)
             if table:
                 series[m["id"]] = table
-    prev_done, test_done, from_innings = dict(st.get("test_done", {})), {}, {}
-    for m in picked:                                    # a Test shows only the innings that moved since the last edition in full; the earlier ones are one line each
+    prev_done, prev_sig, test_done, test_sig, from_innings = dict(st.get("test_done", {})), dict(st.get("test_sig", {})), {}, {}, {}
+    for m in picked:                                    # a Test shows in full only the innings that moved since the last edition; earlier ones are not repeated
         entry = shown_cards.get(m["id"])
         if m.get("matchType") == "test" and entry:
             n = len(entry["innings"])
+            sig = repr(m.get("score"))
             from_innings[m["id"]] = min(prev_done.get(m["id"], 0), max(n - 1, 0))
+            if not m.get("matchEnded") and prev_sig.get(m["id"]) == sig:     # nothing was played (rain, bad light): the status and the scores, no scorecard again
+                from_innings[m["id"]] = n
             test_done[m["id"]] = n if m.get("matchEnded") else max(n - 1, 0)
+            test_sig[m["id"]] = sig
     html = results_html(picked, shown_cards, tables, series, from_innings) + standouts_html(top)
     if html and skipped:
         html += (f'<p class="muted">Standouts were checked in {checked} of {len(picked)} matches: the free cricket data allows only '
                  f"about eight scorecards a day when ESPN's pages are not available.</p>")
     new = {"seen": sorted(seen | {m["id"] for m in picked if m.get("matchEnded")})[-400:],
            "status": {**st.get("status", {}), **{m["id"]: m.get("status") for m in picked if not m.get("matchEnded")}},
-           "cards": dict(list(cards.items())[-60:]), "test_done": dict(list({**prev_done, **test_done}.items())[-20:])}
+           "cards": dict(list(cards.items())[-60:]), "test_done": dict(list({**prev_done, **test_done}.items())[-20:]), "test_sig": dict(list({**prev_sig, **test_sig}.items())[-20:])}
     return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": total_standouts}}
 
 

@@ -47,7 +47,7 @@ def classic_box(entry, picks, history, live, by_id, event):
         diff = ranks[gw] - ranks[gw - 1]
         move = f"{'▼' if diff > 0 else '▲'}{number(abs(diff))}"
     items = [("Team", "", entry["name"], ""),
-             (f"Gameweek {gw}{'' if event['finished'] else ' so far'}", f"{eh['points']} pts", f"average {event['average_entry_score']}", ""),
+             (f"Gameweek {gw}{'' if event['finished'] else ' so far'}", f"{eh['points']} pts", f"(AVG: {event['average_entry_score']})", ""),
              ("Overall rank", "", number(eh["overall_rank"]), move)]
     if cap:
         items.append(("Captain", f"{live.get(cap['element'], 0) * cap['multiplier']} pts", by_id[cap["element"]]["web_name"], ""))
@@ -76,11 +76,12 @@ def is_recent(added, now):
 
 
 def alerts_html(items):
+    """'Injuries': the players of your squad who are not fully fit, numbered, with FPL's note and chance of playing."""
     lis = "".join(f"<li><strong>{r.esc(i['name'])}</strong> ({r.esc(i['team'])}) <span class=\"muted\">{FLAGGED[i['status']]}</span>"
                   f"{(': ' + r.esc(i['news'])) if i['news'] else ''}"
                   f"{(' (' + str(i['chance']) + '% chance of playing)') if i['chance'] is not None and i['status'] == 'd' and 'chance of playing' not in i['news'] else ''}</li>"
                   for i in items)
-    return f'<p><strong>Your squad:</strong></p><ul class="team-news">{lis}</ul>' if lis else ""
+    return f'<p><strong>Injuries</strong></p><ol class="inj">{lis}</ol>' if lis else ""
 
 
 def draft_table(league, my_entry_id, gw):
@@ -150,25 +151,62 @@ def transfer_hints(picks, trend, by_id, limit=HINT_LIMIT):
     return (outs + swaps)[:limit]
 
 
-def hints_html(hints, gws):
-    if not hints:
+POSITION = {1: "goalkeeper", 2: "defender", 3: "midfielder", 4: "forward"}
+
+
+def pickups(picks, trend, players, hints, limit=2):
+    """Players you do not own who would be worth picking up in the position of an underperformer (a 'move out' hint): the best scorer over the trend's gameweeks
+    among available (status 'a') players of that position who played, whose price fits (the outgoing player's price plus your bank), and who beat the player
+    going out. At most one per underperformer, `limit` in all. [{"player", "points", "for", "cost"}]."""
+    squad = {p["element"] for p in picks["picks"]}
+    bank = (picks.get("entry_history") or {}).get("bank") or 0
+    out, used = [], set()
+    for h in (x for x in hints if x["kind"] == "out"):
+        old = h["player"]
+        if not old.get("type") or not old.get("cost"):
+            continue
+        best = None
+        for c in players:
+            if c.get("type") != old["type"] or c["id"] in squad or c["id"] in used or c["status"] != "a" or not c.get("cost") or c["cost"] > old["cost"] + bank:
+                continue
+            pts, apps = _totals(trend, c["id"])
+            if apps >= 2 and pts > h["points"] and (best is None or (pts, c["minutes"]) > (best[0], best[1]["minutes"])):
+                best = (pts, c)
+        if best:
+            used.add(best[1]["id"])
+            out.append({"player": best[1], "points": best[0], "for": old, "cost": best[1]["cost"]})
+        if len(out) == limit:
+            break
+    return out
+
+
+def hints_html(hints, gws, picks_up=()):
+    """'Transfer Suggestions': Underperformers (Move out?), bench players outscoring a starter, and Pick-up suggestions (from `pickups`)."""
+    if not hints and not picks_up:
         return ""
     span = f"{len(gws)} gameweeks"
-    lis = ""
+    outs, swaps = "", ""
     for h in hints:
         p = h["player"]
         if h["kind"] == "out" and h["reason"] == "quiet":
-            lis += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">Move out?</span>: "
-                    f"{', '.join(str(w) for w in h['weekly'])} points in the last {span}</li>")
+            outs += f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">form</span> {', '.join(str(w) for w in h['weekly'])}</li>"
         elif h["kind"] == "out":
-            lis += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">Move out?</span>: "
-                    f"{h['points']} points in {h['apps']} appearances over the last {span}</li>")
+            outs += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">form</span> "
+                     f"{h['points']} points in {h['apps']} appearances over the last {span}</li>")
         else:
             o = h["over"]
-            lis += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">Bench player outscoring a starter</span>: "
-                    f"{h['points']} points against {r.esc(o['name'])}'s {h['over_points']} over the last {span}</li>")
-    return ('<p><strong>Transfer hints</strong> <span class="muted">(a nudge from recent form, not advice)</span></p>'
-            f'<ul class="team-news">{lis}</ul>')
+            swaps += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}): {h['points']} points against {r.esc(o['name'])}'s {h['over_points']} "
+                      f"over the last {span}</li>")
+    html = "<p><strong>Transfer Suggestions</strong></p>"
+    if outs:
+        html += f'<p class="sub">Underperformers <span class="muted">(Move out?)</span> <span class="muted">· points in the last {span}</span></p><ul class="team-news">{outs}</ul>'
+    if swaps:
+        html += f'<p class="sub">Bench players outscoring a starter</p><ul class="team-news">{swaps}</ul>'
+    if picks_up:
+        lis = "".join(f"<li><strong>{r.esc(u['player']['name'])}</strong> ({r.esc(u['player']['team'])}) <span class=\"muted\">{POSITION.get(u['player']['type'], '')}</span>: "
+                      f"{u['points']} points in the last {span} · £{u['cost'] / 10:.1f}m <span class=\"muted\">(for {r.esc(u['for']['name'])})</span></li>" for u in picks_up)
+        html += f'<p class="sub">Pick-up suggestions?</p><ul class="team-news">{lis}</ul>'
+    return html
 
 
 def watch_items(players, seen, now):
@@ -206,7 +244,8 @@ def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry
         if dl and trend_fn:  # only near the deadline, when a transfer decision is due
             trend = trend_fn()
             if trend:
-                parts.append(hints_html(transfer_hints(picks, trend, by_id), list(trend)))
+                hints = transfer_hints(picks, trend, by_id)
+                parts.append(hints_html(hints, list(trend), pickups(picks, trend, players, hints)))
     if dl:
         watch = watch_items(players, state.get("watch_seen", {}), now)
         if watch:

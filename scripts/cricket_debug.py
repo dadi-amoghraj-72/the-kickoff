@@ -34,8 +34,8 @@ from kickoff.sources import espn_cricket  # noqa: E402
 
 try:
     feed = espn_cricket.Feed()
-    extra = cricket.espn_extras(matches, feed)
-    print(f"\nESPN feed read ({feed.calls} calls): {len(extra)} matches the CricketData list lacks")
+    extra = cricket.espn_matches(feed)
+    print(f"\nESPN feed read ({feed.calls} calls): {len(extra)} in-scope matches (these now replace CricketData's version)")
     for m in extra:
         scores = " · ".join(cricket.innings_line(x, m['teams']) for x in m.get('score') or [])
         print(f"  {m['dateTimeGMT'][:16]}  ended={m['matchEnded']}  {m['name'][:70]}  | {m['status']} | {scores}")

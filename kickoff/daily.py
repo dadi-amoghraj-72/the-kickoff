@@ -44,6 +44,11 @@ def _simple(section_id, title, call, state_id):
     return (section_id, title, go)
 
 
+def backup_matches(env):
+    """CricketData's match list (the backup: ESPN's feed is the main source), or an empty list when there is no key."""
+    return cricket_source.get_matches if env.get("CRICKET_DATA_API_KEY") else (lambda: ([], 0))
+
+
 def real_adapters(client=None, env=None):
     """The seven sports with their real sources, football first. client: an Anthropic client or None (no Claude, plain notes). Cricket needs its API key
     (CRICKET_DATA_API_KEY) and is reported as a problem, not an error, when it is missing."""
@@ -55,13 +60,12 @@ def real_adapters(client=None, env=None):
                 "headlines": out["headlines"], "problems": out["problems"], "stats": {**out["stats"], "claude_cost": out["ledger"].total()}}
 
     def cricket_go(now, day, st):
-        if not env.get("CRICKET_DATA_API_KEY"):
-            return {"sections": [], "state": {}, "problems": ["cricket (no CRICKET_DATA_API_KEY)"]}
+        get_matches = backup_matches(env)
         espn_src = espn_cricket.Source()
         card, table, series = cricketcache.getters(cricketcache.fresh(cricketcache.load(), now), espn_src)    # the Mac's cache first (GitHub cannot read ESPN's pages)
         old = copy.deepcopy(st.get("cricket") or {})
-        got = cricket.run(now, espn.window_start(day), old, cricket_source.get_matches, cricket_source.get_scorecard, cricket_source.scorecards_affordable,
-                          espn_card=card, espn_table=table, espn_series=series, espn_extra=lambda ms: cricket.espn_extras(ms, espn_cricket.Feed()))
+        got = cricket.run(now, espn.window_start(day), old, get_matches, cricket_source.get_scorecard, cricket_source.scorecards_affordable,
+                          espn_card=card, espn_table=table, espn_series=series, espn_extra=lambda ms: cricket.espn_matches(espn_cricket.Feed()))
         new = dict(got["state"])
         new["cards"] = dict(list({**old.get("cards", {}), **new.get("cards", {})}.items())[-60:])   # bought scorecards are never paid for twice
         return {"sections": [{"id": "cricket", "title": "Cricket", "html": got["html"]}] if got["html"] else [], "state": {"cricket": new},

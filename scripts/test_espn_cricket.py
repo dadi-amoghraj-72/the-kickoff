@@ -297,11 +297,10 @@ def feed_get(url):
 
 
 feed = ec.Feed(feed_get, pause=0)
-cd_empty = []
-got = ck.espn_extras(cd_empty, feed)
+got = ck.espn_matches(feed)
 odi = next((m for m in got if m["event"] == "1539437"), None)
 raw_ev = next(e for e in FEED["series"]["24469"]["events"] if e["id"] == "1539437")
-check("with an empty CricketData list the feed brings in the finished New Zealand v India 1st ODI: named like CricketData's own, a finished ODI that started at 02:00 UTC on 4 November",
+check("ESPN's feed gives the finished New Zealand v India 1st ODI: named like CricketData's own, a finished ODI that started at 02:00 UTC on 4 November",
       odi and odi["name"] == "New Zealand vs India, 1st ODI, India tour of New Zealand 2026/27" and odi["matchType"] == "odi" and odi["matchEnded"] and odi["dateTimeGMT"] == "2026-11-04T02:00:00" and odi["teams"] == ["New Zealand", "India"], odi and odi["name"])
 check("the result line and the player of the match are ESPN's own words: 'India won by 5 wkts (56b rem) (DLS)' and Anshul Kamboj (compared with the raw series scoreboard)", odi["status"] == raw_ev["status"]["summary"] == "India won by 5 wkts (56b rem) (DLS)" and odi["_card"]["potm"][0]["name"] == "Anshul Kamboj", odi["_card"])
 check("the scores come from the line scores in batting order: New Zealand 185 all out in 40.2 overs, then India 143/5 in 22.4, matching the raw competitor scores ('185 (40.2 ov)', '143/5 ...')",
@@ -310,12 +309,10 @@ check("the scores come from the line scores in batting order: New Zealand 185 al
 wbbl = next((m for m in got if m["event"] and "Big Bash" in m["name"]), None)
 check("the Women's Big Bash game on now is recognised as a league match but is not finished, so the picker will not report it yet", wbbl and ck.classify(wbbl)["label"] == "WBBL" and not wbbl["matchEnded"] and "require" in wbbl["status"], wbbl and (wbbl["name"], wbbl["status"]))
 check("series that are not in scope (Ranji Trophy, Ford Trophy, Quaid-e-Azam, an A-team tour) are never read: only the series with a wanted match cost a call", feed.calls == 3 and all(ck.classify(m)["kind"] for m in got), (feed.calls, [m["name"] for m in got]))
-cd_known = [{"id": "x", "name": "New Zealand vs India, 1st ODI, India tour of New Zealand 2026", "teams": ["New Zealand", "India"], "matchType": "odi", "dateTimeGMT": "2026-11-04T02:00:00"}]
-check("a match CricketData already has (same teams, same '1st ODI') is not added a second time", not any(m["event"] == "1539437" for m in ck.espn_extras(cd_known, ec.Feed(feed_get, pause=0))))
-t20 = [{"id": "y", "name": "New Zealand vs India, 5th T20I, India tour of New Zealand 2026", "teams": ["New Zealand", "India"], "matchType": "t20", "dateTimeGMT": "2026-11-01T07:00:00"}]
-check("the same two teams in another match (the 5th T20I is known, the 1st ODI is not) still brings the ODI in", any(m["event"] == "1539437" for m in ck.espn_extras(t20, ec.Feed(feed_get, pause=0))))
+check("same_match: the same two teams and the same number are one match, whatever the order or the Women suffix; another number or other teams are not", ck.same_match({"teams": ["New Zealand", "India"], "name": "New Zealand vs India, 1st ODI, tour"}, {"teams": ["India", "New Zealand"], "name": "India v New Zealand, 1st ODI"})
+      and not ck.same_match({"teams": ["New Zealand", "India"], "name": "x, 1st ODI"}, {"teams": ["New Zealand", "India"], "name": "x, 2nd ODI"}) and ck.same_match({"teams": ["Sydney Sixers Women", "Perth Scorchers Women"], "name": "a, 3rd Match"}, {"teams": ["Sydney Sixers", "Perth Scorchers"], "name": "b, 3rd Match"}))
 down = ec.Feed(lambda url: feed_get(url) if "header" in url else (_ for _ in ()).throw(OSError("down")), pause=0)
-check("if a series' own scoreboard fails that series is skipped and nothing raises", ck.espn_extras([], down) == [])
+check("if a series' own scoreboard fails that series is skipped and nothing raises", ck.espn_matches(down) == [])
 try:
     ec.Feed(lambda url: (_ for _ in ()).throw(OSError("down")), pause=0).matches()
     header_raised = False
@@ -324,10 +321,20 @@ except OSError:
 check("if the header itself fails the feed raises, and cricket.run (tested below) catches it and carries on with the main list", header_raised)
 NOW_ODI = datetime(2026, 11, 4, 10, 0, tzinfo=timezone.utc)
 run_odi = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no CricketData scorecard should be bought")), lambda used: 5,
-                 espn_extra=lambda ms: ck.espn_extras(ms, ec.Feed(feed_get, pause=0)))
+                 espn_extra=lambda ms: ck.espn_matches(ec.Feed(feed_get, pause=0)))
 ph = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", run_odi["html"]))
 check("the whole block for an ESPN-only match: 'New Zealand v India', '1st ODI', both scores, India's win and the player of the match, with no CricketData scorecard bought", run_odi["stats"]["picked"] == 1 and "New Zealand v India" in ph and "1st ODI" in ph and "185" in ph and "143/5" in ph and "Anshul Kamboj" in ph, ph[:400])
 check("the match is remembered as reported, so tomorrow's edition does not repeat it", "espn-1539437" in run_odi["state"]["seen"], run_odi["state"]["seen"])
+cd_odi = {"id": "c547eb46", "name": "New Zealand vs India, 1st ODI, India tour of New Zealand 2026", "teams": ["New Zealand", "India"], "dateTimeGMT": "2026-11-04T02:00:00", "matchStarted": True, "matchEnded": True,
+          "status": "India won by 5 wkts  -  2nd inns reduced to 32 overs - DLS Target 143", "score": [{"inning": "New Zealand Inning 1", "r": 185, "w": 10, "o": 40.2}, {"inning": "India Inning 1", "r": 143, "w": 5, "o": 22.4}]}
+cd_old = {"id": "wbbl8", "name": "Melbourne Stars Women vs Perth Scorchers Women, 8th Match, Womens Big Bash League 2026", "teams": ["Melbourne Stars Women", "Perth Scorchers Women"], "matchType": "t20", "dateTimeGMT": "2026-11-04T01:00:00",
+          "matchStarted": True, "matchEnded": True, "status": "Perth Scorchers Women won by 3 wkts", "score": [{"inning": "Melbourne Stars Women Inning 1", "r": 150, "w": 8, "o": 20}, {"inning": "Perth Scorchers Women Inning 1", "r": 151, "w": 7, "o": 19.2}]}
+both = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([cd_odi, cd_old], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no")), lambda used: 5, espn_extra=lambda ms: ck.espn_matches(ec.Feed(feed_get, pause=0)))
+bh = re.sub(r"<[^>]+>", "", both["html"])
+check("ESPN first: CricketData lists the 1st ODI too (without a matchType) and ESPN's version replaces it (one New Zealand v India block, ESPN's id and result line), while a WBBL match only CricketData has is still reported (the backup)", both["html"].count("New Zealand v") == 1 and "espn-1539437" in both["state"]["seen"] and "c547eb46" not in both["state"]["seen"]
+      and "India won by 5 wickets (DLS)" in bh and "Perth Scorchers Women won by 3 wickets" in bh and "wbbl8" in both["state"]["seen"], (both["state"]["seen"], bh[:300]))
+no_cd = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: (_ for _ in ()).throw(RuntimeError("no key")), lambda mid: None, lambda used: 0, espn_extra=lambda ms: ck.espn_matches(ec.Feed(feed_get, pause=0)))
+check("without CricketData at all (no key, call limit reached, the list down) cricket still builds from ESPN's feed: the ODI with its result, scores and player of the match", no_cd["stats"]["picked"] == 1 and "New Zealand v" in re.sub(r"<[^>]+>", "", no_cd["html"]) and "Anshul Kamboj" in no_cd["html"] and no_cd["used"] == 0, no_cd["stats"])
 run_boom = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([], 5), lambda mid: None, lambda used: 5, espn_extra=lambda ms: 1 / 0)
 check("if ESPN's extra lookup blows up the cricket block still builds from the main list (here an empty one)", run_boom["html"] == "" and run_boom["stats"]["picked"] == 0)
 

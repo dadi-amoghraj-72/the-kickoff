@@ -3,8 +3,7 @@
   .venv/bin/python scripts/preview_cricket_test.py            writes docs/demo/cricket-test-day3.html and docs/demo/cricket-test-final.html
   add --publish to put them at https://dadi-amoghraj-72.github.io/the-kickoff/demo/cricket-test-day3.html and ...-final.html, --no-open to skip opening them.
 
-Final day: the real finished match (all four innings, South Africa won by 176 runs): the first two innings are one line each (shown on earlier days), the third and
-fourth in full, then the series table with the whole series. Day 3: a layout mock built from the REAL first two innings (South Africa 329, Australia 429) with the
+Final day: the real finished match (South Africa won by 176 runs) as day 5 shows it: only the last innings in full, then the match summary and the series table. Day 3: a layout mock built from the REAL first two innings (South Africa 329, Australia 429) with the
 day and the lead as our assumption: ESPN keeps no day-by-day snapshots, so the status line 'Day 3: Stumps, Australia lead by 100 runs' is ours. No series table
 while the Test is on."""
 import subprocess
@@ -35,9 +34,9 @@ def build(ended, upto=4, status=None, from_innings=0):
 
 
 pages = {"cricket-test-day3": build(False, upto=2, status="Day 3: Stumps - Australia lead by 100 runs", from_innings=1),
-         "cricket-test-final": build(True, upto=4, from_innings=2)}
+         "cricket-test-final": build(True, upto=4, from_innings=3)}
 notes = {"cricket-test-day3": "LAYOUT MOCK of day 3: the first two innings are real; the day and the lead are our assumption (ESPN keeps no day-by-day snapshots). Innings 1 is one line (shown on day 2), innings 2 in full, no series table.",
-         "cricket-test-final": "The real finished Test: innings 1 and 2 one line each (shown on earlier days), innings 3 and 4 in full, then the series table."}
+         "cricket-test-final": "The real finished Test as day 5 shows it: only Australia's second innings in full (the other three were shown on earlier days and are not repeated), then the match summary and the series table."}
 for name, html in pages.items():
     edition = {"date": "2026-10-31", "dummy": False, "banner": notes[name], "home": "../index.html", "headlines": [], "sections": [{"id": "cricket", "title": "Cricket", "html": html}]}
     out = ROOT / "docs" / "demo" / f"{name}.html"
