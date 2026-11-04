@@ -292,7 +292,8 @@ def table_html(label, rows):
     ties = any(x["t"] for x in rows)
     columns = [("#", True), ("Team", False), ("P", True), ("W", True), ("L", True)] + ([("T", True)] if ties else []) + [("NR", True), ("Pts", True), ("NRR", True)]
     body = [[x["pos"], x["team"], x["p"], x["w"], x["l"]] + ([x["t"]] if ties else []) + [x["nr"], x["pts"], f"{x['nrr']:+.3f}" if x["nrr"] is not None else ""] for x in rows]
-    return f'<div class="pts">{r.table(f"{label} table", columns, body)}</div>'
+    gold = ["hl" if label == "IPL" and x["team"] in ("SRH", "Sunrisers Hyderabad") else "" for x in rows]       # D: Sunrisers Hyderabad's row in gold
+    return f'<div class="pts">{r.table(f"{label} table", columns, body, row_classes=gold)}</div>'
 
 
 def results_html(picked, cards=None, tables=None, series=None, from_innings=None):
@@ -540,11 +541,12 @@ def standouts_html(items, inline=False):
 
 # ---- The whole cricket block, within the daily call budget -------------------------------------
 
-def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card=None, espn_table=None, espn_series=None, espn_extra=None):
+def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card=None, espn_table=None, espn_series=None, espn_extra=None, extras_fn=None):
     """Build the cricket section. get_matches() -> (matches, calls used); get_scorecard(id) -> (card, calls used);
     affordable(used) -> how many scorecards fit. espn_card(match) -> a free scorecard or None: tried first, costs no calls.
     espn_table(match) -> the league's points table rows or None.
     espn_series(match) -> every match of the match's bilateral series (espn_cricket.parse_series) or None: a Test or ODI series gets a series table under its first match.
+    extras_fn(label, matches, state) -> (html, state): extra html straight after a league's points table (the IPL's caps and closing note, kickoff.ipl); its state is kept under "ipl".
     st: {"seen": [match ids], "status": {id: last status}}.
     Returns {"html", "state", "used", "stats"}; html is '' when there is no cricket to report."""
     try:
@@ -603,11 +605,18 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
             cards.pop(m["id"], None)
         take(m, entry)
     top = rank(found)
-    tables = {}
+    tables, ipl_state = {}, dict(st.get("ipl") or {})
     for m in picked:  # a points table for each league that played, once per league
         label = m["class"]["label"]
-        if espn_table and m["class"]["kind"] == "league" and label not in tables:
-            tables[label] = table_html(label, espn_table(m))
+        if m["class"]["kind"] == "league" and label not in tables:
+            tables[label] = table_html(label, espn_table(m)) if espn_table else ""
+            if extras_fn:
+                try:
+                    extra, ipl_state = extras_fn(label, [x for x in picked if x["class"]["label"] == label], ipl_state)
+                    tables[label] += extra
+                except Exception:                      # extras never cost the cricket block its results
+                    pass
+    tables = {k: v for k, v in tables.items() if v}
     series, done = {}, set()
     for m in picked:  # one series table per Test or ODI series, under the first of its matches shown
         key = (frozenset(strip_women(t).lower() for t in m.get("teams") or []), m.get("matchType"))
@@ -634,7 +643,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
                  f"about eight scorecards a day when ESPN's pages are not available.</p>")
     new = {"seen": sorted(seen | {m["id"] for m in picked if m.get("matchEnded")})[-400:],
            "status": {**st.get("status", {}), **{m["id"]: m.get("status") for m in picked if not m.get("matchEnded")}},
-           "cards": dict(list(cards.items())[-60:]), "test_done": dict(list({**prev_done, **test_done}.items())[-20:]), "test_sig": dict(list({**prev_sig, **test_sig}.items())[-20:])}
+           "ipl": ipl_state, "cards": dict(list(cards.items())[-60:]), "test_done": dict(list({**prev_done, **test_done}.items())[-20:]), "test_sig": dict(list({**prev_sig, **test_sig}.items())[-20:])}
     return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": total_standouts}}
 
 

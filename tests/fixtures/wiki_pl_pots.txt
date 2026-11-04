@@ -1,0 +1,513 @@
+{{short description|English association football award}}
+{{Use dmy dates|date=April 2022}}
+{{Featured list}}
+{{Infobox award
+| name = Premier League Player of the Season
+| subheader = <!-- or
+| current_awards = -->
+| image = Bruno Fernandes 00-07-14.16.png
+| image_size = <!-- or
+| image_upright  = -->
+| caption = [[Manchester United F.C.|Manchester United]] player [[Bruno Fernandes]] is the current holder of the award.
+| awarded_for = The most outstanding player {{no wrap|in each}} given Premier League season
+| sponsor = [[EA Sports]]
+| country = England
+| presenter = Premier League
+| former name = 
+| year = 1995
+| year2 = 
+| holder = [[Bruno Fernandes]]<!-- or
+| winner         = or
+| winners        = -->
+| most_awards = [[Thierry Henry]], [[Cristiano Ronaldo]], [[Nemanja Vidić]], [[Kevin De Bruyne]], [[Mohamed Salah]] (2)<!-- or
+| most_wins      = -->
+| award1_type = Most consecutive wins
+| award1_winner = Cristiano Ronaldo (2)
+| award2_type = Most team wins
+| award2_winner = [[Manchester United F.C.|Manchester United]] (9)
+| award3_type = Most consecutive team wins
+| award3_winner = Manchester United, [[Manchester City F.C.|Manchester City]] (5)
+}}
+{{multiple image
+| footer = [[Cristiano Ronaldo]] ''(left)'', [[Thierry Henry]] ''(not pictured)'', [[Nemanja Vidić]] ''(right)'', [[Kevin De Bruyne]] ''(not pictured)'' and [[Mohamed Salah]] ''(not pictured)'' have won the most Player of the Season awards with two each.
+| image1 = Cristiano Ronaldo - Celtic 2008.jpg
+| alt1 = Cristiano Ronaldo against Celtic in UCL
+| width1 = 131
+| image3 =Nemanja_Vidić_%28cropped%29.jpg
+| alt3 = Nemanja Vidić, wearing a red Manchester United jersey with the AIG sponsor logo at the front centre and shorts with a number 15 and Nike logo on the left-leg side, looks forward with his mouth partly opened.
+| width3 = 114
+}}
+The '''Premier League Player of the Season''' is an annual [[association football]] award presented to [[Football player|players]] in England, which recognises the most outstanding player in the [[Premier League]] each season.  The recipient is chosen by a panel assembled by the league's [[Premier League#Sponsorship|sponsors]] consisting of members of "football's governing bodies, the media and fans", and is announced in the second or third week of May.<ref name=ronaldo/><ref>{{cite web|title=Ferguson and Vidic land awards|url=http://www.espnfc.com/story/921807|date=21 May 2011|access-date=28 June 2014|publisher=ESPN|archive-url=https://web.archive.org/web/20140628092355/http://www.espnfc.com/story/921807|archive-date=28 June 2014}}</ref>  For sponsorship purposes, from 1994 to 2001 it was called the [[Carling]] Player of the Year; from 2001 to 2004 as the [[Barclaycard]] Player of the Year;<ref>{{cite web|url=http://www.premierleague.com/fapl.rac?command=forwardOnly&nextPage=enSeasons |title=Premier League Awards |publisher=Premier League |access-date=28 June 2014 |archive-url=https://web.archive.org/web/20061210142537/http://www.premierleague.com/fapl.rac?command=forwardOnly&nextPage=enSeasons |archive-date=10 December 2006 }}</ref> and from 2004 to 2016 as the [[Barclays]] Player of the Season.<ref name=Hazard/> Since the [[2016–17 Premier League|2016–17 season]], it is called the '''[[EA Sports]] Player of the Season'''.
+
+The Premier League was founded in 1992, when the clubs of the [[Football League First Division|First Division]] left the [[English Football League|Football League]] and established a new commercially independent league that negotiated its own broadcast and sponsorship agreements.<ref name=history>{{cite web|title=History of the Premier League |url=http://www.premierleague.com/en-gb/about/history.html |publisher=Premier League |access-date=28 June 2014 |archive-url=https://web.archive.org/web/20120421110805/http://www.premierleague.com/en-gb/about/history.html |archive-date=21 April 2012 }}</ref> The newly formed league had no [[Sponsor (commercial)|sponsor]] for its [[1992–93 FA Premier League|inaugural season]] until Carling agreed to a four-year £12&nbsp;million deal that started the [[1993–94 FA Premier League|following season]].<ref>{{cite news|url=https://news.bbc.co.uk/sport2/hi/football/eng_prem/1118425.stm|title=Why Carling called time on Premiership|first=Peter|last=Jones|date=19 January 2001|work=BBC Sport|publisher=BBC|access-date=28 June 2014}}</ref>  That same season, Carling introduced individual awards for players, such as the [[Premier League Golden Boot|Golden Boot]].<ref>{{cite news|title=Top Ten&nbsp;– Golden Boot |url=http://www.skysports.com/interactive/top_tens_story/0,25722,11065_6134449,00.html |date=May 2010 |access-date=29 June 2014 |publisher=Sky Sports |archive-url=https://web.archive.org/web/20141008220608/http://www.skysports.com/interactive/top_tens_story/0%2C25722%2C11065_6134449%2C00.html |archive-date= 8 October 2014 }}</ref> However, the [[Premier League Player of the Month|Player of the Month]] and Player of the Season awards were only first bestowed during the [[1994–95 FA Premier League|1994–95 season]].<ref>{{cite web|title=Seasonal Awards 1993/94|url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466954&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|publisher=Premier League|archive-url=https://web.archive.org/web/20061209120612/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466954&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|archive-date=9 December 2006|access-date=29 June 2014}}</ref><ref name=95awards>{{cite web|title=Seasonal Awards 1994/95 |url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466955&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |publisher=Premier League |archive-url=https://web.archive.org/web/20061211025922/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466955&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |archive-date=11 December 2006 |access-date=29 June 2014 }}</ref>  The first Player of the Season award was given to [[Blackburn Rovers F.C.|Blackburn Rovers]] striker [[Alan Shearer]], who won the Premier League title with his team and the Golden Boot that season.<ref name=95awards/><ref>{{cite news|title=Van Persie follows in Shearer's footsteps|url=https://www.fifa.com/worldfootball/clubfootball/news/newsid=2081340.html|archive-url=https://web.archive.org/web/20130608121138/http://www.fifa.com/worldfootball/clubfootball/news/newsid=2081340.html|archive-date=June 8, 2013|date=20 May 2013|access-date=29 June 2014|publisher=FIFA}}</ref>
+
+[[Thierry Henry]], [[Cristiano Ronaldo]], [[Nemanja Vidić]], [[Kevin De Bruyne]] and [[Mohamed Salah]] have been Player of the Season on two occasions each and are the only players to have won the award more than once, with Ronaldo having achieved this in consecutive years (2007 and 2008). Eight players were the Premier League's leading goalscorer and won the Golden Boot alongside the Player of the Season award.<ref>{{cite news|title=Luis Suarez named Barclays Player of the Season|url=http://www.liverpoolecho.co.uk/sport/football/liverpool-fc-luis-suarez-named-7111678|date=13 May 2014|access-date=28 June 2014|first=James|last=Pearce|newspaper=Liverpool Echo}}</ref><ref>{{cite news|title=Van Persie wins Premier League Golden Boot|url=http://www.arsenal.com/news/news-archive/van-persie-wins-premier-league-golden-boot|publisher=Arsenal F.C.|date=14 May 2012|access-date=1 July 2014|archive-url=https://web.archive.org/web/20131203014426/http://www.arsenal.com/news/news-archive/van-persie-wins-premier-league-golden-boot|archive-date=3 December 2013}}</ref>  Four of these players&nbsp;– [[Kevin Phillips (footballer)|Kevin Phillips]],<ref>{{cite news|title=Will Luis Suarez break the Premier League goal scoring record this season?|url=http://www.independent.ie/sport/soccer/will-luis-suarez-break-the-premier-league-goal-scoring-record-this-season-29861426.html|date=23 December 2013|access-date=30 June 2014|first=Declan|last=Whooley|newspaper=Irish Independent}}</ref> Henry,<ref>{{cite news|title=Golden Shoe fits for Thierry Henry|url=http://www.arsenal.com/news/news-archive/golden-shoe-fits-for-thierry-henry|date=31 May 2005|access-date=30 June 2014|publisher=Arsenal F.C.|archive-url=https://web.archive.org/web/20131203012653/http://www.arsenal.com/news/news-archive/golden-shoe-fits-for-thierry-henry|archive-date=3 December 2013}}</ref> Ronaldo and [[Luis Suárez (Uruguayan footballer)|Luis Suárez]]&nbsp;– went on to win the [[European Golden Shoe]] in the same season.<ref>{{cite news|title=Ronaldo receives Golden Boot in his native Madeira|url=http://uk.reuters.com/article/uk-soccer-ronaldo-boot-idUKLD30291020080913|archive-url=https://web.archive.org/web/20190512161542/https://uk.reuters.com/article/uk-soccer-ronaldo-boot-idUKLD30291020080913|archive-date=12 May 2019|date=14 September 2008|access-date=30 June 2013|first=Carlos|last=Pontes|work=Reuters}}</ref><ref>{{cite news|title=Ronaldo and Suárez share Golden Shoe accolade|url=http://www.uefa.com/memberassociations/news/newsid=2108007.html|archive-url=https://web.archive.org/web/20140523193150/http://www.uefa.com/memberassociations/news/newsid=2108007.html|archive-date=23 May 2014|date=19 May 2014|access-date=30 June 2014|publisher=UEFA}}</ref>  Eleven players have won the Premier League trophy with their respective clubs in the same year they received the award, with [[Peter Schmeichel]] being the only goalkeeper achieving the feat.<ref name=ronaldo/><ref>{{cite news|title=Sir Alex Ferguson and Nemanja Vidic win season awards|url=https://www.bbc.com/sport/0/football/13479964|work=BBC Sport|publisher=BBC|date=20 May 2011|access-date=1 July 2014}}</ref> Ronaldo is the only player to be named Player of the Season and win the [[FIFA World Player of the Year]]; when he accomplished this in 2008, he became the first player from the Premier League to be voted the world's top footballer.<ref name=WPY/> In 2023, [[Erling Haaland]] became the first player in Premier League history to win both Player of the Season and [[Premier League Young Player of the Season|Young Player of the Season]] awards for the same campaign.<ref name="Haaland23"/>
+
+==Winners==
+<!-- THIS IS NOT THE PFA PLAYERS PLAYER OF THE YEAR AWARD, PLEASE CHECK THE AWARD BEFORE ENTERING INTO THIS SECTION-->
+
+[[File:Bruno Fernandes USMNT v Portugal Mar 31 2026-27 (cropped).jpg|thumb|200px|right|alt=Bruno Fernandes wearing a Portugal jacket|[[Bruno Fernandes]] is the current holder of the award for the 2025–26 season.]]
+[[File:Alan Shearer 2008.jpg|thumb|200px|[[Alan Shearer]] won the inaugural Premier League Player of the Season in 1995.|alt=Alan Shearer wearing a black jumper with a white collar visible.]]
+[[File:Peter Schmeichel juli 1991.JPG|200px|thumb|[[Peter Schmeichel]], the 1996 winner, is the only goalkeeper to win the award.|alt=Peter Schmeichel, with blonde hair and wearing a dark blue sweater, looks down towards his left with an unidentified man in the left background.]]
+[[File:C Ronaldo.jpg|thumb|200px|[[Cristiano Ronaldo]], the 2007 and 2008 recipient, won his latter award alongside the [[FIFA World Player of the Year]].|alt=Cristiano Ronaldo&nbsp;– wearing a long-sleeved red jersey, white shorts with a number 7 on the left-leg side and a white armband on the left arm&nbsp;– prepares to take a free kick.]]
+[[File:Luis Suárez Díaz.jpg|thumb|200px|[[Luis Suárez (Uruguayan footballer)|Luis Suárez]], the 2014 recipient of the award, is one of four different players to win the [[European Golden Shoe]] alongside the Player of the Season award.|alt=Luis Suárez&nbsp;– wearing a red Liverpool FC jersey with the Standard Chartered sponsor logo at the front centre and shorts with a number 7 partially obscured on the left-leg side and the club crest on the right&nbsp;– lifts his hand with his mouth partly opened.]]
+{| class="wikitable plainrowheaders"
+|+Key
+!scope="row"|'''Player {{small|(X)}}'''
+|Name of the player and number of times they had won the award at that point (if more than one)
+|-
+|style="text-align:center; background-color:#B0C4DE"|{{dagger}}
+|Indicates player also won the [[European Golden Shoe]] in the same season
+|-
+!scope="row" style="text-align:center; background:#FFE6BD"|{{double-dagger}}
+|Indicates player also won the [[European Golden Shoe]] and [[FIFA World Player of the Year]] in the same season
+|-
+|style="text-align:center; background-color:#bfb"|{{hashtag}}
+|Indicates player also won the [[European Golden Shoe]] and [[Premier League Young Player of the Season]] award in the same season
+|-
+!scope="row" style="text-align:center; background:#ffb"|§
+|Denotes the club were [[List of English football champions|Premier League champions]] in the same season
+|}
+
+{| class="sortable wikitable plainrowheaders"
+|+Premier League Player of the Season winners
+!scope="col" width=70px|Season
+!scope="col" width=145px|Player
+!scope="col" width=70px|Position{{#tag:ref|The [[Premier League]] general reference below links to the database search of all footballers who have played in the league, where the profiles of each winner can be found and their position verified.|group=upper-alpha}}
+!scope="col" width=145px|Nationality
+!scope="col" width=145px|Club
+!scope="col" class="unsortable"|Ref(s)
+|-
+|[[1994–95 FA Premier League|1994–95]]
+!scope="row"|{{sortname|Alan|Shearer}}
+|[[Forward (association football)|Forward]]
+|{{flag|England}}
+!scope="row" style="background:#ffb"|[[Blackburn Rovers F.C.|Blackburn Rovers]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 1994/95 |url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466955&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |publisher=Premier League |archive-url=https://web.archive.org/web/20061211025922/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466955&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |archive-date=11 December 2006 |access-date=17 January 2014 }}</ref>
+|-
+|[[1995–96 FA Premier League|1995–96]]
+!scope="row"|{{sortname|Peter|Schmeichel}}
+|[[Goalkeeper (association football)|Goalkeeper]]
+|{{flag|Denmark}}
+!scope="row" style="background:#ffb"|[[Manchester United F.C.|Manchester United]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 1995/96 |url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466964&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |publisher=Premier League |archive-url=https://web.archive.org/web/20061210000144/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466964&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |archive-date=10 December 2006 |access-date=17 January 2014 }}</ref>
+|-
+|[[1996–97 FA Premier League|1996–97]]
+!scope="row"| [[Juninho Paulista]]
+|[[Midfielder]]
+|{{flag|Brazil}}
+|[[Middlesbrough F.C.|Middlesbrough]]
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 1996/97|url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466965&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|publisher=Premier League|archive-url=https://web.archive.org/web/20060318210313/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466965&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|archive-date=18 March 2006|access-date=17 January 2014}}</ref>
+|-
+|[[1997–98 FA Premier League|1997–98]]
+!scope="row"|{{sortname|Michael|Owen}}
+|[[Forward (association football)|Forward]]
+|{{flag|England}}
+|[[Liverpool F.C.|Liverpool]]
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 1997/98 |url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466970&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |publisher=Premier League |archive-url=https://web.archive.org/web/20061209120625/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466970&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |archive-date= 9 December 2006 |access-date=17 January 2014 }}</ref>
+|-
+|[[1998–99 FA Premier League|1998–99]]
+!scope="row"|{{sortname|Dwight|Yorke}}
+|[[Forward (association football)|Forward]]
+|{{flag|Trinidad and Tobago}}
+!scope="row" style="background:#ffb"|[[Manchester United F.C.|Manchester United]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 1998/99 |url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466971&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |publisher=Premier League |archive-url=https://web.archive.org/web/20061210000150/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466971&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |archive-date=10 December 2006 |access-date=17 January 2014 }}</ref>
+|-
+|[[1999–2000 FA Premier League|1999–2000]]
+!scope="row" style="background:#B0C4DE"|{{sortname|Kevin|Phillips|Kevin Phillips (footballer)}}{{sup|{{dagger}}}}
+|[[Forward (association football)|Forward]]
+|{{flag|England}}
+|[[Sunderland A.F.C.|Sunderland]]
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 1999/2000 |url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466972&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |publisher=Premier League |archive-url=https://web.archive.org/web/20061211025947/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466972&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |archive-date=11 December 2006 |access-date=17 January 2014 }}</ref>
+|-
+|[[2000–01 FA Premier League|2000–01]]
+!scope="row"|{{sortname|Patrick|Vieira}}
+|[[Midfielder]]
+|{{flag|France|1974}}
+|[[Arsenal F.C.|Arsenal]]
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 2000/01 |url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466973&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |publisher=Premier League |archive-url=https://web.archive.org/web/20061209120637/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466973&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |archive-date= 9 December 2006 |access-date=17 January 2014 }}</ref>
+|-
+|[[2001–02 FA Premier League|2001–02]]
+!scope="row"|{{sortname|Freddie|Ljungberg}}
+|[[Midfielder]]
+|{{flag|Sweden}}
+!scope="row" style="background:#ffb"|[[Arsenal F.C.|Arsenal]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 2001/02 |url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466978&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |publisher=Premier League |archive-url=https://web.archive.org/web/20061209120649/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466978&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb |archive-date= 9 December 2006 |access-date=17 January 2014 }}</ref>
+|-
+|[[2002–03 FA Premier League|2002–03]]
+!scope="row"|{{sortname|Ruud van|Nistelrooy}}
+|[[Forward (association football)|Forward]]
+|{{flag|Netherlands}}
+!scope="row" style="background:#ffb"|[[Manchester United F.C.|Manchester United]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite news|title=Van Nistelrooy scoops award|url=https://news.bbc.co.uk/sport2/hi/football/teams/m/man_utd/3028037.stm|work=BBC Sport|publisher=BBC|date=14 May 2003|access-date=17 January 2014}}</ref><ref>{{cite news |title=Van Nistelrooy nets Golden Boot|url=https://news.bbc.co.uk/sport2/hi/football/eng_prem/3018753.stm|work=BBC Sport|publisher=BBC|date=14 May 2003|access-date=17 January 2014}}</ref>
+|-
+|[[2003–04 FA Premier League|2003–04]]
+!scope="row" style="background:#B0C4DE"|{{sortname|Thierry|Henry}}{{sup|{{dagger}}}} {{small|(1)}}
+|[[Forward (association football)|Forward]]
+|{{flag|France|1974}}
+!scope="row" style="background:#ffb"|[[Arsenal F.C.|Arsenal]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 2003/04|url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466982&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|publisher=Premier League|archive-url=https://web.archive.org/web/20061211030011/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=466982&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|archive-date=11 December 2006|access-date=17 January 2014}}</ref><ref>{{cite news|title=Henry set for Golden Shoe|url=https://news.bbc.co.uk/sport2/hi/football/teams/a/arsenal/3743775.stm|work=BBC Sport|publisher=BBC|date=24 May 2004|access-date=17 January 2014}}</ref>
+|-
+|[[2004–05 FA Premier League|2004–05]]
+!scope="row"|{{sortname|Frank|Lampard}}
+|[[Midfielder]]
+|{{flag|England}}
+!scope="row" style="background:#ffb"|[[Chelsea F.C.|Chelsea]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 2004/05|url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=678429&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|publisher=Premier League|archive-url=https://web.archive.org/web/20061211030037/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=678429&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|archive-date=11 December 2006|access-date=17 January 2014}}</ref><ref>{{cite news|title=Lampard riding the crest of a wave|url=https://news.bbc.co.uk/sport2/hi/football/teams/c/chelsea/4378538.stm|first=Paul|last=Fletcher|work=BBC Sport|publisher=BBC|date=28 October 2005|access-date=17 January 2014}}</ref>
+|-
+|[[2005–06 FA Premier League|2005–06]]
+!scope="row"|{{sortname|Thierry|Henry}} {{small|(2)}}
+|[[Forward (association football)|Forward]]
+|{{flag|France|1974}}
+|[[Arsenal F.C.|Arsenal]]
+|style="text-align:center"|<ref>{{cite web|title=Seasonal Awards 2005/06|url=http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=926315&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|publisher=Premier League|archive-url=https://web.archive.org/web/20061209120702/http://www.premierleague.com/fapl.rac?command=setSelectedId&nextPage=enNewsLatest&id=926315&type=com.fapl.website.news.NewsItem&categoryCode=NewsSpecialFeatures&breadcrumb=sfsub_breadcrumb|archive-date=9 December 2006|access-date=17 January 2014}}</ref><ref>{{cite news|title=Henry collects Premiership award|url=https://news.bbc.co.uk/sport2/hi/football/teams/a/arsenal/4978516.stm|work=BBC Sport|publisher=BBC|date=5 May 2006|access-date=17 January 2014}}</ref>
+|-
+|[[2006–07 FA Premier League|2006–07]]
+!scope="row"|{{sortname|Cristiano|Ronaldo}} {{small|(1)}}
+|[[Forward (association football)|Midfielder]]
+|{{flag|Portugal}}
+!scope="row" style="background:#ffb"|[[Manchester United F.C.|Manchester United]]{{sup|§}}
+|style="text-align:center"|<ref name=ronaldo>{{cite news|title=Ronaldo & Ferguson win top awards|url=https://news.bbc.co.uk/sport2/hi/football/teams/m/man_utd/7401795.stm|work=BBC Sport|publisher=BBC|date=14 May 2008|access-date=16 January 2014}}</ref>
+|-
+|[[2007–08 Premier League|2007–08]]
+!scope="row" style="background:#FFE6BD"|{{sortname|Cristiano|Ronaldo}}{{sup|{{double-dagger}}}}{{small|(2)}}
+|[[Forward (association football)|Midfielder]]
+|{{flag|Portugal}}
+!scope="row" style="background:#ffb"|[[Manchester United F.C.|Manchester United]]{{sup|§}}
+|style="text-align:center"|<ref name=ronaldo/><ref name=WPY>{{cite news|title=Cristiano Ronaldo wins Fifa World Player of the Year|url=https://www.telegraph.co.uk/sport/football/players/cristiano-ronaldo/4224600/Cristiano-Ronaldo-wins-Fifa-World-Player-of-the-Year.html|date=12 January 2009|access-date=28 June 2014|first=Duncan|last=White|newspaper=The Daily Telegraph}}</ref>
+|-
+|[[2008–09 Premier League|2008–09]]
+!scope="row"|{{sortname|Nemanja|Vidić}} {{small|(1)}}
+|[[Defender (association football)|Defender]]
+|{{flag|Serbia}}
+!scope="row" style="background:#ffb"|[[Manchester United F.C.|Manchester United]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite news|title=Ferguson and Vidic scoop Premier League awards|url=https://www.independent.co.uk/sport/football/premier-league/ferguson-and-vidic-scoop-premier-league-awards-1691451.html|date=27 May 2009|access-date=16 January 2014|newspaper=The Independent|agency=Press Association}}</ref>
+|-
+|[[2009–10 Premier League|2009–10]]
+!scope="row"|{{sortname|Wayne|Rooney}}
+|[[Forward (association football)|Forward]]
+|{{flag|England}}
+|[[Manchester United F.C.|Manchester United]]
+|style="text-align:center"|<ref>{{cite news|title=Manchester United Striker Wayne Rooney Named Barclays Premier League Player Of The Season|url=http://www.goal.com/en/news/9/england/2010/05/10/1918557/manchester-united-striker-wayne-rooney-named-barclays|date=10 May 2010|access-date=17 January 2014|first=Alex|last=Dimond|work=Goal (website)|publisher=Perform Group}}</ref>
+|-
+|[[2010–11 Premier League|2010–11]]
+!scope="row"|{{sortname|Nemanja|Vidić}} {{small|(2)}}
+|[[Defender (association football)|Defender]]
+|{{flag|Serbia}}
+!scope="row" style="background:#ffb"|[[Manchester United F.C.|Manchester United]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite news|title=Manchester United duo Sir Alex Ferguson and Nemanja Vidic win Premier League awards|url=https://www.telegraph.co.uk/sport/football/teams/manchester-united/8526582/Manchester-United-duo-Sir-Alex-Ferguson-and-Nemanja-Vidic-win-Premier-League-awards.html|date=20 May 2011|access-date=16 January 2014|newspaper=The Daily Telegraph}}</ref>
+|-
+|[[2011–12 Premier League|2011–12]]
+!scope="row"|{{sortname|Vincent|Kompany}}
+|[[Defender (association football)|Defender]]
+|{{flag|Belgium}}
+!scope="row" style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite news|title=Alan Pardew and Vincent Kompany's Premier League award|url=https://www.bbc.com/sport/0/football/18042404|work=BBC Sport|publisher=BBC|date=11 May 2012|access-date=16 January 2014}}</ref>
+|-
+|[[2012–13 Premier League|2012–13]]
+!scope="row"|{{sortname|Gareth|Bale}}
+|[[Midfielder]]
+|{{flag|Wales}}
+|[[Tottenham Hotspur F.C.|Tottenham Hotspur]]
+|style="text-align:center"|<ref>{{cite news|title=Premier League awards for Ferguson & Bale|url=http://www.premierleague.com/en-gb/news/news/2012-13/may/sir-alex-ferguson-and-gareth-bale-win-premier-league-awards.html|publisher=Premier League|date=17 May 2013|access-date=17 January 2014|archive-url=https://web.archive.org/web/20140224032557/http://www.premierleague.com/en-gb/news/news/2012-13/may/sir-alex-ferguson-and-gareth-bale-win-premier-league-awards.html|archive-date=24 February 2014}}</ref>
+|-
+|[[2013–14 Premier League|2013–14]]
+!scope="row" style="background:#B0C4DE"|{{sortname|Luis|Suárez|dab=Uruguayan footballer}}{{sup|{{dagger}}}}
+|[[Forward (association football)|Forward]]
+|{{flag|Uruguay}}
+|[[Liverpool F.C.|Liverpool]]
+|style="text-align:center"|<ref>{{cite news|title=Luis Suarez & Tony Pulis win Barclays Premier League awards|url=https://www.bbc.co.uk/sport/football/27389970|work=BBC Sport|publisher=BBC|date=13 May 2014|access-date=13 May 2014}}</ref>
+|-
+|[[2014–15 Premier League|2014–15]]
+!scope="row"|{{sortname|Eden|Hazard}}
+|[[Midfielder]]
+|{{flag|Belgium}}
+!scope="row" style="background:#ffb"|[[Chelsea F.C.|Chelsea]]{{sup|§}}
+|style="text-align:center"|<ref name=Hazard>{{cite news|url=http://www.premierleague.com/en-gb/news/news/2014-15/may/220515-mourinho-and-hazard-claim-barclays-season-awards-for-2015.html|title=Mourinho and Hazard scoop Barclays season awards|publisher=Premier League|date=22 May 2015|access-date=26 May 2015|archive-url=https://web.archive.org/web/20150526022459/http://www.premierleague.com/en-gb/news/news/2014-15/may/220515-mourinho-and-hazard-claim-barclays-season-awards-for-2015.html|archive-date=26 May 2015}}</ref>
+|-
+|[[2015–16 Premier League|2015–16]]
+!scope="row"|{{sortname|Jamie|Vardy}}
+|[[Forward (association football)|Forward]]
+|{{flag|England}}
+!scope="row" style="background:#ffb"|[[Leicester City F.C.|Leicester City]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite news|url=https://www.premierleague.com/news/46365|publisher=Premier League|first=Dan|last=Nelson|date=17 May 2016|access-date=16 November 2017|archive-url=https://web.archive.org/web/20161018014607/https://www.premierleague.com/news/46365|archive-date=18 October 2016|title=Vardy wins Barclays Player of the Season award}}</ref>
+|-
+|[[2016–17 Premier League|2016–17]]
+!scope="row"|{{sortname|N'Golo|Kanté}}
+|[[Midfielder]]
+|{{flag|France|1974}}
+!scope="row" style="background:#ffb"|[[Chelsea F.C.|Chelsea]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite news|url=https://www.premierleague.com/news/397433|title=Kante named EA SPORTS Player of the Season|publisher=Premier League|date=21 May 2017|access-date=22 May 2017}}</ref>
+|-
+|[[2017–18 Premier League|2017–18]]
+!scope="row"|{{sortname|Mohamed|Salah}} {{small|(1)}}
+|[[Forward (association football)|Forward]]
+|{{flag|Egypt}}
+|[[Liverpool F.C.|Liverpool]]
+|style="text-align:center"|<ref>{{cite news|url=https://www.premierleague.com/news/686265|title=Salah wins EA SPORTS Player of the Season award|publisher=Premier League|date=13 May 2018|access-date=13 May 2018}}</ref>
+|-
+|[[2018–19 Premier League|2018–19]]
+!scope="row"|{{sortname|Virgil van|Dijk}}
+|[[Defender (association football)|Defender]]
+|{{flag|Netherlands}}
+|[[Liverpool F.C.|Liverpool]]
+|style="text-align:center"|<ref>{{cite news|url=https://www.premierleague.com/news/1214766|title=Van Dijk named EA SPORTS Player of the Season|publisher=Premier League|date=12 May 2019|access-date=12 May 2019}}</ref>
+|-
+|[[2019–20 Premier League|2019–20]]
+!scope="row"|{{sortname|Kevin|De Bruyne}} {{small|(1)}}
+|[[Midfielder]]
+|{{flag|Belgium}}
+|[[Manchester City F.C.|Manchester City]]
+|style="text-align:center"|<ref>{{cite news|url=https://www.premierleague.com/news/1750639|title=De Bruyne voted 2019/20 EA SPORTS Player of the Season |publisher=Premier League|date=16 August 2020|access-date=16 August 2020}}</ref>
+|-
+|[[2020–21 Premier League|2020–21]]
+!scope="row"|{{sortname|Rúben|Dias}}
+|[[Defender (association football)|Defender]]
+|{{flag|Portugal}}
+!scope="row" style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite news|url=https://www.premierleague.com/news/2164971|title=Dias named EA SPORTS Player of the Season |publisher=Premier League|date=5 June 2021|access-date=5 June 2021}}</ref>
+|-
+|[[2021–22 Premier League|2021–22]]
+!scope="row"|{{sortname|Kevin|De Bruyne}} {{small|(2)}}
+|[[Midfielder]]
+|{{flag|Belgium}}
+|style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|§}}
+|style="text-align:center"|<ref>{{cite news|url= https://www.premierleague.com/news/2621844 |title=De Bruyne named EA SPORTS Player of the Season |publisher=Premier League|date=21 May 2022|access-date=21 May 2022}}</ref>
+|-
+|[[2022–23 Premier League|2022–23]]
+!scope="row" style="background:#bfb"|{{sortname|Erling|Haaland}}{{sup|{{hashtag}}}}
+|[[Forward (association football)|Forward]]
+|{{flag|Norway}}
+|style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|§}}
+|style="text-align:center"|<ref name="Haaland23">{{cite news|url= https://www.premierleague.com/news/3486457 |title=Haaland voted 2022/23 EA SPORTS Player of the Season |publisher=Premier League |date=27 May 2023|access-date=27 May 2023}}</ref>
+|-
+|[[2023–24 Premier League|2023–24]]
+!scope="row"|{{sortname|Phil|Foden}}
+|[[Midfielder]]
+|{{flag|England}}
+|style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|§}}
+|style="text-align:center"|<ref name="Foden24">{{cite news|url=https://www.premierleague.com/news/4011458|publisher=Premier League|date=18 May 2024|access-date=18 May 2024|title=Foden wins EA SPORTS Player of the Season award}}</ref>
+|-
+|[[2024–25 Premier League|2024–25]]
+!scope="row"|{{sortname|Mohamed|Salah}} {{small|(2)}}
+|[[Forward (association football)|Forward]]
+|{{flag|Egypt}}
+|style="background:#ffb"|[[Liverpool F.C.|Liverpool]]{{sup|§}}
+|style="text-align:center"|<ref name="Salah25">{{cite news|url=https://www.premierleague.com/news/4314799|publisher=Premier League|date=24 May 2025|access-date=24 May 2025|title=Salah wins 2024/25 EA SPORTS Player of the Season award}}</ref>
+|-
+|[[2025-26 Premier League|2025–26]]
+!scope="row"|{{sortname|Bruno|Fernandes}}
+|[[Midfielder (association football)|Midfielder]]
+|{{flag|Portugal}}
+|[[Manchester United F.C.|Manchester United]]
+|style="text-align:center"|<ref>{{cite news |date=23 May 2026 |title=Fernandes wins EA SPORTS Player of the Season award |url=https://www.premierleague.com/en/news/4662427/fernandes-wins-ea-sports-player-of-the-season-award/ |access-date=23 May 2026 |publisher=Premier League}}</ref>
+
+|}<!-- THIS IS NOT THE PFA PLAYERS PLAYER OF THE YEAR AWARD, PLEASE CHECK THE AWARD BEFORE ENTERING INTO THIS SECTION-->
+
+==Multiple awards won by players==
+The following table lists the number of awards won by players who have won at least two Player of the Season awards.
+
+Players in '''bold ''' are still active in the Premier League.
+
+{| class="wikitable"
+!Awards
+!Player
+!Country
+!Seasons
+|-
+!scope="row" rowspan="5"|2
+|{{sortname|Thierry|Henry}}
+|{{flagcountry|FRA}}
+|[[2003–04 FA Premier League|2003–04]], [[2005–06 FA Premier League|2005–06]]
+|-
+|{{sortname|Cristiano|Ronaldo}}
+|{{flagcountry|POR}}
+|[[2006–07 FA Premier League|2006–07]], [[2007–08 Premier League|2007–08]]
+|-
+|{{sortname|Nemanja|Vidić}}
+|{{flagcountry|SRB}}
+|[[2008–09 Premier League|2008–09]], [[2010–11 Premier League|2010–11]]
+|-
+|{{sortname|Kevin|De Bruyne}}
+|{{flagcountry|BEL}}
+|[[2019–20 Premier League|2019–20]], [[2021–22 Premier League|2021–22]]
+|- 
+|{{sortname|Mohamed|Salah}}
+|{{flagcountry|EGY}}
+|[[2017–18 Premier League|2017–18]], [[2024–25 Premier League|2024–25]]
+|}
+
+==Awards won by nationality==
+{| class="sortable wikitable plainrowheaders"#
+|-
+! scope="col" | Country
+! scope="col" | Players
+! scope="col" | Total
+|-
+!scope="row"|{{flag|England}}
+|align="center" |{{nts|7}}
+|align="center" |{{nts|7}}
+|-
+!scope="row"|{{flag|Belgium}}
+|align="center" |{{nts|3}}
+|align="center"|{{nts|4}}
+|-
+!scope="row"|{{flag|France}}
+|align="center" |{{nts|3}}
+|align="center" |{{nts|4}}
+|-
+!scope="row"|{{flag|Portugal}}
+|align="center" |{{nts|3}}
+|align="center" |{{nts|4}}
+|-
+!scope="row"|{{flag|Netherlands}}
+|align="center" |{{nts|2}}
+|align="center" |{{nts|2}}
+|-
+!scope="row"|{{flag|Egypt}}
+|align="center" |{{nts|1}}
+|align="center" |{{nts|2}}
+|-
+!scope="row"|{{flag|Serbia}}
+|align="center" |{{nts|1}}
+|align="center" |{{nts|2}}
+|-
+!scope="row"|{{flag|Brazil}}
+|align="center" |{{nts|1}}
+|align="center" |{{nts|1}}
+|-
+!scope="row"|{{flag|Denmark}}
+|align="center" |{{nts|1}}
+|align="center" |{{nts|1}}
+|-
+!scope="row"|{{flag|Norway}}
+|align="center" |{{nts|1}}
+|align="center" |{{nts|1}}
+|-
+!scope="row"|{{flag|Sweden}}
+|align="center" |{{nts|1}}
+|align="center" |{{nts|1}}
+|-
+!scope="row"|{{flag|Trinidad and Tobago}}
+|align="center" |{{nts|1}}
+|align="center" |{{nts|1}}
+|-
+!scope="row"|{{flag|Uruguay}}
+|align="center" |{{nts|1}}
+|align="center" |{{nts|1}}
+|-
+!scope="row"|{{flag|Wales}}
+|align="center" |{{nts|1}}
+|align="center" |{{nts|1}}
+|}
+
+==Awards won by position==
+{| class="sortable wikitable plainrowheaders"
+|-
+! scope="col" | Position
+! scope="col" | Players
+! scope="col" | Total
+|-
+!scope="row"|[[Forward (association football)|Forward]]
+|align="center" |{{nts|12}}
+|align="center" |{{nts|15}}
+|-
+!scope="row"|[[Midfielder]]
+|align="center" |{{nts|9}}
+|align="center" |{{nts|10}}
+|-
+!scope="row"|[[Defender (association football)|Defender]]
+|align="center" |{{nts|4}}
+|align="center" |{{nts|5}}
+|-
+!scope="row"|[[Goalkeeper (association football)|Goalkeeper]]
+|align="center" |{{nts|1}}
+|align="center" |{{nts|1}}
+|}
+
+==Awards won by club==
+{| class="sortable wikitable plainrowheaders"
+|-
+! scope="col" | Club
+! scope="col" | Players
+! scope="col" | Total
+|-
+!scope="row"|[[Manchester United F.C.|Manchester United]]
+|align="center"|{{nts|7}}
+|align="center"|{{nts|9}}
+|-
+!scope="row"|[[Manchester City F.C.|Manchester City]]
+|align="center"|{{nts|5}}
+|align="center"|{{nts|6}}
+|-
+!scope="row"|[[Liverpool F.C.|Liverpool]]
+|align="center"|{{nts|4}}
+|align="center"|{{nts|5}}
+|-
+!scope="row"|[[Arsenal F.C.|Arsenal]]
+|align="center"|{{nts|3}}
+|align="center"|{{nts|4}}
+|-
+!scope="row"|[[Chelsea F.C.|Chelsea]]
+|align="center"|{{nts|3}}
+|align="center"|{{nts|3}}
+|-
+!scope="row"|[[Leicester City F.C.|Leicester City]]
+|align="center"|{{nts|1}}
+|align="center"|{{nts|1}}
+|-
+!scope="row"|[[Blackburn Rovers F.C.|Blackburn Rovers]]
+|align="center"|{{nts|1}}
+|align="center"|{{nts|1}}
+|-
+!scope="row"|[[Middlesbrough F.C.|Middlesbrough]]
+|align="center"|{{nts|1}}
+|align="center"|{{nts|1}}
+|-
+!scope="row"|[[Sunderland A.F.C.|Sunderland]]
+|align="center"|{{nts|1}}
+|align="center"|{{nts|1}}
+|-
+!scope="row"|[[Tottenham Hotspur F.C.|Tottenham Hotspur]]
+|align="center"|{{nts|1}}
+|align="center"|{{nts|1}}
+|-
+|}
+
+==See also==
+*[[Most Valuable Player]]
+*[[Premier League Player of the Month]]
+*[[FWA Footballer of the Year]]
+*[[PFA Players' Player of the Year]]
+*[[Premier League Young Player of the Season]]
+*[[Premier League Manager of the Season]]
+*[[Premier League Playmaker of the Season]]
+*[[Premier League Goal of the Season]]
+*[[Premier League Save of the Season]]
+*[[Premier League Game Changer of the Season]]
+*[[Premier League Most Powerful Goal]]
+
+==Notes==
+{{reflist|group=upper-alpha}}
+
+==References==
+'''General'''
+{{refbegin}}
+*{{cite web|url=http://espnfc.com/feature/_/id/844596?cc=4716#quotes |archive-url=https://web.archive.org/web/20140117120148/http://espnfc.com/feature/_/id/844596?cc=4716#quotes |archive-date=17 January 2014 |title=A brief history of the English top division&nbsp;– List of Honours (List of Premier League champions) |work=ESPN FC |publisher=ESPN Internet Ventures |date=1 July 2012 |access-date=2 January 2014 }}
+
+{{refend}}
+'''Specific'''
+{{Reflist|colwidth=30em}}
+
+{{Premier League Player of the Season}}
+{{Premier League}}
+{{English football awards}}
+{{National Footballer of the Year}}
+
+[[Category:Premier League trophies and awards|season]]
+[[Category:Association football player of the year awards by competition|England]]
+[[Category:Annual events in England]]
+[[Category:Annual sporting events in the United Kingdom]]
+[[Category:Awards established in 1995]]
+[[Category:Lists of Premier League players|Season]]
+[[Category:Association football player non-biographical articles]]

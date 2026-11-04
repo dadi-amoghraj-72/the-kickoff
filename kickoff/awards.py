@@ -81,7 +81,9 @@ def update(state, season, items):
     return {"season": season, "seen": seen, "rows": new + rows, "names": names}, new
 
 
-BLOCKS = ("team", "asg", "pos")                    # rows shown as a full-width block, and only on the morning they land or on the final awards day
+MLB_LEAGUE = {   # ESPN's club codes -> league (from the real 2026 standings; a test checks every code)
+    **{t: "AL" for t in "NYY BOS BAL TOR TB CHW CLE MIN DET KC HOU TEX SEA ATH LAA".split()}, **{t: "NL" for t in "PHI ATL MIA WSH NYM CHC PIT STL CIN MIL SD LAD ARI SF COL".split()}}
+BLOCKS = ("team", "asg", "pos", "league")                    # rows shown as a full-width block, and only on the morning they land or on the final awards day
 FINAL_LABELS = {"MVP"}                             # the awards whose morning counts as "the final awards day" (D: the NFL Honors day)
 TONES = {"1st": "gold", "2nd": "silver", "3rd": "bronze"}
 SHORT_POS = {"placekicker": "K", "kickoff returner": "KR", "slot cornerback": "Slot CB"}
@@ -132,8 +134,12 @@ def _esc(x):
 
 
 def winner_cell(row):
-    """The winner cell of a one-winner row: the name in gold (in the iridescent MVP colour for every MVP), the team beside it."""
+    """The winner cell of a one-winner row: the name in gold (in the iridescent MVP colour for every MVP), the team beside it. A 'pair' (MLB's two league winners)
+    is two lines, 'AL' then 'NL', each with its own name."""
     d = row.get("data") or {}
+    if row.get("kind") == "pair":
+        cls = "wn mvp" if is_mvp(row["label"]) else "wn"
+        return "".join(f'<div class="pr"><span class="lg">{_esc(w["league"])}</span> <span class="{cls}">{_esc(w["name"])}</span>' + (f' <span class="tc">({_esc(w["team"])})</span>' if w.get("team") else "") + "</div>" for w in d["winners"])
     name = d.get("name") or row.get("text", "")
     cls = "wn mvp" if is_mvp(row["label"]) else "wn"
     team = f' <span class="tc">({_esc(d["team"])})</span>' if d.get("team") else ""
@@ -148,14 +154,25 @@ def block_html(row):
         lines = "".join(f'<div class="pl"><span class="wn {d["tone"]}">{_esc(p["name"])}</span>' + (f' <span class="ct">({p["count"]})</span>' if p.get("count") else "")
                         + (f' <span class="tc">— {_esc(p["team"])}</span>' if p.get("team") else "") + "</div>" for p in d["players"])
         body = f'<div class="lines">{lines}</div>'
+    elif row["kind"] == "league":
+        both = [p["name"] for lg in ("AL", "NL") for p in d.get(lg, [])]
+        short = abbreviate(both)
+
+        def lcol(lg):
+            items = "".join(f'<div class="pl">{_esc(short[p["name"]])} <span class="tc">({_esc(p["team"])})</span></div>' for p in d.get(lg, []))
+            return f'<div class="col"><div class="ch">{"American League" if lg == "AL" else "National League"}</div>{items}</div>'
+        body = f'<div class="asg">{lcol("AL")}{lcol("NL")}</div>'
     elif row["kind"] == "asg":
-        full = [p["name"] for g in ("starters", "reserves") for p in d[g]]
-        short = abbreviate(full)
+        groups = [(t_, k) for t_, k in (("Starters", "starters"), ("Reserves", "reserves"), ("Pitchers", "pitchers")) if d.get(k)]
+        short = abbreviate([p["name"] if isinstance(p, dict) else p for _, k in groups for p in d[k]])
 
         def col(title, players):
-            items = "".join(f'<div class="pl">{_esc(short[p["name"]])}' + (f' <span class="fl">({"Out" if p["flag"] == "out" else "In"})</span>' if p.get("flag") else "") + "</div>" for p in players)
+            items = ""
+            for p in players:
+                nm, flag = (p["name"], p.get("flag")) if isinstance(p, dict) else (p, "")
+                items += f'<div class="pl">{_esc(short[nm])}' + (f' <span class="fl">({"Out" if flag == "out" else "In"})</span>' if flag else "") + "</div>"
             return f'<div class="col"><div class="ch">{title}</div>{items}</div>'
-        body = f'<div class="asg">{col("Starters", d["starters"])}{col("Reserves", d["reserves"])}</div>'
+        body = '<div class="asg">' + "".join(col(t_, d[k]) for t_, k in groups) + "</div>"
     else:
         body = '<table class="pos"><tbody>' + "".join(f'<tr><td class="pp">{_esc(row[0])}</td><td><span class="wn">{_esc(row[1])}</span>' + (f' <span class="tc">({_esc(row[2])})</span>' if len(row) > 2 and row[2] else "") + "</td></tr>" for row in d["rows"]) + "</tbody></table>"
     sub = f'<div class="bs muted">{_esc(d["sub"])}</div>' if d.get("sub") else ""
@@ -163,11 +180,12 @@ def block_html(row):
 
 
 def table_html(title, rows, show_blocks=True):
-    """The cumulative table, newest first: Award and Winner for one-winner rows; full-width blocks for the team awards (only when show_blocks)."""
+    """The cumulative table, newest first: Award and Winner for one-winner rows; full-width blocks for the team awards: all of them when show_blocks is True, only the
+    rows whose keys are in it when it is a set, none when False."""
     body = ""
     for x in rows:
         if x.get("kind") in BLOCKS:
-            if show_blocks:
+            if show_blocks is True or (isinstance(show_blocks, (set, frozenset)) and x["key"] in show_blocks):
                 body += block_html(x)
             continue
         note = f' <span class="muted">· {_esc(x["note"])}</span>' if x.get("note") and x["note"] != "updated" else ""
@@ -217,6 +235,32 @@ def wiki_items(league, season, wiki):
                                 "quiet": True, "text": ", ".join(p["name"] for g in ("starters", "reserves") for p in a[conf][g])})
             return out
         attempt(coach)
+        attempt(stars)
+    if league == "mlb":
+        def manager():
+            m = honours.mlb_manager(wiki.wikitext("Major League Baseball Manager of the Year Award"), season)
+            if len(m) < 2:
+                return []
+            return [{"key": "wiki:moty", "label": "MOTY", "sig": m["AL"] + "|" + m["NL"], "kind": "pair", "data": {"winners": [{"league": lg, "name": m[lg], "team": ""} for lg in ("AL", "NL")]},
+                     "text": f"{m['AL']}; {m['NL']}"}]
+
+        def platinum():
+            p = honours.platinum_glove(wiki.wikitext("Gold Glove Award"), season)
+            if len(p) < 2:
+                return []
+            return [{"key": "wiki:plat", "label": "Platinum G", "sig": p["AL"]["name"] + "|" + p["NL"]["name"], "kind": "pair",
+                     "data": {"winners": [{"league": lg, **p[lg]} for lg in ("AL", "NL")]}, "text": f"{p['AL']['name']}; {p['NL']['name']}"}]
+
+        def stars():
+            a = honours.mlb_all_stars(wiki.wikitext(f"{season} Major League Baseball All-Star Game"))
+            out = []
+            for lg in ("AL", "NL"):
+                if a.get(lg):
+                    out.append({"key": f"wiki:asg:{lg}", "label": f"MLB All-Star Selections — {lg}", "sig": json.dumps(a[lg], sort_keys=True), "kind": "asg", "quiet": True,
+                                "data": {**a[lg], "sub": f"Game: {_day(a['date'])} (US)"}, "text": ", ".join(p for g in ("starters", "reserves", "pitchers") for p in a[lg][g])})
+            return out
+        attempt(manager)
+        attempt(platinum)
         attempt(stars)
     if league == "nfl":
         def allpro():
@@ -269,7 +313,7 @@ def run(source, title, state, season, extra=(), skip=SKIP):
     winners changed. The full-width team blocks are shown on the morning they are announced and on the morning of the MVP (the final awards day), not on the days
     between. Never raises: a source failure leaves the state as it was and shows nothing."""
     try:
-        got = [a for a in source.awards(season) if a["winners"] and a["name"] not in skip]
+        got = [a for a in source.awards(season) if a["winners"] and a["name"] not in skip] if source is not None else []   # None: only the extra (Wikipedia) items
         old = state or {}
         fresh = "season" not in old
         seen = old.get("seen", {}) if old.get("season") == season else {}
@@ -282,8 +326,16 @@ def run(source, title, state, season, extra=(), skip=SKIP):
             if not fresh and seen.get(a["id"]) != sig:
                 infos = [source.athlete(season, w["athlete"]) for w in a["winners"]]
                 teams = [source.team(season, w["team"]) if w["team"] else "" for w in a["winners"]]
+                lg = getattr(source, "league", "")
                 if len(infos) == 1:
                     it.update(kind="single", data={"name": infos[0]["name"], "team": teams[0]}, text=winner_text([infos[0]["name"]], teams[0]))
+                elif lg == "mlb":                       # two league winners (MVP, Cy Young, Rookie): a pair; the clubs' Gold Gloves and Silver Sluggers: a block by league
+                    rows_ = [{"name": i["name"], "team": t, "league": MLB_LEAGUE.get(t, "")} for i, t in zip(infos, teams)]
+                    if len(rows_) == 2:
+                        rows_.sort(key=lambda x: x["league"])
+                        it.update(kind="pair", data={"winners": rows_}, text="; ".join(f"{x['name']} ({x['team']})" for x in rows_))
+                    else:
+                        it.update(kind="league", data={g: [x for x in rows_ if x["league"] == g] for g in ("AL", "NL")}, text=", ".join(x["name"] for x in rows_))
                 else:
                     counts = None
                     if lab.startswith("All-NBA"):
@@ -294,7 +346,7 @@ def run(source, title, state, season, extra=(), skip=SKIP):
         new_state, new = update(state, season, items + list(extra))
         if cache:
             new_state["allnba"] = cache
-        show_blocks = any(x["label"] in FINAL_LABELS for x in new) or any(x.get("kind") in BLOCKS for x in new)
+        show_blocks = True if any(x["label"] in FINAL_LABELS for x in new) else {x["key"] for x in new if x.get("kind") in BLOCKS}   # all on the final day, else only the new ones
         return (table_html(title, new_state["rows"], show_blocks) if new else ""), new_state
     except Exception:
         return "", state

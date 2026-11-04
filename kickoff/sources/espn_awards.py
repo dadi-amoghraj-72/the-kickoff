@@ -16,6 +16,7 @@ class Source:
     def __init__(self, sport, league, get_json=http.get_json, pause=PAUSE):
         self.base, self._get, self.pause, self.calls = CORE.format(sport=sport, league=league), get_json, pause, 0
         self._teams, self._athletes = {}, {}
+        self.league = league
 
     def _call(self, url):
         if self.calls:

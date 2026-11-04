@@ -368,3 +368,7 @@ p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
   .awards .wn.mvp { background: linear-gradient(90deg, #2f5fae 0%, #7b4bb5 35%, #1c8a74 70%, #2f5fae 100%); -webkit-background-clip: text; background-clip: text; }
 }
 .awards th:first-child, .awards tr:not(.blk) td:first-child { padding-left: 12px; }   /* the award names sit in from the table's left edge */
+.awards .pr { padding: 1px 0; }
+.awards .lg { color: var(--muted); font-size: 12px; font-weight: 600; margin-right: 4px; }
+.awards .asg .pl .tc { white-space: nowrap; }
+tr.hl td { color: var(--gold); font-weight: 600; }   /* D's favourites' rows in league tables: Sunrisers Hyderabad (and Arsenal, when built) */

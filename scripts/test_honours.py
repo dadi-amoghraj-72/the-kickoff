@@ -1,4 +1,5 @@
 """Offline tests for the Wikipedia honours (All-Pro, Pro Bowl, NBA All-Star selections, Coach of the Year) on saved real pages. Run: python3 scripts/test_honours.py"""
+import json
 import re
 import sys
 from pathlib import Path
@@ -120,6 +121,37 @@ allp = honours.all_pro(AP)
 every = {n for k in ("first", "second") for u in allp[k].values() for _, n in u}
 check("independent: every club the page links to has a code, so every All-Pro player (60) gets his team's code, none guessed", raw_clubs <= set(awards.NFL_CODES) and all(awards.NFL_CODES.get(allp["teams"].get(n)) for n in every) and len(every) == 60, (raw_clubs - set(awards.NFL_CODES), len(every)))
 check("a few real teams: Stafford LAR, Robinson ATL, McCaffrey SF, Chase CIN, Garrett CLE, Sewell DET", [awards.NFL_CODES[allp["teams"][n]] for n in ("Matthew Stafford", "Bijan Robinson", "Christian McCaffrey", "Ja\u2019Marr Chase", "Myles Garrett", "Penei Sewell")] == ["LAR", "ATL", "SF", "CIN", "CLE", "DET"])
+
+# ---- MLB (round 2) ----
+MASG, MPLAT, MMOTY = [(FX / n).read_text() for n in ("wiki_mlb_asg_2026.txt", "wiki_mlb_plat.txt", "wiki_mlb_moty.txt")]
+ma = honours.mlb_all_stars(MASG)
+al_region = MASG[MASG.index("===American League==="):MASG.index("===National League===")]
+raw_al = len(re.findall(r"\{\{sortname\|", al_region.split("==Roster notes")[0]))
+check("independent: the AL selections (starters, reserves and pitchers) are as many as the raw American League section has players", sum(len(v) for v in ma["AL"].values()) == raw_al and raw_al > 30, (sum(len(v) for v in ma["AL"].values()), raw_al))
+check("the AL starters: Langeliers, Guerrero Jr., Clement, Caminero, Witt Jr., Buxton, Judge, Trout, Alvarez; the game date is 14 July 2026", ma["AL"]["starters"][:2] == ["Shea Langeliers", "Vladimir Guerrero Jr."] and "Aaron Judge" in ma["AL"]["starters"] and len(ma["AL"]["starters"]) == 9 and ma["date"] == "July 14, 2026", ma["AL"]["starters"])
+check("a page that is not an All-Star page gives nothing", honours.mlb_all_stars(AP) == {} and honours.mlb_all_stars("") == {})
+check("Platinum Glove 2025: Bobby Witt Jr. (KC) in the AL, Fernando Tatis Jr. (SD) in the NL; 2026 is not announced yet", honours.platinum_glove(MPLAT, 2025) == {"AL": {"name": "Bobby Witt Jr.", "team": "KC"}, "NL": {"name": "Fernando Tatis Jr.", "team": "SD"}} and honours.platinum_glove(MPLAT, 2026) == {}, honours.platinum_glove(MPLAT, 2025))
+check("Manager of the Year 2025: Stephen Vogt (AL) and Pat Murphy (NL); 2026 not yet", honours.mlb_manager(MMOTY, 2025) == {"AL": "Stephen Vogt", "NL": "Pat Murphy"} and honours.mlb_manager(MMOTY, 2026) == {}, honours.mlb_manager(MMOTY, 2025))
+check("club names as Wikipedia writes them map to ESPN's codes", [honours.mlb_code(x) for x in ("Blue Jays", "Toronto Blue Jays", "Athletics (baseball)", "Oakland Athletics", "[[Texas Rangers (baseball)|Texas Rangers]]", "Kansas City Royals", "nobody")] == ["TOR", "TOR", "ATH", "ATH", "TEX", "KC", ""])
+std = json.loads((FX / "mlb_standings_2026.json").read_text())
+real_league = {e["team"]["abbreviation"]: lg["abbreviation"] for lg in std["children"] for d in (lg.get("children") or [lg]) for e in d["standings"]["entries"]}
+check("independent: the AL/NL map in awards is exactly the real 2026 standings' (30 clubs), and every club has a Wikipedia name mapping", awards.MLB_LEAGUE == real_league and set(honours.MLB_TEAMS) == set(real_league), set(honours.MLB_TEAMS) ^ set(real_league))
+class MW:
+    def wikitext(self, page):
+        return {"Major League Baseball Manager of the Year Award": MMOTY, "Gold Glove Award": MPLAT}.get(page, "")
+mitems = {i["key"]: i for i in awards.wiki_items("mlb", 2025, MW())}
+check("MLB 2025 items: Manager of the Year and Platinum Glove as AL/NL pairs (the All-Star page asked for is the season's own, so none here)", set(mitems) == {"wiki:moty", "wiki:plat"} and mitems["wiki:moty"]["label"] == "MOTY" and mitems["wiki:plat"]["label"] == "Platinum G" and [w["league"] for w in mitems["wiki:plat"]["data"]["winners"]] == ["AL", "NL"], list(mitems))
+class MW2(MW):
+    def wikitext(self, page):
+        return MASG if page == "2026 Major League Baseball All-Star Game" else ""
+sitems = {i["key"]: i for i in awards.wiki_items("mlb", 2026, MW2())}
+check("MLB 2026: the All-Star selections are two blocks, AL and NL, each with Starters, Reserves and Pitchers", set(sitems) == {"wiki:asg:AL", "wiki:asg:NL"} and set(sitems["wiki:asg:AL"]["data"]) >= {"starters", "reserves", "pitchers", "sub"}, list(sitems))
+ah = awards.table_html("MLB Awards", [{**sitems["wiki:asg:AL"], "note": ""}])
+check("the All-Star block shows three centred columns with initials and the headers Starters, Reserves, Pitchers", all(x in ah for x in ("Starters", "Reserves", "Pitchers", "A. Judge", "S. Langeliers")) and ah.count('class="col"') == 3, ah[:400])
+ph = awards.table_html("MLB Awards", [{**mitems["wiki:plat"], "note": ""}])
+check("a pair is two lines, AL then NL, each with the name and team code", ph.count('class="pr"') == 2 and ph.index("Bobby Witt Jr.") < ph.index("Fernando Tatis Jr.") and "(KC)" in ph and "(SD)" in ph, ph)
+mh = awards.table_html("MLB Awards", [{**mitems["wiki:moty"], "note": ""}])
+check("the managers have no team beside them (the page's table does not give a usable code), just AL and NL names", "Stephen Vogt" in mh and "Pat Murphy" in mh and 'class="tc"' not in mh, mh)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

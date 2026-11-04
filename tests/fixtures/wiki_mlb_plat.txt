@@ -1,0 +1,933 @@
+{{Short description|Major League Baseball award}}
+{{redirect|Gold Glove|the boxing competition|Golden Gloves|other uses|Golden Gloves (disambiguation)}}
+{{Use American English|date=March 2026}}
+{{Use mdy dates|date=March 2026}}
+{{infobox sports award
+| name = Gold Glove Award
+| image = Alomar Golden Glove award.jpg
+| imagesize = 
+| alt = 
+| caption = [[Roberto Alomar]]'s 1994 Gold Glove Award
+| sport = [[Baseball]]
+| league = [[Major League Baseball]]
+| description = Best fielding player at each [[Baseball positions|position]] in the [[American League]] and [[National League (baseball)|National League]]
+| sponsor = [[Rawlings (company)|Rawlings]]
+| presenter = Major League Baseball
+| year = 1957
+| year2 = <!-- leave empty for active awards -->
+| holder = 
+}}The '''Rawlings Gold Glove Award''', usually referred to as simply the '''Gold Glove''', is the award given annually to the [[Major League Baseball]] (MLB) players judged to have exhibited superior individual [[Fielding (baseball)|fielding]] performances. It is awarded at each [[Baseball positions|fielding position]] in both the [[National League (baseball)|National League]] (NL) and the [[American League]] (AL). The Gold Glove is widely considered one of the most prestigious defensive awards in baseball.
+
+Winners for position awards are determined from voting by the managers and coaches in each league,<ref name="GG">{{cite web|url=http://sportsillustrated.cnn.com/baseball/news/2002/11/13/al_goldgloves_ap/|title=A-Rod breaks Vizquel's streak; AL West earns eight of nine|date=November 13, 2002|magazine=Sports Illustrated|agency=Associated Press|access-date=May 26, 2009|archive-url=https://web.archive.org/web/20140109062844/http://sportsillustrated.cnn.com/baseball/news/2002/11/13/al_goldgloves_ap/|archive-date=9 January 2014}}</ref> who are not permitted to vote for their own players.<ref name="GG" /> Additionally, a [[sabermetric]] component provided by the [[Society for American Baseball Research]] (SABR) accounts for about 25 percent of the vote.<ref name="sabr_vote">{{cite press release|title=Gold Glove Selection Criteria|publisher=Rawlings Sporting Goods|url=https://www.rawlings.com/gold-glove-criteria.html|access-date=2021-10-13|archive-date=2022-12-28|archive-url=https://web.archive.org/web/20221228202213/https://www.rawlings.com/gold-glove-criteria.html|url-status=live}}</ref> For the utility player awards, the sabermetric component and other defensive statistics are exclusively used to select the winners, without any voting by coaches.<ref>{{cite press release|title=Rawlings Gold Glove Award expands to utility players|publisher=Rawlings Sporting Goods|url=https://www.rawlings.com/utility-release.html|access-date=2023-11-06|archive-date=2023-11-06|archive-url=https://web.archive.org/web/20231106233412/https://www.rawlings.com/utility-release.html|url-status=live}}</ref>
+
+In 1957, the [[baseball glove]] manufacturer [[Rawlings (company)|Rawlings]] created the Gold Glove Award to commemorate the best fielding performance at each position.<ref name="RawlingsPR"/> Winners receive a glove made from gold [[lamé (fabric)|lamé]]-tanned [[leather]] and affixed to a [[walnut]] base.<ref name="RawlingsPR" /> In the inaugural year, one Gold Glove was awarded to the top fielder at each position in MLB;<ref name="RawlingsPR">{{cite web|title=History of the Gold Glove Award|url=https://www.rawlings.com/gold-glove-history.html|access-date=October 13, 2021|website=[[Rawlings (company)|Rawlings]]|publisher=Rawlings Sporting Goods|archive-date=May 21, 2022|archive-url=https://web.archive.org/web/20220521220535/https://www.rawlings.com/gold-glove-history.html|url-status=live}}</ref> since 1958, separate awards have been given to the top fielders in each league.<ref name="RawlingsPR" /> In 2020, Rawlings began issuing a Gold Glove Award for team defense, with one recipient each in the American and National Leagues.<ref>{{cite web |title=Rawlings Gold Glove Team Award {{!}} Learn More Here {{!}} Rawlings |url=https://www.rawlings.com/gold-glove-team.html |website=www.rawlings.com |access-date=2023-02-17 |archive-date=2023-02-17 |archive-url=https://web.archive.org/web/20230217205700/https://www.rawlings.com/gold-glove-team.html |url-status=live }}</ref> Starting in 2022, a Gold Glove Award in each league has been awarded to a [[utility player (baseball)|utility player]].<ref name=GGUtility>{{Cite magazine|last=Philips|first=Gary|title=Rawlings Finally Introduces A Gold Glove Award For Utility Players|url=https://www.si.com/fannation/mlb/fastball/news/rawlings-gold-glove-award-utility-players|access-date=September 24, 2022|magazine=[[Sports Illustrated]]|archive-date=September 24, 2022|archive-url=https://web.archive.org/web/20220924144407/https://www.si.com/fannation/mlb/fastball/news/rawlings-gold-glove-award-utility-players|url-status=live}}</ref>
+
+From 2016–2019, a Gold Glove was also awarded each year to one [[fastpitch softball]] player in the [[National Pro Fastpitch]] league.<ref>{{Cite web|title=Rawlings Softball Gold Glove Award|url=https://www.rawlings.com/gold-glove-softball.html|access-date=October 13, 2021|website=[[Rawlings (company)|Rawlings]]|archive-date=October 17, 2021|archive-url=https://web.archive.org/web/20211017040814/https://www.rawlings.com/gold-glove-softball.html|url-status=live}}</ref>
+
+==History==
+[[File:Gil Hodges.png|thumb|right|upright=.8|[[Gil Hodges]] was one of the first Gold Glove recipients, in 1957]]
+
+For the first four seasons of the award (1957 to 1960), individual awards were presented to [[left fielder]]s, [[center fielder]]s, and [[right fielder]]s. From 1961 through 2010, the phrase "at each position" was no longer strictly accurate, since the prize was presented to three [[outfielder]]s irrespective of their specific position.<ref name=espn_encyc>{{cite book|last1=Gillette|first1=Gary|last2=Palmer|first2=Pete|last3=Gammons|first3=Peter|title=The ESPN Baseball Encyclopedia, Fourth Edition|page=1770|year=2007|publisher=Sterling Publishing|isbn=978-1-4027-4771-7|url=https://books.google.com/books?id=62ntg9bMH4AC&q=editions%3AMH3T-5VaKBIC&pg=PT1791|access-date=January 19, 2012}}</ref> Any combination of outfielders, often three center fielders, could win the award in the same year.<ref name=connolly/><ref name=kurkjian/> Critics called for awarding a single Gold Glove for each individual outfield position, arguing that the three outfield positions are not equivalent defensively.<ref name=kurkjian>{{cite book|last=Kurkjian|first=Tim|title=Is this a Great Game, Or What?|publisher=Macmillan|year=2007|pages=218–219|isbn=978-0-312-36223-2|url=https://books.google.com/books?id=kYs4CrZrdmAC}}</ref> Starting in 2011, separate awards for each outfield position were once again presented.<ref name=connolly>{{cite news|last=Connolly|first=Dan|title=Orioles' Markakis and Wieters win Gold Gloves|date=November 1, 2011|newspaper=The Baltimore Sun|url=http://www.herald-mail.com/sports/bal-orioles-markakis-wieters-gold-glove-1101,0,3175934.story|archive-url=https://archive.today/20130125030036/http://www.herald-mail.com/sports/bal-orioles-markakis-wieters-gold-glove-1101,0,3175934.story|archive-date=January 25, 2013|url-status=dead}}</ref> In the 1985 American League voting, a tie for third-place resulted in the presentation of Gold Glove Awards to four outfielders ([[Dwayne Murphy]], [[Gary Pettis]], [[Dwight Evans (Baseball)|Dwight Evans]] and [[Dave Winfield]]); this scenario was repeated in the National League in 2007 ([[Andruw Jones]], [[Carlos Beltrán]], [[Aaron Rowand]], and [[Jeff Francoeur]]).
+
+===Criticism===
+Before the involvement of the [[Society for American Baseball Research]] (SABR) in the voting process in 2013, ''[[The Boston Globe]]'' writer Peter Abraham argued the [[Fielding Bible Award]]s "are far more accurate (and accountable)" than the Gold Glove awards since statistics are used along with the opinions of an expert panel. The Gold Gloves are selected by managers and coaches who may have seen a player as few as six times during the season.<ref>{{cite news|title=Yadier Molina leads fifth annual "Fielding Bible Awards"|first=Peter|last=Abraham|url=http://www.boston.com/sports/baseball/redsox/extras/extra_bases/2010/11/so_much_for_run.html|newspaper=The Boston Globe|date=November 1, 2010|access-date=November 10, 2010|quote=These awards are far more accurate (and accountable) than the Gold Gloves in that statistics are employed along with the opinions of a large panel of experts.|archive-date=November 5, 2010|archive-url=https://web.archive.org/web/20101105101340/http://www.boston.com/sports/baseball/redsox/extras/extra_bases/2010/11/so_much_for_run.html|url-status=dead}}</ref> Naturally, statistics can be contentious, and there is still no universally agreed system of fielding stats (even with [[advanced metrics]]) in 2024; moreover, a manager gets to see each team in their league during a season, and can indeed form an opinion over that span of whom they felt was the best fielder at each position.
+
+Bill Chuck of [[Comcast SportsNet New England]] claimed that Gold Glove voters frequently counted only [[error (baseball)|errors]] to determine winners.<ref name=chuck>{{cite news|last=Chuck|first=Bill|title=Nation STATion: Playing the field|date=August 8, 2011|work=CSNNE.com|publisher=New England Cable News|url=http://www.necn.com/pages/print_landing?blockID=546784&feedID=3352&|archive-url=https://archive.today/20130130050303/http://www.necn.com/pages/print_landing?blockID=546784&feedID=3352&|archive-date=January 30, 2013|url-status=dead}}</ref> Geoff Baker of ''[[The Seattle Times]]'' maintained the votes for the Gold Gloves rely largely on a player's past reputation.<ref name=baker>{{cite news|title=Mariners eye Durham, Datz for coaching positions; Ichiro wins Fielding Bible Award|first=Geoff|last=Baker|url=http://seattletimes.nwsource.com/html/marinersblog/2013319280_mariners_eye_durham_datz_for_c.html|newspaper=The Seattle Times|date=November 1, 2010|access-date=November 11, 2010|quote=Unlike the Gold Glove awards, chosen by coaches and based largely on reputation, the Fielding Bible Awards are picked by a panel of experts relying heavily on new-wave statistical analysis for defense.|archive-date=June 29, 2011|archive-url=https://web.archive.org/web/20110629064715/http://seattletimes.nwsource.com/html/marinersblog/2013319280_mariners_eye_durham_datz_for_c.html|url-status=dead}}</ref> The [[Associated Press]] proposed that "some fans have viewed the Gold Gloves as mostly a popularity contest, even suggesting that a player's performance at the plate helped draw extra attention to his glove."<ref>{{cite news|title=AL Gold Glove winners named|url=https://www.espn.com/mlb/news/story?id=5784846|work=ESPN|agency=Associated Press|date=November 10, 2010|access-date=November 12, 2010|quote=For years, some fans have viewed the Gold Gloves as mostly a popularity contest, even suggesting that a player's performance at the plate helped draw extra attention to his glove.|archive-date=November 10, 2013|archive-url=https://web.archive.org/web/20131110014341/http://sports.espn.go.com/mlb/news/story?id=5784846|url-status=live}}</ref> After winning the AL Gold Glove at first base in both 1997 and 1998, [[Rafael Palmeiro]] won again in 1999 with the [[Texas Rangers (baseball)|Texas Rangers]] while only appearing in 28 games as a first baseman; he played in 128 games as a [[designated hitter]] that season, resulting in a controversy.<ref name=chuck/><ref>{{cite magazine|url=http://sportsillustrated.cnn.com/2003/baseball/mlb/09/17/beat_goldgloves/|title=Baseball's rubber stamp|last=Luft|first=Jacob|date=September 17, 2003|magazine=Sports Illustrated|access-date=June 5, 2009|archive-date=October 24, 2012|archive-url=https://web.archive.org/web/20121024223936/http://sportsillustrated.cnn.com/2003/baseball/mlb/09/17/beat_goldgloves/|url-status=dead}}</ref><ref>{{cite book|last=Dierker|first=Larry|title=My Team|publisher=Simon and Schuster|year=2006|page=13|isbn=0-7432-7513-6|url=https://books.google.com/books?id=_3zz4DNifaQC|access-date=June 5, 2009}}</ref><ref>{{cite book|last=McKelvey|first=G. Richard|title=All bat, no glove: A history of the designated hitter|publisher=McFarland|year=2004|page=160|isbn=0-7864-1944-X|url=https://books.google.com/books?id=HxxcVNKQpsMC|access-date=June 5, 2009}}</ref> [[Derek Jeter]], winner of five Gold Gloves, believes that many defensive factors cannot be quantified.<ref>{{cite news|last=Kepner|first=Tyler|title=Jeter's Gold Glove an Error, Metric Indicates|url=https://www.nytimes.com/2010/11/10/sports/baseball/10bats.html?ref=todayspaper|newspaper=The New York Times|page=B19|date=November 10, 2010|access-date=November 10, 2010|quote=Jeter—like many players—dismisses defensive statistics as meaningless because of the many factors that cannot be quantified.|archive-date=October 19, 2014|archive-url=https://web.archive.org/web/20141019215646/http://www.nytimes.com/2010/11/10/sports/baseball/10bats.html?ref=todayspaper|url-status=live}}</ref> In 2013, Rawlings collaborated on the Gold Glove Award with SABR, who provided the SABR Defensive Index (SDI) to add a sabermetric component to the selection process. The index accounted for 25 percent of the vote, while managers and coaches continued to provide the majority.<ref name=sabr_vote/> Afterwards, Jay Jaffe of ''[[Sports Illustrated]]'' wrote that the Gold Gloves "appear to have significantly closed the gap on their more statistically driven counterparts."<ref>{{cite magazine|last=Jaffe|first=Jeff|title=Gold Gloves join the stat revolution and it's harder to quibble with the winners|date=October 30, 2013|magazine=Sports Illustrated|url=https://www.si.com/mlb/strike-zone/2013/10/30/gold-glove-winners-fielding-bible-molina-machado-jones-gomez|archive-url=https://web.archive.org/web/20141019054644/http://www.si.com/mlb/strike-zone/2013/10/30/gold-glove-winners-fielding-bible-molina-machado-jones-gomez|archive-date=October 19, 2014|url-status=live}}</ref> SABR and ''[[FiveThirtyEight]]'' believed that the impact to the voting results by SDI, which is also included on the voters' ballots, went beyond its own 25% weight and also influenced the managers' and coaches' voting.<ref>{{cite news|last1=Paine|first1=Neal|last2=Bialik|first2=Carl|title=The Gold Gloves Are Finally Going To The Best Fielders|date=November 11, 2015|work=FiveThirtyEight|url=https://fivethirtyeight.com/features/the-gold-gloves-are-finally-going-to-the-best-fielders/|archive-url=https://web.archive.org/web/20151117063933/http://fivethirtyeight.com/features/the-gold-gloves-are-finally-going-to-the-best-fielders/|archive-date=November 17, 2015|url-status=dead}}</ref>
+
+===Multiple winners===
+[[File:Brooks Robinson 1963.jpg|thumb|right|upright=.8|[[Brooks Robinson]] won 16 Gold Gloves, the most of any position player.]]
+
+The most Gold Gloves ever won by one player is 18 by [[pitcher]] [[Greg Maddux]]. He won 13 consecutive awards from 1990 to 2002, all in the National League.<ref>{{cite web|url=https://www.baseball-reference.com/players/m/maddugr01.shtml|title=Greg Maddux Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=April 26, 2022|archive-url=https://web.archive.org/web/20220426213202/https://www.baseball-reference.com/players/m/maddugr01.shtml|url-status=live}}</ref> [[Brooks Robinson]] has the most wins for a position player, with 16 Gold Gloves,<ref>{{cite web|url=https://www.baseball-reference.com/players/r/robinbr01.shtml|title=Brooks Robinson Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=March 22, 2019|archive-url=https://web.archive.org/web/20190322034131/https://www.baseball-reference.com/players/r/robinbr01.shtml|url-status=live}}</ref> all at [[third baseman|third base]], and is tied for the second-highest total overall with pitcher [[Jim Kaat]]; both players won their 16 awards consecutively.<ref>{{cite web|url=https://www.baseball-reference.com/players/k/kaatji01.shtml|title=Jim Kaat Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=April 23, 2018|archive-url=https://web.archive.org/web/20180423223558/https://www.baseball-reference.com/players/k/kaatji01.shtml|url-status=live}}</ref> [[Iván Rodríguez]] has won the most Gold Gloves as a [[catcher]], with 13 career awards in the American League.<ref>{{cite web|url=https://www.baseball-reference.com/players/r/rodriiv01.shtml|title=Iván Rodríguez Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=April 26, 2009|archive-url=https://web.archive.org/web/20090426201313/http://www.baseball-reference.com/players/r/rodriiv01.shtml|url-status=live}}</ref> [[Ozzie Smith]] has 13 wins at [[shortstop]]; he and Rodríguez are tied for the fourth-highest total among all winners.<ref>{{cite web|url=https://www.baseball-reference.com/players/s/smithoz01.shtml|title=Ozzie Smith Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=November 1, 2011|archive-url=https://web.archive.org/web/20111101205042/http://www.baseball-reference.com/players/s/smithoz01.shtml|url-status=live}}</ref> Among outfielders, [[Roberto Clemente]] and [[Willie Mays]], who played primarily right field and center field, respectively, are tied for the lead with 12 Gold Gloves.<ref>{{cite web|url=https://www.baseball-reference.com/players/c/clemero01.shtml|title=Roberto Clemente History and Statistics|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=July 22, 2017|archive-url=https://web.archive.org/web/20170722085009/https://www.baseball-reference.com/players/c/clemero01.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/players/m/mayswi01.shtml|title=Willie Mays Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=April 13, 2009|archive-url=https://web.archive.org/web/20090413190522/http://www.baseball-reference.com/players/m/mayswi01.shtml|url-status=live}}</ref> [[Keith Hernandez]], the leader at [[first baseman|first base]], has won 11 times,<ref>{{cite web|url=https://www.baseball-reference.com/players/h/hernake01.shtml|title=Keith Hernandez Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=May 9, 2009|archive-url=https://web.archive.org/web/20090509231454/http://www.baseball-reference.com/players/h/hernake01.shtml|url-status=live}}</ref> and [[Roberto Alomar]] leads [[second baseman|second basemen]] with 10 wins.<ref name="Sports Reference LLC">{{cite web|url=https://www.baseball-reference.com/players/a/alomaro01.shtml|title=Roberto Alomar Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=May 3, 2021|archive-url=https://web.archive.org/web/20210503210923/https://www.baseball-reference.com/players/a/alomaro01.shtml|url-status=live}}</ref> Other players with 10 or more wins include shortstop [[Omar Vizquel]] (11),<ref>{{cite web|url=https://www.baseball-reference.com/players/v/vizquom01.shtml|title=Omar Vizquel Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=April 15, 2009|archive-url=https://web.archive.org/web/20090415144834/http://www.baseball-reference.com/players/v/vizquom01.shtml|url-status=live}}</ref> catcher [[Johnny Bench]] (10),<ref>{{cite web|url=https://www.baseball-reference.com/players/b/benchjo01.shtml|title=Johnny Bench Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=January 4, 2010|archive-url=https://web.archive.org/web/20100104102024/http://www.baseball-reference.com/players/b/benchjo01.shtml|url-status=live}}</ref> third basemen [[Mike Schmidt]] (10),<ref>{{cite web|url=https://www.baseball-reference.com/players/s/schmimi01.shtml|title=Mike Schmidt Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=December 3, 2010|archive-url=https://web.archive.org/web/20101203162304/http://www.baseball-reference.com/players/s/schmimi01.shtml|url-status=live}}</ref> and [[Nolan Arenado]] (10) and outfielders [[Ken Griffey Jr.]], [[Ichiro Suzuki]], [[Andruw Jones]], and [[Al Kaline]] (10 each).<ref>{{cite web|url=https://www.baseball-reference.com/players/g/griffke02.shtml|title=Ken Griffey Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=December 4, 2010|archive-url=https://web.archive.org/web/20101204014320/http://www.baseball-reference.com/players/g/griffke02.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/players/s/suzukic01.shtml|title=Ichiro Suzuki Statistics and History|work=Baseball-Reference.com|access-date=November 10, 2010|archive-date=May 18, 2009|archive-url=https://web.archive.org/web/20090518030310/http://www.baseball-reference.com/players/s/suzukic01.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/players/j/jonesan01.shtml|title=Andruw Jones Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=May 4, 2012|archive-url=https://web.archive.org/web/20120504033000/http://www.baseball-reference.com/players/j/jonesan01.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/players/k/kalinal01.shtml|title=Al Kaline Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=June 29, 2011|archive-url=https://web.archive.org/web/20110629133828/http://www.baseball-reference.com/players/k/kalinal01.shtml|url-status=live}}</ref>
+
+The only player to win Gold Gloves as an infielder and outfielder is [[Darin Erstad]], who won Gold Gloves as an outfielder in 2000 and 2002 and as a first baseman in 2004, all with the [[Los Angeles Angels]].<ref>{{cite web|url=https://www.baseball-reference.com/players/e/erstada01.shtml|title=Darin Erstad Statistics and History|work=Baseball-Reference.com|access-date=June 4, 2009|archive-date=June 1, 2009|archive-url=https://web.archive.org/web/20090601104003/http://www.baseball-reference.com/players/e/erstada01.shtml|url-status=live}}</ref> The only other player to win Gold Gloves at multiple positions is [[Plácido Polanco]], who won at second base (2007, 2009 AL) and third base (2011 NL).<ref>{{cite web|url=http://philadelphia.phillies.mlb.com/news/article.jsp?ymd=20111101&content_id=25865956&vkey=news_phi&c_id=phi|title=Polanco's Gold Glove puts him in elite company|last=Ladson|first=Bill|date=November 2, 2011|work=Phillies.MLB.com|access-date=November 6, 2011|url-status=dead|archive-url=https://web.archive.org/web/20111105003037/http://philadelphia.phillies.mlb.com/news/article.jsp?ymd=20111101&content_id=25865956&vkey=news_phi&c_id=phi|archive-date=November 5, 2011}}</ref> Family pairs to win Gold Gloves include brothers [[Ken Boyer|Ken]] and [[Clete Boyer]] (third base),<ref>{{cite web|url=https://www.baseball-reference.com/players/b/boyerke01.shtml|title=Ken Boyer Statistics and History|work=Baseball-Reference.com|access-date=June 24, 2009|archive-date=April 21, 2021|archive-url=https://web.archive.org/web/20210421040814/https://www.baseball-reference.com/players/b/boyerke01.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/players/b/boyercl02.shtml|title=Clete Boyer Statistics and History|work=Baseball-Reference.com|access-date=June 24, 2009}}</ref> brothers [[Sandy Alomar Jr.]] (catcher) and [[Roberto Alomar]] (second base),<ref name="Sports Reference LLC"/> [[Bengie Molina|Bengie]] and [[Yadier Molina]] (catcher),<ref>{{cite web|url=https://www.baseball-reference.com/players/m/molinbe01.shtml|title=Bengie Molina Statistics and History|work=Baseball-Reference.com|access-date=April 26, 2010|archive-date=February 12, 2010|archive-url=https://web.archive.org/web/20100212120635/http://www.baseball-reference.com/players/m/molinbe01.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/players/m/molinya01.shtml|title=Yadier Molina Statistics and History|work=Baseball-Reference.com|access-date=April 26, 2010|archive-date=September 21, 2013|archive-url=https://web.archive.org/web/20130921082014/http://www.baseball-reference.com/players/m/molinya01.shtml|url-status=live}}</ref> father and son [[Bobby Bonds|Bobby]] and [[Barry Bonds]] (outfield),<ref>{{cite web|url=https://www.baseball-reference.com/players/b/bondsbo01.shtml|title=Bobby Bonds Statistics and History|work=Baseball-Reference.com|access-date=June 24, 2009|archive-date=October 27, 2021|archive-url=https://web.archive.org/web/20211027042855/https://www.baseball-reference.com/players/b/bondsbo01.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/players/b/bondsba01.shtml|title=Barry Bonds Statistics and History|work=Baseball-Reference.com|access-date=June 24, 2009|archive-date=June 29, 2011|archive-url=https://web.archive.org/web/20110629110919/http://www.baseball-reference.com/players/b/bondsba01.shtml|url-status=live}}</ref> and father and son [[Bob Boone|Bob]] (catcher) and [[Bret Boone]] (second base).<ref>{{cite web|url=https://www.baseball-reference.com/players/b/boonebo01.shtml|title=Bob Boone Statistics and History|work=Baseball-Reference.com|access-date=June 24, 2009|archive-date=January 9, 2022|archive-url=https://web.archive.org/web/20220109085517/https://www.baseball-reference.com/players/b/boonebo01.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/players/b/boonebr01.shtml|title=Bret Boone Statistics and History|work=Baseball-Reference.com|access-date=June 24, 2009|archive-date=April 14, 2009|archive-url=https://web.archive.org/web/20090414125218/http://www.baseball-reference.com/players/b/boonebr01.shtml|url-status=live}}</ref>
+
+The [[2021 St. Louis Cardinals season|2021 St. Louis Cardinals]] hold the record for most Gold Gloves by a single team in a single season with five.<ref>{{Cite web|url=https://www.espn.com/mlb/story/_/id/32580108/record-five-st-louis-cardinals-capture-gold-glove-awards-full-list-winners-announced|title=5 Cardinals snag Gold Glove awards to set record|date=8 November 2021|website=EspnN.com|access-date=11 November 2021|archive-date=9 November 2021|archive-url=https://web.archive.org/web/20211109101029/https://www.espn.com/mlb/story/_/id/32580108/record-five-st-louis-cardinals-capture-gold-glove-awards-full-list-winners-announced|url-status=live}}</ref> They also won the team Gold Glove for the National League in the same year. The St. Louis Cardinals are the first team to win 100 total Gold Gloves.
+
+==Winners by year==
+[[File:Greg Maddux 2008.jpg|thumb|right|upright=.8|alt=A man wearing a blue cap, blue top, and light-colored trousers, holding a baseball. The back of his shirt reads "Maddox 30"|[[Greg Maddux]] won 18 Gold Gloves, the most of any player.]]
+{|class="wikitable"
+|+Key to symbols and headers in player lists
+!scope="row"| Year
+| Links to the corresponding Major League Baseball season
+|-
+!scope="row"| 1B
+| [[First baseman]] ([[List of Gold Glove Award winners at first base|list of winners]])
+|-
+!scope="row"| 2B
+| [[Second baseman]] ([[List of Gold Glove Award winners at second base|list of winners]])
+|-
+!scope="row"| 3B
+| [[Third baseman]] ([[List of Gold Glove Award winners at third base|list of winners]])
+|-
+!scope="row"| SS
+| [[Shortstop]] ([[List of Gold Glove Award winners at shortstop|list of winners]])
+|-
+!scope="row"| OF
+| [[Outfielder]]{{efn|From 1957 to 1960, and since 2011, individual awards were specified for [[left fielder]], [[center fielder]], and [[right fielder]]. From 1961 to 2010, the prize was presented to three outfielders irrespective of their specific position.}} ([[List of Gold Glove Award winners at outfield|list of winners]])
+|-
+!scope="row"| C
+| [[Catcher]] ([[List of Gold Glove Award winners at catcher|list of winners]])
+|-
+!scope="row"| P
+| [[Pitcher]] ([[List of Gold Glove Award winners at pitcher|list of winners]])
+|-
+!scope="row"| UT
+| [[Utility player (baseball)|Utility player]] <!-- ([[List of Gold Glove Award winners as a utility player|list of winners]]) |-
+!scope="row"| Team
+| [[Baseball_rules#Fielding_team|Team]]  ([[List of Gold Glove Award winners as a team|list of winners]]) -->
+|-
+! scope="row" style="background:#bef;"| * ''or'' **
+| Winner of the most Gold Glove Awards at his position (** indicates tie)
+|-
+!scope="row"| {{†|alt=Hall of Fame}}
+| Member of the [[National Baseball Hall of Fame and Museum]]
+|}
+
+===American League===
+{{sticky header}}
+{|class="wikitable sortable sticky-header"
+|+Gold Glove winners in the American League, listed by position
+!scope="col"| Year
+!scope="col"| 1B
+!scope="col"| 2B
+!scope="col"| 3B
+!scope="col"| SS
+!scope="col"| OF
+!scope="col"| OF
+!scope="col"| OF
+!scope="col"| C
+!scope="col"| P
+!scope="col"| UT
+!scope="col"| Team
+|-
+!scope="row"| {{mlby|1957}}{{efn|name=1957GG|In 1957, Gold Gloves were given to the top fielders across Major League Baseball, instead of separate awards for each league. Winners are listed in both tables, using normal font for their own league and ''italics'' for the other league.}}
+| ''{{sortname|Gil|Hodges}}''<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Nellie|Fox}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Frank|Malzone}} || ''{{sortname|Roy|McMillan}}'' || {{sortname|Minnie|Miñoso}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|LF|LF}} || style="background:#bef;"| ''{{sortname|Willie|Mays}}''**<sup>{{†|alt=Hall of Fame}}</sup>{{ref|CF|CF}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|RF|RF}} || {{sortname|Sherm|Lollar}} || {{sortname|Bobby|Shantz}} || N/A
+|-
+!scope="row"| {{mlby|1958}}
+| {{sortname|Vic|Power|Vic Power (baseball)}} || {{sortname|Frank|Bolling}} || {{sortname|Frank|Malzone}} || {{sortname|Luis|Aparicio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Norm|Siebern}}{{ref|LF|LF}} || {{sortname|Jimmy|Piersall}}{{ref|CF|CF}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|RF|RF}} || {{sortname|Sherm|Lollar}} || {{sortname|Bobby|Shantz}} || N/A
+|-
+!scope="row"| {{mlby|1959}}
+| {{sortname|Vic|Power|Vic Power (baseball)}} || {{sortname|Nellie|Fox}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Frank|Malzone}} || {{sortname|Luis|Aparicio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Minnie|Miñoso}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|LF|LF}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|CF|CF}} || {{sortname|Jackie|Jensen}}{{ref|RF|RF}} || {{sortname|Sherm|Lollar}} || {{sortname|Bobby|Shantz}} || N/A
+|-
+!scope="row"| {{mlby|1960}}
+| {{sortname|Vic|Power|Vic Power (baseball)}} || {{sortname|Nellie|Fox}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Luis|Aparicio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Minnie|Miñoso}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|LF|LF}} || {{sortname|Jim|Landis}}{{ref|CF|CF}} || {{sortname|Roger|Maris}}{{ref|RF|RF}} || {{sortname|Earl|Battey}} || {{sortname|Bobby|Shantz}} || N/A
+|-
+!scope="row"| {{mlby|1961}}
+| {{sortname|Vic|Power|Vic Power (baseball)}} || {{sortname|Bobby|Richardson}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Luis|Aparicio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Landis}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jimmy|Piersall}} || {{sortname|Earl|Battey}} || {{sortname|Frank|Lary}} || N/A
+|-
+!scope="row"| {{mlby|1962}}
+| {{sortname|Vic|Power|Vic Power (baseball)}} || {{sortname|Bobby|Richardson}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Luis|Aparicio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Landis}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mickey|Mantle}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Earl|Battey}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1963}}
+| {{sortname|Vic|Power|Vic Power (baseball)}} || {{sortname|Bobby|Richardson}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Zoilo|Versalles}} || {{sortname|Jim|Landis}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Carl|Yastrzemski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Elston|Howard}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1964}}
+| {{sortname|Vic|Power|Vic Power (baseball)}} || {{sortname|Bobby|Richardson}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Luis|Aparicio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Landis}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Vic|Davalillo}} || {{sortname|Elston|Howard}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1965}}
+| {{sortname|Joe|Pepitone}} || {{sortname|Bobby|Richardson}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Zoilo|Versalles}} || {{sortname|Tom|Tresh}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Carl|Yastrzemski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bill|Freehan}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1966}}
+| {{sortname|Joe|Pepitone}} || {{sortname|Bobby|Knoop}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Luis|Aparicio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tommie|Agee}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tony|Oliva}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bill|Freehan}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1967}}
+| {{sortname|George|Scott|George Scott (first baseman)}} || {{sortname|Bobby|Knoop}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Fregosi}} || {{sortname|Paul|Blair|Paul Blair (baseball)}} || {{sortname|Al|Kaline}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Carl|Yastrzemski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bill|Freehan}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1968}}
+| {{sortname|George|Scott|George Scott (first baseman)}} || {{sortname|Bobby|Knoop}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Luis|Aparicio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Reggie|Smith}} || {{sortname|Mickey|Stanley}} || {{sortname|Carl|Yastrzemski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bill|Freehan}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1969}}
+| {{sortname|Joe|Pepitone}} || {{sortname|Davey|Johnson}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Belanger}} || {{sortname|Paul|Blair|Paul Blair (baseball)}} || {{sortname|Mickey|Stanley}} || {{sortname|Carl|Yastrzemski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bill|Freehan}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1970}}
+| {{sortname|Jim|Spencer}} || {{sortname|Davey|Johnson}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Luis|Aparicio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Paul|Blair|Paul Blair (baseball)}} || {{sortname|Mickey|Stanley}} || {{sortname|Ken|Berry|dab = baseball}} || {{sortname|Ray|Fosse}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1971}}
+| {{sortname|George|Scott|George Scott (first baseman)}} || {{sortname|Davey|Johnson}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Belanger}} || {{sortname|Paul|Blair|Paul Blair (baseball)}} || {{sortname|Amos|Otis}} || {{sortname|Carl|Yastrzemski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ray|Fosse}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1972}}
+| {{sortname|George|Scott|George Scott (first baseman)}} || {{sortname|Doug|Griffin}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ed|Brinkman}} || {{sortname|Paul|Blair|Paul Blair (baseball)}} || {{sortname|Bobby|Murcer}} || {{sortname|Ken|Berry|dab = baseball}} || {{sortname|Carlton|Fisk}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1973}}
+| {{sortname|George|Scott|George Scott (first baseman)}} || {{sortname|Bobby|Grich}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Belanger}} || {{sortname|Paul|Blair|Paul Blair (baseball)}} || {{sortname|Amos|Otis}} || {{sortname|Mickey|Stanley}} || {{sortname|Thurman|Munson}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1974}}
+| {{sortname|George|Scott|George Scott (first baseman)}} || {{sortname|Bobby|Grich}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Belanger}} || {{sortname|Paul|Blair|Paul Blair (baseball)}} || {{sortname|Amos|Otis}} || {{sortname|Joe|Rudi}} || {{sortname|Thurman|Munson}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1975}}
+| {{sortname|George|Scott|George Scott (first baseman)}} || {{sortname|Bobby|Grich}} || style="background:#bef;"| {{sortname|Brooks|Robinson}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Belanger}} || {{sortname|Paul|Blair|Paul Blair (baseball)}} || {{sortname|Fred|Lynn}} || {{sortname|Joe|Rudi}} || {{sortname|Thurman|Munson}} || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1976}}
+| {{sortname|George|Scott|George Scott (first baseman)}} || {{sortname|Bobby|Grich}} || {{sortname|Aurelio|Rodríguez||Rodriguez, Aurelio}} || {{sortname|Mark|Belanger}} || {{sortname|Dwight|Evans|Dwight Evans (baseball)}} || {{sortname|Rick|Manning}} || {{sortname|Joe|Rudi}} ||{{sortname|Jim|Sundberg}} || {{sortname|Jim|Palmer}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1977}}
+| {{sortname|Jim|Spencer}} || {{sortname|Frank|White|Frank White (baseball)}} || {{sortname|Graig|Nettles}} || {{sortname|Mark|Belanger}} || {{sortname|Juan|Beníquez||Beniquez, Juan}} || {{sortname|Al|Cowens}} || {{sortname|Carl|Yastrzemski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Sundberg}} || {{sortname|Jim|Palmer}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1978}}
+| {{sortname|Chris|Chambliss}} || {{sortname|Frank|White|Frank White (baseball)}} || {{sortname|Graig|Nettles}} || {{sortname|Mark|Belanger}} || {{sortname|Dwight|Evans|Dwight Evans (baseball)}} || {{sortname|Fred|Lynn}} || {{sortname|Rick|Miller|Rick Miller (baseball)}} || {{sortname|Jim|Sundberg}} || {{sortname|Jim|Palmer}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1979}}
+| {{sortname|Cecil|Cooper}} || {{sortname|Frank|White|Frank White (baseball)}} || {{sortname|Buddy|Bell}} || {{sortname|Rick|Burleson}} || {{sortname|Dwight|Evans|Dwight Evans (baseball)}} || {{sortname|Fred|Lynn}} || {{sortname|Sixto|Lezcano}} || {{sortname|Jim|Sundberg}} || {{sortname|Jim|Palmer}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1980}}
+| {{sortname|Cecil|Cooper}} || {{sortname|Frank|White|Frank White (baseball)}} || {{sortname|Buddy|Bell}} || {{sortname|Alan|Trammell}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Willie|Wilson|Willie Wilson (baseball)}} || {{sortname|Fred|Lynn}} || {{sortname|Dwayne|Murphy}} || {{sortname|Jim|Sundberg}} || {{sortname|Mike|Norris|Mike Norris (baseball)}} || N/A
+|-
+!scope="row"| {{mlby|1981}}
+| {{sortname|Mike|Squires|dab=baseball}} || {{sortname|Frank|White|Frank White (baseball)}} || {{sortname|Buddy|Bell}} || {{sortname|Alan|Trammell}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dwight|Evans|Dwight Evans (baseball)}} || {{sortname|Rickey|Henderson}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dwayne|Murphy}} || {{sortname|Jim|Sundberg}} || {{sortname|Mike|Norris|Mike Norris (baseball)}} || N/A
+|-
+!scope="row"| {{mlby|1982}}
+| {{sortname|Eddie|Murray}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Frank|White|Frank White (baseball)}} || {{sortname|Buddy|Bell}} || {{sortname|Robin|Yount}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dwight|Evans|Dwight Evans (baseball)}} || {{sortname|Dave|Winfield}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dwayne|Murphy}} || {{sortname|Bob|Boone}} || {{sortname|Ron|Guidry}} || N/A
+|-
+!scope="row"| {{mlby|1983}}
+| {{sortname|Eddie|Murray}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Lou|Whitaker}} || {{sortname|Buddy|Bell}} || {{sortname|Alan|Trammell}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dwight|Evans|Dwight Evans (baseball)}} || {{sortname|Dave|Winfield}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dwayne|Murphy}} || {{sortname|Lance|Parrish}} || {{sortname|Ron|Guidry}} || N/A
+|-
+!scope="row"| {{mlby|1984}}
+| {{sortname|Eddie|Murray}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Lou|Whitaker}} || {{sortname|Buddy|Bell}} || {{sortname|Alan|Trammell}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dwight|Evans|Dwight Evans (baseball)}} || {{sortname|Dave|Winfield}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dwayne|Murphy}} || {{sortname|Lance|Parrish}} || {{sortname|Ron|Guidry}} || N/A
+|-
+!scope="row"| {{mlby|1985}}
+| {{sortname|Don|Mattingly}} || {{sortname|Lou|Whitaker}} || {{sortname|George|Brett}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Alfredo|Griffin}} || {{sortname|Dwight|Evans|Dwight Evans (baseball)}} || {{sort|WinfieldPettis|[[Dave Winfield]]<sup>{{†|alt=Hall of Fame}}</sup>&nbsp;&<br />[[Gary Pettis]]}} || {{sortname|Dwayne|Murphy}} || {{sortname|Lance|Parrish}} || {{sortname|Ron|Guidry}} || N/A
+|-
+!scope="row"| {{mlby|1986}}
+| {{sortname|Don|Mattingly}} || {{sortname|Frank|White|Frank White (baseball)}} || {{sortname|Gary|Gaetti}} || {{sortname|Tony|Fernández||Fernandez, Tony}} || {{sortname|Kirby|Puckett}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Gary|Pettis}} || {{sortname|Jesse|Barfield}} || {{sortname|Bob|Boone}} || {{sortname|Ron|Guidry}} || N/A
+|-
+!scope="row"| {{mlby|1987}}
+| {{sortname|Don|Mattingly}} || {{sortname|Frank|White|Frank White (baseball)}} || {{sortname|Gary|Gaetti}} || {{sortname|Tony|Fernández||Fernandez, Tony}} || {{sortname|Kirby|Puckett}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dave|Winfield}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jesse|Barfield}} || {{sortname|Bob|Boone}} || {{sortname|Mark|Langston}} || N/A
+|-
+!scope="row"| {{mlby|1988}}
+| {{sortname|Don|Mattingly}} || {{sortname|Harold|Reynolds}} || {{sortname|Gary|Gaetti}} || {{sortname|Tony|Fernández||Fernandez, Tony}} || {{sortname|Kirby|Puckett}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Gary|Pettis}} || {{sortname|Devon|White|Devon White (baseball)}} || {{sortname|Bob|Boone}} || {{sortname|Mark|Langston}} || N/A
+|-
+!scope="row"| {{mlby|1989}}
+| {{sortname|Don|Mattingly}} || {{sortname|Harold|Reynolds}} || {{sortname|Gary|Gaetti}} || {{sortname|Tony|Fernández||Fernandez, Tony}} || {{sortname|Kirby|Puckett}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Gary|Pettis}} || {{sortname|Devon|White|Devon White (baseball)}} || {{sortname|Bob|Boone}} || {{sortname|Bret|Saberhagen}} || N/A
+|-
+!scope="row"| {{mlby|1990}}
+| {{sortname|Mark|McGwire}} || {{sortname|Harold|Reynolds}} || {{sortname|Kelly|Gruber}} || {{sortname|Ozzie|Guillén||Guillen, Ozzie}} || {{sortname|Gary|Pettis}} || {{sortname|Ellis|Burks}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Sandy|Alomar Jr.}} || {{sortname|Mike|Boddicker}} || N/A
+|-
+!scope="row"| {{mlby|1991}}
+| {{sortname|Don|Mattingly}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Robin|Ventura}} || {{sortname|Cal|Ripken Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Kirby|Puckett}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Devon|White|Devon White (baseball)}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tony|Peña}} || {{sortname|Mark|Langston}} || N/A
+|-
+!scope="row"| {{mlby|1992}}
+| {{sortname|Don|Mattingly}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Robin|Ventura}} || {{sortname|Cal|Ripken Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Kirby|Puckett}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Devon|White|Devon White (baseball)}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Langston}} || N/A
+|-
+!scope="row"| {{mlby|1993}}
+| {{sortname|Don|Mattingly}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Robin|Ventura}} || {{sortname|Omar|Vizquel}} || {{sortname|Kenny|Lofton}} || {{sortname|Devon|White|Devon White (baseball)}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Langston}} || N/A
+|-
+!scope="row"| {{mlby|1994}}
+| {{sortname|Don|Mattingly}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Wade|Boggs}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Omar|Vizquel}} || {{sortname|Kenny|Lofton}} || {{sortname|Devon|White|Devon White (baseball)}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Langston}} || N/A
+|-
+!scope="row"| {{mlby|1995}}
+| {{sortname|J. T.|Snow}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Wade|Boggs}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Omar|Vizquel}} || {{sortname|Kenny|Lofton}} || {{sortname|Devon|White|Devon White (baseball)}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Langston}} || N/A
+|-
+!scope="row"| {{mlby|1996}}
+| {{sortname|J. T.|Snow}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Robin|Ventura}} || {{sortname|Omar|Vizquel}} || {{sortname|Kenny|Lofton}} || {{sortname|Jay|Buhner}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Mussina}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1997}}
+| {{sortname|Rafael|Palmeiro}} || {{sortname|Chuck|Knoblauch}} || {{sortname|Matt|Williams|Matt Williams (third baseman)}} || {{sortname|Omar|Vizquel}} || {{sortname|Bernie|Williams}} || {{sortname|Jim|Edmonds}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Mussina}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1998}}
+| {{sortname|Rafael|Palmeiro}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Robin|Ventura}} || {{sortname|Omar|Vizquel}} || {{sortname|Bernie|Williams}} || {{sortname|Jim|Edmonds}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Mussina}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1999}}
+| {{sortname|Rafael|Palmeiro}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Scott|Brosius}} || {{sortname|Omar|Vizquel}} || {{sortname|Bernie|Williams}} || {{sortname|Shawn|Green}} || {{sortname|Ken|Griffey Jr.}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Mussina}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2000}}
+| {{sortname|John|Olerud}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Travis|Fryman}} || {{sortname|Omar|Vizquel}} || {{sortname|Bernie|Williams}} || {{sortname|Jermaine|Dye}} || {{sortname|Darin|Erstad}} || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Kenny|Rogers|Kenny Rogers (baseball)}} || N/A
+|-
+!scope="row"| {{mlby|2001}}
+| {{sortname|Doug|Mientkiewicz}} || style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Eric|Chavez}} || {{sortname|Omar|Vizquel}} || {{sortname|Torii|Hunter}} || {{sortname|Mike|Cameron}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Mussina}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2002}}
+| {{sortname|John|Olerud}} || {{sortname|Bret|Boone}} || {{sortname|Eric|Chavez}} || {{sortname|Alex|Rodriguez}} || {{sortname|Torii|Hunter}} || {{sortname|Darin|Erstad}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bengie|Molina}} || {{sortname|Kenny|Rogers|Kenny Rogers (baseball)}} || N/A
+|-
+!scope="row"| {{mlby|2003}}
+| {{sortname|John|Olerud}} || {{sortname|Bret|Boone}} || {{sortname|Eric|Chavez}} || {{sortname|Alex|Rodriguez}} || {{sortname|Torii|Hunter}} || {{sortname|Mike|Cameron}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bengie|Molina}} || {{sortname|Mike|Mussina}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2004}}
+| {{sortname|Darin|Erstad}} || {{sortname|Bret|Boone}} || {{sortname|Eric|Chavez}} || {{sortname|Derek|Jeter}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Torii|Hunter}} || {{sortname|Vernon|Wells|dab=baseball}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Kenny|Rogers|Kenny Rogers (baseball)}} || N/A
+|-
+!scope="row"| {{mlby|2005}}
+| {{sortname|Mark|Teixeira}} || {{sortname|Orlando|Hudson}} || {{sortname|Eric|Chavez}} || {{sortname|Derek|Jeter}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Torii|Hunter}} || {{sortname|Vernon|Wells|dab=baseball}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jason|Varitek}} || {{sortname|Kenny|Rogers|Kenny Rogers (baseball)}} || N/A
+|-
+!scope="row"| {{mlby|2006}}
+| {{sortname|Mark|Teixeira}} || {{sortname|Mark|Grudzielanek}} || {{sortname|Eric|Chavez}} || {{sortname|Derek|Jeter}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Torii|Hunter}} || {{sortname|Vernon|Wells|dab=baseball}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Kenny|Rogers|Kenny Rogers (baseball)}} || N/A
+|-
+!scope="row"| {{mlby|2007}}
+| {{sortname|Kevin|Youkilis}} || {{sortname|Plácido|Polanco}} || {{sortname|Adrián|Beltré||Beltré, Adrián}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Orlando|Cabrera}} || {{sortname|Torii|Hunter}} || {{sortname|Grady|Sizemore}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Iván|Rodríguez||Rodriguez, Ivan}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Johan|Santana}} || N/A
+|-
+!scope="row"| {{mlby|2008}}
+| {{sortname|Carlos|Peña||Peña, Carlos}} || {{sortname|Dustin|Pedroia}} || {{sortname|Adrián|Beltré||Beltré, Adrián}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Michael|Young|Michael Young (baseball)}} || {{sortname|Torii|Hunter}} || {{sortname|Grady|Sizemore}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Joe|Mauer}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Mussina}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2009}}
+| {{sortname|Mark|Teixeira}} || {{sortname|Plácido|Polanco}} || {{sortname|Evan|Longoria}} || {{sortname|Derek|Jeter}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Torii|Hunter}} || {{sortname|Adam|Jones|Adam Jones (baseball)}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Joe|Mauer}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Buehrle}} || N/A
+|-
+!scope="row"| {{mlby|2010}}
+| {{sortname|Mark|Teixeira}} || {{sortname|Robinson|Canó||Cano, Robinson}} || {{sortname|Evan|Longoria}} || {{sortname|Derek|Jeter}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Carl|Crawford}} || {{sortname|Franklin|Gutiérrez||Gutierrez, Franklin}} || {{sortname|Ichiro|Suzuki}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Joe|Mauer}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mark|Buehrle}} || N/A
+|-
+!scope="row"| {{mlby|2011}}
+| {{sortname|Adrián|González}} || {{sortname|Dustin|Pedroia}} || {{sortname|Adrián|Beltré||Beltré, Adrián}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Erick|Aybar}} || {{sortname|Alex|Gordon}}{{ref|LF|LF}} || {{sortname|Jacoby|Ellsbury}}{{ref|CF|CF}} || {{sortname|Nick|Markakis}}{{ref|RF|RF}} || {{sortname|Matt|Wieters}} || {{sortname|Mark|Buehrle}} || N/A
+|-
+!scope="row"| {{mlby|2012}}
+| {{sortname|Mark|Teixeira}} || {{sortname|Robinson|Canó||Cano, Robinson}} || {{sortname|Adrián|Beltré}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|J. J. |Hardy}} || {{sortname|Alex|Gordon}}{{ref|LF|LF}} || {{sortname|Adam|Jones|dab=baseball}}{{ref|CF|CF}} || {{sortname|Josh|Reddick}}{{ref|RF|RF}} || {{sortname|Matt|Wieters}} || {{sort|HellicksonPeavy|[[Jeremy Hellickson]]&nbsp;&<br />[[Jake Peavy]]}} || N/A
+|-
+!scope="row"| {{mlby|2013}}
+| {{sortname|Eric|Hosmer}} || {{sortname|Dustin|Pedroia|}} || {{sortname|Manny|Machado}} || {{sortname|J. J.|Hardy}} || {{sortname|Alex|Gordon}}{{ref|LF|LF}} || {{sortname|Adam|Jones|dab=baseball}}{{ref|CF|CF}} || {{sortname|Shane|Victorino}} {{ref|RF|RF}} || {{sortname|Salvador|Pérez}} || {{sortname|R. A.|Dickey}} || N/A
+|-
+!scope="row"| {{mlby|2014}}
+| {{sortname|Eric|Hosmer}} || {{sortname|Dustin|Pedroia|}} || {{sortname|Kyle|Seager}} || {{sortname|J. J.|Hardy}} || {{sortname|Alex|Gordon}}{{ref|LF|LF}} || {{sortname|Adam|Jones|dab=baseball}}{{ref|CF|CF}} || {{sortname|Nick|Markakis}}{{ref|RF|RF}} || {{sortname|Salvador|Pérez}} || {{sortname|Dallas|Keuchel}} || N/A
+|-
+!scope="row"| {{mlby|2015}}
+| {{sortname|Eric|Hosmer}} || {{sortname|Jose|Altuve}} || {{sortname|Manny|Machado}} || {{sortname|Alcides|Escobar}} || {{sortname|Yoenis|Céspedes}}{{ref|LF|LF}} || {{sortname|Kevin|Kiermaier}}{{ref|CF|CF}} || {{sortname|Kole|Calhoun}}{{ref|RF|RF}} || {{sortname|Salvador|Pérez}} || {{sortname|Dallas|Keuchel}} || N/A
+|-
+!scope="row"| {{mlby|2016}}
+| {{sortname|Mitch|Moreland}} || {{sortname|Ian|Kinsler}} || {{sortname|Adrián|Beltré}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Francisco|Lindor}} || {{sortname|Brett|Gardner}}{{ref|LF|LF}} || {{sortname|Kevin|Kiermaier}}{{ref|CF|CF}} || {{sortname|Mookie|Betts}}{{ref|RF|RF}} || {{sortname|Salvador|Pérez}} || {{sortname|Dallas|Keuchel}} || N/A
+|-
+!scope="row"| {{mlby|2017}}
+| {{sortname|Eric|Hosmer}} || {{sortname|Brian|Dozier}} || {{sortname|Evan|Longoria}} || {{sortname|Andrelton|Simmons}} || {{sortname|Alex|Gordon}}{{ref|LF|LF}} || {{sortname|Byron|Buxton}}{{ref|CF|CF}} || {{sortname|Mookie|Betts}}{{ref|RF|RF}} || {{sortname|Martín|Maldonado}} || {{sortname|Marcus|Stroman}} || N/A
+|-
+!scope="row"| {{mlby|2018}}
+| {{sortname|Matt|Olson}} || {{sortname|Ian|Kinsler}} || {{sortname|Matt|Chapman}} || {{sortname|Andrelton|Simmons}} || {{sortname|Alex|Gordon}}{{ref|LF|LF}} || {{sortname|Jackie|Bradley Jr.}}{{ref|CF|CF}} || {{sortname|Mookie|Betts}}{{ref|RF|RF}} || {{sortname|Salvador|Pérez}} || {{sortname|Dallas|Keuchel}} || N/A
+|-
+!scope="row"| {{mlby|2019}}
+| {{sortname|Matt|Olson}} || {{sortname|Yolmer|Sánchez}} || {{sortname|Matt|Chapman}} || {{sortname|Francisco|Lindor}} || {{sortname|Alex|Gordon}}{{ref|LF|LF}} || {{sortname|Kevin|Kiermaier}}{{ref|CF|CF}} || {{sortname|Mookie|Betts}}{{ref|RF|RF}} || {{sortname|Roberto|Pérez}} || {{sortname|Mike|Leake}} || N/A
+|-
+!scope="row"| {{mlby|2020}}
+| {{sortname|Evan|White}} || {{sortname|César|Hernández|dab=infielder}} || {{sortname|Isiah|Kiner-Falefa}} || {{sortname|J. P.|Crawford}} || {{sortname|Alex|Gordon}}{{ref|LF|LF}} || {{sortname|Luis|Robert Jr.}}{{ref|CF|CF}} || {{sortname|Joey|Gallo}}{{ref|RF|RF}} || {{sortname|Roberto|Pérez}} || {{sortname|Griffin|Canning}} || N/A || [[2020 Cleveland Indians season|Cleveland Indians]]
+|-
+!scope="row"| {{mlby|2021}}
+| {{sortname|Yuli|Gurriel}} || {{sortname|Marcus|Semien}} || {{sortname|Matt|Chapman}} || {{sortname|Carlos|Correa}} || {{sortname|Andrew|Benintendi}}{{ref|LF|LF}} || {{sortname|Michael A.|Taylor}}{{ref|CF|CF}} || {{sortname|Joey|Gallo}}{{ref|RF|RF}} || {{sortname|Sean|Murphy|dab=baseball}} || {{sortname|Dallas|Keuchel}} || N/A || [[2021 Houston Astros season|Houston Astros]]
+|-
+!scope ="row"| {{mlby|2022}}
+| {{sortname|Vladimir|Guerrero Jr.}} || {{sortname|Andrés|Giménez}} || {{sortname|Ramón|Urías}} || {{sortname|Jeremy|Peña}} || {{sortname|Steven|Kwan}} {{ref|LF|LF}} || {{sortname|Myles|Straw}}{{ref|CF|CF}} || {{sortname|Kyle|Tucker}}{{ref|RF|RF}} || {{sortname|Jose|Trevino|dab=baseball}} || {{sortname|Shane|Bieber}} || {{sortname|DJ|LeMahieu}} || [[2022 New York Yankees season|New York Yankees]]
+|-
+!scope ="row"| {{mlby|2023}}
+| {{sortname|Nathaniel|Lowe}} || {{sortname|Andrés|Giménez}} || {{sortname|Matt|Chapman}} || {{sortname|Anthony|Volpe}} || {{sortname|Steven|Kwan}} {{ref|LF|LF}} || {{sortname|Kevin|Kiermaier}}{{ref|CF|CF}} || {{sortname|Adolis|García}}{{ref|RF|RF}} || {{sortname|Jonah|Heim}} || {{sortname|José|Berríos}} || {{sortname|Mauricio|Dubón}} || [[2023 Toronto Blue Jays season|Toronto Blue Jays]]
+|-
+!scope ="row"| {{mlby|2024}}
+| {{sortname|Carlos|Santana|dab=baseball}} || {{sortname|Andrés|Giménez}} || {{sortname|Alex|Bregman}} || {{sortname|Bobby|Witt Jr.}} || {{sortname|Steven|Kwan}} {{ref|LF|LF}} ||  {{sortname|Daulton|Varsho}}{{ref|CF|CF}} || {{sortname|Wilyer|Abreu}}{{ref|RF|RF}} || {{sortname|Cal|Raleigh}} || {{sortname|Seth|Lugo}} || {{sortname|Dylan|Moore}} || [[2024 Toronto Blue Jays season|Toronto Blue Jays]]
+|-
+!scope ="row"| {{mlby|2025}}
+| {{sortname|Ty|France}} || {{sortname|Marcus|Semien}} || {{sortname|Maikel|Garcia}} || {{sortname|Bobby|Witt Jr.}} || {{sortname|Steven|Kwan}} {{ref|LF|LF}} ||  {{sortname|Ceddanne|Rafaela}}{{ref|CF|CF}} || {{sortname|Wilyer|Abreu}}{{ref|RF|RF}} || {{sortname|Dillon|Dingler}} || {{sortname|Max|Fried}} || {{sortname|Mauricio|Dubón}} ||
+[[2025 Texas Rangers season|Texas Rangers]]
+|-
+!scope ="row"| {{mlby|2026}}
+| {{sortname|Christian|Walker}} || {{sortname|Cole|Young}} || {{sortname|Caleb|Durbin}} || {{sortname|Taylor|Walls}} || {{sortname|Cody|Bellinger}} {{ref|LF|LF}} ||  {{sortname|Ceddanne|Rafaela}}{{ref|CF|CF}} || {{sortname|Wilyer|Abreu}}{{ref|RF|RF}} || {{sortname|Dillon|Dingler}} || {{sortname|Tanner|Bibee}} || {{sortname|Ezequiel|Durán}} ||
+[[2025 Texas Rangers season|Texas Rangers]]
+
+|}
+
+===National League===
+{|class="wikitable sortable sticky-header"
+|+Gold Glove winners in the National League, listed by position
+!scope="col"| Year
+!scope="col"| 1B
+!scope="col"| 2B
+!scope="col"| 3B
+!scope="col"| SS
+!scope="col"| OF
+!scope="col"| OF
+!scope="col"| OF
+!scope="col"| C
+!scope="col"| P
+!scope="col"| UT
+!scope="col"| Team
+|-
+!scope="row"| {{mlby|1957}}{{efn|name=1957GG}}
+| {{sortname|Gil|Hodges}}<sup>{{†|alt=Hall of Fame}}</sup> || ''{{sortname|Nellie|Fox}}''<sup>{{†|alt=Hall of Fame}}</sup> || ''{{sortname|Frank|Malzone}}'' || {{sortname|Roy|McMillan}} || ''{{sortname|Minnie|Miñoso}}''<sup>{{†|alt=Hall of Fame}}</sup>{{ref|LF|LF}} || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup>{{ref|CF|CF}} || ''{{sortname|Al|Kaline}}''<sup>{{†|alt=Hall of Fame}}</sup>{{ref|RF|RF}} || ''{{sortname|Sherm|Lollar}}'' || ''{{sortname|Bobby|Shantz}}'' || N/A
+|-
+!scope="row"| {{mlby|1958}}
+| {{sortname|Gil|Hodges}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bill|Mazeroski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ken|Boyer}} || {{sortname|Roy|McMillan}} || {{sortname|Frank|Robinson}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|LF|LF}} || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup>{{ref|CF|CF}} || {{sortname|Hank|Aaron}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|RF|RF}} || {{sortname|Del|Crandall}} || {{sortname|Harvey|Haddix}} || N/A
+|-
+!scope="row"| {{mlby|1959}}
+| {{sortname|Gil|Hodges}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Charlie|Neal}} || {{sortname|Ken|Boyer}} || {{sortname|Roy|McMillan}} || {{sortname|Jackie|Brandt}}{{ref|LF|LF}} || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup>{{ref|CF|CF}} || {{sortname|Hank|Aaron}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|RF|RF}} || {{sortname|Del|Crandall}} || {{sortname|Harvey|Haddix}} || N/A
+|-
+!scope="row"| {{mlby|1960}}
+| {{sortname|Bill|White|Bill White (first baseman)}} || {{sortname|Bill|Mazeroski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ken|Boyer}} || {{sortname|Ernie|Banks}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Wally|Moon}}{{ref|LF|LF}} || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup>{{ref|CF|CF}} || {{sortname|Hank|Aaron}}<sup>{{†|alt=Hall of Fame}}</sup>{{ref|RF|RF}} || {{sortname|Del|Crandall}} || {{sortname|Harvey|Haddix}} || N/A
+|-
+!scope="row"| {{mlby|1961}}
+| {{sortname|Bill|White|Bill White (first baseman)}} || {{sortname|Bill|Mazeroski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ken|Boyer}} || {{sortname|Maury|Wills}} || {{sortname|Vada|Pinson}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|John|Roseboro}} || {{sortname|Bobby|Shantz}} || N/A
+|-
+!scope="row"| {{mlby|1962}}
+| {{sortname|Bill|White|Bill White (first baseman)}} || {{sortname|Ken|Hubbs}} || {{sortname|Jim|Davenport}} || {{sortname|Maury|Wills}} || {{sortname|Bill|Virdon}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Del|Crandall}} || {{sortname|Bobby|Shantz}} || N/A
+|-
+!scope="row"| {{mlby|1963}}
+| {{sortname|Bill|White|Bill White (first baseman)}} || {{sortname|Bill|Mazeroski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ken|Boyer}} || {{sortname|Bobby|Wine}} || {{sortname|Curt|Flood}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Johnny|Edwards|Johnny Edwards (baseball)}} || {{sortname|Bobby|Shantz}} || N/A
+|-
+!scope="row"| {{mlby|1964}}
+| {{sortname|Bill|White|Bill White (first baseman)}} || {{sortname|Bill|Mazeroski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ron|Santo}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Rubén|Amaro Sr.||Amaro, Ruben}} || {{sortname|Curt|Flood}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Johnny|Edwards|Johnny Edwards (baseball)}} || {{sortname|Bobby|Shantz}} || N/A
+|-
+!scope="row"| {{mlby|1965}}
+| {{sortname|Bill|White|Bill White (first baseman)}} || {{sortname|Bill|Mazeroski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ron|Santo}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Leo|Cárdenas||Cardenas, Leo}} || {{sortname|Curt|Flood}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Joe|Torre}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bob|Gibson}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1966}}
+| {{sortname|Bill|White|Bill White (first baseman)}} || {{sortname|Bill|Mazeroski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ron|Santo}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Gene|Alley}} || {{sortname|Curt|Flood}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|John|Roseboro}} || {{sortname|Bob|Gibson}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1967}}
+| {{sortname|Wes|Parker}} || {{sortname|Bill|Mazeroski}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ron|Santo}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Gene|Alley}} || {{sortname|Curt|Flood}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Randy|Hundley}} || {{sortname|Bob|Gibson}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1968}}
+| {{sortname|Wes|Parker}} || {{sortname|Glenn|Beckert}} || {{sortname|Ron|Santo}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dal|Maxvill}} || {{sortname|Curt|Flood}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Willie|Mays}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bob|Gibson}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1969}}
+| {{sortname|Wes|Parker}} || {{sortname|Félix|Millán||Millán, Félix}} || {{sortname|Clete|Boyer}} || {{sortname|Don|Kessinger}} || {{sortname|Curt|Flood}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Pete|Rose}} || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bob|Gibson}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1970}}
+| {{sortname|Wes|Parker}} || {{sortname|Tommy|Helms}} || {{sortname|Doug|Rader}} || {{sortname|Don|Kessinger}} || {{sortname|Tommie|Agee}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Pete|Rose}} || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bob|Gibson}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1971}}
+| {{sortname|Wes|Parker}} || {{sortname|Tommy|Helms}} || {{sortname|Doug|Rader}} || {{sortname|Bud|Harrelson}} || {{sortname|Willie|Davis|Willie Davis (baseball)}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bobby|Bonds}} || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bob|Gibson}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1972}}
+| {{sortname|Wes|Parker}} || {{sortname|Félix|Millán||Millán, Félix}} || {{sortname|Doug|Rader}} || {{sortname|Larry|Bowa}} || {{sortname|Willie|Davis|Willie Davis (baseball)}} || style="background:#bef;"| {{sortname|Roberto|Clemente}}**<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|César|Cedeño||Cedeno, Cesar}} || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bob|Gibson}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1973}}
+| {{sortname|Mike|Jorgensen}} || {{sortname|Joe|Morgan}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Doug|Rader}} || {{sortname|Roger|Metzger}} || {{sortname|Willie|Davis|Willie Davis (baseball)}} || {{sortname|Bobby|Bonds}} || {{sortname|César|Cedeño||Cedeno, Cesar}} || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bob|Gibson}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1974}}
+| {{sortname|Steve|Garvey}} || {{sortname|Joe|Morgan}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Doug|Rader}} || {{sortname|Dave|Concepción||Concepción, Dave}} || {{sortname|César|Gerónimo||Geronimo, Cesar}} || {{sortname|Bobby|Bonds}} || {{sortname|César|Cedeño||Cedeno, Cesar}} || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andy|Messersmith}} || N/A
+|-
+!scope="row"| {{mlby|1975}}
+| {{sortname|Steve|Garvey}} || {{sortname|Joe|Morgan}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ken|Reitz}} || {{sortname|Dave|Concepción||Concepción, Dave}} || {{sortname|César|Gerónimo||Geronimo, Cesar}} || {{sortname|Garry|Maddox}} || {{sortname|César|Cedeño||Cedeno, Cesar}} || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andy|Messersmith}} || N/A
+|-
+!scope="row"| {{mlby|1976}}
+| {{sortname|Steve|Garvey}} || {{sortname|Joe|Morgan}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dave|Concepción||Concepción, Dave}} || {{sortname|César|Gerónimo||Geronimo, Cesar}} || {{sortname|Garry|Maddox}} || {{sortname|César|Cedeño||Cedeno, Cesar}} || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1977}}
+| {{sortname|Steve|Garvey}} || {{sortname|Joe|Morgan}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dave|Concepción||Concepción, Dave}} || {{sortname|César|Gerónimo||Geronimo, Cesar}} || {{sortname|Garry|Maddox}} || {{sortname|Dave|Parker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Johnny|Bench}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Kaat}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1978}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Davey|Lopes}} || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Larry|Bowa}} || {{sortname|Ellis|Valentine}} || {{sortname|Garry|Maddox}} || {{sortname|Dave|Parker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bob|Boone}} || {{sortname|Phil|Niekro}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1979}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Manny|Trillo}} || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dave|Concepción||Concepción, Dave}} || {{sortname|Dave|Winfield}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Garry|Maddox}} || {{sortname|Dave|Parker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Bob|Boone}} || {{sortname|Phil|Niekro}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1980}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Doug|Flynn}} || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dave|Winfield}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Garry|Maddox}} || {{sortname|Andre|Dawson}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Gary|Carter}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Phil|Niekro}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1981}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Manny|Trillo}} || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dusty|Baker}} || {{sortname|Garry|Maddox}} || {{sortname|Andre|Dawson}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Gary|Carter}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Steve|Carlton}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1982}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Manny|Trillo}} || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dale|Murphy}} || {{sortname|Garry|Maddox}} || {{sortname|Andre|Dawson}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Gary|Carter}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Phil|Niekro}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1983}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Ryne|Sandberg}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dale|Murphy}} || {{sortname|Willie|McGee}} || {{sortname|Andre|Dawson}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tony|Peña||Pena, Tony}} || {{sortname|Phil|Niekro}}<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1984}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Ryne|Sandberg}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dale|Murphy}} || {{sortname|Bob|Dernier}} || {{sortname|Andre|Dawson}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tony|Peña||Pena, Tony}} || {{sortname|Joaquín|Andújar||Andújar, Joaquín }} || N/A
+|-
+!scope="row"| {{mlby|1985}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Ryne|Sandberg}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tim|Wallach}} || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dale|Murphy}} || {{sortname|Willie|McGee}} || {{sortname|Andre|Dawson}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tony|Peña||Pena, Tony}} || {{sortname|Rick|Reuschel}} || N/A
+|-
+!scope="row"| {{mlby|1986}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Ryne|Sandberg}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Schmidt}}<sup>{{†|alt=Hall of Fame}}</sup> || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Dale|Murphy}} || {{sortname|Willie|McGee}} || {{sortname|Tony|Gwynn}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jody|Davis|Jody Davis (baseball)}} || {{sortname|Fernando|Valenzuela}} || N/A
+|-
+!scope="row"| {{mlby|1987}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Ryne|Sandberg}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Terry|Pendleton}} || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Eric|Davis|dab=baseball}} || {{sortname|Andre|Dawson}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tony|Gwynn}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|LaValliere}} || {{sortname|Rick|Reuschel}} || N/A
+|-
+!scope="row"| {{mlby|1988}}
+| style="background:#bef;"| {{sortname|Keith|Hernandez}}* || {{sortname|Ryne|Sandberg}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tim|Wallach}} || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Eric|Davis|dab=baseball}} || {{sortname|Andre|Dawson}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andy|Van Slyke}} || {{sortname|Benito|Santiago}} || {{sortname|Orel|Hershiser}} || N/A
+|-
+!scope="row"| {{mlby|1989}}
+| {{sortname|Andrés|Galarraga||Galarraga, Andres}} || {{sortname|Ryne|Sandberg}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Terry|Pendleton}} || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Eric|Davis|dab=baseball}} || {{sortname|Tony|Gwynn}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andy|Van Slyke}} || {{sortname|Benito|Santiago}} || {{sortname|Ron|Darling}} || N/A
+|-
+!scope="row"| {{mlby|1990}}
+| {{sortname|Andrés|Galarraga||Galarraga, Andres}} || {{sortname|Ryne|Sandberg}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Tim|Wallach}} || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Barry|Bonds}} || {{sortname|Tony|Gwynn}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andy|Van Slyke}} || {{sortname|Benito|Santiago}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1991}}
+| {{sortname|Will|Clark}} || {{sortname|Ryne|Sandberg}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Matt|Williams|dab=third baseman}} || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Barry|Bonds}} || {{sortname|Tony|Gwynn}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andy|Van Slyke}} || {{sortname|Tom|Pagnozzi}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1992}}
+| {{sortname|Mark|Grace}} || {{sortname|José|Lind||Lind, Jose}} || {{sortname|Terry|Pendleton}} || style="background:#bef;"| {{sortname|Ozzie|Smith}}*<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Barry|Bonds}} || {{sortname|Larry|Walker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andy|Van Slyke}} || {{sortname|Tom|Pagnozzi}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1993}}
+| {{sortname|Mark|Grace}} || {{sortname|Robby|Thompson}} || {{sortname|Matt|Williams|dab=third baseman}} || {{sortname|Jay|Bell}} || {{sortname|Barry|Bonds}} || {{sortname|Larry|Walker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Marquis|Grissom}} || {{sortname|Kirt|Manwaring}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1994}}
+| {{sortname|Jeff|Bagwell}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Craig|Biggio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Matt|Williams|dab=third baseman}} || {{sortname|Barry|Larkin}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Barry|Bonds}} || {{sortname|Darren|Lewis}} || {{sortname|Marquis|Grissom}} || {{sortname|Tom|Pagnozzi}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1995}}
+| {{sortname|Mark|Grace}} || {{sortname|Craig|Biggio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ken|Caminiti}} || {{sortname|Barry|Larkin}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Raúl|Mondesí||Mondesi, Raul}} || {{sortname|Steve|Finley}} || {{sortname|Marquis|Grissom}} || {{sortname|Charles|Johnson|dab=catcher}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1996}}
+| {{sortname|Mark|Grace}} || {{sortname|Craig|Biggio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ken|Caminiti}} || {{sortname|Barry|Larkin}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Barry|Bonds}} || {{sortname|Steve|Finley}} || {{sortname|Marquis|Grissom}} || {{sortname|Charles|Johnson|dab=catcher}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1997}}
+| {{sortname|J. T.|Snow}} || {{sortname|Craig|Biggio}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Ken|Caminiti}} || {{sortname|Rey|Ordóñez||Ordonez, Rey}} || {{sortname|Barry|Bonds}} || {{sortname|Larry|Walker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Raúl|Mondesí||Mondesi, Raul}} || {{sortname|Charles|Johnson|dab=catcher}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1998}}
+| {{sortname|J. T.|Snow}} || {{sortname|Bret|Boone}} || {{sortname|Scott|Rolen}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Rey|Ordóñez||Ordonez, Rey}} || {{sortname|Barry|Bonds}} || {{sortname|Larry|Walker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Charles|Johnson|dab=catcher}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|1999}}
+| {{sortname|J. T.|Snow}} || {{sortname|Pokey|Reese}} || {{sortname|Robin|Ventura}} || {{sortname|Rey|Ordóñez||Ordonez, Rey}} || {{sortname|Steve|Finley}} || {{sortname|Larry|Walker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Lieberthal}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2000}}
+| {{sortname|J. T.|Snow}} || {{sortname|Pokey|Reese}} || {{sortname|Scott|Rolen}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Neifi|Pérez||Perez, Neifi}} || {{sortname|Steve|Finley}} || {{sortname|Jim|Edmonds}} || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Matheny}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2001}}
+| {{sortname|Todd|Helton}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Fernando|Viña||Vina, Fernando}} || {{sortname|Scott|Rolen}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Orlando|Cabrera}} || {{sortname|Larry|Walker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Edmonds}} || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Brad|Ausmus}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2002}}
+| {{sortname|Todd|Helton}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Fernando|Viña||Vina, Fernando}} || {{sortname|Scott|Rolen}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Édgar|Rentería||Rentería, Édgar}} || {{sortname|Larry|Walker}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Jim|Edmonds}} || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Brad|Ausmus}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2003}}
+| {{sortname|Derrek|Lee}} || {{sortname|Luis|Castillo|Luis Castillo (second baseman)}} || {{sortname|Scott|Rolen}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Édgar|Rentería||Rentería, Édgar }} || {{sortname|José|Cruz Jr.||Cruz, Jose}} || {{sortname|Jim|Edmonds}} || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Matheny}} || {{sortname|Mike|Hampton}} || N/A
+|-
+!scope="row"| {{mlby|2004}}
+| {{sortname|Todd|Helton}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Luis|Castillo|dab=second baseman}} || {{sortname|Scott|Rolen}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|César|Izturis||Izturis, Cesar}} || {{sortname|Steve|Finley}} || {{sortname|Jim|Edmonds}} || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Matheny}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2005}}
+| {{sortname|Derrek|Lee}} || {{sortname|Luis|Castillo|dab=second baseman}} || {{sortname|Mike|Lowell}} || {{sortname|Omar|Vizquel}} || {{sortname|Bobby|Abreu}} || {{sortname|Jim|Edmonds}} || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Mike|Matheny}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2006}}
+| {{sortname|Albert|Pujols}} || {{sortname|Orlando|Hudson}} || {{sortname|Scott|Rolen}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Omar|Vizquel}} || {{sortname|Mike|Cameron}} || {{sortname|Carlos|Beltrán||Beltran, Carlos}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Brad|Ausmus}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2007}}
+| {{sortname|Derrek|Lee}} || {{sortname|Orlando|Hudson}} || {{sortname|David|Wright}} || {{sortname|Jimmy|Rollins}} || {{sort|RowandFrancoeur|[[Aaron Rowand]]&nbsp;&<br />[[Jeff Francoeur]]}} || {{sortname|Carlos|Beltrán||Beltran, Carlos}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Andruw|Jones}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Russell|Martin|Russell Martin (baseball)}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2008}}
+| {{sortname|Adrián|González}} || {{sortname|Brandon|Phillips}} || {{sortname|David|Wright}} || {{sortname|Jimmy|Rollins}} || {{sortname|Nate|McLouth}} || {{sortname|Carlos|Beltrán||Beltran, Carlos}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Shane|Victorino}} || {{sortname|Yadier|Molina}} || style="background:#bef;"| {{sortname|Greg|Maddux}}*<sup>{{†|alt=Hall of Fame}}</sup> || N/A
+|-
+!scope="row"| {{mlby|2009}}
+| {{sortname|Adrián|González}} || {{sortname|Orlando|Hudson}} || {{sortname|Ryan|Zimmerman}} || {{sortname|Jimmy|Rollins}} || {{sortname|Michael|Bourn}} || {{sortname|Matt|Kemp}} || {{sortname|Shane|Victorino}} || {{sortname|Yadier|Molina}} || {{sortname|Adam|Wainwright}} || N/A
+|-
+!scope="row"| {{mlby|2010}}
+| {{sortname|Albert|Pujols}} || {{sortname|Brandon|Phillips}} || {{sortname|Scott|Rolen}}<sup>{{†|alt=Hall of Fame}}</sup> || {{sortname|Troy|Tulowitzki}} || {{sortname|Michael|Bourn}} || {{sortname|Carlos|González|Carlos González (baseball)|González, Carlos}} || {{sortname|Shane|Victorino}} || {{sortname|Yadier|Molina}} || {{sortname|Bronson|Arroyo}} || N/A
+|-
+!scope="row"| {{mlby|2011}}
+| {{sortname|Joey|Votto}} || {{sortname|Brandon|Phillips}} || {{sortname|Plácido|Polanco}} || {{sortname|Troy|Tulowitzki}} || {{sortname|Gerardo|Parra}}{{ref|LF|LF}} || {{sortname|Matt|Kemp}}{{ref|CF|CF}} || {{sortname|Andre|Ethier}}{{ref|RF|RF}} || {{sortname|Yadier|Molina}} || {{sortname|Clayton|Kershaw}} || N/A
+|-
+!scope="row"| {{mlby|2012}}
+| {{sortname|Adam|LaRoche}} || {{sortname|Darwin|Barney}} || {{sortname|Chase|Headley}} || {{sortname|Jimmy|Rollins}} || {{sortname|Carlos|González|dab=baseball}}{{ref|LF|LF}} || {{sortname|Andrew|McCutchen}}{{ref|CF|CF}} || {{sortname|Jason|Heyward}}{{ref|RF|RF}} || {{sortname|Yadier|Molina}} || {{sortname|Mark|Buehrle}} || N/A
+|-
+!scope="row"| {{mlby|2013}}
+| {{sortname|Paul|Goldschmidt}} || {{sortname|Brandon|Phillips}} || {{sortname|Nolan|Arenado}} || {{sortname|Andrelton|Simmons}} || {{sortname|Carlos|González|dab=baseball}}{{ref|LF|LF}} || {{sortname|Carlos|Gómez|dab=baseball}}{{ref|CF|CF}} || {{sortname|Gerardo|Parra}}{{ref|RF|RF}} || {{sortname|Yadier|Molina}} || {{sortname|Adam|Wainwright}} || N/A
+|-
+!scope="row"| {{mlby|2014}}
+| {{sortname|Adrián|González}} || {{sortname|DJ|LeMahieu}} || {{sortname|Nolan|Arenado}} || {{sortname|Andrelton|Simmons}} || {{sortname|Christian|Yelich}}{{ref|LF|LF}} || {{sortname|Juan|Lagares}}{{ref|CF|CF}} || {{sortname|Jason|Heyward}}{{ref|RF|RF}} || {{sortname|Yadier|Molina}} || {{sortname|Zack|Greinke}} || N/A
+|-
+!scope="row"| {{mlby|2015}}
+| {{sortname|Paul|Goldschmidt}} || {{sortname|Dee|Gordon}} || {{sortname|Nolan|Arenado}} || {{sortname|Brandon|Crawford}} || {{sortname|Starling|Marte}}{{ref|LF|LF}} || {{sortname|A. J.|Pollock}}{{ref|CF|CF}} || {{sortname|Jason|Heyward}}{{ref|RF|RF}} || {{sortname|Yadier|Molina}} || {{sortname|Zack|Greinke}} || N/A
+|-
+!scope="row"| {{mlby|2016}}
+| {{sortname|Anthony|Rizzo}} || {{sortname|Joe|Panik}} || {{sortname|Nolan|Arenado}} || {{sortname|Brandon|Crawford}} || {{sortname|Starling|Marte}}{{ref|LF|LF}} || {{sortname|Ender|Inciarte}}{{ref|CF|CF}} || {{sortname|Jason|Heyward}}{{ref|RF|RF}} || {{sortname|Buster|Posey}} || {{sortname|Zack|Greinke}} || N/A
+|-
+!scope="row"| {{mlby|2017}}
+| {{sortname|Paul|Goldschmidt}} || {{sortname|DJ|LeMahieu}} || {{sortname|Nolan|Arenado}} || {{sortname|Brandon|Crawford}} || {{sortname|Marcell|Ozuna}}{{ref|LF|LF}} || {{sortname|Ender|Inciarte}}{{ref|CF|CF}} || {{sortname|Jason|Heyward}}{{ref|RF|RF}} || {{sortname|Tucker|Barnhart}} || {{sortname|Zack|Greinke}} || N/A
+|-
+!scope="row"| {{mlby|2018}}
+| {{sort|RizzoFreeman|[[Anthony Rizzo]]&nbsp;&<br />[[Freddie Freeman]]}} || {{sortname|DJ|LeMahieu}} || {{sortname|Nolan|Arenado}} || {{sortname|Nick|Ahmed}} || {{sortname|Corey|Dickerson}}{{ref|LF|LF}} || {{sortname|Ender|Inciarte}}{{ref|CF|CF}} || {{sortname|Nick|Markakis}}{{ref|RF|RF}} || {{sortname|Yadier|Molina}} || {{sortname|Zack|Greinke}} || N/A
+|-
+!scope="row"| {{mlby|2019}}
+| {{sortname|Anthony|Rizzo}} || {{sortname|Kolten|Wong}} || {{sortname|Nolan|Arenado}} || {{sortname|Nick|Ahmed}} || {{sortname|David|Peralta}}{{ref|LF|LF}} || {{sortname|Lorenzo|Cain}}{{ref|CF|CF}} || {{sortname|Cody|Bellinger}}{{ref|RF|RF}} || {{sortname|J. T.|Realmuto}} || {{sortname|Zack|Greinke}} || N/A
+|-
+!scope="row"| {{mlby|2020}}
+| {{sortname|Anthony|Rizzo}} || {{sortname|Kolten|Wong}} || {{sortname|Nolan|Arenado}} || {{sortname|Javier|Báez}} || {{sortname|Tyler|O'Neill}}{{ref|LF|LF}} || {{sortname|Trent|Grisham}}{{ref|CF|CF}} || {{sortname|Mookie|Betts}}{{ref|RF|RF}} || {{sortname|Tucker|Barnhart}} || {{sortname|Max|Fried}} || N/A || [[2020 Chicago Cubs season|Chicago Cubs]]
+|-
+!scope="row"| {{mlby|2021}}
+| {{sortname|Paul|Goldschmidt}} || {{sortname|Tommy|Edman}} || {{sortname|Nolan|Arenado}} || {{sortname|Brandon|Crawford}} || {{sortname|Tyler|O'Neill}}{{ref|LF|LF}} || {{sortname|Harrison|Bader}}{{ref|CF|CF}} || {{sortname|Adam|Duvall}}{{ref|RF|RF}} || {{sortname|Jacob|Stallings}} || {{sortname|Max|Fried}} || N/A || [[2021 St. Louis Cardinals season|St. Louis Cardinals]]
+|-
+!scope ="row"| {{mlby|2022}}
+| {{sortname|Christian|Walker}} || {{sortname|Brendan|Rodgers|dab=baseball}} || {{sortname|Nolan|Arenado}} || {{sortname|Dansby|Swanson}} || {{sortname|Ian|Happ}}{{ref|LF|LF}} || {{sortname|Trent|Grisham}}{{ref|CF|CF}} || {{sortname|Mookie|Betts}}{{ref|RF|RF}} || {{sortname|J. T.|Realmuto}} || {{sortname|Max|Fried}} || {{sortname|Brendan|Donovan}} || [[2022 St. Louis Cardinals season|St. Louis Cardinals]]
+|-
+!scope ="row"| {{mlby|2023}}
+| {{sortname|Christian|Walker}} || {{sortname|Nico|Hoerner}} || {{sortname|Ke'Bryan|Hayes}} || {{sortname|Dansby|Swanson}} || {{sortname|Ian|Happ}}{{ref|LF|LF}} || {{sortname|Brenton|Doyle}}{{ref|CF|CF}} || {{sortname|Fernando|Tatís Jr.}}{{ref|RF|RF}} || {{sortname|Gabriel|Moreno}} || {{sortname|Zack|Wheeler}} || {{sortname|Ha-seong|Kim}} || [[2023 Milwaukee Brewers season|Milwaukee Brewers]]
+|-
+!scope ="row"| {{mlby|2024}}
+| {{sortname|Christian|Walker}} || {{sortname|Brice|Turang}} || {{sortname|Matt|Chapman}} || {{sortname|Ezequiel|Tovar}} || {{sortname|Ian|Happ}}{{ref|LF|LF}} || {{sortname|Brenton|Doyle}}{{ref|CF|CF}} || {{sortname|Sal|Frelick}}{{ref|RF|RF}} || {{sortname|Patrick|Bailey}} || {{sortname|Chris|Sale}} || {{sortname|Jared|Triolo}} || [[2024 Milwaukee Brewers season|Milwaukee Brewers]]
+|-
+!scope ="row"| {{mlby|2025}}
+| {{sortname|Matt|Olson}} || {{sortname|Nico|Hoerner}} || {{sortname|Ke'Bryan|Hayes}} || {{sortname|Masyn|Winn}} || {{sortname|Ian|Happ}}{{ref|LF|LF}} || {{sortname|Pete|Crow-Armstrong}}{{ref|CF|CF}} || {{sortname|Fernando|Tatís Jr.}}{{ref|RF|RF}} || {{sortname|Patrick|Bailey}} || {{sortname|Logan|Webb}} || {{sortname|Javier|Sanoja}} ||
+[[2025 Chicago Cubs season|Chicago Cubs]]
+|-
+!scope ="row"| {{mlby|2026}}
+| {{sortname|Matt|Olson}} || {{sortname|Brice|Turang}} || {{sortname|Alex|Bregman}} || {{sortname|Geraldo|Perdomo}} || {{sortname|Jackson|Chourio}}{{ref|LF|LF}} || {{sortname|Pete|Crow-Armstrong}}{{ref|CF|CF}} || {{sortname|Corbin|Carroll}}{{ref|RF|RF}} || {{sortname|Gabriel|Moreno}} || {{sortname|Nolan|McLean}} || {{sortname|Mauricio|Dubón}} ||
+
+|}
+
+{{note|LF|LF}} won as a left fielder
+{{note|CF|CF}} won as a center fielder
+{{note|RF|RF}} won as a right fielder
+
+==All-time Gold Glove Team==
+<!--
+***** PLEASE NOTE *****
+***** PLEASE NOTE *****
+***** PLEASE NOTE *****
+***** PLEASE NOTE *****
+
+Before editing this section:
+
+Note that the All-time Gold Glove Team was determined in 2007 by a vote of reporters, players, and managers.
+
+While many of the players who have won the most Gold Gloves at their positions are included on this team, several vote results were different.
+
+Wes Parker, Joe Morgan, Johnny Bench, and Ken Griffey Jr. were all voted as members of this team. Keith Hernandez was not, Roberto Alomar was not, Iván Rodríguez was not, and no other outfielders other than Griffey, Mays, and Clemente were selected.
+
+THE ALL-TIME GOLD GLOVE TEAM IS NOT COMPOSED OF THE PLAYERS WHO WON THE MOST GOLD GLOVES AT THEIR RESPECTIVE POSITIONS. PERIOD.
+***** PLEASE NOTE *****
+***** PLEASE NOTE *****
+***** PLEASE NOTE *****
+***** PLEASE NOTE *****
+ -->
+[[File:Willie Mays cropped.jpg|thumb|upright=.8|alt=The head of a man, wearing a dark cap. On it, the overlapping letters "SF" are visible.|Hall of Fame centerfielder [[Willie Mays]] won 12 Gold Gloves and was elected to the joint MLB/[[Rawlings (company)|Rawlings]] all-time team compiled in 2007, the 50th anniversary of the Gold Glove award]]
+
+On February 20, 2007, [[Major League Baseball]] and [[Rawlings (company)|Rawlings]] announced that an all-time Gold Glove Team would be named during the 50th anniversary of the first Gold Glove Awards.<ref>{{cite web|url=http://mlb.mlb.com/news/article.jsp?ymd=20070220&content_id=1808993&vkey=news_mlb&fext=.jsp&c_id=mlb|title=All-time Gold Glove team to be named|last=Stier|first=Kit|date=February 20, 2007|publisher=Major League Baseball|access-date=May 26, 2009|archive-date=January 3, 2008|archive-url=https://web.archive.org/web/20080103193106/http://mlb.mlb.com/news/article.jsp?ymd=20070220&content_id=1808993&vkey=news_mlb&fext=.jsp&c_id=mlb|url-status=live}}</ref> Rawlings asked 70 baseball reporters, former players, and former managers to select 50 names for the ballot, from an initial selection of 250 names.<ref>{{cite news|url=https://www.espn.com/mlb/news/story?id=2771357|title=Fans to vote on all-time Gold Glove team|date=February 19, 2009|work=ESPN|agency=Associated Press|access-date=May 26, 2009|archive-date=February 23, 2007|archive-url=https://web.archive.org/web/20070223195445/http://sports.espn.go.com/mlb/news/story?id=2771357|url-status=live}}</ref> The team was selected by fans, who voted at the Rawlings Gold Glove website, at [[United States Postal Service]] offices, and at [[sporting goods]] stores. The results were announced at the 2007 Major League Baseball All-Star Game.<ref>{{cite news|url=https://www.espn.com/mlb/news/story?id=2985977|title=Wes Parker surprise addition to all-time Rawlings Gold Glove team|date=August 22, 2007|work=ESPN|agency=Associated Press|access-date=May 26, 2009|archive-date=June 8, 2008|archive-url=https://web.archive.org/web/20080608101837/http://sports.espn.go.com/mlb/news/story?id=2985977|url-status=live}}</ref>
+
+{| class="wikitable" style="text-align:center"
+|+All-time Gold Glove Team members by position
+!scope="row"| First base
+| <!--***NOTE***Wes Parker was voted to the all-time team, not Keith Hernandez (who won the most awards at 1B)***-->[[Wes Parker]]<!--***NOTE***Wes Parker was voted to the all-time team, not Keith Hernandez (who won the most awards at 1B)***-->
+|-
+!scope="row"| Second base
+| [[Joe Morgan]]<sup>{{†|alt=Hall of Fame}}</sup>
+|-
+!scope="row"| Third base
+| style="background:#bef;"| [[Brooks Robinson]]*<sup>{{†|alt=Hall of Fame}}</sup>
+|-
+!scope="row"| Shortstop
+| style="background:#bef;"| [[Ozzie Smith]]*<sup>{{†|alt=Hall of Fame}}</sup>
+|-
+!scope="row" rowspan="3"| Outfield
+| style="background:#bef;"| [[Willie Mays]]**<sup>{{†|alt=Hall of Fame}}</sup>
+|-
+| style="background:#bef;"| [[Roberto Clemente]]**<sup>{{†|alt=Hall of Fame}}</sup>
+|-
+| [[Ken Griffey Jr.]]<sup>{{†|alt=Hall of Fame}}</sup>
+|-
+!scope="row"| Catcher
+|[[Johnny Bench]]<sup>{{†|alt=Hall of Fame}}</sup>
+|-
+!scope="row"| Pitcher
+| style="background:#bef;"| [[Greg Maddux]]*<sup>{{†|alt=Hall of Fame}}</sup>
+|}
+
+==Teammates==
+
+===Middle infield duos===
+[[File:Mark Belanger 1977.jpg|thumb|right|upright=.8|[[Mark Belanger]] (pictured) won multiple Gold Gloves at shortstop along with teammates [[Davey Johnson]] and [[Bobby Grich]] at second base.]]
+
+In the history of the Gold Glove Award, there have been twelve [[Double play|double-play]] combinations, or pairs of [[middle infielder]]s,<ref>{{cite book|last=Dickson|first=Paul|title=The Dickson Baseball Dictionary|publisher=W. W. Norton and Company|year=2009|edition=3|page=268|url=https://books.google.com/books?id=Wq5yeipLolUC&q=double+play+baseball&pg=PA268 | isbn=978-0-393-06681-4}}</ref> that have won awards in the same year. Shortstops and second basemen depend upon each other for the majority of double plays. The most common type of double play occurs with a runner on first base and a ground ball hit towards the middle of the [[baseball field|infield]]. The player fielding the ball (generally the shortstop or second baseman) throws to the fielder covering second base, who steps on the base before the runner from first arrives to [[Force play|force]] that runner out, and then throws the ball to the first baseman to force out the batter for the second out.<ref>{{cite book|author1=Curran, Mike |author2=Newman, Ross |author3=Lopez, Andy |name-list-style=amp |title=Coaching Baseball Successfully|publisher=Human Kinetics|year=2007|page=[https://archive.org/details/coachingbaseball0000curr/page/109 109]|url=https://archive.org/details/coachingbaseball0000curr |url-access=registration |quote=common double play baseball. | isbn=978-0-7360-6520-7}}</ref> [[Mark Belanger]] won four Gold Gloves with the [[Baltimore Orioles]] alongside winning partner [[Bobby Grich]], and [[Joe Morgan]] paired with [[Dave Concepción]] for four combination wins with the [[Cincinnati Reds]]. The most recent teammates to accomplish the feat are [[Dansby Swanson]] and [[Nico Hoerner]], who won with the [[Chicago Cubs]] in 2023.
+
+{| class="wikitable sortable plainrowheaders"
+|+Double-play combinations to win Gold Gloves for the same team in the same season
+!scope="col"| Shortstop
+!scope="col"| Second baseman
+!scope="col"| Team
+!scope="col"| Times won
+!scope="col"| Years
+!scope="col" class=unsortable|Ref(s)
+|-
+!scope="row"| {{sortname|Luis|Aparicio}}<sup>{{†}}</sup>
+!scope="row"| {{sortname|Nellie|Fox}}<sup>{{†}}</sup>
+| [[Chicago White Sox]] || {{center|2}} || {{center|1959–1960}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/CHW/1959.shtml|title=1959 Chicago White Sox Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=July 5, 2014|archive-url=https://web.archive.org/web/20140705113539/http://www.baseball-reference.com/teams/CHW/1959.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/CHW/1960.shtml|title=1960 Chicago White Sox Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=June 22, 2009|archive-url=https://web.archive.org/web/20090622002845/http://www.baseball-reference.com/teams/CHW/1960.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Gene|Alley}}
+!scope="row"| {{sortname|Bill|Mazeroski}}<sup>{{†}}</sup>
+| [[Pittsburgh Pirates]] || {{center|2}} || {{center|1966–1967}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/PIT/1966.shtml|title=1966 Pittsburgh Pirates Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=April 5, 2019|archive-url=https://web.archive.org/web/20190405153222/https://www.baseball-reference.com/teams/PIT/1966.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/PIT/1967.shtml|title=1967 Pittsburgh Pirates Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=March 27, 2022|archive-url=https://web.archive.org/web/20220327002547/https://www.baseball-reference.com/teams/PIT/1967.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Jim|Fregosi}}
+!scope="row"| {{sortname|Bobby|Knoop}}
+| [[California Angels]] || {{center|1}} || {{center|1967}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/CAL/1967.shtml|title=1967 California Angels Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=February 9, 2009|archive-url=https://web.archive.org/web/20090209142513/http://www.baseball-reference.com/teams/CAL/1967.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Mark|Belanger}}
+!scope="row"| {{sortname|Davey|Johnson}}
+| [[Baltimore Orioles]] || {{center|2}} || {{center|1969, 1971}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/BAL/1969.shtml|title=1969 Baltimore Orioles Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=February 5, 2018|archive-url=https://web.archive.org/web/20180205125959/https://www.baseball-reference.com/teams/BAL/1969.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/BAL/1971.shtml|title=1971 Baltimore Orioles Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=March 1, 2009|archive-url=https://web.archive.org/web/20090301210549/http://www.baseball-reference.com/teams/BAL/1971.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Mark|Belanger}}
+!scope="row"| {{sortname|Bobby|Grich}}
+| [[Baltimore Orioles]] || {{center|4}} || {{center|1973–1976}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/BAL/1973.shtml|title=1973 Baltimore Orioles Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=March 26, 2022|archive-url=https://web.archive.org/web/20220326190215/https://www.baseball-reference.com/teams/BAL/1973.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/BAL/1974.shtml|title=1974 Baltimore Orioles Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=March 26, 2022|archive-url=https://web.archive.org/web/20220326175305/https://www.baseball-reference.com/teams/BAL/1974.shtml|url-status=live}}</ref><br /><ref>{{cite web|url=https://www.baseball-reference.com/teams/BAL/1975.shtml|title=1975 Baltimore Orioles Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=July 9, 2017|archive-url=https://web.archive.org/web/20170709200833/http://www.baseball-reference.com/teams/BAL/1975.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/BAL/1976.shtml|title=1976 Baltimore Orioles Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=July 9, 2017|archive-url=https://web.archive.org/web/20170709132633/http://www.baseball-reference.com/teams/BAL/1976.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Dave|Concepción}}
+!scope="row"| {{sortname|Joe|Morgan}}<sup>{{†}}</sup>
+| [[Cincinnati Reds]] || {{center|4}} || {{center|1974–1977}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/CIN/1974.shtml|title=1974 Cincinnati Reds Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=February 3, 2009|archive-url=https://web.archive.org/web/20090203135523/http://www.baseball-reference.com/teams/CIN/1974.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/CIN/1975.shtml|title=1975 Cincinnati Reds Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=June 17, 2022|archive-url=https://web.archive.org/web/20220617093618/https://www.baseball-reference.com/teams/CIN/1975.shtml|url-status=live}}</ref><br /><ref>{{cite web|url=https://www.baseball-reference.com/teams/CIN/1976.shtml|title=1976 Cincinnati Reds Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=July 16, 2019|archive-url=https://web.archive.org/web/20190716223844/https://www.baseball-reference.com/teams/CIN/1976.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/CIN/1977.shtml|title=1977 Cincinnati Reds Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=June 1, 2009|archive-url=https://web.archive.org/web/20090601185623/http://www.baseball-reference.com/teams/CIN/1977.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Alan|Trammell}}<sup>{{†}}</sup>
+!scope="row"| {{sortname|Lou|Whitaker}}
+| [[Detroit Tigers]] || {{center|2}} || {{center|1983–1984}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/DET/1983.shtml|title=1983 Detroit Tigers Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=February 22, 2009|archive-url=https://web.archive.org/web/20090222234726/http://www.baseball-reference.com/teams/DET/1983.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/DET/1984.shtml|title=1984 Detroit Tigers Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=July 12, 2022|archive-url=https://web.archive.org/web/20220712012508/https://www.baseball-reference.com/teams/DET/1984.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Omar|Vizquel}}
+! scope="row" style="background:#bef;"| {{sortname|Roberto|Alomar}}*<sup>{{†}}</sup>
+| [[Cleveland Indians]] || {{center|3}} || {{center|1999–2001}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/CLE/1999.shtml|title=1999 Cleveland Indians Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=May 4, 2018|archive-url=https://web.archive.org/web/20180504011741/https://www.baseball-reference.com/teams/CLE/1999.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/CLE/2000.shtml|title=2000 Cleveland Indians Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=February 10, 2009|archive-url=https://web.archive.org/web/20090210020029/http://www.baseball-reference.com/teams/CLE/2000.shtml|url-status=live}}</ref><br /><ref>{{cite web|url=https://www.baseball-reference.com/teams/CLE/2001.shtml|title=2001 Cleveland Indians Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=October 13, 2022|archive-url=https://web.archive.org/web/20221013100143/https://www.baseball-reference.com/teams/CLE/2001.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Édgar|Rentería}}
+!scope="row"| {{sortname|Fernando|Viña}}
+| [[St. Louis Cardinals]] || {{center|1}} || {{center|2002}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/STL/2002.shtml|title=2002 St. Louis Cardinals Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=October 11, 2022|archive-url=https://web.archive.org/web/20221011155809/https://www.baseball-reference.com/teams/STL/2002.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Derek|Jeter}}<sup>{{†}}</sup>
+!scope="row"| {{sortname|Robinson|Canó||Cano, Robinson}}
+| [[New York Yankees]] || {{center|1}} || {{center|2010}} || {{center|<ref>{{cite web|url=http://mlb.mlb.com/news/article.jsp?ymd=20101109&content_id=16041500&vkey=news_mlb&c_id=mlb|title=Ichiro wins 10th straight Gold Glove|last=Stephens|first=Bailey|date=November 9, 2010|work=MLB.com|access-date=November 9, 2010|archive-date=November 11, 2010|archive-url=https://web.archive.org/web/20101111172822/http://mlb.mlb.com/news/article.jsp?ymd=20101109&content_id=16041500&vkey=news_mlb&c_id=mlb|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Brandon|Crawford}}
+!scope="row"| {{sortname|Joe|Panik}}
+| [[San Francisco Giants]] || {{center|1}} || {{center|2016}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/SFG/2016.shtml|title=2016 San Francisco Giants Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=November 8, 2016|archive-date=October 11, 2022|archive-url=https://web.archive.org/web/20221011101140/https://www.baseball-reference.com/teams/SFG/2016.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Andrelton|Simmons}}
+!scope="row"| {{sortname|Ian|Kinsler}}{{efn|name=Kinsler|Kinsler played 91 games at second base for the Angels before he was traded to the Boston Red Sox on July 30, 2018.}}
+| [[Los Angeles Angels]] || {{center|1}} || {{center|2018}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/LAA/2018.shtml|title=2018 Los Angeles Angels Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=November 4, 2018|archive-date=November 5, 2018|archive-url=https://web.archive.org/web/20181105110819/https://www.baseball-reference.com/teams/LAA/2018.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| {{sortname|Dansby|Swanson}}
+!scope="row"| {{sortname|Nico|Hoerner}}
+| [[Chicago Cubs]] || {{center|1}} || {{center|2023}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/CHC/2023.shtml|title=2023 Chicago Cubs Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=November 5, 2023|archive-date=November 3, 2023|archive-url=https://web.archive.org/web/20231103133648/https://www.baseball-reference.com/teams/CHC/2023.shtml|url-status=live}}</ref>}}
+|}
+
+† = Hall of Fame
+
+===Batteries===
+{{multiple image
+ | footer    = [[Iván Rodríguez]] and [[Kenny Rogers (baseball)|Kenny Rogers]] won Gold Gloves as batterymates in 2000 and 2006.
+ | total_width=300
+ | image1    = Iván Rodríguez (baseball).jpg
+ | alt1      = Man in a white baseball uniform and navy-blue helmet jogs on a baseball field
+ | image2    = Kenny Rogers on May 9, 2008.jpg
+ | alt2      = Man in a white baseball uniform stretches to throw a baseball with his left hand
+}}
+Since 1957, there have been six Gold Glove [[Battery (baseball)|batteries]]. The pitcher and catcher, collectively known as the battery, are the only two players on the field involved in every pitch. In particular, the pitcher and catcher control the [[Base running|running game]] with tools such as [[pickoff]]s or the strength of the catcher's throwing arm.<ref>{{cite book|last=Stallings|first=Jack|author2=Bennett, Bob|others=American Baseball Coaches Association|title=Baseball strategies: American Baseball Coaches Association|publisher=Human Kinetics|year=2003|page=[https://archive.org/details/isbn_9780736042185/page/19 19]|isbn=0-7360-4218-0|url=https://archive.org/details/isbn_9780736042185|url-access=registration|quote=pitcher catcher running game.}}</ref> The first pitcher and catcher on the same team to win Gold Gloves in the same year were [[Jim Kaat]] and [[Earl Battey]], with the [[Minnesota Twins]] in 1962. Only two pairs of batterymates have won Gold Gloves together more than once: [[Iván Rodríguez]] and [[Kenny Rogers (baseball)|Kenny Rogers]] won with the [[Texas Rangers (baseball)|Texas Rangers]] in 2000, and again with the [[Detroit Tigers]] in 2006. [[Yadier Molina]] and [[Adam Wainwright]] matched the feat, winning in both 2009 and 2013.
+
+{| class="wikitable plainrowheaders"
+|+Batterymates to win Gold Gloves for the same team in the same season
+!scope="col"| Pitcher
+!scope="col"| Catcher
+!scope="col"| Team
+!scope="col"| Times won
+!scope="col"| Years
+!scope="col"| Ref
+|-
+!scope="row"| [[Jim Kaat]]<sup>{{†|alt=Hall of Fame}}</sup>
+!scope="row"| [[Earl Battey]]
+| [[Minnesota Twins]] || {{center|1}} || {{center|1962}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/MIN/1962.shtml|title=1962 Minnesota Twins Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=February 4, 2018|archive-url=https://web.archive.org/web/20180204123924/https://www.baseball-reference.com/teams/MIN/1962.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| [[Rick Reuschel]]
+!scope="row"| [[Tony Peña]]
+| [[Pittsburgh Pirates]] || {{center|1}} || {{center|1985}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/PIT/1985.shtml|title=1985 Pittsburgh Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=June 16, 2017|archive-url=https://web.archive.org/web/20170616191454/http://www.baseball-reference.com/teams/PIT/1985.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| [[Bret Saberhagen]]
+!scope="row"| [[Bob Boone]]
+| [[Kansas City Royals]] || {{center|1}} || {{center|1989}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/KCR/1989.shtml|title=1989 Kansas City Royals Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009}}</ref>}}
+|-
+!scope="row" rowspan=2| [[Kenny Rogers (baseball)|Kenny Rogers]]
+! scope="row" style="background:#bef;" rowspan="2"| [[Iván Rodríguez]]*<sup>{{†|alt=Hall of Fame}}</sup>
+| [[Texas Rangers (baseball)|Texas Rangers]] ||rowspan=2 style="text-align:center;" | 2 || {{center|2000}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/TEX/2000.shtml|title=2000 Texas Rangers Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=July 5, 2017|archive-url=https://web.archive.org/web/20170705010816/http://www.baseball-reference.com/teams/TEX/2000.shtml|url-status=live}}</ref>}}
+|-
+| [[Detroit Tigers]] || {{center|2006}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/DET/2006.shtml|title=2006 Detroit Tigers Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=August 6, 2019|archive-url=https://web.archive.org/web/20190806023748/https://www.baseball-reference.com/teams/DET/2006.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| [[Adam Wainwright]]
+!scope="row"| [[Yadier Molina]]
+| [[St. Louis Cardinals]] || {{center|2}} || {{center|2009, 2013}} || {{center|<ref>{{cite web|url=https://www.baseball-reference.com/teams/STL/2009.shtml|title=2009 St. Louis Cardinals Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=June 10, 2009|archive-date=June 3, 2021|archive-url=https://web.archive.org/web/20210603172226/https://www.baseball-reference.com/teams/STL/2009.shtml|url-status=live}}</ref><ref>{{cite web|url=https://www.baseball-reference.com/teams/STL/2013.shtml|title=2013 St. Louis Cardinals Batting, Pitching, & Fielding Statistics|work=Baseball-Reference.com|access-date=October 29, 2013|archive-date=September 21, 2013|archive-url=https://web.archive.org/web/20130921101557/http://www.baseball-reference.com/teams/STL/2013.shtml|url-status=live}}</ref>}}
+|-
+!scope="row"| [[Logan Webb]]
+!scope="row"| [[Patrick Bailey]]
+| [[San Francisco Giants]] || {{center|1}} || {{center|2025}} || {{center|<ref>{{cite web|url=https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-patrick-bailey-gold-glove-award/1889045/|title=Giants ace Logan Webb wins first NL Gold Glove; Patrick Bailey nabs second award|date=2 November 2025 |access-date=November 2, 2025}}</ref>}}
+|}
+
+==Platinum Glove Award==
+{{See also|Wilson Defensive Player of the Year Award#Overall Defensive Player of the Year|l1=Wilson Overall Defensive Player of the Year Award}}
+[[File:Nolan Arenado (27962807183) (cropped).jpg|thumb|As of 2024, [[Nolan Arenado]] (with 6) has won the most Platinum Glove Awards of any player.]]
+
+In 2011, Rawlings added an annual Platinum Glove Award awarded to the best defensive player in each league, as selected by fans from the year's Gold Glove winners.<ref>{{cite web|title=Platinum Glove Award|work=BaseballAlmanac|date=March 25, 2013|url=http://www.baseball-almanac.com/awards/Platinum_Glove_Award.shtml|access-date=2013-11-04|archive-date=2019-02-24|archive-url=https://web.archive.org/web/20190224173956/http://www.baseball-almanac.com/awards/Platinum_Glove_Award.shtml|url-status=live}}</ref> Numbers after a player's name indicate that he has won the award multiple times.
+
+{| class="wikitable sortable" style="text-align:center;"
+|-
+!scope="col" rowspan=2|Year
+!scope="col" colspan=3|American League
+!scope="col" colspan=3|National League
+|-
+!scope="col"|Player
+!scope="col"|Team
+!scope="col"|Position
+!scope="col"|Player
+!scope="col"|Team
+!scope="col"|Position
+|-
+![[2011 Major League Baseball season|2011]]
+|{{sortname|Adrián|Beltré}}<sup>{{†|alt=Hall of Fame}}</sup>
+|[[Texas Rangers (baseball)|Texas Rangers]]
+|3B
+|{{sortname|Yadier|Molina}}
+|[[St. Louis Cardinals]]
+|C
+|-
+![[2012 Major League Baseball season|2012]]
+|{{sortname|Adrián|Beltré}}<sup>{{†|alt=Hall of Fame}}</sup> {{small|(2)}}
+|Texas Rangers
+|3B
+|{{sortname|Yadier|Molina}} {{small|(2)}}
+|St. Louis Cardinals
+|C
+|-
+![[2013 Major League Baseball season|2013]]
+|{{sortname|Manny|Machado}}
+|[[Baltimore Orioles]]
+|3B
+|{{sortname|Andrelton|Simmons}}
+|[[Atlanta Braves]]
+|SS
+|-
+![[2014 Major League Baseball season|2014]]
+|{{sortname|Alex|Gordon}}
+|[[Kansas City Royals]]
+|LF
+|{{sortname|Yadier|Molina}} {{small|(3)}}
+|St. Louis Cardinals
+|C
+|-
+![[2015 Major League Baseball season|2015]]
+|{{sortname|Kevin|Kiermaier}}
+|[[Tampa Bay Rays]]
+|CF
+|{{sortname|Yadier|Molina}} {{small|(4)}}
+|St. Louis Cardinals
+|C
+|-
+![[2016 Major League Baseball season|2016]]
+|{{sortname|Francisco|Lindor}}
+|[[Cleveland Indians]]
+|SS
+|{{sortname|Anthony|Rizzo}}
+|[[Chicago Cubs]]
+|1B
+|-
+![[2017 Major League Baseball season|2017]]
+|{{sortname|Byron|Buxton}}
+|[[Minnesota Twins]]
+|CF
+|{{sortname|Nolan|Arenado}}
+|[[Colorado Rockies]]
+|3B
+|-
+![[2018 Major League Baseball season|2018]]
+|{{sortname|Matt|Chapman}}
+|[[Oakland Athletics]]
+|3B
+|{{sortname|Nolan|Arenado}} {{small|(2)}}
+|Colorado Rockies
+|3B
+|-
+![[2019 Major League Baseball season|2019]]
+|{{sortname|Matt|Chapman}} {{small|(2)}}
+|Oakland Athletics
+|3B
+|{{sortname|Nolan|Arenado}} {{small|(3)}}
+|Colorado Rockies
+|3B
+|-
+![[2020 Major League Baseball season|2020]]
+|{{sortname|Alex|Gordon}} {{small|(2)}}
+|Kansas City Royals
+|LF
+|{{sortname|Nolan|Arenado}} {{small|(4)}}
+|Colorado Rockies
+|3B
+|-
+![[2021 Major League Baseball season|2021]]
+|{{sortname|Carlos|Correa}}
+|[[Houston Astros]]
+|SS
+|{{sortname|Nolan|Arenado}} {{small|(5)}}
+|St. Louis Cardinals
+|3B
+|-
+![[2022 Major League Baseball season|2022]]
+|[[Jose Trevino (baseball)|Jose Trevino]]
+|[[New York Yankees]]
+|C
+|{{sortname|Nolan|Arenado}} {{small|(6)}}
+|St. Louis Cardinals
+|3B
+|-
+![[2023 Major League Baseball season|2023]]
+|{{sortname|Andrés|Giménez}}
+|[[Cleveland Guardians]]
+|2B
+|{{sortname|Fernando|Tatís Jr.}}
+|[[San Diego Padres]]
+|RF
+|-
+![[2024 Major League Baseball season|2024]]
+|{{sortname|Cal|Raleigh}}
+|[[Seattle Mariners]]
+|C
+|{{sortname|Brice|Turang}}
+|[[Milwaukee Brewers]]
+|2B
+|-
+![[2025 Major League Baseball season|2025]]
+|{{sortname|Bobby|Witt Jr.}}
+|Kansas City Royals
+|SS
+|{{sortname|Fernando|Tatis Jr.}} {{small|(2)}}
+|San Diego Padres
+|RF
+|}
+
+==National Pro Fastpitch==
+In 2016, Rawlings announced it would begin awarding a gold glove annually to a female [[fastpitch softball]] player in the [[National Pro Fastpitch]] (NPF) league.<ref>{{cite web |last=Boren |first=Cindy |url=https://www.tampabay.com/sports/softballpreps/former-countryside-softball-star-aj-andrews-first-female-gold-glove-winner/2294157/ |title=Former Countryside softball star A.J. Andrews first female Gold Glove winner |publisher=Tampabay.com |date=2016-09-18 |access-date=2017-06-05 |archive-date=2016-09-21 |archive-url=https://web.archive.org/web/20160921001559/http://www.tampabay.com/sports/softballpreps/former-countryside-softball-star-aj-andrews-first-female-gold-glove-winner/2294157 |url-status=live }}</ref>
+NPF coaches and managers vote for a winner (excluding those on their respective teams). This award is in addition to the collegiate and high school awards added in 2007, the 50th anniversary of the inaugural Gold Glove Awards.<ref>{{cite web|title=First-Ever Female Athlete to Win Rawlings Gold Glove Award®|url=http://www.prnewswire.com/news-releases/first-ever-female-athlete-to-win-rawlings-gold-glove-award-300312446.html|website=PR Newswire|access-date=14 August 2016|date=11 August 2016|archive-date=12 August 2016|archive-url=https://web.archive.org/web/20160812210637/http://www.prnewswire.com/news-releases/first-ever-female-athlete-to-win-rawlings-gold-glove-award-300312446.html|url-status=live}}</ref>
+
+{| class="wikitable sortable" style="text-align:center;"
+|+Gold Glove winners in National Pro Fastpitch 
+!scope="col"|Year
+!scope="col"|Player
+!scope="col"|Team
+!scope="col"|Position
+!scope="col" class=unsortable|Ref
+|-
+| '''[[2016 National Pro Fastpitch season|2016]]'''
+| {{sortname|AJ|Andrews}}
+| [[Akron Racers]]
+| [[Right fielder|RF]]
+|<ref>{{cite web|url=https://www.espn.com/espnw/culture/the-buzz/story/_/id/18022219/|title=NPF's A.J. Andrews receives MLB Rawlings Gold Glove, standing ovation|website=espnW|date=11 November 2016|access-date=5 June 2017|archive-date=14 November 2016|archive-url=https://web.archive.org/web/20161114021756/http://www.espn.com/espnw/culture/the-buzz/article/18022219/|url-status=live}}</ref>
+|-
+| '''[[2017 National Pro Fastpitch season|2017]]'''
+| {{sortname|Chelsea|Goodacre}}
+| [[USSSA Pride]]
+| [[Catcher|C]]
+|<ref>{{cite web|title=Goodacre wins second annual Rawlings Gold Glove Award for Softball|url=https://www.stl.news/2017/08/17/goodacre-wins-second-annual-rawlings-gold-glove-award-for-softball/|website=STL.com|access-date=19 August 2017|date=18 August 2017|archive-url=https://web.archive.org/web/20170819154701/https://www.stl.news/2017/08/17/goodacre-wins-second-annual-rawlings-gold-glove-award-for-softball/|archive-date=19 August 2017|url-status=dead}}</ref>
+|-
+| '''[[2018 National Pro Fastpitch season|2018]]'''
+| {{sortname|Jade|Rhodes}}
+| [[Cleveland Comets]]
+| [[First baseman|1B]]
+|<ref>{{cite web|url=https://www.oanow.com/sports/college/auburn/softball/former-tigers-earn-postseason-awards-from-national-pro-fastpitch/article_a3a8104e-a250-11e8-acdb-a30ef34c3dc9.html|title=Former Tigers earn postseason awards from National Pro Fastpitch|website=OANow|date=17 August 2018|access-date=9 April 2019|archive-date=19 March 2021|archive-url=https://web.archive.org/web/20210319083219/https://oanow.com/sports/college/auburn/softball/former-tigers-earn-postseason-awards-from-national-pro-fastpitch/article_a3a8104e-a250-11e8-acdb-a30ef34c3dc9.html|url-status=live}}</ref>
+|-
+| '''[[2019 National Pro Fastpitch season|2019]]'''
+| {{sortname|Jessie|Warren}}
+| [[USSSA Pride]]
+| [[Third baseman|3B]]
+|<ref>{{cite press release |url=http://usssapride.com/jessie-warren-wins-2019-rawlings-gold-glove/ |title=Jessie Warren Wins 2019 Rawlings Gold Glove |website=usssapride.com |date=August 14, 2019 |access-date=November 2, 2019 |archive-date=November 2, 2019 |archive-url=https://web.archive.org/web/20191102040828/http://usssapride.com/jessie-warren-wins-2019-rawlings-gold-glove/ |url-status=live }}</ref>
+|-
+| '''[[2020 National Pro Fastpitch season|2020]]'''
+| colspan=3 align=center|{{sort|Z|''Season canceled''}} due to [[COVID-19 pandemic]]
+| <ref>{{Cite web|url=https://profastpitch.com/national-pro-fastpitch-cancels-2020-season-due-to-covid-19/|archive-url=https://web.archive.org/web/20200517055700/https://profastpitch.com/national-pro-fastpitch-cancels-2020-season-due-to-covid-19/|url-status=usurped|archive-date=May 17, 2020|title=National Pro Fastpitch Cancels 2020 Season due to COVID-19|date=May 15, 2020|work=[[National Pro Fastpitch]]}}</ref>
+|-
+| '''[[2021 National Pro Fastpitch season|2021]]'''
+| colspan=3 align=center|{{sort|Z|''Season canceled''}} due to COVID-19 pandemic and unavailability of home venues for teams(''league folded in 2021'')
+| <ref>{{cite web|url=https://ballparkdigest.com/2020/12/03/national-pro-fastpitch-to-sit-out-2021-season/|title=National Pro Fastpitch to sit out 2021 season|date=December 3, 2020|work=Ballpark Digest|access-date=December 24, 2021|archive-date=December 24, 2021|archive-url=https://web.archive.org/web/20211224204928/https://ballparkdigest.com/2020/12/03/national-pro-fastpitch-to-sit-out-2021-season/|url-status=live}}</ref>
+|}
+
+==See also==
+{{Portal|Baseball}}
+*[[Silver Slugger Award]] - the offensive counterpart to the award
+*[[Wilson Defensive Player of the Year Award]]
+*[[Esurance MLB Awards]] – Best Defensive Player
+*[[Rawlings Woman Executive of the Year Award]] – a minor league award also presented by Rawlings
+*{{section link|Baseball awards|United States}}
+
+==Notes==
+{{notelist}}
+
+==References==
+{{reflist|30em}}
+
+==External links==
+{{commons}}
+*[http://mlb.mlb.com/mlb/awards/mlb_awards_content.jsp?content=gold_gloves_history MLB Awards (Gold Glove Winners)] {{Webarchive|url=https://web.archive.org/web/20070302082014/http://mlb.mlb.com/mlb/awards/mlb_awards_content.jsp?content=gold_gloves_history |date=2007-03-02 }}
+*[http://www.rawlingsgoldglove.com/ Rawlings Gold Glove Award website] {{Webarchive|url=https://web.archive.org/web/20070219054208/http://www.rawlingsgoldglove.com/ |date=2007-02-19 }}
+
+{{MLB awards}}
+{{Gold Glove}}
+{{AL Platinum Glove Awards}}
+{{NL Platinum Glove Awards}}
+
+{{featured list}}
+
+[[Category:Gold Glove Award| ]]
+[[Category:Awards established in 1957]]

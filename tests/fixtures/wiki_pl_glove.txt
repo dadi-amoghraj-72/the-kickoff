@@ -1,0 +1,353 @@
+{{Featured list}}
+{{Use dmy dates|date=February 2021}}
+{{Use British English|date=August 2022}}
+{{Infobox award
+| name = Premier League Golden Glove
+| subheader = <!-- or | current_awards = -->
+| image = Joe Hart Euro 2012 vs Italy 01.jpg
+| image_size = <!-- or | image_upright = -->
+| alt = Joe Hart playing football
+| caption = [[Joe Hart]] is the joint highest winner of the Golden Glove award with four.
+| awarded_for = The most clean sheets in a given Premier League season
+| sponsor = Castrol
+| country = England
+| presenter = Premier League
+| year = 2005
+| holder = [[David Raya]]
+| most_awards = [[Petr Čech]] and [[Joe Hart]] (4)<!-- or | most_wins = -->
+| award1_type = Most consecutive wins
+| award1_winner = 3 ([[Pepe Reina]], Joe Hart, [[Ederson (footballer, born 1993)|Ederson]], [[David Raya]])
+| award2_type = Most clean sheets
+| award2_winner = 24 (Petr Čech; 2004–05)
+}}
+The '''Premier League Golden Glove''' is an annual [[association football]] award presented to the [[Goalkeeper (association football)|goalkeeper]] who has kept the most [[Shutout#Association football|clean sheets]] in the [[Premier League]]. In football, a team's defence or goalkeeper may be said to "keep a clean sheet" if they prevent their opponents from scoring any goals during an entire match.
+
+The Premier League was founded in 1992, when the clubs of the [[Football League First Division|First Division]] left the [[English Football League|Football League]] and established a new commercially independent league that negotiated its own broadcast and sponsorship agreements.<ref name=history>{{cite web|title=History of the Premier League|url=http://www.premierleague.com/en-gb/history/premier-league/|publisher=Premier League |date=1 July 2015 |access-date=11 July 2015}}</ref> Originally, the Golden Glove could only be won outright by a single player; should there have been a tie, the goalkeeper with the superior clean sheets-to-games ratio received the award.<ref name=scoop/> However, starting in the [[2013–14 Premier League|2013–14 season]], the Golden Glove is shared by goalkeepers with an equal number of clean sheets, regardless of the number of games they played.<ref>{{cite news|url=https://www1.skysports.com/football/news/11668/9854297/who-will-win-the-golden-glove-hart-fabianski-mignolet-forster-and-courtois-in-contention |title=Who will win the Golden Glove? Hart, Fabianski, Mignolet, Forster and Courtois in contention |publisher=Sky Sports |date=18 May 2015 |access-date=27 May 2015 |first=Nick |last=Wright }}</ref>
+
+In 2005, the inaugural Premier League Golden Glove was awarded to [[Petr Čech]] of [[Chelsea F.C.|Chelsea]].<ref name=NBC>{{cite news|url=http://www.nbcsports.com/content/premier-league-preview-top-5-goalkeepers-watch|title=Premier League Preview: Top 5 goalkeepers to watch|first=Liviu|last=Bird|date=12 August 2013|work=NBC Sports|publisher=NBC Sports Group|access-date=1 February 2014|url-status=dead|archive-url=https://web.archive.org/web/20140218230401/http://m.nbcsports.com/content/premier-league-preview-top-5-goalkeepers-watch|archive-date=18 February 2014}}</ref> Čech's 24 clean sheets in a single season remains the current record.<ref name="cech2005"/> Since 2005 Čech and [[Joe Hart]] have won the award on the most occasions with four successes each, with Čech the only goalkeeper to have won the award with two different teams (Chelsea and [[Arsenal F.C.|Arsenal]]). [[Pepe Reina]] was the first goalkeeper to achieve back-to-back wins of the award, managing to do so in three consecutive seasons between 2005 and 2008. Joe Hart later repeated the achievement with Manchester City between 2010 and 2013, as did [[Ederson (footballer, born 1993)|Ederson]] with the same club between 2020 and 2022 and [[David Raya]] from 2024 to 2026.<ref name=NBC/><ref name=third/>
+
+During the [[2008–09 Premier League|2008–09 season]], [[Edwin van der Sar]] surpassed Čech's previous record of ten consecutive clean sheets by reaching 14.<ref>{{cite news|title=Van der Sar concedes following 14 clean sheets|url=https://www.fourfourtwo.com/news/van-der-sar-concedes-following-14-clean-sheets|date=4 March 2009|access-date=1 February 2014|magazine=FourFourTwo}}</ref><ref name="van">{{cite news|title=Edwin van der Sar: A career in pictures|url=https://www.independent.co.uk/sport/football/news-and-comment/edwin-van-der-sar-a-career-in-pictures-2291352.html?action=gallery&ino=9|date=1 June 2011|access-date=1 February 2014|first=James|last=Mariner|newspaper=The Independent}}</ref> During his streak, Van der Sar went 1,311 minutes without conceding a goal.<ref name="van" /> In the process, he broke both Čech's Premier League record (1,025 minutes),<ref>{{cite news|title=Man Utd record delights Ferguson|url=http://news.bbc.co.uk/sport1/hi/football/teams/m/man_utd/7855037.stm|publisher=BBC|date=27 January 2009|access-date=1 February 2014}}</ref> [[Steve Death]]'s Football League record (1,103 minutes)<ref>{{cite news|url=https://www.theleaguepaper.com/features/682/where-are-they-now-reading-1978-79/|title=Where Are They Now? Reading 1978–79|newspaper=The Football League Paper|location=London|date=6 November 2013|access-date=10 July 2015}}</ref> and also the all-time league record in Britain (1,155 minutes) for most consecutive scoreless minutes.<ref>{{cite news|title=Manchester United's Edwin van der Sar still lags behind European clean sheet record|url=https://www.telegraph.co.uk/sport/football/teams/manchester-united/4686952/Manchester-Uniteds-Edwin-van-der-Sar-still-lags-behind-European-clean-sheet-record.html|date=18 February 2009|access-date=2 February 2014|first=Giles|last=Mole|newspaper=The Daily Telegraph}}</ref>
+
+== Winners ==
+[[File:Petr Cech - Chelsea vs Bolton Wanderers (1).jpg|thumb|[[Petr Čech]] won the inaugural Premier League Golden Glove in 2005.|alt=Petr Čech playing football.]]
+
+{| class="wikitable plainrowheaders"
+|+ Key
+!scope="row"|'''Player {{small|(X)}}'''
+| Name of the player and number of times they had won the award at that point (for goalkeepers with more awards than one)
+|-
+!scope="row" style="text-align:center; background:#B0C4DE"|{{dagger|alt=multiple award winners in the same season}}
+| Indicates multiple award winners in the same season
+|-
+!scope="row" style="text-align:center; background:#ffb"|{{double-dagger|alt=Club were Premier League champions}}
+| Denotes the club were [[List of English football champions|Premier League champions]] in the same season
+|-
+!scope="row" style="text-align:center; background:#bbffbb"|{{number sign}}
+|Premier League record
+|}
+
+{| class="wikitable sortable plainrowheaders"
+|+ Premier League Golden Glove winners
+!scope="col"|Season
+!scope="col"|Player
+!scope="col"|Nationality
+!scope="col"|Club
+!scope="col"|Clean sheets
+!scope="col" class="unsortable"|Ref(s)
+|-
+| [[2004–05 FA Premier League|2004–05]]
+!scope="row"|{{sortname|Petr|Čech| |Cech, Petr}} {{small|(1)}}
+| {{flagcountry|CZE}}
+!scope="row" style="background:#ffb"|[[Chelsea F.C.|Chelsea]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+|style="text-align:center; background:#bbffbb"|24{{sup|{{number sign}}}}
+| style="text-align:center"|<ref name="cech2005">{{cite web|url=https://www.premierleague.com/players/2651/Petr-Cech/stats?co=1&se=13|title=Petr Cech Statistics – 2004/05|access-date=17 December 2017|work=premierleague.com}}</ref>
+|-
+| [[2005–06 FA Premier League|2005–06]]
+!scope="row"|{{sortname|Pepe|Reina}} {{small|(1)}}
+| {{flagcountry|ESP}}
+| [[Liverpool F.C.|Liverpool]]
+| style="text-align:center"|20
+| style="text-align:center"|<ref name=scoop/>
+|-
+| [[2006–07 FA Premier League|2006–07]]
+!scope="row"|{{sortname|Pepe|Reina}} {{small|(2)}}
+| {{flagcountry|ESP}}
+| [[Liverpool F.C.|Liverpool]]
+| style="text-align:center"|19
+| style="text-align:center"|<ref>{{cite web|url=http://www.liverpoolfc.com/news/latest-news/reina-nets-goalkeeping-award |title=Reina nets goalkeeping award |publisher=Liverpool F.C |date=8 August 2007 |access-date=26 May 2015 |first=Paul |last=Eaton |url-status=dead |archive-url=https://web.archive.org/web/20141006113019/http://www.liverpoolfc.com/news/latest-news/reina-nets-goalkeeping-award |archive-date=6 October 2014 }}</ref>
+|-
+| [[2007–08 Premier League|2007–08]]
+!scope="row"|{{sortname|Pepe|Reina}} {{small|(3)}}
+| {{flagcountry|ESP}}
+| [[Liverpool F.C.|Liverpool]]
+| style="text-align:center"|18
+| style="text-align:center"|<ref>{{cite news|title=Reina collects Barclays Golden Glove Award |url=http://www.premierleague.com/page/Headlines/0,,12306~1313130,00.html |date=15 May 2008 |publisher=Premier League |archive-url=https://web.archive.org/web/20080918085431/http://www.premierleague.com/page/Headlines/0%2C%2C12306~1313130%2C00.html |archive-date=18 September 2008 |access-date=2 February 2014 |url-status=dead }}</ref><ref>{{cite news|title=Pepe Reina picks up Barclays Premier League golden gloves prize|url=https://www.liverpoolecho.co.uk/sport/football/football-news/pepe-reina-picks-up-barclays-3486169|date=15 May 2008|access-date=2 February 2014|newspaper=Liverpool Echo}}</ref>
+|-
+| [[2008–09 Premier League|2008–09]]
+!scope="row"|{{sortname|Edwin|van der Sar}}
+| {{flagcountry|NED}}
+!scope="row" style="background:#ffb"|[[Manchester United F.C.|Manchester United]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+| style="text-align:center"|21
+| style="text-align:center"|<ref name="van" /><ref>{{cite news|title=English Premier League 2008–2009: Table|url=http://www.statto.com/football/stats/england/premier-league/2008-2009/table|access-date=11 July 2015|publisher=Statto|url-status=live|archive-url=https://web.archive.org/web/20150711124522/http://www.statto.com/football/stats/england/premier-league/2008-2009/table|archive-date=11 July 2015}}</ref>
+|-
+| [[2009–10 Premier League|2009–10]]
+!scope="row"|{{sortname|Petr|Čech| |Cech, Petr}} {{small|(2)}}
+| {{flagcountry|CZE}}
+!scope="row" style="background:#ffb"|[[Chelsea F.C.|Chelsea]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+| style="text-align:center"|17
+| style="text-align:center"|<ref name=scoop>{{cite news|title=Chelsea scoop hat-trick of Barclays awards |url=http://www.premierleague.com/page/Headlines/0,,12306~2051839,00.html |date=13 May 2010 |publisher=Premier League |archive-url=https://web.archive.org/web/20100516014748/http://www.premierleague.com/page/Headlines/0%2C%2C12306~2051839%2C00.html |archive-date=16 May 2010 |access-date=2 February 2014 |url-status=dead }}</ref>
+|-
+| [[2010–11 Premier League|2010–11]]
+!scope="row"|{{sortname|Joe|Hart}} {{small|(1)}}
+| {{flagcountry|ENG}}
+| [[Manchester City F.C.|Manchester City]]
+| style="text-align:center"|18
+| style="text-align:center"|<ref>{{cite news|title=Hart handed Barclays Golden Glove |url=http://www.premierleague.com/page/Headlines/0,,12306~2363905,00.html |date=20 May 2011 |publisher=Premier League |archive-url=https://web.archive.org/web/20110522051320/http://www.premierleague.com/page/Headlines/0%2C%2C12306~2363905%2C00.html |archive-date=22 May 2011 |access-date=2 February 2014 |url-status=dead }}</ref><ref>{{cite news|title=Hart wins Golden Glove award|url=http://www.mcfc.co.uk/news/team-news/2012/may/hart-qpr-preview|first=David|last=Clayton|work=MCFC.com|publisher=Manchester City FC|date=8 May 2013|access-date=1 February 2014}}</ref>
+|-
+| [[2011–12 Premier League|2011–12]]
+!scope="row"|{{sortname|Joe|Hart}} {{small|(2)}}
+| {{flagcountry|ENG}}
+!scope="row" style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+| style="text-align:center"|17
+| style="text-align:center"|<ref>{{cite news|title=Joe Hart wins Premier League Golden Glove award|url=https://www.manchestereveningnews.co.uk/sport/football/football-news/joe-hart-wins-premier-league-688245|date=14 May 2012|access-date=2 February 2014|newspaper=Manchester Evening News}}</ref>
+|-
+| [[2012–13 Premier League|2012–13]]
+!scope="row"|{{sortname|Joe|Hart}} {{small|(3)}}
+| {{flagcountry|ENG}}
+| [[Manchester City F.C.|Manchester City]]
+| style="text-align:center"|18
+| style="text-align:center"|<ref name=third>{{cite news|title=Three in a row for Golden Hart|url=https://www.mancity.com/news/first-team/first-team-news/2013/may/three-golden-gloves-awards-in-a-row-for-joe-hart|first=Mark|last=Booth|work=mancity.com|publisher=Manchester City FC|date=8 May 2013|access-date=7 August 2019}}</ref><ref>{{cite news|title=Stats Zone Premier League Goalkeeper of the Year|url=https://www.fourfourtwo.com/features/stats-zone-premier-league-goalkeeper-year|date=31 May 2013|access-date=2 February 2014|magazine=FourFourTwo}}</ref>
+|-
+| rowspan="2" style="background:#B0C4DE"|[[2013–14 Premier League|2013–14]]{{sup|{{dagger|alt=multiple award winners in the same season}}}}
+!scope="row"|{{sortname|Petr|Čech| |Cech, Petr}} {{small|(3)}}
+| {{flagcountry|CZE}}
+| [[Chelsea F.C.|Chelsea]]
+| rowspan="2" style="text-align:center"|16
+| rowspan="2" style="text-align:center"|<ref name=suarez>{{cite web|title=Suarez and Pulis claim Barclays season awards|url=http://www.premierleague.com/en-gb/news/news/2013-14/may/suarez-and-pulis-claim-barclays-season-awards.html|publisher=Premier League|date=13 May 2014|access-date=13 May 2014}}</ref>
+|-
+!scope="row"|{{sortname|Wojciech|Szczęsny}}
+| {{flagcountry|POL}}
+| [[Arsenal F.C.|Arsenal]]
+|-
+| [[2014–15 Premier League|2014–15]]
+!scope="row"|{{sortname|Joe|Hart}} {{small|(4)}}
+| {{flagcountry|ENG}}
+| [[Manchester City F.C.|Manchester City]]
+| style="text-align:center"|14
+| style="text-align:center"|<ref name="hart">{{cite web|url=http://www.premierleague.com/en-gb/news/news/2014-15/may/250515-sergio-aguero-and-joe-hart-seal-golden-awards-double-for-manchester-city.html|title=Aguero and Hart seal Golden Awards double for Man City|date=25 May 2015|publisher=Premier League|access-date=26 May 2015|archive-url=https://web.archive.org/web/20150526024954/http://www.premierleague.com/en-gb/news/news/2014-15/may/250515-sergio-aguero-and-joe-hart-seal-golden-awards-double-for-manchester-city.html|archive-date=26 May 2015}}</ref>
+|-
+| [[2015–16 Premier League|2015–16]]
+!scope="row"|{{sortname|Petr|Čech| |Cech, Petr}} {{small|(4)}}
+| {{flagcountry|CZE}}
+| [[Arsenal F.C.|Arsenal]]
+| style="text-align:center"|16
+| style="text-align:center"|<ref>{{cite news|title=Petr Cech: Arsenal goalkeeper wins Premier League Golden Glove award ahead of David De Gea|url=https://www.independent.co.uk/sport/football/premier-league/petr-cech-arsenal-news-premier-league-golden-glove-award-david-de-gea-a7035131.html|date=18 May 2016|first=Mark|last=Critchley|access-date=24 January 2017|newspaper=The Independent}}</ref>
+|-
+| [[2016–17 Premier League|2016–17]]
+!scope="row"|{{sortname|Thibaut|Courtois}}
+| {{flagcountry|BEL}}
+!scope="row" style="background:#ffb"|[[Chelsea F.C.|Chelsea]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+| style="text-align:center"|16
+| style="text-align:center"|<ref name="courtois17">{{cite news|title=Chelsea's Thibaut Courtois wins Premier League Golden Glove award|url=http://www.espnfc.com/chelsea/story/3130925/chelseas-thibaut-courtois-wins-2016-17-premier-league-golden-glove-award|date=21 May 2017|first=Liam|last=Twomey|access-date=22 May 2017|work=ESPN|publisher=ESPN Internet Ventures}}</ref>
+|-
+| [[2017–18 Premier League|2017–18]]
+!scope="row"|{{sortname|David|de Gea|}} {{small|(1)}}
+| {{flagcountry|ESP}}
+| [[Manchester United F.C.|Manchester United]]
+| style="text-align:center"|18
+| style="text-align:center"|<ref>{{cite news|title=Manchester United goalkeeper David De Gea dedicates Golden Glove award to teammates|url=https://www.espn.com/soccer/story/_/id/37553778/manchester-united-goalkeeper-david-de-gea-dedicates-golden-glove-award-teammates|work=ESPN|date=10 May 2018}}</ref>
+|-
+| [[2018–19 Premier League|2018–19]]
+!scope="row"|{{sortname||Alisson|Alisson Becker}} {{small|(1)}}
+| {{flagcountry|BRA}}
+| [[Liverpool F.C.|Liverpool]]
+| style="text-align:center"|21
+| style="text-align:center"|<ref name="alisson19">{{cite news|title=Alisson takes Golden Glove prize with last-day clean sheet|url=https://www.goal.com/en-gb/news/alisson-takes-golden-glove-prize-with-last-day-clean-sheet/2m05pdsf9l9h1pu7m87a5nxzm|work=Goal|publisher=Goal.com}}</ref>
+|-
+| [[2019–20 Premier League|2019–20]]
+!scope="row"|{{sortname||Ederson|Ederson (footballer, born 1993)}} {{small|(1)}}
+| {{flagcountry|BRA}}
+| [[Manchester City F.C.|Manchester City]]
+| style="text-align:center"|16
+| style="text-align:center"|<ref name="EM">{{cite web |title=Ederson claims Premier League Golden Glove award for most clean sheets|url=https://www.goal.com/en-gb/news/ederson-claims-premier-league-golden-glove-award-for-most/dinamu7vmzti1m0hhoxns8wa2|website=Goal.com|first=Sam|last=France|date=26 July 2020|access-date=26 July 2020}}</ref>
+|-
+| [[2020–21 Premier League|2020–21]]
+!scope="row"|{{sortname||Ederson|Ederson (footballer, born 1993)}} {{small|(2)}}
+| {{flagcountry|BRA}}
+| scope="row" style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+| style="text-align:center"|19
+| style="text-align:center"|<ref name="EM2">{{cite web |title=Ederson among elite trio as he retains Golden Glove|url=https://www.premierleague.com/news/2142271|publisher=Premier League|date=18 May 2021|access-date=18 May 2021}}</ref>
+|-
+| rowspan="2" style="background:#B0C4DE"|[[2021–22 Premier League|2021–22]]{{sup|{{dagger|alt=multiple award winners in the same season}}}}
+!scope="row"|{{sortname||Alisson|Alisson Becker}} {{small|(2)}}
+| {{flagcountry|BRA}}
+| [[Liverpool F.C.|Liverpool]]
+| rowspan="2" style="text-align:center"|20
+| rowspan="2" style="text-align:center"|<ref name=":2122">{{cite news|title=Golden Boot: Mohamed Salah and Son Heung-min finish as Premier League's top scorers |url=https://www.bbc.com/sport/football/61470030 |work=BBC Sport|access-date=22 May 2022|date=22 May 2022}}</ref>
+|-
+!scope="row"|{{sortname||Ederson|Ederson (footballer, born 1993)}} {{small|(3)}}
+| {{flagcountry|BRA}}
+| scope="row" style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+|-
+| [[2022–23 Premier League|2022–23]]
+!scope="row"|{{sortname|David|de Gea}} {{small|(2)}}
+| {{flagcountry|ESP}}
+| [[Manchester United F.C.|Manchester United]]
+| style="text-align:center"|17
+| style="text-align:center"|<ref>{{cite web |title=De Gea wins 2022/23 Golden Glove award |url=https://www.premierleague.com/news/3445926|publisher=Premier League|date=20 May 2023|access-date=25 May 2025}}</ref>
+|-
+| [[2023–24 Premier League|2023–24]]
+!scope="row"|{{sortname|David|Raya}} {{small|(1)}}
+| {{flagcountry|ESP}}
+| [[Arsenal F.C.|Arsenal]]
+| style="text-align:center"|16
+| style="text-align:center"|<ref>{{cite web |title=Raya wins Golden Glove outright with 15th clean sheet |url=https://www.premierleague.com/news/3980036|publisher=Premier League|date=4 May 2024|access-date=4 May 2024}}</ref>
+|-
+| rowspan="2" style="background:#B0C4DE"|[[2024–25 Premier League|2024–25]]{{sup|{{dagger|alt=multiple award winners in the same season}}}}
+!scope="row"|{{sortname|David|Raya}} {{small|(2)}}
+|{{flagcountry|ESP}}
+|[[Arsenal F.C.|Arsenal]]
+| style="text-align: center;" rowspan="2" |13
+| style="text-align: center;" rowspan="2" |<ref>{{Cite web |title=Raya and Sels share Premier League Golden Glove award |url=https://www.premierleague.com/news/4316253 |publisher=Premier League|date=25 May 2025|access-date=25 May 2025}}</ref>
+|-
+!scope="row"|{{sortname|Matz|Sels}}
+|{{flagcountry|BEL}}
+|[[Nottingham Forest F.C.|Nottingham Forest]]
+|-
+| [[2025–26 Premier League|2025–26]]
+!scope="row"|{{sortname|David|Raya}} {{small|(3)}}
+| {{flagcountry|ESP}}
+| style="background:#ffb"|[[Arsenal F.C.|Arsenal]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+| style="text-align:center"|19
+| style="text-align:center"|<ref>{{Cite web |title=Raya wins Coca-Cola Golden Glove award outright with clean sheet at West Ham |url=https://www.premierleague.com/en/news/4604681/202526-premier-league-golden-glove-which-goalkeeper-has-kept-the-most-clean-sheets|publisher=Premier League|date=10 May 2026 |access-date=10 May 2026 |first=Adrian |last=Clarke }}</ref>
+|}
+
+== Multiple awards won by player ==
+The following table lists the number of awards won by players who have won at least two Golden Glove awards.
+
+Players in '''bold ''' are still active in the Premier League.
+
+{| class="wikitable"
+!Awards
+!Player
+!Country
+!Seasons
+|-
+!rowspan="2"|4
+|{{sortname|Petr|Čech| |Cech, Petr}}
+|{{flagcountry|CZE}}
+|[[2004–05 FA Premier League|2004–05]], [[2009–10 Premier League|2009–10]], [[2013–14 Premier League|2013–14]], [[2015–16 Premier League|2015–16]]
+|-
+|{{sortname|Joe|Hart}}
+|{{flagcountry|ENG}}
+|[[2010–11 Premier League|2010–11]], [[2011–12 Premier League|2011–12]], [[2012–13 Premier League|2012–13]], [[2014–15 Premier League|2014–15]]
+|-
+!rowspan="3"|3
+|{{sortname|Pepe|Reina}}
+|{{flagcountry|ESP}}
+|[[2005–06 FA Premier League|2005–06]], [[2006–07 FA Premier League|2006–07]], [[2007–08 Premier League|2007–08]]
+|-
+|{{sortname||Ederson|Ederson (footballer, born 1993)}}
+|{{flagcountry|BRA}}
+|[[2019–20 Premier League|2019–20]], [[2020–21 Premier League|2020–21]], [[2021–22 Premier League|2021–22]]
+|-
+| '''{{sortname|David|Raya}} '''
+|{{flagcountry|ESP}}
+|[[2023–24 Premier League|2023–24]], [[2024–25 Premier League|2024–25]], [[2025–26 Premier League|2025–26]]
+|-
+!rowspan="3" |2
+|'''{{sortname||Alisson|Alisson Becker}}'''
+|{{flagcountry|BRA}}
+|[[2018–19 Premier League|2018–19]], [[2021–22 Premier League|2021–22]]
+|-
+|{{sortname|David|de Gea}}
+|{{flagcountry|ESP}}
+|[[2017–18 Premier League|2017–18]], [[2022–23 Premier League|2022–23]]
+|}
+
+== Awards won by nationality ==
+{| class="sortable wikitable plainrowheaders" style="text-align:center"
+|-
+!scope="col"|Country
+!scope="col"|Players
+!scope="col"|Total
+|-
+!scope="row"|{{flagcountry|ESP}}
+| 3
+| 8
+|-
+!scope="row"|{{flagcountry|BRA}}
+| 2
+| 5
+|-
+!scope="row"|{{flagcountry|CZE}}
+| 1
+| 4
+|-
+!scope="row"|{{flagcountry|ENG}}
+| 1
+| 4
+|-
+!scope="row"|{{flagcountry|BEL}}
+| 2
+| 2
+|-
+!scope="row"|{{flagcountry|NED}}
+| 1
+| 1
+|-
+!scope="row"|{{flagcountry|POL}}
+| 1
+| 1
+|}
+
+== Awards won by club ==
+{| class="sortable wikitable plainrowheaders" style="text-align:center"
+|-
+!scope="col"|Club
+!scope="col"|Players
+!scope="col"|Total
+|-
+!scope="row"|[[Manchester City F.C.|Manchester City]]
+| 2
+| 7
+|-
+!scope="row"|[[Liverpool F.C.|Liverpool]]
+| 2
+| 5
+|-
+! scope="row" |[[Arsenal F.C.|Arsenal]]
+| 3
+| 5
+|-
+!scope="row"|[[Chelsea F.C.|Chelsea]]
+| 2
+| 4
+|-
+!scope="row"|[[Manchester United F.C.|Manchester United]]
+| 2
+| 3
+|-
+!scope="row"|[[Nottingham Forest F.C.|Nottingham Forest]]
+|1
+|1
+|}
+
+== See also ==
+* [[Premier League Save of the Season]]
+* [[Premier League Save of the Month]]
+
+{{Clear}}
+
+== References ==
+{{Reflist}}
+
+{{Premier League Golden Glove}}
+{{Premier League}}
+{{English football awards}}
+
+[[Category:Lists of Premier League players|Goal]]
+[[Category:Premier League trophies and awards|Golden]]
+[[Category:Association football player non-biographical articles]]
+[[Category:Association football goalkeeper awards]]
+[[Category:2005 establishments in England]]

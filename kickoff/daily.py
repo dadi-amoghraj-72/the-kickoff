@@ -12,12 +12,12 @@ import copy
 import os
 from datetime import datetime, timezone
 
-from kickoff import awards, budget, cricket, cricketcache, f1, football, mlb, nba, nfl, order, preview, render, tennis
+from kickoff import awards, budget, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
 from kickoff import state as state_files
-from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica
+from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica, wikipedia
 from kickoff.sources import cricket as cricket_source
 
-FOOTBALL_STATE = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs", "top30"]
+FOOTBALL_STATE = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs", "top30", "seasons"]
 STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb"]
 
 
@@ -80,7 +80,7 @@ def real_adapters(client=None, env=None):
     env = os.environ if env is None else env
 
     def football_go(now, day, st):
-        out = football.run(day, client=client, st={n: st.get(n) or {} for n in FOOTBALL_STATE}, now=now)
+        out = football.run(day, client=client, st={n: st.get(n) or {} for n in FOOTBALL_STATE}, now=now, seasonal=football_season.build)
         return {"sections": out["sections"], "state": {n: out["new_state"][n] for n in FOOTBALL_STATE if n in out["new_state"]},
                 "headlines": out["headlines"], "problems": out["problems"], "stats": {**out["stats"], "claude_cost": out["ledger"].total()}}
 
@@ -89,9 +89,19 @@ def real_adapters(client=None, env=None):
         espn_src = espn_cricket.Source()
         card, table, series = cricketcache.getters(cricketcache.fresh(cricketcache.load(), now), espn_src)    # the Mac's cache first (GitHub cannot read ESPN's pages)
         old = copy.deepcopy(st.get("cricket") or {})
+        wiki = wikipedia.Source()
         got = cricket.run(now, espn.window_start(day), old, get_matches, cricket_source.get_scorecard, cricket_source.scorecards_affordable,
-                          espn_card=card, espn_table=table, espn_series=series, espn_extra=lambda ms: cricket.espn_matches(espn_cricket.Feed()))
+                          espn_card=card, espn_table=table, espn_series=series, espn_extra=lambda ms: cricket.espn_matches(espn_cricket.Feed()),
+                          extras_fn=ipl.extras_for(day.year, wiki) if day.month in (3, 4, 5, 6) else None)
         new = dict(got["state"])
+        html_awards = ""
+        if day.month in (4, 5, 6):                                  # the IPL's end-of-season awards, the first morning the season page has them
+            try:
+                prev = old.get("ipl_awards") or {"season": day.year, "seen": {}, "rows": [], "names": {}}
+                html_awards, new["ipl_awards"] = ipl.awards_block(day.year, prev, wiki)
+            except Exception:
+                new["ipl_awards"] = old.get("ipl_awards")
+        got = {**got, "html": html_awards + got["html"]}
         new["cards"] = dict(list({**old.get("cards", {}), **new.get("cards", {})}.items())[-60:])   # bought scorecards are never paid for twice
         return {"sections": [{"id": "cricket", "title": "Cricket", "html": got["html"]}] if got["html"] else [], "state": {"cricket": new},
                 "stats": {**got["stats"], "calls_used_today": got["used"]}}
@@ -103,7 +113,7 @@ def real_adapters(client=None, env=None):
         _simple("tennis", "Tennis", lambda now, day, s: tennis.run(now, s, espn_tennis.Source(), fetch_news=lambda: feeds.fetch_all(tennis.FEEDS)), "tennis"),
         _simple("nfl", "NFL", _with_extras(lambda now, day, s: nfl.run(now, day, s, espn_nfl.Source()), "nfl", "football", "NFL", client), "nfl"),
         _simple("nba", "NBA", _with_extras(lambda now, day, s: nba.run(now, day, s, espn_nba.Source()), "nba", "basketball", "NBA", client), "nba"),
-        _simple("mlb", "MLB", lambda now, day, s: mlb.run(now, day, s, espn_mlb.Source()), "mlb"),
+        _simple("mlb", "MLB", _with_extras(lambda now, day, s: mlb.run(now, day, s, espn_mlb.Source()), "mlb", "baseball", "MLB", client), "mlb"),
     ]
 
 

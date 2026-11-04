@@ -40,8 +40,9 @@ def _paragraphs(written, match_by_id):
     return out
 
 
-def run(day, client=None, st=None, now=None, demo=False):
+def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
     """Build both sections. demo=True makes the FPL corner show everything it can, whatever the deadline. st: {"tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs"} (copied, not changed).
+    seasonal: kickoff.football_season.build or None: the Premier League's preview, closing note and awards, and the FA Cup and Champions League closing notes.
     Returns {"sections", "headlines", "new_state", "ledger", "problems", "stats"}."""
     now = now or datetime.now(timezone.utc)
     st = copy.deepcopy(st or {})
@@ -98,7 +99,14 @@ def run(day, client=None, st=None, now=None, demo=False):
         return roundup.html(facts, size, period, info)
 
     # ---- The Football section ----
-    football, quiet = "", []
+    fa_cup = guard("FA Cup results", espn.recent_results, espn.FA_CUP, day) or []   # the FA Cup: its own block, after the leagues
+    season_out = {"pl": "", "fa": "", "cl": ""}
+    if seasonal:                                         # the Premier League's season notes, and the FA Cup and Champions League closing notes
+        got = guard("season notes", seasonal, day, now, rows["eng.1"], fa_cup, cl_matches, st.get("seasons"), client)
+        if got:
+            season_out = got
+            new["seasons"] = got["state"]
+    football, quiet = (f"<h3>Premier League season</h3>{season_out['pl']}" if season_out["pl"] else ""), []
     for lg in LEAGUE_ORDER:
         name, res, tbl = leagues[lg], results[lg] or [], rows[lg]
         parts = ""
@@ -123,10 +131,9 @@ def run(day, client=None, st=None, now=None, demo=False):
                 new.setdefault("tables", {})[lg] = entry
         if parts:
             football += f"<h3>{r.esc(name)}</h3>{parts}"
-    fa_cup = guard("FA Cup results", espn.recent_results, espn.FA_CUP, day) or []   # the FA Cup: its own block, after the leagues
     if fa_cup:
         top_ids = {x["id"] for x in rows["eng.1"] or []} | {x["id"] for x in guard("Championship table", espn.get_table, "eng.2") or []}
-        football += facup.html(fa_cup, top_ids)
+        football += facup.html(fa_cup, top_ids) + season_out["fa"]
         overviews["FA Cup"] = overview.matchday_facts("FA Cup", fa_cup, {}, None)      # so its big results can make the headlines
     wsl_res = guard("Women's Super League results", espn.recent_results, espn.WSL, day) or []
     wsl_parts = ""
@@ -151,6 +158,7 @@ def run(day, client=None, st=None, now=None, demo=False):
         football += champions.section_html(cl_matches, cl_rows, None, cl_box, tables.before_of(saved_tables.get(espn.CHAMPIONS_LEAGUE)),
                                            legs_fn=espn.get_tie_legs, goals_fn=lambda leg_id: espn.get_match_details(leg_id, espn.CHAMPIONS_LEAGUE),
                                            performers=performers.html(guard("Champions League performers", performers.best, espn.CHAMPIONS_LEAGUE, cl_matches) or []))
+        football += season_out["cl"]
         if cl_rows and champions.in_league_phase(cl_matches):   # remembered so the next league-phase table can show who moved
             new.setdefault("tables", {})[espn.CHAMPIONS_LEAGUE] = {"published": day.isoformat(), "rows": tables.signature(cl_rows)}
     if quiet:
@@ -246,5 +254,5 @@ def run(day, client=None, st=None, now=None, demo=False):
     costs["days"][day.isoformat()] = {"spent": ledger.total(), "calls": len(ledger.rows)}
     stats = {"matches": {**{leagues[lg]: len(results[lg] or []) for lg in LEAGUE_ORDER}, "Women's Super League": len(wsl_res)},
              "cl_matches": len(cl_matches),
-             "news_candidates": len(cands), "news_shown": len(shown_news), "injury_items": len(inj_items)}
+             "season_cost": round(season_out.get("cost", 0.0), 5), "news_candidates": len(cands), "news_shown": len(shown_news), "injury_items": len(inj_items)}
     return {"sections": sections, "headlines": unique, "new_state": new, "ledger": ledger, "problems": problems, "stats": stats}

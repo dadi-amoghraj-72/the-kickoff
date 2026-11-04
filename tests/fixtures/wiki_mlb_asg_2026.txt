@@ -1,0 +1,579 @@
+{{Short description|none}}
+{{Use American English|date=July 2026}}
+{{Use mdy dates|date=July 2024}}
+{{Infobox MLB All-Star Game
+| image               = 2026 Major League Baseball All-Star Game logo.svg
+| year                = 2026
+| visitor             = '''[[American League|American League]]'''
+| top1                = 3
+| top2                = 0
+| top3                = 0
+| top4                = 0
+| top5                = 0
+| top6                = 0
+| top7                = 0
+| top8                = 1
+| top9                = 0
+| visitor_r           = 4
+| visitor_h           = 7
+| visitor_e           = 0
+| home                = [[National League (baseball)|National League]]
+| bot1                = 0
+| bot2                = 0
+| bot3                = 0
+| bot4                = 0
+| bot5                = 0
+| bot6                = 0
+| bot7                = 0
+| bot8                = 0
+| bot9                = 0
+| home_r              = 0
+| home_h              = 3
+| home_e              = 0
+| date                = July 14, 2026
+| venue               = [[Citizens Bank Park]]
+| city                = [[Philadelphia]], [[Pennsylvania]]
+| VisitorManager      = [[John Schneider (baseball)|John Schneider]]
+| VisitorManagerTeam  = [[Toronto Blue Jays|TOR]]
+| HomeManager         = [[Dave Roberts (baseball manager)|Dave Roberts]]
+| HomeManagerTeam     = [[Los Angeles Dodgers|LAD]]
+| MVP                 = [[Cody Bellinger]]
+| MVPTeam             = [[New York Yankees|NYY]]
+| television          = [[MLB on Fox|Fox]] (U.S.)<br>[[Sportsnet]] (Canada, simulcast on [[MLB International]])<br> [[TNT Sports (United Kingdom)|TNT Sports 1]] (United Kingdom, simulcast on MLB International)<br> [[NHK BS]] (Japan)
+| tv_announcers       = [[Joe Davis (sportscaster)|Joe Davis]], [[John Smoltz]], [[Ken Rosenthal]], and [[Tom Verducci]] (Fox) <br>[[Matt Vasgersian]] and [[Yonder Alonso]] (Sportsnet/MLB International)<br> [[So Taguchi]] and Shuhei Takagi (NHK BS)
+| radio               = [[Major League Baseball on ESPN Radio|ESPN]]<ref>{{Cite web |last=Lewis |first=Jon |date=2025-02-21 |title=ESPN-MLB split includes radio, streaming |url=https://www.sportsmediawatch.com/2025/02/espn-mlb-split-includes-radio-streaming/ |access-date=2025-02-24 |work=Sports Media Watch}}</ref>
+| radio_announcers    = [[Karl Ravech]], [[Doug Glanville]], [[Buster Olney]], and [[Tim Kurkjian]]
+| attendance          = 43,916
+| first_pitch         = 8:28 PM
+}}
+The '''2026 Major League Baseball All-Star Game''' was the 96th [[Major League Baseball All-Star Game]] played between the [[American League]] (AL) and the [[National League (baseball)|National League]] (NL) of [[Major League Baseball]]. The game was played on July 14, 2026. The game was televised nationally by [[Major League Baseball on Fox|Fox]]. The game was hosted by the [[Philadelphia Phillies]] at [[Citizens Bank Park]] in [[Philadelphia]], [[Pennsylvania]]. The site was chosen [[United States Semiquincentennial|in commemoration]] of the [[signing of the United States Declaration of Independence]] in the city on July 4, 1776.<ref>{{cite web |last1=Seidman |first1=Corey |last2=Salisbury |first2=Jim |title=Phillies set to host 2026 MLB All-Star Game at Citizens Bank Park |url=https://www.nbcsportsphiladelphia.com/mlb/phillies-set-to-host-2026-mlb-all-star-game-at-citizens-bank-park/398420/ |work=NBC Sports Philadelphia |publisher=NBC Sports |access-date=27 July 2024|date=April 16, 2019}}</ref>
+
+The American League beat the National League 4–0, marking it the first shutout in an All-Star game since [[Citi Field]] in [[2013 Major League Baseball All-Star Game|2013]]. [[Cody Bellinger]] of the [[New York Yankees]], who drove in two [[run (baseball)|runs]] in the first inning, won the [[Major League Baseball All-Star Game Most Valuable Player|MLB All-Star Game Most Valuable Player Award]].
+
+==Background==
+===Host selection===
+[[File:20250928PHICBP2026ASG.jpg|thumb|left|2026 MLB All-Star Game logo above centerfield in Citizens Bank Park in Philadelphia (September 2025)]]
+The Philadelphia Phillies were awarded the game on April 16, 2019. This was the fourth time that the Phillies will host an All-Star Game, but the first since moving to Citizens Bank Park in 2004; the previous games were in [[1952 Major League Baseball All-Star Game|1952]] at [[Shibe Park]] and in [[1976 Major League Baseball All-Star Game|1976]] and [[1996 Major League Baseball All-Star Game|1996]] at [[Veterans Stadium]].<ref>{{cite web |last1=Zolecki |first1=Todd |title=Philadelphia will host the 2026 Midsummer Classic. |url=https://www.mlb.com/news/phillies-will-host-2026-all-star-game |website=mlb.com |publisher=Major League Baseball |access-date=27 July 2024|date=April 16, 2019}}</ref> The [[Philadelphia Athletics]] had also hosted the All-Star Game at Shibe Park, in [[1943 Major League Baseball All-Star Game|1943]].<ref>{{cite web |title=11th Annual All-Star Game Program, 1943 |work=Smithsonian Institution |url=https://www.si.edu/object/11th-annual-all-star-game-program-1943%3Anmah_1064413 |access-date=2025-07-16}}</ref>
+
+The All-Star Game logo was unveiled on July 18, 2025, prior to the Phillies' home game against the Los Angeles Angels, with the presence of the Philadelphia City Council, Phillies executives and former Phillies players. The logo features the Liberty Bell with the MLB Batter logo on top and the host city and year on the bottom.<ref>{{cite web|last=Casella|first=Paul|title=MLB, Phillies unveil 2026 All-Star Game logo|url=https://www.mlb.com/news/mlb-all-star-game-2026-logo|publisher=MLB.com|date=July 18, 2025|access-date=July 18, 2025}}</ref>
+
+===Roster selections===
+The starting rosters for each league's position players plus [[designated hitter]] (DH) were determined by fan balloting, which was conducted in two phases. Since 2022, the first-phase top vote-getter for each league automatically received a spot in the starting lineup. The top two vote-getters for every other non-pitching position and DH advanced to the second phase of voting. There are normally six finalists for the three outfield positions in each league, except when an outfielder is the top vote-getter, in which case there are four finalists for the remaining two outfield positions. Voting does not carry over between phases.<ref>{{cite web|last=Castrovince|first=Anthony|title=All-Star FAQ: What to know about how players are selected|url=https://www.mlb.com/news/all-star-game-roster-rules-faq-c239654292|website=MLB.com|date=July 7, 2024|access-date=July 30, 2024}}</ref>
+
+First-phase voting was held from June 3 and ended on June 25.<ref>{{Cite web |title=Phase 1 of All-Star voting ends; finalists revealed tonight |url=https://www.mlb.com/news/mlb-2026-all-star-ballot-phase-1-is-over}}</ref> The top vote-getters from each league were [[Ernie Clement]] for the AL and [[Shohei Ohtani]] for the NL. The second-phase voting was from June 29 through July 2. All voting was conducted online, at [[MLB.com]] or via the MLB [[Application software|app]].<ref>{{cite news |title=Breaking down the All-Star Ballot position by position |first=Jason |last=Foster |work=MLB.com |date=June 3, 2026 |access-date=June 4, 2026 |url=https://www.mlb.com/news/guide-to-2026-mlb-all-star-voting}}</ref>
+{{clear}}
+
+==Rosters==
+{{col-begin}}
+{{col-break}}
+===American League===
+{| class="wikitable sortable plainrowheaders" style="text-align:center;"
+|-
+|+Elected starters
+|-
+!scope="col" | Position
+!scope="col" style="width:150px;"|Player
+!scope="col" style="width:100px;"|Team
+!scope="col" | All-Star Games
+|-
+|[[Catcher|C]]
+!scope="row" style="text-align:center"| {{sortname|Shea|Langeliers}}
+| [[Athletics (baseball)|Athletics]] || 1
+|-
+|[[First baseman|1B]]
+!scope="row" style="text-align:center"| {{sortname|Vladimir|Guerrero Jr.}}{{sup|#}}
+| [[Toronto Blue Jays|Blue Jays]] || 6
+|-
+| [[Second baseman|2B]]
+!scope="row" style="text-align:center"| {{sortname|Ernie|Clement}}{{dagger}}
+| [[Toronto Blue Jays|Blue Jays]] || 1
+|-
+|[[Third baseman|3B]]
+!scope="row" style="text-align:center"| {{sortname|Junior|Caminero}}
+| [[Tampa Bay Rays|Rays]] || 2
+|-
+|[[Shortstop|SS]]
+!scope="row" style="text-align:center"| {{sortname|Bobby|Witt Jr.}}
+| [[Kansas City Royals|Royals]] || 3
+|-
+|[[Outfielder|OF]]
+!scope="row" style="text-align:center"| {{sortname|Byron|Buxton}}{{sup|#}}
+| [[Minnesota Twins|Twins]] || 3
+|-
+|[[Outfielder|OF]]
+!scope="row" style="text-align:center"| {{sortname|Aaron|Judge}}{{sup|#}}
+| [[New York Yankees|Yankees]] || 8
+|-
+|[[Outfielder|OF]]
+!scope="row" style="text-align:center"| {{sortname|Mike|Trout}}
+| [[Los Angeles Angels|Angels]] || 12
+|-
+|[[Designated hitter|DH]]
+!scope="row" style="text-align:center"| {{sortname|Yordan|Alvarez}}
+| [[Houston Astros|Astros]] || 4
+|}
+{| class="wikitable sortable plainrowheaders" style="text-align:center;"
+|-
+|+Reserves
+|-
+!scope="col" | Position
+!scope="col" style="width:150px;"|Player
+!scope="col" style="width:100px;"|Team
+!scope="col" | All-Star Games
+|- 
+|[[Catcher|C]]
+!scope="row" style="text-align:center"| {{sortname|Dillon|Dingler}} 
+| [[Detroit Tigers|Tigers]] || 1
+|- 
+|[[Catcher|C]]
+!scope="row" style="text-align:center"| {{sortname|Adley|Rutschman}} 
+| [[Baltimore Orioles|Orioles]] || 3 
+|- 
+|[[First baseman|1B]] 
+!scope="row" style="text-align:center"| {{sortname|Willson|Contreras}}{{ref label|B|B|none}} 
+| [[Boston Red Sox|Red Sox]] || 4
+|- 
+|[[First baseman|1B]] 
+!scope="row" style="text-align:center"| {{sortname|Nick|Kurtz}}{{ref label|A|A|none}}{{sup|#}}
+| [[Athletics (baseball)|Athletics]] || 1 
+|- 
+|[[First baseman|1B]] 
+!scope="row" style="text-align:center"| {{sortname|Munetaka|Murakami}}{{ref label|I|I|none}}
+| [[Chicago White Sox|White Sox]] || 1
+|- 
+|[[First baseman|1B]] 
+!scope="row" style="text-align:center"| {{sortname|Ben|Rice}} 
+| [[New York Yankees|Yankees]] || 1
+|- 
+|[[Second baseman|2B]] 
+!scope="row" style="text-align:center"| {{sortname|Travis|Bazzana}} 
+| [[Cleveland Guardians|Guardians]] || 1 
+|- 
+|[[Third baseman|3B]] 
+!scope="row" style="text-align:center"| {{sortname|Miguel|Vargas|dab=baseball}} 
+| [[Chicago White Sox|White Sox]] || 1 
+|- 
+|[[Shortstop|SS]] 
+!scope="row" style="text-align:center"| {{sortname|Kevin|McGonigle}} 
+| [[Detroit Tigers|Tigers]] || 1 
+|- 
+|[[Outfielder|OF]] 
+!scope="row" style="text-align:center"| {{sortname|Randy|Arozarena}} 
+| [[Seattle Mariners|Mariners]] || 3 
+|- 
+|[[Outfielder|OF]] 
+!scope="row" style="text-align:center"| {{sortname|Cody|Bellinger}} 
+| [[New York Yankees|Yankees]] || 3 
+|- 
+|[[Outfielder|OF]] 
+!scope="row" style="text-align:center"| {{sortname|Riley|Greene}} 
+| [[Detroit Tigers|Tigers]] || 3
+|- 
+|[[Outfielder|OF]] 
+!scope="row" style="text-align:center"| {{sortname|Tristan|Peters}}{{ref label|J|J|none}} 
+| [[Chicago White Sox|White Sox]] || 1 
+|- 
+|[[Outfielder|OF]] 
+!scope="row" style="text-align:center"| {{sortname|Ceddanne|Rafaela}}{{ref label|F|F|none}}
+| [[Boston Red Sox|Red Sox]] || 1 
+|- 
+|[[Designated hitter|DH]] 
+!scope="row" style="text-align:center"| {{sortname|Yandy|Díaz}} 
+| [[Tampa Bay Rays|Rays]] || 2
+|}
+{| class="wikitable sortable plainrowheaders" style="text-align:center;"
+|-
+|+Pitchers
+|-
+!scope="col"|Player
+!scope="col" style="width:100px;"|Team
+!scope="col" | All-Star Games 
+|- 
+!scope="row" style="text-align:center"| {{sortname|Bryan|Baker|dab=baseball}}
+| [[Tampa Bay Rays|Rays]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Dylan|Cease}}
+| [[Toronto Blue Jays|Blue Jays]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Aroldis|Chapman}}
+| [[Boston Red Sox|Red Sox]] || 9
+|- 
+!scope="row" style="text-align:center"| {{sortname|Jacob|Latz}}
+| [[Texas Rangers (baseball)|Rangers]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Nick|Martinez|dab=baseball}}{{ref label|G|G|none}}
+| [[Tampa Bay Rays|Rays]] || 1 
+|- 
+!scope="row" style="text-align:center"| {{sortname|Parker|Messick}}
+| [[Cleveland Guardians|Guardians]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Drew|Rasmussen}}
+| [[Tampa Bay Rays|Rays]] || 2
+|- 
+!scope="row" style="text-align:center"| {{sortname|Joe|Ryan|dab=baseball}}
+| [[Minnesota Twins|Twins]] || 2
+|- 
+!scope="row" style="text-align:center"| {{sortname|Cam|Schlittler}}
+| [[New York Yankees|Yankees]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Cade|Smith}}
+| [[Cleveland Guardians|Guardians]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Ranger|Suárez}}{{sup|#}}
+| [[Boston Red Sox|Red Sox]] || 2
+|- 
+!scope="row" style="text-align:center"| {{sortname|Louis|Varland}}
+| [[Toronto Blue Jays|Blue Jays]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Justin|Verlander}}{{double-dagger}}
+| [[Detroit Tigers|Tigers]] || 10
+|-
+!scope="row" style="text-align:center"| {{sortname|Michael|Wacha}}
+| [[Kansas City Royals|Royals]] || 2
+|}
+{{col-break}}
+
+===National League===
+{| class="wikitable sortable plainrowheaders" style="text-align:center;"
+|-
+|+Elected starters
+|-
+!scope="col" | Position
+!scope="col" style="width:150px;"|Player
+!scope="col" style="width:100px;"|Team
+!scope="col" | All-Star Games
+|-
+|[[Catcher|C]]
+!scope="row" style="text-align:center"| {{sortname|Drake|Baldwin}}
+| [[Atlanta Braves|Braves]] || 1
+|-
+|[[First baseman|1B]]
+!scope="row" style="text-align:center"| {{sortname|Freddie|Freeman}}
+| [[Los Angeles Dodgers|Dodgers]] || 10
+|-
+| [[Second baseman|2B]]
+!scope="row" style="text-align:center"| {{sortname|Ozzie|Albies}}
+| [[Atlanta Braves|Braves]] || 4
+|-
+|[[Third baseman|3B]]
+!scope="row" style="text-align:center"| {{sortname|Max|Muncy}}
+| [[Los Angeles Dodgers|Dodgers]] || 3
+|-
+|[[Shortstop|SS]]
+!scope="row" style="text-align:center"| {{sortname|CJ|Abrams}}
+| [[Washington Nationals|Nationals]] || 2
+|-
+|[[Outfielder|OF]]
+!scope="row" style="text-align:center"| {{sortname|Brandon|Marsh|dab=baseball}}
+| [[Philadelphia Phillies|Phillies]] || 1
+|-
+|[[Outfielder|OF]]
+!scope="row" style="text-align:center"| {{sortname|Andy|Pages}}
+| [[Los Angeles Dodgers|Dodgers]] || 1
+|-
+|[[Outfielder|OF]]
+!scope="row" style="text-align:center"| {{sortname|Juan|Soto}}
+| [[New York Mets|Mets]] || 5
+|-
+|[[Designated hitter|DH]]
+!scope="row" style="text-align:center"| {{sortname|Shohei|Ohtani}}{{dagger}}{{sup|#}}
+| [[Los Angeles Dodgers|Dodgers]] || 6
+|}
+{| class="wikitable sortable plainrowheaders" style="text-align:center;"
+|-
+|+Reserves
+|-
+!scope="col" | Position
+!scope="col" style="width:150px;"|Player
+!scope="col" style="width:100px;"|Team
+!scope="col" | All-Star Games
+|-
+| [[Catcher|C]]
+!scope="row" style="text-align:center"| {{sortname|William|Contreras}}
+| [[Milwaukee Brewers|Brewers]] || 3
+|-
+| [[Catcher|C]]
+!scope="row" style="text-align:center"| {{sortname|Hunter|Goodman}}
+| [[Colorado Rockies|Rockies]] || 2
+|-
+| [[First baseman|1B]]
+!scope="row" style="text-align:center"| {{sortname|Bryce|Harper}}{{double-dagger}}
+| [[Philadelphia Phillies|Phillies]] || 9
+|-
+| [[First baseman|1B]]
+!scope="row" style="text-align:center"| {{sortname|Matt|Olson}} 
+| [[Atlanta Braves|Braves]] || 4
+|- 
+| [[Second baseman|2B]] 
+!scope="row" style="text-align:center"| {{sortname|Luis|Arráez}} 
+| [[San Francisco Giants|Giants]] || 4 
+|- 
+| [[Third baseman|3B]] 
+!scope="row" style="text-align:center"| {{sortname|Sal|Stewart}} 
+| [[Cincinnati Reds|Reds]] || 1 
+|- 
+| [[Shortstop|SS]] 
+!scope="row" style="text-align:center"| {{sortname|Otto|Lopez}} 
+| [[Miami Marlins|Marlins]] || 1
+|- 
+| [[Outfielder|OF]] 
+!scope="row" style="text-align:center"| {{sortname|Corbin|Carroll}} 
+| [[Arizona Diamondbacks|Diamondbacks]] || 3 
+|- 
+| [[Outfielder|OF]] 
+!scope="row" style="text-align:center"| {{sortname|Pete|Crow-Armstrong}} 
+| [[Chicago Cubs|Cubs]] || 2 
+|- 
+| [[Outfielder|OF]] 
+!scope="row" style="text-align:center"| {{sortname|Jordan|Walker|dab=baseball}}
+| [[St. Louis Cardinals|Cardinals]] || 1 
+|- 
+| [[Outfielder|OF]] 
+!scope="row" style="text-align:center"| {{sortname|James|Wood|dab=baseball}}
+| [[Washington Nationals|Nationals]] || 2 
+|- 
+| [[Designated hitter|DH]] 
+!scope="row" style="text-align:center"| {{sortname|Iván|Herrera}}{{ref label|H|H|none}} 
+| [[St. Louis Cardinals|Cardinals]] || 1 
+|- 
+| [[Designated hitter|DH]] 
+!scope="row" style="text-align:center"| {{sortname|Kyle|Schwarber}} 
+| [[Philadelphia Phillies|Phillies]] || 4
+|}
+{| class="wikitable sortable plainrowheaders" style="text-align:center;"
+|-
+|+Pitchers
+|-
+!scope="col"|Player
+!scope="col" style="width:100px;"|Team
+!scope="col" | All-Star Games 
+|- 
+!scope="row" style="text-align:center"| {{sortname|Braxton|Ashcraft}}{{ref label|D|D|none}}{{sup|#}} 
+| [[Pittsburgh Pirates|Pirates]] || 1 
+|- 
+!scope="row" style="text-align:center"| {{sortname|Chase|Burns}}{{sup|#}}
+| [[Cincinnati Reds|Reds]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Jhoan|Durán}}
+| [[Philadelphia Phillies|Phillies]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Foster|Griffin}}{{ref label|L|L|none}} 
+| [[Washington Nationals|Nationals]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Raisel|Iglesias}}
+| [[Atlanta Braves|Braves]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Jesús|Luzardo}}{{ref label|C|C|none}}
+| [[Philadelphia Phillies|Phillies]] || 1 
+|- 
+!scope="row" style="text-align:center"| {{sortname|Max|Meyer|dab=baseball}}{{sup|#}}
+| [[Miami Marlins|Marlins]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Mason|Miller}}
+| [[San Diego Padres|Padres]] || 2
+|- 
+!scope="row" style="text-align:center"| {{sortname|Jacob|Misiorowski}}{{sup|#}}
+| [[Milwaukee Brewers|Brewers]] || 2
+|- 
+!scope="row" style="text-align:center"| {{sortname|Riley|O'Brien}}{{ref label|E|E|none}} 
+| [[St. Louis Cardinals|Cardinals]] || 1 
+|- 
+!scope="row" style="text-align:center"| {{sortname|Eduardo|Rodríguez|dab=left-handed pitcher}}
+| [[Arizona Diamondbacks|Diamondbacks]] || 1
+|- 
+!scope="row" style="text-align:center"| {{sortname|Chris|Sale}}
+| [[Atlanta Braves|Braves]] || 10
+|- 
+!scope="row" style="text-align:center"| {{sortname|Cristopher|Sánchez}}
+| [[Philadelphia Phillies|Phillies]] || 2
+|- 
+!scope="row" style="text-align:center"| {{sortname|Paul|Skenes}}{{sup|#}}
+| [[Pittsburgh Pirates|Pirates]] || 3
+|- 
+!scope="row" style="text-align:center"| {{sortname|Logan|Webb}}
+| [[San Francisco Giants|Giants]] || 3
+|- 
+!scope="row" style="text-align:center"| {{sortname|Justin|Wrobleski}}{{ref label|K|K|none}}  
+| [[Los Angeles Dodgers|Dodgers]] || 1 
+|- 
+!scope="row" style="text-align:center"| {{sortname|Yoshinobu|Yamamoto}}
+| [[Los Angeles Dodgers|Dodgers]] || 2
+|}
+{{col-end}}
+{{dagger}} Denotes top vote-getter in each league <br> {{double-dagger}} Denotes player was a "Legend Pick" selected by the [[Commissioner of Baseball]]<ref>{{cite news |title=MLB All-Star rosters announced, with Dodgers, Braves and Phillies tied for most players named |work=Yahoo Sports |date=July 4, 2026 |access-date=July 4, 2026 |url=https://sports.yahoo.com/mlb/article/mlb-all-star-rosters-announced-with-dodgers-braves-and-phillies-tied-for-most-players-named-000218823.html}}</ref>
+
+====Roster notes====
+{{refbegin}}
+<ol type="a">
+<li>{{note label|A|A|none}}[[Nick Kurtz]] was named starter in place of [[Vladimir Guerrero Jr.]] due to Guerrero electing not to play.<ref>{{Cite news |title=Nick Kurtz Takes Over as AL Starter at First Base |work=NBC Sports |date=July 4, 2026 |access-date=July 4, 2026 |url=https://www.nbcsports.com/fantasy/baseball/player-news/2026-07-04/nick-kurtz-takes-over-as-al-starter-at-first-base}}</ref></li>
+<li>{{note label|B|B|none}}[[Willson Contreras]] was named as the roster replacement for Vladimir Guerrero Jr. due to Guerrero electing not to play.<ref>{{Cite news|title=Willson Contreras named as All-Star replacement |work=NBC Sports |date=July 7, 2026 |access-date=July 7, 2026 |url=https://www.nbcsports.com/fantasy/baseball/player-news/2026-07-07/willson-contreras-named-as-all-star-replacement}}</ref></li>
+<li>{{note label|C|C|none}}[[Braxton Ashcraft]] was named as the roster replacement for [[Jacob Misiorowski]] due to injury.<ref>{{cite web |url=https://www.mlb.com/news/jacob-misiorowski-arm-fatigue-scratched-from-sunday-s-start |title=Misiorowski (arm fatigue) scratched Sunday, will miss All-Star Game |website=MLB.com}}</ref></li>
+<li>{{note label|D|D|none}}[[Jesús Luzardo]] was named as the roster replacement for [[Max Meyer (baseball)|Max Meyer]] due to Meyer starting on Sunday.<ref name="Tue replacements">{{Cite news|title=Here are the 2026 All-Star Game roster replacements|url=https://www.mlb.com/news/2026-all-star-game-roster-replacements|website=MLB.com|date=July 7, 2026|access-date=July 7, 2026}}</ref></li> 
+<li>{{note label|E|E|none}}[[Riley O'Brien]] was named as the roster replacement for [[Paul Skenes]] due to Skenes starting on Sunday.<ref name="Tue replacements"/></li>
+<li>{{note label|F|F|none}}[[Ceddanne Rafaela]] was named as the roster replacement for [[Aaron Judge]] due to injury.<ref name="Fri replacements">{{Cite news|title=Herrera, Rafaela, Martinez, Murakami named All-Star replacements|url=https://www.espn.com/mlb/story/_/id/49329543/ivan-herrera-ceddanne-rafaela-nick-martinez-munetaka-murakami-named-all-star-injury-replacements|website=ESPN.com|date=July 10, 2026|access-date=July 10, 2026}}</ref></li> 
+<li>{{note label|G|G|none}}[[Nick Martinez (baseball)|Nick Martinez]] was named as the roster replacement for [[Ranger Suárez]] due to injury.<ref name="Fri replacements"/></li>
+<li>{{note label|H|H|none}}[[Iván Herrera]] was named as the roster replacement for [[Shohei Ohtani]] due to injury.<ref name="Fri replacements"/></li>
+<li>{{note label|I|I|none}}[[Munetaka Murakami]] was named as the roster replacement for [[Byron Buxton]] due to injury.<ref name="Fri replacements"/></li>
+<li>{{note label|J|J|none}}[[Tristan Peters]] was named as the roster replacement for [[Nick Kurtz]] due to injury.<ref>{{Cite news |title=Tristan Peters added to All-Star Game roster |work=NBC Sports |date=July 11, 2026 |access-date=July 11, 2026 |url=https://www.nbcsports.com/fantasy/baseball/player-news/2026-07-11/tristan-peters-added-to-all-star-game-roster}}</ref></li>
+<li>{{note label|K|K|none}}[[Justin Wrobleski]] was named as the roster replacement for [[Chase Burns]] due to injury.<ref>{{Cite news |title=Justin Wrobleski finally added to All-Star roster |work=NBC Sports |date=July 11, 2026 |access-date=July 11, 2026 |url=https://www.nbcsports.com/fantasy/baseball/player-news/2026-07-11/justin-wrobleski-finally-added-to-all-star-roster}}</ref></li>
+<li>{{note label|L|L|none}}[[Foster Griffin]] was named as the roster replacement for [[Braxton Ashcraft]] due to Ashcraft electing not to pitch.<ref>{{Cite news |title=Nationals' Griffin joining Wood, Abrams at All-Star Game |work=MLB.com |date=July 11, 2026 |access-date=July 11, 2026 |url=https://www.mlb.com/news/foster-griffin-named-to-2026-nl-all-star-team}}</ref></li>
+</ol>
+:<nowiki>#</nowiki>: Indicates player would not play (replaced as per reference notes above).
+{{refend}}
+
+==Game summary==
+===Starting lineup===
+{{col-begin}}
+{{col-break}}
+{| class="wikitable sortable plainrowheaders" style="text-align:center;"
+|+American League
+|-
+!scope="col"|Order
+!scope="col"|Player
+!scope="col"|Team
+!scope="col"|Position
+|-
+|'''1'''
+!scope="row" style="text-align:center"| {{sortname|Mike|Trout}}
+| [[Los Angeles Angels|Angels]] || [[Center fielder|CF]]
+|-
+|'''2'''
+!scope="row" style="text-align:center"| {{sortname|Yordan|Alvarez}}
+| [[Houston Astros|Astros]] || [[Designated hitter|DH]]
+|-
+|'''3'''
+!scope="row" style="text-align:center"| {{sortname|Shea|Langeliers}}
+| [[Athletics (baseball)|Athletics]] || [[Catcher|C]]
+|-
+|'''4'''
+!scope="row" style="text-align:center"| {{sortname|Junior|Caminero}}
+| [[Tampa Bay Rays|Rays]] || [[Third baseman|3B]]
+|-
+|'''5'''
+!scope="row" style="text-align:center"| {{sortname|Bobby|Witt Jr.}}
+| [[Kansas City Royals|Royals]] || [[Shortstop|SS]]
+|-
+|'''6'''
+!scope="row" style="text-align:center"| {{sortname|Cody|Bellinger}} 
+| [[New York Yankees|Yankees]] || [[Right fielder|RF]]
+|-
+|'''7'''
+!scope="row" style="text-align:center"| {{sortname|Ben|Rice}} 
+| [[New York Yankees|Yankees]] || [[First baseman|1B]]
+|-
+|'''8'''
+!scope="row" style="text-align:center"| {{sortname|Riley|Greene}} 
+| [[Detroit Tigers|Tigers]] || [[Left fielder|LF]]
+|-
+|'''9'''
+!scope="row" style="text-align:center"| {{sortname|Ernie|Clement}}
+| [[Toronto Blue Jays|Blue Jays]] || [[Second baseman|2B]]
+|-
+|{{mdash}}
+!scope="row" style="text-align:center"| {{sortname|Dylan|Cease}}
+| [[Toronto Blue Jays|Blue Jays]] || [[Pitcher|P]]
+|}
+{{col-break}}
+{| class="wikitable sortable plainrowheaders" style="text-align:center;"
+|+National League
+|-
+!scope="col"|Order
+!scope="col"|Player
+!scope="col"|Team
+!scope="col"|Position
+|-
+|'''1'''
+!scope="row" style="text-align:center"| {{sortname|Kyle|Schwarber}} 
+| [[Philadelphia Phillies|Phillies]] || [[Designated hitter|DH]] 
+|-
+|'''2'''
+!scope="row" style="text-align:center"| {{sortname|Juan|Soto}}
+| [[New York Mets|Mets]] || [[Right fielder|RF]]
+|-
+|'''3'''
+!scope="row" style="text-align:center"| {{sortname|Freddie|Freeman}}
+| [[Los Angeles Dodgers|Dodgers]] || [[First baseman|1B]]
+|-
+|'''4'''
+!scope="row" style="text-align:center"| {{sortname|CJ|Abrams}}
+| [[Washington Nationals|Nationals]] || [[Shortstop|SS]]
+|-
+|'''5'''
+!scope="row" style="text-align:center"| {{sortname|Max|Muncy}}
+| [[Los Angeles Dodgers|Dodgers]] || [[Third baseman|3B]]
+|-
+|'''6'''
+!scope="row" style="text-align:center"| {{sortname|Ozzie|Albies}}
+| [[Atlanta Braves|Braves]] || [[Second baseman|2B]]
+|-
+|'''7'''
+!scope="row" style="text-align:center"| {{sortname|Brandon|Marsh|dab=baseball}}
+| [[Philadelphia Phillies|Phillies]] || [[Left fielder|LF]]
+|-
+|'''8'''
+!scope="row" style="text-align:center"| {{sortname|Andy|Pages}}
+| [[Los Angeles Dodgers|Dodgers]] || [[Center fielder|CF]]
+|-
+|'''9'''
+!scope="row" style="text-align:center"| {{sortname|Drake|Baldwin}}
+| [[Atlanta Braves|Braves]] || [[Catcher|C]]
+|-
+|{{mdash}}
+!scope="row" style="text-align:center"| {{sortname|Cristopher|Sánchez}}
+| [[Philadelphia Phillies|Phillies]] || [[Pitcher|P]]
+|}
+{{col-end}}
+
+===Line score===
+{{Linescore
+| Date = July 14, 2026
+| Time = 8:20{{nbsp}}pm ([[Eastern Time Zone|EDT]])
+| Location = [[Citizens Bank Park]] in [[Philadelphia]], [[Pennsylvania]]
+| Other = {{convert|88|F|C}}, Clear
+| Compact = no
+| Road = '''[[American League]]''' |RoadAbr=AL
+| R1=3|R2=0|R3=0|R4=0|R5=0|R6=0|R7=0|R8=1|R9=0|RR=4|RH=7|RE=0
+| Home = [[National League (baseball)|National League]] |HomeAbr=NL
+| H1=0|H2=0|H3=0|H4=0|H5=0|H6=0|H7=0|H8=0|H9=0|HR=0|HH=3|HE=0
+| RSP = Dylan Cease
+| HSP = Cristopher Sánchez
+| WP = [[Dylan Cease]] (1–0)
+| LP = [[Cristopher Sánchez]] (0–1)
+| SV = 
+| RoadHR = [[Miguel Vargas (baseball)|Miguel Vargas]] (1)
+| HomeHR = 
+| Attendance = 43,916 '''Time:''' 2:45
+| Umpires = [[Home plate|HP]] – [[Alan Porter]]; [[First baseman|1B]] – [[Chris Conroy]]; [[Second baseman|2B]] – [[Chad Whitson]]; [[Third baseman|3B]] – [[Ryan Additon]]; [[Left fielder|LF]] – [[Adam Beck (umpire)|Adam Beck]]; [[Right fielder|RF]] – [[Edwin Moscoso]]; Replay Official – [[Vic Carapazza]]<ref>{{cite web |url=https://www.espn.com/mlb/story/_/id/49318291/alan-porter-named-umpire-mlb-all-star-game-philadelphia |title=Alan Porter named umpire in MLB All-Star Game at Philadelphia |website=ESPN.com}}</ref>
+| Notes =
+| BoxURL = https://www.mlb.com/gameday/al-all-stars-vs-nl-all-stars/2026/07/14/823443/final/box
+}}
+
+Pop singer-songwriter [[Alexander Stewart (singer)|Alexander Stewart]] sang the [[O Canada|Canadian national anthem]] while legendary R&B singer and Philadelphia native [[Patti Labelle]] sang the [[The Star Spangled Banner|American national anthem]]. R&B singer, actress, and television personality [[Jennifer Hudson]] sang "[[America the Beautiful]]" during the pre-game ceremony. [[Yordan Alvarez]] delivered the first base hit of the game at the top of the first inning. After two walks and an out, [[Cody Bellinger]] delivered a two-run RBI single to give the American League a 2–0 lead. [[Ben Rice]] later delivered an RBI and extended the lead to 3–0. With both Rice and Bellinger, this became the first time the Yankees had two players hit RBIs in an All-Star Game since 1964.<ref>{{cite web| url=https://www.mlb.com/news/2026-mlb-all-star-game-facts-and-figures |title=Key stats and facts from the 2026 All-Star Game |website=MLB.com}}</ref>  During the top of the third, with a runner on first, [[Junior Caminero]] was hit in the hand by a pitch thrown by [[Riley O'Brien]]. X-ray images that were taken by doctors came back negative as announced during the bottom of the fourth. In the top of the eighth inning, [[Miguel Vargas (baseball)|Miguel Vargas]] hit a solo home run off [[Justin Wrobleski]] to extend the American League's lead to 4–0. [[Aroldis Chapman]] and [[Bryan Baker (baseball)|Bryan Baker]] came in the ninth inning to finish the game, giving the American League a 4–0 victory and the first shutout in an All-Star Game since [[2013 Major League Baseball All-Star Game|2013]].
+
+[[Cody Bellinger]] of the [[New York Yankees]] was named the [[Major League Baseball All-Star Game Most Valuable Player]], finishing the game 1–for-3 with two RBIs, and became the first Yankees [[Most Valuable Player]] since [[Giancarlo Stanton]] back in 2022. The game as a whole was dominated by pitching, with the National League striking out 15 times, with each of the pitchers on the AL team outside of Bryan Baker recording a strike out.<ref>{{Cite web |last=Casella |first=Paul |date=2026-07-15 |title=The very best moments from AL's wire-to-wire All-Star Game victory |url=https://www.mlb.com/news/2026-mlb-all-star-game-top-moments |access-date=2026-07-15 |website=MLB.com}}</ref>
+
+In the fifth inning, ten local youth baseball and softball players rode their bikes onto the field and were matched with one of the All-Stars. Fireworks were shot off and [[Ray Charles|Ray Charles']] version of ''America The Beautiful'' in a tribute to the move, ''[[The Sandlot]]'' and as a tribute to the [[United States Semiquincentennial]]. The tribute was widely praised as one of the best parts of the game.<ref>{{Cite news |last=Carroll |first=Gabriela |date=2026-07-15 |title=How MLB’s All-Star Game tribute to ‘The Sandlot’ came together — and what the kids said about their experiences with major leaguers |url=https://www.inquirer.com/phillies/mlb-all-star-game-the-sandlot-kids-experiences-big-leaguers-20260715.html |work=The Philadelphia Inquirer |access-date=2026-07-16}}</ref><ref>{{Cite web |last=Timmeney |first=Dawn |date=2026-07-15 |title=Young baseball players recreate 'Sandlot' scene at MLB All-Star Game in Philadelphia |url=https://www.fox29.com/news/young-baseball-players-recreate-sandlot-scene-mlb-all-star-game-philadelphia |website=FOX 29 Philadelphia |access-date=2026-07-16}}</ref>
+
+==See also==
+*[[List of Major League Baseball All-Star Games]]
+*[[All-Star Futures Game]]
+*[[Home Run Derby]]
+
+==References==
+{{Reflist}}
+
+{{MLBAllStarGame}}
+{{2026 MLB season by team}}
+{{Major League Baseball on ESPN Radio}}
+{{MLB on Fox}}
+
+{{DEFAULTSORT:Major League Baseball All-Star Game, 2026}}
+[[Category:2026 Major League Baseball season|All-Star]]
+[[Category:2026 in baseball]]
+[[Category:2026 in Philadelphia]]
+[[Category:2026 in sports in Pennsylvania]]
+[[Category:Baseball competitions in Philadelphia]]
+[[Category:July 2026 sports events in the United States]]
+[[Category:Major League Baseball All-Star Game|2026]]
+[[Category:South Philadelphia]]
+[[Category:United States Semiquincentennial]]

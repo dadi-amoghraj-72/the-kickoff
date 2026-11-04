@@ -371,5 +371,10 @@ check("the colours stay: the winner's score gold (w), the other white (n)", 'Aus
 bat2 = dict(wm, teams=["India Women", "Australia Women"], score=[wm["score"][1], wm["score"][0]], status="India Women won by 1 run")
 check("batting order follows the innings, not the team order of the listing: Australia W batted first here, so they are the first line", ck.result_html(bat2).index("Australia W <b") < ck.result_html(bat2).index("India W <b"))
 
+# ---- D, 2026-11-04: Sunrisers Hyderabad's row in gold in the IPL's table ----
+ipl_rows = [{"pos": 1, "team": "RCB", "name": "Royal Challengers Bengaluru", "p": 14, "w": 9, "l": 5, "t": 0, "nr": 0, "pts": 18, "nrr": 0.4}, {"pos": 2, "team": "SRH", "name": "Sunrisers Hyderabad", "p": 14, "w": 8, "l": 6, "t": 0, "nr": 0, "pts": 16, "nrr": 0.1}]
+tbl = ck.table_html("IPL", ipl_rows)
+check("the IPL table: only the Sunrisers Hyderabad row carries the gold class; another league's table never does", tbl.count('class="hl"') == 1 and "SRH" in tbl.split('class="hl"')[1].split("</tr>")[0] and ck.table_html("WBBL", ipl_rows).count("hl") == 0, tbl[:300])
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

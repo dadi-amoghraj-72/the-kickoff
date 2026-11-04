@@ -20,7 +20,11 @@ class Source:
         return self._get(url)
 
     def regular_season_start(self, season):
-        """ISO start of the season's regular season ('2026-10-20T07:00Z'); preseason is never counted."""
+        """ISO start of the season's regular season ('2026-10-20T07:00Z'); preseason is never counted. Football has no such type: its first match day is the first date of
+        the league's calendar on the scoreboard (the current season's)."""
+        if "/soccer/" in self.site:
+            cal = (self._call(self.site + "scoreboard").get("leagues") or [{}])[0].get("calendar") or []
+            return min(cal) if cal else None
         return self._call(self.core + f"seasons/{season}/types/2").get("startDate")
 
     def news(self, limit=50):
@@ -30,5 +34,8 @@ class Source:
         """The newest transaction rows, newest first (100 a page)."""
         out = []
         for p in range(1, pages + 1):
-            out += self._call(self.site + f"transactions?limit=100&page={p}").get("transactions", [])
+            try:
+                out += self._call(self.site + f"transactions?limit=100&page={p}").get("transactions", [])
+            except http.SourceError:                          # football has no transaction log: the news alone then
+                break
         return out

@@ -193,6 +193,32 @@ jokic_line = re.search(r"Nikola Jokic</span> <span class=\"ct\">\((\d+)\)</span>
 check("end to end: the All-NBA first team shows each player's career count in brackets (Jokic's matches a count made straight from the raw lists)", jokic_line and int(jokic_line.group(1)) == jokic_seasons and jokic_seasons >= 8, (jokic_line and jokic_line.group(0), jokic_seasons))
 check("the history is kept in the state so tomorrow does not fetch it again", len(sh["allnba"]["seasons"]) == 80)
 
+# ---- MLB (round 2): the 2025 awards on real data: pairs for the two-league awards, league blocks for the Gold Glove and Silver Slugger ----
+mlb_all = [REC[u] for u in REC if re.search(r"/mlb/seasons/2025/awards/\d+$", u.split("?")[0])]
+mby = {a["name"]: a["id"] for a in mlb_all}
+raw_team = lambda w: REC[w["team"]["$ref"].replace("http://", "https://").split("?")[0]]["abbreviation"]  # noqa: E731
+raw_ath = lambda w: REC[w["athlete"]["$ref"].replace("http://", "https://").split("?")[0]]["displayName"]  # noqa: E731
+mhide = {i for n, i in mby.items() if n not in ("ROTY_PLACEHOLDER",)}
+_, ms = awards.run(src("baseball", "mlb", hide=mhide), "MLB Awards", {}, 2025)
+show = mhide - {mby["MVP"], mby["Cy Young"], mby["Gold Glove"], mby["World Series MVP"], mby["Roberto Clemente Award"]}
+mh, ms = awards.run(src("baseball", "mlb", hide=show), "MLB Awards", ms, 2025)
+mt = re.sub(r"\s+", " ", text(mh))
+mvp_raw = next(a for a in mlb_all if a["name"] == "MVP")["winners"]
+mvp_pairs = sorted((awards.MLB_LEAGUE[raw_team(w)], raw_ath(w), raw_team(w)) for w in mvp_raw)
+check("MLB MVP is a pair, AL then NL, each winner with his club's code (checked against the raw winners and the league map)", all(f"{n} ({t})" in mt for _, n, t in mvp_pairs) and mt.index(mvp_pairs[0][1]) < mt.index(mvp_pairs[1][1]) and mvp_pairs[0][0] == "AL" and mvp_pairs[1][0] == "NL", (mvp_pairs, mt[:300]))
+check("the pair rows use the short labels MVP, Cy Young, WS MVP and RG Award", all(x in mt for x in ("MVP", "Cy Young", "WS MVP", "RG Award")) and "Most Valuable" not in mt, mt[:200])
+check("MVPs are iridescent (MVP and WS MVP), the Cy Young is plain gold", mh.count("wn mvp") >= 3, mh.count("wn mvp"))
+gg_raw = next(a for a in mlb_all if a["name"] == "Gold Glove")["winners"]
+gg_al = sorted(raw_ath(w) for w in gg_raw if awards.MLB_LEAGUE[raw_team(w)] == "AL")
+gg_nl = sorted(raw_ath(w) for w in gg_raw if awards.MLB_LEAGUE[raw_team(w)] == "NL")
+ms_rows = {r_["label"]: r_ for r_ in ms["rows"]}
+gg_row = ms_rows["Golden G"]
+check("the Gold Glove is a league block: the 20 winners split into AL and NL exactly as the raw teams say", gg_row["kind"] == "league" and sorted(p["name"] for p in gg_row["data"]["AL"]) == gg_al and sorted(p["name"] for p in gg_row["data"]["NL"]) == gg_nl and len(gg_al) + len(gg_nl) == 20, (len(gg_al), len(gg_nl)))
+check("the Gold Glove block is shown on the morning it lands (a block), with 'American League' and 'National League' columns and each player's club", "American League" in mh and "National League" in mh and "Golden G" in mh and mh.count('class="pl"') == 20, mh.count('class="pl"'))
+ms2_hide = show - {mby["Silver Slugger"]}
+mh2, ms2 = awards.run(src("baseball", "mlb", hide=ms2_hide), "MLB Awards", ms, 2025)
+check("a later morning (Silver Slugger lands): its block is in, the Gold Glove block is not repeated, the pair rows stay", "Silver S" in text(mh2) and "Golden G" not in text(mh2) and "Cy Young" in text(mh2), ("Silver S" in text(mh2), "Golden G" in text(mh2), "Cy Young" in text(mh2), re.sub(r"\s+", " ", text(mh2))[-250:]))
+
 # ---- the whole block for a morning, and the wrapper the daily run uses ----
 import datetime as dt  # noqa: E402
 from kickoff import daily  # noqa: E402

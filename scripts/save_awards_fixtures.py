@@ -19,7 +19,7 @@ def get(url):
     return rec[url]
 
 
-for sport, league, season, empty in (("basketball", "nba", 2026, 2027), ("football", "nfl", 2025, 2026), ("baseball", "mlb", 2026, None)):
+for sport, league, season, empty in (("basketball", "nba", 2026, 2027), ("football", "nfl", 2025, 2026), ("baseball", "mlb", 2026, None), ("baseball", "mlb", 2025, None)):
     s = espn_awards.Source(sport, league, get_json=get, pause=0.1)
     got = s.awards(season)
     for a in got:

@@ -56,6 +56,7 @@ def parse_match(event, league):
         "home": team("home"), "away": team("away"),
         "home_score": int(teams["home"].get("score") or 0), "away_score": int(teams["away"].get("score") or 0),
         "completed": bool(status.get("completed")), "status": status.get("description", ""),
+        "winner": next((side for side, c in teams.items() if c.get("winner")), None),   # 'home' or 'away' (a shoot-out is decided too), None for a draw or unplayed
         "goals": goals, "reds": reds,
     }
 
@@ -85,9 +86,13 @@ def recent_results(league, edition_date):
     return sorted(out, key=lambda m: m["kickoff"])
 
 
-def get_table(league):
-    """The league table as a list of rows, best first. Each row includes ESPN's zone note, if any."""
-    data = get_json(TABLES.format(league=league))
+def get_table(league, season=None):
+    """The league table as a list of rows, best first. Each row includes ESPN's zone note, if any. season: the year a European season starts (2025 for 2025-26),
+    for a finished season's final table; the current one by default."""
+    return parse_table(get_json(TABLES.format(league=league), {"season": season} if season else None))
+
+
+def parse_table(data):
     groups = data.get("children") or []
     if not groups:
         raise SourceError("no table in response")

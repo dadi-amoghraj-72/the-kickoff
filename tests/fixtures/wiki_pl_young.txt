@@ -1,0 +1,173 @@
+{{Use dmy dates|date=April 2022}}
+{{Infobox award
+| name = Premier League Young Player of the Season
+| subheader = <!-- or | current_awards = -->
+| image = ManCity20240722-020.jpg
+| image_size = 200<!-- or | image_upright = -->
+| alt = 
+| caption = [[Nico O'Reilly]] is the current holder of the award.
+| awarded_for = The most outstanding player aged 23 or younger in each given Premier League season
+| sponsor = [[Hublot]]
+| country = England
+| presenter = [[Premier League]]
+| former name = 
+| year = 2020
+| year2 = 
+| holder = [[Nico O'Reilly]]<!-- or | winner = or | winners = -->
+| most_awards = [[Phil Foden]] (2)<!-- or | most_wins = -->
+| award1_type = Most consecutive wins
+| award1_winner = Phil Foden (2)
+| award2_type = Most team wins
+| award2_winner = [[Manchester City F.C.|Manchester City]] (4)
+}}
+
+The '''Premier League Young Player of the Season''' is an annual English [[association football|football]] award, presented to the best player aged 23 or younger in the [[Premier League]]. For sponsorship purposes, it is known as the '''[[Hublot]] Young Player of the Season''' since the [[2020–21 Premier League|2020–21 season]],<ref>{{cite news|url=https://www.premierleague.com/news/1814342|publisher=Premier League |date=9 September 2020|access-date=6 May 2021|title=Hublot to be Premier League's official timekeeper}}</ref> after being known as '''[[TAG Heuer]] Young Player of the Season''' right after its inception during the [[2019–20 Premier League|2019–20 season]].<ref>{{cite news|url=https://www.premierleague.com/news/1419796|publisher=Premier League |date=10 October 2019|access-date=7 August 2020 |title=TAG Heuer Young Player of the Season award launched}}</ref>
+
+[[Trent Alexander-Arnold]] of [[Liverpool F.C.|Liverpool]] was the first winner of the award.<ref name="TAA20"/> [[Manchester City F.C.|Manchester City]] player [[Phil Foden]] has won the most awards with two.<ref name="PF47"/> In 2024, [[Chelsea F.C.|Chelsea]] midfielder [[Cole Palmer]] became the first player to receive the award while not winning the league.<ref name="Palmer24">{{Cite news|url=https://www.premierleague.com/news/4010760|date=17 May 2024|publisher=Premier League|access-date=17 May 2024|title= Palmer wins Hublot Young Player of the Season award}}</ref> The current holder of the award is Manchester City full-back [[Nico O'Reilly]].<ref name="O'Reilly"/>
+
+==Winners==
+{| class="wikitable plainrowheaders"
+|+Key
+!scope="row"|'''Player {{small|(X)}}'''
+|Name of the player and number of times they had won the award at that point (if more than one)
+|-
+!scope="row" style="text-align:center; background:#B0C4DE"|{{dagger|alt=Multiple award winners in the same season}}
+|Indicates multiple award winners in the same season
+|-
+!scope="row" style="text-align:center; background:#ffb"|{{double-dagger|alt=Club were Premier League champions}}
+|Denotes the club were [[List of English football champions|Premier League champions]] in the same season
+|-
+!scope="row" style="text-align:center; background:#bfb"|{{hashtag|alt=Premier League Player of the Season award in the same campaign}}
+|Indicates player won also [[Premier League Player of the Season]] award in the same campaign
+|}
+
+{| class="wikitable sortable plainrowheaders"
+|+Premier League Young Player of the Season winners
+!scope="col"|Season
+!scope="col"|Player
+!scope="col"|Nationality
+!scope="col"|Club
+!scope="col" class="unsortable"|Ref(s)
+|-
+|[[2019–20 Premier League|2019–20]]
+!scope="row"|{{sortname|Trent|Alexander-Arnold}}
+|{{flagcountry|ENG}}
+!scope="row" style="background:#ffb"|[[Liverpool F.C.|Liverpool]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+|style="text-align:center"|<ref name="TAA20">{{cite news|title=Alexander-Arnold named TAG Heuer Young Player of the Season|publisher=Premier League |url=https://www.premierleague.com/news/1750635|date=14 August 2020|access-date=14 August 2020}}</ref>
+|-
+|[[2020–21 Premier League|2020–21]]
+!scope="row"|{{sortname|Phil|Foden}} {{small|(1)}}
+|{{flagcountry|ENG}}
+!scope="row" style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+|style="text-align:center"|<ref>{{cite news|title=Foden wins Hublot Young Player of the Season award|publisher=Premier League |url=https://www.premierleague.com/news/2164974|date=5 June 2021|access-date=5 June 2021}}</ref>
+|-
+|[[2021–22 Premier League|2021–22]]
+!scope="row"|{{sortname|Phil|Foden}} {{small|(2)}}
+|{{flagcountry|ENG}}
+!scope="row" style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+|style="text-align:center"|<ref name="PF47">{{cite news|title=Foden named Hublot Young Player of the Season|publisher=Premier League |url=https://www.premierleague.com/news/2621849|date=21 May 2022|access-date=21 May 2022}}</ref>
+|-
+|[[2022–23 Premier League|2022–23]]
+!scope="row" style="background:#bfb"|{{sortname|Erling|Haaland}}{{sup|{{hashtag}}}}
+|{{flagcountry|NOR}}
+!scope="row" style="background:#ffb"|[[Manchester City F.C.|Manchester City]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+|style="text-align:center"|<ref>{{Cite news|url=https://www.premierleague.com/news/3487304|date=27 May 2023|publisher=Premier League|access-date=27 May 2023|title=Haaland makes history as Hublot Young Player of the Season}}</ref>
+|-
+|[[2023–24 Premier League|2023–24]]
+!scope="row"|{{sortname|Cole|Palmer}}
+|{{flagcountry|ENG}}
+!scope="row"|[[Chelsea F.C.|Chelsea]]
+|style="text-align:center"|<ref name="Palmer24"/>
+|-
+|[[2024–25 Premier League|2024–25]]
+!scope="row"|{{sortname|Ryan|Gravenberch}}
+|{{flagcountry|NED}}
+!scope="row" style="background:#ffb"|[[Liverpool F.C.|Liverpool]]{{sup|{{double-dagger|alt=Club were Premier League champions}}}}
+|style="text-align:center"|<ref name="RG38">{{cite news|title=Gravenberch wins 2024/25 Hublot Young Player of the Season|publisher=Premier League |url=https://www.premierleague.com/news/4314802|date=24 May 2025|access-date=24 May 2025}}</ref>
+|-
+|[[2025–26 Premier League|2025–26]]
+!scope="row"|{{sortname|Nico|O'Reilly}}
+|{{flagcountry|ENG}}
+!scope="row"|[[Manchester City F.C.|Manchester City]]
+| style="text-align: center;" |<ref name="O'Reilly">{{cite news|title=O'Reilly named Young Player of the Season|publisher=Premier League |url=https://www.premierleague.com/news/4662697/oreilly-named-young-player-of-the-season|date=23 May 2026|access-date=23 May 2026}}</ref>
+|}
+
+== Multiple awards won by players==
+The following table lists the number of awards won by players who have won at least two Young Player of the Season awards.
+
+Players in '''bold ''' are still active in the Premier League.
+
+{| class="wikitable"
+!Awards
+!Player
+!Nationality
+!Seasons
+|-
+! scope="row"|2
+|'''{{sortname|Phil|Foden}}'''
+|{{flagcountry|ENG}}
+|[[2020–21 Premier League|2020–21]], [[2021–22 Premier League|2021–22]]
+|}
+
+==Awards won by nationality==
+{| class="sortable wikitable plainrowheaders" style="text-align:center;"
+|-
+!scope="col"|Country
+!scope="col"|Players
+!scope="col"|Total
+|-
+!scope="row"|{{flagcountry|ENG}}
+|4
+|5
+|-
+!scope="row"|{{flagcountry|NED}}
+|1
+|1
+|-
+!scope="row"|{{flagcountry|NOR}}
+|1
+|1
+|}
+
+==Awards won by club==
+{| class="sortable wikitable plainrowheaders" style="text-align:center;"
+|-
+!scope="col"|Club
+!scope="col"|Players
+!scope="col"|Total
+|-
+!scope="row"|[[Manchester City F.C.|Manchester City]]
+|3
+|4
+|-
+!scope="row"|[[Liverpool F.C.|Liverpool]]
+|2
+|2
+|-
+!scope="row"|[[Chelsea F.C.|Chelsea]]
+|1
+|1
+|}
+
+==See also==
+*[[PFA Young Player of the Year]]
+*[[Premier League Player of the Season]]
+*[[Premier League Playmaker of the Season]]
+*[[Premier League Manager of the Season]]
+*[[Premier League Goal of the Season]]
+*[[Premier League Save of the Season]]
+*[[Premier League Game Changer of the Season]]
+*[[Premier League Most Powerful Goal]]
+
+==References==
+{{reflist}}
+
+{{Premier League Young Player of the Season}}
+{{Premier League}}
+{{English football awards}}
+
+[[Category:Lists of Premier League players|Young]]
+[[Category:Premier League trophies and awards]]
+[[Category:Association football player non-biographical articles]]
+[[Category:Association football young player of the year awards]]
+[[Category:Rookie player awards]]

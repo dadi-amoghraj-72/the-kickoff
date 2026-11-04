@@ -42,14 +42,14 @@ def tables(text):
             if t["cur"] is not None:
                 t["rows"].append(t["cur"])
             t["cur"] = {"head": False, "cells": []}
-        elif line[:1] in "|!":
+        elif line[:1] and line[:1] in "|!":
             t = stack[-1]
             if t["cur"] is None:
                 t["cur"] = {"head": False, "cells": []}
             head = line[0] == "!"
             for c in re.split(r"\|\||!!", line[1:]):
                 c = c.strip()
-                if re.match(r"^[\w-]+\s*=\s*\"[^\"]*\"[^|\[{]*\|", c):          # cell attributes: style="..."|text
+                if re.match(r"^[\w-]+\s*=\s*(?:\"[^\"]*\"|[^\s|]+)[^|\[{]*\|", c):          # cell attributes: style="..."|text
                     c = c.split("|", 1)[1].strip()
                 t["cur"]["cells"].append(c)
                 t["cur"]["head"] = t["cur"]["head"] or head
@@ -168,3 +168,102 @@ def coach_of_the_year(text):
     if not (who and team):
         return None
     return {"season": f"{year}–{str(year + 1)[2:]}", "coach": f"{who.group(1)} {who.group(2)}".strip(), "team": team.group(1).strip()}
+
+
+# ---- MLB ----------------------------------------------------------------------------------------
+
+MLB_TEAMS = {   # ESPN code: (full name, nickname) as Wikipedia writes them
+    "ARI": ("Arizona Diamondbacks", "Diamondbacks"), "ATL": ("Atlanta Braves", "Braves"), "BAL": ("Baltimore Orioles", "Orioles"), "BOS": ("Boston Red Sox", "Red Sox"),
+    "CHC": ("Chicago Cubs", "Cubs"), "CHW": ("Chicago White Sox", "White Sox"), "CIN": ("Cincinnati Reds", "Reds"), "CLE": ("Cleveland Guardians", "Guardians"),
+    "COL": ("Colorado Rockies", "Rockies"), "DET": ("Detroit Tigers", "Tigers"), "HOU": ("Houston Astros", "Astros"), "KC": ("Kansas City Royals", "Royals"),
+    "LAA": ("Los Angeles Angels", "Angels"), "LAD": ("Los Angeles Dodgers", "Dodgers"), "MIA": ("Miami Marlins", "Marlins"), "MIL": ("Milwaukee Brewers", "Brewers"),
+    "MIN": ("Minnesota Twins", "Twins"), "NYM": ("New York Mets", "Mets"), "NYY": ("New York Yankees", "Yankees"), "ATH": ("Athletics", "Athletics"),
+    "PHI": ("Philadelphia Phillies", "Phillies"), "PIT": ("Pittsburgh Pirates", "Pirates"), "SD": ("San Diego Padres", "Padres"), "SF": ("San Francisco Giants", "Giants"),
+    "SEA": ("Seattle Mariners", "Mariners"), "STL": ("St. Louis Cardinals", "Cardinals"), "TB": ("Tampa Bay Rays", "Rays"), "TEX": ("Texas Rangers", "Rangers"),
+    "TOR": ("Toronto Blue Jays", "Blue Jays"), "WSH": ("Washington Nationals", "Nationals")}
+
+
+def mlb_code(text):
+    """ESPN's code for a club written as Wikipedia writes it ('Blue Jays', 'Toronto Blue Jays', 'Oakland Athletics'); '' when it is not recognised."""
+    t = re.sub(r"\s*\(baseball\)", "", link_text(text) or text or "").strip().lower()
+    for code, names in MLB_TEAMS.items():
+        if t in (n.lower() for n in names) or (code == "ATH" and "athletics" in t):
+            return code
+    return ""
+
+
+def person(cell):
+    """A person's name from a cell: '{{sortname|Bobby|Witt Jr.}}' or a wiki link."""
+    m = re.search(r"\{\{sortname\|([^|}]*)\|([^|}]*)", cell)
+    return f"{m.group(1)} {m.group(2)}".strip() if m else link_text(cell)
+
+
+def mlb_all_stars(text):
+    """The MLB All-Star selections: {"date", "AL": {"starters": [name], "reserves": [...], "pitchers": [...]}, "NL": {...}} from the 'Elected starters', 'Reserves' and
+    'Pitchers' tables under '===American League===' and '===National League===', or {} when the page is not that."""
+    out = {}
+    for lg, title in (("AL", "American League"), ("NL", "National League")):
+        m = re.search(rf"^===\s*{title}\s*===\s*$(.*?)(?=^===[^=]|^==[^=])", text, re.M | re.S)
+        groups = {}
+        for t in tables(m.group(1) if m else ""):
+            key = {"elected starters": "starters", "starters": "starters", "reserves": "reserves", "pitchers": "pitchers"}.get(re.sub(r"<.*", "", t["caption"]).strip().lower())
+            if key:
+                groups[key] = [person(r["cells"][1]) for r in t["rows"] if len(r["cells"]) >= 3 and person(r["cells"][1])]      # the player cell is a row header, so head rows count
+        if groups.get("starters") and groups.get("reserves"):
+            out[lg] = {k: groups.get(k, []) for k in ("starters", "reserves", "pitchers")}
+    date = re.search(r"^\|\s*date\s*=\s*(.+)$", text, re.M)
+    if len(out) < 2:
+        return {}
+    return {"date": date.group(1).strip() if date else "", **out}
+
+
+def _year_rows(text, tables_wanted=None):
+    """[(year, cells)] for every row whose first cell holds a season year ('{{mlby|2025}}' or a '[[2025 Major League Baseball season|2025]]' link)."""
+    rows = []
+    for t in tables(text):
+        for r in t["rows"]:
+            m = r["cells"] and re.search(r"\{\{mlby\|(\d{4})\}\}|\[\[\d{4} Major League Baseball season\|(\d{4})\]\]", r["cells"][0])
+            if m:
+                rows.append((int(m.group(1) or m.group(2)), r["cells"], t["caption"]))
+    return rows
+
+
+def platinum_glove(text, year):
+    """{"AL": {"name", "team"}, "NL": {...}} for one year from the Platinum Glove table (six cells: player, team, position, for each league), or {}."""
+    i = text.find("==Platinum Glove Award==")
+    for y, cells, _ in _year_rows(text[i:] if i >= 0 else ""):
+        if y == year and len(cells) >= 7:
+            return {lg: {"name": person(cells[k]), "team": mlb_code(cells[k + 1])} for lg, k in (("AL", 1), ("NL", 4)) if person(cells[k])}
+    return {}
+
+
+def mlb_manager(text, year):
+    """{"AL": name, "NL": name} for one year from the Manager of the Year page's two league tables (the first table with year rows is the AL, the second the NL), or {}."""
+    found = {}
+    seen_tables = []
+    for t in tables(text):
+        rows = [(y, c) for y, c, _ in _year_rows("\n".join(["{|"] + [("|-\n" if k else "") + "\n".join("|" + x for x in r["cells"]) for k, r in enumerate(t["rows"])] + ["|}"]))]
+        if rows:
+            seen_tables.append(rows)
+    for lg, rows in zip(("AL", "NL"), seen_tables[:2]):
+        for y, c in rows:
+            if y == year and len(c) > 1 and person(c[1]):
+                found[lg] = person(c[1])
+    return found
+
+
+# ---- Premier League awards ----------------------------------------------------------------------
+
+def pl_award(text, season):
+    """{"name", "club"} for one season ('2025–26') from a Premier League award page's winners table: the row whose first cell links that season, the winner a sortname in the
+    next cell, the club the first club link after it (Wikipedia writes '[[Manchester City F.C.|Manchester City]]'). {} when the season's row is not there yet."""
+    year = season.replace("–", "[–-]")
+    for t in tables(text):
+        for row in t["rows"]:
+            c = row["cells"]
+            if len(c) >= 4 and re.search(rf"\|\s*{year}\]\]|\[\[{year} Premier League", c[0]):
+                name = person(c[1])
+                club = next((link_text(x) for x in c[2:] if re.search(r"\[\[[^\]|]*(?:F\.C\.|A\.F\.C\.|AFC|Albion|United|City|Hotspur|Wanderers|Palace|Villa|Forest)[^\]|]*\|", x) or re.search(r"\[\[[^\]|]*\|", x) and "F.C." in x), "")
+                if name:
+                    return {"name": re.sub(r"\s*\(\d+\)$", "", name).strip(), "club": club or ""}
+    return {}

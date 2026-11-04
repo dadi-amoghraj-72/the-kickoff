@@ -86,10 +86,11 @@ def html(league_name, season_label, start_iso, bullets):
 
 
 def season_label(league, season):
-    return f"{season - 1}-{str(season)[2:]}" if league == "nba" else str(season)
+    """2026-27 for the NBA (ESPN names it 2027) and for the Premier League (ESPN names it 2026), the year for the others."""
+    return f"{season - 1}-{str(season)[2:]}" if league == "nba" else f"{season}-{str(season + 1)[2:]}" if league == "epl" else str(season)
 
 
-def block(league, sport, name, season, day, done, client, source=None):
+def block(league, sport, name, season, day, done, client, source=None, league_code=None):
     """(html, seasons noted, Claude cost in dollars) for one league on one morning. Asks ESPN for the season's start only (one call) until the week before it; then
     reads the news and the transaction log and has Claude write the note, once. A season with no note written (no Claude, nothing solid to say) is tried again the
     next day of the week, so a failed call is not the end of it. Never raises."""
@@ -98,7 +99,7 @@ def block(league, sport, name, season, day, done, client, source=None):
         return "", done, 0.0
     try:
         from kickoff.sources import espn_season
-        source = source or espn_season.Source(sport, league)
+        source = source or espn_season.Source(sport, league_code or league)
         start = source.regular_season_start(season)
         if not due(start, day, season, done):
             return "", done, 0.0
