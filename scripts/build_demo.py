@@ -22,7 +22,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from kickoff import cricket, football, render, settings, state  # noqa: E402
+from kickoff import cricket, cricketcache, football, render, settings, state  # noqa: E402
 from kickoff.sources import cricket as cricket_source  # noqa: E402
 from kickoff.sources import espn_cricket  # noqa: E402
 
@@ -55,8 +55,9 @@ cricket_stats = None
 if os.environ.get("CRICKET_DATA_API_KEY") and "--no-cricket" not in sys.argv:
     try:
         now = datetime.now(timezone.utc)
+        _cc = cricketcache.getters(cricketcache.fresh(cricketcache.load(), now), _espn)   # the Mac's cache first, then ESPN's pages (they fail quietly on GitHub)
         c = cricket.run(now, espn.window_start(day), {"cards": state.load("cricket").get("cards", {})}, cricket_source.get_matches, cricket_source.get_scorecard,
-                        cricket_source.scorecards_affordable, espn_card=_espn.card, espn_table=_espn.table, espn_series=_espn.series,
+                        cricket_source.scorecards_affordable, espn_card=_cc[0], espn_table=_cc[1], espn_series=_cc[2],
                         espn_extra=lambda ms: cricket.espn_extras(ms, espn_cricket.Feed()))
         cricket_stats = {**c["stats"], "calls_used_today": c["used"]}
         cricket.persist_cards(c["state"]["cards"])  # into the real state: bought scorecards are never paid for twice

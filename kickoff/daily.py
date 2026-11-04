@@ -12,7 +12,7 @@ import copy
 import os
 from datetime import datetime, timezone
 
-from kickoff import budget, cricket, f1, football, mlb, nba, nfl, order, render, tennis
+from kickoff import budget, cricket, cricketcache, f1, football, mlb, nba, nfl, order, render, tennis
 from kickoff import state as state_files
 from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica
 from kickoff.sources import cricket as cricket_source
@@ -58,10 +58,10 @@ def real_adapters(client=None, env=None):
         if not env.get("CRICKET_DATA_API_KEY"):
             return {"sections": [], "state": {}, "problems": ["cricket (no CRICKET_DATA_API_KEY)"]}
         espn_src = espn_cricket.Source()
+        card, table, series = cricketcache.getters(cricketcache.fresh(cricketcache.load(), now), espn_src)    # the Mac's cache first (GitHub cannot read ESPN's pages)
         old = copy.deepcopy(st.get("cricket") or {})
         got = cricket.run(now, espn.window_start(day), old, cricket_source.get_matches, cricket_source.get_scorecard, cricket_source.scorecards_affordable,
-                          espn_card=espn_src.card, espn_table=espn_src.table, espn_series=espn_src.series,
-                          espn_extra=lambda ms: cricket.espn_extras(ms, espn_cricket.Feed()))
+                          espn_card=card, espn_table=table, espn_series=series, espn_extra=lambda ms: cricket.espn_extras(ms, espn_cricket.Feed()))
         new = dict(got["state"])
         new["cards"] = dict(list({**old.get("cards", {}), **new.get("cards", {})}.items())[-60:])   # bought scorecards are never paid for twice
         return {"sections": [{"id": "cricket", "title": "Cricket", "html": got["html"]}] if got["html"] else [], "state": {"cricket": new},

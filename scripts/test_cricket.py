@@ -114,6 +114,21 @@ check("with a garbled label the bowler is still credited to the right side (Irel
 
 # ---- Standouts from a real scorecard ----
 CARD = json.loads((ROOT / "tests" / "fixtures" / "cricket_scorecard_nz_ind.json").read_text())
+nzind_m = next(m for m in M if m["name"].startswith("New Zealand vs India"))
+check("a good scorecard passes: the real New Zealand v India T20I card agrees with the match's totals (runs and wickets)", ck.card_consistent(CARD, nzind_m), nzind_m["score"])
+bat = lambda name, out, r, b: {"batsman": {"name": name}, "dismissal-text": out, "r": r, "b": b}  # noqa: E731
+stale = {"scorecard": [{"inning": "India Inning 1", "batting": [bat("Rohit Sharma", "c Santner b Jamieson", 0, 6), bat("Shubman Gill", "batting", 36, 51), bat("Virat Kohli", "batting", 59, 43)], "bowling": []}], "potm": []}
+stale_m = {"teams": ["New Zealand", "India"], "score": [{"inning": "New Zealand Inning 1", "r": 185, "w": 10, "o": 40.2}, {"inning": "India Inning 1", "r": 143, "w": 5, "o": 22.4}]}
+stale_m2 = dict(stale_m, score=[stale_m["score"][1]])
+check("D's 4 November example is refused: the mid-innings card shows India's Gill and Kohli still 'batting' (one batter out) against a final total of 143/5, so it contradicts the match and is not shown", not ck.card_consistent(stale, stale_m2))
+full = {"scorecard": [{"inning": "India Inning 1", "batting": [bat("A", "c X b Y", 0, 6), bat("B", "c X b Y", 37, 56), bat("C", "c X b Y", 74, 51), bat("D", "c X b Y", 15, 13), bat("E", "c X b Y", 0, 2), bat("F", "not out", 3, 5), bat("G", "not out", 5, 3)], "bowling": []}]}
+check("the same innings with five batters out and two not out (143/5, 134 off the bats) is consistent", ck.card_consistent(full, stale_m2))
+check("more runs off the bats than the total is refused, and a card with no innings or no score to compare is not refused", not ck.card_consistent({"scorecard": [{"inning": "x", "batting": [bat("A", "not out", 200, 100)]}]}, {"score": [{"r": 150, "w": 0}]}) and ck.card_consistent({"scorecard": []}, stale_m) and ck.card_consistent(stale, {"score": []}))
+check("a retired batter (one fewer out than wickets, or one more) is tolerated", ck.card_consistent({"scorecard": [{"inning": "x", "batting": [bat("A", "retired hurt", 10, 10), bat("B", "c X b Y", 20, 20), bat("C", "not out", 5, 5)]}]}, {"score": [{"r": 60, "w": 2}]}))
+run_stale = ck.run(datetime(2026, 11, 4, 10, 0, tzinfo=timezone.utc), datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([{**odi_nt, "matchType": "odi", "score": stale_m["score"]}], 5), lambda mid: (stale, 15), src.scorecards_affordable)
+check("end to end: the stale card is not shown and not saved (no 'Gill batting'), but the match and its result are still in the block", run_stale["stats"]["picked"] == 1 and "batting" not in re.sub(r"<[^>]+>", " ", run_stale["html"]).lower().replace("batting order", "") and "n1" in run_stale["state"]["seen"] and "n1" not in run_stale["state"]["cards"] and "New Zealand v" in re.sub(r"<[^>]+>", "", run_stale["html"]), run_stale["html"][:300])
+real_card_consistent = ck.card_consistent
+ck.card_consistent = lambda card, match: True   # the older tests below hand ONE saved card to every match; the real check would rightly refuse it for the others
 so = ck.standouts(CARD, CARD)
 check("the real NZ v India scorecard has exactly two standouts: Iyer's fast fifty and Milne's T20 four-for", sorted((o["name"], o["kind"]) for o in so) ==
       [("Adam Milne", "four-for"), ("Shreyas Iyer", "fast fifty")], [(o["name"], o["kind"]) for o in so])

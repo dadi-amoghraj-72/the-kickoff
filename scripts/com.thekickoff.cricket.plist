@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Collects the cricket pages GitHub cannot read, every day at 6:50am (this Mac's clock: set to Singapore time) and pushes them.
+     Switch on:   mkdir -p ~/Documents/the-kickoff/preview && cp ~/Documents/the-kickoff/scripts/com.thekickoff.cricket.plist ~/Library/LaunchAgents/ && launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.thekickoff.cricket.plist
+     Switch off:  launchctl bootout gui/$(id -u)/com.thekickoff.cricket && rm ~/Library/LaunchAgents/com.thekickoff.cricket.plist
+     Log: ~/Documents/the-kickoff/preview/cricket-collect.log -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.thekickoff.cricket</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/dadiamoghraj/Documents/the-kickoff/.venv/bin/python</string>
+    <string>/Users/dadiamoghraj/Documents/the-kickoff/scripts/cricket_collect.py</string>
+    <string>--push</string>
+  </array>
+  <key>WorkingDirectory</key><string>/Users/dadiamoghraj/Documents/the-kickoff</string>
+  <key>StartCalendarInterval</key>
+  <dict><key>Hour</key><integer>6</integer><key>Minute</key><integer>50</integer></dict>
+  <key>StandardOutPath</key><string>/Users/dadiamoghraj/Documents/the-kickoff/preview/cricket-collect.log</string>
+  <key>StandardErrorPath</key><string>/Users/dadiamoghraj/Documents/the-kickoff/preview/cricket-collect.log</string>
+</dict>
+</plist>

@@ -16,6 +16,8 @@ FX = ROOT / "tests" / "fixtures"
 SCORES = (FX / "espn_cricket_scores.html").read_text()
 PAGE = (FX / "espn_cricket_scorecard_nz_ind.html").read_text()
 M = json.loads((FX / "cricket_current.json").read_text())
+real_card_consistent = ck.card_consistent
+ck.card_consistent = lambda card, match: True   # the older tests below feed saved cards to matches they do not belong to; the real check is switched back on for the cache tests
 results = []
 
 
@@ -328,6 +330,58 @@ check("the whole block for an ESPN-only match: 'New Zealand v India', '1st ODI',
 check("the match is remembered as reported, so tomorrow's edition does not repeat it", "espn-1539437" in run_odi["state"]["seen"], run_odi["state"]["seen"])
 run_boom = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([], 5), lambda mid: None, lambda used: 5, espn_extra=lambda ms: 1 / 0)
 check("if ESPN's extra lookup blows up the cricket block still builds from the main list (here an empty one)", run_boom["html"] == "" and run_boom["stats"]["picked"] == 0)
+
+# ---- The cricket cache: collected on the Mac, read by the daily run on GitHub ----
+ck.card_consistent = real_card_consistent
+import tempfile  # noqa: E402
+from kickoff import cricketcache as cc  # noqa: E402
+
+CARD_PAGE = (FX / "espn_cricket_scorecard_nz_ind.html").read_text()
+NOW_C = datetime(2026, 11, 2, 8, 0, tzinfo=timezone.utc)
+
+
+def mac_fetch(u):
+    if u == ec.SCORES_URL:
+        return SCORES
+    if "scorecard/1539436" in u:
+        return CARD_PAGE
+    if "/cricket/table/series/21284" in u:
+        return TABLE
+    if "scores/series" in u or "/series/24469" in u and "scorecard" not in u:
+        return SER
+    raise OSError(u)
+
+
+mac = ec.Source(mac_fetch, pause=0)
+picked_c = ck.pick(ck.normalise(M), NOW_C, START)
+cache = cc.collect(picked_c, mac, NOW_C)
+raw_card = ec.parse_scorecard(CARD_PAGE)
+check("collect on the Mac: the New Zealand v India T20I's scorecard from the saved ESPN page is in the cache, with its player of the match, once per match, and agrees with the match (the consistency check)",
+      nzind["id"] in cache["cards"] and cache["cards"][nzind["id"]]["scorecard"] == raw_card and cache["cards"][nzind["id"]]["built"] == "2026-11-02T08:00:00Z" and len(cache["cards"]) == 1, list(cache["cards"]))
+check("the WBBL points table is collected once for the league (one table, not one per WBBL match), as rows", list(cache["tables"]) == ["WBBL"] and len(cache["tables"]["WBBL"]["rows"]) >= 6, {k: len(v["rows"]) for k, v in cache["tables"].items()})
+check("an ODI or Test series gets its series table keyed by match id (the T20I's series is left out, as the rules say), and nothing is collected for a match whose page cannot be read", all(k in {m["id"] for m in picked_c} for k in cache["series"]) and nzind["id"] not in cache["series"])
+with tempfile.TemporaryDirectory() as td:
+    path = Path(td) / "cache.json"
+    cc.save(cache, path)
+    back = cc.load(path)
+    path.write_text("{bad")
+    broken = cc.load(path)
+    empty = {"cards": {}, "tables": {}, "series": {}}
+    check("the cache survives a save and a load, and a missing or broken file loads as an empty cache", back == cache and cc.load(Path(td) / "none.json") == empty and broken == empty, (back == cache, broken))
+old = {"cards": {"a": {"built": "2026-10-20T00:00:00Z", "scorecard": []}, "b": {"built": "2026-11-01T00:00:00Z", "scorecard": []}, "c": {"scorecard": []}}, "tables": {}, "series": {}}
+check("entries older than four days, and entries with no valid stamp, are ignored: only 'b' (a day old) survives", list(cc.fresh(old, NOW_C)["cards"]) == ["b"])
+card_f, table_f, series_f = cc.getters(cache, None)
+check("the daily run's getters answer from the cache without touching ESPN: the card by match id, the league table by label, and None for anything not cached", card_f(nzind)["scorecard"] == raw_card and table_f({"class": {"label": "WBBL"}})[0]["team"] and table_f({"class": {"label": "IPL"}}) is None and card_f({"id": "zzz"}) is None and series_f({"id": "zzz"}) is None)
+down = ec.Source(lambda u: (_ for _ in ()).throw(OSError("blocked")), pause=0)
+card_g, _, _ = cc.getters(cache, down)
+check("on GitHub the live source fails quietly: a cached card is still found, an uncached one is simply None (no error)", card_g(nzind) is not None and card_g({"id": "zzz", "teams": ["A", "B"], "name": "A vs B"}) is None)
+run_c = ck.run(NOW_C, START, {}, lambda: (M, 17), lambda mid: (_ for _ in ()).throw(AssertionError("no CricketData scorecard should be bought for the cached match")) if mid == nzind["id"] else ({"scorecard": []}, 30), src.scorecards_affordable,
+               espn_card=card_f, espn_table=table_f, espn_series=series_f)
+sur = lambda n: n.split()[-1]  # noqa: E731
+bat0, bowl0 = raw_card[0]["batting"][0]["batsman"]["name"], raw_card[0]["bowling"][0]["bowler"]["name"]
+nz_block = run_c["html"].split("New Zealand v")[1].split("</li>")[0] if "New Zealand v" in run_c["html"] else ""
+check("the whole run on GitHub with the Mac's cache: the New Zealand v India block has the full ESPN scorecard from the cache (the first batter and first bowler of the saved page, by surname), no CricketData scorecard bought, and the WBBL points table is there",
+      sur(bat0) in nz_block and sur(bowl0) in nz_block and "WBBL table" in run_c["html"], (bat0, bowl0, nz_block[:200]))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

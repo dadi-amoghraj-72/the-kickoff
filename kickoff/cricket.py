@@ -254,6 +254,27 @@ def short_dismissal(text, names):
     return text
 
 
+NOT_OUT = {"", "not out", "batting", "did not bat", "yet to bat", "retired hurt", "retired not out", "absent hurt"}
+
+
+def card_consistent(card, match):
+    """False when a scorecard contradicts its own match's totals, so a wrong card is never shown. The free CricketData scorecard can be a snapshot from
+    mid-innings: on 4 November it showed India's 143/5 with Gill and Kohli still 'batting' and 48 extras. For every innings the batters' runs must not exceed the
+    total and the number of batters out must match the wickets (give or take one for a retired batter). A page-total card from ESPN carries its own total and is trusted."""
+    scores = match.get("score") or []
+    for i, inn in enumerate(card.get("scorecard") or []):
+        if (inn.get("espn") or {}).get("total"):
+            continue
+        sc = scores[i] if i < len(scores) else None
+        if not sc or sc.get("r") is None:
+            continue
+        batters = inn.get("batting") or []
+        outs = sum(1 for b in batters if (b.get("dismissal-text") or "").strip().lower() not in NOT_OUT)
+        if sum(b.get("r") or 0 for b in batters) > sc["r"] or (sc.get("w") is not None and abs(outs - sc["w"]) > 1):
+            return False
+    return True
+
+
 def slim_card(card, match):
     """The parts of a scorecard we show and keep, per innings. Totals come from the match's own score list. Extras are
     worked out: total minus the batters' runs, with wides and no-balls counted from the bowlers and the rest as byes
@@ -441,7 +462,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
         if cached and (not espn_card or ("potm" in cached and all("dnb" in i for i in cached["innings"]))):
             take(m, cached)
             continue
-        card = m.get("_card") or (espn_card(m) if espn_card else None)  # free: no calls used
+        card = (espn_card(m) if espn_card else None) or m.get("_card")  # free: no calls used; ESPN's page (or the Mac's cache of it) before the feed's bare result
         if card is None and cached:
             take(m, cached)
             continue
@@ -454,6 +475,9 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
             except Exception:  # a failed scorecard costs us the standouts for that match, never the result
                 skipped += 1
                 continue
+        if not card_consistent(card, m):                 # a scorecard that contradicts the match's own totals is worse than none
+            skipped += 1
+            continue
         entry = {"innings": slim_card(card, m), "standouts": standouts(card, m), "potm": card.get("potm") or [], "status": card.get("status") or ""}
         if m.get("matchEnded"):
             cards[m["id"]] = entry
