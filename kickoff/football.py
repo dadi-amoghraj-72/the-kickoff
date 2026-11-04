@@ -64,6 +64,13 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
     saved_tables = st.get("tables", {})
     previous = {lg: {x[0]: x[1] for x in saved_tables.get(lg, {}).get("rows", [])} for lg in rows}
     overviews = {}
+    seen_players = {}
+
+    def cached_players(league, event_id):                # one request per match, shared by the best performers and Young Guns
+        if (league, event_id) not in seen_players:
+            seen_players[(league, event_id)] = espn.get_player_stats(league, event_id)
+        return seen_players[(league, event_id)]
+
     perf_lists = []                                      # the best performers of the Premier League and the Champions League, for the Performance of the Day
 
     # Clean sheets: add today's shutouts to the running count (each match is counted once, ever)
@@ -115,7 +122,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
             parts += guard(f"{name} round-up", round_up, name, name, res, lg, tbl) or ""
             parts += scoreboard.scores_html(res)
             if lg == "eng.1":                    # the best performers of the day: the Premier League and the Champions League only
-                best_pl = guard("Premier League performers", performers.best, lg, res) or []
+                best_pl = guard("Premier League performers", performers.best, lg, res, cached_players) or []
                 perf_lists.append(best_pl)
                 parts += performers.html(best_pl)
         chosen = notes.select(lg, res)
@@ -158,7 +165,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         cl_box = guard("Champions League round-up", round_up, "Champions League", champions.COMPETITION, cl_matches,
                        espn.CHAMPIONS_LEAGUE, rows[espn.CHAMPIONS_LEAGUE], "night") or ""
         cl_rows = rows[espn.CHAMPIONS_LEAGUE]
-        best_cl = guard("Champions League performers", performers.best, espn.CHAMPIONS_LEAGUE, cl_matches) or []
+        best_cl = guard("Champions League performers", performers.best, espn.CHAMPIONS_LEAGUE, cl_matches, cached_players) or []
         perf_lists.append(best_cl)
         football += champions.section_html(cl_matches, cl_rows, None, cl_box, tables.before_of(saved_tables.get(espn.CHAMPIONS_LEAGUE)),
                                            legs_fn=espn.get_tie_legs, goals_fn=lambda leg_id: espn.get_match_details(leg_id, espn.CHAMPIONS_LEAGUE),
@@ -270,5 +277,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         big_news, big_injuries = events.football_news(shown_news), events.football_injuries(inj_items)
     except Exception:
         story_events, big_news, big_injuries = [], [], []
+    match_of = {m["id"]: overview.label(m).replace("-", "\u2013") for m in [*cl_matches, *[x for lg_ in leagues for x in (results[lg_] or [])]]}
+    young_players = [{**pl, "match": match_of.get(ev_)} for (lg_, ev_), pls in seen_players.items() for pl in pls]       # every player of the Premier League and Champions League matches read above
     return {"sections": sections, "headlines": unique, "new_state": new, "ledger": ledger, "problems": problems, "stats": stats,
-            "events": story_events, "news": big_news, "injuries": big_injuries}
+            "events": story_events, "news": big_news, "injuries": big_injuries, "young_in": {"soccer": young_players}}

@@ -448,4 +448,5 @@ def run(now, st, source, fetch_news=None):
         story_events = events.tennis(slams, shown_matches)
     except Exception:
         story_events = []
-    return {"html": html, "state": {"reported": reported[-800:], "seen_news": seen_news[-100:], "closed": closed[-20:]}, "stats": stats, "slams": slams, "events": story_events}
+    return {"html": html, "state": {"reported": reported[-800:], "seen_news": seen_news[-100:], "closed": closed[-20:]}, "stats": stats, "slams": slams, "events": story_events,
+            "young_in": {"tennis": [m for _, m in shown_matches]}}

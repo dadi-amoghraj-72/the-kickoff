@@ -777,4 +777,4 @@ def run(now, day, st, source):
         story_events = events.nfl(new, season_type, week, day.weekday())
     except Exception:
         story_events = []
-    return {"html": html, "state": keep, "stats": stats, "week": week, "events": story_events}
+    return {"html": html, "state": keep, "stats": stats, "week": week, "events": story_events, "young_in": {"nfl": new_players}}

@@ -12,13 +12,13 @@ import copy
 import os
 from datetime import datetime, timezone
 
-from kickoff import awards, bigstuff, budget, ontoday, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
+from kickoff import awards, bigstuff, budget, ontoday, young_sports, youngguns, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
 from kickoff import state as state_files
 from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica, wikipedia
 from kickoff.sources import cricket as cricket_source
 
 FOOTBALL_STATE = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs", "top30", "seasons"]
-STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb"]
+STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb", "youngguns"]
 
 
 def load_state(directory=None):
@@ -40,7 +40,7 @@ def _simple(section_id, title, call, state_id):
     def go(now, day, st):
         got = call(now, day, copy.deepcopy(st.get(state_id) or {}))
         return {"sections": [{"id": section_id, "title": title, "html": got["html"]}] if got.get("html") else [], "state": {state_id: got["state"]},
-                "stats": got.get("stats", {}), "events": got.get("events", [])}
+                "stats": got.get("stats", {}), "events": got.get("events", []), "young_in": got.get("young_in", {})}
     return (section_id, title, go)
 
 
@@ -83,7 +83,7 @@ def real_adapters(client=None, env=None):
         out = football.run(day, client=client, st={n: st.get(n) or {} for n in FOOTBALL_STATE}, now=now, seasonal=football_season.build)
         return {"sections": out["sections"], "state": {n: out["new_state"][n] for n in FOOTBALL_STATE if n in out["new_state"]},
                 "headlines": out["headlines"], "problems": out["problems"], "stats": {**out["stats"], "claude_cost": out["ledger"].total()},
-                "events": out.get("events", []), "news": out.get("news", []), "injuries": out.get("injuries", [])}
+                "events": out.get("events", []), "news": out.get("news", []), "injuries": out.get("injuries", []), "young_in": out.get("young_in", {})}
 
     def cricket_go(now, day, st):
         get_matches = backup_matches(env)
@@ -128,11 +128,11 @@ def real_today(now, day, st):
 
 # ---- The edition --------------------------------------------------------------------------------
 
-def build_edition(now, day, st, adapters, mode="normal", today=None):
+def build_edition(now, day, st, adapters, mode="normal", today=None, client=None, age_lookup=None):
     """Run every adapter. Returns {"edition", "state", "problems", "failed", "stats"}.
     edition: the dict the site renders; state: the new state for every sport (a failed sport keeps its old state); failed: the adapters that raised."""
     content, new_state, problems, failed, headlines, stats = {}, copy.deepcopy(st), [], [], [], {}
-    events, news, injuries = [], [], []
+    events, news, injuries, young_in = [], [], [], {}
     for sid, title, go in adapters:
         try:
             got = go(now, day, st)
@@ -149,8 +149,26 @@ def build_edition(now, day, st, adapters, mode="normal", today=None):
         events += got.get("events", [])
         news += got.get("news", [])
         injuries += got.get("injuries", [])
+        for k_, v_ in (got.get("young_in") or {}).items():
+            young_in.setdefault(k_, []).extend(v_)
         problems += got.get("problems", [])
         stats[sid] = got.get("stats", {})
+    try:                                                         # Young Guns: rookies and under-21s who did something notable (kickoff/youngguns.py)
+        yst = copy.deepcopy(st.get("youngguns") or {})
+        found = []
+        for sport_, fn_ in (("nba", young_sports.nba), ("nfl", young_sports.nfl), ("soccer", young_sports.soccer), ("tennis", young_sports.tennis)):
+            if young_in.get(sport_):
+                found += fn_(young_in[sport_], yst, day, age_lookup)
+        for rows_, race_ in young_in.get("f1", []):
+            found += young_sports.f1(rows_, race_, day)
+        yg = youngguns.build(found, yst, day, client)
+        yg_state = {"watch": yg["state"].get("watch", {}), "ages": dict(list((yst.get("ages") or {}).items())[-3000:])}
+        new_state["youngguns"] = yg_state
+        if yg["html"]:
+            content["young-guns"] = {"title": "Young Guns", "html": yg["html"]}
+        stats["youngguns"] = {"candidates": len(found), "why": yg["why"], "lines": yg["lines"], "plain": yg["plain"], "claude_usage": yg["usage"]}
+    except Exception as e:
+        problems.append(f"young guns ({type(e).__name__})")
     if today:                                                    # On Today (and on Mondays Games to Watch): what is still to come, in Singapore time
         try:
             got_today = today(now, day, st)
@@ -196,7 +214,7 @@ def run_day(now, day, st, make_adapters, use_claude=False, env=None, today=None)
     b = budget.status(st.get("costs"), day)
     client = make_client(b, env, use_claude)
     with budget.models(b["mode"]):
-        out = build_edition(now, day, st, make_adapters(client), b["mode"] if client else "plain" if use_claude else "off", today)
+        out = build_edition(now, day, st, make_adapters(client), b["mode"] if client else "plain" if use_claude else "off", today, client)
     out["budget"], out["client_used"] = b, client is not None
     return out
 

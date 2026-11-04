@@ -734,4 +734,4 @@ def run(now, day, st, source):
         story_events = events.nba(new, mine_teams, day.weekday()) + events.nba_perf(nights)
     except Exception:
         story_events = []
-    return {"html": html, "state": keep, "stats": stats, "events": story_events}
+    return {"html": html, "state": keep, "stats": stats, "events": story_events, "young_in": {"nba": flat}}
