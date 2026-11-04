@@ -180,10 +180,10 @@ check("the underdog found from the flags equals the one found from the moneyline
 won = sorted(f'{g["away"]["abbr"]}@{g["home"]["abbr"]}' for g in FINAL if (g["away"]["score"] > g["home"]["score"]) == (raw_dogs[g["id"]] == "away"))
 check("this week's underdog wins, found from the raw scores and moneylines: the Raiders at the Jets and the Cardinals at the Cowboys (overtime)", won == ["ARI@DAL", "LV@NYJ"] and sorted(f'{g["away"]["abbr"]}@{g["home"]["abbr"]}' for g in FINAL if nfl.underdog_win(g)) == won, won)
 sbd = nfl.scoreboard_html(GAMES, "Week 8", 12, 14)
-check("the scoreboard header counts underdog wins, and a gold asterisk follows each underdog winner's name (2) and nobody else's; no list, no big-upset category", "2 underdog wins" in sbd and sbd.count('class="dog"') == 3 and len(re.findall(r'<td class="tm">[^<]*<span class="dog"', sbd)) == 2
+check("the scoreboard header counts underdog wins, and a gold asterisk follows each underdog winner's name (2) and nobody else's; no list, no big-upset category", re.search(r"Underdogs won</span><span class=\"who\"><span class=\"n\">2/\d+<", sbd) and sbd.count('class="dog"') == 2 and len(re.findall(r'<td class="tm">[^<]*<span class="dog"', sbd)) == 2
       and "big upset" not in sbd.lower(), sbd.count('class="dog"'))
 one = [g for g in GAMES if nfl.underdog_win(g)][:1] + [g for g in GAMES if g["status"] != "final"]
-check("one underdog win reads '1 underdog win'; a game still to play or live is never starred; with none the header says nothing about underdogs", "1 underdog win<" in nfl.scoreboard_html(one, "W", 1, 3) and "underdog" not in nfl.scoreboard_html([{**g, "dog": None} for g in GAMES], "W", 12, 14))
+check("one underdog win reads '1 underdog win'; a game still to play or live is never starred; with none the header says nothing about underdogs", re.search(r"Underdogs won</span><span class=\"who\"><span class=\"n\">1/\d+<", nfl.scoreboard_html(one, "W", 1, 3)) and "Underdogs won" not in nfl.scoreboard_html([{**g, "dog": None} for g in GAMES], "W", 12, 14))
 
 # ---- Highlights: games, teams and plays (not players, not underdogs) ----
 shut = [g for g in FINAL if min(g["home"]["score"], g["away"]["score"]) == 0]
@@ -217,7 +217,10 @@ check("a tied game produces no highlight and no error", nfl.game_highlights([tie
 # ---- Players of the Week: offence, defence, special teams, then the rest ----
 potw = nfl.players_of_the_week(ALL, BYID)
 labels = [l for l, _ in potw]
-check("players of the week: Offence, Defence and Special teams first, then 'Also' lines, at most 3 + 4", labels[:3] == ["Offence", "Defence", "Special teams"] and set(labels[3:]) == {"Also"} and 3 < len(labels) <= 7, labels)
+check("top performances: Offence, Defence and Special teams first, then up to four honourable mentions", labels[:3] == ["Offence", "Defence", "Special teams"] and set(labels[3:]) == {"Mention"} and 3 < len(labels) <= 7, labels)
+mention_pos = [next(p["pos"] for p in ALL if p["short"] == line.split(" (")[0]) for l, line in potw if l == "Mention"]
+rank_of = lambda pos: 0 if pos == "QB" else 1 if pos in nfl.OFF_POS else 2 if pos in nfl.DEF_POS else 3  # noqa: E731
+check("honourable mentions are ordered: quarterbacks first, then other offence, then defence, then special teams (checked on the players' positions in the raw box scores)", [rank_of(x) for x in mention_pos] == sorted(rank_of(x) for x in mention_pos) and mention_pos[0] == "QB" and any(x in nfl.DEF_POS for x in mention_pos), mention_pos)
 check("offence is the Bengals' quarterback (the highest-points offensive player); defence is the Titans' safety with three interceptions", potw[0][1].startswith("J. Burrow (CIN)") and potw[1][1].startswith("A. Hooker (TEN): 3 interceptions"), [x[1][:40] for x in potw[:3]])
 off_best = max((p for p in ALL if p["pos"] in nfl.OFF_POS), key=lambda p: (nfl.points(p), p["short"]))
 def_plain = max((p for p in ALL if p["pos"] in nfl.DEF_POS), key=lambda p: (nfl.points(p), p["short"]))
@@ -236,8 +239,17 @@ sb = nfl.scoreboard_html(FINAL, "Week 8", 12, 14, ["Saints", "Giants"])
 rows_of = lambda html, k: re.findall(rf'<tr class="{k}[^"]*">.*?</tr>', html)  # noqa: E731
 check("scoreboard: two rows per game (24), a white house icon on each home row only (12), the winner row marked (12)", len(rows_of(sb, "a")) == 12 and len(rows_of(sb, "h")) == 12 and sb.count('<svg class="home"') == 12
       and all('class="home"' in row for row in rows_of(sb, "h")) and not any('class="home"' in row for row in rows_of(sb, "a")) and len(re.findall(r'<tr class="[ah] w">', sb)) == 12, sb.count('class="home"'))
+text = lambda h: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h)).strip()  # noqa: E731
+raw_ot = [e for e in SB["events"] if e["status"]["type"]["name"] == "STATUS_FINAL" and e["status"]["period"] > 4]
+close_ot = [e for e in raw_ot if abs(int(e["competitions"][0]["competitors"][0]["score"]) - int(e["competitions"][0]["competitors"][1]["score"])) <= 3]
+bg = nfl.best_game(GAMES)
+check("best game: the one overtime game decided by a field goal or less (Cardinals 33-30 at Dallas), found independently from the raw scoreboard; a 43-36 overtime game and a 42-7 rout do not beat it", len(raw_ot) == 2 and len(close_ot) == 1 and bg["id"] == close_ot[0]["id"] and bg["away"]["abbr"] == "ARI", (bg["away"]["abbr"], bg["home"]["abbr"]))
+sbox = text(nfl.summary_html(GAMES, 12, 14))
+check("the summary box: games played 12/14 with 'Rest still to play' under it, underdogs won, and the best game by team codes with its points and OT underneath", re.search(r"Games played\s+12/14\s+Rest still to play\s+Underdogs won\s+\d+/\d+\s+Best game\s+ARI 33-30 DAL\s+63 points · OT", sbox), sbox)
+check("the box sits above the week's table, and the old one-line count under the title is gone", sbd.index('class="roundup"') < sbd.index('class="nflsb"') and 'class="prog"' not in sbd and "games played" not in sbd, sbd[:200])
+check("a week with nothing finished has no best game, and a week with no games has no box", "Best game" not in text(nfl.summary_html([g for g in GAMES if g["status"] != "final"], 0, 14)) and nfl.summary_html([], 0, 0) == "")
 check("scoreboard: no emoji, full team names, a thick line between kickoff groups (2 for the finished games), overtime tags, the bye line", "🏠" not in sb and "Green Bay Packers" in sb and 'class="tm">Packers' not in sb and sb.count('<tr class="gap">') == 2
-      and "12/14 games played" in sb and sb.count(">OT<") == 2 and "On bye: Saints, Giants." in sb, sb[:200])
+      and '<span class="n">12/14</span>' in sb and sb.count(">OT<") == 2 and "On bye: Saints, Giants." in sb, sb[:200])
 check("scoreboard: nobody is highlighted for being D's team (no gold, no mine class)", "mine" not in sb and "Jacksonville Jaguars" in sb and "Pittsburgh Steelers" in sb)
 full = nfl.scoreboard_html(GAMES, "Week 8", 12, 14, ["Saints"])
 check("the whole week: all 14 games (28 rows), YTP once in the middle of the Monday-night game with no scores, an 'In progress' tag line (no LIVE) above the Sunday-night game with its score, 4 group lines",
@@ -343,10 +355,10 @@ f = Fake()
 mon = nfl.run(NOW, MON, copy.deepcopy(st0), f)
 h = mon["html"]
 check("Monday: scoreboard of the 12 finished games, the bye line, weekly leaders and highlights; no Player of the Week, divisions or playoff picture",
-      "Week 8" in h and "12/14 games played" in h and "On bye:" in h and "Weekly Leaders" in h and "Highlights" in h and "Player of the Week" not in h and "Division" not in h and "AFC East" not in h and "Playoff" not in h, mon["stats"])
+      "Week 8" in h and '<span class="n">12/14</span>' in h and "On bye:" in h and "Weekly Leaders" in h and "Highlights" in h and "Player of the Week" not in h and "Division" not in h and "AFC East" not in h and "Playoff" not in h, mon["stats"])
 check("Monday: 1 scoreboard call plus 12 box scores and no roster calls (positions were known); all 12 games remembered, leaders snapshot saved", [x[0] for x in f.log].count("scoreboard") == 1 and [x[0] for x in f.log].count("box") == 12
       and "roster" not in [x[0] for x in f.log] and len(mon["state"]["reported"]) == 12 and mon["state"]["leaders"]["week"] == 8 and set(mon["state"]["leaders"]["ids"]) == set(nfl.GROUPS), f.log[:3])
-check("Monday's scoreboard lists the whole week: 14 games, the Sunday-night game 'In progress', the Monday-night game YTP", mon["html"].count('<tr class="a') == 14 and mon["html"].count("YTP") == 1 and mon["html"].count(">LIVE<") == 0 and mon["html"].count("In progress") == 1 and "12/14 games played" in mon["html"], mon["stats"])
+check("Monday's scoreboard lists the whole week: 14 games, the Sunday-night game 'In progress', the Monday-night game YTP", mon["html"].count('<tr class="a') == 14 and mon["html"].count("YTP") == 1 and mon["html"].count(">LIVE<") == 0 and mon["html"].count("In progress") == 1 and '<span class="n">12/14</span>' in mon["html"], mon["stats"])
 again = nfl.run(NOW, MON, mon["state"], Fake())
 check("running Monday again shows nothing new (no scoreboard, no leaders, no highlights)", again["html"] == "" and again["stats"]["new"] == 0, again["stats"])
 nopos = nfl.run(NOW, MON, {}, f3 := Fake())
@@ -356,15 +368,15 @@ check("rosters are asked for only when a position is missing: 24 teams, none rep
 # Tuesday: the Sunday-night game finishes
 tue = nfl.run(NOW2, TUE, copy.deepcopy(mon["state"]), Fake(sb=late_scoreboard(mnf=False), late=LATE_SNF))
 check("Tuesday: the week's scoreboard with the Sunday-night game now final (13 of 14 played, Monday night still YTP), no weekly leaders and no players of the week (Wednesday only)", tue["stats"]["new"] == 1 and tue["html"].count('<tr class="a') == 14 and tue["html"].count("YTP") == 1
-      and "13/14 games played" in tue["html"] and "Weekly Leaders" not in tue["html"] and "Players of the Week" not in tue["html"], tue["html"][:200])
+      and '<span class="n">13/14</span>' in tue["html"] and "Weekly Leaders" not in tue["html"] and "Top performances" not in tue["html"], tue["html"][:200])
 tue_calls = Fake(sb=late_scoreboard(mnf=False), late=LATE_SNF)
 nfl.run(NOW2, TUE, copy.deepcopy(mon["state"]), tue_calls)
 check("Tuesday costs one box score (the new game): the underdogs of Monday's games were kept in the state, so the others are not fetched again", [x[0] for x in tue_calls.log].count("box") == 1 and len(mon["state"]["dogs"]) == 12 and all(v in ("home", "away") for v in mon["state"]["dogs"].values()), tue_calls.log)
 # Wednesday: Monday night also done; the wrap
 wed = nfl.run(NOW2, WED, copy.deepcopy(mon["state"]), Fake(sb=SB_LATE, late=LATE_BOTH))
 hw = wed["html"]
-check("Wednesday: the whole week's scoreboard (all 14 games), the leaders again, Players of the Week and the eight division tables", hw.count('<tr class="a') == 14 and "14/14 games played" in hw and "Weekly Leaders" in hw
-      and "Players of the Week" in hw and hw.count("Division Standings") == 1 and "AFC East" in hw and "NFC West" in hw, wed["stats"])
+check("Wednesday: the whole week's scoreboard (all 14 games), the leaders again, Players of the Week and the eight division tables", hw.count('<tr class="a') == 14 and '<span class="n">14/14</span>' in hw and "Weekly Leaders" in hw
+      and "Top performances" in hw and hw.count("Division Standings") == 1 and "AFC East" in hw and "NFC West" in hw, wed["stats"])
 check("Wednesday: the two late-game quarterbacks (158.3 rating) enter the top three and are tagged new, and nobody else is", hw.count('class="new">new</span>') == 2 and "L. QBSEA" in hw and "L. QBWSH" in hw, hw.count('class="new"'))
 check("Wednesday: no playoff picture before week 14, and once every game is final no YTP and no LIVE are left", "Playoff Picture" not in hw and "YTP" not in hw and "In progress" not in hw)
 wed_quiet = nfl.run(NOW2, WED, copy.deepcopy(mon["state"]), Fake(sb=SB_LATE, late=[(snf_id, synth_box("WSH", "PHI", stars=(False, False))), (mnf_id, synth_box("SEA", "CHI", stars=(False, False)))]))
@@ -394,7 +406,7 @@ check("scoreboard down: nothing shown, no exception, state kept, failure counted
 one = nfl.run(NOW, MON, copy.deepcopy(st0), Fake(broken=[("box", next(iter(BOXES)))]))
 check("one box score down: that game is still on the scoreboard, leaders use the other eleven, failure counted", one["stats"]["failed"] == 1 and one["html"].count('<tr class="a') == 14 and one["stats"]["boxes"] == 11 and "Top QBs" in one["html"], one["stats"])
 stand_down = nfl.run(NOW2, WED, copy.deepcopy(st0), Fake(sb=SB_LATE, late=LATE_BOTH, broken=[("standings", None)]))
-check("standings down on Wednesday: the rest of the wrap still shows", "Division Standings" not in stand_down["html"] and "Players of the Week" in stand_down["html"] and stand_down["stats"]["failed"] == 1)
+check("standings down on Wednesday: the rest of the wrap still shows", "Division Standings" not in stand_down["html"] and "Top performances" in stand_down["html"] and stand_down["stats"]["failed"] == 1)
 pre = nfl.run(NOW, MON, copy.deepcopy(st0), Fake(season_type=1))
 check("preseason is not covered", pre["html"] == "" and pre["week"] is None)
 post = nfl.run(NOW2, WED, copy.deepcopy(st0), Fake(sb=SB_LATE, late=LATE_BOTH, season_type=3, week=1))
@@ -457,15 +469,15 @@ tue = nfl.run(TUE_NOW, TUE, {"reported": t_rep, "positions": TPOS}, TueSource())
 tt = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", tue["html"]))
 raw_byes = sorted(t["shortDisplayName"] for t in TSB["teamsOnBye"])
 check("Tuesday edition on the real data: only Sunday night is new, the scoreboard shows 13/14 games played, Monday night as YTP, the four byes (Saints, Giants, 49ers, Texans) as the raw feed lists them",
-      tue["stats"]["new"] == 1 and "13/14 games played" in tt and tt.count("YTP") == 1 and sorted(x.strip() for x in tt.split("On bye:")[1].strip(" .").split(",")) == raw_byes, (tue["stats"], raw_byes))
+      tue["stats"]["new"] == 1 and re.search(r"Games played\s+13/14", tt) and tt.count("YTP") == 1 and sorted(x.strip() for x in tt.split("On bye:")[1].strip(" .").split(",")) == raw_byes, (tue["stats"], raw_byes))
 dogs_raw = 0
 for gid, b in TBOX.items():
     o = b["odds"]
     g = next(x for x in TG if x["id"] == gid)
     dog = "away" if o["away_dog"] else "home" if o["home_dog"] else None
     dogs_raw += bool(dog and dog == nfl.winner(g))
-check("independent: the outright underdog wins counted from the raw odds flags equal the header's number (week 8 has 2: Cardinals and Raiders), and Sunday night (Commanders) was not one", dogs_raw == 2 and "* 2 underdog wins" in tt and not nfl.underdog_win({**next(g for g in TG if g["id"] == t_snf["id"]), "dog": nfl.dog_of(TBOX[t_snf["id"]])}), dogs_raw)
-check("Tuesday has the scoreboard and Sunday night's highlights only: no weekly leaders, no Players of the Week, no division tables", "Weekly Leaders" not in tt and "Players of the Week" not in tt and "Division Standings" not in tt)
+check("independent: the outright underdog wins counted from the raw odds flags equal the header's number (week 8 has 2: Cardinals and Raiders), and Sunday night (Commanders) was not one", dogs_raw == 2 and re.search(r"Underdogs won\s+2/\d+", tt) and not nfl.underdog_win({**next(g for g in TG if g["id"] == t_snf["id"]), "dog": nfl.dog_of(TBOX[t_snf["id"]])}), dogs_raw)
+check("Tuesday has the scoreboard and Sunday night's highlights only: no weekly leaders, no Players of the Week, no division tables", "Weekly Leaders" not in tt and "Top performances" not in tt and "Division Standings" not in tt)
 snf_box = TBOX[t_snf["id"]]
 snf_g = next(g for g in TG if g["id"] == t_snf["id"])
 turn = [int(v["turnovers"]) for v in snf_box["teamStats"].values()]
@@ -474,10 +486,10 @@ longest = max([int(m.group(1)) for p in snf_box["plays"] for m in [re.search(r"(
 expects_hl = abs(snf_g["home"]["score"] - snf_g["away"]["score"]) >= 24 or (t_snf["status"].get("period") or 0) > 4 or deficit >= 14 or max(turn) >= 4 or longest >= 60
 check("independent: Sunday night (27-10, no overtime, not a 14-point comeback, fewer than 4 giveaways, no 60-yard score) qualifies for no highlight, and the page has none, from a separate read of the raw box", (("Highlights" in tt) == expects_hl) and not expects_hl, (turn, deficit, longest))
 tue_all = nfl.run(TUE_NOW, TUE, {"positions": TPOS}, TueSource())
-check("a first run with no state on Tuesday reports all 13 finished games as new (the state, not the clock, decides) and shows the same scoreboard", tue_all["stats"]["new"] == 13 and "13/14 games played" in re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", tue_all["html"])))
+check("a first run with no state on Tuesday reports all 13 finished games as new (the state, not the clock, decides) and shows the same scoreboard", tue_all["stats"]["new"] == 13 and re.search(r"Games played\s+13/14", re.sub(r"<[^>]+>", " ", tue_all["html"])))
 wed_real = nfl.run(WED_NOW, WED, {**mon_state, "reported": t_rep}, TueSource())
 wt = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", wed_real["html"]))
-check("Wednesday on the real data (Monday night still to play): 13 of 14 games, Sunday night changed none of the top-three lists so it says so in one line, and Players of the Week and the division tables are there", "From 13 of 14 games played." in wt and "No change in the top three of any group since Monday." in wt and "Players of the Week" in wt and "Division Standings" in wt, wt[:200])
+check("Wednesday on the real data (Monday night still to play): 13 of 14 games, Sunday night changed none of the top-three lists so it says so in one line, and Players of the Week and the division tables are there", "From 13 of 14 games played." in wt and "No change in the top three of any group since Monday." in wt and "Top performances" in wt and "Division Standings" in wt, wt[:200])
 raw_fg = []
 for tm in snf_box["players"]:
     for cat in tm["statistics"]:
@@ -494,6 +506,11 @@ live_html = nfl.run(NOW, MON, {"positions": POS}, type("S", (), {"calls": 0, "sc
 live_g = next(g for g in GAMES if g["status"] == "live")
 check("the live game has one 'In progress' tag line with ESPN's clock text, placed straight above its two team rows; nothing says LIVE", live_html.count("In progress") == 1 and f'In progress · {nfl.r.esc(live_g["detail"])}' in live_html and "LIVE" not in live_html and live_g["detail"], live_g["detail"])
 wed_html = nfl.run(WED_NOW, WED, {**mon_state, "reported": t_rep}, TueSource())["html"]
+twh = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " | ", wed_html))
+check("the block is called Top performances (not Players of the Week: the picks are our own formula, not the NFL's award); three winners, then 'Honourable mentions' with an indented list under it",
+      "<h4>Top performances</h4>" in wed_html and "Players of the Week" not in wed_html and wed_html.index("Top performances") < wed_html.index("Honourable mentions") and wed_html.count('class="dlist indent"') == 1
+      and wed_html.count('<div class="dlist">') >= 1 and re.search(r"Offence:.*Defence:.*Special teams:.*Honourable mentions", twh), twh[:300])
+check("the mentions carry no 'Also:' label any more", "Also:" not in wed_html)
 check("Players of the Week use the house notes style: a dlist of lines (diamond bullet by CSS), the label in bold, no old bullet list", wed_html.count('<div class="dlist">') >= 1 and '<div class="pl"><span class="t"><strong>Offence:</strong>' in wed_html and '<ul class="standouts">' not in wed_html)
 check("independent: the stat figures of the Offence line are in gold, from a separate read of the raw box (Burrow 38/48, 462 yards, 5 TD, 3 INT) and the result after 'in the' is plain",
       all(f'<span class="n">{x}</span>' in wed_html for x in ("38/48", "462", "5", "3")) and "in the 43-36 win over TEN" in wed_html and '<span class="n">43</span>' not in wed_html)
@@ -518,6 +535,20 @@ po_txt = ptxt(nfl.playoff_html(TSTD, before=sw2))
 check("playoff picture arrows: a team that was two seeds lower last time is up 2", "▲2" in po_txt and "+/-" in po_txt and "▲" not in ptxt(nfl.playoff_html(TSTD)))
 wk1 = nfl.run(WED_NOW, WED, {**mon_state, "reported": t_rep}, TueSource())
 check("the run saves the ranks of the tables it showed; a later Wednesday shows arrows against them (a changed record moves nobody here, so all level)", wk1["state"]["ranks"] == R0 and "–" in ptxt(nfl.run(WED_NOW, WED, {**wk1["state"], "reported": t_rep}, TueSource())["html"]))
+
+# ---- Division tables (D, 2026-11-04): no PF/PA; W-L, DIV, GB, streak; a blue bar on each division leader ----
+dv = nfl.division_html(TSTD)
+dvt = text(dv)
+raw_divs = [d for c in TSTD["children"] for d in c["children"]]
+check("eight division tables with the columns Team, W-L, DIV, GB, Strk, +/-; the PF and PA columns are gone", dv.count('class="pts f1') == 8 and re.search(r"Team\s+W-L\s+DIV\s+GB\s+Strk\s+\+/-", dvt) and ">PF<" not in dv and ">PA<" not in dv, dvt[:200])
+bills = next(d for d in raw_divs if d["name"] == "AFC East")
+raw = {e["team"]["abbreviation"]: {x["name"]: x for x in e["stats"]} for e in bills["standings"]["entries"]}
+check("AFC East on the raw standings: each team's DIV is ESPN's own divisionRecord (BUF 0-1, NE 3-0, NYJ 0-2, MIA 1-1)", all(re.search(rf"{a}\s+\d+-\d+\s+{re.escape(raw[a]['divisionRecord']['displayValue'])}\s", dvt) for a in raw) and raw["NE"]["divisionRecord"]["displayValue"] == "3-0")
+check("games behind: worked out by us, and equal to ESPN's own gamesBehind for all 32 teams in the real standings (BUF leader shown as a dash; NE 1.5, NYJ 4.5, MIA 5)",
+      all((nfl.games_behind(e, d["standings"]["entries"][0]) if i else "–") == ("–" if _s_ == "-" else _s_) for d in raw_divs for i, e in enumerate(d["standings"]["entries"]) for _s_ in [next(x["displayValue"] for x in e["stats"] if x["name"] == "gamesBehind")])
+      and [nfl.games_behind(e, bills["standings"]["entries"][0]) for e in bills["standings"]["entries"]] == ["–", "1.5", "4.5", "5"])
+check("a tie counts as half a win and half a loss when counting games behind", nfl.games_behind({"stats": [{"name": "wins", "value": 5.0}, {"name": "losses", "value": 3.0}, {"name": "ties", "value": 1.0}]}, {"stats": [{"name": "wins", "value": 7.0}, {"name": "losses", "value": 2.0}, {"name": "ties", "value": 0.0}]}) == "1.5")
+check("a blue bar marks exactly one team in each division, the first row (the leader)", dv.count("z-blue") == 8 and all(re.search(r'<tr class="z-blue"><td class="">' + d["standings"]["entries"][0]["team"]["abbreviation"], dv) for d in raw_divs), dv.count("z-blue"))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

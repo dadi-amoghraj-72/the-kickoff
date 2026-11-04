@@ -113,6 +113,22 @@ def standouts(lines):
     return '<ol class="standouts">' + "".join(f"<li>{line}</li>" for line in lines) + "</ol>"
 
 
+def join_names(names):
+    """'A', 'A and B', 'A, B and C'."""
+    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1] if names else ""
+
+
+def summary_box(items):
+    """The small summary box above a scoreboard (the same in football, the NFL and any sport that wants one): rows of a label, a highlighted figure, some
+    text and a small second line. items: [(label, figure, text, sub)]; '' when there are none."""
+    rows = ""
+    for label, fig, text, sub in items:
+        figure = '<span class="n">' + esc(fig) + "</span> " if fig else ""
+        under = f'<span class="sub">{esc(sub)}</span>' if sub else ""
+        rows += f'<li><span class="lbl">{esc(label)}</span><span class="who">{figure}{esc(text)}{under}</span></li>'
+    return f'<ul class="roundup">{rows}</ul>' if rows else ""
+
+
 def potd(title, text):
     return f'<div class="potd"><span class="label">Performance of the Day</span><strong>{esc(title)}</strong><p>{text}</p></div>'
 

@@ -29,19 +29,21 @@ def check(name, ok, detail=""):
 
 text = lambda h: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h)).strip()  # noqa: E731
 L = roundup.lines(FACTS, len(ROWS) // 2, "night")
-check("the Champions League round is 18 games (36 teams), so this window is 9/18", L[0] == ("Games played", "9/18", ""), L[0])
-check("favourites won: 5 of the 6 clear favourites", L[1] == ("Favourites won", "5/6", ""), L[1])
-check("biggest upset: Sporting 2-3 LASK, with the favourite's pre-match chance",
-      L[2] == ("Biggest upset", "", "Sporting CP 2-3 LASK Linz (Sporting CP had a 70% chance)"), L[2])
-check("game of the night: the match, its goals, and that it was a comeback", L[3] == ("Game of the night", "", "Sporting CP 2-3 LASK Linz · 5 goals · comeback"), L[3])
-check("the same four lines in the same order every time", [x[0] for x in L] == ["Games played", "Favourites won", "Biggest upset", "Game of the night"])
+sp_ = next(x for x in FACTS["matches"] if x["match"] == "Sporting CP 2-3 LASK Linz")
+check("the Champions League round is 18 games (36 teams), so this window is 9/18", L[0] == ("Games played", "9/18", "", ""), L[0])
+check("underdogs won: 1 of the 6 clear favourites lost (Sporting), counted from the odds labels, not from the favourites count", L[1] == ("Underdogs won", "1/6", "", "") and FACTS["tally"]["upsets"] == 1 == sum(1 for x in FACTS["matches"] if x.get("result_vs_expectation") in ("upset", "big_upset")), L[1])
+check("biggest upset: the team codes, with the favourite's pre-match chance on the line below", L[2] == ("Biggest upset", "", sp_["codes"], "Sporting CP had a 70% chance") and re.fullmatch(r"[A-Z]+ \d+-\d+ [A-Z]+", sp_["codes"]), L[2])
+check("best game: the team codes, then its goals and the comeback on the line below", L[3] == ("Best game", "", sp_["codes"], "5 goals · comeback"), L[3])
+check("the rows are in the same order every time: games played, underdogs won, biggest upset, best game", [x[0] for x in L] == ["Games played", "Underdogs won", "Biggest upset", "Best game"])
 one_goal = {**FACTS, "matches": [{**FACTS["matches"][0], "total_goals": 1}], "game_of_the_night": FACTS["matches"][0]["match"]}
-check("one goal is '1 goal', not '1 goals'", roundup.lines(one_goal, 10)[-1][2].endswith("· 1 goal"), roundup.lines(one_goal, 10)[-1])
-check("a domestic league says 'day' not 'night'", roundup.lines(FACTS, 10, "day")[3][0] == "Game of the day")
+check("one goal is '1 goal', not '1 goals'", roundup.lines(one_goal, 10)[-1][3] == "1 goal", roundup.lines(one_goal, 10)[-1])
+check("the best game is called 'Best game' in a league and in the Champions League alike", roundup.lines(FACTS, 10, "day")[3][0] == "Best game" == roundup.lines(FACTS, 10, "night")[3][0])
+fallback = {**FACTS, "matches": [{k: v for k, v in FACTS["matches"][0].items() if k != "codes"}], "game_of_the_night": FACTS["matches"][0]["match"]}
+check("a match without codes falls back to its full-name line", roundup.lines(fallback, 10)[-1][2] == FACTS["matches"][0]["match"])
 
 h = roundup.html(FACTS, 18, "night")
-check("the box is a four-row list with the figures highlighted", h.count("<li>") == 4 and h.count('class="n"') == 2 and h.startswith('<ul class="roundup">'), h[:200])
-check("it reads cleanly as text", text(h).startswith("Games played 9/18 Favourites won 5/6 Biggest upset Sporting CP 2-3 LASK Linz"), text(h))
+check("the box is a list with the figures highlighted and the small second lines under their rows", h.count("<li>") == 4 and h.count('class="n"') == 2 and h.count('class="sub"') == 2 and h.startswith('<ul class="roundup">'), h[:200])
+check("it reads cleanly as text", text(h).startswith("Games played 9/18 Underdogs won 1/6 Biggest upset " + sp_["codes"]) and "Sporting CP had a 70% chance" in text(h), text(h))
 
 # ---- Where we are in the season ----
 league = lambda played: [{"played": p} for p in played]  # noqa: E731
@@ -55,28 +57,26 @@ cl = roundup.round_info(ROWS, "Matchday", 8)
 check("Champions League: Matchday 3/8 with all 18 games of the matchday played", (cl["label"], cl["number"], cl["total"], cl["so_far"], cl["size"]) == ("Matchday", 3, 8, 18, 18), cl)
 check("no table, no season row", roundup.round_info([]) is None and roundup.round_info(None) is None)
 L2 = roundup.lines(FACTS, 18, "night", cl)
-check("with the season info the box gets a first row, and games played shows today's and the round's count",
-      L2[0] == ("Matchday", "3/8", "") and L2[1] == ("Games played", "9/18", "[18/18 so far this matchday]"), L2[:2])
+check("with the season info the box gets a first row; all 18 games of the matchday are done, so the second line says the matchday is complete",
+      L2[0] == ("Matchday", "3/8", "", "") and L2[1] == ("Games played", "9/18", "", "Matchday complete"), L2[:2])
+day1 = roundup.round_info(league([4] * 18 + [3] * 18), "Matchday", 8)
+check("day 1 of a two-day matchday: 9 of 18 games played so far gives 'Rest on day 2' under Games played", roundup.lines(FACTS, 18, "night", day1)[1] == ("Games played", "9/18", "", "Rest on day 2"), (day1, roundup.lines(FACTS, 18, "night", day1)[1]))
 sunday = roundup.lines({**FACTS, "matches": FACTS["matches"][:3]}, 10, "day", mon)
-check("D's example: a Monday with 3 games played and 9 of 10 done this game week", sunday[1] == ("Games played", "3/10", "[9/10 so far this game week]"), sunday[1])
-check("the box is the same five rows in the same order", [x[0] for x in roundup.lines(FACTS, 18, "night", cl)] == ["Matchday", "Games played", "Favourites won", "Biggest upset", "Game of the night"])
-check("without season info the box is the old four rows", len(roundup.lines(FACTS, 18, "night")) == 4)
+check("a league: 3 games played and 9 of 10 done this game week says the rest are still to play", sunday[1] == ("Games played", "3/10", "", "Rest still to play"), sunday[1])
+whole = roundup.lines(FACTS, 9, "night", {"label": "Game week", "number": 9, "total": 38, "so_far": 9, "size": 9})
+check("a whole round played in one go has no second line", whole[1] == ("Games played", "9/9", "", ""), whole[1])
+check("the box is the same rows in the same order", [x[0] for x in roundup.lines(FACTS, 18, "night", cl)] == ["Matchday", "Games played", "Underdogs won", "Biggest upset", "Best game"])
+check("without season info the box has no round row", len(roundup.lines(FACTS, 18, "night")) == 4)
 
 # ---- Edge cases ----
-no_upset = {**FACTS, "matches": [x for x in FACTS["matches"] if x.get("result_vs_expectation") != "big_upset"]}
+no_upset = {**FACTS, "matches": [x for x in FACTS["matches"] if x.get("result_vs_expectation") not in ("upset", "big_upset")]}
 no_upset["tally"] = {**FACTS["tally"], "upsets": 0}
-check("no upset: 'None'", dict((a, c) for a, _, c in roundup.lines(no_upset, 18, "night"))["Biggest upset"] == "None")
-none_clear = {**FACTS, "tally": {**FACTS["tally"], "clear_favourites": 0, "favourite_won": 0}}
-check("no clear favourites is stated plainly", dict((a, c) for a, _, c in roundup.lines(none_clear, 18, "night"))["Favourites won"] == "No clear favourites")
-no_odds = overview.matchday_facts("X", MS, {m["id"]: None for m in MS}, ROWS)
-nl = dict((a, c) for a, _, c in roundup.lines(no_odds, 18, "night"))
-check("without odds the box says so, and still gives games and game of the night",
-      nl["Favourites won"] == "No odds available" and nl["Biggest upset"] == "No odds available" and "Game of the night" in nl and "Games played" in nl, nl)
-check("a league with no results has no box", roundup.html(overview.matchday_facts("X", [], {}, ROWS), 10) == "" and roundup.html(None, 10) == "")
-check("two upsets: the bigger one (higher favourite chance) is shown",
-      "Sporting" in dict((a, c) for a, _, c in roundup.lines({**FACTS, "matches": FACTS["matches"] + [{**FACTS["matches"][0], "match": "Small 0-1 Upset", "result_vs_expectation": "upset",
-                                                                                                    "pre_match_chances_pct": {"Small": 52, "draw": 20, "Upset": 28}}]}, 18, "night"))["Biggest upset"])
-check("text from data is escaped", "&lt;" in roundup.html({**FACTS, "matches": [{**FACTS["matches"][0], "match": "<b> 1-0 X"}], "game_of_the_night": "<b> 1-0 X"}, 18))
+check("no upset: the 'Biggest upset' row is left out altogether (no 'None' line)", "Biggest upset" not in [x[0] for x in roundup.lines(no_upset, 18, "night")] and roundup.lines(no_upset, 18, "night")[1] == ("Underdogs won", "0/6", "", ""))
+none_clear = {**FACTS, "tally": {**FACTS["tally"], "clear_favourites": 0, "favourite_won": 0, "upsets": 0}}
+check("no clear favourites is stated plainly", dict((a, c) for a, _, c, _ in roundup.lines(none_clear, 18, "night"))["Underdogs won"] == "No clear favourites")
+no_odds = {k: v for k, v in FACTS.items() if k != "tally"}
+check("no odds is stated plainly", dict((a, c) for a, _, c, _ in roundup.lines(no_odds, 18, "night"))["Underdogs won"] == "No odds available")
+check("no matches, no box", roundup.html({"matches": []}, 18) == "" and roundup.html(None, 18) == "")
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

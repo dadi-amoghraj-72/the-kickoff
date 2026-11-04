@@ -6,7 +6,7 @@ ESPN's own match-report headlines for context, and is not allowed to claim anyth
 """
 import re
 
-from kickoff import notes, settings
+from kickoff import clubs, notes, settings
 from kickoff.http import safe
 from kickoff.sources import espn
 
@@ -128,6 +128,12 @@ def excitement(d, result_vs_expectation=None):
             + {"big_upset": 3, "upset": 2}.get(result_vs_expectation, 0))
 
 
+def team_code(t):
+    """Three letters for a team: our own code for the 17 listed clubs (MUN, PSG, INT, BAR...), else ESPN's abbreviation."""
+    listed = clubs.CLUBS.get(str(t.get("id")))
+    return listed[1] if listed else (t.get("abbr") or t["name"][:3].upper())
+
+
 def label(m):
     return f"{m['home']['name']} {m['home_score']}-{m['away_score']} {m['away']['name']}"
 
@@ -188,7 +194,8 @@ def matchday_facts(competition, matches, odds_by_id, table_rows=None):
         pct, d = odds_by_id.get(m["id"]), drama(m)
         v = verdict(m, pct)
         timeline = goal_timeline(m)
-        row = {"match": label(m), "total_goals": d["total_goals"], "lead_changes": d["lead_changes"], "goals": timeline}
+        row = {"match": label(m), "codes": f"{team_code(m['home'])} {m['home_score']}-{m['away_score']} {team_code(m['away'])}",
+               "total_goals": d["total_goals"], "margin": d["margin"], "lead_changes": d["lead_changes"], "teams": [m["home"].get("id"), m["away"].get("id")], "goals": timeline}
         win = winning_goal(m, timeline)
         if win:
             row["winning_goal"] = win

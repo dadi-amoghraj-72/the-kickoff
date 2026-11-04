@@ -129,6 +129,12 @@ out2 = football.run(DAY, client=None, st=st, now=NOW)
 html2 = " ".join(s["html"] for s in out2["sections"])
 check("run again with the saved state: the table is 'No change', and Saka's injury is not repeated",
       "No change since Sunday" in html2 and "<table" not in html2.split("Premier League")[1][:6000].split("FPL Corner")[0] and "Bukayo Saka" not in html2.split("FPL Corner")[0], html2[:300])
+out3 = football.run(date(2026, 11, 4), client=None, st=st, now=datetime(2026, 11, 4, 0, 30, tzinfo=timezone.utc))
+html3 = " ".join(s["html"] for s in out3["sections"])
+check("a day with no games and an unchanged table: one 'No new games: Premier League.' line at the end, not a heading and a 'No change since' line per league", "No new games: Premier League." in html3 and "No change since" not in html3 and "<h3>Premier League</h3>" not in html3, html3[:300])
+check("a day with games still shows the league's own heading and its table notice (the first run above)", "<h3>Premier League</h3>" in html2)
+from kickoff import render as _r  # noqa: E402
+check("the list of quiet leagues reads 'A', 'A and B', 'A, B and C'", [_r.join_names(x) for x in (["A"], ["A", "B"], ["A", "B", "C"], [])] == ["A", "A and B", "A, B and C", ""])
 check("the saved state is not changed by a run (the caller decides)", st["tables"]["eng.1"]["published"] == "2026-11-01")
 
 # ---- With a (fake) Claude ----
@@ -141,7 +147,7 @@ check("Claude writes only the notes (Sonnet): no Opus overview is bought any mor
 pl3 = html3.split("<h3>Premier League</h3>")[1].split("<h3>")[0]
 check("with Claude the order is: round-up box (8/10), scoreboard, Claude's notes with names in bold, then the table",
       "8/10" in pl3 and pl3.index("roundup") < pl3.index('class="scores"') < pl3.index("<strong>Chelsea</strong>") < pl3.index("<table"), pl3[:300])
-check("the box is identical with and without Claude (it is built by code)", "8/10" in html and "Favourites won" in html and "Biggest upset" in html and "Game of the day" in html)
+check("the box is identical with and without Claude (it is built by code)", "8/10" in html and "Underdogs won" in html and "Best game" in html and "Favourites won" not in html and "Game of the day" not in html)
 check("the cost is totalled and recorded in the monthly state", out3["new_state"]["costs"]["2026-11"]["spent"] == out3["ledger"].total() > 0 and out3["new_state"]["costs"]["2026-11"]["calls"] == len(labels))
 check("news candidates are sent to Claude and remembered, so they are never sent twice",
       out3["stats"]["news_candidates"] == 0 or ("news classification" in labels and len(out3["new_state"]["news_seen"]) == out3["stats"]["news_candidates"]), out3["stats"])

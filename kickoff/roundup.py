@@ -23,34 +23,36 @@ def round_info(table_rows, label="Game week", total=None):
 
 
 def lines(facts, round_size, period="day", info=None):
-    """[(label, figure, text)] for the box. figure is the highlighted part (may be empty)."""
+    """[(label, figure, text, sub)] for the box. figure is the highlighted part (may be empty); sub is a small second line under the row (may be empty).
+    Rows: the round (Matchday 4/8), Games played, Underdogs won, Biggest upset (only when there was one), Best game (team codes, the goals and a comeback below)."""
     rows = facts["matches"]
     known = "tally" in facts
     out = []
     if info and info["number"]:
-        out.append((info["label"], f"{info['number']}/{info['total']}", ""))
-    out.append(("Games played", f"{len(rows)}/{round_size}", f"[{info['so_far']}/{info['size']} so far this {info['label'].lower()}]" if info else ""))
+        out.append((info["label"], f"{info['number']}/{info['total']}", "", ""))
+    sub = ""
+    if info and info["so_far"] < info["size"]:
+        sub = "Rest on day 2" if info["label"] == "Matchday" else "Rest still to play"
+    elif info and len(rows) < round_size:
+        sub = f"{info['label']} complete"
+    out.append(("Games played", f"{len(rows)}/{round_size}", "", sub))
     if known and facts["tally"]["clear_favourites"]:
-        out.append(("Favourites won", f"{facts['tally']['favourite_won']}/{facts['tally']['clear_favourites']}", ""))
+        out.append(("Underdogs won", f"{facts['tally']['upsets']}/{facts['tally']['clear_favourites']}", "", ""))
     elif known:
-        out.append(("Favourites won", "", "No clear favourites"))
+        out.append(("Underdogs won", "", "No clear favourites", ""))
     else:
-        out.append(("Favourites won", "", "No odds available"))
+        out.append(("Underdogs won", "", "No odds available", ""))
     if known:
         upsets = [x for x in rows if x.get("result_vs_expectation") in ("upset", "big_upset")]
         if upsets:
             top = max(upsets, key=lambda x: _favourite(x)[1])
             team, pct = _favourite(top)
-            out.append(("Biggest upset", "", f"{top['match']} ({team} had a {pct}% chance)"))
-        else:
-            out.append(("Biggest upset", "", "None"))
-    else:
-        out.append(("Biggest upset", "", "No odds available"))
+            out.append(("Biggest upset", "", top.get("codes") or top["match"], f"{team} had a {pct}% chance"))
     game = next((x for x in rows if x["match"] == facts.get("game_of_the_night")), None)
     if game:
         extra = " · comeback" if game.get("comeback") else ""
         goals = f"{game['total_goals']} goal" + ("" if game["total_goals"] == 1 else "s")
-        out.append((f"Game of the {period}", "", f"{game['match']} · {goals}{extra}"))
+        out.append(("Best game", "", game.get("codes") or game["match"], f"{goals}{extra}"))
     return out
 
 
@@ -58,9 +60,4 @@ def html(facts, round_size, period="day", info=None):
     """The box. Empty when there were no matches, so a league with nothing to report has no box."""
     if not facts or not facts["matches"]:
         return ""
-    items = ""
-    for label, fig, text in lines(facts, round_size, period, info):
-        figure = '<span class="n">' + r.esc(fig) + "</span> " if fig else ""
-        items += f'<li><span class="lbl">{r.esc(label)}</span><span class="who">{figure}{r.esc(text)}</span></li>'
-
-    return f'<ul class="roundup">{items}</ul>'
+    return r.summary_box(lines(facts, round_size, period, info))

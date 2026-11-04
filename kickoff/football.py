@@ -6,7 +6,7 @@ State is passed in and handed back, never written here, so a test run can't dist
 import copy
 from datetime import datetime, timezone
 
-from kickoff import champions, focus, fplcorner, injuries, international, leaders, news, notes, overview, roundup, scoreboard, settings, tables
+from kickoff import champions, focus, fplcorner, headlines, injuries, international, leaders, news, notes, overview, roundup, scoreboard, settings, tables
 from kickoff import render as r
 from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
@@ -98,7 +98,7 @@ def run(day, client=None, st=None, now=None, demo=False):
         return roundup.html(facts, size, period, info)
 
     # ---- The Football section ----
-    football = ""
+    football, quiet = "", []
     for lg in LEAGUE_ORDER:
         name, res, tbl = leagues[lg], results[lg] or [], rows[lg]
         parts = ""
@@ -113,7 +113,10 @@ def run(day, client=None, st=None, now=None, demo=False):
             html, entry = tables.one("Table", tbl, saved_tables.get(lg), day,
                                      leaders_fn=lambda lg=lg, tbl=tbl: guard(f"{leagues[lg]} leaders", leaders.league_block, lg,
                                                                               espn.season_year(day), tbl, cs))
-            parts += html
+            if entry or res or parts:
+                parts += html
+            else:
+                quiet.append(name)               # no games and the table has not changed: one line for all such leagues, at the end
             if entry:
                 new.setdefault("tables", {})[lg] = entry
         if parts:
@@ -126,7 +129,10 @@ def run(day, client=None, st=None, now=None, demo=False):
         wsl_parts += scoreboard.scores_html(wsl_res)
     if rows[espn.WSL]:
         html, entry = tables.one("Table", rows[espn.WSL], saved_tables.get(espn.WSL), day)
-        wsl_parts += html
+        if entry or wsl_res or wsl_parts:
+            wsl_parts += html
+        else:
+            quiet.append("Women's Super League")
         if entry:
             new.setdefault("tables", {})[espn.WSL] = entry
     if wsl_parts:
@@ -139,6 +145,8 @@ def run(day, client=None, st=None, now=None, demo=False):
                                            legs_fn=espn.get_tie_legs, goals_fn=lambda leg_id: espn.get_match_details(leg_id, espn.CHAMPIONS_LEAGUE))
         if cl_rows and champions.in_league_phase(cl_matches):   # remembered so the next league-phase table can show who moved
             new.setdefault("tables", {})[espn.CHAMPIONS_LEAGUE] = {"published": day.isoformat(), "rows": tables.signature(cl_rows)}
+    if quiet:
+        football += '<p class="muted">No new games: ' + r.esc(r.join_names(quiet)) + ".</p>"
 
     # ---- International football: only around a break, only competitive games ----
     intl = guard("international football", international.run, day, now, client, st.get("top30"))
@@ -216,22 +224,7 @@ def run(day, client=None, st=None, now=None, demo=False):
         arsenal += ars_inj + ars_news
 
     # ---- Headlines for the Telegram ping and the archive ----
-    heads = []
-    if headline_result:
-        heads.append(f"Arsenal: {headline_result}")
-    if champions.COMPETITION in overviews and overviews[champions.COMPETITION].get("game_of_the_night"):
-        heads.append(f"Champions League: {overviews[champions.COMPETITION]['game_of_the_night']}")
-    for comp, f in overviews.items():
-        for row in f["matches"]:
-            if row.get("result_vs_expectation") in ("upset", "big_upset"):
-                heads.append(f"Upset in the {comp}: {row['match']}")
-    for lg in LEAGUE_ORDER:
-        f = overviews.get(leagues[lg])
-        if f and f.get("game_of_the_night"):
-            heads.append(f"{leagues[lg]}: {f['game_of_the_night']}")
-    own = (headline_result or "").replace("–", "-")
-    heads = [h for h in heads if not (own and h.split(": ", 1)[-1].replace("–", "-") == own and not h.startswith("Arsenal"))]
-    unique = list(dict.fromkeys(heads))[:3]
+    unique = headlines.pick(overviews, headline_result)
 
     sections = []
     if arsenal:

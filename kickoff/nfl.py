@@ -150,6 +150,30 @@ def week_name(week, season_type):
 
 # ---- Scoreboard -----------------------------------------------------------------------------------
 
+def best_game(games):
+    """The most dramatic finished game: points scored, overtime and a close finish count; a rout does not. Returns the game or None."""
+    finals = [g for g in games if g["status"] == "final" and g["home"]["score"] is not None]
+    drama = lambda g: ((g["home"]["score"] + g["away"]["score"]) / 10 + (5 if g["ot"] else 0)  # noqa: E731
+                       + (4 if abs(g["home"]["score"] - g["away"]["score"]) <= 3 else 2 if abs(g["home"]["score"] - g["away"]["score"]) <= 7 else 0))
+    return max(finals, key=lambda g: (drama(g), g["date"])) if finals else None
+
+
+def summary_html(games, played, total):
+    """The box above the week's scoreboard: games played (with the rest still to come), underdog wins out of the games that had a clear underdog, and the
+    best game with its points and any overtime on the line below."""
+    if not total:
+        return ""
+    items = [("Games played", f"{played}/{total}", "", "Rest still to play" if played < total else "")]
+    known = [g for g in games if g["status"] == "final" and g.get("dog")]
+    if known:
+        items.append(("Underdogs won", f"{sum(1 for g in known if underdog_win(g))}/{len(known)}", "", ""))
+    best = best_game(games)
+    if best:
+        pts = best["home"]["score"] + best["away"]["score"]
+        items.append(("Best game", "", f"{best['away']['abbr']} {best['away']['score']}-{best['home']['score']} {best['home']['abbr']}", f"{pts} points" + (" · OT" if best["ot"] else "")))
+    return r.summary_box(items)
+
+
 def scoreboard_html(games, title, played, total, byes=()):
     """Every game of the week, two rows per game (away above home): full team names, the home team marked with a house (none at neutral
     sites), the winner in bold, records and an OT tag, an "In progress" tag line above a game being played, YTP (yet to play) in the middle of the score for a game
@@ -178,10 +202,8 @@ def scoreboard_html(games, title, played, total, byes=()):
                 tag = "OT"
             cls = " ".join(x for x in (side[0], "w" if w == side else "") if x)
             rows.append(f'<tr class="{cls}"><td class="tm">{r.esc(t["name"])}{star}{mark}{rec}</td>{score}<td class="ot">{tag}</td></tr>')
-    dogs = sum(1 for g in games if underdog_win(g))
-    sub = f'<span class="prog">{played}/{total} games played' + (f' · {DOG} {dogs} underdog win{"s" if dogs != 1 else ""}' if dogs else "") + "</span>" if total else ""
-    html = (f'<div class="nflsb"><table><colgroup><col style="width:75%"><col style="width:12%"><col style="width:13%"></colgroup>'
-            f'<thead><tr><th class="tt" colspan="3">{r.esc(title)}{sub}</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
+    html = summary_html(games, played, total) + (f'<div class="nflsb"><table><colgroup><col style="width:75%"><col style="width:12%"><col style="width:13%"></colgroup>'
+                                                 f'<thead><tr><th class="tt" colspan="3">{r.esc(title)}</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
     if byes:
         html += f'<p class="muted">On bye: {r.esc(", ".join(byes))}.</p>'
     return html
@@ -426,9 +448,10 @@ def rare_bonus(p):
 
 
 def players_of_the_week(players, games, extras=4):
-    """Bullets for the week's best individual games: [(label, line)]. The best offensive player, the best defender (rare feats such as three
-    interceptions get a bonus so a defender is not outscored by a quarterback's yards) and the best special-teams player, then up to
-    four more who met a spec threshold, best first. Nobody appears twice."""
+    """The week's top individual performances: [(label, line)]. The best offensive player, the best defender (rare feats such as three
+    interceptions get a bonus so a defender is not outscored by a quarterback's yards) and the best special-teams player (our own formula, not the
+    NFL's official award), then up to four honourable mentions ("Mention") who met a spec threshold: the best four by points, listed quarterbacks first,
+    then other offence, defence and special teams. Nobody appears twice."""
     best = lambda pool, key: max(pool, key=lambda p: (key(p), p["short"]), default=None)  # noqa: E731
     off = best([p for p in players if p["pos"] in OFF_POS], points)
     dfn = best([p for p in players if p["pos"] in DEF_POS], lambda p: points(p) + rare_bonus(p))
@@ -438,8 +461,9 @@ def players_of_the_week(players, games, extras=4):
         if p and score(p) >= floor:
             out.append((label, _pline(p, games)))
             used.add(p["id"])
-    more = sorted([p for p in players if kinds_of(p) and p["id"] not in used], key=lambda p: -points(p))[:extras]
-    return out + [("Also", standout_text(p, kinds_of(p), games)) for p in more]
+    group = lambda p: 0 if p["pos"] == "QB" else 1 if p["pos"] in OFF_POS else 2 if p["pos"] in DEF_POS else 3   # noqa: E731
+    more = sorted(sorted([p for p in players if kinds_of(p) and p["id"] not in used], key=lambda p: -points(p))[:extras], key=group)   # the best four, shown quarterbacks first
+    return out + [("Mention", standout_text(p, kinds_of(p), games)) for p in more]
 
 
 def _plain(text):
@@ -450,7 +474,7 @@ def _plain(text):
 def game_highlights(games, boxes, limit=5):
     """Game-level and team-level highlights of the given finished games, ranked by interest, at most five: [(interest, line)]. Comebacks,
     game-winning kicks, shutouts, blowouts, overtime, giveaways and the longest scoring play. Underdog wins are not listed here: they are
-    marked on the scoreboard. Individual performances are in Players of the Week."""
+    marked on the scoreboard. Individual performances are in Top performances."""
     items, longest = [], None
     for g in games:
         w = winner(g)
@@ -544,9 +568,17 @@ def ranks_of(standings):
     return {"div": div, "seeds": seeds}
 
 
+def games_behind(entry, leader):
+    """Games behind the division leader: '–' for the leader (or a tied team), else 0.5 steps (a tie counts as half a win and half a loss)."""
+    val = lambda e, k: float(_stat(e, k, "value") or 0)  # noqa: E731
+    d = ((val(leader, "wins") + val(leader, "ties") / 2 - val(entry, "wins") - val(entry, "ties") / 2) + (val(entry, "losses") + val(entry, "ties") / 2 - val(leader, "losses") - val(leader, "ties") / 2)) / 2
+    return "–" if d <= 0 else f"{d:g}"
+
+
 def division_html(standings, before=None):
-    """Eight small tables, AFC then NFC, in ESPN's order inside each division. +/- is the places moved within the division since the last
-    table shown (`before`, from ranks_of); empty the first time."""
+    """Eight small tables, AFC then NFC, in ESPN's order inside each division (the leader first, with a blue bar). Columns: W-L, DIV (the record inside the
+    division), GB (games behind the leader) and the streak; +/- is the places moved within the division since the last table shown (`before`, from
+    ranks_of); empty the first time."""
     out = ""
     prev = (before or {}).get("div") or {}
     for conf in standings["children"]:
@@ -555,8 +587,9 @@ def division_html(standings, before=None):
             rows = []
             for i, e in enumerate(ents, 1):
                 abbr = e["team"]["abbreviation"]
-                rows.append([abbr, record_of(e), _stat(e, "pointsFor"), _stat(e, "pointsAgainst"), _stat(e, "streak") or "-", r.move(prev[abbr] - i) if abbr in prev else ""])
-            out += r.compact(r.table(div["name"], [("Team", False), ("W-L", True), ("PF", True), ("PA", True), ("Strk", True), ("+/-", True)], rows), (18, 18, 16, 16, 16, 16), " nfl div")
+                rows.append([abbr, record_of(e), _stat(e, "divisionRecord") or "-", games_behind(e, ents[0]), _stat(e, "streak") or "-", r.move(prev[abbr] - i) if abbr in prev else ""])
+            out += r.compact(r.table(div["name"], [("Team", False), ("W-L", True), ("DIV", True), ("GB", True), ("Strk", True), ("+/-", True)], rows,
+                                     zones=["blue" if i == 0 else None for i in range(len(rows))]), (18, 18, 16, 16, 16, 16), " nfl div")
     return out
 
 
@@ -586,14 +619,14 @@ def gold_numbers(text):
     return marked + (" in the " + r.esc(result) if sep else "")
 
 
-def _list(items, numbers=False):
+def _list(items, numbers=False, cls=""):
     """Notes lines in the house style: a gold diamond bullet with a hanging indent; a leading label (Offence:, Comeback:) in bold; the stat
-    figures in gold when `numbers` is set (Players of the Week)."""
+    figures in gold when `numbers` is set (Top performances)."""
     def one(text):
         head, sep, rest = text.partition(": ")
         body = gold_numbers(rest) if numbers else r.esc(rest)
         return f"<strong>{r.esc(head)}:</strong> {body}" if sep and head in LABELS else (gold_numbers(text) if numbers else r.esc(text))
-    return '<div class="dlist">' + "".join(f'<div class="pl"><span class="t">{one(i)}</span></div>' for i in items) + "</div>" if items else ""
+    return f'<div class="dlist{" " + cls if cls else ""}">' + "".join(f'<div class="pl"><span class="t">{one(i)}</span></div>' for i in items) + "</div>" if items else ""
 
 
 def standings_ok(standings):
@@ -675,7 +708,8 @@ def run(now, day, st, source):
         html += "<h4>Highlights</h4>" + _list([t for _, t in hl])
     if wed and all_players:
         potw = players_of_the_week(all_players, by_id)
-        html += "<h4>Players of the Week</h4>" + _list([f"{label}: {line}" for label, line in potw], numbers=True)
+        html += ("<h4>Top performances</h4>" + _list([f"{label}: {line}" for label, line in potw if label != "Mention"], numbers=True)
+                 + (('<p class="subhead">Honourable mentions</p>' + _list([line for label, line in potw if label == "Mention"], numbers=True, cls="indent")) if any(label == "Mention" for label, _ in potw) else ""))
     if wed and season_type == 2:
         try:
             standings = source.standings()
