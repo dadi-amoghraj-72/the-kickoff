@@ -25,6 +25,8 @@ for m in sorted(matches, key=lambda x: x.get("dateTimeGMT", "")):
     ends = ""
     if m.get("matchEnded"):
         ends = f" est. end {cricket.started(m) + cricket.DURATION.get(m.get('matchType'), cricket.timedelta(hours=10)):%m-%d %H:%M}"
+    if "India" in m["name"] and "New Zealand" in m["name"] and m.get("dateTimeGMT", "") >= "2026-11-04":
+        print("SCORE LINE", m["name"], m.get("score"), m.get("status"))
     print(f"{m.get('dateTimeGMT', '?')[:16]}  {m.get('matchType', '?'):5} started={m.get('matchStarted')} ended={m.get('matchEnded')}{ends}  {why:24} {m['name'][:90]}")
 
 # ---- ESPN's cricket feed: can we read it from here, and what would be added? ----
