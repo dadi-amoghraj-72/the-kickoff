@@ -92,7 +92,7 @@ def draft_table(league, my_entry_id, gw):
         e = by[s["league_entry"]]
         moved = (s.get("last_rank") or s["rank"]) - s["rank"]
         rows.append([s["rank"], e["entry_name"], f"▲{moved}" if moved > 0 else (f"▼{-moved}" if moved < 0 else "–"), s["event_total"], s["total"]])
-        mine.append("mine" if e["entry_id"] == my_entry_id else "")
+        mine.append("mine hl" if e["entry_id"] == my_entry_id else "")       # bold and gold, like Arsenal and Sunrisers (D)
         sig.append([s["league_entry"], s["rank"], s["total"]])
     html = r.table(f"{league['league']['name']} After Gameweek {gw}",
                    [("#", True), ("Team", False), ("Move", True), ("GW", True), ("Total", True)], rows, row_classes=mine)

@@ -192,7 +192,7 @@ check("the Friday corner has a heading, the deadline, your team box, your squad,
 check("the first build records the draft table and the watch items it showed", "draft" in st and st.get("watch_seen", {}).get("3") == "2026-11-05T09:00:00Z", st)
 html2, st2 = fc.build(BOOT, FRESH, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, st, FRIDAY)
 check("the Draft table is part of every corner (even when its standings are unchanged since the last time), and so is your team box", "Hong Hu" in html2 and "merino parade fc" in html2)
-check("the Draft table has the league's name with the gameweek, your team highlighted, the move arrows and both team names", "Hong Hu Express SuperLiga After Gameweek 9" in html and 'class="mine"' in html and "Gabi III" in html and "Oinkata" in html, html[:100])
+check("the Draft table has the league's name with the gameweek, your team highlighted, the move arrows and both team names", "Hong Hu Express SuperLiga After Gameweek 9" in html and 'class="mine hl"' in html and "Gabi III" in html and "Oinkata" in html, html[:100])
 for quiet_day in (T(2026, 11, 2, 23, 15), T(2026, 11, 3, 23, 15), T(2026, 11, 4, 23, 15), T(2026, 11, 6, 23, 15)):
     q, _ = fc.build(BOOT, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, quiet_day)
     check(f"on the morning of {quiet_day:%a %-d %b} (not within 24 hours of the deadline, no gameweek just finished) the corner is not shown at all, not even a squad news line", q == "", q[:80])
@@ -213,6 +213,10 @@ check("FPL Watch (new injury news on heavily owned players) belongs to the deadl
 css2 = (Path(__file__).resolve().parent.parent / "kickoff" / "static" / "style.css").read_text()
 check("D's colours: the underperformers' figures and the squad average's number are the same pastel red (and the squad average is bold); the pick-up figures stay gold", ".fplrev .n.bad { color: #f19a9a; }" in css2 and ".fplrev .sq { color: #f19a9a; font-weight: 700; }" in css2 and ".fplrev .n { color: var(--gold)" in css2)
 check("every figure is in square brackets, none bare: no span of class n holds a number without them", all(re.fullmatch(r"\[\d+\.\d\]", m) for m in re.findall(r'<span class="n(?: bad)?">(.*?)</span>', ph + hh)) and len(re.findall(r'<span class="n(?: bad)?">', ph + hh)) >= 6, re.findall(r'<span class="n(?: bad)?">(.*?)</span>', ph + hh))
+
+check("D, 2026-11-04: my Draft team (Gabi III) is bold AND gold: its row carries both classes 'mine' and 'hl'; no other row does", len(re.findall(r'<tr class="mine hl">', table)) == 1 and table.index('class="mine hl"') < table.index("Gabi III") and table.count('class="hl"') + table.count("hl\"") == 1, table)
+css3 = (Path(__file__).resolve().parent.parent / "kickoff" / "static" / "style.css").read_text()
+check("the css that makes the row gold and the team name bold both exist", "tr.hl td { color: var(--gold)" in css3 and "tr.mine td:nth-child(2) { font-weight: 700; }" in css3)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
