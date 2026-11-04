@@ -41,8 +41,9 @@ def src(sport, league, **kw):
 text = lambda h: re.sub(r"<[^>]+>", " ", h)  # noqa: E731
 
 # ---- labels ----
-check("labels drop the league name and 'Award'", [awards.label(n) for n in ("NBA Western Conference Finals MVP", "NFL MVP", "Walter Payton NFL Man of the Year", "Twyman-Stokes Teammate of the Year Award", "Gold Glove", "All-NBA 1st Team")]
-      == ["Western Conference Finals MVP", "MVP", "Walter Payton Man of the Year", "Teammate of the Year", "Gold Glove", "All-NBA 1st Team"])
+check("labels use D's short forms (ROTY, 6MAN, MIP, EC/WC MVP, FINALS MVP, DPOY, TMOTY, OPOY, WP MOTY, COTY, SB MVP, Golden G ...) and otherwise ESPN's name without the league",
+      [awards.label(n) for n in ("Rookie of the Year", "Sixth Man of the Year", "Most Improved Player", "NBA Eastern Conference Finals MVP", "NBA Western Conference Finals MVP", "Finals MVP", "Defensive Player of the Year", "Twyman-Stokes Teammate of the Year Award", "NFL MVP", "NFL Offensive Player of the Year", "NFL Defensive Rookie of the Year", "Walter Payton NFL Man of the Year", "NFL Coach of the Year", "Super Bowl MVP", "Gold Glove", "Roberto Clemente Award", "All-NBA 1st Team", "NBA Cup MVP")]
+      == ["ROTY", "6MAN", "MIP", "EC MVP", "WC MVP", "FINALS MVP", "DPOY", "TMOTY", "MVP", "OPOY", "DROY", "WP MOTY", "COTY", "SB MVP", "Golden G", "RG Award", "All-NBA 1st Team", "Cup MVP"])
 check("winner text: one winner with his team, a team of players as a plain list", awards.winner_text(["A B"], "OKC") == "A B (OKC)" and awards.winner_text(["A. B", "C. D"]) == "A. B, C. D")
 
 # ---- the engine ----
@@ -76,7 +77,7 @@ hide2 = hide_all_but_base - {by_name["Sixth Man of the Year"], by_name["All-NBA 
 calls = []
 html, st = awards.run(espn_awards.Source("basketball", "nba", get_json=replay(hide=hide2, counter=calls), pause=0), "NBA Awards", st, 2026)
 t = text(html)
-check("day 1: three awards announced (Sixth Man, All-NBA first team, Western Conference Finals MVP); the Cup MVP is skipped; the table says NBA Awards", "NBA Awards" in t and "Sixth Man of the Year" in t and "All-NBA 1st Team" in t and "Western Conference Finals MVP" in t and "Cup" not in t and "Most Valuable Player" not in t, t)
+check("day 1: three awards announced (6MAN, All-NBA first team, WC MVP); the Cup MVP is skipped; the table says NBA Awards", "NBA Awards" in t and "6MAN" in t and "All-NBA 1st Team" in t and "WC MVP" in t and "Cup" not in t and "Most Valuable Player" not in t, t)
 raw_p = REC[next(u for u in REC if f"/awards/{by_name['Sixth Man of the Year']}" in u)]["winners"][0]["athlete"]["$ref"]
 raw_name = REC[raw_p.replace("http://", "https://").split("?")[0]]["displayName"]
 tn = re.sub(r"\s+", " ", t)
@@ -86,7 +87,7 @@ raw_names = [REC[w["athlete"]["$ref"].replace("http://", "https://").split("?")[
 raw_teams = [REC[w["team"]["$ref"].replace("http://", "https://").split("?")[0]]["abbreviation"] for w in a1]
 check("the All-NBA first team is five lines in ESPN's order, each the full raw name with that season's team: 'Nikola Jokic — DEN' (the count is left out when ESPN's history cannot be read)",
       all(f"{n} — {tm}" in tn for n, tm in zip(raw_names, raw_teams)) and tn.index(raw_names[0]) < tn.index(raw_names[4]) and len(raw_names) == 5, (raw_names, raw_teams))
-check("day 1 order: the table starts with the awards announced today and not with the older ones (MVP is not shown: it was announced before)", "Most Valuable" not in t and re.sub(r"\s+", " ", t).count("Rookie of the Year") == 0, t)
+check("day 1 order: the table starts with the awards announced today and not with the older ones (MVP is not shown: it was announced before)", "Most Valuable" not in t and re.sub(r"\s+", " ", t).count("ROTY") == 0, t)
 need = [u for u in calls if "/athletes/" in u or "/teams/" in u]
 check("only new awards cost name lookups, and no team or athlete is asked for twice: 6 different athletes (Wembanyama won two awards), each team once", len(need) == len(set(need)) and len([u for u in need if "/athletes/" in u]) == 6, (len(need), len(set(need)), [u[-45:] for u in need]))
 html2, st2 = awards.run(src("basketball", "nba", hide=hide2), "NBA Awards", st, 2026)
@@ -94,7 +95,7 @@ check("run again with nothing new: no table", html2 == "" and st2 == st)
 hide3 = hide2 - {by_name["Defensive Player of the Year"]}
 html3, st3 = awards.run(src("basketball", "nba", hide=hide3), "NBA Awards", st2, 2026)
 t3 = re.sub(r"\s+", " ", text(html3))
-check("day 2: Defensive Player on top, the one-winner awards from day 1 still below it; the All-NBA team block is not repeated on a day it is not new", t3.index("Defensive Player") < t3.index("Sixth Man") and "Western Conference Finals MVP" in t3 and "All-NBA 1st Team" not in t3, t3[:500])
+check("day 2: Defensive Player on top, the one-winner awards from day 1 still below it; the All-NBA team block is not repeated on a day it is not new", t3.index("DPOY") < t3.index("6MAN") and "WC MVP" in t3 and "All-NBA 1st Team" not in t3, t3[:500])
 html_bad, st_bad = awards.run(espn_awards.Source("basketball", "nba", get_json=lambda u: 1 / 0, pause=0), "NBA Awards", st3, 2026)
 check("a failing source shows nothing and keeps the state", html_bad == "" and st_bad == st3)
 
@@ -121,7 +122,7 @@ rows1 = [{"key": "1", "label": "MVP", "kind": "single", "data": {"name": "Shai G
          {"key": "3", "label": "Defensive Player of the Year", "kind": "single", "data": {"name": "Victor Wembanyama", "team": "SA"}, "text": "", "note": ""}]
 th = awards.table_html("NBA Awards", rows1)
 check("the MVP winner carries the iridescent class and the others plain gold; the team code sits beside each name", '<span class="wn mvp">Shai Gilgeous-Alexander</span> <span class="tc">(OKC)</span>' in th and '<span class="wn">Cooper Flagg</span>' in th and th.count("wn mvp") == 1, th)
-check("the label column is wider than the winner column (60% / 40%) so 'Defensive Player of the Year' has room", '<col style="width:60%"><col style="width:40%">' in th)
+check("the winners' column is the wide one (34% labels / 66% winners, D's phone check) now that labels are short forms", '<col style="width:34%"><col style="width:66%">' in th)
 team_row = {"key": "t", "label": "All-NBA 2nd Team", "kind": "team", "data": {"tone": "silver", "players": [{"name": "Kevin Durant", "team": "HOU", "count": 15}, {"name": "Kawhi Leonard", "team": "LAC", "count": None}]}, "text": "", "note": ""}
 tb = awards.table_html("NBA Awards", [team_row])
 check("a team row is a full-width block with one line per player: the name in the tone colour, the count in brackets only when known, then '— TEAM'", 'colspan="2"' in tb and '<span class="wn silver">Kevin Durant</span> <span class="ct">(15)</span> <span class="tc">— HOU</span>' in tb and '<span class="wn silver">Kawhi Leonard</span> <span class="tc">— LAC</span>' in tb and tb.count('class="pl"') == 2, tb)
@@ -144,7 +145,7 @@ _, sx = awards.run(src("basketball", "nba", hide=hide4), "NBA Awards", {}, 2026)
 h_a, sx = awards.run(src("basketball", "nba", hide=hide4 - {by_name["All-NBA 1st Team"]}), "NBA Awards", sx, 2026)
 check("the morning the All-NBA team lands: its block is in the table", "All-NBA 1st Team" in text(h_a))
 h_b, sx = awards.run(src("basketball", "nba", hide=hide4 - {by_name["All-NBA 1st Team"], by_name["Rookie of the Year"]}), "NBA Awards", sx, 2026)
-check("a later morning (Rookie of the Year lands): the one-winner rows are listed, the All-NBA block is not repeated", "Rookie of the Year" in text(h_b) and "All-NBA 1st Team" not in text(h_b) and "Sixth Man" not in text(h_b))
+check("a later morning (Rookie of the Year lands): the one-winner rows are listed, the All-NBA block is not repeated", "ROTY" in text(h_b) and "All-NBA 1st Team" not in text(h_b) and "6MAN" not in text(h_b))
 h_c, sx = awards.run(src("basketball", "nba", hide=hide4 - {by_name["All-NBA 1st Team"], by_name["Rookie of the Year"], by_name["MVP"]}), "NBA Awards", sx, 2026)
 check("the MVP morning is the final awards day: the full list returns, the All-NBA block included", "All-NBA 1st Team" in text(h_c) and "MVP" in text(h_c) and "wn mvp" in h_c)
 
@@ -206,7 +207,7 @@ hide_b = {i for i in ids if i not in (by_name["MVP"],)}
 b_html, b_state = awards.block("nba", "basketball", "NBA Awards", dt.date(2026, 4, 20), {}, source=src("basketball", "nba", hide=hide_b), wiki=NoWiki())
 check("block: the NBA on 20 April 2026 reads the 2026 season; first sight is silent", b_html == "" and b_state["season"] == 2026 and len(b_state["seen"]) == 1)
 b_html2, b_state2 = awards.block("nba", "basketball", "NBA Awards", dt.date(2026, 4, 21), b_state, source=src("basketball", "nba", hide=hide_b - {by_name["Rookie of the Year"]}), wiki=NoWiki())
-check("block: the next day's Rookie of the Year is the news", "Rookie of the Year" in text(b_html2) and "Most Valuable" not in text(b_html2) and b_state2["season"] == 2026, text(b_html2))
+check("block: the next day's Rookie of the Year is the news", "ROTY" in text(b_html2) and "Most Valuable" not in text(b_html2) and b_state2["season"] == 2026, text(b_html2))
 
 # the wrapper: the sport's own html comes after the awards table; the awards state is kept next to the sport's state
 orig_block = awards.block
@@ -214,7 +215,7 @@ awards.block = lambda league, sport, title, day, state, **kw: orig_block(league,
 fake_sport = lambda now, day, st: {"html": "<p>GAMES</p>", "state": {"reported": [1]}}
 wrapped = daily._with_extras(fake_sport, "nba", "basketball", "NBA")
 w_out = wrapped(None, dt.date(2026, 4, 21), {"awards": b_state})
-check("the wrapper puts the awards table above the games and keeps both states", w_out["html"].index("NBA Awards") < w_out["html"].index("GAMES") and w_out["state"]["reported"] == [1] and w_out["state"]["awards"]["season"] == 2026 and "Rookie of the Year" in w_out["html"], w_out["html"][:200])
+check("the wrapper puts the awards table above the games and keeps both states", w_out["html"].index("NBA Awards") < w_out["html"].index("GAMES") and w_out["state"]["reported"] == [1] and w_out["state"]["awards"]["season"] == 2026 and "ROTY" in w_out["html"], w_out["html"][:200])
 w_quiet = wrapped(None, dt.date(2026, 4, 21), {"awards": w_out["state"]["awards"]})
 check("a day with nothing new: only the games, and the awards state unchanged", w_quiet["html"] == "<p>GAMES</p>" and w_quiet["state"]["awards"] == w_out["state"]["awards"])
 awards.block = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("down"))

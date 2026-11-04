@@ -13,11 +13,21 @@ from kickoff import honours
 from kickoff import render as r
 
 SKIP = {"NBA Cup MVP", "NBA Cup All-Tournament Team"}      # D wants the conference finals MVPs but not the in-season Cup
-LABELS = {"Twyman-Stokes Teammate of the Year Award": "Teammate of the Year"}
+LABELS = {   # D's short forms (2026-11-04), keyed by ESPN's names; anything not listed is shown with ESPN's name minus the league
+    "Rookie of the Year": "ROTY", "Sixth Man of the Year": "6MAN", "Most Improved Player": "MIP", "NBA Eastern Conference Finals MVP": "EC MVP",
+    "NBA Western Conference Finals MVP": "WC MVP", "Finals MVP": "FINALS MVP", "Defensive Player of the Year": "DPOY", "Clutch Player of the Year": "CLUTCH",
+    "Twyman-Stokes Teammate of the Year Award": "TMOTY", "All-Star MVP": "ASG MVP",
+    "NFL Offensive Player of the Year": "OPOY", "NFL Defensive Player of the Year": "DPOY", "NFL Offensive Rookie of the Year": "OROY",
+    "NFL Defensive Rookie of the Year": "DROY", "NFL Coach of the Year": "COTY", "NFL Comeback Player of the Year": "CPOY", "Walter Payton NFL Man of the Year": "WP MOTY",
+    "Super Bowl MVP": "SB MVP",
+    "Gold Glove": "Golden G", "Platinum Glove": "Platinum G", "Silver Slugger": "Silver S", "Cy Young": "Cy Young", "ALCS MVP": "ALCS MVP", "NLCS MVP": "NLCS MVP",
+    "World Series MVP": "WS MVP", "Manager of the Year": "MOTY", "Roberto Clemente Award": "RG Award", "All-Star Game MVP": "ASG MVP",
+}
 
 
 def label(name):
-    """'NBA Western Conference Finals MVP' -> 'Western Conference Finals MVP', 'Walter Payton NFL Man of the Year' -> 'Walter Payton Man of the Year'."""
+    """The short form for an award ('NBA Western Conference Finals MVP' -> 'WC MVP', 'Walter Payton NFL Man of the Year' -> 'WP MOTY'); an award with no short form keeps
+    ESPN's name without the league ('All-NBA 1st Team')."""
     if name in LABELS:
         return LABELS[name]
     out = re.sub(r"(?<![-\w])(NBA|NFL|MLB)\s+", "", name)
@@ -156,7 +166,7 @@ def table_html(title, rows, show_blocks=True):
         body += f'<tr><td>{_esc(x["label"])}</td><td class="win">{cell}{note}</td></tr>'
     if not body:
         return ""
-    return (f'<div class="pts f1 awards"><table><colgroup><col style="width:60%"><col style="width:40%"></colgroup><thead><tr><th class="tt" colspan="2">{_esc(title)}</th></tr>'
+    return (f'<div class="pts f1 awards"><table><colgroup><col style="width:34%"><col style="width:66%"></colgroup><thead><tr><th class="tt" colspan="2">{_esc(title)}</th></tr>'
             f'<tr><th>Award</th><th>Winner</th></tr></thead><tbody>{body}</tbody></table></div>')
 
 
@@ -185,7 +195,7 @@ def wiki_items(league, season, wiki):
             c = honours.coach_of_the_year(wiki.wikitext("NBA Coach of the Year Award"))
             if not (c and c["season"] == f"{season - 1}–{str(season)[2:]}"):
                 return []
-            return [{"key": "wiki:coy", "label": "Coach of the Year", "sig": c["coach"], "kind": "single", "data": {"name": c["coach"], "team": c["team"]},
+            return [{"key": "wiki:coy", "label": "COTY", "sig": c["coach"], "kind": "single", "data": {"name": c["coach"], "team": c["team"]},
                      "text": f"{c['coach']} ({c['team']})"}]
 
         def stars():
