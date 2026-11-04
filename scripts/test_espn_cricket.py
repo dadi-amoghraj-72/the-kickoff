@@ -242,9 +242,9 @@ SER = (FX / "espn_cricket_series_nz_ind.html").read_text()
 srows = ec.parse_series(SER)
 txt3 = lambda h: _re3.sub(r"\s+", " ", _re3.sub(r"<[^>]+>", " ", h)).strip()  # noqa: E731
 raw_results = _re3.findall(r'"note":"((?:India|New Zealand) won by [^"]+)"', SER)
-check("independent: the page's own embedded data lists five finished results (3 India, 2 New Zealand), and the parser finds exactly those five, in order, plus five ODIs with no result",
-      len(srows) == 10 and [g["result"] for g in srows if g["result"]] == list(dict.fromkeys(raw_results))[:5] and sum(g["result"] is not None for g in srows) == 5
-      and [g["format"] for g in srows] == ["T20I"] * 5 + ["ODI"] * 5, [(g["n"], g["format"], g["result"]) for g in srows])
+check("independent: the page's own embedded data lists five finished results (3 India, 2 New Zealand), and the parser finds exactly those five, in order, plus five ODIs and the first Test (a date range, 'Nov 19-23 2026') with no result",
+      len(srows) == 11 and [g["result"] for g in srows if g["result"]] == list(dict.fromkeys(raw_results))[:5] and sum(g["result"] is not None for g in srows) == 5
+      and [g["format"] for g in srows] == ["T20I"] * 5 + ["ODI"] * 5 + ["Test"], [(g["n"], g["format"], g["result"]) for g in srows])
 check("the parser reads each match's teams, abbreviations and scores (1st T20I: New Zealand 225/4, India 230/6) and its venue and date; the 5th T20I lists India first",
       (srows[0]["teams"][0]["name"], srows[0]["teams"][0]["abbr"], srows[0]["teams"][0]["score"], srows[0]["teams"][1]["score"], srows[0]["venue"], srows[0]["date"]) == ("New Zealand", "NZ", "225/4", "230/6", "Christchurch", "Oct 22 2026") and srows[4]["teams"][0]["name"] == "India")
 check("a match still to come has no scores and carries its start line", srows[5]["teams"][0]["score"] == "" and srows[5]["starts"] == "Starts at 15:00 local time" and srows[5]["result"] is None and srows[5]["venue"] == "Auckland")
@@ -259,7 +259,7 @@ check("each played match shows its result line under it and the winning side in 
 odi = ck.series_html(srows, "odi")
 ot = txt3(odi)
 check("the ODI series, not started: 0 series 0, five rows made in advance each with its date and 'Starts at 15:00 local time', no scores", "0 series 0" in ot and odi.count('class="one end pre"') == 5 and ot.count("Starts at 15:00 local time") == 5 and "1st ODI · 4 Nov" in ot and "5th ODI · 15 Nov" in ot)
-check("a format with no matches in the page gives nothing", ck.series_html(srows, "test") == "" and ck.series_html([], "odi") == "" and ck.series_html(None, "odi") == "")
+check("a format with no matches in the page gives nothing", ck.series_html([g for g in srows if g["format"] != "Test"], "test") == "" and ck.series_html([], "odi") == "" and ck.series_html(None, "odi") == "")
 tied_rows = _cp.deepcopy(srows[:5])
 tied_rows[0]["result"] = "Match tied"
 tsv = ck.series_html(tied_rows, "t20")
@@ -283,7 +283,7 @@ check("when the series feed has nothing the result still shows without a table",
 page_calls = []
 fsrc = ec.Source(lambda url: (page_calls.append(url) or (SER if "scores/series" in url else SCORES)), pause=0)
 sr = fsrc.series(nzind)
-check("the live source finds the series id from the day's scores page, fetches that series' page once, and returns its 10 matches; a second call uses the cache", sr is not None and len(sr) == 10 and any(u.endswith("/cricket/scores/series/24469") for u in page_calls) and (fsrc.series(nzind) is not None) and sum("scores/series" in u for u in page_calls) == 1, page_calls)
+check("the live source finds the series id from the day's scores page, fetches that series' page once, and returns its 11 matches (five T20Is, five ODIs, a Test); a second call uses the cache", sr is not None and len(sr) == 11 and any(u.endswith("/cricket/scores/series/24469") for u in page_calls) and (fsrc.series(nzind) is not None) and sum("scores/series" in u for u in page_calls) == 1, page_calls)
 check("a source that fails returns None, not an error", ec.Source(lambda url: 1 / 0, pause=0).series(nzind) is None)
 
 # ---- ESPN's cricket JSON feed: matches the free CricketData list does not have (New Zealand v India, 1st ODI, 4 November 2026) ----

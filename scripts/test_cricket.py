@@ -65,6 +65,70 @@ fixed = ck.normalise([odi_nt])
 check("normalised, that ODI is an international in scope and is picked for the edition; before, with no matchType, it was silently dropped (the original dict is not changed)", ck.classify(fixed[0])["kind"] == "international" and [m["id"] for m in ck.pick(fixed, datetime(2026, 11, 4, 10, 0, tzinfo=timezone.utc), datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc))] == ["n1"] and "matchType" not in odi_nt and ck.classify(odi_nt)["kind"] is None)
 run_nt = ck.run(datetime(2026, 11, 4, 10, 0, tzinfo=timezone.utc), datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([odi_nt], 5), lambda mid: (_ for _ in ()).throw(RuntimeError("no card")), src.scorecards_affordable)
 check("end to end: a match with no matchType in the list is in the block (a result line, 'New Zealand v India') and is remembered as reported", run_nt["stats"]["picked"] == 1 and "New Zealand v India" in re.sub(r"<[^>]+>", "", run_nt["html"]) and "n1" in run_nt["state"]["seen"], run_nt["html"][:200])
+
+# ---- D's cricket round of 4 November: heading, big result, scores, Tests, series ----
+check("short_result: 'India won by 5 wkts - 2nd inns reduced to 32 overs - DLS Target 143' reads 'India won by 5 wickets (DLS)'; the balls-remaining bracket goes; a plain result is unchanged; a Test's day line reads on one line",
+      [ck.short_result(x) for x in ("India won by 5 wkts  -  2nd inns reduced to 32 overs - DLS Target 143", "India won by 5 wkts (56b rem) (DLS)", "South Africa won by 176 runs", "Day 3: Stumps - Australia lead by 100 runs", "1 wkt", "")]
+      == ["India won by 5 wickets (DLS)", "India won by 5 wickets (DLS)", "South Africa won by 176 runs", "Day 3: Stumps, Australia lead by 100 runs", "1 wicket", ""])
+dls_m = {"name": "New Zealand vs India, 1st ODI, India tour of New Zealand 2026", "matchType": "odi", "teams": ["New Zealand", "India"], "matchEnded": True, "status": "India won by 5 wkts  -  2nd inns reduced to 32 overs - DLS Target 143",
+         "score": [{"inning": "New Zealand Inning 1", "r": 185, "w": 10, "o": 40.2}, {"inning": "India Inning 1", "r": 143, "w": 5, "o": 22.4}]}
+dh = ck.result_html(dls_m)
+check("the ODI header: 'New Zealand v India · 1st ODI' once (no tour name, no repeated series line), the result as the main line, then the scores, in that order", "New Zealand v <strong>India</strong> · 1st ODI" in dh and "India tour of New Zealand" not in dh and "India won by 5 wickets (DLS)" in dh and "DLS Target" not in dh
+      and dh.index('class="cm"') < dh.index('class="cr"') < dh.index('class="cs"') and "New Zealand 185 (40.2) · India 143/5 (22.4)" in dh, dh)
+test_m = {"name": "South Africa vs Australia, 3rd Test, Australia tour of South Africa 2026", "matchType": "test", "teams": ["South Africa", "Australia"], "matchEnded": True, "status": "South Africa won by 176 runs",
+          "score": [{"inning": "South Africa Inning 1", "r": 329, "w": 10}, {"inning": "Australia Inning 1", "r": 429, "w": 10}, {"inning": "South Africa Inning 2", "r": 387, "w": 10}, {"inning": "Australia Inning 2", "r": 111, "w": 10}]}
+live_test = dict(test_m, matchEnded=False, status="Day 4: Stumps - South Africa lead by 100 runs", score=test_m["score"][:2] + [{"inning": "South Africa Inning 2", "r": 187, "w": 4}])
+check("a Test's scores read 'South Africa 329 & 387 · Australia 429 & 111'; mid-Test an innings still going shows its wickets ('187/4'), with the other side's one innings", ck.scores_line(test_m) == "South Africa 329 & 387 · Australia 429 & 111" and ck.scores_line(live_test) == "South Africa 329 & 187/4 · Australia 429", ck.scores_line(live_test))
+check("series_day: a single date and a Test's date range", [ck.series_day(x) for x in ("Nov 4 2026", "Oct 27-31 2026", "Nov 10 2026", "")] == ["4 Nov", "27–31 Oct", "10 Nov", ""])
+test_end = {"id": "te", "name": "South Africa vs Australia, 3rd Test, tour", "matchType": "test", "teams": ["South Africa", "Australia"], "dateTimeGMT": "2026-10-27T08:30:00", "matchStarted": True, "matchEnded": True, "score": [], "status": "South Africa won by 176 runs"}
+check("a Test that finished on its fifth day is picked for the next edition (before, its estimated end was ten hours after the start, long past, so a finished Test was never reported); one that finished before the window opened, or was already reported, is not",
+      [m["id"] for m in ck.pick([test_end], datetime(2026, 10, 31, 10, 0, tzinfo=timezone.utc), datetime(2026, 10, 30, 23, 15, tzinfo=timezone.utc))] == ["te"]
+      and ck.pick([test_end], datetime(2026, 11, 8, 10, 0, tzinfo=timezone.utc), datetime(2026, 11, 7, 23, 15, tzinfo=timezone.utc)) == []
+      and ck.pick([test_end], datetime(2026, 10, 31, 10, 0, tzinfo=timezone.utc), datetime(2026, 10, 30, 23, 15, tzinfo=timezone.utc), seen={"te"}) == [])
+
+# the real South Africa v Australia series page and the real 3rd Test scorecard
+from kickoff.sources import espn_cricket as _ec  # noqa: E402
+SA_ROWS = _ec.parse_series((ROOT / "tests" / "fixtures" / "espn_cricket_series_sa_aus.html").read_text())
+SA_PAGE = (ROOT / "tests" / "fixtures" / "espn_cricket_scorecard_sa_aus_test.html").read_text()
+sa_card = _ec.parse_scorecard(SA_PAGE)
+check("the series page reads all six matches of the tour: three ODIs and three Tests with their date ranges ('Oct 27-31 2026'), the second Test's 'inns & 31 runs' with a real ampersand", [(g["n"], g["format"]) for g in SA_ROWS] == [("1st", "ODI"), ("2nd", "ODI"), ("3rd", "ODI"), ("1st", "Test"), ("2nd", "Test"), ("3rd", "Test")]
+      and SA_ROWS[5]["date"] == "Oct 27-31 2026" and SA_ROWS[4]["result"] == "South Africa won by an inns & 31 runs", [(g["n"], g["format"], g["date"]) for g in SA_ROWS])
+sa_m = dict(test_m, score=[{"inning": i["inning"].replace(" 1st Innings", " Inning 1").replace(" 2nd Innings", " Inning 2"), "r": i["espn"]["total"]["r"], "w": i["espn"]["total"]["w"], "o": i["espn"]["total"]["o"]} for i in sa_card])
+raw_totals = [i["espn"]["total"]["r"] for i in sa_card]
+check("independent: the real Test's four innings totals from the page (329, 429, 387, 111) give the scores line 'South Africa 329 & 387 · Australia 429 & 111'", raw_totals == [329, 429, 387, 111] and ck.scores_line(sa_m) == "South Africa 329 & 387 · Australia 429 & 111", raw_totals)
+st = ck.series_html(SA_ROWS, "test", current=sa_m)
+raw_wins = {"Australia": sum(1 for g in SA_ROWS if g["format"] == "Test" and g["result"].startswith("Australia won")), "South Africa": sum(1 for g in SA_ROWS if g["format"] == "Test" and g["result"].startswith("South Africa won"))}
+check("the Test series table: 'Australia v South Africa · Test series', the series stands Australia 1, South Africa 2 (counted from the raw results), the dates are ranges ('27–31 Oct'), the second Test's ampersand is clean, and only Tests are in it (no ODI row)",
+      raw_wins == {"Australia": 1, "South Africa": 2} and "Test series" in st and '<span class="ws">1</span>' in st and '<span class="ws">2</span>' in st and st.index('<span class="ws">1</span>') < st.index('<span class="ws">2</span>')
+      and "27–31 Oct" in st and "&amp;amp;" not in st and "inns &amp; 31 runs" in st and "ODI" not in st, st[:300])
+stale_rows = [dict(g) for g in SA_ROWS]
+stale_rows[5] = dict(stale_rows[5], result="South Africa require 90 runs", teams=[dict(t, score="1/0") for t in stale_rows[5]["teams"]])
+fixed = ck.patch_series(stale_rows, sa_m)
+check("a stale series row for the match being reported (ESPN's page caught mid-match) is put right from our own data: the result line, the scores ('329 & 387', '429 & 111'), and the series is recounted from it", fixed[5]["result"] == "South Africa won by 176 runs" and [t["score"] for t in fixed[5]["teams"]] == ["329 & 387", "429 & 111"]
+      and stale_rows[5]["result"] == "South Africa require 90 runs" and ck.series_html(stale_rows, "test", current=sa_m).count("South Africa require") == 0, fixed[5])
+nz_rows = [{"n": "1st", "format": "ODI", "venue": "Auckland", "date": "Nov 4 2026", "teams": [{"name": "New Zealand", "abbr": "NZ", "score": "185"}, {"name": "India", "abbr": "IND", "score": "103/1"}], "result": "India require 40 runs", "starts": None},
+           {"n": "2nd", "format": "ODI", "venue": "Hamilton", "date": "Nov 7 2026", "teams": [{"name": "New Zealand", "abbr": "NZ", "score": ""}, {"name": "India", "abbr": "IND", "score": ""}], "result": None, "starts": "Starts at 15:00 local time"}]
+odi_html = ck.series_html(nz_rows, "odi", current=dls_m)
+check("D's 4 November series table: the stale 1st-ODI row ('185 v 103/1*, India require 40 runs', series 0-0) is replaced by our result, so India lead 1-0 with 'India won by 5 wickets (DLS)' and 143/5 against 185; the 2nd ODI is still to come",
+      "India require" not in odi_html and "India won by 5 wickets (DLS)" in odi_html and "143/5" in odi_html and '<span class="ws">1</span>' in odi_html and "Starts at 15:00" in odi_html, odi_html[:300])
+inn_html = ck.full_scorecard_html(ck.slim_card({"scorecard": sa_card[:1]}, sa_m))
+check("the 4s and 6s headings are lower-case 4s and 6s (a class switches off the capitals), and the strike rate heading is SR", '<th class="n lc">4s</th><th class="n lc">6s</th><th class="n">SR</th>' in inn_html)
+rows_last = inn_html.split("<tbody>")[1].split("</tbody>")[0].split("<tr")[-2:]
+check("extras and total are the last two rows of the SAME batting table (one table for the batting, no separate block), the total row marked bold ('sum total') with the overs and run rate", inn_html.count('<table class="sc">') == 2 and 'class="sum"><td class="name">Extras' in rows_last[0] and 'class="sum total"><td class="name">Total' in rows_last[1] and "run rate" in rows_last[1], rows_last)
+css = (ROOT / "kickoff" / "static" / "style.css").read_text()
+check("the stylesheet gives the cricket tables room on the right, makes the total bold and keeps '4s' lower-case", "table.sc th:last-child" in css and "padding-right: 12px" in css and "tr.sum.total td { font-weight: 700; }" in css and "th.lc { text-transform: none; }" in css)
+full4 = ck.full_scorecard_html(ck.slim_card({"scorecard": sa_card}, sa_m))
+last2 = ck.full_scorecard_html(ck.slim_card({"scorecard": sa_card}, sa_m), from_index=2)
+check("a Test's earlier innings are one line each: with from_index 2 only the third and fourth innings have tables (2 batting + 2 bowling) and the first two are just 'South Africa 1st innings 329 (82.3 ov)' and 'Australia 1st innings 429 (125.1 ov)'; with 0 all four have tables",
+      full4.count('<table class="sc">') == 8 and last2.count('<table class="sc">') == 4 and "South Africa</strong> 1st innings 329 (82.3 ov)" in last2 and "Australia</strong> 1st innings 429 (125.1 ov)" in last2 and last2.count('class="inn"') == 2, last2[:300])
+live_sa = dict(sa_m, id="sa3", matchEnded=False, status="Day 4: Stumps - South Africa lead by 100 runs", matchStarted=True, dateTimeGMT="2026-10-27T08:30:00", score=sa_m["score"][:3])
+done_sa = dict(sa_m, id="sa3", matchEnded=True, status="South Africa won by 176 runs", matchStarted=True, dateTimeGMT="2026-10-27T08:30:00")
+sa_card_cd = {"scorecard": sa_card, "status": "", "potm": [{"name": "Simon Harmer", "team": "South Africa"}]}
+NOW_T, START_T = datetime(2026, 10, 31, 10, 0, tzinfo=timezone.utc), datetime(2026, 10, 30, 23, 15, tzinfo=timezone.utc)
+mid_run = ck.run(NOW_T, START_T, {}, lambda: ([live_sa], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no")), src.scorecards_affordable, espn_card=lambda m: {"scorecard": sa_card[:3], "status": "", "potm": []}, espn_series=lambda m: SA_ROWS)
+check("a Test in progress has no series table (no other matches of the series on days 1 to 4), shows its day, and the state remembers that two innings were complete (the third is still going)", 'ser sm tst' not in mid_run["html"] and "Test · Day 4" in mid_run["html"] and mid_run["state"]["test_done"]["sa3"] == 2, (mid_run["state"].get("test_done"), mid_run["html"][:200]))
+end_run = ck.run(NOW_T, START_T, mid_run["state"], lambda: ([done_sa], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no")), src.scorecards_affordable, espn_card=lambda m: sa_card_cd, espn_series=lambda m: SA_ROWS)
+check("on the final day the Test has the result, innings 3 and 4 in full and the first two as one line (they were shown before), the series table with the whole series, and the state records all four innings", 'ser sm tst' in end_run["html"] and end_run["html"].count('class="inn"') == 2 and "1st innings 329" in end_run["html"] and "South Africa won by 176 runs" in end_run["html"] and end_run["state"]["test_done"]["sa3"] == 4, (end_run["state"].get("test_done"), end_run["html"].count('class="inn"')))
 live = {"id": "t1", "name": "England vs Pakistan, 1st Test, Pakistan tour of England 2027", "matchType": "test", "status": "Day 2: Stumps - England lead by 40 runs",
         "dateTimeGMT": "2026-11-01T10:00:00", "teams": ["England", "Pakistan"], "score": [], "matchStarted": True, "matchEnded": False}
 check("a live Test is reported when its status has changed", any(m["id"] == "t1" for m in ck.pick(M + [live], NOW, START, last_status={"t1": "Day 1: Stumps"})))
@@ -74,10 +138,11 @@ check("live matches that are not Test-nation Tests (Sheffield Shield, an A-team 
 # ---- How a result reads ----
 nz = by("5th T20I")
 h = ck.result_html(nz)
-check("a result shows the teams (India in bold), both innings, the result and the series", "New Zealand v <strong>India</strong>" in h and "India 191/8 (20) · New Zealand 195/3 (18)" in h
-      and "New Zealand won by 7 wkts" in h and "5th T20I, India tour of New Zealand 2026" in h, h)
+check("a result shows the teams (India in bold), both innings, the result and the series", "New Zealand v <strong>India</strong> · 5th T20I" in h and "New Zealand 195/3 (18) · India 191/8 (20)" in h
+      and "New Zealand won by 7 wickets" in h and "India tour of New Zealand" not in h and h.index('class="cr"') < h.index('class="cs"'), h)
 check("an all-out innings has no '/10' and overs keep their decimal", ck.innings_line({"r": 109, "w": 10, "o": 17.4, "inning": "Hobart Hurricanes Women Inning 1"}) == "Hobart Hurricanes Women 109 (17.4)")
-check("a live match carries an In progress tag", '<span class="tag">In progress</span>' in ck.result_html(live))
+live_t20 = {**live, "matchType": "t20", "name": "England vs Pakistan, 1st T20I, tour"}
+check("a live limited-overs match carries an In progress tag; a live Test carries its day flag instead (no second tag)", '<span class="tag">In progress</span>' in ck.result_html(live_t20) and '<span class="tag">In progress</span>' not in ck.result_html(live) and "Test · Day 2" in ck.result_html(live))
 grouped = ck.results_html(picked)
 check("results are grouped under International and then WBBL, each with its matches", grouped.index("<h3>International</h3>") < grouped.index("<h3>WBBL</h3>") and grouped.count("<li>") == 5, grouped[:200])
 check("no matches, no block", ck.results_html([]) == "")
@@ -95,9 +160,9 @@ check("a label for a team not in the list is returned cleaned, not lost", ck.tea
 check("innings lines use the proper team name", ck.innings_line({"r": 129, "w": 10, "o": 33.1, "inning": "ireland Inning 1"}, tn) == "Ireland 129 (33.1)"
       and ck.innings_line({"r": 131, "w": 5, "o": 21.2, "inning": "Namibia,Ireland Inning 1"}, tn) == "Namibia 131/5 (21.2)")
 nam = by("Namibia vs Ireland, 5th ODI")
-check("the real Namibia v Ireland result now reads cleanly", "Ireland 129 (33.1) · Namibia 131/5 (21.2)" in ck.result_html(nam), ck.result_html(nam))
+check("the real Namibia v Ireland result now reads cleanly", "Namibia 131/5 (21.2) · Ireland 129 (33.1)" in ck.result_html(nam) and "Namibia won by 5 wickets" in ck.result_html(nam), ck.result_html(nam))
 wb = by("Sydney Thunder Women vs Brisbane Heat Women")
-check("and so does the real WBBL result", "Brisbane Heat Women 178/5 (20) · Sydney Thunder Women 180/4 (16.4)" in ck.result_html(wb), ck.result_html(wb))
+check("and so does the real WBBL result", "Sydney Thunder Women 180/4 (16.4) · Brisbane Heat Women 178/5 (20)" in ck.result_html(wb) and "6th Match" in ck.result_html(wb) and "Big Bash" not in ck.result_html(wb), ck.result_html(wb))
 def bat(name, r, b, out="b X"):
     return {"batsman": {"name": name}, "r": r, "b": b, "4s": 1, "6s": 1, "sr": 100, "dismissal-text": out}
 
@@ -259,7 +324,7 @@ check("names are escaped", "&lt;" in ck.full_scorecard_html([{**ind, "batting": 
 check("no innings, no HTML", ck.full_scorecard_html([]) == "" and ck.full_scorecard_html(None) == "")
 check("what the data does not carry is not invented: no fall of wickets, did not bat or minutes", all(w not in fh.lower() for w in ("fall of wickets", "did not bat", "minutes")))
 entry = {"innings": sl, "standouts": []}
-check("a tier 1 result carries its scorecard, under the series line", ck.result_html(nz, entry).index("5th T20I, India tour") < ck.result_html(nz, entry).index('<table class="sc">'))
+check("a tier 1 result carries its scorecard under the heading, the result and the scores", ck.result_html(nz, entry).index("won by") < ck.result_html(nz, entry).index('<table class="sc">'))
 check("a tier 3 result never shows a scorecard, even if one was bought", '<table class="sc">' not in ck.result_html(by("Namibia vs Ireland, 5th ODI"), entry))
 check("with no scorecard bought a tier 1 result shows only the result", '<table class="sc">' not in ck.result_html(nz))
 

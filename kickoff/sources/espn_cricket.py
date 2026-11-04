@@ -225,7 +225,7 @@ def parse_table(page):
 # ---- A series page: every match of a bilateral series, played and still to come ----------------------
 
 SERIES_URL = BASE + "/cricket/scores/series/{series}"
-SERIES_HEADER = re.compile(r"^(\d+(?:st|nd|rd|th)) (T20I|ODI|Test),\s+(?:\([^)]*\)\s+)?at (.+), ([A-Z][a-z]{2} \d{1,2} \d{4})$")
+SERIES_HEADER = re.compile(r"^(\d+(?:st|nd|rd|th)) (T20I|ODI|Test),\s+(?:\([^)]*\)\s+)?at (.+), ([A-Z][a-z]{2} \d{1,2}(?:-\d{1,2})? \d{4})$")
 
 
 def parse_series(page):
@@ -243,6 +243,9 @@ def parse_series(page):
         j, teams = i + 1, []
         while j < len(tokens) and tokens[j] != tokens[i]:
             t = tokens[j]
+            if t.startswith("("):                         # an annotation: '(57.1 ov, target 288)', '(f/o)' (follow-on)
+                j += 1
+                continue
             if re.search(r"\d", t):
                 if teams and not t.startswith("("):
                     teams[-1]["score"] = (teams[-1]["score"] + " " + t).strip()
@@ -254,7 +257,7 @@ def parse_series(page):
         if j >= len(tokens) or len(teams) != 2:
             i += 1
             continue
-        after = tokens[j + 1] if j + 1 < len(tokens) else ""
+        after = htmllib.unescape(htmllib.unescape(tokens[j + 1])) if j + 1 < len(tokens) else ""   # the page escapes the ampersand twice
         out.append({"n": m.group(1), "format": m.group(2), "venue": m.group(3), "date": m.group(4), "teams": teams,
                     "result": None if after.startswith("Starts at") or not after else after, "starts": after if after.startswith("Starts at") else None})
         i = j + 1

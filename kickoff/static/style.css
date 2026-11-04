@@ -188,8 +188,8 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket li { display: grid; gap: 1px; padding: 8px 0; border-bottom: 1px solid var(--hairline); }
 .cricket .cm { font-weight: 400; font-size: 17px; }
 .cricket .cm strong { font-weight: 700; }
-.cricket .cs { font-variant-numeric: tabular-nums; }
-.cricket .cr { color: var(--gold); font-weight: 600; font-size: 15px; }
+.cricket .cs { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 15px; }
+.cricket .cr { color: var(--chalk); font-weight: 700; font-size: 18px; }   /* the result is the main line */
 .cricket .ct { color: var(--muted); font-size: 15px; }
 .cricket .dayflag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .cricket .potm { font-size: 15px; color: var(--muted); }
@@ -203,9 +203,12 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket table.sc { font-size: 14px; }
 .cricket table.sc td.name { white-space: normal; min-width: 7em; }
 .cricket table.sc .dis { display: block; color: var(--muted); font-size: 14px; line-height: 1.3; }
-.cricket table.sc tr.sum td { font-weight: 600; background: var(--pitch); }
+.cricket table.sc tr.sum td { font-weight: 400; }
+.cricket table.sc tr.sum.total td { font-weight: 700; }
+.cricket table.sc th.lc { text-transform: none; }   /* 4s and 6s, not 4S and 6S */
 .cricket table.sc th, .cricket table.sc td { padding: 5px 3px; }
 .cricket table.sc th:first-child, .cricket table.sc td:first-child { padding-left: 6px; }
+.cricket table.sc th:last-child, .cricket table.sc td:last-child { padding-right: 12px; }   /* room on the right, as in the other sports' tables */
 .cricket table.sc th { font-size: 12px; letter-spacing: 0; }
 .pts table { font-size: 15px; }
 .pts th, .pts td { padding: 7px 4px; }
@@ -311,6 +314,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone.ser .bo { display: block; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; }
 .nbaone.ser tr.sh th { padding: 10px 4px 2px; white-space: normal; }
 .nbaone.ser tr.sc th { padding: 2px 4px 10px; }
+.nbaone.ser.tst td.aw, .nbaone.ser.tst td.hm { font-size: 16px; font-weight: 600; line-height: 1.3; }   /* a Test series row holds two innings, "390 & 314/6d" */
 .nbaone.ser tr.sc .ws { font-size: 30px; font-weight: 800; color: var(--gold); }
 .nbaone.ser tr.sc .lab { margin: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .standouts .hl { color: var(--gold); font-weight: 600; }
