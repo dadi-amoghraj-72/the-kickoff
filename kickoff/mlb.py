@@ -45,6 +45,12 @@ def num(v):
         return 0
 
 
+def sgt_when(when):
+    """'Mon 5 Oct, 8am SGT' (minutes only when there are some: 'Mon 5 Oct, 8:30am SGT'); when: a Singapore datetime."""
+    clock = f"{when.hour % 12 or 12}" + (f":{when:%M}" if when.minute else "") + ("am" if when.hour < 12 else "pm")
+    return f"{when:%a} {when.day} {when:%b}, {clock} SGT"
+
+
 def day_label(d):
     return f"{d:%a} {d.day} {d:%b}"
 
@@ -413,6 +419,7 @@ def series_html(g0, sched, notes_by_game, seeds=None):
     games = sorted(sched, key=lambda x: x["date"])
     top, bot, wins, need, best = tally(g0, sched)
     over = max(wins.values()) >= need
+    played = sum(1 for x in games if x["status"] == "STATUS_FINAL")
     rows = []
     for n in range(1, best + 1):
         x = games[n - 1] if n <= len(games) else None
@@ -424,16 +431,20 @@ def series_html(g0, sched, notes_by_game, seeds=None):
             sc = {x["home"]["id"]: x["home"]["score"], x["away"]["id"]: x["away"]["score"]}
             rows.append({"mid": f"G{n} · In progress", "a": sc[top["id"]], "b": sc[bot["id"]], "win": None})
         else:
-            if x:
-                when = utc(x["date"]).astimezone(SGT)
-                mid = f"G{n} · {when:%a} {when.day} {when:%b}, {when:%-I:%M%p}".replace("AM", "am").replace("PM", "pm") + f" SGT · at {code(x['home']['abbr'])}"
+            could_end = n - 1 - played >= need - max(wins.values())     # the series can be won before this game is played
+            if over:
+                mid = f"G{n} · –"
+            elif could_end:
+                mid = f"G{n} · if necessary"
+            elif x:
+                mid = f"G{n} · {sgt_when(utc(x['date']).astimezone(SGT))} · at {code(x['home']['abbr'])}"
             else:
-                mid = f"G{n} · " + ("–" if over else "if necessary" if n > need else "to be scheduled")
+                mid = f"G{n} · to be scheduled"
             rows.append({"mid": mid, "pre": True})
     seed = lambda t: (seeds or {}).get(code(t["abbr"]))  # noqa: E731
     left = (f'({seed(top)})\u00a0' if seed(top) else "") + top["name"]
     right = bot["name"] + (f'\u00a0({seed(bot)})' if seed(bot) else "")
-    return r.series_table(name, left, right, wins[top["id"]], wins[bot["id"]], "series", rows)
+    return r.series_table(name, left, right, wins[top["id"]], wins[bot["id"]], "series", rows, sub=f"best of {best}")
 
 
 def closing_html(year, g0, sched, teams, lad_post):

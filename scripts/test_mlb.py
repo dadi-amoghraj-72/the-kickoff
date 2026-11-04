@@ -45,8 +45,8 @@ def text(h):
 
 
 def squash(h):
-    """The page text with all spaces and bars removed, so a series header reads '4series0'."""
-    return re.sub(r"[\s|]+", "", text(h))
+    """The page text with all spaces and bars removed, so a series header reads '4series0' (the small 'best of N' line under the word is taken out)."""
+    return re.sub(r"bestof\d", "", re.sub(r"[\s|]+", "", text(h)))
 
 
 def at(now_str):
@@ -295,7 +295,7 @@ NOW_S = at("2026-10-04T00:00:00")
 OUT_S = run(NOW_S)
 check("the first playoff day: one series table per series that had a game finish, the Dodgers' series first", OUT_S["stats"]["series"] == 2 and OUT_S["stats"]["mode"] == "postseason" and OUT_S["html"].index("NL Division Series") < OUT_S["html"].index("AL Division Series"))
 ts = text(OUT_S["html"])
-check("a division series is best of 5: five rows, game 1 played with the score, the rest still to come, game 5 'if necessary'", len(re.findall(r"G\d ·", ts.split("AL Division")[0])) == 5 and "G5 · if necessary" in ts and "G2 · Mon 5 Oct, 8:00am SGT · at LAD" in ts, ts)
+check("a division series is best of 5: five rows, game 1 played with the score, the rest still to come, game 5 'if necessary'", len(re.findall(r"G\d ·", ts.split("AL Division")[0])) == 5 and "G5 · if necessary" in ts and "G2 · Mon 5 Oct, 8am SGT · at LAD" in ts, ts)
 raw_g1 = next(e for e in BOARDS["2026-10-03"]["events"] if e["competitions"][0]["notes"][0]["headline"] == "NLDS - Game 1")
 sc = {x["homeAway"]: int(x["score"]) for x in raw_g1["competitions"][0]["competitors"]}
 check("game 1's score is the raw one, the home team (the higher seed) on the left", f"{sc['home']} | G1 · Sat 3 Oct · at {mlb.code(next(x for x in raw_g1['competitions'][0]['competitors'] if x['homeAway'] == 'home')['team']['abbreviation'])} | {sc['away']}" in ts, (sc, ts[:200]))
@@ -313,11 +313,26 @@ g4 = next(x for x in LOGS["ohtani_bat"] if x["id"] == raw_nlcs[3]["id"])["stats"
 check("Ohtani's game-4 homer and three RBI come from the raw log and are shown in the accent colour", f"{g4['H']}-for-{g4['AB']}, HR, {g4['RBI']} RBI" in tn and '<span class="n">HR</span>' in OUT_N["html"] and g4["HR"] == "1" and g4["RBI"] == "3", g4)
 g2 = next(x for x in LOGS["yamamoto_pit"] if x["id"] == raw_nlcs[1]["id"])["stats"]
 check("Yamamoto's start in game 2 is shown above Ohtani's batting line", f"{g2['IP']} IP, {g2['ER']} ER, {g2['K']} K" in tn and tn.index("Yamamoto") < tn.index("Ohtani (LAD): 0-for-4"), tn)
-check("the AL series in progress shows its pre-built rows with Singapore times: game 4 on Saturday 17 October", "G4 · Sat 17 Oct, 8:00am SGT" in tn and "1series2" in squash(OUT_N["html"].split("AL Championship")[1]))
+check("the AL series in progress shows its pre-built rows with Singapore times: game 4 on Saturday 17 October", "G4 · Sat 17 Oct, 8am SGT" in tn and "1series2" in squash(OUT_N["html"].split("AL Championship")[1]))
 alcs = [g for g in POST[next(k for k, v in POST.items() if any("ALCS" in x["headline"] for x in v))] if "ALCS" in g["headline"]]
 g4row = sorted(alcs, key=lambda x: x["date"])[3]
 when = iso(g4row["date"]).astimezone(timezone(timedelta(hours=8)))
-check("that time is the raw start time plus eight hours (Singapore), worked out here by hand", f"G4 · {when:%a} {when.day} {when:%b}, {when.hour % 12 or 12}:{when:%M}{'am' if when.hour < 12 else 'pm'} SGT" in tn, (g4row["date"], when))
+check("that time is the raw start time plus eight hours (Singapore), worked out here by hand", f"G4 · {when:%a} {when.day} {when:%b}, {when.hour % 12 or 12}{':' + format(when, '%M') if when.minute else ''}{'am' if when.hour < 12 else 'pm'} SGT" in tn, (g4row["date"], when))
+def could_end(w1, w2, played, n, need):
+    """Brute force: can either side reach `need` wins within the games still to be played before game n?"""
+    k = n - 1 - played
+    return any(w1 + a >= need or w2 + k - a >= need for a in range(k + 1))
+
+
+al = text(OUT_N["html"].split("AL Championship")[1])
+check("'if necessary' follows one rule in every series, whether or not ESPN has the game scheduled: AL at 1-2 after three games (best of 7): G4 and G5 are certain (a time), G6 and G7 are 'if necessary'; checked by brute force over the possible results",
+      all(("if necessary" in re.search(rf"G{n} · ([^|\n]*)", al).group(1)) == could_end(1, 2, 3, n, 4) for n in (4, 5, 6, 7)) and could_end(1, 2, 3, 6, 4) and not could_end(1, 2, 3, 5, 4) and "G5 · if necessary" not in al and "G6 · if necessary" in al, al[-400:])
+ds_one = ts.split("AL Division")[0]
+check("the same rule on the NL division series at 1-0 after game 1 (best of 5): G2 and G3 have times, G4 and G5 are 'if necessary'",
+      all(("if necessary" in re.search(rf"G{n} · ([^|\n]*)", ds_one).group(1)) == could_end(1, 0, 1, n, 3) for n in (2, 3, 4, 5)) and "G3 · if necessary" not in ds_one and "G4 · if necessary" in ds_one, ds_one[:500])
+check("a time on the hour drops the minutes ('5pm', '8am') and keeps them otherwise ('8:30am'); midnight and noon are 12am and 12pm", mlb.sgt_when(datetime(2026, 10, 5, 17, 0)).endswith("5pm SGT") and mlb.sgt_when(datetime(2026, 10, 5, 8, 30)) == "Mon 5 Oct, 8:30am SGT" and mlb.sgt_when(datetime(2026, 10, 5, 0, 0)).endswith("12am SGT") and mlb.sgt_when(datetime(2026, 10, 5, 12, 0)).endswith("12pm SGT"))
+heads = re.findall(r'<tr class="sh"><th colspan="3"><div class="hd"><span class="tn">(.*?)</span><span class="gap"></span><span class="tn">(.*?)</span></div></th></tr><tr class="sc"><th colspan="3"><div class="hd"><span class="ws">(\d+)</span><span class="gap"><span class="lab">series</span><span class="bo">best of (\d)</span></span><span class="ws">(\d+)</span>', OUT_S["html"] + OUT_N["html"])
+check("the series header puts each team's name and its score in matching boxes either side of a gap, with 'series' and 'best of 5' (division) or 'best of 7' (championship) in the gap", len(heads) == 4 and [h[3] for h in heads] == ["5", "5", "7", "7"] and ("1", "0") == (heads[0][2], heads[0][4]), heads)
 check("series notes are cached in the state once made, so earlier games cost no further requests", len(OUT_N["state"]["series_notes"]) >= 4 and all(isinstance(v, list) for v in OUT_N["state"]["series_notes"].values()))
 
 

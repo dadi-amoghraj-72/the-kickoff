@@ -496,6 +496,12 @@ def seeds_by_team(std):
     return {abbr: seed for conf in seeds_of(std).values() for abbr, seed in conf.items()}
 
 
+def sgt_when(when):
+    """'Tue 28 Apr, 8am SGT' (minutes only when there are some)."""
+    clock = f"{when.hour % 12 or 12}" + (f":{when:%M}" if when.minute else "") + ("am" if when.hour < 12 else "pm")
+    return f"{when:%a} {when.day} {when:%b}, {clock} SGT"
+
+
 def series_html(g0, sched, notes_by_game, seeds=None):
     """One table for one series: the two teams as headers with their series wins beside them, then SERIES_GAMES rows made in advance: the
     game number and date, the score once played (winner in bold) with the player notes under it, 'if necessary' for games not yet scheduled.
@@ -508,6 +514,7 @@ def series_html(g0, sched, notes_by_game, seeds=None):
         if x["status"] == "STATUS_FINAL" and x["home"]["score"] is not None:
             wins[x["home"]["id"] if x["home"]["score"] > x["away"]["score"] else x["away"]["id"]] += 1
     over = max(wins.values()) >= 4
+    played = sum(1 for x in games if x["status"] == "STATUS_FINAL")
     rnd = re.sub(r" - Game \d+$", "", g0["headline"])
     rows = []
     for n in range(1, SERIES_GAMES + 1):
@@ -525,18 +532,19 @@ def series_html(g0, sched, notes_by_game, seeds=None):
             sc = {x["home"]["id"]: x["home"]["score"], x["away"]["id"]: x["away"]["score"]}
             rows.append(f'<tr class="one end"><td class="aw">{sc[top["id"]]}</td><td class="mid">G{n} · In progress</td><td class="hm">{sc[bot["id"]]}</td></tr>')
         else:
-            if x:
-                when = utc(x["date"]).astimezone(SGT)
-                mid = f"G{n} · {when:%a} {when.day} {when:%b}, {when:%-I:%M%p}".replace("AM", "am").replace("PM", "pm") + f' SGT · at {x["home"]["abbr"]}'
+            if over:
+                mid = f"G{n} · –"
+            elif n - 1 - played >= 4 - max(wins.values()):      # the series can be won before this game is played
+                mid = f"G{n} · if necessary"
+            elif x:
+                mid = f"G{n} · {sgt_when(utc(x['date']).astimezone(SGT))} · at {x['home']['abbr']}"
             else:
-                mid = f"G{n} · " + ("–" if over else "if necessary" if n >= 5 else "to be scheduled")
+                mid = f"G{n} · to be scheduled"
             rows.append(f'<tr class="one end pre"><td class="mid" colspan="3">{r.esc(mid)}</td></tr>')
     seed = lambda t: (seeds or {}).get(t["abbr"])  # noqa: E731
     left = (f'({seed(top)})\u00a0' if seed(top) else "") + team_name(top.get("name", top["short"]))
     right = team_name(bot.get("name", bot["short"])) + (f'\u00a0({seed(bot)})' if seed(bot) else "")
-    head = (f'<tr><th class="tt" colspan="3">{r.esc(rnd)}</th></tr>'
-            f'<tr class="sh"><th class="aw" colspan="3"><span class="tn">{r.esc(left)}</span><span class="tn r">{r.esc(right)}</span></th></tr>'
-            f'<tr class="sc"><th colspan="3"><span class="ws">{wins[top["id"]]}</span><span class="lab">series</span><span class="ws">{wins[bot["id"]]}</span></th></tr>')
+    head = r.series_head(rnd, left, right, wins[top["id"]], wins[bot["id"]], "series", "best of 7")
     return (f'<div class="nflsb nbaone ser"><table><colgroup><col style="width:30%"><col style="width:40%"><col style="width:30%"></colgroup>'
             f'<thead>{head}</thead><tbody>{"".join(rows)}</tbody></table></div>')
 

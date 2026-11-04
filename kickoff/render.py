@@ -72,11 +72,22 @@ def game_colour_map(matches, key):
     return out
 
 
-def series_table(title, left, right, left_n, right_n, word, rows, cls=""):
+def series_head(title, left, right, left_n, right_n, word, sub=""):
+    """The top of a series table: the title, then each side's name centred over its own big score, the word between the scores ('series', 'aggregate') with
+    a small line under it ('best of 5'). The two names sit in boxes of equal width either side of a fixed gap, and so do the two scores, so each score is
+    directly under its name; a name too long for its box wraps and stays centred."""
+    gap = '<span class="gap"></span>'
+    mid = f'<span class="gap"><span class="lab">{esc(word)}</span>' + (f'<span class="bo">{esc(sub)}</span>' if sub else "") + "</span>"
+    return (f'<tr><th class="tt" colspan="3">{esc(title)}</th></tr>'
+            f'<tr class="sh"><th colspan="3"><div class="hd"><span class="tn">{esc(left)}</span>{gap}<span class="tn">{esc(right)}</span></div></th></tr>'
+            f'<tr class="sc"><th colspan="3"><div class="hd"><span class="ws">{esc(left_n)}</span>{mid}<span class="ws">{esc(right_n)}</span></div></th></tr>')
+
+
+def series_table(title, left, right, left_n, right_n, word, rows, cls="", sub=""):
     """A series-style table (the house pattern for anything played in several games: NBA playoff series, two-legged ties, Test series): a title row,
     the two sides' names, their running score in large numbers either side of `word` ('series', 'aggregate'), then one row per game made in
     advance. rows: [{"mid": text between the scores, "a": left score or None, "b": right score or None, "win": "a" | "b" | None,
-    "notes": [html lines under the game], "pre": True for a game still to play (one centred line)}]."""
+    "notes": [html lines under the game], "pre": True for a game still to play (one centred line)}]. sub: the small line under the word ('best of 5')."""
     body = []
     for x in rows:
         notes = x.get("notes") or []
@@ -87,9 +98,7 @@ def series_table(title, left, right, left_n, right_n, word, rows, cls=""):
         body.append(f'<tr class="one{"" if notes else " end"}"><td class="aw{w("a")}">{esc(x["a"])}</td><td class="mid">{esc(x["mid"])}</td><td class="hm{w("b")}">{esc(x["b"])}</td></tr>')
         if notes:
             body.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl"><span class="t">{n}</span></div>' for n in notes) + "</td></tr>")
-    head = (f'<tr><th class="tt" colspan="3">{esc(title)}</th></tr>'
-            f'<tr class="sh"><th class="aw" colspan="3"><span class="tn">{esc(left)}</span><span class="tn r">{esc(right)}</span></th></tr>'
-            f'<tr class="sc"><th colspan="3"><span class="ws">{esc(left_n)}</span><span class="lab">{esc(word)}</span><span class="ws">{esc(right_n)}</span></th></tr>')
+    head = series_head(title, left, right, left_n, right_n, word, sub)
     return (f'<div class="nflsb nbaone ser{" " + cls if cls else ""}"><table><colgroup><col style="width:30%"><col style="width:40%"><col style="width:30%"></colgroup>'
             f'<thead>{head}</thead><tbody>{"".join(body)}</tbody></table></div>')
 

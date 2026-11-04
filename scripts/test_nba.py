@@ -397,12 +397,12 @@ mt = text(mid["html"])
 wins = {"19": 0, "8": 0}
 for g in SCHED[:3]:
     wins[g["home"]["id"] if g["home"]["score"] > g["away"]["score"] else g["away"]["id"]] += 1
-check("independent: after game 3 ORL (id 19) leads DET (id 8) 2-1 by the raw schedule; the header shows the full names with their seeds, then the series score beside the word 'series' (the team that hosted game 1 is on the left)", wins == {"19": 2, "8": 1} and "(1) Detroit Pistons Orlando Magic (8) 1 series 2" in mt, mt[:200])
+check("independent: after game 3 ORL (id 19) leads DET (id 8) 2-1 by the raw schedule; the header shows the full names with their seeds, then the series score beside the word 'series' (the team that hosted game 1 is on the left)", wins == {"19": 2, "8": 1} and "(1) Detroit Pistons Orlando Magic (8) 1 series best of 7 2" in mt, mt[:200])
 check("the round's name is the table title, from ESPN's note without the game number", mt.startswith("East 1st Round") and "Game 3" not in mt.split("Pistons")[0], mt[:60])
 check("all seven game rows are pre-built: G1 to G7", all(f"G{n} ·" in mt for n in range(1, 8)) and mid["html"].count('class="one') == 7)
 check("played games show the scores as the raw schedule has them (G1 101-112, G2 98-83, G3 105-113) with the date", "101 G1 · Sun 19 Apr · at DET 112" in mt and "98 G2 · Wed 22 Apr · at DET 83" in mt and "105 G3 · Sat 25 Apr · at ORL 113" in mt, mt[:400])
 check("the winner of each played game is in bold: G1 right column, G2 left, G3 right", len(re.findall(r'<td class="(?:aw|hm) w">', mid["html"])) == 3)
-check("unplayed games with a date show it in Singapore time, with SGT (G4 starts 00:00 UTC 28 April = 8:00am Tue 28 April)", "G4 · Tue 28 Apr, 8:00am SGT · at ORL" in mt and mt.count("SGT") == 4, mt)
+check("unplayed games that will certainly be played show their date in Singapore time, with SGT, on the hour without minutes (G4 starts 00:00 UTC 28 April = 8am Tue 28 April); games 6 and 7 at 2-1 are 'if necessary' even if ESPN has dated them", "G4 · Tue 28 Apr, 8am SGT · at ORL" in mt and "G5 · Thu 30 Apr, 7am SGT · at DET" in mt and mt.count("SGT") == 2 and "G6 · if necessary" in mt and "G7 · if necessary" in mt, mt[-350:])
 bx = SBOXES["401869193"]
 cade = next(a for t in bx["players"] for a in t["athletes"] if a["id"] == "4432166")
 cv = dict(zip(bx["players"][0]["labels"], cade["stats"]))
@@ -411,7 +411,7 @@ check("the best performer of game 3 who is not tracked appears with his team (Ba
 raw_seed = {e["team"]["abbreviation"]: int(next(x["displayValue"] for x in e["stats"] if x["name"] == "playoffSeed")) for c in STAND26["children"] for e in c["standings"]["entries"]}
 check("independent: ESPN's final 2025-26 standings give Detroit seed 1 and Orlando seed 8 (the real 1-8 series), and the seeds sit beside the team names", raw_seed["DET"] == 1 and raw_seed["ORL"] == 8 and nba.seeds_by_team(STAND26)["DET"] == 1 and "(1) Detroit Pistons" in mt and "Orlando Magic (8)" in mt)
 check("the seeds come from the standings of the series' own season (2026), asked once", msrc.std_seasons == [2026], getattr(msrc, "std_seasons", None))
-check("the series score numbers sit beside the word 'series' in one row (not out at the team names)", re.search(r'<tr class="sc"><th colspan="3"><span class="ws">1</span><span class="lab">series</span><span class="ws">2</span>', mid["html"]) is not None)
+check("the series score numbers sit beside the word 'series' in one row (not out at the team names)", re.search(r'<tr class="sc"><th colspan="3"><div class="hd"><span class="ws">1</span><span class="gap"><span class="lab">series</span><span class="bo">best of 7</span></span><span class="ws">2</span>', mid["html"]) is not None)
 check("once the playoffs are on, the regular-season standings are not shown, and not fetched for the table itself", "Standings" not in mid["html"] and "Eastern Conference" not in mid["html"])
 nos = series_run(3, date(2026, 4, 26), fail_std=True)[0]
 check("seed feed down: the series table still shows, without seeds, and the failure is counted", "East 1st Round" in nos["html"] and "(1)" not in text(nos["html"]) and "Detroit Pistons Orlando Magic" in text(nos["html"]) and nos["stats"]["failed"] == 1)
@@ -422,16 +422,16 @@ ft = text(full["html"])
 fw = {"8": 0, "19": 0}
 for g in SCHED:
     fw[g["home"]["id"] if g["home"]["score"] > g["away"]["score"] else g["away"]["id"]] += 1
-check("independent: by the raw schedule the series ended DET 4, ORL 3 (game 1's home team DET is the left column); the header says so", fw == {"8": 4, "19": 3} and "(1) Detroit Pistons Orlando Magic (8) 4 series 3" in ft, (fw, ft[:80]))
+check("independent: by the raw schedule the series ended DET 4, ORL 3 (game 1's home team DET is the left column); the header says so", fw == {"8": 4, "19": 3} and "(1) Detroit Pistons Orlando Magic (8) 4 series best of 7 3" in ft, (fw, ft[:80]))
 check("no unplayed rows and no 'SGT' or 'if necessary' once the series is finished", "SGT" not in ft and "if necessary" not in ft and full["html"].count('class="one') == 7)
 short = [dict(g) for g in SCHED[:2]]
 sh, _, _ = series_run(2, date(2026, 4, 23), sched=short)
 st_ = text(sh["html"])
-check("games not yet on the schedule: G3 and G4 'to be scheduled', G5 to G7 'if necessary'", "G3 · to be scheduled" in st_ and "G4 · to be scheduled" in st_ and st_.count("if necessary") == 3, st_)
+check("games not yet on the schedule at 1-1: G3, G4 and G5 are certain ('to be scheduled': no series can end before game 5), G6 and G7 'if necessary'", all(f"G{n} · to be scheduled" in st_ for n in (3, 4, 5)) and "G6 · if necessary" in st_ and "G7 · if necessary" in st_ and st_.count("if necessary") == 2, st_)
 sweep = copy.deepcopy(SCHED[:4])
 sweep[1]["home"]["score"], sweep[1]["away"]["score"] = 83, 98   # ORL also wins game 2: a 4-0 sweep
 sw, _, _ = series_run(4, date(2026, 4, 28), sched=sweep)
-check("a finished sweep: the unplayed games 5 to 7 are marked '–', not 'if necessary'", "if necessary" not in text(sw["html"]) and text(sw["html"]).count("G5 · –") == 1 and "0 series 4" in text(sw["html"]), text(sw["html"])[:300])
+check("a finished sweep: the unplayed games 5 to 7 are marked '–', not 'if necessary'", "if necessary" not in text(sw["html"]) and text(sw["html"]).count("G5 · –") == 1 and "0 series best of 7 4" in text(sw["html"]), text(sw["html"])[:300])
 second = nba.run(mid["state"]["reported"] and datetime(2026, 4, 26, 8, tzinfo=timezone.utc), date(2026, 4, 26), copy.deepcopy(mid["state"]), msrc)
 check("a second run with the saved state shows no series again (nothing new)", second["stats"]["series"] == 0 and second["stats"]["new"] == 0)
 down = series_run(3, date(2026, 4, 26), fail_sched=True)[0]
@@ -462,7 +462,7 @@ check("an in-progress game is not counted as an underdog win or a standout", "un
 lp_rows = [dict(g) for g in SCHED[:4]]
 lp_rows[3] = {**lp_rows[3], "status": "STATUS_IN_PROGRESS", "home": {**lp_rows[3]["home"], "score": 40}, "away": {**lp_rows[3]["away"], "score": 44}}
 lpr = text(nba.series_html(nba.parse_game(L("nba_series_scoreboard.json")["2026-05-03"]["events"][0]), lp_rows, {}))
-check("a playoff game on now: its row shows the score so far with the first-column team (Detroit, away in game 4) on the left, 44-40, and 'G4 · In progress'; the series wins count only finished games", "G4 · In progress" in lpr and "44 G4 · In progress 40" in lpr and "1 series 2" in lpr, lpr[:200])
+check("a playoff game on now: its row shows the score so far with the first-column team (Detroit, away in game 4) on the left, 44-40, and 'G4 · In progress'; the series wins count only finished games", "G4 · In progress" in lpr and "44 G4 · In progress 40" in lpr and "1 series best of 7 2" in lpr, lpr[:200])
 
 # ---- Auto-join and drop-off ----
 st = {}
