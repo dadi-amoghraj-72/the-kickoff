@@ -1,0 +1,18 @@
+# Shows why each cricket match is picked or left out (names and decisions only, no keys printed). Started by hand only.
+name: Cricket debug
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CRICKET_DATA_API_KEY: ${{ secrets.CRICKET_DATA_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - run: python scripts/cricket_debug.py
