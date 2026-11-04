@@ -5,7 +5,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from kickoff.order import assemble  # noqa: E402
 
-ALL = ["big-stuff", "on-today", "arsenal", "football", "cricket", "nba", "nfl", "baseball",
+ALL = ["big-stuff", "on-today", "arsenal", "football", "cricket", "nba", "nfl", "mlb",
        "young-guns", "f1", "tennis", "other-sports", "stories"]
 TITLES = {"f1": "F1", "other-sports": "Other Sports", "big-stuff": "The Big Stuff", "on-today": "On Today",
           "young-guns": "Young Guns", "nba": "NBA", "nfl": "NFL"}
@@ -28,7 +28,7 @@ def check(name, got, want):
 results = [
     check("default order",
           ids(FULL),
-          ["big-stuff", "on-today", "arsenal", "football", "cricket", "nba", "nfl", "baseball",
+          ["big-stuff", "on-today", "arsenal", "football", "cricket", "nba", "nfl", "mlb",
            "young-guns", "around", "stories"]),
     check("cricket lead moves cricket above football",
           ids(FULL, lead="cricket")[:5], ["big-stuff", "on-today", "cricket", "arsenal", "football"]),

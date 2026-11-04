@@ -417,7 +417,7 @@ The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark
 
 The whole build happens in one project, in this order. Each checkpoint is tested on the Mac Mini before it's committed, and a failing source must never break the rest of the edition.
 
-*Status on 2026-11-04: checkpoints 1 to 10 are built (D approved MLB on 2026-11-04; 8 NFL and 9 NBA still await D's explicit OK); the order is now 13 (daily pipeline) first, then 11 and 12, then awards (15) and the season-rhythm items above; the daily schedule is off.*
+*Status on 2026-11-04: checkpoints 1 to 10 are built (D approved NFL, NBA and MLB on 2026-11-04); the order is now 13 (daily pipeline) first, then 11 and 12, then awards (15) and the season-rhythm items above; the daily schedule is off.*
 
 1. **Accounts and setup:** GitHub account (the username appears in the web address), a new public repo, and GitHub Pages switched on. In the Anthropic Console, a new workspace called The Kickoff with a monthly spend limit, then a new API key inside it. A new Telegram bot via BotFather, plus D's chat ID.
 2. **Skeleton:** page template, design system and progress rail. Publish a dummy edition and send the Telegram ping.
@@ -431,7 +431,7 @@ The whole build happens in one project, in this order. Each checkpoint is tested
 10. **MLB:** weekly Dodgers round-up, daily league coverage from the Dodgers' 155th game, the postseason series tables and the season closing note.
 11. **Young Guns** and the watchlist.
 12. **Around the sporting world.**
-13. **Cross-sport sections:** The big stuff, On today, Games to Watch, interesting stories and the lead-sport ordering.
+13. **The daily pipeline and the cross-sport sections.** **13a, the pipeline (built 2026-11-04):** `kickoff/daily.py` and `scripts/daily.py` run every sport (football, cricket, F1, tennis, NFL, NBA, MLB) behind its own guard (a sport that fails shows "No data this morning" and keeps its old state), put the sections in house order, write the edition and the state, and rebuild the site; `kickoff/budget.py` is the monthly Claude guard (80% Opus to Sonnet, 100% plain; `settings.MONTHLY_BUDGET_USD` is a placeholder for D's real figure); `.github/workflows/daily.yml` builds, commits data and docs, pings Telegram and alerts D on failure, started by hand only until go-live; `scripts/alert.py` sends the failure alert. `--dry-run` rehearses into `preview/daily-dry-run/` without touching anything real. **13b, still to build:** The big stuff, On today, Games to Watch and the lead-sport and promoted-event ordering (the run passes no lead sport yet, so sports appear in normal order).
 14. **Test runs:** three mornings run by hand, then switch on the daily 7:15am SGT schedule.
 15. **Awards and season rhythm** (added 2026-11-04): the awards tables, the season-finale note for every sport and the season-preview notes (see "Season rhythm"). Built after 13; its order against 11 and 12 is D's call.
 

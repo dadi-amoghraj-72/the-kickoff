@@ -7,7 +7,7 @@ Around The Sporting World and Interesting Stories. A section with nothing in it 
 
 TOP = ["big-stuff", "on-today"]
 # Sport groups in their normal order. Arsenal and Football always travel together.
-GROUPS = [["arsenal", "football"], ["cricket"], ["nba"], ["nfl"], ["baseball"]]
+GROUPS = [["arsenal", "football"], ["cricket"], ["nba"], ["nfl"], ["mlb"]]
 PROMOTABLE = ["f1", "tennis"]
 AROUND_PARTS = ["f1", "tennis", "other-sports"]  # F1 and tennis first, then the rest
 

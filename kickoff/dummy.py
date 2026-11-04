@@ -48,7 +48,7 @@ def make_dummy(iso_date, lead=None, promoted=("f1",)):
             "<p>Mondays carry the early-game scores, grouped by division. " + LONG + "</p>"
             "<h3>Standouts</h3>" + r.standouts(["<strong>Player Six</strong>, 4 touchdown passes. Placeholder context."])
             + "<h3>Sackings And Appointments</h3><p>Head coach and coordinator changes go here. Placeholder.</p>"},
-        "baseball": {"title": "Baseball", "html":
+        "mlb": {"title": "MLB", "html":
             "<p><strong>Dodgers 5–3.</strong> Placeholder for an Ohtani or Yamamoto entry: the score, the stat line "
             "and a one-line story.</p>"},
         "young-guns": {"title": "Young Guns", "html":

@@ -212,16 +212,18 @@ def render_archive(editions):
     return _page("The Kickoff · Archive", "", body)
 
 
-def load_editions():
-    return [json.loads(p.read_text()) for p in sorted(DATA_DIR.glob("*.json"))]
+def load_editions(data_dir=None):
+    return [json.loads(p.read_text()) for p in sorted((data_dir or DATA_DIR).glob("*.json"))]
 
 
-def build_site():
-    """Write every edition page plus the archive into docs/. Returns the edition dates."""
-    editions = load_editions()
+def build_site(data_dir=None, docs_dir=None):
+    """Write every edition page plus the archive into docs/ (or docs_dir). Returns the edition dates."""
+    docs_dir = docs_dir or DOCS_DIR
+    editions = load_editions(data_dir)
     for ed in editions:
-        out = DOCS_DIR / "editions" / ed["date"]
+        out = docs_dir / "editions" / ed["date"]
         out.mkdir(parents=True, exist_ok=True)
         (out / "index.html").write_text(render_edition(ed))
-    (DOCS_DIR / "index.html").write_text(render_archive(editions))
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    (docs_dir / "index.html").write_text(render_archive(editions))
     return [e["date"] for e in editions]

@@ -10,3 +10,8 @@ OVERVIEW_MODEL = "claude-opus-5-5"  # matchday overviews need judgment: Opus fou
 CLAUDE_EFFORT = "low"  # low | medium | high. Note-writing is rephrasing facts, so low is enough.
 # Dollars per million tokens (input, output), for the cost estimate only.
 PRICES = {"claude-opus-5-5": (4.00, 20.00), "claude-sonnet-5-5": (2.00, 10.00), "claude-haiku-5-5": (0.10, 0.50)}
+
+# Claude spending guard. The Anthropic workspace's own spend limit is the hard stop; this is the softer one the run checks first: at 80% of the month's
+# budget the Opus jobs switch to Sonnet, at 100% Claude is skipped and the plain, code-written versions are used. PLACEHOLDER: D to set his real monthly figure.
+MONTHLY_BUDGET_USD = 10.00
+BUDGET_CHEAPER_AT = 0.80
