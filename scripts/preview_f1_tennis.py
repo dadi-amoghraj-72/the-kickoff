@@ -21,7 +21,7 @@ FX = ROOT / "tests" / "fixtures"
 utc = lambda *a: datetime(*a, tzinfo=timezone.utc)  # noqa: E731
 
 # ---- F1 ----
-f1_html = f1.run(utc(2026, 11, 2, 23, 0), utc(2026, 10, 31, 23, 15), {}, jolpica.Api())["html"]
+f1_html = f1.run(utc(2026, 11, 2, 23, 0), utc(2026, 10, 31, 20, 0), {}, jolpica.Api())["html"]     # the window includes Saturday's qualifying too
 
 # ---- Tennis: the US Open ----
 slam_html = tennis.run(utc(2026, 9, 14, 2, 0), {}, espn_tennis.Source())["html"]
