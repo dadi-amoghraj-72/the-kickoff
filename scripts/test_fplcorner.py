@@ -1,4 +1,5 @@
 """Offline tests for the FPL corner. Run: .venv/bin/python scripts/test_fplcorner.py"""
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -148,14 +149,24 @@ check("each carries the squad's average for its position: DEF 3.0, MID 1.5 (all 
 check("not suggested: squad members, the injured and doubtful, a one-appearance cameo, a defender below the squad's 3.0, or a third midfielder", not {200, 210, 220, 305, 306, 308, 309, 303, 304} & {u["player"]["id"] for u in pu})
 check("positions the squad has nobody in (GKP, FWD) get no pick ups", {u["pos"] for u in pu} == {"DEF", "MID"})
 ph = fc.review_html(fc.transfer_review(UPS, UT, UH, CANDS))
-check("Pick Ups are grouped by position, in the order Defenders then Midfielders here (Goalkeepers and Attackers only when the squad has them): a sub heading with the position and the squad's average for it once, then numbered entries 'Name (Avg. points, last 3 GWs: 8.0)'",
-      "<strong>Potential Pick Ups</strong>" in ph and '<p class="sub"><strong>Defenders</strong> <span class="muted">(my squad avg.: 3.0)</span></p>' in ph and '<p class="sub"><strong>Midfielders</strong> <span class="muted">(my squad avg.: 1.5)</span></p>' in ph
-      and "<strong>Hot Def</strong> (Avg. points, last 3 GWs: 8.0)</li>" in ph and ph.index("Defenders") < ph.index("Midfielders") and "Goalkeepers" not in ph and "Attackers" not in ph, ph)
-check("the entries no longer repeat the squad average, and the old 'Transfer Suggestions' wording is gone", "My squad" not in ph and "Transfer Suggestions" not in ph and "Pick-up" not in ph, ph)
+check("Pick Ups are grouped by position (Defenders then Midfielders here; Goalkeepers and Forwards only when the squad has them): a heading with the position and the squad's average for it once",
+      "<strong>Potential Pick Ups</strong>" in ph and '<p class="gp"><strong>Defenders</strong> <span class="muted">(my squad avg.: 3.0)</span></p>' in ph and '<p class="gp"><strong>Midfielders</strong> <span class="muted">(my squad avg.: 1.5)</span></p>' in ph
+      and ph.index("Defenders") < ph.index("Midfielders") and "Goalkeepers" not in ph and "Forwards" not in ph and "Attackers" not in ph, ph)
+check("an entry is the player's short name, his club's code and the figure in gold: 'Hot Def (XXX) 8.0'", '<li><strong>Hot Def</strong> (XXX) <span class="n">8.0</span></li>' in ph, ph)
+check("the legend is said once under each title (twice here: Underperforming Players and Potential Pick Ups), never on a row", ph.count("Avg. points per Gameweek, last 3 GWs") == 2 and "<li>" in ph and all("Avg." not in li for li in re.findall(r"<li>.*?</li>", ph)), ph)
+check("Forwards is FPL's name for the fourth position (not Attackers)", fc.GROUPS == {"GKP": "Goalkeepers", "DEF": "Defenders", "MID": "Midfielders", "FWD": "Forwards"})
+fwd_rv = {"gws": [7, 8, 9], "swaps": [], "outs": [], "pickups": [{"player": pl(900, "Striker", 4), "pos": "FWD", "avg": 9.0, "pos_avg": 4.2}, {"player": pl(901, "Keeper", 1), "pos": "GKP", "avg": 7.0, "pos_avg": 2.8}]}
+fh = fc.review_html(fwd_rv)
+check("a forward and a goalkeeper: 'Goalkeepers' comes before 'Forwards', in FPL's order", fh.index("Goalkeepers") < fh.index("Forwards") and "Attackers" not in fh)
+check("the entries still carry no 'Avg.' wording", "My squad" not in ph and "Transfer Suggestions" not in ph and "Pick-up" not in ph)
+check("each group numbers from 1 (two entries in the midfield group: 1 and 2)", ph.count('<ol class="inj tight">') >= 2 and ph.split("Midfielders")[1].count("<li>") == 2, ph)
 check("each group numbers from 1 (two entries in the midfield group: 1 and 2)", ph.count('<ol class="inj tight">') >= 2 and ph.split("Midfielders")[1].count("<li>") == 2, ph)
 hh = fc.review_html(rv)
-check("underperforming format: 'Name (Avg. points, last 3 GWs: 0.7)', numbered, header 'Underperforming Players' only", "<strong>Underperforming Players</strong>" in hh and "<strong>P102</strong> (Avg. points, last 3 GWs: 0.7)" in hh and "<strong>P104</strong> (Avg. points, last 3 GWs: 2.0)" in hh and "Move out" not in hh and "Underperformers" not in hh, hh)
-check("bench swaps come first: 'Bench Swaps' ahead of 'Underperforming Players', 'Name over Starter (Avg. points, last 3 GWs: 8.0 | 2.0)'", hh.index("Bench Swaps") < hh.index("Underperforming Players") and "<strong>P110</strong> over <strong>P104</strong> (Avg. points, last 3 GWs: 8.0 | 2.0)" in hh, hh)
+check("underperforming: header 'Underperforming Players', one legend line, then 'P102 (ARS) 0.7' and 'P104 (ARS) 2.0' (name, club code, figure), numbered", "<strong>Underperforming Players</strong></p><p class=\"muted\">Avg. points per Gameweek, last 3 GWs</p>" in hh and '<li><strong>P102</strong> (ARS) <span class="n">0.7</span></li>' in hh and '<li><strong>P104</strong> (ARS) <span class="n">2.0</span></li>' in hh and "Move out" not in hh and "Underperformers" not in hh, hh)
+check("bench swaps come first, with their own legend: 'P110 (ARS) over P104 (ARS) 8.0 | 2.0'", hh.index("Bench Swaps") < hh.index("Underperforming Players") and '<strong>P110</strong> (ARS) over <strong>P104</strong> (ARS) <span class="n">8.0</span> | <span class="n">2.0</span>' in hh and "(bench player | starter)" in hh, hh)
+check("the legend is not repeated per row anywhere in the review", all("Avg." not in li for li in re.findall(r"<li>.*?</li>", hh)))
+css = (Path(__file__).resolve().parent.parent / "kickoff" / "static" / "style.css").read_text()
+check("one font size for everything in the FPL review and Injuries blocks: the wrapper sets headings, group headings, legend and entries to the same 16px", ".fplrev p, .fplrev ol, .fplrev li, .fplrev strong { font-size: 16px; }" in css)
 check("an empty list leaves out its heading; nothing at all gives no block", "Potential Pick Ups" not in hh and fc.review_html({"swaps": [], "outs": [], "pickups": []}) == "")
 calls = []
 SQ_PICKS = {**PICKS, **SQUAD, "entry_history": PICKS["entry_history"]}

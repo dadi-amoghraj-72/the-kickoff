@@ -157,28 +157,31 @@ def transfer_review(picks, trend, by_id, players):
     return {"gws": gws, "swaps": swaps, "outs": outs, "pickups": pickups}
 
 
-GROUPS = {"GKP": "Goalkeepers", "DEF": "Defenders", "MID": "Midfielders", "FWD": "Attackers"}
+GROUPS = {"GKP": "Goalkeepers", "DEF": "Defenders", "MID": "Midfielders", "FWD": "Forwards"}      # FPL's own names for the four positions
+LEGEND = "Avg. points per Gameweek, last 3 GWs"
 
 
 def review_html(review):
-    """The FPL lists, each with only its heading (D, 2026-11-04): Bench Swaps, Underperforming Players (numbered lists), and Potential Pick Ups grouped by position (Goalkeepers,
-    Defenders, Midfielders, Attackers: two numbered entries each, the squad's average for that position once in the group's heading). Players are shown by FPL's own short name
-    (web_name: Raya, Szoboszlai, Gabriel), the established one. A list with nothing in it is left out."""
-    lab = "Avg. points, last 3 GWs"
+    """The FPL lists, each with only its heading and, under it, one legend line saying what the figures are (D, 2026-11-04: not repeated on every row): Bench Swaps and
+    Underperforming Players (numbered lists), and Potential Pick Ups grouped by position (Goalkeepers, Defenders, Midfielders, Forwards: two numbered entries each, the squad's
+    average for that position once in the group's heading). Each entry is the player's FPL short name (web_name), his club's code and the figure: 'Szoboszlai (LIV) 0.7'.
+    Everything in the block is one font size (the wrapper's css). A list with nothing in it is left out."""
     n = lambda v: f"{v:.1f}"  # noqa: E731
-    name = lambda p: f"<strong>{r.esc(p.get('web_name') or p['name'])}</strong>"  # noqa: E731
+    who = lambda p: f"<strong>{r.esc(p.get('web_name') or p['name'])}</strong>" + (f" ({r.esc(p['team'])})" if p.get("team") else "")  # noqa: E731
+    fig = lambda v: f'<span class="n">{n(v)}</span>'  # noqa: E731
     ol = lambda items: '<ol class="inj tight">' + "".join(f"<li>{x}</li>" for x in items) + "</ol>"  # noqa: E731
-    blocks = [
-        ("Bench Swaps", [f"{name(s['player'])} over {name(s['over'])} ({lab}: {n(s['avg'])} | {n(s['over_avg'])})" for s in review["swaps"]]),
-        ("Underperforming Players", [f"{name(o['player'])} ({lab}: {n(o['avg'])})" for o in review["outs"]]),
-    ]
-    out = "".join(f'<p><strong>{t}</strong></p>{ol(items)}' for t, items in blocks if items)
+    head = lambda t, legend: f'<p><strong>{t}</strong></p><p class="muted">{legend}</p>'  # noqa: E731
+    out = ""
+    if review["swaps"]:
+        out += head("Bench Swaps", f"{LEGEND} (bench player | starter)") + ol(f"{who(s['player'])} over {who(s['over'])} {fig(s['avg'])} | {fig(s['over_avg'])}" for s in review["swaps"])
+    if review["outs"]:
+        out += head("Underperforming Players", LEGEND) + ol(f"{who(o['player'])} {fig(o['avg'])}" for o in review["outs"])
     if review["pickups"]:
-        out += "<p><strong>Potential Pick Ups</strong></p>"
+        out += head("Potential Pick Ups", LEGEND)
         for pos, title in GROUPS.items():
             group = [u for u in review["pickups"] if u["pos"] == pos]
             if group:
-                out += f'<p class="sub"><strong>{title}</strong> <span class="muted">(my squad avg.: {n(group[0]["pos_avg"])})</span></p>' + ol(f"{name(u['player'])} ({lab}: {n(u['avg'])})" for u in group)
+                out += f'<p class="gp"><strong>{title}</strong> <span class="muted">(my squad avg.: {n(group[0]["pos_avg"])})</span></p>' + ol(f"{who(u['player'])} {fig(u['avg'])}" for u in group)
     return out
 
 
@@ -213,11 +216,11 @@ def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry
         parts.append(classic_box(entry, picks, history or {}, live, by_id, event))
         alerts = squad_alerts(picks, by_id)
         if dl and alerts:
-            parts.append(alerts_html(alerts))
+            parts.append(f'<div class="fplrev">{alerts_html(alerts)}</div>')
         if dl and trend_fn:  # only near the deadline, when a transfer decision is due
             trend = trend_fn()
             if trend:
-                parts.append(review_html(transfer_review(picks, trend, by_id, players)))
+                parts.append(f'<div class="fplrev">{review_html(transfer_review(picks, trend, by_id, players))}</div>')
     if dl:
         watch = watch_items(players, state.get("watch_seen", {}), now)
         if watch:

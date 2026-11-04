@@ -385,3 +385,9 @@ tr.hl td { color: var(--gold); font-weight: 600; }   /* D's favourites' rows in 
 .caps tr.purple td { color: #b58be6; font-weight: 600; }
 @media (prefers-color-scheme: light) { .caps tr.orange td { color: #b3560d; } .caps tr.purple td { color: #6b3fa8; } }
 .caps td { font-size: 13.5px; }
+/* The FPL corner's Injuries and review lists: one font size for everything (D, 2026-11-04) */
+.fplrev p, .fplrev ol, .fplrev li, .fplrev strong { font-size: 16px; }
+.fplrev p { margin: 0 0 4px; }
+.fplrev p.gp { margin: 12px 0 2px; }
+.fplrev p.muted { margin-bottom: 6px; }
+.fplrev .n { color: var(--gold); font-weight: 600; }
