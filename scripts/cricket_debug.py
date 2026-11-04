@@ -23,7 +23,7 @@ for m in sorted(matches, key=lambda x: x.get("dateTimeGMT", "")):
     why = "PICKED" if m["id"] in picked else "not in scope" if c["kind"] is None else "not started" if not m.get("matchStarted") else "still on" if not m.get("matchEnded") else "ended outside the window"
     ends = ""
     if m.get("matchEnded"):
-        ends = f" est. end {cricket.started(m) + cricket.DURATION.get(m['matchType'], cricket.timedelta(hours=10)):%m-%d %H:%M}"
+        ends = f" est. end {cricket.started(m) + cricket.DURATION.get(m.get('matchType'), cricket.timedelta(hours=10)):%m-%d %H:%M}"
     print(f"{m.get('dateTimeGMT', '?')[:16]}  {m.get('matchType', '?'):5} started={m.get('matchStarted')} ended={m.get('matchEnded')}{ends}  {why:24} {m['name'][:90]}")
 
 # ---- ESPN's scores page: can we read it from here, and what would be added? ----

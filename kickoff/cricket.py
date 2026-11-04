@@ -80,10 +80,10 @@ def pick(matches, now, window_start, seen=None, last_status=None):
             continue
         begin = started(m)
         if m.get("matchEnded"):
-            ends = begin + DURATION.get(m["matchType"], timedelta(hours=10))     # an estimate: a rain-shortened or DLS match ends earlier than this
+            ends = begin + DURATION.get(m.get("matchType"), timedelta(hours=10))     # an estimate: a rain-shortened or DLS match ends earlier than this
             if m["id"] in seen or ends < window_start:
                 continue
-        elif m.get("matchStarted") and m["matchType"] == "test" and c["kind"] == "international":
+        elif m.get("matchStarted") and m.get("matchType") == "test" and c["kind"] == "international":
             pass
         else:
             continue
@@ -132,7 +132,7 @@ def espn_extras(pseudo, matches, fetch, now, limit=MAX_EXTRA_PAGES):
         begin = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
         if begin > now or not innings:
             continue                                        # not started: nothing to report
-        out.append({"id": pm["id"], "name": pm["name"], "teams": pm["teams"], "matchType": pm["matchType"], "dateTimeGMT": start, "matchStarted": True,
+        out.append({"id": pm["id"], "name": pm["name"], "teams": pm["teams"], "matchType": pm.get("matchType"), "dateTimeGMT": start, "matchStarted": True,
                     "matchEnded": bool(RESULT.search(status or "")), "status": status, "score": innings_scores(innings),
                     "_card": {"scorecard": innings, "status": status, "potm": potm}})
     return out
@@ -483,7 +483,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
         key = (frozenset(strip_women(t).lower() for t in m.get("teams") or []), m.get("matchType"))
         if espn_series and m.get("matchType") in SERIES_FORMATS and len(key[0]) == 2 and key not in done:
             done.add(key)
-            table = series_html(espn_series(m), m["matchType"])
+            table = series_html(espn_series(m), m.get("matchType"))
             if table:
                 series[m["id"]] = table
     html = results_html(picked, shown_cards, tables, series) + standouts_html(top)
