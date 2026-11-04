@@ -1,0 +1,29 @@
+# Failure-alert test (checkpoint 13 test run). Started by hand only. It fails on purpose, then runs the same "alert D if the run failed" step the daily
+# workflow uses, so D receives the real Telegram alert. It builds, commits and publishes nothing.
+name: Alert test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fail-on-purpose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Fail on purpose
+        run: |
+          echo "This step fails deliberately to test the alert."
+          exit 1
+      - name: Alert D if the run failed
+        if: failure()
+        run: python scripts/alert.py
