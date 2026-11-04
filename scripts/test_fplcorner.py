@@ -150,9 +150,9 @@ check("not suggested: squad members, the injured and doubtful, a one-appearance 
 check("positions the squad has nobody in (GKP, FWD) get no pick ups", {u["pos"] for u in pu} == {"DEF", "MID"})
 ph = fc.review_html(fc.transfer_review(UPS, UT, UH, CANDS))
 check("Pick Ups are grouped by position (Defenders then Midfielders here; Goalkeepers and Forwards only when the squad has them): a heading with the position and the squad's average for it once",
-      "<strong>Potential Pick Ups</strong>" in ph and '<p class="gp"><strong>Defenders</strong> <span class="muted">(my squad avg.: 3.0)</span></p>' in ph and '<p class="gp"><strong>Midfielders</strong> <span class="muted">(my squad avg.: 1.5)</span></p>' in ph
+      "<strong>Potential Pick Ups</strong>" in ph and '<p class="gp"><strong>Defenders</strong> <span class="muted">(my squad avg.: <span class="sq">3.0</span>)</span></p>' in ph and '<p class="gp"><strong>Midfielders</strong> <span class="muted">(my squad avg.: <span class="sq">1.5</span>)</span></p>' in ph
       and ph.index("Defenders") < ph.index("Midfielders") and "Goalkeepers" not in ph and "Forwards" not in ph and "Attackers" not in ph, ph)
-check("an entry is the player's short name, his club's code and the figure in gold: 'Hot Def (XXX) 8.0'", '<li><strong>Hot Def</strong> (XXX) <span class="n">8.0</span></li>' in ph, ph)
+check("an entry is the player's short name, his club's code and the figure in gold: 'Hot Def (XXX) [8.0]'", '<li><strong>Hot Def</strong> (XXX) <span class="n">[8.0]</span></li>' in ph, ph)
 check("the legend is said once under each title (twice here: Underperforming Players and Potential Pick Ups), never on a row", ph.count("Avg. points per Gameweek, last 3 GWs") == 2 and "<li>" in ph and all("Avg." not in li for li in re.findall(r"<li>.*?</li>", ph)), ph)
 check("Forwards is FPL's name for the fourth position (not Attackers)", fc.GROUPS == {"GKP": "Goalkeepers", "DEF": "Defenders", "MID": "Midfielders", "FWD": "Forwards"})
 fwd_rv = {"gws": [7, 8, 9], "swaps": [], "outs": [], "pickups": [{"player": pl(900, "Striker", 4), "pos": "FWD", "avg": 9.0, "pos_avg": 4.2}, {"player": pl(901, "Keeper", 1), "pos": "GKP", "avg": 7.0, "pos_avg": 2.8}]}
@@ -162,8 +162,8 @@ check("the entries still carry no 'Avg.' wording", "My squad" not in ph and "Tra
 check("each group numbers from 1 (two entries in the midfield group: 1 and 2)", ph.count('<ol class="inj tight">') >= 2 and ph.split("Midfielders")[1].count("<li>") == 2, ph)
 check("each group numbers from 1 (two entries in the midfield group: 1 and 2)", ph.count('<ol class="inj tight">') >= 2 and ph.split("Midfielders")[1].count("<li>") == 2, ph)
 hh = fc.review_html(rv)
-check("underperforming: header 'Underperforming Players', one legend line, then 'P102 (ARS) 0.7' and 'P104 (ARS) 2.0' (name, club code, figure), numbered", "<strong>Underperforming Players</strong></p><p class=\"muted\">Avg. points per Gameweek, last 3 GWs</p>" in hh and '<li><strong>P102</strong> (ARS) <span class="n">0.7</span></li>' in hh and '<li><strong>P104</strong> (ARS) <span class="n">2.0</span></li>' in hh and "Move out" not in hh and "Underperformers" not in hh, hh)
-check("bench swaps come first, with their own legend: 'P110 (ARS) over P104 (ARS) 8.0 | 2.0'", hh.index("Bench Swaps") < hh.index("Underperforming Players") and '<strong>P110</strong> (ARS) over <strong>P104</strong> (ARS) <span class="n">8.0</span> | <span class="n">2.0</span>' in hh and "(bench player | starter)" in hh, hh)
+check("underperforming: header 'Underperforming Players', one legend line, then 'P102 (ARS) [0.7]' and 'P104 (ARS) [2.0]' (name, club code, figure in square brackets, in red), numbered", "<strong>Underperforming Players</strong></p><p class=\"muted\">Avg. points per Gameweek, last 3 GWs</p>" in hh and '<li><strong>P102</strong> (ARS) <span class="n bad">[0.7]</span></li>' in hh and '<li><strong>P104</strong> (ARS) <span class="n bad">[2.0]</span></li>' in hh and "Move out" not in hh and "Underperformers" not in hh, hh)
+check("bench swaps come first, with their own legend: 'P110 (ARS) over P104 (ARS) [8.0] | [2.0]'", hh.index("Bench Swaps") < hh.index("Underperforming Players") and '<strong>P110</strong> (ARS) over <strong>P104</strong> (ARS) <span class="n">[8.0]</span> | <span class="n">[2.0]</span>' in hh and "(bench player | starter)" in hh, hh)
 check("the legend is not repeated per row anywhere in the review", all("Avg." not in li for li in re.findall(r"<li>.*?</li>", hh)))
 css = (Path(__file__).resolve().parent.parent / "kickoff" / "static" / "style.css").read_text()
 check("one font size for everything in the FPL review and Injuries blocks: the wrapper sets headings, group headings, legend and entries to the same 16px", ".fplrev p, .fplrev ol, .fplrev li, .fplrev strong { font-size: 16px; }" in css)
@@ -209,6 +209,10 @@ check("a gameweek still being played does not trigger it", fc.build(mid, PLAYERS
 both, _ = fc.build({**BOOT, "events": [{**EVENT9, "finished": True, "data_checked": True}, EVENT10]}, PLAYERS, ENTRY, PICKS, HISTORY, LIVE, DRAFT, 186059, {}, FRIDAY)
 check("when the deadline morning is also the first morning after the bonus points are final, one corner has both: the deadline and the top scorers", "Deadline:" in both and "Top Scorers" in both and both.count("<h3>FPL Corner</h3>") == 1)
 check("FPL Watch (new injury news on heavily owned players) belongs to the deadline morning only", "FPL Watch" in html and "FPL Watch" not in fin_html)
+
+css2 = (Path(__file__).resolve().parent.parent / "kickoff" / "static" / "style.css").read_text()
+check("D's colours: the underperformers' figures and the squad average's number are the same pastel red (and the squad average is bold); the pick-up figures stay gold", ".fplrev .n.bad { color: #f19a9a; }" in css2 and ".fplrev .sq { color: #f19a9a; font-weight: 700; }" in css2 and ".fplrev .n { color: var(--gold)" in css2)
+check("every figure is in square brackets, none bare: no span of class n holds a number without them", all(re.fullmatch(r"\[\d+\.\d\]", m) for m in re.findall(r'<span class="n(?: bad)?">(.*?)</span>', ph + hh)) and len(re.findall(r'<span class="n(?: bad)?">', ph + hh)) >= 6, re.findall(r'<span class="n(?: bad)?">(.*?)</span>', ph + hh))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

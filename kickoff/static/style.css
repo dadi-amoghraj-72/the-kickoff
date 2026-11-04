@@ -391,3 +391,6 @@ tr.hl td { color: var(--gold); font-weight: 600; }   /* D's favourites' rows in 
 .fplrev p.gp { margin: 12px 0 2px; }
 .fplrev p.muted { margin-bottom: 6px; }
 .fplrev .n { color: var(--gold); font-weight: 600; }
+.fplrev .n.bad { color: #f19a9a; }                 /* the underperformers' figures: pastel red, worse than the average */
+.fplrev .sq { color: #f19a9a; font-weight: 700; }   /* the squad average's number alone: bold pastel red */
+@media (prefers-color-scheme: light) { .fplrev .n.bad, .fplrev .sq { color: #b03a3a; } }

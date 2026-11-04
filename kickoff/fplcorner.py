@@ -164,24 +164,24 @@ LEGEND = "Avg. points per Gameweek, last 3 GWs"
 def review_html(review):
     """The FPL lists, each with only its heading and, under it, one legend line saying what the figures are (D, 2026-11-04: not repeated on every row): Bench Swaps and
     Underperforming Players (numbered lists), and Potential Pick Ups grouped by position (Goalkeepers, Defenders, Midfielders, Forwards: two numbered entries each, the squad's
-    average for that position once in the group's heading). Each entry is the player's FPL short name (web_name), his club's code and the figure: 'Szoboszlai (LIV) 0.7'.
+    average for that position once in the group's heading). Each entry is the player's FPL short name (web_name), his club's code and the figure in square brackets: 'Szoboszlai (LIV) [0.7]' (gold; red for the underperformers; the squad average in a group heading is bold pastel red).
     Everything in the block is one font size (the wrapper's css). A list with nothing in it is left out."""
     n = lambda v: f"{v:.1f}"  # noqa: E731
     who = lambda p: f"<strong>{r.esc(p.get('web_name') or p['name'])}</strong>" + (f" ({r.esc(p['team'])})" if p.get("team") else "")  # noqa: E731
-    fig = lambda v: f'<span class="n">{n(v)}</span>'  # noqa: E731
+    fig = lambda v, cls="n": f'<span class="{cls}">[{n(v)}]</span>'  # noqa: E731  (in square brackets so the number is never bare)
     ol = lambda items: '<ol class="inj tight">' + "".join(f"<li>{x}</li>" for x in items) + "</ol>"  # noqa: E731
     head = lambda t, legend: f'<p><strong>{t}</strong></p><p class="muted">{legend}</p>'  # noqa: E731
     out = ""
     if review["swaps"]:
         out += head("Bench Swaps", f"{LEGEND} (bench player | starter)") + ol(f"{who(s['player'])} over {who(s['over'])} {fig(s['avg'])} | {fig(s['over_avg'])}" for s in review["swaps"])
     if review["outs"]:
-        out += head("Underperforming Players", LEGEND) + ol(f"{who(o['player'])} {fig(o['avg'])}" for o in review["outs"])
+        out += head("Underperforming Players", LEGEND) + ol(f"{who(o['player'])} {fig(o['avg'], 'n bad')}" for o in review["outs"])
     if review["pickups"]:
         out += head("Potential Pick Ups", LEGEND)
         for pos, title in GROUPS.items():
             group = [u for u in review["pickups"] if u["pos"] == pos]
             if group:
-                out += f'<p class="gp"><strong>{title}</strong> <span class="muted">(my squad avg.: {n(group[0]["pos_avg"])})</span></p>' + ol(f"{who(u['player'])} {fig(u['avg'])}" for u in group)
+                out += f'<p class="gp"><strong>{title}</strong> <span class="muted">(my squad avg.: <span class="sq">{n(group[0]["pos_avg"])}</span>)</span></p>' + ol(f"{who(u['player'])} {fig(u['avg'])}" for u in group)
     return out
 
 
