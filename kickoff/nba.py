@@ -57,7 +57,7 @@ def team_name(name):
 # ---- Games ----------------------------------------------------------------------------------------
 
 def parse_game(e):
-    """A game as plain data. status is 'final', 'live', 'scheduled' or 'other'. phase: 'regular', 'playin' or 'playoffs'; cup: the Cup round
+    """A game as plain data. status is 'final', 'live', 'scheduled' or 'other'. phase: 'preseason' (never shown), 'regular', 'playin' or 'playoffs'; cup: the Cup round
     ('Group Play', 'Quarterfinals', ...) or None; headline: ESPN's note for the game ('East 1st Round - Game 3', 'NBA Cup - Group Play')."""
     c, t = e["competitions"][0], e["status"]["type"]
     status = "final" if t["name"] == "STATUS_FINAL" else {"in": "live", "pre": "scheduled"}.get(t["state"], "other")
@@ -74,7 +74,7 @@ def parse_game(e):
     series = c.get("series") or {}
     return {"id": e["id"], "date": utc(e["date"]), "status": status, "ot": status == "final" and (e["status"].get("period") or 0) > 4,
             "neutral": bool(c.get("neutralSite")), "detail": t.get("shortDetail", ""), "headline": headline, "cup": cup, "season": (e.get("season") or {}).get("year"),
-            "phase": "playin" if playin else "playoffs" if season_type == 3 else "regular",
+            "phase": "preseason" if season_type == 1 else "playin" if playin else "playoffs" if season_type == 3 else "regular",
             "series": series.get("summary") if series.get("type") == "playoff" else None,
             "home": side(sides["home"]), "away": side(sides["away"])}
 
@@ -557,7 +557,8 @@ def run(now, day, st, source):
             continue
         for e in sb.get("events", []):
             g = parse_game(e)
-            games[g["id"]] = g
+            if g["phase"] != "preseason":                  # exhibition games are never covered
+                games[g["id"]] = g
     # NBA Cup: learn the groups once from the whole window, then keep each group game's result in the state
     cup_games = keep["cup_games"]
     if not cup_games and CUP_SCAN[0] <= today <= CUP_SCAN[1]:

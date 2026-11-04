@@ -302,6 +302,21 @@ MLB is a quiet weekly round-up for most of the season, then daily coverage for t
 8. **Failures:** a failing source leaves that part out and counts it (game logs down: player tables dropped, the rest stays; standings down: no tables; a game whose box score failed is retried next run).
 9. **Known limits:** ESPN has no historical standings, so the previews and tests show the final 2026 table whatever the week; a game that is in progress at edition time is shown as "In progress" in the daily mode but the weekly round-up only shows finished games; the exact ESPN wording for wild-card games was confirmed on 2026 data (ALWC, NLWC).
 
+## Season rhythm: finales, previews and honours (agreed with D on 2026-11-04)
+
+Rules that apply to every sport with a season. Only the parts marked "done" exist in code today.
+
+1. **Time zone: always Singapore time (SGT).** No phone-location or time-zone switching (D: he is in Singapore 99.9% of the time and can convert himself). A page-side script that converts to the phone's zone is a possible later idea, not planned.
+2. **No preseason, spring training or exhibition games, ever** (done: the NFL skips ESPN season type 1, MLB treats anything that is not regular season or postseason as "other", the NBA drops type 1 games since 2026-11-04, each with a test). Coverage starts with the first regular-season game.
+3. **Season finale note for every sport (MLB done; the others to build in the pipeline step):** when a competition is decided the edition carries one short closing note (the champion and the final result, for the MLB also how the Dodgers' season ended), then that sport stays silent until the next season. Covers the Super Bowl, the NBA Finals, the MLB World Series, the Champions League final, the EPL's last day (title, top four, relegation), the IPL final, the World Cup final, the F1 championship and the other competitions already covered. One shared helper, each sport supplies its own "who won" rule. The season being over is known from each sport's own data, so no Claude is needed.
+4. **"Season is coming" preview, a week before opening day (not built; NFL, NBA, MLB and the EPL only, not every league):** one welcome-back note for someone who has not followed the offseason: major trades and signings (which star plays for whom now), notable draft picks (top picks), coaching changes. Triggered 7 days before the first regular-season game (known from ESPN's schedule). Written by Claude from news (ESPN first, other reliable sports sites, only facts that more than one source agrees on), short, once a year per league. It belongs with checkpoint 12 (Around the sporting world).
+5. **Awards and honours (not built; planned after the daily pipeline, order against checkpoints 11 and 12 to be set by D):** whenever one of the awards below is announced, the sport's section carries a running "Awards" table, shown only on days when something new was announced. **The table is cumulative, newest at the top, older awards stay below** (day 1 Gold Glove; day 2 Platinum Glove over Gold Glove; day 3 Silver Slugger over Platinum Glove over Gold Glove; and so on). Winners only, no vote breakdown, no extra detail. It stays inside the sport's section, even after the season-end note, and starts afresh at that sport's next season. Sources: ESPN first, then other reliable sports news sites where ESPN has no page; every award is tested against real pages before it is built (not yet tested). The awards:
+   - **NBA:** All-Star selections (starters and reserves) and the game date; MVP, Defensive Player, Rookie, Sixth Man, Most Improved, Coach, Teammate of the Year; All-NBA teams and All-Defensive teams (first and second, and the third All-NBA team); any other award announced.
+   - **NFL:** Pro Bowl selections and game, All-Pro teams, the NFL Honors awards (MVP, Offensive and Defensive Player, Rookie and Coach of the Year and the rest), the Walter Payton Man of the Year.
+   - **MLB:** All-Star selections and the game; Gold Glove, Platinum Glove, Silver Slugger, MVP, Cy Young, Rookie of the Year, and the Roberto Clemente Award (the community-service honour; to confirm that is the one D means by "Man of the Year").
+   - **EPL:** the main Premier League awards (Player of the Season, Young Player, Manager, Golden Boot, Golden Glove, and any other main one announced).
+   - **IPL:** during the tournament the Orange Cap (most runs) and Purple Cap (most wickets) leaders sit in the daily IPL table (at most two games a day, so a small table). At the very end, Player of the Series (the IPL calls it Most Valuable Player) and Emerging (young) Player of the Season, once. The official IPL awards, from the real IPL 2025 list (checked against press coverage on 2026-11-04; no official IPL or BCCI page was found, and ESPN's own feed for them is not yet tested): Orange Cap, Purple Cap, MVP (Most Valuable Player), Emerging Player, Super Striker, Most Fours, Most Sixes, Most Dot Balls, Fair Play Award, Best Catch, Best Pitch and Ground, Most Fantasy Points. IPL 2026 coverage says Vaibhav Sooryavanshi took the Orange Cap, MVP, Emerging Player and Super Striker (two outlets) and Kagiso Rabada the Purple Cap (one outlet): single-sourced, treat as unconfirmed.
+
 ## Young Guns
 
 Young Guns is one dedicated section for rookies and young stars across every sport, with a running watchlist so each player's rise reads like a story.
@@ -402,7 +417,7 @@ The look is a floodlit pitch: deep green, chalk text and trophy gold, built dark
 
 The whole build happens in one project, in this order. Each checkpoint is tested on the Mac Mini before it's committed, and a failing source must never break the rest of the edition.
 
-*Status on 2026-11-03: checkpoints 1 to 10 are built (8 NFL, 9 NBA and 10 MLB await D's final review); 11 to 14 are not started; the daily schedule is off.*
+*Status on 2026-11-04: checkpoints 1 to 10 are built (D approved MLB on 2026-11-04; 8 NFL and 9 NBA still await D's explicit OK); the order is now 13 (daily pipeline) first, then 11 and 12, then awards (15) and the season-rhythm items above; the daily schedule is off.*
 
 1. **Accounts and setup:** GitHub account (the username appears in the web address), a new public repo, and GitHub Pages switched on. In the Anthropic Console, a new workspace called The Kickoff with a monthly spend limit, then a new API key inside it. A new Telegram bot via BotFather, plus D's chat ID.
 2. **Skeleton:** page template, design system and progress rail. Publish a dummy edition and send the Telegram ping.
@@ -418,6 +433,7 @@ The whole build happens in one project, in this order. Each checkpoint is tested
 12. **Around the sporting world.**
 13. **Cross-sport sections:** The big stuff, On today, Games to Watch, interesting stories and the lead-sport ordering.
 14. **Test runs:** three mornings run by hand, then switch on the daily 7:15am SGT schedule.
+15. **Awards and season rhythm** (added 2026-11-04): the awards tables, the season-finale note for every sport and the season-preview notes (see "Season rhythm"). Built after 13; its order against 11 and 12 is D's call.
 
 ## Open items
 
@@ -427,4 +443,5 @@ Small things to settle, none of which blocks starting the build.
 - [ ] FIFA ranking: World Football Elo is the labelled stand-in; D can supply the real FIFA top 30 in data/top30_manual.json before each break.
 - [ ] FPL classic team ID and Draft league ID: collect during the build.
 - [x] MLB data source: ESPN, tested on the whole 2026 season (decided 2026-11-03).
+- [ ] IPL awards: confirm that ESPN (or another reliable feed) carries the Orange Cap and Purple Cap leaders live, and the end-of-season awards, before building them; test on a real IPL page.
 - [ ] MLB: review the standout thresholds (2 homers, 4 hits, 5 RBI, 10 strikeouts, 7 scoreless innings) after a month of real use next spring; confirm the weekly Thursday timing once the season starts.

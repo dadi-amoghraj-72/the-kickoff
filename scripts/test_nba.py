@@ -259,6 +259,17 @@ check("the standings below the games have no coloured teams: every team cell is 
 css2 = (ROOT / "kickoff" / "static" / "style.css").read_text()
 check("the colour machinery is gone from the code and the stylesheet", not hasattr(nba, "game_colours") and not hasattr(nba, "paint") and ".gc0" not in css2)
 
+# ---- Preseason games are never covered (D, 2026-11-04) ----
+import copy as _copy  # noqa: E402
+pre_sbs = _copy.deepcopy(SBS)
+for _d in pre_sbs.values():
+    for _e in _d["events"]:
+        _e["season"] = dict(_e.get("season") or {}, type=1)
+pre = nba.run(NOW, TUE, {}, Saved(sbs=pre_sbs, window={}))
+check("a scoreboard whose every game is ESPN season type 1 (preseason) gives no games, no box scores and no output", pre["stats"]["new"] == 0 and pre["html"] == "" and pre["state"]["reported"] == [], pre["stats"])
+check("the same games as regular season (type 2) are covered, so the test above is not vacuous", nba.run(NOW, TUE, {}, Saved())["stats"]["new"] > 0)
+check("parse_game marks type 1 as 'preseason', type 2 as 'regular', type 3 as 'playoffs'", [nba.parse_game(dict(_copy.deepcopy(next(iter(SBS.values()))["events"][0]), season={"year": 2026, "type": t}))["phase"] for t in (1, 2, 3)] == ["preseason", "regular", "playoffs"])
+
 # ---- Rhythm and state ----
 again = nba.run(NOW, MON, copy.deepcopy(out["state"]), Saved())
 check("a second run with the saved state shows no games again; the standings still come (every day there is basketball)", again["stats"]["new"] == 0 and "Last Night's Games" not in again["html"] and "Eastern Conference" in again["html"])
