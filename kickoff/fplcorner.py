@@ -104,109 +104,70 @@ def top_scorers(live, by_id, n=5):
     return [[i + 1, by_id[pid]["name"], by_id[pid]["team"], pts] for i, (pid, pts) in enumerate(best)]
 
 
-HINT_LIMIT = 3
-OUT_AVERAGE = 2.0  # points per appearance
-SWAP_GAP = 4       # points a bench player must beat his position's worst starter by, over the window
+WINDOW = 3         # gameweeks the averages cover
+LOW_AVG = 2.5      # a starter at or below this many points a gameweek is underperforming
+SWAP_GAP = 2.0     # points a gameweek a bench player must beat his position's worst starter by
+PICKUPS_PER_POSITION = 2
+POS = {1: "GKP", 2: "DEF", 3: "MID", 4: "FWD"}
+NOT_FIT = ("i", "s", "u")   # injured, suspended, unavailable: left to the Injuries list
 
 
-def _totals(trend, pid):
-    """(points, appearances) for a player across the gameweeks in trend. An appearance is any minutes played."""
-    points = sum(trend[g].get(pid, {}).get("points", 0) for g in trend)
-    apps = sum(1 for g in trend if trend[g].get(pid, {}).get("minutes", 0) > 0)
-    return points, apps
+def _avg(trend, gws, pid):
+    """Points a gameweek over gws; a gameweek without a game counts as 0."""
+    return sum(trend[g].get(pid, {}).get("points", 0) for g in gws) / len(gws)
 
 
-def transfer_hints(picks, trend, by_id, limit=HINT_LIMIT):
-    """A nudge from the last gameweeks in trend ({gw: {player id: {"points", "minutes"}}}), never advice.
-    'out' (quiet): a starter who scored under 2 points in each of the last 3 gameweeks, which in practice means he is
-        not playing or not doing anything. 'out' (low): a starter who played in at least two of them and averaged
-        2 points an appearance or less. Players already flagged injured, suspended or unavailable are left to the
-        squad alerts.
-    'swap': a bench outfield player who beat the worst starter in his position by 4 or more points."""
+def _played(trend, gws, pid):
+    return sum(1 for g in gws if trend[g].get(pid, {}).get("minutes", 0) > 0)
+
+
+def transfer_review(picks, trend, by_id, players):
+    """The three FPL lists, all in average points a gameweek over the last 3 gameweeks of trend ({gw: {player id: {"points", "minutes"}}}):
+    'swaps' (highest priority, it costs nothing): a fit bench player who beat his position's worst starter by 2.0 or more a gameweek;
+    'outs': fit starters at 2.5 or less; 'pickups': per position (GKP, DEF, MID, FWD) the best two players outside your squad, available (status 'a') and
+    playing in at least 2 of the 3 gameweeks, who beat your squad's average for that position (all 15 players). Nothing if fewer than 3 gameweeks are known."""
+    gws = sorted(trend)[-WINDOW:]
+    if len(gws) < WINDOW:
+        return {"gws": gws, "swaps": [], "outs": [], "pickups": []}
     squad = picks["picks"]
     starters = [p for p in squad if p["position"] <= 11]
-    bench = [p for p in squad if p["position"] > 11 and p["element_type"] != 1]
-    outs, swaps = [], []
-    for p in starters:
-        pl = by_id[p["element"]]
-        if pl["status"] in ("i", "s", "u"):
-            continue
-        pts, apps = _totals(trend, p["element"])
-        weekly = [trend[g].get(p["element"], {}).get("points", 0) for g in sorted(trend)]
-        if len(weekly) >= 3 and all(w < 2 for w in weekly):
-            outs.append({"kind": "out", "reason": "quiet", "player": pl, "points": pts, "apps": apps, "weekly": weekly, "avg": pts / max(apps, 1)})
-        elif apps >= 2 and pts / apps <= OUT_AVERAGE:
-            outs.append({"kind": "out", "reason": "low", "player": pl, "points": pts, "apps": apps, "weekly": weekly, "avg": pts / apps})
-    for b in bench:
+    fit = lambda p: by_id[p["element"]]["status"] not in NOT_FIT  # noqa: E731
+    avg = lambda p: _avg(trend, gws, p["element"])  # noqa: E731
+    outs = [{"player": by_id[p["element"]], "avg": avg(p)} for p in starters if fit(p) and avg(p) <= LOW_AVG]
+    swaps = []
+    for b in (p for p in squad if p["position"] > 11 and fit(p)):
         peers = [s for s in starters if s["element_type"] == b["element_type"]]
-        if not peers:
-            continue
-        worst = min(peers, key=lambda s: _totals(trend, s["element"])[0])
-        bpts, wpts = _totals(trend, b["element"])[0], _totals(trend, worst["element"])[0]
-        if bpts - wpts >= SWAP_GAP:
-            swaps.append({"kind": "swap", "player": by_id[b["element"]], "over": by_id[worst["element"]], "points": bpts,
-                          "over_points": wpts, "gap": bpts - wpts})
-    outs.sort(key=lambda x: (x["reason"] != "quiet", x["points"], x["player"]["name"]))
+        if peers:
+            worst = min(peers, key=lambda s: (avg(s), by_id[s["element"]]["name"]))
+            if avg(b) - avg(worst) >= SWAP_GAP:
+                swaps.append({"player": by_id[b["element"]], "over": by_id[worst["element"]], "avg": avg(b), "over_avg": avg(worst), "gap": avg(b) - avg(worst)})
+    outs.sort(key=lambda x: (x["avg"], x["player"]["name"]))
     swaps.sort(key=lambda x: (-x["gap"], x["player"]["name"]))
-    return (outs + swaps)[:limit]
-
-
-POSITION = {1: "goalkeeper", 2: "defender", 3: "midfielder", 4: "forward"}
-
-
-def pickups(picks, trend, players, hints, limit=2):
-    """Players you do not own who would be worth picking up in the position of an underperformer (a 'move out' hint): the best scorer over the trend's gameweeks
-    among available (status 'a') players of that position who played, whose price fits (the outgoing player's price plus your bank), and who beat the player
-    going out. At most one per underperformer, `limit` in all. [{"player", "points", "for", "cost"}]."""
-    squad = {p["element"] for p in picks["picks"]}
-    bank = (picks.get("entry_history") or {}).get("bank") or 0
-    out, used = [], set()
-    for h in (x for x in hints if x["kind"] == "out"):
-        old = h["player"]
-        if not old.get("type") or not old.get("cost"):
+    mine = {p["element"] for p in squad}
+    pickups = []
+    for typ in sorted(POS):
+        group = [avg(p) for p in squad if p["element_type"] == typ]
+        if not group:
             continue
-        best = None
-        for c in players:
-            if c.get("type") != old["type"] or c["id"] in squad or c["id"] in used or c["status"] != "a" or not c.get("cost") or c["cost"] > old["cost"] + bank:
-                continue
-            pts, apps = _totals(trend, c["id"])
-            if apps >= 2 and pts > h["points"] and (best is None or (pts, c["minutes"]) > (best[0], best[1]["minutes"])):
-                best = (pts, c)
-        if best:
-            used.add(best[1]["id"])
-            out.append({"player": best[1], "points": best[0], "for": old, "cost": best[1]["cost"]})
-        if len(out) == limit:
-            break
-    return out
+        pos_avg = sum(group) / len(group)
+        cands = [(_avg(trend, gws, c["id"]), c) for c in players
+                 if c.get("type") == typ and c["id"] not in mine and c["status"] == "a" and _played(trend, gws, c["id"]) >= 2]
+        best = sorted((x for x in cands if x[0] > pos_avg), key=lambda x: (-x[0], -x[1]["minutes"], x[1]["name"]))[:PICKUPS_PER_POSITION]
+        pickups += [{"player": c, "pos": POS[typ], "avg": a, "pos_avg": pos_avg} for a, c in best]
+    return {"gws": gws, "swaps": swaps, "outs": outs, "pickups": pickups}
 
 
-def hints_html(hints, gws, picks_up=()):
-    """'Transfer Suggestions': Underperformers (Move out?), bench players outscoring a starter, and Pick-up suggestions (from `pickups`)."""
-    if not hints and not picks_up:
-        return ""
-    span = f"{len(gws)} gameweeks"
-    outs, swaps = "", ""
-    for h in hints:
-        p = h["player"]
-        if h["kind"] == "out" and h["reason"] == "quiet":
-            outs += f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">form</span> {', '.join(str(w) for w in h['weekly'])}</li>"
-        elif h["kind"] == "out":
-            outs += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}) <span class=\"muted\">form</span> "
-                     f"{h['points']} points in {h['apps']} appearances over the last {span}</li>")
-        else:
-            o = h["over"]
-            swaps += (f"<li><strong>{r.esc(p['name'])}</strong> ({r.esc(p['team'])}): {h['points']} points against {r.esc(o['name'])}'s {h['over_points']} "
-                      f"over the last {span}</li>")
-    html = "<p><strong>Transfer Suggestions</strong></p>"
-    if outs:
-        html += f'<p class="sub">Underperformers <span class="muted">(Move out?)</span> <span class="muted">· points in the last {span}</span></p><ul class="team-news">{outs}</ul>'
-    if swaps:
-        html += f'<p class="sub">Bench players outscoring a starter</p><ul class="team-news">{swaps}</ul>'
-    if picks_up:
-        lis = "".join(f"<li><strong>{r.esc(u['player']['name'])}</strong> ({r.esc(u['player']['team'])}) <span class=\"muted\">{POSITION.get(u['player']['type'], '')}</span>: "
-                      f"{u['points']} points in the last {span} · £{u['cost'] / 10:.1f}m <span class=\"muted\">(for {r.esc(u['for']['name'])})</span></li>" for u in picks_up)
-        html += f'<p class="sub">Pick-up suggestions?</p><ul class="team-news">{lis}</ul>'
-    return html
+def review_html(review):
+    """Three numbered lists, each with only its heading: Bench Swaps, Underperforming Players, Potential Pick Ups. A list with nothing in it is left out."""
+    lab = "Avg. points, last 3 GWs"
+    n = lambda v: f"{v:.1f}"  # noqa: E731
+    name = lambda p: f"<strong>{r.esc(p['name'])}</strong>"  # noqa: E731
+    blocks = [
+        ("Bench Swaps", [f"{name(s['player'])} over {name(s['over'])} ({lab}: {n(s['avg'])} | {n(s['over_avg'])})" for s in review["swaps"]]),
+        ("Underperforming Players", [f"{name(o['player'])} ({lab}: {n(o['avg'])})" for o in review["outs"]]),
+        ("Potential Pick Ups", [f"{name(u['player'])} ({lab}: {n(u['avg'])} | My squad {u['pos']} avg.: {n(u['pos_avg'])})" for u in review["pickups"]]),
+    ]
+    return "".join(f'<p><strong>{t}</strong></p><ol class="inj">' + "".join(f"<li>{x}</li>" for x in items) + "</ol>" for t, items in blocks if items)
 
 
 def watch_items(players, seen, now):
@@ -244,8 +205,7 @@ def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry
         if dl and trend_fn:  # only near the deadline, when a transfer decision is due
             trend = trend_fn()
             if trend:
-                hints = transfer_hints(picks, trend, by_id)
-                parts.append(hints_html(hints, list(trend), pickups(picks, trend, players, hints)))
+                parts.append(review_html(transfer_review(picks, trend, by_id, players)))
     if dl:
         watch = watch_items(players, state.get("watch_seen", {}), now)
         if watch:

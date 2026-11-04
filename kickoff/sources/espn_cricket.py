@@ -216,7 +216,7 @@ def parse_table(page):
         v = dict(zip(cols, [_text(c) for c in cells]))
         if not (name and pos):
             return None
-        rows.append({"pos": _int(pos.group(1)), "name": _text(name.group(1)), "team": re.sub(r"-W$", "", _text(abbr.group(1))) if abbr else _text(name.group(1)),
+        rows.append({"pos": _int(pos.group(1)), "name": _text(name.group(1)), "team": _text(abbr.group(1)) if abbr else _text(name.group(1)),
                      "p": _int(v.get("M")), "w": _int(v.get("W")), "l": _int(v.get("L")), "t": _int(v.get("T")), "nr": _int(v.get("N/R")),
                      "pts": _int(v.get("PT")), "nrr": _float(v.get("NRR"))})
     return rows or None

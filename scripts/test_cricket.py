@@ -67,7 +67,7 @@ run_nt = ck.run(datetime(2026, 11, 4, 10, 0, tzinfo=timezone.utc), datetime(2026
 check("end to end: a match with no matchType in the list is in the block (a result line, 'New Zealand v India') and is remembered as reported", run_nt["stats"]["picked"] == 1 and "New Zealand v India" in re.sub(r"<[^>]+>", "", run_nt["html"]) and "n1" in run_nt["state"]["seen"], run_nt["html"][:200])
 
 # ---- D's cricket round of 4 November: heading, big result, scores, Tests, series ----
-ck_text = lambda h: re.sub(r"<[^>]+>", "", h)  # noqa: E731
+ck_text = lambda h: re.sub(r"<[^>]+>", "", h.replace('</span><span class="sl">', " · "))  # noqa: E731
 check("the scores line puts each score in bold: the winner's in gold (class w), the other in white (class n), the team names plain; a drawn or live match has every score in white", '<b class="w">' in ck.scores_html({**{"teams": ["A", "B"], "score": [{"inning": "A Inning 1", "r": 100, "w": 3}, {"inning": "B Inning 1", "r": 90, "w": 10}]}, "status": "A won by 10 runs"}) and '<b class="w">' not in ck.scores_html({"teams": ["A", "B"], "score": [{"inning": "A Inning 1", "r": 100, "w": 3}], "status": "Match drawn"}) and ck.scores_html({"teams": ["A", "B"], "score": [{"inning": "A Inning 1", "r": 100, "w": 3}], "status": "Match drawn"}).count('class="n"') == 1)
 check("short_result: 'India won by 5 wkts - 2nd inns reduced to 32 overs - DLS Target 143' reads 'India won by 5 wickets (DLS)'; the balls-remaining bracket goes; a plain result is unchanged; a Test's day line reads on one line",
       [ck.short_result(x) for x in ("India won by 5 wkts  -  2nd inns reduced to 32 overs - DLS Target 143", "India won by 5 wkts (56b rem) (DLS)", "South Africa won by 176 runs", "Day 3: Stumps - Australia lead by 100 runs", "1 wkt", "")]
@@ -76,7 +76,7 @@ dls_m = {"name": "New Zealand vs India, 1st ODI, India tour of New Zealand 2026"
          "score": [{"inning": "New Zealand Inning 1", "r": 185, "w": 10, "o": 40.2}, {"inning": "India Inning 1", "r": 143, "w": 5, "o": 22.4}]}
 dh = ck.result_html(dls_m)
 check("the ODI header: 'New Zealand v India · 1st ODI' once (no tour name, no repeated series line), the result as the main line, then the scores, in that order", "New Zealand v <strong>India</strong> · 1st ODI" in dh and "India tour of New Zealand" not in dh and "India won by 5 wickets (DLS)" in dh and "DLS Target" not in dh
-      and dh.index('class="cm"') < dh.index('class="cr"') < dh.index('class="cs"') and "New Zealand 185 (40.2) · India 143/5 (22.4)" in ck_text(dh) and 'New Zealand <b class="n">185 (40.2)</b> · India <b class="w">143/5 (22.4)</b>' in dh, dh)
+      and dh.index('class="cm"') < dh.index('class="cr"') < dh.index('class="cs"') and "New Zealand 185 (40.2) · India 143/5 (22.4)" in ck_text(dh) and '<span class="sl">New Zealand <b class="n">185 (40.2)</b></span><span class="sl">India <b class="w">143/5 (22.4)</b></span>' in dh and " · India" not in dh.split('class="cs"')[1], dh)
 test_m = {"name": "South Africa vs Australia, 3rd Test, Australia tour of South Africa 2026", "matchType": "test", "teams": ["South Africa", "Australia"], "matchEnded": True, "status": "South Africa won by 176 runs",
           "score": [{"inning": "South Africa Inning 1", "r": 329, "w": 10}, {"inning": "Australia Inning 1", "r": 429, "w": 10}, {"inning": "South Africa Inning 2", "r": 387, "w": 10}, {"inning": "Australia Inning 2", "r": 111, "w": 10}]}
 live_test = dict(test_m, matchEnded=False, status="Day 4: Stumps - South Africa lead by 100 runs", score=test_m["score"][:2] + [{"inning": "South Africa Inning 2", "r": 187, "w": 4}])
@@ -97,7 +97,7 @@ check("the series page reads all six matches of the tour: three ODIs and three T
       and SA_ROWS[5]["date"] == "Oct 27-31 2026" and SA_ROWS[4]["result"] == "South Africa won by an inns & 31 runs", [(g["n"], g["format"], g["date"]) for g in SA_ROWS])
 sa_m = dict(test_m, score=[{"inning": i["inning"].replace(" 1st Innings", " Inning 1").replace(" 2nd Innings", " Inning 2"), "r": i["espn"]["total"]["r"], "w": i["espn"]["total"]["w"], "o": i["espn"]["total"]["o"]} for i in sa_card])
 raw_totals = [i["espn"]["total"]["r"] for i in sa_card]
-check("independent: the real Test's four innings totals from the page (329, 429, 387, 111) give the scores line 'South Africa 329 & 387 · Australia 429 & 111'", raw_totals == [329, 429, 387, 111] and ck.scores_line(sa_m) == "South Africa 329 & 387 · Australia 429 & 111", raw_totals)
+check("independent: the real Test's four innings totals from the page (329, 429, 387, 111) give the scores line 'South Africa 329 & 387 (134.4) · Australia 429 & 111 (57.1)': both innings of each side, the overs of the last one", raw_totals == [329, 429, 387, 111] and ck.scores_line(sa_m) == "South Africa 329 & 387 (134.4) · Australia 429 & 111 (57.1)", raw_totals)
 st = ck.series_html(SA_ROWS, "test", current=sa_m)
 raw_wins = {"Australia": sum(1 for g in SA_ROWS if g["format"] == "Test" and g["result"].startswith("Australia won")), "South Africa": sum(1 for g in SA_ROWS if g["format"] == "Test" and g["result"].startswith("South Africa won"))}
 check("the Test series table: 'Australia v South Africa · Test series', the series stands Australia 1, South Africa 2 (counted from the raw results), the dates are ranges ('27–31 Oct'), the second Test's ampersand is clean, and only Tests are in it (no ODI row)",
@@ -150,7 +150,7 @@ check("live matches that are not Test-nation Tests (Sheffield Shield, an A-team 
 # ---- How a result reads ----
 nz = by("5th T20I")
 h = ck.result_html(nz)
-check("a result shows the teams (India in bold), both innings, the result and the series", "New Zealand v <strong>India</strong> · 5th T20I" in h and "New Zealand 195/3 (18) · India 191/8 (20)" in ck_text(h) and '<b class="w">195/3 (18)</b>' in h and '<b class="n">191/8 (20)</b>' in h
+check("a result shows the teams (India in bold), both innings, the result and the series", "New Zealand v <strong>India</strong> · 5th T20I" in h and "India 191/8 (20) · New Zealand 195/3 (18)" in ck_text(h) and '<b class="w">195/3 (18)</b>' in h and '<b class="n">191/8 (20)</b>' in h
       and "New Zealand won by 7 wickets" in h and "India tour of New Zealand" not in h and h.index('class="cr"') < h.index('class="cs"'), h)
 check("an all-out innings has no '/10' and overs keep their decimal", ck.innings_line({"r": 109, "w": 10, "o": 17.4, "inning": "Hobart Hurricanes Women Inning 1"}) == "Hobart Hurricanes Women 109 (17.4)")
 live_t20 = {**live, "matchType": "t20", "name": "England vs Pakistan, 1st T20I, tour"}
@@ -172,9 +172,9 @@ check("a label for a team not in the list is returned cleaned, not lost", ck.tea
 check("innings lines use the proper team name", ck.innings_line({"r": 129, "w": 10, "o": 33.1, "inning": "ireland Inning 1"}, tn) == "Ireland 129 (33.1)"
       and ck.innings_line({"r": 131, "w": 5, "o": 21.2, "inning": "Namibia,Ireland Inning 1"}, tn) == "Namibia 131/5 (21.2)")
 nam = by("Namibia vs Ireland, 5th ODI")
-check("the real Namibia v Ireland result now reads cleanly", "Namibia 131/5 (21.2) · Ireland 129 (33.1)" in ck_text(ck.result_html(nam)) and "Namibia won by 5 wickets" in ck.result_html(nam), ck.result_html(nam))
+check("the real Namibia v Ireland result now reads cleanly", "Ireland 129 (33.1) · Namibia 131/5 (21.2)" in ck_text(ck.result_html(nam)) and "Namibia won by 5 wickets" in ck.result_html(nam), ck.result_html(nam))
 wb = by("Sydney Thunder Women vs Brisbane Heat Women")
-check("and so does the real WBBL result", "Sydney Thunder Women 180/4 (16.4) · Brisbane Heat Women 178/5 (20)" in ck_text(ck.result_html(wb)) and "6th Match" in ck.result_html(wb) and "Big Bash" not in ck.result_html(wb), ck.result_html(wb))
+check("and so does the real WBBL result", "Brisbane Heat W 178/5 (20) · Sydney Thunder W 180/4 (16.4)" in ck_text(ck.result_html(wb)) and "6th Match" in ck.result_html(wb) and "Big Bash" not in ck.result_html(wb), ck.result_html(wb))
 def bat(name, r, b, out="b X"):
     return {"batsman": {"name": name}, "r": r, "b": b, "4s": 1, "6s": 1, "sr": 100, "dismissal-text": out}
 
@@ -355,6 +355,21 @@ check("the cache keeps only the 60 most recent scorecards", len(block(17, many)[
 check("the cache survives being saved as JSON and read back", block(95, json.loads(json.dumps(state_no_seen)))["html"].count('<table class="sc">') == second["html"].count('<table class="sc">'))
 old_format = {"cards": {nz["id"]: {"summary": [], "standouts": []}}}
 check("an old-format cache entry (from before full scorecards) is ignored and bought again, not shown broken", block(17, old_format)["stats"]["checked"] == 5 and len(cards) == 5)
+
+# ---- D, 2026-11-04: women's sides read with a W; scores on two lines in batting order ----
+check("wname: 'India Women' -> 'India W', 'Sydney Sixers Women' -> 'Sydney Sixers W', inside a result line too; 'Women's' (a league) and men's names are left alone",
+      ck.wname("India Women") == "India W" and ck.wname("Sydney Sixers Women") == "Sydney Sixers W" and ck.wname("India Women won by 5 wickets") == "India W won by 5 wickets"
+      and ck.wname("Women's Big Bash") == "Women's Big Bash" and ck.wname("India") == "India" and ck.wname("") == "")
+wm = {"name": "India Women vs Australia Women, 2nd ODI, Australia Women tour of India 2026", "matchType": "odi", "teams": ["India Women", "Australia Women"], "matchEnded": True,
+      "status": "Australia Women won by 3 wickets", "score": [{"inning": "India Women Inning 1", "r": 245, "w": 10, "o": 49.2}, {"inning": "Australia Women Inning 1", "r": 246, "w": 7, "o": 48.5}]}
+wh = ck.result_html(wm)
+check("a women's match shows 'India W v Australia W', 'Australia W won by 3 wickets' and each score line with W - the word 'Women' appears nowhere in the block",
+      "India <strong>W</strong>" not in wh and "India W v Australia W" in ck_text(wh) and "Australia W won by 3 wickets" in wh and "Women" not in wh, wh)
+check("the scores are two separate lines in batting order, 'India W 245 (49.2)' then 'Australia W 246/7 (48.5)', no dot between them",
+      ck_text(wh).count("India W 245 (49.2)") == 1 and wh.index("India W <b") < wh.index("Australia W <b") and wh.count('<span class="sl">') == 2 and "·" not in wh.split('class="cs"')[1], wh)
+check("the colours stay: the winner's score gold (w), the other white (n)", 'Australia W <b class="w">246/7 (48.5)</b>' in wh and 'India W <b class="n">245 (49.2)</b>' in wh, wh)
+bat2 = dict(wm, teams=["India Women", "Australia Women"], score=[wm["score"][1], wm["score"][0]], status="India Women won by 1 run")
+check("batting order follows the innings, not the team order of the listing: Australia W batted first here, so they are the first line", ck.result_html(bat2).index("Australia W <b") < ck.result_html(bat2).index("India W <b"))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

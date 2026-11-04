@@ -103,9 +103,13 @@ w = fc.watch_items(PLAYERS, {}, NOW)
 check("watch: heavily owned players with new news (Cash, 20% owned) - but not Saka (old news) or Dan (3% owned)", [x["name"] for x in w] == ["Matty Cash"], w)
 check("watch: shown once", fc.watch_items(PLAYERS, {"3": "2026-11-03T09:00:00Z"}, NOW) == [])
 
-# ---- Transfer hints (a nudge near the deadline) ----
+# ---- The three FPL lists (D, 2026-11-04): Bench Swaps, Underperforming Players, Potential Pick Ups - averages over the last 3 gameweeks ----
 def pick(el, pos, typ):
     return {"element": el, "position": pos, "element_type": typ, "is_captain": False, "multiplier": 1 if pos <= 11 else 0}
+
+
+def pl(pid, name, typ, status="a", minutes=900, team="XXX"):
+    return {"id": pid, "name": name, "web_name": name, "team": team, "status": status, "news": "", "news_added": None, "chance_next": None, "owned": 5.0, "type": typ, "cost": 60, "minutes": minutes}
 
 
 HP = {i: player(i, f"Player {i}", f"P{i}", "ARS") for i in range(101, 120)}
@@ -115,74 +119,57 @@ G = lambda pts, mins: {"points": pts, "minutes": mins}  # noqa: E731
 TREND = {7: {101: G(3, 90), 102: G(1, 60), 103: G(6, 90), 104: G(2, 90), 105: G(8, 90), 106: G(7, 90), 107: G(1, 0), 109: G(2, 90), 110: G(9, 90), 111: G(0, 0)},
          8: {101: G(3, 90), 102: G(1, 70), 103: G(5, 90), 104: G(2, 90), 105: G(6, 90), 106: G(5, 90), 107: G(0, 0), 109: G(2, 90), 110: G(8, 90), 111: G(0, 0)},
          9: {101: G(3, 90), 102: G(0, 0), 103: G(7, 90), 104: G(2, 90), 105: G(9, 90), 106: G(6, 90), 107: G(9, 90), 109: G(2, 90), 110: G(7, 90), 111: G(0, 0)}}
-hints = fc.transfer_hints(SQUAD, TREND, HP)
-outs = [h for h in hints if h["kind"] == "out"]
-swaps = [h for h in hints if h["kind"] == "swap"]
-check("a starter with 2 points in 2 appearances (1.0 a game) is a 'move out?' candidate", any(h["player"]["id"] == 102 and h["points"] == 2 and h["apps"] == 2 for h in outs), hints)
-check("a starter averaging 2.0 over three appearances (104: 2, 2, 2) is flagged; one averaging 6 is not", any(h["player"]["id"] == 104 for h in outs) and not any(h["player"]["id"] == 103 for h in outs), outs)
-check("a starter who barely played (107: one appearance) is not flagged: injuries are covered elsewhere", not any(h["player"]["id"] == 107 for h in outs), outs)
-check("the quietest (fewest points) comes first", outs[0]["player"]["id"] == 102 and outs[0]["points"] <= outs[-1]["points"], outs)
-check("a bench midfielder with 24 points against the worst starting midfielder's 6 is a swap (gap 18)",
-      any(h["player"]["id"] == 110 and h["over"]["id"] == 104 and (h["points"], h["over_points"], h["gap"]) == (24, 6, 18) for h in swaps), swaps)
-check("a bench defender with 6 points against a starter's 8 is not", not any(h["player"]["id"] == 109 for h in swaps), swaps)
-check("the bench goalkeeper is never suggested", not any(h["player"]["id"] == 108 for h in hints))
-check("a bench forward with 0 points is not a swap", not any(h["player"]["id"] == 111 for h in swaps))
-check("at most three hints, with 'move out' ahead of swaps", len(hints) <= 3 and [h["kind"] for h in hints] == sorted((h["kind"] for h in hints), key=lambda k: k != "out"), [h["kind"] for h in hints])
-check("a tight squad with nothing to flag gives no hints", fc.transfer_hints(SQUAD, {7: {102: G(8, 90)}, 8: {102: G(8, 90)}}, HP) == [])
-hh = fc.hints_html(hints, [7, 8, 9])
-check("suggestions read: a 'Transfer Suggestions' heading (no 'nudge, not advice' line), 'Underperformers (Move out?)' with the point totals and 'last 3 gameweeks'",
-      "Transfer Suggestions" in hh and "not advice" not in hh and "nudge" not in hh and "last 3 gameweeks" in hh and "Move out?" in hh and "Underperformers" in hh, hh[:300])
-check("no hints, no block", fc.hints_html([], [7]) == "")
+rv = fc.transfer_review(SQUAD, TREND, HP, [])
+ids = lambda rows: [x["player"]["id"] for x in rows]  # noqa: E731
+check("underperforming: starters averaging 2.5 or less a gameweek over 3 (102: 2 points = 0.7, 104: 6 points = 2.0), the lowest first", ids(rv["outs"]) == [102, 104] and round(rv["outs"][0]["avg"], 2) == 0.67 and rv["outs"][1]["avg"] == 2.0, rv["outs"])
+check("a starter at 3.0 (101), 3.3 (107) or 6.0 (103) is not underperforming", not set(ids(rv["outs"])) & {101, 103, 105, 106, 107}, ids(rv["outs"]))
+check("the bench is never listed as underperforming (111 scored 0, 108 nothing)", not set(ids(rv["outs"])) & {108, 109, 110, 111})
+check("bench swap: the benched midfielder (110, 8.0 a gameweek) over the worst starting midfielder (104, 2.0)", len(rv["swaps"]) == 1 and rv["swaps"][0]["player"]["id"] == 110 and rv["swaps"][0]["over"]["id"] == 104 and (rv["swaps"][0]["avg"], rv["swaps"][0]["over_avg"]) == (8.0, 2.0), rv["swaps"])
+check("a bench defender 1.3 a gameweek better than his worst starter (109 over 102) is not 'severe' enough; an empty-handed bench keeper or forward is not a swap", ids(rv["swaps"]) == [110])
+check("exactly 2.0 better counts (the edge)", ids(fc.transfer_review({"picks": [pick(101, 1, 1), pick(109, 13, 2), pick(102, 2, 2)]}, {7: {102: G(0, 0), 109: G(6, 90)}, 8: {102: G(0, 0), 109: G(0, 90)}, 9: {102: G(0, 0), 109: G(0, 90)}}, HP, [])["swaps"]) == [109])
+inj_bench = {**HP, 110: player(110, "Hurt Bench", "HB", "ARS", status="i")}
+check("an injured bench player is not suggested", fc.transfer_review(SQUAD, TREND, inj_bench, [])["swaps"] == [])
+inj_start = {**HP, 102: player(102, "Hurt Starter", "HS", "ARS", status="s")}
+check("a suspended or injured starter is left to the Injuries list, not listed as underperforming", 102 not in ids(fc.transfer_review(SQUAD, TREND, inj_start, [])["outs"]))
+check("fewer than 3 gameweeks of data gives nothing at all", fc.transfer_review(SQUAD, {7: TREND[7], 8: TREND[8]}, HP, []) == {"gws": [7, 8], "swaps": [], "outs": [], "pickups": []})
+check("the Tzolis case: a fit starter on 0, 0, 0 (never played) is underperforming", ids(fc.transfer_review({"picks": [pick(120, 2, 3)]}, {7: {}, 8: {}, 9: {}}, {120: player(120, "Never Plays", "NP", "ARS")}, [])["outs"]) == [120])
+
+# Pick ups: squad MID average (200: 2 pts, 210: 7 pts over 3 weeks -> 0.7 and 2.3, so 1.5), DEF average 3.0
+UPS = {"picks": [pick(200, 5, 3), pick(210, 14, 3), pick(220, 2, 2)]}
+CANDS = [pl(200, "Slow Mid", 3), pl(210, "Bench Mid", 3), pl(220, "My Def", 2), pl(301, "Hot Mid", 3), pl(302, "Hotter Mid", 3), pl(303, "Warm Mid", 3), pl(304, "Cooler Mid", 3),
+         pl(305, "Injured Mid", 3, status="i"), pl(306, "Cameo Mid", 3), pl(307, "Hot Def", 2), pl(308, "Weak Def", 2), pl(309, "Doubtful Mid", 3, status="d")]
+UT = {7: {200: G(1, 90), 210: G(2, 90), 220: G(3, 90), 301: G(8, 90), 302: G(20, 90), 303: G(5, 90), 304: G(2, 90), 305: G(12, 90), 306: G(14, 20), 307: G(8, 90), 308: G(2, 90), 309: G(9, 90)},
+      8: {200: G(0, 90), 210: G(3, 90), 220: G(3, 90), 301: G(7, 90), 302: G(18, 90), 303: G(5, 90), 304: G(2, 90), 305: G(10, 90), 306: G(0, 0), 307: G(8, 90), 308: G(2, 90), 309: G(9, 90)},
+      9: {200: G(1, 90), 210: G(2, 90), 220: G(3, 90), 301: G(6, 90), 302: G(15, 90), 303: G(4, 90), 304: G(2, 90), 305: G(9, 90), 306: G(0, 0), 307: G(8, 90), 308: G(2, 90), 309: G(9, 90)}}
+UH = {c["id"]: c for c in CANDS}
+pu = fc.transfer_review(UPS, UT, UH, CANDS)["pickups"]
+check("pick ups: two per position at most, defenders before midfielders, best average first: Hot Def (8.0), then Hotter Mid (17.7) and Hot Mid (7.0)", [u["player"]["id"] for u in pu] == [307, 302, 301], [(u["player"]["name"], u["pos"], round(u["avg"], 1)) for u in pu])
+check("each carries the squad's average for its position: DEF 3.0, MID 1.5 (all of the squad's midfielders, bench included)", [(u["pos"], round(u["pos_avg"], 2)) for u in pu] == [("DEF", 3.0), ("MID", 1.5), ("MID", 1.5)], pu)
+check("not suggested: squad members, the injured and doubtful, a one-appearance cameo, a defender below the squad's 3.0, or a third midfielder", not {200, 210, 220, 305, 306, 308, 309, 303, 304} & {u["player"]["id"] for u in pu})
+check("positions the squad has nobody in (GKP, FWD) get no pick ups", {u["pos"] for u in pu} == {"DEF", "MID"})
+ph = fc.review_html(fc.transfer_review(UPS, UT, UH, CANDS))
+check("pick up format: 'Name (Avg. points, last 3 GWs: 8.0 | My squad DEF avg.: 3.0)' in a numbered list", "<strong>Hot Def</strong> (Avg. points, last 3 GWs: 8.0 | My squad DEF avg.: 3.0)" in ph and "My squad MID avg.: 1.5)" in ph and '<ol class="inj">' in ph, ph)
+check("the only header is 'Potential Pick Ups', with no explanations or sub lines", "<strong>Potential Pick Ups</strong>" in ph and "Transfer Suggestions" not in ph and "Pick-up" not in ph and 'class="sub"' not in ph and "muted" not in ph, ph)
+hh = fc.review_html(rv)
+check("underperforming format: 'Name (Avg. points, last 3 GWs: 0.7)', numbered, header 'Underperforming Players' only", "<strong>Underperforming Players</strong>" in hh and "<strong>Player 102</strong> (Avg. points, last 3 GWs: 0.7)" in hh and "<strong>Player 104</strong> (Avg. points, last 3 GWs: 2.0)" in hh and "Move out" not in hh and "Underperformers" not in hh, hh)
+check("bench swaps come first: 'Bench Swaps' ahead of 'Underperforming Players', 'Name over Starter (Avg. points, last 3 GWs: 8.0 | 2.0)'", hh.index("Bench Swaps") < hh.index("Underperforming Players") and "<strong>Player 110</strong> over <strong>Player 104</strong> (Avg. points, last 3 GWs: 8.0 | 2.0)" in hh, hh)
+check("an empty list leaves out its heading; nothing at all gives no block", "Potential Pick Ups" not in hh and fc.review_html({"swaps": [], "outs": [], "pickups": []}) == "")
 calls = []
 SQ_PICKS = {**PICKS, **SQUAD, "entry_history": PICKS["entry_history"]}
-BY2 = {**BY, **HP}
 PL2 = PLAYERS + list(HP.values())
 fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, T(2026, 11, 2, 9), trend_fn=lambda: calls.append(1) or TREND)
-check("far from the deadline, the hints are not worked out at all (no wasted requests)", calls == [])
+check("far from the deadline, the lists are not worked out at all (no wasted requests)", calls == [])
 html_near, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, FRIDAY, trend_fn=lambda: TREND)
-check("within 24 hours of the deadline the corner includes the hints", "Transfer Suggestions" in html_near)
+check("within 24 hours of the deadline the corner includes the lists", "Underperforming Players" in html_near and "Bench Swaps" in html_near, html_near[:300])
 html_none, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, FRIDAY, trend_fn=lambda: {})
-check("if the gameweek data is unavailable the corner still builds without hints", "Transfer Suggestions" not in html_none and "merino parade fc" in html_none)
-
-# ---- The rule as D first asked for it: under 2 points in each of the last 3 gameweeks ----
-QUIET = {"picks": [pick(101, 1, 1), pick(120, 2, 3), pick(121, 3, 3), pick(122, 4, 3), pick(123, 12, 3)]}
-HQ = {**HP, 120: player(120, "Never Plays", "Plays", "ARS"), 121: player(121, "One Cameo", "Cameo", "LIV"), 122: player(122, "Injured Starter", "Inj", "ARS", status="i"),
-      123: player(123, "Bench Guy", "Bench", "ARS")}
-QT = {7: {120: G(0, 0), 121: G(0, 0), 122: G(0, 0)}, 8: {120: G(0, 0), 121: G(1, 31), 122: G(0, 0)}, 9: {120: G(0, 0), 121: G(0, 0), 122: G(1, 0)}}
-qh = fc.transfer_hints(QUIET, QT, HQ)
-check("a starter with 0, 0, 0 points (no minutes at all) is flagged: the Tzolis case", any(h["player"]["id"] == 120 and h["reason"] == "quiet" for h in qh), qh)
-check("a starter with 0, 1, 0 points and a 31-minute cameo is flagged: the Szoboszlai case", any(h["player"]["id"] == 121 and h["weekly"] == [0, 1, 0] for h in qh), qh)
-check("an injured starter is left to the squad alerts, not hinted", not any(h["player"]["id"] == 122 for h in qh))
-check("a quiet starter reads as the three weekly scores", "form</span> 0, 1, 0" in fc.hints_html(qh, [7, 8, 9]) and "last 3 gameweeks" in fc.hints_html(qh, [7, 8, 9]), fc.hints_html(qh, [7, 8, 9]))
-check("two gameweeks of data are not enough for the 'under 2 in each of 3' rule", not any(h.get("reason") == "quiet" for h in fc.transfer_hints(QUIET, {7: QT[7], 8: QT[8]}, HQ)))
-check("quiet players come ahead of merely low-scoring ones", [h["reason"] for h in hints if h["kind"] == "out"] == sorted((h["reason"] for h in hints if h["kind"] == "out"), key=lambda r: r != "quiet"), [h.get("reason") for h in hints])
-
-# ---- Pick-up suggestions (D, 2026-11-04): who to bring in, by position, within budget ----
-def pl(pid, name, typ, cost, status="a", minutes=900, team="XXX"):
-    return {"id": pid, "name": name, "web_name": name, "team": team, "status": status, "news": "", "news_added": None, "chance_next": None, "owned": 5.0, "type": typ, "cost": cost, "minutes": minutes}
-
-
-OUTGO = pl(200, "Slow Mid", 3, 70)
-UP_PICKS = {"entry_history": {"bank": 5}, "picks": [{"element": 200, "position": 5, "element_type": 3, "is_captain": False, "multiplier": 1}]}
-CANDS = [OUTGO, pl(201, "Hot Mid", 3, 74), pl(202, "Hotter But Dear", 3, 90), pl(203, "Hot Defender", 2, 60), pl(204, "Injured Mid", 3, 70, status="i"), pl(205, "Cameo Mid", 3, 60, minutes=40), pl(206, "Warm Mid", 3, 65)]
-UP_TREND = {7: {200: G(1, 90), 201: G(8, 90), 202: G(20, 90), 203: G(15, 90), 204: G(12, 90), 205: G(14, 20), 206: G(5, 90)},
-            8: {200: G(0, 90), 201: G(7, 90), 202: G(18, 90), 203: G(9, 90), 204: G(10, 90), 205: G(0, 0), 206: G(5, 90)},
-            9: {200: G(1, 90), 201: G(6, 90), 202: G(15, 90), 203: G(8, 90), 204: G(9, 90), 205: G(0, 0), 206: G(4, 90)}}
-OUT_HINT = {"kind": "out", "reason": "quiet", "player": OUTGO, "points": 2, "apps": 3, "weekly": [1, 0, 1], "avg": 0.7}
-pu = fc.pickups(UP_PICKS, UP_TREND, CANDS, [OUT_HINT])
-check("pick-up: the best same-position player you do not own who is available, played, fits the price (70 + bank 5 = 75) and beat the player going out: Hot Mid (21 points, 7.4m), not the dearer Hotter But Dear, the defender, the injured or the cameo player",
-      len(pu) == 1 and pu[0]["player"]["id"] == 201 and pu[0]["points"] == 21 and pu[0]["for"]["id"] == 200 and pu[0]["cost"] == 74, pu)
-check("nobody who beat the outgoing player and fits the budget means no pick-up, and a player already in the squad is never suggested", fc.pickups(UP_PICKS, UP_TREND, [OUTGO, pl(300, "Poor Mid", 3, 60)], [OUT_HINT]) == [] and all(u["player"]["id"] != 200 for u in pu))
-ph = fc.hints_html([OUT_HINT], [7, 8, 9], pu)
-check("the suggestions block: 'Transfer Suggestions', 'Underperformers (Move out?)' with the form, then 'Pick-up suggestions?' with the player, position, points, price and who he would replace", "Pick-up suggestions?" in ph and "Hot Mid" in ph and "midfielder" in ph and "21 points in the last 3 gameweeks" in ph and "£7.4m" in ph and "for Slow Mid" in ph and ph.index("Underperformers") < ph.index("Pick-up suggestions?"), ph)
-check("at most two pick-ups, one per underperformer", len(fc.pickups(UP_PICKS, UP_TREND, CANDS + [pl(210, "Hot Mid Two", 3, 70)], [OUT_HINT, dict(OUT_HINT, player=pl(211, "Slow Two", 3, 70))])) <= 2)
+check("if the gameweek data is unavailable the corner still builds without the lists", "Underperforming Players" not in html_none and "merino parade fc" in html_none)
 
 # ---- Demo mode shows everything ----
 far = T(2026, 11, 2, 9)
 plain, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, far, trend_fn=lambda: TREND)
 demo, _ = fc.build(BOOT, PL2, ENTRY, SQ_PICKS, HISTORY, LIVE, DRAFT, 186059, {}, far, trend_fn=lambda: TREND, demo=True)
-check("normally, four days before the deadline the corner is left out altogether: no reminder, no hints, no heading", plain == "")
-check("in demo mode the deadline reminder and the hints appear anyway", "Deadline:" in demo and "Transfer Suggestions" in demo, demo[:200])
+check("normally, four days before the deadline the corner is left out altogether: no reminder, no lists, no heading", plain == "")
+check("in demo mode the deadline reminder and the hints appear anyway", "Deadline:" in demo and "Underperforming Players" in demo, demo[:200])
 
 # ---- The whole corner ----
 FRESH = [dict(p, news_added="2026-11-05T09:00:00Z") if p["id"] == 3 else p for p in PLAYERS]      # Cash's suspension news is a few hours old on Friday morning

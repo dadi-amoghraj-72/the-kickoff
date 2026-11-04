@@ -492,3 +492,12 @@ Small things to settle, none of which blocks starting the build.
 - [x] MLB data source: ESPN, tested on the whole 2026 season (decided 2026-11-03).
 - [ ] IPL awards: confirm that ESPN (or another reliable feed) carries the Orange Cap and Purple Cap leaders live, and the end-of-season awards, before building them; test on a real IPL page.
 - [ ] MLB: review the standout thresholds (2 homers, 4 hits, 5 RBI, 10 strikeouts, 7 scoreless innings) after a month of real use next spring; confirm the weekly Thursday timing once the season starts.
+
+## Round 7 (2026-11-04): FPL lists and cricket names/scores
+- **FPL** (shown near the deadline): three numbered lists, each with only its heading and no sub lines, in this order. All figures are average FPL points per Gameweek over the last 3 Gameweeks (a Gameweek without a game counts as 0), one decimal.
+  - **Bench Swaps** (highest priority, costs nothing): a fit bench player whose average beats his position's worst starter by 2.0 or more. `Bench Name over Starter Name (Avg. points, last 3 GWs: 8.0 | 2.0)`.
+  - **Underperforming Players**: fit starters at 2.5 or less, lowest first. `Player Name (Avg. points, last 3 GWs: 1.2)`. Injured, suspended and unavailable players are left to Injuries.
+  - **Potential Pick Ups**: per position (GKP, DEF, MID, FWD) the best two players outside the squad, available (status a), playing in at least 2 of the 3 Gameweeks, whose average beats the squad's average for that position (all 15 squad players). `Player Name (Avg. points, last 3 GWs: 6.3 | My squad MID avg.: 3.1)`. Price is not considered. Draft free agents are not built.
+  - Nothing is shown with fewer than 3 Gameweeks of data. Applies to all future FPL reviews.
+- **Cricket names**: women's sides read with a W, never the word: India W, Sydney Sixers W (headings, result lines, scores, scorecards, series, POTM). Points tables use ESPN's abbreviations with the -W kept (IND-W style).
+- **Cricket scores**: one line per team in batting order, `Team 155/6 (20)` (an all-out side `155 (20)`); a Test `Team 329 & 387 (134.4)`, overs of the last innings only. Winner's score gold, the other white. No dot between teams.

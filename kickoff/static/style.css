@@ -194,6 +194,7 @@ p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
 .cricket .cs { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 15px; }
 .cricket .cs b { font-weight: 700; color: var(--chalk); }
 .cricket .cs b.w { color: var(--gold); }
+.cricket .cs .sl { display: block; }   /* one team per line, in batting order */
 .cricket .cr { color: var(--chalk); font-weight: 700; font-size: 18px; }   /* the result is the main line */
 .cricket .ct { color: var(--muted); font-size: 15px; }
 .cricket .dayflag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }

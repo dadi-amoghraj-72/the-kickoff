@@ -149,9 +149,9 @@ TABLE = (FX / "espn_cricket_table_wbbl.html").read_text()
 rows = ec.parse_table(TABLE)
 check("the WBBL table has all 8 teams in order 1..8, led by Sydney Sixers on 4 points and NRR 2.25",
       rows and [x["pos"] for x in rows] == list(range(1, 9)) and rows[0]["name"] == "Sydney Sixers Women" and (rows[0]["p"], rows[0]["w"], rows[0]["pts"], rows[0]["nrr"]) == (2, 2, 4, 2.25), rows and rows[0])
-check("the row after the finals cut-off line (Melbourne Stars, 5th) is not lost", rows[4]["name"] == "Melbourne Stars Women" and rows[4]["team"] == "MS" and rows[4]["nrr"] == -0.075, rows[4])
+check("the row after the finals cut-off line (Melbourne Stars, 5th) is not lost", rows[4]["name"] == "Melbourne Stars Women" and rows[4]["team"] == "MS-W" and rows[4]["nrr"] == -0.075, rows[4])
 check("every team's played = won + lost + tied + no result, and the points are 2 a win", all(x["p"] == x["w"] + x["l"] + x["t"] + x["nr"] and x["pts"] == 2 * x["w"] for x in rows), rows)
-check("abbreviations are the official ones with the '-W' dropped", [x["team"] for x in rows] == ["SS", "ST", "PS", "AS", "MS", "BH", "MR", "HH"], [x["team"] for x in rows])
+check("abbreviations are the official ones, with the '-W' kept (D, 2026-11-04: IND-W, AUS-W)", [x["team"] for x in rows] == ["SS-W", "ST-W", "PS-W", "AS-W", "MS-W", "BH-W", "MR-W", "HH-W"], [x["team"] for x in rows])
 th = ck.table_html("WBBL", rows)
 check("the table block: caption, numbers right-aligned, signed three-place NRR, no Ties column when nobody has tied",
       "<caption>WBBL table</caption>" in th and "+2.250" in th and "-2.625" in th and "<th class=\"n\">T</th>" not in th and th.count("<tr>") == 8 + 1, th[:300])
@@ -332,7 +332,7 @@ cd_old = {"id": "wbbl8", "name": "Melbourne Stars Women vs Perth Scorchers Women
 both = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([cd_odi, cd_old], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no")), lambda used: 5, espn_extra=lambda ms: ck.espn_matches(ec.Feed(feed_get, pause=0)))
 bh = re.sub(r"<[^>]+>", "", both["html"])
 check("ESPN first: CricketData lists the 1st ODI too (without a matchType) and ESPN's version replaces it (one New Zealand v India block, ESPN's id and result line), while a WBBL match only CricketData has is still reported (the backup)", both["html"].count("New Zealand v") == 1 and "espn-1539437" in both["state"]["seen"] and "c547eb46" not in both["state"]["seen"]
-      and "India won by 5 wickets (DLS)" in bh and "Perth Scorchers Women won by 3 wickets" in bh and "wbbl8" in both["state"]["seen"], (both["state"]["seen"], bh[:300]))
+      and "India won by 5 wickets (DLS)" in bh and "Perth Scorchers W won by 3 wickets" in bh and "Women won" not in bh and "wbbl8" in both["state"]["seen"], (both["state"]["seen"], bh[:300]))
 no_cd = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: (_ for _ in ()).throw(RuntimeError("no key")), lambda mid: None, lambda used: 0, espn_extra=lambda ms: ck.espn_matches(ec.Feed(feed_get, pause=0)))
 check("without CricketData at all (no key, call limit reached, the list down) cricket still builds from ESPN's feed: the ODI with its result, scores and player of the match", no_cd["stats"]["picked"] == 1 and "New Zealand v" in re.sub(r"<[^>]+>", "", no_cd["html"]) and "Anshul Kamboj" in no_cd["html"] and no_cd["used"] == 0, no_cd["stats"])
 run_boom = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([], 5), lambda mid: None, lambda used: 5, espn_extra=lambda ms: 1 / 0)

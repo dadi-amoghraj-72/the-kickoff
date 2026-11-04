@@ -25,6 +25,12 @@ def strip_women(team):
     return re.sub(r"\s+women$", "", team.strip(), flags=re.I)
 
 
+def wname(text):
+    """Women's sides read with a W, never the word (D, 2026-11-04): 'India Women' -> 'India W', 'Sydney Sixers Women' -> 'Sydney Sixers W', also inside a result
+    line ('India Women won by 5 wickets'). 'Women's' (a league name) is left alone."""
+    return re.sub(r"\s+Women\b(?!['\u2019]s)", " W", text or "")
+
+
 def match_type(m):
     """'t20', 'odi' or 'test': the list's own matchType, else read from the match name. The free list sometimes leaves matchType out of a newly added match
     (the 4 November New Zealand v India ODI came with none and was dropped as out of scope)."""
@@ -132,7 +138,7 @@ def espn_matches(feed):
 def title(m):
     """'New Zealand v India' and the rest of the name ('5th T20I, India tour of New Zealand 2026')."""
     parts = [p.strip() for p in m["name"].split(",")]
-    teams = parts[0].replace(" vs ", " v ")
+    teams = wname(parts[0].replace(" vs ", " v "))
     return teams, ", ".join(parts[1:])
 
 
@@ -147,7 +153,7 @@ def heading(m):
 def short_result(status):
     """A result line that reads at a glance: 'India won by 5 wkts - 2nd inns reduced to 32 overs - DLS Target 143' becomes 'India won by 5 wickets (DLS)'; the bracket
     of balls remaining goes. A live Test's 'Day 3: Stumps - Australia lead by 42 runs' becomes 'Day 3: Stumps, Australia lead by 42 runs'."""
-    text = (status or "").strip()
+    text = wname((status or "").strip())
     if not text:
         return ""
     dls = bool(re.search(r"\bDLS\b", text))
@@ -161,31 +167,30 @@ def short_result(status):
 
 
 def team_scores(m):
-    """{team: 'score text'} from the match's innings: a one-innings match gives '185' or '143/5 (22.4)', a Test '329 & 387' (an innings still going shows its wickets,
-    '187/4')."""
+    """{team: 'score text'} from the match's innings, in batting order (the team that batted first first): '143/5 (22.4)', an all-out side '185 (40.2)', a Test
+    '329 & 387' (an innings still going shows its wickets, '187/4'), each with the overs of its last innings when the source has them."""
     teams, per = m.get("teams") or [], {}
     for sc in m.get("score") or []:
         team = team_of(sc.get("inning", ""), teams)
         w = "" if sc.get("w") in (None, 10) else f"/{sc.get('w')}"
         per.setdefault(team, []).append((f"{sc.get('r')}{w}", sc.get("o")))
     test = m.get("matchType") == "test"
-    return {t: " & ".join(x[0] for x in v) if test or len(v) > 1 else v[0][0] + (f" ({v[0][1]:g})" if isinstance(v[0][1], (int, float)) else "") for t, v in per.items()}
+    overs = lambda v: f" ({v[-1][1]:g})" if isinstance(v[-1][1], (int, float)) else ""  # noqa: E731  (the last innings' overs only)
+    return {t: " & ".join(x[0] for x in v) + overs(v) for t, v in per.items()}
 
 
 def scores_html(m):
-    """The scores line with each side's score in bold (the winner's in gold, the other in white), the team names plain: 'New Zealand <b>185 (40.2)</b> · India
-    <b class="w">143/5 (22.4)</b>'. A match with no winner (live, drawn, tied) has every score in bold white."""
+    """The scores, one line per team in batting order (D, 2026-11-04): 'New Zealand <b>185 (40.2)</b>' above 'India <b class="w">143/5 (22.4)</b>', the team names
+    plain, each score in bold: the winner's in gold, the other in white. A match with no winner (live, drawn, tied) has every score in bold white."""
     per = team_scores(m)
-    order = [t for t in (m.get("teams") or []) if t in per] + [t for t in per if t not in (m.get("teams") or [])]
-    winner = next((t for t in order if (m.get("status") or "").startswith(t + " won")), None)
-    return " · ".join(f'{r.esc(t)} <b class="{"w" if t == winner else "n"}">{r.esc(per[t])}</b>' for t in order)
+    winner = next((t for t in per if (m.get("status") or "").startswith(t + " won")), None)
+    return "".join(f'<span class="sl">{r.esc(wname(t))} <b class="{"w" if t == winner else "n"}">{r.esc(per[t])}</b></span>' for t in per)
 
 
 def scores_line(m):
-    """'New Zealand 185 (40.2) · India 143/5 (22.4)' or, for a Test, 'South Africa 329 & 387 · Australia 429 & 111'."""
+    """'New Zealand 185 (40.2) · India 143/5 (22.4)' in batting order, as plain text."""
     per = team_scores(m)
-    order = [t for t in (m.get("teams") or []) if t in per] + [t for t in per if t not in (m.get("teams") or [])]
-    return " · ".join(f"{t} {per[t]}" for t in order)
+    return " · ".join(f"{wname(t)} {per[t]}" for t in per)
 
 
 def day_of(m, entry=None):
@@ -201,7 +206,7 @@ def potm_html(entry):
     people = (entry or {}).get("potm") or []
     if not people:
         return ""
-    return '<span class="potm">Player of the match: ' + ", ".join(f"<strong>{r.esc(p['name'])}</strong>" + (f" ({r.esc(p['team'])})" if p.get("team") else "") for p in people) + "</span>"
+    return '<span class="potm">Player of the match: ' + ", ".join(f"<strong>{r.esc(p['name'])}</strong>" + (f" ({r.esc(wname(p['team']))})" if p.get("team") else "") for p in people) + "</span>"
 
 
 SERIES_FORMATS = ("test", "odi")   # D: series tables for Test and ODI series (add "t20" to widen it to T20I series)
@@ -252,10 +257,10 @@ def series_html(rows, fmt, current=None):
             won = next((n for n in (left, right) if g["result"].startswith(n + " won")), None)
             if won:
                 wins[won] += 1
-            body.append({"mid": f"{g['n']} {label} · {day}", "a": sc.get(left, ""), "b": sc.get(right, ""), "win": "a" if won == left else "b" if won == right else None, "notes": [r.esc(g["result"])]})
+            body.append({"mid": f"{g['n']} {label} · {day}", "a": sc.get(left, ""), "b": sc.get(right, ""), "win": "a" if won == left else "b" if won == right else None, "notes": [r.esc(wname(g["result"]))]})
         else:
             body.append({"mid": f"{g['n']} {label} · {day}" + (f" · {g['starts']}" if g["starts"] else ""), "pre": True})
-    return r.series_table(f"{left} v {right} · {label} series", left, right, wins[left], wins[right], "series", body, "sm tst" if fmt == "test" else "sm")
+    return r.series_table(f"{wname(left)} v {wname(right)} · {label} series", wname(left), wname(right), wins[left], wins[right], "series", body, "sm tst" if fmt == "test" else "sm")
 
 
 def result_html(m, entry=None, series="", from_innings=0):
@@ -266,7 +271,7 @@ def result_html(m, entry=None, series="", from_innings=0):
     names = r.esc(teams)
     for t in m.get("teams") or []:
         if strip_women(t).lower() in HIGHLIGHT:
-            names = names.replace(r.esc(t), f"<strong>{r.esc(t)}</strong>")
+            names = names.replace(r.esc(wname(t)), f"<strong>{r.esc(wname(t))}</strong>")
     live = "" if m.get("matchEnded") or m.get("matchType") == "test" else '<span class="tag">In progress</span> '   # a Test in progress has its day flag instead'
     flag = ""
     if m.get("matchType") == "test" and not m.get("matchEnded"):
@@ -412,7 +417,7 @@ def match_summary_html(innings):
         if inn.get("runs") is None:
             continue
         wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}"
-        rows += (f'<tr class="sum"><td class="name"><strong>{r.esc(inn["team"])}</strong></td><td class="n"><strong>{inn["runs"]}{wickets}</strong></td>'
+        rows += (f'<tr class="sum"><td class="name"><strong>{r.esc(wname(inn["team"]))}</strong></td><td class="n"><strong>{inn["runs"]}{wickets}</strong></td>'
                  f'<td class="name" colspan="2">{r.esc(inn.get("label") or "")}</td></tr>')
         bats = [b for b in inn["batting"] if b.get("b") or b.get("r")]
         bowls = [b for b in inn["bowling"] if b.get("w")]
@@ -433,7 +438,7 @@ def full_scorecard_html(innings, from_index=0):
         wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}"
         total = f"{inn['runs']}{wickets}" if inn["runs"] is not None else ""
         overs = f" ({inn['overs']:g} ov)" if isinstance(inn["overs"], (int, float)) else ""
-        out += f'<p class="inn"><strong>{r.esc(inn["team"])}</strong>{" " + r.esc(inn["label"]) if inn.get("label") else ""} {total}{overs}</p>'
+        out += f'<p class="inn"><strong>{r.esc(wname(inn["team"]))}</strong>{" " + r.esc(inn["label"]) if inn.get("label") else ""} {total}{overs}</p>'
         rows = ""
         for b in inn["batting"]:
             rows += (f'<tr><td class="name">{r.esc(b["name"])}{r.esc(" " + b["mark"] if b.get("mark") else "")}<span class="dis">{r.esc(b["out"])}</span></td><td class="n"><strong>{b["r"]}</strong></td>'
@@ -517,11 +522,11 @@ def standout_html(o, context=True):
     if o["kind"] in ("century", "fast fifty"):
         label = "century" if o["kind"] == "century" else f"fifty off {o['balls']} balls"
         figures = f"{o['runs']}{'*' if o['not_out'] else ''} off {o['balls']} balls, {o['fours']} fours and {o['sixes']} sixes"
-        return (f"<li><strong>{r.esc(o['name'])}</strong> ({r.esc(o['team'])}) · {label}: {figures} against {r.esc(o['against'])}{context}</li>")
+        return (f"<li><strong>{r.esc(o['name'])}</strong> ({r.esc(wname(o['team']))}) · {label}: {figures} against {r.esc(wname(o['against']))}{context}</li>")
     label = "five-wicket haul" if o["kind"] == "five-for" else "four-wicket haul"
     overs = f"{o['overs']:g}" if isinstance(o["overs"], (int, float)) else str(o["overs"])
-    return (f"<li><strong>{r.esc(o['name'])}</strong> ({r.esc(o['team'])}) · {label}: {o['wickets']} for {o['runs_conceded']} off {overs} overs "
-            f"against {r.esc(o['against'])}{context}</li>")
+    return (f"<li><strong>{r.esc(o['name'])}</strong> ({r.esc(wname(o['team']))}) · {label}: {o['wickets']} for {o['runs_conceded']} off {overs} overs "
+            f"against {r.esc(wname(o['against']))}{context}</li>")
 
 
 def standouts_html(items, inline=False):
