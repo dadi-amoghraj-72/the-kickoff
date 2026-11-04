@@ -391,6 +391,12 @@ class Feed:
         self.calls += 1
         return self.get_json(url)
 
+    def upcoming(self, wanted=lambda draft: True):
+        """CricketData-shaped drafts (no scores) of the matches in the header feed that have not started, for 'On Today' and 'Games to Watch'. One request."""
+        header = self._call(HEADER)
+        return [d for league in header["sports"][0]["leagues"] for ev in league.get("events", []) for d in [_draft(league, ev)]
+                if ev.get("status") == "pre" and wanted(d)]
+
     def matches(self, wanted=lambda draft: True, limit=6):
         """CricketData-shaped matches for the current events that `wanted(draft)` accepts, each with "status", "score" and "_card" ({"scorecard": [], "status",
         "potm"}); at most `limit` series are read. A series that fails is skipped."""

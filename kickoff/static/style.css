@@ -406,3 +406,8 @@ tr.p3 td { color: #d08a52; font-weight: 700; }
   tr.p3 td { color: #9a5a22; }
   .plat { background: linear-gradient(90deg, #2f5fae 0%, #7b4bb5 35%, #1c8a74 70%, #2f5fae 100%); -webkit-background-clip: text; background-clip: text; }
 }
+
+/* The Big Stuff and On Today (13b): the lines reuse the gold-diamond standouts list; the time is gold, the Performance of the Day a gold line */
+.ontoday .when { color: var(--gold); font-weight: 600; margin-right: 4px; white-space: nowrap; }
+.pod { color: var(--gold); font-size: 16px; line-height: 1.4; margin: 0 0 14px; }
+.bigstuff a { font-size: 13px; margin-left: 4px; }

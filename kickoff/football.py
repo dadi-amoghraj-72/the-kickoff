@@ -6,7 +6,7 @@ State is passed in and handed back, never written here, so a test run can't dist
 import copy
 from datetime import datetime, timezone
 
-from kickoff import champions, facup, focus, fplcorner, headlines, injuries, international, leaders, news, notes, overview, performers, roundup, scoreboard, settings, tables
+from kickoff import champions, events, facup, focus, fplcorner, headlines, injuries, international, leaders, news, notes, overview, performers, roundup, scoreboard, settings, tables
 from kickoff import render as r
 from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
@@ -64,6 +64,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
     saved_tables = st.get("tables", {})
     previous = {lg: {x[0]: x[1] for x in saved_tables.get(lg, {}).get("rows", [])} for lg in rows}
     overviews = {}
+    perf_lists = []                                      # the best performers of the Premier League and the Champions League, for the Performance of the Day
 
     # Clean sheets: add today's shutouts to the running count (each match is counted once, ever)
     cs = new.get("clean_sheets", {})
@@ -114,7 +115,9 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
             parts += guard(f"{name} round-up", round_up, name, name, res, lg, tbl) or ""
             parts += scoreboard.scores_html(res)
             if lg == "eng.1":                    # the best performers of the day: the Premier League and the Champions League only
-                parts += performers.html(guard("Premier League performers", performers.best, lg, res) or [])
+                best_pl = guard("Premier League performers", performers.best, lg, res) or []
+                perf_lists.append(best_pl)
+                parts += performers.html(best_pl)
         chosen = notes.select(lg, res)
         if chosen:
             facts = [notes.match_facts(m, t, tbl, previous[lg], name) for m, t in chosen]
@@ -155,9 +158,11 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         cl_box = guard("Champions League round-up", round_up, "Champions League", champions.COMPETITION, cl_matches,
                        espn.CHAMPIONS_LEAGUE, rows[espn.CHAMPIONS_LEAGUE], "night") or ""
         cl_rows = rows[espn.CHAMPIONS_LEAGUE]
+        best_cl = guard("Champions League performers", performers.best, espn.CHAMPIONS_LEAGUE, cl_matches) or []
+        perf_lists.append(best_cl)
         football += champions.section_html(cl_matches, cl_rows, None, cl_box, tables.before_of(saved_tables.get(espn.CHAMPIONS_LEAGUE)),
                                            legs_fn=espn.get_tie_legs, goals_fn=lambda leg_id: espn.get_match_details(leg_id, espn.CHAMPIONS_LEAGUE),
-                                           performers=performers.html(guard("Champions League performers", performers.best, espn.CHAMPIONS_LEAGUE, cl_matches) or []))
+                                           performers=performers.html(best_cl))
         football += season_out["cl"]
         if cl_rows and champions.in_league_phase(cl_matches):   # remembered so the next league-phase table can show who moved
             new.setdefault("tables", {})[espn.CHAMPIONS_LEAGUE] = {"published": day.isoformat(), "rows": tables.signature(cl_rows)}
@@ -259,4 +264,11 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
     stats = {"matches": {**{leagues[lg]: len(results[lg] or []) for lg in LEAGUE_ORDER}, "Women's Super League": len(wsl_res)},
              "cl_matches": len(cl_matches),
              "season_cost": round(season_out.get("cost", 0.0), 5), "news_candidates": len(cands), "news_shown": len(shown_news), "injury_items": len(inj_items)}
-    return {"sections": sections, "headlines": unique, "new_state": new, "ledger": ledger, "problems": problems, "stats": stats}
+    comps = [(leagues[lg], results[lg] or []) for lg in LEAGUE_ORDER] + [("Champions League", cl_matches), ("FA Cup", fa_cup), ("Women's Super League", wsl_res)]
+    try:                                                 # the stories and facts The Big Stuff picks from (kickoff/bigstuff.py); never costs the section its games
+        story_events = events.football(comps, day.weekday()) + [p for lst in perf_lists for p in events.football_perf("", lst)]
+        big_news, big_injuries = events.football_news(shown_news), events.football_injuries(inj_items)
+    except Exception:
+        story_events, big_news, big_injuries = [], [], []
+    return {"sections": sections, "headlines": unique, "new_state": new, "ledger": ledger, "problems": problems, "stats": stats,
+            "events": story_events, "news": big_news, "injuries": big_injuries}

@@ -1,0 +1,204 @@
+"""Tests for On Today and Games to Watch: which upcoming games matter, the sun/moon split in Singapore time and the Monday week. Run: .venv/bin/python scripts/test_ontoday.py"""
+import copy
+import json
+import sys
+from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+from kickoff import daily, fixtures, nba, ontoday  # noqa: E402
+
+FIX = ROOT / "tests" / "fixtures"
+results = []
+
+
+def check(name, ok, detail=""):
+    results.append(ok)
+    print(("PASS  " if ok else "FAIL  ") + name)
+    if not ok and detail:
+        print("   ", detail)
+
+
+def utc(*a):
+    return datetime(*a, tzinfo=timezone.utc)
+
+
+def iso(t):
+    return t.strftime("%Y-%m-%dT%H:%MZ")
+
+
+def future(event, when, state="pre", name="STATUS_SCHEDULED"):
+    """A real finished ESPN event turned into a game still to be played at `when`."""
+    e = copy.deepcopy(event)
+    e["date"] = iso(when)
+    e["status"]["type"].update(name=name, state=state, completed=False, description="Scheduled", detail="Scheduled", shortDetail="Scheduled")
+    for c in e["competitions"][0]["competitors"]:
+        c["score"] = "0"
+        c.pop("winner", None)
+    e["competitions"][0].pop("details", None)
+    return e
+
+
+class Fake:
+    """The Sources interface with canned answers."""
+
+    def __init__(self, football=None, nba_events=(), cricket=(), f1=(), tennis=(), nfl=None, boom=()):
+        self.fb, self.nb, self.cr, self.f, self.t, self.nf, self.boom = football or {}, list(nba_events), list(cricket), list(f1), list(tennis), nfl, set(boom)
+
+    def _maybe(self, what):
+        if what in self.boom:
+            raise RuntimeError(what)
+
+    def football(self, league, d):
+        self._maybe("football")
+        return [m for m in self.fb.get(league, []) if m["kickoff"][:10] == d.isoformat()]
+
+    def table(self, league):
+        return [{"id": "359", "rank": 1}, {"id": "367", "rank": 2}, {"id": "364", "rank": 3}, {"id": "363", "rank": 9}]
+
+    def nba(self, d):
+        self._maybe("nba")
+        return {"events": [e for e in self.nb if e["_et"] == d.isoformat()]}
+
+    def nfl(self, week=None, season_type=None):
+        self._maybe("nfl")
+        return self.nf or {"season": {"type": 2}, "week": {"number": 9}, "events": []}
+
+    def mlb(self, d):
+        return {"events": []}
+
+    def cricket(self):
+        self._maybe("cricket")
+        return self.cr
+
+    def f1(self, season):
+        return self.f
+
+    def tennis(self, now):
+        return self.t
+
+
+from kickoff.sources import espn  # noqa: E402
+
+pl = json.load(open(FIX / "espn_pl_20261031.json"))["events"]
+chelsea_mu = next(e for e in pl if {x["team"]["id"] for x in e["competitions"][0]["competitors"]} == {"363", "360"})
+plain = next(e for e in pl if not ({x["team"]["id"] for x in e["competitions"][0]["competitors"]} & {"359", "382", "360", "364", "363", "367", "132", "124", "160", "111", "114", "110", "103", "2572", "83", "86", "1068"}))
+now = utc(2026, 11, 5, 0, 0)          # 8am Singapore
+end = ontoday.day_end(date(2026, 11, 5))
+check("the next edition is 7am Singapore time the next day (23:00 UTC)", end == utc(2026, 11, 5, 23, 0))
+check("sun is 7am to 11pm SGT, moon the rest", ontoday.tag(utc(2026, 11, 4, 23, 0)) == "sun" and ontoday.tag(utc(2026, 11, 5, 14, 59)) == "sun" and ontoday.tag(utc(2026, 11, 5, 15, 0)) == "moon"
+      and ontoday.tag(utc(2026, 11, 5, 22, 59)) == "moon" and ontoday.tag(utc(2026, 11, 5, 23, 0)) == "sun")
+check("times read like 8:30pm and 4am, in Singapore time", ontoday.clock(utc(2026, 11, 5, 12, 30)) == "8:30pm" and ontoday.clock(utc(2026, 11, 5, 20, 0)) == "4am")
+
+# football: listed clubs yes, a game between two unlisted clubs no
+fb = {"eng.1": [espn.parse_match(future(chelsea_mu, utc(2026, 11, 5, 12, 30)), "eng.1"), espn.parse_match(future(plain, utc(2026, 11, 5, 12, 30)), "eng.1")]}
+got, failed = fixtures.collect(Fake(football=fb), now, end, 3)
+texts = [f["text"] for f in got]
+check("a league game with a listed club is on; one without is not", any("Chelsea" in t for t in texts) and not any(plain["competitions"][0]["competitors"][0]["team"]["displayName"] in t for t in texts), texts)
+check("a game already finished or outside the window is not listed", fixtures.collect(Fake(football={"eng.1": [espn.parse_match(chelsea_mu, "eng.1")]}), now, end, 3)[0] == [])
+
+# Champions League: league phase needs a listed club, a knockout game always counts
+cl = json.load(open(FIX / "espn_cl_20261021.json"))["events"]
+other = next(e for e in cl if not ({x["team"]["id"] for x in e["competitions"][0]["competitors"]} & set(fixtures.clubs.CLUBS)))
+ko = json.load(open(FIX / "espn_cl_ko_20260317.json"))["events"]
+ko_other = next((e for e in ko if not ({x["team"]["id"] for x in e["competitions"][0]["competitors"]} & set(fixtures.clubs.CLUBS))), ko[0])
+fb2 = {"uefa.champions": [espn.parse_match(future(other, utc(2026, 11, 5, 20, 0)), "uefa.champions"), espn.parse_match(future(ko_other, utc(2026, 11, 5, 20, 0)), "uefa.champions")]}
+got, _ = fixtures.collect(Fake(football=fb2), now, end, 3)
+stages = sorted(f["stage"] for f in got)
+check("Champions League: a league-phase game without a listed club is dropped; a knockout game counts whoever plays", stages == ["knockout"] or stages == ["knockout", "regular"] and False, stages)
+
+# NBA: regular season only D's five teams; playoffs all
+nbs = json.load(open(FIX / "nba_scoreboards.json"))["2026-11-01"]["events"]
+
+
+def et_of(when):
+    return when.astimezone(fixtures.ET).date().isoformat()
+
+
+reg = []
+for e in nbs:
+    f = future(e, utc(2026, 11, 5, 1, 0))
+    f["_et"] = et_of(utc(2026, 11, 5, 1, 0))
+    reg.append(f)
+parsed = [nba.parse_game(e) for e in reg]
+codes = {g["away"]["abbr"] for g in parsed} | {g["home"]["abbr"] for g in parsed}
+got, _ = fixtures.collect(Fake(nba_events=reg), now, end, 3, mine_nba=set(nba.FIRST))
+mine_games = [g for g in parsed if {g["away"]["abbr"], g["home"]["abbr"]} & set(nba.FIRST)]
+check("NBA regular season: only games of D's five teams are On Today", len([f for f in got if f["sport"] == "nba"]) == len(mine_games), (len(got), len(mine_games)))
+po = []
+for e in nbs:
+    f = future(e, utc(2026, 11, 5, 1, 0))
+    f["_et"] = et_of(utc(2026, 11, 5, 1, 0))
+    f["season"] = {"type": 3, "year": 2026}
+    po.append(f)
+got, _ = fixtures.collect(Fake(nba_events=po), now, end, 3, mine_nba=set())
+check("NBA playoffs: every game counts, not only D's teams", len([f for f in got if f["sport"] == "nba"]) == len(po) and all(f["stage"] == "playoff" for f in got if f["sport"] == "nba"))
+
+# F1: every session in the window
+sched = json.load(open(FIX / "jolpica_schedule_2026.json"))["MRData"]["RaceTable"]["Races"]
+got, _ = fixtures.collect(Fake(f1=sched), utc(2026, 10, 31, 12, 0), utc(2026, 11, 1, 23, 0), 5)
+check("F1: qualifying and the race of the weekend are both listed, with their names", [f["text"] for f in got if f["sport"] == "f1"] == ["F1: Mexico City Grand Prix · Qualifying", "F1: Mexico City Grand Prix · Race"])
+
+# cricket: India men yes, an unrelated bilateral no, India women no
+drafts = [{"id": "e1", "name": "India vs New Zealand, 2nd ODI, India tour of New Zealand 2026", "teams": ["India", "New Zealand"], "matchType": "odi", "dateTimeGMT": "2026-11-05T02:00:00", "matchStarted": False, "matchEnded": False},
+          {"id": "e2", "name": "Sri Lanka vs West Indies, 1st ODI, WI tour", "teams": ["Sri Lanka", "West Indies"], "matchType": "odi", "dateTimeGMT": "2026-11-05T03:00:00", "matchStarted": False, "matchEnded": False},
+          {"id": "e3", "name": "India Women vs Australia Women, 1st ODI, Aus tour", "teams": ["India Women", "Australia Women"], "matchType": "odi", "dateTimeGMT": "2026-11-05T04:00:00", "matchStarted": False, "matchEnded": False}]
+got, _ = fixtures.collect(Fake(cricket=drafts), now, end, 3)
+cr = [f["text"] for f in got if f["sport"] == "cricket"]
+check("cricket: India men's match is on; another side's and India women's are not", len(cr) == 1 and "India" in cr[0] and "Women" not in cr[0], cr)
+ipl = [{"id": "e4", "name": "Royal Challengers Bengaluru vs Mumbai Indians, 12th Match, Indian Premier League 2027", "teams": ["Royal Challengers Bengaluru", "Mumbai Indians"], "matchType": "t20", "dateTimeGMT": "2027-04-05T14:00:00", "matchStarted": False, "matchEnded": False},
+       {"id": "e5", "name": "Delhi Capitals vs Gujarat Titans, 13th Match, Indian Premier League 2027", "teams": ["Delhi Capitals", "Gujarat Titans"], "matchType": "t20", "dateTimeGMT": "2027-04-05T14:00:00", "matchStarted": False, "matchEnded": False}]
+got, _ = fixtures.collect(Fake(cricket=ipl), utc(2027, 4, 5, 0, 0), utc(2027, 4, 6, 0, 0), 3)
+check("IPL: Royal Challengers' game is on (Kohli's team), Delhi v Gujarat is not", [f["text"] for f in got if f["sport"] == "cricket"] and len([f for f in got if f["sport"] == "cricket"]) == 1 and "Royal Challengers" in got[0]["text"])
+
+# tennis: late rounds only
+slam = {"name": "Australian Open", "major": True, "groupings": [{"grouping": {"slug": "mens-singles"}, "competitions": [
+    {"round": {"displayName": "Quarterfinal"}, "date": "2027-01-27T03:00Z", "status": {"type": {"state": "pre"}}},
+    {"round": {"displayName": "Quarterfinal"}, "date": "2027-01-27T08:00Z", "status": {"type": {"state": "pre"}}},
+    {"round": {"displayName": "Round 3"}, "date": "2027-01-27T02:00Z", "status": {"type": {"state": "pre"}}}]}]}
+got, _ = fixtures.collect(Fake(tennis=[slam]), utc(2027, 1, 27, 0, 0), utc(2027, 1, 27, 23, 0), 2)
+tn = [f for f in got if f["sport"] == "tennis"]
+check("tennis: the quarter-finals are one line at the first match's time; round 3 is not listed", len(tn) == 1 and "quarter-finals" in tn[0]["text"] and tn[0]["when"] == utc(2027, 1, 27, 3, 0))
+
+# a sport that breaks costs only itself
+got, failed = fixtures.collect(Fake(football=fb, boom=("nba", "cricket")), now, end, 3)
+check("a failing sport is skipped and reported; the others stay", any(f["sport"] == "football" for f in got), failed)
+
+# html
+html = ontoday.today_html([fixtures.fixture("football", "PL", "Premier League: Chelsea v Manchester United", utc(2026, 11, 5, 12, 30), 6),
+                           fixtures.fixture("football", "CL", "Champions League: Slavia Prague v Arsenal", utc(2026, 11, 5, 20, 0), 9, True)])
+check("On Today: 'While You're Up' with the sun, then 'Overnight' with the moon, times in SGT", html.index("While You") < html.index("Overnight") and "8:30pm" in html and "4am" in html and "☀" in html and "☾" in html, html)
+check("a day with nothing in it gives no block", ontoday.today_html([]) == "")
+many = [fixtures.fixture("nba", "NBA", f"NBA: game {i}", utc(2026, 11, 5, 1 + i % 10, 0), float(i)) for i in range(20)]
+check("On Today never lists more than 12 lines; the cut keeps the highest scores, back in time order", len(ontoday.pick_today(many)) == 12 and min(f["score"] for f in ontoday.pick_today(many)) == 8.0)
+
+# Games to Watch
+base = utc(2026, 11, 9, 23, 0)
+fx = [fixtures.fixture("football", "PL", "Premier League: Arsenal v Tottenham Hotspur", base + timedelta(days=4, hours=12), 12, True, "regular", {"derby", "clash"}),
+      fixtures.fixture("football", "PL", "Premier League: Brentford v Fulham", base + timedelta(days=4, hours=12), 4.1, False, "regular", {"derby"}),
+      fixtures.fixture("f1", "F1", "F1: Brazilian Grand Prix · Qualifying", base + timedelta(days=3), 9, False, "knockout"),
+      fixtures.fixture("f1", "F1", "F1: Brazilian Grand Prix · Race", base + timedelta(days=4), 10, False, "final"),
+      fixtures.fixture("nba", "NBA", "NBA: a at b", base + timedelta(days=1), 1.4, False, "regular"),
+      fixtures.fixture("nba", "NBA", "NBA: stars", base + timedelta(days=2), 4.2, False, "regular", {"stars"}),
+      fixtures.fixture("nba", "NBA", "NBA: Cavaliers at Hawks", base + timedelta(days=1), 6.0, True, "regular")]
+w = [f["text"] for f in ontoday.watch_pick(fx)]
+check("Games to Watch: D's teams, derbies and clashes, the F1 race (not its qualifying) and tracked stars facing each other are in; a plain regular game is not",
+      "Premier League: Arsenal v Tottenham Hotspur" in w and "F1: Brazilian Grand Prix · Race" in w and "NBA: stars" in w and not any("Qualifying" in t for t in w) and "NBA: a at b" not in w and "NBA: Cavaliers at Hawks" not in w, w)
+check("Games to Watch is grouped by day with a small heading each, times in SGT", ontoday.watch_html(fx).count('class="subhead"') == 2 and "Games To Watch" in ontoday.watch_html(fx))
+check("Games to Watch is empty when nothing qualifies", ontoday.watch_html([fixtures.fixture("nba", "NBA", "x", base, 1.0)]) == "")
+
+# the Monday: the week is added, and only on Mondays
+mon = ontoday.build(Fake(f1=sched), utc(2026, 10, 25, 23, 15), date(2026, 10, 26), set(), set())
+tue = ontoday.build(Fake(f1=sched), utc(2026, 10, 26, 23, 15), date(2026, 10, 27), set(), set())
+check("Mondays collect the week ahead (the Mexico City race weekend falls in that week); other days collect nothing", any(f["sport"] == "f1" for f in mon["watch"]) and tue["watch"] == [], [f["text"] for f in mon["watch"]])
+check("a Tuesday never has Games to Watch", "Games To Watch" not in tue["html"])
+
+# the edition
+ed = daily.build_edition(utc(2026, 11, 4, 23, 15), date(2026, 11, 5), {}, [], today=lambda n, d, s: {"html": "<h3>x</h3>", "failed": ["nba"]})
+check("the edition carries On Today after The Big Stuff, and reports a sport that failed", any(s["id"] == "on-today" for s in ed["edition"]["sections"]) and "on today: nba" in ed["problems"], ed["problems"])
+ed2 = daily.build_edition(utc(2026, 11, 4, 23, 15), date(2026, 11, 5), {}, [], today=lambda n, d, s: 1 / 0)
+check("a broken On Today never breaks the edition", any("on today" in p for p in ed2["problems"]))
+
+print(f"\n{sum(results)} of {len(results)} passed")
+sys.exit(0 if all(results) else 1)

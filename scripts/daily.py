@@ -45,7 +45,7 @@ if daily.edition_exists(day, data_dir) and not force:
 
 now = datetime.now(timezone.utc)
 before = daily.load_state(state_dir)
-out = daily.run_day(now, day, before, daily.real_adapters, use_claude=use_claude)
+out = daily.run_day(now, day, before, daily.real_adapters, use_claude=use_claude, today=daily.real_today)
 ed = out["edition"]
 if len(out["failed"]) == len(daily.real_adapters(None)):
     print("Every sport failed:", ", ".join(out["problems"]), file=sys.stderr)

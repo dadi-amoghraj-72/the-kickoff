@@ -363,7 +363,7 @@ def title_notes(ds, cs, schedule, rnd, season, closed=()):
 
 # ---- One session, and the whole block ------------------------------------------------------------
 
-def session_html(due, api, story=None, used=None, capture=None, schedule=None):
+def session_html(due, api, story=None, used=None, capture=None, schedule=None, rows_out=None):
     """(HTML, standings still to come) for one due session, or (None, False) when its results are not published yet. Raises when the source fails.
     story: optional, for Sunday races only: story(race, rows, start, extras) -> (html, usage). Its tokens are added into `used`.
     A failing story is left out; it never costs the tables."""
@@ -379,6 +379,8 @@ def session_html(due, api, story=None, used=None, capture=None, schedule=None):
     rows = (data or {}).get("SprintResults" if kind == "sprint" else "Results")
     if not rows:
         return None, False
+    if rows_out is not None:
+        rows_out[(season, rnd, kind)] = rows
     standouts = biggest_mover(rows) + big_moments(rows) + (firsts(rows, api.finishes) if kind == "race" else [])
     html = f'<p class="f1sum">{summary_html(race_summary(rows), rows)}</p>'
     if kind == "race" and story:
@@ -412,10 +414,11 @@ def run(now, window_start, st, api, season="current", story=None):
     got_standings = {}
     due = due_sessions(schedule, now, window_start, reported, pending)
     parts, waiting, failed, shown, queued_now, used = {}, [], 0, 0, set(), {"input": 0, "output": 0}
+    race_rows = {}                                         # the race results read this run, for The Big Stuff
     for d in due:
         stale = False
         try:
-            html, stale = session_html(d, api, story, used, got_standings, schedule)
+            html, stale = session_html(d, api, story, used, got_standings, schedule, race_rows)
         except Exception:
             failed += 1
             html = None
@@ -463,5 +466,12 @@ def run(now, window_start, st, api, season="current", story=None):
         out += (f'<p class="muted">Not published by the data source yet, so they will appear in a later edition: {r.esc(", ".join(waiting))}.</p>')
     horizon = now - LOOKBACK
     pending = {k: v for k, v in pending.items() if datetime.fromisoformat(v) >= horizon}
+    try:                                                   # for The Big Stuff: each Grand Prix whose race result was shown this morning (always a headline)
+        from kickoff import events
+        races = [(next(x["raceName"] for x in schedule if x["season"] == s_ and x["round"] == r_), _full(rows[0]), team(rows[0]["Constructor"]["name"]))
+                 for (s_, r_, k_), rows in race_rows.items() if k_ == "race" and rows]
+        story_events = events.f1(races)
+    except Exception:
+        story_events = []
     return {"html": out, "state": {"reported": reported[-60:], "pending": pending, "closed": closed[-10:]},
-            "stats": {"due": len(due), "shown": shown, "waiting": len(waiting), "failed": failed, "calls": api.calls, "claude_tokens": used}}
+            "stats": {"due": len(due), "shown": shown, "waiting": len(waiting), "failed": failed, "calls": api.calls, "claude_tokens": used}, "events": story_events}

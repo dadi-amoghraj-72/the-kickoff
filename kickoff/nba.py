@@ -10,6 +10,7 @@ import re
 from datetime import date, timedelta
 from zoneinfo import ZoneInfo
 
+from kickoff import events
 from kickoff import render as r
 from kickoff.nfl import DOG, HOME_SVG, dog_of, utc
 
@@ -726,4 +727,11 @@ def run(now, day, st, source):
     keep["reported"] = reported[-400:]
     keep["series_notes"] = dict(list(keep["series_notes"].items())[-120:])
     stats["calls"] = getattr(source, "calls", 0)
-    return {"html": html, "state": keep, "stats": stats}
+    try:                                                  # for The Big Stuff: the finished games (D's five teams are his) and the best single night
+        mine_teams = set(FIRST)                           # D's five teams; the tracked stars' big nights come in as Performances of the Day
+        found = [(weight(p, kinds_of(p)), p) for p in flat if kinds_of(p)]
+        nights = [(f"{p['name']} ({p['team']}): {line(p)}", w) for w, p in sorted(found, key=lambda x: -x[0])[:3]]
+        story_events = events.nba(new, mine_teams, day.weekday()) + events.nba_perf(nights)
+    except Exception:
+        story_events = []
+    return {"html": html, "state": keep, "stats": stats, "events": story_events}

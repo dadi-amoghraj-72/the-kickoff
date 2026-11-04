@@ -400,7 +400,7 @@ def run(now, st, source, fetch_news=None):
     left out and `failed` says so. "slams" lists each Slam running now with its furthest round, for the ordering rules (Checkpoint 13)."""
     reported, seen_news = list(st.get("reported", [])), list(st.get("seen_news", []))
     stats = {"slams": 0, "matches": 0, "shown": 0, "withdrawals": 0, "failed": 0, "calls": 0}
-    html, slams = "", []
+    html, slams, shown_matches = "", [], []
     try:
         events = source.slam_events(now)
     except Exception:
@@ -416,6 +416,7 @@ def run(now, st, source, fetch_news=None):
             html += event_html(e, new, progress_of(matches, now))
             reported += [m["id"] for m in new]
             stats["shown"] += len(new)
+            shown_matches += [(e["name"], m) for m in new]
     closed = list(st.get("closed", []))
     try:                                                 # the ATP Finals and the WTA Finals (D, 2026-11-04): a permanent part of the tennis coverage
         finals = source.finals_events(now) if hasattr(source, "finals_events") else []
@@ -442,4 +443,9 @@ def run(now, st, source, fetch_news=None):
             seen_news += [link for _, link in lines]
             stats["withdrawals"] = len(lines)
     stats["calls"] = getattr(source, "calls", 0)
-    return {"html": html, "state": {"reported": reported[-800:], "seen_news": seen_news[-100:], "closed": closed[-20:]}, "stats": stats, "slams": slams}
+    try:                                                 # for The Big Stuff: Slam matches from the quarter-finals on, and the promotion of the tennis block
+        from kickoff import events
+        story_events = events.tennis(slams, shown_matches)
+    except Exception:
+        story_events = []
+    return {"html": html, "state": {"reported": reported[-800:], "seen_news": seen_news[-100:], "closed": closed[-20:]}, "stats": stats, "slams": slams, "events": story_events}

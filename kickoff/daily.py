@@ -12,7 +12,7 @@ import copy
 import os
 from datetime import datetime, timezone
 
-from kickoff import awards, budget, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
+from kickoff import awards, bigstuff, budget, ontoday, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
 from kickoff import state as state_files
 from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica, wikipedia
 from kickoff.sources import cricket as cricket_source
@@ -40,7 +40,7 @@ def _simple(section_id, title, call, state_id):
     def go(now, day, st):
         got = call(now, day, copy.deepcopy(st.get(state_id) or {}))
         return {"sections": [{"id": section_id, "title": title, "html": got["html"]}] if got.get("html") else [], "state": {state_id: got["state"]},
-                "stats": got.get("stats", {})}
+                "stats": got.get("stats", {}), "events": got.get("events", [])}
     return (section_id, title, go)
 
 
@@ -82,7 +82,8 @@ def real_adapters(client=None, env=None):
     def football_go(now, day, st):
         out = football.run(day, client=client, st={n: st.get(n) or {} for n in FOOTBALL_STATE}, now=now, seasonal=football_season.build)
         return {"sections": out["sections"], "state": {n: out["new_state"][n] for n in FOOTBALL_STATE if n in out["new_state"]},
-                "headlines": out["headlines"], "problems": out["problems"], "stats": {**out["stats"], "claude_cost": out["ledger"].total()}}
+                "headlines": out["headlines"], "problems": out["problems"], "stats": {**out["stats"], "claude_cost": out["ledger"].total()},
+                "events": out.get("events", []), "news": out.get("news", []), "injuries": out.get("injuries", [])}
 
     def cricket_go(now, day, st):
         get_matches = backup_matches(env)
@@ -104,7 +105,7 @@ def real_adapters(client=None, env=None):
         got = {**got, "html": html_awards + got["html"]}
         new["cards"] = dict(list({**old.get("cards", {}), **new.get("cards", {})}.items())[-60:])   # bought scorecards are never paid for twice
         return {"sections": [{"id": "cricket", "title": "Cricket", "html": got["html"]}] if got["html"] else [], "state": {"cricket": new},
-                "stats": {**got["stats"], "calls_used_today": got["used"]}}
+                "stats": {**got["stats"], "calls_used_today": got["used"]}, "events": got.get("events", [])}
 
     return [
         ("football", "Football", football_go),
@@ -117,12 +118,21 @@ def real_adapters(client=None, env=None):
     ]
 
 
+def real_today(now, day, st):
+    """On Today and Games to Watch from the real sources: {"html", "failed"} (see kickoff.ontoday). The teams with a tracked NBA player come from the NBA state."""
+    from kickoff import fixtures
+    tracked_teams = set(dict(nba.TEAMS, **((st.get("nba") or {}).get("teams") or {})).values())        # every team with a tracked player (for "stars facing each other")
+    src = fixtures.Sources(espn_nba.Source(), espn_nfl.Source(), espn_mlb.Source(), espn_cricket.Feed(), jolpica.Api(), espn_tennis.Source())
+    return ontoday.build(src, now, day, set(nba.FIRST), tracked_teams)
+
+
 # ---- The edition --------------------------------------------------------------------------------
 
-def build_edition(now, day, st, adapters, mode="normal"):
+def build_edition(now, day, st, adapters, mode="normal", today=None):
     """Run every adapter. Returns {"edition", "state", "problems", "failed", "stats"}.
     edition: the dict the site renders; state: the new state for every sport (a failed sport keeps its old state); failed: the adapters that raised."""
     content, new_state, problems, failed, headlines, stats = {}, copy.deepcopy(st), [], [], [], {}
+    events, news, injuries = [], [], []
     for sid, title, go in adapters:
         try:
             got = go(now, day, st)
@@ -136,9 +146,34 @@ def build_edition(now, day, st, adapters, mode="normal"):
                 content[s["id"]] = {"title": s["title"], "html": s["html"]}
         new_state.update(got.get("state", {}))
         headlines += got.get("headlines", [])
+        events += got.get("events", [])
+        news += got.get("news", [])
+        injuries += got.get("injuries", [])
         problems += got.get("problems", [])
         stats[sid] = got.get("stats", {})
-    sections = order.assemble(content)
+    if today:                                                    # On Today (and on Mondays Games to Watch): what is still to come, in Singapore time
+        try:
+            got_today = today(now, day, st)
+            if got_today["html"]:
+                content["on-today"] = {"title": "On Today", "html": got_today["html"]}
+            problems += [f"on today: {s_}" for s_ in got_today["failed"]]
+        except Exception as e:
+            problems.append(f"on today ({type(e).__name__})")
+    lead, promoted = None, ()
+    try:                                                         # The Big Stuff and the section order: plain rules over the day's stories (bigstuff.py, importance.py)
+        big = bigstuff.build(events, news, injuries, day.weekday())
+        if big["html"]:
+            content["big-stuff"] = {"title": "The Big Stuff", "html": big["html"]}
+        for p_, text in big["majors"].items():
+            if p_ in content:
+                content[p_]["headline"] = text
+        if big["headlines"]:
+            headlines = big["headlines"]
+        lead, promoted = big["lead"], big["promoted"]
+        stats["bigstuff"] = {"stories": len(events), "shown": [s["why"] for s in big["selected"]], "lead": lead, "promoted": promoted, "perf": (big["perf"] or {}).get("text")}
+    except Exception as e:
+        problems.append(f"big stuff ({type(e).__name__})")
+    sections = order.assemble(content, lead, promoted)
     if not sections:
         sections = [{"id": "quiet", "title": "A quiet morning", "html": "<p>Nothing finished overnight in the sports we follow.</p>"}]
     edition = {"date": day.isoformat(), "dummy": False, "headlines": list(dict.fromkeys(headlines))[:3], "sections": sections,
@@ -154,14 +189,14 @@ def make_client(b, env, use_claude):
     return anthropic.Anthropic()
 
 
-def run_day(now, day, st, make_adapters, use_claude=False, env=None):
+def run_day(now, day, st, make_adapters, use_claude=False, env=None, today=None):
     """The budget guard, then build_edition. make_adapters(client) -> the adapter list (real_adapters for a real run). Returns build_edition's dict plus
     "budget" (see budget.status) and "client_used"."""
     env = os.environ if env is None else env
     b = budget.status(st.get("costs"), day)
     client = make_client(b, env, use_claude)
     with budget.models(b["mode"]):
-        out = build_edition(now, day, st, make_adapters(client), b["mode"] if client else "plain" if use_claude else "off")
+        out = build_edition(now, day, st, make_adapters(client), b["mode"] if client else "plain" if use_claude else "off", today)
     out["budget"], out["client_used"] = b, client is not None
     return out
 

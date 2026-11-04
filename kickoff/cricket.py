@@ -472,7 +472,8 @@ def full_scorecard_html(innings, from_index=0):
 # ---- Standouts, from the scorecard ------------------------------------------------------------
 
 CENTURY, FIVE_FOR, FAST_FIFTY_BALLS, T20_FOUR_FOR = 100, 5, 25, 4
-TIER = {"century": 0, "five-for": 1, "fast fifty": 2, "four-for": 3}  # ranking order: rarer and bigger first
+KOHLI = re.compile(r"\bkohli\b", re.I)    # D's favourite player in all of sport (2026-11-05): always listed in the standouts when he batted, at the top
+TIER = {"century": 0, "five-for": 1, "fast fifty": 2, "four-for": 3, "kohli": 4}  # ranking order: rarer and bigger first
 MAX_STANDOUTS = 5
 
 
@@ -494,6 +495,8 @@ def standouts(card, match):
                 out.append({**who, "kind": "century"})
             elif runs >= 50 and 0 < balls <= FAST_FIFTY_BALLS:
                 out.append({**who, "kind": "fast fifty"})
+            elif KOHLI.search(who["name"]) and balls > 0:
+                out.append({**who, "kind": "kohli"})
         for b in inn.get("bowling") or []:
             wickets = b.get("w") or 0
             who = {"name": b["bowler"]["name"], "team": bowling_team, "against": batting_team, "wickets": wickets, "runs_conceded": b.get("r") or 0,
@@ -509,6 +512,8 @@ def rank(items, limit=MAX_STANDOUTS):
     """Best first: centuries (most runs), five-fors (most wickets, fewest runs), fast fifties (fewest balls), four-fors (fewest runs)."""
     def key(o):
         k = TIER[o["kind"]]
+        if o["kind"] == "kohli" or KOHLI.search(o.get("name", "")):
+            return (-1, -o.get("runs", 0), o.get("balls", 0))       # Virat Kohli first, whatever he scored
         if o["kind"] == "century":
             return (k, -o["runs"], o["balls"])
         if o["kind"] in ("five-for", "four-for"):
@@ -520,8 +525,8 @@ def rank(items, limit=MAX_STANDOUTS):
 def standout_html(o, context=True):
     series = ", ".join(o["match"].split(",")[1:]).strip()
     context = (f" ({r.esc(series)}; {r.esc(o['result'])})" if o["result"] else f" ({r.esc(series)})") if context else ""
-    if o["kind"] in ("century", "fast fifty"):
-        label = "century" if o["kind"] == "century" else f"fifty off {o['balls']} balls"
+    if o["kind"] in ("century", "fast fifty", "kohli"):
+        label = "century" if o["kind"] == "century" else f"fifty off {o['balls']} balls" if o["kind"] == "fast fifty" else "innings"
         figures = f"{o['runs']}{'*' if o['not_out'] else ''} off {o['balls']} balls, {o['fours']} fours and {o['sixes']} sixes"
         return (f"<li><strong>{r.esc(o['name'])}</strong> ({r.esc(wname(o['team']))}) · {label}: {figures} against {r.esc(wname(o['against']))}{context}</li>")
     label = "five-wicket haul" if o["kind"] == "five-for" else "four-wicket haul"
@@ -644,7 +649,13 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
     new = {"seen": sorted(seen | {m["id"] for m in picked if m.get("matchEnded")})[-400:],
            "status": {**st.get("status", {}), **{m["id"]: m.get("status") for m in picked if not m.get("matchEnded")}},
            "ipl": ipl_state, "cards": dict(list(cards.items())[-60:]), "test_done": dict(list({**prev_done, **test_done}.items())[-20:]), "test_sig": dict(list({**prev_sig, **test_sig}.items())[-20:])}
-    return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": total_standouts}}
+    try:                                                   # for The Big Stuff (kickoff/events.py): finished matches, with Virat Kohli's figures when he batted
+        from kickoff import events                         # here, not at the top: events reads this module too
+        story_events, perfs = events.cricket(picked, shown_cards, (now + timedelta(hours=8)).weekday())
+    except Exception:
+        story_events, perfs = [], []
+    return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": total_standouts},
+            "events": story_events + perfs}
 
 
 def persist_cards(new_cards, directory=None):

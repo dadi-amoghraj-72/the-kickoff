@@ -11,6 +11,7 @@ import re
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
+from kickoff import events
 from kickoff import render as r
 
 ET = ZoneInfo("America/New_York")
@@ -772,4 +773,8 @@ def run(now, day, st, source):
     html += closing
     keep.update(reported=reported[-300:], leaders=leaders_shown or st.get("leaders"))
     stats["calls"] = getattr(source, "calls", 0)
-    return {"html": html, "state": keep, "stats": stats, "week": week}
+    try:                                                  # for The Big Stuff: the games finished since the last edition
+        story_events = events.nfl(new, season_type, week, day.weekday())
+    except Exception:
+        story_events = []
+    return {"html": html, "state": keep, "stats": stats, "week": week, "events": story_events}

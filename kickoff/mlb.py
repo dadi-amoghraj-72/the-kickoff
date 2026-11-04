@@ -13,6 +13,7 @@ import re
 from datetime import timedelta
 from zoneinfo import ZoneInfo
 
+from kickoff import events
 from kickoff import render as r
 from kickoff.nfl import DOG, dog_of, utc
 
@@ -608,7 +609,11 @@ def run(now, day, st, source):
     keep["reported"] = keep["reported"][-400:]
     keep["series_notes"] = dict(list(keep["series_notes"].items())[-120:])
     stats["calls"] = getattr(source, "calls", 0)
-    return {"html": html, "state": keep, "stats": stats}
+    try:                                                  # for The Big Stuff: only in the daily modes (the weekly round-up is not news of the morning)
+        story_events = events.mlb(new, day.weekday()) if stats["mode"] in ("daily", "postseason") else []
+    except Exception:
+        story_events = []
+    return {"html": html, "state": keep, "stats": stats, "events": story_events}
 
 
 def race_pair(teams, before):
