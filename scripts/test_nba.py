@@ -239,7 +239,7 @@ check("regular season: no house icon anywhere", html.count('class="home"') == 0)
 check("both US days get a label because the games span two dates; the Cup tag is not on regular games", "Sat 31 Oct" in t and "Sun 1 Nov" in t and "NBA Cup" not in games_part)
 check("a game's line is not cut off from its notes: every score row that has notes is followed straight by the notes row, and the separator is only after the notes",
       len(re.findall(r'<tr class="one"><td[^>]*>[^<]*(?:<[^>]+>[^<]*)*?</tr><tr class="note end">', games_part)) == 11 and games_part.count(' end"') == 11 and "one end" not in games_part, games_part.count(' end"'))
-check("independent: Wembanyama's line is built from the raw stats and carries his team: 'V. Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk · 17-34 FG'", "V. Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk · 17-34 FG" in text(out["html"]).replace("\u00a0", " "))
+check("independent: Wembanyama's line is built from the raw stats and carries his team: 'V. Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk' (no shooting line)", "V. Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk" in text(out["html"]).replace("\u00a0", " ") and "17-34" not in text(out["html"]))
 check("standouts section lists Doncic first", "Standouts Luka Doncic (LAL)" in t)
 check("state: the 11 games are reported, underdogs saved, tracked players' teams remembered, standings saved for next time", len(out["state"]["reported"]) == 11 and set(out["state"]["dogs"]) == set(BOXES)
       and out["state"]["teams"]["1966"] == "PHI" and out["state"]["teams"]["3945274"] == "LAL" and out["state"]["seeds"]["Eastern Conference"]["PHI"] == 1)
@@ -250,6 +250,7 @@ check("in the page the standouts list carries the highlights, and the colour rul
 check("short_name: initial and surname; hyphenated surnames, suffixes and names that already have initials are kept whole after the first initial", [nba.short_name(n) for n in ("Shai Gilgeous-Alexander", "Wendell Carter Jr.", "P.J. Washington", "Karl-Anthony Towns", "Nene")] == ["S. Gilgeous-Alexander", "W. Carter Jr.", "P.J. Washington", "K. Towns", "Nene"])
 under = [n for gid in BOXES for n in notes_for(gid)]
 check("under the games every name is an initial and a surname (no 'Firstname Surname (XXX):' line anywhere), while the standouts list keeps full names", under and all(re.match(r"[A-Z]\.\s?[^ ]+.* \([A-Z]{3}\):", n) for n in under) and "Luka Doncic (LAL)" in text(out["html"]), [n for n in under if not re.match(r"[A-Z]\.\s?[^ ]+.* \([A-Z]{3}\):", n)][:3])
+
 
 # ---- No game colours in the tables below (dropped 2026-11-04: all white) ----
 shown = sorted([g for g in GAMES if g["id"] in [e["id"] for e in SBS["2026-11-01"]["events"]]], key=nba.order_key)
@@ -388,7 +389,7 @@ check("unplayed games that will certainly be played show their date in Singapore
 bx = SBOXES["401869193"]
 cade = next(a for t in bx["players"] for a in t["athletes"] if a["id"] == "4432166")
 cv = dict(zip(bx["players"][0]["labels"], cade["stats"]))
-check("independent: Cade Cunningham's note under game 1 is built from the raw box score", f"C. Cunningham (DET): {cv['PTS']} pts, {cv['REB']} reb, {cv['AST']} ast · {cv['FG']} FG" in mt.replace(" ", " "), cv)
+check("independent: Cade Cunningham's note under game 1 is built from the raw box score", f"C. Cunningham (DET): {cv['PTS']} pts, {cv['REB']} reb, {cv['AST']} ast" in mt and cv["FG"] not in mt.replace(" ", " "), cv)
 check("the best performer of game 3 who is not tracked appears with his team (Banchero, ORL)", "P. Banchero (ORL):" in mt)
 raw_seed = {e["team"]["abbreviation"]: int(next(x["displayValue"] for x in e["stats"] if x["name"] == "playoffSeed")) for c in STAND26["children"] for e in c["standings"]["entries"]}
 check("independent: ESPN's final 2025-26 standings give Detroit seed 1 and Orlando seed 8 (the real 1-8 series), and the seeds sit beside the team names", raw_seed["DET"] == 1 and raw_seed["ORL"] == 8 and nba.seeds_by_team(STAND26)["DET"] == 1 and "(1) Detroit Pistons" in mt and "Orlando Magic (8)" in mt)

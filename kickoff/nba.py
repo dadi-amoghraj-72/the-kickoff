@@ -200,7 +200,7 @@ def short_name(name):
 
 
 def full_line(p):
-    return f"{short_name(p['name'])} ({p['team']}): {line(p)} · {p['fg']}\u00a0FG"
+    return f"{short_name(p['name'])} ({p['team']}): {line(p)}"
 
 
 def standout_text(p, kinds, games, plays):
