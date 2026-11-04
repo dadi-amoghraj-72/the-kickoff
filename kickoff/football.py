@@ -6,7 +6,7 @@ State is passed in and handed back, never written here, so a test run can't dist
 import copy
 from datetime import datetime, timezone
 
-from kickoff import champions, focus, fplcorner, headlines, injuries, international, leaders, news, notes, overview, performers, roundup, scoreboard, settings, tables
+from kickoff import champions, facup, focus, fplcorner, headlines, injuries, international, leaders, news, notes, overview, performers, roundup, scoreboard, settings, tables
 from kickoff import render as r
 from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
@@ -123,6 +123,11 @@ def run(day, client=None, st=None, now=None, demo=False):
                 new.setdefault("tables", {})[lg] = entry
         if parts:
             football += f"<h3>{r.esc(name)}</h3>{parts}"
+    fa_cup = guard("FA Cup results", espn.recent_results, espn.FA_CUP, day) or []   # the FA Cup: its own block, after the leagues
+    if fa_cup:
+        top_ids = {x["id"] for x in rows["eng.1"] or []} | {x["id"] for x in guard("Championship table", espn.get_table, "eng.2") or []}
+        football += facup.html(fa_cup, top_ids)
+        overviews["FA Cup"] = overview.matchday_facts("FA Cup", fa_cup, {}, None)      # so its big results can make the headlines
     wsl_res = guard("Women's Super League results", espn.recent_results, espn.WSL, day) or []
     wsl_parts = ""
     if wsl_res:

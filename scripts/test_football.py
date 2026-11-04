@@ -136,6 +136,16 @@ espn.get_player_stats = lambda lg, mid: (_ for _ in ()).throw(SourceError("HTTP 
 out_pd = football.run(DAY, client=None, st={}, now=NOW)
 check("if ESPN's player stats fail the rest of the block is unaffected and there is simply no Best performers heading", "Best performers" not in " ".join(s["html"] for s in out_pd["sections"]) and "<h3>Premier League</h3>" in " ".join(s["html"] for s in out_pd["sections"]) and "class=\"scores\"" in " ".join(s["html"] for s in out_pd["sections"]))
 espn.get_player_stats = espn_real_stats
+_fa_events = json.loads((FIX / "espn_facup.json").read_text())["20260110"]["events"]
+_real_recent = espn.recent_results
+espn.recent_results = lambda lg, d: [espn.parse_match(e, "eng.fa") for e in _fa_events] if lg == "eng.fa" else _real_recent(lg, d)
+out_fa = football.run(DAY, client=None, st={}, now=NOW)
+fa_html = " ".join(s["html"] for s in out_fa["sections"])
+check("the FA Cup has its own block in Football: 'FA Cup · Third Round' with the 12 ties that matter and '6 other ties played.', after the leagues", "<h3>FA Cup · Third Round</h3>" in fa_html and "6 other ties played." in fa_html and fa_html.index("<h3>Premier League</h3>") < fa_html.index("<h3>FA Cup"), fa_html[:200])
+check("a big FA Cup result can be one of the three headlines, named 'FA Cup: ...', never more than three in all", len(out_fa["headlines"]) <= 3 and all(h.split(": ")[0] in ("Arsenal", "Premier League", "FA Cup", "Champions League") for h in out_fa["headlines"]), out_fa["headlines"])
+espn.recent_results = lambda lg, d: [] if lg == "eng.fa" else _real_recent(lg, d)
+check("with no FA Cup ties there is no FA Cup block at all", "FA Cup" not in " ".join(s["html"] for s in football.run(DAY, client=None, st={}, now=NOW)["sections"]))
+espn.recent_results = _real_recent
 out2 = football.run(DAY, client=None, st=st, now=NOW)
 html2 = " ".join(s["html"] for s in out2["sections"])
 check("run again with the saved state: the table is 'No change', and Saka's injury is not repeated",

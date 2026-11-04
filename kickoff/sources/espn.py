@@ -16,6 +16,7 @@ LEAGUES = {
 }
 WSL = "eng.w.1"
 CHAMPIONS_LEAGUE = "uefa.champions"
+FA_CUP = "eng.fa"
 MATCH_LENGTH = timedelta(minutes=105)  # kick-off to full time, roughly
 
 
