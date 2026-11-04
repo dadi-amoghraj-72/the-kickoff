@@ -313,38 +313,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone.ser tr.sc .ws { font-size: 30px; font-weight: 800; color: var(--gold); }
 .nbaone.ser tr.sc .lab { margin: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .standouts .hl { color: var(--gold); font-weight: 600; }
-/* NBA: each game of the day gets one of 15 locked pastel colours; both of its teams carry it in the tables below (15 hues 24 degrees apart taken in steps of 4, so the first four games of a night are a quarter-turn apart: coral, green, blue, violet; soft pastels on dark, muted deeper tones on light) */
-.gc0 { color: #E3A6A0; font-weight: 700; }
-.gc1 { color: #C8EAB8; font-weight: 700; }
-.gc2 { color: #A0D0E3; font-weight: 700; }
-.gc3 { color: #E4B8EA; font-weight: 700; }
-.gc4 { color: #E3C1A0; font-weight: 700; }
-.gc5 { color: #B8EABC; font-weight: 700; }
-.gc6 { color: #A0B5E3; font-weight: 700; }
-.gc7 { color: #EAB8DC; font-weight: 700; }
-.gc8 { color: #E3DCA0; font-weight: 700; }
-.gc9 { color: #B8EAD0; font-weight: 700; }
-.gc10 { color: #A6A0E3; font-weight: 700; }
-.gc11 { color: #EAB8C8; font-weight: 700; }
-.gc12 { color: #D0E3A0; font-weight: 700; }
-.gc13 { color: #B8EAE4; font-weight: 700; }
-.gc14 { color: #C1A0E3; font-weight: 700; }
 @media (prefers-color-scheme: light) {
-  .gc0 { color: #783B36; }
-  .gc1 { color: #4B7836; }
-  .gc2 { color: #366578; }
-  .gc3 { color: #703678; }
-  .gc4 { color: #785636; }
-  .gc5 { color: #36783B; }
-  .gc6 { color: #364B78; }
-  .gc7 { color: #783665; }
-  .gc8 { color: #787036; }
-  .gc9 { color: #367856; }
-  .gc10 { color: #3B3678; }
-  .gc11 { color: #78364B; }
-  .gc12 { color: #657836; }
-  .gc13 { color: #367870; }
-  .gc14 { color: #563678; }
 }
 /* Notes lines outside a table (NFL Players of the Week and highlights): the same gold diamond bullet and hanging indent as the NBA notes */
 .dlist { margin: 6px 0 14px; }

@@ -32,11 +32,6 @@ class Ledger:
         return [f"  {x['label']:34} {x['model']:19} {x['input']:>6} in {x['output']:>5} out  ${x['cost']:.4f}" for x in self.rows]
 
 
-def game_colours(matches):
-    """{team id: colour number} for the teams of the matches shown above a table: one colour per match, shared by its two teams (15 locked pastels)."""
-    return r.game_colour_map(matches or [], lambda m, side: m[side]["id"])
-
-
 def _paragraphs(written, match_by_id):
     out = ""
     for mid, w in written.items():
@@ -117,8 +112,7 @@ def run(day, client=None, st=None, now=None, demo=False):
         if tbl:
             html, entry = tables.one("Table", tbl, saved_tables.get(lg), day,
                                      leaders_fn=lambda lg=lg, tbl=tbl: guard(f"{leagues[lg]} leaders", leaders.league_block, lg,
-                                                                              espn.season_year(day), tbl, cs),
-                                     colours=game_colours(res))
+                                                                              espn.season_year(day), tbl, cs))
             parts += html
             if entry:
                 new.setdefault("tables", {})[lg] = entry
@@ -131,7 +125,7 @@ def run(day, client=None, st=None, now=None, demo=False):
                            rows[espn.WSL]) or ""
         wsl_parts += scoreboard.scores_html(wsl_res)
     if rows[espn.WSL]:
-        html, entry = tables.one("Table", rows[espn.WSL], saved_tables.get(espn.WSL), day, colours=game_colours(wsl_res))
+        html, entry = tables.one("Table", rows[espn.WSL], saved_tables.get(espn.WSL), day)
         wsl_parts += html
         if entry:
             new.setdefault("tables", {})[espn.WSL] = entry
@@ -141,7 +135,7 @@ def run(day, client=None, st=None, now=None, demo=False):
         cl_box = guard("Champions League round-up", round_up, "Champions League", champions.COMPETITION, cl_matches,
                        espn.CHAMPIONS_LEAGUE, rows[espn.CHAMPIONS_LEAGUE], "night") or ""
         cl_rows = rows[espn.CHAMPIONS_LEAGUE]
-        football += champions.section_html(cl_matches, cl_rows, None, cl_box, tables.before_of(saved_tables.get(espn.CHAMPIONS_LEAGUE)), game_colours(cl_matches),
+        football += champions.section_html(cl_matches, cl_rows, None, cl_box, tables.before_of(saved_tables.get(espn.CHAMPIONS_LEAGUE)),
                                            legs_fn=espn.get_tie_legs, goals_fn=lambda leg_id: espn.get_match_details(leg_id, espn.CHAMPIONS_LEAGUE))
         if cl_rows and champions.in_league_phase(cl_matches):   # remembered so the next league-phase table can show who moved
             new.setdefault("tables", {})[espn.CHAMPIONS_LEAGUE] = {"published": day.isoformat(), "rows": tables.signature(cl_rows)}

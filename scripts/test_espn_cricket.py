@@ -156,15 +156,7 @@ check("the table block: caption, numbers right-aligned, signed three-place NRR, 
 tied = [dict(x) for x in rows]
 tied[0].update(t=1, p=3, pts=5)
 check("a Ties column appears when a team has tied", "<th class=\"n\">T</th>" in ck.table_html("WBBL", tied))
-import re as _re  # noqa: E402
-two = [{"teams": ["Sydney Sixers Women", "Melbourne Stars Women"]}, {"teams": ["Perth Scorchers Women", "Adelaide Strikers Women"]}]
-cols = ck.league_colours(two)
-tp = ck.table_html("WBBL", rows, cols)
-spans = _re.findall(r'<span class="gc(\d)">([A-Z]+)</span>', tp)
-check("independent: the four teams of the two matches above the table are coloured by their official abbreviations (SS, MS, PS, AS), in two colours, once each, nobody else", sorted(a for _, a in spans) == ["AS", "MS", "PS", "SS"] and len({c for c, _ in spans}) == 2, spans)
-check("both teams of a match share a colour (SS with MS, PS with AS)", dict((a, c) for c, a in spans)["SS"] == dict((a, c) for c, a in spans)["MS"] != dict((a, c) for c, a in spans)["PS"] == dict((a, c) for c, a in spans)["AS"])
-check("a table with no colours given is unchanged, and a team name that does not match any row is simply ignored", 'class="gc' not in ck.table_html("WBBL", rows) and 'class="gc' not in ck.table_html("WBBL", rows, ck.league_colours([{"teams": ["Nobody FC", "Nowhere United"]}])))
-check("the women's suffix is ignored when matching: 'Sydney Sixers' and 'Sydney Sixers Women' are the same team", ck.league_colours([{"teams": ["Sydney Sixers Women", "Brisbane Heat"]}]) == {"sydney sixers": 0, "brisbane heat": 0})
+check("no game colours in a league table: all white", "gc" not in ck.table_html("WBBL", rows) and "<span" not in ck.table_html("WBBL", rows))
 broken = [dict(x) for x in rows]
 broken[2]["w"] = 5
 check("a table whose rows do not add up, is out of order, or is empty is left out, not shown wrong",

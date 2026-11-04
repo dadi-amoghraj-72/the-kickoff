@@ -160,17 +160,7 @@ def result_html(m, entry=None, series=""):
             f'{full_scorecard_html(entry["innings"]) if full else ""}{standouts_html(entry["standouts"], inline=True) if full else ""}{series}</li>')
 
 
-def league_colours(matches):
-    """{team name, lower case: colour number} for the matches of one league shown above its table: one colour per match, shared by both teams
-    (the 15 locked pastels of the stylesheet; a league plays at most a few matches a day, so they never run out)."""
-    out = {}
-    for i, m in enumerate(matches):
-        for t in m.get("teams") or []:
-            out[strip_women(t).lower()] = i % 15
-    return out
-
-
-def table_html(label, rows, colours=None):
+def table_html(label, rows):
     """A league's points table, shown after its results. '' when the rows do not add up (played = won + lost + tied + no result,
     positions 1..n in order): better no table than a wrong one. A Ties column appears only when some team has a tie."""
     if not rows or [x["pos"] for x in rows] != list(range(1, len(rows) + 1)) or any(x["p"] != x["w"] + x["l"] + x["t"] + x["nr"] for x in rows):
@@ -178,10 +168,7 @@ def table_html(label, rows, colours=None):
     ties = any(x["t"] for x in rows)
     columns = [("#", True), ("Team", False), ("P", True), ("W", True), ("L", True)] + ([("T", True)] if ties else []) + [("NR", True), ("Pts", True), ("NRR", True)]
     body = [[x["pos"], x["team"], x["p"], x["w"], x["l"]] + ([x["t"]] if ties else []) + [x["nr"], x["pts"], f"{x['nrr']:+.3f}" if x["nrr"] is not None else ""] for x in rows]
-    html = r.table(f"{label} table", columns, body)
-    if colours:  # the teams that played in the matches above, in pair colours (match the table's team by full name)
-        html = r.paint(html, {x["team"]: colours[strip_women(x["name"]).lower()] for x in rows if strip_women(x["name"]).lower() in colours})
-    return f'<div class="pts">{html}</div>'
+    return f'<div class="pts">{r.table(f"{label} table", columns, body)}</div>'
 
 
 def results_html(picked, cards=None, tables=None, series=None):
@@ -437,7 +424,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
     for m in picked:  # a points table for each league that played, once per league
         label = m["class"]["label"]
         if espn_table and m["class"]["kind"] == "league" and label not in tables:
-            tables[label] = table_html(label, espn_table(m), league_colours([x for x in picked if x["class"]["label"] == label]))
+            tables[label] = table_html(label, espn_table(m))
     series, done = {}, set()
     for m in picked:  # one series table per Test or ODI series, under the first of its matches shown
         key = (frozenset(strip_women(t).lower() for t in m.get("teams") or []), m.get("matchType"))

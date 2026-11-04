@@ -43,16 +43,15 @@ def movement(x, before):
     return r.move(before[x["id"]] - x["rank"]) if before and x["id"] in before else ""
 
 
-def _table_html(name, rows, before=None, colours=None):
-    """Club names are the short ones (Man City, Brighton), so the six columns fit a 360px screen on one line each. colours: {team id: colour number} for the teams that played in the matches shown above (both teams of a match share a colour)."""
+def _table_html(name, rows, before=None):
+    """Club names are the short ones (Man City, Brighton), so the six columns fit a 360px screen on one line each."""
     zones = [zone_for(x["zone"]) for x in rows]
     body = [[x.get("short") or x["team"], x["played"], f"{x['gd']:+d}", x["points"], movement(x, before)] for x in rows]
     body = [[x["rank"]] + b for x, b in zip(rows, body)]
-    html = r.table(name, COLUMNS, body, zones=zones)
-    return r.paint(html, {(x.get("short") or x["team"]): colours[x["id"]] for x in rows if x["id"] in (colours or {})}) if colours else html
+    return r.table(name, COLUMNS, body, zones=zones)
 
 
-def block(name, rows, decision, leaders="", before=None, colours=None):
+def block(name, rows, decision, leaders="", before=None):
     """The HTML for one league's table, following the decision. Leaders go under a table that is shown."""
     mode = decision["mode"]
     if mode == "skip":
@@ -60,9 +59,9 @@ def block(name, rows, decision, leaders="", before=None, colours=None):
     if mode == "unchanged":
         return f'<p class="muted"><strong>{r.esc(name)}:</strong> No change since {decision["since"]}.</p>'
     if mode == "full":
-        return _table_html(name, rows, before, colours) + leaders
+        return _table_html(name, rows, before) + leaders
     top, rest = rows[:6], rows[6:]
-    html = _table_html(f"{name}: top 6", top, before, colours)
+    html = _table_html(f"{name}: top 6", top, before)
     yours = [x for x in rest if is_listed(x["id"])]
     if yours:
         line = ", ".join(f"{code(x['id'], x['abbr'])} {ordinal(x['rank'])} ({x['points']} pts)" for x in yours)
@@ -75,17 +74,17 @@ def before_of(saved_entry):
     return {x[0]: x[1] for x in saved_entry["rows"]} if saved_entry else None
 
 
-def one(name, rows, saved_entry, edition_date, tuesday_only=False, leaders_fn=None, colours=None):
+def one(name, rows, saved_entry, edition_date, tuesday_only=False, leaders_fn=None):
     """One league's table block and its new state entry (None if nothing was published).
     leaders_fn is called only when the table is actually shown, so no requests are wasted."""
     decision = decide(rows, saved_entry, edition_date, tuesday_only=tuesday_only)
     shown = decision["mode"] in ("full", "changed")
-    html = block(name, rows, decision, (leaders_fn() or "") if (shown and leaders_fn) else "", before_of(saved_entry), colours)
+    html = block(name, rows, decision, (leaders_fn() or "") if (shown and leaders_fn) else "", before_of(saved_entry))
     entry = {"published": edition_date.isoformat(), "rows": signature(rows)} if shown else None
     return html, entry
 
 
-def tables_html(tables, state, edition_date, leagues, tuesday_only=(), leaders=None, colours=None):
+def tables_html(tables, state, edition_date, leagues, tuesday_only=(), leaders=None):
     """tables: {league_id: rows or None if the source failed}. leagues: {league_id: display name}.
     Returns (html, new_state). State changes only for tables that were actually shown."""
     new_state, parts = dict(state), []
@@ -95,7 +94,7 @@ def tables_html(tables, state, edition_date, leagues, tuesday_only=(), leaders=N
             parts.append(r.no_data(f"{name} table"))
             continue
         decision = decide(rows, state.get(league), edition_date, tuesday_only=league in tuesday_only)
-        parts.append(block(name, rows, decision, (leaders or {}).get(league, ""), before_of(state.get(league)), (colours or {}).get(league)))
+        parts.append(block(name, rows, decision, (leaders or {}).get(league, ""), before_of(state.get(league))))
         if decision["mode"] in ("full", "changed"):
             new_state[league] = {"published": edition_date.isoformat(), "rows": signature(rows)}
     return "".join(parts), new_state

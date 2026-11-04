@@ -86,7 +86,7 @@ def zone(rank):
     return "blue" if rank <= TOP_EIGHT else ("lilac" if rank <= CUT_LINE else "rose")
 
 
-def table_html(rows, before=None, colours=None):
+def table_html(rows, before=None):
     """The full league-phase table. Zone bars show the three groups, a heavier line marks the cut after 8th and
     24th, and the listed clubs are in bold so they are easy to find. No legend."""
     if len(rows) < CUT_LINE:
@@ -94,13 +94,12 @@ def table_html(rows, before=None, colours=None):
     body = [[x["rank"], x.get("short") or x["team"], x["played"], f"{x['gd']:+d}", x["points"], movement(x, before)] for x in rows]
     classes = [" ".join(c for c in ("cut" if x["rank"] in (TOP_EIGHT, CUT_LINE) else "", "mine" if is_listed(x["id"]) else "") if c)
                for x in rows]
-    html = r.table(f"League Phase After Matchday {max(x['played'] for x in rows)}",
+    return r.table(f"League Phase After Matchday {max(x['played'] for x in rows)}",
                    [("#", True), ("Team", False), ("P", True), ("GD", True), ("Pts", True), ("+/-", True)],
                    body, zones=[zone(x["rank"]) for x in rows], row_classes=classes)
-    return r.paint(html, {(x.get("short") or x["team"]): colours[x["id"]] for x in rows if x["id"] in (colours or {})}) if colours else html
 
 
-def section_html(matches, rows, overview_text=None, box="", before=None, colours=None, legs_fn=None, goals_fn=None):
+def section_html(matches, rows, overview_text=None, box="", before=None, legs_fn=None, goals_fn=None):
     """The full Champions League block: the overview first, then the scoreboard, then the league-phase table.
     Returns '' when there were no matches, so the block is simply left out."""
     if not matches:
@@ -134,5 +133,5 @@ def section_html(matches, rows, overview_text=None, box="", before=None, colours
                 return None
         html += tie_html(m["stage"], legs, goals_of)
     if rows and in_league_phase(matches):
-        html += table_html(rows, before, colours)
+        html += table_html(rows, before)
     return html

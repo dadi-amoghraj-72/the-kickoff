@@ -55,23 +55,6 @@ def table(caption, columns, rows, zones=None, legend=None, row_classes=None):
     return out
 
 
-def paint(html, colours):
-    """Colour team cells in a table: colours is {cell text: colour number}; the text is wrapped in <span class="gcN"> (the 15 locked pastel
-    colours of the stylesheet, one per game of the day, shared by both teams of a game). Only a team cell of the form <td class="">TEXT</td> changes."""
-    for text, n in colours.items():
-        cell = f'<td class="">{esc(text)}</td>'
-        html = html.replace(cell, f'<td class=""><span class="gc{n % 15}">{esc(text)}</span></td>')
-    return html
-
-
-def game_colour_map(matches, key):
-    """{key(team): colour number}: the matches in the order shown, each with one colour for both its teams. key(match, 'home'|'away') names the team."""
-    out = {}
-    for i, m in enumerate(matches):
-        out[key(m, "home")] = out[key(m, "away")] = i % 15
-    return out
-
-
 def series_head(title, left, right, left_n, right_n, word, sub=""):
     """The top of a series table: the title, then each side's name centred over its own big score, the word between the scores ('series', 'aggregate') with
     a small line under it ('best of 5'). The two names sit in boxes of equal width either side of a fixed gap, and so do the two scores, so each score is

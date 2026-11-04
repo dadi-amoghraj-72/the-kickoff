@@ -191,20 +191,20 @@ for gid, b in BOXES.items():
     best = max((a for t in b["players"] for a in t["athletes"] if not a["dnp"] and a["stats"]),
                key=lambda a: (lambda d: (int(d["PTS"]) + 1.2 * int(d["REB"]) + 1.5 * int(d["AST"]) + 3 * int(d["STL"]) + 3 * int(d["BLK"]), a["name"]))(dict(zip(b["players"][0]["labels"], a["stats"]))))
     notes = notes_for(gid)
-    ok &= any(n.startswith(best["name"]) for n in notes)
+    ok &= any(n.startswith(best["name"].split(" ", 1)[0][0] + ". " + best["name"].split(" ", 1)[1]) for n in notes)
     names = [n.split(":")[0].split(" (")[0] for n in notes]
     dup |= len(names) != len(set(names))
 check("independent: the best performer of every game (best weighted stat line, found from the raw box) is in its notes, tracked or not", ok)
 check("no player appears twice under one game", not dup)
-check("one best performer per game: the Spurs game has Wembanyama (tracked and best) and no extra performer line", [n.split(":")[0] for n in notes_for("401909901")] == ["Victor Wembanyama (SAS)", "Anthony Edwards (MIN)"], notes_for("401909901"))
+check("one best performer per game: the Spurs game has Wembanyama (tracked and best) and no extra performer line", [n.split(":")[0] for n in notes_for("401909901")] == ["V. Wembanyama (SAS)", "A. Edwards (MIN)"], notes_for("401909901"))
 check("the 76ers game: Brown's line, then the untracked best performer Maxey with his team code, and only then LeBron and Embiid as DNP",
-      [n.split(":")[0] for n in notes_for("401909897")] == ["Jaylen Brown (PHI)", "Tyrese Maxey (PHI)", "LeBron James (PHI)", "Joel Embiid (PHI)"], notes_for("401909897"))
+      [n.split(":")[0] for n in notes_for("401909897")] == ["J. Brown (PHI)", "T. Maxey (PHI)", "L. James (PHI)", "J. Embiid (PHI)"], notes_for("401909897"))
 bad_order = [gid for gid in BOXES if (lambda ns: any("DNP" in a and "DNP" not in b for a, b in zip(ns, ns[1:])))(notes_for(gid))]
 check("in every game the DNP lines come after every line of a player who played (D's own players included)", not bad_order and sum("DNP" in n for gid in BOXES for n in notes_for(gid)) >= 5, bad_order)
 inj = BOXES["401909897"]["injuries"]
 check("independent: ESPN lists Embiid as Day-To-Day with a foot problem and does not list LeBron: so 'DNP (Day-To-Day, Foot)' and a plain 'DNP'",
-      inj["3059318"] == {"status": "Day-To-Day", "type": "Foot"} and "1966" not in inj and "Joel Embiid (PHI): DNP (Day-To-Day, Foot)" in notes_for("401909897") and "LeBron James (PHI): DNP" in notes_for("401909897"))
-check("Edwards: ESPN says Out with a knee: 'Anthony Edwards: DNP (Out, Knee)'", BOXES["401909901"]["injuries"]["4594268"] == {"status": "Out", "type": "Knee"} and "Anthony Edwards (MIN): DNP (Out, Knee)" in notes_for("401909901"))
+      inj["3059318"] == {"status": "Day-To-Day", "type": "Foot"} and "1966" not in inj and "J. Embiid (PHI): DNP (Day-To-Day, Foot)" in notes_for("401909897") and "L. James (PHI): DNP" in notes_for("401909897"))
+check("Edwards: ESPN says Out with a knee: 'A. Edwards: DNP (Out, Knee)'", BOXES["401909901"]["injuries"]["4594268"] == {"status": "Out", "type": "Knee"} and "A. Edwards (MIN): DNP (Out, Knee)" in notes_for("401909901"))
 check("a tracked player whose team did not play gets no line (Giannis, Jokic, Flagg, Young, Davis)", not any(n.split(":")[0] in ("Giannis Antetokounmpo", "Nikola Jokić", "Cooper Flagg", "Trae Young", "Anthony Davis") for gid in BOXES for n in notes_for(gid)))
 dnp_box = copy.deepcopy(BOXES)
 for tm in dnp_box["401909902"]["players"]:
@@ -212,14 +212,14 @@ for tm in dnp_box["401909902"]["players"]:
         if a["id"] == "3202":
             a["dnp"], a["reason"], a["stats"] = True, "COACH'S DECISION", []
 dnp_box["401909902"]["injuries"].pop("3202", None)
-check("a tracked player listed as did-not-play with no injury entry shows the box score's reason: 'Kevin Durant: DNP (Coach's decision)'", "Kevin Durant (HOU): DNP (Coach's decision)" in notes_for("401909902", boxes=dnp_box), notes_for("401909902", boxes=dnp_box))
+check("a tracked player listed as did-not-play with no injury entry shows the box score's reason: 'K. Durant: DNP (Coach's decision)'", "K. Durant (HOU): DNP (Coach's decision)" in notes_for("401909902", boxes=dnp_box), notes_for("401909902", boxes=dnp_box))
 dnp_box["401909902"]["injuries"]["3202"] = {"status": "Out", "type": "Rest"}
-check("an injury entry beats the box reason: 'DNP (Out, Rest)'", "Kevin Durant (HOU): DNP (Out, Rest)" in notes_for("401909902", boxes=dnp_box))
+check("an injury entry beats the box reason: 'DNP (Out, Rest)'", "K. Durant (HOU): DNP (Out, Rest)" in notes_for("401909902", boxes=dnp_box))
 check("dnp_text: status only when ESPN gives no type; plain DNP when ESPN says nothing", nba.dnp_text("1", "A B", "XYZ", {"injuries": {"1": {"status": "Out", "type": ""}}}) == "A B (XYZ): DNP (Out)" and nba.dnp_text("1", "A B", "XYZ", {"injuries": {}}) == "A B (XYZ): DNP")
 moved = notes_for("401909900", info={"teams": {**nba.TEAMS, "1966": "MIL"}, "auto": {}})
-check("a traded player is followed: with LeBron's team set to Milwaukee, his DNP line is under the Cavaliers-Bucks game and no longer under the 76ers game", "LeBron James (MIL): DNP" in moved and not any(n.startswith("LeBron") for n in notes_for("401909897", info={"teams": {**nba.TEAMS, "1966": "MIL"}, "auto": {}})))
+check("a traded player is followed: with LeBron's team set to Milwaukee, his DNP line is under the Cavaliers-Bucks game and no longer under the 76ers game", "L. James (MIL): DNP" in moved and not any(n.startswith("L. James") for n in notes_for("401909897", info={"teams": {**nba.TEAMS, "1966": "MIL"}, "auto": {}})))
 auto_p = next(p["id"] for p in ALL if p["name"] == "Kris Dunn")
-check("an auto-added player is followed like D's own: his stat line is under his game", any(n.startswith("Kris Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl") for n in notes_for("401909905", tracked=TR | {auto_p})))
+check("an auto-added player is followed like D's own: his stat line is under his game", any(n.startswith("K. Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl") for n in notes_for("401909905", tracked=TR | {auto_p})))
 
 # ---- The whole run ----
 out = nba.run(NOW, TUE, {}, Saved())
@@ -239,42 +239,24 @@ check("regular season: no house icon anywhere", html.count('class="home"') == 0)
 check("both US days get a label because the games span two dates; the Cup tag is not on regular games", "Sat 31 Oct" in t and "Sun 1 Nov" in t and "NBA Cup" not in games_part)
 check("a game's line is not cut off from its notes: every score row that has notes is followed straight by the notes row, and the separator is only after the notes",
       len(re.findall(r'<tr class="one"><td[^>]*>[^<]*(?:<[^>]+>[^<]*)*?</tr><tr class="note end">', games_part)) == 11 and games_part.count(' end"') == 11 and "one end" not in games_part, games_part.count(' end"'))
-check("independent: Wembanyama's line is built from the raw stats and carries his team: 'Victor Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk · 17-34 FG'", "Victor Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk · 17-34 FG" in text(out["html"]).replace("\u00a0", " "))
+check("independent: Wembanyama's line is built from the raw stats and carries his team: 'V. Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk · 17-34 FG'", "V. Wembanyama (SAS): 43 pts, 7 reb, 4 ast, 6 blk · 17-34 FG" in text(out["html"]).replace("\u00a0", " "))
 check("standouts section lists Doncic first", "Standouts Luka Doncic (LAL)" in t)
 check("state: the 11 games are reported, underdogs saved, tracked players' teams remembered, standings saved for next time", len(out["state"]["reported"]) == 11 and set(out["state"]["dogs"]) == set(BOXES)
       and out["state"]["teams"]["1966"] == "PHI" and out["state"]["teams"]["3945274"] == "LAL" and out["state"]["seeds"]["Eastern Conference"]["PHI"] == 1)
 
 check("in the page the standouts list carries the highlights, and the colour rule exists", out["html"].count('<span class="hl">') >= 5 and ".standouts .hl { color: var(--gold)" in (ROOT / "kickoff" / "static" / "style.css").read_text())
 
-# ---- Game colours in the tables below ----
+# ---- Short names under each game (D, 2026-11-04): first initial and surname, so every line fits one line at 360px ----
+check("short_name: initial and surname; hyphenated surnames, suffixes and names that already have initials are kept whole after the first initial", [nba.short_name(n) for n in ("Shai Gilgeous-Alexander", "Wendell Carter Jr.", "P.J. Washington", "Karl-Anthony Towns", "Nene")] == ["S. Gilgeous-Alexander", "W. Carter Jr.", "P.J. Washington", "K. Towns", "Nene"])
+under = [n for gid in BOXES for n in notes_for(gid)]
+check("under the games every name is an initial and a surname (no 'Firstname Surname (XXX):' line anywhere), while the standouts list keeps full names", under and all(re.match(r"[A-Z]\.\s?[^ ]+.* \([A-Z]{3}\):", n) for n in under) and "Luka Doncic (LAL)" in text(out["html"]), [n for n in under if not re.match(r"[A-Z]\.\s?[^ ]+.* \([A-Z]{3}\):", n)][:3])
+
+# ---- No game colours in the tables below (dropped 2026-11-04: all white) ----
 shown = sorted([g for g in GAMES if g["id"] in [e["id"] for e in SBS["2026-11-01"]["events"]]], key=nba.order_key)
 sun = nba.run(NOW, TUE, {"reported": [e["id"] for e in SBS["2026-10-31"]["events"]]}, Saved())
-cols = nba.game_colours(shown)
-raw_teams = {t for e in SBS["2026-11-01"]["events"] for x in e["competitions"][0]["competitors"] for t in [fixc(x["team"]["abbreviation"])]}
-painted = re.findall(r'<span class="gc(\d+)">([A-Z]+)</span>', sun["html"])
-check("independent: the teams painted in the standings are exactly the 8 that played in tonight's 4 games (from the raw scoreboard), each once", len(painted) == 8 and {a for _, a in painted} == raw_teams and len({a for _, a in painted}) == 8, painted)
-pairs = {}
-for n, a in painted:
-    pairs.setdefault(n, set()).add(a)
-raw_pairs = {frozenset(fixc(x["team"]["abbreviation"]) for x in e["competitions"][0]["competitors"]) for e in SBS["2026-11-01"]["events"]}
-check("both teams of a game share one colour, and each of the 4 games has its own colour: 4 colours, each used by exactly the two teams that played each other", len(pairs) == 4 and {frozenset(v) for v in pairs.values()} == raw_pairs, pairs)
-check("the colour follows the order of the games shown (Lakers game first = colour 0, then 76ers/Cavaliers/Spurs/Celtics order, then by tip-off)", cols["LAL"] == cols["TOR"] == 0 and cols["BOS"] == cols["ORL"] == 1 and len(set(cols.values())) == 4, cols)
-check("the colours are NOT in the games table above, only in the tables below", "gc" not in sun["html"].split("<h4>")[0])
-check("teams that did not play are not coloured: 22 of the 30 team codes stay plain in the standings", len(re.findall(r'<td class="">[A-Z]+</td>', sun["html"])) == 22, len(re.findall(r'<td class="">[A-Z]+</td>', sun["html"])))
-check("a run with no games above paints nothing: the standings come plain", 'class="gc' not in nba.run(NOW, TUE, {"reported": [g["id"] for g in GAMES]}, Saved())["html"])
-check("with more than 15 games the colours wrap round instead of failing", len(nba.game_colours([{"away": {"abbr": f"A{i}"}, "home": {"abbr": f"H{i}"}} for i in range(18)])) == 36 and nba.game_colours([{"away": {"abbr": f"A{i}"}, "home": {"abbr": f"H{i}"}} for i in range(18)])["A15"] == 0)
-check("paint() changes only the team cell of a listed team and nothing else", nba.paint('<td class="">PHI</td><td class="">DET</td><td class="n">6-1</td>', {"PHI": 3}) == '<td class=""><span class="gc3">PHI</span></td><td class="">DET</td><td class="n">6-1</td>')
+check("the standings below the games have no coloured teams: every team cell is plain text", "<h4>Standings</h4>" in sun["html"] and 'class="gc' not in sun["html"] and len(re.findall(r'<td class="">[A-Z]+</td>', sun["html"])) >= 30)
 css2 = (ROOT / "kickoff" / "static" / "style.css").read_text()
-dark_css = re.findall(r"^\.gc(\d+) \{ color: (#[0-9A-F]{6}); font-weight: 700; \}$", css2, re.M)
-light_css = re.findall(r"^  \.gc(\d+) \{ color: (#[0-9A-F]{6}); \}$", css2, re.M)
-import colorsys  # noqa: E402
-hls = lambda hx: colorsys.rgb_to_hls(*(int(hx[i:i + 2], 16) / 255 for i in (1, 3, 5)))  # noqa: E731
-check("the 15 game colours are locked: the stylesheet and the code's palette hold the same 15 hex values for dark and light, all different", [c for _, c in dark_css] == list(nba.PALETTE_DARK) and [c for _, c in light_css] == list(nba.PALETTE_LIGHT)
-      and len(set(nba.PALETTE_DARK)) == 15 and len(set(nba.PALETTE_LIGHT)) == 15 and nba.GAME_COLOURS == 15 == len(dark_css), (len(dark_css), len(light_css)))
-check("pastel only: every dark-theme colour is light and soft (lightness 75-82%, saturation at most 60%), no bright shades; the light-theme set is muted (saturation at most 45%)",
-      all(0.75 <= hls(c)[1] <= 0.82 and hls(c)[2] <= 0.60 for c in nba.PALETTE_DARK) and all(hls(c)[2] <= 0.45 for c in nba.PALETTE_LIGHT), [(c, [round(x, 2) for x in hls(c)]) for c in nba.PALETTE_DARK][:3])
-check("the 15 pastel colours are kept apart: no two dark-theme hues are closer than 15 degrees", all(min(abs(hls(a)[0] - hls(b)[0]) % 1, 1 - abs(hls(a)[0] - hls(b)[0]) % 1) * 360 >= 15 for i_, a in enumerate(nba.PALETTE_DARK) for b in nba.PALETTE_DARK[i_ + 1:]))
-check("every game number from 0 to 14 has a colour, so a 15-game night can never run out", all(f".gc{n} " in css2 for n in range(15)))
+check("the colour machinery is gone from the code and the stylesheet", not hasattr(nba, "game_colours") and not hasattr(nba, "paint") and ".gc0" not in css2)
 
 # ---- Rhythm and state ----
 again = nba.run(NOW, MON, copy.deepcopy(out["state"]), Saved())
@@ -299,7 +281,7 @@ check("independent: ESPN's own codes include five that are not three letters (GS
       {"GS", "NO", "NY", "SA", "UTAH", "WSH"} <= std_codes and nba.code("WSH") == "WSH" and all(len(c) == 3 for c in OFFICIAL) and {nba.code(c) for c in std_codes} == OFFICIAL and len(OFFICIAL) == 30 and nba.code("GS") == "GSW" and nba.code("BOS") == "BOS")
 check("in the page every team code is official: no GS, NY, SA, NO or UTAH token anywhere, and GSW is there", not re.search(r"\b(GS|NY|SA|NO|UTAH)\b", text(out["html"]).replace("NO ", "")) and "GSW" in text(out["html"]) and {c for c in re.findall(r"\(([A-Z]{2,4})\)", text(out["html"]))} <= OFFICIAL, sorted({c for c in re.findall(r"\(([A-Z]{2,4})\)", text(out["html"]))} - OFFICIAL))
 check("every player line carries a team code in brackets, D's own players and the DNP lines included", all(re.match(r".+ \([A-Z]{3}\): ", n) for gid in BOXES for n in notes_for(gid)) and sum(1 for gid in BOXES for n in notes_for(gid)) > 20)
-check("Curry's line shows GSW and the Spurs game uses SAS: 'Stephen Curry (GSW): DNP' and 'Victor Wembanyama (SAS)'", any(n.startswith("Stephen Curry (GSW): DNP") for n in notes_for("401909905")) and nba.TEAMS["3975"] == "GSW" and nba.TEAMS["5104157"] == "SAS" and nba.FIRST[3] == "SAS")
+check("Curry's line shows GSW and the Spurs game uses SAS: 'S. Curry (GSW): DNP' and 'V. Wembanyama (SAS)'", any(n.startswith("S. Curry (GSW): DNP") for n in notes_for("401909905")) and nba.TEAMS["3975"] == "GSW" and nba.TEAMS["5104157"] == "SAS" and nba.FIRST[3] == "SAS")
 check("all of D's players' starting teams and the order list use three-letter codes (Trae Young and Anthony Davis are WSH)", set(nba.TEAMS.values()) <= OFFICIAL and set(nba.FIRST) <= OFFICIAL and nba.TEAMS["4277905"] == nba.TEAMS["6583"] == "WSH")
 
 # ---- Standings and arrows ----
@@ -406,8 +388,8 @@ check("unplayed games that will certainly be played show their date in Singapore
 bx = SBOXES["401869193"]
 cade = next(a for t in bx["players"] for a in t["athletes"] if a["id"] == "4432166")
 cv = dict(zip(bx["players"][0]["labels"], cade["stats"]))
-check("independent: Cade Cunningham's note under game 1 is built from the raw box score", f"Cade Cunningham (DET): {cv['PTS']} pts, {cv['REB']} reb, {cv['AST']} ast · {cv['FG']} FG" in mt.replace(" ", " "), cv)
-check("the best performer of game 3 who is not tracked appears with his team (Banchero, ORL)", "Paolo Banchero (ORL):" in mt)
+check("independent: Cade Cunningham's note under game 1 is built from the raw box score", f"C. Cunningham (DET): {cv['PTS']} pts, {cv['REB']} reb, {cv['AST']} ast · {cv['FG']} FG" in mt.replace(" ", " "), cv)
+check("the best performer of game 3 who is not tracked appears with his team (Banchero, ORL)", "P. Banchero (ORL):" in mt)
 raw_seed = {e["team"]["abbreviation"]: int(next(x["displayValue"] for x in e["stats"] if x["name"] == "playoffSeed")) for c in STAND26["children"] for e in c["standings"]["entries"]}
 check("independent: ESPN's final 2025-26 standings give Detroit seed 1 and Orlando seed 8 (the real 1-8 series), and the seeds sit beside the team names", raw_seed["DET"] == 1 and raw_seed["ORL"] == 8 and nba.seeds_by_team(STAND26)["DET"] == 1 and "(1) Detroit Pistons" in mt and "Orlando Magic (8)" in mt)
 check("the seeds come from the standings of the series' own season (2026), asked once", msrc.std_seasons == [2026], getattr(msrc, "std_seasons", None))
@@ -487,12 +469,12 @@ for i, h in enumerate(("1966", "5104157")):
     nba.update_tracking(st3, [(h, f"a{i}"), (h, f"b{i}"), (h, f"c{i}")], {}, d0)
 check("D's own list never goes into the auto list, and cannot be dropped", st3["auto"] == {} and set(nba.TRACKED) <= nba.update_tracking(st3, [], {}, d0 + timedelta(days=400)))
 dunn = {"auto": {auto_p: {"name": "Kris Dunn", "last": "2026-11-01"}}}
-check("an auto-added player is followed in the run: Kris Dunn's line is in the Clippers-Warriors notes", "Kris Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl" in text(nba.run(NOW, MON, dunn, Saved())["html"]))
+check("an auto-added player is followed in the run: Kris Dunn's line is in the Clippers-Warriors notes", "K. Dunn (LAC): 12 pts, 2 reb, 4 ast, 7 stl" in text(nba.run(NOW, MON, dunn, Saved())["html"]))
 
 # ---- Failures and edge cases ----
 bad = nba.run(NOW, MON, {}, Saved(fail_box=["401909896"]))
 check("one failed box score: that game is left out and not marked reported; the other 10 show and it comes back next run", bad["stats"]["failed"] == 1 and "401909896" not in bad["state"]["reported"] and len(bad["state"]["reported"]) == 10
-      and "Damian Lillard" not in text(bad["html"]) and "Damian Lillard" in text(nba.run(NOW, MON, bad["state"], Saved())["html"]))
+      and "D. Lillard" not in text(bad["html"]) and "D. Lillard" in text(nba.run(NOW, MON, bad["state"], Saved())["html"]))
 none = nba.run(NOW, TUE, {}, Saved(fail_sb=True, fail_std=True))
 check("scoreboard and standings down: nothing shown, no crash; three scoreboard failures and one stopped Cup scan counted (not sixty)", none["html"] == "" and none["stats"]["failed"] == 4, none["stats"])
 nostd = nba.run(NOW, MON, {}, Saved(fail_std=True))
