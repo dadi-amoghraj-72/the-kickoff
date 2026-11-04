@@ -39,3 +39,16 @@ try:
         print(f"  {m['dateTimeGMT'][:16]}  ended={m['matchEnded']}  {m['name'][:70]}  | {m['status']} | {scores}")
 except Exception as e:  # noqa: BLE001
     print(f"\nESPN feed FAILED: {type(e).__name__}: {str(e)[:200]}")
+
+# ---- Which cricket web pages answer from here? (honest, plain requests; status, size and the start of the body) ----
+import urllib.request  # noqa: E402
+
+for url in ("https://www.espn.com/cricket/scores", "https://www.espn.in/cricket/scores", "https://www.espncricinfo.com/live-cricket-score",
+            "https://www.espn.com/cricket/series/24469/scorecard/1539437"):
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "TheKickoff/1.0 (personal daily digest)"})
+        with urllib.request.urlopen(req, timeout=20) as r:
+            body = r.read()
+            print(f"PAGE {url}: HTTP {r.status}, {len(body)} bytes, final url {r.geturl()[:60]}, starts {body[:60]!r}")
+    except Exception as e:  # noqa: BLE001
+        print(f"PAGE {url}: {type(e).__name__} {str(e)[:100]}")
