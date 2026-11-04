@@ -38,9 +38,13 @@ def short_name(d):
 
 
 def heading(race, total):
-    """'Race 19/24: Mexico City Grand Prix, Mexico City'."""
+    """Two lines (D, 2026-11-04): 'Race 19/23' and under it 'Mexico City Grand Prix, Mexico City' (a line break between them)."""
     place = ((race.get("Circuit") or {}).get("Location") or {}).get("locality")
-    return f"Race {int(race['round'])}/{total}: {race['raceName']}" + (f", {place}" if place else "")
+    return f"Race {int(race['round'])}/{total}\n{race['raceName']}" + (f", {place}" if place else "")
+
+
+def heading_html(text):
+    return r.esc(text).replace(chr(10), "<br>")
 
 
 def team(name):
@@ -113,7 +117,8 @@ def results_table(caption, rows):
     """Race or sprint: position, driver, places gained, gap to the winner (or why out), points."""
     laps = int(rows[0]["laps"]) if rows and rows[0].get("laps") else 0
     body = [[x["position"], short_name(x["Driver"]), moved(x), _gap(x, laps), f"{int(float(x['points'])):02d}"] for x in rows]
-    return _tight(r.table(f"{caption} Results", [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body), (9, 34, 12, 29, 16), " race")
+    podium = ["p1", "p2", "p3"] + [""] * (len(body) - 3)          # gold, silver and bronze for the first three (D, 2026-11-04)
+    return _tight(r.table(f"{caption} Results", [("P", True), ("Driver", False), ("+/-", True), ("Gap", True), ("Pts", True)], body, row_classes=podium[:len(body)]), (9, 34, 12, 29, 16), " race")
 
 
 def best_time(row):
@@ -127,20 +132,30 @@ def qualifying_table(rows):
     return _tight(r.table("Qualifying Results", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body), (12, 44, 16, 28))
 
 
-def driver_standings_table(standings, rnd, limit=10, teams=None):
+def _plat(v):
+    return r.Raw(f'<span class="plat">{r.esc(v)}</span>')
+
+
+def driver_standings_table(standings, rnd, limit=10, teams=None, decided=False):
     """teams: {driverId: team they drove for in the race just run}. The standings list several teams for a driver who has moved, in
-    no order we can rely on, so the race's own result decides; the first listed team is only the fallback."""
+    no order we can rely on, so the race's own result decides; the first listed team is only the fallback. The leader's row is gold, and platinum once the title is decided."""
     rows = (standings or {}).get("DriverStandings") or []
     teams = teams or {}
     body = [[x["position"], short_name(x["Driver"]), abbr(teams.get(x["Driver"]["driverId"]) or (x.get("Constructors") or [{"name": ""}])[0]["name"]), int(float(x["points"]))]
             for x in rows[:limit]]
-    return _tight(r.table(f"Drivers' standings: top {min(limit, len(rows))}", [("P", True), ("Driver", False), ("Team", False), ("Pts", True)], body), (12, 44, 20, 24)) if body else ""
+    if decided and body:
+        body[0] = [_plat(v) for v in body[0]]
+    classes = ["hl" if i == 0 and not decided else "" for i in range(len(body))]
+    return _tight(r.table(f"Drivers' standings: top {min(limit, len(rows))}", [("P", True), ("Driver", False), ("Team", False), ("Pts", True)], body, row_classes=classes), (12, 44, 20, 24)) if body else ""
 
 
-def constructor_standings_table(standings, rnd):
+def constructor_standings_table(standings, rnd, decided=False):
     rows = (standings or {}).get("ConstructorStandings") or []
     body = [[x["position"], team(x["Constructor"]["name"]), int(float(x["points"]))] for x in rows]
-    return _tight(r.table("Constructors' standings", [("P", True), ("Team", False), ("Pts", True)], body), (12, 60, 28)) if body else ""
+    if decided and body:
+        body[0] = [_plat(v) for v in body[0]]
+    classes = ["hl" if i == 0 and not decided else "" for i in range(len(body))]
+    return _tight(r.table("Constructors' standings", [("P", True), ("Team", False), ("Pts", True)], body, row_classes=classes), (12, 60, 28)) if body else ""
 
 
 # ---- Round-up lines and standouts ----------------------------------------------------------------
@@ -162,27 +177,37 @@ def race_summary(rows):
     win = rows[0]
     grid = int(win.get("grid") or 0)
     start = "from pole" if grid == 1 else (f"from P{grid} on the grid" if grid > 1 else "from the pit lane")
-    out = f"{_name(win)} ({team(win['Constructor']['name'])}) won {start}"
+    out = f"{_full(win)} ({team(win['Constructor']['name'])}) won {start}"
     if len(rows) > 1 and seconds((rows[1].get("Time") or {}).get("time")) is not None and rows[1].get("status") == "Finished":
-        out += f", {(rows[1]['Time']['time']).lstrip('+')}s ahead of {_name(rows[1])}"
+        out += f", {(rows[1]['Time']['time']).lstrip('+')}s ahead of {_full(rows[1])}"
     out += "."
     out_n = sum(1 for x in rows if x.get("status") not in ("Finished", "Lapped") and not re.match(r"\+\d+ Lap", x.get("status", "")))
     if out_n:
         out += f" {out_n} did not finish."
     fastest = next((x for x in rows if (x.get("FastestLap") or {}).get("rank") == "1"), None)
     if fastest:  # always on a line of its own
-        out += f"\nFastest lap: {_name(fastest)}, {fastest['FastestLap']['Time']['time']}."
+        out += f"\nFastest lap: {_full(fastest)}, {fastest['FastestLap']['Time']['time']}."
     return out
+
+
+def summary_html(text, rows):
+    """The race blurb as html: lines apart, and the fastest lap's time in purple, as on the F1 broadcast (D, 2026-11-04)."""
+    fastest = next((x for x in rows if (x.get("FastestLap") or {}).get("rank") == "1"), None)
+    html = r.esc(text).replace(chr(10), "<br>")
+    if fastest:
+        t = r.esc(fastest["FastestLap"]["Time"]["time"])
+        html = html.replace(f", {t}.", f', <span class="fl">{t}</span>.')
+    return html
 
 
 def quali_summary(rows):
     if not rows:
         return ""
     pole = rows[0]
-    out = f"Pole: {_name(pole)} ({team(pole['Constructor']['name'])}), {best_time(pole)[1]}"
+    out = f"Pole: {_full(pole)} ({team(pole['Constructor']['name'])}), {best_time(pole)[1]}"
     gap = pole_margin(rows)
     if gap is not None:
-        out += f", {gap:.3f}s ahead of {_name(rows[1])}"
+        out += f", {gap:.3f}s ahead of {_full(rows[1])}"
     return out + "."
 
 
@@ -195,7 +220,9 @@ def pole_margin(rows):
 
 
 def _full(row):
-    return f"{row['Driver']['givenName']} {row['Driver']['familyName']}"
+    """'Kimi Antonelli', 'Max Verstappen': the given name he is known by (the last of several: Andrea Kimi Antonelli is Kimi) and his surname."""
+    given = (row["Driver"].get("givenName") or "").split()
+    return f"{given[-1] if given else ''} {row['Driver']['familyName']}".strip()
 
 
 def biggest_mover(rows):
@@ -292,9 +319,10 @@ def fresh_standings(api, season, rnd, race, race_rows, sprint_rows=None):
     return ds, (cs if cs and str(cs.get("round")) == str(rnd) else None)
 
 
-def standings_html(ds, cs, rnd, race_rows):
+def standings_html(ds, cs, rnd, race_rows, schedule=None):
     teams = {x["Driver"]["driverId"]: x["Constructor"]["name"] for x in race_rows}
-    return driver_standings_table(ds, rnd, teams=teams) + constructor_standings_table(cs, rnd)
+    dec_d, dec_c = titles_decided(ds, cs, schedule, rnd) if schedule else (False, False)
+    return driver_standings_table(ds, rnd, teams=teams, decided=dec_d) + constructor_standings_table(cs, rnd, decided=dec_c)
 
 
 # ---- The championships: a closing note when a title is decided ------------------------------------
@@ -308,29 +336,34 @@ def remaining_max(schedule, rnd, race_pts, sprint_pts):
     return sum(race_pts + (sprint_pts if "Sprint" in x else 0) for x in schedule if int(x["round"]) > rnd)
 
 
+def titles_decided(ds, cs, schedule, rnd):
+    """(drivers' title decided, constructors' title decided) after round `rnd`: the leader's lead over second place is more than the points still on offer (a tie is never called)."""
+    def decided(rows, race_pts, sprint_pts):
+        return len(rows) >= 2 and float(rows[0]["points"]) - float(rows[1]["points"]) > remaining_max(schedule, rnd, race_pts, sprint_pts)
+    return (decided((ds or {}).get("DriverStandings") or [], RACE_MAX, SPRINT_MAX), decided((cs or {}).get("ConstructorStandings") or [], TEAM_RACE_MAX, TEAM_SPRINT_MAX))
+
+
 def title_notes(ds, cs, schedule, rnd, season, closed=()):
-    """([html notes], new closed keys): a note for each title that is mathematically decided after round `rnd` and has not been said: the leader's lead over second place is more than
-    the most points still on offer (a tie is never called). "Kimi Antonelli (Mercedes) is the 2026 Drivers' World Champion with 4 races to spare." After the last round no 'to spare'.
-    ds, cs: Jolpica's driver and constructor standings lists for the round (verified by the caller)."""
+    """([html notes], new closed keys): a note for each title that is mathematically decided after round `rnd` (titles_decided) and has not been said. "Kimi Antonelli (Mercedes) is the 2026
+    Drivers' World Champion with 4 races to spare." After the last round no 'to spare'."""
     notes, new = [], []
     left = sum(1 for x in schedule if int(x["round"]) > rnd)
     spare = "" if left == 0 else f" with {left} race{'s' if left != 1 else ''} to spare"
-    rows = (ds or {}).get("DriverStandings") or []
-    if len(rows) >= 2 and f"{season}-drivers" not in closed and float(rows[0]["points"]) - float(rows[1]["points"]) > remaining_max(schedule, rnd, RACE_MAX, SPRINT_MAX):
-        d = rows[0]
+    dec_d, dec_c = titles_decided(ds, cs, schedule, rnd)
+    if dec_d and f"{season}-drivers" not in closed:
+        d = ds["DriverStandings"][0]
         team_ = d["Constructors"][-1]["name"] if d.get("Constructors") else ""
-        notes.append(f"{d['Driver']['givenName']} {d['Driver']['familyName']}" + (f" ({team(team_)})" if team_ else "") + f" is the {season} Drivers' World Champion{spare}.")
+        notes.append(_full(d) + (f" ({team(team_)})" if team_ else "") + f" is the {season} Drivers' World Champion{spare}.")
         new.append(f"{season}-drivers")
-    rows = (cs or {}).get("ConstructorStandings") or []
-    if len(rows) >= 2 and f"{season}-constructors" not in closed and float(rows[0]["points"]) - float(rows[1]["points"]) > remaining_max(schedule, rnd, TEAM_RACE_MAX, TEAM_SPRINT_MAX):
-        notes.append(f"{team(rows[0]['Constructor']['name'])} are the {season} Constructors' World Champions{spare}.")
+    if dec_c and f"{season}-constructors" not in closed:
+        notes.append(f"{team(cs['ConstructorStandings'][0]['Constructor']['name'])} are the {season} Constructors' World Champions{spare}.")
         new.append(f"{season}-constructors")
     return [f'<p class="f1sum">{r.esc(n)}</p>' for n in notes], new
 
 
 # ---- One session, and the whole block ------------------------------------------------------------
 
-def session_html(due, api, story=None, used=None, capture=None):
+def session_html(due, api, story=None, used=None, capture=None, schedule=None):
     """(HTML, standings still to come) for one due session, or (None, False) when its results are not published yet. Raises when the source fails.
     story: optional, for Sunday races only: story(race, rows, start, extras) -> (html, usage). Its tokens are added into `used`.
     A failing story is left out; it never costs the tables."""
@@ -347,7 +380,7 @@ def session_html(due, api, story=None, used=None, capture=None):
     if not rows:
         return None, False
     standouts = biggest_mover(rows) + big_moments(rows) + (firsts(rows, api.finishes) if kind == "race" else [])
-    html = f'<p class="f1sum">{r.esc(race_summary(rows)).replace(chr(10), "<br>")}</p>'
+    html = f'<p class="f1sum">{summary_html(race_summary(rows), rows)}</p>'
     if kind == "race" and story:
         try:
             text, usage = story(due["race"], rows, start_of(due["race"], "race"), standouts)
@@ -362,7 +395,7 @@ def session_html(due, api, story=None, used=None, capture=None):
     if kind == "race":
         got = fresh_standings(api, season, rnd, due["race"], rows)
         if got:
-            html += standings_html(got[0], got[1], rnd, rows)
+            html += standings_html(got[0], got[1], rnd, rows, schedule)
             if capture is not None:
                 capture[int(rnd)] = got
         else:  # stale or missing: shown in a later edition, once the source has caught up
@@ -382,7 +415,7 @@ def run(now, window_start, st, api, season="current", story=None):
     for d in due:
         stale = False
         try:
-            html, stale = session_html(d, api, story, used, got_standings)
+            html, stale = session_html(d, api, story, used, got_standings, schedule)
         except Exception:
             failed += 1
             html = None
@@ -413,7 +446,7 @@ def run(now, window_start, st, api, season="current", story=None):
             pending.pop(sid)
             reported.append(sid)
             shown += 1
-            parts.setdefault(int(rnd_), [heading(race, max(int(x["round"]) for x in schedule)), []])[1].append(standings_html(got[0], got[1], int(rnd_), rows))
+            parts.setdefault(int(rnd_), [heading(race, max(int(x["round"]) for x in schedule)), []])[1].append(standings_html(got[0], got[1], int(rnd_), rows, schedule))
             got_standings[int(rnd_)] = got
         else:
             waiting.append(f"{race['raceName']} standings")
@@ -425,7 +458,7 @@ def run(now, window_start, st, api, season="current", story=None):
         if notes and rnd_ in parts:
             parts[rnd_][1].extend(notes)
             closed += new_keys
-    out = "".join(f"<h3>{r.esc(name)}</h3>" + "".join(blocks) for _, (name, blocks) in sorted(parts.items()))
+    out = "".join(f"<h3>{heading_html(name)}</h3>" + "".join(blocks) for _, (name, blocks) in sorted(parts.items()))
     if waiting:
         out += (f'<p class="muted">Not published by the data source yet, so they will appear in a later edition: {r.esc(", ".join(waiting))}.</p>')
     horizon = now - LOOKBACK

@@ -394,3 +394,15 @@ tr.hl td { color: var(--gold); font-weight: 600; }   /* D's favourites' rows in 
 .fplrev .n.bad { color: #f19a9a; }                 /* the underperformers' figures: pastel red, worse than the average */
 .fplrev .sq { color: #f19a9a; font-weight: 700; }   /* the squad average's number alone: bold pastel red */
 @media (prefers-color-scheme: light) { .fplrev .n.bad, .fplrev .sq { color: #b03a3a; } }
+/* F1: the fastest lap's time in purple, the podium in gold, silver and bronze, the championship leader in gold and platinum once the title is decided (D, 2026-11-04) */
+.f1sum .fl { color: #b57bf0; font-weight: 700; }
+tr.p1 td { color: var(--gold); font-weight: 700; }
+tr.p2 td { color: #c5ccd6; font-weight: 700; }
+tr.p3 td { color: #d08a52; font-weight: 700; }
+.plat { color: #dfe9ff; font-weight: 700; background: linear-gradient(90deg, #f4f8ff 0%, #c9dcff 25%, #f1d9ff 50%, #c8fff0 75%, #f4f8ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+@media (prefers-color-scheme: light) {
+  .f1sum .fl { color: #7b3fb8; }
+  tr.p2 td { color: #6c7683; }
+  tr.p3 td { color: #9a5a22; }
+  .plat { background: linear-gradient(90deg, #2f5fae 0%, #7b4bb5 35%, #1c8a74 70%, #2f5fae 100%); -webkit-background-clip: text; background-clip: text; }
+}

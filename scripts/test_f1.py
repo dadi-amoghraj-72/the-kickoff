@@ -108,7 +108,7 @@ check("practice sessions and sprint qualifying are never due", all(d["session"] 
 tbl = f1.results_table("Race", ROWS)
 cells = lambda html: [re.sub(r"<[^>]+>", "", c) for c in re.findall(r"<td[^>]*>.*?</td>", html)]  # noqa: E731
 c = cells(tbl)
-check("the race table has all 22 drivers, 5 columns each (P, Driver, +/-, Gap, Pts)", len(c) == 22 * 5 and tbl.count("<tr>") == 22 + 2, len(c))
+check("the race table has all 22 drivers, 5 columns each (P, Driver, +/-, Gap, Pts)", len(c) == 22 * 5 and len(re.findall(r"<tr[ >]", tbl)) == 22 + 2, len(c))
 check("points in the table add up to the 101 the top ten scored", sum(int(c[i * 5 + 4]) for i in range(22)) == 101, sum(int(c[i * 5 + 4]) for i in range(22)))
 check("winner row: K. Antonelli, level, race time to the second, 25 points; second row is a gap", c[:5] == ["1", "K. Antonelli", "–", "1:35:16", "25"] and c[5:7] == ["2", "C. Leclerc"] and c[8:10] == ["+13.078", "18"], c[:10])
 check("lapped cars show laps down, retirements show DNF", c[11 * 5 + 3] == "+1 lap" and c[19 * 5 + 3] == "DNF" and c[21 * 5 + 3] == "DNF", [c[i * 5 + 3] for i in (11, 19, 21)])
@@ -121,16 +121,16 @@ check("qualifying table: pole is ANT, Q3, 1:34.035; a Q1 exit shows its Q1 time 
 check("Lawson, 10th with no Q3 time, shows his Q2 time marked Q2 (so 9th Lindblad's slower Q3 lap does not look out of order)", qt[9 * 4:9 * 4 + 4] == ["10", "L. Lawson", "Q2", "1:35.058"], qt[36:40])
 check("the tables use the compact style", f1.qualifying_table(Q18["QualifyingResults"]).startswith('<div class="pts f1">') and tbl.startswith('<div class="pts f1') and f1.driver_standings_table(DS18, 18).startswith('<div class="pts f1">'))
 ds = f1.driver_standings_table(DS18, 18)
-check("driver standings: top 10, leader Antonelli on 365", ds.count("<tr>") == 12 and cells(ds)[:4][1] == "K. Antonelli" and cells(ds)[3] == "365" and "top 10" in ds, cells(ds)[:4])
+check("driver standings: top 10, leader Antonelli on 365", len(re.findall(r"<tr[ >]", ds)) == 12 and cells(ds)[:4][1] == "K. Antonelli" and cells(ds)[3] == "365" and "top 10" in ds, cells(ds)[:4])
 lawson = lambda html: cells(html)[cells(html).index("L. Lawson") + 1]  # noqa: E731
 check("a driver listed under two teams in the standings (Lawson) shows the team from the race: Racing Bulls, not Red Bull", lawson(f1.driver_standings_table(DS18, 18, teams={x["Driver"]["driverId"]: x["Constructor"]["name"] for x in ROWS})) == "RB"
       and lawson(ds) in ("RB", "RBR"))
 cs = f1.constructor_standings_table(CS18, 18)
-check("constructor standings: all 11 teams, Mercedes first on 607", cs.count("<tr>") == 13 and cells(cs)[:3] == ["1", "Mercedes", "607"], cells(cs)[:3])
+check("constructor standings: all 11 teams, Mercedes first on 607", len(re.findall(r"<tr[ >]", cs)) == 13 and cells(cs)[:3] == ["1", "Mercedes", "607"], cells(cs)[:3])
 
 # ---- Round-up lines ----
-check("race line: winner, start, margin, fastest lap, retirements", f1.race_summary(ROWS) == "Antonelli (Mercedes) won from pole, 13.078s ahead of Leclerc. 3 did not finish.\nFastest lap: Leclerc, 1:37.976.", f1.race_summary(ROWS))
-check("qualifying line: pole, time, margin to P2 (94.214 - 94.035 = 0.179)", f1.quali_summary(Q18["QualifyingResults"]) == "Pole: Antonelli (Mercedes), 1:34.035, 0.179s ahead of Verstappen.", f1.quali_summary(Q18["QualifyingResults"]))
+check("race line: winner, start, margin, fastest lap, retirements", f1.race_summary(ROWS) == "Kimi Antonelli (Mercedes) won from pole, 13.078s ahead of Charles Leclerc. 3 did not finish.\nFastest lap: Charles Leclerc, 1:37.976.", f1.race_summary(ROWS))
+check("qualifying line: pole, time, margin to P2 (94.214 - 94.035 = 0.179)", f1.quali_summary(Q18["QualifyingResults"]) == "Pole: Kimi Antonelli (Mercedes), 1:34.035, 0.179s ahead of Max Verstappen.", f1.quali_summary(Q18["QualifyingResults"]))
 check("the fastest lap is always on its own line, in the page too", f1.race_summary(ROWS).split("\n")[1].startswith("Fastest lap:") and "<br>Fastest lap:" in f1.session_html({"season": "2026", "round": 18, "session": "race", "race": RACE18}, FakeApi(results_for={18: RACE18}))[0])
 check("seconds() reads lap times and gaps", f1.seconds("1:34.035") == 94.035 and f1.seconds("+13.078") == 13.078 and abs(f1.seconds("+1:19.183") - 79.183) < 1e-9 and f1.seconds("DNF") is None and f1.seconds(None) is None)
 
@@ -175,7 +175,7 @@ check("a first pole is called out", f1.quali_standouts(q, lambda d: 1) == ["Anto
 SGT_MORNING = utc(2026, 10, 26, 2, 0)
 api = FakeApi(results_for={18: RACE18}, qualifying_for={18: Q18})
 out = f1.run(SGT_MORNING, W, {}, api)
-check("the US GP race edition: heading, race line, race table, both standings, no waiting note", "<h3>Race 18/23: United States Grand Prix, Austin</h3>" in out["html"] and "won from pole" in out["html"]
+check("the US GP race edition: heading, race line, race table, both standings, no waiting note", "<h3>Race 18/23<br>United States Grand Prix, Austin</h3>" in out["html"] and "won from pole" in out["html"]
       and ">Race Results</th>" in out["html"] and "Drivers&#x27; standings: top 10" in out["html"].replace("'", "&#x27;") and "Constructors" in out["html"] and "Not published" not in out["html"], out["html"][:400])
 check("it is remembered as reported, nothing is pending", out["state"]["reported"] == ["2026-18-race"] and out["state"]["pending"] == {}, out["state"])
 check("calls: schedule, results, 3 podium checks, 3 standings (this round, the one before, constructors) = 8", api.calls == 8, api.log)
@@ -264,6 +264,28 @@ try:
 finally:
     f1.fresh_standings = orig_fresh
 check("through the F1 block: the race edition has the note after the standings, the state remembers it, and a later edition showing the same round again does not repeat it", "Drivers&#x27; World Champion with 4 races to spare" in t1["html"] and t1["html"].index("Constructors&#x27; standings") < t1["html"].index("World Champion") and "2026-drivers" in t1["state"]["closed"] and "World Champion" not in t2["html"], (t1["state"], t2["html"][-200:]))
+
+# ---- D's F1 comments (2026-11-04): two-line heading, purple fastest lap, full names, podium accents, gold leader and platinum once decided ----
+rc = SCH_REAL[18]
+check("the heading is two lines: 'Race 19/23' then 'Mexico City Grand Prix, Mexico City'", f1.heading(rc, 23) == "Race 19/23\nMexico City Grand Prix, Mexico City" and f1.heading_html(f1.heading(rc, 23)) == "Race 19/23<br>Mexico City Grand Prix, Mexico City", f1.heading(rc, 23))
+sm = f1.summary_html(f1.race_summary(ROWS), ROWS)
+check("the race blurb has the full names (Kimi Antonelli, Charles Leclerc: the given name he is known by) and the fastest lap's time alone in purple", "Kimi Antonelli (Mercedes) won from pole" in sm and "ahead of Charles Leclerc" in sm and 'Fastest lap: Charles Leclerc, <span class="fl">1:37.976</span>.' in sm and sm.count('class="fl"') == 1 and "<br>" in sm, sm)
+check("no fastest lap in the data, no purple", "class=\"fl\"" not in f1.summary_html("X won.", [{"Driver": {}, "FastestLap": {"rank": "2"}}]))
+rt = f1.results_table("Race", ROWS)
+check("race table: the first three rows are gold, silver and bronze (p1, p2, p3), nobody else", re.findall(r'<tr class="(p\d)">', rt) == ["p1", "p2", "p3"] and len(re.findall(r"<tr[ >]", rt)) == 22 + 2, re.findall(r'<tr class="(p\d)">', rt))
+check("a sprint table gets the same podium accents; a short field (two cars) does not crash", re.findall(r'<tr class="(p\d)">', f1.results_table("Sprint", ROWS)) == ["p1", "p2", "p3"] and re.findall(r'<tr class="(p\d)">', f1.results_table("Sprint", ROWS[:2])) == ["p1", "p2"])
+dsx = f1.driver_standings_table(R19["ds"], 19, decided=False)
+csx = f1.constructor_standings_table(R19["cs"], 19, decided=False)
+check("while the title is open the leader's row is gold (class hl) in both championship tables, and only his", dsx.count('class="hl"') == 1 and csx.count('class="hl"') == 1 and "plat" not in dsx + csx and dsx.index('class="hl"') < dsx.index("K. Antonelli"), dsx[:300])
+dec = f1.titles_decided(R19["ds"], R19["cs"], SCH_REAL, 19)
+check("the real round-19 standings: the Drivers' title is decided, the Constructors' is not", dec == (True, False), dec)
+dsp = f1.driver_standings_table(R19["ds"], 19, decided=True)
+check("once decided the leader's whole row is platinum (the pearl colour, four cells) instead of gold, the other rows plain", dsp.count('class="plat"') == 4 and 'class="hl"' not in dsp and "K. Antonelli" in dsp.split('class="plat"')[2] and len(re.findall(r"<tr[ >]", dsp)) == 12, dsp.count('class="plat"'))
+shtml = f1.standings_html(R19["ds"], R19["cs"], 19, ROWS, SCH_REAL)
+check("standings_html puts it together: Antonelli platinum in the drivers' table, Mercedes still gold in the constructors'", shtml.count('class="plat"') == 4 and shtml.count('class="hl"') == 1 and shtml.index('class="plat"') < shtml.index('class="hl"'), (shtml.count('class="plat"'), shtml.count('class="hl"')))
+check("without a schedule (old callers) the leader is simply gold", f1.standings_html(R19["ds"], R19["cs"], 19, ROWS).count('class="hl"') == 2)
+css = (ROOT / "kickoff" / "static" / "style.css").read_text()
+check("the css has purple, the podium metals and the platinum text", ".f1sum .fl { color: #b57bf0" in css and "tr.p1 td" in css and "tr.p2 td" in css and "tr.p3 td" in css and ".plat {" in css)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
