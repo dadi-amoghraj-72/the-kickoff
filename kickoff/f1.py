@@ -297,9 +297,40 @@ def standings_html(ds, cs, rnd, race_rows):
     return driver_standings_table(ds, rnd, teams=teams) + constructor_standings_table(cs, rnd)
 
 
+# ---- The championships: a closing note when a title is decided ------------------------------------
+
+RACE_MAX, SPRINT_MAX = 25, 8            # a driver's most points from a Grand Prix and from a sprint
+TEAM_RACE_MAX, TEAM_SPRINT_MAX = 25 + 18, 8 + 7       # a team's: a one-two
+
+
+def remaining_max(schedule, rnd, race_pts, sprint_pts):
+    """The most points anyone can still score after round `rnd`: every later round's race, and its sprint where the schedule has one."""
+    return sum(race_pts + (sprint_pts if "Sprint" in x else 0) for x in schedule if int(x["round"]) > rnd)
+
+
+def title_notes(ds, cs, schedule, rnd, season, closed=()):
+    """([html notes], new closed keys): a note for each title that is mathematically decided after round `rnd` and has not been said: the leader's lead over second place is more than
+    the most points still on offer (a tie is never called). "Kimi Antonelli (Mercedes) is the 2026 Drivers' World Champion with 4 races to spare." After the last round no 'to spare'.
+    ds, cs: Jolpica's driver and constructor standings lists for the round (verified by the caller)."""
+    notes, new = [], []
+    left = sum(1 for x in schedule if int(x["round"]) > rnd)
+    spare = "" if left == 0 else f" with {left} race{'s' if left != 1 else ''} to spare"
+    rows = (ds or {}).get("DriverStandings") or []
+    if len(rows) >= 2 and f"{season}-drivers" not in closed and float(rows[0]["points"]) - float(rows[1]["points"]) > remaining_max(schedule, rnd, RACE_MAX, SPRINT_MAX):
+        d = rows[0]
+        team_ = d["Constructors"][-1]["name"] if d.get("Constructors") else ""
+        notes.append(f"{d['Driver']['givenName']} {d['Driver']['familyName']}" + (f" ({team(team_)})" if team_ else "") + f" is the {season} Drivers' World Champion{spare}.")
+        new.append(f"{season}-drivers")
+    rows = (cs or {}).get("ConstructorStandings") or []
+    if len(rows) >= 2 and f"{season}-constructors" not in closed and float(rows[0]["points"]) - float(rows[1]["points"]) > remaining_max(schedule, rnd, TEAM_RACE_MAX, TEAM_SPRINT_MAX):
+        notes.append(f"{team(rows[0]['Constructor']['name'])} are the {season} Constructors' World Champions{spare}.")
+        new.append(f"{season}-constructors")
+    return [f'<p class="f1sum">{r.esc(n)}</p>' for n in notes], new
+
+
 # ---- One session, and the whole block ------------------------------------------------------------
 
-def session_html(due, api, story=None, used=None):
+def session_html(due, api, story=None, used=None, capture=None):
     """(HTML, standings still to come) for one due session, or (None, False) when its results are not published yet. Raises when the source fails.
     story: optional, for Sunday races only: story(race, rows, start, extras) -> (html, usage). Its tokens are added into `used`.
     A failing story is left out; it never costs the tables."""
@@ -332,6 +363,8 @@ def session_html(due, api, story=None, used=None):
         got = fresh_standings(api, season, rnd, due["race"], rows)
         if got:
             html += standings_html(got[0], got[1], rnd, rows)
+            if capture is not None:
+                capture[int(rnd)] = got
         else:  # stale or missing: shown in a later edition, once the source has caught up
             stale = True
             html += '<p class="muted">The standings for this round are not up to date at the source yet; they will follow in a later edition.</p>'
@@ -341,14 +374,15 @@ def session_html(due, api, story=None, used=None):
 def run(now, window_start, st, api, season="current", story=None):
     """{"html", "state", "stats"}. st: {"reported": [session ids], "pending": {id: iso end}}. A failing or not-yet-published session
     is kept as pending (and mentioned) rather than lost; one failure never stops the others."""
-    reported, pending = list(st.get("reported", [])), dict(st.get("pending", {}))
+    reported, pending, closed = list(st.get("reported", [])), dict(st.get("pending", {})), list(st.get("closed", []))
     schedule = api.schedule(season)
+    got_standings = {}
     due = due_sessions(schedule, now, window_start, reported, pending)
     parts, waiting, failed, shown, queued_now, used = {}, [], 0, 0, set(), {"input": 0, "output": 0}
     for d in due:
         stale = False
         try:
-            html, stale = session_html(d, api, story, used)
+            html, stale = session_html(d, api, story, used, got_standings)
         except Exception:
             failed += 1
             html = None
@@ -380,12 +414,21 @@ def run(now, window_start, st, api, season="current", story=None):
             reported.append(sid)
             shown += 1
             parts.setdefault(int(rnd_), [heading(race, max(int(x["round"]) for x in schedule)), []])[1].append(standings_html(got[0], got[1], int(rnd_), rows))
+            got_standings[int(rnd_)] = got
         else:
             waiting.append(f"{race['raceName']} standings")
+    for rnd_, got in sorted(got_standings.items()):            # a title decided by this round's standings: said once
+        try:
+            notes, new_keys = title_notes(got[0], got[1], schedule, rnd_, str(schedule[0]["season"]), closed)
+        except Exception:
+            notes, new_keys = [], []
+        if notes and rnd_ in parts:
+            parts[rnd_][1].extend(notes)
+            closed += new_keys
     out = "".join(f"<h3>{r.esc(name)}</h3>" + "".join(blocks) for _, (name, blocks) in sorted(parts.items()))
     if waiting:
         out += (f'<p class="muted">Not published by the data source yet, so they will appear in a later edition: {r.esc(", ".join(waiting))}.</p>')
     horizon = now - LOOKBACK
     pending = {k: v for k, v in pending.items() if datetime.fromisoformat(v) >= horizon}
-    return {"html": out, "state": {"reported": reported[-60:], "pending": pending},
+    return {"html": out, "state": {"reported": reported[-60:], "pending": pending, "closed": closed[-10:]},
             "stats": {"due": len(due), "shown": shown, "waiting": len(waiting), "failed": failed, "calls": api.calls, "claude_tokens": used}}

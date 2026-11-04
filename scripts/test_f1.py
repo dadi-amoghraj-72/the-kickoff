@@ -236,5 +236,34 @@ check("sprint weekend: the race's standings include the sprint's points and are 
 nosprint = f1.run(utc(2026, 10, 12, 2, 0), utc(2026, 10, 11, 12, 0), {}, FakeApi(results_for={17: RACE17}, sprint_for={}, dstand={16: DS16, 17: DS17b}))
 check("if the sprint's points cannot be found, those standings do not add up and are held back", "Drivers" not in nosprint["html"] and "2026-17-standings" in nosprint["state"]["pending"], nosprint["state"])
 
+# ---- The championships (D, 2026-11-04): a closing note when a title is mathematically decided; real round 19 standings (Mexico City) ----
+R19 = json.loads((FX / "f1_standings_r19_2026.json").read_text())
+SCH_REAL = json.loads((FX / "f1_schedule_2026.json").read_text())
+dn, cn = f1.title_notes(R19["ds"], R19["cs"], SCH_REAL, 19, "2026")
+raw_ds = R19["ds"]["DriverStandings"]
+lead = float(raw_ds[0]["points"]) - float(raw_ds[1]["points"])
+left = [x for x in SCH_REAL if int(x["round"]) > 19]
+check("independent: Antonelli leads Verstappen by 119 points after round 19, with four races left and no sprint among them, so at most 100 points are on offer", lead == 119 and len(left) == 4 and not any("Sprint" in x for x in left) and raw_ds[0]["Driver"]["familyName"] == "Antonelli", (lead, len(left)))
+check("so the Drivers' title is decided: 'Kimi Antonelli (Mercedes) is the 2026 Drivers' World Champion with 4 races to spare.'", len(dn) == 1 and "Kimi Antonelli (Mercedes) is the 2026 Drivers&#x27; World Champion with 4 races to spare." in dn[0], dn)
+check("the Constructors' title is not: Mercedes lead Ferrari by 126 and 4 one-twos are worth 172", "constructors" not in " ".join(cn) and cn == ["2026-drivers"], cn)
+cn2 = f1.title_notes(R19["ds"], R19["cs"], SCH_REAL, 22, "2026", closed=["2026-drivers"])
+check("after round 22 (one race left, worth at most 43) the same 126-point lead decides the Constructors' title, 'with 1 race to spare' (singular), and the Drivers' title, already said, is not said again", len(cn2[0]) == 1 and "Mercedes are the 2026 Constructors&#x27; World Champions with 1 race to spare." in cn2[0][0] and cn2[1] == ["2026-constructors"], cn2)
+cn3 = f1.title_notes(R19["ds"], R19["cs"], SCH_REAL, 23, "2026")
+check("after the last round there is nothing left to spare: 'is the 2026 Drivers' World Champion.' and both titles are said", len(cn3[0]) == 2 and "to spare" not in " ".join(cn3[0]) and "2026 Drivers&#x27; World Champion." in cn3[0][0], cn3)
+close = json.loads(json.dumps(R19["ds"]))
+close["DriverStandings"][1]["points"] = str(int(float(close["DriverStandings"][0]["points"])) - 99)
+check("a lead of 99 with 100 on offer decides nothing; a lead of exactly 100 is not enough either (a tie on points is never called)", f1.title_notes(close, R19["cs"], SCH_REAL, 19, "2026")[0] == [] and f1.title_notes({**close, "DriverStandings": [close["DriverStandings"][0], {**close["DriverStandings"][1], "points": str(int(float(close["DriverStandings"][0]["points"])) - 100)}]}, R19["cs"], SCH_REAL, 19, "2026")[0] == [])
+sprint_sched = [dict(x, Sprint={"date": "x"}) if x["round"] == "20" else x for x in SCH_REAL]
+check("a sprint weekend adds its 8 points: with Brazil a sprint round, 108 are on offer, still under the lead of 119", f1.title_notes(R19["ds"], R19["cs"], sprint_sched, 19, "2026")[0] != [] and f1.remaining_max(sprint_sched, 19, 25, 8) == 108)
+check("no standings, one driver, or an unreadable list: no note and no error", f1.title_notes(None, None, SCH_REAL, 19, "2026") == ([], []) and f1.title_notes({"DriverStandings": [raw_ds[0]]}, None, SCH_REAL, 19, "2026") == ([], []))
+orig_fresh = f1.fresh_standings
+f1.fresh_standings = lambda api, season, rnd, race, rows, sprint=None: (R19["ds"], R19["cs"])
+try:
+    t1 = f1.run(utc(2026, 11, 2, 3, 0), utc(2026, 10, 31, 23, 15), {}, FakeApi(results_for={19: {**RACE18, "round": "19", "raceName": "Mexico City Grand Prix"}}, dstand={18: DS18, 19: DS19}))
+    t2 = f1.run(utc(2026, 11, 2, 3, 0), utc(2026, 10, 31, 23, 15), {"closed": t1["state"]["closed"]}, FakeApi(results_for={19: {**RACE18, "round": "19", "raceName": "Mexico City Grand Prix"}}, dstand={18: DS18, 19: DS19}))
+finally:
+    f1.fresh_standings = orig_fresh
+check("through the F1 block: the race edition has the note after the standings, the state remembers it, and a later edition showing the same round again does not repeat it", "Drivers&#x27; World Champion with 4 races to spare" in t1["html"] and t1["html"].index("Constructors&#x27; standings") < t1["html"].index("World Champion") and "2026-drivers" in t1["state"]["closed"] and "World Champion" not in t2["html"], (t1["state"], t2["html"][-200:]))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

@@ -97,8 +97,10 @@ check("ordering: the final first, then semi-finals; best seed first inside a rou
 every = [m for k in MS for m in MS[k]]
 indep = sorted(m["id"] for k, ev in (("ao", AO), ("rg", RG)) for m in MS[k] if (lambda n: n and n.group(2) and int(n.group(2)) <= 10)(re.match(r"^(?:\((\d+)\)\s+)?.+?\s+\([A-Z]{2,3}\)\s+bt\s+(?:\((\d+)\)\s+)?", notes_of(ev)[m["id"]])))
 check("top-10 seeds out: the matches picked (loser seed 1 to 10) are the same ones found by reading ESPN's notes a second way", sorted(m["id"] for m in every if m["loser"]["seed"] and m["loser"]["seed"] <= 10) == indep, len(indep))
-line = tennis.seeds_out([next(m for m in every if m["loser"]["seed"] == 1 and m["status"] == "final")])[0]
+line = tennis.seeds_out([next(m for m in every if m["loser"]["seed"] == 1 and m["status"] == "final" and m["stage"] != "F")])[0]
 check("a top-seed-out line names the seed, who beat him, the round and the score", line.startswith("Top Seed Out: (1) ") and " beaten by " in line and " in the " in line and line.endswith("."), line)
+fin_loss = [m for m in every if m["stage"] == "F" and m["loser"]["seed"] and m["loser"]["seed"] <= 10]
+check("D's review, 2026-11-04: a top-10 seed beaten in a final is not a 'Top Seed Out' (he is the beaten finalist, said in the champion's milestone line)", fin_loss and tennis.seeds_out(fin_loss) == [], [m["loser"]["name"] for m in fin_loss])
 check("a seed 11 or lower going out is not a standout", tennis.seeds_out([m for m in every if m["loser"]["seed"] and m["loser"]["seed"] > 10]) == [])
 retline = tennis.seeds_out([ret])[0]
 check("a retirement line says retired against, with the score and ret.", "retired against" in retline and "3-6 6-4 6-4 ret." in retline, retline)
@@ -261,6 +263,71 @@ merged = espn_tennis.Source(lambda u: {"events": [copy.deepcopy(half)]} if "/atp
 check("source: if the men's endpoint lacks the women's draw, the women's endpoint fills it in", len(merged) == 1 and {g["grouping"]["slug"] for g in merged[0]["groupings"]} >= {"mens-singles", "womens-singles"}, [g["grouping"]["slug"] for g in merged[0]["groupings"]])
 check("source: top 10 returns ten names", espn_tennis.Source(fake_get).top10("atp") == [f"P{i}" for i in range(1, 11)])
 check("tennis needs no Claude: neither module imports anthropic", "anthropic" not in (ROOT / "kickoff" / "tennis.py").read_text() and "anthropic" not in (ROOT / "kickoff" / "sources" / "espn_tennis.py").read_text())
+
+# ---- The tour finals (D, 2026-11-04): the ATP Finals and the WTA Finals, on the real 2025 events ----
+TF = json.loads((FX / "espn_tour_finals_2025.json").read_text())
+ATPF, WTAF = TF["atpf20251116"], TF["wtaf20251108"]
+
+
+def as_of(event, now):
+    """The event as the scoreboard would have shown it at `now`: matches that had not started are not there yet."""
+    e = copy.deepcopy(event)
+    for g in e["groupings"]:
+        g["competitions"] = [c for c in g["competitions"] if tennis.utc(c["date"]) <= now]
+    return e
+
+
+class FinalsSource:
+    def __init__(self, events):
+        self.events, self.calls = events, 0
+
+    def slam_events(self, now):
+        return []
+
+    def finals_events(self, now):
+        return [as_of(e, now) for e in self.events]
+
+
+check("espn_tennis.is_finals: 'Nitto ATP Finals' and 'FAGE WTA Finals Indian Wells' are the tour finals; the Paris Masters, a Slam and an ordinary WTA event are not", espn_tennis.is_finals(ATPF) and espn_tennis.is_finals(WTAF) and not espn_tennis.is_finals({"name": "Rolex Paris Masters"}) and not espn_tennis.is_finals({"name": "US Open"}) and not espn_tennis.is_finals({"name": "Chennai Open"}))
+am = tennis.finals_matches_of(ATPF)
+raw_comps = [c for g in ATPF["groupings"] if g["grouping"]["slug"] == "mens-singles" for c in g["competitions"]]
+check("independent: the ATP Finals has 15 singles matches (12 group, 2 semi-finals, the final), as many as the raw event lists", len(am) == 15 == len(raw_comps) and [m["stage"] for m in am].count("G") == 12 and [m["stage"] for m in am].count("SF") == 2 and [m["stage"] for m in am].count("F") == 1)
+groups = tennis.finals_groups(am)
+check("the two round-robin groups are found from who played whom: A is the group of the top seed (Alcaraz, de Minaur, Fritz, Musetti), B the other (Sinner, Zverev, Shelton, Auger-Aliassime)",
+      [g["name"] for g in groups] == ["Group A", "Group B"] and sorted(p["short"] for p in groups[0]["players"].values()) == ["A. de Minaur", "C. Alcaraz", "L. Musetti", "T. Fritz"] and sorted(p["short"] for p in groups[1]["players"].values()) == ["A. Zverev", "B. Shelton", "F. Auger-Aliassime", "J. Sinner"] and all(len(g["matches"]) == 6 for g in groups), [(g["name"], len(g["matches"])) for g in groups])
+st = {g["name"]: tennis.standings(g) for g in groups}
+raw_wins = {}
+for c in raw_comps:
+    if c["round"]["displayName"] == "Group Stage":
+        w = next(p for p in c["competitors"] if p.get("winner"))["athlete"]["displayName"]
+        raw_wins[w] = raw_wins.get(w, 0) + 1
+check("independent: every player's group wins equal the number of raw group matches he won", all(raw_wins.get(x["p"]["name"], 0) == x["w"] for rows in st.values() for x in rows), (raw_wins, [(x["p"]["name"], x["w"]) for rows in st.values() for x in rows]))
+semi_players = {p["name"] for m in am if m["stage"] == "SF" for p in (m["winner"], m["loser"])}
+through = {x["p"]["name"] for rows in st.values() for x in rows[:2]}
+check("independent: the top two of each group by our order (wins, then the match between two tied players, then sets, then games) are exactly the four real semi-finalists, so the tie-break for de Minaur over Fritz (1-2 each; de Minaur won their match) is right", through == semi_players and len(semi_players) == 4, (through, semi_players))
+check("Group A: Alcaraz 3-0 (sets 6-1), de Minaur, Fritz, Musetti; Group B: Sinner 3-0 (6-0), Auger-Aliassime 2-1, Zverev, Shelton", [(x["p"]["short"], x["w"]) for x in st["Group A"]] == [("C. Alcaraz", 3), ("A. de Minaur", 1), ("T. Fritz", 1), ("L. Musetti", 1)] and [(x["p"]["short"], x["w"]) for x in st["Group B"]] == [("J. Sinner", 3), ("F. Auger-Aliassime", 2), ("A. Zverev", 1), ("B. Shelton", 0)] and (st["Group A"][0]["sw"], st["Group A"][0]["sl"]) == (6, 1))
+gt = tennis.group_table("ATP Finals", groups[0])
+check("the group table is titled 'ATP Finals · Group A', complete, with the top two marked Q and every player's P, W, L and sets", "ATP Finals · Group A" in gt and "complete: the top two go through" in gt and gt.count(">Q<") == 2 and "3</td><td class=\"s\">3</td><td class=\"s\">0</td><td class=\"s\">6-1" in gt, gt[:400])
+check("the closing note names the year, the tour and the final: Jannik Sinner beat Carlos Alcaraz 7-6 7-5 (6 and 5 games, the tie-break not shown)", tennis.finals_closing(ATPF, am) == "<p>That&#x27;s the 2025 ATP Finals. Jannik Sinner wins the title, beating Carlos Alcaraz 7-6 7-5.</p>", tennis.finals_closing(ATPF, am))
+check("no final yet, no note", tennis.finals_closing(as_of(ATPF, datetime(2025, 11, 15, 23, 0, tzinfo=timezone.utc)), tennis.finals_matches_of(as_of(ATPF, datetime(2025, 11, 15, 23, 0, tzinfo=timezone.utc)))) == "")
+
+# a morning by morning run
+M1 = datetime(2025, 11, 10, 0, 0, tzinfo=timezone.utc)       # after the first day: two group matches
+r1 = tennis.run(M1, {}, FinalsSource([ATPF]))
+check("the first morning (10 November): 'ATP Finals', the Group Stage table with two matches, a half-played group table for A and for B", "<h3>ATP Finals</h3>" in r1["html"] and "Men&#x27;s Singles · Group Stage" in r1["html"] and r1["html"].count("<tbody>") >= 3 and "ATP Finals · Group A" in r1["html"] and r1["stats"]["shown"] == 2, r1["stats"])
+r1b = tennis.run(M1, r1["state"], FinalsSource([ATPF]))
+check("run again the same morning: nothing is shown twice", r1b["html"] == "" and r1b["stats"]["shown"] == 0)
+M2 = datetime(2025, 11, 17, 2, 0, tzinfo=timezone.utc)
+r2 = tennis.run(M2, {}, FinalsSource([ATPF]))
+check("the morning after the final (17 November): the final's table, the semi-finals, the closing note; the older group matches are beyond the three-day lookback", "Men&#x27;s Singles · Final" in r2["html"] and "Semi-finals" in r2["html"] and "That&#x27;s the 2025 ATP Finals" in r2["html"] and r2["html"].index("Men&#x27;s Singles · Final") < r2["html"].index("Semi-finals") < r2["html"].index("That&#x27;s the 2025"), r2["stats"])
+r2b = tennis.run(M2 + timedelta(days=1), r2["state"], FinalsSource([ATPF]))
+check("the next morning: not repeated, and the closing note is said once", "That&#x27;s the 2025" not in r2b["html"] and r2b["state"]["closed"] == r2["state"]["closed"] and len(r2["state"]["closed"]) == 1, r2b["html"][:100])
+wm = tennis.finals_matches_of(WTAF)
+wg = tennis.finals_groups(wm)
+raw_w = [c for g in WTAF["groupings"] if g["grouping"]["slug"] == "womens-singles" for c in g["competitions"]]
+check("the WTA Finals the same way: 15 matches, two groups of four, and the top two of each group are the four semi-finalists", len(wm) == 15 == len(raw_w) and len(wg) == 2 and {x["p"]["name"] for g in wg for x in tennis.standings(g)[:2]} == {p["name"] for m in wm if m["stage"] == "SF" for p in (m["winner"], m["loser"])}, [(g["name"], [x["p"]["short"] for x in tennis.standings(g)]) for g in wg])
+check("a tour-finals table has three set columns (best of three), the tour in the heading", 'colspan="4"' in tennis.finals_html(WTAF, wm[-1:], wm) and "WTA Finals" in tennis.finals_html(WTAF, wm[-1:], wm))
+check("a source that has no finals_events method or fails costs the Slam coverage nothing", tennis.run(M2, {}, type("S", (), {"slam_events": lambda self, now: [], "calls": 0})())["html"] == "" and tennis.run(M2, {}, type("S", (), {"slam_events": lambda self, now: [], "finals_events": lambda self, now: 1 / 0, "calls": 0})())["stats"]["failed"] == 1)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
