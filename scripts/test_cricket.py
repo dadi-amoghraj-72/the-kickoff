@@ -52,7 +52,12 @@ check("internationals come before the league games", [m["class"]["kind"] for m i
 check("the Pakistan tri-series final (finished the evening before) is not repeated", "Pakistan vs Sri Lanka" not in names)
 seen = {picked[0]["id"]}
 check("a match already reported is not reported again", picked[0]["id"] not in {m["id"] for m in ck.pick(M, NOW, START, seen=seen)})
-check("a match that has not finished by now is left out (an early 'now')", len(ck.pick(M, datetime(2026, 11, 1, 6, 0, tzinfo=timezone.utc), START)) < 5)
+first = M[[i for i, m in enumerate(M) if m["id"] == picked[0]["id"]][0]]
+check("a match the data says is still being played (matchEnded false) is left out of the results", picked[0]["id"] not in {m["id"] for m in ck.pick([{**x, "matchEnded": False} if x["id"] == picked[0]["id"] else x for x in M], NOW, START)})
+dls = {"id": "dls1", "name": "New Zealand vs India, 1st ODI, India tour of New Zealand 2026", "matchType": "odi", "teams": ["New Zealand", "India"], "dateTimeGMT": "2026-11-04T02:00:00", "matchStarted": True, "matchEnded": True, "score": [], "status": "India won by 5 wkts (DLS)"}
+start0, two_hours_in = datetime(2026, 11, 3, 0, 0, tzinfo=timezone.utc), datetime(2026, 11, 4, 4, 0, tzinfo=timezone.utc)
+check("a match that ended early (rain, DLS) is picked even when 'now' is before our nine-hour estimate of an ODI's end: the data says it ended, so it ended (the 4 November New Zealand v India ODI)", [m["id"] for m in ck.pick([dls], two_hours_in, start0)] == ["dls1"])
+check("but one the data says is still on is not picked, and one that ended before the window opened is not picked", ck.pick([{**dls, "matchEnded": False}], two_hours_in, start0) == [] and ck.pick([dls], two_hours_in, datetime(2026, 11, 5, 0, 0, tzinfo=timezone.utc)) == [])
 live = {"id": "t1", "name": "England vs Pakistan, 1st Test, Pakistan tour of England 2027", "matchType": "test", "status": "Day 2: Stumps - England lead by 40 runs",
         "dateTimeGMT": "2026-11-01T10:00:00", "teams": ["England", "Pakistan"], "score": [], "matchStarted": True, "matchEnded": False}
 check("a live Test is reported when its status has changed", any(m["id"] == "t1" for m in ck.pick(M + [live], NOW, START, last_status={"t1": "Day 1: Stumps"})))

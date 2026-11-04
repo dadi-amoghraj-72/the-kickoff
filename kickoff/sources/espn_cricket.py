@@ -263,6 +263,50 @@ def parse_series(page):
 
 # ---- Fetching ----------------------------------------------------------------------------------------
 
+# ---- Matches ESPN lists that the free CricketData list does not (yet) have ---------------------------------
+
+GAME_URL = BASE + "/cricket/series/{series}/scorecard/{game}"      # ESPN redirects this short form to the full page
+START = re.compile(r'"date":"(\d{4}-\d\d-\d\dT\d\d:\d\d)Z"')
+RESULT = re.compile(r"\b(won by|match tied|tied|no result|match drawn|drawn|abandoned)\b", re.I)
+ORDINAL = re.compile(r"^\d+(?:st|nd|rd|th)$")
+STOP = re.compile(r"^(?:\d+(?:st|nd|rd|th)|final|semi|qualifier|eliminator|group|elite|plate|play|super|quarter)$")
+
+
+def parse_start(page):
+    """The match's start as 'YYYY-MM-DDTHH:MM:00' (UTC, CricketData's form), or None."""
+    found = START.search(page)
+    return found.group(1) + ":00" if found else None
+
+
+def ended(status):
+    """True when the status line says the match is over ('India won by 5 wkts', 'Match tied', 'No result')."""
+    return bool(RESULT.search(status or ""))
+
+
+def match_from_slug(game_id, entry):
+    """A CricketData-shaped match from a scores-page entry's slug ('new-zealand-vs-india-1st-odi-24469'): {"id", "name", "teams", "matchType"}, or None
+    when the slug is not 'team vs team ...'. The name is rebuilt as 'New Zealand vs India, 1st ODI' so the usual scope rules can read it."""
+    words = (entry.get("slug") or "").replace("&amp;", "and").split("-")
+    if "vs" not in words:
+        return None
+    i = words.index("vs")
+    left, rest = words[:i], words[i + 1:]
+    j = next((k for k, w in enumerate(rest) if STOP.match(w) or w in ("odi", "t20i", "t20", "test")), len(rest))
+    right, tail = rest[:j], rest[j:]
+    if not left or not right:
+        return None
+    team = lambda ws: " ".join(w.capitalize() for w in ws)  # noqa: E731
+    tail = [w for w in tail if not (w.isdigit() and len(w) > 4)]            # the trailing series id
+    fmt = next((w for w in tail if w in ("odi", "t20i", "t20", "test")), None)
+    words_ = [w.upper() if w in ("odi", "t20i", "t20") else w.capitalize() for w in tail]
+    k = next((n for n, w in enumerate(tail) if w in ("match", "odi", "t20i", "t20", "test")), 0)
+    head, extra = " ".join(words_[:k + 1]), re.sub(r"\b(\d{4}) (\d{2})\b", r"\1-\2", " ".join(words_[k + 1:]))
+    kind = fmt or ("t20" if re.search(r"big bash|premier league|hundred", " ".join(tail), re.I) else "test" if re.search(r"ranji|shield|championship", " ".join(tail), re.I) else "t20")
+    return {"id": f"espn-{game_id}", "name": f"{team(left)} vs {team(right)}, {head}" + (f", {extra}" if extra else ""), "teams": [team(left), team(right)],
+            "matchType": {"t20i": "t20", "t20": "t20", "odi": "odi", "test": "test"}[kind], "ordinal": next((w for w in tail if ORDINAL.match(w)), ""),
+            "series": entry.get("series"), "game": game_id, "scorecard": entry.get("scorecard")}
+
+
 def _get(url):
     return http.get_bytes(url).decode("utf-8", "replace")
 
@@ -292,6 +336,25 @@ class Source:
             page = self._page(game["scorecard"]) if game else None
             innings = parse_scorecard(page) if page else None
             return {"scorecard": innings, **parse_meta(page)} if innings else None
+        except Exception:
+            return None
+
+    def games(self):
+        """{game id: {"slug", "series", "scorecard"}} for the matches on ESPN's scores page (read once)."""
+        if self.index is None:
+            self.index = parse_index(self._page(SCORES_URL))
+        return self.index
+
+    def pseudo_matches(self):
+        """The scores page's matches as CricketData-shaped stubs (match_from_slug), the ones whose slug reads 'team vs team ...'."""
+        return [pm for pm in (match_from_slug(g, e) for g, e in self.games().items()) if pm]
+
+    def page_of(self, pseudo):
+        """(start 'YYYY-MM-DDTHH:MM:00', status line, potm, innings) from the scorecard page of a match_from_slug match; None when the page cannot be read."""
+        try:
+            page = self._page(pseudo.get("scorecard") or GAME_URL.format(series=pseudo["series"], game=pseudo["game"]))
+            meta = parse_meta(page)
+            return parse_start(page), meta["status"], meta["potm"], parse_scorecard(page)
         except Exception:
             return None
 

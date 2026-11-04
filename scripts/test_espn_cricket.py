@@ -284,5 +284,41 @@ sr = fsrc.series(nzind)
 check("the live source finds the series id from the day's scores page, fetches that series' page once, and returns its 10 matches; a second call uses the cache", sr is not None and len(sr) == 10 and any(u.endswith("/cricket/scores/series/24469") for u in page_calls) and (fsrc.series(nzind) is not None) and sum("scores/series" in u for u in page_calls) == 1, page_calls)
 check("a source that fails returns None, not an error", ec.Source(lambda url: 1 / 0, pause=0).series(nzind) is None)
 
+# ---- Matches ESPN has and the free CricketData list does not (New Zealand v India, 1st ODI, 4 November 2026) ----
+ODI = (FX / "espn_cricket_scorecard_nz_ind_odi.html").read_text()
+check("the start of the match is read from the page: 02:00 UTC on 4 November, in CricketData's form", ec.parse_start(ODI) == "2026-11-04T02:00:00" and ec.parse_start("no date here") is None)
+check("a status line that says the match is over is recognised; one in progress is not", all(ec.ended(x) for x in ("India won by 5 wkts (56b rem) (DLS)", "Match tied", "No result", "Match drawn", "Match abandoned")) and not any(ec.ended(x) for x in ("Day 2: Stumps - England lead by 40 runs", "Toss delayed", "")))
+stubs = {x: ec.match_from_slug("1", {"slug": x, "series": "9", "scorecard": None}) for x in ("new-zealand-vs-india-1st-odi-24469", "hobart-hurricanes-women-vs-melbourne-renegades-women-9th-match-womens-big-bash-league-2026-27", "england-vs-india-4th-test-india-tour-of-england-2026", "just-a-slug")}
+check("a scores-page slug becomes a match the scope rules can read: 'New Zealand vs India, 1st ODI' (odi), the WBBL match with its league name (t20), a Test (test); a slug with no 'vs' is nothing",
+      stubs["new-zealand-vs-india-1st-odi-24469"]["name"] == "New Zealand vs India, 1st ODI" and stubs["new-zealand-vs-india-1st-odi-24469"]["matchType"] == "odi" and stubs["new-zealand-vs-india-1st-odi-24469"]["teams"] == ["New Zealand", "India"]
+      and stubs["hobart-hurricanes-women-vs-melbourne-renegades-women-9th-match-womens-big-bash-league-2026-27"]["name"] == "Hobart Hurricanes Women vs Melbourne Renegades Women, 9th Match, Womens Big Bash League 2026-27"
+      and stubs["england-vs-india-4th-test-india-tour-of-england-2026"]["matchType"] == "test" and stubs["just-a-slug"] is None, stubs)
+check("the stubs are in scope exactly as CricketData's own names would be: the ODI is an international, the WBBL game a league match, and a Ranji game is out", ck.classify(stubs["new-zealand-vs-india-1st-odi-24469"])["kind"] == "international"
+      and ck.classify(stubs["hobart-hurricanes-women-vs-melbourne-renegades-women-9th-match-womens-big-bash-league-2026-27"])["label"] == "WBBL"
+      and ck.classify(ec.match_from_slug("2", {"slug": "assam-vs-karnataka-elite-group-b-ranji-trophy-2026-27", "series": "8050", "scorecard": None}))["kind"] is None)
+src_odi = ec.Source(lambda url: ODI, pause=0)
+got = src_odi.page_of(stubs["new-zealand-vs-india-1st-odi-24469"])
+check("reading the match page: its start, 'India won by 5 wkts (56b rem) (DLS)', the player of the match (Anshul Kamboj) and both innings", got and got[0] == "2026-11-04T02:00:00" and got[1].startswith("India won by 5 wkts") and got[2][0]["name"] == "Anshul Kamboj" and len(got[3]) == 2, got and got[:3])
+sc = ck.innings_scores(got[3])
+check("the score lines come from the page's own totals and match its text: New Zealand 185 all out in 40.2 overs, India 143/5 in 22.4", [(x["inning"], x["r"], x["w"], x["o"]) for x in sc] == [("New Zealand Inning 1", 185, 10, 40.2), ("India Inning 1", 143, 5, 22.4)] and "185" in ODI and "143" in ODI and "40.2" in ODI and "22.4" in ODI, sc)
+NOW_ODI = datetime(2026, 11, 4, 10, 0, tzinfo=timezone.utc)
+fetch = lambda pm: src_odi.page_of(pm)  # noqa: E731
+ext = ck.espn_extras([stubs["new-zealand-vs-india-1st-odi-24469"], stubs["england-vs-india-4th-test-india-tour-of-england-2026"]], [], fetch, NOW_ODI)
+check("extras: the ESPN-only ODI is added as a finished, CricketData-shaped match with its score lines and card; a Test England v India stub is also read but its page is the ODI page here, so only the ODI test counts", any(m["id"] == "espn-1" and m["matchEnded"] and m["matchStarted"] and m["dateTimeGMT"] == "2026-11-04T02:00:00" and m["status"].startswith("India won") and m["_card"]["potm"][0]["name"] == "Anshul Kamboj" and len(m["score"]) == 2 for m in ext), ext and ext[0].keys())
+cd_known = [{"id": "x", "name": "New Zealand vs India, 1st ODI, India tour of New Zealand 2026", "teams": ["New Zealand", "India"], "matchType": "odi", "dateTimeGMT": "2026-11-04T02:00:00"}]
+check("a match CricketData already has (same teams and the same '1st ODI') is not fetched or added twice", ck.espn_extras([stubs["new-zealand-vs-india-1st-odi-24469"]], cd_known, lambda pm: (_ for _ in ()).throw(AssertionError("must not be fetched")), NOW_ODI) == [])
+t20 = [{"id": "y", "name": "New Zealand vs India, 5th T20I, India tour of New Zealand 2026", "teams": ["New Zealand", "India"], "matchType": "t20", "dateTimeGMT": "2026-11-01T07:00:00"}]
+check("the same two teams in another match (the 5th T20I is known, the 1st ODI is not) still brings the ODI in", len(ck.espn_extras([stubs["new-zealand-vs-india-1st-odi-24469"]], t20, fetch, NOW_ODI)) == 1)
+check("a match that has not started yet, a page that cannot be read, and an out-of-scope game all give nothing, and no more than 6 pages are ever read",
+      ck.espn_extras([stubs["new-zealand-vs-india-1st-odi-24469"]], [], fetch, datetime(2026, 11, 4, 0, 0, tzinfo=timezone.utc)) == [] and ck.espn_extras([stubs["new-zealand-vs-india-1st-odi-24469"]], [], lambda pm: None, NOW_ODI) == []
+      and ck.espn_extras([ec.match_from_slug("2", {"slug": "assam-vs-karnataka-elite-group-b-ranji-trophy-2026-27", "series": "8050", "scorecard": None})], [], lambda pm: (_ for _ in ()).throw(AssertionError("out of scope")), NOW_ODI) == []
+      and (lambda calls: (ck.espn_extras([dict(stubs["new-zealand-vs-india-1st-odi-24469"], id=f"espn-{i}", teams=["New Zealand", f"India{i}"]) for i in range(10)], [], lambda pm: calls.append(1) or None, NOW_ODI), len(calls))[1])([]) <= ck.MAX_EXTRA_PAGES)
+run_odi = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no CricketData scorecard should be bought")), lambda used: 5,
+                 espn_extra=lambda ms: ck.espn_extras([stubs["new-zealand-vs-india-1st-odi-24469"]], ms, fetch, NOW_ODI))
+ph = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", run_odi["html"]))
+check("the whole block for an ESPN-only match: 'New Zealand v India', '1st ODI', both scores, India's win and the player of the match, with no CricketData scorecard bought", run_odi["stats"]["picked"] == 1 and "New Zealand v India" in ph and "1st ODI" in ph and "185" in ph and "143/5" in ph and "Anshul Kamboj" in ph, ph[:400])
+check("the match is remembered as reported, so tomorrow's edition does not repeat it", "espn-1" in run_odi["state"]["seen"], run_odi["state"]["seen"])
+run_boom = ck.run(NOW_ODI, datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([], 5), lambda mid: None, lambda used: 5, espn_extra=lambda ms: 1 / 0)
+check("if ESPN's extra lookup blows up the cricket block still builds from the main list (here an empty one)", run_boom["html"] == "" and run_boom["stats"]["picked"] == 0)
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

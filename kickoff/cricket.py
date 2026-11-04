@@ -12,6 +12,7 @@ TEST_NATIONS = {"australia", "england", "india", "new zealand", "pakistan", "sou
 # Checked in this order, so "women's" is tested before the men's version of the same name.
 LEAGUES = [("WPL", r"women'?s premier league", 50), ("WBBL", r"women'?s big bash", 50), ("Women's Hundred", r"the hundred women|women'?s hundred", 50),
            ("IPL", r"indian premier league", 60), ("BBL", r"big bash league", 60), ("The Hundred", r"the hundred", 60)]
+RESULT = re.compile(r"\b(won by|match tied|tied|no result|match drawn|drawn|abandoned)\b", re.I)    # a status line that says the match is over
 FORMAT = re.compile(r"\b(T20I|ODI|Test|Tri-Series|World Cup|Asia Cup|Ashes|Champions Trophy)\b", re.I)
 EXCLUDE = re.compile(r"\b(sixes|unofficial|under[- ]?19|u19|emerging|legends|masters|academy)\b", re.I)
 WORLD_CUP = re.compile(r"\bworld cup\b", re.I)
@@ -79,8 +80,8 @@ def pick(matches, now, window_start, seen=None, last_status=None):
             continue
         begin = started(m)
         if m.get("matchEnded"):
-            ends = begin + DURATION.get(m["matchType"], timedelta(hours=10))
-            if m["id"] in seen or not (window_start <= ends <= now):
+            ends = begin + DURATION.get(m["matchType"], timedelta(hours=10))     # an estimate: a rain-shortened or DLS match ends earlier than this
+            if m["id"] in seen or ends < window_start:
                 continue
         elif m.get("matchStarted") and m["matchType"] == "test" and c["kind"] == "international":
             pass
@@ -88,6 +89,53 @@ def pick(matches, now, window_start, seen=None, last_status=None):
             continue
         out.append({**m, "class": c})
     return sorted(out, key=lambda x: (-x["class"]["priority"], x["dateTimeGMT"]), reverse=False)
+
+
+MAX_EXTRA_PAGES = 6
+
+
+def innings_scores(innings):
+    """CricketData-style score entries ({"inning": "India Inning 1", "r", "w", "o"}) from ESPN scorecard innings (each with its total)."""
+    out, seen = [], {}
+    for inn in innings:
+        total = (inn.get("espn") or {}).get("total")
+        if not total:
+            continue
+        team = re.sub(r"\s+Innings?$", "", inn.get("inning", "")).strip()
+        seen[team] = seen.get(team, 0) + 1
+        out.append({"inning": f"{team} Inning {seen[team]}", "r": total["r"], "w": total["w"], "o": total["o"]})
+    return out
+
+
+def espn_extras(pseudo, matches, fetch, now, limit=MAX_EXTRA_PAGES):
+    """Matches that ESPN's scores page lists but the free CricketData list does not have (it can run behind: on 4 November 2026 it lacked a finished New Zealand v
+    India ODI that ESPN already had). pseudo: match_from_slug dicts for the scores page; matches: the CricketData list; fetch(pseudo) -> (start, status, potm, innings)
+    or None. Returns CricketData-shaped matches that are in scope and not already in the list, each carrying its scorecard as "_card". At most `limit` pages are read."""
+    ordinal = lambda name: (re.search(r"\b(\d+(?:st|nd|rd|th))\b", name or "", re.I) or [None, ""])[1].lower()  # noqa: E731
+    have = {}
+    for m in matches:
+        have.setdefault(frozenset(strip_women(t).lower() for t in m.get("teams") or []), set()).add(ordinal(m.get("name")))
+    out, pages = [], 0
+    for pm in pseudo:
+        if classify(pm)["kind"] is None:
+            continue
+        pair = frozenset(strip_women(t).lower() for t in pm["teams"])
+        if pair in have and (ordinal(pm["name"]) in have[pair] or not ordinal(pm["name"])):
+            continue                                        # CricketData has this one
+        if pages >= limit:
+            break
+        pages += 1
+        got = fetch(pm)
+        if not got or not got[0]:
+            continue
+        start, status, potm, innings = got
+        begin = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
+        if begin > now or not innings:
+            continue                                        # not started: nothing to report
+        out.append({"id": pm["id"], "name": pm["name"], "teams": pm["teams"], "matchType": pm["matchType"], "dateTimeGMT": start, "matchStarted": True,
+                    "matchEnded": bool(RESULT.search(status or "")), "status": status, "score": innings_scores(innings),
+                    "_card": {"scorecard": innings, "status": status, "potm": potm}})
+    return out
 
 
 def title(m):
@@ -370,7 +418,7 @@ def standouts_html(items, inline=False):
 
 # ---- The whole cricket block, within the daily call budget -------------------------------------
 
-def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card=None, espn_table=None, espn_series=None):
+def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card=None, espn_table=None, espn_series=None, espn_extra=None):
     """Build the cricket section. get_matches() -> (matches, calls used); get_scorecard(id) -> (card, calls used);
     affordable(used) -> how many scorecards fit. espn_card(match) -> a free scorecard or None: tried first, costs no calls.
     espn_table(match) -> the league's points table rows or None.
@@ -378,6 +426,11 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
     st: {"seen": [match ids], "status": {id: last status}}.
     Returns {"html", "state", "used", "stats"}; html is '' when there is no cricket to report."""
     matches, used = get_matches()
+    if espn_extra:                                      # ESPN's scores page can have a match the free list has not caught up with yet
+        try:
+            matches = matches + (espn_extra(matches) or [])
+        except Exception:
+            pass
     seen = set(st.get("seen", []))
     picked = pick(matches, now, window_start, seen, st.get("status", {}))
     found, checked, skipped, shown_cards = [], 0, 0, {}
@@ -400,7 +453,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
         if cached and (not espn_card or ("potm" in cached and all("dnb" in i for i in cached["innings"]))):
             take(m, cached)
             continue
-        card = espn_card(m) if espn_card else None  # free: no calls used
+        card = m.get("_card") or (espn_card(m) if espn_card else None)  # free: no calls used
         if card is None and cached:
             take(m, cached)
             continue
