@@ -57,7 +57,7 @@ def main():
     cmd = [str(ROOT / ".venv" / "bin" / "python"), str(ROOT / "scripts" / "build_demo.py"), "--no-open"] + (["--claude"] if "--claude" in sys.argv else []) + (["--showcase"] if "--showcase" in sys.argv else []) + ([] if dry else ["--publish"])
     log("building the demo page" + (" (dry run: not published)" if dry else ""))
     run = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    tail = "\n".join((run.stdout or "").strip().splitlines()[-8:])
+    tail = "\n".join((run.stdout or "").strip().splitlines()[-40:])   # the whole build report: which sections, any cricket problem, the Claude cost
     log(tail)
     day = today.isoformat()
     found = re.search(r"sections: (.*)", run.stdout or "")
