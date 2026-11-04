@@ -12,7 +12,7 @@ import copy
 import os
 from datetime import datetime, timezone
 
-from kickoff import budget, cricket, cricketcache, f1, football, mlb, nba, nfl, order, render, tennis
+from kickoff import awards, budget, cricket, cricketcache, f1, football, mlb, nba, nfl, order, preview, render, tennis
 from kickoff import state as state_files
 from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica
 from kickoff.sources import cricket as cricket_source
@@ -42,6 +42,31 @@ def _simple(section_id, title, call, state_id):
         return {"sections": [{"id": section_id, "title": title, "html": got["html"]}] if got.get("html") else [], "state": {state_id: got["state"]},
                 "stats": got.get("stats", {})}
     return (section_id, title, go)
+
+
+def _with_extras(call, league, sport, name, client=None):
+    """Wrap a sport's run (now, day, state) so its section also carries, above its games: the "season is coming" note in the week before the season (kickoff.preview,
+    Claude writes it, once a season) and the awards table on a day something new was announced (kickoff.awards). Their states live inside the sport's own state under
+    'awards' and 'previewed' (the sport's run does not know them, so they are put back here). Neither can cost the sport its games: any failure leaves them out."""
+    def go(now, day, st):
+        got = call(now, day, st)
+        old_awards, old_prev = copy.deepcopy((st or {}).get("awards")), list((st or {}).get("previewed") or [])
+        html_a, new_awards = "", old_awards
+        html_p, new_prev, cost = "", old_prev, 0.0
+        try:
+            html_a, new_awards = awards.block(league, sport, f"{name} Awards", day, old_awards)
+        except Exception:
+            pass
+        try:
+            html_p, new_prev, cost = preview.block(league, sport, name, awards.season_of(league, day), day, old_prev, client)
+        except Exception:
+            pass
+        out = dict(got)
+        out["state"] = {**got["state"], **({"awards": new_awards} if new_awards is not None else {}), "previewed": new_prev}
+        out["html"] = html_p + html_a + (got.get("html") or "")
+        out["stats"] = {**got.get("stats", {}), "preview_cost": round(cost, 5)}
+        return out
+    return go
 
 
 def backup_matches(env):
@@ -76,8 +101,8 @@ def real_adapters(client=None, env=None):
         ("cricket", "Cricket", cricket_go),
         _simple("f1", "F1", lambda now, day, s: f1.run(now, espn.window_start(day), s, jolpica.Api()), "f1"),
         _simple("tennis", "Tennis", lambda now, day, s: tennis.run(now, s, espn_tennis.Source(), fetch_news=lambda: feeds.fetch_all(tennis.FEEDS)), "tennis"),
-        _simple("nfl", "NFL", lambda now, day, s: nfl.run(now, day, s, espn_nfl.Source()), "nfl"),
-        _simple("nba", "NBA", lambda now, day, s: nba.run(now, day, s, espn_nba.Source()), "nba"),
+        _simple("nfl", "NFL", _with_extras(lambda now, day, s: nfl.run(now, day, s, espn_nfl.Source()), "nfl", "football", "NFL", client), "nfl"),
+        _simple("nba", "NBA", _with_extras(lambda now, day, s: nba.run(now, day, s, espn_nba.Source()), "nba", "basketball", "NBA", client), "nba"),
         _simple("mlb", "MLB", lambda now, day, s: mlb.run(now, day, s, espn_mlb.Source()), "mlb"),
     ]
 

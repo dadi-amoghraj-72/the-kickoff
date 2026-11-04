@@ -1,0 +1,404 @@
+{{Short description|National Football League all-star games}}
+{{Use mdy dates|date=November 2025}}
+{{Use American English|date=March 2026}}
+{{Infobox American football game
+| full_name          = 2026 Pro Bowl Games
+| type               = pb
+| name               = 2026
+| image              =
+| image_size         = 
+| home               = [[American Football Conference|AFC]] 
+| home_total         =52
+| visitor            = [[National Football Conference|NFC]] 
+| visitor_total      =66
+| date               = February 3, 2026
+| stadium            = [[Moscone Center]], [[San Francisco, California]]
+| visitor_coach      = [[Jerry Rice]]
+| visitor_home_team  = 
+| home_coach         = [[Steve Young]]
+| home_coach_team    = 
+| offensiveMVP       = [[George Pickens]]
+| offMVPteam         = [[Dallas Cowboys]]
+| defensiveMVP       = [[Antoine Winfield Jr.]]
+| defMVPteam         = [[Tampa Bay Buccaneers]]
+| network            = {{hlist|[[Monday Night Football|ESPN]]|[[Disney XD]]|[[ESPN Deportes]]|[[NFL+]]|[[ESPN DTC]]}}
+| referee            =
+| anthem             = Ebony Riley
+| halftime           = 
+| attendance         = 
+| announcers         = [[Scott Van Pelt]] (play-by-play), [[Dan Orlovsky]], [[Jason Kelce]] (color), [[Laura Rutledge]], and [[Michelle Beisner-Buck]] (sideline reporters)
+| radio              = [[NFL on Westwood One|Westwood One]]
+| radioannouncers    = [[Ryan Radtke]], (play-by-play), [[Kirk Morrison]] (analyst) and [[Amber Theoharis]] (sideline reporter)
+| last               = [[2025 Pro Bowl Games|2025]]
+}}
+
+The '''2026 Pro Bowl Games''' was the [[National Football League]] (NFL)'s [[all-star game]] for the [[2025 NFL season]]. This was the fourth and final year the event has consisted of a non-contact [[flag football]] game, and the first year it has been integrated into the [[Super Bowl]]'s festivities instead of a standalone event.<ref name="CNN-October">{{cite web|last=Martin|first=Jill|url=https://www.cnn.com/2025/10/22/sport/football-nfl-pro-bowl-moves-to-super-bowl-week|title=The NFL's Pro Bowl is moving to Super Bowl week|website=CNN|date=October 22, 2025|access-date=November 3, 2025}}</ref> It took place in the week leading up to [[Super Bowl LX]] on Tuesday, February 3, 2026, at the [[Moscone Center]] in [[San Francisco, California]], the site of this season's [[Super Bowl Experience]].<ref name="schedule">{{cite web|title=Official lineup of Super Bowl LX events and venues revealed |url=https://www.nfl.com/news/official-lineup-of-super-bowl-lx-events-and-venues-revealed|website=NFL.com|date=November 3, 2025|access-date=November 9, 2025}}</ref> The [[National Football Conference| NFC]] defended their win from the previous year's flag football game with a 66–52 win, extending their win streak to four straight, retaining their undefeated record since the format change, and allowing them to retake a 27–26 all-time lead over the AFC in Pro Bowl events.
+
+This was the final edition of the Pro Bowl Games, as the NFL announced in August 2026 that they would be discontinued.<ref>{{cite news |title=NFL pulls the plug on the Pro Bowl |url=https://www.tsn.ca/nfl/article/nfl-pulls-the-plug-on-the-pro-bowl/ |access-date=26 August 2026 |publisher=TSN}}</ref>
+
+==Background==
+In October 2025, the NFL announced plans to integrate the Pro Bowl Games into the Super Bowl's festivities rather than continue to hold it as a standalone event. It will be designed as a more intimate, television-oriented event held inside a 4,000-seat ballroom at the [[Moscone Center]] in [[San Francisco]], the site of this season's [[Super Bowl Experience]]. The league also intends to use it as a preview for [[Flag football at the Summer Olympics|flag football's Olympics debut]] at the [[2028 Summer Olympics|2028 Games]] in [[Los Angeles]].<ref name="ESPN-October">{{cite web|title=NFL's Pro Bowl festivities moving to Tuesday of Super Bowl week |url=https://www.espn.com/nfl/story/_/id/46684395/nfl-pro-bowl-festivities-moving-tuesday-super-bowl-week|website=ESPN|date=October 22, 2025|access-date=November 3, 2025}}</ref>
+
+==Format==
+The format included a 7-on-7 flag football game held on February 3, 2026. The Skills Competition was not televised this year and did not count towards the points of the final score. Portions were shown on social media and other digital platforms. In the three prior years held that were worth points towards the final score.<ref name="nfl-announcement">{{cite web|title=2026 Pro Bowl Games Moved to Tuesday of Super Bowl LX Week in Bay Area|url=https://operations.nfl.com/updates/the-game/2026-pro-bowl-games-presented-by-verizon-moved-to-tuesday-of-super-bowl-lx-week-in-bay-area/|website=NFL.com|date=October 22, 2025|access-date=November 9, 2025}}</ref>
+
+==Rosters==
+The fan voting ran from November 27, 2025, to December, with the initial rosters announced on December 23, 2025.<ref name="nfl-announcement"/> After quarterback [[Drake Maye]] and the [[2025 New England Patriots season|New England Patriots]] advanced to [[Super Bowl LX]], he was replaced by [[Shedeur Sanders]]; the [[2025 Cleveland Browns season|Cleveland Browns]] rookie was reportedly selected because a number of other AFC quarterbacks were either injured or declined to participate, but it sparked outbursts from fans due to Sanders's subpar season that included a 3–4 record, a 56.6 completion percentage, a 7-10 interception ratio, and a 68.1 [[passer rating]].<ref>{{cite web|last=Brinkerhoff|first=Nick|url=https://www.usatoday.com/story/sports/nfl/2026/01/26/shedeur-sanders-pro-bowl-browns/88366394007/|title=Why is Shedeur Sanders going to the Pro Bowl? Browns QB's selection explained|website=USA Today|date=January 26, 2026|access-date=January 26, 2026}}</ref><ref>{{Cite web|title=Browns rookie QB Shedeur Sanders added to Pro Bowl Games roster as replacement|url=https://www.nfl.com/news/browns-rookie-qb-shedeur-sanders-added-to-pro-bowl-games-roster-as-replacement|website=NFL.com|access-date=January 29, 2026|language=en-US|date=January 27, 2026}}</ref>
+
+===AFC===
+{|class="wikitable"
+|+ Offense
+!Position 
+!Starter(s)
+!Reserve(s)
+!Alternate(s)
+|-
+|style="text-align:center"|[[Quarterback]]
+|{{Small|17}} [[Josh Allen]], [[2025 Buffalo Bills season|Buffalo]]{{ref label|injury|b|b}}
+|{{Small|10}} [[Justin Herbert]], [[2025 Los Angeles Chargers season|LA Chargers]]{{ref label|declined|d|d}}<br />{{Small|10}} [[Drake Maye]], [[2025 New England Patriots season|New England]]{{ref label|Super Bowl|c|c}}
+|{{Small|9}} [[Joe Burrow]], [[2025 Cincinnati Bengals season|Cincinnati]]{{ref label|replacement|a|a}}<br />{{Small|16}} [[Joe Flacco]], [[2025 Cincinnati Bengals season|Cincinnati]]{{ref label|replacement|a|a}}<br />{{Small|12}} ''[[Shedeur Sanders]]'', [[2025 Cleveland Browns season|Cleveland]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Running back]]
+|{{Small|28}} [[Jonathan Taylor]], [[2025 Indianapolis Colts season|Indianapolis]]
+|{{Small|28}} [[De'Von Achane]], [[2025 Miami Dolphins season|Miami]]<br />{{Small|4}} [[James Cook (running back)|James Cook]], [[2025 Buffalo Bills season|Buffalo]]
+|
+|-
+|style="text-align:center"|[[Fullback (gridiron football)|Fullback]]
+|{{Small|42}} [[Patrick Ricard (American football)|Patrick Ricard]], [[2025 Baltimore Ravens season|Baltimore]]
+|
+|
+|-
+|style="text-align:center"|[[Wide receiver]]
+|{{Small|1}} [[Ja'Marr Chase]], [[2025 Cincinnati Bengals season|Cincinnati]]<br />{{Small|12}} [[Nico Collins]], [[2025 Houston Texans season|Houston]]
+|{{Small|4}} [[Zay Flowers]], [[2025 Baltimore Ravens season|Baltimore]]{{ref label|declined|d|d}}<br />{{Small|14}} [[Courtland Sutton]], [[2025 Denver Broncos season|Denver]]
+|{{Small|5}} [[Tee Higgins]], [[2025 Cincinnati Bengals season|Cincinnati]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Tight end]]
+|{{Small|89}} [[Brock Bowers]], [[2025 Las Vegas Raiders season|Las Vegas]]{{ref label|injury|b|b}}
+|{{Small|87}} [[Travis Kelce]], [[2025 Kansas City Chiefs season|Kansas City]]{{ref label|declined|d|d}}
+|{{Small|84}} ''[[Tyler Warren]]'', [[2025 Indianapolis Colts season|Indianapolis]]{{ref label|replacement|a|a}}<br/>{{Small|86}} [[Dalton Kincaid]], [[2025 Buffalo Bills season|Buffalo]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Tackle (gridiron football position)|Offensive tackle]]
+|{{Small|72}} [[Garett Bolles]], [[2025 Denver Broncos season|Denver]]<br />{{Small|73}} [[Dion Dawkins]], [[2025 Buffalo Bills season|Buffalo]]
+|{{Small|76}} [[Joe Alt]], [[2025 Los Angeles Chargers season|LA Chargers]]{{ref label|injury|b|b}}
+|
+|-
+|style="text-align:center"|[[Guard (gridiron football)|Offensive guard]]
+|{{Small|77}} [[Quinn Meinerz]], [[2025 Denver Broncos season|Denver]]<br />{{Small|56}} [[Quenton Nelson]], [[2025 Indianapolis Colts season|Indianapolis]]
+|{{Small|65}} [[Trey Smith (offensive lineman)|Trey Smith]], [[2025 Kansas City Chiefs season|Kansas City]]
+|
+|-
+|style="text-align:center"|[[Center (gridiron football)|Center]]
+|{{Small|52}} [[Creed Humphrey]], [[2025 Kansas City Chiefs season|Kansas City]]
+|{{Small|64}} [[Tyler Linderbaum]], [[2025 Baltimore Ravens season|Baltimore]]
+|
+|}
+{|class="wikitable"
+|+ Defense
+!Position 
+!Starter(s)
+!Reserve(s)
+!Alternate(s)
+|-
+|style="text-align:center"|[[Defensive end]]
+|{{Small|51}} [[Will Anderson Jr.]], [[2025 Houston Texans season|Houston]]<br />{{Small|95}} [[Myles Garrett]], [[2025 Cleveland Browns season|Cleveland]]{{ref label|declined|d|d}}
+|{{Small|98}} [[Maxx Crosby]], [[2025 Las Vegas Raiders season|Las Vegas]]
+|
+|-
+|style="text-align:center"|[[Defensive tackle]]
+|{{Small|95}} [[Chris Jones (defensive tackle, born 1994)|Chris Jones]], [[2025 Kansas City Chiefs season|Kansas City]]<br />{{Small|98}} [[Jeffery Simmons]], [[2025 Tennessee Titans season|Tennessee]]
+|{{Small|99}} [[Zach Allen]], [[2025 Denver Broncos season|Denver]]
+|
+|-
+|style="text-align:center"|[[Outside linebacker]]
+|{{Small|15}} [[Nik Bonitto]], [[2025 Denver Broncos season|Denver]]<br />{{Small|90}} [[T. J. Watt]], [[2025 Pittsburgh Steelers season|Pittsburgh]]{{ref label|declined|d|d}}
+|{{Small|45}} [[Tuli Tuipulotu]], [[2025 Los Angeles Chargers season|LA Chargers]]
+|{{Small|0}} [[Devin Lloyd]], [[2025 Jacksonville Jaguars season|Jacksonville]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Middle linebacker|Inside / middle linebacker]]
+|{{Small|0}} [[Roquan Smith]], [[2025 Baltimore Ravens season|Baltimore]]
+|{{Small|0}} [[Azeez Al-Shaair]], [[2025 Houston Texans season|Houston]]
+|
+|-
+|style="text-align:center"|[[Cornerback]]
+|{{Small|24}} [[Derek Stingley Jr.]], [[2025 Houston Texans season|Houston]]<br />{{Small|2}} [[Patrick Surtain II]], [[2025 Denver Broncos season|Denver]]
+|{{Small|0}} [[Christian Gonzalez]], [[2025 New England Patriots season|New England]]{{ref label|Super Bowl|c|c}}<br />{{Small|21}} [[Denzel Ward]], [[2025 Cleveland Browns season|Cleveland]]
+|{{Small|4}} [[Kamari Lassiter]], [[2025 Houston Texans season|Houston]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Free safety]]
+|{{Small|5}} [[Jalen Ramsey]], [[2025 Pittsburgh Steelers season|Pittsburgh]]{{ref label|declined|d|d}}
+|
+|{{Small|2}} [[Calen Bullock]], [[2025 Houston Texans season|Houston]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Strong safety]]
+|{{Small|14}} [[Kyle Hamilton]], [[2025 Baltimore Ravens season|Baltimore]]
+|{{Small|3}} [[Derwin James]], [[2025 Los Angeles Chargers season|LA Chargers]]
+|
+|-
+|}
+
+{|class="wikitable"
+|+ Special Teams
+!Position 
+!Starter
+!Alternate(s)
+|-
+|style="text-align:center"|[[Long snapper]]
+|{{Small|46}} [[Ross Matiscik]], [[2025 Jacksonville Jaguars season|Jacksonville]]
+|
+|-
+|style="text-align:center"|[[Punter (gridiron football)|Punter]]
+|{{Small|11}} [[Jordan Stout]], [[2025 Baltimore Ravens season|Baltimore]]
+|
+|-
+|style="text-align:center"|[[Placekicker]]
+|{{Small|11}} [[Cameron Dicker]], [[2025 Los Angeles Chargers season|LA Chargers]]
+|
+|-
+|style="text-align:center"|[[Return specialist]]
+|{{Small|17}} ''[[Chimere Dike]]'', [[2025 Tennessee Titans season|Tennessee]]
+|
+|-
+|style="text-align:center"|[[Special teams]]
+|{{Small|15}} [[Ben Skowronek]], [[2025 Pittsburgh Steelers season|Pittsburgh]]
+|
+|-
+|}
+
+:'''bold''' player who participated in the game
+:''italics'' signifies a rookie
+:'''{{Small|(C)}}''' signifies the player has been selected as a captain
+:{{note label|replacement|a|a}} Replacement player selection due to an injury or vacancy
+:{{note label|replacement|b|b}} Injured Player; selected but did not participate  
+:{{note label|replacement|c|c}} Selected but did not play because his team advanced to [[Super Bowl LX]]'' (see [[Pro Bowl draft|Pro Bowl "Player Selection"]] section)''
+:{{note label|declined|d|d}} Selected but chose not to participate
+
+===NFC===
+{|class="wikitable"
+|+ Offense
+!Position
+!Starter(s)
+!Reserve(s)
+!Alternate(s)
+|-
+|style="text-align:center"|[[Quarterback]]
+|{{Small|9}} [[Matthew Stafford]], [[2025 Los Angeles Rams season|LA Rams]]{{ref label|declined|d|d}}
+|{{Small|14}} [[Sam Darnold]], [[2025 Seattle Seahawks season|Seattle]]{{ref label|Super Bowl|c|c}}<br />{{Small|4}} [[Dak Prescott]], [[2025 Dallas Cowboys season|Dallas]]
+|{{Small|16}} [[Jared Goff]], [[2025 Detroit Lions season|Detroit]]{{ref label|replacement|a|a}}<br />{{Small|1}} [[Jalen Hurts]], [[2025 Philadelphia Eagles season|Philadelphia]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Running back]]
+|{{Small|0}} [[Jahmyr Gibbs]], [[2025 Detroit Lions season|Detroit]]
+|{{Small|23}} [[Christian McCaffrey]], [[2025 San Francisco 49ers season|San Francisco]]<br />{{Small|7}} [[Bijan Robinson]], [[2025 Atlanta Falcons season|Atlanta]]
+|
+|-
+|style="text-align:center"|[[Fullback (gridiron football)|Fullback]]
+|{{Small|44}} [[Kyle Juszczyk]], [[2025 San Francisco 49ers season|San Francisco]]
+|
+|
+|-
+|style="text-align:center"|[[Wide receiver]]
+|{{Small|12}} [[Puka Nacua]], [[2025 Los Angeles Rams season|LA Rams]]<br />{{Small|11}} [[Jaxon Smith-Njigba]], [[2025 Seattle Seahawks season|Seattle]]{{ref label|Super Bowl|c|c}}
+|{{Small|3}} [[George Pickens]], [[2025 Dallas Cowboys season|Dallas]]<br />{{Small|14}} [[Amon-Ra St. Brown]], [[2025 Detroit Lions season|Detroit]]
+|{{Small|88}} [[CeeDee Lamb]], [[2025 Dallas Cowboys season|Dallas]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Tight end]]
+|{{Small|85}} [[Trey McBride]], [[2025 Arizona Cardinals season|Arizona]]
+|{{Small|85}} [[George Kittle]], [[2025 San Francisco 49ers season|San Francisco]]{{ref label|injury|b|b}}
+|{{Small|87}} [[Jake Ferguson]], [[2025 Dallas Cowboys season|Dallas]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Tackle (gridiron football)|Offensive tackle]]
+|{{Small|58}} [[Penei Sewell]], [[2025 Detroit Lions season|Detroit]]<br />{{Small|78}} [[Tristan Wirfs]], [[2025 Tampa Bay Buccaneers|Tampa Bay]]
+|{{Small|71}} [[Trent Williams]], [[2025 San Francisco 49ers season|San Francisco]]
+|
+|-
+|style="text-align:center"|[[Guard (gridiron football)|Offensive guard]]
+|{{Small|73}} [[Tyler Smith (American football)|Tyler Smith]], [[2025 Dallas Cowboys season|Dallas]]<br />{{Small|62}} [[Joe Thuney]], [[2025 Chicago Bears season|Chicago]]
+|{{Small|63}} [[Chris Lindstrom]], [[2025 Atlanta Falcons season|Atlanta]]
+|
+|-
+|style="text-align:center"|[[Center (gridiron football)|Center]]
+|{{Small|52}} [[Drew Dalman]], [[2025 Chicago Bears season|Chicago]]
+|{{Small|51}} [[Cam Jurgens]], [[2025 Philadelphia Eagles season|Philadelphia]]
+|
+|}
+{|class="wikitable"
+|+ Defense
+!Position
+!Starter(s)
+!Reserve(s)
+!Alternate(s)
+|-
+|style="text-align:center"|[[Defensive end]]
+|{{Small|97}} [[Aidan Hutchinson]], [[2025 Detroit Lions season|Detroit]]<br />{{Small|1}} [[Micah Parsons]], [[2025 Green Bay Packers|Green Bay]]{{ref label|injury|b|b}}
+|{{Small|0}} [[DeMarcus Lawrence]], [[2025 Seattle Seahawks season|Seattle]]{{ref label|Super Bowl|c|c}}
+|
+|-
+|style="text-align:center"|[[Defensive tackle]]
+|{{Small|98}} [[Jalen Carter]], [[2025 Philadelphia Eagles season|Philadelphia]]<br />{{Small|99}} [[Leonard Williams]], [[2025 Seattle Seahawks season|Seattle]]{{ref label|Super Bowl|c|c}}
+|{{Small|92}} [[Quinnen Williams]], [[2025 Dallas Cowboys season|Dallas]]
+|
+|-
+|style="text-align:center"|[[Outside linebacker]]
+|{{Small|0}} [[Brian Burns (American football)|Brian Burns]], [[2025 New York Giants season|NY Giants]]<br />{{Small|8}} [[Jared Verse]], [[2025 Los Angeles Rams season|LA Rams]]
+|{{Small|0}} [[Byron Young (linebacker)|Byron Young]], [[2025 Los Angeles Rams season|LA Rams]]
+|
+|-
+|style="text-align:center"|[[Middle linebacker|Inside / middle linebacker]]
+|{{Small|46}} [[Jack Campbell (American football)|Jack Campbell]], [[2025 Detroit Lions season|Detroit]]
+|{{Small|53}} [[Zack Baun]], [[2025 Philadelphia Eagles season|Philadelphia]]
+|
+|-
+|style="text-align:center"|[[Cornerback]]
+|{{Small|8}} [[Jaycee Horn]], [[2025 Carolina Panthers season|Carolina]]<br />{{Small|21}} [[Devon Witherspoon]], [[2025 Seattle Seahawks season|Seattle]]{{ref label|Super Bowl|c|c}}
+|{{Small|33}} [[Cooper DeJean]], [[2025 Philadelphia Eagles season|Philadelphia]]<br />{{Small|27}} [[Quinyon Mitchell]], [[2025 Philadelphia Eagles season|Philadelphia]]{{ref label|declined|d|d}}
+|{{Small|26}} [[Nahshon Wright]], [[2025 Chicago Bears season|Chicago]]{{ref label|replacement|a|a}}<br />{{Small|25}} [[Keisean Nixon]], [[2025 Green Bay Packers season|Green Bay]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Free safety]]
+|{{Small|31}} [[Kevin Byard|Kevin Byard III]], [[2025 Chicago Bears season|Chicago]]
+|{{Small|31}} [[Antoine Winfield Jr.]], [[2025 Tampa Bay Buccaneers season|Tampa Bay]]
+|
+|-
+|style="text-align:center"|[[Strong safety]]
+|{{Small|3}} [[Budda Baker]], [[2025 Arizona Cardinals season|Arizona]]
+|
+|
+|}
+
+{|class="wikitable"
+|+ Special teams
+!Position
+!Starter(s)
+!Alternate(s)
+|-
+|style="text-align:center"|[[Long snapper]]
+|{{Small|46}} [[Jon Weeks]], [[2025 San Francisco 49ers season|San Francisco]]
+|
+|-
+|style="text-align:center"|[[Punter (gridiron football)|Punter]]
+|{{Small|10}} [[Tress Way]], [[2025 Washington Commanders season|Washington]]
+|
+|-
+|style="text-align:center"|[[Placekicker]]
+|{{Small|17}} [[Brandon Aubrey]], [[2025 Dallas Cowboys season|Dallas]]
+|
+|-
+|style="text-align:center"|[[Return specialist]]
+|{{Small|22}} [[Rashid Shaheed]], [[2025 Seattle Seahawks season|Seattle]]{{ref label|Super Bowl|c|c}}
+|{{Small|9}} [[KaVontae Turpin]], [[2025 Dallas Cowboys season|Dallas]]{{ref label|replacement|a|a}}
+|-
+|style="text-align:center"|[[Special teams]]
+|{{Small|57}} [[Luke Gifford]], [[2025 San Francisco 49ers season|San Francisco]]
+|
+|}
+
+:'''bold''' player who participated in the game 
+:''italics'' signifies a rookie
+:'''{{Small|C}}''' signifies the player has been selected as a captain 
+:{{note label|replacement|a|a}} Replacement Player selection due to injury or vacancy
+:{{note label|injury|b|b}} Injured Player; selected but did not participate
+:{{note label|Super Bowl|c|c}} Selected but did not play because his team advanced to [[Super Bowl LX]]'' (see [[Pro Bowl draft|Pro Bowl "Player Selection"]] section)''  
+:{{note label|declined|d|d}} Selected but chose not to participate
+
+==Number of selections per team==
+{| border=0
+|-
+|style="padding-left:50px"|
+{| class="wikitable sortable"
+|+American Football Conference
+|-
+! Team !! Selections
+|-
+|[[2025 Baltimore Ravens season|Baltimore Ravens]] || 6
+|-
+|[[2025 Buffalo Bills season|Buffalo Bills]] || 4
+|-
+|[[2025 Cincinnati Bengals season|Cincinnati Bengals]] || 4
+|-
+|[[2025 Cleveland Browns season|Cleveland Browns]] || 3
+|-
+|[[2025 Denver Broncos season|Denver Broncos]] || 6
+|-
+|[[2025 Houston Texans season|Houston Texans]] || 6
+|-
+|[[2025 Indianapolis Colts season|Indianapolis Colts]] || 2
+|-
+|[[2025 Jacksonville Jaguars season|Jacksonville Jaguars]] || 2
+|-
+|[[2025 Kansas City Chiefs season|Kansas City Chiefs]] || 4
+|-
+|[[2025 Los Angeles Chargers season|Los Angeles Chargers]] || 5
+|-
+|[[2025 Las Vegas Raiders season|Las Vegas Raiders]] || 2
+|-
+|[[2025 Miami Dolphins season|Miami Dolphins]] || 1
+|-
+|[[2025 New England Patriots season|New England Patriots]] || 2
+|-
+|[[2025 New York Jets season|New York Jets]] || 0
+|-
+|[[2025 Pittsburgh Steelers season|Pittsburgh Steelers]] || 3
+|-
+|[[2025 Tennessee Titans season|Tennessee Titans]] || 2
+|} 
+|style="padding-left:50px"|
+{| class="wikitable sortable"
+|+National Football Conference
+|-
+! Team !! Selections
+|-
+|[[2025 Arizona Cardinals season|Arizona Cardinals]] || 2
+|-
+|[[2025 Atlanta Falcons season|Atlanta Falcons]] || 2
+|-
+|[[2025 Carolina Panthers season|Carolina Panthers]] || 1
+|-
+|[[2025 Chicago Bears season|Chicago Bears]] || 4
+|- 
+|[[2025 Dallas Cowboys season|Dallas Cowboys]] || 8
+|-
+|[[2025 Detroit Lions season|Detroit Lions]] || 6
+|-
+|[[2025 Green Bay Packers season|Green Bay Packers]] || 2
+|- 
+|[[2025 Los Angeles Rams season|Los Angeles Rams]] || 4
+|-
+|[[2025 Minnesota Vikings season|Minnesota Vikings]] || 0
+|- 
+|[[2025 New Orleans Saints season|New Orleans Saints]] || 0
+|- 
+|[[2025 New York Giants season|New York Giants]] || 1
+|-
+|[[2025 Philadelphia Eagles season|Philadelphia Eagles]] || 6
+|-
+|[[2025 San Francisco 49ers season|San Francisco 49ers]] || 6
+|-
+|[[2025 Seattle Seahawks season|Seattle Seahawks]] || 6
+|-
+|[[2025 Tampa Bay Buccaneers season|Tampa Bay Buccaneers]] || 2
+|-
+|[[2025 Washington Commanders season|Washington Commanders]] || 1
+|}
+|}
+
+==Broadcasting==
+[[NFL on ESPN|ESPN]] will continue to produce the telecasts of the Pro Bowl Games. However, [[NFL on ABC|ABC]] will no longer simulcast the flag football game live due to the broadcast network's prior commitment to air its regular Tuesday night primetime lineup.<ref name="smw-October">{{cite web|last=Lewis|first=Jon|title=NFL announces Pro Bowl changes |url=https://www.sportsmediawatch.com/2025/10/nfl-announces-pro-bowl-changes/|website=Sports Media Watch|date=October 22, 2025|access-date=November 3, 2025}}</ref> However, ABC aired a one-hour Pro Bowl Games content special, ''Championship Chase: The Pro Bowl'' produced by [[NFL Films]] on Sunday, February 1, preceded by a special edition of ''[[NFL Live]]'' on ESPN.<ref name="nfl-announcement"/> This special was narrated by [[Method Man]] and made available on ESPN digital platforms the next day.
+
+==References==
+{{reflist}}
+
+==External links==
+*{{Official website|https://www.nfl.com/pro-bowl/}}
+
+{{2025 NFL season by team}}
+{{Pro Bowl}}
+{{MNF}}
+
+{{DEFAULTSORT:Pro Bowl}}
+[[Category:Pro Bowl|2026]]
+[[Category:2025 NFL season]]
+[[Category:2026 in American football]]
+[[Category:February 2026 sports events in the United States]]
+[[Category:American football competitions in San Francisco]]
+[[Category:2026 in sports in California]]
+[[Category:2026 in San Francisco]]
+[[Category:Flag football competitions]]

@@ -563,5 +563,46 @@ check("games behind: worked out by us, and equal to ESPN's own gamesBehind for a
 check("a tie counts as half a win and half a loss when counting games behind", nfl.games_behind({"stats": [{"name": "wins", "value": 5.0}, {"name": "losses", "value": 3.0}, {"name": "ties", "value": 1.0}]}, {"stats": [{"name": "wins", "value": 7.0}, {"name": "losses", "value": 2.0}, {"name": "ties", "value": 0.0}]}) == "1.5")
 check("a blue bar marks exactly one team in each division, the first row (the leader)", dv.count("z-blue") == 8 and all(re.search(r'<tr class="z-blue"><td class="">' + d["standings"]["entries"][0]["team"]["abbreviation"], dv) for d in raw_divs), dv.count("z-blue"))
 
+# ---- The season's closing note (D, 2026-11-04): the Super Bowl, on the real Super Bowl LX scoreboard (Seahawks 29, Patriots 13, 8 February 2026) ----
+SBL = json.loads((FX / "nfl_superbowl_2025.json").read_text())
+
+
+class SBSource:
+    """The scoreboard after the season: nothing on the board, but week 5 of the postseason still holds the Super Bowl."""
+    def __init__(self, board=None):
+        self.board, self.calls, self.log = board if board is not None else {"events": [], "leagues": []}, 0, []
+
+    def scoreboard(self, week=None, season_type=None):
+        self.log.append((week, season_type))
+        return SBL if (week, season_type) == (5, 3) else self.board
+
+    def box(self, event_id):
+        raise RuntimeError("down")
+
+
+check("Super Bowl LX: the closing note names the season, the champions, the game and the score", nfl.closing_html(nfl.super_bowl(SBL["events"]))
+      == ("<p>That&#x27;s the 2025 NFL season. The Seahawks are Super Bowl LX champions, beating the Patriots 29-13.</p>", 2025))
+raw_e = SBL["events"][0]["competitions"][0]["competitors"]
+raw_win = max(raw_e, key=lambda x: int(x["score"]))
+check("independent: the raw scoreboard's higher score is the winner's 29 and the loser's 13, and ESPN's winner flag agrees", raw_win["score"] == "29" and raw_win["team"]["shortDisplayName"] == "Seahawks" and raw_win["winner"] is True)
+check("a Super Bowl not yet final gives no note", nfl.super_bowl([{**SBL["events"][0], "status": {"type": {"name": "STATUS_IN_PROGRESS"}}}]) is None)
+tue_after = datetime(2026, 2, 10, 0, 0, tzinfo=timezone.utc)
+s1 = SBSource()
+o1 = nfl.run(tue_after, date(2026, 2, 10), {}, s1)
+check("two days after the Super Bowl, with an empty offseason board, the section is the closing note (found by asking for week 5 of the postseason) and the state remembers 2025",
+      "Super Bowl LX champions" in o1["html"] and o1["state"]["closed"] == 2025 and (5, 3) in s1.log, (o1["html"][:200], s1.log))
+s2 = SBSource()
+o2 = nfl.run(datetime(2026, 2, 11, 0, 0, tzinfo=timezone.utc), date(2026, 2, 11), o1["state"], s2)
+check("said once: the next morning has nothing (and does not even ask again)", o2["html"] == "" and o2["state"]["closed"] == 2025 and (5, 3) not in s2.log, s2.log)
+o3 = nfl.run(datetime(2026, 2, 20, 0, 0, tzinfo=timezone.utc), date(2026, 2, 20), {}, SBSource())
+check("ten days later, a system that never said it does not say it (the note is for the morning after)", o3["html"] == "")
+o4 = nfl.run(datetime(2026, 7, 1, 0, 0, tzinfo=timezone.utc), date(2026, 7, 1), {}, (src4 := SBSource()))
+check("in July the section is empty and the Super Bowl is not even asked for", o4["html"] == "" and (5, 3) not in src4.log, src4.log)
+board = {**SBL, "events": SBL["events"]}
+o5 = nfl.run(tue_after, date(2026, 2, 10), {}, SBSource(board))
+check("with the Super Bowl still on the board (week 5, postseason) the note comes with the board", "Super Bowl LX champions" in o5["html"], o5["html"][:150])
+o6 = nfl.run(datetime(2026, 2, 11, 0, 0, tzinfo=timezone.utc), date(2026, 2, 11), o5["state"], SBSource(board))
+check("and the next morning, with the Super Bowl still on the board, it is not said again", "Super Bowl LX champions" not in o6["html"] and o6["state"]["closed"] == 2025, o6["html"][:150])
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

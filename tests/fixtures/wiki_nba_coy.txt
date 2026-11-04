@@ -1,0 +1,740 @@
+{{Short description|National Basketball Association award}}
+{{for|the NBA coaches' union award|NBCA Coach of the Year Award}}
+{{Infobox sports award
+| name        = NBA Coach of the Year
+| image       = NBA Coach of the Year Logo.jpeg
+| image_size  = 250
+| alt         = 
+| caption     =
+| sport       = [[Basketball]]
+| league      = [[National Basketball Association]]
+| givenfor    = Coach deemed most integral to their team's success in regular season of the [[National Basketball Association]]
+| first       = {{NBA Year|1962}}
+| mostwins    = [[Don Nelson]] <br>[[Pat Riley]]<br>[[Gregg Popovich]] (tied, 3)
+| mostrecent  = [[Joe Mazzulla]], [[Boston Celtics]] ([[2025–26 NBA season|2026]])
+}}
+{{NBA Awards}}
+The '''National Basketball Association's Coach of the Year''' is an annual [[National Basketball Association]] (NBA) award given since the [[1962–63 NBA season]]. The winner receives the '''[[Red Auerbach]] Trophy''', which is named in honor of the head coach who led the [[Boston Celtics]] to nine [[List of NBA champions|NBA championships]] from 1956 to 1966. The winner is selected at the end of the regular season by a panel of sportswriters from the United States and Canada, each of whom casts a vote for first, second and third place selections. Each first-place vote is worth five points; each second-place vote is worth three points; and each third-place vote is worth one point. The person with the highest point total, regardless of the number of first-place votes, wins the award.<ref>{{cite web|url=http://www.nba.com/news/awards2006_coach.html|title=Dallas' Avery Johnson Named 2005–06 NBA Coach of the Year|access-date=July 12, 2008|date=April 28, 2006|publisher=Turner Sports Interactive, Inc|work=NBA.com|archive-url=https://web.archive.org/web/20100321175505/http://www.nba.com/news/awards2006_coach.html|archive-date=March 21, 2010|url-status=dead}}</ref>
+
+Since its inception, the award has been given to 41 different coaches. The most recent award winner is current [[Boston Celtics]] head coach [[Joe Mazzulla]]. [[Gregg Popovich]], [[Don Nelson]] and [[Pat Riley]] have each won the award three times, while [[Hubie Brown]], [[Mike Brown (basketball, born 1970)|Mike Brown]], [[Mike Budenholzer]], [[Mike D'Antoni]], [[Bill Fitch]], [[Cotton Fitzsimmons]], [[Gene Shue]], and [[Tom Thibodeau]] have each won it twice. No coach has won consecutive Coach of the Year awards. Riley is the only coach to be named Coach of the Year with three franchises.<ref name="riley">{{cite web| title = Heat coach Pat Riley among 2008 Basketball Hall of Fame class| url = https://www.espn.com/espn/wire?section=nba&id=3334726| date = April 7, 2008| access-date = July 12, 2008| publisher = ESPN}}</ref> [[Tom Heinsohn]], [[Bill Sharman]], and [[Lenny Wilkens]] are the only recipients to have been inducted to the [[Naismith Memorial Basketball Hall of Fame]] as both [[List of players in the Naismith Memorial Basketball Hall of Fame|player]] and [[List of coaches in the Naismith Memorial Basketball Hall of Fame|coach]]. [[Johnny Kerr]] is the only person to win the award with a losing record (33–48 with the [[Chicago Bulls]] in {{nbay|1966}}). Kerr was honored because he had guided the Bulls to the [[NBA Playoffs]] in their first season in the league.<ref>{{cite web|url=http://www.nba.com/history/players/kerrj_bio.html|title=Johnny "Red" Kerr Bio|access-date=July 15, 2008|publisher=Turner Sports Interactive, Inc|work=NBA.com|archive-url=https://web.archive.org/web/20120122063328/http://www.nba.com/history/players/kerrj_bio.html|archive-date=January 22, 2012|url-status=dead}}</ref> [[Doc Rivers]] is the only person to win the award despite his team not making the playoffs (41–41 with the [[Orlando Magic]] in {{nbay|1999}}). Only five recipients also coached the team that won the championship the same season: Red Auerbach, [[Red Holzman]], Bill Sharman, [[Phil Jackson]], and Gregg Popovich. Popovich is the only NBA Coach of the Year recipient to win the championship in the same season twice, winning the NBA title with the [[San Antonio Spurs]] in 2003 and 2014. 2020 winner and former [[Toronto Raptors]] head coach [[Nick Nurse]] is the only coach to receive this honor in both the NBA and the [[NBA G League]], having received the [[NBA G League Coach of the Year Award|G League award]] in [[2010–11 NBA Development League season|2011]].<ref name="2020COY">{{cite press release|url=https://www.nba.com/article/2020/08/22/raptors-nick-nurse-2019-20-coach-year-release |title=Toronto's Nick Nurse wins 2019-20 NBA Coach of the Year award |publisher=NBA |date=August 22, 2020 |access-date=August 22, 2020}}</ref>
+
+2015–16 recipient [[Steve Kerr]] only coached 39 of the 82 games in the season due to complications from offseason back surgery, though he received credit for all of the [[Golden State Warriors]]' 73 wins that season. Assistant coach [[Luke Walton]] served as interim head coach for the other 43 games for the Warriors, receiving one second-place vote and two third-place votes.<ref>{{cite web|first=Ananth|last=Pandian|url=http://www.cbssports.com/nba/eye-on-basketball/25567376/warriors-steve-kerr-wins-the-2016-nba-coach-of-the-year-award|title=Warriors' Steve Kerr wins the 2016 NBA Coach of the Year award|work=CBS Sports|date=April 26, 2016|access-date=April 28, 2016}}</ref> Steve Kerr and Luke Walton both won [[NBA Coach of the Month]] during the 2015–16 season, Kerr in March and Walton in November. Kerr asked the league to award Walton with the wins accumulated during Kerr's medical recovery time, but the NBA refused to do so because under league rules interim head coaches do not have win-loss records at all.  Mike Brown became the first unanimous Coach of the Year recipient in NBA history in the [[2022–23 NBA season|2022–23 season]].<ref>{{Cite web |title=Sacramento's Mike Brown unanimous Coach of the Year winner |work=San Francisco Chronicle |date=19 April 2023 |url=https://www.sfchronicle.com/sports/article/sacramento-s-mike-brown-unanimous-coach-of-the-17907375.php}}</ref>
+
+==Winners==
+[[File:Auerbach Lipofsky.jpg|thumb|upright|Hall of Famer [[Red Auerbach]] won the award in the 1964–65 season. The award was later named after him.|alt=A man, wearing a brown coat, white shirt and black tie, standing in front of a collage.]]
+[[File:Phil Jackson 3 cropped.jpg|thumb|upright|Hall of Famer [[Phil Jackson]] won the award in the 1995–96 season, coaching the [[Chicago Bulls]] to 72 wins in a season.|alt=A man with gray hair, wearing a black suit, white shirt and tie, at a basketball game.]]
+[[File:Mike D'Antoni 2010.jpg|thumb|upright|[[Mike D'Antoni]] led the [[2004–05 Phoenix Suns season|2004–05]] [[Phoenix Suns]] to a 33-win increase from the previous season.|alt=A man with gray hair, wearing a black suit, white shirt and tie, at a basketball game.]]
+[[File:Tom Thibodeau cropped.jpg|thumb|upright|[[Chicago Bulls]] and [[New York Knicks]] head coach [[Tom Thibodeau]] won the award in the 2010–11 and 2020–21 seasons.|alt=A man with dark hair, wearing a black suit, white shirt and tie, at a basketball game.]]
+[[File:George Karl.jpg|thumb|upright|[[George Karl]] led the [[2012–13 Denver Nuggets season|2012–13]] [[Denver Nuggets]] to a 57–25 record without an NBA All-Star.|alt=A man with gray hair, wearing a black suit, white shirt and tie, sitting at a basketball game.]]
+[[File:Pop sitting down.JPG|thumb|upright|[[Gregg Popovich]] led the [[2013–14 San Antonio Spurs season|2013–14]] [[San Antonio Spurs]] to their 5th NBA championship, and earned his 3rd NBA Coach of the Year Award that same season.|alt=A man with white hair, wearing a black suit, white shirt and orange tie, sitting at a basketball game.]]
+[[File:Mike Brown NBA cropped.jpg|thumb|upright|[[Mike Brown (basketball, born 1970)|Mike Brown]] won the award unanimously in the 2022–23 season. He remains the only coach in NBA history to have achieved that feat.]]
+{| class="wikitable"
+|-
+|style="background-color:#CFECEC; width:5em"|^
+|Denotes head coach who is currently active in the NBA as a head coach
+|-
+|style="background-color:#FFFF99; width:4em"|*
+|Elected to the [[Naismith Memorial Basketball Hall of Fame]] as a coach
+|-
+| {{dagger}}
+|Denotes coach was a unanimous winner
+|-
+|'''Bold'''
+|Team won NBA championship for that season
+|-
+|Coach (#)
+|Denotes the number of times the coach has been selected
+|-
+|-
+|Team (#)
+|Denotes the number of times a coach from this team has won
+|-
+|W–L
+|Win–loss record for that season
+|-
+|Win%
+|[[Winning percentage]] for that season
+|-
+|Win% ±
+|[[Winning percentage]] change from previous season
+|}
+
+{| class="wikitable plainrowheaders sortable" summary="Season (sortable), Coach (sortable), Nationality (sortable), Team (sortable), W–L (sortable) and Win% (sortable)"
+|-
+!scope="col"| Season
+!scope="col"| Coach
+!scope="col"| Nationality
+!scope="col"| Team
+!scope="col"| W–L
+!scope="col"| Win%
+!scope="col"| Win% ±
+|-
+| {{nbay|1962}}
+!scope="row" style="background-color:transparent;"| {{sortname|Harry|Gallatin}}
+| {{flag|United States}}
+| [[1962–63 St. Louis Hawks season|St. Louis Hawks]]
+| 48–32
+| .600
+| +.237
+|-
+| {{nbay|1963}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Alex|Hannum}}*
+| {{flagu|United States}}
+| [[1963–64 San Francisco Warriors season|San Francisco Warriors]]
+| 48–32
+| .600
+| +.212
+|-
+| {{nbay|1964}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Red|Auerbach}}*{{efn|name=Top10|Was selected as one of the [[50 Greatest Players in NBA History#Coaches|Top 10 Coaches in NBA History]]<ref>{{cite web|url=http://www.nba.com/history/top_10_coaches.html|title=Top 10 Coaches in NBA History|access-date=July 12, 2008|publisher=Turner Sports Interactive, Inc|work=NBA.com|archive-url=https://web.archive.org/web/20120209033542/http://www.nba.com/history/top_10_coaches.html|archive-date=February 9, 2012|url-status=dead}}</ref>}}
+| {{flagu|United States}}
+| '''[[1964–65 Boston Celtics season|Boston Celtics]]'''
+| 62–18
+| .775
+| +.037
+|-
+| {{nbay|1965}}
+!scope="row" style="background-color:transparent;"| {{sortname|Dolph|Schayes}}
+| {{flagu|United States}}
+| [[1965–66 Philadelphia 76ers season|Philadelphia 76ers]]
+| 55–25
+| .688
+| +.188
+|-
+| {{nbay|1966}}
+!scope="row" style="background-color:transparent;"| {{sortname|Johnny|Kerr}}
+| {{flagu|United States}}
+| [[1966–67 Chicago Bulls season|Chicago Bulls]]
+| 33–48
+| .407
+| {{sort|-|–}}
+|-
+| {{nbay|1967}}
+!scope="row" style="background-color:transparent;"| {{sortname|Richie|Guerin}}
+| {{flagu|United States}}
+| [[1967–68 St. Louis Hawks season|St. Louis Hawks]] (2)
+| 56–26
+| .683
+| +.202
+|-
+| {{nbay|1968}}
+!scope="row" style="background-color:transparent;"| {{sortname|Gene|Shue}}
+| {{flagu|United States}}
+| [[1968–69 Baltimore Bullets season|Baltimore Bullets]]
+| 57–25
+| .695
+| +.256
+|-
+| {{nbay|1969}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Red|Holzman}}*{{efn|name=Top10}}
+| {{flagu|United States}}
+| '''[[1969–70 New York Knicks season|New York Knicks]]'''
+| 60–22
+| .732
+| +.073
+|-
+| {{nbay|1970}}
+!scope="row" style="background-color:transparent;"| {{sortname|Dick|Motta}}
+| {{flagu|United States}}
+| [[1970–71 Chicago Bulls season|Chicago Bulls]] (2)
+| 51–31
+| .622
+| +.146
+|-
+| {{nbay|1971}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Bill|Sharman}}*
+| {{flagu|United States}}
+| '''[[1971–72 Los Angeles Lakers season|Los Angeles Lakers]]'''
+| 69–13
+| .841
+| +.256
+|-
+| {{nbay|1972}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Tom|Heinsohn}}*
+| {{flagu|United States}}
+| [[1972–73 Boston Celtics season|Boston Celtics]] (2)
+| 68–14
+| .829
+| +.146
+|-
+| {{nbay|1973}}
+!scope="row" style="background-color:transparent;"| {{sortname|Ray|Scott|dab=basketball}}
+| {{flagu|United States}}
+| [[1973–74 Detroit Pistons season|Detroit Pistons]]
+| 52–30
+| .634
+| +.146
+|-
+| {{nbay|1974}}
+!scope="row" style="background-color:transparent;"| {{sortname|Phil|Johnson|dab=basketball, born 1941}}
+| {{flagu|United States}}
+| [[1974–75 Kansas City–Omaha Kings season|Kansas City–Omaha Kings]]
+| 44–38
+| .537
+| +.135
+|-
+| {{nbay|1975}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Bill|Fitch}}*{{efn|name=Top10}}
+| {{flagu|United States}}
+| [[1975–76 Cleveland Cavaliers season|Cleveland Cavaliers]]
+| 49–33
+| .598
+| +.110
+|-
+| {{nbay|1976}}
+!scope="row" style="background-color:transparent;"| {{sortname|Tom|Nissalke}}
+| {{flagu|United States}}
+| [[1976–77 Houston Rockets season|Houston Rockets]]
+| 49–33
+| .598
+| +.110
+|-
+| {{nbay|1977}}
+!scope="row" style="background-color:transparent;"| {{sortname|Hubie|Brown}}
+| {{flagu|United States}}
+| [[1977–78 Atlanta Hawks season|Atlanta Hawks]] (3)
+| 41–41
+| .500
+| +.122
+|-
+| {{nbay|1978}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Cotton|Fitzsimmons}}*
+| {{flagu|United States}}
+| [[1978–79 Kansas City Kings season|Kansas City Kings]] (2)
+| 48–34
+| .585
+| +.207
+|-
+| {{nbay|1979}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Bill|Fitch}}*{{efn|name=Top10}} (2)
+| {{flagu|United States}}
+| [[1979–80 Boston Celtics season|Boston Celtics]] (3)
+| 61–21
+| .744
+| +.390
+|-
+| {{nbay|1980}}
+!scope="row" style="background-color:transparent;"| {{sortname|Jack|McKinney|dab=basketball}}
+| {{flagu|United States}}
+| [[1980–81 Indiana Pacers season|Indiana Pacers]]
+| 44–38
+| .537
+| +.086
+|-
+| {{nbay|1981}}
+!scope="row" style="background-color:transparent;"| {{sortname|Gene|Shue}} (2)
+| {{flagu|United States}}
+| [[1981–82 Washington Bullets season|Washington Bullets]] (2)
+| 43–39
+| .524
+| +.048
+|-
+| {{nbay|1982}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Don|Nelson}}*{{efn|name=Top10}}
+| {{flagu|United States}}
+| [[1982–83 Milwaukee Bucks season|Milwaukee Bucks]]
+| 51–31
+| .622
+| {{sort|+.003|-.049}}
+|-
+| {{nbay|1983}}
+!scope="row" style="background-color:transparent;"| {{sortname|Frank|Layden}}
+| {{flagu|United States}}
+| [[1983–84 Utah Jazz season|Utah Jazz]]
+| 45–37
+| .549
+| +.183
+|-
+| {{nbay|1984}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Don|Nelson}}*{{efn|name=Top10}} (2)
+| {{flagu|United States}}
+| [[1984–85 Milwaukee Bucks season|Milwaukee Bucks]] (2)
+| 59–23
+| .720
+| +.110
+|-
+| {{nbay|1985}}
+!scope="row" style="background-color:transparent;"| {{sortname|Mike|Fratello}}
+| {{flagu|United States}}
+| [[1985–86 Atlanta Hawks season|Atlanta Hawks]] (4)
+| 50–32
+| .610
+| +.195
+|-
+| {{nbay|1986}}
+!scope="row" style="background-color:transparent;"| {{sortname|Mike|Schuler}}
+| {{flagu|United States}}
+| [[1986–87 Portland Trail Blazers season|Portland Trail Blazers]]
+| 49–33
+| .598
+| +.110
+|-
+| {{nbay|1987}}
+!scope="row" style="background-color:transparent;"| {{sortname|Doug|Moe}}
+| {{flagu|United States}}
+| [[1987–88 Denver Nuggets season|Denver Nuggets]]
+| 54–28
+| .659
+| +.208
+|-
+| {{nbay|1988}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Cotton|Fitzsimmons}}* (2)
+| {{flagu|United States}}
+| [[1988–89 Phoenix Suns season|Phoenix Suns]]
+| 55–27
+| .671
+| +.330
+|-
+| {{nbay|1989}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Pat|Riley}}*{{efn|name=Top10}}
+| {{flagu|United States}}
+| [[1989–90 Los Angeles Lakers season|Los Angeles Lakers]] (2)
+| 63–19
+| .768
+| +.073
+|-
+| {{nbay|1990}}
+!scope="row" style="background-color:transparent;"| {{sortname|Don|Chaney}}
+| {{flagu|United States}}
+| [[1990–91 Houston Rockets season|Houston Rockets]] (2)
+| 52–30
+| .634
+| +.134
+|-
+| {{nbay|1991}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Don|Nelson}}*{{efn|name=Top10}} (3)
+| {{flagu|United States}}
+| [[1991–92 Golden State Warriors season|Golden State Warriors]] (2)
+| 55–27
+| .671
+| +.134
+|-
+| {{nbay|1992}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Pat|Riley}}*{{efn|name=Top10}} (2)
+| {{flagu|United States}}
+| [[1992–93 New York Knicks season|New York Knicks]] (2)
+| 60–22
+| .732
+| +.110
+|-
+| {{nbay|1993}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Lenny|Wilkens}}*{{efn|name=Top10}}
+| {{flagu|United States}}
+| [[1993–94 Atlanta Hawks season|Atlanta Hawks]] (5)
+| 57–25
+| .695
+| +.171
+|-
+| {{nbay|1994}}
+!scope="row" style="background-color:transparent;"| {{sortname|Del|Harris}}
+| {{flagu|United States}}
+| [[1994–95 Los Angeles Lakers season|Los Angeles Lakers]] (3)
+| 48–34
+| .585
+| +.183
+|-
+| {{nbay|1995}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Phil|Jackson}}*{{efn|name=Top10}}
+| {{flagu|United States}}
+| '''[[1995–96 Chicago Bulls season|Chicago Bulls]]''' (3)
+| 72–10
+| .878
+| +.305
+|-
+| {{nbay|1996}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Pat|Riley}}*{{efn|name=Top10}} (3)
+| {{flagu|United States}}
+| [[1996–97 Miami Heat season|Miami Heat]]
+| 61–21
+| .744
+| +.232
+|-
+| {{nbay|1997}}
+!scope="row" style="background-color:transparent"| {{sortname|Larry|Bird}}
+| {{flagu|United States}}
+| [[1997–98 Indiana Pacers season|Indiana Pacers]] (2)
+| 58–24
+| .707
+| +.231
+|-
+| {{nbay|1998}}
+!scope="row" style="background-color:transparent;"| {{sortname|Mike|Dunleavy|Mike Dunleavy Sr.}}
+| {{flagu|United States}}
+| [[1998–99 Portland Trail Blazers season|Portland Trail Blazers]] (2)
+| 35–15
+| .700
+| +.139
+|-
+| {{nbay|1999|trunc=y}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Doc|Rivers}}*
+| {{flagu|United States}}
+| [[1999–2000 Orlando Magic season|Orlando Magic]]
+| 41–41
+| .500
+| {{sort|+.001|-.160}}
+|-
+| {{nbay|2000}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Larry|Brown|dab=basketball}}*
+| {{flagu|United States}}
+| [[2000–01 Philadelphia 76ers season|Philadelphia 76ers]] (2)
+| 56–26
+| .683
+| +.085
+|-
+| {{nbay|2001}}
+!scope="row" style="background-color:#CFECEC"| {{sortname|Rick|Carlisle}}^
+| {{flagu|United States}}
+| [[2001–02 Detroit Pistons season|Detroit Pistons]] (2)
+| 50–32
+| .610
+| +.220
+|-
+| {{nbay|2002}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Gregg|Popovich}}*
+| {{flagu|United States}}
+| '''[[2002–03 San Antonio Spurs season|San Antonio Spurs]]'''
+| 60–22
+| .732
+| +.025
+|-
+| {{nbay|2003}}
+!scope="row" style="background-color:transparent;"| {{sortname|Hubie|Brown}} (2)
+| {{flagu|United States}}
+| [[2003–04 Memphis Grizzlies season|Memphis Grizzlies]]
+| 50–32
+| .610
+| +.269
+|-
+| {{nbay|2004}}
+!scope="row" style="background-color:transparent;"| {{sortname|Mike|D'Antoni}}
+| {{flagu|United States}}<br />{{flag|Italy|1946}}{{efn|name=MA|D'Antoni also holds Italian citizenship and has represented Italy at international level.<ref name=Italian>{{cite web|url=http://www.nba.com/coachfile/mike_dantoni/|title=Mike D'Antoni|access-date=August 17, 2008|publisher=Turner Sports Interactive, Inc|work=NBA.com|archive-url=https://web.archive.org/web/20120421035518/http://www.nba.com/coachfile/mike_dantoni/|archive-date=April 21, 2012|url-status=dead}}</ref>}}
+| [[2004–05 Phoenix Suns season|Phoenix Suns]] (2)
+| 62–20
+| .756
+| +.402
+|-
+| {{nbay|2005}}
+!scope="row" style="background-color:transparent"| {{sortname|Avery|Johnson}}
+| {{flagu|United States}}
+| [[2005–06 Dallas Mavericks season|Dallas Mavericks]]
+| 60–22
+| .732
+| +.025
+|-
+| {{nbay|2006}}
+!scope="row" style="background-color:transparent"| {{sortname|Sam|Mitchell|dab=basketball}}
+| {{flagu|United States}}
+| [[2006–07 Toronto Raptors season|Toronto Raptors]]
+| 47–35
+| .573
+| +.244
+|-
+| {{nbay|2007}}
+!scope="row" style="background-color:transparent"| {{sortname|Byron|Scott}}
+| {{flagu|United States}}
+| [[2007–08 New Orleans Hornets season|New Orleans Hornets]]
+| 56–26
+| .683
+| +.207
+|-
+| {{nbay|2008}}
+!scope="row" style="background-color:#CFECEC;"| {{sortname|Mike|Brown|dab=basketball, born 1970}}^
+| {{flagu|United States}}
+| [[2008–09 Cleveland Cavaliers season|Cleveland Cavaliers]] (2)
+| 66–16
+| .805
+| +.256
+|-
+| {{nbay|2009}}
+!scope="row" style="background-color:transparent"| {{sortname|Scott|Brooks}}
+| {{flagu|United States}}
+| [[2009–10 Oklahoma City Thunder season|Oklahoma City Thunder]]
+| 50–32
+| .610
+| +.330
+|-
+| {{nbay|2010}}
+!scope="row" style="background-color:transparent;"| {{sortname|Tom|Thibodeau}}
+| {{flagu|United States}}
+| [[2010–11 Chicago Bulls season|Chicago Bulls]] (4)
+| 62–20
+| .756
+| +.256
+|-
+| {{nbay|2011}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Gregg|Popovich}}* (2)
+| {{flagu|United States}}
+| [[2011–12 San Antonio Spurs season|San Antonio Spurs]] (2)
+| 50–16
+| .758
+| +.014
+|-
+| {{nbay|2012}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|George|Karl}}*
+| {{flagu|United States}}
+| [[2012–13 Denver Nuggets season|Denver Nuggets]] (2)
+| 57–25
+| .695
+| +.119
+|-
+| {{nbay|2013}}
+!scope="row" style="background-color:#FFFF99"| {{sortname|Gregg|Popovich}}* (3)
+| {{flagu|United States}}
+| '''[[2013–14 San Antonio Spurs season|San Antonio Spurs]]''' (3)
+| 62–20
+| .756
+| +.049
+|-
+| {{nbay|2014}}
+!scope="row" style="background-color:transparent;"| {{sortname|Mike|Budenholzer}}
+| {{flagu|United States}}
+| [[2014–15 Atlanta Hawks season|Atlanta Hawks]] (6)
+| 60–22
+| .732
+| +.269
+|-
+| {{nbay|2015}}
+!scope="row" style="background-color:#CFECEC"| {{sortname|Steve|Kerr}}^
+| {{flagu|United States}}
+| [[2015–16 Golden State Warriors season|Golden State Warriors]] (3)
+| 73–9
+| .890
+| +.073
+|-
+| {{nbay|2016}}
+!scope="row" style="background-color:transparent;"| {{sortname|Mike|D'Antoni}} (2)
+| {{flagu|United States}}<br />{{flagu|Italy}}{{efn|name=MA}}
+| [[2016–17 Houston Rockets season|Houston Rockets]] (3)
+| 55–27
+| .671
+| +.171
+|-
+| {{nbay|2017}}
+!scope="row" style="background-color:transparent;"| {{sortname|Dwane|Casey}}
+| {{flagu|United States}}
+| [[2017–18 Toronto Raptors season|Toronto Raptors]] (2)
+| 59–23
+| .720
+| +.098
+|-
+| {{nbay|2018}}
+!scope="row" style="background-color:transparent;"| {{sortname|Mike|Budenholzer}} (2)
+| {{flagu|United States}}
+| [[2018–19 Milwaukee Bucks season|Milwaukee Bucks]] (3)
+| 60–22
+| .732
+| +.195
+|-
+| {{nbay|2019}}
+!scope="row" style="background-color:#CFECEC"| {{sortname|Nick|Nurse}}^
+| {{flagu|United States}}
+| [[2019–20 Toronto Raptors season|Toronto Raptors]] (3)
+| 46–18{{efn|Record reflects games played before the NBA [[Suspension of the 2019–20 NBA season|suspended its 2019–20 season]] due to the [[COVID-19 pandemic]]. Before the season resumed on July 30, 2020, the NBA announced that voting for that season's awards would be based solely on games played before the season was halted.<ref name=2020COY/>}}
+| .719
+| +.012
+|-
+| {{nbay|2020}}
+!scope="row" style="background-color:transparent;"| {{sortname|Tom|Thibodeau}} (2)
+| {{flagu|United States}}
+| [[2020–21 New York Knicks season|New York Knicks]] (3)
+| 41–31
+| .569
+| +.251
+|-
+| {{nbay|2021}}
+| {{sortname|Monty|Williams}}
+| {{flagu|United States}}
+| [[2021–22 Phoenix Suns season|Phoenix Suns]] (3) 
+| 64–18
+| .780
+| +.072
+|-
+| {{nbay|2022}}
+!scope="row" style="background-color:#CFECEC;"| {{sortname|Mike|Brown|dab=basketball, born 1970}}^† (2)
+| {{flagu|United States}}
+| [[2022–23 Sacramento Kings season|Sacramento Kings]] (3) 
+| 48–34
+| .585
+| +.219
+|-
+| {{nbay|2023}}
+!scope="row" style="background-color:#CFECEC"| {{sortname|Mark|Daigneault}}^
+| {{flagu|United States}}
+| [[2023–24 Oklahoma City Thunder season|Oklahoma City Thunder]] (2) 
+| 57–25
+| .695
+| +.207
+|-
+| {{nbay|2024}}
+!scope="row" style="background-color:#CFECEC"| {{sortname|Kenny|Atkinson}}^
+| {{flagu|United States}}
+| [[2024–25 Cleveland Cavaliers season|Cleveland Cavaliers]] (3) 
+| 64–18
+| .780
+| +.195
+|-
+| {{nbay|2025}}
+!scope="row" style="background-color:#CFECEC"| {{sortname|Joe|Mazzulla}}^
+| {{flagu|United States}}
+| [[2025–26 Boston Celtics season|Boston Celtics]] (4) 
+| 56–26
+| .683
+| {{sort|+.002|-.061}}
+|-
+|}
+
+==Multi-time winners==
+{| class="wikitable sortable"
+|-
+!Awards!!Coach!!Team(s)!!Years
+|-
+| rowspan="3" |3||{{flagicon|USA}} [[Don Nelson]]||[[Milwaukee Bucks]] (2), [[Golden State Warriors]] (1)||[[1982-83 Milwaukee Bucks season|1983]], [[1984-85 Milwaukee Bucks season|1985]], [[1991-92 Golden State Warriors season|1992]]
+|-
+|{{flagicon|USA}} [[Pat Riley]]||[[Los Angeles Lakers]] (1), [[New York Knicks]] (1), [[Miami Heat]] (1)|| {{nowrap|[[1989-90 Los Angeles Lakers season|1990]], [[1992-93 New York Knicks season|1993]], [[1996-97 Miami Heat season|1997]]}}
+|-
+|{{flagicon|USA}} [[Gregg Popovich]]||[[San Antonio Spurs]]||[[2002-03 San Antonio Spurs season|2003]], [[2011-12 San Antonio Spurs season|2012]], [[2013-14 San Antonio Spurs season|2014]]
+|-
+| rowspan="8" |2||{{flagicon|USA}} [[Gene Shue]]||[[Baltimore Bullets (1963–73)|Baltimore Bullets]] (1), [[Washington Bullets]] (1)||[[1968-69 Baltimore Bullets season|1969]], [[1981-82 Washington Bullets season|1982]]
+|-
+|{{flagicon|USA}} [[Bill Fitch]]||[[Cleveland Cavaliers]] (1), [[Boston Celtics]] (1)||[[1975-76 Cleveland Cavaliers season|1976]], [[1979-80 Boston Celtics season|1980]]
+|-
+|{{flagicon|USA}} [[Hubie Brown]]||[[Atlanta Hawks]] (1), [[Memphis Grizzlies]] (1)||[[1977-78 Atlanta Hawks season|1978]], [[2003-04 Memphis Grizzlies season|2004]]
+|-
+|{{flagicon|USA}} [[Cotton Fitzsimmons]]||[[Kansas City Kings]] (1), [[Phoenix Suns]] (1)||[[1978-79 Kansas City Kings season|1979]], [[1988-89 Phoenix Suns season|1989]]
+|-
+|{{flagicon|USA}} [[Mike D'Antoni]]||[[Phoenix Suns]] (1), [[Houston Rockets]] (1)||[[2004-05 Phoenix Suns season|2005]], [[2016-17 Houston Rockets season|2017]]
+|-
+|{{flagicon|USA}} [[Mike Budenholzer]]||[[Atlanta Hawks]] (1), [[Milwaukee Bucks]] (1)||[[2014-15 Atlanta Hawks season|2015]], [[2018-19 Milwaukee Bucks season|2019]]
+|-
+|{{flagicon|USA}} [[Tom Thibodeau]]||[[Chicago Bulls]] (1), [[New York Knicks]] (1)||[[2010-11 Chicago Bulls season|2011]], [[2020-21 New York Knicks season|2021]]
+|-
+|{{flagicon|USA}} [[Mike Brown (basketball, born 1970)|Mike Brown]]||[[Cleveland Cavaliers]] (1), [[Sacramento Kings]] (1)||[[2008–09 Cleveland Cavaliers season|2009]], [[2022–23 Sacramento Kings season|2023]]
+|}
+
+== Teams ==
+{| class="wikitable"
+|-
+!Awards !!Teams !!Years
+|-
+|6
+|[[Atlanta Hawks|Atlanta Hawks / St. Louis Hawks]]
+|{{nbay|1962|end}}, {{nbay|1967|end}}, {{nbay|1977|end}}, {{nbay|1985|end}}, {{nbay|1993|end}}, {{nbay|2014|end}}
+|-
+|rowspan=2|4
+|[[Boston Celtics]]
+|{{nbay|1964|end}}, {{nbay|1972|end}}, {{nbay|1979|end}}, {{nbay|2025|end}}
+|-
+|[[Chicago Bulls]]
+|{{nbay|1966|end}}, {{nbay|1970|end}}, {{nbay|1995|end}}, {{nbay|2010|end}}
+|-
+| rowspan="11" |3
+|-
+|[[Cleveland Cavaliers]]
+|{{nbay|1975|end}}, {{nbay|2008|end}}, {{nbay|2024|end}}
+|-
+|[[Golden State Warriors]]
+|{{nbay|1963|end}}, {{nbay|1991|end}}, {{nbay|2015|end}}
+|-
+|[[Houston Rockets]]
+|{{nbay|1976|end}}, {{nbay|1990|end}}, {{nbay|2016|end}}
+|-
+|[[Los Angeles Lakers]]
+|{{nbay|1971|end}}, {{nbay|1989|end}}, {{nbay|1994|end}}
+|-
+|[[Milwaukee Bucks]]
+|{{nbay|1982|end}}, {{nbay|1984|end}}, {{nbay|2018|end}}
+|-
+|[[New York Knicks]]
+|{{nbay|1969|end}}, {{nbay|1992|end}}, {{nbay|2020|end}}
+|-
+|[[Phoenix Suns]] 
+|{{nbay|1988|end}}, {{nbay|2004|end}}, {{nbay|2021|end}}
+|-
+|[[Sacramento Kings|Sacramento Kings / Kansas City–Omaha Kings]]
+|{{nbay|1974|end}}, {{nbay|1978|end}},  {{nbay|2022|end}}
+|-
+|[[San Antonio Spurs]]
+|{{nbay|2002|end}}, {{nbay|2011|end}}, {{nbay|2013|end}}
+|-
+|[[Toronto Raptors]]
+|{{nbay|2006|end}}, {{nbay|2017|end}}, {{nbay|2019|end}}
+|-
+| rowspan="7" |2
+|[[Denver Nuggets]]
+|{{nbay|1987|end}}, {{nbay|2012|end}} 
+|-
+|[[Detroit Pistons]]
+|{{nbay|1973|end}}, {{nbay|2001|end}} 
+|-
+|[[Indiana Pacers]]
+|{{nbay|1980|end}}, {{nbay|1997|end}} 
+|-
+|[[Oklahoma City Thunder]]
+|{{nbay|2009|end}}, {{nbay|2023|end}}
+|-
+|[[Philadelphia 76ers]]
+|{{nbay|1965|end}}, {{nbay|2000|end}} 
+|-
+|[[Portland Trail Blazers]]
+|{{nbay|1986|end}}, {{nbay|1998|end}} 
+|-
+|[[Washington Wizards|Washington Wizards / Baltimore Bullets / Washington Bullets]]
+|{{nbay|1968|end}}, {{nbay|1981|end}} 
+|-
+|rowspan=6|1
+|[[Dallas Mavericks]]
+|{{nbay|2005|end}}
+|-
+|[[Memphis Grizzlies]]
+|{{nbay|2003|end}}
+|-
+|[[Miami Heat]]
+|{{nbay|1996|end}}
+|-
+|[[New Orleans Pelicans|New Orleans Pelicans / New Orleans Hornets]]
+|{{nbay|2007|end}}
+|-
+|[[Orlando Magic]]
+|{{nbay|1999|end}}
+|-
+|[[Utah Jazz]]
+|{{nbay|1983|end}}
+|-
+| rowspan="3" |0
+|[[Brooklyn Nets]]
+| rowspan="3" |None
+|-
+|[[Los Angeles Clippers]]
+|-
+|[[Minnesota Timberwolves]] 
+|-
+|}
+
+==See also==
+{{Portal|Basketball}}
+*[[List of NBA awards]]
+*[[NBA records]]
+* [[NBCA Coach of the Year Award]], awarded by NBA coaches' union
+* [[NBL (United States) Coach of the Year Award]]
+
+==Notes==
+{{notelist}}
+
+==References==
+;General
+{{refbegin}}
+*{{cite web| title = Coach of the Year| url = http://www.nba.com/history/awards_coachofyear.html| access-date = June 2, 2008| publisher = Turner Sports Interactive, Inc| work = NBA.com| archive-url = https://web.archive.org/web/20100915001144/http://www.nba.com/history/awards_coachofyear.html| archive-date = September 15, 2010| url-status = dead}}
+*{{cite web| title = NBA Coach of the Year| url = https://www.basketball-reference.com/awards/coy.html| access-date = July 15, 2008|work=basketball-reference.com}}
+{{refend}}
+;Specific
+{{reflist}}
+
+{{NBA Coaches of the Year}}
+
+{{featured list}}
+
+[[Category:Awards established in 1963]]
+[[Category:Basketball coaching awards in the United States]]
+[[Category:NBA awards|Coach]]
+[[Category:NBA coaches]]
+[[Category:NBA lists|Coach of the Year]]

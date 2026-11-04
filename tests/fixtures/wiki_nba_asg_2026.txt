@@ -1,0 +1,671 @@
+{{Short description|Exhibition basketball game}}
+{{Use mdy dates|date=January 2024}}
+{{infobox NBA All-Star Game
+| name = 2026 NBA All-Star Game
+| image = 2026 NBA All-Star Game logo.png
+| caption =
+| visitor = '''USA Stars'''
+| home = USA Stripes
+| visitor_qtr1 = 47
+| visitor_total = 47
+| home_qtr1 = 21
+| home_total = 21
+| date = February 15, 2026
+| arena = [[Intuit Dome]]<br>[[Kia Forum]] (Celebrity Game)
+| city = [[Inglewood, California|Inglewood]]
+| MVP = [[Anthony Edwards (basketball)|Anthony Edwards]] (USA Stars)
+| winners = USA Stars
+| runner-up = USA Stripes
+| anthem = [[Sarah McLachlan]] (Canadian)<br/>[[Brandy Norwood|Brandy]] and [[June's Diary]] (American)
+| referee = Sean Wright, Karl Lane, Brent Barnaky
+| halftime =
+| attendance = 15,973
+| network = [[NBA on NBC|NBC]]<br> [[Peacock (streaming service)|Peacock]]
+| announcers = [[Noah Eagle]], [[Reggie Miller]], [[Jamal Crawford]], Zora Stephenson and [[Ashley ShahAhmadi]] (All-Star Game, All-Star Saturday Night, Rising Stars Tournament) <br> [[Mark Jones (sportscaster)|Mark Jones]], [[Richard Jefferson]] and [[Monica McNutt]] (Celebrity Game, ESPN)
+| prev_year = [[2025 NBA All-Star Game|2025]]
+| next_year = [[2027 NBA All-Star Game|2027]]
+}}
+The '''2026 NBA All-Star Game''' was a [[round-robin tournament]] played on February 15, 2026, the 75th edition. It was hosted by the [[Los Angeles Clippers]] at the [[Intuit Dome]] in [[Inglewood, California]], during the [[2025–26 NBA season]]. It was the seventh [[NBA All-Star Game]] to be played in the [[Greater Los Angeles|Los Angeles metropolitan area]], the fourth hosted by the Clippers (their first without a co-host), and the first one played in [[Inglewood, California|Inglewood]] since the [[Los Angeles Lakers]] hosted it in [[1983 NBA All-Star Game|1983]].<ref>{{Cite web|url=https://www.nba.com/video/adam-sliver-announces-la-clippers-los-angeles-to-host-2026-nba-all-star|title=Adam Sliver Announces LA Clippers Los Angeles To Host 2026 NBA All-Star Game|website=NBA.com|publisher=NBA|date=January 16, 2024|accessdate=January 16, 2024}}</ref> The game was televised nationally by [[NBA on NBC|NBC]] for the first time since [[2002 NBA All-Star Game|2002]] and streamed live on [[Peacock (streaming service)|Peacock]].
+
+It consisted of a three-team [[round-robin tournament]], with the top two teams advancing to a championship game. The teams, two composed of American players (USA Stars and USA Stripes) and one of international players (Team World), were drafted by the league from a pool of twenty-four selected through a voting process.<ref name="FAQ">{{cite web|title=2026 NBA All-Star FAQ, guide and things to know|date=January 19, 2026 |url=https://www.nba.com/news/nba-all-star-faq-2026|website=NBA.com|publisher=NBA|access-date=February 8, 2026}}</ref> Following the round-robin games, the USA Stripes finished with a 2–0 record, while the USA Stars finished 1–1 to secure the second seed and Team World was eliminated as they went winless at 0–2 against both USA teams. In the championship round, the USA Stars defeated the USA Stripes to win the tournament. [[Anthony Edwards (basketball)|Anthony Edwards]] was named the [[NBA All-Star Game Most Valuable Player|All-Star Most Valuable Player]] (MVP).
+
+The surrounding weekend festivities featured the return of the [[NBA All-Star Weekend Shooting Stars Competition|Shooting Stars]] competition, replacing the [[NBA All-Star Weekend Skills Challenge|Skills Challenge]] for at least this year.
+
+==Background==
+The announcement for 2026's All-Star Game was made on January 16, 2024, at a press conference held by the Los Angeles Clippers at the then-under-construction Intuit Dome in Inglewood. In attendance at the announcement were [[Commissioner of the NBA|NBA commissioner]] [[Adam Silver]], Clippers chairman [[Steve Ballmer]], Clippers president of business operations [[Gillian Zucker]], Los Angeles mayor [[Karen Bass]], and Inglewood mayor [[James T. Butts Jr.]]<ref>{{Cite web |date=January 16, 2024 |title=Los Angeles and LA Clippers to host NBA All-Star 2026 |url=https://www.nba.com/news/2026-nba-all-star-weekend-los-angeles-official-release |url-status=live |archive-url=https://web.archive.org/web/20240116202807/https://www.nba.com/news/2026-nba-all-star-weekend-los-angeles-official-release |archive-date=January 16, 2024 |access-date=January 16, 2024 |website=NBA.com |publisher=NBA}}</ref>
+
+During an interview on [[Fox Sports 1]]'s ''[[Breakfast Ball]]'' on June 4, 2025, Silver revealed that the game would most likely be played in a format pitting U.S. players against international players. He cited the concurrent [[2026 Winter Olympics]] on NBC and the success of the NHL's [[4 Nations Face-Off]] as influences on the format.<ref>{{Cite web |date=June 4, 2025 |title=2026 NBA All-Star Game to feature USA vs. the World, says Adam Silver |url=https://www.cbssports.com/nba/news/2026-nba-all-star-game-to-feature-usa-vs-the-world-says-adam-silver/ |access-date=June 4, 2025 |website=CBS Sports}}</ref>
+
+==Format change==
+On November 12, 2025, the NBA announced that the NBA All-Star Game would adopt a new USA vs. the World format. The game would take the form of a [[round-robin tournament]] featuring three teams: two composed of American players and one of international players, each consisting of at least eight members. The top two teams based on record would advance to the championship game. In the event of a three-way tie after the third game, point differential would serve as the tiebreaker. All four games would be played with a 12-minute time limit.<ref name="2026Format">{{Cite web|title=2026 NBA All-Star Game to feature new U.S. vs. World competition|url=https://www.nba.com/news/2026-nba-all-star-game-new-format|website=NBA.com |publisher=NBA|date=November 11, 2025|access-date=November 12, 2025}}</ref><ref>{{Cite web|last=Young|first=Ryan|title=NBA switching All-Star Game format again, will have USA vs. World round-robin tournament in 2026|url=https://sports.yahoo.com/nba/breaking-news/article/nba-switching-all-star-game-format-again-will-have-usa-vs-world-round-robin-tournament-in-2026-024710036.html|work=Yahoo! Sports|date=November 11, 2025|access-date=November 12, 2025}}</ref>
+
+==All-Star Game==
+
+===Coaches===
+{{Multiple image
+| image1            = J.B. Bickerstaff (cropped).jpg
+| image2            = Mitch Johnson (cropped).png
+| image3            = Darko Rajaković pregame interview.png
+| total_width       = 450
+| caption1          = 
+| footer            = [[Detroit Pistons]]' [[J. B. Bickerstaff]], [[San Antonio Spurs]]' [[Mitch Johnson]], and [[Toronto Raptors]]' [[Darko Rajaković]] were selected as the All-Star Game head coaches.
+}}
+[[J. B. Bickerstaff]], head coach of Eastern Conference leader [[Detroit Pistons]], earned a coaching spot on January 24.<ref name="2026EastHeadCoach">{{Cite web|title=JB Bickerstaff named head coach in 2026 NBA All-Star Game|url=https://www.nba.com/news/jb-bickerstaff-named-head-coach-in-2026-nba-all-star-game|website=NBA.com|date=January 24, 2026|access-date=January 25, 2026}}</ref> Although the [[Oklahoma City Thunder]] have the best record in the Western Conference through February 1, their head coach, [[Mark Daigneault]], was ineligible to coach in the All-Star Game because he had coached in the 2025 game and league rules prohibit a coach from coaching in consecutive All-Star Games. [[Mitch Johnson]], head coach of the [[San Antonio Spurs]], earned a coaching spot on February 1.<ref name="2026WestHeadCoach">{{Cite web|title=Spurs' Mitch Johnson named head coach in 2026 NBA All-Star Game|url=https://www.nba.com/news/spurs-mitch-johnson-named-head-coach-in-2026-nba-all-star-game|website=NBA.com |publisher=NBA|date=February 1, 2026|access-date=February 1, 2026}}</ref> On February 3, it was announced that [[Darko Rajaković]], head coach of the [[Toronto Raptors]], would coach Team World, having the most wins among [[List of foreign NBA coaches|non-American head coaches]] in the regular season.<ref name="2026WorldCoach">{{Cite web|title=Raptors' Darko Rajaković named head coach in 2026 NBA All-Star Game|url=https://www.nba.com/news/darko-rajakovic-coach-team-world-2026-all-star-game|website=NBA.com |publisher=NBA|date=February 3, 2026|access-date=February 3, 2026}}</ref>
+
+===Rosters===
+As had been the case in previous years, the rosters for the All-Star Game were selected through a voting process. The fans could vote through the NBA website. The player will be selected, regardless of playing position. The starters will be chosen by the fans, media, and current NBA players. Fans made up 50% of the vote, and NBA players and media each comprised 25% of the vote. The five players who received the highest cumulative vote totals in each conferences were named the All-Star starters.<ref name="2026Format"/> NBA head coaches voted for the reserves for their respective conferences, none of which could be players from their own team. Each coach selected two guards, three frontcourt players and two wild cards, with each selected player ranked in order of preference within each category. If a multi-position player was to be selected, coaches were encouraged to vote for the player at the position that was "most advantageous for the All-Star team", regardless of where the player was listed on the All-Star ballot or the position he was listed in box scores. If the selection process does not yield 16 American players and 8 international players, NBA Commissioner [[Adam Silver]] will make the necessary selections to complete the rosters.<ref name="FAQ"/>
+
+The All-Star Game starters were announced on January 19, 2026. [[Cade Cunningham]] of the [[Detroit Pistons]], [[Jalen Brunson]] of the [[New York Knicks]], and [[Tyrese Maxey]] of the [[Philadelphia 76ers]] were announced as the starting guards in the East, earning their second, third, and second all-star appearances, respectively. [[Giannis Antetokounmpo]] of the [[Milwaukee Bucks]] and [[Jaylen Brown]] of the [[Boston Celtics]] were named the frontcourt starters in the East, earning their tenth and fifth all-star appearances, respectively.<ref name=2026Starters>{{cite web|title=Luka Dončić, Giannis Antetokounmpo lead 2026 All-Star starters|url=https://www.nba.com/news/2026-all-star-starters|website=NBA.com |publisher=NBA|date=January 19, 2026|access-date=January 19, 2026}}</ref>
+
+In the West, [[Shai Gilgeous-Alexander]] of the [[Oklahoma City Thunder]], [[Stephen Curry]] of the [[Golden State Warriors]], and [[Luka Dončić]] of the [[Los Angeles Lakers]] were named to the starting backcourt, earning their fourth, 12th, and sixth all-star appearances, respectively. In the frontcourt, [[Victor Wembanyama]] of the [[San Antonio Spurs]] and [[Nikola Jokić]] of the [[Denver Nuggets]] were named to their second and eighth all-star appearances, respectively.<ref name=2026Starters/>
+
+The All-Star Game reserves were announced on February 1, 2026. The East reserves included [[Scottie Barnes]] of the [[Toronto Raptors]], his second selection; [[Jalen Duren]] of the [[Detroit Pistons]], his first selection; [[Jalen Johnson]] of the [[Atlanta Hawks]], his first selection; [[Donovan Mitchell]] of the [[Cleveland Cavaliers]], his seventh selection; [[Norman Powell]] of the [[Miami Heat]], his first selection; [[Pascal Siakam]] of the [[Indiana Pacers]], his fourth selection; and [[Karl-Anthony Towns]] of the [[New York Knicks]], his sixth selection.<ref name=2026Reserves>{{cite web|title=2026 NBA All-Star reserves announced on NBC/Peacock|url=https://www.nba.com/news/2026-all-star-reserves|website=NBA.com |publisher=NBA |date=February 1, 2026|access-date=February 1, 2026}}</ref>
+
+The West reserves included [[Deni Avdija]] of the [[Portland Trail Blazers]], his first selection; [[Devin Booker]] of the [[Phoenix Suns]], his fifth selection; [[Kevin Durant]] of the [[Houston Rockets]], his 16th selection; [[Anthony Edwards (basketball)|Anthony Edwards]] of the [[Minnesota Timberwolves]], his fourth selection; [[Chet Holmgren]] of the [[Oklahoma City Thunder]], his first selection; [[LeBron James]] of the [[Los Angeles Lakers]], his 22nd selection; and [[Jamal Murray]] of the [[Denver Nuggets]], his first selection.<ref name=2026Reserves/>
+
+On February 3, 2026, NBA Commissioner [[Adam Silver]] added [[Kawhi Leonard]] to the USA pool, marking his seventh selection.<ref name="LeonardSelection"/> On February 8, [[Alperen Şengün]] was selected as an injury replacement for [[Shai Gilgeous-Alexander]].<ref name="SGAInjury">{{Cite web|title=Rockets' Alperen Sengun replaces Shai Gilgeous-Alexander in ASG|url=https://www.espn.com/nba/story/_/id/47867941/rockets-alperen-sengun-replaces-shai-gilgeous-alexander-asg|access-date=February 8, 2026|date=February 8, 2026|website=ESPN}}</ref> On February 10, it was announced that [[Brandon Ingram]] would be the injury replacement for Stephen Curry.<ref name="CurryInjury">{{Cite web |title=Raptors' Brandon Ingram replaces Stephen Curry in 2026 NBA All-Star Game |url=https://www.nba.com/news/raptors-brandon-ingram-replaces-stephen-curry-all-star-game |access-date=February 11, 2026|date=February 10, 2026|website=NBA.com |publisher=NBA}}</ref> On February 12, [[De'Aaron Fox]] was named as the injury replacement for [[Giannis Antetokounmpo]]; Fox was added to the Team Stripes roster, while [[Norman Powell]] was reassigned to Team World.<ref name="AntetokounmpoInjury">{{cite web |title=De'Aaron Fox replaces Giannis Antetokounmpo in NBA All-Star Game |url=https://www.espn.com/nba/story/_/id/47910620/deaaron-fox-replaces-giannis-antetokounmpo-nba-all-star-game |website=ESPN |access-date=February 12, 2026|date=February 12, 2026}}</ref>
+
+*''Italics'' indicates leading vote-getters per conference
+{{col-begin}}
+{{col-2}}
+<div style="display: flex; justify-content: center;">
+{| class="wikitable" style="text-align:center"
+|+Eastern Conference All-Stars
+|-
+!scope="col" width="25px"|Pos
+!scope="col" width="150px"|Player
+!scope="col" width="160px"|Team
+!scope="col" width="75px"|No. of selections
+|-
+!scope="col" colspan="4"|Starters<ref name=2026Starters/>
+|-
+|F/C
+|style="text-align:left"|''[[Giannis Antetokounmpo]]''{{ref|inj1|INJ1}}
+|style="text-align:left"|[[Milwaukee Bucks]]
+|10
+|-
+|G/F
+|style="text-align:left"|[[Jaylen Brown]]
+|style="text-align:left"|[[Boston Celtics]]
+|5
+|-
+|G
+|style="text-align:left"|[[Jalen Brunson]]
+|style="text-align:left"|[[New York Knicks]]
+|3
+|-
+|G/F
+|style="text-align:left"|[[Cade Cunningham]]
+|style="text-align:left"|[[Detroit Pistons]]
+|2
+|-
+|G
+|style="text-align:left"|[[Tyrese Maxey]]
+|style="text-align:left"|[[Philadelphia 76ers]]
+|2
+|-
+!scope="col" colspan="4"|Reserves<ref name=2026Reserves/>
+|- 
+|F
+|style="text-align:left"|[[Scottie Barnes]]
+|style="text-align:left"|[[Toronto Raptors]]
+|2
+|-
+|C
+|style="text-align:left"|[[Jalen Duren]]
+|style="text-align:left"|[[Detroit Pistons]]
+|1
+|-
+|F
+|style="text-align:left"|[[Brandon Ingram]]{{ref|rep1|REP1}}
+|style="text-align:left"|[[Toronto Raptors]]
+|2
+|-
+|F
+|style="text-align:left"|[[Jalen Johnson]]
+|style="text-align:left"|[[Atlanta Hawks]]
+|1
+|-
+|G
+|style="text-align:left"|[[Donovan Mitchell]]
+|style="text-align:left"|[[Cleveland Cavaliers]]
+|7
+|-
+|G
+|style="text-align:left"|[[Norman Powell]]
+|style="text-align:left"|[[Miami Heat]]
+|1
+|-
+|F/C
+|style="text-align:left"|[[Pascal Siakam]]
+|style="text-align:left"|[[Indiana Pacers]]
+|4
+|-
+|C/F
+|style="text-align:left"|[[Karl-Anthony Towns]]
+|style="text-align:left"|[[New York Knicks]]
+|6
+|}
+</div>
+{{col-2}}
+<div style="display: flex; justify-content: center;">
+{| class="wikitable" style="text-align:center"
+|+Western Conference All-Stars
+|-
+!scope="col" width="25px"|Pos
+!scope="col" width="160px"|Player
+!scope="col" width="160px"|Team
+!scope="col" width="75px"|No. of selections
+|-
+!scope="col" colspan="4"|Starters<ref name=2026Starters/>
+|-
+|G
+|style="text-align:left"|[[Stephen Curry]]{{ref|inj2|INJ2}}
+|style="text-align:left"|[[Golden State Warriors]]
+|12
+|-
+|G/F
+|style="text-align:left"|''[[Luka Dončić]]''
+|style="text-align:left"|[[Los Angeles Lakers]]
+|6
+|-
+|G/F
+|style="text-align:left"|[[Shai Gilgeous-Alexander]]{{ref|inj3|INJ3}}
+|style="text-align:left"|[[Oklahoma City Thunder]]
+|4
+|-
+|C
+|style="text-align:left"|[[Nikola Jokić]]
+|style="text-align:left"|[[Denver Nuggets]]
+|8
+|-
+|C/F
+|style="text-align:left"|[[Victor Wembanyama]]
+|style="text-align:left"|[[San Antonio Spurs]]
+|2
+|-
+!scope="col" colspan="4"|Reserves<ref name=2026Reserves/>
+|- 
+|F
+|style="text-align:left"|[[Deni Avdija]]
+|style="text-align:left"|[[Portland Trail Blazers]]
+|1
+|-
+|G
+|style="text-align:left"|[[Devin Booker]]
+|style="text-align:left"|[[Phoenix Suns]]
+|5
+|-
+|F/C
+|style="text-align:left"|[[Kevin Durant]]
+|style="text-align:left"|[[Houston Rockets]]
+|16
+|-
+|G
+|style="text-align:left"|[[Anthony Edwards (basketball)|Anthony Edwards]]
+|style="text-align:left"|[[Minnesota Timberwolves]]
+|4
+|-
+|C/F
+|style="text-align:left"|[[Chet Holmgren]]
+|style="text-align:left"|[[Oklahoma City Thunder]]
+|1
+|-
+|F
+|style="text-align:left"|[[LeBron James]]
+|style="text-align:left"|[[Los Angeles Lakers]]
+|22
+|-
+|G/F
+|style="text-align:left"|[[Kawhi Leonard]]{{ref|note1|NOTE1}}
+|style="text-align:left"|[[Los Angeles Clippers]]
+|7
+|-
+|G
+|style="text-align:left"|[[Jamal Murray]]
+|style="text-align:left"|[[Denver Nuggets]]
+|1
+|-
+|C/F
+|style="text-align:left"|[[Alperen Şengün]]{{ref|rep2|REP2}}
+|style="text-align:left"|[[Houston Rockets]]
+|2
+|-
+|G
+|style="text-align:left"|[[De'Aaron Fox]]{{ref|rep3|REP3}}
+|style="text-align:left"|[[San Antonio Spurs]]
+|2
+|}
+</div>
+{{col-end}}
+{{refbegin}}
+{{note|note1|NOTE1}} NBA Commissioner [[Adam Silver]] added [[Kawhi Leonard]] to the USA pool.<ref name="LeonardSelection">{{Cite web|author=NBA.com staff|title=Kawhi Leonard named to 2026 NBA All-Star Game|url=https://www.nba.com/news/kawhi-leonard-named-to-2026-nba-all-star-game|website=NBA.com |publisher=NBA|date=February 3, 2026|access-date=February 3, 2026}}</ref><br>
+{{note|inj1|INJ1}} Giannis Antetokounmpo was unable to play due to an injury.<ref name="AntetokounmpoInjury" /><br>
+{{note|inj2|INJ2}} Stephen Curry was unable to play due to an injury.<ref name="CurryInjury" /><br>
+{{note|inj3|INJ3}} Shai Gilgeous-Alexander was unable to play due to an injury.<ref name="SGAInjury" /><br>
+{{note|rep1|REP1}} Brandon Ingram was selected as Stephen Curry's replacement.<ref name="CurryInjury" /><br>
+{{note|rep2|REP2}} Alperen Şengün was selected as Shai Gilgeous-Alexander's replacement.<ref name="SGAInjury" /><br>
+{{note|rep3|REP3}} De'Aaron Fox was selected as Giannis Antetokounmpo's replacement.<ref name="AntetokounmpoInjury" />
+{{refend}}
+
+===Lineups===
+The team lineups were announced on February 3. The players were assigned to the three teams regardless of their positions.<ref name="FAQ"/>
+{{col-begin}}
+{{Col-3}}
+{| class="wikitable"
+|+USA Stars
+! Pos
+! Player
+! Team
+|-
+!scope="col" colspan="4"|Starters
+|-
+| G/F
+| [[Cade Cunningham]]
+| [[Detroit Pistons]]
+|-
+| G
+| [[Tyrese Maxey]]
+| [[Philadelphia 76ers]]
+|-
+| G
+| [[Devin Booker]]
+| [[Phoenix Suns]]
+|-
+| G
+| [[Anthony Edwards (basketball)|Anthony Edwards]]
+| [[Minnesota Timberwolves]]
+|-
+| C
+| [[Jalen Duren]]
+| [[Detroit Pistons]]
+|-
+!scope="col" colspan="4"|Reserves
+|-
+| F
+| [[Scottie Barnes]]
+| [[Toronto Raptors]]
+|-
+| C/F		
+| [[Chet Holmgren]]
+| [[Oklahoma City Thunder]]
+|-
+| F
+| [[Jalen Johnson]]
+| [[Atlanta Hawks]]
+|-
+| colspan="3" |'''Head coach''':<br>[[J. B. Bickerstaff]] ([[Detroit Pistons]])
+|}
+{{Col-3}}
+{| class="wikitable"
+|+USA Stripes
+! Pos
+! Player
+! Team
+|-
+!scope="col" colspan="4"|Starters
+|-
+| G/F
+| [[Jaylen Brown]]
+| [[Boston Celtics]]
+|-
+| G		
+| [[Jalen Brunson]]
+| [[New York Knicks]]
+|-
+| F
+| [[LeBron James]]
+| [[Los Angeles Lakers]]
+|-
+| G/F
+| [[Kawhi Leonard]]{{ref|note1|NOTE1}}
+| [[Los Angeles Clippers]]
+|-
+| F/C
+| [[Kevin Durant]]
+| [[Houston Rockets]]
+|-
+!scope="col" colspan="4"|Reserves
+|-
+| F
+| [[Brandon Ingram]]{{ref|rep1|REP1}}
+| [[Toronto Raptors]]
+|-
+| G		
+| [[Donovan Mitchell]]
+| [[Cleveland Cavaliers]]
+|-
+| G
+| [[De'Aaron Fox]]{{ref|rep3|REP3}}
+| [[San Antonio Spurs]]
+|-
+! colspan=3 | Injured
+|-
+| G
+| [[Stephen Curry]]{{ref|inj2|INJ2}}
+| [[Golden State Warriors]]
+|-
+| colspan="3" |'''Head coach''':<br>[[Mitch Johnson]] ([[San Antonio Spurs]])
+|}
+{{Col-3}}
+{| class="wikitable"
+|+Team World
+! Pos
+! Player
+! Team
+|-
+!scope="col" colspan="4"|Starters
+|-
+| G/F
+| {{Flagicon|SLO}} [[Luka Dončić]]
+| [[Los Angeles Lakers]]
+|-
+| C
+| {{Flagicon|SER}} [[Nikola Jokić]]
+| [[Denver Nuggets]]
+|-
+| F/C
+| {{Flagicon|FRA}} [[Victor Wembanyama]]
+| [[San Antonio Spurs]]
+|-
+| F
+| {{Flagicon|ISR}} [[Deni Avdija]]
+| [[Portland Trail Blazers]]
+|-
+| G
+| {{Flagicon|CAN}} [[Jamal Murray]]
+| [[Denver Nuggets]]
+|-
+!scope="col" colspan="4"|Reserves
+|-
+| F/C
+| {{Flagicon|TUR}} [[Alperen Şengün]]{{ref|rep2|REP2}}
+| [[Houston Rockets]]
+|-
+| F/C
+| {{Flagicon|CMR}} [[Pascal Siakam]]
+| [[Indiana Pacers]]
+|-
+| C/F
+| {{Flagicon|DOM}} [[Karl-Anthony Towns]]
+| [[New York Knicks]]
+|-
+| G
+| {{Flagicon|JAM}} [[Norman Powell]]
+| [[Miami Heat]]
+|-
+! colspan=3 | Injured
+|-
+| F/C
+| {{Flagicon|GRE}} [[Giannis Antetokounmpo]]{{ref|inj1|INJ1}}
+| [[Milwaukee Bucks]]
+|-
+| G/F
+| {{Flagicon|CAN}} [[Shai Gilgeous-Alexander]]{{ref|inj3|INJ3}}
+| [[Oklahoma City Thunder]]
+|-
+| colspan="3" |'''Head coach''':<br>{{Flagicon|SER}} [[Darko Rajaković]] ([[Toronto Raptors]])
+|}
+{{col-end}}
+
+===Round-robin games===
+:''Note: Times are [[Eastern Time Zone|EST]] ([[UTC−05:00|UTC−5]]) as listed by NBA. The local time of the venue (Los Angeles) is also given ([[Pacific Time Zone|PST]], [[UTC−08:00|UTC−8]]).''
+{{basketballbox|bg=#eee|date=February 15, 2026 |time=5:00 p.m. {{small|(2:00 p.m. [[Pacific Time Zone|PST]])}} |place=[[Intuit Dome]], [[Inglewood, California|Inglewood]], [[California]]
+|referee=Sean Wright, Karl Lane, Brent Barnaky
+|attendance=15,973
+|TV=[[NBA on NBC|NBC]]
+|team1=Team World |score1=35
+|team2='''USA Stars''' |score2='''37'''
+|Q1=32–32 |OT=3–'''5'''
+|points1=[[Victor Wembanyama]] 14 |points2=[[Anthony Edwards (basketball)|Anthony Edwards]] 13
+|rebounds1=Victor Wembanyama 6 |rebounds2=[[Scottie Barnes]] 5
+|assist1=[[Jamal Murray]] 4 |assist2=[[Devin Booker]] 4
+|report=[https://www.nba.com/game/wld-vs-str-0032500011 Recap]
+}}
+{{basketballbox|date=February 15, 2026 |time=5:55 p.m. {{small|(2:55 p.m. [[Pacific Time Zone|PST]])}} |place=[[Intuit Dome]], [[Inglewood, California|Inglewood]], [[California]]
+|referee=Sean Wright, Karl Lane, Brent Barnaky
+|attendance=15,973
+|TV=[[NBA on NBC|NBC]]
+|team1=USA Stars |score1=40
+|team2='''USA Stripes''' |score2='''42'''
+|Q1=40–'''42''' 
+|points1=[[Cade Cunningham|Cunningham]], [[Anthony Edwards (basketball)|Edwards]] 11 |points2=[[Jaylen Brown]] 11
+|rebounds1=[[Devin Booker]] 5 |rebounds2=[[Kawhi Leonard]] 5
+|assist1=Cade Cunningham 4 |assist2=[[Donovan Mitchell]] 3
+|report=[https://www.nba.com/game/str-vs-stp-0032500021 Recap]
+}}
+{{basketballbox|bg=#eee|date=February 15, 2026 |time=6:25 pm. {{small|(3:25 p.m. [[Pacific Time Zone|PST]])}} |place=[[Intuit Dome]], [[Inglewood, California|Inglewood]], [[California]]
+|referee=Sean Wright, Karl Lane, Brent Barnaky
+|attendance=15,973
+|TV=[[NBA on NBC|NBC]]
+|team1=Team World |score1=45
+|team2='''USA Stripes''' |score2='''48'''
+|Q1=45–'''48''' 
+|points1=[[Victor Wembanyama]] 19 |points2=[[Kawhi Leonard]] 31
+|rebounds1=[[Pascal Siakam]] 3 |rebounds2=Kawhi Leonard 3
+|assist1=[[Jamal Murray]] 4 |assist2=[[LeBron James]] 4
+|report=[https://www.nba.com/game/wld-vs-stp-0032500031 Recap]
+}}
+
+===Championship game===
+
+{{basketballbox|bg=#eee|date=February 15, 2026 |time=7:10 p.m. {{small|(4:10 p.m. [[Pacific Time Zone|PST]])}} |place=[[Intuit Dome]], [[Inglewood, California|Inglewood]], [[California]]
+|referee=Sean Wright, Karl Lane, Brent Barnaky
+|attendance=15,973
+|TV=[[NBA on NBC|NBC]]
+|team1='''USA Stars''' |score1='''47'''
+|team2=USA Stripes |score2=21
+|Q1='''47'''–21 
+|points1=[[Tyrese Maxey]] 9 |points2=[[Donovan Mitchell]] 6
+|rebounds1=[[Scottie Barnes|Barnes]], [[Jalen Duren|Duren]], [[Anthony Edwards (basketball)|Edwards]] 4 |rebounds2=[[LeBron James]] 4
+|assist1=[[Devin Booker|Booker]], [[Cade Cunningham|Cunningham]], Edwards 2 |assist2=[[De'Aaron Fox]] 2
+|report=[https://www.nba.com/game/str-vs-stp-0032500041 Recap]
+}}
+
+==All-Star Weekend==
+<!--
+===NBA on TNT American Express Road Show===
+-->
+===Celebrity Game===
+{{Further|NBA All-Star Celebrity Game}}
+{{#section:NBA All-Star Celebrity Game|2026}}
+
+===Rising Stars Challenge===
+{{Further|Rising Stars Challenge}}
+{{#section:Rising Stars Challenge|2026}}
+
+====Semifinals====
+{{basketballbox|bg=#eee|date=February 13, 2026 |time=9:00 pm [[Eastern Time Zone|ET]] |place=[[Intuit Dome]], [[Inglewood, California|Inglewood]], [[California]]
+|referee=Nate Green, Phenizee Ransom, Matt Myers
+|attendance=
+|TV=[[Peacock (streaming service)|Peacock]]/[[NBCSN]]
+|team1=Team Austin |score1=34
+|team2='''Team Melo''' |score2='''40'''
+|Q1= |Q2= |Q3= |Q4=
+|points1=[[Yanic Konan Niederhäuser]] (11) |points2=[[Donovan Clingan|Clingan]], [[Reed Sheppard|Sheppard]] (9)
+|rebounds1=[[Ron Harper Jr.]] (7) |rebounds2=[[Ace Bailey (basketball)|Ace Bailey]] (3)
+|assist1=[[Tristen Newton]] (4) |assist2=[[Stephon Castle]] (5)
+|report=[https://www.nba.com/game/mel-vs-aus-0032500004 Recap]
+}}
+{{basketballbox|date=February 13, 2026 |time=9:55 pm [[Eastern Time Zone|ET]] |place=[[Intuit Dome]], [[Inglewood, California|Inglewood]], [[California]]
+|referee=Nate Green, Phenizee Ransom, Matt Myers
+|attendance=
+|TV=[[Peacock (streaming service)|Peacock]]/[[NBCSN]]
+|team1='''Team Vince''' |score1='''41'''
+|team2=Team T-Mac |score2=36
+|Q1= |Q2= |Q3= |Q4=
+|points1=[[V. J. Edgecombe]] (17) |points2=[[Jaylon Tyson]] (10)
+|rebounds1=V. J. Edgecombe (5) |rebounds2=Jaylon Tyson (5)
+|assist1=[[Matas Buzelis|Buzelis]], [[Egor Dëmin|Dëmin]], [[Derik Queen|Queen]] (2) |assist2=[[Bub Carrington]] (3)
+|report=[https://www.nba.com/game/vin-vs-tmc-0032500005 Recap]
+}}
+
+====Championship game====
+{{basketballbox|bg=#eee|date=February 13, 2026 |time=10:35 pm [[Eastern Time Zone|ET]] |place=[[Intuit Dome]], [[Inglewood, California|Inglewood]], [[California]]
+|referee=Nate Green, Phenizee Ransom, Matt Myers
+|attendance=
+|TV=[[Peacock (streaming service)|Peacock]]/[[NBCSN]]
+|team1='''Team Vince''' |score1='''25'''
+|team2=Team Melo |score2=24
+|Q1= |Q2= |Q3= |Q4=
+|points1=[[V. J. Edgecombe]] (6) |points2=[[Dylan Harper]] (8)
+|rebounds1=[[Derik Queen]] (5) |rebounds2=Dylan Harper (5)
+|assist1=[[Kyshawn George]] (4) |assist2=[[Stephon Castle|Castle]], [[Jeremiah Fears|Fears]], Harper, [[Reed Sheppard|Sheppard]] (1)
+|report=[https://www.nba.com/game/vin-vs-mel-0032500006 Recap]
+}}
+
+===Three Point Contest===
+{{Further|Three-Point Contest}}
+
+{{legend|#FEFF9F|Indicates the champion}}
+{{row hover highlight}}
+{|class="wikitable mw-datatable" style="text-align:center; width:100%"
+! Rank
+! {{abbr|P|Position}} !! Player<ref>{{Cite web|title=NBA announces field for 2026 State Farm 3-Point Contest|url=https://www.nba.com/news/2026-3-point-contest|website=NBA.com |publisher=NBA|date=February 7, 2026|access-date=February 11, 2026}}</ref> !! Team !! Height !! Weight !! {{abbr|3P%|3-point field-goal percentage before All-Star weekend}}
+! First Round !! Final Round
+|- bgcolor=#FEFF9F
+! 1
+| G || align=left|'''[[Damian Lillard]]''' || align=left|'''[[Portland Trail Blazers]]''' || 6–2 || 200 || {{n/a}}{{efn|Damian Lillard did not play a game in the {{nbay|2025}} season.}}
+| 27 || 29
+|-
+! 2
+| G || align=left|[[Devin Booker]] || align=left|[[Phoenix Suns]] || 6–5 || 206 || .311
+| 30 || 27
+|-
+! 3
+| G/F || align=left|[[Kon Knueppel]] || align=left|[[Charlotte Hornets]] || 6–6 || 215 || .431
+| 27 || 17
+|-
+! 4
+| G || align=left|[[Donovan Mitchell]] || align=left|[[Cleveland Cavaliers]] || 6–2 || 215 || .376
+| 24 || rowspan=5 {{n/a|{{abbr|DNQ|Did Not Qualify}}}}
+|-
+! 5
+| G/F || align=left|[[Norman Powell]] || align=left|[[Miami Heat]] || 6–3 || 215 || .396
+| 23
+|-
+! 6
+| G || align=left|[[Jamal Murray]] || align=left|[[Denver Nuggets]] || 6–4 || 215 || .425
+| 18
+|-
+! 7
+| G || align=left|[[Tyrese Maxey]] || align=left|[[Philadelphia 76ers]] || 6–2 || 200 || .379
+| 17
+|-
+! 8
+| C/F || align=left|[[Bobby Portis Jr.]] || align=left|[[Milwaukee Bucks]] || 6–9 || 250  || .451
+| 15
+|}
+{{noteslist}}
+
+===Shooting Stars===
+{{Further|NBA All-Star Weekend Shooting Stars Competition}}
+
+{{legend|#FEFF9F|Indicates the winning team}}
+{{legend|#D1F8EF|Indicates the team's legend}}
+{{row hover highlight}}
+{|class="wikitable mw-datatable" style="text-align:center; width:100%"
+! Rank
+! Team
+! Members<ref>{{Cite web|title=NBA announces teams for 2026 Kia Shooting Stars|url=https://www.nba.com/news/2026-shooting-stars|website=NBA.com |publisher=NBA|date=February 7, 2026|access-date=February 12, 2026}}</ref> !! Representing
+! First Round !! Final Round
+|-
+! rowspan=3|1
+| bgcolor=#FEFF9F rowspan=3|Team Knicks
+| [[Jalen Brunson]] || rowspan=2|[[New York Knicks]]
+| rowspan=3|{{big|31}} || rowspan=3|{{big|47}}
+|-
+| [[Karl-Anthony Towns]]
+|-
+| bgcolor=#D1F8EF|[[Allan Houston]] || {{n/a}}
+|-
+! rowspan=3|2
+| rowspan=3|Team Cameron
+| [[Kon Knueppel]] || [[Charlotte Hornets]]
+| rowspan=3|{{big|24}} || rowspan=3|{{big|38}}
+|-
+| [[Jalen Johnson]] || [[Atlanta Hawks]]
+|-
+| bgcolor=#D1F8EF|[[Corey Maggette]] || {{n/a}}
+|-
+! rowspan=3|3
+| rowspan=3 | Team Harper
+| [[Dylan Harper]] || [[San Antonio Spurs]]
+| rowspan=3|{{big|18}} || rowspan=6 {{n/a|{{abbr|DNQ|Did Not Qualify}}}}
+|-
+| [[Ron Harper Jr.]] || [[Boston Celtics]] / [[Maine Celtics]]
+|-
+| bgcolor=#D1F8EF|[[Ron Harper|Ron Harper Sr.]] || {{n/a}}
+|-
+! rowspan=3|4
+| rowspan=3|Team All-Star
+| [[Scottie Barnes]] || [[Toronto Raptors]]
+| rowspan=3|{{big|16}}
+|-
+| [[Chet Holmgren]] || [[Oklahoma City Thunder]]
+|- 
+| bgcolor=#D1F8EF|[[Richard Hamilton (basketball)|Richard Hamilton]] || {{n/a}}
+|-
+|}
+
+===Slam Dunk Contest===
+{{Further|Slam Dunk Contest}}
+
+{{legend|#FEFF9F|Indicates the champion}}
+{{row hover highlight}}
+{|class="wikitable mw-datatable" style="text-align:center; width:100%"
+! rowspan=2 | {{abbr|#|Rank}}
+! rowspan=2 | {{abbr|P|Position}}
+! rowspan=2 | Player<ref>{{Cite web|title=NBA announces participants for 2026 AT&T Slam Dunk Contest|url=https://www.nba.com/news/2026-slam-dunk-contest|website=NBA.com |publisher=NBA|date=February 7, 2026|access-date=February 11, 2026}}</ref>
+! rowspan=2 | Team
+! rowspan=2 | {{abbr|H|Height}}
+! rowspan=2 | {{abbr|W|Weight}}
+! colspan=3 | First Round
+! colspan=3 | Final Round
+|-
+! 1 !! 2 !! {{abbr|T|Total}}
+! 1 !! 2 !! {{abbr|T|Total}}
+|- 
+! 1
+| bgcolor=#FEFF9F | F || bgcolor=#FEFF9F align=left|'''[[Keshad Johnson]]''' || bgcolor=#FEFF9F align=left|'''[[Miami Heat]]''' || bgcolor=#FEFF9F|6–6 || bgcolor=#FEFF9F|225
+| 47.4 || 45.4 || bgcolor=#ECEBDE|92.8
+| 49.6 || 47.8 || bgcolor=#ECEBDE|97.4
+|-
+! 2
+| F || align=left|[[Carter Bryant (basketball)|Carter Bryant]] || align=left|[[San Antonio Spurs]] || 6–6 || 220
+| 45.6 || 49.2 || bgcolor=#ECEBDE|94.8
+| 50.0 || 43.0 || bgcolor=#ECEBDE|93.0
+|-
+! 3
+| C || align=left|[[Jaxson Hayes]] || align=left|[[Los Angeles Lakers]] || 7–0 || 220
+| 44.6 || 47.2 || bgcolor=#ECEBDE|91.8
+| rowspan=2 colspan=3 {{n/a|{{abbr|DNQ|Did not qualify}}}}
+|-
+! 4
+| G || align=left|[[Jase Richardson]] || align=left|[[Orlando Magic]] || 6–1 || 180
+| 45.4 || 43.4 || bgcolor=#ECEBDE|88.8
+|-
+! colspan=12|{{small|Judges: [[Julius Erving]], [[Dominique Wilkins]], [[Dwight Howard]], [[Corey Maggette]] and [[Brent Barry]]}}<ref>{{Cite web|title=2026 AT&T Slam Dunk Contest judges intros|url=https://www.nba.com/watch/video/2026-att-slam-dunk-contest-judges-intros?plsrc=nba&collection=2026-all-star-video|website=NBA.com |publisher=NBA|date=February 14, 2026|access-date=February 14, 2026}}</ref>
+|-
+|}
+
+==Media coverage==
+The game was televised live by [[NBA on NBC|NBC]] for the first time since [[2002 NBA All-Star Game|2002]] and streamed live on [[Peacock (streaming service)|Peacock]].<ref>{{Cite web|last=Helin|first=Kurt|title=2026 NBA All-Star Game: All the details on new three-team, USA vs. international players format|url=https://www.nbcsports.com/nba/news/2026-nba-all-star-game-all-the-details-on-new-three-team-usa-vs-international-players-format|work=[[NBC Sports]]|date=November 11, 2025|access-date=November 12, 2025}}</ref> For this year games began at 5 p.m. ([[Eastern Time Zone|EST]]) to accommodate [[Olympics on NBC|NBC's coverage]] of the [[2026 Winter Olympics]].<ref>{{cite web |last=Zeglinski |first=Robert |date=February 15, 2026 |title=Why is the NBA All-Star Game starting so early? |url=https://ftw.usatoday.com/story/sports/nba/2026/02/15/nba-all-star-game-early-start-time-olympics/88693887007/ |work=[[USA Today]] |access-date=April 7, 2026}}</ref> [[Noah Eagle]] (play-by-play), [[Reggie Miller]] and [[Jamal Crawford]] (analysts) called the All-Star Weekend.<ref>{{cite web |last=Yoder |first=Matt |date=February 10, 2026 |title=Noah Eagle will call first NBA All-Star Game for NBC? |url=https://awfulannouncing.com/nbc/noah-eagle-will-call-first-nba-all-star-game.html |website=Awful Announcing |access-date=April 7, 2026}}</ref>
+
+==References==
+{{reflist}}
+
+==External links==
+*[https://www.nba.com/allstar/2026 2026 NBA All-Star Game] at NBA.com
+
+{{NBA All-Star Games}}
+{{2025–26 NBA season by team}}
+{{NBA on NBC}}
+{{Portal bar|Basketball|United States}}
+
+[[Category:NBA All-Star Game]]
+[[Category:2025–26 NBA season|All-Star Game]]
+[[Category:2026 in sports in Los Angeles County, California|NBA All-Star Game]]
+[[Category:Basketball competitions in Inglewood, California]]
+[[Category:February 2026 sports events in the United States|NBA All-Star Game]]
+[[Category:Sports competitions in Inglewood, California]]

@@ -552,5 +552,15 @@ check("career totals are gone: the milestone watch for LeBron and Harden was dro
 check("NBA needs no Claude: neither module imports anthropic", "anthropic" not in (ROOT / "kickoff" / "nba.py").read_text() and "anthropic" not in (ROOT / "kickoff" / "sources" / "espn_nba.py").read_text())
 check("D's 24 tracked players are all there, each with a starting team", len(nba.TRACKED) == 24 and set(nba.TEAMS) == set(nba.TRACKED))
 
+# ---- The season's closing note (D, 2026-11-04): the 2026 NBA Finals, Knicks 4-1 over the Spurs (real schedule) ----
+FIN = [x for x in json.loads((FX / "nba_finals_2026_schedule.json").read_text()) if x["headline"].startswith("NBA Finals")]
+check("the Finals closing note: season, champions, opponent and the series score", nba.closing_html(2026, FIN) == "<p>That&#x27;s the 2025-26 NBA season. The New York Knicks are NBA champions, beating the San Antonio Spurs 4-1.</p>", nba.closing_html(2026, FIN))
+raw_wins = {}
+for x in FIN:
+    hi, lo = (x["home"], x["away"]) if x["home"]["score"] > x["away"]["score"] else (x["away"], x["home"])
+    raw_wins[hi["name"]] = raw_wins.get(hi["name"], 0) + 1
+check("independent: counting the five raw scores gives New York 4, San Antonio 1", raw_wins == {"New York Knicks": 4, "San Antonio Spurs": 1}, raw_wins)
+check("a Finals tied 2-2 after four games gets no note, and neither does an empty series", nba.closing_html(2026, FIN[:4]) == "" and nba.closing_html(2026, []) == "")
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

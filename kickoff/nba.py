@@ -525,6 +525,25 @@ def sgt_when(when):
     return f"{when:%a} {when.day} {when:%b}, {clock} SGT"
 
 
+def closing_html(season, sched):
+    """The season's closing note once the NBA Finals are decided (D, 2026-11-04): 'That's the 2025-26 NBA season. The New York Knicks are NBA champions, beating the
+    San Antonio Spurs 4-1.' sched: the Finals series' games (schedule rows). '' while the series is still open. The Finals MVP comes in the Awards table."""
+    wins, names = {}, {}
+    for x in sched:
+        for side in ("home", "away"):
+            names[x[side]["id"]] = x[side]["name"]
+    for x in sched:
+        if x["status"] == "STATUS_FINAL" and x["home"]["score"] is not None and x["home"]["score"] != x["away"]["score"]:
+            w = x["home"] if x["home"]["score"] > x["away"]["score"] else x["away"]
+            wins[w["id"]] = wins.get(w["id"], 0) + 1
+    if not wins or max(wins.values()) < 4:
+        return ""
+    champ = max(wins, key=wins.get)
+    other = next(i for i in names if i != champ)
+    text = f"That's the {season - 1}-{str(season)[2:]} NBA season. The {names[champ]} are NBA champions, beating the {names[other]} {wins[champ]}-{wins.get(other, 0)}."
+    return f"<p>{r.esc(text)}</p>"
+
+
 def series_html(g0, sched, notes_by_game, seeds=None):
     """One table for one series: the two teams as headers with their series wins beside them, then SERIES_GAMES rows made in advance: the
     game number and date, the score once played (winner in bold) with the player notes under it, 'if necessary' for games not yet scheduled.
@@ -580,7 +599,7 @@ def run(now, day, st, source):
     stats = {"games": 0, "new": 0, "boxes": 0, "failed": 0, "standouts": 0, "series": 0, "cup_new": 0, "live": 0, "calls": 0}
     reported, dogs = list(st.get("reported", [])), dict(st.get("dogs", {}))
     keep = {"reported": reported, "auto": st.get("auto", {}), "hits": st.get("hits", {}), "dogs": dogs, "teams": dict(TEAMS, **st.get("teams", {})),
-            "seeds": st.get("seeds"), "cup_games": dict(st.get("cup_games", {})), "series_notes": dict(st.get("series_notes", {}))}
+            "seeds": st.get("seeds"), "cup_games": dict(st.get("cup_games", {})), "series_notes": dict(st.get("series_notes", {})), "closed": st.get("closed")}
     today = now.astimezone(ET).date()
     games = {}
     for back in (2, 1, 0):
@@ -679,6 +698,11 @@ def run(now, day, st, source):
                 keep["series_notes"][x["id"]] = game_notes(gg, bx, players_of(bx, gg), tracked, info)
             html += series_html(g0, sched, keep["series_notes"], seeds)
             stats["series"] += 1
+            if g0["headline"].startswith("NBA Finals") and keep["closed"] != g0["season"]:   # the Finals are decided: the season's closing note, once
+                note = closing_html(g0["season"], sched)
+                if note:
+                    html += note
+                    keep["closed"] = g0["season"]
     if texts:
         html += "<h4>Standouts</h4>" + '<ul class="standouts">' + "".join(f"<li>{standout_html(t, m)}</li>" for t, m in rows) + "</ul>"
     std = None

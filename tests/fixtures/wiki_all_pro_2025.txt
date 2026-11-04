@@ -1,0 +1,266 @@
+{{Short description|Media-voted list of the best NFL players in 2025}}
+{{Use mdy dates|date=January 2025}}
+{{sidebar
+| width = 25em
+| title = 2025 All-Pro Team
+| headingstyle = border-top:#aaa 1px solid
+| content1style = 
+| content1 = [[All-Pro]]
+| content2 = [[2025 NFL season]]
+| heading3 = Selectors
+| content3 = [[Associated Press]] <br> [[Pro Football Writers of America]] <br> [[The Sporting News]]
+| content4style = border-top:1px #aaa solid
+| content4 = [[2024 All-Pro Team|2024]]  ← → 2026
+}}
+
+The '''2025 All-Pro teams''' were named by the [[Associated Press]] (AP),<ref name="APTeam">{{cite web |title=2025 NFL All-Pro Team: See who made the roster|url=https://apnews.com/article/nfl-all-pro-2025-76fbd57c87e524c320e1194d860b61b3 |website=AP News |agency=[[Associated Press]] |date=10 January 2026 |access-date=10 January 2026}}</ref> [[Pro Football Writers of America]] (PFWA),<ref name="PFWATeam">{{cite web |url=https://www.profootballwriters.org/2026/01/19/pfwa-2025-all-nfl-all-afc-and-all-nfc-teams-announced/ |title=PFWA 2025 All-NFL, All-AFC and All-NFC teams announced |website=Pro Football Writers Association |date=January 19, 2026 |access-date=January 19, 2026}}</ref> and ''[[The Sporting News]]'' (TSN)<ref name="TSNTeam">{{Cite web |last=Iyer |first=Vinnie |date=January 29, 2026 |title=NFL All-Pro Team: How NFL head coaches voted for Sporting News' roster in 2025 |url=https://www.sportingnews.com/us/nfl/news/nfl-all-pro-team-2025-sporting-news/b69c0290bd156ec492c9c93b |access-date=January 30, 2026 |website=The Sporting News}}</ref> for performance in the [[2025 NFL season]]. Any player selected to any of the teams can be described as an "All-Pro." The AP team, with first-team and second-team selections, was chosen by a national panel of fifty NFL writers and broadcasters. ''The Sporting News'' All-Pro team was voted on by NFL players and executives. The PFWA All-NFL team is selected by its more than 300 national members who are accredited media members covering the NFL.
+
+For the 2025 vote, the AP added a new "all purpose" position. Similar to the "[[Offensive backfield|flex]]" position voted on from [[2016 All-Pro Team|2016]] to [[2019 All-Pro Team|2019]], the "all-purpose" selection can be a running back, fullback, wide receiver, or tight end.<ref name="USAToday">{{cite web |last1=Ostly |first1=Ayrton |last2=Axson |first2=Scooby |url=https://www.usatoday.com/story/sports/nfl/2026/01/10/nfl-all-pro-teams-2025/88092124007/ |title=NFL All-Pro teams revealed: These players defined the 2025 season |work=[[USA Today]] |date=January 10, 2026 |access-date=January 10, 2026}}</ref>
+
+== Teams ==
+{| border="0"
+|- valign="top" 
+|
+{| class="wikitable"
+! colspan="3" |Offense
+|-
+!Position
+!First team
+!Second team
+|-
+|[[Quarterback]]
+|[[Matthew Stafford]], [[2025 Los Angeles Rams season|Los Angeles Rams]] (AP, PFWA, TSN)
+|[[Drake Maye]], [[2025 New England Patriots season|New England]] (AP-2)
+|-
+|[[Running back]]
+|[[Bijan Robinson]], [[2025 Atlanta Falcons season|Atlanta]] (AP)<br>[[James Cook (running back)|James Cook]], [[2025 Buffalo Bills season|Buffalo]] (PFWA)<br>[[Christian McCaffrey]], [[2025 San Francisco 49ers season|San Francisco]] (PFWA, TSN)<br>[[Jonathan Taylor]], [[2025 Indianapolis Colts season|Indianapolis]] (TSN) 
+|[[James Cook (running back)|James Cook]], [[2025 Buffalo Bills season|Buffalo]] (AP-2)
+|-
+|[[Fullback (gridiron football)|Fullback]]
+|[[Kyle Juszczyk]], [[2025 San Francisco 49ers season|San Francisco]] (AP)
+|[[Patrick Ricard (American football)|Patrick Ricard]], [[2025 Baltimore Ravens season|Baltimore]] (AP-2)
+|-
+|All-purpose
+|[[Christian McCaffrey]], [[2025 San Francisco 49ers season|San Francisco]] (AP)
+|[[Bijan Robinson]], [[2025 Atlanta Falcons season|Atlanta]] (AP-2)
+|-
+|[[Wide receiver]]
+|[[Puka Nacua]], [[2025 Los Angeles Rams season|Los Angeles Rams]] (AP, PFWA, TSN)<br>[[Jaxon Smith-Njigba]], [[2025 Seattle Seahawks season|Seattle]] (AP, PFWA, TSN)<br>[[Ja’Marr Chase]], [[2025 Cincinnati Bengals season|Cincinnati]] (AP)
+|[[George Pickens]], [[2025 Dallas Cowboys season|Dallas]] (AP-2)<br>[[Chris Olave]], [[2025 New Orleans Saints season|New Orleans]] (AP-2)<br>[[Amon-Ra St. Brown]], [[2025 Detroit Lions season|Detroit]] (AP-2)
+|-
+|[[Tight end]]
+|[[Trey McBride]], [[2025 Arizona Cardinals season|Arizona]] (AP, PFWA, TSN)
+|[[Kyle Pitts]], [[2025 Atlanta Falcons season|Atlanta]] (AP-2)
+|-
+|[[Left tackle]]
+|[[Garett Bolles]], [[2025 Denver Broncos season|Denver]] (AP)
+|[[Trent Williams]], [[2025 San Francisco 49ers season|San Francisco]] (AP-2)
+|-
+|[[Left guard]]
+|[[Joe Thuney]], [[2025 Chicago Bears season|Chicago]] (AP)
+|[[Quenton Nelson]], [[2025 Indianapolis Colts season|Indianapolis]] (AP-2)
+|-
+|[[Center (gridiron football)|Center]]
+|[[Creed Humphrey]], [[2025 Kansas City Chiefs season|Kansas City]] (AP, PFWA, TSN)
+|[[Aaron Brewer (offensive lineman)|Aaron Brewer]], [[2025 Miami Dolphins season|Miami]] (AP-2)
+|-
+|[[Right guard]]
+|[[Quinn Meinerz]], [[2025 Denver Broncos season|Denver]] (AP)
+|[[Chris Lindstrom]], [[2025 Atlanta Falcons season|Atlanta]] (AP-2)
+|-
+|[[Right tackle]]
+|[[Penei Sewell]], [[2025 Detroit Lions season|Detroit]] (AP)
+|[[Darnell Wright]], [[2025 Chicago Bears season|Chicago]] (AP-2)
+|-
+|[[Tackle (gridiron football position)|Tackle]]
+|[[Garett Bolles]], [[2025 Denver Broncos season|Denver]] (PFWA)<br>[[Penei Sewell]], [[2025 Detroit Lions season|Detroit]] (PFWA, TSN)<br>[[Trent Williams]], [[2025 San Francisco 49ers season|San Francisco]] (TSN)
+|
+|-
+|[[Guard (gridiron football)|Guard]]
+|[[Quinn Meinerz]], [[2025 Denver Broncos season|Denver]] (PFWA)<br>[[Joe Thuney]], [[2025 Chicago Bears season|Chicago]] (PFWA, TSN)<br>[[Quenton Nelson]], [[2025 Indianapolis Colts season|Indianapolis]] (TSN)
+|
+|}
+{| class="wikitable"
+! colspan="3" |Special teams
+|-
+!Position
+!First team
+!Second team
+|-
+|[[Placekicker]]
+|[[Will Reichard]], [[2025 Minnesota Vikings season|Minnesota]] (AP)<br>[[Brandon Aubrey]], [[2025 Dallas Cowboys season|Dallas]] (PFWA)<br>[[Cameron Dicker]], [[2025 Los Angeles Chargers season|Los Angeles Chargers]] (TSN)
+|[[Brandon Aubrey]], [[2025 Dallas Cowboys season|Dallas]] (AP-2)
+|-
+|[[Punter (gridiron football)|Punter]]
+|[[Jordan Stout]], [[2025 Baltimore Ravens season|Baltimore]] (AP, PFWA)<br>[[Tress Way]], [[2025 Washington Commanders season|Washington]] (TSN)
+|[[Michael Dickson]], [[2025 Seattle Seahawks season|Seattle]] (AP-2)
+|-
+|[[Kickoff returner]]
+|[[Ray Davis (American football)|Ray Davis]], [[2025 Buffalo Bills season|Buffalo]] (AP, PFWA, TSN)
+|[[KaVontae Turpin]], [[2025 Dallas Cowboys season|Dallas]] (AP-2)
+|-
+|[[Punt returner]]
+|[[Chimere Dike]], [[2025 Tennessee Titans season|Tennessee]] (AP, PFWA)<br>[[Marcus Jones (cornerback)|Marcus Jones]], [[2025 New England Patriots season|New England]] (TSN)
+|[[Marcus Jones (cornerback)|Marcus Jones]], [[2025 New England Patriots season|New England]] (AP-2)
+|-
+|[[Special teams|Special teamer]]
+|[[Devon Key]], [[2025 Denver Broncos season|Denver]] (AP, PFWA)
+|[[Del'Shawn Phillips]], [[2025 Los Angeles Chargers season|Los Angeles Chargers]] (AP-2)
+|-
+|[[Long snapper]]
+|[[Ross Matiscik]], [[2025 Jacksonville Jaguars season|Jacksonville]] (AP)
+|[[Andrew DePaola]], [[2025 Minnesota Vikings season|Minnesota]] (AP-2)
+|-
+|}
+| styles="padding-left:40px;" |
+{| class="wikitable"
+! colspan="3" |Defense
+|-
+!Position
+!First team
+!Second team
+|-
+|[[Edge rusher]]
+|[[Myles Garrett]], [[2025 Cleveland Browns season|Cleveland]] (AP)<br>[[Micah Parsons]], [[2025 Green Bay Packers season|Green Bay]] (AP)<br>[[Will Anderson Jr.]], [[2025 Houston Texans season|Houston]] (AP)
+|[[Aidan Hutchinson]], [[2025 Detroit Lions season|Detroit]] (AP-2)<br>[[Danielle Hunter]], [[2025 Houston Texans season|Houston]] (AP-2)<br>[[Brian Burns (American football)|Brian Burns]], [[2025 New York Giants season|New York Giants]] (AP-2)
+|-
+|[[Defensive end]]
+|[[Will Anderson Jr.]], [[2025 Houston Texans season|Houston]] (PFWA, TSN)<br>[[Myles Garrett]], [[2025 Cleveland Browns season|Cleveland]] (PFWA, TSN)
+|
+|-
+|Interior lineman/[[Defensive tackle]]
+|[[Jeffery Simmons]], [[2025 Tennessee Titans season|Tennessee]] (AP, PFWA, TSN)<br>[[Zach Allen]], [[2025 Denver Broncos season|Denver]] (AP)<br>[[Leonard Williams]], [[2025 Seattle Seahawks season|Seattle]] (PFWA)<br>[[Quinnen Williams]], [[2025 Dallas Cowboys season|Dallas]] (TSN)
+|[[Leonard Williams]], [[2025 Seattle Seahawks season|Seattle]] (AP-2)<br>[[Cameron Heyward]], [[2025 Pittsburgh Steelers season|Pittsburgh]] (AP-2)
+|-
+|[[Linebacker]]
+|[[Jordyn Brooks]], [[2025 Miami Dolphins season|Miami]] (AP, TSN)<br>[[Jack Campbell (American football)|Jack Campbell]], [[2025 Detroit Lions season|Detroit]] (AP, PFWA, TSN)
+|[[Ernest Jones (linebacker)|Ernest Jones IV]], [[2025 Seattle Seahawks season|Seattle]] (AP-2)<br>[[Devin Lloyd]], [[2025 Jacksonville Jaguars season|Jacksonville]] (AP-2)
+|-
+|[[Outside linebacker]]
+|[[Nik Bonitto]], [[2025 Denver Broncos season|Denver]] (PFWA, TSN)<br>[[Brian Burns (American football)|Brian Burns]], [[2025 New York Giants season|New York Giants]] (PFWA)
+|- 
+|[[Cornerback]]
+|[[Derek Stingley Jr.]], [[2025 Houston Texans season|Houston]] (AP, PFWA)<br>[[Quinyon Mitchell]], [[2025 Philadelphia Eagles season|Philadelphia]] (AP, PFWA)<br>[[Patrick Surtain II]], [[2025 Denver Broncos season|Denver]] (TSN)<br>[[Jaycee Horn]], [[2025 Carolina Panthers season|Carolina]] (TSN)
+|[[Devon Witherspoon]], [[2025 Seattle Seahawks season|Seattle]] (AP-2)<br>[[Patrick Surtain II]], [[2025 Denver Broncos season|Denver]] (AP-2)
+|-
+|[[Slot cornerback]]
+|[[Cooper DeJean]], [[2025 Philadelphia Eagles season|Philadelphia]] (AP)
+|[[Derwin James]], [[2025 Los Angeles Chargers season|Los Angeles Chargers]] (AP-2)
+|-
+|[[Safety (gridiron football position)|Safety]]
+|[[Kyle Hamilton]], [[2025 Baltimore Ravens season|Baltimore]] (AP, PFWA, TSN)<br>[[Kevin Byard]], [[2025 Chicago Bears season|Chicago]] (AP, PFWA, TSN)
+|[[Jessie Bates]], [[2025 Atlanta Falcons season|Atlanta]] (AP-2)<br>[[Talanoa Hufanga]], [[2025 Denver Broncos season|Denver]] (AP-2t)<br>[[Xavier McKinney]], [[2025 Green Bay Packers season|Green Bay]] (AP-2t)
+|-
+|}
+|}
+
+AP source:<ref name="APTeam" /><br>
+PFWA source:<ref name="PFWATeam" /><br>
+TSN source:<ref name="TSNTeam" />
+
+For this season's AP ballot, [[Los Angeles Rams]] wide receiver [[Puka Nacua]], [[Seattle Seahawks]] wide receiver [[Jaxon Smith-Njigba]], and [[Cleveland Browns]] edge rusher [[Myles Garrett]] were unanimous selections, receiving all 50 first-place votes at their respective positions.<ref name="USAToday" />
+
+==Key==
+*AP = Associated Press first-team All-Pro
+*AP-2 = Associated Press second-team All-Pro
+<!--*AP-t = Tied for first-team All-Pro in the AP vote-->
+*AP-2t = Tied for second-team All-Pro in the AP vote
+*PFWA = Pro Football Writers Association All-NFL
+*TSN = ''The Sporting News'' All-Pro
+<!--*TSN-t = Tied for All-Pro in the TSN vote-->
+
+==Number of AP selections per team==
+{| border=0
+|- style="vertical-align:top"
+|style="padding-left:50px"|
+{| class="wikitable sortable"
+|+American Football Conference
+|-
+! Team !! Selections
+|-
+|[[2025 Baltimore Ravens season|Baltimore Ravens]] || 3
+|-
+|[[2025 Buffalo Bills season|Buffalo Bills]] || 2
+|-
+|[[2025 Cincinnati Bengals season|Cincinnati Bengals]] || 1
+|-
+|[[2025 Cleveland Browns season|Cleveland Browns]] || 1
+|-
+|[[2025 Denver Broncos season|Denver Broncos]] || 6
+|-
+|[[2025 Houston Texans season|Houston Texans]] || 3
+|-
+|[[2025 Indianapolis Colts season|Indianapolis Colts]] || 1
+|-
+|[[2025 Jacksonville Jaguars season|Jacksonville Jaguars]] || 2
+|-
+|[[2025 Kansas City Chiefs season|Kansas City Chiefs]] || 1
+|-
+|[[2025 Las Vegas Raiders season|Las Vegas Raiders]] || 0
+|-
+|[[2025 Los Angeles Chargers season|Los Angeles Chargers]] || 2
+|-
+|[[2025 Miami Dolphins season|Miami Dolphins]] || 2
+|-
+|[[2025 New England Patriots season|New England Patriots]] || 2
+|-
+|[[2025 New York Jets season|New York Jets]] || 0
+|-
+|[[2025 Pittsburgh Steelers season|Pittsburgh Steelers]] || 1
+|-
+|[[2025 Tennessee Titans season|Tennessee Titans]] || 2
+|}
+|style="padding-left:50px"|
+{| class="wikitable sortable"
+|+National Football Conference
+|-
+! Team !! Selections
+|-
+|[[2025 Arizona Cardinals season|Arizona Cardinals]] || 1
+|-
+|[[2025 Atlanta Falcons season|Atlanta Falcons]] || 5{{efn|name=Falcons|Including [[Bijan Robinson]]'s dual selections at first-team running back and second-team all-purpose.}}
+|-
+|[[2025 Carolina Panthers season|Carolina Panthers]] || 0
+|- 
+|[[2025 Chicago Bears season|Chicago Bears]] || 3
+|-
+|[[2025 Dallas Cowboys season|Dallas Cowboys]] || 3
+|-
+|[[2025 Detroit Lions season|Detroit Lions]] || 4
+|-
+|[[2025 Green Bay Packers season|Green Bay Packers]] || 2
+|-
+|[[2025 Los Angeles Rams season|Los Angeles Rams]] || 2
+|-
+|[[2025 Minnesota Vikings season|Minnesota Vikings]] || 2
+|-
+|[[2025 New Orleans Saints season|New Orleans Saints]] || 1
+|-
+|[[2025 New York Giants season|New York Giants]] || 1
+|-  
+|[[2025 Philadelphia Eagles season|Philadelphia Eagles]] || 2
+|-
+|[[2025 San Francisco 49ers season|San Francisco 49ers]] || 3
+|-
+|[[2025 Seattle Seahawks season|Seattle Seahawks]] || 5
+|-
+|[[2025 Tampa Bay Buccaneers season|Tampa Bay Buccaneers]] || 0
+|-
+|[[2025 Washington Commanders season|Washington Commanders]] || 0
+|}
+|}
+
+==Position differences==
+PFWA and TSN do not separate the tackles and guards into more specific positions as the AP does, nor do they select an all-purpose player on offense. Additionally, PFWA and TSN formally select defensive ends as opposed to edge rushers, while PFWA selects outside linebackers separately from middle linebackers.
+
+==Notes==
+{{notelist}}
+
+==References==
+{{reflist}}
+
+{{NFL All-Pro Teams}}
+<!--{{2025 All-Pro Team}}-->
+
+[[Category:All-Pro Teams]]
+[[Category:2025 NFL season|Allpro]]

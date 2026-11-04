@@ -646,13 +646,35 @@ def standings_ok(standings):
 
 # ---- The whole block ------------------------------------------------------------------------------
 
+def super_bowl(events):
+    """The finished Super Bowl among a scoreboard's raw events, or None."""
+    for e in events or []:
+        c = e["competitions"][0]
+        if e["status"]["type"]["name"] == "STATUS_FINAL" and any(n.get("headline", "").startswith("Super Bowl") for n in c.get("notes", [])):
+            return e
+    return None
+
+
+def closing_html(e):
+    """(html, season year): the season's closing note once the Super Bowl is played (D, 2026-11-04), "That's the 2025 NFL season. The Seahawks are Super Bowl LX
+    champions, beating the Patriots 29-13." e: the Super Bowl's raw scoreboard event. The Super Bowl MVP comes in the Awards table."""
+    c = e["competitions"][0]
+    win = next(x for x in c["competitors"] if x.get("winner"))
+    lose = next(x for x in c["competitors"] if x is not win)
+    name = next(n["headline"] for n in c.get("notes", []) if n.get("headline", "").startswith("Super Bowl"))
+    year = (e.get("season") or {}).get("year")
+    text = (f"That's the {year} NFL season. The {win['team']['shortDisplayName']} are {name} champions, "
+            f"beating the {lose['team']['shortDisplayName']} {win['score']}-{lose['score']}.")
+    return f"<p>{r.esc(text)}</p>", year
+
+
 def run(now, day, st, source):
     """{"html", "state", "stats", "week"}. now: UTC; day: the edition's date in Singapore (its weekday decides the extras);
     st: {"reported": [game ids], "positions": {athlete id: position}, "leaders": {"week", "ids"}}. A failing source never raises:
     that part is left out and counted in stats["failed"]."""
     stats = {"week": None, "games": 0, "completed": 0, "new": 0, "shown": 0, "boxes": 0, "failed": 0, "unknown_positions": 0, "calls": 0}
     reported, positions, dogs = list(st.get("reported", [])), dict(st.get("positions", {})), dict(st.get("dogs", {}))
-    keep = {"reported": reported, "positions": positions, "leaders": st.get("leaders"), "dogs": dogs, "ranks": st.get("ranks")}
+    keep = {"reported": reported, "positions": positions, "leaders": st.get("leaders"), "dogs": dogs, "ranks": st.get("ranks"), "closed": st.get("closed")}
     empty = {"html": "", "state": keep, "stats": stats, "week": None}
     try:
         sb = source.scoreboard()
@@ -662,6 +684,19 @@ def run(now, day, st, source):
     season_type = (sb.get("season") or {}).get("type")
     if season_type == 1:  # preseason: not covered
         return empty
+    sb_event = super_bowl(sb.get("events"))
+    if not sb_event and now.month in (2, 3) and keep["closed"] != now.year - 1:    # the scoreboard may have moved on after the Super Bowl: look at it directly
+        try:
+            sb_event = super_bowl(source.scoreboard(5, 3).get("events"))
+        except Exception:
+            stats["failed"] += 1
+    closing = ""
+    if sb_event and timedelta(0) <= now - utc(sb_event["date"]) <= timedelta(days=4):
+        note, year = closing_html(sb_event)
+        if year and keep["closed"] != year:
+            closing, keep["closed"] = note, year
+    if not (sb.get("week") or {}).get("number") or not sb.get("events"):    # the offseason: nothing on the board, only the closing note when it is due
+        return {**empty, "html": closing}
     week = sb["week"]["number"]
     games = [parse_game(e) for e in sb["events"]]
     byes = [t["shortDisplayName"] for t in sb["week"].get("teamsOnBye", [])]
@@ -734,6 +769,7 @@ def run(now, day, st, source):
     stats["shown"] = len(completed) if show_board else 0
     if show_board:
         reported += [g["id"] for g in completed if g["id"] not in set(reported)]
+    html += closing
     keep.update(reported=reported[-300:], leaders=leaders_shown or st.get("leaders"))
     stats["calls"] = getattr(source, "calls", 0)
     return {"html": html, "state": keep, "stats": stats, "week": week}
