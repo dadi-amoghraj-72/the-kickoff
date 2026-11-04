@@ -3,7 +3,7 @@ postseason, and a closing note when the World Series is decided. All by code fro
 
 Three modes, each worked out from the data (nothing to switch on or off):
   weekly  (Thursday editions until the Dodgers have played DAILY_FROM games): the Dodgers' week, Ohtani's batting and the two pitchers' starts,
-          the six division tables and both wild-card races, with movement arrows against the last table shown;
+          the six division tables and both playoff races (division leaders, wild cards, chasers), with movement arrows against the last table shown;
   daily   (from the Dodgers' DAILY_FROM-th game to the end of the regular season): every game finished since the last edition with a line
           under it only when a batter or pitcher stood out, and each league's playoff race;
   postseason: one series table per series that had a game (best of 3, 5 or 7, the rows made in advance), then the closing note.
@@ -315,24 +315,22 @@ def behind(t, ref):
     return "–" if d == 0 else f"+{abs(d):g}" if d < 0 else f"{d:g}"
 
 
-def race_table(teams, league, first, last, title, before=None, offset=0):
+def race_table(teams, league, first, last, title, before=None):
     """One league's seeds `first` to `last` (1 to 6 are in the playoffs): blue for a division winner (1 to 3), lilac for a wild card, plain for the teams
     out. ✓ after a code: the team has clinched a place; ✗: it is out. The GB column counts from the sixth seed."""
     rows = sorted((t for t in teams if t["league"] == league), key=lambda t: t["seed"])
     ref = next(t for t in rows if t["seed"] == 6)
     show = [t for t in rows if first <= t["seed"] <= last]
     mark = lambda t: t["abbr"] + (" ✓" if t["mark"] in ("*", "x", "y", "z") else " ✗" if t["mark"] == "e" else "")  # noqa: E731
-    body = [[t["seed"] - offset, mark(t), t["overall"], behind(t, ref), r.move(before[t["abbr"]] - t["seed"]) if before and t["abbr"] in before else ""] for t in show]
+    body = [[t["seed"], mark(t), t["overall"], behind(t, ref), r.move(before[t["abbr"]] - t["seed"]) if before and t["abbr"] in before else ""] for t in show]
     zones = ["blue" if t["seed"] <= 3 else "lilac" if t["seed"] <= 6 else None for t in show]
     return r.compact(r.table(title, [("#", True), ("Team", False), ("W-L", True), ("GB", True), ("+/-", True)], body, zones=zones), (10, 30, 22, 20, 18), " nba")
 
 
-def races(teams, first, last, before=None, wild=False):
-    """Both leagues' race tables, the National League first. wild=True: the wild-card race (seeds 4 to 9), numbered 1 to 6."""
-    out = ""
-    for league in LEAGUE_FIRST:
-        out += race_table(teams, league, first, last, f"{short_league(league)} {'Wild Card Race' if wild else 'Playoff Race'}", before, 3 if wild else 0)
-    return out
+def races(teams, first, last, before=None):
+    """Both leagues' playoff race tables, the National League first: the three division leaders (blue, seeds 1 to 3, so the order for home field is
+    visible), the three wild cards (lilac, seeds 4 to 6), then the chasers down to seed `last`."""
+    return "".join(race_table(teams, league, first, last, f"{short_league(league)} Playoff Race", before) for league in LEAGUE_FIRST)
 
 
 # ---- Weekly round-up ----------------------------------------------------------------------------
@@ -546,7 +544,7 @@ def run(now, day, st, source):
             try:
                 teams = teams_of(source.standings())
                 tables, places = division_tables(teams, keep["div"])
-                html += tables + races(teams, 4, 9, keep["seeds"], wild=True)
+                html += tables + races(teams, 1, 9, keep["seeds"])
                 keep["div"], keep["seeds"] = places, {t["abbr"]: t["seed"] for t in teams}
             except Exception:
                 stats["failed"] += 1

@@ -129,12 +129,13 @@ divs = re.findall(r"\n(NL|AL) (West|Central|East) \|", TXT_W)
 check("six division tables, the National League first and the Dodgers' division first within it", divs == [("NL", "West"), ("NL", "Central"), ("NL", "East"), ("AL", "West"), ("AL", "Central"), ("AL", "East")], divs)
 check("each division table lists its five teams; the Dodgers lead the NL West at 100-62 on the raw standings", "1 | LAD | 100-62 | - |" in TXT_W and len(re.findall(r"\n[1-5] \| [A-Z]{3} \| \d+-\d+ \|", TXT_W)) == 30)
 check("a division table has no movement arrows the first time (nothing to compare with)", "▲" not in TXT_W and "▼" not in TXT_W)
-check("both wild-card races come after the divisions, numbered 1 to 6", [m for m in re.findall(r"\n(NL|AL) Wild Card Race \|", TXT_W)] == ["NL", "AL"] and TXT_W.index("NL Wild Card Race") > TXT_W.index("AL East"))
+check("both playoff races come after the divisions, each listing seeds 1 to 9 in order", [m for m in re.findall(r"\n(NL|AL) Playoff Race \|", TXT_W)] == ["NL", "AL"] and TXT_W.index("NL Playoff Race") > TXT_W.index("AL East")
+      and all(re.findall(r"\n(\d) \| [A-Z]{3}(?: [✓✗])? \| \d+-\d+ \| [+\d–.]+ \|", TXT_W[TXT_W.index(f"{lg} Playoff Race"):][:600])[:9] == [str(i) for i in range(1, 10)] for lg in ("NL", "AL")), TXT_W[TXT_W.index("NL Playoff"):][:300])
 flat = {e["team"]["abbreviation"]: {s["name"]: s["displayValue"] for s in e["stats"]} for lg in STD["children"] for dv in lg["children"] for e in dv["standings"]["entries"]}
 nl = sorted((a for a in flat if any(a == e["team"]["abbreviation"] for dv in STD["children"][1]["children"] for e in dv["standings"]["entries"])), key=lambda a: int(flat[a]["playoffSeed"]))
 ref = flat[nl[5]]    # the sixth seed
 ahead = int(flat[nl[3]]["wins"]) - int(ref["wins"]) + int(ref["losses"]) - int(flat[nl[3]]["losses"])
-check("the wild-card race counts games from the sixth seed: the fourth seed is that many games ahead, the sixth is level (–), a team out is behind", f"1 | {mlb.code(nl[3])} ✓ | {flat[nl[3]]['overall']} | +{ahead / 2:g} |" in TXT_W and f"3 | {mlb.code(nl[5])} ✓ | {ref['overall']} | – |" in TXT_W and "ARI ✗ | 86-76 | 2 |" in TXT_W, (nl, TXT_W[TXT_W.index('NL Wild Card'):][:300]))
+check("the playoff race counts games from the sixth seed: the fourth seed is that many games ahead, the sixth is level (–), a team out is behind; the division leaders are seeds 1 to 3", f"4 | {mlb.code(nl[3])} ✓ | {flat[nl[3]]['overall']} | +{ahead / 2:g} |" in TXT_W and f"6 | {mlb.code(nl[5])} ✓ | {ref['overall']} | – |" in TXT_W and "ARI ✗ | 86-76 | 2 |" in TXT_W and all(f"{i + 1} | {mlb.code(nl[i])}" in TXT_W for i in range(3)), (nl, TXT_W[TXT_W.index('NL Playoff'):][:300]))
 check("the season opener line comes only when the state has not seen this season", "season is under way" not in TXT_W and "The 2026 MLB season is under way." in text(run(NOW_W, {k: v for k, v in WSTATE.items() if k != "opened"})["html"]))
 second = run(NOW_W, OUT_W["state"])
 check("run twice: the same Thursday gives nothing the second time, so nothing is shown twice", second["html"] == "" and OUT_W["state"]["week_reported"][-6:] == [g["id"] for g in WEEK], second["stats"])
@@ -181,11 +182,11 @@ class NoStd(Saved):
 ns = run(NOW_W, WSTATE, NoStd(NOW_W))
 check("standings down: the Dodgers' week still comes without the tables, and the week is not lost", ns["stats"]["failed"] == 1 and "Ohtani · Batting" in ns["html"] and "NL West" not in ns["html"] and len(ns["state"]["week_reported"]) > len(WSTATE["week_reported"]))
 
-nl_div = OUT_W["html"].split("NL Wild Card Race")[0].count('class="z-blue"')
+nl_div = OUT_W["html"].split("NL Playoff Race")[0].count('class="z-blue"')
 check("zones: each of the six divisions has exactly one blue row (the leader); the lilac rows are exactly the six teams ESPN seeds 4 to 6 (the wild cards)",
-      nl_div == 6 and OUT_W["html"].split("NL Wild Card Race")[0].count('class="z-lilac"') == sum(1 for a in flat if int(flat[a]["playoffSeed"]) in (4, 5, 6)) == 6)
-race_nl = OUT_W["html"].split("NL Wild Card Race")[1].split("AL Wild Card Race")[0]
-check("zones in a wild-card race: seeds 4 to 6 (rows 1 to 3) lilac, the three teams out plain", race_nl.count('class="z-lilac"') == 3 and race_nl.count("z-blue") == 0 and race_nl.split("<tbody>")[1].split("</tbody>")[0].count("<tr>") == 3)
+      nl_div == 6 and OUT_W["html"].split("NL Playoff Race")[0].count('class="z-lilac"') == sum(1 for a in flat if int(flat[a]["playoffSeed"]) in (4, 5, 6)) == 6)
+race_nl = OUT_W["html"].split("NL Playoff Race")[1].split("AL Playoff Race")[0]
+check("zones in a playoff race: seeds 1 to 3 (the division leaders) blue, 4 to 6 (wild cards) lilac, the three teams out plain: nine rows", race_nl.count('class="z-blue"') == 3 and race_nl.count('class="z-lilac"') == 3 and race_nl.split("<tbody>")[1].split("</tbody>")[0].count("<tr") == 9)
 
 # ---- Daily mode (from the Dodgers' 155th game) --------------------------------------------------------------
 NOW_D = at("2026-09-21T00:00:00")
