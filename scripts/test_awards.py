@@ -122,7 +122,7 @@ rows1 = [{"key": "1", "label": "MVP", "kind": "single", "data": {"name": "Shai G
          {"key": "3", "label": "Defensive Player of the Year", "kind": "single", "data": {"name": "Victor Wembanyama", "team": "SA"}, "text": "", "note": ""}]
 th = awards.table_html("NBA Awards", rows1)
 check("the MVP winner carries the iridescent class and the others plain gold; the team code sits beside each name", '<span class="wn mvp">Shai Gilgeous-Alexander</span> <span class="tc">(OKC)</span>' in th and '<span class="wn">Cooper Flagg</span>' in th and th.count("wn mvp") == 1, th)
-check("the winners' column is the wide one (34% labels / 66% winners, D's phone check) now that labels are short forms", '<col style="width:34%"><col style="width:66%">' in th)
+check("the winners' column is the wide one (31% labels / 69% winners, D's phone check) now that labels are short forms", '<col style="width:31%"><col style="width:69%">' in th)
 team_row = {"key": "t", "label": "All-NBA 2nd Team", "kind": "team", "data": {"tone": "silver", "players": [{"name": "Kevin Durant", "team": "HOU", "count": 15}, {"name": "Kawhi Leonard", "team": "LAC", "count": None}]}, "text": "", "note": ""}
 tb = awards.table_html("NBA Awards", [team_row])
 check("a team row is a full-width block with one line per player: the name in the tone colour, the count in brackets only when known, then '— TEAM'", 'colspan="2"' in tb and '<span class="wn silver">Kevin Durant</span> <span class="ct">(15)</span> <span class="tc">— HOU</span>' in tb and '<span class="wn silver">Kawhi Leonard</span> <span class="tc">— LAC</span>' in tb and tb.count('class="pl"') == 2, tb)

@@ -111,7 +111,7 @@ section > :last-child { margin-bottom: 0; }
 table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 16px; font-variant-numeric: tabular-nums; }
 caption { text-align: left; padding: 0 0 6px; font-weight: 600; background: transparent; }
 th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
-th:first-child, td:first-child { padding-left: 10px; }
+th:first-child, td:first-child { padding-left: 8px; }
 th:last-child, td:last-child { padding-right: 10px; }
 .table-wrap td:not(.n) { white-space: normal; }   /* a long club name wraps instead of pushing the numbers off a 360px screen */
 th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -343,8 +343,8 @@ p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
 .awards tr:not(.blk) td { font-size: 13.5px; }
 .awards th, .awards td { white-space: normal; overflow-wrap: break-word; }
 .awards td.win .tc { white-space: nowrap; }
-.awards td.win { text-align: left; padding-left: 10px; }
-.awards th:nth-child(2) { padding-left: 10px; }
+.awards td.win { text-align: left; padding-left: 8px; }
+.awards th:nth-child(2) { padding-left: 8px; }
 .awards .wn { color: var(--gold); font-weight: 600; }
 .awards .wn.silver { color: #c5ccd6; }
 .awards .wn.bronze { color: #d08a52; }
@@ -367,3 +367,4 @@ p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
   .awards .wn.bronze { color: #9a5a22; }
   .awards .wn.mvp { background: linear-gradient(90deg, #2f5fae 0%, #7b4bb5 35%, #1c8a74 70%, #2f5fae 100%); -webkit-background-clip: text; background-clip: text; }
 }
+.awards th:first-child, .awards tr:not(.blk) td:first-child { padding-left: 12px; }   /* the award names sit in from the table's left edge */

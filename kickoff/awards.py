@@ -175,7 +175,7 @@ def table_html(title, rows, show_blocks=True):
         body += f'<tr><td>{_esc(x["label"])}</td><td class="win">{cell}{note}</td></tr>'
     if not body:
         return ""
-    return (f'<div class="pts f1 awards"><table><colgroup><col style="width:34%"><col style="width:66%"></colgroup><thead><tr><th class="tt" colspan="2">{_esc(title)}</th></tr>'
+    return (f'<div class="pts f1 awards"><table><colgroup><col style="width:31%"><col style="width:69%"></colgroup><thead><tr><th class="tt" colspan="2">{_esc(title)}</th></tr>'
             f'<tr><th>Award</th><th>Winner</th></tr></thead><tbody>{body}</tbody></table></div>')
 
 
