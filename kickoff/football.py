@@ -6,7 +6,7 @@ State is passed in and handed back, never written here, so a test run can't dist
 import copy
 from datetime import datetime, timezone
 
-from kickoff import champions, focus, fplcorner, headlines, injuries, international, leaders, news, notes, overview, roundup, scoreboard, settings, tables
+from kickoff import champions, focus, fplcorner, headlines, injuries, international, leaders, news, notes, overview, performers, roundup, scoreboard, settings, tables
 from kickoff import render as r
 from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
@@ -105,6 +105,8 @@ def run(day, client=None, st=None, now=None, demo=False):
         if res:
             parts += guard(f"{name} round-up", round_up, name, name, res, lg, tbl) or ""
             parts += scoreboard.scores_html(res)
+            if lg == "eng.1":                    # the best performers of the day: the Premier League and the Champions League only
+                parts += performers.html(guard("Premier League performers", performers.best, lg, res) or [])
         chosen = notes.select(lg, res)
         if chosen:
             facts = [notes.match_facts(m, t, tbl, previous[lg], name) for m, t in chosen]
@@ -142,7 +144,8 @@ def run(day, client=None, st=None, now=None, demo=False):
                        espn.CHAMPIONS_LEAGUE, rows[espn.CHAMPIONS_LEAGUE], "night") or ""
         cl_rows = rows[espn.CHAMPIONS_LEAGUE]
         football += champions.section_html(cl_matches, cl_rows, None, cl_box, tables.before_of(saved_tables.get(espn.CHAMPIONS_LEAGUE)),
-                                           legs_fn=espn.get_tie_legs, goals_fn=lambda leg_id: espn.get_match_details(leg_id, espn.CHAMPIONS_LEAGUE))
+                                           legs_fn=espn.get_tie_legs, goals_fn=lambda leg_id: espn.get_match_details(leg_id, espn.CHAMPIONS_LEAGUE),
+                                           performers=performers.html(guard("Champions League performers", performers.best, espn.CHAMPIONS_LEAGUE, cl_matches) or []))
         if cl_rows and champions.in_league_phase(cl_matches):   # remembered so the next league-phase table can show who moved
             new.setdefault("tables", {})[espn.CHAMPIONS_LEAGUE] = {"published": day.isoformat(), "rows": tables.signature(cl_rows)}
     if quiet:

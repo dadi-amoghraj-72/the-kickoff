@@ -99,7 +99,7 @@ def table_html(rows, before=None):
                    body, zones=[zone(x["rank"]) for x in rows], row_classes=classes)
 
 
-def section_html(matches, rows, overview_text=None, box="", before=None, legs_fn=None, goals_fn=None):
+def section_html(matches, rows, overview_text=None, box="", before=None, legs_fn=None, goals_fn=None, performers=""):
     """The full Champions League block: the overview first, then the scoreboard, then the league-phase table.
     Returns '' when there were no matches, so the block is simply left out."""
     if not matches:
@@ -132,6 +132,7 @@ def section_html(matches, rows, overview_text=None, box="", before=None, legs_fn
             except Exception:
                 return None
         html += tie_html(m["stage"], legs, goals_of)
+    html += performers                             # the best performers of the night, right under the scores
     if rows and in_league_phase(matches):
         html += table_html(rows, before)
     return html

@@ -146,6 +146,24 @@ def get_starting_keepers(league, event_id):
     return out
 
 
+def get_player_stats(league, event_id):
+    """Every player of a finished match as plain data, from ESPN's match summary (one request): [{"id", "name", "short", "team_id", "team_abbr", "team",
+    "pos", "starter", "goals", "assists", "shots_on", "saves", "conceded", "yellow", "red", "own_goals"}]. ESPN gives counts only: no ratings."""
+    data = get_json(SUMMARY.format(league=league), {"event": event_id})
+    out = []
+    for side in data.get("rosters", []):
+        t = side["team"]
+        for p in side.get("roster", []):
+            st = {x["name"]: x.get("value") or 0 for x in p.get("stats", [])}
+            a = p["athlete"]
+            out.append({"id": a["id"], "name": a.get("displayName", ""), "short": a.get("shortName") or a.get("displayName", ""), "team_id": t["id"],
+                        "team_abbr": t.get("abbreviation", ""), "team": t.get("displayName", ""), "pos": (p.get("position") or {}).get("abbreviation", ""),
+                        "starter": bool(p.get("starter")), "goals": int(st.get("totalGoals", 0)), "assists": int(st.get("goalAssists", 0)),
+                        "shots_on": int(st.get("shotsOnTarget", 0)), "saves": int(st.get("saves", 0)), "conceded": int(st.get("goalsConceded", 0)),
+                        "yellow": int(st.get("yellowCards", 0)), "red": int(st.get("redCards", 0)), "own_goals": int(st.get("ownGoals", 0))})
+    return out
+
+
 def results_between(league, start, end, pause=0.1):
     """Every finished match from start to end (UTC dates, inclusive), one day at a time."""
     out, day = [], start

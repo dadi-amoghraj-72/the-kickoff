@@ -125,6 +125,17 @@ st = out["new_state"]
 check("state to save: tables, clean sheets, injuries, FPL, seen news, costs", {"tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs"} <= set(st), set(st))
 check("the Premier League table is remembered; clean sheets were counted", "eng.1" in st["tables"] and st["clean_sheets"]["eng.1"]["keepers"], list(st))
 check("the headlines are built by code, at most three", len(out["headlines"]) <= 3)
+pl_block = html.split("<h3>Premier League</h3>")[1].split("<h3>")[0] if "<h3>Premier League</h3>" in html else ""
+espn_real_stats = espn.get_player_stats
+espn.get_player_stats = lambda lg, mid: [{"id": "7", "name": "Test Scorer", "short": "T. Scorer", "team_id": "359", "team_abbr": "ARS", "team": "Arsenal", "pos": "F", "starter": True, "goals": 2, "assists": 0, "shots_on": 3, "saves": 0, "conceded": 0, "yellow": 0, "red": 0, "own_goals": 0}]
+out_pf = football.run(DAY, client=None, st={}, now=NOW)
+pf_html = " ".join(s["html"] for s in out_pf["sections"])
+pf_pl = pf_html.split("<h3>Premier League</h3>")[1].split("<h3>")[0]
+check("the Premier League block has the best performers (the top three of the day) after the scores and before the table; a league other than the Premier League and the Champions League has none", "Best performers" in pf_pl and pf_pl.index('class="scores"') < pf_pl.index("Best performers") < pf_pl.index("<table") and "T. Scorer (ARS)" in pf_pl and pf_html.count("Best performers") == 1, pf_pl[:300])
+espn.get_player_stats = lambda lg, mid: (_ for _ in ()).throw(SourceError("HTTP 500"))
+out_pd = football.run(DAY, client=None, st={}, now=NOW)
+check("if ESPN's player stats fail the rest of the block is unaffected and there is simply no Best performers heading", "Best performers" not in " ".join(s["html"] for s in out_pd["sections"]) and "<h3>Premier League</h3>" in " ".join(s["html"] for s in out_pd["sections"]) and "class=\"scores\"" in " ".join(s["html"] for s in out_pd["sections"]))
+espn.get_player_stats = espn_real_stats
 out2 = football.run(DAY, client=None, st=st, now=NOW)
 html2 = " ".join(s["html"] for s in out2["sections"])
 check("run again with the saved state: the table is 'No change', and Saka's injury is not repeated",
