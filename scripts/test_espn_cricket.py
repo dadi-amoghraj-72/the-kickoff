@@ -368,6 +368,16 @@ with tempfile.TemporaryDirectory() as td:
     broken = cc.load(path)
     empty = {"cards": {}, "tables": {}, "series": {}}
     check("the cache survives a save and a load, and a missing or broken file loads as an empty cache", back == cache and cc.load(Path(td) / "none.json") == empty and broken == empty, (back == cache, broken))
+stale_page = [dict(inn, espn=dict(inn["espn"], total={"r": 54, "w": 1, "o": 10.5, "rr": 4.98})) if i == 1 else inn for i, inn in enumerate(ec.parse_scorecard((FX / "espn_cricket_scorecard_nz_ind.html").read_text()))]
+nz_m = dict(nzind, score=[{"inning": "New Zealand Inning 1", "r": ec.parse_scorecard((FX / "espn_cricket_scorecard_nz_ind.html").read_text())[0]["espn"]["total"]["r"], "w": ec.parse_scorecard((FX / "espn_cricket_scorecard_nz_ind.html").read_text())[0]["espn"]["total"]["w"], "o": 20}])
+good_page = ec.parse_scorecard((FX / "espn_cricket_scorecard_nz_ind.html").read_text())
+sc_both = [{"inning": f"X Inning {i + 1}", "r": inn["espn"]["total"]["r"], "w": inn["espn"]["total"]["w"], "o": inn["espn"]["total"]["o"]} for i, inn in enumerate(good_page)]
+check("an ESPN page card is checked against the match's score line too: the real New Zealand v India T20I page passes against its own totals, and the 54/1 copy that a stale ESPN cache once gave the Mac (India's 143/5 final) is refused",
+      ck.card_consistent({"scorecard": good_page}, {"score": sc_both}) and not ck.card_consistent({"scorecard": [good_page[0], dict(good_page[1], espn=dict(good_page[1]["espn"], total={"r": 54, "w": 1, "o": 10.5}))]}, {"score": sc_both}), sc_both)
+stale_cache = {"cards": {nzind["id"]: {"built": "2026-11-02T07:00:00Z", "scorecard": stale_page}}, "tables": {}, "series": {}}
+stale_src = type("S", (), {"card": lambda self, m: {"scorecard": stale_page, "status": "", "potm": []}, "table": lambda self, m: None, "series": lambda self, m: None})()
+after = cc.collect([dict(nzind, score=sc_both, **{"class": ck.classify(nzind)})], stale_src, NOW_C, stale_cache)
+check("collect refuses a stale page and also removes an older cached card for that match, so the wrong card cannot survive on the Mac or be read on GitHub", nzind["id"] not in after["cards"])
 old = {"cards": {"a": {"built": "2026-10-20T00:00:00Z", "scorecard": []}, "b": {"built": "2026-11-01T00:00:00Z", "scorecard": []}, "c": {"scorecard": []}}, "tables": {}, "series": {}}
 check("entries older than four days, and entries with no valid stamp, are ignored: only 'b' (a day old) survives", list(cc.fresh(old, NOW_C)["cards"]) == ["b"])
 card_f, table_f, series_f = cc.getters(cache, None)

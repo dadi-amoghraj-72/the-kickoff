@@ -258,14 +258,19 @@ NOT_OUT = {"", "not out", "batting", "did not bat", "yet to bat", "retired hurt"
 
 
 def card_consistent(card, match):
-    """False when a scorecard contradicts its own match's totals, so a wrong card is never shown. The free CricketData scorecard can be a snapshot from
-    mid-innings: on 4 November it showed India's 143/5 with Gill and Kohli still 'batting' and 48 extras. For every innings the batters' runs must not exceed the
-    total and the number of batters out must match the wickets (give or take one for a retired batter). A page-total card from ESPN carries its own total and is trusted."""
+    """False when a scorecard contradicts its own match's totals, so a wrong card is never shown. Cards can be stale: the free CricketData scorecard can be a
+    snapshot from mid-innings (on 4 November it showed India's 143/5 with Gill and Kohli still 'batting' and 48 extras), and ESPN's page can be served from an old
+    cache (the Mac once read India at 54/1 after the match had finished 143/5). Every innings is compared with the match's own score line: the card's total (a page
+    total when ESPN gives one) must equal it in runs and wickets, the batters' runs must not exceed it, and the batters out must match the wickets (give or take one
+    for a retired batter). With no score line to compare, only the batters are checked."""
     scores = match.get("score") or []
     for i, inn in enumerate(card.get("scorecard") or []):
-        if (inn.get("espn") or {}).get("total"):
-            continue
         sc = scores[i] if i < len(scores) else None
+        page_total = (inn.get("espn") or {}).get("total")
+        if page_total and sc and sc.get("r") is not None and (page_total["r"] != sc["r"] or (sc.get("w") is not None and page_total["w"] != sc["w"])):
+            return False
+        if page_total and not sc:
+            continue
         if not sc or sc.get("r") is None:
             continue
         batters = inn.get("batting") or []

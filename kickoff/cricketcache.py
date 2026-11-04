@@ -81,8 +81,11 @@ def collect(picked, source, now, cache=None):
     built, done = stamp(now), set()
     for m in picked:
         card = source.card(m)
-        if card and card.get("scorecard") and cricket.card_consistent(card, m):
-            cache["cards"][m["id"]] = {"built": built, "scorecard": card["scorecard"], "status": card.get("status", ""), "potm": card.get("potm", [])}
+        if card and card.get("scorecard"):
+            if cricket.card_consistent(card, m):
+                cache["cards"][m["id"]] = {"built": built, "scorecard": card["scorecard"], "status": card.get("status", ""), "potm": card.get("potm", [])}
+            else:
+                cache["cards"].pop(m["id"], None)          # a page that contradicts the match (a stale copy) also removes an older entry for it
         label = m["class"]["label"]
         if m["class"]["kind"] == "league" and label not in done:           # once per league per run: the table changes with every match
             done.add(label)
