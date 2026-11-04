@@ -1,5 +1,6 @@
 """Offline tests for cricket (the match list part). Run: python3 scripts/test_cricket.py"""
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -58,6 +59,12 @@ dls = {"id": "dls1", "name": "New Zealand vs India, 1st ODI, India tour of New Z
 start0, two_hours_in = datetime(2026, 11, 3, 0, 0, tzinfo=timezone.utc), datetime(2026, 11, 4, 4, 0, tzinfo=timezone.utc)
 check("a match that ended early (rain, DLS) is picked even when 'now' is before our nine-hour estimate of an ODI's end: the data says it ended, so it ended (the 4 November New Zealand v India ODI)", [m["id"] for m in ck.pick([dls], two_hours_in, start0)] == ["dls1"])
 check("but one the data says is still on is not picked, and one that ended before the window opened is not picked", ck.pick([{**dls, "matchEnded": False}], two_hours_in, start0) == [] and ck.pick([dls], two_hours_in, datetime(2026, 11, 5, 0, 0, tzinfo=timezone.utc)) == [])
+odi_nt = {"id": "n1", "name": "New Zealand vs India, 1st ODI, India tour of New Zealand 2026", "dateTimeGMT": "2026-11-04T02:00:00", "teams": ["New Zealand", "India"], "matchStarted": True, "matchEnded": True, "score": []}
+check("a listed match with no matchType (the 4 November New Zealand v India ODI) gets it from its name: ODI, T20I and Test", [ck.match_type(x) for x in (odi_nt, {"name": "A vs B, 5th T20I"}, {"name": "A vs B, 1st Test, tour"}, {"name": "Indian Premier League, 3rd Match"}, {"matchType": "odi", "name": "x"})] == ["odi", "t20", "test", "", "odi"])
+fixed = ck.normalise([odi_nt])
+check("normalised, that ODI is an international in scope and is picked for the edition; before, with no matchType, it was silently dropped (the original dict is not changed)", ck.classify(fixed[0])["kind"] == "international" and [m["id"] for m in ck.pick(fixed, datetime(2026, 11, 4, 10, 0, tzinfo=timezone.utc), datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc))] == ["n1"] and "matchType" not in odi_nt and ck.classify(odi_nt)["kind"] is None)
+run_nt = ck.run(datetime(2026, 11, 4, 10, 0, tzinfo=timezone.utc), datetime(2026, 11, 2, 23, 15, tzinfo=timezone.utc), {}, lambda: ([odi_nt], 5), lambda mid: (_ for _ in ()).throw(RuntimeError("no card")), src.scorecards_affordable)
+check("end to end: a match with no matchType in the list is in the block (a result line, 'New Zealand v India') and is remembered as reported", run_nt["stats"]["picked"] == 1 and "New Zealand v India" in re.sub(r"<[^>]+>", " ", run_nt["html"]) and "n1" in run_nt["state"]["seen"], run_nt["html"][:200])
 live = {"id": "t1", "name": "England vs Pakistan, 1st Test, Pakistan tour of England 2027", "matchType": "test", "status": "Day 2: Stumps - England lead by 40 runs",
         "dateTimeGMT": "2026-11-01T10:00:00", "teams": ["England", "Pakistan"], "score": [], "matchStarted": True, "matchEnded": False}
 check("a live Test is reported when its status has changed", any(m["id"] == "t1" for m in ck.pick(M + [live], NOW, START, last_status={"t1": "Day 1: Stumps"})))

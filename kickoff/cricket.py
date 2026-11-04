@@ -25,6 +25,20 @@ def strip_women(team):
     return re.sub(r"\s+women$", "", team.strip(), flags=re.I)
 
 
+def match_type(m):
+    """'t20', 'odi' or 'test': the list's own matchType, else read from the match name. The free list sometimes leaves matchType out of a newly added match
+    (the 4 November New Zealand v India ODI came with none and was dropped as out of scope)."""
+    if m.get("matchType"):
+        return m["matchType"]
+    found = re.search(r"\b(T20I|T20|ODI|Test)\b", m.get("name", ""), re.I)
+    return {"t20i": "t20", "t20": "t20", "odi": "odi", "test": "test"}.get(found.group(1).lower(), "") if found else ""
+
+
+def normalise(matches):
+    """The list with every match's matchType filled in (see match_type); the matches are copied, the originals untouched."""
+    return [m if m.get("matchType") else {**m, "matchType": match_type(m)} for m in matches]
+
+
 def classify(m):
     """{"kind": "international" | "league" | None, "women", "label", "priority"} for a match from the list."""
     name = m.get("name", "")
@@ -399,6 +413,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
     st: {"seen": [match ids], "status": {id: last status}}.
     Returns {"html", "state", "used", "stats"}; html is '' when there is no cricket to report."""
     matches, used = get_matches()
+    matches = normalise(matches)
     if espn_extra:                                      # ESPN's scores page can have a match the free list has not caught up with yet
         try:
             matches = matches + (espn_extra(matches) or [])

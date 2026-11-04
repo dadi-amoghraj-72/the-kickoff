@@ -16,6 +16,7 @@ now = datetime.now(timezone.utc)
 day = now.astimezone(ZoneInfo("Asia/Singapore")).date()
 ws = espn.window_start(day)
 matches, used = src.get_matches()
+matches = cricket.normalise(matches)
 print(f"now {now:%Y-%m-%d %H:%M} UTC | window starts {ws:%Y-%m-%d %H:%M} UTC | {len(matches)} matches listed | calls used today: {used}\n")
 picked = {m["id"] for m in cricket.pick(matches, now, ws)}
 for m in sorted(matches, key=lambda x: x.get("dateTimeGMT", "")):
