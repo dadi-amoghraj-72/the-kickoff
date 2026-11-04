@@ -102,14 +102,18 @@ section > :last-child { margin-bottom: 0; }
 .tag svg { width: 16px; height: 16px; }
 
 /* Standouts, ranked */
-.standouts { margin: 0 0 14px; padding-left: 1.3em; }
-.standouts li { margin-bottom: 6px; padding-left: 4px; }
+.standouts { margin: 0 0 14px; padding-left: 0; list-style: none; }
+.standouts li { margin-bottom: 6px; padding-left: 20px; }
+.standouts li::before { content: "\25C6"; display: inline-block; width: 20px; margin-left: -20px; padding-left: 4px; box-sizing: border-box; font-size: 9px; color: var(--gold); vertical-align: middle; }   /* the house gold diamond bullet, on every standouts list */
 
 /* Tables: numbers right-aligned, zone bars on the left edge of a row */
 .table-wrap { margin: 14px 0 6px; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 16px; font-variant-numeric: tabular-nums; }
 caption { text-align: left; padding: 0 0 6px; font-weight: 600; background: transparent; }
-th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+th:first-child, td:first-child { padding-left: 10px; }
+th:last-child, td:last-child { padding-right: 10px; }
+.table-wrap td:not(.n) { white-space: normal; }   /* a long club name wraps instead of pushing the numbers off a 360px screen */
 th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 th.n, td.n { text-align: right; }
 tr[class^="z-"] td:first-child { padding-left: 14px; }
@@ -148,6 +152,7 @@ tr.mine td:nth-child(2) { font-weight: 700; }
 .roundup li { display: grid; grid-template-columns: 9em 1fr; column-gap: 10px; align-items: baseline; padding: 3px 0; }
 .roundup .lbl { color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
 .roundup .n { color: var(--gold); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.roundup .sub { display: block; color: var(--muted); font-size: 14px; margin-top: 1px; }
 
 .nodata { display: inline-block; padding: 4px 12px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; color: var(--muted); font-size: 16px; }
 
@@ -189,7 +194,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket .dayflag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .cricket .potm { font-size: 15px; color: var(--muted); }
 .cricket .potm strong { color: var(--chalk); font-weight: 600; }
-.cricket ul.standouts.in { margin: 2px 0 6px; padding-left: 18px; font-size: 15px; line-height: 1.5; }
+.cricket ul.standouts.in { margin: 2px 0 6px; padding-left: 0; font-size: 15px; line-height: 1.5; }
 .cricket .cd { color: var(--muted); font-size: 15px; line-height: 1.5; }
 .cricket .cd strong { color: var(--chalk); font-weight: 600; }
 
@@ -266,17 +271,18 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone td.mid { text-align: center; color: var(--muted); white-space: nowrap; font-size: 13px; }
 .nbaone td.hm { text-align: left; }
 .nbaone td.w { font-weight: 700; color: var(--chalk); }
-.pts.f1.nba th.tt { font-size: 16px; padding: 12px 8px 10px; }
+.pts.f1.nba th.tt { font-size: 16px; padding: 12px 8px 10px; white-space: normal; }
+.pts.f1.nba th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 14px; color: var(--muted); }   /* the small line under a table title: season numbers (Dodgers, Ohtani) */
 .pts.f1.nba td:nth-child(2) { font-weight: 600; }
+.pts.f1.mlbwk th, .pts.f1.mlbwk td { text-align: center; padding-left: 3px; padding-right: 3px; }   /* the weekly tables: everything centred */
+.pts.f1.mlbwk td:nth-child(2) { font-weight: 400; }
+.pts.f1.mlbwk .hi { color: var(--gold); font-weight: 700; }
 .nflsb tr.tag td { padding: 10px 10px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-align: center; }
 .nflsb tr.note td { padding: 0 10px 10px; font-size: 13px; white-space: normal; overflow-wrap: anywhere; }
 .nflsb tr.note .pl { color: var(--chalk); }
 .nbaone tr.end td { border-bottom: 1px solid var(--hairline); }
 .nbaone tr.pre td { color: var(--muted); }
 .nbaone.ser th { padding: 6px 4px 8px; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--chalk); font-weight: 600; }
-.nbaone.ser th.aw { text-align: left; padding-left: 10px; }
-.nbaone.ser th.hm { text-align: right; padding-right: 10px; }
-.nbaone.ser th.mid { text-align: center; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
 .nbaone.ser .ws { color: var(--gold); font-size: 16px; }
 .nbaone.ser td.aw { text-align: left; padding-left: 12px; }
 .nbaone.ser td.hm { text-align: right; padding-right: 12px; }
@@ -296,47 +302,31 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone.ser td.aw.w, .nbaone.ser td.hm.w { color: var(--chalk); font-weight: 800; }
 .nbaone.ser td.aw:not(.w), .nbaone.ser td.hm:not(.w) { color: var(--muted); }
 .nbaone.ser td.mid { font-size: 14px; font-weight: 400; color: var(--muted); }
-.nbaone.ser th.sh .tn, .nbaone.ser tr.sh th .tn { display: inline-block; width: 50%; font-size: 17px; font-weight: 700; color: var(--chalk); }
-.nbaone.ser tr.sh th .tn.r { text-align: right; }
-.nbaone.ser tr.sh th { text-align: left; padding: 8px 10px 2px; white-space: normal; }
-.nbaone.ser tr.sc th { text-align: center; padding: 2px 4px 10px; }
+.nbaone.ser .hd { display: flex; align-items: center; }
+.nbaone.ser .hd > .tn, .nbaone.ser .hd > .ws { flex: 1 1 0; min-width: 0; text-align: center; }
+.nbaone.ser .hd > .gap { flex: 0 0 72px; text-align: center; }
+.nbaone.ser .tn { font-size: 16px; font-weight: 700; color: var(--chalk); line-height: 1.2; }
+.nbaone.ser .ws { font-size: 30px; font-weight: 700; line-height: 1.1; }
+.nbaone.ser .lab { display: block; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.nbaone.ser .bo { display: block; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; }
+.nbaone.ser tr.sh th { padding: 10px 4px 2px; white-space: normal; }
+.nbaone.ser tr.sc th { padding: 2px 4px 10px; }
 .nbaone.ser tr.sc .ws { font-size: 30px; font-weight: 800; color: var(--gold); }
 .nbaone.ser tr.sc .lab { margin: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .standouts .hl { color: var(--gold); font-weight: 600; }
-/* NBA: each game of the day gets one of 15 locked pastel colours; both of its teams carry it in the tables below (15 hues 24 degrees apart taken in steps of 4, so the first four games of a night are a quarter-turn apart: coral, green, blue, violet; soft pastels on dark, muted deeper tones on light) */
-.gc0 { color: #E3A6A0; font-weight: 700; }
-.gc1 { color: #C8EAB8; font-weight: 700; }
-.gc2 { color: #A0D0E3; font-weight: 700; }
-.gc3 { color: #E4B8EA; font-weight: 700; }
-.gc4 { color: #E3C1A0; font-weight: 700; }
-.gc5 { color: #B8EABC; font-weight: 700; }
-.gc6 { color: #A0B5E3; font-weight: 700; }
-.gc7 { color: #EAB8DC; font-weight: 700; }
-.gc8 { color: #E3DCA0; font-weight: 700; }
-.gc9 { color: #B8EAD0; font-weight: 700; }
-.gc10 { color: #A6A0E3; font-weight: 700; }
-.gc11 { color: #EAB8C8; font-weight: 700; }
-.gc12 { color: #D0E3A0; font-weight: 700; }
-.gc13 { color: #B8EAE4; font-weight: 700; }
-.gc14 { color: #C1A0E3; font-weight: 700; }
 @media (prefers-color-scheme: light) {
-  .gc0 { color: #783B36; }
-  .gc1 { color: #4B7836; }
-  .gc2 { color: #366578; }
-  .gc3 { color: #703678; }
-  .gc4 { color: #785636; }
-  .gc5 { color: #36783B; }
-  .gc6 { color: #364B78; }
-  .gc7 { color: #783665; }
-  .gc8 { color: #787036; }
-  .gc9 { color: #367856; }
-  .gc10 { color: #3B3678; }
-  .gc11 { color: #78364B; }
-  .gc12 { color: #657836; }
-  .gc13 { color: #367870; }
-  .gc14 { color: #563678; }
 }
-</style></head><body><div class="topbar"><a href="../index.html">Archive</a><span class="chip" id="chip">1 min read</span></div><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Tuesday 3 November 2026</p></header><p class="banner">NFL preview. Built from saved real data: NFL week 8 of 2026 as the Tuesday 3 November edition would show it (12 of 14 games played at the time).</p><section id="nfl"><h2>NFL</h2><div class="nflsb"><table><colgroup><col style="width:75%"><col style="width:12%"><col style="width:13%"></colgroup><thead><tr><th class="tt" colspan="3">Week 8<span class="prog">13/14 games played · <span class="dog" title="Underdog win">*</span> 2 underdog wins</span></th></tr></thead><tbody><tr class="a"><td class="tm">Carolina Panthers <span class="rec">3-4</span></td><td class="sc">19</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Green Bay Packers <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-3</span></td><td class="sc">27</td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Baltimore Ravens <span class="rec">4-4</span></td><td class="sc">10</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Buffalo Bills <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">6-1</span></td><td class="sc">36</td><td class="ot"></td></tr><tr class="a"><td class="tm">Tennessee Titans <span class="rec">1-7</span></td><td class="sc">36</td><td class="ot">OT</td></tr><tr class="h w"><td class="tm">Cincinnati Bengals <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-2</span></td><td class="sc">43</td><td class="ot"></td></tr><tr class="a w"><td class="tm">Arizona Cardinals<span class="dog" title="Underdog win">*</span> <span class="rec">3-5</span></td><td class="sc">33</td><td class="ot">OT</td></tr><tr class="h"><td class="tm">Dallas Cowboys <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">3-5</span></td><td class="sc">30</td><td class="ot"></td></tr><tr class="a"><td class="tm">Minnesota Vikings <span class="rec">6-1</span></td><td class="sc">15</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Detroit Lions <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-2</span></td><td class="sc">19</td><td class="ot"></td></tr><tr class="a w"><td class="tm">Las Vegas Raiders<span class="dog" title="Underdog win">*</span> <span class="rec">4-4</span></td><td class="sc">38</td><td class="ot"></td></tr><tr class="h"><td class="tm">New York Jets <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">2-6</span></td><td class="sc">33</td><td class="ot"></td></tr><tr class="a"><td class="tm">Cleveland Browns <span class="rec">5-3</span></td><td class="sc">6</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Pittsburgh Steelers <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">6-2</span></td><td class="sc">27</td><td class="ot"></td></tr><tr class="a"><td class="tm">Atlanta Falcons <span class="rec">3-5</span></td><td class="sc">0</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Tampa Bay Buccaneers <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">3-5</span></td><td class="sc">16</td><td class="ot"></td></tr><tr class="a"><td class="tm">Indianapolis Colts <span class="rec">2-6</span></td><td class="sc">7</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Jacksonville Jaguars <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-2</span></td><td class="sc">42</td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Los Angeles Chargers <span class="rec">0-7</span></td><td class="sc">9</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Los Angeles Rams <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">4-4</span></td><td class="sc">24</td><td class="ot"></td></tr><tr class="a"><td class="tm">Kansas City Chiefs <span class="rec">5-2</span></td><td class="sc">24</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Denver Broncos <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">6-2</span></td><td class="sc">28</td><td class="ot"></td></tr><tr class="a w"><td class="tm">New England Patriots <span class="rec">5-3</span></td><td class="sc">24</td><td class="ot"></td></tr><tr class="h"><td class="tm">Miami Dolphins <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">1-6</span></td><td class="sc">19</td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Philadelphia Eagles <span class="rec">2-6</span></td><td class="sc">10</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Washington Commanders <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">2-4-1</span></td><td class="sc">27</td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Chicago Bears <span class="rec">5-2</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Seattle Seahawks <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">4-3</span></td><td class="ot"></td></tr></tbody></table></div><p class="muted">On bye: Saints, Giants, 49ers, Texans.</p></section><footer><a href="../index.html">All editions</a> · The Kickoff, your daily sports digest.</footer></main><nav class="rail" aria-label="Sections"><div class="rail-fill" id="rail-fill"></div><a class="rail-tick" href="#nfl" style="top:0.00%" aria-label="Jump to NFL" title="NFL"></a></nav><script>/* Progress rail: fills as you read, highlights the current section, drives the corner chip.
+/* Notes lines outside a table (NFL Players of the Week and highlights): the same gold diamond bullet and hanging indent as the NBA notes */
+.dlist { margin: 6px 0 14px; }
+.dlist .pl { display: flex; align-items: flex-start; padding: 5px 0; font-size: 16px; line-height: 1.4; }
+.dlist .pl::before { content: "\25C6"; flex: 0 0 20px; box-sizing: border-box; height: 22px; padding-left: 4px; display: flex; align-items: center; font-size: 9px; line-height: 1; color: var(--gold); }
+.dlist .pl .t { flex: 1 1 auto; min-width: 0; }
+.dlist .n { color: var(--gold); font-weight: 600; }
+.dlist.indent { margin-left: 18px; margin-top: 2px; }
+.subhead { margin: 14px 0 0; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.nbaone.ser.sm td.aw, .nbaone.ser.sm td.hm { font-size: 18px; }
+.nbaone.ser.sm td.mid { font-size: 13px; }
+</style></head><body><div class="topbar"><a href="../index.html">Archive</a><span class="chip" id="chip">1 min read</span></div><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Tuesday 3 November 2026</p></header><p class="banner">NFL preview. Built from saved real data: NFL week 8 of 2026 as the Tuesday 3 November edition would show it (12 of 14 games played at the time).</p><section id="nfl"><h2>NFL</h2><ul class="roundup"><li><span class="lbl">Games played</span><span class="who"><span class="n">13/14</span> <span class="sub">Rest still to play</span></span></li><li><span class="lbl">Underdogs won</span><span class="who"><span class="n">2/13</span> </span></li><li><span class="lbl">Best game</span><span class="who">ARI 33-30 DAL<span class="sub">63 points · OT</span></span></li></ul><div class="nflsb"><table><colgroup><col style="width:75%"><col style="width:12%"><col style="width:13%"></colgroup><thead><tr><th class="tt" colspan="3">Week 8</th></tr></thead><tbody><tr class="a"><td class="tm">Carolina Panthers <span class="rec">3-4</span></td><td class="sc">19</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Green Bay Packers <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-3</span></td><td class="sc">27</td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Baltimore Ravens <span class="rec">4-4</span></td><td class="sc">10</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Buffalo Bills <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">6-1</span></td><td class="sc">36</td><td class="ot"></td></tr><tr class="a"><td class="tm">Tennessee Titans <span class="rec">1-7</span></td><td class="sc">36</td><td class="ot">OT</td></tr><tr class="h w"><td class="tm">Cincinnati Bengals <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-2</span></td><td class="sc">43</td><td class="ot"></td></tr><tr class="a w"><td class="tm">Arizona Cardinals<span class="dog" title="Underdog win">*</span> <span class="rec">3-5</span></td><td class="sc">33</td><td class="ot">OT</td></tr><tr class="h"><td class="tm">Dallas Cowboys <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">3-5</span></td><td class="sc">30</td><td class="ot"></td></tr><tr class="a"><td class="tm">Minnesota Vikings <span class="rec">6-1</span></td><td class="sc">15</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Detroit Lions <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-2</span></td><td class="sc">19</td><td class="ot"></td></tr><tr class="a w"><td class="tm">Las Vegas Raiders<span class="dog" title="Underdog win">*</span> <span class="rec">4-4</span></td><td class="sc">38</td><td class="ot"></td></tr><tr class="h"><td class="tm">New York Jets <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">2-6</span></td><td class="sc">33</td><td class="ot"></td></tr><tr class="a"><td class="tm">Cleveland Browns <span class="rec">5-3</span></td><td class="sc">6</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Pittsburgh Steelers <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">6-2</span></td><td class="sc">27</td><td class="ot"></td></tr><tr class="a"><td class="tm">Atlanta Falcons <span class="rec">3-5</span></td><td class="sc">0</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Tampa Bay Buccaneers <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">3-5</span></td><td class="sc">16</td><td class="ot"></td></tr><tr class="a"><td class="tm">Indianapolis Colts <span class="rec">2-6</span></td><td class="sc">7</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Jacksonville Jaguars <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-2</span></td><td class="sc">42</td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Los Angeles Chargers <span class="rec">0-7</span></td><td class="sc">9</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Los Angeles Rams <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">4-4</span></td><td class="sc">24</td><td class="ot"></td></tr><tr class="a"><td class="tm">Kansas City Chiefs <span class="rec">5-2</span></td><td class="sc">24</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Denver Broncos <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">6-2</span></td><td class="sc">28</td><td class="ot"></td></tr><tr class="a w"><td class="tm">New England Patriots <span class="rec">5-3</span></td><td class="sc">24</td><td class="ot"></td></tr><tr class="h"><td class="tm">Miami Dolphins <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">1-6</span></td><td class="sc">19</td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Philadelphia Eagles <span class="rec">2-6</span></td><td class="sc">10</td><td class="ot"></td></tr><tr class="h w"><td class="tm">Washington Commanders <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">2-4-1</span></td><td class="sc">27</td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Chicago Bears <span class="rec">5-2</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Seattle Seahawks <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">4-3</span></td><td class="ot"></td></tr></tbody></table></div><p class="muted">On bye: Saints, Giants, 49ers, Texans.</p></section><footer><a href="../index.html">All editions</a> · The Kickoff, your daily sports digest.</footer></main><nav class="rail" aria-label="Sections"><div class="rail-fill" id="rail-fill"></div><a class="rail-tick" href="#nfl" style="top:0.00%" aria-label="Jump to NFL" title="NFL"></a></nav><script>/* Progress rail: fills as you read, highlights the current section, drives the corner chip.
    Written to stay cheap while scrolling on a phone: it measures only when the page width changes (iPhone Safari
    fires a resize every time the address bar slides), moves the fill with a transform, and touches the page
    only when a value actually changed. */
