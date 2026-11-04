@@ -68,7 +68,7 @@ page = R("wiki_ipl_2026.txt")
 wiki_ipl = Wiki({"2026 Indian Premier League": page})
 final = {"name": "Royal Challengers Bengaluru vs Gujarat Titans, Final, Indian Premier League 2026", "matchEnded": True, "status": "Royal Challengers Bengaluru won by 5 wickets"}
 extra, _ = ipl.extras_for(2026, wiki_ipl)("IPL", [final], {})
-ipl_html = "<h4>A morning with IPL matches: the two cap holders only (Orange and Purple), then on the final's morning the closing note</h4>"
+ipl_html = "<h4>A morning with IPL matches: the Orange Cap and Purple Cap top five, the leader's row in its colour, then on the final's morning the closing note</h4>"
 ipl_html += ipl.caps_html(ipl.stats(page)) + ipl.closing_html(final)
 aw_html, _ = ipl.awards_block(2026, {"season": 2026, "seen": {}, "rows": [], "names": {}}, wiki_ipl, yahoo_page=R("yahoo_ipl_2026_awards.html"))
 ipl_html += "<h4>The morning the end-of-season awards are on the page (Wikipedia's table plus Yahoo Sports' article)</h4>" + aw_html

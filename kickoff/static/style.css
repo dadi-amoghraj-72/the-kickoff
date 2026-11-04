@@ -372,12 +372,7 @@ p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
 .awards .lg { color: var(--muted); font-size: 12px; font-weight: 600; margin-right: 4px; }
 .awards .asg .pl .tc { white-space: nowrap; }
 tr.hl td { color: var(--gold); font-weight: 600; }   /* D's favourites' rows in league tables: Sunrisers Hyderabad (and Arsenal, when built) */
-.caps.orange td, .caps.orange th.tt { color: #f2994a; }
-.caps.purple td, .caps.purple th.tt { color: #b58be6; }
-.caps td { font-weight: 600; }
 @media (prefers-color-scheme: light) {
-  .caps.orange td, .caps.orange th.tt { color: #b3560d; }
-  .caps.purple td, .caps.purple th.tt { color: #6b3fa8; }
 }
 .awards .wn.orange { color: #f2994a; }
 .awards .wn.purple { color: #b58be6; }
@@ -385,7 +380,7 @@ tr.hl td { color: var(--gold); font-weight: 600; }   /* D's favourites' rows in 
 .awards .asg.three { gap: 6px; }
 .awards .asg.three .pl { font-size: 12.5px; }   /* three columns on a phone: a smaller size keeps names such as D. Rasmussen on one line */
 .awards .asg.three .ch { font-size: 11px; }
-.caps tr.orange td { color: #f2994a; }
-.caps tr.purple td { color: #b58be6; }
+.caps tr.orange td { color: #f2994a; font-weight: 600; }
+.caps tr.purple td { color: #b58be6; font-weight: 600; }
 @media (prefers-color-scheme: light) { .caps tr.orange td { color: #b3560d; } .caps tr.purple td { color: #6b3fa8; } }
 .caps td { font-size: 13.5px; }

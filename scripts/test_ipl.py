@@ -37,8 +37,9 @@ check("the wicket table keeps ties: Rashid Khan and Anshul Kamboj are both on 21
 check("a page without the tables gives nothing", ipl.stats("nothing here") == {} and ipl.stats("") == {})
 
 ch = ipl.caps_html(st)
-check("the caps are the two holders only: Orange 'Vaibhav Sooryavanshi (RR)' 776 runs and Purple 'Kagiso Rabada (GT)' 29 wkts - nobody else from the tables", "IPL Cap Leaders" in ch and "Vaibhav Sooryavanshi (RR)" in ch and "776 runs" in ch and "Kagiso Rabada (GT)" in ch and "29 wkts" in ch and "Shubman Gill" not in ch and "Bhuvneshwar" not in ch and ch.count("<tr") == 4, text(ch)[:300])
-check("orange and purple: the Orange row is orange, the Purple row purple, in that order; no gold row", ch.index('class="orange"') < ch.index('class="purple"') and 'class="hl"' not in ch, ch.count('class="hl"'))
+check("the caps: 'Orange Cap · most runs' and 'Purple Cap · most wickets', each the top five (776, 732, 722, 675, 624 runs; 29, 28, 25, 21, 21 wickets), team codes beside", "Orange Cap · most runs" in ch and "Purple Cap · most wickets" in ch and all(x in text(ch) for x in ("776", "732", "722", "675", "624", "Kagiso Rabada", "Bhuvneshwar Kumar", "Jofra Archer", "Rashid Khan", "Anshul Kamboj")) and ch.count("<tr") == 2 * (1 + 1 + 5), ch.count("<tr"))
+leader_rows = re.findall(r'<tr class="(orange|purple)">(.*?)</tr>', ch, re.S)
+check("D's rule: only the leader's row is coloured: one orange row (Sooryavanshi) and one purple row (Rabada), the other eight rows plain, no gold", [(c, "Vaibhav Sooryavanshi" in r_ or "Kagiso Rabada" in r_) for c, r_ in leader_rows] == [("orange", True), ("purple", True)] and "Vaibhav Sooryavanshi" in leader_rows[0][1] and "Kagiso Rabada" in leader_rows[1][1] and 'class="hl"' not in ch, leader_rows)
 check("no stats, no caps", ipl.caps_html({}) == "")
 
 aw = ipl.end_awards(PAGE)
@@ -65,9 +66,9 @@ check("not for a qualifier, an unfinished final or a final with no winner", ipl.
 # ---- the extras function the cricket block calls ----
 go = ipl.extras_for(2026, Wiki())
 h1, s1 = go("IPL", [final], {})
-check("on a morning with IPL matches: the caps, then the closing note, and the year is remembered", "Cap Leaders" in h1 and "champions" in h1 and s1 == {"closed": 2026} and h1.index("Cap Leaders") < h1.index("champions"), (text(h1)[:200], s1))
+check("on a morning with IPL matches: the caps, then the closing note, and the year is remembered", "Orange Cap" in h1 and "champions" in h1 and s1 == {"closed": 2026} and h1.index("Orange Cap") < h1.index("champions"), (text(h1)[:200], s1))
 h2, s2 = go("IPL", [final], s1)
-check("the next morning with the final still in view: caps again, the closing note not repeated", "Cap Leaders" in h2 and "champions" not in h2 and s2 == s1)
+check("the next morning with the final still in view: caps again, the closing note not repeated", "Orange Cap" in h2 and "champions" not in h2 and s2 == s1)
 check("other leagues get nothing from it", go("WBBL", [final], {}) == ("", {}))
 
 
@@ -77,7 +78,7 @@ class Down:
 
 
 hd, sd = ipl.extras_for(2026, Down())("IPL", [final], {})
-check("Wikipedia down: no caps, but the closing note (from ESPN's own data) still comes", "champions" in hd and "Cap Leaders" not in hd and sd == {"closed": 2026}, hd[:120])
+check("Wikipedia down: no caps, but the closing note (from ESPN's own data) still comes", "champions" in hd and "Orange Cap" not in hd and sd == {"closed": 2026}, hd[:120])
 
 # ---- through the cricket block itself ----
 NOW = datetime(2026, 5, 31, 23, 30, tzinfo=timezone.utc)
@@ -86,9 +87,9 @@ m = {"id": "ipl-final", "name": final["name"], "matchType": "t20", "teams": ["Ro
      "score": [{"inning": "Gujarat Titans Inning 1", "r": 160, "w": 8, "o": 20}, {"inning": "Royal Challengers Bengaluru Inning 1", "r": 161, "w": 5, "o": 18.4}]}
 out = ck.run(NOW, datetime(2026, 5, 31, 0, 0, tzinfo=timezone.utc), {}, lambda: ([m], 1), lambda mid: (_ for _ in ()).throw(RuntimeError("no")), lambda used: 0, extras_fn=ipl.extras_for(2026, Wiki()))
 oh = text(out["html"])
-check("the IPL block of the final's morning has the result, the two cap holders and the closing note", "Royal Challengers Bengaluru" in oh and "Cap Leaders" in oh and "Kagiso Rabada" in oh and "champions" in oh and out["state"]["ipl"] == {"closed": 2026}, oh[:300])
+check("the IPL block of the final's morning has the result, the two cap tables and the closing note", "Royal Challengers Bengaluru" in oh and "Orange Cap" in oh and "Purple Cap" in oh and "Kagiso Rabada" in oh and "champions" in oh and out["state"]["ipl"] == {"closed": 2026}, oh[:300])
 out2 = ck.run(NOW, datetime(2026, 5, 31, 0, 0, tzinfo=timezone.utc), {}, lambda: ([m], 1), lambda mid: (_ for _ in ()).throw(RuntimeError("no")), lambda used: 0, extras_fn=lambda *a: 1 / 0)
-check("an extras function that blows up costs the cricket block nothing", "Royal Challengers Bengaluru" in text(out2["html"]) and "Cap Leaders" not in out2["html"], text(out2["html"])[:150])
+check("an extras function that blows up costs the cricket block nothing", "Royal Challengers Bengaluru" in text(out2["html"]) and "Orange Cap" not in out2["html"], text(out2["html"])[:150])
 
 # ---- the awards block ----
 from kickoff import awards  # noqa: E402
