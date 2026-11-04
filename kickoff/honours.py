@@ -198,6 +198,15 @@ def person(cell):
     return f"{m.group(1)} {m.group(2)}".strip() if m else link_text(cell)
 
 
+def _player(cells):
+    """The player of an All-Star table row: the first cell written with {{sortname|First|Last}} (the Pitchers table has no Position column, so the player is not always
+    the second cell); else the first wiki link that is not a position."""
+    for c in cells:
+        if "{{sortname|" in c:
+            return person(c)
+    return None
+
+
 def mlb_all_stars(text):
     """The MLB All-Star selections: {"date", "AL": {"starters": [name], "reserves": [...], "pitchers": [...]}, "NL": {...}} from the 'Elected starters', 'Reserves' and
     'Pitchers' tables under '===American League===' and '===National League===', or {} when the page is not that."""
@@ -208,7 +217,7 @@ def mlb_all_stars(text):
         for t in tables(m.group(1) if m else ""):
             key = {"elected starters": "starters", "starters": "starters", "reserves": "reserves", "pitchers": "pitchers"}.get(re.sub(r"<.*", "", t["caption"]).strip().lower())
             if key:
-                groups[key] = [person(r["cells"][1]) for r in t["rows"] if len(r["cells"]) >= 3 and person(r["cells"][1])]      # the player cell is a row header, so head rows count
+                groups[key] = [_player(r["cells"]) for r in t["rows"] if len(r["cells"]) >= 3 and _player(r["cells"])]      # the player cell is a row header, so head rows count
         if groups.get("starters") and groups.get("reserves"):
             out[lg] = {k: groups.get(k, []) for k in ("starters", "reserves", "pitchers")}
     date = re.search(r"^\|\s*date\s*=\s*(.+)$", text, re.M)

@@ -11,7 +11,7 @@ from kickoff import render as r
 
 CODES = {"Chennai Super Kings": "CSK", "Delhi Capitals": "DC", "Gujarat Titans": "GT", "Kolkata Knight Riders": "KKR", "Lucknow Super Giants": "LSG", "Mumbai Indians": "MI",
          "Punjab Kings": "PBKS", "Rajasthan Royals": "RR", "Royal Challengers Bengaluru": "RCB", "Royal Challengers Bangalore": "RCB", "Sunrisers Hyderabad": "SRH"}
-GOLD_TEAMS = {"SRH"}           # D: Sunrisers Hyderabad's row in gold, in every IPL table
+GOLD_TEAMS = {"SRH"}           # D: Sunrisers Hyderabad's row in gold in the official league (points) table, nowhere else
 
 
 def season_page(year):
@@ -41,32 +41,79 @@ def stats(text):
     return out if {"runs", "wickets"} <= set(out) else {}
 
 
+ORDER = ["MVP", "Orange Cap", "Purple Cap", "Emerging", "Super Striker", "Most Sixes", "Most Fours", "Dot Balls", "Best Catch", "Fair Play", "Final POTM"]
+WIKI_NAMES = {"most valuable player": "MVP", "orange cap": "Orange Cap", "purple cap": "Purple Cap", "emerging player": "Emerging", "highest batting strike rate": "Super Striker",
+              "most sixes": "Most Sixes", "most fours": "Most Fours", "most dot balls": "Dot Balls", "catch of the season": "Best Catch", "team fairplay": "Fair Play"}
+YAHOO_NAMES = {"mvp award": "MVP", "orange cap": "Orange Cap", "purple cap": "Purple Cap", "emerging player award": "Emerging", "super striker of the season": "Super Striker",
+               "super sixes": "Most Sixes", "most fours": "Most Fours", "green dot ball": "Dot Balls", "catch of the season": "Best Catch", "fairplay award": "Fair Play",
+               "player of the match (final)": "Final POTM"}
+
+
+def _key(name, names):
+    n = re.sub(r"\s+", " ", name.strip().lower())
+    return next((v for k, v in names.items() if n.startswith(k)), None)
+
+
 def end_awards(text):
-    """{"MVP": (player, team code), "Emerging": (...)} from the 'End of season awards' table once it is on the page, else {}."""
+    """{label: {"name", "team", "detail"}} from the Wikipedia page's 'End of season awards' table once it is on the page (MVP, Orange Cap, Purple Cap, Emerging, Super Striker,
+    Most Sixes, Most Fours, Dot Balls, Best Catch, Fair Play), else {}."""
     out = {}
     for t in honours.tables(text):
         if t["caption"].lower().startswith("end of season awards"):
             for row in t["rows"]:
                 c = row["cells"]
                 if len(c) >= 4:
+                    key = _key(c[0], WIKI_NAMES)
                     who, club = honours.link_text(c[2]), honours.link_text(c[3]) or ""
-                    if who and c[0].lower().startswith("most valuable player"):
-                        out["MVP"] = (who, CODES.get(club, club))
-                    elif who and c[0].lower().startswith("emerging player"):
-                        out["Emerging"] = (who, CODES.get(club, club))
+                    if key and (who or club):
+                        out[key] = {"name": who or club, "team": CODES.get(club, "") if who else "", "detail": ""}
     return out
 
 
+def yahoo_awards(page):
+    """The same awards from Yahoo Sports' article (a table of Award and Winner; Yahoo carries Cricket News' list, 'IPL 2026 awards list'): {label: {"name", "team", "detail"}}, with
+    the Player of the Match of the final as well. A winner reads 'Name (Team)', 'Name (Team) - 172 dot balls (3268 planted)' or 'Name (RCB vs KKR - Tim David's dismissal)'; what is not a
+    team goes in 'detail'. {} when the page has no such table."""
+    import html as _html
+    m = re.search(r'<table class="content-table".*?</table>', page, re.S)
+    if not m:
+        return {}
+    out = {}
+    for tr in re.findall(r"<tr.*?</tr>", m.group(0), re.S):
+        cells = [_html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", c))).strip() for c in re.findall(r"<td[^>]*>(.*?)</td>", tr, re.S)]
+        if len(cells) < 2:
+            continue
+        key = _key(cells[0], YAHOO_NAMES)
+        if not key:
+            continue
+        text = cells[1]
+        mm = re.match(r"^(.+?) \((.+?)\)(?: - (.+))?$", text)
+        name, inner, tail = (mm.group(1), mm.group(2), mm.group(3)) if mm else (text, "", "")
+        team = CODES.get(inner, inner if inner in CODES.values() else "")
+        detail = re.sub(r"\s*\(\d[^)]*\)$", "", tail or "").strip() if team or not inner else inner
+        out[key] = {"name": name.strip(), "team": team, "detail": detail}
+    return out
+
+
+def merged_awards(wiki_page, yahoo_page=""):
+    """Wikipedia's awards, with Yahoo's filling what Wikipedia lacks (the Final's Player of the Match and any award not yet in its table); on a clash Wikipedia's name stands."""
+    y, w = yahoo_awards(yahoo_page or ""), end_awards(wiki_page)
+    got = {**y, **w}
+    for k, v in w.items():                       # Wikipedia's name stands, Yahoo's detail ('172 dot balls') is kept
+        if k in y and y[k].get("detail") and not v.get("detail"):
+            got[k] = {**v, "detail": y[k]["detail"]}
+    return {k: got[k] for k in ORDER if k in got}
+
+
 def caps_html(st, limit=3):
-    """Two small tables, 'Orange Cap · most runs' and 'Purple Cap · most wickets', the top `limit` of each, Sunrisers Hyderabad's row in gold."""
+    """Two small tables, 'Orange Cap · most runs' in orange and 'Purple Cap · most wickets' in purple (D: they are named after colours), the top `limit` of each. No gold
+    here: Sunrisers Hyderabad's gold row is for the official league table only."""
     out = ""
-    for key, title, unit in (("runs", "Orange Cap · most runs", "Runs"), ("wickets", "Purple Cap · most wickets", "Wkts")):
+    for key, title, unit, tone in (("runs", "Orange Cap · most runs", "Runs", "orange"), ("wickets", "Purple Cap · most wickets", "Wkts", "purple")):
         rows = st.get(key, [])[:limit]
         if not rows:
             continue
-        body = [[n, who, team] for n, who, team in rows]
-        classes = ["hl" if team in GOLD_TEAMS else "" for _, _, team in rows]
-        out += r.compact(r.table(title, [(unit, True), ("Player", False), ("Team", False)], body, row_classes=classes), (22, 52, 26), " caps")
+        out += r.compact(r.table(title, [(unit, True), ("Player", False), ("Team", False)], [[n, who, team] for n, who, team in rows]), (22, 52, 26), f" caps {tone}")
     return out
 
 
@@ -104,15 +151,14 @@ def extras_for(year, wiki):
     return go
 
 
-def awards_block(year, state, wiki, title="IPL Awards"):
-    """(html, state): the end-of-season awards (Most Valuable Player and Emerging Player) as a one-off Awards table the first morning the Wikipedia page has them.
-    state is kickoff.awards' state; the year is the IPL season (the table is simply absent before the final)."""
+def awards_block(year, state, wiki, title="IPL Awards", yahoo_page=""):
+    """(html, state): the end-of-season awards as an Awards table, newest first, the first morning the Wikipedia page (or the Yahoo article, when settings.IPL_AWARDS_URLS has one
+    for the year and the caller passes its page) has them: MVP, Orange Cap, Purple Cap, Emerging Player, Super Striker, Most Sixes, Most Fours, Dot Balls, Best Catch, Fair Play and the
+    final's Player of the Match. Said once per award; a later one joins the table. state is kickoff.awards' state."""
     from kickoff import awards
     items = []
-    got = end_awards(wiki.wikitext(season_page(year)))
-    for key, label in (("MVP", "MVP"), ("Emerging", "Emerging")):
-        if key in got:
-            who, team = got[key]
-            items.append({"key": f"ipl:{key}", "label": label, "sig": who, "kind": "single", "data": {"name": who, "team": team}, "text": f"{who} ({team})"})
+    for key, v in merged_awards(wiki.wikitext(season_page(year)), yahoo_page).items():
+        items.append({"key": f"ipl:{key}", "label": key, "sig": v["name"], "kind": "single", "data": v,
+                      "text": f"{v['name']} ({v['team']})" if v["team"] else v["name"]})
     new_state, new = awards.update(state or {}, year, items)
     return (awards.table_html(title, new_state["rows"]) if new else ""), new_state

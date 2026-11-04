@@ -38,12 +38,24 @@ check("a page without the tables gives nothing", ipl.stats("nothing here") == {}
 
 ch = ipl.caps_html(st, limit=5)
 check("the caps: 'Orange Cap · most runs' and 'Purple Cap · most wickets', Sooryavanshi first, each with its figure and team", "Orange Cap · most runs" in ch and "Purple Cap · most wickets" in ch and "Vaibhav Sooryavanshi" in ch and "776" in ch and "Kagiso Rabada" in ch, text(ch)[:300])
-check("D's rule: Sunrisers Hyderabad's row (Klaasen) carries the gold class, nobody else's does", ch.count('class="hl"') == 1 and "Heinrich Klaasen" in ch.split('class="hl"')[1].split("</tr>")[0], ch.count('class="hl"'))
+check("D's colour idea: the Orange Cap table is orange and the Purple Cap table purple; no gold row here (Sunrisers' gold is for the official league table only)", " caps orange" in ch and " caps purple" in ch and 'class="hl"' not in ch and ch.index(" caps orange") < ch.index(" caps purple"), ch.count('class="hl"'))
 check("the default is the top three of each", ipl.caps_html(st).count("<tr") == 2 * (1 + 1 + 3), ipl.caps_html(st).count("<tr"))
 check("no stats, no caps", ipl.caps_html({}) == "")
 
 aw = ipl.end_awards(PAGE)
-check("end of season: the Most Valuable Player and the Emerging Player (both Vaibhav Sooryavanshi of Rajasthan Royals)", aw == {"MVP": ("Vaibhav Sooryavanshi", "RR"), "Emerging": ("Vaibhav Sooryavanshi", "RR")}, aw)
+check("Wikipedia's end of season table: MVP, Orange Cap and Emerging all Vaibhav Sooryavanshi (RR), Purple Cap Kagiso Rabada (GT), Most Fours Sai Sudharsan (GT), Fair Play Punjab Kings",
+      aw["MVP"] == {"name": "Vaibhav Sooryavanshi", "team": "RR", "detail": ""} and aw["Purple Cap"]["name"] == "Kagiso Rabada" and aw["Purple Cap"]["team"] == "GT" and aw["Most Fours"]["name"] == "Sai Sudharsan" and aw["Fair Play"]["name"] == "Punjab Kings" and aw["Emerging"]["name"] == "Vaibhav Sooryavanshi", aw)
+YA = (FX / "yahoo_ipl_2026_awards.html").read_text()
+ya = ipl.yahoo_awards(YA)
+check("Yahoo Sports' article (Cricket News' 'IPL 2026 awards list') gives the same winners, plus the final's Player of the Match (Virat Kohli) and the details: 172 dot balls for Siraj, the catch's match",
+      ya["MVP"]["name"] == "Vaibhav Sooryavanshi" and ya["Purple Cap"]["team"] == "GT" and ya["Final POTM"]["name"] == "Virat Kohli" and ya["Dot Balls"]["detail"] == "172 dot balls" and "Tim David" in ya["Best Catch"]["detail"] and ya["Fair Play"]["name"] == "Punjab Kings", ya)
+raw_rows = re.findall(r"<tr.*?</tr>", YA, re.S)
+check("independent: Yahoo's table has 16 rows (a header, 13 awards and honours, runners-up and champions) and we read the 11 of them that are awards", len(raw_rows) == 16 and len(ya) == 11, (len(raw_rows), len(ya)))
+agree = [k for k in ya if k in aw and ya[k]["name"].split()[-1] == aw[k]["name"].split()[-1]]
+check("the two sources agree on the surname of every award they share (Siraj is spelt Mohammad by Yahoo and Mohammed by Wikipedia)", len(agree) == len([k for k in ya if k in aw]) and len(agree) >= 9, agree)
+mg = ipl.merged_awards(PAGE, YA)
+check("merged: Wikipedia's name stands (Mohammed Siraj), Yahoo's detail is kept (172 dot balls), and Yahoo's Final POTM is added; in the display order MVP, Orange, Purple ...", mg["Dot Balls"]["name"] == "Mohammed Siraj" and mg["Dot Balls"]["detail"] == "172 dot balls" and mg["Final POTM"]["name"] == "Virat Kohli" and list(mg)[:3] == ["MVP", "Orange Cap", "Purple Cap"], list(mg))
+check("Yahoo alone (Wikipedia down) still gives the list; neither gives nothing", len(ipl.merged_awards("", YA)) == 11 and ipl.merged_awards("", "") == {} and ipl.yahoo_awards("<html></html>") == {})
 check("before the awards exist: nothing", ipl.end_awards(PAGE.split("=== End of season awards ===")[0]) == {})
 
 # ---- the closing note from ESPN's own final ----
@@ -86,7 +98,9 @@ fresh = {"season": 2026, "seen": {}, "rows": [], "names": {}}
 hb, sb = ipl.awards_block(2026, fresh, before)
 check("before the awards are on the page: no table", hb == "" and sb["rows"] == [])
 ha, sa = ipl.awards_block(2026, sb, Wiki())
-check("the morning the page has them: an 'IPL Awards' table with MVP and Emerging, Vaibhav Sooryavanshi (RR) both times", "IPL Awards" in ha and text(ha).count("Vaibhav Sooryavanshi") == 2 and "MVP" in ha and "Emerging" in ha and ha.count("wn mvp") == 1, text(ha)[:200])
+check("the morning the page has them: an 'IPL Awards' table: MVP first (iridescent), then the Orange Cap in orange and the Purple Cap in purple, Emerging, Super Striker ...", "IPL Awards" in ha and ha.count("wn mvp") == 1 and "wn orange" in ha and "wn purple" in ha and text(ha).index("MVP") < text(ha).index("Orange Cap") < text(ha).index("Purple Cap") < text(ha).index("Emerging"), text(ha)[:300])
+hy, sy = ipl.awards_block(2026, sb, Wiki(), yahoo_page=YA)
+check("with Yahoo's article as well, the table also has the final's Player of the Match and the 172 dot balls detail", "Final POTM" in hy and "Virat Kohli" in hy and "172 dot balls" in text(hy), text(hy)[:200])
 hc, sc = ipl.awards_block(2026, sa, Wiki())
 check("and not again afterwards", hc == "" and sc == sa)
 

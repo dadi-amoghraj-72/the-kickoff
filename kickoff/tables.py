@@ -48,7 +48,8 @@ def _table_html(name, rows, before=None):
     zones = [zone_for(x["zone"]) for x in rows]
     body = [[x.get("short") or x["team"], x["played"], f"{x['gd']:+d}", x["points"], movement(x, before)] for x in rows]
     body = [[x["rank"]] + b for x, b in zip(rows, body)]
-    return r.table(name, COLUMNS, body, zones=zones)
+    gold = ["hl" if x["abbr"] == "ARS" or (x.get("short") or x["team"]) == "Arsenal" else "" for x in rows]       # D: Arsenal's row in gold in a league table
+    return r.table(name, COLUMNS, body, zones=zones, row_classes=gold)
 
 
 def block(name, rows, decision, leaders="", before=None):

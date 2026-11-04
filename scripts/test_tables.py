@@ -1,6 +1,7 @@
 """Offline tests for table change detection. Run: python3 scripts/test_tables.py"""
 import copy
 import json
+import re
 import sys
 import tempfile
 from datetime import date
@@ -102,6 +103,14 @@ check("an unchanged table is still just 'No change since', no arrows", "No chang
 top6, _ = tables.tables_html({"eng.1": PL}, prev_state, THU, LEAGUES)
 check("movement works with the pure helper: movement(x, {id: 4}) for a team now 3rd is ▲1, for one now 3rd that was 3rd is –, with no earlier table it is blank", tables.movement({"id": "a", "rank": 3}, {"a": 4}) == "▲1" and tables.movement({"id": "a", "rank": 3}, {"a": 3}) == "–" and tables.movement({"id": "a", "rank": 3}, None) == "" and tables.movement({"id": "a", "rank": 3}, {"b": 1}) == "" and tables.movement({"id": "a", "rank": 5}, {"a": 2}) == "▼3")
 check("no game colours in a league table, full or top-6 view: all white", "gc" not in tables.tables_html({"eng.1": PL}, {}, WED, LEAGUES)[0] and "gc" not in tables.tables_html({"eng.1": PL}, prev_state, THU, LEAGUES)[0] and "<span" not in tables.tables_html({"eng.1": PL}, {}, WED, LEAGUES)[0] and "▲" in tables.tables_html({"eng.1": PL}, prev_state, THU, LEAGUES)[0])
+
+# ---- D, 2026-11-04: Arsenal's row in gold in a league table, nobody else's ----
+full = tables.block("Premier League", PL, {"mode": "full"})
+ars_row = next(r_ for r_ in full.split("<tr") if "Arsenal" in r_)
+check("the Premier League table: Arsenal's row has the gold class", re.search(r'class="[^"]*\bhl\b', ars_row.split(">")[0]) is not None, ars_row[:80])
+check("independent: exactly one row in the table has it, and it is the row of the club ESPN lists as Arsenal", len(re.findall(r'<tr class="[^"]*\bhl\b', full)) == 1 and any(x["short"] == "Arsenal" for x in PL), full.count("hl"))
+changed = tables.block("Premier League", PL, {"mode": "changed"})
+check("the 'top 6' view has it too when Arsenal is in it", changed.count("hl") >= 1 if any(x["short"] == "Arsenal" and x["rank"] <= 6 for x in PL) else True)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

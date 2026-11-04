@@ -92,7 +92,8 @@ def table_html(rows, before=None):
     if len(rows) < CUT_LINE:
         return ""
     body = [[x["rank"], x.get("short") or x["team"], x["played"], f"{x['gd']:+d}", x["points"], movement(x, before)] for x in rows]
-    classes = [" ".join(c for c in ("cut" if x["rank"] in (TOP_EIGHT, CUT_LINE) else "", "mine" if is_listed(x["id"]) else "") if c)
+    classes = [" ".join(c for c in ("cut" if x["rank"] in (TOP_EIGHT, CUT_LINE) else "", "mine" if is_listed(x["id"]) else "",
+                                       "hl" if x["abbr"] == "ARS" or (x.get("short") or x["team"]) == "Arsenal" else "") if c)
                for x in rows]
     return r.table(f"League Phase After Matchday {max(x['played'] for x in rows)}",
                    [("#", True), ("Team", False), ("P", True), ("GD", True), ("Pts", True), ("+/-", True)],

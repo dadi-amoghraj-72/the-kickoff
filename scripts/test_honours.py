@@ -140,7 +140,7 @@ class MW:
     def wikitext(self, page):
         return {"Major League Baseball Manager of the Year Award": MMOTY, "Gold Glove Award": MPLAT}.get(page, "")
 mitems = {i["key"]: i for i in awards.wiki_items("mlb", 2025, MW())}
-check("MLB 2025 items: Manager of the Year and Platinum Glove as AL/NL pairs (the All-Star page asked for is the season's own, so none here)", set(mitems) == {"wiki:moty", "wiki:plat"} and mitems["wiki:moty"]["label"] == "MOTY" and mitems["wiki:plat"]["label"] == "Platinum G" and [w["league"] for w in mitems["wiki:plat"]["data"]["winners"]] == ["AL", "NL"], list(mitems))
+check("MLB 2025 items: Manager of the Year (an AL/NL pair) and the Platinum Glove Awardees (a league block, AL and NL one player each)", set(mitems) == {"wiki:moty", "wiki:plat"} and mitems["wiki:moty"]["label"] == "MOTY" and mitems["wiki:moty"]["kind"] == "pair" and mitems["wiki:plat"]["label"] == "Platinum Glove Awardees" and mitems["wiki:plat"]["kind"] == "league" and mitems["wiki:plat"]["data"]["AL"][0]["name"] == "Bobby Witt Jr.", list(mitems))
 class MW2(MW):
     def wikitext(self, page):
         return MASG if page == "2026 Major League Baseball All-Star Game" else ""
@@ -149,9 +149,16 @@ check("MLB 2026: the All-Star selections are two blocks, AL and NL, each with St
 ah = awards.table_html("MLB Awards", [{**sitems["wiki:asg:AL"], "note": ""}])
 check("the All-Star block shows three centred columns with initials and the headers Starters, Reserves, Pitchers", all(x in ah for x in ("Starters", "Reserves", "Pitchers", "A. Judge", "S. Langeliers")) and ah.count('class="col"') == 3, ah[:400])
 ph = awards.table_html("MLB Awards", [{**mitems["wiki:plat"], "note": ""}])
-check("a pair is two lines, AL then NL, each with the name and team code", ph.count('class="pr"') == 2 and ph.index("Bobby Witt Jr.") < ph.index("Fernando Tatis Jr.") and "(KC)" in ph and "(SD)" in ph, ph)
+check("the Platinum Glove block has the title 'Platinum Glove Awardees' and the two winners with their clubs under American League and National League", "Platinum Glove Awardees" in ph and "B. Witt Jr." in ph and "(KC)" in ph and "F. Tatis Jr." in ph and "(SD)" in ph, ph[:500])
 mh = awards.table_html("MLB Awards", [{**mitems["wiki:moty"], "note": ""}])
 check("the managers have no team beside them (the page's table does not give a usable code), just AL and NL names", "Stephen Vogt" in mh and "Pat Murphy" in mh and 'class="tc"' not in mh, mh)
+
+# MLB All-Star pitchers: the page's Pitchers tables have no Position column, so the player is the sortname cell, not a fixed column (it once showed the clubs: 'Rays', 'Blue Jays')
+pit = ma["AL"]["pitchers"]
+nick = {n for _, n in honours.MLB_TEAMS.values()}
+check("the AL pitchers are real names (Bryan Baker, Dylan Cease, Aroldis Chapman first), never club nicknames", pit[:3] == ["Bryan Baker", "Dylan Cease", "Aroldis Chapman"] and not set(pit) & nick and not set(ma["NL"]["pitchers"]) & nick, pit[:6])
+raw_pit_al = len(re.findall(r"\{\{sortname\|", re.search(r"\|\+Pitchers(.*?)\|\}", al_region, re.S).group(1)))
+check("independent: as many AL pitchers as the raw Pitchers table has sortnames", len(pit) == raw_pit_al and raw_pit_al >= 10, (len(pit), raw_pit_al))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

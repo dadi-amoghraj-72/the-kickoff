@@ -53,7 +53,7 @@ MW = Wiki({"Major League Baseball Manager of the Year Award": R("wiki_mlb_moty.t
 sched = [("start", set(), None),
          ("Morning 1: MVP and Cy Young (a pair each: AL then NL), the World Series MVP and the Roberto Clemente Award", {"MVP", "Cy Young", "World Series MVP", "Roberto Clemente Award"}, None),
          ("Morning 2: the Gold Glove (20 winners, a block by league)", {"MVP", "Cy Young", "World Series MVP", "Roberto Clemente Award", "Gold Glove"}, None),
-         ("Morning 3: Platinum Glove and Manager of the Year join (from Wikipedia), Rookie of the Year", {"MVP", "Cy Young", "World Series MVP", "Roberto Clemente Award", "Gold Glove", "Rookie of the Year"}, MW)]
+         ("Morning 3: Platinum Glove Awardees and Manager of the Year join (from Wikipedia), Rookie of the Year", {"MVP", "Cy Young", "World Series MVP", "Roberto Clemente Award", "Gold Glove", "Rookie of the Year"}, MW)]
 mlb_html, state = "", {}
 for i, (label, show, wiki) in enumerate(sched):
     extra = awards.wiki_items("mlb", 2025, wiki) if wiki else []
@@ -68,10 +68,10 @@ page = R("wiki_ipl_2026.txt")
 wiki_ipl = Wiki({"2026 Indian Premier League": page})
 final = {"name": "Royal Challengers Bengaluru vs Gujarat Titans, Final, Indian Premier League 2026", "matchEnded": True, "status": "Royal Challengers Bengaluru won by 5 wickets"}
 extra, _ = ipl.extras_for(2026, wiki_ipl)("IPL", [final], {})
-ipl_html = "<h4>A morning with IPL matches: the cap leaders (Sunrisers Hyderabad's row in gold, shown here with the top five), then on the final's morning the closing note</h4>"
+ipl_html = "<h4>A morning with IPL matches: the cap leaders (orange and purple, shown here with the top five; no gold row here), then on the final's morning the closing note</h4>"
 ipl_html += ipl.caps_html(ipl.stats(page), limit=5) + ipl.closing_html(final)
-aw_html, _ = ipl.awards_block(2026, {"season": 2026, "seen": {}, "rows": [], "names": {}}, wiki_ipl)
-ipl_html += "<h4>The morning the end-of-season awards are on the page</h4>" + aw_html
+aw_html, _ = ipl.awards_block(2026, {"season": 2026, "seen": {}, "rows": [], "names": {}}, wiki_ipl, yahoo_page=R("yahoo_ipl_2026_awards.html"))
+ipl_html += "<h4>The morning the end-of-season awards are on the page (Wikipedia's table plus Yahoo Sports' article)</h4>" + aw_html
 
 # ---- Premier League ----
 rows = espn.parse_table(json.loads(R("espn_eng1_table_2025.json")))

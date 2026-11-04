@@ -20,8 +20,8 @@ LABELS = {   # D's short forms (2026-11-04), keyed by ESPN's names; anything not
     "NFL Offensive Player of the Year": "OPOY", "NFL Defensive Player of the Year": "DPOY", "NFL Offensive Rookie of the Year": "OROY",
     "NFL Defensive Rookie of the Year": "DROY", "NFL Coach of the Year": "COTY", "NFL Comeback Player of the Year": "CPOY", "Walter Payton NFL Man of the Year": "WP MOTY",
     "Super Bowl MVP": "SB MVP",
-    "Gold Glove": "Golden G", "Platinum Glove": "Platinum G", "Silver Slugger": "Silver S", "Cy Young": "Cy Young", "ALCS MVP": "ALCS MVP", "NLCS MVP": "NLCS MVP",
-    "World Series MVP": "WS MVP", "Manager of the Year": "MOTY", "Roberto Clemente Award": "RG Award", "All-Star Game MVP": "ASG MVP",
+    "Gold Glove": "Golden Glove Awardees", "Platinum Glove": "Platinum Glove Awardees", "Silver Slugger": "Silver Slugger Awardees", "Cy Young": "Cy Young", "ALCS MVP": "ALCS MVP", "NLCS MVP": "NLCS MVP",
+    "World Series MVP": "WS MVP", "Manager of the Year": "MOTY", "Roberto Clemente Award": "RC Award", "All-Star Game MVP": "ASG MVP",
 }
 
 
@@ -141,9 +141,10 @@ def winner_cell(row):
         cls = "wn mvp" if is_mvp(row["label"]) else "wn"
         return "".join(f'<div class="pr"><span class="lg">{_esc(w["league"])}</span> <span class="{cls}">{_esc(w["name"])}</span>' + (f' <span class="tc">({_esc(w["team"])})</span>' if w.get("team") else "") + "</div>" for w in d["winners"])
     name = d.get("name") or row.get("text", "")
-    cls = "wn mvp" if is_mvp(row["label"]) else "wn"
+    cls = "wn mvp" if is_mvp(row["label"]) else "wn orange" if row["label"] == "Orange Cap" else "wn purple" if row["label"] == "Purple Cap" else "wn"
     team = f' <span class="tc">({_esc(d["team"])})</span>' if d.get("team") else ""
-    return f'<span class="{cls}">{_esc(name)}</span>{team}'
+    detail = f' <span class="tc">· {_esc(d["detail"])}</span>' if d.get("detail") else ""
+    return f'<span class="{cls}">{_esc(name)}</span>{team}{detail}'
 
 
 def block_html(row):
@@ -172,7 +173,7 @@ def block_html(row):
                 nm, flag = (p["name"], p.get("flag")) if isinstance(p, dict) else (p, "")
                 items += f'<div class="pl">{_esc(short[nm])}' + (f' <span class="fl">({"Out" if flag == "out" else "In"})</span>' if flag else "") + "</div>"
             return f'<div class="col"><div class="ch">{title}</div>{items}</div>'
-        body = '<div class="asg">' + "".join(col(t_, d[k]) for t_, k in groups) + "</div>"
+        body = f'<div class="asg{" three" if len(groups) == 3 else ""}">' + "".join(col(t_, d[k]) for t_, k in groups) + "</div>"
     else:
         body = '<table class="pos"><tbody>' + "".join(f'<tr><td class="pp">{_esc(row[0])}</td><td><span class="wn">{_esc(row[1])}</span>' + (f' <span class="tc">({_esc(row[2])})</span>' if len(row) > 2 and row[2] else "") + "</td></tr>" for row in d["rows"]) + "</tbody></table>"
     sub = f'<div class="bs muted">{_esc(d["sub"])}</div>' if d.get("sub") else ""
@@ -248,8 +249,8 @@ def wiki_items(league, season, wiki):
             p = honours.platinum_glove(wiki.wikitext("Gold Glove Award"), season)
             if len(p) < 2:
                 return []
-            return [{"key": "wiki:plat", "label": "Platinum G", "sig": p["AL"]["name"] + "|" + p["NL"]["name"], "kind": "pair",
-                     "data": {"winners": [{"league": lg, **p[lg]} for lg in ("AL", "NL")]}, "text": f"{p['AL']['name']}; {p['NL']['name']}"}]
+            return [{"key": "wiki:plat", "label": "Platinum Glove Awardees", "sig": p["AL"]["name"] + "|" + p["NL"]["name"], "kind": "league",
+                     "data": {lg: [{"name": p[lg]["name"], "team": p[lg]["team"]}] for lg in ("AL", "NL")}, "text": f"{p['AL']['name']}; {p['NL']['name']}"}]
 
         def stars():
             a = honours.mlb_all_stars(wiki.wikitext(f"{season} Major League Baseball All-Star Game"))
