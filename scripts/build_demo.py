@@ -57,7 +57,7 @@ if os.environ.get("CRICKET_DATA_API_KEY") and "--no-cricket" not in sys.argv:
         now = datetime.now(timezone.utc)
         c = cricket.run(now, espn.window_start(day), {"cards": state.load("cricket").get("cards", {})}, cricket_source.get_matches, cricket_source.get_scorecard,
                         cricket_source.scorecards_affordable, espn_card=_espn.card, espn_table=_espn.table, espn_series=_espn.series,
-                        espn_extra=lambda ms: cricket.espn_extras(_espn.pseudo_matches(), ms, _espn.page_of, now))
+                        espn_extra=lambda ms: cricket.espn_extras(ms, espn_cricket.Feed()))
         cricket_stats = {**c["stats"], "calls_used_today": c["used"]}
         cricket.persist_cards(c["state"]["cards"])  # into the real state: bought scorecards are never paid for twice
         if c["html"]:

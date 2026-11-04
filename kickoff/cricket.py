@@ -91,51 +91,24 @@ def pick(matches, now, window_start, seen=None, last_status=None):
     return sorted(out, key=lambda x: (-x["class"]["priority"], x["dateTimeGMT"]), reverse=False)
 
 
-MAX_EXTRA_PAGES = 6
+MAX_EXTRA_SERIES = 6
 
 
-def innings_scores(innings):
-    """CricketData-style score entries ({"inning": "India Inning 1", "r", "w", "o"}) from ESPN scorecard innings (each with its total)."""
-    out, seen = [], {}
-    for inn in innings:
-        total = (inn.get("espn") or {}).get("total")
-        if not total:
-            continue
-        team = re.sub(r"\s+Innings?$", "", inn.get("inning", "")).strip()
-        seen[team] = seen.get(team, 0) + 1
-        out.append({"inning": f"{team} Inning {seen[team]}", "r": total["r"], "w": total["w"], "o": total["o"]})
-    return out
-
-
-def espn_extras(pseudo, matches, fetch, now, limit=MAX_EXTRA_PAGES):
-    """Matches that ESPN's scores page lists but the free CricketData list does not have (it can run behind: on 4 November 2026 it lacked a finished New Zealand v
-    India ODI that ESPN already had). pseudo: match_from_slug dicts for the scores page; matches: the CricketData list; fetch(pseudo) -> (start, status, potm, innings)
-    or None. Returns CricketData-shaped matches that are in scope and not already in the list, each carrying its scorecard as "_card". At most `limit` pages are read."""
+def espn_extras(matches, feed):
+    """Matches that ESPN's cricket feed has and the free CricketData list does not (it can run behind: on 4 November 2026 it lacked a finished New Zealand v India
+    ODI that ESPN already had). Only matches in scope that are not already in `matches` (same two teams and the same ordinal, '1st ODI') are read from
+    `feed` (espn_cricket.Feed); each comes back CricketData-shaped with its result line, scores and player of the match."""
     ordinal = lambda name: (re.search(r"\b(\d+(?:st|nd|rd|th))\b", name or "", re.I) or [None, ""])[1].lower()  # noqa: E731
     have = {}
     for m in matches:
         have.setdefault(frozenset(strip_women(t).lower() for t in m.get("teams") or []), set()).add(ordinal(m.get("name")))
-    out, pages = [], 0
-    for pm in pseudo:
-        if classify(pm)["kind"] is None:
-            continue
-        pair = frozenset(strip_women(t).lower() for t in pm["teams"])
-        if pair in have and (ordinal(pm["name"]) in have[pair] or not ordinal(pm["name"])):
-            continue                                        # CricketData has this one
-        if pages >= limit:
-            break
-        pages += 1
-        got = fetch(pm)
-        if not got or not got[0]:
-            continue
-        start, status, potm, innings = got
-        begin = datetime.strptime(start, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
-        if begin > now or not innings:
-            continue                                        # not started: nothing to report
-        out.append({"id": pm["id"], "name": pm["name"], "teams": pm["teams"], "matchType": pm.get("matchType"), "dateTimeGMT": start, "matchStarted": True,
-                    "matchEnded": bool(RESULT.search(status or "")), "status": status, "score": innings_scores(innings),
-                    "_card": {"scorecard": innings, "status": status, "potm": potm}})
-    return out
+
+    def wanted(draft):
+        if classify(draft)["kind"] is None:
+            return False
+        pair = frozenset(strip_women(t).lower() for t in draft["teams"])
+        return not (pair in have and (ordinal(draft["name"]) in have[pair] or not ordinal(draft["name"])))
+    return feed.matches(wanted, MAX_EXTRA_SERIES)
 
 
 def title(m):

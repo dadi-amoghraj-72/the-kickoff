@@ -61,7 +61,7 @@ def real_adapters(client=None, env=None):
         old = copy.deepcopy(st.get("cricket") or {})
         got = cricket.run(now, espn.window_start(day), old, cricket_source.get_matches, cricket_source.get_scorecard, cricket_source.scorecards_affordable,
                           espn_card=espn_src.card, espn_table=espn_src.table, espn_series=espn_src.series,
-                          espn_extra=lambda ms: cricket.espn_extras(espn_src.pseudo_matches(), ms, espn_src.page_of, now))
+                          espn_extra=lambda ms: cricket.espn_extras(ms, espn_cricket.Feed()))
         new = dict(got["state"])
         new["cards"] = dict(list({**old.get("cards", {}), **new.get("cards", {})}.items())[-60:])   # bought scorecards are never paid for twice
         return {"sections": [{"id": "cricket", "title": "Cricket", "html": got["html"]}] if got["html"] else [], "state": {"cricket": new},

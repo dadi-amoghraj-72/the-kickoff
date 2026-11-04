@@ -263,50 +263,6 @@ def parse_series(page):
 
 # ---- Fetching ----------------------------------------------------------------------------------------
 
-# ---- Matches ESPN lists that the free CricketData list does not (yet) have ---------------------------------
-
-GAME_URL = BASE + "/cricket/series/{series}/scorecard/{game}"      # ESPN redirects this short form to the full page
-START = re.compile(r'"date":"(\d{4}-\d\d-\d\dT\d\d:\d\d)Z"')
-RESULT = re.compile(r"\b(won by|match tied|tied|no result|match drawn|drawn|abandoned)\b", re.I)
-ORDINAL = re.compile(r"^\d+(?:st|nd|rd|th)$")
-STOP = re.compile(r"^(?:\d+(?:st|nd|rd|th)|final|semi|qualifier|eliminator|group|elite|plate|play|super|quarter)$")
-
-
-def parse_start(page):
-    """The match's start as 'YYYY-MM-DDTHH:MM:00' (UTC, CricketData's form), or None."""
-    found = START.search(page)
-    return found.group(1) + ":00" if found else None
-
-
-def ended(status):
-    """True when the status line says the match is over ('India won by 5 wkts', 'Match tied', 'No result')."""
-    return bool(RESULT.search(status or ""))
-
-
-def match_from_slug(game_id, entry):
-    """A CricketData-shaped match from a scores-page entry's slug ('new-zealand-vs-india-1st-odi-24469'): {"id", "name", "teams", "matchType"}, or None
-    when the slug is not 'team vs team ...'. The name is rebuilt as 'New Zealand vs India, 1st ODI' so the usual scope rules can read it."""
-    words = (entry.get("slug") or "").replace("&amp;", "and").split("-")
-    if "vs" not in words:
-        return None
-    i = words.index("vs")
-    left, rest = words[:i], words[i + 1:]
-    j = next((k for k, w in enumerate(rest) if STOP.match(w) or w in ("odi", "t20i", "t20", "test")), len(rest))
-    right, tail = rest[:j], rest[j:]
-    if not left or not right:
-        return None
-    team = lambda ws: " ".join(w.capitalize() for w in ws)  # noqa: E731
-    tail = [w for w in tail if not (w.isdigit() and len(w) > 4)]            # the trailing series id
-    fmt = next((w for w in tail if w in ("odi", "t20i", "t20", "test")), None)
-    words_ = [w.upper() if w in ("odi", "t20i", "t20") else w.capitalize() for w in tail]
-    k = next((n for n, w in enumerate(tail) if w in ("match", "odi", "t20i", "t20", "test")), 0)
-    head, extra = " ".join(words_[:k + 1]), re.sub(r"\b(\d{4}) (\d{2})\b", r"\1-\2", " ".join(words_[k + 1:]))
-    kind = fmt or ("t20" if re.search(r"big bash|premier league|hundred", " ".join(tail), re.I) else "test" if re.search(r"ranji|shield|championship", " ".join(tail), re.I) else "t20")
-    return {"id": f"espn-{game_id}", "name": f"{team(left)} vs {team(right)}, {head}" + (f", {extra}" if extra else ""), "teams": [team(left), team(right)],
-            "matchType": {"t20i": "t20", "t20": "t20", "odi": "odi", "test": "test"}[kind], "ordinal": next((w for w in tail if ORDINAL.match(w)), ""),
-            "series": entry.get("series"), "game": game_id, "scorecard": entry.get("scorecard")}
-
-
 def _get(url):
     return http.get_bytes(url).decode("utf-8", "replace")
 
@@ -339,25 +295,6 @@ class Source:
         except Exception:
             return None
 
-    def games(self):
-        """{game id: {"slug", "series", "scorecard"}} for the matches on ESPN's scores page (read once)."""
-        if self.index is None:
-            self.index = parse_index(self._page(SCORES_URL))
-        return self.index
-
-    def pseudo_matches(self):
-        """The scores page's matches as CricketData-shaped stubs (match_from_slug), the ones whose slug reads 'team vs team ...'."""
-        return [pm for pm in (match_from_slug(g, e) for g, e in self.games().items()) if pm]
-
-    def page_of(self, pseudo):
-        """(start 'YYYY-MM-DDTHH:MM:00', status line, potm, innings) from the scorecard page of a match_from_slug match; None when the page cannot be read."""
-        try:
-            page = self._page(pseudo.get("scorecard") or GAME_URL.format(series=pseudo["series"], game=pseudo["game"]))
-            meta = parse_meta(page)
-            return parse_start(page), meta["status"], meta["potm"], parse_scorecard(page)
-        except Exception:
-            return None
-
     def series(self, match):
         """Every match of the series this match belongs to (see parse_series), or None."""
         try:
@@ -384,3 +321,79 @@ class Source:
 
 def card_getter(fetch=_get, pause=PAUSE):
     return Source(fetch, pause).card
+
+
+# ---- ESPN's cricket JSON feed: the matches the free CricketData list may not have yet -----------------------
+
+HEADER = "https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=cricket&lang=en&region=us"
+SERIES_FEED = "https://site.api.espn.com/apis/site/v2/sports/cricket/{series}/scoreboard"
+TYPES = {"odi": "odi", "t20i": "t20", "t20": "t20", "test": "test", "first-class": "test"}
+
+
+def _draft(league, ev):
+    """A CricketData-shaped match from a header event (no scores yet): its name carries the format and the league so the usual scope rules can read it."""
+    teams = [t.strip() for t in (ev.get("name") or "").split(" v ")]
+    title = re.sub(r"\s*\((?:D/N|N|D)\)", "", ev.get("title") or "").strip()
+    kind = TYPES.get(((ev.get("eventType") or (ev.get("class") or {}).get("eventType") or "")).lower(), "t20")
+    return {"id": f"espn-{ev['id']}", "name": ", ".join(x for x in (" vs ".join(teams), title, league.get("name")) if x), "teams": teams, "matchType": kind,
+            "dateTimeGMT": (ev.get("date") or "").replace("Z", "")[:19], "matchStarted": ev.get("status") in ("in", "post"), "matchEnded": ev.get("status") == "post",
+            "status": ev.get("summary") or "", "series": league["id"], "event": ev["id"]}
+
+
+def _scores(ev):
+    """CricketData-style score entries ({"inning", "r", "w", "o"}), in batting order, from the competitors' line scores."""
+    rows = []
+    for c in ev["competitions"][0]["competitors"]:
+        team = c["team"]["displayName"]
+        for ls in c.get("linescores") or []:
+            if ls.get("isBatting") or ls.get("runs"):
+                rows.append((ls.get("period", 0), team, ls))
+    out, count = [], {}
+    for _, team, ls in sorted(rows, key=lambda x: x[0]):
+        count[team] = count.get(team, 0) + 1
+        out.append({"inning": f"{team} Inning {count[team]}", "r": ls.get("runs", 0), "w": ls.get("wickets", 0), "o": ls.get("overs")})
+    return out
+
+
+class Feed:
+    """Reads the header scoreboard once (every current cricket series and its matches), then the scoreboard of a series for the matches wanted: the result line,
+    the scores and the player of the match. Free JSON from the same ESPN host as the other sports, so it works from GitHub's servers (ESPN's cricket web
+    pages do not)."""
+
+    def __init__(self, get_json=None, pause=PAUSE):
+        self.get_json, self.pause, self.calls = get_json or http.get_json, pause, 0
+
+    def _call(self, url):
+        if self.calls:
+            time.sleep(self.pause)
+        self.calls += 1
+        return self.get_json(url)
+
+    def matches(self, wanted=lambda draft: True, limit=6):
+        """CricketData-shaped matches for the current events that `wanted(draft)` accepts, each with "status", "score" and "_card" ({"scorecard": [], "status",
+        "potm"}); at most `limit` series are read. A series that fails is skipped."""
+        header = self._call(HEADER)
+        chosen = {}
+        for league in header["sports"][0]["leagues"]:
+            for ev in league.get("events", []):
+                d = _draft(league, ev)
+                if d["matchStarted"] and wanted(d):
+                    chosen.setdefault(league["id"], {})[ev["id"]] = d
+        out = []
+        for sid, evs in list(chosen.items())[:limit]:
+            try:
+                board = self._call(SERIES_FEED.format(series=sid))
+            except Exception:
+                continue
+            for e in board.get("events", []):
+                d = evs.get(e["id"])
+                if not d:
+                    continue
+                st = e.get("status") or {}
+                potm = [{"name": f["athlete"].get("displayName") or f["athlete"].get("name", ""), "team": ""} for f in (e["competitions"][0].get("status") or {}).get("featuredAthletes", [])
+                        if f.get("abbreviation") == "POTM"] or [{"name": f["athlete"].get("displayName") or f["athlete"].get("name", ""), "team": ""} for f in st.get("featuredAthletes", [])
+                                                                if f.get("abbreviation") == "POTM"]
+                status = st.get("summary") or d["status"]
+                out.append({**d, "status": status, "matchEnded": (st.get("type") or {}).get("state") == "post", "score": _scores(e),
+                            "_card": {"scorecard": [], "status": status, "potm": potm}})
+        return out

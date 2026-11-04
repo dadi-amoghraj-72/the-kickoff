@@ -26,20 +26,15 @@ for m in sorted(matches, key=lambda x: x.get("dateTimeGMT", "")):
         ends = f" est. end {cricket.started(m) + cricket.DURATION.get(m.get('matchType'), cricket.timedelta(hours=10)):%m-%d %H:%M}"
     print(f"{m.get('dateTimeGMT', '?')[:16]}  {m.get('matchType', '?'):5} started={m.get('matchStarted')} ended={m.get('matchEnded')}{ends}  {why:24} {m['name'][:90]}")
 
-# ---- ESPN's scores page: can we read it from here, and what would be added? ----
+# ---- ESPN's cricket feed: can we read it from here, and what would be added? ----
 from kickoff.sources import espn_cricket  # noqa: E402
 
 try:
-    esrc = espn_cricket.Source()
-    stubs = esrc.pseudo_matches()
-    print(f"\nESPN scores page read: {len(esrc.games())} matches, {len(stubs)} with 'team vs team' slugs")
-    extra = cricket.espn_extras(stubs, matches, esrc.page_of, now)
-    raw = esrc.fetch(espn_cricket.SCORES_URL)
-    import re as _re
-    print(f"raw scores page: {len(raw)} characters; title: {(_re.search(r'<title>(.*?)</title>', raw, _re.S) or [None, '?'])[1][:100]!r}; links to /cricket/series/: {raw.count('/cricket/series/')}")
-    print(f"ESPN-only matches added: {len(extra)}")
+    feed = espn_cricket.Feed()
+    extra = cricket.espn_extras(matches, feed)
+    print(f"\nESPN feed read ({feed.calls} calls): {len(extra)} matches the CricketData list lacks")
     for m in extra:
-        print(f"  {m['dateTimeGMT'][:16]}  ended={m['matchEnded']}  {m['name']}  | {m['status']}")
-    print(f"pages read: {esrc.fetched}")
+        scores = " · ".join(cricket.innings_line(x, m['teams']) for x in m.get('score') or [])
+        print(f"  {m['dateTimeGMT'][:16]}  ended={m['matchEnded']}  {m['name'][:70]}  | {m['status']} | {scores}")
 except Exception as e:  # noqa: BLE001
-    print(f"\nESPN scores page FAILED: {type(e).__name__}: {str(e)[:200]}")
+    print(f"\nESPN feed FAILED: {type(e).__name__}: {str(e)[:200]}")
