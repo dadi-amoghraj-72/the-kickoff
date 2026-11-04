@@ -400,9 +400,9 @@ for g in SCHED[:3]:
 check("independent: after game 3 ORL (id 19) leads DET (id 8) 2-1 by the raw schedule; the header shows the full names with their seeds, then the series score beside the word 'series' (the team that hosted game 1 is on the left)", wins == {"19": 2, "8": 1} and "(1) Detroit Pistons Orlando Magic (8) 1 series 2" in mt, mt[:200])
 check("the round's name is the table title, from ESPN's note without the game number", mt.startswith("East 1st Round") and "Game 3" not in mt.split("Pistons")[0], mt[:60])
 check("all seven game rows are pre-built: G1 to G7", all(f"G{n} ·" in mt for n in range(1, 8)) and mid["html"].count('class="one') == 7)
-check("played games show the scores as the raw schedule has them (G1 101-112, G2 98-83, G3 105-113) with the date", "101 G1 · Sun 19 Apr 112" in mt and "98 G2 · Wed 22 Apr 83" in mt and "105 G3 · Sat 25 Apr 113" in mt, mt[:400])
+check("played games show the scores as the raw schedule has them (G1 101-112, G2 98-83, G3 105-113) with the date", "101 G1 · Sun 19 Apr · at DET 112" in mt and "98 G2 · Wed 22 Apr · at DET 83" in mt and "105 G3 · Sat 25 Apr · at ORL 113" in mt, mt[:400])
 check("the winner of each played game is in bold: G1 right column, G2 left, G3 right", len(re.findall(r'<td class="(?:aw|hm) w">', mid["html"])) == 3)
-check("unplayed games with a date show it in Singapore time, with SGT (G4 starts 00:00 UTC 28 April = 8:00am Tue 28 April)", "G4 · Tue 28 Apr, 8:00am SGT" in mt and mt.count("SGT") == 4, mt)
+check("unplayed games with a date show it in Singapore time, with SGT (G4 starts 00:00 UTC 28 April = 8:00am Tue 28 April)", "G4 · Tue 28 Apr, 8:00am SGT · at ORL" in mt and mt.count("SGT") == 4, mt)
 bx = SBOXES["401869193"]
 cade = next(a for t in bx["players"] for a in t["athletes"] if a["id"] == "4432166")
 cv = dict(zip(bx["players"][0]["labels"], cade["stats"]))

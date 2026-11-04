@@ -27,8 +27,12 @@ MOON = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width
         '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>')
 
 
+class Raw(str):
+    """Text that is already HTML (a cell with a gold span in it): esc() leaves it as it is."""
+
+
 def esc(text):
-    return html.escape(str(text), quote=True)
+    return str(text) if isinstance(text, Raw) else html.escape(str(text), quote=True)
 
 
 # ---- Building blocks used inside sections -------------------------------------------------

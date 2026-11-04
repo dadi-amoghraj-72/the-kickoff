@@ -518,7 +518,7 @@ def series_html(g0, sched, notes_by_game, seeds=None):
             rw = "w" if sc[bot["id"]] > sc[top["id"]] else ""
             d = utc(x["date"]).astimezone(ET).date()
             note = notes_by_game.get(x["id"], [])
-            rows.append(f'<tr class="one{"" if note else " end"}"><td class="aw {lw}">{sc[top["id"]]}</td><td class="mid">G{n} · {day_label(d)}</td><td class="hm {rw}">{sc[bot["id"]]}</td></tr>')
+            rows.append(f'<tr class="one{"" if note else " end"}"><td class="aw {lw}">{sc[top["id"]]}</td><td class="mid">G{n} · {day_label(d)} · at {x["home"]["abbr"]}</td><td class="hm {rw}">{sc[bot["id"]]}</td></tr>')
             if note:
                 rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl"><span class="t">{note_html(t)}</span></div>' for t in note) + "</td></tr>")
         elif x and "IN_PROGRESS" in x["status"] and x["home"]["score"] is not None:   # on now: the score so far, and the game is shown final next edition
@@ -527,7 +527,7 @@ def series_html(g0, sched, notes_by_game, seeds=None):
         else:
             if x:
                 when = utc(x["date"]).astimezone(SGT)
-                mid = f"G{n} · {when:%a} {when.day} {when:%b}, {when:%-I:%M%p}".replace("AM", "am").replace("PM", "pm") + " SGT"
+                mid = f"G{n} · {when:%a} {when.day} {when:%b}, {when:%-I:%M%p}".replace("AM", "am").replace("PM", "pm") + f' SGT · at {x["home"]["abbr"]}'
             else:
                 mid = f"G{n} · " + ("–" if over else "if necessary" if n >= 5 else "to be scheduled")
             rows.append(f'<tr class="one end pre"><td class="mid" colspan="3">{r.esc(mid)}</td></tr>')

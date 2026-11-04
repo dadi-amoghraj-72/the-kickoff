@@ -67,10 +67,11 @@ def won(g, team="19"):
 
 
 def label(g):
-    """'Mon @HOU': the weekday (New York date) and the opponent, with @ when the Dodgers were away."""
+    """'Mon 4 @HOU': the weekday and day number (New York date) and the opponent, with @ when the Dodgers were away."""
     home = g["home"]["id"] == "19"
     opp = (g["away"] if home else g["home"])["abbr"]
-    return f"{iso(g['date']).astimezone(ET):%a} " + ("" if home else "@") + FOUR.get(opp, opp)
+    d = iso(g["date"]).astimezone(ET)
+    return f"{d:%a} {d.day} " + ("" if home else "@") + FOUR.get(opp, opp)
 
 
 FINAL = [g for g in SCHED if g["status"] == "STATUS_FINAL"]
@@ -104,8 +105,15 @@ season = [g for g in FINAL if iso(g["date"]) < NOW_W - timedelta(hours=4)]
 wk_w = sum(1 for g in WEEK if won(g))
 check(f"the Dodgers' line is worked out from the raw schedule: week {wk_w}-{len(WEEK) - wk_w}, season {sum(1 for g in season if won(g))}-{sum(1 for g in season if not won(g))}, game {len(season)} of 162",
       f"Wk: {wk_w}-{len(WEEK) - wk_w} · Season: {sum(1 for g in season if won(g))}-{sum(1 for g in season if not won(g))} · G{len(season)}/162" in TXT_W, TXT_W[:300])
-check("the Dodgers table has one row per game with the opponent and the score from the Dodgers' side", len(WEEK) == 6 and all(
-    re.search(rf"{re.escape(label(g).split()[0])} {iso(g['date']).astimezone(ET).day} \| {re.escape(label(g).split()[1])} \| {'W' if won(g) else 'L'} \d+–\d+", TXT_W) for g in WEEK))
+check("the Dodgers table has one row per game: 'Fri 1 @STL' (@ only when away) and the score from the Dodgers' side", len(WEEK) == 6 and all(
+    f"{label(g)} | {'W' if won(g) else 'L'} {(g['home'] if g['home']['id'] == '19' else g['away'])['score']}–{(g['away'] if g['home']['id'] == '19' else g['home'])['score']} |" in TXT_W for g in WEEK))
+hg = next(g for g in FINAL if g["home"]["id"] == "19")
+check("a home game has no @ and an away game has one (this week's six are all away, so a home game is taken from the season)", mlb.lad_result(hg)[0] == mlb.code(hg["away"]["abbr"]) and all(mlb.lad_result(g)[0].startswith("@") for g in WEEK if g["home"]["id"] != "19"))
+d0, d1 = iso(WEEK[0]["date"]).astimezone(ET), iso(WEEK[-1]["date"]).astimezone(ET)
+check(f"the date range of the games shown sits under the title: Games {d0.day} {d0:%b} – {d1.day} {d1:%b}", f"Games {d0.day} {d0:%b} – {d1.day} {d1:%b}" in TXT_W, TXT_W[:200])
+check("gold: a Dodgers win, a homer, a steal, 3+ RBI, 3+ hits and an 8+ strikeout game are wrapped in the gold class, other cells are not", OUT_W["html"].count('class="hi"') > 0
+      and all(f'<span class="hi">W {(g["home"] if g["home"]["id"] == "19" else g["away"])["score"]}' in OUT_W["html"] for g in WEEK if won(g))
+      and not any(f'<span class="hi">L ' in OUT_W["html"] for g in WEEK))
 bat_rows = [x for x in LOGS["ohtani_bat"] if x["id"] in {g["id"] for g in WEEK}]
 tot = {k: sum(int(x["stats"][k]) for x in bat_rows) for k in ("H", "AB", "HR", "RBI", "SB")}
 check("Ohtani's batting table has one row per game he batted in, and a Week row with sums taken from the raw game log", len(bat_rows) == 5 and
@@ -283,10 +291,10 @@ NOW_S = at("2026-10-04T00:00:00")
 OUT_S = run(NOW_S)
 check("the first playoff day: one series table per series that had a game finish, the Dodgers' series first", OUT_S["stats"]["series"] == 2 and OUT_S["stats"]["mode"] == "postseason" and OUT_S["html"].index("NL Division Series") < OUT_S["html"].index("AL Division Series"))
 ts = text(OUT_S["html"])
-check("a division series is best of 5: five rows, game 1 played with the score, the rest still to come, game 5 'if necessary'", len(re.findall(r"G\d ·", ts.split("AL Division")[0])) == 5 and "G5 · if necessary" in ts and "G2 · Mon 5 Oct, 8:00am SGT" in ts, ts)
+check("a division series is best of 5: five rows, game 1 played with the score, the rest still to come, game 5 'if necessary'", len(re.findall(r"G\d ·", ts.split("AL Division")[0])) == 5 and "G5 · if necessary" in ts and "G2 · Mon 5 Oct, 8:00am SGT · at LAD" in ts, ts)
 raw_g1 = next(e for e in BOARDS["2026-10-03"]["events"] if e["competitions"][0]["notes"][0]["headline"] == "NLDS - Game 1")
 sc = {x["homeAway"]: int(x["score"]) for x in raw_g1["competitions"][0]["competitors"]}
-check("game 1's score is the raw one, the home team (the higher seed) on the left", f"{sc['home']} | G1 · Sat 3 Oct | {sc['away']}" in ts, (sc, ts[:200]))
+check("game 1's score is the raw one, the home team (the higher seed) on the left", f"{sc['home']} | G1 · Sat 3 Oct · at {mlb.code(next(x for x in raw_g1['competitions'][0]['competitors'] if x['homeAway'] == 'home')['team']['abbreviation'])} | {sc['away']}" in ts, (sc, ts[:200]))
 sd = {mlb.code(e["team"]["abbreviation"]): int({s["name"]: s["displayValue"] for s in e["stats"]}["playoffSeed"]) for lg in STD["children"] for dv in lg["children"] for e in dv["standings"]["entries"]}
 check("regular-season seeds beside the names: (2) Dodgers, (3) Braves", f"({sd['LAD']}) Los Angeles Dodgers" in ts and f"Atlanta Braves ({sd['ATL']})" in ts and sd["LAD"] == 2 and sd["ATL"] == 3, ts[:120])
 check("the Dodgers' playoff game carries Ohtani's line, from the raw game log", (lambda x: f"Shohei Ohtani (LAD): {x['H']}-for-{x['AB']}" in ts)(next(x for x in LOGS["ohtani_bat"] if x["id"] == raw_g1["id"])["stats"]))

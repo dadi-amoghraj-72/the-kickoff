@@ -27,6 +27,7 @@ CODE_FIX = {"KC": "KCR", "SD": "SDP", "SF": "SFG", "TB": "TBR"}   # the four ESP
 HR_GAME, HITS_GAME, RBI_GAME, K_GAME = 2, 4, 5, 10     # a batter or pitcher worth a line under a game; D's choice, to be reviewed after a month of real use
 QUALITY_IP = 7                                         # a starter with this many innings and no earned run
 MAX_NOTABLE = 2
+WK_HITS, WK_RBI, WK_K = 3, 3, 8                           # the week tables' gold: 3+ hits, 3+ RBI, a home run or steal, 8+ strikeouts, a win
 ROUND_NAMES = {"ALDS": "AL Division Series", "NLDS": "NL Division Series", "ALCS": "AL Championship Series", "NLCS": "NL Championship Series",
                "ALWC": "AL Wild Card Series", "NLWC": "NL Wild Card Series"}
 LEAGUE_FIRST = ("National League", "American League")                  # the Dodgers' league first
@@ -254,10 +255,16 @@ def games_html(items, many_days, dogs):
             f'<thead><tr><th class="tt" colspan="3">Last Night\'s Games{sub}</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
 
 
-def titled(caption, sub, columns, body, widths, zones=None):
-    """A compact table with a centred title and a muted line (counts, season numbers) under it."""
-    html = r.compact(r.table(caption, columns, body, zones=zones), widths, " nba")
-    return html.replace("</th></tr>", f'<span class="prog">{r.esc(sub)}</span></th></tr>', 1) if sub else html
+def titled(caption, sub, columns, body, widths, zones=None, extra=""):
+    """A compact table with a centred title and muted lines (counts, dates, season numbers; one per line of `sub`) under it."""
+    html = r.compact(r.table(caption, columns, body, zones=zones), widths, " nba" + extra)
+    lines = "".join(f'<span class="prog">{r.esc(x)}</span>' for x in sub.split("\n")) if sub else ""
+    return html.replace("</th></tr>", f"{lines}</th></tr>", 1) if sub else html
+
+
+def hi(text, on):
+    """A table cell in gold when `on` (a standout number of the week)."""
+    return r.Raw(f'<span class="hi">{r.esc(text)}</span>') if on else text
 
 
 # ---- Standings ----------------------------------------------------------------------------------
@@ -343,18 +350,20 @@ def week_html(games, finals, logs, boxes):
     logs: the game logs by game id; boxes: {game id: box score} for games where Ohtani did not bat (the reason he sat)."""
     wins = sum(1 for x in games if lad_result(x)[2])
     season_w = sum(1 for x in finals if lad_result(x)[2])
-    sub = f"Wk: {wins}-{len(games) - wins} · Season: {season_w}-{len(finals) - season_w} · G{len(finals)}/{SEASON_GAMES}"
     local = lambda x: utc(x["date"]).astimezone(ET).date()  # noqa: E731
-    rows = [[f"{local(x):%a} {local(x).day}", lad_result(x)[0], lad_result(x)[1]] for x in games]
-    out = titled("Dodgers", sub, [("Day", False), ("Opp", False), ("Result", False)], rows, (28, 32, 40))
+    span = lambda d: f"{d.day} {d:%b}"  # noqa: E731
+    game = lambda x: f"{local(x):%a} {local(x).day} {lad_result(x)[0]}"  # noqa: E731   # Fri 1 @STL away, Fri 1 STL home
+    sub = f"Games {span(local(games[0]))} – {span(local(games[-1]))}\nWk: {wins}-{len(games) - wins} · Season: {season_w}-{len(finals) - season_w} · G{len(finals)}/{SEASON_GAMES}"
+    rows = [[game(x), hi(lad_result(x)[1], lad_result(x)[2])] for x in games]
+    out = titled("Dodgers", sub, [("Game", False), ("Result", False)], rows, (50, 50), extra=" mlbwk")
     bat = [(x, bat_of(logs["bat"][x["id"]])) for x in games if x["id"] in logs["bat"]]
     if bat:
         tot = {k: sum(b[k] for _, b in bat) for k in ("h", "ab", "hr", "rbi", "sb")}
         last = logs["bat"][bat[-1][0]["id"]]
-        body = [[f"{local(x):%a} {lad_result(x)[0]}", f"{b['h']}-{b['ab']}", b["hr"], b["rbi"], b["sb"]] for x, b in bat]
+        body = [[game(x), hi(f"{b['h']}-{b['ab']}", b["h"] >= WK_HITS), hi(b["hr"], b["hr"] > 0), hi(b["rbi"], b["rbi"] >= WK_RBI), hi(b["sb"], b["sb"] > 0)] for x, b in bat]
         body.append(["Week", f"{tot['h']}-{tot['ab']}", tot["hr"], tot["rbi"], tot["sb"]])
         out += titled("Ohtani · Batting", f"Season: {last.get('AVG', '')} AVG · {last.get('OPS', '')} OPS",
-                      [("Game", False), ("H-AB", True), ("HR", True), ("RBI", True), ("SB", True)], body, (28, 18, 16, 19, 19))
+                      [("Game", False), ("H-AB", True), ("HR", True), ("RBI", True), ("SB", True)], body, (32, 18, 14, 18, 18), extra=" mlbwk")
     missed = [x for x in games if x["id"] not in logs["bat"] and x["id"] not in logs["opit"]]    # a start without a turn at bat is not a missed game
     if missed:
         why = "; ".join(f"{local(x):%a} {local(x).day}: " + dnp_text(OHTANI[1], boxes.get(x["id"]), OHTANI[0]).split(": ", 1)[1] for x in missed)
@@ -362,9 +371,9 @@ def week_html(games, finals, logs, boxes):
     starts = [(name, x, logs[key][x["id"]]) for name, key in (("Ohtani", "opit"), ("Yamamoto", "ypit")) for x in games if x["id"] in logs[key]]
     starts.sort(key=lambda s: s[1]["date"])
     if starts:
-        body = [[n, f"{local(x):%a} {lad_result(x)[0]}", p.get("IP", ""), p.get("ER", ""), p.get("K", ""), pit_of(p)["dec"] or "–"] for n, x, p in starts]
+        body = [[n, game(x), p.get("IP", ""), p.get("ER", ""), hi(p.get("K", ""), num(p.get("K")) >= WK_K), hi(pit_of(p)["dec"] or "–", pit_of(p)["dec"] == "W")] for n, x, p in starts]
         era = ", ".join(f"{n} {[p for m, _, p in starts if m == n][-1].get('ERA', '')}" for n in ("Yamamoto", "Ohtani") if any(m == n for m, _, _ in starts))
-        out += titled("Pitching", f"ERA: {era}" if era else "", [("Pitcher", False), ("Game", False), ("IP", True), ("ER", True), ("K", True), ("Dec", True)], body, (28, 28, 12, 10, 10, 12))
+        out += titled("Pitching", f"ERA: {era}" if era else "", [("Pitcher", False), ("Game", False), ("IP", True), ("ER", True), ("K", True), ("Dec", True)], body, (25, 33, 11, 10, 9, 12), extra=" mlbwk")
     else:
         out += '<p class="muted">No starts this week from Ohtani or Yamamoto.</p>'
     return out
@@ -410,7 +419,7 @@ def series_html(g0, sched, notes_by_game, seeds=None):
         x = games[n - 1] if n <= len(games) else None
         if x and x["status"] == "STATUS_FINAL":
             sc = {x["home"]["id"]: x["home"]["score"], x["away"]["id"]: x["away"]["score"]}
-            rows.append({"mid": f"G{n} · {day_label(utc(x['date']).astimezone(ET).date())}", "a": sc[top["id"]], "b": sc[bot["id"]],
+            rows.append({"mid": f"G{n} · {day_label(utc(x['date']).astimezone(ET).date())} · at {code(x['home']['abbr'])}", "a": sc[top["id"]], "b": sc[bot["id"]],
                          "win": "a" if sc[top["id"]] > sc[bot["id"]] else "b", "notes": notes_by_game.get(x["id"], [])})
         elif x and "IN_PROGRESS" in x["status"] and x["home"]["score"] is not None:   # on now: the score so far; shown final in the next edition
             sc = {x["home"]["id"]: x["home"]["score"], x["away"]["id"]: x["away"]["score"]}
@@ -418,7 +427,7 @@ def series_html(g0, sched, notes_by_game, seeds=None):
         else:
             if x:
                 when = utc(x["date"]).astimezone(SGT)
-                mid = f"G{n} · {when:%a} {when.day} {when:%b}, {when:%-I:%M%p}".replace("AM", "am").replace("PM", "pm") + " SGT"
+                mid = f"G{n} · {when:%a} {when.day} {when:%b}, {when:%-I:%M%p}".replace("AM", "am").replace("PM", "pm") + f" SGT · at {code(x['home']['abbr'])}"
             else:
                 mid = f"G{n} · " + ("–" if over else "if necessary" if n > need else "to be scheduled")
             rows.append({"mid": mid, "pre": True})
