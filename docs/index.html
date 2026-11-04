@@ -75,6 +75,8 @@ a { color: var(--gold); text-underline-offset: 3px; }
 h2, h3 { color: var(--gold); font-weight: 700; line-height: 1.25; text-transform: capitalize; }
 h2 { font-size: 30px; margin: 0 0 12px; }
 h3 { font-size: 21px; margin: 28px 0 6px; }
+h4 { margin: 20px 0 4px; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.f1sum { margin: 6px 0 4px; }
 p { margin: 0 0 14px; }
 .muted { color: var(--muted); }
 strong { font-weight: 600; }
@@ -100,14 +102,18 @@ section > :last-child { margin-bottom: 0; }
 .tag svg { width: 16px; height: 16px; }
 
 /* Standouts, ranked */
-.standouts { margin: 0 0 14px; padding-left: 1.3em; }
-.standouts li { margin-bottom: 6px; padding-left: 4px; }
+.standouts { margin: 0 0 14px; padding-left: 0; list-style: none; }
+.standouts li { margin-bottom: 6px; padding-left: 20px; }
+.standouts li::before { content: "\25C6"; display: inline-block; width: 20px; margin-left: -20px; padding-left: 4px; box-sizing: border-box; font-size: 9px; color: var(--gold); vertical-align: middle; }   /* the house gold diamond bullet, on every standouts list */
 
 /* Tables: numbers right-aligned, zone bars on the left edge of a row */
 .table-wrap { margin: 14px 0 6px; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 16px; font-variant-numeric: tabular-nums; }
 caption { text-align: left; padding: 0 0 6px; font-weight: 600; background: transparent; }
-th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+th:first-child, td:first-child { padding-left: 10px; }
+th:last-child, td:last-child { padding-right: 10px; }
+.table-wrap td:not(.n) { white-space: normal; }   /* a long club name wraps instead of pushing the numbers off a 360px screen */
 th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 th.n, td.n { text-align: right; }
 tr[class^="z-"] td:first-child { padding-left: 14px; }
@@ -136,7 +142,7 @@ tr.mine td:nth-child(2) { font-weight: 700; }
 .scores li { display: grid; grid-template-columns: 1fr 3.6em 1fr; column-gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--hairline); }
 .scores .h { text-align: right; }
 .scores .s { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--gold); }
-.scores .gh, .scores .ga { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.scores .gh, .scores .ga { font-size: 14px; color: var(--muted); line-height: 1.5; }
 .scores .gh { grid-column: 1; text-align: right; }
 .scores .ga { grid-column: 3; }
 .scores .mine { font-weight: 700; }
@@ -175,4 +181,146 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .news, .team-news { list-style: none; margin: 4px 0 14px; padding: 0; font-size: 16px; }
 .news li, .team-news li { padding: 8px 0; border-bottom: 1px solid var(--hairline); }
 .tag { margin-right: 6px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-</style></head><body><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Archive</p></header><section style="border-top:0;margin-top:24px"><ul class="archive"><li><a class="d" href="editions/2026-11-02/index.html">Monday 2 November 2026 (dummy)</a><span class="muted">Dummy headline one: placeholder for the biggest story</span></li></ul></section></main></body></html>
+
+/* Cricket results: teams, innings scores, result, series */
+.cricket { list-style: none; margin: 4px 0 14px; padding: 0; }
+.cricket li { display: grid; gap: 1px; padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+.cricket .cm { font-weight: 400; font-size: 17px; }
+.cricket .cm strong { font-weight: 700; }
+.cricket .cs { font-variant-numeric: tabular-nums; }
+.cricket .cr { color: var(--gold); font-weight: 600; font-size: 15px; }
+.cricket .ct { color: var(--muted); font-size: 15px; }
+.cricket .dayflag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.cricket .potm { font-size: 15px; color: var(--muted); }
+.cricket .potm strong { color: var(--chalk); font-weight: 600; }
+.cricket ul.standouts.in { margin: 2px 0 6px; padding-left: 0; font-size: 15px; line-height: 1.5; }
+.cricket .cd { color: var(--muted); font-size: 15px; line-height: 1.5; }
+.cricket .cd strong { color: var(--chalk); font-weight: 600; }
+
+/* Full cricket scorecard */
+.cricket .inn { margin: 10px 0 2px; font-size: 17px; }
+.cricket table.sc { font-size: 14px; }
+.cricket table.sc td.name { white-space: normal; min-width: 7em; }
+.cricket table.sc .dis { display: block; color: var(--muted); font-size: 14px; line-height: 1.3; }
+.cricket table.sc tr.sum td { font-weight: 600; background: var(--pitch); }
+.cricket table.sc th, .cricket table.sc td { padding: 5px 3px; }
+.cricket table.sc th:first-child, .cricket table.sc td:first-child { padding-left: 6px; }
+.cricket table.sc th { font-size: 12px; letter-spacing: 0; }
+.pts table { font-size: 15px; }
+.pts th, .pts td { padding: 7px 4px; }
+.pts th { font-size: 12px; letter-spacing: 0; }
+.pts th:first-child, .pts td:first-child { padding-left: 8px; }
+.pts.f1 table { font-size: 15px; width: 100%; max-width: 520px; table-layout: fixed; }
+.pts.f1 th:last-child, .pts.f1 td:last-child { padding-right: 16px; }
+.pts.f1 th.tt { text-align: center; font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 3px 8px 8px; }
+.pts.f1 th, .pts.f1 td { padding-left: 3px; padding-right: 3px; }
+.pts.f1 th:nth-child(n+3), .pts.f1 td:nth-child(n+3) { padding-left: 9px; }
+.cricket p.fow { font-size: 15px; line-height: 1.5; margin: 8px 0 4px; }
+.f1story { margin: 0 0 12px; line-height: 1.55; }
+
+/* Tennis: each match is two rows (winner above), one column per set */
+.tennis { margin: 14px 0 6px; }
+.tennis table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 16px; }
+.tennis th.tt { white-space: normal; text-align: center; font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 8px 8px; }
+.tennis td { padding: 4px 3px; border-bottom: 0; white-space: normal; vertical-align: middle; }
+.tennis td.pl { padding-left: 8px; overflow-wrap: anywhere; }
+.tennis td.s { text-align: center; color: var(--muted); }
+.tennis tr.w td.pl { font-weight: 700; }
+.tennis tr.w td.s { color: var(--chalk); }
+.tennis tr.l { border-bottom: 1px solid var(--hairline); }
+.tennis tr.l td { padding-bottom: 7px; }
+.tennis tr.w td { padding-top: 7px; }
+.tennis sup { font-size: 10px; margin-left: 1px; }
+.tennis td.tag { text-align: left; color: var(--muted); padding-left: 0; white-space: nowrap; overflow: visible; }
+.tennis th.tt .prog { display: block; margin-top: 2px; font-weight: 400; font-size: 14px; color: var(--muted); }
+
+/* NFL: two rows per game (away above home), a white house marks the home team, a thicker line between kickoff groups, YTP in the middle of a game not yet played */
+.nflsb { margin: 14px 0 6px; }
+.nflsb table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 16px; }
+.nflsb th.tt { white-space: normal; text-align: center; font-size: 18px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 12px 8px 10px; }
+.nflsb th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 14px; color: var(--muted); }
+.nflsb td { padding: 4px 3px; border-bottom: 0; vertical-align: middle; }
+.nflsb td.tm { padding-left: 10px; padding-right: 6px; white-space: normal; font-size: 15px; }
+.nflsb td.sc { text-align: right; color: var(--muted); padding-right: 6px; }
+.nflsb td.ytp { text-align: center; padding-right: 3px; font-size: 15px; font-weight: 600; letter-spacing: 0.08em; }
+.nflsb td.ot { text-align: left; font-size: 13px; padding-left: 4px; color: var(--muted); }
+.nflsb tr.w td.tm, .nflsb tr.w td.sc { font-weight: 700; color: var(--chalk); }
+.nflsb tr.h { border-bottom: 1px solid var(--hairline); }
+.nflsb tr.h td { padding-bottom: 8px; }
+.nflsb tr.a td { padding-top: 8px; }
+.nflsb tr.gap { border-bottom: 2px solid var(--muted); }
+.nflsb tr.gap td { padding: 0; height: 2px; }
+.nflsb svg.home { color: var(--chalk); vertical-align: -1px; margin-left: 2px; }
+.nflsb .rec { font-size: 12px; font-weight: 400; color: var(--muted); white-space: nowrap; }
+.pts.f1.nfl th.tt { font-size: 16px; padding: 12px 8px 10px; }
+.pts.f1.nfl td:nth-child(2) { font-weight: 600; }
+.pts.f1.nfl.div td:first-child { font-weight: 700; }
+.pts.f1.nfl.div td:nth-child(2) { font-weight: 400; }
+.pts.f1.nfl tr.sub td { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); background: rgba(255, 255, 255, 0.04); }
+.pts.f1.nfl .new, .new { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); margin-left: 2px; }
+.pts.f1.nfl.st thead tr:nth-child(2) { display: none; }
+.pts.f1.nfl.div th:first-child, .pts.f1.nfl.div td:first-child { padding-left: 14px; }
+.pts.f1.nfl.po th:first-child, .pts.f1.nfl.po td:first-child { text-align: center; padding-left: 3px; }
+.pts.f1.nfl.po th:last-child, .pts.f1.nfl.po td:last-child { text-align: center; padding-left: 3px; }
+.pts.f1.nfl tr.bye td { color: var(--gold); font-weight: 700; }
+.nflsb .dog { color: var(--chalk); font-weight: 700; margin-left: 1px; }
+.nflsb th.tt .prog .dog { font-size: 15px; }
+.nbaone td { padding: 5px 4px; }
+.nbaone td.aw { text-align: right; }
+.nbaone td.mid { text-align: center; color: var(--muted); white-space: nowrap; font-size: 13px; }
+.nbaone td.hm { text-align: left; }
+.nbaone td.w { font-weight: 700; color: var(--chalk); }
+.pts.f1.nba th.tt { font-size: 16px; padding: 12px 8px 10px; white-space: normal; }
+.pts.f1.nba th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 14px; color: var(--muted); }   /* the small line under a table title: season numbers (Dodgers, Ohtani) */
+.pts.f1.nba td:nth-child(2) { font-weight: 600; }
+.pts.f1.mlbwk th, .pts.f1.mlbwk td { text-align: center; padding-left: 3px; padding-right: 3px; }   /* the weekly tables: everything centred */
+.pts.f1.mlbwk td:nth-child(2) { font-weight: 400; }
+.pts.f1.mlbwk .hi { color: var(--gold); font-weight: 700; }
+.nflsb tr.tag td { padding: 10px 10px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-align: center; }
+.nflsb tr.note td { padding: 0 10px 10px; font-size: 13px; white-space: normal; overflow-wrap: anywhere; }
+.nflsb tr.note .pl { color: var(--chalk); }
+.nbaone tr.end td { border-bottom: 1px solid var(--hairline); }
+.nbaone tr.pre td { color: var(--muted); }
+.nbaone.ser th { padding: 6px 4px 8px; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--chalk); font-weight: 600; }
+.nbaone.ser .ws { color: var(--gold); font-size: 16px; }
+.nbaone.ser td.aw { text-align: left; padding-left: 12px; }
+.nbaone.ser td.hm { text-align: right; padding-right: 12px; }
+.nflsb .pl .n { color: var(--gold); font-weight: 600; }
+.nbaone td.aw, .nbaone td.hm { white-space: normal; line-height: 1.25; }
+/* NBA: bigger type (the tables are what D checks the games and series with) */
+.nbaone table { font-size: 16px; }
+.nbaone td { padding: 7px 4px; }
+.nbaone td.mid { font-size: 18px; font-weight: 700; color: var(--chalk); padding-left: 2px; padding-right: 2px; }
+.nbaone td.aw, .nbaone td.hm { font-size: 15px; }
+.nflsb tr.note td { font-size: 14px; padding: 2px 10px 12px; }
+.nflsb tr.note .pl { display: flex; align-items: flex-start; padding-top: 5px; line-height: 1.35; }
+.nflsb tr.note .pl::before { content: "\25C6"; flex: 0 0 16px; box-sizing: border-box; height: 19px; padding-left: 3px; display: flex; align-items: center; font-size: 8px; line-height: 1; color: var(--gold); }
+.nflsb tr.note .pl .t { flex: 1 1 auto; min-width: 0; }
+.nflsb tr.tag td { font-size: 12px; }
+.nbaone.ser td.aw, .nbaone.ser td.hm { font-size: 24px; font-weight: 600; padding-top: 9px; padding-bottom: 6px; }
+.nbaone.ser td.aw.w, .nbaone.ser td.hm.w { color: var(--chalk); font-weight: 800; }
+.nbaone.ser td.aw:not(.w), .nbaone.ser td.hm:not(.w) { color: var(--muted); }
+.nbaone.ser td.mid { font-size: 14px; font-weight: 400; color: var(--muted); }
+.nbaone.ser .hd { display: flex; align-items: center; }
+.nbaone.ser .hd > .tn, .nbaone.ser .hd > .ws { flex: 1 1 0; min-width: 0; text-align: center; }
+.nbaone.ser .hd > .gap { flex: 0 0 72px; text-align: center; }
+.nbaone.ser .tn { font-size: 16px; font-weight: 700; color: var(--chalk); line-height: 1.2; }
+.nbaone.ser .ws { font-size: 30px; font-weight: 700; line-height: 1.1; }
+.nbaone.ser .lab { display: block; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.nbaone.ser .bo { display: block; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; }
+.nbaone.ser tr.sh th { padding: 10px 4px 2px; white-space: normal; }
+.nbaone.ser tr.sc th { padding: 2px 4px 10px; }
+.nbaone.ser tr.sc .ws { font-size: 30px; font-weight: 800; color: var(--gold); }
+.nbaone.ser tr.sc .lab { margin: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.standouts .hl { color: var(--gold); font-weight: 600; }
+@media (prefers-color-scheme: light) {
+}
+/* Notes lines outside a table (NFL Players of the Week and highlights): the same gold diamond bullet and hanging indent as the NBA notes */
+.dlist { margin: 6px 0 14px; }
+.dlist .pl { display: flex; align-items: flex-start; padding: 5px 0; font-size: 16px; line-height: 1.4; }
+.dlist .pl::before { content: "\25C6"; flex: 0 0 20px; box-sizing: border-box; height: 22px; padding-left: 4px; display: flex; align-items: center; font-size: 9px; line-height: 1; color: var(--gold); }
+.dlist .pl .t { flex: 1 1 auto; min-width: 0; }
+.dlist .n { color: var(--gold); font-weight: 600; }
+.nbaone.ser.sm td.aw, .nbaone.ser.sm td.hm { font-size: 18px; }
+.nbaone.ser.sm td.mid { font-size: 13px; }
+</style></head><body><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Archive</p></header><section style="border-top:0;margin-top:24px"><ul class="archive"><li><a class="d" href="editions/2026-11-04/index.html">Wednesday 4 November 2026</a><span class="muted">Champions League: Manchester United 3-2 AS Roma</span></li><li><a class="d" href="editions/2026-11-02/index.html">Monday 2 November 2026 (dummy)</a><span class="muted">Dummy headline one: placeholder for the biggest story</span></li></ul></section></main></body></html>

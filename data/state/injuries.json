@@ -1,0 +1,307 @@
+{
+  "1": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "10": {
+    "news_added": "2026-09-20T19:30:08.247780Z",
+    "reported": false,
+    "status": "a"
+  },
+  "106": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "109": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "112": {
+    "news_added": "2026-09-30T16:00:09.552205Z",
+    "reported": false,
+    "status": "a"
+  },
+  "113": {
+    "news_added": "2026-10-25T17:30:09.883815Z",
+    "reported": false,
+    "status": "d"
+  },
+  "114": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "115": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "116": {
+    "news_added": "2026-09-22T09:30:09.629652Z",
+    "reported": false,
+    "status": "a"
+  },
+  "12": {
+    "news_added": "2026-10-21T20:30:09.540957Z",
+    "reported": false,
+    "status": "i"
+  },
+  "124": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "127": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "129": {
+    "news_added": "2026-08-30T18:00:07.935334Z",
+    "reported": false,
+    "status": "a"
+  },
+  "13": {
+    "news_added": "2026-10-28T00:00:08.477333Z",
+    "reported": false,
+    "status": "a"
+  },
+  "138": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "149": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "15": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "154": {
+    "news_added": "2026-09-21T13:00:09.022726Z",
+    "reported": false,
+    "status": "a"
+  },
+  "156": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "200": {
+    "news_added": "2026-10-28T23:00:10.088612Z",
+    "reported": true,
+    "status": "i"
+  },
+  "237": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "26": {
+    "news_added": "2026-09-24T22:00:09.120308Z",
+    "reported": false,
+    "status": "a"
+  },
+  "31": {
+    "news_added": "2026-10-05T09:30:09.853316Z",
+    "reported": false,
+    "status": "a"
+  },
+  "350": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "356": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "358": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "362": {
+    "news_added": "2026-10-06T00:30:10.323830Z",
+    "reported": false,
+    "status": "a"
+  },
+  "366": {
+    "news_added": "2026-10-25T17:00:09.888666Z",
+    "reported": false,
+    "status": "a"
+  },
+  "372": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "379": {
+    "news_added": "2026-09-27T10:30:09.051435Z",
+    "reported": false,
+    "status": "a"
+  },
+  "384": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "388": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "390": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "391": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "4": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "40": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "401": {
+    "news_added": "2026-10-19T22:30:08.721497Z",
+    "reported": false,
+    "status": "a"
+  },
+  "411": {
+    "news_added": "2026-10-19T13:00:10.543876Z",
+    "reported": false,
+    "status": "a"
+  },
+  "412": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "417": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "418": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "419": {
+    "news_added": "2026-10-31T14:00:08.592593Z",
+    "reported": true,
+    "status": "s"
+  },
+  "426": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "427": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "428": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "43": {
+    "news_added": "2026-07-23T12:01:23.321726Z",
+    "reported": false,
+    "status": "a"
+  },
+  "455": {
+    "news_added": "2026-09-14T14:30:07.387706Z",
+    "reported": false,
+    "status": "a"
+  },
+  "481": {
+    "news_added": "2026-08-23T17:00:07.952697Z",
+    "reported": false,
+    "status": "a"
+  },
+  "496": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "502": {
+    "news_added": "2026-10-19T22:30:08.861525Z",
+    "reported": false,
+    "status": "a"
+  },
+  "503": {
+    "news_added": "2026-08-21T15:00:07.610517Z",
+    "reported": false,
+    "status": "a"
+  },
+  "504": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "522": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "579": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "8": {
+    "news_added": "2026-10-24T18:30:08.735545Z",
+    "reported": false,
+    "status": "a"
+  },
+  "82": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "86": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "87": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "88": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "94": {
+    "news_added": "2026-10-10T16:30:08.848962Z",
+    "reported": false,
+    "status": "a"
+  },
+  "98": {
+    "news_added": "2026-10-17T16:30:09.272910Z",
+    "reported": false,
+    "status": "a"
+  }
+}
