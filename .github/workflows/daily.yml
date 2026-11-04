@@ -14,6 +14,10 @@ on:
         description: "Use Claude for notes and overviews (true or false)"
         required: false
         default: "false"
+      force:
+        description: "Rebuild a date that already has an edition (true or false)"
+        required: false
+        default: "false"
       ping:
         description: "Send the Telegram ping (true or false)"
         required: false
@@ -47,6 +51,7 @@ jobs:
           ARGS=""
           if [ -n "${{ github.event.inputs.date }}" ]; then ARGS="$ARGS --date ${{ github.event.inputs.date }}"; fi
           if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event.inputs.claude }}" = "true" ]; then ARGS="$ARGS --claude"; fi
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
           python scripts/daily.py $ARGS
       - name: Publish (commit the edition, the state and the site)
         run: |
