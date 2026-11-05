@@ -74,6 +74,19 @@ def standalone(edition):
     return render.render_edition({**edition, "home": "#"})
 
 
+def writer(folder=None):
+    """A write(name, html) -> path function for `fallback`: saves the page in a fresh temporary folder (or `folder`) and returns the file's path."""
+    import tempfile
+    from pathlib import Path
+    base = Path(folder or tempfile.mkdtemp())
+
+    def write(name, html):
+        path = base / name
+        path.write_text(html, encoding="utf-8")
+        return path
+    return write
+
+
 def fallback(edition, send_text, send_file, write, note="The page is not live yet, so here is the edition itself (open the attached file)."):
     """Send the digest and the page. write(name, html) -> a path for the file. Returns what was sent."""
     path = write(f"the-kickoff-{edition['date']}.html", standalone(edition))

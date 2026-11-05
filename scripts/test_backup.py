@@ -64,6 +64,13 @@ sent, written = [], {}
 got = backup.fallback(ED, lambda x: sent.append(("text", x)), lambda p, cap: sent.append(("file", p, cap)), lambda name, html: written.setdefault(name, html) and f"/tmp/{name}")
 check("the fallback sends the text and then the file named for the date", got == ["text", "file"] and sent[0][0] == "text" and sent[1] == ("file", "/tmp/the-kickoff-2026-11-09.html", "The Kickoff, full page") and "Long football section" in written["the-kickoff-2026-11-09.html"])
 
+w = backup.writer()
+p = w("x.html", "<html>\u00e9</html>")
+check("the real file writer returns the file's path (the first live run returned a number and failed here)", isinstance(p, Path) and p.read_text(encoding="utf-8") == "<html>\u00e9</html>" and p.name == "x.html", p)
+sent2 = []
+backup.fallback(ED, lambda x: None, lambda path, cap: sent2.append(path), backup.writer())
+check("the fallback with the real writer hands the sender a real file that holds the page", sent2 and Path(sent2[0]).exists() and "Long football section" in Path(sent2[0]).read_text(encoding="utf-8"))
+
 # ---- the watchdog's decisions -------------------------------------------------------------------------
 class Deps:
     def __init__(self, live=False, local=False, build=True, push=True, sent_before=False, send_fails=False):

@@ -63,8 +63,7 @@ class Deps:
 
     def send(self, d):
         ed = json.loads(edition_path(d).read_text())
-        out = Path(tempfile.mkdtemp())
-        backup.fallback(ed, send_message, send_document, lambda name, html: (out / name).write_text(html) or out / name,
+        backup.fallback(ed, send_message, send_document, backup.writer(),
                         "The page is not live yet (GitHub is slow or down), so here is the edition itself: open the attached file.")
 
     def already_sent(self, d):

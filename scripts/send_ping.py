@@ -44,8 +44,7 @@ if "--dry-run" in argv:
 
 load_env()
 if "--fallback" in argv or (wait is not None and not backup.wait_for_page(message.splitlines()[-1], wait)):
-    out = Path(tempfile.mkdtemp())
-    sent = backup.fallback(edition, send_message, send_document, lambda name, html: (out / name).write_text(html) or out / name)
+    sent = backup.fallback(edition, send_message, send_document, backup.writer())
     print("Page not live in time, so sent the backup:", ", ".join(sent))
 else:
     send_message(message)
