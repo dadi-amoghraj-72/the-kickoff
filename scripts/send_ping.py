@@ -7,6 +7,7 @@
                                               and the whole edition as an HTML file instead (the backup for a slow or broken GitHub Pages). Only today's edition
                                               (Singapore date) is sent in this mode, never an older one.
   python3 scripts/send_ping.py --fallback    send the text-and-file version straight away (to rehearse the backup)
+  add --dir preview/daily-dry-run/editions   to use the editions of a dry run (scripts/daily.py --dry-run) instead of the saved ones in data/editions
 """
 import json
 import os
@@ -25,8 +26,10 @@ from kickoff.telegram import DEFAULT_BASE_URL, build_message, send_document, sen
 argv = sys.argv[1:]
 wait = int(argv[argv.index("--wait") + 1]) if "--wait" in argv else None
 args = [a for i, a in enumerate(argv) if not a.startswith("--") and not (i and argv[i - 1] == "--wait")]
-files = sorted(DATA_DIR.glob("*.json"))
-path = DATA_DIR / f"{args[0]}.json" if args else (files[-1] if files else None)
+folder = Path(argv[argv.index("--dir") + 1]) if "--dir" in argv else DATA_DIR
+args = [a for a in args if a != str(folder) and a != argv[argv.index("--dir") + 1 if "--dir" in argv else 0]]
+files = sorted(folder.glob("*.json"))
+path = folder / f"{args[0]}.json" if args else (files[-1] if files else None)
 if not path or not path.exists():
     sys.exit("No edition found. Run scripts/build.py first.")
 edition = json.loads(path.read_text())
