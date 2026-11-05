@@ -99,7 +99,7 @@ tops = [float(g["top"].split(",")[1].replace("px", "")) for g in got]
 check("the icon rides the head of the fill: lower on the rail as you scroll, from the top to the bottom of the 700px rail", tops == sorted(tops) and tops[0] == 0 and abs(tops[-1] - 700) <= 1, tops)
 spin = {g["y"]: g["turn"] for g in got}
 check("balls turn with the scroll (the football at 2100 and 3100 are at different angles) and do not all sit at 0", spin[2100] != spin[3100] and spin[2100] not in (None, "rotate(0deg)"), spin)
-check("a car and a trophy only sway a little (within 7 degrees)", all(abs(int(spin[y].replace("rotate(", "").replace("deg)", ""))) <= 7 for y in (0, 7100)), spin)
+check("the trophy, the F1 flag and the NFL goalposts only sway a little (within 7 degrees); the NFL no longer spins like a ball", all(abs(int(spin[y].replace("rotate(", "").replace("deg)", ""))) <= 7 for y in (0, 5100, 7100)), spin)
 check("the fill still grows as before (scaleY from 0 to 1)", got[0]["fill"] == "scaleY(0)" and got[-1]["fill"] == "scaleY(1)", [got[0]["fill"], got[-1]["fill"]])
 _h = run(SECS, [[5000, 800], [5000, 600], [5000, 800]])
 _t = [float(g["top"].split(",")[1].replace("px", "")) for g in _h]
