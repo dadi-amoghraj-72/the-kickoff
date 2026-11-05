@@ -14,7 +14,7 @@
   var icon = document.getElementById("rail-icon");
   var railEl = document.querySelector(".rail");
   var ICONS = window.RAIL_ICONS || {}, BY_SECTION = window.RAIL_SECTION_ICON || {}, BY_SPORT = window.RAIL_SPORT_ICON || {};
-  var iconMarks = [], railH = 1, lastKey = "", lastTop = -1, lastDeg = -999;
+  var iconMarks = [], railH = 1, lastKey = "", lastTop = -1, lastDeg = -999, lastInnerH = 0;
   var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var WPM = 230;
   var words = document.querySelector("main").innerText.trim().split(/\s+/).length;
@@ -30,11 +30,14 @@
     for (var i = 1; i < tops.length; i++) tops[i] = Math.max(tops[i], tops[i - 1]);
     if (icon && railEl) {
       railH = Math.max(1, railEl.getBoundingClientRect().height);
+      lastInnerH = window.innerHeight;
       iconMarks = [];
       secs.forEach(function (s) {
         var top = s.getBoundingClientRect().top + window.scrollY;
-        iconMarks.push({ y: top, key: BY_SECTION[s.id] || "chess" });
-        [].slice.call(s.querySelectorAll("h4.sport")).forEach(function (h) {
+        var sports = [].slice.call(s.querySelectorAll("h4.sport"));
+        var first = sports.length ? BY_SPORT[(sports[0].textContent || "").trim().toLowerCase()] : "";
+        iconMarks.push({ y: top, key: first || BY_SECTION[s.id] || "chess" });       // Other Sports opens with its first sport's drawing, not a generic one
+        sports.forEach(function (h) {
           var name = (h.textContent || "").trim().toLowerCase();
           iconMarks.push({ y: h.getBoundingClientRect().top + window.scrollY, key: BY_SPORT[name] || "chess" });
         });
@@ -45,6 +48,11 @@
 
   function moveIcon(y, p) {
     if (!icon || !iconMarks.length) return;
+    if (window.innerHeight !== lastInnerH && railEl) {                               // the rail's height follows the window (iPhone Safari's address bar): measure it again so the icon stays on the head of the fill
+      railH = Math.max(1, railEl.getBoundingClientRect().height);
+      lastInnerH = window.innerHeight;
+      lastTop = -1;
+    }
     var line = y + window.innerHeight * 0.35, key = iconMarks[0].key;
     for (var m = 0; m < iconMarks.length; m++) if (iconMarks[m].y <= line) key = iconMarks[m].key;
     var d = ICONS[key] || ICONS.chess;

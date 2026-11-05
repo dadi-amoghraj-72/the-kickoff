@@ -42,7 +42,7 @@ var secEls = SECTIONS.map(function (s) {
 var fill = { style: {} }, chip = { textContent: "" };
 var icon = __ICON__ ? { classList: { add: function () { this.on = true; } }, style: {}, firstChild: null } : null;
 if (icon) Object.defineProperty(icon, "innerHTML", { set: function (v) { this._html = v; this.firstChild = { style: {} }; }, get: function () { return this._html; } });
-var rail = { getBoundingClientRect: function () { return { height: 700, top: 64 }; } };
+var rail = { getBoundingClientRect: function () { return { height: window.innerHeight - 100, top: 64 }; } };
 window.document = { documentElement: { scrollHeight: __TOTAL__ },
   querySelectorAll: function (sel) { return sel === "main section[id]" ? secEls : []; },
   querySelector: function (sel) { return sel === "main" ? { innerText: "word word word" } : sel === ".rail" ? rail : null; },
@@ -54,7 +54,8 @@ __RAIL__
 function at(y) { window.scrollY = y; handlers.scroll(); }
 var out = [];
 var STEPS = __STEPS__;
-STEPS.forEach(function (y) {
+STEPS.forEach(function (st) {
+  var y = st; if (st instanceof Array) { y = st[0]; window.innerHeight = st[1]; }
   at(y);
   var key = "none";
   if (icon && icon._html) for (var k in window.RAIL_ICONS) if (icon._html.indexOf(window.RAIL_ICONS[k].svg) >= 0) key = k;
@@ -80,7 +81,7 @@ SECS = [{"id": "big-stuff", "y": 0}, {"id": "on-today", "y": 1000}, {"id": "foot
         {"id": "mlb", "y": 6000}, {"id": "f1", "y": 7000}, {"id": "young-guns", "y": 8000},
         {"id": "other-sports", "y": 9000, "h4": [{"t": "Rugby", "y": 9100}, {"t": "Golf", "y": 9500}, {"t": "UFC", "y": 9900}, {"t": "Badminton", "y": 10300}, {"t": "Chess", "y": 10700}]},
         {"id": "stories", "y": 11200}]
-STEPS = [0, 1100, 2100, 3100, 4100, 5100, 6100, 7100, 8100, 9000, 9300, 9800, 10100, 10600, 11000, 11300, 12000]
+STEPS = [0, 1100, 2100, 3100, 4100, 5100, 6100, 7100, 8100, 8800, 9000, 9300, 9800, 10100, 10600, 11000, 11300, 12000]
 got = run(SECS, STEPS)
 if isinstance(got, dict):
     check("the harness ran", False, got)
@@ -90,6 +91,8 @@ keys = {g["y"]: g["key"] for g in got}
 check("each section has its own drawing: Big Stuff trophy, On Today clock, Football football, Cricket ball, NBA basketball, NFL, MLB, F1 car, Young Guns star",
       [keys[y] for y in (0, 1100, 2100, 3100, 4100, 5100, 6100, 7100, 8100)] == ["trophy", "clock", "football", "cricket", "basketball", "nfl", "baseball", "f1", "star"], keys)
 check("Other Sports changes the drawing by sport: rugby ball, golf ball, UFC glove, shuttlecock, chess king", [keys[y] for y in (9000, 9300, 9800, 10100, 10600)] == ["rugby", "golf", "ufc", "badminton", "chess"], keys)
+check("Other Sports opens with its first sport's drawing (the rugby ball), not a generic one, from the moment the section is reached (D, 2026-11-05)", keys[8800] == "rugby", keys)
+check("the Arsenal section has the cannon and the Football section the football", run([{"id": "arsenal", "y": 0}, {"id": "football", "y": 1000}], [0, 1100])[0]["key"] == "cannon" and run([{"id": "arsenal", "y": 0}, {"id": "football", "y": 1000}], [0, 1100])[1]["key"] == "football")
 check("Interesting Stories gets the chess king", keys[11300] == "chess" and keys[12000] == "chess")
 check("the icon is shown (made visible) once it has a drawing", all(g["on"] for g in got))
 tops = [float(g["top"].split(",")[1].replace("px", "")) for g in got]
@@ -98,6 +101,9 @@ spin = {g["y"]: g["turn"] for g in got}
 check("balls turn with the scroll (the football at 2100 and 3100 are at different angles) and do not all sit at 0", spin[2100] != spin[3100] and spin[2100] not in (None, "rotate(0deg)"), spin)
 check("a car and a trophy only sway a little (within 7 degrees)", all(abs(int(spin[y].replace("rotate(", "").replace("deg)", ""))) <= 7 for y in (0, 7100)), spin)
 check("the fill still grows as before (scaleY from 0 to 1)", got[0]["fill"] == "scaleY(0)" and got[-1]["fill"] == "scaleY(1)", [got[0]["fill"], got[-1]["fill"]])
+_h = run(SECS, [[5000, 800], [5000, 600], [5000, 800]])
+_t = [float(g["top"].split(",")[1].replace("px", "")) for g in _h]
+check("the icon follows the rail when its height changes (iPhone Safari's address bar): at the same scroll the offset shrinks with a shorter window and returns", _t[1] < _t[0] and abs(_t[1] / _t[0] - 500 / 700) < 0.03 and abs(_t[2] - _t[0]) < 1, _t)
 nofill = run(SECS, [0, 5000, 12000], with_icon=False)
 check("with no icon element the bar works exactly as before and nothing breaks", isinstance(nofill, list) and nofill[0]["fill"] == "scaleY(0)" and nofill[-1]["fill"] == "scaleY(1)" and nofill[0]["top"] is None, nofill)
 check("every section id the page can make has a drawing (big-stuff, on-today, arsenal, football, cricket, nba, nfl, mlb, f1, tennis, tour, young-guns, other-sports, stories, quiet)",
