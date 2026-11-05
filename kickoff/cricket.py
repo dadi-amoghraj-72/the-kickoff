@@ -649,9 +649,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
             test_done[m["id"]] = n if m.get("matchEnded") else max(n - 1, 0)
             test_sig[m["id"]] = sig
     html = results_html(picked, shown_cards, tables, series, from_innings, now) + standouts_html(top)
-    if html and skipped:
-        html += (f'<p class="muted">Standouts were checked in {checked} of {len(picked)} matches: the free cricket data allows only '
-                 f"about eight scorecards a day when ESPN's pages are not available.</p>")
+    # (until 2026-11-05 a note under the section said how many matches had their standouts checked; it was developer chatter, so it lives in the stats only: picked / checked / skipped)
     new = {"seen": sorted(seen | {m["id"] for m in picked if m.get("matchEnded")})[-400:],
            "status": {**st.get("status", {}), **{m["id"]: m.get("status") for m in picked if not m.get("matchEnded")}},
            "ipl": ipl_state, "cards": dict(list(cards.items())[-60:]), "test_done": dict(list({**prev_done, **test_done}.items())[-20:]), "test_sig": dict(list({**prev_sig, **test_sig}.items())[-20:])}

@@ -334,7 +334,7 @@ def run(now, st, source, client=None):
         extra = "".join(blocks.get(key, []))
         if lines[key] or extra:
             shown = lines[key][:PER_SPORT]
-            html += f"<h4>{r.esc(HEADING[key])}</h4>" + (f'<ul class="standouts">{"".join(shown)}</ul>' if shown else "") + extra
+            html += f'<h4 class="sport{" first" if not html else ""}">{r.esc(HEADING[key])}</h4>' + (f'<ul class="standouts">{"".join(shown)}</ul>' if shown else "") + extra
             stats["shown"] += len(shown) + (1 if extra else 0)
     picks, usage2 = stories(client, items, now, set(seen) | set(story_log))
     stats["claude_usage"] = {k: stats["claude_usage"][k] + usage2[k] for k in usage2}

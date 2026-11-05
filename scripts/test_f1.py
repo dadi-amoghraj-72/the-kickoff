@@ -290,5 +290,11 @@ check("the css has purple, the podium metals and the platinum text", ".f1sum .fl
 qt = f1.qualifying_table(Q18["QualifyingResults"])
 check("D, 2026-11-04: in the qualifying table only pole is gold (the first row's class p1), nobody else", re.findall(r'<tr class="(p\d)">', qt) == ["p1"] and len(re.findall(r"<tr[ >]", qt)) == len(Q18["QualifyingResults"]) + 2, re.findall(r'<tr class="(p\d)">', qt))
 
+# ---- newest session first (D, 2026-11-05): the race table above the qualifying table when both are new in one edition
+_both = f1.run(utc(2026, 11, 2, 3, 0), utc(2026, 10, 31, 20, 0), {}, FakeApi(qualifying_for={19: Q19}, results_for={19: {**RACE18, "round": "19", "raceName": "Mexico City Grand Prix"}}, dstand={18: DS18, 19: DS19}))
+_h = _both["html"]
+check("race first, qualifying below: when both sessions of a weekend are in one edition the Race Results table comes before the Qualifying one",
+      ">Race Results</th>" in _h and ">Qualifying Results</th>" in _h and _h.index(">Race Results</th>") < _h.index(">Qualifying Results</th>"), [_h.find(">Race Results</th>"), _h.find(">Qualifying Results</th>")])
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

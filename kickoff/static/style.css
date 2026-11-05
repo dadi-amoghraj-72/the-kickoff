@@ -464,3 +464,12 @@ p.key .dog { color: var(--chalk); font-weight: 700; }
 /* Young Guns: one blank row between sports, gold figures (D, 2026-11-05) */
 .standouts.yg li.sport-gap { margin-top: 22px; }
 .standouts .n { color: var(--gold); font-weight: 600; }
+
+/* Other Sports: each sport named in gold on its own line, a faint line between sports (D, 2026-11-05) */
+h4.sport { margin: 30px 0 8px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 20px; font-weight: 700; letter-spacing: 0.02em; text-transform: none; color: var(--gold); }
+h4.sport.first { margin-top: 14px; padding-top: 0; border-top: 0; }
+
+/* The end of an edition */
+.theend { display: flex; align-items: center; gap: 16px; margin: 44px 0 26px; }
+.theend .ln { flex: 1 1 0; height: 1px; background: var(--gold); opacity: 0.7; }
+.theend b { color: var(--gold); font-size: 22px; font-weight: 700; letter-spacing: 0.06em; text-transform: none; white-space: nowrap; }

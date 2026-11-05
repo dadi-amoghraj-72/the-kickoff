@@ -178,7 +178,7 @@ next(e for e in six_now["events"] if e["status"]["type"]["name"] == "STATUS_FINA
 around.notes.call_json = claude_all
 out = around.run(NOW, {}, Src(rugby={"180659": six_now}, golf={"pga": major}, news=news), object())
 html = out["sections"][0]["html"]
-check("the block: rugby, then golf, then chess, then darts, each under its own heading", html.index("<h4>Rugby</h4>") < html.index("<h4>Golf</h4>") < html.index("<h4>Chess</h4>") < html.index("<h4>Darts</h4>"), html[:500])
+check("the block: rugby, then golf, then chess, then darts, each under its own heading", [html.index(f'">{n}</h4>') for n in ("Rugby", "Golf", "Chess", "Darts")] == sorted(html.index(f'">{n}</h4>') for n in ("Rugby", "Golf", "Chess", "Darts")) and html.count('<h4 class="sport') == 4 and html.count("sport first") == 1, html[:500])
 check("the feed lines are Claude's sentence with the source's link and name", "A result was reported." in html and 'href="https://x/' in html and ">ChessBase</a>" in html and ">BBC Sport</a>" in html)
 out2 = around.run(NOW, {}, Src(golf={"pga": major}, news=news), object())
 again = around.run(NOW, out2["state"]["around"], Src(golf={"pga": major}, news=news), object())
@@ -188,7 +188,7 @@ out3 = around.run(NOW, {}, Src(news=many), object())
 check("the block: at most 2 feed lines for one sport (D, 2026-11-05)", out3["sections"][0]["html"].count("<li>") == 2, out3["sections"][0]["html"].count("<li>"))
 around.notes.call_json = real_call
 nocl = around.run(NOW, {}, Src(rugby={"180659": six_now}, golf={"pga": major}, news=news), None)
-check("without Claude there are no feed lines at all (no plain headlines), only the structured sports", "<h4>Rugby</h4>" in nocl["sections"][0]["html"] and "Darts" not in nocl["sections"][0]["html"] and "Chess" not in nocl["sections"][0]["html"] and "<a href=\"https://x/" not in nocl["sections"][0]["html"])
+check("without Claude there are no feed lines at all (no plain headlines), only the structured sports", '">Rugby</h4>' in nocl["sections"][0]["html"] and "Darts" not in nocl["sections"][0]["html"] and "Chess" not in nocl["sections"][0]["html"] and "<a href=\"https://x/" not in nocl["sections"][0]["html"])
 around.notes.call_json = claude_all
 tab = [item("Tanvi Patri scripts history, first Indian woman in the Youth Olympics final", hours=2, source="Facebook"), item("PV Sindhu qualifies for World Tour Finals after Hylo Open win", "badminton", hours=2, source="The News Mill"),
        item("Satwik and Chirag win the All England Open title", "badminton", hours=2, source="The Hindu"), item("Scheffler wins the Masters", "golf", hours=2, source="BBC Sport"),

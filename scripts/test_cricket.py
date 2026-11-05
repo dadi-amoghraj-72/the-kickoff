@@ -286,7 +286,7 @@ check("the matches shown are remembered, so tomorrow does not repeat them", len(
 tight = block(80)
 check("with 80 calls used only 1 scorecard fits: the most important match is checked, the rest are skipped but their results still show",
       tight["stats"]["checked"] == 1 and tight["stats"]["skipped"] == 4 and tight["html"].count("<li><span class=\"cm\">") == 5, tight["stats"])
-check("the page says how many matches had their standouts checked", "checked in 1 of 5 matches" in tight["html"])
+check("the checked count is in the stats, not on the page (developer chatter, D 2026-11-05)", "checked in" not in tight["html"] and tight["stats"]["checked"] == 1 and tight["stats"]["picked"] == 5, tight["stats"])
 check("a failing scorecard loses only the standouts for that match: the results are all still shown", block(17, fail=True)["html"].count('<li><span class="cm">') == 5 and block(17, fail=True)["stats"]["checked"] == 0)
 check("no matches in the window means no cricket block", block(17, matches=[])["html"] == "")
 check("a live Test is in the block every day, even with the same status as yesterday",

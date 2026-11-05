@@ -60,7 +60,11 @@ def packed_today():
 def section(page, sid):
     html = (DEMO / f"{page}.html").read_text()
     m = re.search(rf'<section id="{sid}"><h2>[^<]*</h2>(.*?)</section>', html, re.S)
-    return m.group(1) if m else ""
+    out = m.group(1) if m else ""
+    if sid == "other-sports":             # the demo built each sport on its own, so each was "first"; in a real edition only the first sport has no line above it
+        head, _, rest = out.partition('class="sport first"')
+        out = head + 'class="sport first"' + rest.replace('class="sport first"', 'class="sport"')
+    return out
 
 
 if "--skip-build" not in sys.argv:

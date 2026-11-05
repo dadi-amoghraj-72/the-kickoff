@@ -11,6 +11,7 @@ from kickoff import render as r
 # (key in the schedule, our name, how long after the start the results are normally in)
 SESSIONS = (("Qualifying", "qualifying", timedelta(minutes=75)), ("Sprint", "sprint", timedelta(minutes=60)), ("race", "race", timedelta(minutes=150)))
 ORDER = {"qualifying": 0, "sprint": 1, "race": 2}
+AFTER_RACE = 1.9       # the title note and held-back standings of a round sit right under the race, above the sprint and qualifying (newest first, D, 2026-11-05)
 LABEL = {"qualifying": "Qualifying", "sprint": "Sprint", "race": "Race"}
 MOVER_PLACES = 4           # places gained from the grid, for a driver to be named Biggest Mover
 EARLY_LAPS = 5             # a retirement within this many laps is an early exit
@@ -434,7 +435,7 @@ def run(now, window_start, st, api, season="current", story=None):
             pending[f"{d['season']}-{d['round']}-standings"] = d["end"].isoformat()
             queued_now.add(f"{d['season']}-{d['round']}-standings")
         shown += 1
-        parts.setdefault(d["round"], [title, []])[1].append(html)
+        parts.setdefault(d["round"], [title, []])[1].append((ORDER[d["session"]], html))
     for sid in sorted(k for k in pending if k.endswith("-standings") and k not in reported):  # standings held back from an earlier edition
         season_, rnd_, _ = sid.split("-")
         race = next((x for x in schedule if x["season"] == season_ and x["round"] == rnd_), None)
@@ -449,7 +450,7 @@ def run(now, window_start, st, api, season="current", story=None):
             pending.pop(sid)
             reported.append(sid)
             shown += 1
-            parts.setdefault(int(rnd_), [heading(race, max(int(x["round"]) for x in schedule)), []])[1].append(standings_html(got[0], got[1], int(rnd_), rows, schedule))
+            parts.setdefault(int(rnd_), [heading(race, max(int(x["round"]) for x in schedule)), []])[1].append((AFTER_RACE + 0.05, standings_html(got[0], got[1], int(rnd_), rows, schedule)))
             got_standings[int(rnd_)] = got
         else:
             waiting.append(f"{race['raceName']} standings")
@@ -459,9 +460,9 @@ def run(now, window_start, st, api, season="current", story=None):
         except Exception:
             notes, new_keys = [], []
         if notes and rnd_ in parts:
-            parts[rnd_][1].extend(notes)
+            parts[rnd_][1].extend((AFTER_RACE, n_) for n_ in notes)
             closed += new_keys
-    out = "".join(f"<h3>{heading_html(name)}</h3>" + "".join(blocks) for _, (name, blocks) in sorted(parts.items()))
+    out = "".join(f"<h3>{heading_html(name)}</h3>" + "".join(h_ for _, h_ in sorted(blocks, key=lambda b: -b[0])) for _, (name, blocks) in sorted(parts.items()))   # newest session first
     if waiting:
         out += (f'<p class="muted">Not published by the data source yet, so they will appear in a later edition: {r.esc(", ".join(waiting))}.</p>')
     horizon = now - LOOKBACK

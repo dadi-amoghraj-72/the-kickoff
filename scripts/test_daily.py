@@ -153,5 +153,9 @@ _ns3 = {}
 daily.record_extra_costs(_ns3, {"around": {"claude_usage": {"input": 8_000_000, "output": 0}}}, _date(2026, 11, 5))
 check("so the budget guard sees them: a month of Around alone can reach the plain-notes mode", _budget.status(_ns3["costs"], _date(2026, 11, 6))["mode"] in ("cheaper", "plain"), _budget.status(_ns3["costs"], _date(2026, 11, 6)))
 
+# ---- the end of the page (D, 2026-11-05)
+_pg = render.render_edition({"date": "2026-11-05", "dummy": False, "sections": [{"id": "x", "title": "X", "html": "<p>a</p>"}]})
+check("every edition ends with a gold line, 'The End', a gold line, above the footer, once", _pg.count("The End</b>") == 1 and _pg.index('class="theend"') < _pg.index("<footer>") and _pg.index("<p>a</p>") < _pg.index('class="theend"') and _pg.count('class="ln"') == 2)
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
