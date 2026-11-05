@@ -82,16 +82,34 @@ check("an Indian player's match is of interest; so is a top seed's; a match betw
       and not bd.interesting(next(m for m in ms if m["a"]["flag"] not in bd.SPOT and m["b"]["flag"] not in bd.SPOT and not ({"Shi Yuqi", "Anders Antonsen", "Jonatan Christie"} & set(m["a"]["names"] + m["b"]["names"]))), "Men's singles", tops))
 
 # ---- the one standard line ---------------------------------------------------------------------------------------------
-check("the line is always winner first: 'Lakshya Sen (IND) def. Jonatan Christie (INA) 21–13, 21–10'", bd.line(sen) == "Lakshya Sen (IND) def. Jonatan Christie (INA) 21–13, 21–10", bd.line(sen))
+check("the line is always winner first: 'Lakshya Sen (IND) def. Jonatan Christie (INA) [3] 21–13, 21–10'", bd.line(sen) == "Lakshya Sen (IND) def. Jonatan Christie (INA) [3] 21–13, 21–10", bd.line(sen))
 loh = next(m for m in ms if m["round"] == "Quarter-finals" and "Loh Kean Yew" in m["a"]["names"] + m["b"]["names"])
-check("a loss by the player D follows reads the same way, the winner first: 'Shi Yuqi (CHN) def. Loh Kean Yew (SGP) 21–18, 21–16' (never 'lost to')", bd.line(loh) == "Shi Yuqi (CHN) def. Loh Kean Yew (SGP) 21–18, 21–16", bd.line(loh))
+check("a loss by the player D follows reads the same way, the winner first: 'Shi Yuqi (CHN) [1] def. Loh Kean Yew (SGP) 21–18, 21–16' (never 'lost to')", bd.line(loh) == "Shi Yuqi (CHN) [1] def. Loh Kean Yew (SGP) 21–18, 21–16", bd.line(loh))
 check("in every match of the page the line has 'def.' and none has 'lost to' or 'beat'", all(" def. " in bd.line(m) and " lost to " not in bd.line(m) and " beat " not in bd.line(m) for d in p for m in p[d]["matches"]))
-check("the winner is in bold and the loser is not", bd.line_html(sen).startswith("<strong>Lakshya Sen (IND)</strong> def. Jonatan Christie (INA) 21–13, 21–10") and bd.line_html(sen).count("<strong>") == 1)
+check("the winner is in bold and the loser is not", bd.line_html(sen).startswith("<strong>Lakshya Sen (IND)</strong> def. Jonatan Christie (INA) [3] 21–13, 21–10") and bd.line_html(sen).count("<strong>") == 1)
 ret = next(m for d in p for m in p[d]["matches"] if m.get("retired"))
-check("a match that ended early says so, winner first: Satwik/Chirag's retirement in the Round of 16", bd.line(ret) == "Xie Haonan / Zeng Weihan (CHN) def. Satwiksairaj Rankireddy / Chirag Shetty (IND) 21–16 (retired)", bd.line(ret))
+check("a match that ended early says so, winner first: Satwik/Chirag's retirement in the Round of 16", bd.line(ret) == "Xie Haonan / Zeng Weihan (CHN) def. Satwiksairaj Rankireddy / Chirag Shetty (IND) [7] 21–16 (retired)", bd.line(ret))
 co = bd.parse(CO)
 han = next(m for m in co["Women's singles"]["matches"] if m["round"] == "Semi-finals" and m.get("retired"))
 check("a retired semi-final too (China Open: Han Yue beat An Se-young 21–19 and the match ended)", "Han Yue" in han["a"]["names"] + han["b"]["names"] and bd.score_text(han) == "21–19 (retired)", bd.score_text(han))
+
+# ---- seeds and the order D looks in ---------------------------------------------------------------------------------------------
+check("the seeds come from the page's Seeds list (1, 2, 3 ... in order): Shi Yuqi 1, Antonsen 2, Christie 3, Vitidsarn 5, Lee Zii Jia 7 in the men's singles",
+      {n: i for i, (n, _) in enumerate(p["Men's singles"]["seeds"], 1)}["Shi Yuqi"] == 1 and {n: i for i, (n, _) in enumerate(p["Men's singles"]["seeds"], 1)}["Lee Zii Jia"] == 7)
+raw_seed = re.search(r"RD1-seed\d+\s*=\s*(\d+)\s*\n\|\s*RD1-team\d+\s*=[^\n]*Satwiksairaj", AE)
+check("a seeded pair carries its seed: Satwik/Chirag are 7 (the same number the draw's own seed field has next to them)", raw_seed and raw_seed.group(1) == "7" and "Satwiksairaj Rankireddy / Chirag Shetty (IND) [7]" in bd.line(ret))
+check("seeded players show it in square brackets in the line (Shi Yuqi [1], Lee Zii Jia [7], Christie [3]) and an unseeded player does not", "[1]" in bd.line_html(loh) and "Lee Zii Jia (MAS) [7]" in bd.line(next(m for m in ms if "Lee Zii Jia" in m["a"]["names"] + m["b"]["names"] and m["round"] == "Round of 32")) and "Lakshya Sen (IND) def" in bd.line(sen))
+r32 = [m for m in p["Men's singles"]["matches"] if m["round"] == "Round of 32" and bd.interesting(m, "Men's singles", tops)]
+ordered = bd.by_priority(r32)
+check("Singapore's matches come first, then India's, then the other Southeast Asian countries', then the rest (a top seed against an unlisted player)", [bd.priority(m) for m in ordered] == sorted(bd.priority(m) for m in r32)
+      and bd.priority(ordered[0]) == 0 and "Loh Kean Yew" in ordered[0]["a"]["names"] + ordered[0]["b"]["names"] and [bd.priority(m) for m in ordered][:3] == [0, 1, 1] and bd.priority(ordered[-1]) == 3, [bd.priority(m) for m in ordered])
+check("priority: a Singapore-India match counts as Singapore's; Brunei, Cambodia, Myanmar, Laos and Timor-Leste are 'other Southeast Asian'; China-Japan is neither",
+      bd.priority({"a": {"flag": "SGP"}, "b": {"flag": "IND"}}) == 0 and bd.priority({"a": {"flag": "IND"}, "b": {"flag": "CHN"}}) == 1 and all(bd.priority({"a": {"flag": f}, "b": {"flag": "CHN"}}) == 2 for f in ("BRU", "CAM", "MYA", "LAO", "TLS", "MAS", "INA", "THA", "PHI", "VIE")) and bd.priority({"a": {"flag": "CHN"}, "b": {"flag": "JPN"}}) == 3)
+h_ord = bd.event_html("All England Open", {"Men's singles": r32}, tops)
+names_in_order = re.findall(r"<li><strong>([^<]*)</strong>", h_ord)
+check("in the page the bullets are in that order: Loh Kean Yew (SGP) first, then the two Indians", names_in_order[0].startswith("Loh Kean Yew") and names_in_order[1].startswith("Lakshya Sen") and names_in_order[2].startswith("Toma Junior Popov"), names_in_order[:4])
+sf = [m for m in p["Women's doubles"]["matches"] if m["round"] == "Semi-finals"]
+check("the semi-final tables are ordered the same way (the match with the listed country first)", [bd.priority(m) for m in bd.by_priority(sf)] == sorted(bd.priority(m) for m in sf))
 
 # ---- the start notice ----------------------------------------------------------------------------------------------------
 wiki = Wiki({"2025 All England Open": AE})
@@ -116,9 +134,9 @@ check("the early rounds are in round order inside a discipline (Round of 32 befo
 h = bd.late_table("Men's singles", "All England Open · Final", [fin["Men's singles"]])
 t = text(h)
 check("a table: the title, then two rows a match (the winner first and bold), a column for each game", "Men's singles · All England Open · Final" in t and 'class="w"' in h and 'class="l"' in h and h.count("<tr class") == 2
-      and "Shi Yuqi CHN 21 21" in t and "Lee Chia-hao TPE 17 19" in t, t)
+      and "Shi Yuqi CHN [1] 21 21" in t and "Lee Chia-hao TPE 17 19" in t, t)
 h2 = bd.late_table("Women's singles", "All England Open · Final", [fin["Women's singles"]])
-check("a three-game match fills all three columns: An Se-young 13 21 21 over Wang Zhiyi 21 18 18", "An Se-young KOR 13 21 21" in text(h2) and "Wang Zhiyi CHN 21 18 18" in text(h2))
+check("a three-game match fills all three columns: An Se-young 13 21 21 over Wang Zhiyi 21 18 18", "An Se-young KOR [1] 13 21 21" in text(h2) and "Wang Zhiyi CHN [2] 21 18 18" in text(h2))
 h3 = bd.late_table("Men's doubles", "x", [fin["Men's doubles"]])
 check("doubles pairs sit one partner above the other in a single cell", "Kim Won-ho / Seo Seung-jae KOR" in text(h3) and h3.count("<br>") == 2)
 h4 = bd.late_table("Women's singles", "China Open · Semi-finals", [han])

@@ -127,6 +127,10 @@ def parse(w):
                 if key not in seen:
                     seen.add(key)
                     matches.append(m)
+        seed_of = {name: i for i, (name, _) in enumerate(seeds, 1)}          # the Seeds list is in seed order (1, 2, 3 ...)
+        for m in matches:
+            for k in ("a", "b"):
+                m[k] = {**m[k], "seed": seed_of.get(" / ".join(m[k]["names"]))}
         out[title] = {"seeds": seeds, "matches": matches}
     return out
 
@@ -140,8 +144,20 @@ def level_of(text):
 # ---- Choosing and showing -----------------------------------------------------------------------------
 
 def label(s):
-    """'Lakshya Sen (IND)' or 'Kim Won-ho / Seo Seung-jae (KOR)'."""
-    return " / ".join(s["names"]) + (f" ({s['flag']})" if s["flag"] else "")
+    """'Lakshya Sen (IND)', 'Shi Yuqi (CHN) [1]' (the seed in square brackets, as D's figures are) or 'Kim Won-ho / Seo Seung-jae (KOR) [2]'."""
+    return " / ".join(s["names"]) + (f" ({s['flag']})" if s["flag"] else "") + (f" [{s['seed']}]" if s.get("seed") else "")
+
+
+def priority(m):
+    """Who D looks at first: Singapore (0), then India (1), then the other listed countries (2, any order), then the rest (3: a top seed against an unlisted player)."""
+    def one(s):
+        return 0 if s["flag"] == "SGP" else 1 if s["flag"] == "IND" else 2 if s["flag"] in SPOT else 3
+    return min(one(m["a"]), one(m["b"]))
+
+
+def by_priority(matches):
+    """The matches with Singapore's first, then India's, then the other Southeast Asian countries', then the rest; otherwise in the order of the draw."""
+    return sorted(matches, key=priority)
 
 
 def top_seeds(parsed, n=3):
@@ -186,7 +202,8 @@ def late_table(disc, rnd, matches):
         wg = m["games"] if m["winner"] == "a" else [(y, x) for x, y in m["games"]]
         for is_w, s in ((True, win), (False, lose)):
             cells = "".join(f'<td class="s">{(g[0] if is_w else g[1])}</td>' for g in wg) + "".join('<td class="s"></td>' for _ in range(3 - len(wg)))
-            names = "<br>".join(r.esc(n) for n in s["names"]) + (f' <span class="muted">{r.esc(s["flag"])}</span>' if s["flag"] else "") + (' <span class="muted">ret.</span>' if m.get("retired") and not is_w else "")
+            names = ("<br>".join(r.esc(n) for n in s["names"]) + (f' <span class="muted">{r.esc(s["flag"])}</span>' if s["flag"] else "") + (f' <span class="muted">[{s["seed"]}]</span>' if s.get("seed") else "")
+                     + (' <span class="muted">ret.</span>' if m.get("retired") and not is_w else ""))
             rows += f'<tr class="{"w" if is_w else "l"}"><td class="pl">{names}</td>{cells}</tr>'
     return (f'<div class="tennis"><table><colgroup><col style="width:64%"><col style="width:12%"><col style="width:12%"><col style="width:12%"></colgroup><thead><tr><th class="tt" colspan="4">'
             f'{r.esc(disc)} · {r.esc(rnd)}</th></tr></thead><tbody>{rows}</tbody></table></div>')
@@ -199,7 +216,7 @@ def event_html(name, new_matches, tops, notice=None):
         out += f'<ul class="standouts bd"><li>{r.esc(notice)}</li></ul>'
     groups = ""
     for d in DISCIPLINES:
-        mine = [m for m in new_matches.get(d, []) if m["round"] not in LATE and interesting(m, d, tops)]
+        mine = by_priority([m for m in new_matches.get(d, []) if m["round"] not in LATE and interesting(m, d, tops)])
         for rnd in ROUND_ORDER:
             ms = [m for m in mine if m["round"] == rnd]
             if ms:
@@ -208,7 +225,7 @@ def event_html(name, new_matches, tops, notice=None):
         out += f'<p class="subhead">{r.esc(name)}</p>' + groups
     for rnd in LATE:
         for d in DISCIPLINES:
-            ms = [m for m in new_matches.get(d, []) if m["round"] == rnd]
+            ms = by_priority([m for m in new_matches.get(d, []) if m["round"] == rnd])
             if ms:
                 out += late_table(d, f"{name} · {rnd}", ms)
     return out
