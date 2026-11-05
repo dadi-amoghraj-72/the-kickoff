@@ -210,7 +210,7 @@ check("World Cup qualifiers, pathway events and ICC 'League Two' games are not t
 eng_pak = [dict(i, inning=i["inning"].replace("Tasmania", "England").replace("New South Wales", "Pakistan")) for i in multi]
 everyday = ck.run(NOW, START, {"status": {"t9": live_test["status"]}}, lambda: ([live_test], 17), paid, src.scorecards_affordable,
                   espn_card=lambda m: {"scorecard": eng_pak, "status": "Day 3: Stumps", "potm": []})
-check("a Test in progress appears with a 'Test · Day 3' flag at the top of its block, before the teams", everyday["html"].index("Test · Day 3") < everyday["html"].index("England v Pakistan"), everyday["html"][:300])
+check("a Test in progress appears with the day beside the match number ('2nd Test · Day 3', D, 2026-11-05) and the 'Test · in progress' pill above the teams", everyday["html"].index("Test · in progress") < everyday["html"].index("England v Pakistan") and "England v Pakistan · 2nd Test · Day 3" in everyday["html"], everyday["html"][:300])
 check("the Test's scorecard is shown but not saved (it changes every day)", "Pakistan</strong> 2nd innings" in everyday["html"] and "t9" not in everyday["state"]["cards"])
 check("with no day in the status, ESPN's line gives it; with neither it says 'in progress'",
       ck.day_of({"status": ""}, {"status": "Day 4: Lunch"}) == 4 and ck.day_of({"status": "Stumps"}, {}) is None and "Test · in progress" in ck.result_html({**live_test, "status": "Stumps"}))

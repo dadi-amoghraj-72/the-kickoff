@@ -378,5 +378,12 @@ check("the IPL table: only the Sunrisers Hyderabad row carries the gold class; a
 
 check("singular figures: 1 four and 1 six, never '1 sixes' (D, 2026-11-05)", "1 four and 1 six against" in ck.standout_html({**iyer, "fours": 1, "sixes": 1}) and "2 fours and 0 sixes" in ck.standout_html({**iyer, "fours": 2, "sixes": 0}))
 
+# ---- the day of a Test from the start date when the status line has none (D, 2026-11-05)
+_t = {"matchType": "test", "dateTimeGMT": "2026-11-03T04:00:00", "status": "Stumps"}
+_utc = lambda d, h=23: __import__("datetime").datetime(2026, 11, d, h, 15, tzinfo=__import__("datetime").timezone.utc)  # noqa: E731
+check("the day is counted from the start date: day 1 on the first day, day 3 on the third, never above 5", ck.day_of(_t, None, _utc(3)) == 1 and ck.day_of(_t, None, _utc(5)) == 3 and ck.day_of(_t, None, _utc(20)) == 5)
+check("a status line that names the day wins, and with no clock the day stays unknown", ck.day_of({**_t, "status": "Day 4: Lunch"}, None, _utc(5)) == 4 and ck.day_of(_t) is None)
+check("the heading says '2nd Test · Day 3' and the pill stays 'Test · in progress'", "2nd Test · Day 3" in ck.result_html({**_t, "id": "x", "name": "Bangladesh vs West Indies, 2nd Test, WI tour", "teams": ["Bangladesh", "West Indies"], "matchStarted": True, "matchEnded": False}, None, "", 0, _utc(5)))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

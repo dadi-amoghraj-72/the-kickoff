@@ -232,6 +232,8 @@ def cricket(src, now, end, weekday):
         name = m.get("name", "")
         stage = "final" if re.search(r"\bfinal\b", name, re.I) and not re.search(r"semi|quarter", name, re.I) else "knockout" if events.KNOCKOUT_WORDS.search(name) else "regular"
         teams, first = cricket_mod.heading(m)
+        day = cricket_mod.day_of(m, None, now) if live and m.get("matchType") == "test" else None
+        first = f"{first} · Day {day}" if day and first else first                  # a Test under way says which day (D, 2026-11-05)
         label = c.get("label", "")
         out.append(fixture("cricket", label or "Cricket", f"Cricket: {teams}" + (f" · {first}" if first else "") + (f" ({label})" if label and label != "International" else ""),
                            now if live else when, importance.story_score("cricket", stage, mine, weekday=weekday), mine, stage, {"live"} if live else ()))

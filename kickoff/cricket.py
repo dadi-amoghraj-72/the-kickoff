@@ -193,12 +193,17 @@ def scores_line(m):
     return " · ".join(f"{wname(t)} {per[t]}" for t in per)
 
 
-def day_of(m, entry=None):
-    """The day of a Test in progress: from the match's status line ('Day 2: Stumps - ...'), else from ESPN's."""
+def day_of(m, entry=None, now=None):
+    """The day of a Test in progress: from the match's status line ('Day 2: Stumps - ...'), else from ESPN's, else (when `now` is given) counted from the start date, at most 5."""
     for text in (m.get("status"), (entry or {}).get("status")):
         found = re.search(r"\bDay\s*(\d)\b", text or "", re.I)
         if found:
             return int(found.group(1))
+    if now is not None and m.get("matchType") == "test" and m.get("dateTimeGMT"):
+        try:
+            return max(1, min(5, (now.date() - started(m).date()).days + 1))
+        except (ValueError, TypeError):
+            return None
     return None
 
 
@@ -263,7 +268,7 @@ def series_html(rows, fmt, current=None):
     return r.series_table(f"{wname(left)} v {wname(right)} · {label} series", wname(left), wname(right), wins[left], wins[right], "series", body, "sm tst" if fmt == "test" else "sm")
 
 
-def result_html(m, entry=None, series="", from_innings=0):
+def result_html(m, entry=None, series="", from_innings=0, now=None):
     """One match: the teams and its number ('New Zealand v India · 1st ODI'), the result as the big line, the scores under it, the player of the match, then the
     scorecard and the series table. A Test in progress carries its day and 'Day 3: Stumps, Australia lead by 42 runs' as the result line; from_innings: the
     innings of a Test already shown in full before (they come as one line each)."""
@@ -273,11 +278,12 @@ def result_html(m, entry=None, series="", from_innings=0):
         if strip_women(t).lower() in HIGHLIGHT:
             names = names.replace(r.esc(wname(t)), f"<strong>{r.esc(wname(t))}</strong>")
     live = "" if m.get("matchEnded") or m.get("matchType") == "test" else '<span class="tag">In progress</span> '   # a Test in progress has its day flag instead'
-    flag = ""
+    flag, day = "", None
     if m.get("matchType") == "test" and not m.get("matchEnded"):
-        day = day_of(m, entry)
-        flag = f'<span class="dayflag">Test · {"Day " + str(day) if day else "in progress"}</span>'
+        day = day_of(m, entry, now)
+        flag = '<span class="dayflag">Test · in progress</span>'                                  # the day sits in the heading line: '2nd Test · Day 3' (D, 2026-11-05)
     full = bool(entry) and scorecard_tier(m) < 3
+    first = f"{first} · Day {day}" if day and first else first
     return (f'<li>{flag}<span class="cm">{names}{" · " + r.esc(first) if first else ""}</span>'
             f'<span class="cr">{live}{r.esc(short_result(m.get("status")))}</span><span class="cs">{scores_html(m)}</span>{potm_html(entry)}'
             f'{full_scorecard_html(entry["innings"], from_innings) if full else ""}{match_summary_html(entry["innings"]) if full and m.get("matchType") == "test" and m.get("matchEnded") else ""}'
@@ -296,7 +302,7 @@ def table_html(label, rows):
     return f'<div class="pts">{r.table(f"{label} table", columns, body, row_classes=gold)}</div>'
 
 
-def results_html(picked, cards=None, tables=None, series=None, from_innings=None):
+def results_html(picked, cards=None, tables=None, series=None, from_innings=None, now=None):
     """Matches grouped under International, Women's international, and each league, in priority order. '' if none.
     tables: {league label: points table html}, shown straight after that league's results."""
     groups, order = {}, []
@@ -308,7 +314,7 @@ def results_html(picked, cards=None, tables=None, series=None, from_innings=None
         groups[label].append(m)
     out = ""
     for label in order:
-        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m, (cards or {}).get(m['id']), (series or {}).get(m['id'], ''), (from_innings or {}).get(m['id'], 0)) for m in groups[label])}</ul>{(tables or {}).get(label, '')}"
+        out += f"<h3>{r.esc(label)}</h3><ul class=\"cricket\">{''.join(result_html(m, (cards or {}).get(m['id']), (series or {}).get(m['id'], ''), (from_innings or {}).get(m['id'], 0), now) for m in groups[label])}</ul>{(tables or {}).get(label, '')}"
     return out
 
 
@@ -642,7 +648,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
                 from_innings[m["id"]] = n
             test_done[m["id"]] = n if m.get("matchEnded") else max(n - 1, 0)
             test_sig[m["id"]] = sig
-    html = results_html(picked, shown_cards, tables, series, from_innings) + standouts_html(top)
+    html = results_html(picked, shown_cards, tables, series, from_innings, now) + standouts_html(top)
     if html and skipped:
         html += (f'<p class="muted">Standouts were checked in {checked} of {len(picked)} matches: the free cricket data allows only '
                  f"about eight scorecards a day when ESPN's pages are not available.</p>")

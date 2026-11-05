@@ -212,7 +212,7 @@ _live = [{"id": "t1", "name": "Bangladesh vs West Indies, 2nd Test, WI tour of B
 got, _ = fixtures.collect(Fake(cricket=_live), now, end, 3)
 _lv = [f for f in got if f["sport"] == "cricket"]
 check("cricket: a Test in progress is listed ('Under way', every day of the match), a Test that has ended (even on day four) is not, and a league that is not the IPL is not",
-      len(_lv) == 1 and "Bangladesh v West Indies" in _lv[0]["text"] and "live" in _lv[0]["flags"] and _lv[0]["when"] == now and "Under way" in ontoday._line(_lv[0]), [(f["text"], f["flags"]) for f in _lv])
+      len(_lv) == 1 and "Bangladesh v West Indies · 2nd Test · Day 3" in _lv[0]["text"] and "live" in _lv[0]["flags"] and _lv[0]["when"] == now and "Under way" in ontoday._line(_lv[0]), [(f["text"], f["flags"]) for f in _lv])
 
 # a sport that breaks costs only itself
 got, failed = fixtures.collect(Fake(football=fb, boom=("nba", "cricket")), now, end, 3)
