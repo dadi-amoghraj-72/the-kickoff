@@ -224,11 +224,11 @@ def render_edition(ed):
         f'<a class="rail-tick" href="#{esc(s["id"])}" style="top:{i / n * 100:.2f}%" '
         f'aria-label="Jump to {esc(s["title"])}" title="{esc(s["title"])}"></a>'
         for i, s in enumerate(sections))
-    rail = f'<nav class="rail" aria-label="Sections"><div class="rail-fill" id="rail-fill"></div>{ticks}</nav>'
+    rail = f'<nav class="rail" aria-label="Sections"><div class="rail-fill" id="rail-fill"></div>{ticks}<div class="rail-icon" id="rail-icon" aria-hidden="true"></div></nav>'
     end = '<div class="theend"><span class="ln"></span><b>The End</b><span class="ln"></span></div>'        # a gold line, "The End", a gold line (D, 2026-11-05)
     footer = f'<footer><a href="{home}">All editions</a> · The Kickoff, your daily sports digest.</footer>'
     body = f"<main>{_masthead(nice_date(ed['date']))}{banner}{secs}{end}{footer}</main>{rail}"
-    script = f"<script>{(STATIC / 'rail.js').read_text()}</script>"
+    script = f"<script>{(STATIC / 'rail-icons.js').read_text()}\n{(STATIC / 'rail.js').read_text()}</script>"
     return _page(f"The Kickoff · {nice_date(ed['date'])}", topbar, body, script)
 
 
