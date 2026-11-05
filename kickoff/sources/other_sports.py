@@ -55,6 +55,18 @@ class Source:
     def ufc(self):
         return self._json(SITE + "mma/ufc/scoreboard")
 
+    def ufc_listing(self):
+        """The addresses on UFC.com's events list ('ufc-332', 'cryptocom-ufc-331', 'ufc-fight-night-november-07-2026'): used to find a numbered event's address when it has a sponsor in front."""
+        self.calls += 1
+        import re
+        page = http.get_bytes("https://www.ufc.com/events", retries=1, timeout=30).decode("utf-8", "replace")
+        return sorted(set(re.findall(r'href="/event/([^"#?]+)"', page)))
+
+    def ufc_rankings_page(self):
+        """UFC.com's rankings page as html (updated by UFC every Tuesday)."""
+        self.calls += 1
+        return http.get_bytes("https://www.ufc.com/rankings", retries=1, timeout=30).decode("utf-8", "replace")
+
     def ufc_page(self, slug):
         """UFC.com's event page ('ufc-309') as html: the official source of the fights' details (ranks, title bout, method, round, time)."""
         self.calls += 1

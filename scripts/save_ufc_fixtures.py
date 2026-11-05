@@ -1,4 +1,4 @@
-"""Save real UFC pages for the tests (run once, no keys): the UFC.com event pages of UFC 309 (Jones vs. Miocic, 16 November 2024) and UFC 316 (Dvalishvili vs. O'Malley 2, 7 June 2025) as they stand
+"""Save real UFC pages for the tests (run once, no keys): the UFC.com event pages of UFC 309 (Jones vs. Miocic, 16 November 2024), UFC 316 (Dvalishvili vs. O'Malley 2, 7 June 2025) and the UFC Fight Night of 22 November 2025 (Tsarukyan vs. Hooker, Doha), and the rankings page, as they stand
 now that the cards are over, and ESPN's scoreboard for UFC 309's date, trimmed to what the code reads.
 
   .venv/bin/python scripts/save_ufc_fixtures.py"""
@@ -11,9 +11,11 @@ sys.path.insert(0, str(ROOT))
 from kickoff import http  # noqa: E402
 
 FX = ROOT / "tests" / "fixtures"
-for name, slug in (("ufc_com_309", "ufc-309"), ("ufc_com_316", "ufc-316")):
+PAGES = {"ufc_com_309": "https://www.ufc.com/event/ufc-309", "ufc_com_316": "https://www.ufc.com/event/ufc-316", "ufc_com_fn_20251122": "https://www.ufc.com/event/ufc-fight-night-november-22-2025",
+         "ufc_com_rankings": "https://www.ufc.com/rankings"}
+for name, url in PAGES.items():
     try:
-        body = http.get_bytes(f"https://www.ufc.com/event/{slug}", retries=1, timeout=30)
+        body = http.get_bytes(url, retries=1, timeout=30)
         (FX / f"{name}.html").write_bytes(body)
         print("saved", name, len(body))
     except Exception as e:

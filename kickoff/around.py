@@ -13,6 +13,7 @@ from datetime import datetime, timedelta, timezone
 
 from kickoff import badminton, chess_live, golf, importance, majors, notes, settings
 from kickoff import ufc as ufc_mod
+from kickoff import ufcrank
 from kickoff import render as r
 from kickoff.sources import other_sports
 from kickoff.sources.other_sports import RUGBY_LEAGUES
@@ -274,6 +275,13 @@ def run(now, st, source, client=None):
     except Exception:
         stats["failed"] += 1
     stats["failed"] += min(len(ufc_fails), 1)
+    rank_state = st.get("ufcrank") or {}
+    try:
+        rk = ufcrank.run(source, (now + timedelta(hours=8)).date(), rank_state)
+        blocks["ufc"] += rk["blocks"]
+        rank_state = rk["state"]
+    except Exception:
+        stats["failed"] += 1
     badminton_state = st.get("badminton") or {}
     wiki_fails = []
     try:
@@ -333,4 +341,4 @@ def run(now, st, source, client=None):
         sections.append({"id": "other-sports", "title": "Other Sports", "html": html})
     if picks:
         sections.append({"id": "stories", "title": "Interesting Stories", "html": stories_html(picks)})
-    return {"sections": sections, "state": {"around": {"seen": seen[-300:], "stories": story_log, "golf": g["state"], "badminton": badminton_state, "ufc": ufc_state}}, "stats": stats, "events": story_events}
+    return {"sections": sections, "state": {"around": {"seen": seen[-300:], "stories": story_log, "golf": g["state"], "badminton": badminton_state, "ufc": ufc_state, "ufcrank": rank_state}}, "stats": stats, "events": story_events}

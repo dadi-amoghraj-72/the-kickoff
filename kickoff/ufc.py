@@ -1,8 +1,9 @@
-"""UFC (checkpoint 12, D's rules of 2026-11-05): numbered events only (UFC 330), three fights, each in its own box: the main event, the co-main event and the top bout of the Prelims.
+"""UFC (checkpoint 12, D's rules of 2026-11-05): every UFC event, numbered ones (UFC 330) and Fight Nights alike (added the same day), three fights, each in its own box: the main event, the co-main event and
+the top bout of the Prelims.
 
 The box is built like an NBA game: the winner on the left, "def." in the middle, the loser on the right, each name with his ranking in square brackets ([#3], or [C] for a champion), and under it in the
 same box the details: how the fight was won (Decision - Unanimous, KO/TKO ...), the weight class and whether a belt was at stake. Above the three boxes: "UFC 330 · Las Vegas · Sun 8 Nov" (the date
-in Singapore time).
+in Singapore time; a Fight Night is headed with its name, "UFC Fight Night: Cortes Acosta vs. Walker · Las Vegas · Sun 8 Nov").
 
 One source for the fight details: UFC.com's own event page (the official one): card sections (Main Card, Prelims, Early Prelims), ranks as the card listed them, the title-bout label, who won, how, the
 round and the time. ESPN's free scoreboard only finds which numbered event has just finished (and its city and date) and, if UFC.com cannot be read, gives the bare result (winner, weight class,
@@ -110,12 +111,27 @@ def box_html(label, f):
 
 
 def header(event):
-    """'UFC 330 · Las Vegas · Sun 8 Nov' (the date in Singapore time)."""
+    """'UFC 330 · Las Vegas · Sun 8 Nov' for a numbered event, 'UFC Fight Night: Cortes Acosta vs. Walker · Las Vegas · Sun 8 Nov' for the others (the date in Singapore time)."""
     n = re.match(r"^(UFC \d+)", event["name"])
     venue = (event.get("venues") or [{}])[0]
     city = (venue.get("address") or {}).get("city", "")
     when = datetime.fromisoformat(event["date"].replace("Z", "+00:00")).astimezone(SGT)
-    return " · ".join(x for x in (n.group(1) if n else event["name"], city, f"{when:%a} {when.day} {when:%b}") if x)
+    return " \u00b7 ".join(x for x in (n.group(1) if n else event["name"], city, f"{when:%a} {when.day} {when:%b}") if x)
+
+
+def slugs(event, listing=()):
+    """The UFC.com addresses to try for an event, best first: a numbered event is 'ufc-330' (sometimes with a sponsor in front, 'cryptocom-ufc-331', found in the events list); a Fight Night is
+    'ufc-fight-night-november-07-2026' named for the day it was held where it was held, so the day of the start and the days either side are tried."""
+    out = []
+    n = re.match(r"^UFC (\d+)", event["name"])
+    started = datetime.fromisoformat(event["date"].replace("Z", "+00:00"))
+    if n:
+        out += [x for x in listing if re.search(rf"(^|-)ufc-{n.group(1)}$", x)] + [f"ufc-{n.group(1)}"]
+    else:
+        for delta in (0, -1, 1):
+            d = (started + timedelta(days=delta)).date()
+            out.append(f"ufc-fight-night-{d:%B}-{d:%d}-{d:%Y}".lower())
+    return list(dict.fromkeys(out))
 
 
 def espn_fallback(event):
@@ -141,8 +157,8 @@ def espn_fallback(event):
 
 
 def run(source, now, state, fails=None):
-    """{"blocks": [html], "state": {"done": [event ids]}}. source.ufc() -> ESPN's scoreboard json; source.ufc_page(slug) -> UFC.com's event page html. A numbered event that finished within the last 40 hours is
-    shown once."""
+    """{"blocks": [html], "state": {"done": [event ids]}}. source.ufc() -> ESPN's scoreboard json; source.ufc_page(slug) -> UFC.com's event page html; source.ufc_listing() (optional) -> the addresses on
+    UFC.com's events list. A UFC event (numbered or a Fight Night) that finished within the last 40 hours is shown once."""
     done = list((state or {}).get("done") or [])
     blocks = []
     try:
@@ -152,17 +168,23 @@ def run(source, now, state, fails=None):
         return {"blocks": [], "state": {"done": done}}
     for e in events:
         try:
-            m = re.match(r"^UFC (\d+)", e["name"])
             started = datetime.fromisoformat(e["date"].replace("Z", "+00:00"))
-            if not m or e["id"] in done or e["status"]["type"].get("state") != "post" or not (timedelta(0) <= now - started <= RECENT):
+            if not re.match(r"^UFC\b", e["name"]) or e["id"] in done or e["status"]["type"].get("state") != "post" or not (timedelta(0) <= now - started <= RECENT):
                 continue
-            boxes = []
+            boxes, listing = [], []
             try:
-                boxes = [box_html(label, f) for label, f in three(parse(source.ufc_page(f"ufc-{m.group(1)}")))]
-                boxes = [b for b in boxes if b]
+                listing = source.ufc_listing() if hasattr(source, "ufc_listing") else []
             except Exception:
-                (fails if fails is not None else []).append("ufc")
+                listing = []
+            for slug in slugs(e, listing):                  # the first address whose page has finished fights
+                try:
+                    boxes = [b for b in (box_html(label, f) for label, f in three(parse(source.ufc_page(slug)))) if b]
+                except Exception:
+                    continue
+                if boxes:
+                    break
             if not boxes:
+                (fails if fails is not None else []).append("ufc")
                 boxes = espn_fallback(e)
             if boxes:
                 blocks.append(f'<p class="subhead">{r.esc(header(e))}</p>' + "".join(boxes))

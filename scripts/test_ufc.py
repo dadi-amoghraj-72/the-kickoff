@@ -30,17 +30,27 @@ p309, p316 = ufc.parse(H309), ufc.parse(H316)
 
 
 class Src:
-    def __init__(self, board, page=None, boom=False):
-        self.b, self.p, self.boom = board, page, boom
+    """ESPN's board and UFC.com's pages. page: one html (served for any address of UFC 309: ufc-309) or a {address: html} dict."""
+
+    def __init__(self, board, page=None, boom=False, listing=None):
+        self.b, self.p, self.boom, self.l, self.asked = board, page, boom, listing, []
 
     def ufc(self):
         if self.boom == "espn":
             raise RuntimeError
         return self.b
 
+    def ufc_listing(self):
+        if self.l is None:
+            raise RuntimeError("no listing")
+        return self.l
+
     def ufc_page(self, slug):
+        self.asked.append(slug)
         if self.p is None or self.boom == "page":
             raise RuntimeError("blocked")
+        if isinstance(self.p, dict):
+            return self.p.get(slug, "<html>no such event</html>")
         assert slug == "ufc-309", slug
         return self.p
 
@@ -92,9 +102,7 @@ check("the run: the header above, then three boxes (main event, co-main event, P
       and [m for m in re.findall(r'<th class="tt" colspan="3">([^<]*)</th>', html)] == ["Main event", "Co-main event", "Prelims · top bout"], html[:300])
 check("each event is shown once", ufc.run(Src(ESPN, H309), NOW, got["state"])["blocks"] == [] and len(got["state"]["done"]) == 1)
 check("an event more than 40 hours old is not news", ufc.run(Src(ESPN, H309), NOW + timedelta(days=3), {})["blocks"] == [])
-fight_night = copy.deepcopy(ESPN)
-fight_night["events"][0]["name"] = "UFC Fight Night: A vs. B"
-check("a Fight Night is not covered (numbered events only)", ufc.run(Src(fight_night, H309), NOW, {})["blocks"] == [])
+check("a different sport's event (not UFC) is ignored", ufc.run(Src({"events": [{**ESPN["events"][0], "name": "PFL 10: A vs. B"}]}, H309), NOW, {})["blocks"] == [])
 pre = copy.deepcopy(ESPN)
 pre["events"][0]["status"]["type"]["state"] = "pre"
 check("a card that has not finished gives nothing", ufc.run(Src(pre, H309), NOW, {})["blocks"] == [])
@@ -107,6 +115,28 @@ fails = []
 ufc.run(Src(ESPN, None), NOW, {}, fails)
 check("a UFC.com page that cannot be read is counted", fails)
 check("a page laid out differently gives nothing rather than a wrong box", ufc.parse("<html><body>no fights here</body></html>") == {"main": [], "prelims": [], "early": []} and ufc.three(ufc.parse("<div>x</div>")) == [])
+
+
+# ---- Fight Nights (added by D the same day) and finding the address ------------------------------------------------------------
+HFN = (FX / "ufc_com_fn_20251122.html").read_text()
+fn_event = {"id": "600052000", "name": "UFC Fight Night: Tsarukyan vs. Hooker", "date": "2025-11-22T15:00Z", "venues": [{"address": {"city": "Doha"}}], "status": {"type": {"state": "post", "completed": True}}, "competitions": []}
+pfn = ufc.parse(HFN)
+check("a Fight Night page is read the same way: Main Card, Prelims and Early Prelims, the main event first", [len(pfn[k]) for k in ("main", "prelims", "early")] and len(pfn["main"]) >= 4 and len(ufc.three(pfn)) == 3, {k: len(v) for k, v in pfn.items()})
+src = Src({"events": [fn_event]}, {"ufc-fight-night-november-22-2025": HFN})
+got = ufc.run(src, datetime(2025, 11, 23, 2, 0, tzinfo=timezone.utc), {})
+check("a Fight Night is covered: its header is its name, the city and the date in Singapore time (15:00 UTC on the 22nd is 11pm there), then the three boxes",
+      got["blocks"] and got["blocks"][0].startswith('<p class="subhead">UFC Fight Night: Tsarukyan vs. Hooker \u00b7 Doha \u00b7 Sat 22 Nov</p>') and got["blocks"][0].count('<div class="ufc">') == 3, got["blocks"][:1])
+check("the Fight Night's address is the date it was held: ufc-fight-night-november-22-2025 is tried first", src.asked[0] == "ufc-fight-night-november-22-2025", src.asked)
+night = {"id": "1", "name": "UFC Fight Night: A vs. B", "date": "2026-11-08T01:00Z"}
+check("the addresses to try for a Fight Night: the day of the start, the day before, the day after (a late card is dated the day before where it was held)",
+      ufc.slugs(night) == ["ufc-fight-night-november-08-2026", "ufc-fight-night-november-07-2026", "ufc-fight-night-november-09-2026"], ufc.slugs(night))
+num = {"id": "2", "name": "UFC 331: A vs. B", "date": "2026-11-15T01:00Z"}
+check("a numbered event is ufc-331, but an address from the events list with a sponsor in front (cryptocom-ufc-331) is tried first", ufc.slugs(num) == ["ufc-331"] and ufc.slugs(num, ["ufc-332", "cryptocom-ufc-331", "ufc-fight-night-x"]) == ["cryptocom-ufc-331", "ufc-331"])
+src2 = Src({"events": [{**fn_event, "date": "2025-11-23T03:00Z"}]}, {"ufc-fight-night-november-22-2025": HFN})
+got2 = ufc.run(src2, datetime(2025, 11, 23, 12, 0, tzinfo=timezone.utc), {})
+check("an address that gives a page with no fights is skipped for the next one (a card at 03:00 UTC on the 23rd was held on the 22nd)", got2["blocks"] and src2.asked[:2] == ["ufc-fight-night-november-23-2025", "ufc-fight-night-november-22-2025"], src2.asked)
+src3 = Src({"events": [{**ESPN["events"][0], "name": "UFC 309: Jones vs. Miocic"}]}, {"cryptocom-ufc-309": H309}, listing=["cryptocom-ufc-309"])
+check("the events list is used to find a sponsored address", ufc.run(src3, NOW, {})["blocks"] and src3.asked[0] == "cryptocom-ufc-309", src3.asked)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

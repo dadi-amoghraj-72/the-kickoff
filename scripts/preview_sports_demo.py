@@ -132,6 +132,30 @@ for title, note, board, now_, pages in (("UFC · a card with one title fight", "
     got = ufc.run(UfcSrc(board, pages), now_, {})
     blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 Real data.</strong> {render.esc(note)}</p><h4>UFC</h4>{''.join(got['blocks'])}")
 
+# UFC Fight Night and the monthly rankings table
+fn_event = {"id": "600052000", "name": "UFC Fight Night: Tsarukyan vs. Hooker", "date": "2025-11-22T15:00Z", "venues": [{"address": {"city": "Doha"}}], "status": {"type": {"state": "post", "completed": True}}, "competitions": []}
+got = ufc.run(UfcSrc({"events": [fn_event]}, {"ufc-fight-night-november-22-2025": (FX / "ufc_com_fn_20251122.html").read_text()}), utc(2025, 11, 23, 2, 0), {})
+blocks.append(f"<p class='muted'><strong>Demo \u00b7 UFC Fight Night \u00b7 Real data.</strong> A Fight Night (Doha, 22 November 2025) from UFC.com's real page: the header is its name.</p><h4>UFC</h4>{''.join(got['blocks'])}")
+from kickoff import ufcrank  # noqa: E402
+from datetime import date as _date  # noqa: E402
+
+rank_page = (FX / "ufc_com_rankings.html").read_text()
+
+
+class RankSrc:
+    def ufc_rankings_page(self):
+        return rank_page
+
+
+first = ufcrank.run(RankSrc(), _date(2026, 11, 4), {})
+blocks.append(f"<p class='muted'><strong>Demo \u00b7 UFC rankings, the first time \u00b7 Real data.</strong> UFC.com's real rankings page of 3 November 2026: the top 10 of both pound-for-pound lists, and the champion plus #1 and #2 of each division. Shown once a month, on the first Wednesday.</p><h4>UFC</h4>{''.join(first['blocks'])}")
+snap = {k: list(v) for k, v in first["state"]["snapshot"].items()}
+snap["Men's Pound-for-Pound"][0], snap["Men's Pound-for-Pound"][1] = snap["Men's Pound-for-Pound"][1], snap["Men's Pound-for-Pound"][0]
+snap["Flyweight"] = ["Alexandre Pantoja", "Joshua Van", "Brandon Royval"]
+snap["Lightweight"] = [snap["Lightweight"][0], snap["Lightweight"][2], snap["Lightweight"][1]]
+later = ufcrank.run(RankSrc(), _date(2026, 12, 2), {"month": "2026-11", "snapshot": snap})
+blocks.append(f"<p class='muted'><strong>Demo \u00b7 UFC rankings, a month later \u00b7 Real page, made-up earlier order.</strong> The same table a month on, with the moves since it was last shown (the earlier order is made up here, to show the arrows: ▲ up, ▼ down, NEW for a name that was not in that list).</p><h4>UFC</h4>{''.join(later['blocks'])}")
+
 # badminton: the real 2025 All England Open, shown the way it would come day by day
 ae = rd("all_england_2025")
 parsed = bd.parse(ae)
