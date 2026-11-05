@@ -62,7 +62,12 @@ check("D's order: the men's pound-for-pound, the eight men's classes from Flywei
       heads == ["Men's Pound-for-Pound", "Flyweight", "Bantamweight", "Featherweight", "Lightweight", "Welterweight", "Middleweight", "Light Heavyweight", "Heavyweight", "Women's Pound-for-Pound",
                 "Women's Strawweight", "Women's Flyweight", "Women's Bantamweight"], heads)
 check("one break row, between the last men's class and the women's pound-for-pound", h.count('class="gap"') == 1 and h.index("Heavyweight") < h.index('class="gap"') < h.index("Women&#x27;s Pound-for-Pound"))
+p1_rows = re.findall(r'<tr class="p1">(.*?)</tr>', h, re.S)
+check("D: the first rank of each pound-for-pound list and the champion of each division are in bold gold (13 rows, the first row under each sub-heading)", len(p1_rows) == 13
+      and [text(x).strip().split(" ")[0] for x in p1_rows] == ["1", "C", "C", "C", "C", "C", "C", "C", "C", "1", "C", "C", "C"]
+      and "Islam Makhachev" in text(p1_rows[0]) and "Joshua Van" in text(p1_rows[1]) and "Valentina Shevchenko" in text(p1_rows[9]), [text(x).strip()[:24] for x in p1_rows])
 css = (ROOT / "kickoff" / "static" / "style.css").read_text()
+check("the gold rows have their own colour rule so the Move column is gold too", ".ufcrank tr.p1 td, .ufcrank tr.p1 td:nth-child(3) { color: var(--gold); font-weight: 700; }" in css)
 check("the first column has padding on the left (12px): the numbers are not flush against the edge, in the UFC table and in the golf tables", ".ufcrank th:first-child, .ufcrank td:first-child { padding-left: 12px; }" in css and ".pts.f1.golf th:first-child, .pts.f1.golf td:first-child { padding-left: 12px; }" in css)
 
 check("the block: a title with the update date, then one compact table with a sub-heading for each list", t.strip().startswith("UFC rankings \u00b7 updated Tuesday, Nov. 03") and h.count('class="sub"') == 13 and "Women's Pound-for-Pound" in t and "Light Heavyweight" in t, t[:200])

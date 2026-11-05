@@ -86,7 +86,7 @@ def table_html(lists, before):
         for i, n in enumerate(names):
             champion = name in DIVISIONS and i == 0
             rows.append(["C" if champion else str(i + 1 - (0 if name in P4P else 1)), n, move(n, old, i)])
-            classes.append("")
+            classes.append("p1" if i == 0 else "")          # D: the first rank of a pound-for-pound list and the champion of a division in bold gold
     html = r.table("UFC rankings", [("#", False), ("Fighter", False), ("Move", True)], rows, row_classes=classes)
     return r.compact(html, [12, 66, 22], " ufcrank")
 

@@ -442,3 +442,4 @@ tr.also td { color: var(--muted); font-style: italic; }
 .ufcrank th:first-child, .ufcrank td:first-child { padding-left: 12px; }   /* D: the numbers were flush against the left edge */
 .ufcrank tr.gap td { height: 18px; padding: 0; border: 0; background: var(--pitch); }
 .pts.f1.golf th:first-child, .pts.f1.golf td:first-child { padding-left: 12px; }
+.ufcrank tr.p1 td, .ufcrank tr.p1 td:nth-child(3) { color: var(--gold); font-weight: 700; }
