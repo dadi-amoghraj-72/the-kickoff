@@ -1,0 +1,922 @@
+{
+ "rankings": [
+  {
+   "name": "Men's Pound for Pound Rankings",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Kamaru Usman"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Israel Adesanya"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Francis Ngannou"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Alexander Volkanovski"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Jan Blachowicz"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Dustin Poirier"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Deiveson Figueiredo"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Stipe Miocic"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Charles Oliveira"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Women's Pound for Pound Rankings",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Amanda Nunes"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Valentina Shevchenko"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Cris Cyborg"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Rose Namajunas"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Zhang Weili"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Jessica Andrade"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Germaine de Randamie"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Holly Holm"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Katlyn Cerminara"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Heavyweight Division Champions (Up to 265 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Francis Ngannou"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Light Heavyweight Division Champions (Up to 205 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Jan Blachowicz"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Middleweight Division Champions (Up to 185 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Israel Adesanya"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Welterweight Division Champions (Up to 170 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Kamaru Usman"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Lightweight Division Champions (Up to 155 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Charles Oliveira"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Featherweight Division Champions (Up to 145 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Alexander Volkanovski"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Bantamweight Division Champions (Up to 135 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Aljamain Sterling"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Flyweight Division Champions (Up to 125 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Deiveson Figueiredo"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Women's Bantamweight Division Champions (Up to 135 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Amanda Nunes"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Women's Strawweight Division Champions (Up to 115 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Rose Namajunas"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Heavyweight Division Rankings (Up to 265 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Francis Ngannou"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Stipe Miocic"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Derrick Lewis"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Ciryl Gane"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Curtis Blaydes"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Alexander Volkov"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Jairzinho Rozenstruik"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Alistair Overeem"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Ryan Bader"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Light Heavyweight Division Rankings (Up to 205 pounds)",
+   "ranks": [
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Jan Blachowicz"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Glover Teixeira"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Ji\u0159\u00ed Proch\u00e1zka"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Aleksandar Rakic"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Vadim Nemkov"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Dominick Reyes"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Corey Anderson"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Ryan Bader"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Thiago Santos"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Middleweight Division Rankings (Up to 185 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Israel Adesanya"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Robert Whittaker"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Paulo Costa"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Jared Cannonier"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Marvin Vettori"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Derek Brunson"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Darren Till"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Jack Hermansson"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Gegard Mousasi"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Welterweight Division Rankings (Up to 170 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Kamaru Usman"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Colby Covington"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Douglas Lima"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Leon Edwards"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Gilbert Burns"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Stephen Thompson"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Michael Chiesa"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Vicente Luque"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Jorge Masvidal"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Rory MacDonald"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Lightweight Division Rankings (Up to 155 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Charles Oliveira"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Dustin Poirier"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Justin Gaethje"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Michael Chandler"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Beneil Dariush"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Dan Hooker"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Rafael Dos Anjos"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Islam Makhachev"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Paul Felder"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Gregor Gillespie"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Featherweight Division Rankings (Up to 145 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Alexander Volkanovski"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Max Holloway"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Patricio Pitbull"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Brian Ortega"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Calvin Kattar"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Yair Rodriguez"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Chan Sung Jung"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Josh Emmett"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Edson Barboza"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Bantamweight Division Rankings (Up to 135 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Aljamain Sterling"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Petr Yan"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Cory Sandhagen"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Cody Garbrandt"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Rob Font"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Jos\u00e9 Aldo"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Frankie Edgar"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Pedro Munhoz"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Marlon Moraes"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Raphael Assuncao"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Flyweight Division Rankings (Up to 125 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Deiveson Figueiredo"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Brandon Moreno"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Adriano Moraes"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Demetrious Johnson"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Askar Askarov"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Alex Perez"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Alexandre Pantoja"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Kai Kara-France"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Brandon Royval"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Rogerio Bontorin"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Women's Bantamweight Division Rankings (Up to 135 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Amanda Nunes"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Germaine de Randamie"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Julianna Pe\u00f1a"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Holly Holm"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Irene Aldana"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Yana Santos"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Ketlen Vieira"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Raquel Pennington"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Macy Chiasson"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Women's Strawweight Division Rankings (Up to 115 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Rose Namajunas"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Zhang Weili"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Carla Esparza"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Yan Xiaonan"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Marina Rodriguez"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Mackenzie Dern"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Claudia Gadelha"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Michelle Waterson-Gomez"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Tecia Pennington"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Women's Flyweight Division Champions (Up to 125 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Valentina Shevchenko"
+     }
+    }
+   ]
+  },
+  {
+   "name": "Women's Flyweight Division Rankings (Up to 125 pounds)",
+   "ranks": [
+    {
+     "current": 1,
+     "athlete": {
+      "displayName": "Valentina Shevchenko"
+     }
+    },
+    {
+     "current": 2,
+     "athlete": {
+      "displayName": "Jessica Andrade"
+     }
+    },
+    {
+     "current": 3,
+     "athlete": {
+      "displayName": "Katlyn Cerminara"
+     }
+    },
+    {
+     "current": 4,
+     "athlete": {
+      "displayName": "Jennifer Maia"
+     }
+    },
+    {
+     "current": 5,
+     "athlete": {
+      "displayName": "Joanne Wood"
+     }
+    },
+    {
+     "current": 6,
+     "athlete": {
+      "displayName": "Lauren Murphy"
+     }
+    },
+    {
+     "current": 7,
+     "athlete": {
+      "displayName": "Juliana Velasquez"
+     }
+    },
+    {
+     "current": 8,
+     "athlete": {
+      "displayName": "Ilima-Lei Macfarlane"
+     }
+    },
+    {
+     "current": 9,
+     "athlete": {
+      "displayName": "Cynthia Calvillo"
+     }
+    },
+    {
+     "current": 10,
+     "athlete": {
+      "displayName": "Liz Carmouche"
+     }
+    }
+   ]
+  }
+ ]
+}

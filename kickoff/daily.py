@@ -12,13 +12,14 @@ import copy
 import os
 from datetime import datetime, timezone
 
-from kickoff import awards, bigstuff, budget, ontoday, young_sports, youngguns, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
+from kickoff import around, awards, bigstuff, budget, ontoday, young_sports, youngguns, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
 from kickoff import state as state_files
 from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica, wikipedia
 from kickoff.sources import cricket as cricket_source
+from kickoff.sources import other_sports
 
 FOOTBALL_STATE = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs", "top30", "seasons"]
-STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb", "youngguns"]
+STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb", "youngguns", "around"]
 
 
 def load_state(directory=None):
@@ -107,6 +108,10 @@ def real_adapters(client=None, env=None):
         return {"sections": [{"id": "cricket", "title": "Cricket", "html": got["html"]}] if got["html"] else [], "state": {"cricket": new},
                 "stats": {**got["stats"], "calls_used_today": got["used"]}, "events": got.get("events", [])}
 
+    def around_go(now, day, st):
+        got = around.run(now, copy.deepcopy(st.get("around") or {}), other_sports.Source(), client)
+        return {**got, "events": []}
+
     return [
         ("football", "Football", football_go),
         ("cricket", "Cricket", cricket_go),
@@ -115,6 +120,7 @@ def real_adapters(client=None, env=None):
         _simple("nfl", "NFL", _with_extras(lambda now, day, s: nfl.run(now, day, s, espn_nfl.Source()), "nfl", "football", "NFL", client), "nfl"),
         _simple("nba", "NBA", _with_extras(lambda now, day, s: nba.run(now, day, s, espn_nba.Source()), "nba", "basketball", "NBA", client), "nba"),
         _simple("mlb", "MLB", _with_extras(lambda now, day, s: mlb.run(now, day, s, espn_mlb.Source()), "mlb", "baseball", "MLB", client), "mlb"),
+        ("around", "Other Sports", around_go),
     ]
 
 
