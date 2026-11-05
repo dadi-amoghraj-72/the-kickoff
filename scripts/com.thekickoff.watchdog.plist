@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- The backup for GitHub: every day at 7:40am (this Mac's clock: set to Singapore time) checks that the day's page is live; if not, builds the edition here and sends it to Telegram.
+     Does nothing when the page is live. The Mac must be awake: to wake it at 7:35 run once (needs your password):  sudo pmset repeat wakeorpoweron MTWRFSU 07:35:00
+     Switch on:   mkdir -p ~/Documents/the-kickoff/preview && cp ~/Documents/the-kickoff/scripts/com.thekickoff.watchdog.plist ~/Library/LaunchAgents/ && launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.thekickoff.watchdog.plist
+     Switch off:  launchctl bootout gui/$(id -u)/com.thekickoff.watchdog && rm ~/Library/LaunchAgents/com.thekickoff.watchdog.plist
+     Log: ~/Documents/the-kickoff/preview/watchdog.log -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.thekickoff.watchdog</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/dadiamoghraj/Documents/the-kickoff/.venv/bin/python</string>
+    <string>/Users/dadiamoghraj/Documents/the-kickoff/scripts/watchdog.py</string>
+  </array>
+  <key>WorkingDirectory</key><string>/Users/dadiamoghraj/Documents/the-kickoff</string>
+  <key>StartCalendarInterval</key>
+  <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>40</integer></dict>
+  <key>StandardOutPath</key><string>/Users/dadiamoghraj/Documents/the-kickoff/preview/watchdog.log</string>
+  <key>StandardErrorPath</key><string>/Users/dadiamoghraj/Documents/the-kickoff/preview/watchdog.log</string>
+</dict>
+</plist>

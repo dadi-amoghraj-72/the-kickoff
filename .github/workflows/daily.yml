@@ -60,10 +60,10 @@ jobs:
           git add data docs
           if git diff --cached --quiet; then echo "Nothing new to publish"; else git commit -m "Edition $(date -u +%F)" && git push; fi
       - name: Telegram ping
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.ping == 'true' }}
-        run: |
-          sleep 60   # GitHub Pages needs a minute to publish the new page before the link works
-          python scripts/send_ping.py
+        # always(): even if the publish step failed (GitHub rejecting pushes), the edition built on this runner is still sent. The ping waits up to 15 minutes for the page to be
+        # live; if it is not, it sends the digest as text and the whole page as an HTML file instead (kickoff/backup.py). It sends only today's edition, never an old one.
+        if: ${{ always() && (github.event_name == 'schedule' || github.event.inputs.ping == 'true') }}
+        run: python scripts/send_ping.py --wait 900 ${{ github.event.inputs.date }}
       - name: Alert D if the run failed
         if: failure()
         run: python scripts/alert.py
