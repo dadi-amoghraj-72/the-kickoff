@@ -13,11 +13,12 @@ from datetime import datetime, timedelta, timezone
 
 from kickoff import chess_live, majors, notes, settings
 from kickoff import render as r
+from kickoff.sources import other_sports
 from kickoff.sources.other_sports import RUGBY_LEAGUES
 
 RECENT = timedelta(hours=36)
 PER_SPORT = 3                 # lines per sport
-MAX_CANDIDATES = 14           # headlines sent to Claude in one call
+MAX_CANDIDATES = 20           # headlines sent to Claude in one call
 STORY_POOL = 40
 STORY_DAYS = 7
 
@@ -30,7 +31,7 @@ RULES = [
     ("hockey", "Field hockey", r"field hockey|\bhockey\b|\bfih\b", r"pro league|world cup|asia cup"),
     ("chess", "Chess", r"\bchess\b|\bfide\b|grandmaster", r"world (chess )?championship|candidates|olympiad|tata steel|norway chess|grand chess tour|sinquefield|women'?s world"),
     ("darts", "Darts", r"\bdarts?\b|\bpdc\b", r"world (darts )?championship|world matchplay|grand slam of darts|premier league|ally pally|alexandra palace"),
-    ("games", "Multi-sport games", r"games|olympic|olympics", r"olympic|asian games|sea games|southeast asian games|commonwealth games"),
+    ("games", "Multi-sport games", r"games|olympic|olympics", r"\b(asian|sea|southeast asian|commonwealth|olympic|paralympic|youth olympic) games\b|\bolympics\b"),
     ("womens-football", "Women's football", r"women'?s (world cup|euro)|\bwwc\b", r"women'?s (world cup|euro)|\bfinal\b"),
 ]
 ORDER = ["rugby", "golf", "ufc", "badminton", "athletics", "handball", "hockey", "chess", "darts", "games", "womens-football", "spotlight"]
@@ -45,7 +46,11 @@ NOT_SPOT = re.compile(r"\b(cricket|ipl|test match|odi|t20|football|premier leagu
 RESULT = re.compile(r"\b(wins?|won|beats?|beat|defeats?|champion|title|crowned|claims?|retains?|seals?|clinch|secures?|medal|gold|silver|bronze|reaches?|into the final|semi-?final|"
                     r"knockout|thrash|stun|triumph|victory|lifts?)\b", re.I)
 MAJORS = re.compile(r"masters tournament|pga championship|u\.?s\.? open|the open championship|chevron championship|women'?s pga|evian|women'?s open|ryder cup|solheim cup", re.I)
+# Without Claude (plain mode) a headline needs an outcome verb, not just a medal word: "Olympic gold stolen" and "Asian Games gold boosts a basketball season" are not results.
+STRICT = re.compile(r"\b(wins?|won|beats?|defeats?|champions?|crowned|claims? (?:the )?(?:title|gold|silver|bronze|crown)|retains?|clinch\w*|secures?|lifts?|reaches? (?:the )?(?:\w+ )?final|into the final|storms into|triumph|victory|thrash\w*|stuns?)\b", re.I)
+NEGATIVE = re.compile(r"\b(stolen|theft|robbery|burgled|arrested|funeral|obituary|tribute)\b", re.I)         # in the news, but not sport
 NEWS = re.compile(r"\b(withdraws?|withdrawn|ruled out|banned|ban\b|retires?|retirement|confirmed|confirms|doping|injur\w+|suspended)\b", re.I)
+EXCLUDE = {"games": re.compile(r"medall?ists?\b|\bstolen\b|\bformer\b|\blegend|\bdoping\b|\bwhereabouts\b", re.I)}      # a past medallist in the news is not the Games being played
 KINDS = ["result", "news", "none"]
 
 SYSTEM = """You sort and summarise sports news items for The Kickoff, a personal daily digest. Each item is only a headline and a short blurb from BBC Sport, The Guardian,
@@ -158,8 +163,10 @@ def ufc(source, now, fails=None):
 def sport_of(item):
     """(sport key, spotlight?) for a headline, or (None, False) when it is about no covered event."""
     text = f"{item['title']} {item['text']}"
+    if NEGATIVE.search(text):
+        return None, False
     for key, _, words, events in RULES:
-        if re.search(words, text, re.I) and re.search(events, text, re.I):
+        if re.search(words, text, re.I) and re.search(events, text, re.I) and not (key in EXCLUDE and EXCLUDE[key].search(text)):
             return key, bool(SPOT_PLACE.search(text) or SPOT_NAMES.search(text))
     if (SPOT_PLACE.search(text) or SPOT_NAMES.search(text)) and SPOT_STAGE.search(text) and not NOT_SPOT.search(text):
         for key, _, words, _e in RULES:
@@ -170,13 +177,23 @@ def sport_of(item):
     return None, False
 
 
+def english(title):
+    """True when the headline is (almost) all Latin letters: Google News also finds Korean, Vietnamese and other-language outlets, which the digest does not use."""
+    letters = [c for c in title if c.isalpha()]
+    return not letters or sum(1 for c in letters if c.isascii()) / len(letters) >= 0.9
+
+
 def candidates(items, now, seen=()):
     """Fresh headlines (36 hours, not shown before) about a covered event: [{**item, "sport", "spotlight"}], newest first."""
     seen = set(seen)
-    out = []
+    out, titles = [], set()
     for i in items:
-        if i["link"] in seen or not (timedelta(0) <= now - i["published"] <= RECENT):
+        if i["link"] in seen or not (timedelta(0) <= now - i["published"] <= RECENT) or not english(i["title"]):
             continue
+        key = re.sub(r"[^a-z0-9]", "", i["title"].lower())[:60]          # the same story from two outlets (or twice from one search) is one candidate
+        if key in titles:
+            continue
+        titles.add(key)
         key, spot = sport_of(i)
         if key and (RESULT.search(i["title"]) or NEWS.search(i["title"])):            # a preview or a feature is not a result; Claude then sorts the rest
             out.append({**i, "sport": key, "spotlight": spot})
@@ -224,7 +241,7 @@ def classify(client, cands):
 
 def plain_pick(cands):
     """Without Claude: the source's own headline for an item that reads like a result."""
-    return {c["link"]: {"kind": "result", "summary": None} for c in cands if RESULT.search(c["title"])}
+    return {c["link"]: {"kind": "result", "summary": None} for c in cands if STRICT.search(c["title"])}
 
 
 def line_html(text, link=None, source=None):

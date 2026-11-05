@@ -126,7 +126,23 @@ preview = item("World Darts Championship preview: who can stop Littler?", hours=
 seen_l = item("Humphries beats Littler in World Matchplay", hours=2, link="https://x/seen")
 cands = around.candidates([fresh, stale, preview, seen_l], NOW, seen=["https://x/seen"])
 check("candidates: fresh, not seen, and reading like a result or news; a preview, an old story and a seen link are out", [c["link"] for c in cands] == [fresh["link"]], [c["title"] for c in cands])
-check("candidates: a ban or a withdrawal counts as news", len(around.candidates([item("Olympic medallist banned for doping violation", hours=2)], NOW)) == 1)
+check("candidates: a withdrawal counts as news", len(around.candidates([item("Carlsen withdraws from Norway Chess after illness", "chess", hours=2)], NOW)) == 1)
+check("a theft is not sport: 'Olympic gold stolen from a former hockey captain' is dropped everywhere", around.sport_of(item("Olympic gold, Asian Games silver stolen from former India hockey captain", "hockey")) == (None, False))
+check("plain mode wants an outcome verb: 'Asian Games gold boosts a basketball season' is not a result, 'India storms into the final' is",
+      around.plain_pick([{"link": "a", "title": "Asian Games Gold, Foreign Players Boost KBL Season"}]) == {} and list(around.plain_pick([{"link": "b", "title": "ACT Hockey: Dominant India storms into the final"}])) == ["b"])
+
+# ---- Google News and the same story twice -----------------------------------------------------------
+gn = (b'<?xml version="1.0"?><rss><channel><item><title>Satwik and Chirag reach All England final - Hindustan Times</title><link>https://news.google.com/rss/articles/abc</link>'
+      b'<pubDate>Wed, 04 Nov 2026 22:00:00 GMT</pubDate><description>&lt;ol&gt;related&lt;/ol&gt;</description><source url="https://www.hindustantimes.com">Hindustan Times</source></item></channel></rss>')
+pg = feeds.parse_gnews(gn, "Google News")
+check("Google News: the publisher becomes the source and leaves the title; the related-headlines clutter is dropped", len(pg) == 1 and pg[0]["source"] == "Hindustan Times" and pg[0]["title"] == "Satwik and Chirag reach All England final" and pg[0]["text"] == "" and pg[0]["link"].startswith("https://news.google.com/"), pg)
+check("the feed list now includes Yahoo Sports, The Hindu, The Straits Times, Times of India and Google News searches", {"Yahoo Sports", "The Hindu", "The Straits Times", "Times of India", "Google News"} <= {f[0] for f in around.other_sports.FEEDS} and any(f[1] == "gnews" for f in around.other_sports.FEEDS))
+twice = [item("Littler wins World Darts Championship final", hours=5, link="https://x/a"), item("Littler wins World Darts Championship final!", hours=4, link="https://x/b", source="Google News")]
+check("candidates: the same headline from two outlets is one candidate", len(around.candidates(twice, NOW)) == 1)
+
+check("headlines in other languages (Korean, Vietnamese ...) are not candidates", around.english("Asian Games gold, foreign players boost KBL season") and not around.english("아시안게임 금메달 외국인 선수") and not around.english("Vi\u1ec7t Nam gi\u00e0nh huy ch\u01b0\u01a1ng v\u00e0ng"))
+check("multi-sport games: a past medallist in the news (a ban, a theft, a golf title) is not the Games; the Games themselves are",
+      sp("Olympic medallist Barbosu banned for doping violation")[0] is None and sp("Commonwealth Games medallist Hawkes claims Irish Open title")[0] is None and sp("India top the medal table at the Asian Games, win gold in squash")[0] == "games")
 
 # ---- Claude's check -------------------------------------------------------------------------------------
 real_call = around.notes.call_json

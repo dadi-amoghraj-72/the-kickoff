@@ -12,6 +12,7 @@ RUGBY_LEAGUES = {"268565": "British & Irish Lions Tour", "164205": "Rugby World 
                  "289234": "International Test Match", "289237": "Women's Rugby World Cup"}
 BBC = "https://feeds.bbci.co.uk/sport/{}/rss.xml"
 GUARDIAN = "https://www.theguardian.com/{}/rss"
+GNEWS = "https://news.google.com/rss/search?q={q}&hl=en-SG&gl=SG&ceid=SG:en"
 FEEDS = [
     ("BBC Sport", "rss", BBC.format("rugby-union")), ("The Guardian", "rss", GUARDIAN.format("sport/rugby-union")),
     ("BBC Sport", "rss", BBC.format("golf")), ("The Guardian", "rss", GUARDIAN.format("sport/golf")),
@@ -23,7 +24,14 @@ FEEDS = [
     ("BBC Sport", "rss", BBC.format("football/womens")), ("The Guardian", "rss", GUARDIAN.format("football/womensfootball")),
     ("The Guardian", "rss", GUARDIAN.format("sport/ufc")),
     ("BBC Sport", "rss", "https://feeds.bbci.co.uk/sport/rss.xml"), ("The Guardian", "rss", GUARDIAN.format("sport")),
-]
+    # Added 2026-11-05 (D asked for livelier sources than Wikipedia): Yahoo Sports, the Indian and Singapore papers' sport pages (the spotlight rule), and Google News searches per sport,
+    # which pick up fresh headlines from many outlets within the hour.
+    ("Yahoo Sports", "rss", "https://sports.yahoo.com/rss/"), ("Yahoo Sports", "rss", "https://sports.yahoo.com/golf/rss/"),
+    ("The Hindu", "rss", "https://www.thehindu.com/sport/feeder/default.rss"), ("The Straits Times", "rss", "https://www.straitstimes.com/news/sport/rss.xml"),
+    ("Times of India", "rss", "https://timesofindia.indiatimes.com/rssfeeds/4719148.cms"),
+] + [("Google News", "gnews", GNEWS.format(q=q)) for q in (
+    "badminton+BWF", "%22field+hockey%22+FIH", "handball+EHF", "PDC+darts", "chess+FIDE", "%22Diamond+League%22+OR+%22World+Athletics%22", "%22Asian+Games%22+OR+%22SEA+Games%22+OR+%22Commonwealth+Games%22",
+    "%22Women%27s+Euro%22+OR+%22Women%27s+World+Cup%22+football", "%22Ryder+Cup%22+OR+%22Solheim+Cup%22")]
 
 
 class Source:

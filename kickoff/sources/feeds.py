@@ -45,6 +45,21 @@ def parse_rss(body, source):
     return [i for i in items if i["title"] and i["link"] and i["published"]]
 
 
+def parse_gnews(body, source):
+    """Google News's search feed: the title ends ' - Publisher', and the item names the publisher in <source>. The publisher becomes the item's source and leaves the title; the link is
+    Google's redirect to the publisher's article. The description is a list of related headlines, so it is dropped (only the headline is used)."""
+    root = ET.fromstring(body)
+    items = []
+    for it in root.iter("item"):
+        get = lambda tag: (it.findtext(tag) or "").strip()  # noqa: E731
+        publisher = get("source")
+        title = clean(get("title"))
+        if publisher and title.endswith(f" - {publisher}"):
+            title = title[:-len(publisher) - 3].strip()
+        items.append({"source": publisher or source, "title": title, "text": "", "link": get("link"), "published": _when(get("pubDate"))})
+    return [i for i in items if i["title"] and i["link"] and i["published"]]
+
+
 def parse_espn(body, source):
     items = []
     for a in json.loads(body).get("articles", []):
@@ -54,7 +69,7 @@ def parse_espn(body, source):
     return [i for i in items if i["title"] and i["link"] and i["published"]]
 
 
-PARSERS = {"rss": parse_rss, "espn": parse_espn}
+PARSERS = {"rss": parse_rss, "espn": parse_espn, "gnews": parse_gnews}
 
 
 def fetch_all(feeds=FEEDS):
