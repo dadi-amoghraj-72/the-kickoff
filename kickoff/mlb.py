@@ -255,11 +255,11 @@ def game_rows(g, notes, many_days):
 
 
 def games_html(items, many_days, dogs):
-    """items: [(game, notes)] already in order. One table titled Last Night's Games; the underdog count sits under the title."""
+    """items: [(game, notes)] already in order. One table titled Yesterday's Games; the underdog count sits under the title."""
     rows = [x for g, notes in items for x in game_rows(g, notes, many_days)]
     sub = f'<span class="prog">{DOG} {dogs} underdog win{"s" if dogs != 1 else ""}</span>' if dogs else ""
     return (f'<div class="nflsb nbaone"><table><colgroup><col style="width:35%"><col style="width:30%"><col style="width:35%"></colgroup>'
-            f'<thead><tr><th class="tt" colspan="3">Last Night\'s Games{sub}</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
+            f'<thead><tr><th class="tt" colspan="3">Yesterday\'s Games{sub}</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
 
 
 def titled(caption, sub, columns, body, widths, zones=None, extra=""):

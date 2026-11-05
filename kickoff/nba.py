@@ -1,4 +1,4 @@
-"""NBA: "Last Night's Games" (every game finished since the last edition, one compact line each, the tracked players' lines and the best
+"""NBA: "Yesterday's Games" (every game finished since the last edition, one compact line each, the tracked players' lines and the best
 performer of the game under it), ranked standouts, the conference standings with movement arrows every day, NBA Cup tags and group tables,
 and, in the playoffs, one table per series. All by code from exact data, so no Claude cost.
 
@@ -412,12 +412,11 @@ def summary_html(games):
 
 
 def games_html(items, many_days):
-    """items: [(game, notes)] already in order. A summary box, then one table titled Last Night's Games (with the US date of the games in brackets: the games
-    are played on that date in America, whatever the date is in Singapore)."""
+    """items: [(game, notes)] already in order. A summary box, then one table titled Yesterday's Games (no date: the games span two dates, US and Singapore)."""
     rows = [x for g, notes in items for x in game_rows(g, notes, many_days)]
     games = [g for g, _ in items]
     return (summary_html(games) + f'<div class="nflsb nbaone"><table><colgroup><col style="width:35%"><col style="width:30%"><col style="width:35%"></colgroup>'
-            f'<thead><tr><th class="tt" colspan="3">Last Night\'s Games ({us_dates(games)}, US time)</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
+            f'<thead><tr><th class="tt" colspan="3">Yesterday\'s Games</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>')
 
 
 def _list(items):

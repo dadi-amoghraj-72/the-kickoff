@@ -227,9 +227,9 @@ html, t = out["html"], text(out["html"])
 S = out["stats"]
 games_part = html.split("<h4>")[0]
 check("run: 11 new games, 11 box scores, nothing failed", S["new"] == 11 and S["boxes"] == 11 and S["failed"] == 0, S)
-check("one table titled Last Night's Games with the US dates of the games in brackets (31 Oct–1 Nov, US time): no Star Games / Other Games tables, no '8 of 11' counts, no 'won by' sentences, no career lines", "Last Night's Games (31 Oct–1 Nov, US time)" in t and not any(x in t for x in ("Star Games", "Other Games", "of 11 games", "won by", "held on", "ran away", "Career")), t[:200])
+check("one table titled Yesterday's Games with no date: no Star Games / Other Games tables, no '8 of 11' counts, no 'won by' sentences, no career lines", "Yesterday's Games" in t and not any(x in t for x in ("Star Games", "Other Games", "of 11 games", "won by", "held on", "ran away", "Career")), t[:200])
 raw_known = sum(1 for b in BOXES.values() if b["odds"]["away_dog"] or b["odds"]["home_dog"])
-check("the underdog count is in the summary box above the table (Underdogs won 2/N, N the games with a clear underdog by the raw odds flags), not as an asterisk line under the title", re.search(rf"Underdogs won\s+2/{raw_known}\s+Best game", t) and "* 2 underdog wins" not in t and t.index("Underdogs won") < t.index("Last Night's Games"), (raw_known, t[:160]))
+check("the underdog count is in the summary box above the table (Underdogs won 2/N, N the games with a clear underdog by the raw odds flags), not as an asterisk line under the title", re.search(rf"Underdogs won\s+2/{raw_known}\s+Best game", t) and "* 2 underdog wins" not in t and t.index("Underdogs won") < t.index("Yesterday's Games"), (raw_known, t[:160]))
 raw_dogs = sum(1 for gid, b in BOXES.items() if (("away" if b["odds"]["away_dog"] else "home" if b["odds"]["home_dog"] else None) == nba.winner(BYID[gid])))
 check("independent: underdog wins counted straight from the odds flags are 2, with one asterisk per winner and none in the title", raw_dogs == 2 and html.count('class="dog"') == 2, raw_dogs)
 css = (ROOT / "kickoff" / "static" / "style.css").read_text()
@@ -247,7 +247,7 @@ check("state: the 11 games are reported, underdogs saved, tracked players' teams
 
 check("in the page the standouts list carries the highlights, and the colour rule exists", out["html"].count('<span class="hl">') >= 5 and ".standouts .hl { color: var(--gold)" in (ROOT / "kickoff" / "static" / "style.css").read_text())
 
-# ---- The Last Night's Games heading and box (D, 2026-11-04) ----
+# ---- The Yesterday's Games heading and box (D, 2026-11-04) ----
 from datetime import datetime as _dt, timezone as _tz  # noqa: E402
 mkg = lambda iso, a, h, ot=False, dog=None: {"id": iso, "date": _dt.fromisoformat(iso).replace(tzinfo=_tz.utc), "status": "final", "ot": ot, "dog": dog, "away": {"abbr": "AAA", "score": a}, "home": {"abbr": "HHH", "score": h}}  # noqa: E731
 check("the US date in the heading: one date, a range in one month, a range across two months (Eastern dates: a 02:00 UTC game belongs to the evening before)",
@@ -295,7 +295,7 @@ check("parse_game marks type 1 as 'preseason', type 2 as 'regular', type 3 as 'p
 
 # ---- Rhythm and state ----
 again = nba.run(NOW, MON, copy.deepcopy(out["state"]), Saved())
-check("a second run with the saved state shows no games again; the standings still come (every day there is basketball)", again["stats"]["new"] == 0 and "Last Night's Games" not in again["html"] and "Eastern Conference" in again["html"])
+check("a second run with the saved state shows no games again; the standings still come (every day there is basketball)", again["stats"]["new"] == 0 and "Yesterday's Games" not in again["html"] and "Eastern Conference" in again["html"])
 check("the standings come on a Monday too, not only Tuesday", "Eastern Conference" in nba.run(NOW, MON, {}, Saved())["html"])
 check("a day with no basketball at all shows nothing, not even standings", nba.run(NOW, MON, {}, Saved(sbs={}, window={}))["html"] == "")
 check("games older than 60 hours that were never reported are ignored (a first run does not dump a month)", nba.run(NOW + timedelta(days=10), MON, {}, Saved())["stats"]["new"] == 0)
@@ -432,7 +432,7 @@ check("the series score numbers sit beside the word 'series' in one row (not out
 check("once the playoffs are on, the regular-season standings are not shown, and not fetched for the table itself", "Standings" not in mid["html"] and "Eastern Conference" not in mid["html"])
 nos = series_run(3, date(2026, 4, 26), fail_std=True)[0]
 check("seed feed down: the series table still shows, without seeds, and the failure is counted", "East 1st Round" in nos["html"] and "(1)" not in text(nos["html"]) and "Detroit Pistons Orlando Magic" in text(nos["html"]) and nos["stats"]["failed"] == 1)
-check("a playoff game is in its series table and not repeated in a Last Night's Games table", "Last Night's Games" not in mt and mid["stats"]["series"] == 1)
+check("a playoff game is in its series table and not repeated in a Yesterday's Games table", "Yesterday's Games" not in mt and mid["stats"]["series"] == 1)
 check("notes for all three finished games are kept in the state; the box scores fetched were the new game's plus the two earlier ones: 3 in all", len(mid["state"]["series_notes"]) == 3 and msrc.box_calls == 3, (len(mid["state"]["series_notes"]), msrc.box_calls))
 full, fsrc, _ = series_run(7, date(2026, 5, 4))
 ft = text(full["html"])
@@ -513,7 +513,7 @@ check("one failed box score: that game is left out and not marked reported; the 
 none = nba.run(NOW, TUE, {}, Saved(fail_sb=True, fail_std=True))
 check("scoreboard and standings down: nothing shown, no crash; three scoreboard failures and one stopped Cup scan counted (not sixty)", none["html"] == "" and none["stats"]["failed"] == 4, none["stats"])
 nostd = nba.run(NOW, MON, {}, Saved(fail_std=True))
-check("standings down: the games still show without the standings table", "Last Night's Games" in nostd["html"] and "Standings" not in nostd["html"] and nostd["stats"]["failed"] == 1)
+check("standings down: the games still show without the standings table", "Yesterday's Games" in nostd["html"] and "Standings" not in nostd["html"] and nostd["stats"]["failed"] == 1)
 
 # ---- Source ----
 CALLS = []

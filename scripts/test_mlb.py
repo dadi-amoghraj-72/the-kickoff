@@ -257,7 +257,7 @@ class NoBox(Saved):
 nb = run(NOW_D, {}, NoBox(NOW_D))
 check("box scores down: no games are shown or marked reported (tried again next run), the race tables still come", nb["stats"]["failed"] >= 25 and "Last Night" not in nb["html"] and "<table" in nb["html"] and nb["state"]["reported"] == [] and "Playoff Race" in nb["html"], nb["stats"])
 ns = run(NOW_D, {}, NoStd(NOW_D))
-check("standings down: the games come without the race tables", "Last Night" in ns["html"] and "Playoff Race" not in ns["html"] and ns["stats"]["failed"] == 1)
+check("standings down: the games come without the race tables", "Yesterday" in ns["html"] and "Playoff Race" not in ns["html"] and ns["stats"]["failed"] == 1)
 
 
 class NoSched(Saved):
