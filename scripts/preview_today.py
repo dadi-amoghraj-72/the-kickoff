@@ -3,6 +3,7 @@
   .venv/bin/python scripts/preview_today.py --claude            builds docs/demo/today-real.html and opens it (a few cents; needs the key in .env, so D runs it)
   .venv/bin/python scripts/preview_today.py                     the same without Claude (free)
   add --publish to put it at https://dadi-amoghraj-72.github.io/the-kickoff/demo/today-real.html, --no-open to skip opening it
+  add --ping to send the Telegram message for this rehearsal (the headlines and the demo page's link; needs the Telegram key in .env, so D runs it)
   --state-from <commit>   the saved state to start from (default 1974d1f: the state before the first test morning, so games already reported on 5 Nov show again)
   --date 2026-11-05       the Singapore edition date (default: today)
 
@@ -20,6 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from kickoff import daily, render  # noqa: E402
 from kickoff.envfile import load_env  # noqa: E402
+from kickoff.telegram import build_message, send_message  # noqa: E402
 
 arg = lambda name, default: sys.argv[sys.argv.index(name) + 1] if name in sys.argv else default  # noqa: E731
 commit = arg("--state-from", "1974d1f")
@@ -60,3 +62,14 @@ if "--publish" in sys.argv:
     else:
         pushed = git("push", "origin", "main")
         print("Published: https://dadi-amoghraj-72.github.io/the-kickoff/demo/today-real.html" if pushed.returncode == 0 else "Committed, but the push failed: " + pushed.stderr.strip()[:300])
+if "--ping" in sys.argv:
+    lines = build_message(ed).splitlines()
+    lines[-1] = "https://dadi-amoghraj-72.github.io/the-kickoff/demo/today-real.html"          # the rehearsal page, not the real edition's address
+    lines[0] += " (rehearsal)"
+    message = "\n".join(lines)
+    print("Telegram message:\n" + message)
+    try:
+        send_message(message)
+        print("Sent.")
+    except RuntimeError as e:
+        print(f"Not sent: {e}")
