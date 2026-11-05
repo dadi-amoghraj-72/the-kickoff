@@ -154,7 +154,7 @@ Rules that came out of building the F1, tennis, NFL and NBA sections with D, wri
 
 - **MLB (checkpoint 10, built 2026-11-03):** see the MLB section. It follows rules 11 and 14 for the Dodgers, rule 16 for the postseason, three-letter codes with a fix map, the underdog asterisk from ESPN's line, and surnames for the two pitchers in the weekly tables. One decision still open for D: tables for Ohtani and Yamamoto use surnames only, not initial + surname (rule 2), because "Y. Yamamoto" would wrap on a phone.
 - **Young Guns (checkpoint 11):** the tracked-player machinery (auto-join, drop-off, hits in the state) lives in `kickoff/nba.py` today; move it into a shared module before reusing it for the watchlist, and keep one standout definition per sport.
-- **Around the sporting world (checkpoint 12):** news-fed, so the same table, tag and marker rules apply but no stat tables; keep the spotlight rule.
+- **Around the sporting world (checkpoint 12):** news-fed, so the same table, tag and marker rules apply but no stat tables; the only spotlight left is badminton (Singapore, India, then the other listed countries first) and the chess stars; the feed spotlight was removed.
 - **Cross-sport ordering (checkpoint 13):** the order lists (NBA's five teams first) are the model for D's priorities in every sport; keep them as short, tested lists.
 
 **Decisions (2026-11-03) and what was done**
@@ -389,7 +389,7 @@ The general section covers major events only and is built from news feeds, since
 | --- | --- |
 | Rugby | Men's and women's internationals and World Cups |
 | Golf | The four men's majors, the five women's majors, the Ryder Cup and the Solheim Cup |
-| UFC | Numbered events only, main and co-main events only, ranked fighters only |
+| UFC | Every UFC event (numbered or Fight Night): main event, co-main event and the Prelims' top bout, unranked fighters included; a title fight is also in the Big Stuff |
 | Badminton | BWF Super 1000s, World Championships and World Tour Finals |
 | Athletics | Diamond League and World Championships |
 | Handball | World Championships, Euros and the EHF Champions League Final Four, men's and women's |
@@ -571,7 +571,7 @@ Built in `kickoff/around.py` and `kickoff/sources/other_sports.py`; tests `scrip
 | --- | --- | --- |
 | Rugby | ESPN rugby scoreboards by league id (Lions Tour 268565, World Cup 164205, Six Nations 180659, Rugby Championship 244293, Nations Championship 17567, International Test Match 289234, Women's World Cup 289237); BBC and Guardian rugby union feeds | Answers, fresh. Women's Six Nations and the autumn Tests outside the listed ids are not on ESPN's list |
 | Golf | ESPN PGA and LPGA scoreboards (majors only, by name); BBC and Guardian golf feeds | Answers. Ryder and Solheim Cups come from the feeds by name; the five women's majors are matched by name on the LPGA board |
-| UFC | ESPN UFC scoreboard and rankings (numbered events, main and co-main, a ranked fighter in the fight) | Answers; the finished-card shape (winner, method) was not yet seen on a real finished card, only built to ESPN's fields |
+| UFC | ESPN UFC scoreboard and rankings (every event; UFC.com's event page gives the fight details) | Answers; the finished-card shape (winner, method) was not yet seen on a real finished card, only built to ESPN's fields |
 | Badminton | BBC and Guardian badminton feeds (83 and 203 days old), the general BBC and Guardian sport feeds, BWF's feed (empty) | **Thin:** only what the general feeds carry. A real source (BWF results pages, Wikipedia season pages) is still to find |
 | Athletics | BBC (10 hours old) and Guardian athletics feeds | Answers, fresh |
 | Handball | EHF's news page is HTML (no feed); Guardian has no handball feed | **Gap:** only what the general feeds carry |
@@ -624,3 +624,15 @@ Built in `kickoff/badminton.py` (tests `scripts/test_badminton.py`, 32 checks on
 - **UFC rankings table, edits (2026-11-05):** the order is **all the men's first: the men's pound-for-pound, then the eight weight classes from Flyweight to Heavyweight; a break (a blank row); then the women's pound-for-pound and the women's Strawweight, Flyweight and Bantamweight.** The numbers in the first column had no room on the left (the compact table style gives every cell 3px): the first column now has 12px of padding, in the UFC table and in the golf tables.
 - **Standing table rule (D has had to repeat it):** **the first column of every table keeps clear space on the left, at least 8px, 12px in the compact (fixed-width) style, so no number or position sits flush against the edge.** Check it on every new table at 360px before reporting; also in the memory note feedback-phone-is-the-reference.
 - **UFC rankings, gold rows (2026-11-05, D):** the first rank of each pound-for-pound list and the champion of each weight class are in bold gold (13 rows), under their gold sub-headings.
+
+
+## Round 20 (2026-11-05): the consistency audit applied (D's answers to AUDIT.md)
+- **Winner first** in the Big Stuff and the Telegram headlines for every sport (`events.winner_first`); the tables keep each sport's own order (home/away).
+- **One en dash** in every displayed score (`render.dash`); records such as 5-2 stay with a hyphen.
+- **Young Guns** use full names. **Seeds and ranks** are in square brackets everywhere: tennis "C. Alcaraz [1]", UFC "[3]" (champion "[C]"). Tennis "Top Seed Out" notes read winner first ("A def. B score (R16)").
+- **Table titles** are Title Case; the badminton and tennis rounds read R64, R32, R16, QF, SF and Final; golf "After Round 2"; UFC "Main Event", "Co-Main Event", "Prelims · Top Bout"; badminton "Men's Singles · R32".
+- **Start notices** (golf, badminton): "Thu 9 Apr", the date in Singapore time, no label. The NBA header keeps its "US time" label because it names the US game day.
+- **Windows:** UFC, rugby and chess results stay news for three days (each is shown once, so a skipped day is caught up).
+- **Every Claude call counts towards the $10:** `daily.record_extra_costs` adds the previews, Young Guns and the Around sorting to the month's `costs`.
+- **Big Stuff adds:** a UFC title-fight result; all five finals of a badminton Super 1000, the India Open and the Singapore Open, and any final with an Indian or Southeast Asian player at the other events.
+- **Games to Watch and On Today add:** UFC cards (main-event time, SGT) and the badminton finals day (the day only, "All day"). The golf start is now the day only as well. Found on the way: the real `fixtures.Sources` had no `golf` method, so a golf start never reached Games to Watch in a real run (only in the tests); fixed.

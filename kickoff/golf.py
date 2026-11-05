@@ -177,7 +177,8 @@ def start_notes(board, now, seen):
             continue
         start = datetime.fromisoformat(c["startDate"].replace("Z", "+00:00"))
         if timedelta(0) < start - now <= START_WINDOW:
-            out.append((c["id"], f"{c['label']} starts on {start:%A} {start.day} {start:%B} (US time)"))
+            sgt = start.astimezone(timezone(timedelta(hours=8)))                # Singapore date, no label
+            out.append((c["id"], f"{c['label']} starts on {sgt:%a} {sgt.day} {sgt:%b}"))
     return out
 
 
@@ -223,7 +224,7 @@ def run(boards, now, state):
                         rows = standing(ps, n)[:size]
                         extras = extras_for(ps, rows, n) if tour == "pga" else []
                         under_way = any(0 < p["rounds"].get(n + 1, {}).get("holes", 0) < 18 for p in ps)
-                        title = f"{name} · After round {n}" + (" (next round under way)" if under_way else "")
+                        title = f"{name} · After Round {n}" + (" (next round under way)" if under_way else "")
                         blocks.append(table(title, rows, extras, False))
                         mine["round"] = n
                     elif n > mine["round"]:

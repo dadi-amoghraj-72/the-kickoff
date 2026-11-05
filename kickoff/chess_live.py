@@ -1,7 +1,7 @@
 """Chess results from Lichess's free broadcast API (official, no key): the elite events (Lichess tier 5: the Candidates, Tata Steel, Norway Chess, the World Championship match ...) and
 the Indian stars in the tier 4 and 5 events (checkpoint 12, second pass, 2026-11-05).
 
-  - a round that finished in the last 36 hours in a tier 5 event: the decisive games (the three with the highest average rating) and how many were drawn;
+  - a round that finished in the last three days in a tier 5 event: the decisive games (the three with the highest average rating) and how many were drawn;
   - the last round of a round-robin of twelve players or fewer: the winner and score, summed from every round's games;
   - a win by a listed Indian player in a tier 4 or 5 event (the spotlight rule), at most two lines.
 Only the games' own tags are used (White, Black, Result, ratings), so every line is exact. Without Lichess nothing is shown. Built on the real API's shapes; no tier 5 event was running when it was built,
@@ -9,7 +9,7 @@ so the tier 5 paths are tested on made-up games with the real layout."""
 import re
 from datetime import timedelta, timezone, datetime
 
-RECENT = timedelta(hours=36)
+RECENT = timedelta(days=3)
 ELITE_TIER = 5
 STAR_TIER = 4
 MAX_ROUND_ROBIN = 12

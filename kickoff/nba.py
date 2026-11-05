@@ -407,7 +407,7 @@ def summary_html(games):
         items.append(("Underdogs won", f"{sum(1 for g in known if underdog_win(g))}/{len(known)}", "", ""))
     best = best_game(games)
     if best:
-        items.append(("Best game", "", f"{best['away']['abbr']} {best['away']['score']}-{best['home']['score']} {best['home']['abbr']}", ""))
+        items.append(("Best game", "", f"{best['away']['abbr']} {best['away']['score']}\u2013{best['home']['score']} {best['home']['abbr']}", ""))
     return r.summary_box(items)
 
 
@@ -541,7 +541,7 @@ def closing_html(season, sched):
         return ""
     champ = max(wins, key=wins.get)
     other = next(i for i in names if i != champ)
-    text = f"That's the {season - 1}-{str(season)[2:]} NBA season. The {names[champ]} are NBA champions, beating the {names[other]} {wins[champ]}-{wins.get(other, 0)}."
+    text = f"That's the {season - 1}-{str(season)[2:]} NBA season. The {names[champ]} are NBA champions, beating the {names[other]} {wins[champ]}\u2013{wins.get(other, 0)}."
     return f"<p>{r.esc(text)}</p>"
 
 

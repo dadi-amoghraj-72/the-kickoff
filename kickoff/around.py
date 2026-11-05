@@ -18,7 +18,8 @@ from kickoff import render as r
 from kickoff.sources import other_sports
 from kickoff.sources.other_sports import RUGBY_LEAGUES
 
-RECENT = timedelta(hours=36)
+RECENT = timedelta(hours=36)                                 # feed items
+RESULTS_RECENT = timedelta(days=3)                              # rugby results: a skipped day is caught up (each is shown once)
 PER_SPORT = 3                 # lines per sport
 MAX_CANDIDATES = 20           # headlines sent to Claude in one call
 STORY_POOL = 40
@@ -101,7 +102,7 @@ def rugby(source, now, fails=None):
         for e in events:
             try:
                 c = e["competitions"][0]
-                if e["status"]["type"].get("name") != "STATUS_FINAL" or not (timedelta(0) <= now - _utc(e["date"]) <= RECENT + timedelta(hours=3)):
+                if e["status"]["type"].get("name") != "STATUS_FINAL" or not (timedelta(0) <= now - _utc(e["date"]) <= RESULTS_RECENT):
                     continue
                 side = {x["homeAway"]: x for x in c["competitors"]}
                 out.append((f"{side['home']['team']['displayName']} {int(side['home']['score'])}–{int(side['away']['score'])} {side['away']['team']['displayName']} ({name})", f"rugby:{e['id']}"))
@@ -267,11 +268,12 @@ def run(now, st, source, client=None):
             seen.append(uid)
     blocks["golf"] += g["blocks"]
     ufc_state = st.get("ufc") or {}
-    ufc_fails = []
+    ufc_fails, ufc_stories, badminton_stories = [], [], []
     try:
         u = ufc_mod.run(source, now, ufc_state, ufc_fails)
         blocks["ufc"] = u["blocks"]
         ufc_state = u["state"]
+        ufc_stories = u.get("stories", [])
     except Exception:
         stats["failed"] += 1
     stats["failed"] += min(len(ufc_fails), 1)
@@ -288,11 +290,13 @@ def run(now, st, source, client=None):
         b = badminton.run(source, (now + timedelta(hours=8)).date(), badminton_state, wiki_fails)
         blocks["badminton"] += [h for _, h in b["blocks"]]
         badminton_state = b["state"]
+        badminton_stories = b.get("stories", [])
     except Exception:
         stats["failed"] += 1
     try:
         from kickoff import events as ev
         story_events = [ev.story("golf", "Golf", t, importance.story_score("golf", "final"), False, "final") for t in g["winners"]]
+        story_events += [ev.story(sp_, name_, t, importance.story_score(sp_, "final"), False, "final") for sp_, name_, texts in (("ufc", "UFC", ufc_stories), ("badminton", "Badminton", badminton_stories)) for t in texts]
     except Exception:
         story_events = []
     for fn in (lambda: [(sp, t, uid, link, "Wikipedia") for sp, t, uid, link in majors.run(source, sgt_today, wiki_fails)],

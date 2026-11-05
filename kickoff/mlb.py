@@ -453,7 +453,7 @@ def closing_html(year, g0, sched, teams, lad_post):
     teams: teams_of() of the final standings; lad_post: the Dodgers' postseason schedule rows (empty when they missed the playoffs)."""
     top, bot, wins, need, _ = tally(g0, sched)
     champ, other = (top, bot) if wins[top["id"]] >= need else (bot, top)
-    text = f"That's the {year} MLB season. The {champ['short']} are World Series champions, beating the {other['short']} {wins[champ['id']]}-{wins[other['id']]}."
+    text = f"That's the {year} MLB season. The {champ['short']} are World Series champions, beating the {other['short']} {wins[champ['id']]}\u2013{wins[other['id']]}."
     rec = next((t["overall"] for t in teams if t["abbr"] == "LAD"), "")
     played = [x for x in lad_post if x["status"] == "STATUS_FINAL"]
     if not played:
@@ -465,7 +465,7 @@ def closing_html(year, g0, sched, teams, lad_post):
         mine = [x for x in played if round_of(x["headline"])[0] == rnd]
         w = sum(1 for x in mine if lad_result(x)[2])
         opp = next(x["away"] if x["home"]["id"] == LAD else x["home"] for x in mine)
-        text += f" The Dodgers finished {rec} and went out in the {rnd}, {w}-{len(mine) - w} to the {opp['short']}."
+        text += f" The Dodgers finished {rec} and went out in the {rnd}, {w}\u2013{len(mine) - w} to the {opp['short']}."
     return f"<p>{r.esc(text)}</p>"
 
 

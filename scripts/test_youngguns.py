@@ -69,12 +69,12 @@ check("F1: Antonelli (born 25 Aug 2006) is 20 on 26 Oct 2026, so he is listed wi
 check("F1: the same race a year later, he is 21 and drops out", "Kimi Antonelli" not in [c["name"] for c in young_sports.f1(rows, "x", date(2027, 10, 26))])
 
 # ---- football and tennis --------------------------------------------------------------------------
-pl = lambda pid, short, goals, assists: {"id": pid, "short": short, "team_abbr": "CHE", "goals": goals, "assists": assists, "match": "Chelsea 2\u20131 Spurs"}  # noqa: E731
+pl = lambda pid, name, goals, assists: {"id": pid, "name": name, "short": name.split()[-1], "team_abbr": "CHE", "goals": goals, "assists": assists, "match": "Chelsea 2\u20131 Spurs"}  # noqa: E731
 lk = Lookup({("soccer", "20"): {"dob": "2008-02-01", "years": 0}, ("soccer", "21"): {"dob": "1995-02-01", "years": 0}})
-got = young_sports.soccer([pl("20", "L. Yamal", 2, 1), pl("21", "S. Old", 3, 0), pl("22", "No Goal", 0, 0)], {}, DAY, lk)
+got = young_sports.soccer([pl("20", "Lamine Yamal", 2, 1), pl("21", "Sam Old", 3, 0), pl("22", "No Goal", 0, 0)], {}, DAY, lk)
 check("football: an 18-year-old with two goals and an assist is listed with his figures; a veteran and a player with no goal or assist are not (and cost no lookup)",
-      [c["name"] for c in got] == ["L. Yamal"] and got[0]["facts"] == "2 goals, 1 assist (Chelsea 2\u20131 Spurs)" and ("soccer", "22") not in lk.calls, got)
-m = lambda stage, seed, wid="30": {"stage": stage, "winner": {"id": wid, "short": "J. Fonseca", "seed": None}, "loser": {"id": "31", "short": "A. Rublev", "seed": seed}, "status": "final", "sets": [{"w": 6, "l": 4, "tb": None, "won": True}, {"w": 6, "l": 3, "tb": None, "won": True}], "draw": "Men's Singles"}  # noqa: E731
+      [c["name"] for c in got] == ["Lamine Yamal"] and got[0]["facts"] == "2 goals, 1 assist (Chelsea 2\u20131 Spurs)" and ("soccer", "22") not in lk.calls, got)
+m = lambda stage, seed, wid="30": {"stage": stage, "winner": {"id": wid, "name": "Joao Fonseca", "short": "J. Fonseca", "seed": None}, "loser": {"id": "31", "short": "A. Rublev", "seed": seed}, "status": "final", "sets": [{"w": 6, "l": 4, "tb": None, "won": True}, {"w": 6, "l": 3, "tb": None, "won": True}], "draw": "Men's Singles"}  # noqa: E731
 lk = Lookup({("tennis", "30"): {"dob": "2006-08-04", "years": None}})
 check("tennis: an under-21 who beats a seed (or wins in the last 16 or later) is listed; an early-round win over an unseeded player is not (no lookup)",
       len(young_sports.tennis([m("R2", 7)], {}, DAY, lk)) == 1 and young_sports.tennis([m("R4", None)], {}, DAY, lk) and not young_sports.tennis([m("R2", None)], {}, DAY, Lookup({})))

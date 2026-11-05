@@ -80,7 +80,7 @@ check("pos(): a tie is T3, alone is 3", golf.pos(3, 2) == "T3" and golf.pos(3, 1
 out = golf.run({"pga": upto(masters, 2)}, utc(2025, 4, 12), {})
 html = out["blocks"][0]
 t = text(html)
-check("men's table after round 2: titled with the event and the round, columns Pos Player Rd Total Behind", "Masters Tournament · After round 2" in t and "Pos Player Rd Total Behind" in t, t[:200])
+check("men's table after round 2: titled with the event and the round, columns Pos Player Rd Total Behind", "Masters Tournament · After Round 2" in t and "Pos Player Rd Total Behind" in t, t[:200])
 check("the leader's row is gold and has no strokes behind; the next player is one behind", html.count('class="p1"') == 1 and "Justin Rose -1 -8 –" in t and "Bryson DeChambeau -4 -7 1" in t, t[:400])
 body_rows = re.findall(r"<tr(?: class=\"([^\"]*)\")?>", html.split("<tbody>")[1])
 check("25 rows in the top 25 (the leader's p1) and D's players below them (muted 'also' rows)", sum(1 for c in body_rows if c in ("", "p1")) == 25 and sum(1 for c in body_rows if c == "also") >= 1 and body_rows[:25].count("also") == 0, body_rows)
@@ -88,9 +88,9 @@ check("D's players outside the top 25 are listed below it with their real positi
 check("a player who is not in the field is simply not listed (Tiger Woods was not at the 2025 Masters)", "Woods" not in t)
 check("state: round 2 is remembered, so the same board gives nothing the next morning", golf.run({"pga": upto(masters, 2)}, utc(2025, 4, 13), out["state"])["blocks"] == [])
 nxt = golf.run({"pga": upto(masters, 3)}, utc(2025, 4, 13), out["state"])
-check("and round 3, when finished, gives its own table", len(nxt["blocks"]) == 1 and "After round 3" in text(nxt["blocks"][0]))
+check("and round 3, when finished, gives its own table", len(nxt["blocks"]) == 1 and "After Round 3" in text(nxt["blocks"][0]))
 under = golf.run({"pga": upto(masters, 2, partial=10)}, utc(2025, 4, 12), {})
-check("round 3 under way: the table is still after round 2 and says the next round is under way (it does not move while players are on the course)", "After round 2 (next round under way)" in text(under["blocks"][0]))
+check("round 3 under way: the table is still after round 2 and says the next round is under way (it does not move while players are on the course)", "After Round 2 (next round under way)" in text(under["blocks"][0]))
 
 # ---- the final ---------------------------------------------------------------------------------------------------
 fin = golf.run({"pga": with_end(masters, "2025-04-13T04:00Z")}, utc(2025, 4, 14), {})
@@ -114,7 +114,7 @@ for n in (1, 2):
     check(f"women: nothing after round {n}", golf.run({"lpga": upto(evian, n)}, utc(2025, 7, 12), {})["blocks"] == [])
 w3 = golf.run({"lpga": upto(evian, 3)}, utc(2025, 7, 13), {})
 t3 = text(w3["blocks"][0]) if w3["blocks"] else ""
-check("women: Saturday's table has the first 10 only, no D's-players rows, titled Evian Championship", w3["blocks"] and len(re.findall(r"<tr[ >]", w3["blocks"][0].split("<tbody>")[1])) == 10 and "Evian Championship · After round 3" in t3 and 'class="also"' not in w3["blocks"][0], t3[:300])
+check("women: Saturday's table has the first 10 only, no D's-players rows, titled Evian Championship", w3["blocks"] and len(re.findall(r"<tr[ >]", w3["blocks"][0].split("<tbody>")[1])) == 10 and "Evian Championship · After Round 3" in t3 and 'class="also"' not in w3["blocks"][0], t3[:300])
 wf = golf.run({"lpga": with_end(evian, ev_end)}, datetime.fromisoformat(ev_end.replace("Z", "+00:00")) + (utc(2025, 1, 2) - utc(2025, 1, 1)), {})
 raw_w = sorted(ev["competitions"][0]["competitors"], key=lambda c: c["order"])
 check("women: the final top 10 with the winner (the board's own first) in gold and a Big Stuff line", wf["blocks"] and wf["winners"] and f"1 {raw_w[0]['athlete']['displayName']}" in text(wf["blocks"][0]) and f"2 {raw_w[1]['athlete']['displayName']}" in text(wf["blocks"][0]) and len(re.findall(r"<tr[ >]", wf["blocks"][0].split("<tbody>")[1])) == 10
@@ -122,7 +122,7 @@ check("women: the final top 10 with the winner (the board's own first) in gold a
 
 # ---- the start note -------------------------------------------------------------------------------------------------
 sn = golf.run({"pga": masters}, utc(2025, 4, 7), {})
-check("the week before: 'Masters Tournament starts on Thursday 10 April (US time)', once", sn["lines"] == [("Masters Tournament starts on Thursday 10 April (US time)", "golf:start:401703489")] or [t for t, _ in sn["lines"]] == ["Masters Tournament starts on Thursday 10 April (US time)"], sn["lines"])
+check("the week before: 'Masters Tournament starts on Thu 10 Apr', once", sn["lines"] == [("Masters Tournament starts on Thu 10 Apr", "golf:start:401703489")] or [t for t, _ in sn["lines"]] == ["Masters Tournament starts on Thu 10 Apr"], sn["lines"])
 check("not repeated", golf.run({"pga": masters}, utc(2025, 4, 8), sn["state"])["lines"] == [])
 check("three weeks ahead is too early for the start note", golf.run({"pga": masters}, utc(2025, 3, 18), {})["lines"] == [])
 check("the women's majors have no start note (D: weekend tables only)", golf.run({"lpga": evian}, utc(2025, 7, 8), {})["lines"] == [])

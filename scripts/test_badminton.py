@@ -114,7 +114,7 @@ check("the semi-final tables are ordered the same way (the match with the listed
 # ---- the start notice ----------------------------------------------------------------------------------------------------
 wiki = Wiki({"2025 All England Open": AE})
 n1 = bd.run(wiki, date(2025, 3, 6), {})
-check("five days before: one line, 'All England Open (BWF World Tour Super 1000) starts on Tuesday 11 March', and no list of players", len(n1["blocks"]) == 1 and text(n1["blocks"][0][1]).strip() == "All England Open (BWF World Tour Super 1000) starts on Tuesday 11 March", text(n1["blocks"][0][1]))
+check("five days before: one line, 'All England Open (BWF World Tour Super 1000) starts on Tue 11 Mar', and no list of players", len(n1["blocks"]) == 1 and text(n1["blocks"][0][1]).strip() == "All England Open (BWF World Tour Super 1000) starts on Tue 11 Mar", text(n1["blocks"][0][1]))
 check("the notice is given once", bd.run(wiki, date(2025, 3, 7), n1["state"])["blocks"] == [] and n1["state"]["2025 All England Open"]["announced"])
 check("more than a week before there is no notice", bd.run(wiki, date(2025, 3, 1), {})["blocks"] == [])
 check("there is no 'who is in the draw' paragraph any more: nothing in the module builds one", not hasattr(bd, "draw_note") and "who is in the draw" not in text(bd.run(wiki, date(2025, 3, 17), {})["blocks"][0][1]))
@@ -125,15 +125,15 @@ h = bd.event_html("All England Open", {d: v for d, v in fresh.items() if v}, top
 t = text(h)
 import html as _html  # noqa: E402
 titles = [_html.unescape(x) for x in re.findall(r"<p class=\"subhead\">([^<]*)</p>", h)]
-check("one title for each discipline that has matches, in the fixed order, each with its round", titles == ["All England Open", "Men's singles · Round of 32", "Women's singles · Round of 32", "Men's doubles · Round of 32", "Women's doubles · Round of 32", "Mixed doubles · Round of 32"], titles)
+check("one title for each discipline that has matches, in the fixed order, each with its round", titles == ["All England Open", "Men's Singles · R32", "Women's Singles · R32", "Men's Doubles · R32", "Women's Doubles · R32", "Mixed Doubles · R32"], titles)
 check("each match is one bullet of a gold-diamond list with space between the lines, winner in bold", h.count('<ul class="standouts bd">') == 5 and h.count("<li>") == sum(len(v) for v in fresh.values()) and h.count("<strong>") == h.count("<li>"))
 check("a discipline with no match that day gets no title", "Mixed doubles" not in text(bd.event_html("X", {"Men's singles": fresh["Men's singles"]}, tops)))
-check("the early rounds are in round order inside a discipline (Round of 32 before Round of 16)", re.findall(r"Men&#x27;s singles · ([^<]*)</p>", bd.event_html("X", {"Men's singles": [m for m in p["Men's singles"]["matches"] if m["round"] in ("Round of 16", "Round of 32", "Quarter-finals") and bd.interesting(m, "Men's singles", tops)]}, tops)) == ["Round of 32", "Round of 16", "Quarter-finals"])
+check("the early rounds are in round order inside a discipline (Round of 32 before Round of 16)", re.findall(r"Men&#x27;s Singles · ([^<]*)</p>", bd.event_html("X", {"Men's singles": [m for m in p["Men's singles"]["matches"] if m["round"] in ("Round of 16", "Round of 32", "Quarter-finals") and bd.interesting(m, "Men's singles", tops)]}, tops)) == ["R32", "R16", "QF"])
 
 # ---- the tables ---------------------------------------------------------------------------------------------------------------
 h = bd.late_table("Men's singles", "All England Open · Final", [fin["Men's singles"]])
 t = text(h)
-check("a table: the title, then two rows a match (the winner first and bold), a column for each game", "Men's singles · All England Open · Final" in t and 'class="w"' in h and 'class="l"' in h and h.count("<tr class") == 2
+check("a table: the title, then two rows a match (the winner first and bold), a column for each game", "Men's Singles · All England Open · Final" in t and 'class="w"' in h and 'class="l"' in h and h.count("<tr class") == 2
       and "Shi Yuqi CHN [1] 21 21" in t and "Lee Chia-hao TPE 17 19" in t, t)
 h2 = bd.late_table("Women's singles", "All England Open · Final", [fin["Women's singles"]])
 check("a three-game match fills all three columns: An Se-young 13 21 21 over Wang Zhiyi 21 18 18", "An Se-young KOR [1] 13 21 21" in text(h2) and "Wang Zhiyi CHN [2] 21 18 18" in text(h2))
@@ -162,6 +162,14 @@ july = bd.run(Wiki({"2025 China Open (badminton)": CO}), date(2025, 7, 29), {})
 check("the China Open of July 2025 is found in July (its month list covers July and November), semi-finals and final as tables", july["blocks"] and "Han Yue" in text(july["blocks"][0][1]) and july["blocks"][0][1].count('<div class="tennis">') == 10)
 nov = bd.run(Wiki({"2025 BWF World Tour Finals": WTF}), date(2025, 12, 22), {})
 check("the World Tour Finals (a small draw of four a discipline) show their semi-finals and finals too, with no level in a notice", nov["blocks"] and nov["blocks"][0][1].count('<div class="tennis">') == 10)
+
+_fin = bd.run(wiki, date(2025, 3, 17), {})
+check("Big Stuff: a Super 1000 gives all five finals, singles and doubles, winner first", len(_fin["stories"]) == 5 and _fin["stories"][0].startswith("All England Open Men's Singles: Shi Yuqi (CHN) [1] def. ") and any("Mixed Doubles:" in t for t in _fin["stories"]), _fin["stories"])
+check("a final is a story once", bd.run(wiki, date(2025, 3, 17), _fin["state"])["stories"] == [])
+_m = {"round": "Final", "winner": "a", "games": [(21, 10), (21, 10)], "a": {"names": ["A One"], "flag": "CHN"}, "b": {"names": ["B Two"], "flag": "KOR"}}
+_i = {**_m, "b": {"names": ["L Sen"], "flag": "IND"}}
+check("a smaller event only when an Indian or Southeast Asian player is in the final", bd.title_stories("Japan Open", "BWF World Tour Super 750", "Men's singles", [_m]) == [] and len(bd.title_stories("Japan Open", "BWF World Tour Super 750", "Men's singles", [_i])) == 1)
+check("the India Open and the Singapore Open count whoever plays; early rounds never", len(bd.title_stories("India Open", "BWF World Tour Super 750", "Men's singles", [_m])) == 1 and len(bd.title_stories("Singapore Open", None, "Men's doubles", [_m])) == 1 and bd.title_stories("India Open", None, "Men's singles", [{**_m, "round": "Round of 16"}]) == [])
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

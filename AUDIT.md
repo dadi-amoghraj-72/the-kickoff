@@ -1,7 +1,7 @@
 # The Kickoff: consistency audit (2026-11-05)
 
 D asked for one last pass over every decision, to flag where something that should work the same way across sports works differently. Evidence below comes from the code, the CSS, the saved demos and
-the real data; nothing here has been changed yet. Each item has a recommendation: **FIX** (I would just do it), **YOUR CALL** (changes something D has already approved or is a judgement), **LEAVE** (a
+the real data; all of it has since been applied (D's answers, 2026-11-05; see SPEC.md round 20). Each item has a recommendation: **FIX** (I would just do it), **YOUR CALL** (changes something D has already approved or is a judgement), **LEAVE** (a
 deliberate difference, written down so it stops looking like an accident).
 
 ## 1. Results: who is first, which verb, which dash

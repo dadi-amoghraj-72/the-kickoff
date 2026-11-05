@@ -39,6 +39,13 @@ def football_stage(comp, m):
     return "regular"
 
 
+def winner_first(m):
+    """'Galatasaray 4–2 Lille' for an away win (the winner first, with his score first, as every summary line reads; D, 2026-11-05), 'Arsenal 2–1 Brentford' for a home win and 'Bayern Munich 2–2 Arsenal'
+    (home first) for a draw."""
+    h, a, hs, as_ = m["home"]["name"], m["away"]["name"], m["home_score"], m["away_score"]
+    return f"{a} {as_}{DASH}{hs} {h}" if as_ > hs else f"{h} {hs}{DASH}{as_} {a}"
+
+
 def football(comps, weekday):
     """comps: [(competition name, [match dicts from espn.parse_match])]. Finished matches only. Arsenal's (men and women) is flagged "first"."""
     out = []
@@ -53,7 +60,7 @@ def football(comps, weekday):
             bonus = min(0.5 * d["margin"] + 0.3 * d["total_goals"] + (1 if d["comeback"] else 0), 4)
             wow = d["margin"] >= 5 or (d["comeback"] and d["total_goals"] >= 5)
             stage = football_stage(comp, m)
-            text = f"{comp.replace('UEFA ', '')}: {overview.label(m).replace('-', DASH)}"
+            text = f"{comp.replace('UEFA ', '')}: {winner_first(m)}"
             e = story("football", comp, text, importance.story_score("football", stage, mine, listed, margin_bonus=bonus, wow=wow, weekday=weekday), mine, stage)
             if any(i == "359" for i in ids):
                 e["first"] = True

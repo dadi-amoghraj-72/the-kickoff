@@ -24,6 +24,8 @@ DISCIPLINES = ("Men's singles", "Women's singles", "Men's doubles", "Women's dou
 SINGLES = ("Men's singles", "Women's singles")
 LATE = ("Semi-finals", "Final")
 ROUND_ORDER = ["Round of 64", "Round of 32", "Round of 16", "Quarter-finals", "Semi-finals", "Final"]
+SHORT = {"Round of 64": "R64", "Round of 32": "R32", "Round of 16": "R16", "Quarter-finals": "QF", "Semi-finals": "SF", "Final": "Final"}     # shown in titles (D, 2026-11-05)
+TITLE = {d: d[:-7] + "Singles" if d.endswith("singles") else d[:-7] + "Doubles" for d in DISCIPLINES}                                   # "Men's Singles", shown in titles
 NOTICE_DAYS = 7
 # (event name, titles to try ({y} = the year), months it can be on (with a margin)): Wikipedia's draw page of each event
 CALENDAR = [
@@ -206,7 +208,7 @@ def late_table(disc, rnd, matches):
                      + (' <span class="muted">ret.</span>' if m.get("retired") and not is_w else ""))
             rows += f'<tr class="{"w" if is_w else "l"}"><td class="pl">{names}</td>{cells}</tr>'
     return (f'<div class="tennis"><table><colgroup><col style="width:64%"><col style="width:12%"><col style="width:12%"><col style="width:12%"></colgroup><thead><tr><th class="tt" colspan="4">'
-            f'{r.esc(disc)} · {r.esc(rnd)}</th></tr></thead><tbody>{rows}</tbody></table></div>')
+            f'{r.esc(TITLE.get(disc, disc))} · {r.esc(rnd)}</th></tr></thead><tbody>{rows}</tbody></table></div>')
 
 
 def event_html(name, new_matches, tops, notice=None):
@@ -220,14 +222,14 @@ def event_html(name, new_matches, tops, notice=None):
         for rnd in ROUND_ORDER:
             ms = [m for m in mine if m["round"] == rnd]
             if ms:
-                groups += f'<p class="subhead">{r.esc(d)} · {r.esc(rnd)}</p><ul class="standouts bd">' + "".join(f"<li>{line_html(m)}</li>" for m in ms) + "</ul>"
+                groups += f'<p class="subhead">{r.esc(TITLE[d])} · {r.esc(SHORT[rnd])}</p><ul class="standouts bd">' + "".join(f"<li>{line_html(m)}</li>" for m in ms) + "</ul>"
     if groups:
         out += f'<p class="subhead">{r.esc(name)}</p>' + groups
     for rnd in LATE:
         for d in DISCIPLINES:
             ms = by_priority([m for m in new_matches.get(d, []) if m["round"] == rnd])
             if ms:
-                out += late_table(d, f"{name} · {rnd}", ms)
+                out += late_table(d, f"{name} · {SHORT[rnd]}", ms)
     return out
 
 
@@ -248,8 +250,24 @@ def span(box_dates, year):
     return start or end, end
 
 
+BIG_TITLES = ("India Open", "Singapore Open")
+
+
+def title_stories(name, level, disc, matches):
+    """[text] for the finals among `matches` that are Big Stuff (D, 2026-11-05): every final (singles and doubles) of a Super 1000, the India Open and the Singapore Open; at any other event only a final
+    with an Indian or Southeast Asian player in it. 'India Open (BWF World Tour Super 750) Men's Singles: Shi Yuqi (CHN) [1] def. ...' """
+    big = "1000" in (level or "") or name in BIG_TITLES
+    out = []
+    for m in matches:
+        if m["round"] != "Final" or m.get("winner") not in ("a", "b"):
+            continue
+        if big or m["a"]["flag"] in SPOT or m["b"]["flag"] in SPOT:
+            out.append(f"{name} {TITLE.get(disc, disc)}: {line(m)}")
+    return out
+
+
 def notice_text(name, level, start):
-    return f"{name}{f' ({level})' if level else ''} starts on {start:%A} {start.day} {start:%B}"
+    return f"{name}{f' ({level})' if level else ''} starts on {start:%a} {start.day} {start:%b}"
 
 
 def run(wiki, today, state, fails=None):
@@ -257,7 +275,7 @@ def run(wiki, today, state, fails=None):
     final the new early-round lines of interest and the new semi-final and final tables, each match once. wiki.wikitext(title) -> text ('' when missing).
     state: {page title: {"seen": [match ids], "announced": bool}}."""
     st = {k: {"seen": list(v.get("seen", [])), "announced": bool(v.get("announced") or v.get("noted"))} for k, v in (state or {}).items()}
-    blocks = []
+    blocks, stories = [], []
     for name, titles, months in CALENDAR:
         years = {today.year} | ({today.year + 1} if today.month >= 11 and 1 in months else set())
         if today.month not in months:
@@ -293,6 +311,7 @@ def run(wiki, today, state, fails=None):
                         fresh = [m for m in info["matches"] if mid(m) not in mine["seen"] and (m["round"] in LATE or interesting(m, d, tops))]
                         if fresh:
                             new[d] = fresh
+                            stories += title_stories(name, level_of(text), d, fresh)
                 html = event_html(name, new, tops, notice)
                 if html:
                     blocks.append((title, html))
@@ -300,4 +319,4 @@ def run(wiki, today, state, fails=None):
                 mine["seen"] = mine["seen"][-400:]
             except Exception:
                 (fails if fails is not None else []).append("badminton")
-    return {"blocks": blocks, "state": dict(list(st.items())[-12:])}
+    return {"blocks": blocks, "stories": stories, "state": dict(list(st.items())[-12:])}

@@ -191,7 +191,7 @@ blow = [g for g in FINAL if abs(g["home"]["score"] - g["away"]["score"]) >= 24]
 hl_all = nfl.game_highlights(FINAL, BOX, limit=99)
 texts = [t for _, t in hl_all]
 check("highlights: the shutout (Buccaneers 16-0 Falcons) and the two blowouts of 24+ points (Jaguars 42-7, Bills 36-10) are found from the raw scores, each once", len(shut) == 1 and len(blow) == 2 and sum(t.startswith("Shutout:") for t in texts) == 1
-      and sum(t.startswith("Blowout:") for t in texts) == 2 and "Shutout: Buccaneers blanked Falcons 16-0." in texts, texts)
+      and sum(t.startswith("Blowout:") for t in texts) == 2 and "Shutout: Buccaneers blanked Falcons 16–0." in texts, texts)
 
 
 def raw_deficit(gid, win_side):
@@ -201,7 +201,7 @@ def raw_deficit(gid, win_side):
 
 comebacks = {g["id"]: raw_deficit(g["id"], nfl.winner(g)) for g in FINAL if raw_deficit(g["id"], nfl.winner(g)) >= 14}
 check("highlights: comebacks from 14+ points down match an independent reading of the scoring plays (the Cardinals came back from 14 in Dallas, and the winning kick shares the line)", len(comebacks) >= 1
-      and sum(t.startswith("Comeback:") for t in texts) == len(comebacks) and any("Comeback: Cardinals came back from 14 points down to beat Cowboys 33-30 in overtime, Chad Ryland kicking the 42-yard winner." == t for t in texts), (comebacks, [t for t in texts if "Comeback" in t]))
+      and sum(t.startswith("Comeback:") for t in texts) == len(comebacks) and any("Comeback: Cardinals came back from 14 points down to beat Cowboys 33–30 in overtime, Chad Ryland kicking the 42-yard winner." == t for t in texts), (comebacks, [t for t in texts if "Comeback" in t]))
 check("highlights: a comeback and a winning kick in one game make one line, never two", sum("Cowboys" in t for t in texts) == 1 and not any(t.startswith("Game-winner:") and "Cowboys" in t for t in texts))
 long_raw = max(((int(re.search(r"(\d+) Yd", p["text"]).group(1)), p["text"]) for b in BOXES.values() for p in b["plays"] if "Touchdown" in p["type"] and re.search(r"(\d+) Yd", p["text"])), default=None)
 check("highlights: the longest scoring play of the week (a 95-yard kickoff return, Raiders) equals the longest found by reading every scoring play", long_raw[0] == 95 and any(t.startswith("Longest play:") and "95 Yd Kickoff Return" in t for t in texts), long_raw)
@@ -245,7 +245,7 @@ close_ot = [e for e in raw_ot if abs(int(e["competitions"][0]["competitors"][0][
 bg = nfl.best_game(GAMES)
 check("best game: the one overtime game decided by a field goal or less (Cardinals 33-30 at Dallas), found independently from the raw scoreboard; a 43-36 overtime game and a 42-7 rout do not beat it", len(raw_ot) == 2 and len(close_ot) == 1 and bg["id"] == close_ot[0]["id"] and bg["away"]["abbr"] == "ARI", (bg["away"]["abbr"], bg["home"]["abbr"]))
 sbox = text(nfl.summary_html(GAMES, 12, 14))
-check("the summary box: games played 12/14 with 'Rest still to play' under it, underdogs won, and the best game by team codes and score with nothing underneath", re.fullmatch(r"Games played\s+12/14\s+Rest still to play\s+Underdogs won\s+\d+/\d+\s+Best game\s+ARI 33-30 DAL", sbox) and "points" not in sbox and "OT" not in sbox, sbox)
+check("the summary box: games played 12/14 with 'Rest still to play' under it, underdogs won, and the best game by team codes and score with nothing underneath", re.fullmatch(r"Games played\s+12/14\s+Rest still to play\s+Underdogs won\s+\d+/\d+\s+Best game\s+ARI 33–30 DAL", sbox) and "points" not in sbox and "OT" not in sbox, sbox)
 check("the box sits above the week's table, and the old one-line count under the title is gone", sbd.index('class="roundup"') < sbd.index('class="nflsb"') and 'class="prog"' not in sbd and "games played" not in sbd, sbd[:200])
 check("a week with nothing finished has no best game, and a week with no games has no box", "Best game" not in text(nfl.summary_html([g for g in GAMES if g["status"] != "final"], 0, 14)) and nfl.summary_html([], 0, 0) == "")
 check("scoreboard: no emoji, full team names, a thick line between kickoff groups (2 for the finished games), overtime tags, the bye line", "🏠" not in sb and "Green Bay Packers" in sb and 'class="tm">Packers' not in sb and sb.count('<tr class="gap">') == 2
@@ -497,7 +497,7 @@ for tm in snf_box["players"]:
             for a in cat["athletes"]:
                 lab = dict(zip(cat["labels"], a["stats"]))
                 raw_fg.append((a["athlete"]["displayName"], lab["FG"]))
-check("independent: by the raw box one kicker made 4 of 5 field goals on Sunday night, a Stevens, and he is the special-teams Player of the Week in the page", [n for n, f in raw_fg if f == "4/5"] != [] and all(n.endswith("Stevens") for n, f in raw_fg if f == "4/5") and "Special teams: D. Stevens (WSH): 4/5 field goals in the 27-10 win over PHI" in wt, raw_fg)
+check("independent: by the raw box one kicker made 4 of 5 field goals on Sunday night, a Stevens, and he is the special-teams Player of the Week in the page", [n for n, f in raw_fg if f == "4/5"] != [] and all(n.endswith("Stevens") for n, f in raw_fg if f == "4/5") and "Special teams: D. Stevens (WSH): 4/5 field goals in the 27–10 win over PHI" in wt, raw_fg)
 check("the only unplayed game (Monday night) is still YTP on Wednesday, once", wt.count("YTP") == 1)
 
 # ---- Notes style, In progress line, movement arrows (retrofit of 2026-11-03) ----
@@ -513,7 +513,7 @@ check("the block is called Top performances (not Players of the Week: the picks 
 check("the mentions carry no 'Also:' label any more", "Also:" not in wed_html)
 check("Players of the Week use the house notes style: a dlist of lines (diamond bullet by CSS), the label in bold, no old bullet list", wed_html.count('<div class="dlist">') >= 1 and '<div class="pl"><span class="t"><strong>Offence:</strong>' in wed_html and '<ul class="standouts">' not in wed_html)
 check("independent: the stat figures of the Offence line are in gold, from a separate read of the raw box (Burrow 38/48, 462 yards, 5 TD, 3 INT) and the result after 'in the' is plain",
-      all(f'<span class="n">{x}</span>' in wed_html for x in ("38/48", "462", "5", "3")) and "in the 43-36 win over TEN" in wed_html and '<span class="n">43</span>' not in wed_html)
+      all(f'<span class="n">{x}</span>' in wed_html for x in ("38/48", "462", "5", "3")) and "in the 43–36 win over TEN" in wed_html and '<span class="n">43</span>' not in wed_html)
 burrow = next(a for t in TBOX[next(e["id"] for e in TSB["events"] if "CIN" in [c["team"]["abbreviation"] for c in e["competitions"][0]["competitors"]] and "TEN" in [c["team"]["abbreviation"] for c in e["competitions"][0]["competitors"]])]["players"] for cat in t["statistics"] if cat["name"] == "passing" for a in cat["athletes"] if a["athlete"]["displayName"].endswith("Burrow"))
 check("independent: the raw box has Burrow at 38/48 for 462 yards", burrow["stats"][0] == "38/48" and burrow["stats"][1] == "462", burrow["stats"][:2])
 check("gold_numbers: numbers before the result are wrapped; a team code or hyphenated score is not", nfl.gold_numbers("A. B (X): 3 sacks, 2/4 attempts in the 27-10 win over PHI") == 'A. B (X): <span class="n">3</span> sacks, <span class="n">2/4</span> attempts in the 27-10 win over PHI')
@@ -538,9 +538,9 @@ check("the run saves the ranks of the tables it showed; a later Wednesday shows 
 
 # ---- Highlights have something to catch the eye; the leader tables are titled by position (D, 2026-11-04) ----
 teams_ = {"Cardinals", "Cowboys", "Buccaneers", "Falcons", "Jaguars", "Colts", "Bills", "Ravens", "Raiders"}
-sample = nfl.emphasise("Comeback: Cardinals came back from 14 points down to beat Cowboys 33-30 in overtime, Chad Ryland kicking the 42-yard winner.", teams_)
+sample = nfl.emphasise("Comeback: Cardinals came back from 14 points down to beat Cowboys 33–30 in overtime, Chad Ryland kicking the 42-yard winner.", teams_)
 check("a highlight line: both teams in bold and the key figures in gold (14 points, the 33-30 score, the 42-yard kick), nothing nested", sample.count("<strong>") == 2 and "<strong>Cardinals</strong>" in sample and "<strong>Cowboys</strong>" in sample
-      and '<span class="n">14</span> points' in sample and '<span class="n">33-30</span>' in sample and '<span class="n">42</span>-yard' in sample and "<span class=\"n\"><span" not in sample and "<strong><strong>" not in sample, sample)
+      and '<span class="n">14</span> points' in sample and '<span class="n">33–30</span>' in sample and '<span class="n">42</span>-yard' in sample and "<span class=\"n\"><span" not in sample and "<strong><strong>" not in sample, sample)
 check("a longest-play line gets its yardage in gold, and an escaped character is not mangled", '<span class="n">95</span> Yd' in nfl.emphasise("Longest play: Dylan Laube 95 Yd Kickoff Return for a touchdown (LV).", teams_) and "&amp;" in nfl.emphasise("A & B", teams_))
 hl_block = mon["html"].split("<h4>Highlights</h4>")[1].split("<h4>")[0] if "<h4>Highlights</h4>" in mon["html"] else ""
 hl_lines = re.findall(r'<span class="t">(.*?)</span></div>', hl_block)
@@ -581,7 +581,7 @@ class SBSource:
 
 
 check("Super Bowl LX: the closing note names the season, the champions, the game and the score", nfl.closing_html(nfl.super_bowl(SBL["events"]))
-      == ("<p>That&#x27;s the 2025 NFL season. The Seahawks are Super Bowl LX champions, beating the Patriots 29-13.</p>", 2025))
+      == ("<p>That&#x27;s the 2025 NFL season. The Seahawks are Super Bowl LX champions, beating the Patriots 29–13.</p>", 2025))
 raw_e = SBL["events"][0]["competitions"][0]["competitors"]
 raw_win = max(raw_e, key=lambda x: int(x["score"]))
 check("independent: the raw scoreboard's higher score is the winner's 29 and the loser's 13, and ESPN's winner flag agrees", raw_win["score"] == "29" and raw_win["team"]["shortDisplayName"] == "Seahawks" and raw_win["winner"] is True)

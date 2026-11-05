@@ -25,7 +25,7 @@ DERBIES = {frozenset(p) for p in (("359", "367"), ("359", "363"), ("367", "363")
 TOP = 4                    # two teams from the top four of their league meeting is a top-of-the-table clash
 
 
-def fixture(sport, comp, text, when, score, mine=False, stage="regular", flags=()):
+def fixture(sport, comp, text, when, score, mine=False, stage="regular", flags=()):       # flag "dateonly": only the day is known or wanted (golf's start, a badminton final), no time shown
     return {"sport": sport, "comp": comp, "text": text, "when": when, "score": score, "mine": mine, "stage": stage, "flags": set(flags)}
 
 
@@ -34,8 +34,24 @@ def fixture(sport, comp, text, when, score, mine=False, stage="regular", flags=(
 class Sources:
     """Everything fixtures needs from the outside world, one method per sport. Tests pass their own object with the same methods."""
 
-    def __init__(self, nba_source, nfl_source, mlb_source, cricket_feed, f1_api, tennis_source):
+    def __init__(self, nba_source, nfl_source, mlb_source, cricket_feed, f1_api, tennis_source, other=None):
         self.nba_s, self.nfl_s, self.mlb_s, self.cricket_f, self.f1_a, self.tennis_s = nba_source, nfl_source, mlb_source, cricket_feed, f1_api, tennis_source
+        self.other_s = other
+
+    def _other(self):
+        if self.other_s is None:
+            from kickoff.sources import other_sports
+            self.other_s = other_sports.Source()
+        return self.other_s
+
+    def golf(self, tour):
+        return self._other().golf(tour)
+
+    def ufc(self):
+        return self._other().ufc()
+
+    def wikitext(self, title):
+        return self._other().wikitext(title)
 
     def football(self, league, utc_date):
         return espn.get_matches_on(league, utc_date)
@@ -265,7 +281,47 @@ def golf(src, now, end, weekday):
             continue
         start = golf_mod._utc(c["startDate"]) if hasattr(golf_mod, "_utc") else datetime.fromisoformat(c["startDate"].replace("Z", "+00:00"))
         if now <= start < end:
-            out.append(fixture("golf", "Golf", f"Golf: {c['label']} starts ({start:%A}, US time)", start, importance.story_score("golf", "final"), False, "final"))
+            out.append(fixture("golf", "Golf", f"Golf: {c['label']} starts", start, importance.story_score("golf", "final"), False, "final", {"dateonly"}))
+    return out
+
+
+def ufc(src, now, end, weekday):
+    """A UFC card (numbered or Fight Night) still to come: one line at the main event's time (the last fight of the card on ESPN's scoreboard): 'UFC 330: A vs. B (main event)'."""
+    out = []
+    for e in src.ufc().get("events", []):
+        try:
+            if not re.match(r"^UFC\b", e["name"]) or e["status"]["type"].get("state") != "pre":
+                continue
+            cs = e.get("competitions") or []
+            when = datetime.fromisoformat((cs[-1]["date"] if cs else e["date"]).replace("Z", "+00:00"))
+            if now <= when < end:
+                out.append(fixture("ufc", "UFC", f"{e['name']} (main event)", when, importance.story_score("ufc", "final"), False, "final"))
+        except (KeyError, ValueError, TypeError, IndexError):
+            continue
+    return out
+
+
+def badminton(src, now, end, weekday):
+    """The finals day of a Super 750+ event, the India Open or the Singapore Open (kickoff/badminton.py's calendar), from Wikipedia's infobox; the day only, no time (D, 2026-11-05)."""
+    from kickoff import badminton as bd
+    from kickoff import majors
+    out, today = [], (now + timedelta(hours=8)).date()
+    for name, titles, months in bd.CALENDAR:
+        if today.month not in months:
+            continue
+        for t in [x.format(y=today.year) for x in titles]:
+            try:
+                text = src.wikitext(t)
+            except Exception:
+                continue
+            if not text:
+                continue
+            start, last = bd.span(majors.infobox(text).get("dates") or majors.infobox(text).get("date"), today.year)
+            if last:
+                when = datetime(last.year, last.month, last.day, 12, 0, tzinfo=SGT).astimezone(timezone.utc)
+                if now <= when < end and start and last - start <= timedelta(days=9):
+                    out.append(fixture("badminton", name, f"Badminton: {name} finals day", when, importance.story_score("badminton", "final"), False, "final", {"dateonly"}))
+            break
     return out
 
 
@@ -274,7 +330,8 @@ def collect(src, now, end, weekday, mine_nba=(), watch=False, tracked_nba=()):
     out, failed = [], []
     for sport, fn in (("football", lambda: football(src, now, end, weekday, watch)), ("nba", lambda: nba(src, now, end, weekday, set(mine_nba), set(tracked_nba), watch)), ("nfl", lambda: nfl(src, now, end, weekday)),
                       ("mlb", lambda: mlb(src, now, end, weekday)), ("cricket", lambda: cricket(src, now, end, weekday)), ("f1", lambda: f1(src, now, end, weekday)),
-                      ("tennis", lambda: tennis(src, now, end, weekday)), ("golf", lambda: golf(src, now, end, weekday))):
+                      ("tennis", lambda: tennis(src, now, end, weekday)), ("golf", lambda: golf(src, now, end, weekday)),
+                      ("ufc", lambda: ufc(src, now, end, weekday)), ("badminton", lambda: badminton(src, now, end, weekday))):
         try:
             out += fn()
         except Exception:

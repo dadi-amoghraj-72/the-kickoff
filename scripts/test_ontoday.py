@@ -169,8 +169,28 @@ class _G(Fake):  # noqa: E302
         return _gb if tour == "pga" else {"events": []}
 got, _ = fixtures.collect(_G(), utc(2025, 4, 7, 0, 0), utc(2025, 4, 14, 0, 0), 0)
 gf = [f for f in got if f["sport"] == "golf"]
-check("golf: the Masters' start is a fixture for the week (Games to Watch), named with its US day", len(gf) == 1 and gf[0]["text"] == "Golf: Masters Tournament starts (Thursday, US time)" and gf[0]["stage"] == "final", gf)
+check("golf: the Masters' start is a fixture for the week (Games to Watch), the day only, no time zone label", len(gf) == 1 and gf[0]["text"] == "Golf: Masters Tournament starts" and gf[0]["stage"] == "final", gf)
 check("golf: a major that has already started, or starts after the window, is not listed", [f for f in fixtures.collect(_G(), utc(2025, 4, 11, 0, 0), utc(2025, 4, 14, 0, 0), 0)[0] if f["sport"] == "golf"] == [])
+
+# UFC cards and the badminton finals day (D, 2026-11-05)
+_ufc = {"events": [{"id": "1", "name": "UFC 330: Jones vs. Miocic", "date": "2027-01-17T01:00Z", "status": {"type": {"state": "pre"}}, "competitions": [{"date": "2027-01-17T01:00Z"}, {"date": "2027-01-17T04:00Z"}]},
+                   {"id": "2", "name": "PFL 3: A vs. B", "date": "2027-01-17T02:00Z", "status": {"type": {"state": "pre"}}, "competitions": [{"date": "2027-01-17T02:00Z"}]},
+                   {"id": "3", "name": "UFC Fight Night: C vs. D", "date": "2027-01-10T01:00Z", "status": {"type": {"state": "post"}}, "competitions": [{"date": "2027-01-10T03:00Z"}]}]}
+_wk = "{{Infobox badminton tournament\n| dates = 12–19 January 2027\n}}\n"
+class _U(Fake):  # noqa: E302
+    def ufc(self):
+        return _ufc
+
+    def wikitext(self, title):
+        return _wk if title == "2027 India Open (badminton)" else ""
+got, _ = fixtures.collect(_U(), utc(2027, 1, 16, 0, 0), utc(2027, 1, 18, 0, 0), 5)
+uf = [f for f in got if f["sport"] == "ufc"]
+check("UFC: a card still to come is one line at the main event's time; PFL and a finished card are not listed", len(uf) == 1 and uf[0]["text"] == "UFC 330: Jones vs. Miocic (main event)" and uf[0]["when"] == utc(2027, 1, 17, 4, 0), uf)
+check("UFC: the main event at 4am UTC reads 12pm in Singapore", ">12pm<" in ontoday._line(uf[0]), ontoday._line(uf[0]))
+got, _ = fixtures.collect(_U(), utc(2027, 1, 18, 20, 0), utc(2027, 1, 19, 23, 0), 1)
+bd_ = [f for f in got if f["sport"] == "badminton"]
+check("badminton: only the finals day of the event, the day alone (no time), listed on its last day", len(bd_) == 1 and bd_[0]["text"] == "Badminton: India Open finals day" and "dateonly" in bd_[0]["flags"] and "All day" in ontoday._line(bd_[0]) and "am" not in ontoday._line(bd_[0]).split("</span>")[0], bd_)
+check("badminton: not listed on the other days of the event", [f for f in fixtures.collect(_U(), utc(2027, 1, 14, 0, 0), utc(2027, 1, 15, 0, 0), 3)[0] if f["sport"] == "badminton"] == [])
 
 # a sport that breaks costs only itself
 got, failed = fixtures.collect(Fake(football=fb, boom=("nba", "cricket")), now, end, 3)

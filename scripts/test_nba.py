@@ -554,7 +554,7 @@ check("D's 24 tracked players are all there, each with a starting team", len(nba
 
 # ---- The season's closing note (D, 2026-11-04): the 2026 NBA Finals, Knicks 4-1 over the Spurs (real schedule) ----
 FIN = [x for x in json.loads((FX / "nba_finals_2026_schedule.json").read_text()) if x["headline"].startswith("NBA Finals")]
-check("the Finals closing note: season, champions, opponent and the series score", nba.closing_html(2026, FIN) == "<p>That&#x27;s the 2025-26 NBA season. The New York Knicks are NBA champions, beating the San Antonio Spurs 4-1.</p>", nba.closing_html(2026, FIN))
+check("the Finals closing note: season, champions, opponent and the series score", nba.closing_html(2026, FIN) == "<p>That&#x27;s the 2025-26 NBA season. The New York Knicks are NBA champions, beating the San Antonio Spurs 4–1.</p>", nba.closing_html(2026, FIN))
 raw_wins = {}
 for x in FIN:
     hi, lo = (x["home"], x["away"]) if x["home"]["score"] > x["away"]["score"] else (x["away"], x["home"])

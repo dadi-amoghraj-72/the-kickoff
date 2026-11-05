@@ -136,5 +136,22 @@ check("the workflow builds, publishes (data and docs only), pings on request and
 check("runs can never overlap (one concurrency group) and have a time limit", "concurrency:" in wf and "timeout-minutes" in wf)
 check("the Telegram message is the date, the headlines and the link to that day's page", telegram.build_message(ed).splitlines()[0].startswith("The Kickoff · Thu 5 Nov") and telegram.build_message(ed).endswith("/editions/2026-11-05/"))
 
+# ---- every Claude call counts towards the month's $10 (previews, Young Guns, Around)
+from datetime import date as _date
+from kickoff import budget as _budget
+_stats = {"nfl": {"preview_cost": 0.02}, "youngguns": {"claude_usage": {"input": 1000, "output": 500}}, "around": {"claude_usage": {"input": 10000, "output": 1000}}, "f1": {}}
+_spent, _calls = daily.extra_costs(_stats)
+check("the extra costs add up: a preview's dollars, Young Guns at the main model, Around at the news model", _calls == 3 and abs(_spent - (0.02 + (1000 * settings.PRICES[settings.CLAUDE_MODEL][0] + 500 * settings.PRICES[settings.CLAUDE_MODEL][1]) / 1e6 + (10000 * 2.0 + 1000 * 10.0) / 1e6)) < 1e-4, (_spent, _calls))
+_ns = {"costs": {"2026-11": {"spent": 1.0, "calls": 4, "days": {"2026-11-05": {"spent": 0.5, "calls": 2}}}}}
+daily.record_extra_costs(_ns, _stats, _date(2026, 11, 5))
+_m = _ns["costs"]["2026-11"]
+check("they are added to the month and to the day, next to the football run's own", abs(_m["spent"] - (1.0 + _spent)) < 1e-4 and _m["calls"] == 7 and abs(_m["days"]["2026-11-05"]["spent"] - (0.5 + _spent)) < 1e-4, _m)
+_ns2 = {}
+daily.record_extra_costs(_ns2, {"f1": {}}, _date(2026, 11, 5))
+check("a day with no Claude call leaves the costs alone", _ns2 == {}, _ns2)
+_ns3 = {}
+daily.record_extra_costs(_ns3, {"around": {"claude_usage": {"input": 8_000_000, "output": 0}}}, _date(2026, 11, 5))
+check("so the budget guard sees them: a month of Around alone can reach the plain-notes mode", _budget.status(_ns3["costs"], _date(2026, 11, 6))["mode"] in ("cheaper", "plain"), _budget.status(_ns3["costs"], _date(2026, 11, 6)))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

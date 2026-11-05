@@ -51,7 +51,7 @@ for key, ev in (("ao", AO), ("rg", RG)):
         tail = re.sub(r"\((\d+)-(\d+)\)", lambda k: f"({min(int(k.group(1)), int(k.group(2)))})", tail)  # (7-3) -> (3): the loser's points
         tail = re.sub(r"\s+\(", "(", tail)
         tail = re.sub(r"\s*0-0 ret", " ret", tail).strip()   # ESPN writes a set that never started as 0-0
-        if (tail or "w/o") != (tennis.score(m).replace(" ret.", " ret")) and not (tail == "w/o" and tennis.score(m) == "w/o"):
+        if (tail or "w/o") != (tennis.score(m).replace(" ret.", " ret").replace("\u2013", "-")) and not (tail == "w/o" and tennis.score(m) == "w/o"):
             bad.append((tail, tennis.score(m)))
         if m["winner"]["name"].split()[-1] not in notes[m["id"]].split(" bt ")[0]:
             bad.append(("winner", m["id"]))
@@ -63,13 +63,13 @@ check("each seed number belongs to one player only, in every draw (no seed read 
 check("seeds run 1 to 32 in both draws", {s for (_, d, s) in seedmap if d == "mens-singles"} <= set(range(1, 33)) and {s for (_, d, s) in seedmap if d == "womens-singles"} <= set(range(1, 33)))
 finals = {(k, m["draw"]): m for k in MS for m in MS[k] if m["stage"] == "F"}
 f = finals[("ao", "mens-singles")]
-check("the 2026 Australian Open men's final: (1) Alcaraz beat (4) Djokovic 2-6 6-2 6-3 7-5", tennis.name(f["winner"]) == "(1) C. Alcaraz" and tennis.name(f["loser"]) == "(4) N. Djokovic" and tennis.score(f) == "2-6 6-2 6-3 7-5", (tennis.name(f["winner"]), tennis.score(f)))
+check("the 2026 Australian Open men's final: Alcaraz [1] def. Djokovic [4] 2-6 6-2 6-3 7-5", tennis.name(f["winner"]) == "C. Alcaraz [1]" and tennis.name(f["loser"]) == "N. Djokovic [4]" and tennis.score(f) == "2–6 6–2 6–3 7–5", (tennis.name(f["winner"]), tennis.score(f)))
 f = finals[("rg", "mens-singles")]
-check("a tie-break shows the loser's points: the Roland-Garros men's final had 6-7(5)", "6-7(5)" in tennis.score(f), tennis.score(f))
+check("a tie-break shows the loser's points: the Roland-Garros men's final had 6-7(5)", "6–7(5)" in tennis.score(f), tennis.score(f))
 f = finals[("rg", "womens-singles")]
 check("an unseeded finalist has no seed number", f["loser"]["seed"] is None and tennis.name(f["loser"]) == f["loser"]["short"], tennis.name(f["loser"]))
 ret = next(m for m in MS["ao"] if m["status"] == "retired" and m["stage"] == "R1" and m["loser"]["seed"] == 7)
-check("a retirement says so, and the set that never started is not shown (3-6 6-4 6-4 ret.)", tennis.score(ret) == "3-6 6-4 6-4 ret." and ret["loser"]["seed"] == 7, tennis.score(ret))
+check("a retirement says so, and the set that never started is not shown (3-6 6-4 6-4 ret.)", tennis.score(ret) == "3–6 6–4 6–4 ret." and ret["loser"]["seed"] == 7, tennis.score(ret))
 wo = next(m for m in MS["ao"] if m["status"] == "walkover")
 check("a walkover has no score and is marked w/o", tennis.score(wo) == "w/o" and wo["sets"] == [], tennis.score(wo))
 check("stage_reached: the finished Slam reached the final; an event with only first-round matches started reached R1",
@@ -98,14 +98,14 @@ every = [m for k in MS for m in MS[k]]
 indep = sorted(m["id"] for k, ev in (("ao", AO), ("rg", RG)) for m in MS[k] if (lambda n: n and n.group(2) and int(n.group(2)) <= 10)(re.match(r"^(?:\((\d+)\)\s+)?.+?\s+\([A-Z]{2,3}\)\s+bt\s+(?:\((\d+)\)\s+)?", notes_of(ev)[m["id"]])))
 check("top-10 seeds out: the matches picked (loser seed 1 to 10) are the same ones found by reading ESPN's notes a second way", sorted(m["id"] for m in every if m["loser"]["seed"] and m["loser"]["seed"] <= 10) == indep, len(indep))
 line = tennis.seeds_out([next(m for m in every if m["loser"]["seed"] == 1 and m["status"] == "final" and m["stage"] != "F")])[0]
-check("a top-seed-out line names the seed, who beat him, the round and the score", line.startswith("Top Seed Out: (1) ") and " beaten by " in line and " in the " in line and line.endswith("."), line)
+check("a top-seed-out line names the seed, who beat him, the round and the score", line.startswith("Top Seed Out: ") and " def. " in line and " [1] " in line and " beaten by " not in line and re.search(r"\((R\d|QF|SF)\)\.$", line), line)
 fin_loss = [m for m in every if m["stage"] == "F" and m["loser"]["seed"] and m["loser"]["seed"] <= 10]
 check("D's review, 2026-11-04: a top-10 seed beaten in a final is not a 'Top Seed Out' (he is the beaten finalist, said in the champion's milestone line)", fin_loss and tennis.seeds_out(fin_loss) == [], [m["loser"]["name"] for m in fin_loss])
 check("a seed 11 or lower going out is not a standout", tennis.seeds_out([m for m in every if m["loser"]["seed"] and m["loser"]["seed"] > 10]) == [])
 retline = tennis.seeds_out([ret])[0]
-check("a retirement line says retired against, with the score and ret.", "retired against" in retline and "3-6 6-4 6-4 ret." in retline, retline)
+check("a retirement line says retired against, with the score and ret.", " def. " in retline and "retired against" not in retline and "3–6 6–4 6–4 ret. (R1)." in retline and retline.startswith("Top Seed Out: N. Borges def. F. Auger-Aliassime [7]"), retline)
 fixed = tennis.seeds_out([{**wo, "loser": {**wo["loser"], "seed": 4}}])[0]
-check("a walkover line has no score and ends with the round", "withdrew before facing" in fixed and "w/o" not in fixed and fixed.endswith("round."), fixed)
+check("a walkover line has no score and ends with the round", "withdrew before facing" in fixed and "w/o" not in fixed and fixed.endswith("(R3)."), fixed)
 
 
 def by_notes(ev, key):
@@ -123,7 +123,7 @@ def by_notes(ev, key):
 for key, ev in (("ao", AO), ("rg", RG)):
     mine = sorted(m["id"] for m in MS[key] if tennis.comebacks([m]))
     check(f"{key}: comebacks from two sets down (men, best of five) equal those found a second way from the notes text ({len(mine)})", mine == sorted(by_notes(ev, key)), (mine, by_notes(ev, key)))
-check("a comeback line says who came back from two sets down against whom, and the round", all("came back from two sets down to beat" in c for k in MS for c in tennis.comebacks(MS[k])))
+check("a comeback line says who came back from two sets down against whom, and the round", all(" def. " in c and c.endswith(", from two sets down.") and re.search(r"\((R\d|QF|SF)\)", c) for k in MS for c in tennis.comebacks(MS[k])) and any(tennis.comebacks(MS[k]) for k in MS))
 three_set = [m for m in MS["ao"] if m["draw"] == "womens-singles"]
 check("women play best of three, so a women's match is never a two-sets-down comeback", tennis.comebacks(three_set) == [])
 ms_ret = copy.deepcopy(next(m for m in MS["ao"] if tennis.comebacks([m])))
@@ -155,7 +155,7 @@ check("a table per round and draw with the title as a centred header row, two ro
 men, women = html.split('<div class="tennis">')[1:]
 check("men's tables have 5 set columns, women's 3", men.count("<col ") == 6 and women.count("<col ") == 4, (men.count("<col "), women.count("<col ")))
 check("the tie-break points sit small on the loser's side of that set only (the 6-7(5) set: 6 over 7 with a small 5 beside the 6)", "6<sup>5</sup>" in men and men.count("<sup>") == 1, men)
-check("winner rows are marked for bold, with the seed in brackets", '<tr class="w"><td class="pl">(2) A. Zverev</td>' in men, men[:400])
+check("winner rows are marked for bold, with the seed in brackets", '<tr class="w"><td class="pl">A. Zverev [2]</td>' in men, men[:400])
 chk = tennis.stage_table("mens-singles", "R1", [ret, wo])
 check("a retirement and a walkover are tagged on the loser's row, in the first empty set cell (a walkover has all five empty)", chk.count('<td class="tag">ret.</td><td class="s"></td></tr>') == 1 and chk.count('<td class="tag">w/o</td>' + '<td class="s"></td>' * 4 + '</tr>') == 1, chk)
 full = {**ret, "status": "retired", "sets": [{"w": 6, "l": 4, "tb": None, "won": True}] * 5}
@@ -203,7 +203,7 @@ check("run: it reports the Slam's stage and that it is a major event (quarter-fi
 check("run: shown matches are remembered, and the next run shows nothing new", len(out["state"]["reported"]) == len(shown_all) and tennis.run(NOW_END, out["state"], FakeSource())["html"] == "")
 early = tennis.run(utc(2026, 1, 19, 12, 0), {}, FakeSource())
 check("run: on the second day it shows seeded first-round matches only, and the Slam is not yet a major event", early["slams"][0]["stage"] == "R1" and early["slams"][0]["major"] is False and early["stats"]["shown"] > 0
-      and "Quarter-finals" not in early["html"] and "First Round" in early["html"], early["slams"])
+      and "\u00b7 QF" not in early["html"] and "\u00b7 R1" in early["html"], early["slams"])
 qual = tennis.run(utc(2026, 1, 14, 12, 0), {}, FakeSource())
 check("run: during qualifying week the Slam is running but has no main-draw stage and nothing is shown", qual["slams"] == [{"name": "Australian Open", "stage": None, "major": False}] and qual["html"] == "", qual["slams"])
 mid = tennis.run(utc(2026, 1, 21, 12, 0), {}, FakeSource())
@@ -214,7 +214,7 @@ check("run: a broken source leaves tennis out, says so, and keeps the state", do
 prog = tennis.run(NOWP, {}, FakeSource())
 qf_done = raw_done[("mens-singles", "QF")]
 check("run: the page titles carry each round's progress, from the same count (the quarter-finals still being played, the last 16 complete)",
-      f'Men&#x27;s Singles · Quarter-finals<span class="prog">{qf_done}/4 played</span>' in prog["html"] and 'Fourth Round<span class="prog">8/8 complete</span>' in prog["html"], re.findall(r'colspan="\d">([^<]*)<', prog["html"]))
+      f'Men&#x27;s Singles · QF<span class="prog">{qf_done}/4 played</span>' in prog["html"] and 'R4<span class="prog">8/8 complete</span>' in prog["html"], re.findall(r'colspan="\d">([^<]*)<', prog["html"]))
 check("run: no Slam running gives nothing", tennis.run(NOW_END, {}, FakeSource(events=[]))["html"] == "")
 
 # ---- Withdrawals ----
@@ -308,7 +308,7 @@ check("independent: the top two of each group by our order (wins, then the match
 check("Group A: Alcaraz 3-0 (sets 6-1), de Minaur, Fritz, Musetti; Group B: Sinner 3-0 (6-0), Auger-Aliassime 2-1, Zverev, Shelton", [(x["p"]["short"], x["w"]) for x in st["Group A"]] == [("C. Alcaraz", 3), ("A. de Minaur", 1), ("T. Fritz", 1), ("L. Musetti", 1)] and [(x["p"]["short"], x["w"]) for x in st["Group B"]] == [("J. Sinner", 3), ("F. Auger-Aliassime", 2), ("A. Zverev", 1), ("B. Shelton", 0)] and (st["Group A"][0]["sw"], st["Group A"][0]["sl"]) == (6, 1))
 gt = tennis.group_table("ATP Finals", groups[0])
 check("the group table is titled 'ATP Finals · Group A', complete, with the top two marked Q and every player's P, W, L and sets", "ATP Finals · Group A" in gt and "complete: the top two go through" in gt and gt.count(">Q<") == 2 and "3</td><td class=\"s\">3</td><td class=\"s\">0</td><td class=\"s\">6-1" in gt, gt[:400])
-check("the closing note names the year, the tour and the final: Jannik Sinner beat Carlos Alcaraz 7-6 7-5 (6 and 5 games, the tie-break not shown)", tennis.finals_closing(ATPF, am) == "<p>That&#x27;s the 2025 ATP Finals. Jannik Sinner wins the title, beating Carlos Alcaraz 7-6 7-5.</p>", tennis.finals_closing(ATPF, am))
+check("the closing note names the year, the tour and the final: Jannik Sinner beat Carlos Alcaraz 7-6 7-5 (6 and 5 games, the tie-break not shown)", tennis.finals_closing(ATPF, am) == "<p>That&#x27;s the 2025 ATP Finals. Jannik Sinner wins the title, beating Carlos Alcaraz 7–6 7–5.</p>", tennis.finals_closing(ATPF, am))
 check("no final yet, no note", tennis.finals_closing(as_of(ATPF, datetime(2025, 11, 15, 23, 0, tzinfo=timezone.utc)), tennis.finals_matches_of(as_of(ATPF, datetime(2025, 11, 15, 23, 0, tzinfo=timezone.utc)))) == "")
 
 # a morning by morning run
@@ -319,7 +319,7 @@ r1b = tennis.run(M1, r1["state"], FinalsSource([ATPF]))
 check("run again the same morning: nothing is shown twice", r1b["html"] == "" and r1b["stats"]["shown"] == 0)
 M2 = datetime(2025, 11, 17, 2, 0, tzinfo=timezone.utc)
 r2 = tennis.run(M2, {}, FinalsSource([ATPF]))
-check("the morning after the final (17 November): the final's table, the semi-finals, the closing note; the older group matches are beyond the three-day lookback", "Men&#x27;s Singles · Final" in r2["html"] and "Semi-finals" in r2["html"] and "That&#x27;s the 2025 ATP Finals" in r2["html"] and r2["html"].index("Men&#x27;s Singles · Final") < r2["html"].index("Semi-finals") < r2["html"].index("That&#x27;s the 2025"), r2["stats"])
+check("the morning after the final (17 November): the final's table, the semi-finals, the closing note; the older group matches are beyond the three-day lookback", "Men&#x27;s Singles · Final" in r2["html"] and "\u00b7 SF" in r2["html"] and "That&#x27;s the 2025 ATP Finals" in r2["html"] and r2["html"].index("Men&#x27;s Singles · Final") < r2["html"].index("\u00b7 SF") < r2["html"].index("That&#x27;s the 2025"), r2["stats"])
 r2b = tennis.run(M2 + timedelta(days=1), r2["state"], FinalsSource([ATPF]))
 check("the next morning: not repeated, and the closing note is said once", "That&#x27;s the 2025" not in r2b["html"] and r2b["state"]["closed"] == r2["state"]["closed"] and len(r2["state"]["closed"]) == 1, r2b["html"][:100])
 wm = tennis.finals_matches_of(WTAF)

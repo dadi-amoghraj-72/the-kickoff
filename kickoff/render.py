@@ -31,6 +31,12 @@ class Raw(str):
     """Text that is already HTML (a cell with a gold span in it): esc() leaves it as it is."""
 
 
+def dash(text):
+    """A score or a range written with a hyphen between digits gets the en dash ('3-2' -> '3–2', '2026-27' -> '2026–27'): one dash in every score the page shows (D, 2026-11-05). Records (W-L) are written
+    without it by their own modules."""
+    return re.sub(r"(?<=\d)-(?=\d)", "\u2013", text)
+
+
 def esc(text):
     return str(text) if isinstance(text, Raw) else html.escape(str(text), quote=True)
 

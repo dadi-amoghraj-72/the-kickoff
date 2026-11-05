@@ -111,7 +111,7 @@ check("an elite round that just finished: the top decisive games and the draws, 
 rr = {"rounds": [{"id": "R12", "finished": True}, {"id": "R13", "finished": True}]}
 final = chess_live.run(Lichess([item("Tata Steel Chess 2027 | Masters", 5, "R13", 5, last_day_h=-2)], {"R13": pgn, "R12": game("Gukesh, D", "Giri, Anish", "1-0")}, rr), NOW)
 check("the last round of a round-robin: the winner and the points, summed from every round", any("wins on 2 points" in t and "Gukesh" in t for t, *_ in final), final)
-check("a minor event (tier 3) is ignored, and so is an old round", chess_live.run(Lichess([item("Club open", 3, "R13", 5), item("Tata Steel", 5, "R13", 60)], {"R13": pgn}), NOW) == [])
+check("a minor event (tier 3) is ignored, and so is an old round", chess_live.run(Lichess([item("Club open", 3, "R13", 5), item("Tata Steel", 5, "R13", 100)], {"R13": pgn}), NOW) == [])
 star = chess_live.run(Lichess([item("Chola Chess Open | Open", 4, "R13", 5)], {"R13": pgn}), NOW)
 check("the spotlight: a listed Indian player's win in a tier 4 event gets a line (the draw does not)", [t for t, *_ in star] == ["Gukesh beat Firouzja in Chola Chess Open, Round 13"], star)
 check("Lichess down gives nothing, never an error", chess_live.run(Lichess([], {}, boom=True), NOW) == [])

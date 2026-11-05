@@ -13,6 +13,7 @@ import os
 from datetime import datetime, timezone
 
 from kickoff import around, awards, bigstuff, budget, ontoday, young_sports, youngguns, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
+from kickoff import notes, settings
 from kickoff import state as state_files
 from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica, wikipedia
 from kickoff.sources import cricket as cricket_source
@@ -128,7 +129,7 @@ def real_today(now, day, st):
     """On Today and Games to Watch from the real sources: {"html", "failed"} (see kickoff.ontoday). The teams with a tracked NBA player come from the NBA state."""
     from kickoff import fixtures
     tracked_teams = set(dict(nba.TEAMS, **((st.get("nba") or {}).get("teams") or {})).values())        # every team with a tracked player (for "stars facing each other")
-    src = fixtures.Sources(espn_nba.Source(), espn_nfl.Source(), espn_mlb.Source(), espn_cricket.Feed(), jolpica.Api(), espn_tennis.Source())
+    src = fixtures.Sources(espn_nba.Source(), espn_nfl.Source(), espn_mlb.Source(), espn_cricket.Feed(), jolpica.Api(), espn_tennis.Source(), other_sports.Source())
     return ontoday.build(src, now, day, set(nba.FIRST), tracked_teams)
 
 
@@ -197,12 +198,45 @@ def build_edition(now, day, st, adapters, mode="normal", today=None, client=None
         stats["bigstuff"] = {"stories": len(events), "shown": [s["why"] for s in big["selected"]], "lead": lead, "promoted": promoted, "perf": (big["perf"] or {}).get("text")}
     except Exception as e:
         problems.append(f"big stuff ({type(e).__name__})")
+    try:
+        record_extra_costs(new_state, stats, day)
+    except Exception as e:
+        problems.append(f"costs ({type(e).__name__})")
     sections = order.assemble(content, lead, promoted)
     if not sections:
         sections = [{"id": "quiet", "title": "A quiet morning", "html": "<p>Nothing finished overnight in the sports we follow.</p>"}]
     edition = {"date": day.isoformat(), "dummy": False, "headlines": list(dict.fromkeys(headlines))[:3], "sections": sections,
                "built": now.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "claude": mode}
     return {"edition": edition, "state": new_state, "problems": problems, "failed": failed, "stats": stats}
+
+
+def extra_costs(stats):
+    """(dollars, calls) of the Claude calls made outside the football run: the season previews, Young Guns phrasing, the Around feed sorting and Interesting Stories."""
+    total, calls = 0.0, 0
+    for s in stats.values():
+        if isinstance(s, dict) and s.get("preview_cost"):
+            total += float(s["preview_cost"])
+            calls += 1
+    for sid, model in (("youngguns", None), ("around", settings.NEWS_MODEL)):
+        usage = (stats.get(sid) or {}).get("claude_usage")
+        if usage and (usage.get("input") or usage.get("output")):
+            total += notes.cost(usage, model)
+            calls += 1
+    return total, calls
+
+
+def record_extra_costs(new_state, stats, day):
+    """Adds those costs to the month's total in state["costs"] (where the football run already put its own), so the budget guard sees every Claude call."""
+    spent, calls = extra_costs(stats)
+    if not calls:
+        return
+    month = day.strftime("%Y-%m")
+    c = new_state.setdefault("costs", {}).setdefault(month, {"spent": 0.0, "calls": 0, "days": {}})
+    c["spent"] = round(c.get("spent", 0.0) + spent, 5)
+    c["calls"] = c.get("calls", 0) + calls
+    today_ = c.setdefault("days", {}).setdefault(day.isoformat(), {"spent": 0.0, "calls": 0})
+    today_["spent"] = round(today_.get("spent", 0.0) + spent, 5)
+    today_["calls"] = today_.get("calls", 0) + calls
 
 
 def make_client(b, env, use_claude):

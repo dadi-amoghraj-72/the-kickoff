@@ -170,7 +170,7 @@ def summary_html(games, played, total):
         items.append(("Underdogs won", f"{sum(1 for g in known if underdog_win(g))}/{len(known)}", "", ""))
     best = best_game(games)
     if best:
-        items.append(("Best game", "", f"{best['away']['abbr']} {best['away']['score']}-{best['home']['score']} {best['home']['abbr']}", ""))
+        items.append(("Best game", "", f"{best['away']['abbr']} {best['away']['score']}\u2013{best['home']['score']} {best['home']['abbr']}", ""))
     return r.summary_box(items)
 
 
@@ -377,7 +377,7 @@ def _result(p, games):
     mine, theirs = (g["home"], g["away"]) if g["home"]["abbr"] == p["team"] else (g["away"], g["home"])
     hi, lo = max(mine["score"], theirs["score"]), min(mine["score"], theirs["score"])
     verb = "tie with" if hi == lo else ("win over" if mine["score"] > theirs["score"] else "loss to")
-    return f"in the {hi}-{lo} {verb} {theirs['abbr']}"
+    return f"in the {hi}\u2013{lo} {verb} {theirs['abbr']}"
 
 
 def _s(x, one, many=None):
@@ -485,9 +485,9 @@ def game_highlights(games, boxes, limit=5):
         box = boxes.get(g["id"]) or {}
         plays = box.get("plays") or []
         if lo == 0:
-            items.append((3.0, f"Shutout: {win['short']} blanked {lose['short']} {hi}-0."))
+            items.append((3.0, f"Shutout: {win['short']} blanked {lose['short']} {hi}\u20130."))
         if hi - lo >= BLOWOUT:
-            items.append((2 + (hi - lo) / 100, f"Blowout: {win['short']} beat {lose['short']} {hi}-{lo}."))
+            items.append((2 + (hi - lo) / 100, f"Blowout: {win['short']} beat {lose['short']} {hi}\u2013{lo}."))
         comeback = winning_kick = None
         if plays:
             other = "home" if w == "away" else "away"
@@ -504,19 +504,19 @@ def game_highlights(games, boxes, limit=5):
                     longest = (int(y.group(1)), pl)
         ot = " in overtime" if g["ot"] else ""
         if comeback and winning_kick:  # one line, not two, for the same game
-            items.append((5.5 + comeback / 100, f"Comeback: {win['short']} came back from {comeback} points down to beat {lose['short']} {hi}-{lo}{ot}, {winning_kick[0]} kicking the {winning_kick[1]}-yard winner."))
+            items.append((5.5 + comeback / 100, f"Comeback: {win['short']} came back from {comeback} points down to beat {lose['short']} {hi}\u2013{lo}{ot}, {winning_kick[0]} kicking the {winning_kick[1]}-yard winner."))
         elif comeback:
-            items.append((5 + comeback / 100, f"Comeback: {win['short']} came back from {comeback} points down to beat {lose['short']} {hi}-{lo}{ot}."))
+            items.append((5 + comeback / 100, f"Comeback: {win['short']} came back from {comeback} points down to beat {lose['short']} {hi}\u2013{lo}{ot}."))
         elif winning_kick:
-            items.append((4.5, f"Game-winner: {winning_kick[0]} ({win['abbr']}) kicked a {winning_kick[1]}-yard field goal {winning_kick[2]} to beat {lose['short']} {hi}-{lo}."))
+            items.append((4.5, f"Game-winner: {winning_kick[0]} ({win['abbr']}) kicked a {winning_kick[1]}-yard field goal {winning_kick[2]} to beat {lose['short']} {hi}\u2013{lo}."))
         elif g["ot"]:
-            items.append((2.0, f"Overtime: {win['short']} beat {lose['short']} {hi}-{lo}."))
+            items.append((2.0, f"Overtime: {win['short']} beat {lose['short']} {hi}\u2013{lo}."))
         for side in (win, lose):
             t = (box.get("teamStats") or {}).get(side["id"]) or {}
             giveaways = int(num(t.get("turnovers", 0)))
             if giveaways >= TURNOVERS:
                 opp = lose if side is win else win
-                items.append((2.0 + giveaways / 100, f"Giveaways: {side['short']} turned the ball over {giveaways} times in the {hi}-{lo} {'win over' if side is win else 'loss to'} {opp['short']}."))
+                items.append((2.0 + giveaways / 100, f"Giveaways: {side['short']} turned the ball over {giveaways} times in the {hi}\u2013{lo} {'win over' if side is win else 'loss to'} {opp['short']}."))
     if longest and longest[0] >= LONG_PLAY:
         items.append((3.5, f"Longest play: {_plain(longest[1]['text'])} for a touchdown ({longest[1]['team']})."))
     return sorted(items, key=lambda t: -t[0])[:limit]
@@ -615,7 +615,7 @@ def gold_numbers(text):
     stats, sep, result = text.rpartition(" in the ")
     if not sep:
         stats, result = text, ""
-    marked = re.sub(r"(?<![\w-])(\d+(?:/\d+)?)(?![\w-])", r'<span class="n">\1</span>', r.esc(stats))
+    marked = re.sub(r"(?<![\w\u2013-])(\d+(?:/\d+)?)(?![\w\u2013-])", r'<span class="n">\1</span>', r.esc(stats))
     return marked + (" in the " + r.esc(result) if sep else "")
 
 
@@ -623,8 +623,8 @@ def emphasise(text, teams):
     """A highlight line with something to catch the eye: the team names in bold and the key figures in gold (scores like 33-30, '14 points', '42-yard',
     '95 Yd', '4 times') and the runner of a longest play in bold. Long runs of plain white text get skipped on a phone, so every highlight carries both."""
     out = r.esc(text)
-    out = re.sub(r"(?<![\w-])(\d+-\d+)(?![\w-])", r'<span class="n">\1</span>', out)
-    out = re.sub(r"(?<![\w>-])(\d+)(?=-yard|\s+(?:points|Yd|yards|times)\b)", r'<span class="n">\1</span>', out)
+    out = re.sub(r"(?<![\w\u2013-])(\d+[\u2013-]\d+)(?![\w\u2013-])", r'<span class="n">\1</span>', out)
+    out = re.sub(r"(?<![\w>\u2013-])(\d+)(?=-yard|\s+(?:points|Yd|yards|times)\b)", r'<span class="n">\1</span>', out)
     out = re.sub(r"(?<![\w>])([A-Z][\w.'-]+(?: [A-Z][\w.'-]+)+)(?= <span class=\"n\">\d+</span> Yd)", r"<strong>\1</strong>", out)   # the player of a longest play
     for name in sorted(teams, key=len, reverse=True):
         out = re.sub(rf"(?<![\w>]){re.escape(r.esc(name))}(?![\w<])", lambda m: f"<strong>{m.group(0)}</strong>", out)
@@ -665,7 +665,7 @@ def closing_html(e):
     name = next(n["headline"] for n in c.get("notes", []) if n.get("headline", "").startswith("Super Bowl"))
     year = (e.get("season") or {}).get("year")
     text = (f"That's the {year} NFL season. The {win['team']['shortDisplayName']} are {name} champions, "
-            f"beating the {lose['team']['shortDisplayName']} {win['score']}-{lose['score']}.")
+            f"beating the {lose['team']['shortDisplayName']} {win['score']}\u2013{lose['score']}.")
     return f"<p>{r.esc(text)}</p>", year
 
 

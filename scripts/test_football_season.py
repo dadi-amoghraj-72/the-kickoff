@@ -41,8 +41,8 @@ check("a table with a club that has not played 38 gives no note (the last day is
 
 # ---- the cup finals ----
 check("the FA Cup final of 16 May 2026 is found: stage 'final', Manchester City won 1-0 away at Wembley (ESPN lists Chelsea as the home side)", FA[0]["stage"] == "final" and FA[0]["winner"] == "away" and (FA[0]["home_score"], FA[0]["away_score"]) == (0, 1), FA[0])
-check("the FA Cup note: the winners and the score from the winner's side", text(fs.final_note("FA Cup", FA, 2025)) == "That's the 2025-26 FA Cup. Manchester City are the winners, beating Chelsea 1-0.", text(fs.final_note("FA Cup", FA, 2025)))
-check("the Champions League final went to penalties: PSG are champions 'on penalties after a 1-1 draw', Arsenal the beaten side", text(fs.final_note("Champions League", CL, 2025)) == "That's the 2025-26 Champions League. Paris Saint-Germain are champions, beating Arsenal on penalties after a 1-1 draw.", text(fs.final_note("Champions League", CL, 2025)))
+check("the FA Cup note: the winners and the score from the winner's side", text(fs.final_note("FA Cup", FA, 2025)) == "That's the 2025-26 FA Cup. Manchester City are the winners, beating Chelsea 1–0.", text(fs.final_note("FA Cup", FA, 2025)))
+check("the Champions League final went to penalties: PSG are champions 'on penalties after a 1–1 draw', Arsenal the beaten side", text(fs.final_note("Champions League", CL, 2025)) == "That's the 2025-26 Champions League. Paris Saint-Germain are champions, beating Arsenal on penalties after a 1–1 draw.", text(fs.final_note("Champions League", CL, 2025)))
 check("a match that is not a final, not finished or has no winner gives no note", fs.final_note("FA Cup", [dict(FA[0], stage="semifinals")], 2025) == "" and fs.final_note("FA Cup", [dict(FA[0], completed=False)], 2025) == "" and fs.final_note("FA Cup", [dict(FA[0], winner=None)], 2025) == "" and fs.final_note("FA Cup", [], 2025) == "")
 
 # ---- the awards pages ----

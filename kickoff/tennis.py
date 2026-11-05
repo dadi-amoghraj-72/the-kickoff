@@ -21,6 +21,7 @@ TOP_SEED = 10
 STAGES = {"Round 1": "R1", "Round 2": "R2", "Round 3": "R3", "Round 4": "R4", "Quarterfinal": "QF", "Semifinal": "SF", "Final": "F"}
 ORDER = ["R1", "R2", "R3", "R4", "QF", "SF", "F"]
 STAGE_NAME = {"R1": "First Round", "R2": "Second Round", "R3": "Third Round", "R4": "Fourth Round", "QF": "Quarter-finals", "SF": "Semi-finals", "F": "Final"}
+STAGE_SHORT = {"R1": "R1", "R2": "R2", "R3": "R3", "R4": "R4", "QF": "QF", "SF": "SF", "F": "Final"}     # the official abbreviations, for table titles (D, 2026-11-05: R32, R16, QF ...); prose keeps the words
 PER_DRAW = {"R1": 64, "R2": 32, "R3": 16, "R4": 8, "QF": 4, "SF": 2, "F": 1}  # matches in each round of a 128-player singles draw
 REACHES = {"R4": "the quarter-finals", "QF": "the semi-finals", "SF": "the final"}  # what winning that round means
 DRAW = {"mens-singles": "Men's Singles", "womens-singles": "Women's Singles"}
@@ -51,7 +52,7 @@ def score(m, tb=True):
     """'6-3 7-6(2) 5-7 6-2', with ' ret.' after a retirement and 'w/o' for a walkover."""
     if m["status"] == "walkover":
         return "w/o"
-    text = " ".join(f"{s['w']}-{s['l']}" + (f"({s['tb']})" if tb and s["tb"] is not None else "") for s in m["sets"])
+    text = " ".join(f"{s['w']}\u2013{s['l']}" + (f"({s['tb']})" if tb and s["tb"] is not None else "") for s in m["sets"])
     return text + (" ret." if m["status"] == "retired" else "")
 
 
@@ -135,7 +136,8 @@ def dates_line(matches):
 
 
 def name(p, short=True):
-    return (f"({p['seed']}) " if p["seed"] else "") + (p["short"] if short else p["name"])
+    """'C. Alcaraz [1]': the seed in square brackets after the name, as every seed or rank on the page (D, 2026-11-05)."""
+    return (p["short"] if short else p["name"]) + (f" [{p['seed']}]" if p["seed"] else "")
 
 
 # ---- Standouts ------------------------------------------------------------------------------------
@@ -145,9 +147,11 @@ def seeds_out(matches):
     for m in matches:
         s = m["loser"]["seed"]
         if s is not None and s <= TOP_SEED and m["stage"] != "F":     # the beaten finalist is the champion's milestone line, not a shock
-            how = {"final": "beaten by", "retired": "retired against", "walkover": "withdrew before facing"}[m["status"]]
-            out.append(f"Top Seed Out: {name(m['loser'])} {how} {name(m['winner'])} in the {STAGE_NAME[m['stage']].lower()}"
-                       + ("" if m["status"] == "walkover" else f", {score(m)}") + ".")
+            stage = STAGE_SHORT[m["stage"]]
+            if m["status"] == "walkover":
+                out.append(f"Top Seed Out: {name(m['loser'])} withdrew before facing {name(m['winner'])} ({stage}).")
+            else:                                                   # the one standard form: the winner first, 'def.', the loser (D, 2026-11-05), a retirement ends the score with 'ret.'
+                out.append(f"Top Seed Out: {name(m['winner'])} def. {name(m['loser'])} {score(m)} ({stage}).")
     return out
 
 
@@ -158,7 +162,7 @@ def comebacks(matches):
         s = m["sets"]
         if (m["draw"] == "mens-singles" and m["status"] == "final" and len(s) == 5 and not s[0]["won"] and not s[1]["won"]
                 and sum(x["won"] for x in s) == 3):
-            out.append(f"Comeback: {name(m['winner'])} came back from two sets down to beat {name(m['loser'])}, {score(m)}, in the {STAGE_NAME[m['stage']].lower()}.")
+            out.append(f"Comeback: {name(m['winner'])} def. {name(m['loser'])} {score(m)} ({STAGE_SHORT[m['stage']]}), from two sets down.")
     return out
 
 
@@ -253,7 +257,7 @@ def stage_table(draw, stage, matches, done=None, title=None, sets=None):
                 after = f' <span class="muted">{tag}</span>' if tag else ""
             rows.append(f'<tr class="{"w" if winner_row else "l"}"><td class="pl">{r.esc(name(p))}{after}</td>{cells}</tr>')
     sub = f'<span class="prog">{progress_text(stage, done)}</span>' if done is not None else ""
-    return (f'<div class="tennis"><table><colgroup>{cols}</colgroup><thead><tr><th class="tt" colspan="{n + 1}">{r.esc(title or f"{DRAW[draw]} · {STAGE_NAME[stage]}")}{sub}</th></tr></thead>'
+    return (f'<div class="tennis"><table><colgroup>{cols}</colgroup><thead><tr><th class="tt" colspan="{n + 1}">{r.esc(title or f"{DRAW[draw]} · {STAGE_SHORT[stage]}")}{sub}</th></tr></thead>'
             f'<tbody>{"".join(rows)}</tbody></table></div>')
 
 
@@ -277,6 +281,7 @@ def event_html(event, new, progress=None):
 
 TOUR_STAGES = {"Group Stage": "G", "Semifinal": "SF", "Final": "F"}
 TOUR_NAME = {"G": "Group Stage", "SF": "Semi-finals", "F": "Final"}
+TOUR_TITLE = {"G": "Group Stage", "SF": "SF", "F": "Final"}          # table titles use the abbreviation
 TOUR_ORDER = ["G", "SF", "F"]
 
 
@@ -381,7 +386,7 @@ def finals_html(event, new, all_matches):
     for stage in reversed(TOUR_ORDER):
         part = [m for m in new if m["stage"] == stage]
         if part:
-            html += stage_table(draw, stage, part, title=f"{DRAW[draw]} · {TOUR_NAME[stage]}", sets=3)
+            html += stage_table(draw, stage, part, title=f"{DRAW[draw]} · {TOUR_TITLE[stage]}", sets=3)
     if any(m["stage"] == "G" for m in new):
         html += "".join(group_table(tour, g) for g in finals_groups(all_matches))
     return html

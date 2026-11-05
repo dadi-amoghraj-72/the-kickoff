@@ -36,7 +36,7 @@ def _paragraphs(written, match_by_id):
     out = ""
     for mid, w in written.items():
         m = match_by_id[mid]
-        out += f"<p>{r.bold_names(w['note'], (m['home']['name'], m['away']['name'], m['home']['short'], m['away']['short']))}</p>"
+        out += f"<p>{r.dash(r.bold_names(w['note'], (m['home']['name'], m['away']['name'], m['home']['short'], m['away']['short'])))}</p>"
     return out
 
 

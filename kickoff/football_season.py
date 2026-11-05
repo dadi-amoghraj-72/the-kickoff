@@ -39,11 +39,11 @@ def final_note(competition, matches, year):
         w_score, l_score = (hs, as_) if m["winner"] == "home" else (as_, hs)
         status = (m.get("status") or "").lower()
         if "penalt" in status:
-            how = f"on penalties after a {hs}-{as_} draw"
+            how = f"on penalties after a {hs}\u2013{as_} draw"
         elif "extra" in status:
-            how = f"{w_score}-{l_score} after extra time"
+            how = f"{w_score}\u2013{l_score} after extra time"
         else:
-            how = f"{w_score}-{l_score}"
+            how = f"{w_score}\u2013{l_score}"
         word = "champions" if competition == "Champions League" else "the winners"
         return f"<p>{r.esc(f'''That's the {label(year)} {competition}. {win['name']} are {word}, beating {lose['name']} {how}.''')}</p>"
     return ""

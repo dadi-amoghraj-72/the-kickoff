@@ -1,4 +1,4 @@
-"""Young Guns candidates, one function per sport: the notable performances of a sport's finished games, checked for youth (kickoff/youngguns.py).
+"""Young Guns candidates (full names everywhere: D does not know the young players, as with golfers; 2026-11-05), one function per sport: the notable performances of a sport's finished games, checked for youth (kickoff/youngguns.py).
 
 Each takes the players the sport has already read, the saved state ({"watch", "ages"}; `ages` is filled in with new lookups) and the edition's date, and returns candidates.
 A threshold is the usual one, 70% of it for a player on the watchlist; the lookup happens only for a player who already clears the lowest threshold, so a busy night costs a
@@ -96,7 +96,7 @@ def soccer(players, state, day, get=None):
         if not yg.is_young(age, rookie):
             continue
         bits = ([f"{p['goals']} goal" + ("s" if p["goals"] > 1 else "")] if p["goals"] else []) + ([f"{p['assists']} assist" + ("s" if p["assists"] > 1 else "")] if p["assists"] else [])
-        out.append(yg.make("soccer", p["id"], p["short"], p["team_abbr"], ", ".join(bits) + (f" ({p['match']})" if p.get("match") else ""), p["goals"] * 5 + p["assists"] * 3, age, False, day))
+        out.append(yg.make("soccer", p["id"], p["name"], p["team_abbr"], ", ".join(bits) + (f" ({p['match']})" if p.get("match") else ""), p["goals"] * 5 + p["assists"] * 3, age, False, day))
     return out
 
 
@@ -112,5 +112,5 @@ def tennis(matches, state, day, get=None):
         if not yg.is_young(age, rookie):
             continue
         why = f"beat ({l['seed']}) {l['short']}" if l.get("seed") else f"beat {l['short']}"
-        out.append(yg.make("tennis", w["id"], w["short"], m.get("draw", ""), f"{why} {tennis_mod.score(m, tb=False)}", 10 + tennis_mod.ORDER.index(m["stage"]) * 3 + (5 if l.get("seed") else 0), age, False, day))
+        out.append(yg.make("tennis", w["id"], w["name"], m.get("draw", ""), f"{why} {tennis_mod.score(m, tb=False)}", 10 + tennis_mod.ORDER.index(m["stage"]) * 3 + (5 if l.get("seed") else 0), age, False, day))
     return out
