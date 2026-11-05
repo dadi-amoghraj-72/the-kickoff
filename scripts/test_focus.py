@@ -68,22 +68,24 @@ check("an edition two days on has no Arsenal match", focus.build(focus.ARSENAL, 
 # ---- Next up ----
 nxt = out["next"]
 check("next up: Slavia Prague away in the Champions League, in Singapore time",
-      nxt[0]["opponent"] == "Slavia Prague" and nxt[0]["competition"] == "UEFA Champions League" and nxt[0]["venue"] == "away" and nxt[0]["when"] == "Thursday 5 November, 4:00am SGT", nxt[0])
-check("then Hull at home on Saturday night", nxt[1]["venue"] == "home" and nxt[1]["when"] == "Saturday 7 November, 11:00pm SGT", nxt[1])
+      nxt[0]["opponent"] == "Slavia Prague" and nxt[0]["competition"] == "UEFA Champions League" and nxt[0]["venue"] == "away" and nxt[0]["when"] == "Thu 5 Nov, 4am SGT", nxt[0])
+check("then Hull at home on Saturday night", nxt[1]["venue"] == "home" and nxt[1]["when"] == "Sat 7 Nov, 11pm SGT", nxt[1])
 later = focus.next_up(espn.get_team_games("359", "eng.1", upcoming=True), "359", datetime(2026, 11, 8, tzinfo=timezone.utc))
 check("fixtures already past are skipped: from 8 Nov the next is Newcastle away (kick-off 21 Nov UTC = 22 Nov in Singapore)",
-      later[0]["opponent"] == "Newcastle United" and later[0]["when"] == "Sunday 22 November, 1:30am SGT", later[0])
-check("kick-off times convert across midnight", focus.when_sgt("2026-11-04T20:00Z") == "Thursday 5 November, 4:00am SGT"
-      and focus.when_sgt("2026-11-07T15:00Z") == "Saturday 7 November, 11:00pm SGT" and focus.when_sgt("2026-11-01T16:30Z") == "Monday 2 November, 12:30am SGT")
+      later[0]["opponent"] == "Newcastle United" and later[0]["when"] == "Sun 22 Nov, 1:30am SGT", later[0])
+check("kick-off times convert across midnight", focus.when_sgt("2026-11-04T20:00Z") == "Thu 5 Nov, 4am SGT"
+      and focus.when_sgt("2026-11-07T15:00Z") == "Sat 7 Nov, 11pm SGT" and focus.when_sgt("2026-11-01T16:30Z") == "Mon 2 Nov, 12:30am SGT")
 html = focus.next_up_html(nxt)
-check("the next-up line reads naturally", html.startswith("<p><strong>Next up:</strong> ") and "(away)" in html and "Then " in html and html.endswith("</p>"), html)
+check("the next-up block: a heading, then one gold-diamond bullet a game, 'Sat 7 Nov, 11pm · Hull City (home) · EPL', the next three, in date order",
+      html.startswith("<p><strong>Next up</strong></p><ul") and html.count("<li>") == 3 and "<li>Thu 5 Nov, 4am · Slavia Prague (away) · CL</li>" in html and "<li>Sat 7 Nov, 11pm · Hull City (home) · EPL</li>" in html, html)
+check("competitions are short (EPL, CL, LC) except the FA Cup, and the Women's ones keep their names", [focus.short_comp(x) for x in ("English Premier League", "UEFA Champions League", "English League Cup", "Carabao Cup", "FA Cup", "UEFA Women's Champions League")] == ["EPL", "CL", "LC", "LC", "FA Cup", "UEFA Women's Champions League"])
 check("no fixtures, no line", focus.next_up_html([]) == "")
 
 # ---- Arsenal Women ----
 wg = espn.get_team_games("19973", "eng.w.1", today=date(2026, 11, 2))
 check("Women's games are read the same way", len(wg) > 0 and all(g["completed"] for g in wg), len(wg))
 wn = focus.next_up(espn.get_team_games("19973", "eng.w.1", upcoming=True), "19973", NOW)
-check("Women's next two fixtures have Singapore times", len(wn) == 2 and all(x["when"].endswith("SGT") for x in wn), wn)
+check("Women's next fixtures have Singapore times", len(wn) >= 2 and all(x["when"].endswith("SGT") for x in wn), wn)
 
 # ---- A note through the safety check ----
 good = ("Arsenal won 1-0 at Liverpool, Kai Havertz scoring in the 16th minute from a Declan Rice cross. "

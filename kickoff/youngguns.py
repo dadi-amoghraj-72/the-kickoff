@@ -97,12 +97,21 @@ def why(c, watched_flag):
     return f"{c['sport']} {'rookie' if c['rookie'] else 'under 21'}, score {c['score']}" + (", watchlist" if watched_flag else "")
 
 
-def html(lines):
-    """Gold figures like the other standouts lists; '' when nobody was notable (the section is then simply not there)."""
+def html(lines, sports=None):
+    """Gold figures like the other standouts lists; one blank row between sports (sports: the sport of each line, in the same order); '' when nobody was notable (the section is then simply not there)."""
     if not lines:
         return ""
     gold = lambda t: re.sub(r"(?<![\w-])(\d+)(?=\s)", r'<span class="n">\1</span>', r.esc(t))  # noqa: E731
-    return '<ul class="standouts">' + "".join(f"<li>{gold(t)}</li>" for t in lines) + "</ul>"
+    sports = sports or [None] * len(lines)
+    gap = lambda i: ' class="sport-gap"' if i and sports[i] != sports[i - 1] else ""  # noqa: E731
+    items = "".join(f"<li{gap(i)}>{gold(t)}</li>" for i, t in enumerate(lines))
+    return '<ul class="standouts yg">' + items + "</ul>"
+
+
+def grouped(picked):
+    """The picks with each sport together (sports in the order of their best player, players keep their order inside a sport)."""
+    order = list(dict.fromkeys(c["sport"] for c in picked))
+    return sorted(picked, key=lambda c: order.index(c["sport"]))
 
 
 # ---- Claude phrasing (optional) -----------------------------------------------------------------
@@ -140,8 +149,8 @@ def phrase(client, found, call_json=None):
 def build(found, state, day, client=None):
     """Everything for the morning: {"html", "state", "lines", "why", "cost_usage"}. found: candidates from every sport (already checked for youth and notability).
     The watchlist counts today's picks; Claude phrases the lines when a client is given (the plain line is the fallback for any line that fails the check)."""
-    picked = select(found)
+    picked = grouped(select(found))
     new_state = update_watch(state, found, day)
     written, usage = phrase(client, picked)
     lines = [written.get(watch_key(c)) or plain_line(c) for c in picked]
-    return {"html": html(lines), "state": new_state, "lines": lines, "plain": [plain_line(c) for c in picked], "why": [why(c, watched(state, c["sport"], c["id"])) for c in picked], "usage": usage}
+    return {"html": html(lines, [c["sport"] for c in picked]), "state": new_state, "lines": lines, "plain": [plain_line(c) for c in picked], "why": [why(c, watched(state, c["sport"], c["id"])) for c in picked], "usage": usage}

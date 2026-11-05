@@ -195,7 +195,7 @@ def build_edition(now, day, st, adapters, mode="normal", today=None, client=None
         if big["headlines"]:
             headlines = big["headlines"]
         lead, promoted = big["lead"], big["promoted"]
-        stats["bigstuff"] = {"stories": len(events), "shown": [s["why"] for s in big["selected"]], "lead": lead, "promoted": promoted, "perf": (big["perf"] or {}).get("text")}
+        stats["bigstuff"] = {"stories": len(events), "shown": [s["why"] for s in big["selected"]], "lead": lead, "promoted": promoted, "stars": [p_["text"] for p_ in big["stars"]]}
     except Exception as e:
         problems.append(f"big stuff ({type(e).__name__})")
     try:

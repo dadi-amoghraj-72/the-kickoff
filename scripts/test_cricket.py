@@ -376,5 +376,7 @@ ipl_rows = [{"pos": 1, "team": "RCB", "name": "Royal Challengers Bengaluru", "p"
 tbl = ck.table_html("IPL", ipl_rows)
 check("the IPL table: only the Sunrisers Hyderabad row carries the gold class; another league's table never does", tbl.count('class="hl"') == 1 and "SRH" in tbl.split('class="hl"')[1].split("</tr>")[0] and ck.table_html("WBBL", ipl_rows).count("hl") == 0, tbl[:300])
 
+check("singular figures: 1 four and 1 six, never '1 sixes' (D, 2026-11-05)", "1 four and 1 six against" in ck.standout_html({**iyer, "fours": 1, "sixes": 1}) and "2 fours and 0 sixes" in ck.standout_html({**iyer, "fours": 2, "sixes": 0}))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

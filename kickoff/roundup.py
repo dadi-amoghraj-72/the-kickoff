@@ -47,10 +47,10 @@ def lines(facts, round_size, period="day", info=None):
         if upsets:
             top = max(upsets, key=lambda x: _favourite(x)[1])
             team, pct = _favourite(top)
-            out.append(("Biggest upset", "", top.get("codes") or top["match"], f"{team} had a {pct}% chance"))
+            out.append(("Biggest upset", "", r.dash(top.get("codes") or top["match"]), f"{team} had a {pct}% chance"))
     game = next((x for x in rows if x["match"] == facts.get("game_of_the_night")), None)
     if game:
-        out.append(("Best game", "", game.get("codes") or game["match"], ""))
+        out.append(("Best game", "", r.dash(game.get("codes") or game["match"]), ""))
     return out
 
 

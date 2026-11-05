@@ -203,7 +203,7 @@ out5 = football.run(date(2026, 11, 2), client=None, st={}, now=NOW)
 ids = [s["id"] for s in out5["sections"]]
 ars = next((s["html"] for s in out5["sections"] if s["id"] == "arsenal"), "")
 check("when Arsenal played, an Arsenal section comes first, then Football", ids[0] == "arsenal", ids)
-check("the Arsenal section has the result, the next fixtures in Singapore time and Arsenal Women", "Liverpool 0–1 Arsenal" in re.sub(r"<[^>]+>", "", ars) and "Next up:" in ars and "SGT" in ars and "Arsenal Women" in ars, ars[:300])
+check("the Arsenal section has the result, the next fixtures in Singapore time and Arsenal Women", "Liverpool 0–1 Arsenal" in re.sub(r"<[^>]+>", "", ars) and "Next up</strong>" in ars and "(away) · CL" in ars and "Arsenal Women" in ars, ars[:300])
 check("Arsenal's own injury news goes in the Arsenal section, not Football", "Bukayo Saka" in ars and "Bukayo Saka" not in next(s["html"] for s in out5["sections"] if s["id"] == "football").split("FPL Corner")[0])
 check("the first headline is Arsenal's result", out5["headlines"][0] == "Arsenal: Liverpool 0–1 Arsenal", out5["headlines"])
 
@@ -216,6 +216,13 @@ fpl.get_json = lambda *a, **k: (_ for _ in ()).throw(SourceError("HTTP 500"))
 feeds.get_bytes = lambda *a, **k: (_ for _ in ()).throw(SourceError("HTTP 500"))
 dead = football.run(DAY, client=None, st={}, now=NOW)
 check("with every source down it still returns, with no sections and a long problem list (no crash)", dead["sections"] == [] and len(dead["problems"]) >= 8, (dead["sections"], dead["problems"]))
+
+# ---- the underdog asterisk on the results (D, 2026-11-05)
+from kickoff import scoreboard as _sb
+_m = {"id": "1", "home": {"id": "h", "short": "Fenerbahce", "name": "Fenerbahce"}, "away": {"id": "a", "short": "Liverpool", "name": "Liverpool"}, "home_score": 3, "away_score": 2, "details": [], "goals": []}
+_plain = _sb.scores_html([dict(_m)])
+_dog = _sb.scores_html([{**_m, "dog": "home"}])
+check("football results: the underdog winner carries the asterisk, the other team does not, and a one-line key explains it", "Fenerbahce<span class=\"dog\"" in _dog and "Liverpool<span" not in _dog and "Underdog won" in _dog and "dog" not in _plain, _dog[:300])
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

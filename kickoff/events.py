@@ -166,7 +166,7 @@ def kohli_innings(entry):
 
 
 def kohli_perf(runs):
-    """His innings on the 0-100 Performance of the Day scale: 30 plus 0.9 a run plus 15 because he is D's favourite player. A duck stays under the bar; 12 runs clears it."""
+    """His innings on the 0-100 Performance of the Day scale: 30 plus 0.9 a run plus 15 because he is D's favourite player. A duck stays under the bar; 28 runs clears it."""
     return 30 + 0.9 * runs + 15
 
 

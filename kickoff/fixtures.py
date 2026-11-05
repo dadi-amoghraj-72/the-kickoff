@@ -69,7 +69,7 @@ class Sources:
         return self.mlb_s.scoreboard(day)
 
     def cricket(self):
-        return self.cricket_f.upcoming(lambda d: cricket_mod.classify(d)["kind"] is not None)
+        return self.cricket_f.upcoming(lambda d: cricket_mod.classify(d)["kind"] is not None, under_way=True)
 
     def f1(self, season):
         return self.f1_a.schedule(season)
@@ -98,7 +98,8 @@ def football(src, now, end, weekday, watch=False):
                 continue
             for m in matches:
                 when = espn.parse_time(m["kickoff"])
-                if m.get("completed") or not (now <= when < end):
+                live = not m.get("completed") and when < now <= when + espn.MATCH_LENGTH        # kicked off already, not over: under way now
+                if m.get("completed") or not (live or now <= when < end):
                     continue
                 ids = [str(m["home"]["id"]), str(m["away"]["id"])]
                 mine = any(i in events.MY_FOOTBALL for i in ids)
@@ -126,7 +127,9 @@ def football(src, now, end, weekday, watch=False):
                     if all(tables[lg].get(i, 99) <= TOP for i in ids):
                         flags.add("clash")
                 score = importance.story_score("football", stage, mine, listed, margin_bonus=2 if flags else 0, weekday=weekday)
-                out.append(fixture("football", name, f"{name.replace('UEFA ', '')}: {m['home']['name']} v {m['away']['name']}", when, score, mine, stage, flags))
+                if live:
+                    flags.add("live")
+                out.append(fixture("football", name, f"{name.replace('UEFA ', '')}: {m['home']['name']} v {m['away']['name']}", now if live else when, score, mine, stage, flags))
     return out
 
 
@@ -139,16 +142,19 @@ def nba(src, now, end, weekday, mine_teams=(), tracked_teams=(), watch_stars=Fal
             continue
         for e in sb.get("events", []):
             g = nba_mod.parse_game(e)
-            if g["status"] != "scheduled" or g["phase"] == "preseason" or not (now <= g["date"] < end):
+            live = g["status"] == "live" and g["date"] < now
+            if g["status"] not in ("scheduled", "live") or g["phase"] == "preseason" or not (live or now <= g["date"] < end):
                 continue
             a, h = g["away"], g["home"]
             mine = a["abbr"] in mine_teams or h["abbr"] in mine_teams
             stage = "playoff" if g["phase"] == "playoffs" else "knockout" if g["phase"] == "playin" or g.get("cup") in ("Quarterfinals", "Semifinals") else "final" if g.get("cup") == "Championship" else "regular"
             flags = {"stars"} if a["abbr"] in tracked_teams and h["abbr"] in tracked_teams else set()
-            if stage == "regular" and not (mine or watch_stars and flags):         # a plain regular-season game: D's five teams only (the stars' clashes only for Games to Watch)
+            if live:
+                flags.add("live")
+            if stage == "regular" and not (mine or watch_stars and flags - {"live"}):         # a plain regular-season game: D's five teams only (the stars' clashes only for Games to Watch)
                 continue
-            out.append(fixture("nba", "NBA", f"NBA: {a['name']} at {h['name']}" + (f" · {g['series']}" if g.get("series") else ""), g["date"],
-                               importance.story_score("nba", stage, mine, margin_bonus=6 if flags else 0, weekday=weekday), mine, stage, flags))
+            out.append(fixture("nba", "NBA", f"NBA: {a['name']} at {h['name']}" + (f" · {g['series']}" if g.get("series") else ""), now if live else g["date"],
+                               importance.story_score("nba", stage, mine, margin_bonus=6 if flags - {"live"} else 0, weekday=weekday), mine, stage, flags))
     return out
 
 
@@ -170,7 +176,8 @@ def nfl(src, now, end, weekday):
     for b in boards:
         for e in b.get("events", []):
             g = nfl_mod.parse_game(e)
-            if g["status"] != "scheduled" or not (now <= g["date"] < end):
+            live = g["status"] == "live" and g["date"] < now
+            if g["status"] not in ("scheduled", "live") or not (live or now <= g["date"] < end):
                 continue
             a, h = g["away"], g["home"]
             mine = a["abbr"] in events.MY_NFL or h["abbr"] in events.MY_NFL
@@ -178,7 +185,7 @@ def nfl(src, now, end, weekday):
             night = nfl_mod.slot(g)[1] == "night"
             if stage == "regular" and not (mine or night):
                 continue
-            out.append(fixture("nfl", "NFL", f"NFL: {a['name']} at {h['name']}", g["date"], importance.story_score("nfl", stage, mine, weekday=weekday), mine, stage))
+            out.append(fixture("nfl", "NFL", f"NFL: {a['name']} at {h['name']}", now if live else g["date"], importance.story_score("nfl", stage, mine, weekday=weekday), mine, stage, {"live"} if live else ()))
     return out
 
 
@@ -192,13 +199,14 @@ def mlb(src, now, end, weekday):
             continue
         for e in sb.get("events", []):
             g = mlb_mod.parse_game(e)
-            if g["status"] != "scheduled" or g["phase"] != "post" or not (now <= g["date"] < end):      # postseason only: every game counts; the regular season is not daily news
+            live = g["status"] == "live" and g["date"] < now
+            if g["status"] not in ("scheduled", "live") or g["phase"] != "post" or not (live or now <= g["date"] < end):      # postseason only: every game counts; the regular season is not daily news
                 continue
             a, h = g["away"], g["home"]
             mine = events.LAD in (a["id"], h["id"])
             stage = "final" if "world series" in (g.get("headline") or "").lower() else "playoff"
-            out.append(fixture("mlb", "MLB", f"MLB: {a['name']} at {h['name']}" + (f" · {g['headline']}" if g.get("headline") else ""), g["date"],
-                               importance.story_score("mlb", stage, mine, weekday=weekday), mine, stage))
+            out.append(fixture("mlb", "MLB", f"MLB: {a['name']} at {h['name']}" + (f" · {g['headline']}" if g.get("headline") else ""), now if live else g["date"],
+                               importance.story_score("mlb", stage, mine, weekday=weekday), mine, stage, {"live"} if live else ()))
     return out
 
 
@@ -214,18 +222,19 @@ def cricket(src, now, end, weekday):
             when = cricket_mod.started(m)
         except Exception:
             continue
-        if c["kind"] is None or not (now <= when < end):
+        live = bool(m.get("matchStarted")) and not m.get("matchEnded") and when < now          # on now: a Test on day two, three or four, an ODI half way (D, 2026-11-05)
+        if c["kind"] is None or m.get("matchEnded") or not (live or now <= when < end):
+            continue
+        if c["kind"] == "league" and c.get("label") != "IPL":                  # leagues: the IPL only (D); the test-playing nations' internationals are all in
             continue
         m = {**m, "class": c}
         mine = events.is_mine_cricket(m)
         name = m.get("name", "")
         stage = "final" if re.search(r"\bfinal\b", name, re.I) and not re.search(r"semi|quarter", name, re.I) else "knockout" if events.KNOCKOUT_WORDS.search(name) else "regular"
-        if not (mine or stage != "regular"):
-            continue
         teams, first = cricket_mod.heading(m)
         label = c.get("label", "")
         out.append(fixture("cricket", label or "Cricket", f"Cricket: {teams}" + (f" · {first}" if first else "") + (f" ({label})" if label and label != "International" else ""),
-                           when, importance.story_score("cricket", stage, mine, weekday=weekday), mine, stage))
+                           now if live else when, importance.story_score("cricket", stage, mine, weekday=weekday), mine, stage, {"live"} if live else ()))
     return out
 
 

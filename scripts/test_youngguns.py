@@ -123,5 +123,12 @@ simple = daily._simple("nba", "NBA", lambda n, d, s_: {"html": "<p>x</p>", "stat
 check("the simple sports' adapter passes the Young Guns material on (the first real run found it dropped)", simple["young_in"] == {"nba": [1]})
 check("youngguns is one of the saved states", "youngguns" in daily.STATE_NAMES)
 
+# ---- one blank row between sports, gold figures, sports together (D, 2026-11-05)
+_h = yg.html(["Darius Acuff Jr. (SAC, rookie, 19) scored 22 points and gave out 12 assists.", "Dylan Harper (SAS, 20) scored 21 points.", "Mattia Liberali (COMO, 19): 1 goal, 2 assists (Lens 1\u20139 Como)"], ["nba", "nba", "soccer"])
+check("a blank row only where the sport changes: the first basketball line and the second have none, the first football line has it", _h.count("sport-gap") == 1 and _h.index("sport-gap") > _h.index("Harper"), _h)
+check("figures are gold (22, 12, 21, 1, 2) and the ages are not (19, 20)", all(f'<span class="n">{n}</span>' in _h for n in ("22", "12", "21", "1", "2")) and '<span class="n">19' not in _h and '<span class="n">20' not in _h, _h)
+_c = lambda sp, i: yg.make(sp, i, f"P{i}", "T", "1 goal", 50 - i, 19, False, DAY)  # noqa: E731
+check("the picks are grouped by sport, sports in the order of their best player", [c["sport"] for c in yg.grouped([_c("nba", 1), _c("soccer", 2), _c("nba", 3), _c("soccer", 4)])] == ["nba", "nba", "soccer", "soccer"])
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

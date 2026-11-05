@@ -146,11 +146,12 @@ drafts = [{"id": "e1", "name": "India vs New Zealand, 2nd ODI, India tour of New
           {"id": "e3", "name": "India Women vs Australia Women, 1st ODI, Aus tour", "teams": ["India Women", "Australia Women"], "matchType": "odi", "dateTimeGMT": "2026-11-05T04:00:00", "matchStarted": False, "matchEnded": False}]
 got, _ = fixtures.collect(Fake(cricket=drafts), now, end, 3)
 cr = [f["text"] for f in got if f["sport"] == "cricket"]
-check("cricket: India men's match is on; another side's and India women's are not", len(cr) == 1 and "India" in cr[0] and "Women" not in cr[0], cr)
+check("cricket: every international of the test-playing nations is on (India men's, Sri Lanka v West Indies, the women's ODI too), in time order", len(cr) == 3 and "India v New Zealand" in cr[0] and "Sri Lanka v West Indies" in cr[1] and "Women's international" in cr[2], cr)
 ipl = [{"id": "e4", "name": "Royal Challengers Bengaluru vs Mumbai Indians, 12th Match, Indian Premier League 2027", "teams": ["Royal Challengers Bengaluru", "Mumbai Indians"], "matchType": "t20", "dateTimeGMT": "2027-04-05T14:00:00", "matchStarted": False, "matchEnded": False},
        {"id": "e5", "name": "Delhi Capitals vs Gujarat Titans, 13th Match, Indian Premier League 2027", "teams": ["Delhi Capitals", "Gujarat Titans"], "matchType": "t20", "dateTimeGMT": "2027-04-05T14:00:00", "matchStarted": False, "matchEnded": False}]
 got, _ = fixtures.collect(Fake(cricket=ipl), utc(2027, 4, 5, 0, 0), utc(2027, 4, 6, 0, 0), 3)
-check("IPL: Royal Challengers' game is on (Kohli's team), Delhi v Gujarat is not", [f["text"] for f in got if f["sport"] == "cricket"] and len([f for f in got if f["sport"] == "cricket"]) == 1 and "Royal Challengers" in got[0]["text"])
+_cg = [f for f in got if f["sport"] == "cricket"]
+check("IPL: every game is on (the one league kept, D, 2026-11-05) and D's team scores higher", len(_cg) == 2 and max(_cg, key=lambda f: f["score"])["mine"] is True, [(f["text"], f["score"]) for f in _cg])
 
 # tennis: late rounds only
 slam = {"name": "Australian Open", "major": True, "groupings": [{"grouping": {"slug": "mens-singles"}, "competitions": [
@@ -172,6 +173,18 @@ gf = [f for f in got if f["sport"] == "golf"]
 check("golf: the Masters' start is a fixture for the week (Games to Watch), the day only, no time zone label", len(gf) == 1 and gf[0]["text"] == "Golf: Masters Tournament starts" and gf[0]["stage"] == "final", gf)
 check("golf: a major that has already started, or starts after the window, is not listed", [f for f in fixtures.collect(_G(), utc(2025, 4, 11, 0, 0), utc(2025, 4, 14, 0, 0), 0)[0] if f["sport"] == "golf"] == [])
 
+# games already under way are On Today too (D, 2026-11-05): a D's-team NBA game that tipped off before the edition, marked live and shown as "Under way"
+lv = []
+for e in nbs:
+    f = future(e, utc(2026, 11, 4, 23, 30), state="in", name="STATUS_IN_PROGRESS")
+    f["_et"] = et_of(utc(2026, 11, 4, 23, 30))
+    lv.append(f)
+got, _ = fixtures.collect(Fake(nba_events=lv), now, end, 3, mine_nba=set(nba.FIRST))
+_lg = [f for f in got if f["sport"] == "nba"]
+check("NBA under way: a game of D's teams that has started is listed with 'Under way' (others are not, as before)", len(_lg) == len(mine_games) and all("live" in f["flags"] and f["when"] == now and "Under way" in ontoday._line(f) for f in _lg), len(_lg))
+got, _ = fixtures.collect(Fake(nba_events=[{**e, "status": {**e["status"], "type": {**e["status"]["type"], "state": "post", "name": "STATUS_FINAL"}}} for e in lv]), now, end, 3, mine_nba=set(nba.FIRST))
+check("a game that has finished is never listed as under way", [f for f in got if f["sport"] == "nba"] == [])
+
 # UFC cards and the badminton finals day (D, 2026-11-05)
 _ufc = {"events": [{"id": "1", "name": "UFC 330: Jones vs. Miocic", "date": "2027-01-17T01:00Z", "status": {"type": {"state": "pre"}}, "competitions": [{"date": "2027-01-17T01:00Z"}, {"date": "2027-01-17T04:00Z"}]},
                    {"id": "2", "name": "PFL 3: A vs. B", "date": "2027-01-17T02:00Z", "status": {"type": {"state": "pre"}}, "competitions": [{"date": "2027-01-17T02:00Z"}]},
@@ -191,6 +204,15 @@ got, _ = fixtures.collect(_U(), utc(2027, 1, 18, 20, 0), utc(2027, 1, 19, 23, 0)
 bd_ = [f for f in got if f["sport"] == "badminton"]
 check("badminton: only the finals day of the event, the day alone (no time), listed on its last day", len(bd_) == 1 and bd_[0]["text"] == "Badminton: India Open finals day" and "dateonly" in bd_[0]["flags"] and "All day" in ontoday._line(bd_[0]) and "am" not in ontoday._line(bd_[0]).split("</span>")[0], bd_)
 check("badminton: not listed on the other days of the event", [f for f in fixtures.collect(_U(), utc(2027, 1, 14, 0, 0), utc(2027, 1, 15, 0, 0), 3)[0] if f["sport"] == "badminton"] == [])
+
+# cricket in progress: a Test on day three is listed every morning; a Test that ended on day four is not; a league other than the IPL is not
+_live = [{"id": "t1", "name": "Bangladesh vs West Indies, 2nd Test, WI tour of Bangladesh 2026", "teams": ["Bangladesh", "West Indies"], "matchType": "test", "dateTimeGMT": "2026-11-03T04:00:00", "matchStarted": True, "matchEnded": False},
+         {"id": "t2", "name": "Afghanistan vs Zimbabwe, 1st Test, tour", "teams": ["Afghanistan", "Zimbabwe"], "matchType": "test", "dateTimeGMT": "2026-11-01T04:00:00", "matchStarted": True, "matchEnded": True},
+         {"id": "t3", "name": "Sydney Thunder Women vs Perth Scorchers Women, 11th Match, Women's Big Bash League", "teams": ["Sydney Thunder Women", "Perth Scorchers Women"], "matchType": "t20", "dateTimeGMT": "2026-11-05T08:10:00", "matchStarted": False, "matchEnded": False}]
+got, _ = fixtures.collect(Fake(cricket=_live), now, end, 3)
+_lv = [f for f in got if f["sport"] == "cricket"]
+check("cricket: a Test in progress is listed ('Under way', every day of the match), a Test that has ended (even on day four) is not, and a league that is not the IPL is not",
+      len(_lv) == 1 and "Bangladesh v West Indies" in _lv[0]["text"] and "live" in _lv[0]["flags"] and _lv[0]["when"] == now and "Under way" in ontoday._line(_lv[0]), [(f["text"], f["flags"]) for f in _lv])
 
 # a sport that breaks costs only itself
 got, failed = fixtures.collect(Fake(football=fb, boom=("nba", "cricket")), now, end, 3)

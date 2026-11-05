@@ -443,3 +443,24 @@ tr.also td { color: var(--muted); font-style: italic; }
 .ufcrank tr.gap td { height: 18px; padding: 0; border: 0; background: var(--pitch); }
 .pts.f1.golf th:first-child, .pts.f1.golf td:first-child { padding-left: 12px; }
 .ufcrank tr.p1 td, .ufcrank tr.p1 td:nth-child(3) { color: var(--gold); font-weight: 700; }
+
+/* Football results: the underdog asterisk (as in the NFL and NBA tables) and its one-line key */
+.scores .dog { color: var(--chalk); font-weight: 700; margin-left: 1px; }
+p.key { margin: 4px 0 10px; font-size: 13px; color: var(--muted); }
+p.key .dog { color: var(--chalk); font-weight: 700; }
+
+/* Day-1 review fixes (D, 2026-11-05): cricket alignment */
+.cricket .dayflag { display: inline-flex; align-items: center; justify-content: center; line-height: 1; padding: 6px 12px 4px; }   /* the text centred in the bubble, both ways (the font sits high, so a little more above) */
+.cricket ul.standouts li { display: block; padding: 0 0 0 20px; border-bottom: 0; }   /* the cricket list rule made a grid of the standout: the diamond and the name sat on separate rows */
+.nbaone.ser th.tt { padding: 12px 8px; vertical-align: middle; }
+.nbaone.ser tr.sh th { padding: 10px 4px 5px; vertical-align: middle; }
+.nbaone.ser tr.sc th { padding: 5px 4px 10px; vertical-align: middle; }
+.nbaone.ser .hd { align-items: center; }
+
+/* NBA: a wanted player who did not play (DNP) is a smaller, grey line so it does not look like a performance (D, 2026-11-05) */
+.nflsb tr.note .pl.dnp { font-size: 13px; color: var(--muted); padding-top: 2px; }
+.nflsb tr.note .pl.dnp::before { color: var(--muted); }
+
+/* Young Guns: one blank row between sports, gold figures (D, 2026-11-05) */
+.standouts.yg li.sport-gap { margin-top: 22px; }
+.standouts .n { color: var(--gold); font-weight: 600; }

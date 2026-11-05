@@ -59,14 +59,19 @@ check("the pick is explained for the dev log", all("score" in s["why"] for s in 
 
 # ---- the Performance of the Day -----------------------------------------------------------------
 p = lambda text, score, mine=False: events.perf("nba", text, score, mine)  # noqa: E731
-check("no performance below the bar: none", bigstuff.performance([p("x", 49)]) is None)
-check("the best performance wins, and D's own player wins a tie", bigstuff.performance([p("a", 60), p("b", 80)])["text"] == "b" and bigstuff.performance([p("a", 80), p("b", 80, True)])["text"] == "b")
+check("no star below the bar (70): none", bigstuff.stars([p("x", 69)]) == [])
+check("Stars Of The Night: best first, up to three, D's own player first on a tie", [x["text"] for x in bigstuff.stars([p("a", 60), events.perf("cricket", "b", 80), p("c", 90), events.perf("football", "d", 75), p("e", 71)])] == ["c", "b", "d"]
+      and bigstuff.stars([p("a", 100), p("b", 100, True)])[0]["text"] == "b")
+_pf = lambda sp, t, sc: events.perf(sp, t, sc)  # noqa: E731
+check("at most two stars from one sport, so a third basketball night makes room for another sport",
+      [x["text"] for x in bigstuff.stars([_pf("nba", "n1", 100), _pf("nba", "n2", 99), _pf("nba", "n3", 98), _pf("football", "f1", 97)])] == ["n1", "n2", "f1"])
+check("a hat-trick counts: three goals in a Champions League game scores about 97, above the bar", __import__("kickoff.performers", fromlist=["score"]).score({"goals": 3, "assists": 0, "shots_on": 3, "red": 0, "own_goals": 0, "pos": "F", "starter": True, "saves": 0, "conceded": 0}) * 6 >= importance.PERFORMANCE_MIN)
 card = {"innings": [{"team": "Royal Challengers Bengaluru", "batting": [{"name": "Virat Kohli", "out": "not out", "mark": "*", "r": 82, "b": 54}]}]}
 k = events.kohli_innings(card)
 check("Kohli's innings is found by name in a saved scorecard", k == [(82, 54, True)])
 check("his figures read 'Virat Kohli 82* (54)'", events.kohli_text(k) == "Virat Kohli 82* (54)")
-check("a modest Kohli innings clears the Performance of the Day bar, a duck does not",
-      events.kohli_perf(12) >= importance.PERFORMANCE_MIN and events.kohli_perf(0) < importance.PERFORMANCE_MIN)
+check("a Kohli innings of 30 clears the Stars Of The Night bar, a duck does not",
+      events.kohli_perf(30) >= importance.PERFORMANCE_MIN and events.kohli_perf(0) < importance.PERFORMANCE_MIN)
 check("a Kohli match in the Cricket section: he is first in its standouts whatever he scored",
       __import__("kickoff.cricket", fromlist=["x"]).rank([{"kind": "century", "name": "A B", "runs": 140, "balls": 80}, {"kind": "kohli", "name": "Virat Kohli", "runs": 12, "balls": 9}])[0]["name"] == "Virat Kohli")
 
@@ -103,7 +108,7 @@ out = daily.build_edition(now, day, {}, [("football", "Football", fake(stories, 
 ed = out["edition"]
 big = next(s for s in ed["sections"] if s["id"] == "big-stuff")
 check("the edition's first section is The Big Stuff, with scores, news, injuries and the Performance of the Day",
-      ed["sections"][0]["id"] == "big-stuff" and all(x in big["html"] for x in ("Key Overnight Scores", "Biggest News", "Major Injuries", "Performance Of The Day", "Arsenal 3")), big["html"][:300])
+      ed["sections"][0]["id"] == "big-stuff" and all(x in big["html"] for x in ("Key Overnight Scores", "Biggest News", "Major Injuries", "Stars Of The Night", "Arsenal 3")), big["html"][:300])
 check("the headlines for the ping are the top stories, Arsenal first", ed["headlines"][0].startswith("Football: Arsenal") and len(ed["headlines"]) <= 3)
 check("with no events at all the Big Stuff section is simply left out", "big-stuff" not in [s["id"] for s in daily.build_edition(now, day, {}, [("football", "Football", fake([]))])["edition"]["sections"]])
 bad = daily.build_edition(now, day, {}, [("football", "Football", fake([{"kind": "result"}]))])
@@ -114,6 +119,20 @@ check("a cricket story of D's team moves Cricket to the front of the sports", [s
 f1p = daily.build_edition(now, day, {}, [("f1", "F1", lambda n, d, s: {"sections": [{"id": "f1", "title": "F1", "html": "<p>f1</p>"}], "state": {}, "events": [events.f1([("Mexico City Grand Prix", "Max Verstappen", "Red Bull")])[0]]})])
 fb = f1p["edition"]["sections"]
 check("an F1 race gets a Major Events headline in The Big Stuff and its own section", fb[0]["id"] == "big-stuff" and "Major Events" in fb[0]["html"] and "Max Verstappen wins" in fb[0]["html"] and fb[1]["id"] == "f1", fb[0]["html"][:200])
+
+# ---- grouped by sport (D, 2026-11-05)
+_gs = [{"kind": "result", "sport": "football", "comp": "Champions League", "text": "Champions League: Arsenal 2\u20131 Slavia Prague", "score": 40, "mine": True, "stage": "regular"},
+       {"kind": "result", "sport": "football", "comp": "Champions League", "text": "Champions League: Como 9\u20131 Lens", "score": 30, "mine": False, "stage": "regular"},
+       {"kind": "result", "sport": "cricket", "comp": "Cricket", "text": "Cricket: New Zealand v India, India won by 5 wickets", "score": 25, "mine": True, "stage": "regular"},
+       {"kind": "result", "sport": "nba", "comp": "NBA", "text": "NBA: Boston Celtics 109\u2013102 Milwaukee Bucks", "score": 20, "mine": True, "stage": "regular"},
+       {"kind": "result", "sport": "ufc", "comp": "UFC", "text": "UFC 330: Jon Jones def. Stipe Miocic", "score": 22, "mine": False, "stage": "final"}]
+_gh = bigstuff.html(_gs)
+check("each sport is named once as a header, its games are the bullets under it, without the repeated prefix",
+      _gh.count("Champions League") == 1 and '<p class="subhead">Champions League</p><ul class="standouts bigstuff"><li>Arsenal 2\u20131 Slavia Prague</li><li>Como 9\u20131 Lens</li></ul>' in _gh
+      and "<li>Champions League:" not in _gh and '<p class="subhead">NBA</p>' in _gh and "<li>Boston Celtics 109\u2013102 Milwaukee Bucks</li>" in _gh, _gh)
+check("the groups follow the order of their best story: Champions League, Cricket, NBA", _gh.index("Champions League") < _gh.index("Cricket") < _gh.index("NBA"))
+check("a story that does not begin with its competition keeps its whole text under the header (UFC)", '<p class="subhead">UFC</p><ul class="standouts bigstuff"><li>UFC 330: Jon Jones def. Stipe Miocic</li>' in _gh, _gh)
+check("the Telegram headlines keep the sport prefix on every line (they stand alone)", bigstuff.headlines(_gs)[0] == "Champions League: Arsenal 2\u20131 Slavia Prague")
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

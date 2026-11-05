@@ -34,6 +34,9 @@ def scorers_html(m, side):
 HIGHLIGHT = frozenset(CLUBS) | {"19973"}
 
 
+DOG = '<span class="dog" title="Underdog win">*</span>'      # the same asterisk as the NFL and NBA tables
+
+
 def scores_html(matches, highlight=HIGHLIGHT):
     """One line per match: home team (right-aligned), score, away team (left-aligned), with the scorers
     underneath, each under their own team. Clubs in `highlight` have their name in bold."""
@@ -41,11 +44,13 @@ def scores_html(matches, highlight=HIGHLIGHT):
         return ""
     items = []
     for m in matches:
-        name = lambda side: (f'<span class="mine">{r.esc(m[side]["short"])}</span>'  # noqa: E731
-                             if m[side]["id"] in highlight else r.esc(m[side]["short"]))
+        star = lambda side: DOG if m.get("dog") == side else ""  # noqa: E731
+        name = lambda side: ((f'<span class="mine">{r.esc(m[side]["short"])}</span>'  # noqa: E731
+                              if m[side]["id"] in highlight else r.esc(m[side]["short"])) + star(side))
         row = (f'<span class="h">{name("home")}</span><span class="s">{m["home_score"]}–{m["away_score"]}</span>'
                f'<span>{name("away")}</span>')
         home, away = scorers_html(m, "home"), scorers_html(m, "away")
         row += (f'<span class="gh">{home}</span>' if home else "") + (f'<span class="ga">{away}</span>' if away else "")
         items.append(f"<li>{row}</li>")
-    return f'<ul class="scores">{"".join(items)}</ul>'
+    key = '<p class="key"><span class="dog">*</span> Underdog won</p>' if any(m.get("dog") for m in matches) else ""
+    return f'<ul class="scores">{"".join(items)}</ul>{key}'

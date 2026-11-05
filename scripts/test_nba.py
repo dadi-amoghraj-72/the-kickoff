@@ -196,9 +196,10 @@ for gid, b in BOXES.items():
     dup |= len(names) != len(set(names))
 check("independent: the best performer of every game (best weighted stat line, found from the raw box) is in its notes, tracked or not", ok)
 check("no player appears twice under one game", not dup)
-check("one best performer per game: the Spurs game has Wembanyama (tracked and best) and no extra performer line", [n.split(":")[0] for n in notes_for("401909901")] == ["V. Wembanyama (SAS)", "A. Edwards (MIN)"], notes_for("401909901"))
-check("the 76ers game: Brown's line, then the untracked best performer Maxey with his team code, and only then LeBron and Embiid as DNP",
-      [n.split(":")[0] for n in notes_for("401909897")] == ["J. Brown (PHI)", "T. Maxey (PHI)", "L. James (PHI)", "J. Embiid (PHI)"], notes_for("401909897"))
+check("key players (D, 2026-11-05): the Spurs game has Wembanyama (tracked and best), then everyone else with 25 points or more (Dosunmu 27, Harper 25), then Edwards as DNP",
+      [n.split(":")[0] for n in notes_for("401909901")] == ["V. Wembanyama (SAS)", "A. Dosunmu (MIN)", "D. Harper (SAS)", "A. Edwards (MIN)"], notes_for("401909901"))
+check("the 76ers game: Brown's line, then the untracked best performer Maxey and Allen's 27 for the losing side (25 or more), and only then LeBron and Embiid as DNP",
+      [n.split(":")[0] for n in notes_for("401909897")] == ["J. Brown (PHI)", "T. Maxey (PHI)", "G. Allen (CHA)", "L. James (PHI)", "J. Embiid (PHI)"], notes_for("401909897"))
 bad_order = [gid for gid in BOXES if (lambda ns: any("DNP" in a and "DNP" not in b for a, b in zip(ns, ns[1:])))(notes_for(gid))]
 check("in every game the DNP lines come after every line of a player who played (D's own players included)", not bad_order and sum("DNP" in n for gid in BOXES for n in notes_for(gid)) >= 5, bad_order)
 inj = BOXES["401909897"]["injuries"]
@@ -567,6 +568,33 @@ css = (ROOT / "kickoff" / "static" / "style.css").read_text()
 nba_size = re.search(r"\.standouts li \{[^}]*font-size: (\d+)px", css)
 nfl_size = re.search(r"\.dlist \.pl \{[^}]*font-size: (\d+)px", css)
 check("the NBA standouts list and the NFL highlights list have the same font size (16px; the standouts used to inherit the page's 18px)", nba_size and nfl_size and nba_size.group(1) == nfl_size.group(1) == "16", (nba_size and nba_size.group(1), nfl_size and nfl_size.group(1)))
+
+# ---- key players, the best game and the grey DNP line (D, 2026-11-05)
+_p = lambda i, team, pts, dnp=False: {"id": i, "name": f"Player {i}", "team": team, "PTS": pts, "REB": 3, "AST": 3, "STL": 0, "BLK": 0, "TO": 1, "dnp": dnp, "pos": "G"}  # noqa: E731
+_g = {"status": "final", "home": {"abbr": "MIN", "score": 117}, "away": {"abbr": "HOU", "score": 107}}
+_ps = [_p("a", "MIN", 22), _p("b", "MIN", 20), _p("c", "MIN", 12), _p("d", "HOU", 21), _p("e", "HOU", 26)]
+_k = nba.key_players(_g, _ps, set())
+check("key players: the winning team's top scorer from 20 points (Minnesota's 22) and anyone else from 25 (Houston's 26); a 21 on the losing side and a 20 on the winning side are not added",
+      {p["id"] for p in _k} == {"a", "e"}, [p["id"] for p in _k])
+check("at most three players a game besides the tracked ones", len(nba.key_players(_g, [_p(str(i), "HOU", 30 + i) for i in range(6)] + [_p("w", "MIN", 22)], set())) == 3)
+check("a tracked player already listed is not added again", "a" not in {p["id"] for p in nba.key_players(_g, _ps, {"a"})})
+_gm = lambda h, a, **k: {"status": "final", "ot": False, "home": {"abbr": h[0], "score": h[1]}, "away": {"abbr": a[0], "score": a[1]}, "dog": None, "date": "2026-11-05T00:00Z", **k}  # noqa: E731
+_utah_ot = _gm(("NOP", 120), ("UTA", 113), ot=True)
+_spurs = _gm(("SAS", 112), ("DAL", 111), star=True)
+_philly = _gm(("DET", 106), ("PHI", 112), clash=True)
+check("best game: the one-point game with a 52-point night beats the overtime game and the top-two clash (Utah-New Orleans, 7 points in overtime, no longer wins on overtime alone)",
+      nba.best_game([_utah_ot, _spurs, _philly]) is _spurs and nba.best_game([_utah_ot, _philly]) is _philly)
+_gs = [_gm(("SAS", 120), ("DAL", 100)), _gm(("PHX", 101), ("POR", 100))]
+check("best game: closeness still counts (a one-point game beats a 20-point one, even with one of D's teams in the rout)", nba.best_game(_gs) is _gs[1])
+_fl = [_gm(("DET", 106), ("PHI", 112), id="1"), _gm(("NOP", 120), ("UTA", 113), id="2")]
+nba.flag_games(_fl, {"1": []}, {"East": {"PHI": 1, "DET": 2, "BOS": 3}})
+check("flags: both teams in the top three seeds of one conference is a clash; teams in no table are not", _fl[0]["clash"] is True and _fl[1]["clash"] is False)
+_g1 = {"id": "1", "home": {"abbr": "SAS"}, "away": {"abbr": "DAL"}}
+_g2 = {"id": "2", "home": {"abbr": "X"}, "away": {"abbr": "Y"}}
+nba.flag_games([_g1, _g2], {"1": [_p("s", "SAS", 52)], "2": [_p("t", "X", 30)]}, {})
+check("flags: a 52-point night is a star game, a 30-point one is not", _g1["star"] is True and _g2["star"] is False)
+_oh = out["html"]
+check("the DNP line has its own class (smaller and grey) and a played line does not", _oh.count('class="pl dnp"') >= 1 and _oh.count('class="pl dnp"') == _oh.count("DNP"), (_oh.count('class="pl dnp"'), _oh.count("DNP")))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

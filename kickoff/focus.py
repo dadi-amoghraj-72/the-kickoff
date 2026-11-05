@@ -13,11 +13,28 @@ ARSENAL = {"id": "359", "domestic": "eng.1", "name": "Arsenal"}
 ARSENAL_WOMEN = {"id": "19973", "domestic": "eng.w.1", "name": "Arsenal Women"}
 
 
-def when_sgt(kickoff_utc):
-    """'Thursday 5 November, 4:00am SGT' from an ESPN UTC time like '2026-11-04T20:00Z'."""
+COMP_SHORT = (("champions league", "CL"), ("premier league", "EPL"), ("league cup", "LC"), ("carabao", "LC"), ("efl cup", "LC"))   # Arsenal's competitions (D, 2026-11-05); the FA Cup keeps its name
+
+
+def short_comp(name):
+    """'EPL', 'CL', 'LC' or the name itself ('FA Cup'); the Women's competitions keep theirs (Women's Champions League is not 'CL')."""
+    low = (name or "").lower()
+    if "women" in low:
+        return name
+    return next((s for key, s in COMP_SHORT if key in low), name)
+
+
+def when_short(kickoff_utc):
+    """'Sat 7 Nov, 11pm' (the standard short form, Singapore time) from an ESPN UTC time like '2026-11-07T15:00Z'."""
     dt = datetime.strptime(kickoff_utc, "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc).astimezone(SGT)
-    clock = dt.strftime("%I:%M%p").lstrip("0").lower()
-    return f"{dt:%A} {dt.day} {dt:%B}, {clock} SGT"
+    h = dt.hour % 12 or 12
+    clock = f"{h}:{dt.minute:02d}{'am' if dt.hour < 12 else 'pm'}" if dt.minute else f"{h}{'am' if dt.hour < 12 else 'pm'}"
+    return f"{dt:%a} {dt.day} {dt:%b}, {clock}"
+
+
+def when_sgt(kickoff_utc):
+    """'Thu 5 Nov, 4am SGT' from an ESPN UTC time like '2026-11-04T20:00Z'."""
+    return when_short(kickoff_utc) + " SGT"
 
 
 def result_for(game, team_id):
@@ -40,7 +57,7 @@ def form(games, team_id, upto=None):
             "unbeaten_run": run}
 
 
-def next_up(upcoming, team_id, today_utc, count=2):
+def next_up(upcoming, team_id, today_utc, count=3):
     """The next fixtures, with Singapore kick-off times. Built by code so a time can never be misquoted."""
     out = []
     for g in upcoming:
@@ -49,7 +66,7 @@ def next_up(upcoming, team_id, today_utc, count=2):
         home = g["home"]["id"] == team_id
         opp = g["away" if home else "home"]["name"]
         out.append({"opponent": opp, "venue": "home" if home else "away", "competition": g["competition"] or "",
-                    "when": when_sgt(g["kickoff"])})
+                    "when": when_sgt(g["kickoff"]), "short": when_short(g["kickoff"])})
         if len(out) == count:
             break
     return out
@@ -58,8 +75,8 @@ def next_up(upcoming, team_id, today_utc, count=2):
 def next_up_html(fixtures):
     if not fixtures:
         return ""
-    parts = [f"{r.esc(x['opponent'])} ({x['venue']}), {r.esc(x['competition'])}, {x['when']}" for x in fixtures]
-    return f'<p><strong>Next up:</strong> {parts[0]}.' + (f" Then {parts[1]}." if len(parts) > 1 else "") + "</p>"
+    items = "".join(f"<li>{r.esc(x['short'])} · {r.esc(x['opponent'])} ({x['venue']}) · {r.esc(short_comp(x['competition']))}</li>" for x in fixtures)
+    return f'<p><strong>Next up</strong></p><ul class="standouts bd">{items}</ul>'
 
 
 def match_dict(game, details):

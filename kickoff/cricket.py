@@ -527,7 +527,7 @@ def standout_html(o, context=True):
     context = (f" ({r.esc(series)}; {r.esc(o['result'])})" if o["result"] else f" ({r.esc(series)})") if context else ""
     if o["kind"] in ("century", "fast fifty", "kohli"):
         label = "century" if o["kind"] == "century" else f"fifty off {o['balls']} balls" if o["kind"] == "fast fifty" else "innings"
-        figures = f"{o['runs']}{'*' if o['not_out'] else ''} off {o['balls']} balls, {o['fours']} fours and {o['sixes']} sixes"
+        figures = f"{o['runs']}{'*' if o['not_out'] else ''} off {o['balls']} balls, {o['fours']} {'four' if o['fours'] == 1 else 'fours'} and {o['sixes']} {'six' if o['sixes'] == 1 else 'sixes'}"
         return (f"<li><strong>{r.esc(o['name'])}</strong> ({r.esc(wname(o['team']))}) · {label}: {figures} against {r.esc(wname(o['against']))}{context}</li>")
     label = "five-wicket haul" if o["kind"] == "five-for" else "four-wicket haul"
     overs = f"{o['overs']:g}" if isinstance(o["overs"], (int, float)) else str(o["overs"])

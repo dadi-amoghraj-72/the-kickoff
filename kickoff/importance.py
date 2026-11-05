@@ -23,7 +23,7 @@ CAP = {0: 8, 1: 6, 2: 5, 3: 5, 4: 5, 5: 6, 6: 8}
 PER_SPORT = 4          # at most this many lines of one sport, unless they are D's teams' or a final (those are never squeezed out)
 MIN_SCORE = 4          # a story below this is not worth a line (a quiet morning shows fewer)
 
-PERFORMANCE_MIN = 50   # a Performance of the Day needs at least this on the common 0-100 scale; below it there is none that day
+PERFORMANCE_MIN = 70   # a Star Of The Night needs at least this on the common 0-100 scale (D, 2026-11-05: up to three a night); below it there are none that day
 
 
 def heavy(weekday):

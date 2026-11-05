@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from kickoff import overview, roundup  # noqa: E402
+from kickoff import render as r  # noqa: E402
 from kickoff.sources import espn  # noqa: E402
 
 FIX = ROOT / "tests" / "fixtures"
@@ -32,18 +33,18 @@ L = roundup.lines(FACTS, len(ROWS) // 2, "night")
 sp_ = next(x for x in FACTS["matches"] if x["match"] == "Sporting CP 2-3 LASK Linz")
 check("the Champions League round is 18 games (36 teams), so this window is 9/18", L[0] == ("Games played", "9/18", "", ""), L[0])
 check("underdogs won: 1 of the 6 clear favourites lost (Sporting), counted from the odds labels, not from the favourites count", L[1] == ("Underdogs won", "1/6", "", "") and FACTS["tally"]["upsets"] == 1 == sum(1 for x in FACTS["matches"] if x.get("result_vs_expectation") in ("upset", "big_upset")), L[1])
-check("biggest upset: the team codes, with the favourite's pre-match chance on the line below", L[2] == ("Biggest upset", "", sp_["codes"], "Sporting CP had a 70% chance") and re.fullmatch(r"[A-Z]+ \d+-\d+ [A-Z]+", sp_["codes"]), L[2])
-check("best game: the team codes and the score and nothing underneath (no goals, no comeback line: D's choice)", L[3] == ("Best game", "", sp_["codes"], ""), L[3])
+check("biggest upset: the team codes, with the favourite's pre-match chance on the line below", L[2] == ("Biggest upset", "", r.dash(sp_["codes"]), "Sporting CP had a 70% chance") and re.fullmatch(r"[A-Z]+ \d+-\d+ [A-Z]+", sp_["codes"]), L[2])
+check("best game: the team codes and the score and nothing underneath (no goals, no comeback line: D's choice)", L[3] == ("Best game", "", r.dash(sp_["codes"]), ""), L[3])
 check("the rows are in the same order every time: games played, underdogs won, biggest upset, best game", [x[0] for x in L] == ["Games played", "Underdogs won", "Biggest upset", "Best game"])
 one_goal = {**FACTS, "matches": [{**FACTS["matches"][0], "total_goals": 1}], "game_of_the_night": FACTS["matches"][0]["match"]}
 check("the best game row has no second line however many goals there were", roundup.lines(one_goal, 10)[-1][3] == "" and roundup.lines(FACTS, 10)[-1][3] == "", roundup.lines(one_goal, 10)[-1])
 check("the best game is called 'Best game' in a league and in the Champions League alike", roundup.lines(FACTS, 10, "day")[3][0] == "Best game" == roundup.lines(FACTS, 10, "night")[3][0])
 fallback = {**FACTS, "matches": [{k: v for k, v in FACTS["matches"][0].items() if k != "codes"}], "game_of_the_night": FACTS["matches"][0]["match"]}
-check("a match without codes falls back to its full-name line", roundup.lines(fallback, 10)[-1][2] == FACTS["matches"][0]["match"])
+check("a match without codes falls back to its full-name line", roundup.lines(fallback, 10)[-1][2] == r.dash(FACTS["matches"][0]["match"]))
 
 h = roundup.html(FACTS, 18, "night")
 check("the box is a list with the figures highlighted and the small second lines under their rows", h.count("<li>") == 4 and h.count('class="n"') == 2 and h.count('class="sub"') == 1 and h.startswith('<ul class="roundup">'), h[:200])
-check("it reads cleanly as text", text(h).startswith("Games played 9/18 Underdogs won 1/6 Biggest upset " + sp_["codes"]) and "Sporting CP had a 70% chance" in text(h), text(h))
+check("it reads cleanly as text", text(h).startswith("Games played 9/18 Underdogs won 1/6 Biggest upset " + r.dash(sp_["codes"])) and "Sporting CP had a 70% chance" in text(h), text(h))
 
 # ---- Where we are in the season ----
 league = lambda played: [{"played": p} for p in played]  # noqa: E731

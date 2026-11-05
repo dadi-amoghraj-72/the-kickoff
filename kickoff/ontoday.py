@@ -42,7 +42,7 @@ def pick_today(found, cap=MAX_TODAY):
 
 def _line(f, with_day=False):
     t = f["when"].astimezone(SGT)
-    stamp = "All day" if "dateonly" in f["flags"] else clock(f["when"])
+    stamp = "Under way" if "live" in f["flags"] else "All day" if "dateonly" in f["flags"] else clock(f["when"])
     return f'<li><span class="when">{(t.strftime("%a ") if with_day else "")}{stamp}</span> {r.esc(f["text"])}</li>'
 
 

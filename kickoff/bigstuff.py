@@ -3,7 +3,7 @@
   Key overnight scores     the best stories of the morning, Arsenal's result always first; more lines on a heavy weekend morning, fewer on a quiet one
   Biggest news             transfers, sackings, appointments the football section already collected (with their source links)
   Major injuries           listed clubs' and tracked players' injuries the football section already collected
-  Performance of the Day   one line, the best performance on one 0-100 scale across sports (below the bar: none)
+  Stars Of The Night       up to three individual performances on one 0-100 scale across sports (below the bar: none)
   Major Events             an F1 race or a Grand Slam from the quarter-finals (added by kickoff/order.py)
 
 Everything chosen is explained in `why` for the dev log (never shown on the page): D will judge the ranking for a month and change numbers in importance.py."""
@@ -12,6 +12,7 @@ from kickoff import render as r
 
 MAX_NEWS = 2
 MAX_INJURIES = 2
+STARS_MAX, STARS_PER_SPORT = 3, 2
 
 
 def select(stories, weekday):
@@ -33,24 +34,46 @@ def select(stories, weekday):
     return out
 
 
-def performance(perfs):
-    """The one Performance of the Day, or None: the highest score on the common scale, at least PERFORMANCE_MIN; D's own players win ties."""
-    best = [p for p in perfs if p.get("kind") == "perf" and p["score"] >= importance.PERFORMANCE_MIN]
-    return max(best, key=lambda p: (p["score"], p.get("mine", False)), default=None)
+def stars(perfs, limit=STARS_MAX):
+    """Stars Of The Night (D, 2026-11-05: was one Performance of the Day): up to three individual performances on the common 0-100 scale, each at least PERFORMANCE_MIN, best first (D's own
+    players win ties); at most two from one sport, so one sport cannot fill the list."""
+    best = sorted((p for p in perfs if p.get("kind") == "perf" and p["score"] >= importance.PERFORMANCE_MIN), key=lambda p: (-p["score"], not p.get("mine", False), p["text"]))
+    out, per = [], {}
+    for p in best:
+        if len(out) < limit and per.get(p["sport"], 0) < STARS_PER_SPORT:
+            per[p["sport"]] = per.get(p["sport"], 0) + 1
+            out.append(p)
+    return out
 
 
-def html(stories, perf=None, news=(), injuries=()):
+def html(stories, stars_=(), news=(), injuries=()):
     """The block's inner html. Empty string when there is nothing at all (a section appears only when it has something in it)."""
     out = ""
     if stories:
-        out += "<h3>Key Overnight Scores</h3>" + _list(s["text"] for s in stories)
+        out += "<h3>Key Overnight Scores</h3>" + _grouped(stories)
     if news:
         out += "<h3>Biggest News</h3>" + _list_html(news[:MAX_NEWS])
     if injuries:
         out += "<h3>Major Injuries</h3>" + _list_html(injuries[:MAX_INJURIES])
-    if perf:
-        out += f'<h3>Performance Of The Day</h3><p class="pod">{r.esc(perf["text"])}</p>'
+    if stars_:
+        out += "<h3>Stars Of The Night</h3>" + _list(p["text"] for p in stars_)
     return out
+
+
+def split_story(s):
+    """(header, line): 'Champions League', 'Arsenal 2\u20131 Slavia Prague' from the story 'Champions League: Arsenal 2\u20131 Slavia Prague'; a story whose text does not begin with its competition keeps
+    the whole text under the competition's name."""
+    comp = s.get("comp") or s["sport"].upper()
+    return (comp, s["text"][len(comp) + 2:]) if s["text"].startswith(comp + ": ") else (comp, s["text"])
+
+
+def _grouped(stories):
+    """The sport named once as a header, its games as gold-diamond bullets under it (D, 2026-11-05); the groups in the order of their best story (Arsenal's result leads)."""
+    groups = {}
+    for s in stories:
+        head, line = split_story(s)
+        groups.setdefault(head, []).append(line)
+    return "".join(f'<p class="subhead">{r.esc(h)}</p>' + _list(lines) for h, lines in groups.items())
 
 
 def _list(texts):
@@ -91,10 +114,10 @@ def promoted(stories):
 
 
 def build(events, news=(), injuries=(), weekday=1):
-    """Everything the edition needs from the day's events: {"html", "headlines", "lead", "promoted", "majors" ({"f1": text}), "selected", "perf"}."""
+    """Everything the edition needs from the day's events: {"html", "headlines", "lead", "promoted", "majors" ({"f1": text}), "selected", "stars"}."""
     stories = [e for e in events if e.get("kind", "result") == "result"]
     selected = select(stories, weekday)
-    perf = performance([e for e in events if e.get("kind") == "perf"])
+    star_list = stars([e for e in events if e.get("kind") == "perf"])
     major = {p: next(s["text"].split(": ", 1)[-1] for s in stories if s.get("promote") == p) for p in promoted(stories)}
-    return {"html": html(selected, perf, news, injuries), "headlines": headlines(selected), "lead": lead_sport(stories), "promoted": list(major),
-            "majors": major, "selected": selected, "perf": perf}
+    return {"html": html(selected, star_list, news, injuries), "headlines": headlines(selected), "lead": lead_sport(stories), "promoted": list(major),
+            "majors": major, "selected": selected, "stars": star_list}

@@ -54,7 +54,7 @@ check("recent news with a fractional-second timestamp is recognised", fc.is_rece
 # ---- Deadline reminder ----
 FRIDAY = T(2026, 11, 5, 23, 15)     # the Friday 7:15am Singapore edition: 19 hours and 15 minutes before the deadline (Saturday 2:30am SGT = 18:30 UTC on Friday)
 d = fc.deadline(BOOT, FRIDAY)
-check("within 24 hours of the deadline (the Friday morning edition): the reminder, in Singapore time", d == {"gw": 10, "when": "Saturday 7 November, 2:30am SGT"}, d)
+check("within 24 hours of the deadline (the Friday morning edition): the reminder, in Singapore time", d == {"gw": 10, "when": "Sat 7 Nov, 2:30am SGT"}, d)
 check("more than 24 hours out (the Thursday morning edition, 43 hours before) and the Wednesday one: no reminder", fc.deadline(BOOT, T(2026, 11, 4, 23, 15)) is None and fc.deadline(BOOT, T(2026, 11, 3, 23, 15)) is None)
 check("the edition after the deadline (Saturday 7:15am Singapore time, 23:15 UTC on Friday) is past it, so exactly one edition falls inside the 24 hours", fc.deadline(BOOT, T(2026, 11, 6, 23, 15)) is None and fc.deadline(BOOT, T(2026, 11, 6, 18, 31)) is None)
 check("after the deadline: no reminder", fc.deadline(BOOT, T(2026, 11, 7)) is None)

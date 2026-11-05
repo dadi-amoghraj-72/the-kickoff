@@ -318,6 +318,32 @@ def dnp_text(pid, name, team, box, p=None):
     return f"{name} ({team}): DNP"
 
 
+KEY_SCORER, KEY_OTHER, KEY_MAX = 20, 25, 3     # D, 2026-11-05: the winning team's top scorer from 20 points, anyone else from 25; at most three players a game besides D's tracked ones
+
+
+def key_players(g, players, shown):
+    """The players (not D's tracked ones, who are always listed) who clearly mattered, best first, at most KEY_MAX: the game's best performer as before, the top scorer of the winning team
+    when he has KEY_SCORER points or more, and anyone with KEY_OTHER points or more."""
+    played = [p for p in players if not p["dnp"] and p["id"] not in shown]
+    picks = []
+    pool = [p for p in players if not p["dnp"]]
+    if pool:
+        best = max(pool, key=lambda p: (weight(p, kinds_of(p)), p["name"]))
+        if best["id"] not in shown:
+            picks.append(best)
+    if g.get("status") == "final" and g["home"]["score"] is not None and g["home"]["score"] != g["away"]["score"]:
+        won = g["home"] if g["home"]["score"] > g["away"]["score"] else g["away"]
+        mine_side = [p for p in players if not p["dnp"] and p["team"] == won["abbr"]]
+        if mine_side:
+            top = max(mine_side, key=lambda p: (p["PTS"], p["name"]))
+            if top["PTS"] >= KEY_SCORER and top["id"] not in shown and top not in picks:
+                picks.append(top)
+    for p in sorted(played, key=lambda p: (-p["PTS"], p["name"])):
+        if p["PTS"] >= KEY_OTHER and p not in picks:
+            picks.append(p)
+    return picks[:KEY_MAX]
+
+
 def game_notes(g, box, players, tracked, info):
     """The lines under a game: each tracked player's stat line (best first), then the best performer of the game when he is not one of those, and
     last each tracked player of the two teams who did not play (DNP and the reason): the DNP lines always sit below every player who played. `players`: everyone in this game's box score;
@@ -325,11 +351,7 @@ def game_notes(g, box, players, tracked, info):
     here = {p["id"]: p for p in players}
     mine = sorted((p for p in players if p["id"] in tracked and not p["dnp"]), key=lambda p: -weight(p, kinds_of(p)))
     out = [full_line(p) for p in mine]
-    played = [p for p in players if not p["dnp"]]
-    if played:
-        best = max(played, key=lambda p: (weight(p, kinds_of(p)), p["name"]))
-        if best["id"] not in {p["id"] for p in mine}:
-            out.append(full_line(best))
+    out += [full_line(p) for p in key_players(g, players, {p["id"] for p in mine})]
     teams = {g["home"]["abbr"], g["away"]["abbr"]}
     for pid in sorted(tracked, key=lambda x: list(TRACKED).index(x) if x in TRACKED else 999):  # the DNP lines come last, below every player who played
         p = here.get(pid)
@@ -379,7 +401,7 @@ def game_rows(g, notes, many_days):
     rows.append(f'<tr class="{cls}"><td class="aw{" w" if w == "away" else ""}">{r.esc(a["name"])}{star if w == "away" else ""}</td>'
                 f'<td class="mid">{score}</td><td class="hm{" w" if w == "home" else ""}">{r.esc(h["name"])}{star if w == "home" else ""}{icon}</td></tr>')
     if notes:
-        rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl"><span class="t">{note_html(x)}</span></div>' for x in notes) + "</td></tr>")
+        rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl{" dnp" if ": DNP" in x else ""}"><span class="t">{note_html(x)}</span></div>' for x in notes) + "</td></tr>")
     return rows
 
 
@@ -392,10 +414,25 @@ def us_dates(games):
     return f"{a.day}–{z.day} {z:%b}" if a.month == z.month else f"{a.day} {a:%b}–{z.day} {z:%b}"
 
 
+OT_BONUS, STAR_BONUS, CLASH_BONUS, MINE_BONUS = 3, 4, 3, 1     # D, 2026-11-05: overtime alone had made a 7-point game "best" over Wembanyama's 52 in a one-point finish and a top-two clash
+STAR_POINTS = 45                                                  # a star night: this many points, or a triple-double
+
+
+def flag_games(games, players, seeds):
+    """Marks each finished game for best_game: "star" (a player with STAR_POINTS or a triple-double) and "clash" (both teams in the top three seeds of the same conference).
+    players: {game id: [player]}; seeds: {conference: {team code: seed}} (empty when the standings are not available)."""
+    for g in games:
+        ps = players.get(g["id"], [])
+        g["star"] = any(not p["dnp"] and (p["PTS"] >= STAR_POINTS or "triple-double" in kinds_of(p)) for p in ps)
+        g["clash"] = any(g["home"]["abbr"] in ts and g["away"]["abbr"] in ts and max(ts[g["home"]["abbr"]], ts[g["away"]["abbr"]]) <= 3 for ts in seeds.values())
+
+
 def best_game(games):
-    """The best finished game by code: a close finish and overtime count most, an underdog winning counts a little, a rout does not. None without a final."""
+    """The best finished game by code: a close finish counts most; overtime, a star night (50-point game, triple-double), a top-three clash in a conference, an underdog winning and one of
+    D's five teams playing each add to it; a rout does not. None without a final."""
     finals = [g for g in games if g["status"] == "final" and g["home"]["score"] is not None]
-    drama = lambda g: ((5 if g["ot"] else 0) + max(0, 10 - abs(g["home"]["score"] - g["away"]["score"])) * 0.6 + (2 if underdog_win(g) else 0))  # noqa: E731
+    drama = lambda g: ((OT_BONUS if g["ot"] else 0) + max(0, 10 - abs(g["home"]["score"] - g["away"]["score"])) * 0.6 + (2 if underdog_win(g) else 0)  # noqa: E731
+                       + (STAR_BONUS if g.get("star") else 0) + (CLASH_BONUS if g.get("clash") else 0) + (MINE_BONUS if {g["home"]["abbr"], g["away"]["abbr"]} & set(FIRST) else 0))
     return max(finals, key=lambda g: (drama(g), g["home"]["score"] + g["away"]["score"], g["date"])) if finals else None
 
 
@@ -569,7 +606,7 @@ def series_html(g0, sched, notes_by_game, seeds=None):
             note = notes_by_game.get(x["id"], [])
             rows.append(f'<tr class="one{"" if note else " end"}"><td class="aw {lw}">{sc[top["id"]]}</td><td class="mid">G{n} · {day_label(d)} · at {x["home"]["abbr"]}</td><td class="hm {rw}">{sc[bot["id"]]}</td></tr>')
             if note:
-                rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl"><span class="t">{note_html(t)}</span></div>' for t in note) + "</td></tr>")
+                rows.append('<tr class="note end"><td colspan="3">' + "".join(f'<div class="pl{" dnp" if ": DNP" in t else ""}"><span class="t">{note_html(t)}</span></div>' for t in note) + "</td></tr>")
         elif x and "IN_PROGRESS" in x["status"] and x["home"]["score"] is not None:   # on now: the score so far, and the game is shown final next edition
             sc = {x["home"]["id"]: x["home"]["score"], x["away"]["id"]: x["away"]["score"]}
             rows.append(f'<tr class="one end"><td class="aw">{sc[top["id"]]}</td><td class="mid">G{n} · In progress</td><td class="hm">{sc[bot["id"]]}</td></tr>')
@@ -655,6 +692,17 @@ def run(now, day, st, source):
             keep["teams"][p["id"]] = p["team"]
     stats["standouts"] = len(texts)
     info = {"teams": keep["teams"], "auto": {k: v["name"] for k, v in keep["auto"].items()}}
+    std = None
+    playoffs_on = any(g["phase"] == "playoffs" for g in games.values())   # once the playoffs are on, the regular-season tables are not needed
+    if (games or new) and not playoffs_on:                  # the standings come every day there is basketball until then
+        try:
+            std = source.standings()
+        except Exception:
+            stats["failed"] += 1
+    try:
+        flag_games(new, players, seeds_of(std) if std and standings_ok(std) else {})
+    except Exception:
+        pass
     html = ""
     live = [g for g in games.values() if g["status"] == "live"]   # on now: shown with the score so far, and as a final in the next edition
     stats["live"] = len(live)
@@ -705,13 +753,6 @@ def run(now, day, st, source):
                     keep["closed"] = g0["season"]
     if texts:
         html += "<h4>Standouts</h4>" + '<ul class="standouts">' + "".join(f"<li>{standout_html(t, m)}</li>" for t, m in rows) + "</ul>"
-    std = None
-    playoffs_on = any(g["phase"] == "playoffs" for g in games.values())   # once the playoffs are on, the regular-season tables are not needed
-    if (games or new) and not playoffs_on:                  # the standings come every day there is basketball until then
-        try:
-            std = source.standings()
-        except Exception:
-            stats["failed"] += 1
     cup_new = [g for g in new + live if g["cup"] == "Group Play"]
     stats["cup_new"] = len(cup_new)
     conf_of = {}
