@@ -57,6 +57,14 @@ check("if that morning was missed, the first edition after it is due (Saturday 7
 out = ufcrank.run(Src(), date(2026, 11, 4), {})
 h = out["blocks"][0]
 t = text(h)
+heads = [x.replace("&#x27;", "'") for x in re.findall(r'<tr class="sub"><td class=""></td><td class="">([^<]*)</td>', h)]
+check("D's order: the men's pound-for-pound, the eight men's classes from Flyweight to Heavyweight, a break, then the women's pound-for-pound and the three women's classes",
+      heads == ["Men's Pound-for-Pound", "Flyweight", "Bantamweight", "Featherweight", "Lightweight", "Welterweight", "Middleweight", "Light Heavyweight", "Heavyweight", "Women's Pound-for-Pound",
+                "Women's Strawweight", "Women's Flyweight", "Women's Bantamweight"], heads)
+check("one break row, between the last men's class and the women's pound-for-pound", h.count('class="gap"') == 1 and h.index("Heavyweight") < h.index('class="gap"') < h.index("Women&#x27;s Pound-for-Pound"))
+css = (ROOT / "kickoff" / "static" / "style.css").read_text()
+check("the first column has padding on the left (12px): the numbers are not flush against the edge, in the UFC table and in the golf tables", ".ufcrank th:first-child, .ufcrank td:first-child { padding-left: 12px; }" in css and ".pts.f1.golf th:first-child, .pts.f1.golf td:first-child { padding-left: 12px; }" in css)
+
 check("the block: a title with the update date, then one compact table with a sub-heading for each list", t.strip().startswith("UFC rankings \u00b7 updated Tuesday, Nov. 03") and h.count('class="sub"') == 13 and "Women's Pound-for-Pound" in t and "Light Heavyweight" in t, t[:200])
 check("the divisions show C for the champion, then 1 and 2; the pound-for-pound lists show 1 to 10", "Flyweight C Joshua Van 1 Alexandre Pantoja 2 Manel Kape" in t and "Men's Pound-for-Pound 1 Islam Makhachev 2 Alexander Volkanovski" in t and "10 Alex Pereira" in t, t[:600])
 check("the first time there are no moves in the Move column", "\u25b2" not in t and "\u25bc" not in t and "NEW" not in t)

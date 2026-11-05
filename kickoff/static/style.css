@@ -439,3 +439,6 @@ tr.also td { color: var(--muted); font-style: italic; }
 .ufcrank td { padding-top: 5px; padding-bottom: 5px; }
 .ufcrank tr.sub td { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); background: rgba(255, 255, 255, 0.04); padding-top: 9px; padding-bottom: 7px; }
 .ufcrank td:nth-child(3) { text-align: right; color: var(--muted); }
+.ufcrank th:first-child, .ufcrank td:first-child { padding-left: 12px; }   /* D: the numbers were flush against the left edge */
+.ufcrank tr.gap td { height: 18px; padding: 0; border: 0; background: var(--pitch); }
+.pts.f1.golf th:first-child, .pts.f1.golf td:first-child { padding-left: 12px; }

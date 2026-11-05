@@ -12,7 +12,11 @@ from datetime import date, timedelta
 from kickoff import render as r
 
 P4P = ("Men's Pound-for-Pound", "Women's Pound-for-Pound")
-DIVISIONS = ("Flyweight", "Bantamweight", "Featherweight", "Lightweight", "Welterweight", "Middleweight", "Light Heavyweight", "Heavyweight", "Women's Strawweight", "Women's Flyweight", "Women's Bantamweight")
+MEN = ("Flyweight", "Bantamweight", "Featherweight", "Lightweight", "Welterweight", "Middleweight", "Light Heavyweight", "Heavyweight")
+WOMEN = ("Women's Strawweight", "Women's Flyweight", "Women's Bantamweight")
+DIVISIONS = MEN + WOMEN
+# D's order (2026-11-05): all the men's first (the men's pound-for-pound, then the eight weight classes from the lightest), a break, then the women's (the women's pound-for-pound, then their three classes)
+ORDER = (P4P[0], *MEN, P4P[1], *WOMEN)
 P4P_ROWS = 10
 DIVISION_ROWS = 2        # the champion and #1 and #2
 
@@ -45,12 +49,9 @@ def updated(page):
 def listing(groups):
     """The names shown for each list, in order: {"Men's Pound-for-Pound": [10 names], "Flyweight": [champion, #1, #2], ...}."""
     out = {}
-    for name in P4P:
+    for name in ORDER:
         if name in groups:
-            out[name] = groups[name]["ranks"][:P4P_ROWS]
-    for name in DIVISIONS:
-        if name in groups:
-            out[name] = [groups[name]["champion"]] + groups[name]["ranks"][:DIVISION_ROWS]
+            out[name] = groups[name]["ranks"][:P4P_ROWS] if name in P4P else [groups[name]["champion"]] + groups[name]["ranks"][:DIVISION_ROWS]
     return out
 
 
@@ -76,6 +77,9 @@ def table_html(lists, before):
     """One compact table: a sub-heading for each list, then its names with the rank (C for a champion) and the move."""
     rows, classes = [], []
     for name, names in lists.items():
+        if name == P4P[1]:                       # the break between the men's and the women's
+            rows.append(["", "", ""])
+            classes.append("gap")
         rows.append(["", name, ""])
         classes.append("sub")
         old = (before or {}).get(name)
