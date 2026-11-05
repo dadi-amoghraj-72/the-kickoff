@@ -101,7 +101,7 @@ def html(lines, sports=None):
     """Gold figures like the other standouts lists; one blank row between sports (sports: the sport of each line, in the same order); '' when nobody was notable (the section is then simply not there)."""
     if not lines:
         return ""
-    gold = lambda t: re.sub(r"(?<![\w-])(\d+)(?=\s)", r'<span class="n">\1</span>', r.esc(t))  # noqa: E731
+    gold = lambda t: re.sub(r"(?<![\w\u2013-])(\d+)(?=\s)", r'<span class="n">\1</span>', r.esc(t))  # noqa: E731
     sports = sports or [None] * len(lines)
     gap = lambda i: ' class="sport-gap"' if i and sports[i] != sports[i - 1] else ""  # noqa: E731
     items = "".join(f"<li{gap(i)}>{gold(t)}</li>" for i, t in enumerate(lines))

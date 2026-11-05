@@ -130,5 +130,8 @@ check("figures are gold (22, 12, 21, 1, 2) and the ages are not (19, 20)", all(f
 _c = lambda sp, i: yg.make(sp, i, f"P{i}", "T", "1 goal", 50 - i, 19, False, DAY)  # noqa: E731
 check("the picks are grouped by sport, sports in the order of their best player", [c["sport"] for c in yg.grouped([_c("nba", 1), _c("soccer", 2), _c("nba", 3), _c("soccer", 4)])] == ["nba", "nba", "soccer", "soccer"])
 
+_s = yg.html(["Mattia Liberali (COMO, 19) scored once as Como won 9\u20131 at Lens, with 2 assists."], ["soccer"])
+check("a score is never part gold: the 9 and the 1 of '9\u20131' stay plain, the 2 assists are gold", '<span class="n">2</span>' in _s and '<span class="n">9' not in _s and '<span class="n">1</span>' not in _s, _s)
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

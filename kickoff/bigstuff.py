@@ -7,12 +7,28 @@
   Major Events             an F1 race or a Grand Slam from the quarter-finals (added by kickoff/order.py)
 
 Everything chosen is explained in `why` for the dev log (never shown on the page): D will judge the ranking for a month and change numbers in importance.py."""
+import re
+
 from kickoff import importance
 from kickoff import render as r
 
 MAX_NEWS = 2
 MAX_INJURIES = 2
 STARS_MAX, STARS_PER_SPORT = 3, 2
+SPORT_HEADER = {"cricket": "Cricket", "nfl": "NFL", "mlb": "MLB", "nba": "NBA", "f1": "F1"}
+
+
+def names_of(text):
+    return {w for w in re.findall(r"\b[A-Z][a-z]{2,}\b", text)}
+
+
+def dedupe_news(items):
+    """The same story from two sources (BBC and ESPN both on one contract) is shown once: an item that shares two or more names with an earlier one is dropped."""
+    out = []
+    for i in items:
+        if not any(len(names_of(i["text"]) & names_of(o["text"])) >= 2 for o in out):
+            out.append(i)
+    return out
 
 
 def select(stories, weekday):
@@ -52,7 +68,7 @@ def html(stories, stars_=(), news=(), injuries=()):
     if stories:
         out += "<h3>Key Overnight Scores</h3>" + _grouped(stories)
     if news:
-        out += "<h3>Biggest News</h3>" + _list_html(news[:MAX_NEWS])
+        out += "<h3>Biggest News</h3>" + _list_html(dedupe_news(list(news))[:MAX_NEWS])
     if injuries:
         out += "<h3>Major Injuries</h3>" + _list_html(injuries[:MAX_INJURIES])
     if stars_:
@@ -63,6 +79,9 @@ def html(stories, stars_=(), news=(), injuries=()):
 def split_story(s):
     """(header, line): 'Champions League', 'Arsenal 2\u20131 Slavia Prague' from the story 'Champions League: Arsenal 2\u20131 Slavia Prague'; a story whose text does not begin with its competition keeps
     the whole text under the competition's name."""
+    label = SPORT_HEADER.get(s["sport"])
+    if label and s["text"].startswith(label + ": "):          # cricket's competition is "International" or "IPL"; the header is the sport (D, 2026-11-05)
+        return label, s["text"][len(label) + 2:]
     comp = s.get("comp") or s["sport"].upper()
     return (comp, s["text"][len(comp) + 2:]) if s["text"].startswith(comp + ": ") else (comp, s["text"])
 

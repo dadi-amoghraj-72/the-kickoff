@@ -134,5 +134,12 @@ check("the groups follow the order of their best story: Champions League, Cricke
 check("a story that does not begin with its competition keeps its whole text under the header (UFC)", '<p class="subhead">UFC</p><ul class="standouts bigstuff"><li>UFC 330: Jon Jones def. Stipe Miocic</li>' in _gh, _gh)
 check("the Telegram headlines keep the sport prefix on every line (they stand alone)", bigstuff.headlines(_gs)[0] == "Champions League: Arsenal 2\u20131 Slavia Prague")
 
+# ---- review of the first real rehearsal (D, 2026-11-05)
+_cr = bigstuff.html([{"kind": "result", "sport": "cricket", "comp": "International", "text": "Cricket: New Zealand v India, India won by 5 wickets", "score": 30, "mine": True, "stage": "regular"}])
+check("cricket is headed 'Cricket', not its competition ('International')", '<p class="subhead">Cricket</p>' in _cr and "International" not in _cr and "<li>New Zealand v India, India won by 5 wickets</li>" in _cr, _cr)
+_nw = [{"text": "England captain Harry Kane has signed a new contract with Bayern Munich that lasts until 2029.", "source": "BBC Sport"}, {"text": "Harry Kane has put pencil to paper on a new contract, committing his future to Bayern Munich.", "source": "ESPN"},
+       {"text": "Chelsea have sacked their manager Enzo Maresca.", "source": "BBC Sport"}]
+check("the same story from two sources is shown once (Kane's contract on BBC and ESPN), a different story stays", len(bigstuff.dedupe_news(_nw)) == 2 and bigstuff.dedupe_news(_nw)[1]["text"].startswith("Chelsea"), bigstuff.dedupe_news(_nw))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
