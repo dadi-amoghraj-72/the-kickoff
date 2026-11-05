@@ -1,4 +1,11 @@
 {
+  "awards": {
+    "names": {},
+    "rows": [],
+    "season": 2026,
+    "seen": {}
+  },
+  "closed": null,
   "dogs": {
     "401873023": "away",
     "401873024": "away",
@@ -2284,6 +2291,7 @@
     "5452151": "DB",
     "8439": "QB"
   },
+  "previewed": [],
   "ranks": {
     "div": {
       "ARI": 4,

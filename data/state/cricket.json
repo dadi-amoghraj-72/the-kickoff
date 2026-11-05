@@ -415,6 +415,376 @@
       ],
       "status": "Scorchers won by 15 runs"
     },
+    "786781a5-0548-479e-b268-a87521ea2e36": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 6,
+              "fours": 1,
+              "mark": "",
+              "name": "Lizelle Lee",
+              "out": "lbw b Molineux",
+              "r": 6,
+              "sixes": 0,
+              "sr": 100
+            },
+            {
+              "b": 18,
+              "fours": 1,
+              "mark": "",
+              "name": "Chamari Athapaththu",
+              "out": "c Webb b Wareham",
+              "r": 9,
+              "sixes": 0,
+              "sr": 50
+            },
+            {
+              "b": 2,
+              "fours": 0,
+              "mark": "",
+              "name": "Rachel Trenaman",
+              "out": "b Molineux",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0
+            },
+            {
+              "b": 43,
+              "fours": 10,
+              "mark": "",
+              "name": "Nicola Carey",
+              "out": "b Matthews",
+              "r": 62,
+              "sixes": 0,
+              "sr": 144.19
+            },
+            {
+              "b": 13,
+              "fours": 1,
+              "mark": "",
+              "name": "Heather Graham",
+              "out": "c Tryon b Molineux",
+              "r": 9,
+              "sixes": 0,
+              "sr": 69.23
+            },
+            {
+              "b": 16,
+              "fours": 1,
+              "mark": "",
+              "name": "Maddy Green",
+              "out": "lbw b Molineux",
+              "r": 17,
+              "sixes": 0,
+              "sr": 106.25
+            },
+            {
+              "b": 18,
+              "fours": 7,
+              "mark": "",
+              "name": "Chinelle Henry",
+              "out": "run out (Wareham/Faltum)",
+              "r": 36,
+              "sixes": 0,
+              "sr": 200
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Hayley Silver-holmes",
+              "out": "not out",
+              "r": 2,
+              "sixes": 0,
+              "sr": 50
+            },
+            {
+              "b": 1,
+              "fours": 1,
+              "mark": "",
+              "name": "Lauren Smith",
+              "out": "not out",
+              "r": 4,
+              "sixes": 0,
+              "sr": 400
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 9,
+              "m": 0,
+              "name": "Tayla Vlaeminck",
+              "nb": 0,
+              "o": 3,
+              "r": 27,
+              "w": 0,
+              "wd": 2
+            },
+            {
+              "eco": 5.5,
+              "m": 0,
+              "name": "Sophie Molineux",
+              "nb": 0,
+              "o": 4,
+              "r": 22,
+              "w": 4,
+              "wd": 0
+            },
+            {
+              "eco": 9.8,
+              "m": 0,
+              "name": "Hayley Matthews",
+              "nb": 0,
+              "o": 4,
+              "r": 39,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 7.3,
+              "m": 0,
+              "name": "Milly Illingworth",
+              "nb": 1,
+              "o": 3,
+              "r": 22,
+              "w": 0,
+              "wd": 2
+            },
+            {
+              "eco": 5.8,
+              "m": 0,
+              "name": "Georgia Wareham",
+              "nb": 0,
+              "o": 4,
+              "r": 23,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 9,
+              "m": 0,
+              "name": "Chloe Tryon",
+              "nb": 0,
+              "o": 2,
+              "r": 18,
+              "w": 0,
+              "wd": 1
+            }
+          ],
+          "bowling_team": "Melbourne Renegades Women",
+          "dnb": [],
+          "extras": {
+            "b_lb": 3,
+            "nb": 1,
+            "total": 9,
+            "w": 5
+          },
+          "fow": "",
+          "label": "",
+          "overs": 20,
+          "runs": 154,
+          "team": "Hobart Hurricanes Women",
+          "wickets": 7
+        },
+        {
+          "batting": [
+            {
+              "b": 11,
+              "fours": 3,
+              "mark": "",
+              "name": "Olivia Porter",
+              "out": "b Graham",
+              "r": 14,
+              "sixes": 0,
+              "sr": 127.27
+            },
+            {
+              "b": 44,
+              "fours": 8,
+              "mark": "",
+              "name": "Hayley Matthews",
+              "out": "b Graham",
+              "r": 59,
+              "sixes": 0,
+              "sr": 134.09
+            },
+            {
+              "b": 25,
+              "fours": 3,
+              "mark": "",
+              "name": "Courtney Webb",
+              "out": "b Carey",
+              "r": 29,
+              "sixes": 0,
+              "sr": 116
+            },
+            {
+              "b": 4,
+              "fours": 1,
+              "mark": "",
+              "name": "Sophie Molineux",
+              "out": "c and b Strano",
+              "r": 6,
+              "sixes": 0,
+              "sr": 150
+            },
+            {
+              "b": 11,
+              "fours": 3,
+              "mark": "",
+              "name": "Georgia Wareham",
+              "out": "b Carey",
+              "r": 17,
+              "sixes": 0,
+              "sr": 154.55
+            },
+            {
+              "b": 11,
+              "fours": 0,
+              "mark": "",
+              "name": "Nicole Faltum",
+              "out": "not out",
+              "r": 9,
+              "sixes": 0,
+              "sr": 81.82
+            },
+            {
+              "b": 3,
+              "fours": 1,
+              "mark": "",
+              "name": "Chloe Tryon",
+              "out": "b Graham",
+              "r": 4,
+              "sixes": 0,
+              "sr": 133.33
+            },
+            {
+              "b": 11,
+              "fours": 2,
+              "mark": "",
+              "name": "Deandra Dottin",
+              "out": "not out",
+              "r": 15,
+              "sixes": 0,
+              "sr": 136.36
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 5.5,
+              "m": 0,
+              "name": "Molly Strano",
+              "nb": 0,
+              "o": 4,
+              "r": 22,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 7.8,
+              "m": 0,
+              "name": "Nicola Carey",
+              "nb": 1,
+              "o": 3.5,
+              "r": 30,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 14,
+              "m": 0,
+              "name": "Chinelle Henry",
+              "nb": 0,
+              "o": 1,
+              "r": 14,
+              "w": 0,
+              "wd": 1
+            },
+            {
+              "eco": 6,
+              "m": 0,
+              "name": "Heather Graham",
+              "nb": 0,
+              "o": 4,
+              "r": 24,
+              "w": 3,
+              "wd": 0
+            },
+            {
+              "eco": 8.3,
+              "m": 0,
+              "name": "Isabella Malgioglio",
+              "nb": 0,
+              "o": 3,
+              "r": 25,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 9.5,
+              "m": 0,
+              "name": "Lauren Smith",
+              "nb": 0,
+              "o": 2,
+              "r": 19,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 9,
+              "m": 0,
+              "name": "Hayley Silver-holmes",
+              "nb": 0,
+              "o": 1,
+              "r": 9,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 12,
+              "m": 0,
+              "name": "Chamari Athapaththu",
+              "nb": 0,
+              "o": 1,
+              "r": 12,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Hobart Hurricanes Women",
+          "dnb": [],
+          "extras": {
+            "b_lb": 0,
+            "nb": 1,
+            "total": 2,
+            "w": 1
+          },
+          "fow": "",
+          "label": "",
+          "overs": 19.5,
+          "runs": 155,
+          "team": "Melbourne Renegades Women",
+          "wickets": 6
+        }
+      ],
+      "potm": [],
+      "standouts": [
+        {
+          "against": "Hobart Hurricanes Women",
+          "kind": "four-for",
+          "maidens": 0,
+          "match": "Hobart Hurricanes Women vs Melbourne Renegades Women, 9th Match, Womens Big Bash League 2026",
+          "name": "Sophie Molineux",
+          "overs": 4,
+          "result": "Melbourne Renegades Women won by 4 wkts",
+          "runs_conceded": 22,
+          "team": "Melbourne Renegades Women",
+          "wickets": 4
+        }
+      ],
+      "status": "Melbourne Renegades Women won by 4 wkts"
+    },
     "936348e9-608f-4ca8-9cc5-5d3082ab0b90": {
       "innings": [
         {
@@ -734,8 +1104,358 @@
           "wickets": 4
         }
       ]
+    },
+    "c547eb46-2025-413a-b7f2-6d1584daa42f": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 11,
+              "fours": 2,
+              "mark": "",
+              "name": "Will Young",
+              "out": "c Iyer b Singh",
+              "r": 9,
+              "sixes": 0,
+              "sr": 81.81
+            },
+            {
+              "b": 43,
+              "fours": 3,
+              "mark": "",
+              "name": "Tim Seifert",
+              "out": "c sub (RD Gaikwad) b Brar",
+              "r": 38,
+              "sixes": 2,
+              "sr": 88.37
+            },
+            {
+              "b": 11,
+              "fours": 2,
+              "mark": "",
+              "name": "Henry Nicholls",
+              "out": "c Naman Dhir b Singh",
+              "r": 9,
+              "sixes": 0,
+              "sr": 81.81
+            },
+            {
+              "b": 41,
+              "fours": 3,
+              "mark": "",
+              "name": "Daryl Mitchell",
+              "out": "run out (Sharma/†Rahul)",
+              "r": 28,
+              "sixes": 1,
+              "sr": 68.29
+            },
+            {
+              "b": 11,
+              "fours": 0,
+              "mark": "†",
+              "name": "Tom Latham",
+              "out": "c & b Brar",
+              "r": 3,
+              "sixes": 0,
+              "sr": 27.27
+            },
+            {
+              "b": 51,
+              "fours": 2,
+              "mark": "",
+              "name": "Glenn Phillips",
+              "out": "c Iyer b Singh",
+              "r": 30,
+              "sixes": 1,
+              "sr": 58.82
+            },
+            {
+              "b": 16,
+              "fours": 0,
+              "mark": "(c)",
+              "name": "Mitchell Santner",
+              "out": "b Kamboj",
+              "r": 4,
+              "sixes": 0,
+              "sr": 25.0
+            },
+            {
+              "b": 9,
+              "fours": 0,
+              "mark": "",
+              "name": "Nathan Smith",
+              "out": "c Kohli b Kamboj",
+              "r": 1,
+              "sixes": 0,
+              "sr": 11.11
+            },
+            {
+              "b": 6,
+              "fours": 0,
+              "mark": "",
+              "name": "Kyle Jamieson",
+              "out": "c Kohli b Singh",
+              "r": 1,
+              "sixes": 0,
+              "sr": 16.66
+            },
+            {
+              "b": 21,
+              "fours": 3,
+              "mark": "",
+              "name": "Jacob Duffy",
+              "out": "not out",
+              "r": 15,
+              "sixes": 0,
+              "sr": 71.42
+            },
+            {
+              "b": 23,
+              "fours": 1,
+              "mark": "",
+              "name": "Blair Tickner",
+              "out": "c †Rahul b Brar",
+              "r": 34,
+              "sixes": 4,
+              "sr": 147.82
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 7.0,
+              "m": 0,
+              "name": "Arshdeep Singh",
+              "nb": 0,
+              "o": 10.0,
+              "r": 70,
+              "w": 4,
+              "wd": 2
+            },
+            {
+              "eco": 5.5,
+              "m": 0,
+              "name": "Auqib Nabi",
+              "nb": 0,
+              "o": 6.0,
+              "r": 33,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 2.2,
+              "m": 2,
+              "name": "Anshul Kamboj",
+              "nb": 0,
+              "o": 10.0,
+              "r": 22,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 4.71,
+              "m": 0,
+              "name": "Gurnoor Brar",
+              "nb": 1,
+              "o": 9.2,
+              "r": 44,
+              "w": 3,
+              "wd": 1
+            },
+            {
+              "eco": 2.4,
+              "m": 0,
+              "name": "Axar Patel",
+              "nb": 0,
+              "o": 5.0,
+              "r": 12,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "India",
+          "dnb": [],
+          "extras": {
+            "lb": 4,
+            "nb": 1,
+            "total": 13,
+            "w": 8
+          },
+          "fow": "1-22 (Young, 4.3), 2-40 (Nicholls, 8.3), 3-73 (Seifert, 14.2), 4-84 (Latham, 16.6), 5-97 (Mitchell, 21.1), 6-113 (Santner, 26.1), 7-115 (Smith, 28.3), 8-131 (Jamieson, 31.1), 9-146 (Phillips, 35.1), 10-185 (Tickner, 40.2)",
+          "label": "",
+          "overs": 40.2,
+          "runs": 185,
+          "team": "New Zealand",
+          "wickets": 10
+        },
+        {
+          "batting": [
+            {
+              "b": 6,
+              "fours": 0,
+              "mark": "",
+              "name": "Rohit Sharma",
+              "out": "c Santner b Jamieson",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 56,
+              "fours": 5,
+              "mark": "(c)",
+              "name": "Shubman Gill",
+              "out": "c †Latham b Smith",
+              "r": 37,
+              "sixes": 0,
+              "sr": 66.07
+            },
+            {
+              "b": 51,
+              "fours": 13,
+              "mark": "",
+              "name": "Virat Kohli",
+              "out": "c Seifert b Duffy",
+              "r": 74,
+              "sixes": 1,
+              "sr": 145.09
+            },
+            {
+              "b": 13,
+              "fours": 1,
+              "mark": "",
+              "name": "Shreyas Iyer",
+              "out": "c Nicholls b Duffy",
+              "r": 15,
+              "sixes": 1,
+              "sr": 115.38
+            },
+            {
+              "b": 2,
+              "fours": 0,
+              "mark": "",
+              "name": "Axar Patel",
+              "out": "c Phillips b Duffy",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 5,
+              "fours": 0,
+              "mark": "†",
+              "name": "KL Rahul",
+              "out": "not out",
+              "r": 3,
+              "sixes": 0,
+              "sr": 60.0
+            },
+            {
+              "b": 3,
+              "fours": 1,
+              "mark": "",
+              "name": "Naman Dhir",
+              "out": "not out",
+              "r": 5,
+              "sixes": 0,
+              "sr": 166.66
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 4.85,
+              "m": 0,
+              "name": "Kyle Jamieson",
+              "nb": 0,
+              "o": 7.0,
+              "r": 34,
+              "w": 1,
+              "wd": 2
+            },
+            {
+              "eco": 7.0,
+              "m": 0,
+              "name": "Jacob Duffy",
+              "nb": 0,
+              "o": 7.0,
+              "r": 49,
+              "w": 3,
+              "wd": 2
+            },
+            {
+              "eco": 9.5,
+              "m": 0,
+              "name": "Blair Tickner",
+              "nb": 0,
+              "o": 4.0,
+              "r": 38,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 4.5,
+              "m": 0,
+              "name": "Nathan Smith",
+              "nb": 0,
+              "o": 4.4,
+              "r": 21,
+              "w": 1,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "New Zealand",
+          "dnb": [],
+          "extras": {
+            "lb": 1,
+            "total": 9,
+            "w": 8
+          },
+          "fow": "1-1 (Sharma, 0.6), 2-114 (Gill, 18.2), 3-124 (Kohli, 19.4), 4-124 (Patel, 19.6), 5-136 (Iyer, 21.4)",
+          "label": "",
+          "overs": 22.4,
+          "runs": 143,
+          "team": "India",
+          "wickets": 5
+        }
+      ],
+      "potm": [
+        {
+          "name": "Anshul Kamboj",
+          "team": "India"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "New Zealand",
+          "balls": 51,
+          "fours": 13,
+          "kind": "kohli",
+          "match": "New Zealand vs India, 1st ODI, India tour of New Zealand 2026",
+          "name": "Virat Kohli",
+          "not_out": false,
+          "result": "India won by 5 wkts  -  2nd inns reduced to 32 overs - DLS Target 143",
+          "runs": 74,
+          "sixes": 1,
+          "team": "India"
+        }
+      ],
+      "status": "India won by 5 wkts (56b rem) (DLS)"
     }
   },
-  "seen": [],
-  "status": {}
+  "ipl": {},
+  "seen": [
+    "786781a5-0548-479e-b268-a87521ea2e36",
+    "c547eb46-2025-413a-b7f2-6d1584daa42f"
+  ],
+  "status": {
+    "espn-1553296": "West Indies won toss & batted",
+    "espn-1555123": "Zimbabwe won toss & batted"
+  },
+  "test_done": {
+    "espn-1553296": 0,
+    "espn-1555123": 0
+  },
+  "test_sig": {
+    "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 86, 'w': 3, 'o': 26.6}]",
+    "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 6, 'w': 0, 'o': 2.2}]"
+  }
 }

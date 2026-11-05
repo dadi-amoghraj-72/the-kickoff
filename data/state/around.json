@@ -1,0 +1,101 @@
+{
+  "badminton": {
+    "2026 China Open (badminton)": {
+      "announced": false,
+      "seen": []
+    }
+  },
+  "golf": {
+    "events": {},
+    "notes": []
+  },
+  "seen": [],
+  "stories": {},
+  "ufc": {
+    "done": []
+  },
+  "ufcrank": {
+    "month": "2026-11",
+    "snapshot": {
+      "Bantamweight": [
+        "Petr Yan",
+        "Merab Dvalishvili",
+        "Sean O'Malley"
+      ],
+      "Featherweight": [
+        "Alexander Volkanovski",
+        "Movsar Evloev",
+        "Diego Lopes"
+      ],
+      "Flyweight": [
+        "Joshua Van",
+        "Alexandre Pantoja",
+        "Manel Kape"
+      ],
+      "Heavyweight": [
+        "Ciryl Gane",
+        "Tom Aspinall",
+        "Alexander Volkov"
+      ],
+      "Light Heavyweight": [
+        "Carlos Ulberg",
+        "Magomed Ankalaev",
+        "Jiří Procházka"
+      ],
+      "Lightweight": [
+        "Justin Gaethje",
+        "Ilia Topuria",
+        "Arman Tsarukyan"
+      ],
+      "Men's Pound-for-Pound": [
+        "Islam Makhachev",
+        "Alexander Volkanovski",
+        "Petr Yan",
+        "Justin Gaethje",
+        "Ilia Topuria",
+        "Joshua Van",
+        "Sean Strickland",
+        "Tom Aspinall",
+        "Merab Dvalishvili",
+        "Alex Pereira"
+      ],
+      "Middleweight": [
+        "Sean Strickland",
+        "Khamzat Chimaev",
+        "Dricus Du Plessis"
+      ],
+      "Welterweight": [
+        "Islam Makhachev",
+        "Ian Machado Garry",
+        "Carlos Prates"
+      ],
+      "Women's Bantamweight": [
+        "Kayla Harrison",
+        "Julianna Peña",
+        "Joselyne Edwards"
+      ],
+      "Women's Flyweight": [
+        "Natalia Silva",
+        "Valentina Shevchenko",
+        "Alexa Grasso"
+      ],
+      "Women's Pound-for-Pound": [
+        "Valentina Shevchenko",
+        "Kayla Harrison",
+        "Zhang Weili",
+        "Natalia Silva",
+        "Mackenzie Dern",
+        "Alexa Grasso",
+        "Manon Fiorot",
+        "Tatiana Suarez",
+        "Jasmine Jasudavicius",
+        "Erin Blanchfield"
+      ],
+      "Women's Strawweight": [
+        "Mackenzie Dern",
+        "Zhang Weili",
+        "Tatiana Suarez"
+      ]
+    }
+  }
+}

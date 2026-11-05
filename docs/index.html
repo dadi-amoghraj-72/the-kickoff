@@ -103,7 +103,7 @@ section > :last-child { margin-bottom: 0; }
 
 /* Standouts, ranked */
 .standouts { margin: 0 0 14px; padding-left: 0; list-style: none; }
-.standouts li { margin-bottom: 6px; padding-left: 20px; }
+.standouts li { margin-bottom: 6px; padding-left: 20px; font-size: 16px; line-height: 1.4; }   /* the same size as the NFL highlights (.dlist .pl): the NBA's standouts used to inherit the page's 18px */
 .standouts li::before { content: "\25C6"; display: inline-block; width: 20px; margin-left: -20px; padding-left: 4px; box-sizing: border-box; font-size: 9px; color: var(--gold); vertical-align: middle; }   /* the house gold diamond bullet, on every standouts list */
 
 /* Tables: numbers right-aligned, zone bars on the left edge of a row */
@@ -111,7 +111,7 @@ section > :last-child { margin-bottom: 0; }
 table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 16px; font-variant-numeric: tabular-nums; }
 caption { text-align: left; padding: 0 0 6px; font-weight: 600; background: transparent; }
 th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
-th:first-child, td:first-child { padding-left: 10px; }
+th:first-child, td:first-child { padding-left: 8px; }
 th:last-child, td:last-child { padding-right: 10px; }
 .table-wrap td:not(.n) { white-space: normal; }   /* a long club name wraps instead of pushing the numbers off a 360px screen */
 th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -181,15 +181,22 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 /* News and team-news lists */
 .news, .team-news { list-style: none; margin: 4px 0 14px; padding: 0; font-size: 16px; }
 .news li, .team-news li { padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+ol.inj { margin: 4px 0 14px; padding-left: 1.7em; font-size: 16px; }   /* the FPL Injuries list, numbered */
+ol.inj li { padding: 6px 0; }
+ol.inj.tight li { padding: 2px 0; }       /* the FPL review lists are compact (D) */
+p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
 .tag { margin-right: 6px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* Cricket results: teams, innings scores, result, series */
 .cricket { list-style: none; margin: 4px 0 14px; padding: 0; }
 .cricket li { display: grid; gap: 1px; padding: 8px 0; border-bottom: 1px solid var(--hairline); }
-.cricket .cm { font-weight: 400; font-size: 17px; }
+.cricket .cm { font-weight: 400; font-size: 17px; margin-bottom: 8px; }   /* air between the teams line and the result */
 .cricket .cm strong { font-weight: 700; }
-.cricket .cs { font-variant-numeric: tabular-nums; }
-.cricket .cr { color: var(--gold); font-weight: 600; font-size: 15px; }
+.cricket .cs { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 15px; }
+.cricket .cs b { font-weight: 700; color: var(--chalk); }
+.cricket .cs b.w { color: var(--gold); }
+.cricket .cs .sl { display: block; }   /* one team per line, in batting order */
+.cricket .cr { color: var(--chalk); font-weight: 700; font-size: 18px; }   /* the result is the main line */
 .cricket .ct { color: var(--muted); font-size: 15px; }
 .cricket .dayflag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .cricket .potm { font-size: 15px; color: var(--muted); }
@@ -203,9 +210,13 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .cricket table.sc { font-size: 14px; }
 .cricket table.sc td.name { white-space: normal; min-width: 7em; }
 .cricket table.sc .dis { display: block; color: var(--muted); font-size: 14px; line-height: 1.3; }
-.cricket table.sc tr.sum td { font-weight: 600; background: var(--pitch); }
+.cricket table.sc tr.sum td { font-weight: 400; }
+.cricket table.sc tr.sum.total td { font-weight: 700; }
+.cricket table.sc th.lc { text-transform: none; }
+.cricket table.sc.ms tr.sum td { background: rgba(255, 255, 255, 0.04); padding-top: 7px; }   /* the match summary: a shaded row for each innings, then its top batter and bowler */   /* 4s and 6s, not 4S and 6S */
 .cricket table.sc th, .cricket table.sc td { padding: 5px 3px; }
 .cricket table.sc th:first-child, .cricket table.sc td:first-child { padding-left: 6px; }
+.cricket table.sc th:last-child, .cricket table.sc td:last-child { padding-right: 12px; }   /* room on the right, as in the other sports' tables */
 .cricket table.sc th { font-size: 12px; letter-spacing: 0; }
 .pts table { font-size: 15px; }
 .pts th, .pts td { padding: 7px 4px; }
@@ -311,6 +322,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .nbaone.ser .bo { display: block; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; }
 .nbaone.ser tr.sh th { padding: 10px 4px 2px; white-space: normal; }
 .nbaone.ser tr.sc th { padding: 2px 4px 10px; }
+.nbaone.ser.tst td.aw, .nbaone.ser.tst td.hm { font-size: 16px; font-weight: 600; line-height: 1.3; }   /* a Test series row holds two innings, "390 & 314/6d" */
 .nbaone.ser tr.sc .ws { font-size: 30px; font-weight: 800; color: var(--gold); }
 .nbaone.ser tr.sc .lab { margin: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .standouts .hl { color: var(--gold); font-weight: 600; }
@@ -321,9 +333,114 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairli
 .dlist .pl { display: flex; align-items: flex-start; padding: 5px 0; font-size: 16px; line-height: 1.4; }
 .dlist .pl::before { content: "\25C6"; flex: 0 0 20px; box-sizing: border-box; height: 22px; padding-left: 4px; display: flex; align-items: center; font-size: 9px; line-height: 1; color: var(--gold); }
 .dlist .pl .t { flex: 1 1 auto; min-width: 0; }
-.dlist .n { color: var(--gold); font-weight: 600; }
+.dlist .n { color: var(--gold); font-weight: 600; white-space: nowrap; }   /* a score like 16-0 never breaks across two lines */
 .dlist.indent { margin-left: 18px; margin-top: 2px; }
 .subhead { margin: 14px 0 0; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 .nbaone.ser.sm td.aw, .nbaone.ser.sm td.hm { font-size: 18px; }
 .nbaone.ser.sm td.mid { font-size: 13px; }
-</style></head><body><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Archive</p></header><section style="border-top:0;margin-top:24px"><ul class="archive"><li><a class="d" href="editions/2026-11-04/index.html">Wednesday 4 November 2026</a><span class="muted">Champions League: Manchester United 3-2 AS Roma</span></li><li><a class="d" href="editions/2026-11-02/index.html">Monday 2 November 2026 (dummy)</a><span class="muted">Dummy headline one: placeholder for the biggest story</span></li></ul></section></main></body></html>
+
+/* Awards (NBA and NFL): winners in gold, every MVP in an iridescent pearl, the All-NBA teams in gold, silver and bronze; team awards as full-width blocks */
+.awards table { width: 100%; }
+.awards tr:not(.blk) td { font-size: 13.5px; }
+.awards th, .awards td { white-space: normal; overflow-wrap: break-word; }
+.awards td.win .tc { white-space: nowrap; }
+.awards td.win { text-align: left; padding-left: 8px; }
+.awards th:nth-child(2) { padding-left: 8px; }
+.awards .wn { color: var(--gold); font-weight: 600; }
+.awards .wn.silver { color: #c5ccd6; }
+.awards .wn.bronze { color: #d08a52; }
+.awards .wn.mvp { color: #dfe9ff; background: linear-gradient(90deg, #f4f8ff 0%, #c9dcff 25%, #f1d9ff 50%, #c8fff0 75%, #f4f8ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.awards .tc, .awards .ct, .awards .fl { color: var(--muted); font-weight: 400; font-size: 13px; }
+.awards .ct { color: var(--chalk); }
+.awards tr.blk td { padding: 10px 8px 12px; }
+.awards .bt { font-weight: 700; margin-bottom: 4px; }
+.awards .bs { font-size: 13px; margin-bottom: 6px; }
+.awards .lines .pl, .awards .asg .pl { padding: 2px 0; line-height: 1.35; }
+.awards .asg .pl { text-align: center; }
+.awards .asg { display: flex; gap: 12px; }
+.awards .asg .col { flex: 1; min-width: 0; }
+.awards .asg .ch { text-align: center; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--hairline); margin-bottom: 4px; padding-bottom: 2px; }
+.awards table.pos { width: 100%; margin-top: 2px; }
+.awards table.pos td { padding: 3px 4px 3px 6px; border: 0; }
+.awards table.pos td.pp { width: 28%; color: var(--muted); font-size: 13px; }
+@media (prefers-color-scheme: light) {
+  .awards .wn.silver { color: #6c7683; }
+  .awards .wn.bronze { color: #9a5a22; }
+  .awards .wn.mvp { background: linear-gradient(90deg, #2f5fae 0%, #7b4bb5 35%, #1c8a74 70%, #2f5fae 100%); -webkit-background-clip: text; background-clip: text; }
+}
+.awards th:first-child, .awards tr:not(.blk) td:first-child { padding-left: 12px; }   /* the award names sit in from the table's left edge */
+.awards .pr { padding: 1px 0; }
+.awards .lg { color: var(--muted); font-size: 12px; font-weight: 600; margin-right: 4px; }
+.awards .asg .pl .tc { white-space: nowrap; }
+tr.hl td { color: var(--gold); font-weight: 600; }   /* D's favourites' rows in league tables: Sunrisers Hyderabad (and Arsenal, when built) */
+@media (prefers-color-scheme: light) {
+}
+.awards .wn.orange { color: #f2994a; }
+.awards .wn.purple { color: #b58be6; }
+@media (prefers-color-scheme: light) { .awards .wn.orange { color: #b3560d; } .awards .wn.purple { color: #6b3fa8; } }
+.awards .asg.three { gap: 6px; }
+.awards .asg.three .pl { font-size: 12.5px; }   /* three columns on a phone: a smaller size keeps names such as D. Rasmussen on one line */
+.awards .asg.three .ch { font-size: 11px; }
+.caps tr.orange td { color: #f2994a; font-weight: 600; }
+.caps tr.purple td { color: #b58be6; font-weight: 600; }
+@media (prefers-color-scheme: light) { .caps tr.orange td { color: #b3560d; } .caps tr.purple td { color: #6b3fa8; } }
+.caps td { font-size: 13.5px; }
+/* The FPL corner's Injuries and review lists: one font size for everything (D, 2026-11-04) */
+.fplrev p, .fplrev ol, .fplrev li, .fplrev strong { font-size: 16px; }
+.fplrev p { margin: 0 0 4px; }
+.fplrev p.gp { margin: 12px 0 2px; }
+.fplrev p.muted { margin-bottom: 6px; }
+.fplrev .n { color: var(--gold); font-weight: 600; }
+.fplrev .n.bad { color: #f19a9a; }                 /* the underperformers' figures: pastel red, worse than the average */
+.fplrev .sq { color: #f19a9a; font-weight: 700; }   /* the squad average's number alone: bold pastel red */
+@media (prefers-color-scheme: light) { .fplrev .n.bad, .fplrev .sq { color: #b03a3a; } }
+/* F1: the fastest lap's time in purple, the podium in gold, silver and bronze, the championship leader in gold and platinum once the title is decided (D, 2026-11-04) */
+.f1sum .fl { color: #b57bf0; font-weight: 700; }
+tr.p1 td { color: var(--gold); font-weight: 700; }
+tr.p2 td { color: #c5ccd6; font-weight: 700; }
+tr.p3 td { color: #d08a52; font-weight: 700; }
+.plat { color: #dfe9ff; font-weight: 700; background: linear-gradient(90deg, #f4f8ff 0%, #c9dcff 25%, #f1d9ff 50%, #c8fff0 75%, #f4f8ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+@media (prefers-color-scheme: light) {
+  .f1sum .fl { color: #7b3fb8; }
+  tr.p2 td { color: #6c7683; }
+  tr.p3 td { color: #9a5a22; }
+  .plat { background: linear-gradient(90deg, #2f5fae 0%, #7b4bb5 35%, #1c8a74 70%, #2f5fae 100%); -webkit-background-clip: text; background-clip: text; }
+}
+
+/* The Big Stuff and On Today (13b): the lines reuse the gold-diamond standouts list; the time is gold, the Performance of the Day a gold line */
+.ontoday .when { color: var(--gold); font-weight: 600; margin-right: 4px; white-space: nowrap; }
+.pod { color: var(--gold); font-size: 16px; line-height: 1.4; margin: 0 0 14px; }
+.bigstuff a { font-size: 13px; margin-left: 4px; }
+
+/* Golf (D's players below the top 25) and badminton scorecards */
+tr.also td { color: var(--muted); font-style: italic; }
+.tennis td.pl br + * { }
+.pts.f1.golf table { font-size: 15px; }
+.pts.f1.golf th:nth-child(2), .pts.f1.golf td:nth-child(2) { padding-left: 4px; padding-right: 4px; line-height: 1.25; overflow-wrap: anywhere; }
+.pts.f1.golf th:nth-child(n+3), .pts.f1.golf td:nth-child(n+3) { padding-left: 4px; padding-right: 6px; }
+.pts.f1.golf td { padding-top: 7px; padding-bottom: 7px; }
+.pts.f1.golf tr.p1 td { color: var(--gold); font-weight: 700; }
+.standouts.bd li { margin-bottom: 12px; line-height: 1.45; }
+.standouts.bd li strong { color: var(--chalk); }
+
+/* UFC: one box a fight, built like an NBA game (winner, def., loser) with the details under it */
+.ufc { margin: 14px 0 8px; }
+.ufc table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 16px; }
+.ufc th.tt { text-align: center; white-space: normal; letter-spacing: 0; text-transform: none; color: var(--chalk); font-size: 16px; padding: 10px 8px 8px; }
+.ufc td { padding: 6px 4px; white-space: normal; border-bottom: 0; vertical-align: middle; }
+.ufc tr.vs td { padding-top: 10px; padding-bottom: 12px; line-height: 1.3; }
+.ufc td.wn { text-align: left; padding-left: 8px; overflow-wrap: anywhere; }
+.ufc td.df { text-align: center; color: var(--muted); font-size: 14px; padding-left: 0; padding-right: 0; }
+.ufc td.ls { text-align: right; padding-right: 8px; overflow-wrap: anywhere; }
+.ufc tr.dt td { font-size: 14px; border-top: 1px solid var(--hairline); }
+.ufc td.k { color: var(--muted); padding-left: 8px; }
+.ufc td.v { text-align: right; padding-right: 8px; }
+.ufcrank table { font-size: 15px; }
+.ufcrank td { padding-top: 5px; padding-bottom: 5px; }
+.ufcrank tr.sub td { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); background: rgba(255, 255, 255, 0.04); padding-top: 9px; padding-bottom: 7px; }
+.ufcrank td:nth-child(3) { text-align: right; color: var(--muted); }
+.ufcrank th:first-child, .ufcrank td:first-child { padding-left: 12px; }   /* D: the numbers were flush against the left edge */
+.ufcrank tr.gap td { height: 18px; padding: 0; border: 0; background: var(--pitch); }
+.pts.f1.golf th:first-child, .pts.f1.golf td:first-child { padding-left: 12px; }
+.ufcrank tr.p1 td, .ufcrank tr.p1 td:nth-child(3) { color: var(--gold); font-weight: 700; }
+</style></head><body><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Archive</p></header><section style="border-top:0;margin-top:24px"><ul class="archive"><li><a class="d" href="editions/2026-11-05/index.html">Thursday 5 November 2026</a><span class="muted">Champions League: Arsenal 2–1 Slavia Prague</span></li><li><a class="d" href="editions/2026-11-04/index.html">Wednesday 4 November 2026</a><span class="muted">Champions League: Manchester United 3-2 AS Roma</span></li><li><a class="d" href="editions/2026-11-02/index.html">Monday 2 November 2026 (dummy)</a><span class="muted">Dummy headline one: placeholder for the biggest story</span></li></ul></section></main></body></html>
