@@ -1439,12 +1439,675 @@
         }
       ],
       "status": "India won by 5 wkts (56b rem) (DLS)"
+    },
+    "de774f34-7940-44c4-acce-8918a8069613": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 18,
+              "fours": 4,
+              "mark": "",
+              "name": "Grace Harris",
+              "out": "c Bouchier b Larosa",
+              "r": 22,
+              "sixes": 0,
+              "sr": 122.22
+            },
+            {
+              "b": 61,
+              "fours": 12,
+              "mark": "",
+              "name": "Charli Knott",
+              "out": "run out (Schutt/Patterson)",
+              "r": 104,
+              "sixes": 4,
+              "sr": 170.49
+            },
+            {
+              "b": 11,
+              "fours": 0,
+              "mark": "",
+              "name": "Georgia Redmayne",
+              "out": "lbw b Ecclestone",
+              "r": 7,
+              "sixes": 0,
+              "sr": 63.64
+            },
+            {
+              "b": 18,
+              "fours": 1,
+              "mark": "",
+              "name": "Yastika Bhatia",
+              "out": "run out (McGrath)",
+              "r": 16,
+              "sixes": 0,
+              "sr": 88.89
+            },
+            {
+              "b": 7,
+              "fours": 0,
+              "mark": "",
+              "name": "Annie O Neil",
+              "out": "not out",
+              "r": 13,
+              "sixes": 1,
+              "sr": 185.71
+            },
+            {
+              "b": 6,
+              "fours": 2,
+              "mark": "",
+              "name": "Orla Prendergast",
+              "out": "not out",
+              "r": 16,
+              "sixes": 0,
+              "sr": 266.67
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 9,
+              "m": 0,
+              "name": "Megan Schutt",
+              "nb": 0,
+              "o": 4,
+              "r": 36,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 12,
+              "m": 0,
+              "name": "Eleanor Larosa",
+              "nb": 1,
+              "o": 4,
+              "r": 48,
+              "w": 1,
+              "wd": 3
+            },
+            {
+              "eco": 4.5,
+              "m": 0,
+              "name": "Sophie Ecclestone",
+              "nb": 0,
+              "o": 4,
+              "r": 18,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 9,
+              "m": 0,
+              "name": "Amanda-Jade Wellington",
+              "nb": 0,
+              "o": 4,
+              "r": 36,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 14,
+              "m": 0,
+              "name": "Tahlia McGrath",
+              "nb": 0,
+              "o": 2,
+              "r": 28,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 10,
+              "m": 0,
+              "name": "Ella Wilson",
+              "nb": 0,
+              "o": 1,
+              "r": 10,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 6,
+              "m": 0,
+              "name": "Madeline Penna",
+              "nb": 0,
+              "o": 1,
+              "r": 6,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Adelaide Strikers Women",
+          "dnb": [],
+          "extras": {
+            "b_lb": 2,
+            "nb": 1,
+            "total": 6,
+            "w": 3
+          },
+          "fow": "",
+          "label": "",
+          "overs": 20,
+          "runs": 184,
+          "team": "Brisbane Heat Women",
+          "wickets": 4
+        },
+        {
+          "batting": [
+            {
+              "b": 48,
+              "fours": 9,
+              "mark": "",
+              "name": "Laura Wolvaardt",
+              "out": "c Knott b Glenn",
+              "r": 75,
+              "sixes": 0,
+              "sr": 156.25
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Maia Bouchier",
+              "out": "c Neil b Hamilton",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0
+            },
+            {
+              "b": 16,
+              "fours": 0,
+              "mark": "",
+              "name": "Tahlia McGrath",
+              "out": "c Bhatia b Glenn",
+              "r": 13,
+              "sixes": 0,
+              "sr": 81.25
+            },
+            {
+              "b": 45,
+              "fours": 7,
+              "mark": "",
+              "name": "Madeline Penna",
+              "out": "c Ginger b Harris",
+              "r": 68,
+              "sixes": 4,
+              "sr": 151.11
+            },
+            {
+              "b": 5,
+              "fours": 0,
+              "mark": "",
+              "name": "Bridget Patterson",
+              "out": "b Harris",
+              "r": 4,
+              "sixes": 0,
+              "sr": 80
+            },
+            {
+              "b": 7,
+              "fours": 0,
+              "mark": "",
+              "name": "Ellie Johnston",
+              "out": "not out",
+              "r": 4,
+              "sixes": 0,
+              "sr": 57.14
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 14.5,
+              "m": 0,
+              "name": "Lily Bassingthwaighte",
+              "nb": 0,
+              "o": 2,
+              "r": 29,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 6.5,
+              "m": 0,
+              "name": "Charli Knott",
+              "nb": 0,
+              "o": 4,
+              "r": 26,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 6.5,
+              "m": 0,
+              "name": "Lucy Hamilton",
+              "nb": 2,
+              "o": 4,
+              "r": 26,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 4.8,
+              "m": 0,
+              "name": "Sarah Glenn",
+              "nb": 0,
+              "o": 4,
+              "r": 19,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 10,
+              "m": 0,
+              "name": "Catherine White",
+              "nb": 1,
+              "o": 1,
+              "r": 10,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 13.7,
+              "m": 0,
+              "name": "Sianna Ginger",
+              "nb": 2,
+              "o": 3,
+              "r": 41,
+              "w": 0,
+              "wd": 1
+            },
+            {
+              "eco": 9.5,
+              "m": 0,
+              "name": "Grace Harris",
+              "nb": 0,
+              "o": 2,
+              "r": 19,
+              "w": 2,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Brisbane Heat Women",
+          "dnb": [],
+          "extras": {
+            "b_lb": 0,
+            "nb": 5,
+            "total": 6,
+            "w": 1
+          },
+          "fow": "",
+          "label": "",
+          "overs": 20,
+          "runs": 170,
+          "team": "Adelaide Strikers Women",
+          "wickets": 5
+        }
+      ],
+      "potm": [],
+      "standouts": [
+        {
+          "against": "Adelaide Strikers Women",
+          "balls": 61,
+          "fours": 12,
+          "kind": "century",
+          "match": "Adelaide Strikers Women vs Brisbane Heat Women, 10th Match, Womens Big Bash League 2026",
+          "name": "Charli Knott",
+          "not_out": false,
+          "result": "Brisbane Heat Women won by 14 runs",
+          "runs": 104,
+          "sixes": 4,
+          "team": "Brisbane Heat Women"
+        }
+      ],
+      "status": "Brisbane Heat Women won by 14 runs"
+    },
+    "f6bfa913-6f79-4fd9-ab8a-fe0b4cf5a456": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 55,
+              "fours": 8,
+              "mark": "",
+              "name": "Beth Mooney",
+              "out": "not out",
+              "r": 80,
+              "sixes": 1,
+              "sr": 145.45
+            },
+            {
+              "b": 15,
+              "fours": 1,
+              "mark": "",
+              "name": "Katie Mack",
+              "out": "st Wilson b Barsby",
+              "r": 10,
+              "sixes": 0,
+              "sr": 66.67
+            },
+            {
+              "b": 39,
+              "fours": 3,
+              "mark": "",
+              "name": "Sophie Devine",
+              "out": "retd hurt",
+              "r": 42,
+              "sixes": 1,
+              "sr": 107.69
+            },
+            {
+              "b": 10,
+              "fours": 2,
+              "mark": "",
+              "name": "Freya Kemp",
+              "out": "c Voll b HJ Darlington",
+              "r": 30,
+              "sixes": 3,
+              "sr": 300
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Mikayla Hinkley",
+              "out": "not out",
+              "r": 1,
+              "sixes": 0,
+              "sr": 100
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 6.2,
+              "m": 0,
+              "name": "Samantha Bates",
+              "nb": 0,
+              "o": 4,
+              "r": 25,
+              "w": 0,
+              "wd": 3
+            },
+            {
+              "eco": 10.8,
+              "m": 0,
+              "name": "Lauren Bell",
+              "nb": 0,
+              "o": 4,
+              "r": 43,
+              "w": 0,
+              "wd": 4
+            },
+            {
+              "eco": 8.5,
+              "m": 0,
+              "name": "Hannah Darlington",
+              "nb": 0,
+              "o": 4,
+              "r": 34,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 6,
+              "m": 0,
+              "name": "Jemma Barsby",
+              "nb": 0,
+              "o": 3,
+              "r": 18,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 9.3,
+              "m": 0,
+              "name": "Nadine de Klerk",
+              "nb": 0,
+              "o": 3,
+              "r": 28,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 12,
+              "m": 0,
+              "name": "Georgia Voll",
+              "nb": 0,
+              "o": 2,
+              "r": 24,
+              "w": 0,
+              "wd": 1
+            }
+          ],
+          "bowling_team": "Sydney Thunder Women",
+          "dnb": [],
+          "extras": {
+            "b_lb": 11,
+            "nb": 0,
+            "total": 20,
+            "w": 9
+          },
+          "fow": "",
+          "label": "",
+          "overs": 20,
+          "runs": 183,
+          "team": "Perth Scorchers Women",
+          "wickets": 2
+        },
+        {
+          "batting": [
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Georgia Voll",
+              "out": "b Ainsworth",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0
+            },
+            {
+              "b": 19,
+              "fours": 5,
+              "mark": "",
+              "name": "Phoebe Litchfield",
+              "out": "c Edgar b Ainsworth",
+              "r": 34,
+              "sixes": 1,
+              "sr": 178.95
+            },
+            {
+              "b": 16,
+              "fours": 4,
+              "mark": "",
+              "name": "Anika Learoyd",
+              "out": "lbw b Devine",
+              "r": 22,
+              "sixes": 0,
+              "sr": 137.5
+            },
+            {
+              "b": 26,
+              "fours": 2,
+              "mark": "",
+              "name": "Heather Knight",
+              "out": "st Mooney b Devine",
+              "r": 27,
+              "sixes": 1,
+              "sr": 103.85
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Nadine de Klerk",
+              "out": "lbw b Sana",
+              "r": 2,
+              "sixes": 0,
+              "sr": 50
+            },
+            {
+              "b": 19,
+              "fours": 4,
+              "mark": "",
+              "name": "Tahlia Wilson",
+              "out": "c Hinkley b Edgar",
+              "r": 25,
+              "sixes": 0,
+              "sr": 131.58
+            },
+            {
+              "b": 12,
+              "fours": 3,
+              "mark": "",
+              "name": "Laura Harris",
+              "out": "b King",
+              "r": 29,
+              "sixes": 2,
+              "sr": 241.67
+            },
+            {
+              "b": 9,
+              "fours": 1,
+              "mark": "",
+              "name": "Jemma Barsby",
+              "out": "c Kemp b King",
+              "r": 9,
+              "sixes": 0,
+              "sr": 100
+            },
+            {
+              "b": 6,
+              "fours": 0,
+              "mark": "",
+              "name": "Hannah Darlington",
+              "out": "b King",
+              "r": 5,
+              "sixes": 0,
+              "sr": 83.33
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Lauren Bell",
+              "out": "not out",
+              "r": 1,
+              "sixes": 0,
+              "sr": 100
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Samantha Bates",
+              "out": "b King",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 6,
+              "m": 0,
+              "name": "Chloe Ainsworth",
+              "nb": 0,
+              "o": 4,
+              "r": 24,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 7.5,
+              "m": 0,
+              "name": "Fatima Sana",
+              "nb": 0,
+              "o": 2,
+              "r": 15,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 11,
+              "m": 0,
+              "name": "Lilly Mills",
+              "nb": 0,
+              "o": 3,
+              "r": 33,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 10.3,
+              "m": 0,
+              "name": "Sophie Devine",
+              "nb": 0,
+              "o": 3,
+              "r": 31,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 7.3,
+              "m": 0,
+              "name": "Amy Edgar",
+              "nb": 0,
+              "o": 3,
+              "r": 22,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 8.8,
+              "m": 0,
+              "name": "Alana King",
+              "nb": 0,
+              "o": 4,
+              "r": 35,
+              "w": 4,
+              "wd": 2
+            }
+          ],
+          "bowling_team": "Perth Scorchers Women",
+          "dnb": [],
+          "extras": {
+            "b_lb": 6,
+            "nb": 0,
+            "total": 12,
+            "w": 6
+          },
+          "fow": "",
+          "label": "",
+          "overs": 19,
+          "runs": 166,
+          "team": "Sydney Thunder Women",
+          "wickets": 10
+        }
+      ],
+      "potm": [],
+      "standouts": [
+        {
+          "against": "Sydney Thunder Women",
+          "kind": "four-for",
+          "maidens": 0,
+          "match": "Sydney Thunder Women vs Perth Scorchers Women, 11th Match, Womens Big Bash League 2026",
+          "name": "Alana King",
+          "overs": 4,
+          "result": "Perth Scorchers Women won by 17 runs",
+          "runs_conceded": 35,
+          "team": "Perth Scorchers Women",
+          "wickets": 4
+        }
+      ],
+      "status": "Perth Scorchers Women won by 17 runs"
     }
   },
   "ipl": {},
   "seen": [
     "786781a5-0548-479e-b268-a87521ea2e36",
-    "c547eb46-2025-413a-b7f2-6d1584daa42f"
+    "c547eb46-2025-413a-b7f2-6d1584daa42f",
+    "de774f34-7940-44c4-acce-8918a8069613",
+    "f6bfa913-6f79-4fd9-ab8a-fe0b4cf5a456"
   ],
   "status": {
     "espn-1553296": "West Indies won toss & batted",
@@ -1455,7 +2118,7 @@
     "espn-1555123": 0
   },
   "test_sig": {
-    "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 86, 'w': 3, 'o': 26.6}]",
-    "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 6, 'w': 0, 'o': 2.2}]"
+    "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 235, 'w': 4, 'o': 70.0}]",
+    "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 326, 'w': 5, 'o': 87.0}]"
   }
 }
