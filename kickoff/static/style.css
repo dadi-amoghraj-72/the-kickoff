@@ -415,3 +415,10 @@ tr.p3 td { color: #d08a52; font-weight: 700; }
 /* Golf (D's players below the top 25) and badminton scorecards */
 tr.also td { color: var(--muted); font-style: italic; }
 .tennis td.pl br + * { }
+.pts.f1.golf table { font-size: 15px; }
+.pts.f1.golf th:nth-child(2), .pts.f1.golf td:nth-child(2) { padding-left: 4px; padding-right: 4px; line-height: 1.25; overflow-wrap: anywhere; }
+.pts.f1.golf th:nth-child(n+3), .pts.f1.golf td:nth-child(n+3) { padding-left: 4px; padding-right: 6px; }
+.pts.f1.golf td { padding-top: 7px; padding-bottom: 7px; }
+.pts.f1.golf tr.p1 td { color: var(--gold); font-weight: 700; }
+.standouts.bd li { margin-bottom: 12px; line-height: 1.45; }
+.standouts.bd li strong { color: var(--chalk); }

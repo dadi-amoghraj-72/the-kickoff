@@ -81,10 +81,10 @@ out = golf.run({"pga": upto(masters, 2)}, utc(2025, 4, 12), {})
 html = out["blocks"][0]
 t = text(html)
 check("men's table after round 2: titled with the event and the round, columns Pos Player Rd Total Behind", "Masters Tournament · After round 2" in t and "Pos Player Rd Total Behind" in t, t[:200])
-check("the leader's row is gold and has no strokes behind; the next player is one behind", html.count('class="p1"') == 1 and "J. Rose -1 -8 –" in t and "B. DeChambeau -4 -7 1" in t, t[:400])
+check("the leader's row is gold and has no strokes behind; the next player is one behind", html.count('class="p1"') == 1 and "Justin Rose -1 -8 –" in t and "Bryson DeChambeau -4 -7 1" in t, t[:400])
 body_rows = re.findall(r"<tr(?: class=\"([^\"]*)\")?>", html.split("<tbody>")[1])
 check("25 rows in the top 25 (the leader's p1) and D's players below them (muted 'also' rows)", sum(1 for c in body_rows if c in ("", "p1")) == 25 and sum(1 for c in body_rows if c == "also") >= 1 and body_rows[:25].count("also") == 0, body_rows)
-check("D's players outside the top 25 are listed below it with their real position and strokes behind (Rahm and Spieth T40, Koepka and Mickelson T67, Bhatia T40 at +2 ...)", all(x in t for x in ["T40 J. Rahm -1 +2 10", "T40 J. Spieth +1 +2 10", "T67 B. Koepka +3 +5 13", "T67 P. Mickelson +2 +5 13", "T40 A. Bhatia +4 +2 10"]), t[-300:])
+check("D's players outside the top 25 are listed below it with their real position and strokes behind (Rahm and Spieth T40, Koepka and Mickelson T67, Bhatia T40 at +2 ...)", all(x in t for x in ["T40 Jon Rahm -1 +2 10", "T40 Jordan Spieth +1 +2 10", "T40 Akshay Bhatia +4 +2 10", "T67 Brooks Koepka +3 +5 13", "T67 Phil Mickelson +2 +5 13"]), t[-300:])
 check("a player who is not in the field is simply not listed (Tiger Woods was not at the 2025 Masters)", "Woods" not in t)
 check("state: round 2 is remembered, so the same board gives nothing the next morning", golf.run({"pga": upto(masters, 2)}, utc(2025, 4, 13), out["state"])["blocks"] == [])
 nxt = golf.run({"pga": upto(masters, 3)}, utc(2025, 4, 13), out["state"])
@@ -95,13 +95,17 @@ check("round 3 under way: the table is still after round 2 and says the next rou
 # ---- the final ---------------------------------------------------------------------------------------------------
 fin = golf.run({"pga": with_end(masters, "2025-04-13T04:00Z")}, utc(2025, 4, 14), {})
 ft = text(fin["blocks"][0])
-check("the final: McIlroy first (gold) after the playoff, Rose second, Reed third, Scheffler fourth, Im and DeChambeau tied fifth", "1 R. McIlroy" in ft and "2 J. Rose" in ft and "3 P. Reed" in ft and "4 S. Scheffler" in ft and "T5 S. Im" in ft and "T5 B. DeChambeau" in ft and fin["blocks"][0].count('class="p1"') == 1, ft[:500])
-check("D's players outside the top 25 on the final table: Bhatia T42 at +4 (15 behind); Koepka and Mickelson missed the cut (MC)", "T42 A. Bhatia -1 +4 15" in ft and "MC B. Koepka +5" in ft and "MC P. Mickelson +5" in ft, ft[-400:])
+check("the final: McIlroy first (gold) after the playoff, Rose second, Reed third, Scheffler fourth, Im and DeChambeau tied fifth", "1 Rory McIlroy" in ft and "2 Justin Rose" in ft and "3 Patrick Reed" in ft and "4 Scottie Scheffler" in ft and "T5 Sungjae Im" in ft and "T5 Bryson DeChambeau" in ft and fin["blocks"][0].count('class="p1"') == 1, ft[:500])
+check("D's players outside the top 25 on the final table: Bhatia T42 at +4 (15 behind); Koepka and Mickelson missed the cut (MC)", "T42 Akshay Bhatia -1 +4 15" in ft and "MC Brooks Koepka +5" in ft and "MC Phil Mickelson +5" in ft, ft[-400:])
 check("the winner makes a Big Stuff line", fin["winners"] == ["Golf: Rory McIlroy wins the Masters Tournament (-11)"], fin["winners"])
 check("the final is shown once", golf.run({"pga": with_end(masters, "2025-04-13T04:00Z")}, utc(2025, 4, 15), fin["state"])["blocks"] == [])
 check("an event that finished a month ago is not news, even on the first run", golf.run({"pga": with_end(masters, "2025-04-13T04:00Z")}, utc(2025, 5, 20), {})["blocks"] == [])
 pl = golf.run({"pga": with_end(players, players["events"][0]["endDate"])}, datetime.fromisoformat(players["events"][0]["endDate"].replace("Z", "+00:00")) + (utc(2025, 1, 2) - utc(2025, 1, 1)), {})
 check("THE PLAYERS Championship gets the men's treatment under the name 'The Players Championship'", pl["blocks"] and "The Players Championship · Final" in text(pl["blocks"][0]) and pl["winners"][0].startswith("Golf: ") and "The Players Championship" in pl["winners"][0], pl["winners"])
+
+check("D's players below the table are in order of position, never alphabetical: Bhatia T42, then the missed cuts in his list's order (Koepka, Mickelson)", [x["name"] for x in golf.extras_for(ps, golf.final_rows(ps, 25), 4)] == ["Akshay Bhatia", "Brooks Koepka", "Phil Mickelson"])
+_r2 = golf.standing(golf.people(upto(masters, 2)["events"][0]), 2)[:25]
+check("and after round 2, position order: T40 (Rahm, Spieth, Bhatia in his list's order), then T67 (Koepka, Mickelson)", [(x["pos"], x["name"]) for x in golf.extras_for(golf.people(upto(masters, 2)["events"][0]), _r2, 2)] == [("T40", "Jon Rahm"), ("T40", "Jordan Spieth"), ("T40", "Akshay Bhatia"), ("T67", "Brooks Koepka"), ("T67", "Phil Mickelson")])
 
 # ---- the women's weekend ------------------------------------------------------------------------------------------
 ev = evian["events"][0]
@@ -113,7 +117,7 @@ t3 = text(w3["blocks"][0]) if w3["blocks"] else ""
 check("women: Saturday's table has the first 10 only, no D's-players rows, titled Evian Championship", w3["blocks"] and len(re.findall(r"<tr[ >]", w3["blocks"][0].split("<tbody>")[1])) == 10 and "Evian Championship · After round 3" in t3 and 'class="also"' not in w3["blocks"][0], t3[:300])
 wf = golf.run({"lpga": with_end(evian, ev_end)}, datetime.fromisoformat(ev_end.replace("Z", "+00:00")) + (utc(2025, 1, 2) - utc(2025, 1, 1)), {})
 raw_w = sorted(ev["competitions"][0]["competitors"], key=lambda c: c["order"])
-check("women: the final top 10 with the winner (the board's own first) in gold and a Big Stuff line", wf["blocks"] and wf["winners"] and f"1 {raw_w[0]['athlete']['shortName']}" in text(wf["blocks"][0]) and len(re.findall(r"<tr[ >]", wf["blocks"][0].split("<tbody>")[1])) == 10
+check("women: the final top 10 with the winner (the board's own first) in gold and a Big Stuff line", wf["blocks"] and wf["winners"] and f"1 {raw_w[0]['athlete']['displayName']}" in text(wf["blocks"][0]) and f"2 {raw_w[1]['athlete']['displayName']}" in text(wf["blocks"][0]) and len(re.findall(r"<tr[ >]", wf["blocks"][0].split("<tbody>")[1])) == 10
       and wf["winners"] and wf["winners"][0].startswith(f"Golf: {raw_w[0]['athlete']['displayName']} wins the Evian Championship"), (wf["winners"], text(wf["blocks"][0])[:200]))
 
 # ---- the start note -------------------------------------------------------------------------------------------------

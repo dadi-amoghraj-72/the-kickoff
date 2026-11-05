@@ -112,7 +112,7 @@ def table(title, rows, extras, final, behind_label="Behind"):
         ties[x["rank"]] = ties.get(x["rank"], 0) + 1
     body, classes = [], []
     for x in rows:
-        body.append([pos(x["rank"], ties[x["rank"]]), x["p"]["short"], show(x["rd"]), show(x["cum"]), "–" if x["cum"] == lead else str(x["cum"] - lead)])
+        body.append([pos(x["rank"], ties[x["rank"]]), x["p"]["name"], show(x["rd"]), show(x["cum"]), "–" if x["cum"] == lead else str(x["cum"] - lead)])
         classes.append("p1" if x["rank"] == 1 and x is rows[0] else "")
     for e in extras:
         body.append([e["pos"], e["name"], e.get("rd", ""), e.get("total", ""), e.get("behind", "")])
@@ -122,7 +122,8 @@ def table(title, rows, extras, final, behind_label="Behind"):
 
 
 def render_table(title, cols, body, classes):
-    return r.table(title, cols, body, row_classes=classes)
+    """The standing in the compact fixed-width style: full player names (D does not know golfers' names), which wrap onto a second line when a name is long, narrow numbers."""
+    return r.compact(r.table(title, cols, body, row_classes=classes), [11, 43, 14, 15, 17], " golf")
 
 
 def extras_for(ps, rows, n, limit_names=None):
@@ -140,10 +141,11 @@ def extras_for(ps, rows, n, limit_names=None):
             continue
         x = next((y for y in everyone if y["p"]["id"] == p["id"]), None)
         if x:
-            out.append({"name": p["short"], "pos": pos(x["rank"], ties[x["rank"]]), "rd": show(x["rd"]), "total": show(x["cum"]), "behind": "–" if x["cum"] == lead else str(x["cum"] - lead)})
+            out.append({"name": p["name"], "rank": x["rank"], "pos": pos(x["rank"], ties[x["rank"]]), "rd": show(x["rd"]), "total": show(x["cum"]), "behind": "–" if x["cum"] == lead else str(x["cum"] - lead)})
         else:
             lab = status_label(p, n) or "MC"
-            out.append({"name": p["short"], "pos": lab, "rd": "", "total": show(p["total"]) if p["total"] is not None else "", "behind": ""})
+            out.append({"name": p["name"], "rank": 10**6, "pos": lab, "rd": "", "total": show(p["total"]) if p["total"] is not None else "", "behind": ""})
+    out.sort(key=lambda e: e["rank"])                      # D: always in order of position (T40, then T67, then MC/WD last); players on the same position keep his list's order
     return out
 
 
@@ -155,8 +157,10 @@ def final_rows(ps, size):
     for p in done:
         rank = 1 + sum(1 for q in done if q["total"] < p["total"])
         rows.append({"p": p, "cum": p["total"], "rd": p["rounds"][4]["par"] if p["rounds"][4]["par"] is not None else 0, "rank": rank})
-    if rows and len(rows) > 1 and rows[1]["rank"] == 1 and rows[0]["p"]["playoff"]:
-        rows[1]["rank"] = 2                       # a playoff winner leads alone; the loser of the playoff is second
+    if len(rows) > 1 and rows[1]["rank"] == 1:        # a tie on the lead is a playoff: the winner (ESPN's first) leads alone, the others tied with him share second
+        for x in rows[1:]:
+            if x["rank"] == 1:
+                x["rank"] = 2
     return rows[:size]
 
 

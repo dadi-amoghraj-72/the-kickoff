@@ -130,14 +130,14 @@ parsed = bd.parse(ae)
 tops = bd.top_seeds(parsed)
 
 
-def day(rounds, note=False):
+def day(rounds, notice=None):
     fresh = {d: [m for m in info["matches"] if m["round"] in rounds and (m["round"] in bd.LATE or bd.interesting(m, d, tops))] for d, info in parsed.items()}
-    return bd.event_html("All England Open", parsed, {d: v for d, v in fresh.items() if v}, bd.draw_note(parsed, tops) if note else [], tops)
+    return bd.event_html("All England Open", {d: v for d, v in fresh.items() if v}, tops, notice)
 
 
-for title, note, html in (("Badminton · the draw", "The note when the event starts: who from India and Southeast Asia is in the draw, and the top three singles seeds.", day([], True)),
-                          ("Badminton · first-round day", "One line for each first-round match with an Indian or Southeast Asian player or a top-three singles seed, win or lose.", day(["First round"])),
-                          ("Badminton · quarter-final day", "The same, one line each.", day(["Quarter-finals"])),
+for title, note, html in (("Badminton · the week before", "One line before the event starts (no list of players).", day([], bd.notice_text("All England Open", bd.level_of(ae), date(2025, 3, 11)))),
+                          ("Badminton · Round of 32 day", "The matches with an Indian or Southeast Asian player or a top-three singles seed, grouped by discipline in the fixed order, always winner def. loser.", day(["Round of 32"])),
+                          ("Badminton · quarter-final day", "The same, for the quarter-finals.", day(["Quarter-finals"])),
                           ("Badminton · semi-final day", "Every semi-final of the five disciplines, as tables.", day(["Semi-finals"])),
                           ("Badminton · final day", "Every final, as tables.", day(["Final"]))):
     blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 Real data (the 2025 All England Open's real page).</strong> {render.esc(note)}</p><h4>Badminton</h4>{html}")
