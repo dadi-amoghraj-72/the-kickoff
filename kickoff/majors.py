@@ -22,7 +22,7 @@ CALENDAR = [
     ("badminton", "All England Open", ["{y} All England Open"], {3, 4}, "bwf"),
     ("badminton", "Malaysia Open", ["{y} Malaysia Open (badminton)", "{y} Malaysia Open"], {1, 2}, "bwf"),
     ("badminton", "Indonesia Open", ["{y} Indonesia Open (badminton)", "{y} Indonesia Open"], {6, 7}, "bwf"),
-    ("badminton", "China Open", ["{y} China Open (badminton)", "{y} China Open"], {11, 12}, "bwf"),
+    ("badminton", "China Open", ["{y} China Open (badminton)", "{y} China Open"], {7, 8, 11, 12}, "bwf"),     # July in 2025, November in 2024: both months are looked at
     ("badminton", "BWF World Championships", ["{y} BWF World Championships"], {8, 9}, "bwf"),
     ("badminton", "BWF World Tour Finals", ["{y} BWF World Tour Finals"], {12, 1}, "bwf"),
     ("darts", "PDC World Championship", ["{y} PDC World Darts Championship"], {12, 1, 2}, "infobox"),

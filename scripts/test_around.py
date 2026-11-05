@@ -131,6 +131,10 @@ check("a theft is not sport: 'Olympic gold stolen from a former hockey captain' 
 check("plain mode wants an outcome verb: 'Asian Games gold boosts a basketball season' is not a result, 'India storms into the final' is",
       around.plain_pick([{"link": "a", "title": "Asian Games Gold, Foreign Players Boost KBL Season"}]) == {} and list(around.plain_pick([{"link": "b", "title": "ACT Hockey: Dominant India storms into the final"}])) == ["b"])
 
+check("a line of several results is one item with the title in bold and each result on its own line (readable on a phone); a plain line is unchanged",
+      around.line_html("All England Open: men's singles A; women's singles B", "https://w", "Wikipedia", split=True) == '<li><strong>All England Open</strong><br>men&#x27;s singles A<br>women&#x27;s singles B <a href="https://w" rel="noopener">Wikipedia</a></li>'
+      and around.line_html("Ireland 43\u201321 Scotland (Six Nations)") == "<li>Ireland 43\u201321 Scotland (Six Nations)</li>")
+
 # ---- Google News and the same story twice -----------------------------------------------------------
 gn = (b'<?xml version="1.0"?><rss><channel><item><title>Satwik and Chirag reach All England final - Hindustan Times</title><link>https://news.google.com/rss/articles/abc</link>'
       b'<pubDate>Wed, 04 Nov 2026 22:00:00 GMT</pubDate><description>&lt;ol&gt;related&lt;/ol&gt;</description><source url="https://www.hindustantimes.com">Hindustan Times</source></item></channel></rss>')

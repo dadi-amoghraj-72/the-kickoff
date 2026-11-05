@@ -104,7 +104,7 @@ def run(source, now):
                 if table and len(table) <= MAX_ROUND_ROBIN:
                     best = max(table.values())
                     leaders = sorted(p for p, s in table.items() if s == best)
-                    out.append((f"{name}: " + (f"{surname(leaders[0])} wins on {_num(best)} points" if len(leaders) == 1 else f"{' and '.join(surname(p) for p in leaders)} share first on {_num(best)} points"),
+                    out.append((f"{name}: " + (f"{surname(leaders[0])} wins on {_num(best)} point{'s' if best != 1 else ''}" if len(leaders) == 1 else f"{' and '.join(surname(p) for p in leaders)} share first on {_num(best)} point{'s' if best != 1 else ''}"),
                                 f"chess:{tour['id']}:final", link))
         if stars < 2:
             for g in games:

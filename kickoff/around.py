@@ -244,8 +244,13 @@ def plain_pick(cands):
     return {c["link"]: {"kind": "result", "summary": None} for c in cands if STRICT.search(c["title"])}
 
 
-def line_html(text, link=None, source=None):
+def line_html(text, link=None, source=None, split=False):
+    """One list item. split=True (a line of several results, 'Title: a; b; c') puts the title in bold and each result on its own line, so it reads on a phone."""
     tail = f' <a href="{r.esc(link)}" rel="noopener">{r.esc(source)}</a>' if link else ""
+    if split and "; " in text and ": " in text:
+        head, rest = text.split(": ", 1)
+        body = f"<strong>{r.esc(head)}</strong>" + "".join(f"<br>{r.esc(part)}" for part in rest.split("; "))
+        return f"<li>{body}{tail}</li>"
     return f"<li>{r.esc(text)}{tail}</li>"
 
 
@@ -303,7 +308,7 @@ def run(now, st, source, client=None):
         try:                                           # the majors from Wikipedia and the chess from Lichess: exact lines, written by code
             for sp, text, uid, link, label in fn():
                 if uid not in seen:
-                    lines[sp].append(line_html(text, link, label))
+                    lines[sp].append(line_html(text, link, label, split=True))
                     seen.append(uid)
         except Exception:
             stats["failed"] += 1
