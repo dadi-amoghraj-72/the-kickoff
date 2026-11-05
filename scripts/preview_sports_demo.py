@@ -100,7 +100,7 @@ def golf_block(title, kind, note, board, now, tour="pga"):
     out = golf.run({tour: board}, now, {})
     html = "".join(out["blocks"]) or "<p class='muted'>Nothing came out of this block.</p>"
     html += "".join(f"<p class='muted'>Big Stuff line: {render.esc(w)}</p>" for w in out["winners"])
-    blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 {render.esc(kind)}.</strong> {render.esc(note)}</p><h4 class="sport">Golf</h4>{html}")
+    blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 {render.esc(kind)}.</strong> {render.esc(note)}</p><h4 class='sport'>Golf</h4>{html}")
 
 
 golf_block("Golf · men's major, Friday", "Real data", "The real 2025 Masters as it stood after round 2 (later rounds emptied): the first 25, then D's players below.", upto(masters, 2), utc(2025, 4, 12, 0, 0))
@@ -130,12 +130,12 @@ class UfcSrc:
 for title, note, board, now_, pages in (("UFC · a card with one title fight", "UFC 309 from UFC.com's real page: the main event, the co-main event and the top bout of the Prelims; the ranks are as the card listed them.", espn309, utc(2024, 11, 17, 2, 0), {"ufc-309": html309}),
                                         ("UFC · a card with two title fights", "UFC 316 from UFC.com's real page: a challenger beating the champion shows the winner with his own rank and the champion on the right.", {"events": [ev316]}, utc(2025, 6, 8, 12, 0), {"ufc-316": html316})):
     got = ufc.run(UfcSrc(board, pages), now_, {})
-    blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 Real data.</strong> {render.esc(note)}</p><h4 class="sport">UFC</h4>{''.join(got['blocks'])}")
+    blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 Real data.</strong> {render.esc(note)}</p><h4 class='sport'>UFC</h4>{''.join(got['blocks'])}")
 
 # UFC Fight Night and the monthly rankings table
 fn_event = {"id": "600052000", "name": "UFC Fight Night: Tsarukyan vs. Hooker", "date": "2025-11-22T15:00Z", "venues": [{"address": {"city": "Doha"}}], "status": {"type": {"state": "post", "completed": True}}, "competitions": []}
 got = ufc.run(UfcSrc({"events": [fn_event]}, {"ufc-fight-night-november-22-2025": (FX / "ufc_com_fn_20251122.html").read_text()}), utc(2025, 11, 23, 2, 0), {})
-blocks.append(f"<p class='muted'><strong>Demo \u00b7 UFC Fight Night \u00b7 Real data.</strong> A Fight Night (Doha, 22 November 2025) from UFC.com's real page: the header is its name.</p><h4 class="sport">UFC</h4>{''.join(got['blocks'])}")
+blocks.append(f"<p class='muted'><strong>Demo \u00b7 UFC Fight Night \u00b7 Real data.</strong> A Fight Night (Doha, 22 November 2025) from UFC.com's real page: the header is its name.</p><h4 class='sport'>UFC</h4>{''.join(got['blocks'])}")
 from kickoff import ufcrank  # noqa: E402
 from datetime import date as _date  # noqa: E402
 
@@ -148,13 +148,13 @@ class RankSrc:
 
 
 first = ufcrank.run(RankSrc(), _date(2026, 11, 4), {})
-blocks.append(f"<p class='muted'><strong>Demo \u00b7 UFC rankings, the first time \u00b7 Real data.</strong> UFC.com's real rankings page of 3 November 2026: the top 10 of both pound-for-pound lists, and the champion plus #1 and #2 of each division. Shown once a month, on the first Wednesday.</p><h4 class="sport">UFC</h4>{''.join(first['blocks'])}")
+blocks.append(f"<p class='muted'><strong>Demo \u00b7 UFC rankings, the first time \u00b7 Real data.</strong> UFC.com's real rankings page of 3 November 2026: the top 10 of both pound-for-pound lists, and the champion plus #1 and #2 of each division. Shown once a month, on the first Wednesday.</p><h4 class='sport'>UFC</h4>{''.join(first['blocks'])}")
 snap = {k: list(v) for k, v in first["state"]["snapshot"].items()}
 snap["Men's Pound-for-Pound"][0], snap["Men's Pound-for-Pound"][1] = snap["Men's Pound-for-Pound"][1], snap["Men's Pound-for-Pound"][0]
 snap["Flyweight"] = ["Alexandre Pantoja", "Joshua Van", "Brandon Royval"]
 snap["Lightweight"] = [snap["Lightweight"][0], snap["Lightweight"][2], snap["Lightweight"][1]]
 later = ufcrank.run(RankSrc(), _date(2026, 12, 2), {"month": "2026-11", "snapshot": snap})
-blocks.append(f"<p class='muted'><strong>Demo \u00b7 UFC rankings, a month later \u00b7 Real page, made-up earlier order.</strong> The same table a month on, with the moves since it was last shown (the earlier order is made up here, to show the arrows: ▲ up, ▼ down, NEW for a name that was not in that list).</p><h4 class="sport">UFC</h4>{''.join(later['blocks'])}")
+blocks.append(f"<p class='muted'><strong>Demo \u00b7 UFC rankings, a month later \u00b7 Real page, made-up earlier order.</strong> The same table a month on, with the moves since it was last shown (the earlier order is made up here, to show the arrows: ▲ up, ▼ down, NEW for a name that was not in that list).</p><h4 class='sport'>UFC</h4>{''.join(later['blocks'])}")
 
 # badminton: the real 2025 All England Open, shown the way it would come day by day
 ae = rd("all_england_2025")
@@ -172,7 +172,7 @@ for title, note, html in (("Badminton · the week before", "One line before the 
                           ("Badminton · quarter-final day", "The same, for the quarter-finals.", day(["Quarter-finals"])),
                           ("Badminton · semi-final day", "Every semi-final of the five disciplines, as tables.", day(["Semi-finals"])),
                           ("Badminton · final day", "Every final, as tables.", day(["Final"]))):
-    blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 Real data (the 2025 All England Open's real page).</strong> {render.esc(note)}</p><h4 class="sport">Badminton</h4>{html}")
+    blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 Real data (the 2025 All England Open's real page).</strong> {render.esc(note)}</p><h4 class='sport'>Badminton</h4>{html}")
 add("Darts", "Real data", "The 2025 Grand Slam of Darts, read the day after the final (16 November 2025).", utc(2025, 11, 17, 0, 0), wiki=lambda t: pages.get(t, ""))
 
 # chess: made-up elite round in Lichess's layout

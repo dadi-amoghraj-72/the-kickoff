@@ -61,9 +61,16 @@ def section(page, sid):
     html = (DEMO / f"{page}.html").read_text()
     m = re.search(rf'<section id="{sid}"><h2>[^<]*</h2>(.*?)</section>', html, re.S)
     out = m.group(1) if m else ""
-    if sid == "other-sports":             # the demo built each sport on its own, so each was "first"; in a real edition only the first sport has no line above it
-        head, _, rest = out.partition('class="sport first"')
-        out = head + 'class="sport first"' + rest.replace('class="sport first"', 'class="sport"')
+    if sid == "other-sports":             # the demo built each block on its own: in a real edition a sport is named once and only the first has no line above it
+        seen = set()
+
+        def fix(m):
+            name = m.group(2)
+            if name in seen:
+                return ""
+            seen.add(name)
+            return f'<h4 class="sport{" first" if len(seen) == 1 else ""}">{name}</h4>'
+        out = re.sub(r"<h4 class=(['\"])sport(?: first)?\1>([A-Za-z ]+)</h4>", fix, out)
     return out
 
 
