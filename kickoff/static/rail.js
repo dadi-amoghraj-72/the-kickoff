@@ -14,7 +14,7 @@
   var icon = document.getElementById("rail-icon");
   var railEl = document.querySelector(".rail");
   var ICONS = window.RAIL_ICONS || {}, BY_SECTION = window.RAIL_SECTION_ICON || {}, BY_SPORT = window.RAIL_SPORT_ICON || {};
-  var iconMarks = [], railH = 1, lastKey = "", lastTop = -1, lastDeg = -999, lastInnerH = 0;
+  var iconMarks = [], railH = 1, lastKey = "", lastTop = -1, lastDeg = -999, lastInnerH = 0, endY = 0;
   var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var WPM = 230;
   var words = document.querySelector("main").innerText.trim().split(/\s+/).length;
@@ -42,6 +42,8 @@
           iconMarks.push({ y: h.getBoundingClientRect().top + window.scrollY, key: BY_SPORT[name] || "chess" });
         });
       });
+      var endEl = document.querySelector(".theend");                                 // "The End": the chequered flag
+      endY = endEl ? endEl.getBoundingClientRect().top + window.scrollY : 0;
       iconMarks.sort(function (a, b) { return a.y - b.y; });
     }
   }
@@ -55,6 +57,7 @@
     }
     var line = y + window.innerHeight * 0.35, key = iconMarks[0].key;
     for (var m = 0; m < iconMarks.length; m++) if (iconMarks[m].y <= line) key = iconMarks[m].key;
+    if (endY && y + window.innerHeight * 0.85 >= endY) key = "flag";               // "The End" has come into view: the chequered flag
     var d = ICONS[key] || ICONS.chess;
     if (!d) return;
     if (key !== lastKey) {

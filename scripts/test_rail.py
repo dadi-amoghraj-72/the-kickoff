@@ -45,7 +45,7 @@ if (icon) Object.defineProperty(icon, "innerHTML", { set: function (v) { this._h
 var rail = { getBoundingClientRect: function () { return { height: window.innerHeight - 100, top: 64 }; } };
 window.document = { documentElement: { scrollHeight: __TOTAL__ },
   querySelectorAll: function (sel) { return sel === "main section[id]" ? secEls : []; },
-  querySelector: function (sel) { return sel === "main" ? { innerText: "word word word" } : sel === ".rail" ? rail : null; },
+  querySelector: function (sel) { return sel === "main" ? { innerText: "word word word" } : sel === ".rail" ? rail : sel === ".theend" && __END__ ? { getBoundingClientRect: box(__END__) } : null; },
   getElementById: function (id) { return id === "rail-fill" ? fill : id === "chip" ? chip : id === "rail-icon" ? icon : null; },
   fonts: null };
 var document = window.document;
@@ -65,10 +65,10 @@ print(JSON.stringify(out));
 """
 
 
-def run(sections, steps, with_icon=True, total=None):
+def run(sections, steps, with_icon=True, total=None, end=0):
     total = total or sections[-1]["y"] + 1400
     js = (HARNESS.replace("__SECTIONS__", json.dumps(sections)).replace("__ICON__", "true" if with_icon else "false").replace("__TOTAL__", str(total))
-          .replace("__ICONS__", ICONS).replace("__RAIL__", RAIL).replace("__STEPS__", json.dumps(steps)))
+          .replace("__ICONS__", ICONS).replace("__RAIL__", RAIL).replace("__STEPS__", json.dumps(steps)).replace("__END__", str(end)))
     p = ROOT / "preview" / "rail_harness.js"
     p.parent.mkdir(exist_ok=True)
     p.write_text(js)
@@ -82,7 +82,7 @@ SECS = [{"id": "big-stuff", "y": 0}, {"id": "on-today", "y": 1000}, {"id": "foot
         {"id": "other-sports", "y": 9000, "h4": [{"t": "Rugby", "y": 9100}, {"t": "Golf", "y": 9500}, {"t": "UFC", "y": 9900}, {"t": "Badminton", "y": 10300}, {"t": "Chess", "y": 10700}]},
         {"id": "stories", "y": 11200}]
 STEPS = [0, 1100, 2100, 3100, 4100, 5100, 6100, 7100, 8100, 8800, 9000, 9300, 9800, 10100, 10600, 11000, 11300, 12000]
-got = run(SECS, STEPS)
+got = run(SECS, STEPS + [12900, 13400], end=13100, total=13900)
 if isinstance(got, dict):
     check("the harness ran", False, got)
     sys.exit(1)
@@ -94,6 +94,8 @@ check("Other Sports changes the drawing by sport: rugby ball, golf ball, UFC glo
 check("Other Sports opens with its first sport's drawing (the rugby ball), not a generic one, from the moment the section is reached (D, 2026-11-05)", keys[8800] == "rugby", keys)
 check("the Arsenal section has the cannon and the Football section the football", run([{"id": "arsenal", "y": 0}, {"id": "football", "y": 1000}], [0, 1100])[0]["key"] == "cannon" and run([{"id": "arsenal", "y": 0}, {"id": "football", "y": 1000}], [0, 1100])[1]["key"] == "football")
 check("Interesting Stories gets the chess king", keys[11300] == "chess" and keys[12000] == "chess")
+check("at the end of the page the chequered flag leads the bar (D, 2026-11-05): The End (at 13100) is in view from about 12420 up", keys[12900] == "flag" and keys[13400] == "flag" and keys[12000] == "chess", keys)
+check("F1 has the helmet now, not the flag", keys[7100] == "f1" and "currentColor" in __import__("pathlib").Path(ROOT / "kickoff/static/rail-icons.js").read_text().split("f1: {")[1].split("\n")[0] and "x=\"5\" y=\"3\"" not in __import__("pathlib").Path(ROOT / "kickoff/static/rail-icons.js").read_text().split("f1: {")[1].split("\n")[0])
 check("the icon is shown (made visible) once it has a drawing", all(g["on"] for g in got))
 tops = [float(g["top"].split(",")[1].replace("px", "")) for g in got]
 check("the icon rides the head of the fill: lower on the rail as you scroll, from the top to the bottom of the 700px rail", tops == sorted(tops) and tops[0] == 0 and abs(tops[-1] - 700) <= 1, tops)

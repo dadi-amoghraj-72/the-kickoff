@@ -492,7 +492,8 @@ window.RAIL_ICONS = {
   tennis: { spin: true, svg: '<circle cx="12" cy="12" r="10" fill="currentColor"/><circle cx="12" cy="12" r="10" fill="none" stroke="var(--pitch)" stroke-width="0"/><path d="M4.6 3.6C10.4 8 10.4 16 4.6 20.4M19.4 3.6C13.6 8 13.6 16 19.4 20.4" stroke="var(--pitch)" stroke-width="1.7" stroke-linecap="round" fill="none"/>' },
   golf: { spin: false, svg: '<rect x="11.2" y="2" width="1.6" height="17.5" fill="currentColor"/><polygon points="12.8,2 20.5,5.4 12.8,8.8" fill="currentColor"/><ellipse cx="12" cy="20.6" rx="8" ry="2.2" fill="currentColor"/>' },
   rugby: { spin: true, svg: '<g transform="rotate(-35 12 12)"><ellipse cx="12" cy="12" rx="10.5" ry="7" fill="currentColor"/><path d="M5.2 12h13.6M9.6 10v4M12 9.6v4.8M14.4 10v4" stroke="var(--pitch)" stroke-width="1.2" fill="none"/></g>' },
-  f1: { spin: false, svg: '<rect x="3" y="2" width="1.8" height="20" rx=".9" fill="currentColor"/><g fill="currentColor"><rect x="5.0" y="3.0" width="4.4" height="4.4"/><rect x="13.8" y="3.0" width="4.4" height="4.4"/><rect x="9.4" y="7.4" width="4.4" height="4.4"/><rect x="18.2" y="7.4" width="4.4" height="4.4"/><rect x="5.0" y="11.8" width="4.4" height="4.4"/><rect x="13.8" y="11.8" width="4.4" height="4.4"/></g><rect x="5" y="3" width="17.6" height="13.2" fill="none" stroke="currentColor" stroke-width="1.3"/>' },
+  f1: { spin: false, svg: '<path d="M2.5 14.6C2.5 8.4 6.9 4 12.7 4c5.1 0 9 3.3 9.5 8.3l.1 2.7c0 1.6-1.2 2.8-2.8 2.8H11.2l-3.3 2.2H5.5c-1.7 0-3-1.4-3-3.1z" fill="currentColor"/><path d="M12.3 8.4h8.8l.5 5h-9.9z" fill="var(--pitch)"/><path d="M2.8 12.4h7.4" stroke="var(--pitch)" stroke-width="1.4" fill="none"/>' },
+  flag: { spin: false, svg: '<rect x="3" y="2" width="1.8" height="20" rx=".9" fill="currentColor"/><g fill="currentColor"><rect x="5.0" y="3.0" width="4.4" height="4.4"/><rect x="13.8" y="3.0" width="4.4" height="4.4"/><rect x="9.4" y="7.4" width="4.4" height="4.4"/><rect x="18.2" y="7.4" width="4.4" height="4.4"/><rect x="5.0" y="11.8" width="4.4" height="4.4"/><rect x="13.8" y="11.8" width="4.4" height="4.4"/></g><rect x="5" y="3" width="17.6" height="13.2" fill="none" stroke="currentColor" stroke-width="1.3"/>' },
   ufc: { spin: false, svg: '<path d="M6.5 9c0-3.6 2.4-6 6.2-6h1.6c3.4 0 5.2 2.2 5.2 5.4V13c0 2.2-1.2 3.6-3 3.9V21H8.6v-4.6C7.2 15.6 6.5 14 6.5 12z" fill="currentColor"/><path d="M8.6 18.2h8.4" stroke="var(--pitch)" stroke-width="1.3" fill="none"/><path d="M7 11.2c-1.8-.2-3 .8-2.8 2.2.2 1.2 1.4 1.8 2.8 1.6" fill="currentColor"/>' },
   badminton: { spin: false, svg: '<path d="M8.5 13L5.4 2.5h13.2L15.5 13z" fill="currentColor"/><path d="M9.2 5.5l1.2 7M12 5.5v7M14.8 5.5l-1.2 7" stroke="var(--pitch)" stroke-width="1" fill="none"/><path d="M8.5 14.2h7v2.2a3.5 3.5 0 0 1-7 0z" fill="currentColor"/>' },
   darts: { spin: false, svg: '<circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/>' },
@@ -522,7 +523,7 @@ window.RAIL_SPORT_ICON = { rugby: "rugby", golf: "golf", ufc: "ufc", badminton: 
   var icon = document.getElementById("rail-icon");
   var railEl = document.querySelector(".rail");
   var ICONS = window.RAIL_ICONS || {}, BY_SECTION = window.RAIL_SECTION_ICON || {}, BY_SPORT = window.RAIL_SPORT_ICON || {};
-  var iconMarks = [], railH = 1, lastKey = "", lastTop = -1, lastDeg = -999, lastInnerH = 0;
+  var iconMarks = [], railH = 1, lastKey = "", lastTop = -1, lastDeg = -999, lastInnerH = 0, endY = 0;
   var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var WPM = 230;
   var words = document.querySelector("main").innerText.trim().split(/\s+/).length;
@@ -550,6 +551,8 @@ window.RAIL_SPORT_ICON = { rugby: "rugby", golf: "golf", ufc: "ufc", badminton: 
           iconMarks.push({ y: h.getBoundingClientRect().top + window.scrollY, key: BY_SPORT[name] || "chess" });
         });
       });
+      var endEl = document.querySelector(".theend");                                 // "The End": the chequered flag
+      endY = endEl ? endEl.getBoundingClientRect().top + window.scrollY : 0;
       iconMarks.sort(function (a, b) { return a.y - b.y; });
     }
   }
@@ -563,6 +566,7 @@ window.RAIL_SPORT_ICON = { rugby: "rugby", golf: "golf", ufc: "ufc", badminton: 
     }
     var line = y + window.innerHeight * 0.35, key = iconMarks[0].key;
     for (var m = 0; m < iconMarks.length; m++) if (iconMarks[m].y <= line) key = iconMarks[m].key;
+    if (endY && y + window.innerHeight * 0.85 >= endY) key = "flag";               // "The End" has come into view: the chequered flag
     var d = ICONS[key] || ICONS.chess;
     if (!d) return;
     if (key !== lastKey) {
