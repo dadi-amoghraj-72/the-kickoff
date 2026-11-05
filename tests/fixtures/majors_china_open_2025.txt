@@ -1,0 +1,2072 @@
+{{Infobox badminton event
+|name           = {{nowrap|2025 China Open}}
+|image          =  
+|caption        =
+|dates          = 22–27 July 
+|number_edition = 34th
+|level          = G2L2
+|prize_money    = 2000000
+|other          =
+|venue          = [[Changzhou Olympic Sports Centre|Olympic Sports Centre Gymnasium]]
+|location       = [[Changzhou]], [[Jiangsu]], China
+| MS             = [[Shi Yuqi]]
+| country_MS     = CHN
+| WS             = [[Wang Zhiyi]]
+| country_WS     = CHN
+| MD1            = [[Fajar Alfian]]
+| country_MD1    = IDN
+| MD2            = [[Muhammad Shohibul Fikri]]
+| country_MD2    = IDN
+| WD1            = [[Liu Shengshu]]
+| country_WD1    = CHN
+| WD2            = [[Tan Ning (badminton)|Tan Ning]]
+| country_WD2    = CHN
+| XD1            = [[Feng Yanzhe]]
+| country_XD1    = CHN
+| XD2            = [[Huang Dongping]]
+| country_XD2    = CHN
+|previous       = [[2024 China Open (badminton)|2024]]
+|next           = [[2026 China Open (badminton)|2026]]
+}}
+
+The '''2025 China Open''' (officially known as the '''Victor China Open 2025''' for sponsorship reasons) was a badminton tournament that took place at [[Changzhou Olympic Sports Centre|Olympic Sports Centre Gymnasium]] in [[Changzhou]], [[Jiangsu]], China from 22 to 27 July 2025 and had a total prize of $2,000,000.<ref name="pros"/><ref>{{cite web|title=Badminton schedule 2025: BWF World Tour Final and World Championships among big-ticket events for shuttlers |url=https://www.olympics.com/en/news/badminton-schedule-2025-tournament-calendar |publisher=Olympics.com|access-date=6 July 2025}}</ref>
+{{TOC right}}
+
+==Tournament==
+The 2025 China Open was the eighteenth tournament of the [[2025 BWF World Tour]] and also part of the [[China Open (badminton)|China Open]] championships, which had been held since [[China Open (badminton)|1986]].<ref>{{Cite web |title=BadmintonRanks - Professional Badminton Data Statistics |url=https://badmintonranks.com/tournament?id=11469 |access-date=2025-07-25 |website=badmintonranks.com}}</ref> This tournament was organized by [[Chinese Badminton Association]], and sanctioned by the [[Badminton World Federation|BWF]].<ref name="pros">{{cite web|title=Victor China Open 2025|url=https://extranet.bwf.sport/docs/events/5259/docs/VICTOR%20China%20Open%202025%20Prospectus_Final.pdf |publisher=[[Badminton World Federation]] |access-date=6 July 2025}}</ref><ref>{{cite web|title=2025 China Open |url=https://badmintonworldtour.com/event/2025-china-open/ |publisher=badmintonworldtour.com|access-date=6 July 2025}}</ref>
+
+===Venue===
+The tournament was held at [[Changzhou Olympic Sports Centre|Olympic Sports Centre Gymnasium]] in [[Changzhou]], [[Jiangsu]], China.<ref name="pros"/>
+
+===Point distribution===
+Below is the tables with the point distribution for each phase of the tournament based on the new [[BWF World Ranking#After 23 April 2024|BWF points system]] for the [[BWF World Tour Super 1000]] event starting in Week 29 2025.<ref>{{cite web |title=World Ranking System |url=https://extranet.bwf.sport/docs/document-system/81/1466/1471/Section%205.3.3.1%20-%20World%20Ranking%20System%20-%2011%20November%202023%20V3.1.pdf|publisher=[[Badminton World Federation]] |access-date=6 July 2025}}</ref>
+
+{| class="wikitable" style="text-align:center"
+|-
+! width="75" | Winner
+! width="75" | Runner-up
+! width="75" | 3/4
+! width="75" | 5/8
+! width="75" | 9/16
+! width="75" | 17/32
+|-
+| 13,500 || 11,500 || 9,500 || 7,400 || 5,400 || 3,300
+|}
+
+===Prize money===
+The total prize money for this year tournament was US$2,000,000. Distribution of prize money was in accordance with BWF regulations.<ref name="pros"/>
+
+{| class="wikitable" style="font-size:90%; text-align:center"
+|-
+| width="104px" | '''Event'''
+| width="68px" | '''Winner'''
+| width="68px" | '''Finalist'''
+| width="68px" | '''Semi-finals'''
+| width="80px" | '''Quarter-finals'''
+| width="68px" | '''Last 16'''
+| width="68px" | '''Last 32'''
+|-
+| bgcolor="#dfe2e9" | '''Singles'''
+| $140,000 || $68,000 || $28,000 || $11,000 || $6,000 || $2,000
+|-
+| bgcolor="#dfe2e9" | '''Doubles'''
+| $148,000 || $70,000 || $28,000 || $12,500 || $6,500 || $2,000
+|}
+
+== Men's singles ==
+=== Seeds ===
+{{colbegin}}
+# {{flagicon|THA}} [[Kunlavut Vitidsarn]] ''(quarter-finals)''
+# {{flagicon|DEN}} [[Anders Antonsen]] ''(semi-finals)''
+# '''{{flagicon|CHN}} [[Shi Yuqi]] (champion)'''
+# {{flagicon|INA}} [[Jonatan Christie]] ''(second round)''
+# {{flagicon|CHN}} [[Li Shifeng]] ''(quarter-finals)''
+# {{flagicon|TPE}} [[Chou Tien-chen]] ''(semi-finals)''
+# {{flagicon|JPN}} [[Kodai Naraoka]] ''(first round)''
+# {{flagicon|FRA}} [[Alex Lanier]] ''(first round)''
+{{colend}}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade=#A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1    = 6
+| RD1-team1    = {{flagicon|TPE}} [[Chou Tien-chen]]
+| RD1-score1-1 = 13
+| RD1-score1-2 = 20
+| RD1-score1-3 =
+| RD1-seed2    = 3
+| RD1-team2    = '''{{flagicon|CHN}} [[Shi Yuqi]]'''
+| RD1-score2-1 = '''21'''
+| RD1-score2-2 = '''22'''
+| RD1-score2-3 =
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = '''{{flagicon|CHN}} [[Wang Zhengxing]]'''
+| RD1-score3-1 = '''21'''
+| RD1-score3-2 = '''21'''
+| RD1-score3-3 =
+| RD1-seed4    = 2
+| RD1-team4    = {{flagicon|DEN}} [[Anders Antonsen]]
+| RD1-score4-1 = 18
+| RD1-score4-2 = 15
+| RD1-score4-3 =
+
+| RD2-seed1    = 3
+| RD2-team1    = '''{{flagicon|CHN}} [[Shi Yuqi]]'''
+| RD2-score1-1 = 14
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 = '''21'''
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|CHN}} [[Wang Zhengxing]]
+| RD2-score2-1 = '''21'''
+| RD2-score2-2 = 14
+| RD2-score2-3 = 15
+}}
+
+=== Top half ===
+==== Section 1 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 1
+| RD1-team1    = '''{{flagicon|THA}} [[Kunlavut Vitidsarn|K Vitidsarn]]'''
+| RD1-score1-1 = 10
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 = '''21'''
+| RD1-seed2    = &nbsp;
+| RD1-team2    = {{flagicon|INA}} [[Alwi Farhan|A Farhan]]
+| RD1-score2-1 = '''21'''
+| RD1-score2-2 = 15
+| RD1-score2-3 = 18
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = '''{{flagicon|MAS}} [[Leong Jun Hao|Leong J H]]'''
+| RD1-score3-1 = '''21'''
+| RD1-score3-2 = '''21'''
+| RD1-score3-3 =
+| RD1-seed4    = &nbsp;
+| RD1-team4    = {{flagicon|JPN}} [[Kenta Nishimoto|K Nishimoto]]
+| RD1-score4-1 = 15
+| RD1-score4-2 = 18
+| RD1-score4-3 =
+
+| RD1-seed5    = 6
+| RD1-team5    = '''{{flagicon|TPE}} [[Chou Tien-chen|Chou T-c]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    = &nbsp;
+| RD1-team6    = {{flagicon|TPE}} [[Wang Tzu-wei|Wang T-w]]
+| RD1-score6-1 = 18
+| RD1-score6-2 = 16
+| RD1-score6-3 =
+
+| RD1-seed7    = &nbsp;
+| RD1-team7    = '''{{flagicon|IND}} [[Prannoy H. S.|Prannoy HS]]'''
+| RD1-score7-1 = 8
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 = '''23'''
+| RD1-seed8    = &nbsp;
+| RD1-team8    = {{flagicon|JPN}} [[Koki Watanabe|K Watanabe]]
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = 16
+| RD1-score8-3 = 21
+
+| RD2-seed1    = 1
+| RD2-team1    = '''{{flagicon|THA}} [[Kunlavut Vitidsarn|K Vitidsarn]]'''
+| RD2-score1-1 = '''23'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|MAS}} [[Leong Jun Hao|Leong J H]]
+| RD2-score2-1 = 21
+| RD2-score2-2 = 7
+| RD2-score2-3 =
+
+| RD2-seed3    = 6
+| RD2-team3    = '''{{flagicon|TPE}} [[Chou Tien-chen|Chou T-c]]'''
+| RD2-score3-1 = 18
+| RD2-score3-2 ='''21'''
+| RD2-score3-3 ='''21'''
+| RD2-seed4    =
+| RD2-team4    = {{flagicon|IND}} [[Prannoy H. S.|Prannoy HS]]
+| RD2-score4-1 ='''21'''
+| RD2-score4-2 = 15 
+| RD2-score4-3 = 8
+
+| RD3-seed1    = 1
+| RD3-team1    = {{flagicon|THA}} [[Kunlavut Vitidsarn|K Vitidsarn]]
+| RD3-score1-1 = 17
+| RD3-score1-2 = 11
+| RD3-score1-3 =
+| RD3-seed2    = 6
+| RD3-team2    = '''{{flagicon|TPE}} [[Chou Tien-chen|Chou T-c]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 =
+}}
+
+==== Section 2 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 3
+| RD1-team1    = '''{{flagicon|CHN}} [[Shi Yuqi|Shi YQ]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    = &nbsp;
+| RD1-team2    = {{flagicon|CHN}} [[Weng Hongyang|Weng HY]]
+| RD1-score2-1 = 16
+| RD1-score2-2 = 11
+| RD1-score2-3 =
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = {{flagicon|DEN}} [[Rasmus Gemke|R Gemke]]
+| RD1-score3-1 = '''22'''
+| RD1-score3-2 = 16
+| RD1-score3-3 = 11
+| RD1-seed4    = &nbsp;
+| RD1-team4    = '''{{flagicon|IRL}} [[Nhat Nguyen|N Nguyen]]'''
+| RD1-score4-1 = 20
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 = '''21'''
+
+| RD1-seed5    = 5
+| RD1-team5    = '''{{flagicon|CHN}} [[Li Shifeng|Li SF]]'''
+| RD1-score5-1 = 14
+| RD1-score5-2 = '''24'''
+| RD1-score5-3 = '''21'''
+| RD1-seed6    = &nbsp;
+| RD1-team6    = {{flagicon|IND}} [[Lakshya Sen|L Sen]]
+| RD1-score6-1 = '''21'''
+| RD1-score6-2 = 22
+| RD1-score6-3 = 11
+
+| RD1-seed7    = &nbsp;
+| RD1-team7    = {{flagicon|HKG}} [[Lee Cheuk Yiu|Lee C Y]]
+| RD1-score7-1 = 14
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 = 7
+| RD1-seed8    = &nbsp;
+| RD1-team8    = '''{{flagicon|HKG}} [[Ng Ka Long|Ng K L]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = 11
+| RD1-score8-3 = '''21'''
+
+| RD2-seed1    = 3
+| RD2-team1    = '''{{flagicon|CHN}} [[Shi Yuqi|Shi YQ]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|IRL}} [[Nhat Nguyen|N Nguyen]]
+| RD2-score2-1 = 15
+| RD2-score2-2 = 8
+| RD2-score2-3 =
+
+| RD2-seed3    = 5
+| RD2-team3    = '''{{flagicon|CHN}} [[Li Shifeng|Li SF]]'''
+| RD2-score3-1 = '''21'''
+| RD2-score3-2 = '''21'''
+| RD2-score3-3 =
+| RD2-seed4    = &nbsp;
+| RD2-team4    = {{flagicon|HKG}} [[Ng Ka Long|Ng K L]]
+| RD2-score4-1 = 17
+| RD2-score4-2 = 9
+| RD2-score4-3 =
+
+| RD3-seed1    = 3
+| RD3-team1    = '''{{flagicon|CHN}} [[Shi Yuqi|Shi YQ]]'''
+| RD3-score1-1 = 15
+| RD3-score1-2 = '''21'''
+| RD3-score1-3 = '''21'''
+| RD3-seed2    = 5
+| RD3-team2    = {{flagicon|CHN}} [[Li Shifeng|Li SF]]
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = 15
+| RD3-score2-3 = 11
+}}
+
+=== Bottom half ===
+==== Section 3 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = &nbsp;
+| RD1-team1    = '''{{flagicon|TPE}} [[Lee Chia-hao|Lee C-h]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    = &nbsp;
+| RD1-team2    = {{flagicon|CHN}} [[Lu Guangzu|Lu GZ]]
+| RD1-score2-1 = 8
+| RD1-score2-2 = 15
+| RD1-score2-3 =
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = '''{{flagicon|CHN}} [[Wang Zhengxing|Wang ZX]]'''
+| RD1-score3-1 = 15
+| RD1-score3-2 = '''21'''
+| RD1-score3-3 = '''21'''
+| RD1-seed4    = 7
+| RD1-team4    = {{flagicon|JPN}} [[Kodai Naraoka|K Naraoka]]
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = 16
+| RD1-score4-3 = 17
+
+| RD1-seed5    = &nbsp;
+| RD1-team5    = {{flagicon|CHN}} [[Lei Lanxi|Lei LX]]
+| RD1-score5-1 = 13
+| RD1-score5-2 = 8
+| RD1-score5-3 =
+| RD1-seed6    = &nbsp;
+| RD1-team6    = '''{{flagicon|FRA}} [[Christo Popov|C Popov]]'''
+| RD1-score6-1 = '''21'''
+| RD1-score6-2 = '''21'''
+| RD1-score6-3 =
+
+| RD1-seed7    = &nbsp;
+| RD1-team7    = {{flagicon|SGP}} [[Jason Teh|J Teh]]
+| RD1-score7-1 = 17
+| RD1-score7-2 = 12
+| RD1-score7-3 =
+| RD1-seed8    = 4
+| RD1-team8    = '''{{flagicon|INA}} [[Jonatan Christie|J Christie]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = '''21'''
+| RD1-score8-3 =
+
+| RD2-seed1    =
+| RD2-team1    = {{flagicon|TPE}} [[Lee Chia-hao|Lee C-h]]
+| RD2-score1-1 = 12
+| RD2-score1-2 = '''27'''
+| RD2-score1-3 = 21
+| RD2-seed2    =
+| RD2-team2    = '''{{flagicon|CHN}} [[Wang Zhengxing|Wang ZX]]'''
+| RD2-score2-1 = '''21'''
+| RD2-score2-2 = 25
+| RD2-score2-3 = '''23'''
+
+| RD2-seed3    =
+| RD2-team3    = '''{{flagicon|FRA}} [[Christo Popov|C Popov]]'''
+| RD2-score3-1 = '''21'''
+| RD2-score3-2 = 13
+| RD2-score3-3 = '''21'''
+| RD2-seed4    = 4
+| RD2-team4    = {{flagicon|INA}} [[Jonatan Christie|J Christie]]
+| RD2-score4-1 = 12
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 = 16
+
+| RD3-seed1    =
+| RD3-team1    = '''{{flagicon|CHN}} [[Wang Zhengxing|Wang ZX]]'''
+| RD3-score1-1 = '''21'''
+| RD3-score1-2 = '''22'''
+| RD3-score1-3 =
+| RD3-seed2    =
+| RD3-team2    = {{flagicon|FRA}} [[Christo Popov|C Popov]]
+| RD3-score2-1 = 6
+| RD3-score2-2 = 20
+| RD3-score2-3 =
+}}
+
+==== Section 4 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = &nbsp;
+| RD1-team1    = {{flagicon|INA}} [[Anthony Sinisuka Ginting|A S Ginting]]
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = 16
+| RD1-score1-3 =14
+| RD1-seed2    = PFR
+| RD1-team2    = '''{{flagicon|CAN}} [[Brian Yang (badminton)|B Yang]]'''
+| RD1-score2-1 = 9
+| RD1-score2-2 = '''21'''
+| RD1-score2-3 ='''21'''
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = '''{{flagicon|FRA}} [[Toma Junior Popov|T J Popov]]'''
+| RD1-score3-1 = '''22'''
+| RD1-score3-2 = 13
+| RD1-score3-3 = '''21'''
+| RD1-seed4    = 8
+| RD1-team4    = {{flagicon|FRA}} [[Alex Lanier|A Lanier]]
+| RD1-score4-1 = 20
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 = 17
+
+| RD1-seed5    = &nbsp;
+| RD1-team5    = '''{{flagicon|TPE}} [[Lin Chun-yi (badminton)|Lin C-y]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = 16
+| RD1-score5-3 = '''21'''
+| RD1-seed6    = &nbsp;
+| RD1-team6    = {{flagicon|TPE}} [[Chi Yu-jen|Chi Y-j]]
+| RD1-score6-1 = 13
+| RD1-score6-2 = '''21'''
+| RD1-score6-3 = 8
+
+| RD1-seed7    = &nbsp;
+| RD1-team7    = {{flagicon|JPN}} [[Yushi Tanaka|Y Tanaka]]
+| RD1-score7-1 = 19
+| RD1-score7-2 = 15
+| RD1-score7-3 =
+| RD1-seed8    = 2
+| RD1-team8    = '''{{flagicon|DEN}} [[Anders Antonsen|A Antonsen]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = '''21'''
+| RD1-score8-3 =
+
+| RD2-seed1    = PFR
+| RD2-team1    = {{flagicon|CAN}} [[Brian Yang (badminton)|B Yang]]
+| RD2-score1-1 = 17
+| RD2-score1-2 = 16
+| RD2-score1-3 =
+| RD2-seed2    = &nbsp;
+| RD2-team2    = '''{{flagicon|FRA}} [[Toma Junior Popov|T J Popov]]'''
+| RD2-score2-1 ='''21'''
+| RD2-score2-2 ='''21'''
+| RD2-score2-3 =
+
+| RD2-seed3    = &nbsp;
+| RD2-team3    = {{flagicon|TPE}} [[Lin Chun-yi (badminton)|Lin C-y]]
+| RD2-score3-1 = 19
+| RD2-score3-2 = '''22'''
+| RD2-score3-3 = 20
+| RD2-seed4    = 2
+| RD2-team4    = '''{{flagicon|DEN}} [[Anders Antonsen|A Antonsen]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = 20
+| RD2-score4-3 = '''22'''
+
+| RD3-seed1    =
+| RD3-team1    = {{flagicon|FRA}} [[Toma Junior Popov|T J Popov]]
+| RD3-score1-1 = '''21'''
+| RD3-score1-2 = 12
+| RD3-score1-3 = 8
+| RD3-seed2    = 2
+| RD3-team2    = '''{{flagicon|DEN}} [[Anders Antonsen|A Antonsen]]'''
+| RD3-score2-1 = 19
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 = '''21'''
+}}
+
+== Women's singles ==
+=== Seeds ===
+{{colbegin}}
+# {{flagicon|KOR}} [[An Se-young]] ''(semi-finals)''
+# '''{{flagicon|CHN}} [[Wang Zhiyi]] (champion)'''
+# {{flagicon|JPN}} [[Akane Yamaguchi]] ''(semi-finals)''
+# {{flagicon|CHN}} [[Han Yue]] ''(final)''
+# {{flagicon|CHN}} [[Chen Yufei]] ''(quarter-finals)''
+# {{flagicon|JPN}} [[Tomoka Miyazaki]] ''(first round)''
+# {{flagicon|THA}} [[Pornpawee Chochuwong]] ''(first round)''
+# {{flagicon|INA}} [[Gregoria Mariska Tunjung]] ''(quarter-finals)''
+{{colend}}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade=#A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1    = 1
+| RD1-team1    = {{flagicon|KOR}} [[An Se-young]]
+| RD1-score1-1 = 19
+| RD1-score1-2 = 6<sup>r</sup>
+| RD1-score1-3 =
+| RD1-seed2    = 4
+| RD1-team2    = '''{{flagicon|CHN}} [[Han Yue]]'''
+| RD1-score2-1 = '''21'''
+| RD1-score2-2 = 11
+| RD1-score2-3 =
+
+| RD1-seed3    = 3
+| RD1-team3    = {{flagicon|JPN}} [[Akane Yamaguchi]]
+| RD1-score3-1 = 20
+| RD1-score3-2 = 11
+| RD1-score3-3 =
+| RD1-seed4    = 2
+| RD1-team4    = '''{{flagicon|CHN}} [[Wang Zhiyi]]'''
+| RD1-score4-1 = '''22'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD2-seed1    = 4
+| RD2-team1    = {{flagicon|CHN}} [[Han Yue]]
+| RD2-score1-1 = 8
+| RD2-score1-2 = 13
+| RD2-score1-3 =
+| RD2-seed2    = 2
+| RD2-team2    = '''{{flagicon|CHN}} [[Wang Zhiyi]]'''
+| RD2-score2-1 = '''21'''
+| RD2-score2-2 = '''21'''
+| RD2-score2-3 =
+}}
+
+=== Top half ===
+==== Section 1 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 1
+| RD1-team1    = '''{{flagicon|KOR}} [[An Se-young|An S-y]]'''
+| RD1-score1-1 = 13
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 = '''21'''
+| RD1-seed2    = &nbsp;
+| RD1-team2    = {{flagicon|CAN}} [[Michelle Li|M Li]]
+| RD1-score2-1 = '''21'''
+| RD1-score2-2 = 3
+| RD1-score2-3 = 10
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = '''{{flagicon|KOR}} [[Sim Yu-jin|Sim Y-j]]'''
+| RD1-score3-1 = '''21'''
+| RD1-score3-2 = 14
+| RD1-score3-3 = '''21'''
+| RD1-seed4    = &nbsp;
+| RD1-team4    = {{flagicon|INA}} [[Putri Kusuma Wardani|P K Wardani]]
+| RD1-score4-1 = 14
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 = 19
+
+| RD1-seed5    = 5
+| RD1-team5    = '''{{flagicon|CHN}} [[Chen Yufei|Chen YF]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    = &nbsp;
+| RD1-team6    = {{flagicon|KOR}} [[Kim Ga-eun (badminton)|Kim G-e]]
+| RD1-score6-1 = 15
+| RD1-score6-2 = 11
+| RD1-score6-3 =
+
+| RD1-seed7    = &nbsp;
+| RD1-team7    = '''{{flagicon|CHN}} [[Gao Fangjie|Gao FJ]]'''
+| RD1-score7-1 = '''21'''
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 =
+| RD1-seed8    = &nbsp;
+| RD1-team8    = {{flagicon|DEN}} [[Julie Dawall Jakobsen|J D Jakobsen]]
+| RD1-score8-1 = 11
+| RD1-score8-2 = 13
+| RD1-score8-3 =
+
+| RD2-seed1    = 1
+| RD2-team1    = '''{{flagicon|KOR}} [[An Se-young|An S-y]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|KOR}} [[Sim Yu-jin|Sim Y-j]]
+| RD2-score2-1 = 13
+| RD2-score2-2 = 15
+| RD2-score2-3 =
+
+| RD2-seed3    = 5
+| RD2-team3    = '''{{flagicon|CHN}} [[Chen Yufei|Chen YF]]'''
+| RD2-score3-1 = 13
+| RD2-score3-2 = '''21'''
+| RD2-score3-3 = '''21'''
+| RD2-seed4    =
+| RD2-team4    = {{flagicon|CHN}} [[Gao Fangjie|Gao FJ]]
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = 5
+| RD2-score4-3 = 9
+
+| RD3-seed1    = 1
+| RD3-team1    = '''{{flagicon|KOR}} [[An Se-young|An S-y]]'''
+| RD3-score1-1 = '''21'''
+| RD3-score1-2 = '''21'''
+| RD3-score1-3 =
+| RD3-seed2    = 5
+| RD3-team2    = {{flagicon|CHN}} [[Chen Yufei|Chen YF]]
+| RD3-score2-1 = 18
+| RD3-score2-2 = 19
+| RD3-score2-3 =
+}}
+
+==== Section 2 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 4
+| RD1-team1    = '''{{flagicon|CHN}} [[Han Yue|Han Y]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = 12
+| RD1-score1-3 = '''21'''
+| RD1-seed2    = &nbsp;
+| RD1-team2    = {{flagicon|JPN}} [[Natsuki Nidaira|N Nidaira]]
+| RD1-score2-1 = 9
+| RD1-score2-2 = '''21'''
+| RD1-score2-3 = 17
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = {{flagicon|THA}} [[Ratchanok Intanon|R Intanon]]
+| RD1-score3-1 = '''22'''
+| RD1-score3-2 = 16
+| RD1-score3-3 = 19
+| RD1-seed4    = &nbsp;
+| RD1-team4    = '''{{flagicon|CHN}} [[Han Qianxi|Han QX]]'''
+| RD1-score4-1 = 20
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 = '''21'''
+
+| RD1-seed5    = 8
+| RD1-team5    = '''{{flagicon|INA}} [[Gregoria Mariska Tunjung|G M Tunjung]]'''
+| RD1-score5-1 = '''23'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    = &nbsp;
+| RD1-team6    = {{flagicon|JPN}} [[Kaoru Sugiyama|K Sugiyama]]
+| RD1-score6-1 = 21
+| RD1-score6-2 = 9
+| RD1-score6-3 =
+
+| RD1-seed7    = &nbsp;
+| RD1-team7    = '''{{flagicon|TPE}} [[Lin Hsiang-ti|Lin H-t]]'''
+| RD1-score7-1 = 21
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 = '''21'''
+| RD1-seed8    = &nbsp;
+| RD1-team8    = {{flagicon|IND}} [[Anupama Upadhyaya|A Upadhyaya]]
+| RD1-score8-1 = '''23'''
+| RD1-score8-2 = 11
+| RD1-score8-3 = 10
+
+| RD2-seed1    = 4
+| RD2-team1    = '''{{flagicon|CHN}} [[Han Yue|Han Y]]'''
+| RD2-score1-1 = 19
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 = '''21'''
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|CHN}} [[Han Qianxi|Han QX]]
+| RD2-score2-1 = '''21'''
+| RD2-score2-2 = 15
+| RD2-score2-3 = 11
+
+| RD2-seed3    = 8
+| RD2-team3    = '''{{flagicon|INA}} [[Gregoria Mariska Tunjung|G M Tunjung]]'''
+| RD2-score3-1 = '''21'''
+| RD2-score3-2 = '''21'''
+| RD2-score3-3 =
+| RD2-seed4    =
+| RD2-team4    = {{flagicon|TPE}} [[Lin Hsiang-ti|Lin H-t]]
+| RD2-score4-1 = 13
+| RD2-score4-2 = 14
+| RD2-score4-3 =
+
+| RD3-seed1    = 4
+| RD3-team1    = '''{{flagicon|CHN}} [[Han Yue|Han Y]]'''
+| RD3-score1-1 = '''21'''
+| RD3-score1-2 = '''21'''
+| RD3-score1-3 =
+| RD3-seed2    = 8
+| RD3-team2    = {{flagicon|INA}} [[Gregoria Mariska Tunjung|G M Tunjung]]
+| RD3-score2-1 = 19
+| RD3-score2-2 = 18
+| RD3-score2-3 =
+}}
+
+=== Bottom half ===
+==== Section 3 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = &nbsp;
+| RD1-team1    = '''{{flagicon|IND}} [[Unnati Hooda|U Hooda]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    = &nbsp;
+| RD1-team2    = {{flagicon|SCO}} [[Kirsty Gilmour|K Gilmour]]
+| RD1-score2-1 = 11
+| RD1-score2-2 = 16
+| RD1-score2-3 =
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = '''{{flagicon|IND}} [[P. V. Sindhu]]'''
+| RD1-score3-1 = '''21'''
+| RD1-score3-2 = 8
+| RD1-score3-3 = '''21'''
+| RD1-seed4    = 6
+| RD1-team4    = {{flagicon|JPN}} [[Tomoka Miyazaki|T Miyazaki]]
+| RD1-score4-1 = 15
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 = 17
+
+| RD1-seed5    = PFR
+| RD1-team5    = {{flagicon|UKR}} [[Polina Buhrova|P Buhrova]]
+| RD1-score5-1 = 16
+| RD1-score5-2 = 19
+| RD1-score5-3 =
+| RD1-seed6    = &nbsp;
+| RD1-team6    = '''{{flagicon|THA}} [[Busanan Ongbamrungphan|B Ongbamrungphan]]'''
+| RD1-score6-1 = '''21'''
+| RD1-score6-2 = '''21'''
+| RD1-score6-3 =
+
+| RD1-seed7    = &nbsp;
+| RD1-team7    = {{flagicon|DEN}} [[Mia Blichfeldt|M Blichfeldt]]
+| RD1-score7-1 = 12
+| RD1-score7-2 = 9
+| RD1-score7-3 =
+| RD1-seed8    = 3
+| RD1-team8    = '''{{flagicon|JPN}} [[Akane Yamaguchi|A Yamaguchi]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = '''21'''
+| RD1-score8-3 =
+
+| RD2-seed1    =
+| RD2-team1    = '''{{flagicon|IND}} [[Unnati Hooda|U Hooda]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = 19
+| RD2-score1-3 = '''21'''
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|IND}} [[P. V. Sindhu]]
+| RD2-score2-1 = 16
+| RD2-score2-2 = '''21'''
+| RD2-score2-3 = 13
+
+| RD2-seed3    = &nbsp;
+| RD2-team3    = {{flagicon|THA}} [[Busanan Ongbamrungphan|B Ongbamrungphan]]
+| RD2-score3-1 = 14
+| RD2-score3-2 = 17
+| RD2-score3-3 =
+| RD2-seed4    = 3
+| RD2-team4    = '''{{flagicon|JPN}} [[Akane Yamaguchi|A Yamaguchi]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    =
+| RD3-team1    = {{flagicon|IND}} [[Unnati Hooda|U Hooda]]
+| RD3-score1-1 = 16
+| RD3-score1-2 = 12
+| RD3-score1-3 =
+| RD3-seed2    = 3
+| RD3-team2    = '''{{flagicon|JPN}} [[Akane Yamaguchi|A Yamaguchi]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 =
+}}
+
+==== Section 4 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = &nbsp;
+| RD1-team1    = {{flagicon|DEN}} [[Line Kjaersfeldt|L Kjaersfeldt]]
+| RD1-score1-1 = 20
+| RD1-score1-2 = 16
+| RD1-score1-3 =
+| RD1-seed2    = &nbsp;
+| RD1-team2    = '''{{flagicon|TPE}} [[Sung Shuo-yun|Sung S-y]]'''
+| RD1-score2-1 = '''22'''
+| RD1-score2-2 = '''21'''
+| RD1-score2-3 =
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = '''{{flagicon|TPE}} [[Chiu Pin-chian|Chiu P-c]]'''
+| RD1-score3-1 = 20
+| RD1-score3-2 = '''21'''
+| RD1-score3-3 = 11
+| RD1-seed4    = 7
+| RD1-team4    = {{flagicon|THA}} [[Pornpawee Chochuwong|P Chochuwong]]
+| RD1-score4-1 = '''22'''
+| RD1-score4-2 = 19
+| RD1-score4-3 = 5<sup>r</sup>
+
+| RD1-seed5    = &nbsp;
+| RD1-team5    = {{flagicon|USA}} [[Beiwen Zhang|BW Zhang]]
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = 10
+| RD1-score5-3 = 13
+| RD1-seed6    = &nbsp;
+| RD1-team6    = '''{{flagicon|JPN}} [[Riko Gunji|R Gunji]]'''
+| RD1-score6-1 = 19
+| RD1-score6-2 = '''21'''
+| RD1-score6-3 = '''21'''
+
+| RD1-seed7    = &nbsp;
+| RD1-team7    = {{flagicon|TPE}} [[Hsu Wen-chi|Hsu W-c]]
+| RD1-score7-1 = 16
+| RD1-score7-2 = 9
+| RD1-score7-3 =
+| RD1-seed8    = 2
+| RD1-team8    = '''{{flagicon|CHN}} [[Wang Zhiyi|Wang ZY]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = '''21'''
+| RD1-score8-3 =
+
+| RD2-seed1    =
+| RD2-team1    = {{flagicon|TPE}} [[Sung Shuo-yun|Sung S-y]]
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = 15
+| RD2-score1-3 = 18
+| RD2-seed2    =
+| RD2-team2    = '''{{flagicon|TPE}} [[Chiu Pin-chian|Chiu P-c]]'''
+| RD2-score2-1 = 17
+| RD2-score2-2 = '''21'''
+| RD2-score2-3 = '''21'''
+
+| RD2-seed3    =
+| RD2-team3    = {{flagicon|JPN}} [[Riko Gunji|R Gunji]]
+| RD2-score3-1 = 15
+| RD2-score3-2 = 13
+| RD2-score3-3 =
+| RD2-seed4    = 2
+| RD2-team4    = '''{{flagicon|CHN}} [[Wang Zhiyi|Wang ZY]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    =
+| RD3-team1    = {{flagicon|TPE}} [[Chiu Pin-chian|Chiu P-c]]
+| RD3-score1-1 = 16
+| RD3-score1-2 = 11
+| RD3-score1-3 =
+| RD3-seed2    = 2
+| RD3-team2    = '''{{flagicon|CHN}} [[Wang Zhiyi|Wang ZY]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 =
+}}
+
+== Men's doubles ==
+=== Seeds ===
+{{colbegin}}
+# {{flagicon|MAS}} [[Goh Sze Fei]] / [[Nur Izzuddin]] ''(first round)''
+# {{flagicon|MAS}} [[Aaron Chia]] / [[Soh Wooi Yik]] ''(final)''
+# {{flagicon|KOR}} [[Kim Won-ho]] / [[Seo Seung-jae]] ''(quarter-finals)''
+# {{flagicon|DEN}} [[Kim Astrup]] / [[Anders Skaarup Rasmussen]] ''(first round)''
+# {{flagicon|CHN}} [[Liang Weikeng]] / [[Wang Chang (badminton)|Wang Chang]] ''(semi-finals)''
+# {{flagicon|MAS}} [[Man Wei Chong]] / [[Tee Kai Wun]] ''(quarter-finals)''
+# {{flagicon|INA}} [[Sabar Karyaman Gutama]] / [[Muhammad Reza Pahlevi Isfahani]] ''(second round)''
+# {{flagicon|INA}} [[Leo Rolly Carnando]] / [[Bagas Maulana]] ''(second round)''
+{{colend}}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade=#A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1    = 5
+| RD1-team1    = {{flagicon|CHN}} [[Liang Weikeng]]<br>{{flagicon|CHN}} [[Wang Chang (badminton)|Wang Chang]]
+| RD1-score1-1 = 19
+| RD1-score1-2 = 17
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = '''{{flagicon|IDN}} [[Fajar Alfian]]<br>{{flagicon|IDN}} [[Muhammad Shohibul Fikri]]'''
+| RD1-score2-1 = '''21'''
+| RD1-score2-2 = '''21'''
+| RD1-score2-3 =
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = {{flagicon|IND}} [[Satwiksairaj Rankireddy]]<br>{{flagicon|IND}} [[Chirag Shetty]]
+| RD1-score3-1 = 13
+| RD1-score3-2 = 17
+| RD1-score3-3 =
+| RD1-seed4    = 2
+| RD1-team4    = '''{{flagicon|MAS}} [[Aaron Chia]]<br>{{flagicon|MAS}} [[Soh Wooi Yik]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD2-seed1    = &nbsp;
+| RD2-team1    = '''{{flagicon|IDN}} [[Fajar Alfian]]<br>{{flagicon|IDN}} [[Muhammad Shohibul Fikri]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    = 2
+| RD2-team2    = {{flagicon|MAS}} [[Aaron Chia]]<br>{{flagicon|MAS}} [[Soh Wooi Yik]]
+| RD2-score2-1 = 15
+| RD2-score2-2 = 14
+| RD2-score2-3 =
+}}
+
+=== Top half ===
+==== Section 1 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 1
+| RD1-team1    = {{flagicon|MAS}} [[Goh Sze Fei|Goh S F]]<br>{{flagicon|MAS}} [[Nur Izzuddin|N Izzuddin]] 
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = 15
+| RD1-score1-3 = 17
+| RD1-seed2    =
+| RD1-team2    = '''{{flagicon|KOR}} [[Kang Min-hyuk (badminton)|Kang M-h]]<br>{{flagicon|KOR}} [[Ki Dong-ju|Ki D-j]]'''
+| RD1-score2-1 = 15
+| RD1-score2-2 = '''21'''
+| RD1-score2-3 = '''21'''
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|TPE}} [[Chiu Hsiang-chieh|Chiu H-c]]<br>{{flagicon|TPE}} [[Wang Chi-lin|Wang C-l]]
+| RD1-score3-1 = '''21'''
+| RD1-score3-2 = 12
+| RD1-score3-3 = 14
+| RD1-seed4    =
+| RD1-team4    = '''{{flagicon|DEN}} [[Daniel Lundgaard|D Lundgaard]]<br>{{flagicon|DEN}} [[Mads Vestergaard|M Vestergaard]]'''
+| RD1-score4-1 = 12
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 = '''21'''
+
+| RD1-seed5    = 5
+| RD1-team5    = '''{{flagicon|CHN}} [[Liang Weikeng|Liang WK]]<br>{{flagicon|CHN}} [[Wang Chang (badminton)|Wang C]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|TPE}} [[Lee Jhe-huei|Lee J-h]]<br>{{flagicon|TPE}} [[Yang Po-hsuan|Yang P-hs]]
+| RD1-score6-1 = 11
+| RD1-score6-2 = 11
+| RD1-score6-3 =
+
+| RD1-seed7    =
+| RD1-team7    = '''{{flagicon|CHN}} [[Huang Di (badminton)|Huang D]]<br>{{flagicon|CHN}} [[Liu Yang (badminton)|Liu Ya]]'''
+| RD1-score7-1 = 16
+| RD1-score7-2 = '''26'''
+| RD1-score7-3 = '''21'''
+| RD1-seed8    =
+| RD1-team8    = {{flagicon|TPE}} [[Liu Kuang-heng|Liu K-h]]<br>{{flagicon|TPE}} [[Yang Po-han|Yang P-ha]]
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = 24
+| RD1-score8-3 = 19
+
+| RD2-seed1    =
+| RD2-team1    = '''{{flagicon|KOR}} [[Kang Min-hyuk (badminton)|Kang M-h]]<br>{{flagicon|KOR}} [[Ki Dong-ju|Ki D-j]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|DEN}} [[Daniel Lundgaard|D Lundgaard]]<br>{{flagicon|DEN}} [[Mads Vestergaard|M Vestergaard]]
+| RD2-score2-1 = 17
+| RD2-score2-2 = 13
+| RD2-score2-3 =
+
+| RD2-seed3    = 5
+| RD2-team3    = '''{{flagicon|CHN}} [[Liang Weikeng|Liang WK]]<br>{{flagicon|CHN}} [[Wang Chang (badminton)|Wang C]]'''
+| RD2-score3-1 = '''21'''
+| RD2-score3-2 = '''21'''
+| RD2-score3-3 =
+| RD2-seed4    =
+| RD2-team4    = {{flagicon|CHN}} [[Huang Di (badminton)|Huang D]]<br>{{flagicon|CHN}} [[Liu Yang (badminton)|Liu Ya]]
+| RD2-score4-1 = 15
+| RD2-score4-2 = 12
+| RD2-score4-3 =
+
+| RD3-seed1    =
+| RD3-team1    = {{flagicon|KOR}} [[Kang Min-hyuk (badminton)|Kang M-h]]<br>{{flagicon|KOR}} [[Ki Dong-ju|Ki D-j]]
+| RD3-score1-1 = 16
+| RD3-score1-2 = 20
+| RD3-score1-3 =
+| RD3-seed2    = 5
+| RD3-team2    = '''{{flagicon|CHN}} [[Liang Weikeng|Liang WK]]<br>{{flagicon|CHN}} [[Wang Chang (badminton)|Wang C]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''22'''
+| RD3-score2-3 =
+}}
+
+==== Section 2 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 3
+| RD1-team1    = '''{{flagicon|KOR}} [[Kim Won-ho|Kim W-h]]<br>{{flagicon|KOR}} [[Seo Seung-jae|Seo S-j]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|CHN}} [[Xie Haonan|Xie HN]]<br>{{flagicon|CHN}} [[Zeng Weihan|Zeng WH]]
+| RD1-score2-1 = 14
+| RD1-score2-2 = 14
+| RD1-score2-3 =
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|CHN}} [[Chen Boyang|Chen BY]]<br>{{flagicon|CHN}} [[Liu Yi (badminton)|Liu Yi]]
+| RD1-score3-1 = 14
+| RD1-score3-2 = 17
+| RD1-score3-3 =
+| RD1-seed4    =
+| RD1-team4    = '''{{flagicon|JPN}} [[Takuro Hoki|T Hoki]]<br>{{flagicon|JPN}} [[Yugo Kobayashi|Y Kobayashi]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD1-seed5    = 7
+| RD1-team5    = '''{{flagicon|INA}} [[Sabar Karyaman Gutama|S K Gutama]]<br>{{flagicon|INA}} [[Muhammad Reza Pahlevi Isfahani|M R P Isfahani]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|USA}} [[Chen Zhi-yi|Chen Z-y]]<br>{{flagicon|USA}} [[Presley Smith|P Smith]]
+| RD1-score6-1 = 9
+| RD1-score6-2 = 14
+| RD1-score6-3 =
+
+| RD1-seed7    =
+| RD1-team7    = '''{{flagicon|INA}} [[Fajar Alfian|F Alfian]]<br>{{flagicon|INA}} [[Muhammad Shohibul Fikri|M S Fikri]]'''
+| RD1-score7-1 = '''21'''
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 =
+| RD1-seed8    =
+| RD1-team8    = {{flagicon|MAS}} [[Choong Hon Jian|Choong H J]]<br>{{flagicon|MAS}} [[Muhammad Haikal|M Haikal]]
+| RD1-score8-1 = 11
+| RD1-score8-2 = 10
+| RD1-score8-3 =
+
+| RD2-seed1    = 3
+| RD2-team1    = '''{{flagicon|KOR}} [[Kim Won-ho|Kim W-h]]<br>{{flagicon|KOR}} [[Seo Seung-jae|Seo S-j]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|JPN}} [[Takuro Hoki|T Hoki]]<br>{{flagicon|JPN}} [[Yugo Kobayashi|Y Kobayashi]]
+| RD2-score2-1 = 13
+| RD2-score2-2 = 13
+| RD2-score2-3 =
+
+| RD2-seed3    = 7
+| RD2-team3    = {{flagicon|INA}} [[Sabar Karyaman Gutama|S K Gutama]]<br>{{flagicon|INA}} [[Muhammad Reza Pahlevi Isfahani|M R P Isfahani]]
+| RD2-score3-1 = 8
+| RD2-score3-2 = 13
+| RD2-score3-3 =
+| RD2-seed4    =
+| RD2-team4    = '''{{flagicon|INA}} [[Fajar Alfian|F Alfian]]<br>{{flagicon|INA}} [[Muhammad Shohibul Fikri|M S Fikri]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    = 3
+| RD3-team1    = {{flagicon|KOR}} [[Kim Won-ho|Kim W-h]]<br>{{flagicon|KOR}} [[Seo Seung-jae|Seo S-j]]
+| RD3-score1-1 = 19
+| RD3-score1-2 = 14
+| RD3-score1-3 =
+| RD3-seed2    =
+| RD3-team2    = '''{{flagicon|INA}} [[Fajar Alfian|F Alfian]]<br>{{flagicon|INA}} [[Muhammad Shohibul Fikri|M S Fikri]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 =
+}}
+
+=== Bottom half ===
+==== Section 3 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    =
+| RD1-team1    = '''{{flagicon|IND}} [[Satwiksairaj Rankireddy|S Rankireddy]]<br>{{flagicon|IND}} [[Chirag Shetty|C Shetty]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|JPN}} [[Kenya Mitsuhashi|K Mitsuhashi]]<br>{{flagicon|JPN}} [[Hiroki Okamura|H Okamura]]
+| RD1-score2-1 = 13
+| RD1-score2-2 = 9
+| RD1-score2-3 =
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|JPN}} [[Takumi Nomura|T Nomura]]<br>{{flagicon|JPN}} [[Yuichi Shimogami|Y Shimogami]]
+| RD1-score3-1 = 17
+| RD1-score3-2 = 17
+| RD1-score3-3 =
+| RD1-seed4    = 8
+| RD1-team4    = '''{{flagicon|INA}} [[Leo Rolly Carnando|L R Carnando]]<br>{{flagicon|INA}} [[Bagas Maulana|B Maulana]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD1-seed5    =
+| RD1-team5    = '''{{flagicon|MAS}} [[Ong Yew Sin|Ong Y S]]<br>{{flagicon|MAS}} [[Teo Ee Yi|Teo E Y]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|CHN}} [[Ren Xiangyu|Ren XY]]<br>{{flagicon|CHN}} [[Sun Wenjun|Sun WJ]]
+| RD1-score6-1 = 17
+| RD1-score6-2 = 14
+| RD1-score6-3 =
+
+| RD1-seed7    =
+| RD1-team7    = '''{{flagicon|THA}} [[Kittinupong Kedren|K Kedren]]<br>{{flagicon|THA}} [[Dechapol Puavaranukroh|D Puavaranukroh]]'''
+| RD1-score7-1 = 18
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 = '''21'''
+| RD1-seed8    = 4
+| RD1-team8    = {{flagicon|DEN}} [[Kim Astrup|K Astrup]]<br>{{flagicon|DEN}} [[Anders Skaarup Rasmussen|A S Rasmussen]]
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = 19
+| RD1-score8-3 = 18
+
+| RD2-seed1    =
+| RD2-team1    = '''{{flagicon|IND}} [[Satwiksairaj Rankireddy|S Rankireddy]]<br>{{flagicon|IND}} [[Chirag Shetty|C Shetty]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    = 8
+| RD2-team2    = {{flagicon|INA}} [[Leo Rolly Carnando|L R Carnando]]<br>{{flagicon|INA}} [[Bagas Maulana|B Maulana]]
+| RD2-score2-1 = 19
+| RD2-score2-2 = 19
+| RD2-score2-3 =
+
+| RD2-seed3    =
+| RD2-team3    = '''{{flagicon|MAS}} [[Ong Yew Sin|Ong Y S]]<br>{{flagicon|MAS}} [[Teo Ee Yi|Teo E Y]]'''
+| RD2-score3-1 = '''21'''
+| RD2-score3-2 = '''21'''
+| RD2-score3-3 =
+| RD2-seed4    =
+| RD2-team4    = {{flagicon|THA}} [[Kittinupong Kedren|K Kedren]]<br>{{flagicon|THA}} [[Dechapol Puavaranukroh|D Puavaranukroh]]
+| RD2-score4-1 = 16
+| RD2-score4-2 = 16
+| RD2-score4-3 =
+
+| RD3-seed1    =
+| RD3-team1    = '''{{flagicon|IND}} [[Satwiksairaj Rankireddy|S Rankireddy]]<br>{{flagicon|IND}} [[Chirag Shetty|C Shetty]]'''
+| RD3-score1-1 = '''21'''
+| RD3-score1-2 = '''21'''
+| RD3-score1-3 =
+| RD3-seed2    =
+| RD3-team2    = {{flagicon|MAS}} [[Ong Yew Sin|Ong Y S]]<br>{{flagicon|MAS}} [[Teo Ee Yi|Teo E Y]]
+| RD3-score2-1 = 18
+| RD3-score2-2 = 14
+| RD3-score2-3 =
+}}
+
+==== Section 4 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    =
+| RD1-team1    = '''{{flagicon|MAS}} [[Nur Mohd Azriyn Ayub|N M Azriyn A]]<br>{{flagicon|MAS}} [[Tan Wee Kiong|Tan W K]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = 18
+| RD1-score1-3 = '''21'''
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|TPE}} [[Lee Fang-chih|Lee F-c]]<br>{{flagicon|TPE}} [[Lee Fang-jen|Lee F-j]]
+| RD1-score2-1 = 16
+| RD1-score2-2 = '''21'''
+| RD1-score2-3 = 14
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|MAS}} [[Junaidi Arif|J Arif]]<br>{{flagicon|MAS}} [[Yap Roy King|Yap R K]]
+| RD1-score3-1 = 17
+| RD1-score3-2 = 19
+| RD1-score3-3 =
+| RD1-seed4    = 6
+| RD1-team4    = '''{{flagicon|MAS}} [[Man Wei Chong|Man W C]]<br>{{flagicon|MAS}} [[Tee Kai Wun|Tee K W]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD1-seed5    =
+| RD1-team5    = '''{{flagicon|FRA}} [[Christo Popov|C Popov]]<br>{{flagicon|FRA}} [[Toma Junior Popov|T J Popov]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|CAN}} [[Kevin Lee (badminton)|K Lee]]<br>{{flagicon|CAN}} [[Ty Alexander Lindeman|T A Lindeman]]
+| RD1-score6-1 = 17
+| RD1-score6-2 = 14
+| RD1-score6-3 =
+
+| RD1-seed7    =
+| RD1-team7    = {{flagicon|DEN}} [[Rasmus Kjær|R Kjær]]<br>{{flagicon|DEN}} [[Frederik Søgaard|F Søgaard]]
+| RD1-score7-1 = 19
+| RD1-score7-2 = 15
+| RD1-score7-3 =
+| RD1-seed8    = 2
+| RD1-team8    = '''{{flagicon|MAS}} [[Aaron Chia|A Chia]]<br>{{flagicon|MAS}} [[Soh Wooi Yik|Soh W Y]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = '''21'''
+| RD1-score8-3 =
+
+| RD2-seed1    =
+| RD2-team1    = {{flagicon|MAS}} [[Nur Mohd Azriyn Ayub|N M Azriyn A]]<br>{{flagicon|MAS}} [[Tan Wee Kiong|Tan W K]]
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = 17
+| RD2-score1-3 = 19
+| RD2-seed2    = 6
+| RD2-team2    = '''{{flagicon|MAS}} [[Man Wei Chong|Man W C]]<br>{{flagicon|MAS}} [[Tee Kai Wun|Tee K W]]'''
+| RD2-score2-1 = 17
+| RD2-score2-2 = '''21'''
+| RD2-score2-3 = '''21'''
+
+| RD2-seed3    =
+| RD2-team3    = {{flagicon|FRA}} [[Christo Popov|C Popov]]<br>{{flagicon|FRA}} [[Toma Junior Popov|T J Popov]]
+| RD2-score3-1 = 17
+| RD2-score3-2 = 18
+| RD2-score3-3 =
+| RD2-seed4    = 2
+| RD2-team4    = '''{{flagicon|MAS}} [[Aaron Chia|A Chia]]<br>{{flagicon|MAS}} [[Soh Wooi Yik|Soh W Y]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    = 6
+| RD3-team1    = {{flagicon|MAS}} [[Man Wei Chong|Man W C]]<br>{{flagicon|MAS}} [[Tee Kai Wun|Tee K W]]
+| RD3-score1-1 = 16
+| RD3-score1-2 = 16
+| RD3-score1-3 =
+| RD3-seed2    = 2
+| RD3-team2    = '''{{flagicon|MAS}} [[Aaron Chia|A Chia]]<br>{{flagicon|MAS}} [[Soh Wooi Yik|Soh W Y]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 =
+}}
+
+== Women's doubles ==
+=== Seeds ===
+{{colbegin}}
+# '''{{flagicon|CHN}} [[Liu Shengshu]] / [[Tan Ning (badminton)|Tan Ning]] (champions)'''
+# {{flagicon|JPN}} [[Nami Matsuyama]] / [[Chiharu Shida]] ''(first round)''
+# {{flagicon|MAS}} [[Pearly Tan]] / [[Thinaah Muralitharan]] ''(semi-finals)''
+# {{flagicon|KOR}} [[Baek Ha-na]] / [[Lee So-hee]] ''(quarter-finals)''
+# {{flagicon|CHN}} [[Li Yijing]] / [[Luo Xumin]] ''(quarter-finals)''
+# {{flagicon|JPN}} [[Rin Iwanaga]] / [[Kie Nakanishi]] ''(second round)''
+# {{flagicon|KOR}} [[Kim Hye-jeong]] / [[Kong Hee-yong]] ''(semi-finals)''
+# {{flagicon|JPN}} [[Yuki Fukushima]] / [[Mayu Matsumoto]] ''(quarter-finals)''
+{{colend}}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade=#A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1    = 1
+| RD1-team1    = '''{{flagicon|CHN}} [[Liu Shengshu]]<br>{{flagicon|CHN}} [[Tan Ning (badminton)|Tan Ning]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    = 7
+| RD1-team2    = {{flagicon|KOR}} [[Kim Hye-jeong]]<br>{{flagicon|KOR}} [[Kong Hee-yong]]
+| RD1-score2-1 = 10
+| RD1-score2-2 = 12
+| RD1-score2-3 =
+
+| RD1-seed3    = 3
+| RD1-team3    = {{flagicon|MAS}} [[Pearly Tan]]<br>{{flagicon|MAS}} [[Thinaah Muralitharan]]
+| RD1-score3-1 = 14
+| RD1-score3-2 = 17
+| RD1-score3-3 =
+| RD1-seed4    =
+| RD1-team4    = '''{{flagicon|CHN}} [[Jia Yifan]]<br>{{flagicon|CHN}} [[Zhang Shuxian]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD2-seed1    = 1
+| RD2-team1    = '''{{flagicon|CHN}} [[Liu Shengshu]]<br>{{flagicon|CHN}} [[Tan Ning (badminton)|Tan Ning]]'''
+| RD2-score1-1 = '''24'''
+| RD2-score1-2 = 17
+| RD2-score1-3 = '''21'''
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|CHN}} [[Jia Yifan]]<br>{{flagicon|CHN}} [[Zhang Shuxian]]
+| RD2-score2-1 = 22
+| RD2-score2-2 = '''21'''
+| RD2-score2-3 = 14
+}}
+
+=== Top half ===
+==== Section 1 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 1
+| RD1-team1    = '''{{flagicon|CHN}} [[Liu Shengshu|Liu SS]]<br>{{flagicon|CHN}} [[Tan Ning (badminton)|Tan N]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|AUS}} [[Gronya Somerville|G Somerville]]<br>{{flagicon|AUS}} [[Angela Yu (badminton)|A Yu]]
+| RD1-score2-1 = 10
+| RD1-score2-2 = 14
+| RD1-score2-3 =
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|IND}} [[Kavipriya Selvam|K Selvam]]<br>{{flagicon|IND}} [[Simran Singhi|S Singhi]]
+| RD1-score3-1 = 16
+| RD1-score3-2 = 14
+| RD1-score3-3 =
+| RD1-seed4    =
+| RD1-team4    = '''{{flagicon|USA}} [[Lauren Lam|L Lam]]<br>{{flagicon|USA}} [[Allison Lee (badminton)|A Lee]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD1-seed5    = 5
+| RD1-team5    = '''{{flagicon|CHN}} [[Li Yijing|Li YJ]]<br>{{flagicon|CHN}} [[Luo Xumin|Luo XM]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|USA}} [[Francesca Corbett|F Corbett]]<br>{{flagicon|USA}} [[Jennie Gai|J Gai]]
+| RD1-score6-1 = 10
+| RD1-score6-2 = 9
+| RD1-score6-3 =
+
+| RD1-seed7    =
+| RD1-team7    = '''{{flagicon|JPN}} [[Mizuki Otake|M Otake]]<br>{{flagicon|JPN}} [[Miyu Takahashi|M Takahashi]]'''
+| RD1-score7-1 = '''24'''
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 =
+| RD1-seed8    =
+| RD1-team8    = {{flagicon|ENG}} [[Annie Lado|A Lado]]<br>{{flagicon|ENG}} [[Estelle van Leeuwen|E van Leeuwen]]
+| RD1-score8-1 = 22
+| RD1-score8-2 = 10
+| RD1-score8-3 =
+
+| RD2-seed1    = 1
+| RD2-team1    = '''{{flagicon|CHN}} [[Liu Shengshu|Liu SS]]<br>{{flagicon|CHN}} [[Tan Ning (badminton)|Tan N]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|USA}} [[Lauren Lam|L Lam]]<br>{{flagicon|USA}} [[Allison Lee (badminton)|A Lee]]
+| RD2-score2-1 = 9
+| RD2-score2-2 = 13
+| RD2-score2-3 =
+
+| RD2-seed3    = 5
+| RD2-team3    = '''{{flagicon|CHN}} [[Li Yijing|Li YJ]]<br>{{flagicon|CHN}} [[Luo Xumin|Luo XM]]'''
+| RD2-score3-1 = '''21'''
+| RD2-score3-2 = '''21'''
+| RD2-score3-3 =
+| RD2-seed4    =
+| RD2-team4    = {{flagicon|JPN}} [[Mizuki Otake|M Otake]]<br>{{flagicon|JPN}} [[Miyu Takahashi|M Takahashi]]
+| RD2-score4-1 = 17
+| RD2-score4-2 = 19
+| RD2-score4-3 =
+
+| RD3-seed1    = 1
+| RD3-team1    = '''{{flagicon|CHN}} [[Liu Shengshu|Liu SS]]<br>{{flagicon|CHN}} [[Tan Ning (badminton)|Tan N]]'''
+| RD3-score1-1 = '''21'''
+| RD3-score1-2 = 17
+| RD3-score1-3 = '''21'''
+| RD3-seed2    = 5
+| RD3-team2    = {{flagicon|CHN}} [[Li Yijing|Li YJ]]<br>{{flagicon|CHN}} [[Luo Xumin|Luo XM]]
+| RD3-score2-1 = 13
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 = 16
+}}
+
+==== Section 2 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 4
+| RD1-team1    = '''{{flagicon|KOR}} [[Baek Ha-na|Baek H-n]]<br>{{flagicon|KOR}} [[Lee So-hee|Lee S-h]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|HKG}} [[Fan Ka Yan|Fan K Y]]<br>{{flagicon|HKG}} [[Yau Mau Ying|Yau M Y]]
+| RD1-score2-1 = 6
+| RD1-score2-2 = 15
+| RD1-score2-3 =
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|UKR}} [[Polina Buhrova|P Buhrova]]<br>{{flagicon|UKR}} [[Yevheniia Kantemyr|Y Kantemyr]]
+| RD1-score3-1 = 11
+| RD1-score3-2 = 18
+| RD1-score3-3 =
+| RD1-seed4    =
+| RD1-team4    = '''{{flagicon|HKG}} [[Lui Lok Lok|Lui L L]]<br>{{flagicon|HKG}} [[Tsang Hiu Yan|Tsang H Y]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD1-seed5    = 7
+| RD1-team5    = '''{{flagicon|KOR}} [[Kim Hye-jeong|Kim H-j]]<br>{{flagicon|KOR}} [[Kong Hee-yong|Kong H-y]]'''
+| RD1-score5-1 = w
+| RD1-score5-2 = /
+| RD1-score5-3 = o
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|INA}} [[Lanny Tria Mayasari|L T Mayasari]]<br>{{flagicon|INA}} [[Siti Fadia Silva Ramadhanti|S F S Ramadhanti]]
+| RD1-score6-1 =
+| RD1-score6-2 =
+| RD1-score6-3 =
+
+| RD1-seed7    =
+| RD1-team7    = {{flagicon|IND}} [[Amrutha Pramuthesh|A Pramuthesh]]<br>{{flagicon|IND}} [[Sonali Singh|S Singh]]
+| RD1-score7-1 = 12
+| RD1-score7-2 = 5
+| RD1-score7-3 =
+| RD1-seed8    =
+| RD1-team8    = '''{{flagicon|TPE}} [[Hsieh Pei-shan|Hsieh P-s]]<br>{{flagicon|TPE}} [[Hung En-tzu|Hung E-t]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = '''21'''
+| RD1-score8-3 =
+
+| RD2-seed1    = 4
+| RD2-team1    = '''{{flagicon|KOR}} [[Baek Ha-na|Baek H-n]]<br>{{flagicon|KOR}} [[Lee So-hee|Lee S-h]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|HKG}} [[Lui Lok Lok|Lui L L]]<br>{{flagicon|HKG}} [[Tsang Hiu Yan|Tsang H Y]]
+| RD2-score2-1 = 7
+| RD2-score2-2 = 16
+| RD2-score2-3 =
+
+| RD2-seed3    = 7
+| RD2-team3    = '''{{flagicon|KOR}} [[Kim Hye-jeong|Kim H-j]]<br>{{flagicon|KOR}} [[Kong Hee-yong|Kong H-y]]'''
+| RD2-score3-1 = '''21'''
+| RD2-score3-2 = 19
+| RD2-score3-3 = '''21'''
+| RD2-seed4    =
+| RD2-team4    = {{flagicon|TPE}} [[Hsieh Pei-shan|Hsieh P-s]]<br>{{flagicon|TPE}} [[Hung En-tzu|Hung E-t]]
+| RD2-score4-1 = 18
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 = 17
+
+| RD3-seed1    = 4
+| RD3-team1    = {{flagicon|KOR}} [[Baek Ha-na|Baek H-n]]<br>{{flagicon|KOR}} [[Lee So-hee|Lee S-h]]
+| RD3-score1-1 = '''21'''
+| RD3-score1-2 = 20
+| RD3-score1-3 = 12
+| RD3-seed2    = 7
+| RD3-team2    = '''{{flagicon|KOR}} [[Kim Hye-jeong|Kim H-j]]<br>{{flagicon|KOR}} [[Kong Hee-yong|Kong H-y]]'''
+| RD3-score2-1 = 6
+| RD3-score2-2 = '''22'''
+| RD3-score2-3 = '''21'''
+}}
+
+=== Bottom half ===
+==== Section 3 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    =
+| RD1-team1    = {{flagicon|TPE}} [[Sung Shuo-yun|Sung S-y]]<br>{{flagicon|TPE}} [[Yu Chien-hui|Yu C-h]]
+| RD1-score1-1 = 10
+| RD1-score1-2 = 16
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = '''{{flagicon|INA}} [[Febriana Dwipuji Kusuma|F D Kusuma]]<br>{{flagicon|INA}} [[Amallia Cahaya Pratiwi|A C Pratiwi]]'''
+| RD1-score2-1 = '''21'''
+| RD1-score2-2 = '''21'''
+| RD1-score2-3 =
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|TPE}} [[Chang Ching-hui (badminton)|Chang C-h]]<br>{{flagicon|TPE}} [[Yang Ching-tun|Yang C-t]]
+| RD1-score3-1 = 15
+| RD1-score3-2 = 10
+| RD1-score3-3 =
+| RD1-seed4    = 8
+| RD1-team4    = '''{{flagicon|JPN}} [[Yuki Fukushima|Y Fukushima]]<br>{{flagicon|JPN}} [[Mayu Matsumoto|M Matsumoto]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD1-seed5    =
+| RD1-team5    = '''{{flagicon|JPN}} [[Rui Hirokami|R Hirokami]]<br>{{flagicon|JPN}} [[Sayaka Hobara|S Hobara]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|BUL}} [[Gabriela Stoeva|G Stoeva]]<br>{{flagicon|BUL}} [[Stefani Stoeva|S Stoeva]]
+| RD1-score6-1 = 10
+| RD1-score6-2 = 16
+| RD1-score6-3 =
+
+| RD1-seed7    =
+| RD1-team7    = {{flagicon|MAS}} [[Ong Xin Yee|Ong X Y]]<br>{{flagicon|MAS}} [[Carmen Ting|C Ting]]
+| RD1-score7-1 = 8
+| RD1-score7-2 = 12
+| RD1-score7-3 =
+| RD1-seed8    = 3
+| RD1-team8    = '''{{flagicon|MAS}} [[Pearly Tan|P Tan]]<br>{{flagicon|MAS}} [[Thinaah Muralitharan|Thinaah M]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = '''21'''
+| RD1-score8-3 =
+
+| RD2-seed1    =
+| RD2-team1    = {{flagicon|INA}} [[Febriana Dwipuji Kusuma|F D Kusuma]]<br>{{flagicon|INA}} [[Amallia Cahaya Pratiwi|A C Pratiwi]]
+| RD2-score1-1 = 14
+| RD2-score1-2 = 9
+| RD2-score1-3 =
+| RD2-seed2    = 8
+| RD2-team2    = '''{{flagicon|JPN}} [[Yuki Fukushima|Y Fukushima]]<br>{{flagicon|JPN}} [[Mayu Matsumoto|M Matsumoto]]'''
+| RD2-score2-1 = '''21'''
+| RD2-score2-2 = '''21'''
+| RD2-score2-3 =
+
+| RD2-seed3    =
+| RD2-team3    = {{flagicon|JPN}} [[Rui Hirokami|R Hirokami]]<br>{{flagicon|JPN}} [[Sayaka Hobara|S Hobara]]
+| RD2-score3-1 = 17
+| RD2-score3-2 = 13
+| RD2-score3-3 =
+| RD2-seed4    = 3
+| RD2-team4    = '''{{flagicon|MAS}} [[Pearly Tan|P Tan]]<br>{{flagicon|MAS}} [[Thinaah Muralitharan|Thinaah M]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    = 8
+| RD3-team1    = {{flagicon|JPN}} [[Yuki Fukushima|Y Fukushima]]<br>{{flagicon|JPN}} [[Mayu Matsumoto|M Matsumoto]]
+| RD3-score1-1 = 16
+| RD3-score1-2 = 12
+| RD3-score1-3 =
+| RD3-seed2    = 3
+| RD3-team2    = '''{{flagicon|MAS}} [[Pearly Tan|P Tan]]<br>{{flagicon|MAS}} [[Thinaah Muralitharan|Thinaah M]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 =
+}}
+
+==== Section 4 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    =
+| RD1-team1    = '''{{flagicon|MAS}} [[Go Pei Kee|Go P K]]<br>{{flagicon|MAS}} [[Teoh Mei Xing|Teoh M X]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|POL}} [[Paulina Hankiewicz|P Hankiewicz]]<br>{{flagicon|POL}} [[Kornelia Marczak|K Marczak]]
+| RD1-score2-1 = 5
+| RD1-score2-2 = 6
+| RD1-score2-3 =
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|KOR}} [[Jeong Na-eun|Jeong N-e]]<br>{{flagicon|KOR}} [[Lee Yeon-woo|Lee Y-w]]
+| RD1-score3-1 = 19
+| RD1-score3-2 = 14
+| RD1-score3-3 =
+| RD1-seed4    = 6
+| RD1-team4    = '''{{flagicon|JPN}} [[Rin Iwanaga|R Iwanaga]]<br>{{flagicon|JPN}} [[Kie Nakanishi|K Nakanishi]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD1-seed5    =
+| RD1-team5    = '''{{flagicon|HKG}} [[Yeung Nga Ting|Yeung N T]]<br>{{flagicon|HKG}} [[Yeung Pui Lam|Yeung P L]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|IND}} [[Rutaparna Panda|R Panda]]<br>{{flagicon|IND}} [[Swetaparna Panda|S Panda]]
+| RD1-score6-1 = 12
+| RD1-score6-2 = 13
+| RD1-score6-3 =
+
+| RD1-seed7    =
+| RD1-team7    = '''{{flagicon|CHN}} [[Jia Yifan|Jia YF]]<br>{{flagicon|CHN}} [[Zhang Shuxian|Zhang SX]]'''
+| RD1-score7-1 = 21
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 = '''21'''
+| RD1-seed8    = 2
+| RD1-team8    = {{flagicon|JPN}} [[Nami Matsuyama|N Matsuyama]]<br>{{flagicon|JPN}} [[Chiharu Shida|C Shida]]
+| RD1-score8-1 = '''23'''
+| RD1-score8-2 = 11
+| RD1-score8-3 = 11
+
+| RD2-seed1    =
+| RD2-team1    = '''{{flagicon|MAS}} [[Go Pei Kee|Go P K]]<br>{{flagicon|MAS}} [[Teoh Mei Xing|Teoh M X]]'''
+| RD2-score1-1 = '''26'''
+| RD2-score1-2 = 7
+| RD2-score1-3 = '''21'''
+| RD2-seed2    = 6
+| RD2-team2    = {{flagicon|JPN}} [[Rin Iwanaga|R Iwanaga]]<br>{{flagicon|JPN}} [[Kie Nakanishi|K Nakanishi]]
+| RD2-score2-1 = 24
+| RD2-score2-2 = '''21'''
+| RD2-score2-3 = 18
+
+| RD2-seed3    = 
+| RD2-team3    = {{flagicon|HKG}} [[Yeung Nga Ting|Yeung N T]]<br>{{flagicon|HKG}} [[Yeung Pui Lam|Yeung P L]]
+| RD2-score3-1 = 9
+| RD2-score3-2 = 12
+| RD2-score3-3 =
+| RD2-seed4    =
+| RD2-team4    = '''{{flagicon|CHN}} [[Jia Yifan|Jia YF]]<br>{{flagicon|CHN}} [[Zhang Shuxian|Zhang SX]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    =
+| RD3-team1    = {{flagicon|MAS}} [[Go Pei Kee|Go P K]]<br>{{flagicon|MAS}} [[Teoh Mei Xing|Teoh M X]]
+| RD3-score1-1 = 7
+| RD3-score1-2 = 15
+| RD3-score1-3 =
+| RD3-seed2    =
+| RD3-team2    = '''{{flagicon|CHN}} [[Jia Yifan|Jia YF]]<br>{{flagicon|CHN}} [[Zhang Shuxian|Zhang SX]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 =
+}}
+
+== Mixed doubles ==
+=== Seeds ===
+{{colbegin}}
+# '''{{flagicon|CHN}} [[Feng Yanzhe]] / [[Huang Dongping]] (champions)'''
+# {{flagicon|CHN}} [[Jiang Zhenbang]] / [[Wei Yaxin]] ''(final)''
+# {{flagicon|HKG}} [[Tang Chun Man]] / [[Tse Ying Suet]] ''(quarter-finals)''
+# {{flagicon|MAS}} [[Chen Tang Jie]] / [[Toh Ee Wei]] ''(quarter-finals)''
+# {{flagicon|THA}} [[Dechapol Puavaranukroh]] / [[Supissara Paewsampran]] ''(second round)''
+# {{flagicon|MAS}} [[Goh Soon Huat]] / [[Shevon Jemie Lai]] ''(first round)''
+# {{flagicon|FRA}} [[Thom Gicquel]] / [[Delphine Delrue]] ''(first round)''
+# {{flagicon|JPN}} [[Hiroki Midorikawa]] / [[Natsu Saito]] ''(second round)''
+{{colend}}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade=#A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1    = 1
+| RD1-team1    = '''{{flagicon|CHN}} [[Feng Yanzhe]]<br>{{flagicon|CHN}} [[Huang Dongping]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|CHN}} [[Guo Xinwa]]<br>{{flagicon|CHN}} [[Chen Fanghui]]
+| RD1-score2-1 = 17
+| RD1-score2-2 = 11
+| RD1-score2-3 =
+
+| RD1-seed3    = &nbsp;
+| RD1-team3    = {{flagicon|IDN}} [[Jafar Hidayatullah]]<br>{{flagicon|IDN}} [[Felisha Pasaribu]]
+| RD1-score3-1 = '''21'''
+| RD1-score3-2 = 15
+| RD1-score3-3 = 16
+| RD1-seed4    = 2
+| RD1-team4    = '''{{flagicon|CHN}} [[Jiang Zhenbang]]<br>{{flagicon|CHN}} [[Wei Yaxin]]'''
+| RD1-score4-1 = 16
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 = '''21'''
+
+| RD2-seed1    = 1
+| RD2-team1    = '''{{flagicon|CHN}} [[Feng Yanzhe]]<br>{{flagicon|CHN}} [[Huang Dongping]]'''
+| RD2-score1-1 = '''23'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    = 2
+| RD2-team2    = {{flagicon|CHN}} [[Jiang Zhenbang]]<br>{{flagicon|CHN}} [[Wei Yaxin]]
+| RD2-score2-1 = 21
+| RD2-score2-2 = 17
+| RD2-score2-3 =
+}}
+
+=== Top half ===
+==== Section 1 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 1
+| RD1-team1    = '''{{flagicon|CHN}} [[Feng Yanzhe|Feng YZ]]<br>{{flagicon|CHN}} [[Huang Dongping|Huang DP]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|JPN}} [[Yuichi Shimogami|Y Shimogami]]<br>{{flagicon|JPN}} [[Sayaka Hobara|S Hobara]]
+| RD1-score2-1 = 18
+| RD1-score2-2 = 16
+| RD1-score2-3 =
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|IND}} [[Rohan Kapoor (badminton)|R Kapoor]]<br>{{flagicon|IND}} [[Ruthvika Gadde|R Gadde]]
+| RD1-score3-1 = '''27'''
+| RD1-score3-2 = 16
+| RD1-score3-3 = 14
+| RD1-seed4    =
+| RD1-team4    = '''{{flagicon|MAS}} [[Wong Tien Ci|Wong T C]]<br>{{flagicon|MAS}} [[Lim Chiew Sien|Lim C S]]'''
+| RD1-score4-1 = 25
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 = '''21'''
+
+| RD1-seed5    = 8
+| RD1-team5    = '''{{flagicon|JPN}} [[Hiroki Midorikawa|H Midorikawa]]<br>{{flagicon|JPN}} [[Natsu Saito|N Saito]]'''
+| RD1-score5-1 = 22
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 = '''21'''
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|TPE}} [[Ye Hong-wei|Ye H-w]]<br>{{flagicon|TPE}} [[Nicole Gonzales Chan|N G Chan]]
+| RD1-score6-1 = '''24'''
+| RD1-score6-2 = 19
+| RD1-score6-3 = 19
+
+| RD1-seed7    =
+| RD1-team7    = '''{{flagicon|INA}} [[Rehan Naufal Kusharjanto|R N Kusharjanto]]<br>{{flagicon|INA}} [[Gloria Emanuelle Widjaja|G E Widjaja]]'''
+| RD1-score7-1 = '''21'''
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 =
+| RD1-seed8    =
+| RD1-team8    = {{flagicon|IND}} [[Ashith Surya|A Surya]]<br>{{flagicon|IND}} [[Amrutha Pramuthesh|A Pramuthesh]]
+| RD1-score8-1 = 12
+| RD1-score8-2 = 17
+| RD1-score8-3 =
+
+| RD2-seed1    = 1
+| RD2-team1    = '''{{flagicon|CHN}} [[Feng Yanzhe|Feng YZ]]<br>{{flagicon|CHN}} [[Huang Dongping|Huang DP]]'''
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = 24
+| RD2-score1-3 = '''21'''
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|MAS}} [[Wong Tien Ci|Wong T C]]<br>{{flagicon|MAS}} [[Lim Chiew Sien|Lim C S]]
+| RD2-score2-1 = 11
+| RD2-score2-2 = '''26'''
+| RD2-score2-3 =  9
+
+| RD2-seed3    = 8
+| RD2-team3    = {{flagicon|JPN}} [[Hiroki Midorikawa|H Midorikawa]]<br>{{flagicon|JPN}} [[Natsu Saito|N Saito]]
+| RD2-score3-1 = 14
+| RD2-score3-2 = 15
+| RD2-score3-3 =
+| RD2-seed4    =
+| RD2-team4    = '''{{flagicon|INA}} [[Rehan Naufal Kusharjanto|R N Kusharjanto]]<br>{{flagicon|INA}} [[Gloria Emanuelle Widjaja|G E Widjaja]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    = 1
+| RD3-team1    = '''{{flagicon|CHN}} [[Feng Yanzhe|Feng YZ]]<br>{{flagicon|CHN}} [[Huang Dongping|Huang DP]]'''
+| RD3-score1-1 = '''21'''
+| RD3-score1-2 = '''21'''
+| RD3-score1-3 =
+| RD3-seed2    =
+| RD3-team2    = {{flagicon|INA}} [[Rehan Naufal Kusharjanto|R N Kusharjanto]]<br>{{flagicon|INA}} [[Gloria Emanuelle Widjaja|G E Widjaja]]
+| RD3-score2-1 = 14
+| RD3-score2-2 = 11
+| RD3-score2-3 =
+}}
+
+==== Section 2 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    = 4
+| RD1-team1    = '''{{flagicon|MAS}} [[Chen Tang Jie|Chen T J]]<br>{{flagicon|MAS}} [[Toh Ee Wei|Toh E W]]'''
+| RD1-score1-1 = '''22'''
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 =
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|USA}} [[Presley Smith|P Smith]]<br>{{flagicon|USA}} [[Jennie Gai|J Gai]]
+| RD1-score2-1 = 20
+| RD1-score2-2 = 12
+| RD1-score2-3 =
+
+| RD1-seed3    =
+| RD1-team3    = {{flagicon|MAS}} [[Hoo Pang Ron|Hoo P R]]<br>{{flagicon|MAS}} [[Cheng Su Yin|Cheng S Y]]
+| RD1-score3-1 = 15
+| RD1-score3-2 = 16
+| RD1-score3-3 =
+| RD1-seed4    =
+| RD1-team4    = '''{{flagicon|CHN}} [[Gao Jiaxuan|Gao JX]]<br>{{flagicon|CHN}} [[Wu Mengying|Wu MY]]'''
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 =
+
+| RD1-seed5    = 5
+| RD1-team5    = '''{{flagicon|THA}} [[Dechapol Puavaranukroh|D Puavaranukroh]]<br>{{flagicon|THA}} [[Supissara Paewsampran|S Paewsampran]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 =
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|SGP}} [[Terry Hee|T Hee]]<br>{{flagicon|SGP}} [[Jin Yujia|Jin YJ]]
+| RD1-score6-1 = 12
+| RD1-score6-2 = 11
+| RD1-score6-3 =
+
+| RD1-seed7    =
+| RD1-team7    = '''{{flagicon|CHN}} [[Guo Xinwa|Guo XW]]<br>{{flagicon|CHN}} [[Chen Fanghui|Chen FH]]'''
+| RD1-score7-1 = 17
+| RD1-score7-2 = '''21'''
+| RD1-score7-3 = '''21'''
+| RD1-seed8    =
+| RD1-team8    = {{flagicon|DEN}} [[Jesper Toft|J Toft]]<br>{{flagicon|DEN}} [[Amalie Magelund|A Magelund]]
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = 19
+| RD1-score8-3 = 14
+
+| RD2-seed1    = 4
+| RD2-team1    = '''{{flagicon|MAS}} [[Chen Tang Jie|Chen T J]]<br>{{flagicon|MAS}} [[Toh Ee Wei|Toh E W]]'''
+| RD2-score1-1 = '''22'''
+| RD2-score1-2 = '''21'''
+| RD2-score1-3 =
+| RD2-seed2    =
+| RD2-team2    = {{flagicon|CHN}} [[Gao Jiaxuan|Gao JX]]<br>{{flagicon|CHN}} [[Wu Mengying|Wu MY]]
+| RD2-score2-1 = 20
+| RD2-score2-2 = 17
+| RD2-score2-3 =
+
+| RD2-seed3    = 5
+| RD2-team3    = {{flagicon|THA}} [[Dechapol Puavaranukroh|D Puavaranukroh]]<br>{{flagicon|THA}} [[Supissara Paewsampran|S Paewsampran]]
+| RD2-score3-1 = 20
+| RD2-score3-2 = 15
+| RD2-score3-3 =
+| RD2-seed4    =
+| RD2-team4    = '''{{flagicon|CHN}} [[Guo Xinwa|Guo XW]]<br>{{flagicon|CHN}} [[Chen Fanghui|Chen FH]]'''
+| RD2-score4-1 = '''22'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    = 4
+| RD3-team1    = {{flagicon|MAS}} [[Chen Tang Jie|Chen T J]]<br>{{flagicon|MAS}} [[Toh Ee Wei|Toh E W]]
+| RD3-score1-1 = 19
+| RD3-score1-2 = 15
+| RD3-score1-3 =
+| RD3-seed2    =
+| RD3-team2    = '''{{flagicon|CHN}} [[Guo Xinwa|Guo XW]]<br>{{flagicon|CHN}} [[Chen Fanghui|Chen FH]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 =
+}}
+
+=== Bottom half ===
+==== Section 3 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    =
+| RD1-team1    = '''{{flagicon|DEN}} [[Mads Vestergaard|M Vestergaard]]<br>{{flagicon|DEN}} [[Christine Busch|C Busch]]'''
+| RD1-score1-1 = 21
+| RD1-score1-2 = '''21'''
+| RD1-score1-3 = '''21'''
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|ENG}} [[Callum Hemming|C Hemming]]<br>{{flagicon|ENG}} [[Estelle van Leeuwen|E van Leeuwen]]
+| RD1-score2-1 = '''23'''
+| RD1-score2-2 = 13
+| RD1-score2-3 = 18
+
+| RD1-seed3    =
+| RD1-team3    = '''{{flagicon|INA}} [[Jafar Hidayatullah|J Hidayatullah]]<br>{{flagicon|INA}} [[Felisha Pasaribu|F Pasaribu]]'''
+| RD1-score3-1 = 18
+| RD1-score3-2 = '''24'''
+| RD1-score3-3 = '''21'''
+| RD1-seed4    = 6
+| RD1-team4    = {{flagicon|MAS}} [[Goh Soon Huat|Goh S H]]<br>{{flagicon|MAS}} [[Shevon Jemie Lai|S J Lai]]
+| RD1-score4-1 = '''21'''
+| RD1-score4-2 = 22
+| RD1-score4-3 = 15
+
+| RD1-seed5    =
+| RD1-team5    = '''{{flagicon|THA}} [[Ruttanapak Oupthong|R Oupthong]]<br>{{flagicon|THA}} [[Jhenicha Sudjaipraparat|J Sudjaipraparat]]'''
+| RD1-score5-1 = 18
+| RD1-score5-2 = '''21'''
+| RD1-score5-3 = '''24'''
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|TPE}} [[Yang Po-hsuan|Yang P-hs]]<br>{{flagicon|TPE}} [[Hu Ling-fang|Hu L-f]]
+| RD1-score6-1 = '''21'''
+| RD1-score6-2 = 19
+| RD1-score6-3 = 22
+
+| RD1-seed7    =
+| RD1-team7    = {{flagicon|USA}} [[Chen Zhi-yi|Chen Z-y]]<br>{{flagicon|USA}} [[Francesca Corbett|F Corbett]]
+| RD1-score7-1 = 12
+| RD1-score7-2 = 12
+| RD1-score7-3 =
+| RD1-seed8    = 3
+| RD1-team8    = '''{{flagicon|HKG}} [[Tang Chun Man|Tang C M]]<br>{{flagicon|HKG}} [[Tse Ying Suet|Tse Y S]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = '''21'''
+| RD1-score8-3 =
+
+| RD2-seed1    =
+| RD2-team1    = {{flagicon|DEN}} [[Mads Vestergaard|M Vestergaard]]<br>{{flagicon|DEN}} [[Christine Busch|C Busch]]
+| RD2-score1-1 = 9
+| RD2-score1-2 = 15
+| RD2-score1-3 =
+| RD2-seed2    =
+| RD2-team2    = '''{{flagicon|INA}} [[Jafar Hidayatullah|J Hidayatullah]]<br>{{flagicon|INA}} [[Felisha Pasaribu|F Pasaribu]]'''
+| RD2-score2-1 = '''21'''
+| RD2-score2-2 = '''21'''
+| RD2-score2-3 =
+
+| RD2-seed3    =
+| RD2-team3    = {{flagicon|THA}} [[Ruttanapak Oupthong|R Oupthong]]<br>{{flagicon|THA}} [[Jhenicha Sudjaipraparat|J Sudjaipraparat]]
+| RD2-score3-1 = 18
+| RD2-score3-2 = 16
+| RD2-score3-3 =
+| RD2-seed4    = 3
+| RD2-team4    = '''{{flagicon|HKG}} [[Tang Chun Man|Tang C M]]<br>{{flagicon|HKG}} [[Tse Ying Suet|Tse Y S]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    =
+| RD3-team1    = '''{{flagicon|INA}} [[Jafar Hidayatullah|J Hidayatullah]]<br>{{flagicon|INA}} [[Felisha Pasaribu|F Pasaribu]]'''
+| RD3-score1-1 = '''21'''
+| RD3-score1-2 = 18
+| RD3-score1-3 = '''21'''
+| RD3-seed2    = 3
+| RD3-team2    = {{flagicon|HKG}} [[Tang Chun Man|Tang C M]]<br>{{flagicon|HKG}} [[Tse Ying Suet|Tse Y S]]
+| RD3-score2-1 = 13
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 = 17
+}}
+
+==== Section 4 ====
+{{8TeamBracket-Tennis3
+| RD1=First round
+| RD2=Second round
+| RD3=Quarter-finals
+| team-width=160
+
+| RD1-seed1    =
+| RD1-team1    = '''{{flagicon|INA}} [[Amri Syahnawi|A Syahnawi]]<br>{{flagicon|INA}} [[Nita Violina Marwah|N V Marwah]]'''
+| RD1-score1-1 = '''21'''
+| RD1-score1-2 = 17
+| RD1-score1-3 = '''21'''
+| RD1-seed2    =
+| RD1-team2    = {{flagicon|CHN}} [[Cheng Xing|Cheng X]]<br>{{flagicon|CHN}} [[Zhang Chi (badminton)|Zhang C]]
+| RD1-score2-1 = 18
+| RD1-score2-2 = '''21'''
+| RD1-score2-3 = 19
+
+| RD1-seed3    =
+| RD1-team3    = '''{{flagicon|KOR}} [[Wang Chan|Wang C]]<br>{{flagicon|KOR}} [[Jeong Na-eun|Jeong N-e]]'''
+| RD1-score3-1 = '''21'''
+| RD1-score3-2 = 16
+| RD1-score3-3 = '''21'''
+| RD1-seed4    = 7
+| RD1-team4    = {{flagicon|FRA}} [[Thom Gicquel|T Gicquel]]<br>{{flagicon|FRA}} [[Delphine Delrue|D Delrue]]
+| RD1-score4-1 = 17
+| RD1-score4-2 = '''21'''
+| RD1-score4-3 = 15
+
+| RD1-seed5    =
+| RD1-team5    = '''{{flagicon|TPE}} [[Lu Ming-che (badminton)|Lu M-c]]<br>{{flagicon|TPE}} [[Hung En-tzu|Hung E-t]]'''
+| RD1-score5-1 = '''21'''
+| RD1-score5-2 = 19
+| RD1-score5-3 = '''21'''
+| RD1-seed6    =
+| RD1-team6    = {{flagicon|FRA}} [[Julien Maio|J Maio]]<br>{{flagicon|FRA}} [[Léa Palermo|L Palermo]]
+| RD1-score6-1 = 16
+| RD1-score6-2 = '''21'''
+| RD1-score6-3 = 12
+
+| RD1-seed7    =
+| RD1-team7    = {{flagicon|CAN}} [[Kevin Lee (badminton)|K Lee]]<br>{{flagicon|CAN}} [[Josephine Wu|J Wu]]
+| RD1-score7-1 = 14
+| RD1-score7-2 = 11
+| RD1-score7-3 =
+| RD1-seed8    = 2
+| RD1-team8    = '''{{flagicon|CHN}} [[Jiang Zhenbang|Jiang ZB]]<br>{{flagicon|CHN}} [[Wei Yaxin|Wei YX]]'''
+| RD1-score8-1 = '''21'''
+| RD1-score8-2 = '''21'''
+| RD1-score8-3 =
+
+| RD2-seed1    =
+| RD2-team1    = {{flagicon|INA}} [[Amri Syahnawi|A Syahnawi]]<br>{{flagicon|INA}} [[Nita Violina Marwah|N V Marwah]]
+| RD2-score1-1 = '''21'''
+| RD2-score1-2 = 13
+| RD2-score1-3 = 19
+| RD2-seed2    =
+| RD2-team2    = '''{{flagicon|KOR}} [[Wang Chan|Wang C]]<br>{{flagicon|KOR}} [[Jeong Na-eun|Jeong N-e]]'''
+| RD2-score2-1 = 12
+| RD2-score2-2 = '''21'''
+| RD2-score2-3 = '''21'''
+
+| RD2-seed3    =
+| RD2-team3    = {{flagicon|TPE}} [[Lu Ming-che (badminton)|Lu M-c]]<br>{{flagicon|TPE}} [[Hung En-tzu|Hung E-t]]
+| RD2-score3-1 = 11
+| RD2-score3-2 = 12
+| RD2-score3-3 =
+| RD2-seed4    = 2
+| RD2-team4    = '''{{flagicon|CHN}} [[Jiang Zhenbang|Jiang ZB]]<br>{{flagicon|CHN}} [[Wei Yaxin|Wei YX]]'''
+| RD2-score4-1 = '''21'''
+| RD2-score4-2 = '''21'''
+| RD2-score4-3 =
+
+| RD3-seed1    =
+| RD3-team1    =  {{flagicon|KOR}} [[Wang Chan|Wang C]]<br>{{flagicon|KOR}} [[Jeong Na-eun|Jeong N-e]]
+| RD3-score1-1 = 17
+| RD3-score1-2 = 14
+| RD3-score1-3 =
+| RD3-seed2    = 2
+| RD3-team2    = '''{{flagicon|CHN}} [[Jiang Zhenbang|Jiang ZB]]<br>{{flagicon|CHN}} [[Wei Yaxin|Wei YX]]'''
+| RD3-score2-1 = '''21'''
+| RD3-score2-2 = '''21'''
+| RD3-score2-3 =
+}}
+
+==References==
+{{Reflist}}
+
+==External links==
+* [https://bwfbadminton.com/tournament/5281/victor-china-open-2025/ Tournament link]
+* [https://bwfworldchampionships.bwfbadminton.com/tournament/5281/victor-china-open-2025 BWF Badminton]
+
+{{s-start}}
+{{succession box | before=[[2025 Japan Open]] | title=[[2025 BWF World Tour|BWF World Tour]] <br />[[2025 BWF season]] | years= | after=[[2025 Macau Open (badminton)|2025 Macau Open]]}}
+{{s-end}}
+
+{{2025 BWF World Tour}}
+{{China Open (badminton)}}
+
+[[Category:2025 BWF World Tour|China Open]]
+[[Category:China Open (badminton)]]
+[[Category:July 2025 sports events in China|China Open]]

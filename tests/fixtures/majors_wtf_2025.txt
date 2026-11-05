@@ -1,0 +1,2158 @@
+{{Short description|2025 badminton tournament in Hangzhou, China}}
+{{Infobox badminton event
+| name = 2025 BWF World Tour Finals
+| image = 
+| caption = 
+| dates = 17–21 December
+| number_edition = 8th
+| level = G2L1
+| prize_money = 3000000
+| other = 
+| venue = [[Hangzhou Olympic Expo Center|Hangzhou Olympic Sports Centre Gymnasium]]
+| location = [[Hangzhou]], China<ref name="BWF">{{cite web |author1=BWF Staff |title=HSBC Race To Finals Rankings Complete |url=https://bwfworldtourfinals.bwfbadminton.com/news-single/2024/11/27/hsbc-race-to-finals-rankings-complete |website=bwfworldtourfinals.bwfbadminton.com |publisher=BWF |access-date=1 December 2024 |archive-url=https://archive.today/20241201155522/https://bwfworldtourfinals.bwfbadminton.com/news-single/2024/11/27/hsbc-race-to-finals-rankings-complete |archive-date=1 December 2024 |date=27 November 2024}}</ref>
+| MS = [[Christo Popov]]
+| country_MS = FRA
+| WS =  [[An Se-young]]
+| country_WS = KOR
+| MD1 = [[Kim Won-ho]]
+| country_MD1 = KOR
+| MD2 = [[Seo Seung-jae]]
+| country_MD2 = KOR
+| WD1 = [[Baek Ha-na]]
+| country_WD1 = KOR
+| WD2 = [[Lee So-hee]]
+| country_WD2 = KOR
+| XD1 = [[Feng Yanzhe]]
+| country_XD1 = CHN
+| XD2 = [[Huang Dongping]]
+| country_XD2 = CHN
+| previous = [[2024 BWF World Tour Finals|2024 Hangzhou]]
+| next = [[2026 BWF World Tour Finals|2026 Hangzhou]]}}
+
+The '''2025 BWF World Tour Finals''' (officially was the '''HSBC BWF World Tour Finals 2025''' for sponsorship reasons) was the final tournament of the [[2025 BWF World Tour]]. It has been held from 17 to 21 December 2025 in [[Hangzhou]], [[China]] and features a total prize pool of $3,000,000.
+
+== Tournament ==
+The 2025 BWF World Tour was the eighth edition of the [[BWF World Tour Finals]] and was organized by the [[Chinese Badminton Association]] with sanction from the [[Badminton World Federation|BWF]].<ref>{{cite news|url=https://bwfworldtourfinals.bwfbadminton.com/news-single/2023/08/09/hsbc-bwf-world-tour-finals-finds-home-in-hangzhou/|title=HSBC World Tour Finals finds home in Hangzhou|publisher=[[Badminton World Federation|BWF]]|date=9 August 2023|access-date=26 November 2023}}</ref>
+
+=== Point distribution ===
+Below is the point distribution table for each phase of the tournament based on the [[BWF World Ranking|BWF points system]] for the [[BWF World Tour Finals]] event.<ref>{{cite web |title=World Ranking System (11/11/2023 Version 3.1) |url=https://extranet.bwf.sport/docs/document-system/81/1466/1471/Section%205.3.3.1%20-%20World%20Ranking%20System%20-%2011%20November%202023%20V3.1.pdf |access-date=25 June 2024 |publisher=[[Badminton World Federation]]}}</ref>
+
+{| class="wikitable"
+! width="100" | Winner(s)
+! width="100" | Runner(s)-up
+! width="100" | Semi-finalists
+! width="100" | 3rd in group
+! width="100" | 4th in group
+|-
+| style="text-align:center" | 14,000
+| style="text-align:center" | 12,000
+| style="text-align:center" | 10,000
+| style="text-align:center" | 8,900
+| style="text-align:center" | 7,800
+|}
+
+=== Prize money ===
+The total prize money for this year's tournament is US$3,000,000. Distribution of prize money was in accordance with BWF regulations.
+
+{| class="wikitable" style="font-size:90%;text-align:center"
+! style="width:104px;" | Achievement
+! style="width:68px; " | Winner(s)
+! style="width:88px; " | Runner(s)-up
+! style="width:100px;" | Semi-finalist(s)
+! style="width:88px; " | 3rd in group
+! style="width:88px; " | 4th in group
+|-
+| style="background:#dfe2e9;" | '''Singles'''
+| $240,000
+| $120,000
+| $60,000
+| $33,000
+| $18,000
+|-
+| style="background:#dfe2e9;" | '''Doubles'''
+| $252,000
+| $120,000
+| $60,000
+| $39,000
+| $21,000
+|}
+
+== Players ==
+Below are the eligible players for World Tour Finals. The top eight players, or pairs in doubles categories, in the [[BWF World Ranking]] are eligible to play in the tournament, with a maximum of two players or pairs representing each national member association.
+
+=== Men's singles ===
+{| class="wikitable" style="text-align:center"
+! rowspan="2" width="50"  | Seeds
+! rowspan="2" width="50"  | Rank
+! rowspan="2" width="150" | NOCs
+! rowspan="2" width="200" | Players
+! colspan="3" | Performances
+|-
+! width="350" | Winner
+! width="350" | Runner-up
+! width="350" | Semifinalists
+|-
+| 1
+| 1
+| style="text-align:left; background:#ccffcc" | {{bd|THA}} (1)
+| style="text-align:left; background:#ccffcc" | [[Kunlavut Vitidsarn]]
+| style="text-align:left" | '''3'''<br /><small>Super 750: [[2025 Singapore Open (badminton)|Singapore Open]]<br />Super 500: [[2025 Indonesia Masters|Indonesia Masters]], [[2025 Thailand Open (badminton)|Thailand Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Arctic Open|Arctic Open]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]]</small><br /><small>Super 750: [[2025 French Open (badminton)|French Open]]</small>
+|-
+| 2
+| 2
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Li Shifeng]]
+| style="text-align:left" | '''2'''<br /><small>Super 500: [[2025 Malaysia Masters|Malaysia Masters]], [[2025 Hong Kong Open (badminton)|Hong Kong Open]]</small>
+| style="text-align:left" | 
+| style="text-align:left" | '''4'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[All England Badminton Championships|All England Open]]<br />Super 750: [[2025 French Open (badminton)|French Open]]<br />Super 300: [[2025 Swiss Open (badminton)|Swiss Open]]</small> 
+|-
+| rowspan="2" | 3/4
+| 3
+| style="text-align:left; background:#ccffcc" | {{bd|TPE}} (1)
+| style="text-align:left; background:#ccffcc" | [[Chou Tien-chen]]
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Arctic Open|Arctic Open]]</small>
+| style="text-align:left" | '''2'''<br/><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]]<br />Super 300: [[2025 Taipei Open|Taipei Open]]</small>
+| style="text-align:left" | '''7'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 French Open (badminton)|French Open]]<br />Super 500: [[2025 Korea Open (badminton)|Korea Open]], [[2025 Hong Kong Open (badminton)|Hong Kong Open]],  [[2025 Australian Open (badminton)|Australian Open]]<br />Super 300: [[2025 Swiss Open (badminton)|Swiss Open]], [[2025 U.S. Open (badminton)|U.S. Open]]</small> 
+|-
+| 4
+| style="text-align:left; background:#ccffcc" | {{bd|DEN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Anders Antonsen]]
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]]<br />Super 750: [[2025 French Open (badminton)|French Open]]</small>
+| style="text-align:left" | '''3'''<br/><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]]<br />Super 500: [[2025 Thailand Open (badminton)|Thailand Open]], [[2025 Korea Open (badminton)|Korea Open]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 China Masters|China Masters]]</small>  
+|-
+| rowspan="4" | 5/8
+| 5
+| style="text-align:left; background:#ccffcc" | {{bd|FRA}} (1)
+| style="text-align:left; background:#ccffcc" | [[Christo Popov]]
+| style="text-align:left" | 
+| style="text-align:left" | '''2'''<br /><small>Super 750: [[2025 French Open (badminton)|French Open]]<br />Super 300: [[2025 Swiss Open (badminton)|Swiss Open]]</small>
+| style="text-align:left" | '''4'''<br /><small>Super 750: [[2025 Singapore Open (badminton)|Singapore Open]], [[2025 Japan Open|Japan Open]], [[2025 China Masters|China Masters]]<br />Super 500: [[2025 Hong Kong Open (badminton)|Hong Kong Open]]</small>   
+|-
+| 6
+| style="text-align:left; background:#ccffcc" | {{bd|INA}} (1)
+| style="text-align:left; background:#ccffcc" | [[Jonatan Christie]]
+| style="text-align:left" | '''3'''<br /><small>Super 750: [[2025 Denmark Open|Denmark Open]]<br />Super 500: [[2025 Korea Open (badminton)|Korea Open]], [[2025 Hylo Open|Hylo Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Indonesia Masters|Indonesia Masters]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 750: [[2025 India Open (badminton)|India Open]]<br />Super 300: [[2025 Orléans Masters|Orléans Masters]]</small>   
+|-
+| 7
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} (2)
+| style="text-align:left; background:#ccffcc" | [[Shi Yuqi]]
+| style="text-align:left" | '''4'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[2025 All England Open|All England Open]], [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 Japan Open|Japan Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 750: [[2025 Denmark Open|Denmark Open]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]]<br />Super 500: [[2025 Indonesia Masters|Indonesia Masters]]</small> 
+|-
+| 8
+| style="text-align:left; background:#ccffcc" | {{bd|JPN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Kodai Naraoka]]
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Japan Masters|Japan Masters]]</small>
+| style="text-align:left" | 
+| style="text-align:left" | '''3'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]]<br />Super 500: [[2025 Malaysia Masters|Malaysia Masters]]<br />Super 300: [[2025 Canada Open|Canada Open]]</small> 
+|}
+
+=== Women's singles ===
+{| class="wikitable" style="text-align:center"
+! rowspan="2" width="50"  | Seeds
+! rowspan="2" width="50"  | Rank
+! rowspan="2" width="150" | NOCs
+! rowspan="2" width="200" | Players
+! colspan="3" | Performances
+|-
+! width="350" | Winner
+! width="350" | Runner-up
+! width="350" | Semifinalists
+|-
+| 1
+| 1
+| style="text-align:left; background:#ccffcc" | {{bd|KOR}} (1)
+| style="text-align:left; background:#ccffcc" | [[An Se-young]]
+| style="text-align:left" | '''10'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[2025 All England Open|All England Open]], [[2025 Indonesia Open|Indonesia Open]]<br />Super 750: [[2025 India Open (badminton)|India Open]], [[2025 Japan Open|Japan Open]], [[2025 China Masters|China Masters]], [[2025 Denmark Open|Denmark Open]], [[2025 French Open (badminton)|French Open]]<br />Super 500:[[2025 Australian Open (badminton)|Australian Open]]<br />Super 300: [[2025 Orléans Masters|Orléans Masters]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Korea Open (badminton)|Korea Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]</small>
+|-
+| 2
+| 2
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Wang Zhiyi]]
+| style="text-align:left" | '''3'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 500: [[2025 Malaysia Masters|Malaysia Masters]], [[2025 Hong Kong Open (badminton)|Hong Kong Open]]</small>
+| style="text-align:left" | '''7'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[2025 All England Open|All England Open]], [[2025 Indonesia Open|Indonesia Open]]<br />Super 750: [[2025 Singapore Open (badminton)|Singapore Open]], [[2025 Japan Open|Japan Open]], [[2025 Denmark Open|Denmark Open]], [[2025 French Open (badminton)|French Open]]</small>
+| style="text-align:left" |
+|-
+| rowspan="2" | 3/4
+| 3
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} (2)
+| style="text-align:left; background:#ccffcc" | [[Han Yue]]
+| style="text-align:left" | 
+| style="text-align:left" | '''3'''<br /><small>Super 750: [[2025 China Masters|China Masters]]<br />Super 500: [[2025 Malaysia Masters|Malaysia Masters]], [[2025 Hong Kong Open (badminton)|Hong Kong Open]]</small>
+| style="text-align:left" | '''8'''<br /><small>Super 1000: [[2025 All England Open|All England Open]], [[2025 Indonesia Open|Indonesia Open]], [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 Singapore Open (badminton)|Singapore Open]], [[2025 Japan Open|Japan Open]], [[2025 China Masters|China Masters]], [[2025 Denmark Open|Denmark Open]]<br />Super 500: [[2025 Malaysia Masters|Malaysia Masters]]</small>
+|-
+| 4
+| style="text-align:left; background:#ccffcc" | {{bd|JPN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Akane Yamaguchi]]
+| style="text-align:left" | '''2'''<br /><small>Super 500: [[2025 Korea Open (badminton)|Korea Open]], [[2025 Arctic Open|Arctic Open]]</small>
+| style="text-align:left" | 
+| style="text-align:left" | '''8'''<br /><small>Super 1000: [[2025 All England Open|All England Open]], [[2025 Indonesia Open|Indonesia Open]], [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 Singapore Open (badminton)|Singapore Open]], [[2025 Japan Open|Japan Open]], [[2025 China Masters|China Masters]], [[2025 Denmark Open|Denmark Open]]<br />Super 500: [[2025 Malaysia Masters|Malaysia Masters]]</small> 
+|-
+| rowspan="4" | 5/8
+| 5
+| style="text-align:left; background:#ccffcc" | {{bd|INA}} (1)
+| style="text-align:left; background:#ccffcc" | [[Putri Kusuma Wardani]]
+| style="text-align:left" | 
+| style="text-align:left" | '''2'''<br /><small>Super 500: [[2025 Hylo Open|Hylo Open]], [[2025 Australian Open (badminton)|Australian Open]]</small>
+| style="text-align:left" | '''3'''<br /><small>Super 500: [[2025 Korea Open (badminton)|Korea Open]]<br />Super 300: [[2025 Thailand Masters (badminton)|Thailand Masters]], [[2025 Swiss Open (badminton)|Swiss Open]]</small>  
+|-
+| 6
+| style="text-align:left; background:#ccffcc" | {{bd|THA}} (1)
+| style="text-align:left; background:#ccffcc" | [[Pornpawee Chochuwong]]
+| style="text-align:left" | '''1'''<br /><small>Super 300: [[2025 Thailand Masters (badminton)|Thailand Masters]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 750: [[2025 India Open (badminton)|India Open]]<br />Super 500: [[2025 Thailand Open (badminton)|Thailand Open]]</small> 
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Korea Open (badminton)|Korea Open]]</small> 
+|-
+| 7
+| style="text-align:left; background:#ccffcc" | {{bd|THA}} (2)
+| style="text-align:left; background:#ccffcc" | [[Ratchanok Intanon]]
+| style="text-align:left" | '''2'''<br /><small>Super 500: [[2025 Indonesia Masters|Indonesia Masters]], [[2025 Japan Masters|Japan Masters]]</small>
+| style="text-align:left" | 
+| style="text-align:left" | '''3'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]]<br />Super 500: [[2025 Arctic Open|Arctic Open]], [[2025 Australian Open (badminton)|Australian Open]]</small> 
+|-
+| 8
+| style="text-align:left; background:#ccffcc" | {{bd|JPN}} (2)
+| style="text-align:left; background:#ccffcc" | [[Tomoka Miyazaki]]
+| style="text-align:left" | '''1'''<br /><small>Super 300: [[2025 Taipei Open|Taipei Open]]</small>
+| style="text-align:left" | 
+| style="text-align:left" | '''2'''<br /><small>Super 750: [[2025 India Open (badminton)|India Open]]<br />Super 500: [[2025 Thailand Open (badminton)|Thailand Open]]</small>
+|}
+
+=== Men's doubles ===
+{| class="wikitable" style="text-align:center"
+! rowspan="2" width="50"  | Seeds
+! rowspan="2" width="50"  | Rank
+! rowspan="2" width="150" | NOCs
+! rowspan="2" width="200" | Players
+! colspan="3" | Performances
+|-
+! width="350" | Winner
+! width="350" | Runner-up
+! width="350" | Semifinalists
+|-
+| 1
+| 1
+| style="text-align:left; background:#ccffcc" | {{bd|KOR}} (1)
+| style="text-align:left; background:#ccffcc" | [[Kim Won-ho]]<br />[[Seo Seung-jae]]
+| style="text-align:left" | '''9'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[2025 All England Open|All England Open]], [[2025 Indonesia Open|Indonesia Open]]<br />Super 750:[[2025 Japan Open|Japan Open]], [[2025 China Masters|China Masters]], [[2025 French Open (badminton)|French Open]]<br /> Super 500: [[2025 Korea Open (badminton)|Korea Open]], [[2025 Japan Masters|Japan Masters]]<br />Super 300: [[2025 German Open (badminton)|German Open]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 750: [[2025 India Open (badminton)|India Open]], [[2025 Singapore Open (badminton)|Singapore Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 300: [[2025 Orléans Masters|Orléans Masters]]</small>
+|-
+| 2
+| 2
+| style="text-align:left; background:#ccffcc" | {{bd|MAS}} (1)
+| style="text-align:left; background:#ccffcc" | [[Aaron Chia]]<br />[[Soh Wooi Yik]]
+| style="text-align:left" | '''2'''<br /><small>Super 750: [[2025 Singapore Open (badminton)|Singapore Open]]<br /> Super 500: [[2025 Thailand Open (badminton)|Thailand Open]]</small>
+| style="text-align:left" | '''3'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 500: [[2025 Malaysia Masters|Malaysia Masters]], [[2025 Arctic Open|Arctic Open]]</small>
+| style="text-align:left" | '''5'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 India Open (badminton)|India Open]], [[2025 China Masters|China Masters]], [[2025 French Open (badminton)|French Open]]<br />Super 500: [[2025 Indonesia Masters|Indonesia Masters]]</small>
+|-
+| rowspan="2" | 3/4
+| 3
+| style="text-align:left; background:#ccffcc" | {{bd|IND}} (1)
+| style="text-align:left; background:#ccffcc" | [[Satwiksairaj Rankireddy]]<br />[[Chirag Shetty]] 
+| style="text-align:left" | 
+| style="text-align:left" | '''2'''<br /><small>Super 750: [[2025 China Masters|China Masters]]<br />Super 500: [[2025 Hong Kong Open (badminton)|Hong Kong Open]]</small>
+| style="text-align:left" | '''5'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 India Open (badminton)|India Open]], [[2025 Singapore Open (badminton)|Singapore Open]], [[2025 Denmark Open|Denmark Open]]</small> 
+|-
+| 4
+| style="text-align:left; background:#ccffcc" | {{bd|MAS}} (2)
+| style="text-align:left; background:#ccffcc" | [[Man Wei Chong]]<br />[[Tee Kai Wun]] 
+| style="text-align:left" | '''2'''<br /><small>Super 500: [[2025 Indonesia Masters|Indonesia Masters]], [[2025 Malaysia Masters|Malaysia Masters]]</small>
+| style="text-align:left" | 
+| style="text-align:left" | '''4'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[2025 Indonesia Open|Indonesia Open]]</small><small><br />Super 500:[[2025 Hylo Open|Hylo Open]]</small> 
+|-
+| rowspan="4" | 5/8
+| 5
+| style="text-align:left; background:#ccffcc" | {{bd|INA}} (1)
+| style="text-align:left; background:#ccffcc" | [[Sabar Karyaman Gutama]]<br />[[Muhammad Reza Pahlevi Isfahani]] 
+| style="text-align:left" | 
+| style="text-align:left" | '''3'''<br /><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]]<br />Super 500: [[2025 Hylo Open|Hylo Open]]<br />Super 300: [[2025 Macau Open (badminton)|Macau Open]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 All England Open|All England Open]]<br/>Super 500: [[2025 Australian Open (badminton)|Australian Open]]</small> 
+|-
+| 6
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Liang Weikeng]]<br />[[Wang Chang (badminton)|Wang Chang]] 
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Hong Kong Open (badminton)|Hong Kong Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 300: [[2025 Orléans Masters|Orléans Masters]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 Denmark Open|Denmark Open]]</small> 
+|-
+| 7
+| style="text-align:left; background:#ccffcc" | {{bd|TPE}} (1)
+| style="text-align:left; background:#ccffcc" | [[Chiu Hsiang-chieh]]<br />[[Wang Chi-lin]] 
+| style="text-align:left" | '''2'''<br /><small>Super 500: [[2025 Hylo Open|Hylo Open]]<br />Super 300: [[2025 Taipei Open|Taipei Open]]</small>
+| style="text-align:left" | 
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Japan Masters|Japan Masters]]</small> 
+|-
+| 8
+| style="text-align:left; background:#ccffcc" | {{bd|INA}} (2)
+| style="text-align:left; background:#ccffcc" | [[Fajar Alfian]]<br />[[Muhammad Shohibul Fikri]] 
+| style="text-align:left" | '''1'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]</small>
+| style="text-align:left" | '''4'''<br /><small>Super 750: [[2025 Denmark Open|Denmark Open]], [[2025 French Open (badminton)|French Open]]<br />Super 500: [[2025 Korea Open (badminton)|Korea Open]], [[2025 Australian Open (badminton)|Australian Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 750: [[2025 China Masters|China Masters]]</small> 
+|}
+
+=== Women's doubles ===
+{| class="wikitable" style="text-align:center"
+! rowspan="2" width="50"  | Seeds
+! rowspan="2" width="50"  | Rank
+! rowspan="2" width="150" | NOCs
+! rowspan="2" width="200" | Players
+! colspan="3" | Performances
+|-
+! width="350" | Winner
+! width="350" | Runner-up
+! width="350" | Semifinalists
+|-
+|-
+| 1
+| 1
+| style="text-align:left; background:#ccffcc" | {{bd|MAS}} (1)
+| style="text-align:left; background:#ccffcc" | [[Pearly Tan]]<br />[[Thinaah Muralitharan]]
+| style="text-align:left" | '''3'''<br /><small>Super 500: [[2025 Thailand Open (badminton)|Thailand Open]], [[2025 Arctic Open|Arctic Open]], [[2025 Japan Masters|Japan Masters]]</small>
+| style="text-align:left" | '''3'''<br /><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]]<br />Super 750: [[2025 Japan Open|Japan Open]]<br />Super 500: [[2025 Indonesia Masters|Indonesia Masters]]</small>
+| style="text-align:left" | '''4'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 India Open (badminton)|India Open]]<br />[[2025 Malaysia Masters|Malaysia Masters]], [[2025 Hong Kong Open (badminton)|Hong Kong Open]]</small>
+|-
+| 2
+| 2
+| style="text-align:left; background:#ccffcc" | {{bd|KOR}} (1)
+| style="text-align:left; background:#ccffcc" | [[Kim Hye-jeong]]<br />[[Kong Hee-yong]]
+| style="text-align:left" | '''4'''<br /><small>Super 750: [[2025 Singapore Open (badminton)|Singapore Open]]<br />Super 500: [[2025 Indonesia Masters|Indonesia Masters]], [[2025 Korea Open (badminton)|Korea Open]]<br />Super 300: [[2025 Orléans Masters|Orléans Masters]]</small>
+| style="text-align:left" | '''3'''<br /><small>Super 750: [[2025 India Open (badminton)|India Open]], [[2025 China Masters|China Masters]], [[2025 Denmark Open|Denmark Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]</small>
+|-
+| rowspan="2" | 3/4
+| 3
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Liu Shengshu]]<br />[[Tan Ning (badminton)|Tan Ning]]
+| style="text-align:left" | '''4'''<br /><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]], [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 Japan Open|Japan Open]]<br />Super 500: [[2025 Malaysia Masters|Malaysia Masters]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 300: [[2025 Swiss Open (badminton)|Swiss Open]]</small>
+| style="text-align:left" | '''4'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[2025 All England Open|All England Open]]<br />Super 750: [[2025 Singapore Open (badminton)|Singapore Open]], [[2025 China Masters|China Masters]]</small>
+|-
+| 4
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} (2)
+| style="text-align:left; background:#ccffcc" | [[Jia Yifan]]<br />[[Zhang Shuxian]]
+| style="text-align:left" | '''3'''<br /><small>Super 750: [[2025 China Masters|China Masters]]<br />Super 500: [[2025 Hong Kong Open (badminton)|Hong Kong Open]]<br />Super 300: [[2025 Swiss Open (badminton)|Swiss Open]]</small>
+| style="text-align:left" | '''3'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[2025 China Open (badminton)|China Open]]<br />Super 500: [[2025 Malaysia Masters|Malaysia Masters]]</small>
+| style="text-align:left" | '''5'''<br /><small>Super 1000: [[2025 All England Open|All England Open]]<br />Super 750: [[2025 Singapore Open (badminton)|Singapore Open]], [[2025 Japan Open|Japan Open]]<br />Super 500: [[2025 Indonesia Masters|Indonesia Masters]]<br />Super 300: [[2025 Orléans Masters|Orléans Masters]]</small>
+|-
+| rowspan="4" | 5/8
+| 5
+| style="text-align:left; background:#ccffcc" | {{bd|JPN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Yuki Fukushima]]<br />[[Mayu Matsumoto]]
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]]<br />Super 750: [[2025 French Open (badminton)|French Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 1000: [[2025 All England Open|All England Open]]</small>
+| style="text-align:left" | '''4'''<br /><small>Super 750: [[2025 Denmark Open|Denmark Open]]<br />Super 500: [[2025 Korea Open (badminton)|Korea Open]], [[2025 Japan Masters|Kumamoto Masters]]<br />Super 300: [[2025 Orléans Masters|Orléans Masters]]</small>
+|-
+| 6
+| style="text-align:left; background:#ccffcc" | {{bd|KOR}} (2)
+| style="text-align:left; background:#ccffcc" | [[Baek Ha-na]]<br />[[Lee So-hee]]
+| style="text-align:left" | '''1'''<br /><small>Super 750: [[2025 Denmark Open|Denmark Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 300: [[2025 Orléans Masters|Orléans Masters]]</small>
+| style="text-align:left" | '''3'''<br /><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]]<br />Super 750: [[2025 China Masters|China Masters]]<br />Super 500: [[2025 Korea Open (badminton)|Korea Open]]</small>
+|-
+| 7
+| style="text-align:left; background:#ccffcc" | {{bd|JPN}} (2)
+| style="text-align:left; background:#ccffcc" | [[Rin Iwanaga]]<br />[[Kie Nakanishi]]
+| style="text-align:left" | 
+| style="text-align:left" | '''5'''<br /><small>Super 750: [[2025 Singapore Open (badminton)|Singapore Open]]<br />Super 500: [[2025 Hong Kong Open (badminton)|Hong Kong Open]], [[2025 Korea Open (badminton)|Korea Open]], [[2025 Arctic Open|Arctic Open]], [[2025 Japan Masters|Japan Masters]]</small>
+| style="text-align:left" | 
+|-
+| 8
+| style="text-align:left; background:#ccffcc" | {{bd|TPE}} (1)
+| style="text-align:left; background:#ccffcc" | [[Hsieh Pei-shan]]<br />[[Hung En-tzu]]
+| style="text-align:left" | '''2'''<br /><small>Super 300: [[2025 Taipei Open|Taipei Open]], [[2025 Macau Open (badminton)|Macau Open]]</small>
+| style="text-align:left" | 
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Arctic Open|Arctic Open]]</small>
+|}
+
+=== Mixed doubles ===
+{| class="wikitable" style="text-align:center"
+! rowspan="2" width="50"  | Seeds
+! rowspan="2" width="50"  | Rank
+! rowspan="2" width="150" | NOCs
+! rowspan="2" width="200" | Players
+! colspan="3" | Performances
+|-
+! width="350" | Winner
+! width="350" | Runner-up
+! width="350" | Semifinalists
+|-
+|-
+| 1
+| 1
+| style="text-align:left; background:#ccffcc" | {{bd|THA}} (1)
+| style="text-align:left; background:#ccffcc" | [[Dechapol Puavaranukroh]]<br />[[Supissara Paewsampran]]
+| style="text-align:left" | '''5'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]]<br />Super 750: [[2025 Singapore Open (badminton)|Singapore Open]], [[2025 China Masters|China Masters]]<br />Super 500: [[2025 Japan Masters|Kumamoto Masters]]<br />Super 300: [[2025 Thailand Masters (badminton)|Thailand Masters]]</small>
+| style="text-align:left" | '''3'''<br /><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]]<br />Super 750: [[2025 Japan Open|Japan Open]], [[2025 French Open (badminton)|French Open]]</small>
+| style="text-align:left" | '''3'''<br /><small>Super 500: [[2025 Indonesia Masters|Indonesia Masters]], [[2025 Arctic Open|Arctic Open]]</small> 
+|-
+| 2
+| 2
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Feng Yanzhe]]<br />[[Huang Dongping]]
+| style="text-align:left" | '''7'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 Denmark Open|Denmark Open]], [[2025 French Open (badminton)|French Open]]<br />Super 500: [[2025 Thailand Open (badminton)|Thailand Open]], [[2025 Malaysia Masters|Malaysia Masters]], [[2025 Hong Kong Open (badminton)|Hong Kong Open]], [[2025 Korea Open (badminton)|Korea Open]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]]<br />Super 500: [[2025 Arctic Open|Arctic Open]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 750: [[2025 Japan Open|Japan Open]], [[2025 China Masters|China Masters]]</small>
+|-
+| rowspan="2" | 3/4
+| 3
+| style="text-align:left; background:#ccffcc" | {{bd|MAS}} (1)
+| style="text-align:left; background:#ccffcc" | [[Chen Tang Jie]]<br />[[Toh Ee Wei]]
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Australian Open (badminton)|Australian Open]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 750: [[2025 China Masters|China Masters]]</small>
+| style="text-align:left" | '''6'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]], [[2025 Indonesia Open|Indonesia Open]]<br />Super 750: [[2025 India Open (badminton)|India Open]], [[2025 Japan Open|Japan Open]], [[2025 Denmark Open|Denmark Open]]<br />Super 300: [[2025 Macau Open (badminton)|Macau Open]]</small> 
+|-
+| 4
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} (2)
+| style="text-align:left; background:#ccffcc" | [[Jiang Zhenbang]]<br />[[Wei Yaxin]]
+| style="text-align:left" | '''3'''<br /><small>Super 750: [[2025 India Open (badminton)|India Open]], [[2025 Japan Open|Japan Open]]<br />Super 500: [[2025 Arctic Open|Arctic Open]]</small>
+| style="text-align:left" | '''4'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 750: [[2025 Denmark Open|Denmark Open]]<br />[[2025 Malaysia Masters|Malaysia Masters]], [[2025 Korea Open (badminton)|Korea Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 750: [[2025 China Masters|China Masters]]</small>
+|-
+| rowspan="4" | 5/8
+| 5
+| style="text-align:left; background:#ccffcc" | {{bd|MAS}} (2)
+| style="text-align:left; background:#ccffcc" | [[Goh Soon Huat]]<br />[[Shevon Jemie Lai]]
+| style="text-align:left" | 
+| style="text-align:left" | 
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 Malaysia Open (badminton)|Malaysia Open]]<br />Super 750: [[2025 India Open (badminton)|India Open]]</small> 
+|-
+| 6
+| style="text-align:left; background:#ccffcc" | {{bd|FRA}} (1)
+| style="text-align:left; background:#ccffcc" | [[Thom Gicquel]]<br />[[Delphine Delrue]]
+| style="text-align:left" | '''1'''<br /><small>Super 1000: [[2025 Indonesia Open|Indonesia Open]]</small>
+| style="text-align:left" | '''3'''<br /><small>Super 750: [[2025 India Open (badminton)|India Open]]<br />Super 500: [[2025 Hylo Open|Hylo Open]], [[2025 Japan Masters|Japan Masters]]</small>
+| style="text-align:left" | 
+|-
+| 7
+| style="text-align:left; background:#ccffcc" | {{bd|JPN}} (1)
+| style="text-align:left; background:#ccffcc" | [[Hiroki Midorikawa]]<br />[[Natsu Saito]]
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Indonesia Masters|Indonesia Masters]]</small>
+| style="text-align:left" | 
+| style="text-align:left" | 
+|-
+| 8
+| style="text-align:left; background:#ccffcc" | {{bd|INA}} (1)
+| style="text-align:left; background:#ccffcc" | [[Jafar Hidayatullah]]<br />[[Felisha Pasaribu]]
+| style="text-align:left" | '''1'''<br /><small>Super 300: [[2025 Taipei Open|Taipei Open]]</small>
+| style="text-align:left" | '''1'''<br /><small>Super 500: [[2025 Australian Open (badminton)|Australian Open]]</small>
+| style="text-align:left" | '''2'''<br /><small>Super 1000: [[2025 China Open (badminton)|China Open]]<br />Super 300:[[2025 Thailand Masters (badminton)|Thailand Masters]]</small>
+|}
+
+==Representatives by nation==
+{| class="wikitable" style="text-align:center"
+! colspan="10" | Top Nation
+|-
+! Rank
+! Nation
+! MS
+! WS
+! MD
+! WD
+! XD
+! Total
+! Players
+|-
+| 1
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} '''(H)'''
+| 2
+| 2
+| 1
+| 2
+| 2
+| 9
+| 14
+|-
+| 2
+| style="text-align:left" | {{bd|JPN}}
+| 1
+| 2
+| 
+| 2
+| 1
+| 6
+| 9
+|-
+| rowspan="2"| 3
+| style="text-align:left" | {{bd|INA}}
+| 1
+| 1
+| 2
+| 
+| 1
+| 5
+| 8
+|-
+| style="text-align:left" | {{bd|MAS}}
+| 
+| 
+| 2
+| 1
+| 2
+| 5
+| 10
+|-
+| rowspan="2"| 4
+| style="text-align:left" | {{bd|KOR}}
+| 
+| 1
+| 1
+| 2
+| 
+| 4
+| 7
+|-
+| style="text-align:left" | {{bd|THA}}
+| 1
+| 2
+| 
+| 
+| 1
+| 4
+| 5
+|-
+| 5
+| style="text-align:left" | {{bd|TPE}}
+| 1
+| 
+| 1
+| 1
+| 
+| 3
+| 5
+|-
+| 6
+| style="text-align:left" | {{bd|FRA}}
+| 1
+| 
+| 
+| 
+| 1
+| 2
+| 3
+|-
+| rowspan="2"| 7
+| style="text-align:left" | {{bd|DEN}}
+| 1
+| 
+| 
+| 
+| 
+| 1
+| 1
+|-
+| style="text-align:left" | {{bd|IND}}
+| 
+| 
+| 1
+| 
+| 
+| 1
+| 2
+|-
+! colspan="2" | Total
+! 8
+! 8
+! 8
+! 8
+! 8
+! 40
+! 64
+|}
+
+==Performance by nation==
+{| class="wikitable sortable" style="text-align: center; width:500px "
+! Nation
+! Group stage
+! Semi-finals
+! Final
+! Winner(s)
+|-
+| align=left | {{bd|KOR}}
+| 4 || 3 || 3 || 3
+|-
+| style="text-align:left; background:#ccffcc" | {{bd|CHN}} '''(H)'''
+| 9 || 6 || 5 || 1
+|-
+| align=left | {{bd|FRA}}
+| 2 || 1 || 1 || 1
+|-
+| align=left | {{bd|JPN}}
+| 6 || 4 || 1 ||  
+|-
+| align=left | {{bd|MAS}}
+| 5 || 2 ||  || 
+|-
+| align=left | {{bd|THA}}
+| 4 || 2 ||  || 
+|-
+| align=left | {{bd|INA}}
+| 5 || 1 ||  || 
+|-
+| align=left | {{bd|IND}}
+| 1 || 1 ||  || 
+|-
+| align=left | {{bd|TPE}}
+| 3 ||  ||  || 
+|-
+| align=left | {{bd|DEN}}
+| 1 ||  ||  || 
+|-
+! Total
+! 40
+! 20
+! 10
+! 5
+|}
+
+== Men's singles ==
+=== Seeds ===
+{{colbegin}}
+#{{flagicon|THA}} [[Kunlavut Vitidsarn]] ''(semi-finals)''
+#{{flagicon|CHN}} [[Li Shifeng]] ''(withdrew)''
+#{{flagicon|TPE}} [[Chou Tien-chen]] ''(group stage)''
+#{{flagicon|DEN}} [[Anders Antonsen]] ''(group stage)''
+{{colend}}
+
+=== Group A ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="200" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|FRA}} [[Christo Popov]]
+| 3
+| 3
+| 0
+| 6
+| 3
+| +3
+| 174
+| 145
+| +29
+| '''3'''
+| rowspan="2" | Advance to [[#Finals|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|THA}} [[Kunlavut Vitidsarn]] 
+| 3
+| 2
+| 1
+| 5
+| 3
+| +2
+| 144
+| 133
+| +11
+| '''2'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|DEN}} [[Anders Antonsen]] 
+| 3
+| 1
+| 2
+| 4
+| 4
+| 0
+| 144
+| 144
+| 0
+| '''1'''
+| rowspan="2"| Eliminated
+|-style="background:#ffcccc"
+| 4
+| style="text-align:left" | {{flagicon|INA}} [[Jonatan Christie]] 
+| 3
+| 0
+| 3
+| 1
+| 6
+| –5
+| 104
+| 144
+| –40
+| '''0'''
+|}
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right"  | '''[[Kunlavut Vitidsarn]] {{flagicon|THA}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|INA}} [[Jonatan Christie]]
+| '''21'''–10
+| '''21'''–14
+| 
+|-
+| style="text-align:right"  | [[Anders Antonsen]] {{flagicon|DEN}}
+| style="text-align:center" | 1–'''2'''
+| style="text-align:left"   | '''{{flagicon|FRA}} [[Christo Popov]]'''
+| 13–'''21'''
+| '''21'''–12
+| 19–'''21'''
+|-
+| rowspan="2" | 18 Dec
+| style="text-align:right"  | '''[[Anders Antonsen]] {{flagicon|DEN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|INA}} [[Jonatan Christie]]
+| '''21'''–16
+| '''21'''–14
+| 
+|-
+| style="text-align:right"  | [[Kunlavut Vitidsarn]] {{flagicon|THA}}
+| style="text-align:center" | 1–'''2'''
+| style="text-align:left"   | '''{{flagicon|FRA}} [[Christo Popov]]'''
+| 11–'''21'''
+| '''21'''–18
+| 10–'''21'''
+|-
+| rowspan="2" | 19 Dec
+| style="text-align:right"  | '''[[Christo Popov]] {{flagicon|FRA}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|INA}} [[Jonatan Christie]]
+| 18–'''21'''
+| '''21'''–16
+| '''21'''–13
+|-
+| style="text-align:right"  | '''[[Kunlavut Vitidsarn]] {{flagicon|THA}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|DEN}} [[Anders Antonsen]]
+| '''21'''–15
+| 18–'''21'''
+| '''21'''–13
+|}
+
+=== Group B ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="200" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|CHN}} [[Shi Yuqi]] 
+| 2
+| 2
+| 0
+| 4
+| 1
+| +3
+| 103
+| 67
+| +36
+| '''2'''
+| rowspan="2" | Advance to [[#Finals|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|JPN}} [[Kodai Naraoka]] 
+| 2
+| 1
+| 1
+| 2
+| 2
+| 0
+| 62
+| 77
+| –15
+| '''1'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|TPE}} [[Chou Tien-chen]] 
+| 2
+| 0
+| 2
+| 1
+| 4
+| –3
+| 82
+| 103
+| –21
+| '''0'''
+| Eliminated
+|-style="background:#dddddd"
+| 4
+| style="text-align:left" | {{flagicon|CHN}} [[Li Shifeng]] '''(Z)'''
+| –
+| –
+| –
+| –
+| –
+| –
+| –
+| –
+| –
+| –
+| Withdrew
+|}
+<small>'''(Z)''' ''Withdrew due to a right ankle injury''</small>
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right;background:#dddddd"" | <s>[[Li Shifeng]]</s> {{flagicon|CHN}}
+| style="text-align:centre;background:#dddddd"" | <s>0–'''2'''</s><br />''(voided)''
+| style="text-align:left;background:#dddddd""  | '''{{flagicon|CHN}} <s>[[Shi Yuqi]]</s>'''
+| style="text-align:centre;background:#dddddd"" | <s>13–'''21'''</s>
+| style="text-align:centre;background:#dddddd"" | <s>21–'''23'''</s>
+| style="text-align:centre;background:#dddddd"" |
+|-
+| style="text-align:right"  | [[Chou Tien-chen]] {{flagicon|TPE}}
+| style="text-align:center" | 0–'''2'''
+| style="text-align:left"   | '''{{flagicon|JPN}} [[Kodai Naraoka]]'''
+| 17–'''21'''
+| 18–'''21'''
+| 
+|-
+| rowspan="2" | 18 Dec 
+| style="text-align:right;background:#dddddd""  | <s>[[Li Shifeng]]</s> {{flagicon|CHN}}
+| style="text-align:centre;background:#dddddd"" | <s>0–'''2'''</s><br />''(voided)''
+| style="text-align:left;background:#dddddd""   | '''{{flagicon|JPN}} <s>[[Kodai Naraoka]]</s>'''
+| style="text-align:centre;background:#dddddd"" | <s>16–'''21'''</s>
+| style="text-align:centre;background:#dddddd"" | <s>15–'''21'''</s>
+| style="text-align:centre;background:#dddddd"" | 
+|-
+| style="text-align:right"  | [[Chou Tien-chen]] {{flagicon|TPE}}
+| style="text-align:center" | 1–'''2'''
+| style="text-align:left"   | '''{{flagicon|CHN}} [[Shi Yuqi]]'''
+| 11–'''21'''
+| '''21'''–19
+| 15–'''21'''
+|-
+| rowspan="2" | 19 Dec
+| style="text-align:right;background:#dddddd"" | <s>[[Li Shifeng]]</s> {{flagicon|CHN}}
+| style="text-align:centre;background:#dddddd"" | <s>1–0</s><br />''(voided)''
+| style="text-align:left;background:#dddddd"" | {{flagicon|TPE}} <s>[[Chou Tien-chen]]</s>
+| style="text-align:centre;background:#dddddd"" | <s>'''21'''–14</s>
+| style="text-align:centre;background:#dddddd"" | <s>14<sup>r</sup>–11</s>
+| style="text-align:centre;background:#dddddd""| 
+|-
+| style="text-align:right"  | '''[[Shi Yuqi]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|JPN}} [[Kodai Naraoka]]
+| '''21'''–9
+| '''21'''–11
+| 
+|}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade     = #A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1=&nbsp;
+| RD1-team1='''{{flagicon|FRA}} [[Christo Popov]]'''
+| RD1-score1-1= '''21'''
+| RD1-score1-2= '''21'''
+| RD1-score1-3=
+| RD1-seed2= 
+| RD1-team2={{flagicon|JPN}} [[Kodai Naraoka]]
+| RD1-score2-1= 19
+| RD1-score2-2= 8
+| RD1-score2-3=
+
+| RD1-seed3= 1
+| RD1-team3={{flagicon|THA}} [[Kunlavut Vitidsarn]]
+| RD1-score3-1= 16
+| RD1-score3-2= 13
+| RD1-score3-3=
+| RD1-seed4=
+| RD1-team4='''{{flagicon|CHN}} [[Shi Yuqi]]'''
+| RD1-score4-1= '''21'''
+| RD1-score4-2= '''21'''
+| RD1-score4-3=
+
+| RD2-seed1=&nbsp;
+| RD2-team1='''{{flagicon|FRA}} [[Christo Popov]]'''
+| RD2-score1-1= '''21'''
+| RD2-score1-2= '''21'''
+| RD2-score1-3=
+| RD2-seed2=
+| RD2-team2={{flagicon|CHN}} [[Shi Yuqi]]
+| RD2-score2-1= 19
+| RD2-score2-2= 9
+| RD2-score2-3=
+}}
+
+== Women's singles ==
+=== Seeds ===
+{{colbegin}}
+#'''{{flagicon|KOR}} [[An Se-young]] (champion)'''
+#{{flagicon|CHN}} [[Wang Zhiyi]] ''(final)''
+#{{flagicon|CHN}} [[Han Yue]] ''(group stage)''
+#{{flagicon|JPN}} [[Akane Yamaguchi]] ''(semi-finals)''
+{{colend}}
+
+=== Group A ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="200" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|KOR}} [[An Se-young]] 
+| 3
+| 3
+| 0
+| 6
+| 2
+| +4
+| 148
+| 100
+| +48
+| '''3'''
+| rowspan="2" | Advance to [[#Finals|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|JPN}} [[Akane Yamaguchi]] 
+| 3
+| 2
+| 1
+| 5
+| 3
+| +2
+| 146
+| 143
+| +3
+| '''2'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|INA}} [[Putri Kusuma Wardani]] 
+| 3
+| 1
+| 2
+| 4
+| 4
+| 0
+| 143
+| 140
+| +3
+| '''1'''
+| rowspan="2"| Eliminated
+|-style="background:#ffcccc"
+| 4
+| style="text-align:left" | {{flagicon|JPN}} [[Tomoka Miyazaki]] 
+| 3
+| 0
+| 3
+| 0
+| 6
+| –6
+| 72
+| 126
+| –54
+| '''0'''
+|}
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right"  | '''[[An Se-young]] {{flagicon|KOR}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|INA}} [[Putri Kusuma Wardani]]
+| '''21'''–16
+| 8–'''21'''
+| '''21'''–8
+|-
+| style="text-align:right"  | '''[[Akane Yamaguchi]] {{flagicon|JPN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|JPN}} [[Tomoka Miyazaki]]
+| '''21'''–14
+| '''21'''–17
+| 
+|-
+| rowspan="2" | 18 Dec
+| style="text-align:right"  | '''[[Akane Yamaguchi]] {{flagicon|JPN}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|INA}} [[Putri Kusuma Wardani]]
+| 22–'''24'''
+| '''21'''–19
+| '''21'''–13
+|-
+| style="text-align:right"  | '''[[An Se-young]] {{flagicon|KOR}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|JPN}} [[Tomoka Miyazaki]]
+| '''21'''–9
+| '''21'''–6
+| 
+|-
+| rowspan="2" | 19 Dec
+| style="text-align:right"  | '''[[Putri Kusuma Wardani]] {{flagicon|INA}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|JPN}} [[Tomoka Miyazaki]]
+| '''21'''–17
+| '''21'''–9
+| 
+|-
+| style="text-align:right"  | '''[[An Se-young]] {{flagicon|KOR}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|JPN}} [[Akane Yamaguchi]]
+| 14–'''21'''
+| '''21'''–5
+| '''21'''–14
+|}
+
+=== Group B ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="200" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|CHN}} [[Wang Zhiyi]] 
+| 2
+| 2
+| 0
+| 4
+| 0
+| +4
+| 84
+| 55
+| +29
+| '''2'''
+| rowspan="2" | Advance to [[#Finals 2|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|THA}} [[Ratchanok Intanon]] 
+| 2
+| 1
+| 1
+| 2
+| 2
+| 0
+| 78
+| 69
+| +9
+| '''1'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|CHN}} [[Han Yue]] 
+| 2
+| 0
+| 2
+| 0
+| 4
+| –4
+| 19
+| 42
+| –23
+| '''0'''
+| Eliminated
+|-style="background:#dddddd"
+| 4
+| style="text-align:left" | {{flagicon|THA}} [[Pornpawee Chochuwong]] '''(Z)'''
+| –
+| –
+| –
+| –
+| –
+| –
+| –
+| –
+| –
+| –
+| Withdrew
+|}
+<small>'''(Z)''' ''Withdrew due to a left calf injury''</small>
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right"  | '''[[Wang Zhiyi]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|CHN}} [[Han Yue]]
+| '''21'''–14
+| '''21'''–5
+| 
+|-
+| style="text-align:right;background:#dddddd""  | '''<s>[[Pornpawee Chochuwong]]</s> {{flagicon|THA}}'''
+| style="text-align:centre;background:#dddddd"" | <s>'''2'''–1</s><br />''(voided)''
+| style="text-align:left;background:#dddddd""   | {{flagicon|THA}} <s>[[Ratchanok Intanon]]</s>
+| style="text-align:centre;background:#dddddd"" | <s>'''21'''–18</s>
+| style="text-align:centre;background:#dddddd"" | <s>14–'''21'''</s>
+| style="text-align:centre;background:#dddddd"" | <s>'''21'''–10</s>
+|-
+| rowspan="2" | 18 Dec 
+| style="text-align:right"  | '''[[Wang Zhiyi]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|THA}} [[Ratchanok Intanon]]
+| '''21'''–17
+| '''21'''–19
+| 
+|-
+| style="text-align:right"  | [[Han Yue]] {{flagicon|CHN}}
+| style="text-align:center" | N/P
+| style="text-align:left"   | {{flagicon|THA}} [[Pornpawee Chochuwong]]
+| colspan="3" {{N/A|''Cancelled''}}
+|-
+| rowspan="2" | 19 Dec
+| style="text-align:right"  | [[Han Yue]] {{flagicon|CHN}}
+| style="text-align:center" | 0–'''2'''
+| style="text-align:left"   | '''{{flagicon|THA}} [[Ratchanok Intanon]]'''
+| 17–'''21'''
+| 10–'''21'''
+| 
+|-
+| style="text-align:right"  | [[Wang Zhiyi]] {{flagicon|CHN}}
+| style="text-align:center" | N/P
+| style="text-align:left"   | {{flagicon|THA}} [[Pornpawee Chochuwong]]
+| colspan="3" {{N/A|''Cancelled''}}
+|}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade     = #A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1= 1
+| RD1-team1='''{{flagicon|KOR}} [[An Se-young]]'''
+| RD1-score1-1= '''21'''
+| RD1-score1-2= '''21'''
+| RD1-score1-3=
+| RD1-seed2= 4
+| RD1-team2={{flagicon|JPN}} [[Akane Yamaguchi]]
+| RD1-score2-1= 15
+| RD1-score2-2= 12
+| RD1-score2-3=
+
+| RD1-seed3=
+| RD1-team3={{flagicon|THA}} [[Ratchanok Intanon]]
+| RD1-score3-1= '''21'''
+| RD1-score3-2= 17
+| RD1-score3-3= 11
+| RD1-seed4= 2
+| RD1-team4='''{{flagicon|CHN}} [[Wang Zhiyi]]''' 
+| RD1-score4-1= 15
+| RD1-score4-2= '''21'''
+| RD1-score4-3= '''21'''
+
+| RD2-seed1= 1
+| RD2-team1='''{{flagicon|KOR}} [[An Se-young]]'''
+| RD2-score1-1= '''21'''
+| RD2-score1-2= 18
+| RD2-score1-3= '''21'''
+| RD2-seed2= 2
+| RD2-team2={{flagicon|CHN}} [[Wang Zhiyi]]
+| RD2-score2-1= 13
+| RD2-score2-2= '''21'''
+| RD2-score2-3= 10
+}}
+
+== Men's doubles ==
+=== Seeds ===
+{{colbegin}}
+#'''{{flagicon|KOR}} [[Kim Won-ho]] / [[Seo Seung-jae]] (champions)'''
+#{{flagicon|MAS}} [[Aaron Chia]] / [[Soh Wooi Yik]] ''(group stage)''
+#{{flagicon|IND}} [[Satwiksairaj Rankireddy]] / [[Chirag Shetty]] ''(semi-finals)''
+#{{flagicon|MAS}} [[Man Wei Chong]] / [[Tee Kai Wun]] ''(group stage)''
+{{colend}}
+
+=== Group A ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="225" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|KOR}} [[Kim Won-ho]]<br />{{flagicon|KOR}} [[Seo Seung-jae]] 
+| 3
+| 3
+| 0
+| 6
+| 2
+| +4
+| 168
+| 158
+| +10
+| '''3'''
+| rowspan="2" | Advance to [[#Finals|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|INA}} [[Sabar Karyaman Gutama]]<br />{{flagicon|INA}} [[Muhammad Reza Pahlevi Isfahani]]
+| 3
+| 2
+| 1
+| 4
+| 3
+| +1
+| 143
+| 139
+| +4
+| '''2'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|MAS}} [[Man Wei Chong]]<br />{{flagicon|MAS}} [[Tee Kai Wun]]
+| 3
+| 1
+| 2
+| 3
+| 4
+| –1
+| 145
+| 141
+| +4
+| '''1'''
+| rowspan="2"| Eliminated
+|-style="background:#ffcccc"
+| 4
+| style="text-align:left" | {{flagicon|TPE}} [[Chiu Hsiang-chieh]]<br />{{flagicon|TPE}} [[Wang Chi-lin]] 
+| 3
+| 0
+| 3
+| 2
+| 6
+| –4
+| 151
+| 169
+| –18
+| '''0'''
+|}
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right"  | [[Man Wei Chong]] {{flagicon|MAS}} <br / >[[Tee Kai Wun]] {{flagicon|MAS}}
+| style="text-align:center" | 0–'''2'''
+| style="text-align:left"   | '''{{flagicon|INA}} [[Sabar Karyaman Gutama]] <br / >{{flagicon|INA}} [[Muhammad Reza Pahlevi Isfahani]]'''
+| 21–'''23'''
+| 19–'''21'''
+| 
+|-
+| style="text-align:right"  | '''[[Kim Won-ho]] {{flagicon|KOR}} <br / >[[Seo Seung-jae]] {{flagicon|KOR}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|TPE}} [[Chiu Hsiang-chieh]] <br / >{{flagicon|TPE}} [[Wang Chi-lin]]
+| '''21'''–19
+| 23–'''25'''
+| '''21'''–14
+|-
+| rowspan="2" | 18 Dec
+| style="text-align:right"  | '''[[Kim Won-ho]] {{flagicon|KOR}} <br / >[[Seo Seung-jae]] {{flagicon|KOR}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|INA}} [[Sabar Karyaman Gutama]] <br / >{{flagicon|INA}} [[Muhammad Reza Pahlevi Isfahani]]
+| '''22'''–20
+| '''21'''–17
+| 
+|-
+| style="text-align:right"  | '''[[Man Wei Chong]] {{flagicon|MAS}} <br / >[[Tee Kai Wun]] {{flagicon|MAS}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|TPE}} [[Chiu Hsiang-chieh]] <br / >{{flagicon|TPE}} [[Wang Chi-lin]]
+| '''21'''–18
+| '''21'''–19
+| 
+|-
+| rowspan="2" | 19 Dec
+| style="text-align:right"  | [[Chiu Hsiang-chieh]] {{flagicon|TPE}} <br / >[[Wang Chi-lin]] {{flagicon|TPE}}
+| style="text-align:center" | 1–'''2'''
+| style="text-align:left"   | '''{{flagicon|INA}} [[Sabar Karyaman Gutama]]<br / >{{flagicon|INA}} [[Muhammad Reza Pahlevi Isfahani]]'''
+| 19–'''21'''
+| '''22'''–20
+| 15–'''21'''
+|-
+| style="text-align:right"  | '''[[Kim Won-ho]] {{flagicon|KOR}} <br / >[[Seo Seung-jae]] {{flagicon|KOR}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|MAS}} [[Man Wei Chong]] <br / >{{flagicon|MAS}} [[Tee Kai Wun]]
+| '''25'''–23
+| 14–'''21'''
+| '''21'''–19
+|}
+
+=== Group B ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="200" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|IND}} [[Satwiksairaj Rankireddy]]<br />{{flagicon|IND}} [[Chirag Shetty]] 
+| 3
+| 3
+| 0
+| 6
+| 3
+| +3
+| 172
+| 152
+| +20
+| '''3'''
+| rowspan="2" | Advance to [[#Finals|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|CHN}} [[Liang Weikeng]]<br />{{flagicon|CHN}} [[Wang Chang (badminton)|Wang Chang]] 
+| 3
+| 2
+| 1
+| 5
+| 2
+| +3
+| 139
+| 118
+| +21
+| '''2'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|MAS}} [[Aaron Chia]]<br />{{flagicon|MAS}} [[Soh Wooi Yik]] 
+| 3
+| 1
+| 2
+| 3
+| 5
+| –2
+| 150
+| 162
+| –12
+| '''1'''
+| rowspan="2"| Eliminated
+|-style="background:#ffcccc"
+| 4
+| style="text-align:left" | {{flagicon|INA}} [[Fajar Alfian]]<br />{{flagicon|INA}} [[Muhammad Shohibul Fikri]] 
+| 3
+| 0
+| 3
+| 2
+| 6
+| –4
+| 135
+| 164
+| –29
+| '''0'''
+|}
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right"  | '''[[Satwiksairaj Rankireddy]] {{flagicon|IND}} <br / >[[Chirag Shetty]] {{flagicon|IND}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|CHN}} [[Liang Weikeng]] <br / >{{flagicon|CHN}} [[Wang Chang (badminton)|Wang Chang]]
+| 12–'''21'''
+| '''22'''–20
+| '''21'''–14
+|-
+| style="text-align:right"  | '''[[Aaron Chia]] {{flagicon|MAS}} <br / >[[Soh Wooi Yik]] {{flagicon|MAS}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|INA}} [[Fajar Alfian]] <br / >{{flagicon|INA}} [[Muhammad Shohibul Fikri]]
+| 22–'''24'''
+| '''21'''–18
+| '''21'''–19
+|-
+| rowspan="2" | 18 Dec 
+| style="text-align:right"  | [[Aaron Chia]] {{flagicon|MAS}} <br / >[[Soh Wooi Yik]] {{flagicon|MAS}}
+| style="text-align:center" | 0–'''2'''
+| style="text-align:left"   | '''{{flagicon|CHN}} [[Liang Weikeng]] <br / >{{flagicon|CHN}} [[Wang Chang (badminton)|Wang Chang]]'''
+| 14–'''21'''
+| 18–'''21'''
+| 
+|-
+| style="text-align:right"  | '''[[Satwiksairaj Rankireddy]] {{flagicon|IND}} <br / >[[Chirag Shetty]] {{flagicon|IND}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|INA}} [[Fajar Alfian]] <br / >{{flagicon|INA}} [[Muhammad Shohibul Fikri]]
+| '''21'''–11
+| 16–'''21'''
+| '''21'''–11
+|-
+| rowspan="2" | 19 Dec
+| style="text-align:right"  | '''[[Liang Weikeng]] {{flagicon|CHN}} <br / >[[Wang Chang (badminton)|Wang Chang]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|INA}} [[Fajar Alfian]] <br / >{{flagicon|INA}} [[Muhammad Shohibul Fikri]]
+| '''21'''–17
+| '''21'''–14
+|
+|-
+| style="text-align:right"  | [[Aaron Chia]] {{flagicon|MAS}} <br / >[[Soh Wooi Yik]] {{flagicon|MAS}}
+| style="text-align:center" | 1–'''2'''
+| style="text-align:left"   | '''{{flagicon|IND}} [[Satwiksairaj Rankireddy]] <br / >{{flagicon|IND}} [[Chirag Shetty]]'''
+| '''21'''–17 
+| 18–'''21'''
+| 15–'''21'''
+|}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade     = #A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1= 1
+| RD1-team1='''{{flagicon|KOR}} [[Kim Won-ho]]<br />{{flagicon|KOR}} [[Seo Seung-jae]]'''
+| RD1-score1-1= '''21'''
+| RD1-score1-2= '''21'''
+| RD1-score1-3=
+| RD1-seed2=
+| RD1-team2={{flagicon|INA}} [[Sabar Karyaman Gutama]]<br />{{flagicon|INA}} [[Muhammad Reza Pahlevi Isfahani]]
+| RD1-score2-1= 9
+| RD1-score2-2= 11
+| RD1-score2-3=
+
+| RD1-seed3=
+| RD1-team3='''{{flagicon|CHN}} [[Liang Weikeng]]<br />{{flagicon|CHN}} [[Wang Chang (badminton)|Wang Chang]]'''
+| RD1-score3-1= 10
+| RD1-score3-2= '''21'''
+| RD1-score3-3= '''21'''
+| RD1-seed4= 3
+| RD1-team4={{flagicon|IND}} [[Satwiksairaj Rankireddy]]<br />{{flagicon|IND}} [[Chirag Shetty]]
+| RD1-score4-1= '''21'''
+| RD1-score4-2= 17
+| RD1-score4-3= 13
+
+| RD2-seed1= 1
+| RD2-team1='''{{flagicon|KOR}} [[Kim Won-ho]]<br />{{flagicon|KOR}} [[Seo Seung-jae]]'''
+| RD2-score1-1= '''21'''
+| RD2-score1-2= '''21'''
+| RD2-score1-3=
+| RD2-seed2=
+| RD2-team2={{flagicon|CHN}} [[Liang Weikeng]]<br />{{flagicon|CHN}} [[Wang Chang (badminton)|Wang Chang]]
+| RD2-score2-1= 18
+| RD2-score2-2= 14
+| RD2-score2-3=
+}}
+
+== Women's doubles ==
+=== Seeds ===
+{{colbegin}}
+#{{flagicon|MAS}} [[Pearly Tan]] / [[Thinaah Muralitharan]] ''(semi-finals)''
+#{{flagicon|KOR}} [[Kim Hye-jeong]] / [[Kong Hee-yong]] ''(group stage)''
+#{{flagicon|CHN}} [[Liu Shengshu]] / [[Tan Ning (badminton)|Tan Ning]] ''(semi-finals)''
+#{{flagicon|CHN}} [[Jia Yifan]] / [[Zhang Shuxian]] ''(group stage)''
+{{colend}}
+
+=== Group A ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="200" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|MAS}} [[Pearly Tan]]<br />{{flagicon|MAS}} [[Thinaah Muralitharan]] 
+| 3
+| 2
+| 1
+| 5
+| 2
+| +3
+| 139
+| 117
+| +22
+| '''2'''
+| rowspan="2" | Advance to [[#Finals|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|JPN}} [[Yuki Fukushima]]<br />{{flagicon|JPN}} [[Mayu Matsumoto]]  
+| 3
+| 2
+| 1
+| 5
+| 3
+| +2
+| 156
+| 141
+| +15
+| '''2'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|CHN}} [[Jia Yifan]]<br />{{flagicon|CHN}} [[Zhang Shuxian]]   
+| 3
+| 2
+| 1
+| 4
+| 3
+| +1
+| 128
+| 117
+| +11
+| '''2'''
+| rowspan="2"| Eliminated
+|-style="background:#ffcccc"
+| 4
+| style="text-align:left" | {{flagicon|JPN}} [[Rin Iwanaga]]<br />{{flagicon|JPN}} [[Kie Nakanishi]] 
+| 3
+| 0
+| 3
+| 0
+| 6
+| –6
+| 78
+| 126
+| –48
+| '''0'''
+|}
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right"  | '''[[Pearly Tan]] {{flagicon|MAS}} <br / >[[Thinaah Muralitharan]] {{flagicon|MAS}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|CHN}} [[Jia Yifan]] <br / >{{flagicon|CHN}} [[Zhang Shuxian]]
+| '''21'''–17
+| '''21'''–11
+| 
+|-
+| style="text-align:right"  | '''[[Yuki Fukushima]] {{flagicon|JPN}} <br / >[[Mayu Matsumoto]] {{flagicon|JPN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|JPN}} [[Rin Iwanaga]] <br / >{{flagicon|JPN}} [[Kie Nakanishi]]
+| '''21'''–14
+| '''21'''–14
+| 
+|-
+| rowspan="2" | 18 Dec
+| style="text-align:right"  | '''[[Pearly Tan]] {{flagicon|MAS}} <br / >[[Thinaah Muralitharan]] {{flagicon|MAS}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|JPN}} [[Rin Iwanaga]] <br / >{{flagicon|JPN}} [[Kie Nakanishi]]
+| '''21'''–13
+| '''21'''–18
+|
+|-
+| style="text-align:right"  | '''[[Jia Yifan]] {{flagicon|CHN}} <br / >[[Zhang Shuxian]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|JPN}} [[Yuki Fukushima]] <br / >{{flagicon|JPN}} [[Mayu Matsumoto]]
+| '''21'''–19
+| 16–'''21'''
+| '''21'''–16
+|-
+| rowspan="2" | 19 Dec 
+| style="text-align:right"  | [[Pearly Tan]] {{flagicon|MAS}} <br / >[[Thinaah Muralitharan]] {{flagicon|MAS}}
+| style="text-align:center" | 1–'''2'''
+| style="text-align:left"   | '''{{flagicon|JPN}} [[Yuki Fukushima]] <br / >{{flagicon|JPN}} [[Mayu Matsumoto]]'''
+| 15–'''21'''
+| '''21'''–16
+| 19–'''21'''
+|-
+| style="text-align:right"  | '''[[Jia Yifan]] {{flagicon|CHN}} <br / >[[Zhang Shuxian]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|JPN}} [[Rin Iwanaga]] <br / >{{flagicon|JPN}} [[Kie Nakanishi]]
+| '''21'''–11
+| '''21'''–8
+| 
+|}
+
+=== Group B ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="200" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|CHN}} [[Liu Shengshu]]<br />{{flagicon|CHN}} [[Tan Ning (badminton)|Tan Ning]] 
+| 3
+| 3
+| 0
+| 6
+| 0
+| +6
+| 126
+| 69
+| +57
+| '''3'''
+| rowspan="2" | Advance to [[#Finals|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|KOR}} [[Baek Ha-na]]<br />{{flagicon|KOR}} [[Lee So-hee]]  
+| 3
+| 2
+| 1
+| 4
+| 2
+| +2
+| 101
+| 105
+| –4
+| '''2'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|KOR}} [[Kim Hye-jeong]]<br /> {{flagicon|KOR}} [[Kong Hee-yong]]
+| 3
+| 1
+| 2
+| 2
+| 5
+| –3
+| 113
+| 125
+| –12
+| '''1'''
+| rowspan="2"| Eliminated
+|-style="background:#ffcccc"
+| 4
+| style="text-align:left" | {{flagicon|TPE}} [[Hsieh Pei-shan]]<br />{{flagicon|TPE}} [[Hung En-tzu]] 
+| 3
+| 0
+| 3
+| 1
+| 6
+| –5
+| 101
+| 142
+| –41
+| '''0'''
+|}
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right"  | [[Kim Hye-jeong]] {{flagicon|KOR}} <br / >[[Kong Hee-yong]] {{flagicon|KOR}}
+| style="text-align:center" | 0–'''2'''
+| style="text-align:left"   | '''{{flagicon|KOR}} [[Baek Ha-na]] <br / >{{flagicon|KOR}} [[Lee So-hee]]'''
+| 15–'''21'''
+| 12–'''21'''
+| 
+|-
+| style="text-align:right"  | '''[[Liu Shengshu]] {{flagicon|CHN}} <br / >[[Tan Ning (badminton)|Tan Ning]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|TPE}} [[Hsieh Pei-shan]] <br / >{{flagicon|TPE}} [[Hung En-tzu]]
+| '''21'''–10
+| '''21'''–14
+| 
+|-
+| rowspan="2" | 18 Dec 
+| style="text-align:right"  | '''[[Kim Hye-jeong]] {{flagicon|KOR}} <br / >[[Kong Hee-yong]] {{flagicon|KOR}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|TPE}} [[Hsieh Pei-shan]] <br / >{{flagicon|TPE}} [[Hung En-tzu]]
+| '''21'''–7
+| 16–'''21'''
+| '''21'''–13
+|-
+| style="text-align:right"  | '''[[Liu Shengshu]] {{flagicon|CHN}} <br / >[[Tan Ning (badminton)|Tan Ning]] {{flagicon|CHN}}'''
+| style="text-align:center" |'''2'''–0
+| style="text-align:left"   | {{flagicon|KOR}} [[Baek Ha-na]] <br / >{{flagicon|KOR}} [[Lee So-hee]]
+| '''21'''–7
+| '''21'''–10
+|   
+|-
+| rowspan="2" | 19 Dec
+| style="text-align:right"  | '''[[Baek Ha-na]] {{flagicon|KOR}} <br / >[[Lee So-hee]] {{flagicon|KOR}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|TPE}} [[Hsieh Pei-shan]] <br / >{{flagicon|TPE}} [[Hung En-tzu]]
+| '''21'''–17
+| '''21'''–19
+| 
+|-
+| style="text-align:right"   | [[Kim Hye-jeong]] {{flagicon|KOR}} <br / >[[Kong Hee-yong]] {{flagicon|KOR}}
+| style="text-align:center" | 0–'''2'''
+| style="text-align:left"  | '''{{flagicon|CHN}} [[Liu Shengshu]] <br / >{{flagicon|CHN}} [[Tan Ning (badminton)|Tan Ning]]'''
+| 17–'''21'''
+| 11–'''21'''
+| 
+|}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade     = #A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1= 1
+| RD1-team1={{flagicon|MAS}} [[Pearly Tan]]<br />{{flagicon|MAS}} [[Thinaah Muralitharan]]
+| RD1-score1-1= 19
+| RD1-score1-2= 13
+| RD1-score1-3=
+| RD1-seed2=
+| RD1-team2='''{{flagicon|JPN}} [[Yuki Fukushima]]<br />{{flagicon|JPN}} [[Mayu Matsumoto]]'''
+| RD1-score2-1= '''21'''
+| RD1-score2-2= '''21'''
+| RD1-score2-3=
+
+| RD1-seed3=
+| RD1-team3='''{{flagicon|KOR}} [[Baek Ha-na]]<br />{{flagicon|KOR}} [[Lee So-hee]]'''
+| RD1-score3-1= 15
+| RD1-score3-2= '''21'''
+| RD1-score3-3= '''21'''
+| RD1-seed4= 3
+| RD1-team4={{flagicon|CHN}} [[Liu Shengshu]]<br />{{flagicon|CHN}} [[Tan Ning (badminton)|Tan Ning]]
+| RD1-score4-1= '''21'''
+| RD1-score4-2= 16
+| RD1-score4-3= 19
+
+| RD2-seed1=&nbsp;
+| RD2-team1={{flagicon|JPN}} [[Yuki Fukushima]]<br />{{flagicon|JPN}} [[Mayu Matsumoto]]
+| RD2-score1-1= 17
+| RD2-score1-2= 11
+| RD2-score1-3=
+| RD2-seed2=
+| RD2-team2='''{{flagicon|KOR}} [[Baek Ha-na]]<br />{{flagicon|KOR}} [[Lee So-hee]]'''
+| RD2-score2-1= '''21'''
+| RD2-score2-2= '''21'''
+| RD2-score2-3=
+}}
+
+== Mixed doubles ==
+=== Seeds ===
+{{colbegin}}
+#{{flagicon|THA}} [[Dechapol Puavaranukroh]] / [[Supissara Paewsampran]] ''(group stage)''
+#{{flagicon|CHN}} '''[[Feng Yanzhe]] / [[Huang Dongping]] (champions)'''
+#{{flagicon|MAS}} [[Chen Tang Jie]] / [[Toh Ee Wei]] ''(semi-finals)''
+#{{flagicon|CHN}} [[Jiang Zhenbang]] / [[Wei Yaxin]] ''(final)''
+{{colend}}
+
+=== Group A ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="200" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|CHN}} [[Jiang Zhenbang]]<br />{{flagicon|CHN}} [[Wei Yaxin]] 
+| 3
+| 3
+| 0
+| 6
+| 1
+| +5
+| 142
+| 109
+| +33
+| '''3'''
+| rowspan="2" | Advance to [[#Finals|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|JPN}} [[Hiroki Midorikawa]]<br />{{flagicon|JPN}} [[Natsu Saito]] 
+| 3
+| 2
+| 1
+| 4
+| 3
+| +1
+| 138
+| 130
+| +8
+| '''2'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|FRA}} [[Thom Gicquel]]<br />{{flagicon|FRA}} [[Delphine Delrue]]
+| 3
+| 1
+| 2
+| 4
+| 5
+| –1
+| 161
+| 174
+| –13
+| '''1'''
+| rowspan="2"| Eliminated
+|-style="background:#ffcccc"
+| 4
+| style="text-align:left" | {{flagicon|THA}} [[Dechapol Puavaranukroh]]<br />{{flagicon|THA}} [[Supissara Paewsampran]] 
+| 3
+| 0
+| 3
+| 1
+| 6
+| –5
+| 112
+| 140
+| –28
+| '''0'''
+|}
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right"  | '''[[Jiang Zhenbang]] {{flagicon|CHN}} <br / >[[Wei Yaxin]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|FRA}} [[Thom Gicquel]] <br / >{{flagicon|FRA}} [[Delphine Delrue]]
+| 16–'''21'''
+| '''21'''–16
+| '''21'''–17
+|-
+| style="text-align:right"  | [[Dechapol Puavaranukroh]] {{flagicon|THA}} <br / >[[Supissara Paewsampran]] {{flagicon|THA}}
+| style="text-align:center" | 0–'''2'''
+| style="text-align:left"   | '''{{flagicon|JPN}} [[Hiroki Midorikawa]] <br / >{{flagicon|JPN}} [[Natsu Saito]]'''
+| 19–'''21'''
+| 18–'''21'''
+| 
+|-
+| rowspan="2" | 18 Dec
+| style="text-align:right"  | [[Dechapol Puavaranukroh]] {{flagicon|THA}} <br / >[[Supissara Paewsampran]] {{flagicon|THA}}
+| style="text-align:center" | 1–'''2'''
+| style="text-align:left"   | '''{{flagicon|FRA}} [[Thom Gicquel]] <br / >{{flagicon|FRA}} [[Delphine Delrue]]'''
+| '''21'''–14
+| 14–'''21'''
+| 18–'''21'''
+|-
+| style="text-align:right"  | '''[[Jiang Zhenbang]] {{flagicon|CHN}} <br / >[[Wei Yaxin]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|JPN}} [[Hiroki Midorikawa]] <br / >{{flagicon|JPN}} [[Natsu Saito]]
+| '''21'''–17
+| '''21'''–16
+| 
+|-
+| rowspan="2" | 19 Dec
+| style="text-align:right"  | [[Thom Gicquel]] {{flagicon|FRA}} <br / >[[Delphine Delrue]] {{flagicon|FRA}}
+| style="text-align:center" | 1–'''2'''
+| style="text-align:left"   | '''{{flagicon|JPN}} [[Hiroki Midorikawa]] <br / >{{flagicon|JPN}} [[Natsu Saito]]'''
+| 14–'''21'''
+| '''23'''–21
+| 14–'''21'''
+|-
+| style="text-align:right"  | [[Dechapol Puavaranukroh]] {{flagicon|THA}} <br / >[[Supissara Paewsampran]] {{flagicon|THA}}
+| style="text-align:center" | 0–'''2'''
+| style="text-align:left"   | '''{{flagicon|CHN}} [[Jiang Zhenbang]] <br / >{{flagicon|CHN}} [[Wei Yaxin]]'''
+| 10–'''21'''
+| 12–'''21'''
+| 
+|}
+
+=== Group B ===
+{| class="wikitable" style="font-size:90%; text-align:center"
+! width="20"  | Rank
+! width="200" | Players
+! width="20"  | Pld
+! width="20"  | W
+! width="20"  | L
+! width="20"  | GF
+! width="20"  | GA
+! width="20"  | GD
+! width="20"  | PF
+! width="20"  | PA
+! width="20"  | PD
+! width="20"  | Pts
+! width="20"  | Qualification
+|-style="background:#ccffcc"
+| 1
+| style="text-align:left" | {{flagicon|CHN}} [[Feng Yanzhe]]<br />{{flagicon|CHN}} [[Huang Dongping]] 
+| 3
+| 3
+| 0
+| 6
+| 1
+| +5
+| 155
+| 132
+| +23
+| '''3'''
+| rowspan="2" | Advance to [[#Finals|semi-finals]]
+|-style="background:#ccffcc"
+| 2
+| style="text-align:left" | {{flagicon|MAS}} [[Chen Tang Jie]]<br />{{flagicon|MAS}} [[Toh Ee Wei]] 
+| 3
+| 2
+| 1
+| 4
+| 3
+| +1
+| 143
+| 123
+| +20
+| '''2'''
+|-style="background:#ffcccc"
+| 3
+| style="text-align:left" | {{flagicon|INA}} [[Jafar Hidayatullah]]<br />{{flagicon|INA}} [[Felisha Pasaribu]] 
+| 3
+| 1
+| 2
+| 3
+| 4
+| –1
+| 126
+| 135
+| –9
+| '''1'''
+| rowspan="2"| Eliminated
+|-style="background:#ffcccc"
+| 4
+| style="text-align:left" | {{flagicon|MAS}} [[Goh Soon Huat]]<br />{{flagicon|MAS}} [[Shevon Jemie Lai]] 
+| 3
+| 0
+| 3
+| 1
+| 6
+| –5
+| 116
+| 150
+| –34
+| '''0'''
+|}
+
+{| class="wikitable" style="text-align: center; font-size:90%"
+! width="60"  | Date
+! width="200" | Player 1
+! width="60"  | Score
+! width="200" | Player 2
+! width="50"  | Set 1
+! width="50"  | Set 2
+! width="50"  | Set 3
+|-
+|-
+| rowspan="2" | 17 Dec
+| style="text-align:right"  | '''[[Feng Yanzhe]] {{flagicon|CHN}} <br / >[[Huang Dongping]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|INA}} [[Jafar Hidayatullah]] <br / >{{flagicon|INA}} [[Felisha Pasaribu]]
+| '''21'''–18
+| '''21'''–16
+| 
+|-
+| style="text-align:right"  | '''[[Chen Tang Jie]] {{flagicon|MAS}} <br / >[[Toh Ee Wei]] {{flagicon|MAS}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|MAS}} [[Goh Soon Huat]] <br / >{{flagicon|MAS}} [[Shevon Jemie Lai]]
+| '''21'''–13
+| '''21'''–13
+| 
+|-
+| rowspan="2" | 18 Dec 
+| style="text-align:right"  | '''[[Chen Tang Jie]] {{flagicon|MAS}} <br / >[[Toh Ee Wei]] {{flagicon|MAS}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|INA}} [[Jafar Hidayatullah]] <br / >{{flagicon|INA}} [[Felisha Pasaribu]]
+| 17–'''21'''
+| '''21'''–14
+| '''21'''–15
+|-
+| style="text-align:right"  | '''[[Feng Yanzhe]] {{flagicon|CHN}} <br / >[[Huang Dongping]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–1
+| style="text-align:left"   | {{flagicon|MAS}} [[Goh Soon Huat]] <br / >{{flagicon|MAS}} [[Shevon Jemie Lai]]
+| 23–'''25'''
+| '''21'''–11
+| '''22'''–20
+|-
+| rowspan="2" | 19 Dec
+| style="text-align:right"  | '''[[Feng Yanzhe]] {{flagicon|CHN}} <br / >[[Huang Dongping]] {{flagicon|CHN}}'''
+| style="text-align:center" | '''2'''–0
+| style="text-align:left"   | {{flagicon|MAS}} [[Chen Tang Jie]] <br / >{{flagicon|MAS}} [[Toh Ee Wei]]
+| '''21'''–18
+| '''26'''–24
+| 
+|-
+| style="text-align:right"  | [[Goh Soon Huat]] {{flagicon|MAS}}  <br / >[[Shevon Jemie Lai]] {{flagicon|MAS}}
+| style="text-align:center" | 0–'''2'''
+| style="text-align:left"   | '''{{flagicon|INA}} [[Jafar Hidayatullah]] <br / >{{flagicon|INA}} [[Felisha Pasaribu]]'''
+| 17–'''21'''
+| 17–'''21'''
+| 
+|}
+
+=== Finals ===
+{{4TeamBracket-Tennis3
+| RD-shade     = #A8D3FF
+| RD1=Semi-finals
+| RD2=Final
+| team-width=175
+
+| RD1-seed1= 4
+| RD1-team1='''{{flagicon|CHN}} [[Jiang Zhenbang]]<br />{{flagicon|CHN}} [[Wei Yaxin]]'''
+| RD1-score1-1= 9
+| RD1-score1-2= '''21'''
+| RD1-score1-3= '''21'''
+| RD1-seed2= 3
+| RD1-team2={{flagicon|MAS}} [[Chen Tang Jie]]<br />{{flagicon|MAS}} [[Toh Ee Wei]]
+| RD1-score2-1= '''21'''
+| RD1-score2-2= 11
+| RD1-score2-3= 17
+
+| RD1-seed3=
+| RD1-team3={{flagicon|JPN}} [[Hiroki Midorikawa]]<br />{{flagicon|JPN}} [[Natsu Saito]]
+| RD1-score3-1= 20
+| RD1-score3-2= '''21'''
+| RD1-score3-3= 9
+| RD1-seed4= 2
+| RD1-team4='''{{flagicon|CHN}} [[Feng Yanzhe]]<br />{{flagicon|CHN}} [[Huang Dongping]]'''
+| RD1-score4-1= '''22'''
+| RD1-score4-2= 17
+| RD1-score4-3= '''21'''
+
+| RD2-seed1= 4
+| RD2-team1={{flagicon|CHN}} [[Jiang Zhenbang]]<br />{{flagicon|CHN}} [[Wei Yaxin]]
+| RD2-score1-1= 12
+| RD2-score1-2= 17
+| RD2-score1-3=
+| RD2-seed2= 2
+| RD2-team2='''{{flagicon|CHN}} [[Feng Yanzhe]]<br />{{flagicon|CHN}} [[Huang Dongping]]'''
+| RD2-score2-1= '''21'''
+| RD2-score2-2= '''21'''
+| RD2-score2-3=
+}}
+
+== References ==
+{{Reflist}}
+
+== External links ==
+* [https://bwfworldtour.bwfbadminton.com/tournament/5259/hsbc-bwf-world-tour-finals-2025/overview HSBC BWF World Tour Finals website]
+*[https://bwfworldtourfinals.bwfbadminton.com/results/5259/hsbc-bwf-world-tour-finals-2025 HSBC BWF World Tour Finals website]
+* [https://bwfworldtour.bwfbadminton.com/ HSBC BWF World Tour website]
+
+{{S-start}}
+{{Succession box
+| title = [[2025 BWF World Tour|BWF World Tour]] <br />[[2025 BWF season]]
+| years = 
+| before = [[2025 Odisha Masters]]
+| after = [[2026 Malaysia Open (badminton)|2026 Malaysia Open]]
+}}
+{{S-end}}{{2025 BWF World Tour}}{{BWF World Tour Finals}}
+
+[[Category:2025 BWF World Tour|*BWF World Tour Finals]]
+[[Category:BWF World Tour Finals]]
+[[Category:International sports competitions hosted by China]]
+[[Category:Sport in Hangzhou]]
+[[Category:Badminton tournaments in China|World Tour Finals]]
+[[Category:December 2025 sports events in China|BWF]]

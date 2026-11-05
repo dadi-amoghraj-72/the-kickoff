@@ -11,7 +11,7 @@ import json
 import re
 from datetime import datetime, timedelta, timezone
 
-from kickoff import notes, settings
+from kickoff import chess_live, majors, notes, settings
 from kickoff import render as r
 from kickoff.sources.other_sports import RUGBY_LEAGUES
 
@@ -279,6 +279,18 @@ def run(now, st, source, client=None):
         except Exception:
             stats["failed"] += 1
         stats["failed"] += len(fails)
+    sgt_today = (now + timedelta(hours=8)).date()
+    wiki_fails = []
+    for fn in (lambda: [(sp, t, uid, link, "Wikipedia") for sp, t, uid, link in majors.run(source, sgt_today, wiki_fails)],
+               lambda: [("chess", t, uid, link, "Lichess") for t, uid, link in chess_live.run(source, now)]):
+        try:                                           # the majors from Wikipedia and the chess from Lichess: exact lines, written by code
+            for sp, text, uid, link, label in fn():
+                if uid not in seen:
+                    lines[sp].append(line_html(text, link, label))
+                    seen.append(uid)
+        except Exception:
+            stats["failed"] += 1
+    stats["failed"] += min(len(wiki_fails), 1)         # a page that did not answer, however many events looked at it
     items = []
     try:
         items = source.news()

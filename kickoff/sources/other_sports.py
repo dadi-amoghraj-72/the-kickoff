@@ -50,6 +50,25 @@ class Source:
     def ufc_rankings(self):
         return self._json(SITE + "mma/ufc/rankings")
 
+    def wikitext(self, title):
+        """A Wikipedia page's wikitext ('' when missing): the majors of the sports without a feed (kickoff.majors). Two seconds between pages keeps Wikipedia's rate limit happy."""
+        if not hasattr(self, "_wiki"):
+            from kickoff.sources import wikipedia
+            self._wiki = wikipedia.Source(pause=2.0)
+        self.calls += 1
+        return self._wiki.wikitext(title)
+
+    def top(self):
+        """Lichess's broadcast list: the active and the recently finished events with their latest round."""
+        return self._json("https://lichess.org/api/broadcast/top")
+
+    def tour(self, tour_id):
+        return self._json(f"https://lichess.org/api/broadcast/{tour_id}")
+
+    def round_pgn(self, round_id):
+        self.calls += 1
+        return http.get_bytes(f"https://lichess.org/api/broadcast/round/{round_id}.pgn").decode("utf-8", "replace")
+
     def news(self):
         """Every item of every feed that answers, newest first (headline, blurb, link, source, time)."""
         self.calls += len(FEEDS)

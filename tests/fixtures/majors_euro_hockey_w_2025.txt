@@ -1,0 +1,552 @@
+{{Short description|International field hockey competition}}
+{{Infobox field hockey
+| tournament = 2025 Women's EuroHockey Championship
+| other_titles = 
+| image = 
+| size = 
+| caption = 
+| country = Germany
+| city = [[Mönchengladbach]]
+| dates = 9–17 August
+| venues = [[Warsteiner HockeyPark]]
+| teams = 8
+| confederations = 1
+| champions = {{fhw|NED}}
+| count = 13
+| second = {{fhw|GER}}
+| third = {{fhw|ESP}}
+| matches = 20
+| goals = 64
+| top_scorer = {{fhwicon|NED}} [[Yibbi Jansen]]
+| top_scorer_goals = 6
+| best_player = {{fhwicon|NED}} Yibbi Jansen
+| young_player = {{fhwicon|BEL}} [[Camille Belis]]
+| goalkeeper = {{fhwicon|ESP}} [[Clara Pérez]]
+| previous_year = 2023
+| previous_tournament = 2023 Women's EuroHockey Championship
+| next_year = 2027
+| next_tournament = 2027 Women's EuroHockey Championship
+}}
+The '''2025 Women's EuroHockey Championship''' was the 17th edition of the [[Women's EuroHockey Championship]], the biennial international women's [[field hockey]] championship of [[Europe]] organised by the [[European Hockey Federation]].
+
+The tournament was held alongside the [[2025 Men's EuroHockey Championship|men's tournament]] at the [[Warsteiner HockeyPark]] in [[Mönchengladbach]], Germany from 9 to 17 August 2025.<ref>{{cite web |title=Mönchengladbach to welcome 2025 EuroHockey Championships |url=https://eurohockey.org/monchengladbach-to-welcome-2025-eurohockey-championships |website=eurohockey.org |publisher=[[European Hockey Federation]] |access-date=8 March 2024 |date=8 March 2024}}</ref><ref>{{cite web |title=EK hockey in 2025 opnieuw in Mönchengladbach |url=https://nieuws.nl/sport/20240308/ek-hockey-in-2025-opnieuw-in-monchengladbach/ |website=nieuws.nl |access-date=8 March 2024 |language=nl |date=8 March 2024}}</ref> It was the third time Mönchengladbach hosted the event.
+
+The [[Netherlands women's national field hockey team|Netherlands]] were the four-time defending champions and won their 13th title with a win over Germany.<ref>{{cite web |title=Hockeysters voor vierde keer op rij Europees kampioen: winst op getergd België |url=https://nos.nl/collectie/13946/artikel/2488087-hockeysters-voor-vierde-keer-op-rij-europees-kampioen-winst-op-getergd-belgie |website=nos.nl |publisher=[[Nederlandse Omroep Stichting|NOS]] |access-date=5 December 2023 |language=nl |date=26 August 2023}}</ref> The winner would qualify for the [[2026 Women's FIH Hockey World Cup]] to be held in [[Wavre]], Belgium and [[Amstelveen]], Netherlands.<ref name="FIHWorldCup2026">{{cite web |title=Qualification System for 2026 FIH Hockey World Cups |url=https://www.fih.hockey/static-assets/pdf/qualification-system-for-2026-fih-hockey-world-cups-final.pdf |website=fih.ch |publisher=[[International Hockey Federation]]}}</ref> As the Netherlands won this tournament, Spain qualified.
+
+==Qualification==
+The top six team from the [[2023 Women's EuroHockey Championship|2023 edition]] have qualified directly for this edition of the tournament.<ref>{{cite web |title=Ireland's women and Spain's men preserve top level status for 2025 |url=https://eurohockey.org/irelands-women-and-spains-men-preserve-top-level-status-for-2025}}</ref> The last two teams will be the winners of the two sets of EuroHockey Qualifiers taking place in [[Glasgow]], Scotland and [[Douai]], France in August 2024.<ref>{{cite web |title=EURO B : les poules des qualificatifs |url=https://okey.lalibre.be/euro-b-les-poules-des-qualificatifs/ |website=okey.lalibre.be |access-date=28 September 2023 |language=fr |date=28 September 2023}}</ref><ref>{{cite web |title=EuroHockey Qualifiers 2024 venues announced |url=https://eurohockey.org/eurohockey-qualifiers-2024 |access-date=28 September 2023}}</ref>
+
+===Qualified teams===
+{|class=wikitable
+!Dates
+!Event
+!Location
+!Quotas
+!Qualifiers
+|-
+|18–26 August 2023
+|[[2023 Women's EuroHockey Championship|2023 EuroHockey Championship]]
+|[[Mönchengladbach]], Germany
+|style="align: center;" | 6
+|{{fhw|NED}}<br />{{fhw|BEL}}<br />{{fhw|GER}}<br />{{fhw|ENG}}<br />{{fhw|IRE}}<br />{{fhw|ESP}}
+|-
+|rowspan="2" | 22–25 August 2024
+|rowspan="2" | [[2025 Women's EuroHockey Championship Qualifiers|EuroHockey Championship Qualifiers]]
+|[[Douai]], France
+|style="align: center;" | 1
+|{{fhw|FRA}}
+|-
+|[[Glasgow]], Scotland
+|style="align: center;" | 1
+|{{fhw|SCO}}
+|-
+!colspan="3" | Total
+!8
+!
+|}
+
+==Squads==
+{{Main|2025 Women's EuroHockey Championship squads}}
+
+==Draw==
+The draw will be held shortly after the [[2025 Men's EuroHockey Championship Qualifiers|EuroHockey Championship Qualifiers]] events are played.<ref>{{Cite web|url=https://ehks-production.s3.eu-west-2.amazonaws.com/outdoor-appendix-a-championships-senior-u21-6t0U8z5gv2XCw0QKb0N.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAZBTHRICCZMSC2HFL%2F20240823%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240823T070423Z&X-Amz-Expires=360000&X-Amz-Signature=b92bf63f36abc6c469500dd2ad03ab106b89241db33f3c476b403a71943a57de&X-Amz-SignedHeaders=host&x-id=GetObject|title=REGULATIONS FOR EUROHOCKEY CHAMPIONSHIPS (OUTDOOR) SENIOR AND U21 CHAMPIONSHIPS (MEN AND WOMEN)|publisher=[[European Hockey Federation|EHF]]|website=eurohockey.org|date=March 2024}}</ref>
+===Seeding===
+{| class="wikitable"
+|-
+! style="width: 25%;" | Pot 1
+! style="width: 25%;" | Pot 2
+! style="width: 25%;" | Pot 3
+! style="width: 25%;" | Pot 4
+|- style="vertical-align: top;"
+|{{plainlist|
+* {{fhw|NED}}
+* {{fhw|BEL}}
+}}
+|{{plainlist|
+* {{fhw|GER}}
+* {{fhw|ENG}}
+}}
+|{{plainlist|
+* {{fhw|ESP}}
+* {{fhw|IRE}}
+}}
+|{{plainlist|
+* {{fhw|SCO}}
+* {{fhw|FRA}}
+}}
+|}
+
+==Preliminary round==
+The pools were announced on 12 September 2024.<ref>{{cite web |title=EHC2025 set for huge battles as group stages confirmed|url=https://eurohockey.org/ehc2025-set-for-huge-battles-as-group-stages-confirmed-2|website=eurohockey.org |publisher=[[European Hockey Federation]] |access-date=12 September 2024 |date=12 September 2024}}</ref>
+
+===Pool A===
+<section begin="Pool A"/>{{#invoke:Sports table|main|style=WDL
+|update=complete
+|source=[https://tms.fih.ch/competitions/1711/reports/poolstandings FIH]
+
+|team_order=NED, GER, FRA, IRE
+
+|win_FRA=1 |draw_FRA=0 |loss_FRA=2 |gf_FRA= 2 |ga_FRA=10
+|win_IRE=0 |draw_IRE=1 |loss_IRE=2 |gf_IRE= 0 |ga_IRE=3
+|win_GER=1 |draw_GER=1 |loss_GER=1 |gf_GER= 5 |ga_GER=6 |status_GER=H
+|win_NED=3 |draw_NED=0 |loss_NED=0 |gf_NED=13 |ga_NED=1
+
+|name_FRA={{fhw|FRA}}
+|name_IRE={{fhw|IRE}}
+|name_GER={{fhw|GER}}
+|name_NED={{fhw|NED}}
+
+|class_rules = 1) points; 2) matches won; 3) goal difference; 4) goals for; 5) head-to-head result; 6) field goals for.<ref name="Regulations2">{{cite web|url=https://www.fih.ch/media/8997723/fih-general-tournament-regulations-current-update.pdf|title=FIH General Tournament Regulations May 2022|publisher=[[International Hockey Federation]]|accessdate=12 February 2023}}</ref>
+
+|result1=SF |result2=SF
+
+|res_col_header=Q
+|col_SF=green1 |text_SF=[[#First to fourth place classification|Semi-finals]]
+}}<section end="Pool A"/>
+
+{{Fieldhockeybox
+|date=9 August 2025
+|time=15:30
+|team1={{fhw-rt|NED}}
+|score=2–0
+|team2={{fhw|IRE}}
+|report=[https://tms.fih.ch/matches/20513/reports/matchreport Report]
+|goals1=[[Joosje Burg|Burg]] {{fhgoal|FG|9}}<br />[[Yibbi Jansen|Jansen]] {{fhgoal|PC|37}}
+|goals2=
+|umpires=[[Laurine Delforge]] (BEL)<br />Magali Sergeant (BEL)
+}}
+{{Fieldhockeybox
+|date=9 August 2025
+|time=18:00
+|team1={{fhw-rt|GER}}
+|score=4–1
+|team2={{fhw|FRA}}
+|report=[https://tms.fih.ch/matches/20514/reports/matchreport Report]
+|goals1=[[Sara Strauss|Strauss]] {{fhgoal|FG|13}}<br />[[Sophia Schwabe|Schwabe]] {{fhgoal|FG|15|PC|24}}<br />[[Lena Micheel|Micheel]] {{fhgoal|PC|22}}
+|goals2=[[Eve Verzura|Verzura]] {{fhgoal|PC|43}}
+|umpires=Rebecca Edwards (ENG)<br />Sandra Adell (ESP)
+}}
+----
+{{Fieldhockeybox
+|date=11 August 2025
+|time=15:45
+|team1={{fhw-rt|IRE}}
+|score=0–1
+|team2={{fhw|FRA}}
+|report=[https://tms.fih.ch/matches/20518/reports/matchreport Report]
+|goals1=
+|goals2=[[Mathilde Duffrène|Duffrène]] {{fhgoal|PC|49}}
+|umpires=Sophie Bockelmann (GER)<br />Tim Meissner (GER)
+}}
+{{Fieldhockeybox
+|date=11 August 2025
+|time=20:30
+|team1={{fhw-rt|GER}}
+|score=1–5
+|team2={{fhw|NED}}
+|report=[https://tms.fih.ch/matches/20520/reports/matchreport Report]
+|goals1=[[Lena Micheel|Micheel]] {{fhgoal|PC|19}}
+|goals2=[[Freeke Moes|Moes]] {{fhgoal|FG|1}}<br />[[Frédérique Matla|Matla]] {{fhgoal|FG|10}}<br />[[Pien Sanders|Sanders]] {{fhgoal|FG|13|FG|24}}<br />[[Marijn Veen|Veen]] {{fhgoal|FG|54}}
+|umpires=Rachel Williams (ENG)<br />Ivona Makar (CRO)
+}}
+----
+{{Fieldhockeybox
+|date=13 August 2025
+|time=17:30
+|team1={{fhw-rt|NED}}
+|score=6–0
+|team2={{fhw|FRA}}
+|report=[https://tms.fih.ch/matches/20523/reports/matchreport Report]
+|goals1=[[Marijn Veen|Veen]] {{fhgoal|FG|11}}<br />[[Yibbi Jansen|Jansen]] {{fhgoal|PC|16|PC|34}}<br />[[Frédérique Matla|Matla]] {{fhgoal|PS|20|PS|25}}<br />[[Luna Fokke|Fokke]] {{fhgoal|PC|44}}
+|goals2=
+|umpires=Paul Walker (ENG)<br />Magali Sergeant (BEL)
+}}
+{{Fieldhockeybox
+|date=13 August 2025
+|time=20:00
+|team1={{fhw-rt|IRE}}
+|score=0–0
+|team2={{fhw|GER}}
+|report=[https://tms.fih.ch/matches/20524/reports/matchreport Report]
+|goals1=
+|goals2=
+|umpires=Sébastien Michielsen (BEL)<br />Alex Fedenczuk (SCO)
+}}
+
+===Pool B===
+<section begin="Pool B"/>{{#invoke:Sports table|main|style=WDL
+|update=complete
+|source=[https://tms.fih.ch/competitions/1711/reports/poolstandings FIH]
+
+|team_order=BEL, ESP, ENG, SCO
+
+|win_BEL=2 |draw_BEL=1 |loss_BEL=0 |gf_BEL=9 |ga_BEL=2
+|win_ENG=1 |draw_ENG=0 |loss_ENG=2 |gf_ENG=4 |ga_ENG=4
+|win_SCO=0 |draw_SCO=1 |loss_SCO=2 |gf_SCO=1 |ga_SCO=9
+|win_ESP=1 |draw_ESP=2 |loss_ESP=0 |gf_ESP=5 |ga_ESP=4
+
+|name_BEL={{fhw|BEL}}
+|name_ENG={{fhw|ENG}}
+|name_SCO={{fhw|SCO}}
+|name_ESP={{fhw|ESP}}
+
+|class_rules = 1) points; 2) matches won; 3) goal difference; 4) goals for; 5) head-to-head result; 6) field goals for.<ref name="Regulations2">{{cite web|url=https://www.fih.ch/media/8997723/fih-general-tournament-regulations-current-update.pdf|title=FIH General Tournament Regulations May 2022|publisher=[[International Hockey Federation]]|accessdate=12 February 2023}}</ref>
+
+|result1=SF |result2=SF
+
+|res_col_header=Q
+|col_SF=green1 |text_SF=[[#First to fourth place classification|Semi-finals]]
+}}<section end="Pool B"/>
+
+{{Fieldhockeybox
+|date=10 August 2025
+|time=10:15
+|team1={{fhw-rt|ENG}}
+|score=3–0
+|team2={{fhw|SCO}}
+|report=[https://tms.fih.ch/matches/20515/reports/matchreport Report]
+|goals1=[[Fiona Crackles|Crackles]] {{fhgoal|FG|12}}<br />[[Lily Walker|Walker]] {{fhgoal|FG|16}}<br />[[Lily Owsley|Owsley]] {{fhgoal|PC|52}}
+|goals2=
+|umpires=Ivona Makar (CRO)<br />Lorijn de Kraker (NED)
+}}
+{{Fieldhockeybox
+|date=10 August 2025
+|time=12:30
+|team1={{fhw-rt|BEL}}
+|score=2–2
+|team2={{fhw|ESP}}
+|report=[https://tms.fih.ch/matches/20516/reports/matchreport Report]
+|goals1=[[Stéphanie Vanden Borre|Vanden Borre]] {{fhgoal|PC|26|PS|51}}
+|goals2=[[Patricia Álvarez|Álvarez]] {{fhgoal|FG|19}}<br />[[Sara Barrios|Barrios]] {{fhgoal|FG|43}}
+|umpires=Marcin Grochal (POL)<br />Sophie Bockelmann (GER)
+}}
+----
+{{Fieldhockeybox
+|date=11 August 2025
+|time=13:30
+|team1={{fhw-rt|ESP}}
+|score=1–1
+|team2={{fhw|SCO}}
+|report=[https://tms.fih.ch/matches/20517/reports/matchreport Report]
+|goals1=[[Lucía Jiménez Vicente|L. Jiménez]] {{fhgoal|FG|12}}
+|goals2=[[Heather McEwan|McEwan]] {{fhgoal|FG|56}}
+|umpires=Coen van Bunge (NED)<br />Shane O'Donell (IRL)
+}}
+{{Fieldhockeybox
+|date=11 August 2025
+|time=18:00
+|team1={{fhw-rt|ENG}}
+|score=0–2
+|team2={{fhw|BEL}}
+|report=[https://tms.fih.ch/matches/20519/reports/matchreport Report]
+|goals1=
+|goals2=[[Louise Dewaet|Dewaet]] {{fhgoal|FG|13}}<br />[[Lisa Moors|Moors]] {{fhgoal|FG|50}}
+|umpires=Lorijn de Kraker (NED)<br />Sandra Adell (ESP)
+}}
+----
+{{Fieldhockeybox
+|date=13 August 2025
+|time=10:00
+|team1={{fhw-rt|ESP}}
+|score=2–1
+|team2={{fhw|ENG}}
+|report=[https://tms.fih.ch/matches/20521/reports/matchreport Report]
+|goals1=[[Luciana Molina|Molina]] {{fhgoal|FG|10}}<br />[[Lucía Jiménez Vicente|L. Jiménez]] {{fhgoal|FG|36}}
+|goals2=[[Tess Howard|Howard]] {{fhgoal|FG|12}}
+|umpires=[[Laurine Delforge]] (BEL)<br />Alison Keogh (IRL)
+}}
+{{Fieldhockeybox
+|date=13 August 2025
+|time=12:15
+|team1={{fhw-rt|BEL}}
+|score=5–0
+|team2={{fhw|SCO}}
+|report=[https://tms.fih.ch/matches/20522/reports/matchreport Report]
+|goals1=[[Ambre Ballenghien|Ballenghien]] {{fhgoal|FG|1|PC|18}}<br />[[Justine Rasir|Rasir]] {{fhgoal|FG|27}}<br />[[Stéphanie Vanden Borre|Vanden Borre]] {{fhgoal|PS|31}}<br />[[Astrid Bonami|Bonami]] {{fhgoal|PC|37}}
+|goals2=
+|umpires=Ben Göntgen (GER)<br />Rebecca Edwards (ENG)
+}}
+
+==Fifth to eighth place classification==
+===Pool C===
+The points obtained in the preliminary round against the other team were carried over.
+
+{{#invoke:Sports table|main|style=WDL
+|update=complete
+|source=[https://tms.fih.ch/competitions/1711/reports/poolstandings FIH]
+
+|team_order=ENG, SCO, FRA, IRE
+
+|win_FRA=1 |draw_FRA=0 |loss_FRA=2 |gf_FRA=2 |ga_FRA=7
+|win_ENG=3 |draw_ENG=0 |loss_ENG=0 |gf_ENG=10|ga_ENG=2
+|win_IRE=0 |draw_IRE=0 |loss_IRE=3 |gf_IRE=3 |ga_IRE=6
+|win_SCO=2 |draw_SCO=0 |loss_SCO=1 |gf_SCO=5 |ga_SCO=5
+
+|name_FRA={{fhw|FRA}}
+|name_ENG={{fhw|ENG}}
+|name_IRE={{fhw|IRE}}
+|name_SCO={{fhw|SCO}}
+
+|class_rules = 1) points; 2) matches won; 3) goal difference; 4) goals for; 5) head-to-head result; 6) field goals for.<ref name="Regulations2" />
+}}
+
+{{Fieldhockeybox
+|date=15 August 2025
+|time=12:30
+|team1={{fhw-rt|IRE}}
+|score=2–3
+|team2={{fhw|SCO}}
+|report=[https://tms.fih.ch/matches/20525/reports/matchreport Report]
+|goals1=[[Róisín Upton|Upton]] {{fhgoal|PS|35}}<br />[[Katie Mullan|Mullan]] {{fhgoal|FG|51}}
+|goals2=[[Charlotte Watson|Watson]] {{fhgoal|PS|49}}<br />[[Amy Costello|Costello]] {{fhgoal|PC|52}}<br />[[Heather McEwan|McEwan]] {{fhgoal|FG|54}}
+|umpires=Rachel Williams (ENG)<br />Rebecca Edwards (ENG)
+}}
+{{Fieldhockeybox
+|date=15 August 2025
+|time=14:45
+|team1={{fhw-rt|FRA}}
+|score=1–5
+|team2={{fhw|ENG}}
+|report=[https://tms.fih.ch/matches/20526/reports/matchreport Report]
+|goals1=[[Yohanna Lhopital|Lhopital]] {{fhgoal|FG|32}}
+|goals2=[[Grace Balsdon|Balsdon]] {{fhgoal|PC|7|PC|7}}<br />[[Ellie Rayer|Rayer]] {{fhgoal|FG|19|FG|53}}<br />[[Lily Owsley|Owsley]] {{fhgoal|PC|49}}
+|umpires=Sophie Bockelmann (GER)<br />Sandra Adell (ESP)
+}}
+----
+{{Fieldhockeybox
+|date=17 August 2025
+|time=09:30
+|team1={{fhw-rt|ENG}}
+|score=2–1
+|team2={{fhw|IRE}}
+|report=[https://tms.fih.ch/matches/20529/reports/matchreport Report]
+|goals1=[[Tess Howard|Howard]] {{fhgoal|FG|16}}<br />[[Darcy Bourne|Bourne]] {{fhgoal|FG|31}}
+|goals2=[[Katie Mullan|Mullan]] {{fhgoal|FG|23}}
+|umpires=Ivona Makar (CRO)<br />Sandra Adell (ESP)
+}}
+{{Fieldhockeybox
+|date=17 August 2025
+|time=11:45
+|team1={{fhw-rt|FRA}}
+|score=0–2
+|team2={{fhw|SCO}}
+|report=[https://tms.fih.ch/matches/20530/reports/matchreport Report]
+|goals1=
+|goals2=[[Sarah Robertson (field hockey)|Robertson]] {{fhgoal|PC|34}}<br />[[Amy Costello|Costello]] {{fhgoal|PC|41}}
+|umpires=Ben Göntgen (GER)<br />Sophie Bockelmann (GER)
+}}
+
+==First to fourth place classification==
+===Bracket===
+<section begin="Bracket"/>{{#invoke:RoundN|N4
+|widescore=yes|bold_winner=high
+|3rdplace=yes
+<!--Date|Team 1|Score 1|Team 2|Score 2 -->
+<!--semi-finals -->
+|15 August|{{fhw|NED}}|3|{{fhw|ESP}}|1
+|15 August|{{fhw|BEL}}|1 (2)|{{fhw|GER}} ([[Penalty shoot-out (field hockey)|p.s.o.]])|1 (3)
+<!--final -->
+|17 August|{{fhw|NED}}|2|{{fhw|GER}}|1
+<!--third place -->
+|17 August|{{fhw|ESP}} ([[Penalty shoot-out (field hockey)|p.s.o.]])|0 (2)|{{fhw|BEL}}|0 (1)
+}}<section end="Bracket"/>
+
+===Semifinals===
+{{Fieldhockeybox
+|date=15 August 2025
+|time=17:00
+|team1={{fhw-rt|NED}}
+|score=3–1
+|team2={{fhw|ESP}}
+|report=[https://tms.fih.ch/matches/20527/reports/matchreport Report]
+|goals1=[[Yibbi Jansen|Jansen]] {{fhgoal|PC|22|PC|26|PC|49}}
+|goals2=[[Patricia Álvarez|Álvarez]] {{fhgoal|FG|5}}
+|umpires=Marcin Grochal (POL)<br />Sébastien Michielsen (BEL)
+}}
+----
+{{Fieldhockeybox
+|date=15 August 2025
+|time=20:00
+|team1={{fhw-rt|BEL}}
+|score=1–1
+|team2={{fhw|GER}}
+|report=[https://tms.fih.ch/matches/20528/reports/matchreport Report]
+|goals1=[[Alix Gerniers|Gerniers]] {{fhgoal|PC|51}}
+|goals2=[[Ines Wanner|Wanner]] {{fhgoal|PC|3}}
+|penalties1=[[Charlotte Englebert|Englebert]] {{fhps|g}}<br />[[Ambre Ballenghien|Ballenghien]] {{fhps|m}}<br />[[Justine Rasir|Rasir]] {{fhps|g}}<br />[[Astrid Bonami|Bonami]] {{fhps|m}}<br />[[Delphine Marien|Marien]] {{fhps|m}}
+|penaltyscore=2–3
+|penalties2={{fhps|g}} [[Sophia Schwabe|Schwabe]]<br />{{fhps|g}} [[Jette Fleschütz|Fleschütz]]<br />{{fhps|m}} [[Sara Strauss|Strauss]]<br />{{fhps|g}} [[Lena Micheel|Micheel]]
+|umpires=Paul Walker (ENG)<br />Lorijn de Kraker (NED)
+}}
+
+===Third place game===
+{{Fieldhockeybox
+|date=17 August 2025
+|time=14:30
+|team1={{fhw-rt|ESP}}
+|score=0–0
+|team2={{fhw|BEL}}
+|report=[https://tms.fih.ch/matches/20531/reports/matchreport Report]
+|goals1=
+|goals2=
+|umpires=Rebecca Edwards (ENG)<br />Lorijn de Kraker (NED)
+|penalties1=[[Marta Segú|Segú]] {{fhps|m}}<br />[[Paula Jiménez|P. Jiménez]] {{fhps|m}}<br />[[Laia Vidosa|Vidosa]] {{fhps|g}}<br />[[Lucía Jiménez Vicente|L. Jiménez]] {{fhps|m}}<br />[[Berta Agulló|Agulló]] {{fhps|m}}<br />[[Lucía Jiménez Vicente|L. Jiménez]] {{fhps|m}}<br />[[Paula Jiménez|P. Jiménez]] {{fhps|g}}
+|penaltyscore=2–1
+|penalties2={{fhps|m}} [[Stéphanie Vanden Borre|Vanden Borre]]<br />{{fhps|g}} [[Ambre Ballenghien|Ballenghien]]<br />{{fhps|m}} [[Camille Belis|Belis]]<br />{{fhps|m}} [[Stéphanie Vanden Borre|Vanden Borre]]<br />{{fhps|m}} [[Judith Vandermeiren|Vandermeiren]]<br />{{fhps|m}} [[Justine Rasir|Rasir]]<br />{{fhps|m}} [[Ambre Ballenghien|Ballenghien]]
+}}
+
+===Final===
+{{Fieldhockeybox
+|date=17 August 2025
+|time=17:00
+|team1={{fhw-rt|NED}}
+|score=2–1
+|team2={{fhw|GER}}
+|report=[https://tms.fih.ch/matches/20532/reports/matchreport Report]
+|goals1=[[Pien Dicke|Dicke]] {{fhgoal|FG|5}}<br />[[Luna Fokke|Fokke]] {{fhgoal|FG|18}}
+|goals2=[[Lisa Nolte|Nolte]] {{fhgoal|PC|35}}
+|umpires=Rachel Williams (ENG)<br />Magali Sergeant (BEL)
+}}
+
+==Statistics and awards==
+===Final standings===
+<section begin="Ranking"/>{{#invoke:Sports table|main|style=Custom
+|update=complete
+|source=[https://tms.fih.ch/competitions/1711/reports/poolstandings FIH]
+|num_cols=0
+
+|team_order=NED, GER, ESP, BEL, ENG, SCO, FRA, IRE
+
+|status_GER=H
+
+|name_NED={{fhw|NED}}
+|name_GER={{fhw|GER}}
+|name_ESP={{fhw|ESP}}
+|name_BEL={{fhw|BEL}}
+|name_ENG={{fhw|ENG}}
+|name_SCO={{fhw|SCO}}
+|name_FRA={{fhw|FRA}}
+|name_IRE={{fhw|IRE}}
+
+|pos_NED={{Gold1}}
+|pos_GER={{Silver2}}
+|pos_ESP={{Bronze3}}
+
+|result3=Q |result5=WCQ |result6=WCQ |result7=WCQ |result8=WCQ
+
+|note_BEL=Belgium and the Netherlands are already qualified for the [[2026 Women's FIH Hockey World Cup|2026 FIH Hockey World Cup]] as hosts.
+|note_NED=BEL
+|note_GER=Germany is already qualified for the 2026 FIH Hockey World Cup as the highest placed nation of the [[2023–24 Women's FIH Pro League|2023–24 FIH Pro League]].
+
+|res_col_header=Q
+|col_Q=green1 |text_Q=[[2026 Women's FIH Hockey World Cup|2026 FIH Hockey World Cup]]
+|col_WCQ=blue1  |text_WCQ=[[2026 Women's FIH Hockey World Cup Qualifiers|2026 World Cup Qualifiers]]
+}}<section end="Ranking"/>
+
+===Goalscorers===
+{{Goalscorers
+|goals=64|matches=20
+|source=[https://tms.fih.ch/competitions/1711/reports/scorers FIH]
+|updated=complete
+
+|6 goals=
+*{{fhwicon|NED}} [[Yibbi Jansen]]
+
+|3 goals=
+*{{fhwicon|BEL}} [[Stéphanie Vanden Borre]]
+*{{fhwicon|NED}} [[Frédérique Matla]]
+
+|2 goals=
+*{{fhwicon|BEL}} [[Ambre Ballenghien]]
+*{{fhwicon|ENG}} [[Grace Balsdon]]
+*{{fhwicon|ENG}} [[Tess Howard]]
+*{{fhwicon|ENG}} [[Lily Owsley]]
+*{{fhwicon|ENG}} [[Ellie Rayer]]
+*{{fhwicon|GER}} [[Lena Micheel]]
+*{{fhwicon|GER}} [[Sophia Schwabe]]
+*{{fhwicon|IRE}} [[Katie Mullan]]
+*{{fhwicon|NED}} [[Luna Fokke]]
+*{{fhwicon|NED}} [[Pien Sanders]]
+*{{fhwicon|NED}} [[Marijn Veen]]
+*{{fhwicon|SCO}} [[Amy Costello]]
+*{{fhwicon|SCO}} [[Heather McEwan]]
+*{{fhwicon|ESP}} [[Patricia Álvarez]]
+*{{fhwicon|ESP}} [[Lucía Jiménez Vicente]]
+
+|1 goal=
+*{{fhwicon|BEL}} [[Astrid Bonami]]
+*{{fhwicon|BEL}} [[Louise Dewaet]]
+*{{fhwicon|BEL}} [[Alix Gerniers]]
+*{{fhwicon|BEL}} [[Lisa Moors]]
+*{{fhwicon|BEL}} [[Justine Rasir]]
+*{{fhwicon|ENG}} [[Darcy Bourne]]
+*{{fhwicon|ENG}} [[Fiona Crackles]]
+*{{fhwicon|ENG}} [[Lily Walker]]
+*{{fhwicon|FRA}} [[Mathilde Duffrène]]
+*{{fhwicon|FRA}} [[Yohanna Lhopital]]
+*{{fhwicon|FRA}} [[Eve Verzura]]
+*{{fhwicon|GER}} [[Lisa Nolte]]
+*{{fhwicon|GER}} [[Sara Strauss]]
+*{{fhwicon|GER}} [[Ines Wanner]]
+*{{fhwicon|IRE}} [[Róisín Upton]]
+*{{fhwicon|NED}} [[Joosje Burg]]
+*{{fhwicon|NED}} [[Pien Dicke]]
+*{{fhwicon|NED}} [[Freeke Moes]]
+*{{fhwicon|SCO}} [[Sarah Robertson (field hockey)|Sarah Robertson]]
+*{{fhwicon|SCO}} [[Charlotte Watson]]
+*{{fhwicon|ESP}} [[Sara Barrios]]
+*{{fhwicon|ESP}} [[Luciana Molina]]
+}}
+
+===Awards===
+The following awards were given at the conclusion of the tournament.<ref>{{cite web |title=Netherlands complete unmatched five women’s EHC titles in a row|url=https://eurohockey.org/netherlands-complete-unmatched-five-womens-ehc-titles-in-a-row|date=17 August 2025|publisher=eurohockey.org}}</ref>
+
+{| class="wikitable"
+|-
+! Award !! Player
+|-
+| Player of the tournament || {{fhwicon|NED}} [[Yibbi Jansen]]
+|-
+| Goalkeeper of the tournament || {{fhwicon|ESP}} [[Clara Pérez]]
+|-
+| Young player of the tournament || {{fhwicon|BEL}} [[Camille Belis]]
+|}
+
+==See also==
+* [[2025 Men's EuroHockey Championship]]
+
+==References==
+{{reflist}}
+
+{{Women's EuroHockey Championship}}
+{{European championships in 2025}}
+
+[[Category:2025 Women's EuroHockey Championship| ]]
+[[Category:Women's EuroHockey Nations Championship]]
+[[Category:2025–26 in European women's field hockey|Championship]]
+[[Category:2025 in German sport|EuroHockey Championship]]
+[[Category:Women's international field hockey competitions hosted by Germany]]
+[[Category:August 2025 sports events in Germany|EuroHockey Championship]]
+[[Category:Sport in Mönchengladbach]]
+[[Category:21st century in Mönchengladbach]]
+[[Category:2026 Women's FIH Hockey World Cup qualification|EuroHockey Championship]]
