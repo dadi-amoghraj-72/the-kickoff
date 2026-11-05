@@ -4,7 +4,7 @@
   add --publish to put it at https://dadi-amoghraj-72.github.io/the-kickoff/demo/packed-weekend.html, --no-open to skip opening it.
 
 Each section is the real code's output for a real saved day of its sport, so the layout is the real layout, but the days differ (it is a collage, not one real morning):
-  The Big Stuff, On Today, Games To Watch   the heavy Monday of scripts/preview_bigstuff.py
+  The Big Stuff, On Today, In The Week Ahead   the heavy Monday of scripts/preview_bigstuff.py
   Arsenal, Football                          the Champions League night of 21 October 2026 (live ESPN history)
   Cricket                                    the saved NZ v India series and the other matches of scripts/preview_cricket.py
   NBA                                        the weekend of 31 October and 1 November
@@ -40,7 +40,7 @@ SGT = ZoneInfo("Asia/Singapore")
 
 
 def packed_today():
-    """On Today and Games To Watch for a Monday 9 November, 7:15am Singapore time, with a game of every kind: under way (two Tests on a day count), UFC's main event, a badminton finals day, a golf start."""
+    """On Today and In The Week Ahead for a Monday 9 November, 7:15am Singapore time, with a game of every kind: under way (two Tests on a day count), UFC's main event, a badminton finals day, a golf start."""
     at = lambda d, h, m=0: datetime(2026, 11, d, h, m, tzinfo=SGT).astimezone(timezone.utc)  # noqa: E731
     now = at(9, 7, 15)
     f = lambda sport, text, when, stage="regular", mine=False, flags=(), score=None: fixtures.fixture(sport, sport, text, when, score if score is not None else importance.story_score(sport, stage, mine), mine, stage, flags)  # noqa: E731

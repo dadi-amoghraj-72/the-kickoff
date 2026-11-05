@@ -20,7 +20,7 @@ def make_dummy(iso_date, lead=None, promoted=("f1",)):
             r.on_today([("up", "5:30pm", "Placeholder: a Premier League early kick-off."),
                         ("up", "8:00pm", "Placeholder: a Champions League match."),
                         ("overnight", "2:00am", "Placeholder: an NBA game, results in tomorrow's edition.")])
-            + "<h3>Games To Watch This Week</h3><p>Mondays carry the week's big games, with every time in Singapore time. "
+            + "<h3>In The Week Ahead</h3><p>Mondays carry the week's big games, with every time in Singapore time. "
             + "This is a placeholder for the picks.</p>"},
         "arsenal": {"title": "Arsenal", "html":
             "<p><strong>Placeholder result.</strong> Scorers, injuries, next fixture and news go here. " + LONG + "</p>"

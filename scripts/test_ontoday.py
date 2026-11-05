@@ -1,4 +1,4 @@
-"""Tests for On Today and Games to Watch: which upcoming games matter, the sun/moon split in Singapore time and the Monday week. Run: .venv/bin/python scripts/test_ontoday.py"""
+"""Tests for On Today and In The Week Ahead: which upcoming games matter, the sun/moon split in Singapore time and the Monday week. Run: .venv/bin/python scripts/test_ontoday.py"""
 import copy
 import json
 import sys
@@ -170,7 +170,7 @@ class _G(Fake):  # noqa: E302
         return _gb if tour == "pga" else {"events": []}
 got, _ = fixtures.collect(_G(), utc(2025, 4, 7, 0, 0), utc(2025, 4, 14, 0, 0), 0)
 gf = [f for f in got if f["sport"] == "golf"]
-check("golf: the Masters' start is a fixture for the week (Games to Watch), the day only, no time zone label", len(gf) == 1 and gf[0]["text"] == "Golf: Masters Tournament starts" and gf[0]["stage"] == "final", gf)
+check("golf: the Masters' start is a fixture for the week (In The Week Ahead), the day only, no time zone label", len(gf) == 1 and gf[0]["text"] == "Golf: Masters Tournament starts" and gf[0]["stage"] == "final", gf)
 check("golf: a major that has already started, or starts after the window, is not listed", [f for f in fixtures.collect(_G(), utc(2025, 4, 11, 0, 0), utc(2025, 4, 14, 0, 0), 0)[0] if f["sport"] == "golf"] == [])
 
 # games already under way are On Today too (D, 2026-11-05): a D's-team NBA game that tipped off before the edition, marked live and shown as "Under way"
@@ -226,7 +226,7 @@ check("a day with nothing in it gives no block", ontoday.today_html([]) == "")
 many = [fixtures.fixture("nba", "NBA", f"NBA: game {i}", utc(2026, 11, 5, 1 + i % 10, 0), float(i)) for i in range(20)]
 check("On Today never lists more than 12 lines; the cut keeps the highest scores, back in time order", len(ontoday.pick_today(many)) == 12 and min(f["score"] for f in ontoday.pick_today(many)) == 8.0)
 
-# Games to Watch
+# In The Week Ahead
 base = utc(2026, 11, 9, 23, 0)
 fx = [fixtures.fixture("football", "PL", "Premier League: Arsenal v Tottenham Hotspur", base + timedelta(days=4, hours=12), 12, True, "regular", {"derby", "clash"}),
       fixtures.fixture("football", "PL", "Premier League: Brentford v Fulham", base + timedelta(days=4, hours=12), 4.1, False, "regular", {"derby"}),
@@ -236,16 +236,16 @@ fx = [fixtures.fixture("football", "PL", "Premier League: Arsenal v Tottenham Ho
       fixtures.fixture("nba", "NBA", "NBA: stars", base + timedelta(days=2), 4.2, False, "regular", {"stars"}),
       fixtures.fixture("nba", "NBA", "NBA: Cavaliers at Hawks", base + timedelta(days=1), 6.0, True, "regular")]
 w = [f["text"] for f in ontoday.watch_pick(fx)]
-check("Games to Watch: D's teams, derbies and clashes, the F1 race (not its qualifying) and tracked stars facing each other are in; a plain regular game is not",
+check("In The Week Ahead: D's teams, derbies and clashes, the F1 race (not its qualifying) and tracked stars facing each other are in; a plain regular game is not",
       "Premier League: Arsenal v Tottenham Hotspur" in w and "F1: Brazilian Grand Prix · Race" in w and "NBA: stars" in w and not any("Qualifying" in t for t in w) and "NBA: a at b" not in w and "NBA: Cavaliers at Hawks" not in w, w)
-check("Games to Watch is grouped by day with a small heading each, times in SGT", ontoday.watch_html(fx).count('class="subhead"') == 2 and "Games To Watch" in ontoday.watch_html(fx))
-check("Games to Watch is empty when nothing qualifies", ontoday.watch_html([fixtures.fixture("nba", "NBA", "x", base, 1.0)]) == "")
+check("In The Week Ahead is grouped by day with a small heading each, times in SGT", ontoday.watch_html(fx).count('class="subhead"') == 2 and "In The Week Ahead" in ontoday.watch_html(fx))
+check("In The Week Ahead is empty when nothing qualifies", ontoday.watch_html([fixtures.fixture("nba", "NBA", "x", base, 1.0)]) == "")
 
 # the Monday: the week is added, and only on Mondays
 mon = ontoday.build(Fake(f1=sched), utc(2026, 10, 25, 23, 15), date(2026, 10, 26), set(), set())
 tue = ontoday.build(Fake(f1=sched), utc(2026, 10, 26, 23, 15), date(2026, 10, 27), set(), set())
 check("Mondays collect the week ahead (the Mexico City race weekend falls in that week); other days collect nothing", any(f["sport"] == "f1" for f in mon["watch"]) and tue["watch"] == [], [f["text"] for f in mon["watch"]])
-check("a Tuesday never has Games to Watch", "Games To Watch" not in tue["html"])
+check("a Tuesday never has In The Week Ahead", "In The Week Ahead" not in tue["html"])
 
 # the edition
 ed = daily.build_edition(utc(2026, 11, 4, 23, 15), date(2026, 11, 5), {}, [], today=lambda n, d, s: {"html": "<h3>x</h3>", "failed": ["nba"]})

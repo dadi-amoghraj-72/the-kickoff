@@ -1,7 +1,7 @@
 """On Today and Games to Watch: what is still to come, in Singapore time, from the fixtures kickoff/fixtures.py collects.
 
   On Today        the next 24 hours until the next edition at 7am: "While You're Up" (sun, 7am to 11pm SGT) then "Overnight" (moon, 11pm to 7am)
-  Games To Watch  Mondays only: the rest of the week, grouped by day (D's teams, playoffs and finals, derbies, top-of-the-table clashes, tracked NBA stars facing each other,
+  In The Week Ahead  Mondays only: the rest of the week, grouped by day (D's teams, playoffs and finals, derbies, top-of-the-table clashes, tracked NBA stars facing each other,
                   every F1 race, the late rounds of a Slam)
 
 Plain rules in code; every time is SGT. A block with nothing in it is left out."""
@@ -83,7 +83,7 @@ def watch_html(found):
             out += ("</ul>" if current else "") + f'<p class="subhead">{d.strftime("%a %-d %b")}</p><ul class="standouts ontoday">'
             current = d
         out += _line(f)
-    return '<h3>Games To Watch</h3>' + out + "</ul>"
+    return '<h3>In The Week Ahead</h3>' + out + "</ul>"
 
 
 def build(src, now, day, mine_nba=(), tracked_nba=()):
