@@ -14,7 +14,7 @@ from kickoff import render as r
 
 MAX_NEWS = 2
 MAX_INJURIES = 2
-STARS_MAX, STARS_PER_SPORT = 3, 2
+STARS_MAX, STARS_PER_SPORT, STARS_MILESTONE_MAX = 3, 2, 5
 SPORT_HEADER = {"cricket": "Cricket", "nfl": "NFL", "mlb": "MLB", "nba": "NBA", "f1": "F1"}
 
 
@@ -58,6 +58,9 @@ def stars(perfs, limit=STARS_MAX):
     for p in best:
         if len(out) < limit and per.get(p["sport"], 0) < STARS_PER_SPORT:
             per[p["sport"]] = per.get(p["sport"], 0) + 1
+            out.append(p)
+    for p in best:                                          # a century or a five-wicket haul always makes it (D, 2026-11-05), up to five stars in all
+        if p.get("milestone") and p not in out and len(out) < STARS_MILESTONE_MAX:
             out.append(p)
     return out
 

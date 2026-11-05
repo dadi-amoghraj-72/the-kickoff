@@ -224,5 +224,17 @@ _plain = _sb.scores_html([dict(_m)])
 _dog = _sb.scores_html([{**_m, "dog": "home"}])
 check("football results: the underdog winner carries the asterisk, the other team does not, and a one-line key explains it", "Fenerbahce<span class=\"dog\"" in _dog and "Liverpool<span" not in _dog and "Underdog won" in _dog and "dog" not in _plain, _dog[:300])
 
+# ---- the note as short paragraphs, players in bold, W/D/L (D, 2026-11-05, his red lines on the Arsenal note)
+_note = ("Arsenal won 2-1 away at Slavia Prague in the Champions League. Noni Madueke scored in the 9th minute, assisted by Viktor Gy\u00f6keres, and Gy\u00f6keres added a second in the 38th minute, set up by Mikel Merino. "
+         "Wiktor Nowak pulled one back for Slavia Prague in the 90th minute, with David Jur\u00e1sek providing the assist. Arsenal climbed from 9th to 3rd, on 10 points from four games. Their last five read 3 won, 2 drawn, 0 lost, and they have now gone eight unbeaten. Slavia Prague dropped from 32nd to 34th, on 1 point.")
+_goals = [{"player": "Noni Madueke", "assist": "Viktor Gy\u00f6keres", "side": "away"}, {"player": "Viktor Gy\u00f6keres", "assist": "Mikel Merino", "side": "away"}, {"player": "Wiktor Nowak", "assist": "David Jur\u00e1sek", "side": "home"}]
+_ps = football.split_note(football.short_form(_note), _goals, "Slavia Prague", "Arsenal")
+check("the note splits into D's three paragraphs: Arsenal's goals, Slavia's goal, then the table and form", len(_ps) == 3 and _ps[0].endswith("Mikel Merino.") and _ps[1].startswith("Wiktor Nowak") and _ps[2].startswith("Arsenal climbed"), _ps)
+check("the record is short: '3 won, 2 drawn, 0 lost' reads 3W 2D 0L, and '3 wins, 2 draws and 0 defeats' too", "3W 2D 0L" in _ps[2] and football.short_form("3 wins, 2 draws and 0 defeats") == "3W 2D 0L")
+_m = {"home": {"name": "Slavia Prague", "short": "Slavia Prague"}, "away": {"name": "Arsenal", "short": "Arsenal"}, "goals": _goals}
+_hh = football._paragraphs({"1": {"note": _note}}, {"1": _m})
+check("three <p>, players and teams in bold (Noni Madueke, Gy\u00f6keres alone, Wiktor Nowak, Arsenal)", _hh.count("<p>") == 3 and all(f"<strong>{n}</strong>" in _hh for n in ("Noni Madueke", "Gy\u00f6keres", "Wiktor Nowak", "Arsenal", "Slavia Prague")), _hh[:400])
+check("a one-sentence note stays one paragraph", football.split_note("Arsenal won 1-0.", _goals, "A", "B") == ["Arsenal won 1-0."])
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

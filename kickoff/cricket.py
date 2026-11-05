@@ -499,7 +499,7 @@ def standouts(card, match):
                    "fours": b.get("4s") or 0, "sixes": b.get("6s") or 0, "not_out": (b.get("dismissal-text") or "").lower() == "not out"}
             if runs >= CENTURY:
                 out.append({**who, "kind": "century"})
-            elif runs >= 50 and 0 < balls <= FAST_FIFTY_BALLS:
+            elif t20 and runs >= 50 and 0 < balls <= FAST_FIFTY_BALLS:         # D, 2026-11-05: fifties and four-wicket hauls matter in T20; in ODIs and Tests only hundreds and five-fors
                 out.append({**who, "kind": "fast fifty"})
             elif KOHLI.search(who["name"]) and balls > 0:
                 out.append({**who, "kind": "kohli"})
@@ -528,17 +528,25 @@ def rank(items, limit=MAX_STANDOUTS):
     return sorted(items, key=key)[:limit]
 
 
+def standout_text(o):
+    """The plain text of a standout: 'Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W' or 'Sophie Molineux (Melbourne Renegades W): 4/22 (4 ov) v Hobart Hurricanes W'."""
+    import re as _re
+    return _re.sub(r"<[^>]+>", "", standout_html(o)).replace("&#x27;", "'").replace("&amp;", "&")
+
+
 def standout_html(o, context=True):
-    series = ", ".join(o["match"].split(",")[1:]).strip()
-    context = (f" ({r.esc(series)}; {r.esc(o['result'])})" if o["result"] else f" ({r.esc(series)})") if context else ""
+    """One standout as a clean bullet (D, 2026-11-05): 'Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W' and
+    'Sophie Molineux (Melbourne Renegades W): 4/22 (4 ov) v Hobart Hurricanes W'. `context` is kept for the callers; the match context is no longer written."""
+    who = f"<strong>{r.esc(o['name'])}</strong> ({r.esc(wname(o['team']))})"
+    against = f" v {r.esc(wname(o['against']))}" if o.get("against") else ""
     if o["kind"] in ("century", "fast fifty", "kohli"):
-        label = "century" if o["kind"] == "century" else f"fifty off {o['balls']} balls" if o["kind"] == "fast fifty" else "innings"
-        figures = f"{o['runs']}{'*' if o['not_out'] else ''} off {o['balls']} balls, {o['fours']} {'four' if o['fours'] == 1 else 'fours'} and {o['sixes']} {'six' if o['sixes'] == 1 else 'sixes'}"
-        return (f"<li><strong>{r.esc(o['name'])}</strong> ({r.esc(wname(o['team']))}) · {label}: {figures} against {r.esc(wname(o['against']))}{context}</li>")
-    label = "five-wicket haul" if o["kind"] == "five-for" else "four-wicket haul"
+        bits = [f"{o['runs']}{'*' if o['not_out'] else ''} ({o['balls']})"]
+        for key, one, many in (("fours", "four", "fours"), ("sixes", "six", "sixes")):
+            if o[key]:
+                bits.append(f"{o[key]} {one if o[key] == 1 else many}")
+        return f"<li>{who}: {', '.join(bits)}{against}</li>"
     overs = f"{o['overs']:g}" if isinstance(o["overs"], (int, float)) else str(o["overs"])
-    return (f"<li><strong>{r.esc(o['name'])}</strong> ({r.esc(wname(o['team']))}) · {label}: {o['wickets']} for {o['runs_conceded']} off {overs} overs "
-            f"against {r.esc(wname(o['against']))}{context}</li>")
+    return f"<li>{who}: {o['wickets']}/{o['runs_conceded']} ({overs} ov){against}</li>"
 
 
 def standouts_html(items, inline=False):

@@ -191,14 +191,18 @@ def cricket(picked, cards, weekday):
         text = f"Cricket: {teams}" + (f" ({label})" if label and label != "International" else "") + (f", {result}" if result else "") + (f" · {kohli_text(k)}" if k else "")
         sc = importance.story_score("cricket", stage, mine, kohli=bool(k), weekday=weekday)
         out.append(story("cricket", label or "Cricket", text, sc, mine or bool(k), stage, kohli=bool(k)))
+        card_standouts = (cards.get(m["id"]) or {}).get("standouts", [])
         for r_, b_, n_ in k:
-            perfs.append(perf("cricket", f"Virat Kohli {r_}{'*' if n_ else ''} ({b_} balls) in {teams}", kohli_perf(r_), True))
-        for o in (cards.get(m["id"]) or {}).get("standouts", []):
+            mine_k = next((o for o in card_standouts if o["kind"] in ("kohli", "century") and cricket_mod.KOHLI.search(o["name"]) and o["runs"] == r_), None)
+            perfs.append(perf("cricket", cricket_mod.standout_text(mine_k) if mine_k else f"Virat Kohli {r_}{'*' if n_ else ''} ({b_} balls) in {teams}", kohli_perf(r_), True))
+        for o in card_standouts:
             bonus = 10 if mine else 0
-            if o["kind"] == "century":
-                perfs.append(perf("cricket", f"{o['name']} {o['runs']} ({o['balls']} balls) for {cricket_mod.wname(o['team'])}", 85 + 0.3 * (o["runs"] - 100) + bonus, mine))
+            if cricket_mod.KOHLI.search(o.get("name", "")):                       # his own innings is the Kohli performance above
+                continue
+            if o["kind"] == "century":                                            # a century or a five-wicket haul in any match we report is a star of the night, whatever the competition (D, 2026-11-05)
+                perfs.append({**perf("cricket", cricket_mod.standout_text(o), 85 + 0.3 * (o["runs"] - 100) + bonus, mine), "milestone": True})
             elif o["kind"] == "five-for":
-                perfs.append(perf("cricket", f"{o['name']} {o['wickets']} for {o['runs_conceded']} for {cricket_mod.wname(o['team'])}", 80 + 5 * (o["wickets"] - 5) + bonus, mine))
+                perfs.append({**perf("cricket", cricket_mod.standout_text(o), 80 + 5 * (o["wickets"] - 5) + bonus, mine), "milestone": True})
     return out, perfs
 
 
@@ -237,7 +241,8 @@ LIVE_BLOG = re.compile(r"\b(live|as it happened|minute-by-minute)\b|\bv\b", re.I
 
 def football_news(shown):
     """The biggest news: Arsenal's stories first, then sackings and appointments, confirmed transfers, injuries; rumours last. [{"text", "link", "source"}]."""
-    ranked = sorted(shown, key=lambda i: (i.get("club") != "Arsenal", NEWS_RANK.get(i["kind"], 9), i["published"]))
+    from kickoff import news as news_mod
+    ranked = sorted((i for i in shown if not news_mod.is_renewal(i)), key=lambda i: (i.get("club") != "Arsenal", NEWS_RANK.get(i["kind"], 9), i["published"]))
     return [{"text": i["summary"] or i["headline"], "link": i["link"], "source": i["source"]} for i in ranked
             if (i["kind"] != "transfer_rumour" or i.get("club") == "Arsenal") and (i["summary"] or STRONG_NEWS.search(i["headline"]) and not LIVE_BLOG.search(i["headline"]))]
 

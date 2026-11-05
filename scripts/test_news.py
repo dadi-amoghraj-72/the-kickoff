@@ -174,5 +174,15 @@ _shown = [i["link"] for i in news.plain_managerial(_cases)]
 check("without Claude only headlines that say a manager was sacked, left or appointed are shown: a reaction, a match report, a column and a live blog are not (4 Nov: Kuyt, Gyokeres, Football Daily)", sorted(_shown) == ["l1", "l6"], _shown)
 check("a transfer item is not shown without Claude, and nothing gives nothing", all(i["kind"] == "manager_news" for i in plain) and news.plain_managerial([]) == [] and news.plain_managerial([c for c in cs if c["hint"] != "managerial"]) == [])
 
+# ---- renewals and duplicates (D, 2026-11-05)
+from kickoff import events as _ev  # noqa: E402
+_k1 = {"kind": "transfer_confirmed", "club": "Bayern Munich", "summary": "England captain Harry Kane has signed a new contract with Bayern Munich that lasts until 2029.", "headline": "Kane signs new Bayern deal", "source": "BBC Sport", "link": "https://x/1", "listed": True, "published": 2, "section": "football"}
+_k2 = {**_k1, "summary": "Harry Kane has put pencil to paper on a new contract, committing his future to Bayern Munich.", "source": "ESPN", "link": "https://x/2", "published": 1}
+_sg = {**_k1, "summary": "Real Madrid have signed Jude Bellingham's brother Jobe from Sunderland for a club record fee.", "headline": "Jobe Bellingham joins Real Madrid", "link": "https://x/3", "club": "Real Madrid", "published": 3}
+check("a contract renewal is recognised (both Kane items), a real signing is not", news.is_renewal(_k1) and news.is_renewal(_k2) and not news.is_renewal(_sg))
+check("Biggest News leaves renewals out and keeps a real signing", [x["link"] for x in _ev.football_news([_k1, _k2, _sg])] == ["https://x/3"], _ev.football_news([_k1, _k2, _sg]))
+_h = news.html([_k1, _k2, _sg], "football", "Transfers And Managers")
+check("the section keeps the renewal but once: the same story from BBC and ESPN is one item (the newer source stays)", _h.count("Harry Kane") == 1 and "Jobe from Sunderland" in _h and _h.count("<li>") == 2, _h)
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

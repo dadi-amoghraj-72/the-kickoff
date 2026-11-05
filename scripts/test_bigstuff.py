@@ -141,5 +141,17 @@ _nw = [{"text": "England captain Harry Kane has signed a new contract with Bayer
        {"text": "Chelsea have sacked their manager Enzo Maresca.", "source": "BBC Sport"}]
 check("the same story from two sources is shown once (Kane's contract on BBC and ESPN), a different story stays", len(bigstuff.dedupe_news(_nw)) == 2 and bigstuff.dedupe_news(_nw)[1]["text"].startswith("Chelsea"), bigstuff.dedupe_news(_nw))
 
+# ---- a century or a five-wicket haul always makes Stars Of The Night (D, 2026-11-05)
+_ms = {**events.perf("cricket", "Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W", 86), "milestone": True}
+_top = [events.perf("nba", "n1", 100), events.perf("football", "f1", 100), events.perf("cricket", "Virat Kohli (India): 74 (51)", 100)]
+check("a century in a women's league makes the list even when three performances already filled it", _ms in bigstuff.stars(_top + [_ms]) and len(bigstuff.stars(_top + [_ms])) == 4, bigstuff.stars(_top + [_ms]))
+check("an ordinary performance of the same score still waits outside the three", len(bigstuff.stars(_top + [events.perf("cricket", "x", 86)])) == 3)
+
+_wm = {"id": "w1", "name": "Brisbane Heat Women vs Adelaide Strikers Women, 10th Match, Women's Big Bash League", "teams": ["Brisbane Heat Women", "Adelaide Strikers Women"], "matchType": "t20", "matchEnded": True,
+       "status": "Brisbane Heat Women won by 14 runs", "class": {"kind": "league", "label": "WBBL", "women": True}}
+_wo = {"kind": "century", "name": "Charli Knott", "team": "Brisbane Heat Women", "against": "Adelaide Strikers Women", "runs": 104, "balls": 61, "fours": 12, "sixes": 4, "not_out": False, "match": "x", "result": ""}
+_, _wp = events.cricket([_wm], {"w1": {"innings": [], "standouts": [_wo]}}, 1)
+check("a century in the Women's Big Bash is a milestone performance in the clean standout style", len(_wp) == 1 and _wp[0]["milestone"] and _wp[0]["text"] == "Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W", _wp)
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

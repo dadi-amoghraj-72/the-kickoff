@@ -4,6 +4,7 @@ Every source is called through a guard: if it fails, that block is skipped and t
 Claude is optional: with client=None every note and overview is the plain version written by code (free).
 State is passed in and handed back, never written here, so a test run can't disturb the real state files."""
 import copy
+import re
 from datetime import datetime, timezone
 
 from kickoff import champions, events, facup, focus, fplcorner, headlines, injuries, international, leaders, news, notes, overview, performers, roundup, scoreboard, settings, tables
@@ -32,11 +33,48 @@ class Ledger:
         return [f"  {x['label']:34} {x['model']:19} {x['input']:>6} in {x['output']:>5} out  ${x['cost']:.4f}" for x in self.rows]
 
 
+FORM_WORDS = re.compile(r"\b(climbed|dropped|rose|fell|moved|table|points?|last five|unbeaten|undefeated|winless|league phase|ranked|position|run of)\b", re.I)
+GOAL_WORDS = re.compile(r"\b(minute|scored|scorer|assist\w*|goal|equali[sz]\w*|pulled one back|penalty|opener|winner|header|brace|hat-trick)\b", re.I)
+
+
+def short_form(text):
+    """'3 won, 2 drawn, 0 lost' (or '3 wins, 2 draws and 0 defeats') becomes '3W 2D 0L': the record as it is written everywhere else on the page (D, 2026-11-05)."""
+    return re.sub(r"\b(\d+) (?:won|wins?),? (\d+) (?:drawn|draws?),? (?:and )?(\d+) (?:lost|losses|defeats?)\b", r"\1W \2D \3L", text, flags=re.I)
+
+
+def split_note(note, goals, home, away):
+    """A match note as short paragraphs (D, 2026-11-05, his red lines on the Arsenal note): the first side's goals, then the other side's goals, then the table and form. Whatever
+    Claude wrote, code does the splitting: a goal sentence names its scorer (from the match's own goals) and so its side; a new paragraph starts when that side changes and before
+    the first table-or-form sentence. A note with one sentence, or no goals to read, stays one paragraph."""
+    sentences = re.split(r"(?<=[.!?])\s+(?=[A-Z])", note.strip())
+    if len(sentences) < 3:
+        return [note.strip()]
+    side_of = {}
+    for g in goals:
+        for who in (g.get("player"), g.get("assist")):
+            if who:
+                side_of.setdefault(who.split()[-1].lower(), g["side"] if who == g.get("player") else None)
+                side_of.setdefault(who.lower(), g["side"] if who == g.get("player") else None)
+    paras, last_side, seen_form = [[]], None, False
+    for s in sentences:
+        is_form = bool(FORM_WORDS.search(s)) and not re.search(r"\bminute\b", s, re.I)
+        side = next((side_of[w] for w in re.findall(r"[\w\u00c0-\u024f'-]+", s.lower()) if side_of.get(w)), None) if GOAL_WORDS.search(s) and not is_form else None
+        if (is_form and not seen_form and paras[-1]) or (side and last_side and side != last_side and paras[-1] and not seen_form):
+            paras.append([])
+        seen_form = seen_form or is_form
+        last_side = side or last_side
+        paras[-1].append(s)
+    return [" ".join(p) for p in paras if p]
+
+
 def _paragraphs(written, match_by_id):
     out = ""
     for mid, w in written.items():
         m = match_by_id[mid]
-        out += f"<p>{r.dash(r.bold_names(w['note'], (m['home']['name'], m['away']['name'], m['home']['short'], m['away']['short'])))}</p>"
+        teams = (m["home"]["name"], m["away"]["name"], m["home"]["short"], m["away"]["short"])
+        people = [x for g in m.get("goals", []) for x in (g.get("player"), g.get("assist"))]
+        for para in split_note(short_form(w["note"]), m.get("goals", []), m["home"]["name"], m["away"]["name"]):
+            out += f"<p>{r.dash(r.bold_names(para, teams, people))}</p>"
     return out
 
 
@@ -239,7 +277,8 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         block = guard(club["name"], focus.build, club, day, all_rows, previous, now, tier)
         if not block:
             continue
-        match_by_id = {f["id"]: {"home": {"name": f["home"], "short": f["home"]}, "away": {"name": f["away"], "short": f["away"]}}
+        match_by_id = {f["id"]: {"home": {"name": f["home"], "short": f["home"]}, "away": {"name": f["away"], "short": f["away"]},
+                                 "goals": [{"player": g["scorer"], "assist": g.get("assist"), "side": "home" if g["for"] == f["home"] else "away"} for g in f["goals"]]}
                        for f in block["facts"]}
         body = write_notes_for(f"{club['name']} note", block["facts"], match_by_id)
         if block["facts"] and club is focus.ARSENAL:

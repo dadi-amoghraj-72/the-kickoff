@@ -251,9 +251,9 @@ check("fast fifties: fewer balls first, then more runs", [o["name"] for o in ck.
 
 # ---- How a standout reads ----
 hi, hm = ck.standout_html(iyer), ck.standout_html(milne)
-check("a fast fifty line: name, team, the figures, the opponent, the series and the result", "<strong>Shreyas Iyer</strong> (India) · fifty off 23 balls: 50 off 23 balls, 3 fours and 4 sixes against New Zealand" in hi
-      and "5th T20I" in hi and "New Zealand won by 7 wkts" in hi, hi)
-check("a bowling line: wickets for runs off overs", "<strong>Adam Milne</strong> (New Zealand) · four-wicket haul: 4 for 19 off 4 overs against India" in hm, hm)
+check("a fast fifty line: name (team): runs (balls), fours, sixes v opponent (D, 2026-11-05)", "<strong>Shreyas Iyer</strong> (India): 50 (23), 3 fours, 4 sixes v New Zealand" in hi
+      and "5th T20I" not in hi and "won by" not in hi, hi)
+check("a bowling line: name (team): wickets/runs (overs ov) v opponent", "<strong>Adam Milne</strong> (New Zealand): 4/19 (4 ov) v India" in hm, hm)
 check("no standouts, no heading", ck.standouts_html([]) == "" and 'class="standouts"' in ck.standouts_html(so))
 check("names are escaped", "&lt;" in ck.standout_html({**iyer, "name": "<b>"}) and "<b>" not in ck.standout_html({**iyer, "name": "<b>"}).replace("<strong>", ""))
 
@@ -376,7 +376,7 @@ ipl_rows = [{"pos": 1, "team": "RCB", "name": "Royal Challengers Bengaluru", "p"
 tbl = ck.table_html("IPL", ipl_rows)
 check("the IPL table: only the Sunrisers Hyderabad row carries the gold class; another league's table never does", tbl.count('class="hl"') == 1 and "SRH" in tbl.split('class="hl"')[1].split("</tr>")[0] and ck.table_html("WBBL", ipl_rows).count("hl") == 0, tbl[:300])
 
-check("singular figures: 1 four and 1 six, never '1 sixes' (D, 2026-11-05)", "1 four and 1 six against" in ck.standout_html({**iyer, "fours": 1, "sixes": 1}) and "2 fours and 0 sixes" in ck.standout_html({**iyer, "fours": 2, "sixes": 0}))
+check("singular figures: 1 four, 1 six, never '1 sixes'; a zero is left out (D, 2026-11-05)", "1 four, 1 six v" in ck.standout_html({**iyer, "fours": 1, "sixes": 1}) and "2 fours v" in ck.standout_html({**iyer, "fours": 2, "sixes": 0}) and "sixes" not in ck.standout_html({**iyer, "fours": 2, "sixes": 0}))
 
 # ---- the day of a Test from the start date when the status line has none (D, 2026-11-05)
 _t = {"matchType": "test", "dateTimeGMT": "2026-11-03T04:00:00", "status": "Stumps"}
@@ -384,6 +384,13 @@ _utc = lambda d, h=23: __import__("datetime").datetime(2026, 11, d, h, 15, tzinf
 check("the day is counted from the start date: day 1 on the first day, day 3 on the third, never above 5", ck.day_of(_t, None, _utc(3)) == 1 and ck.day_of(_t, None, _utc(5)) == 3 and ck.day_of(_t, None, _utc(20)) == 5)
 check("a status line that names the day wins, and with no clock the day stays unknown", ck.day_of({**_t, "status": "Day 4: Lunch"}, None, _utc(5)) == 4 and ck.day_of(_t) is None)
 check("the heading says '2nd Test · Day 3' and the pill stays 'Test · in progress'", "2nd Test · Day 3" in ck.result_html({**_t, "id": "x", "name": "Bangladesh vs West Indies, 2nd Test, WI tour", "teams": ["Bangladesh", "West Indies"], "matchStarted": True, "matchEnded": False}, None, "", 0, _utc(5)))
+
+# ---- fifties and four-wicket hauls only in T20; ODIs and Tests keep hundreds and five-fors (D, 2026-11-05)
+_odi = {"matchType": "odi", "name": "A vs B, 1st ODI", "teams": ["A", "B"]}
+_t20 = {**_odi, "matchType": "t20"}
+_cardb = lambda bat_, w=None: {"scorecard": [{"inning": "A Inning 1", "batting": [{"batsman": {"name": "P"}, "r": bat_[0], "b": bat_[1], "4s": 4, "6s": 2, "dismissal-text": "c x b y"}], "bowling": [{"bowler": {"name": "Q"}, "w": w or 0, "r": 22, "o": 4, "m": 0}]}]}  # noqa: E731
+check("a fast fifty counts in a T20 and not in an ODI; a century counts in both", [o["kind"] for o in ck.standouts(_cardb((50, 24)), _t20)] == ["fast fifty"] and ck.standouts(_cardb((50, 24)), _odi) == [] and [o["kind"] for o in ck.standouts(_cardb((104, 61)), _odi)] == ["century"])
+check("a four-wicket haul counts in a T20 and not in an ODI; a five-for counts in both", [o["kind"] for o in ck.standouts(_cardb((0, 1), 4), _t20) if o["kind"] != "kohli"] == ["four-for"] and not [o for o in ck.standouts(_cardb((0, 1), 4), _odi) if o["kind"] in ("four-for", "five-for")] and [o["kind"] for o in ck.standouts(_cardb((0, 1), 5), _odi)] == ["five-for"])
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

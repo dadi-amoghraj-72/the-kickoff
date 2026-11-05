@@ -92,7 +92,7 @@ sel = yg.select(many)
 check("at most 5 lines, best first, one line per player", len(sel) == 5 and sel[0]["score"] == 99 and len({yg.watch_key(x) for x in sel}) == 5)
 check("no candidates, no section", yg.html([]) == "" and yg.build([], {}, DAY)["html"] == "")
 b = yg.build([c("1", 60, name="Cooper Flagg")], {}, DAY)
-check("the plain line reads 'Name (team, rookie, age): facts' with gold figures", "Cooper Flagg (DET, rookie, 19): " in b["lines"][0] and '<span class="n">20</span>' in b["html"], b["html"])
+check("the plain line reads 'Name (team, rookie, age): facts' with gold figures", "Cooper Flagg (DET, rookie, 19): " in b["lines"][0] and '<span class="n">20 pts</span>' in b["html"], b["html"])
 
 # ---- Claude phrasing ----------------------------------------------------------------------------
 cand = yg.make("nba", "1", "Cooper Flagg", "DAL", "27 pts, 8 reb against Orlando Magic", 60, 19, True, DAY)
@@ -126,12 +126,16 @@ check("youngguns is one of the saved states", "youngguns" in daily.STATE_NAMES)
 # ---- one blank row between sports, gold figures, sports together (D, 2026-11-05)
 _h = yg.html(["Darius Acuff Jr. (SAC, rookie, 19) scored 22 points and gave out 12 assists.", "Dylan Harper (SAS, 20) scored 21 points.", "Mattia Liberali (COMO, 19): 1 goal, 2 assists (Lens 1\u20139 Como)"], ["nba", "nba", "soccer"])
 check("a blank row only where the sport changes: the first basketball line and the second have none, the first football line has it", _h.count("sport-gap") == 1 and _h.index("sport-gap") > _h.index("Harper"), _h)
-check("figures are gold (22, 12, 21, 1, 2) and the ages are not (19, 20)", all(f'<span class="n">{n}</span>' in _h for n in ("22", "12", "21", "1", "2")) and '<span class="n">19' not in _h and '<span class="n">20' not in _h, _h)
+check("the whole stat phrase is gold (22 points, 12 assists, 21 points, 1 goal, 2 assists) and the ages are not (19, 20)", all(f'<span class="n">{n}</span>' in _h for n in ("22 points", "12 assists", "21 points", "1 goal", "2 assists")) and '<span class="n">19' not in _h and '<span class="n">20' not in _h, _h)
 _c = lambda sp, i: yg.make(sp, i, f"P{i}", "T", "1 goal", 50 - i, 19, False, DAY)  # noqa: E731
 check("the picks are grouped by sport, sports in the order of their best player", [c["sport"] for c in yg.grouped([_c("nba", 1), _c("soccer", 2), _c("nba", 3), _c("soccer", 4)])] == ["nba", "nba", "soccer", "soccer"])
 
 _s = yg.html(["Mattia Liberali (COMO, 19) scored once as Como won 9\u20131 at Lens, with 2 assists."], ["soccer"])
-check("a score is never part gold: the 9 and the 1 of '9\u20131' stay plain, the 2 assists are gold", '<span class="n">2</span>' in _s and '<span class="n">9' not in _s and '<span class="n">1</span>' not in _s, _s)
+check("'scored once' and '2 assists' are gold, the score 9\u20131 and the age are not", '<span class="n">scored once</span>' in _s and '<span class="n">2 assists</span>' in _s and '<span class="n">9' not in _s and '9\u20131' in _s and '<span class="n">19' not in _s, _s)
+_c = {"name": "Mattia Liberali", "team": "COMO", "age": 19, "facts": "1 goal, 2 assists (Lens 1\u20139 Como)", "rookie": False}
+check("a count the facts do not carry is rejected: 'scored twice' for one goal, 'a hat-trick', '3 assists' (D, 2026-11-05)", not yg.supported("Mattia Liberali (COMO, 19) scored twice at Lens.", _c) and not yg.supported("Mattia Liberali (COMO, 19) scored a hat-trick.", _c)
+      and not yg.supported("Mattia Liberali (COMO, 19) set up 3 assists.", _c) and yg.supported("Mattia Liberali (COMO, 19) scored once and set up 2 assists.", _c), "")
+check("number words count too: 'two assists' passes, 'three assists' does not", yg.counts_agree("He had two assists.", "1 goal, 2 assists") and not yg.counts_agree("He had three assists.", "1 goal, 2 assists"))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

@@ -228,9 +228,9 @@ i_nz = h.index("New Zealand v <strong>India</strong>")
 i_next = h.index("Namibia v Ireland")
 check("NZ v India: result, then Player of the match, then the scorecard, then its own standouts, all before the next match",
       i_nz < h.index("Player of the match: <strong>Adam Milne</strong> (New Zealand)", i_nz) < h.index("<table class=\"sc\">", i_nz) < h.index("<strong>Standouts</strong>", i_nz) < i_next, h[i_nz:i_nz + 200])
-check("the standouts under NZ v India are about that match and do not repeat the series and result", "Adam Milne</strong> (New Zealand) · four-wicket haul: 4 for 19 off 4 overs against India</li>" in h[i_nz:i_next])
+check("the standouts under NZ v India are about that match and do not repeat the series and result", "Adam Milne</strong> (New Zealand): 4/19 (4 ov) v India</li>" in h[i_nz:i_next])
 check("matches with only a result line still show Player of the match when we have it (Namibia v Ireland)", h.index("Player of the match", i_next) < h.index("Afghanistan v Zimbabwe"), h[i_next:i_next + 400])
-check("their standouts (Noor Ahmad's five-for) are in the closing list, with the series and result", h.index("<h3>Standouts</h3>") > h.index("Afghanistan v Zimbabwe") and "Noor Ahmad" in h[h.index("<h3>Standouts</h3>"):], h[-600:])
+check("their standouts (Noor Ahmad's five-for) are in the closing list, as clean bullets", h.index("<h3>Standouts</h3>") > h.index("Afghanistan v Zimbabwe") and "Noor Ahmad" in h[h.index("<h3>Standouts</h3>"):], h[-600:])
 check("the closing list holds only the no-scorecard matches' standouts, not NZ v India's", "Adam Milne" not in h[h.index("<h3>Standouts</h3>"):] and "Shreyas Iyer" not in h[h.index("<h3>Standouts</h3>"):])
 no_potm = ck.run(NOW, START, {}, lambda: ([nzind], 17), paid, src.scorecards_affordable, espn_card=lambda m: {"scorecard": inn})["html"]
 check("when no Player of the match is known, no line appears", "Player of the match" not in no_potm)

@@ -101,7 +101,7 @@ def html(lines, sports=None):
     """Gold figures like the other standouts lists; one blank row between sports (sports: the sport of each line, in the same order); '' when nobody was notable (the section is then simply not there)."""
     if not lines:
         return ""
-    gold = lambda t: re.sub(r"(?<![\w\u2013-])(\d+)(?=\s)", r'<span class="n">\1</span>', r.esc(t))  # noqa: E731
+    gold = lambda t: highlight(r.esc(t))  # noqa: E731
     sports = sports or [None] * len(lines)
     gap = lambda i: ' class="sport-gap"' if i and sports[i] != sports[i - 1] else ""  # noqa: E731
     items = "".join(f"<li{gap(i)}>{gold(t)}</li>" for i, t in enumerate(lines))
@@ -117,16 +117,58 @@ def grouped(picked):
 # ---- Claude phrasing (optional) -----------------------------------------------------------------
 
 SYSTEM = ("You write one short line for each young player in a sports digest (a rookie or under 21). Use ONLY the facts given for that player; add nothing from memory. "
-          "Plain, warm, specific, no hype, at most 25 words, British spelling, no emojis. Keep the player's name, team code and age as given.")
+          "Plain, warm, specific, no hype, at most 25 words, British spelling, no emojis. Keep the player's name, team code and age as given. Write the player's own figures as digits next to the stat word (1 goal, 2 assists, 22 points), or as once/twice for goals.")
 SCHEMA = {"type": "object", "properties": {"lines": {"type": "array", "items": {"type": "object", "properties": {"n": {"type": "integer"}, "text": {"type": "string"}},
           "required": ["n", "text"], "additionalProperties": False}}}, "required": ["lines"], "additionalProperties": False}
 
 
+NUMBER_WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "once": 1, "twice": 2}
+STAT = {"goal": "goal", "goals": "goal", "assist": "assist", "assists": "assist", "ast": "assist", "point": "pts", "points": "pts", "pts": "pts", "rebound": "reb", "rebounds": "reb",
+        "reb": "reb", "block": "blk", "blocks": "blk", "blk": "blk", "steal": "stl", "steals": "stl", "stl": "stl", "save": "save", "saves": "save"}
+_NUM = r"(\d+|" + "|".join(k for k in NUMBER_WORDS if k not in ("once", "twice")) + r")"
+CLAIM = re.compile(rf"\b{_NUM}\s+({'|'.join(STAT)})\b", re.I)
+CLAIM_TIMES = re.compile(r"\b(?:scored|netted|found the net|struck|converted)\s+(once|twice)\b", re.I)
+CLAIM_NAMED = {"hat-trick": 3, "hat trick": 3, "brace": 2}
+
+
+def count_of(word):
+    word = word.lower()
+    return int(word) if word.isdigit() else NUMBER_WORDS.get(word)
+
+
+def fact_counts(facts):
+    """{'goal': 1, 'assist': 2} from the player's facts ('1 goal, 2 assists')."""
+    return {STAT[m.group(2).lower()]: count_of(m.group(1)) for m in CLAIM.finditer(facts or "")}
+
+
+def claimed_counts(text):
+    """The counts a written line states about the player: [(stat, n)] from '2 assists', 'scored twice', 'a hat-trick'."""
+    out = [(STAT[m.group(2).lower()], count_of(m.group(1))) for m in CLAIM.finditer(text)]
+    out += [("goal", count_of(m.group(1))) for m in CLAIM_TIMES.finditer(text)]
+    out += [("goal", n) for k, n in CLAIM_NAMED.items() if re.search(rf"\b{k}\b", text, re.I)]
+    return out
+
+
+def counts_agree(text, facts):
+    """Every count the line states must be the count in the facts (a line that says 'scored twice' for one goal is wrong, whatever the sentence looks like)."""
+    have = fact_counts(facts)
+    return all(have.get(stat) == n for stat, n in claimed_counts(text))
+
+
 def supported(text, c):
-    """Every number and every capitalised word in a written line must be in that player's facts, name, team or age."""
+    """Every number and every capitalised word in a written line must be in that player's facts, name, team or age; every count it states must match the facts."""
     hay = f"{c['name']} {c['team']} {c['age'] or ''} {c['facts']} rookie".lower()
-    words = re.findall(r"\b[A-Z][\w'’.-]{2,}\b", re.sub(r"^\W*\w+", "", text))
-    return all(w.lower().strip(".'’-") in hay for w in words) and all(n in hay for n in re.findall(r"\d+", text)) and len(text.split()) <= 30
+    words = re.findall(r"\b[A-Z][\w'\u2019.-]{2,}\b", re.sub(r"^\W*\w+", "", text))
+    return (all(w.lower().strip(".'\u2019-") in hay for w in words) and all(n in hay for n in re.findall(r"\d+", text)) and len(text.split()) <= 30
+            and counts_agree(text, c["facts"]))
+
+
+HIGHLIGHT = re.compile(rf"\b(?:{_NUM}\s+(?:{'|'.join(STAT)})|(?:scored|netted|found the net|struck|converted)\s+(?:once|twice)|(?:an?\s+)?(?:hat-trick|hat trick|brace))\b", re.I)
+
+
+def highlight(text):
+    """The figures that are the news in gold, the whole phrase: '1 goal', '2 assists', '22 pts', 'scored twice', 'a hat-trick'. Scores (9-1) and ages are never part of a phrase (D, 2026-11-05)."""
+    return HIGHLIGHT.sub(lambda m: f'<span class="n">{m.group(0)}</span>', text)
 
 
 def phrase(client, found, call_json=None):

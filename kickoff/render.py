@@ -158,10 +158,19 @@ def _name_variants(names):
     return variants
 
 
-def bold_names(text, names):
-    """Escape a note for the page and put the given team names in bold, wherever they appear."""
+def _person_variants(people):
+    """Each player's full name and his surname (the last word, when it is four letters or more and no other player shares it): 'Viktor Gy\u00f6keres' and 'Gy\u00f6keres'."""
+    people = {p.strip() for p in people if p and p.strip()}
+    lasts = {}
+    for p in people:
+        lasts.setdefault(p.split()[-1], set()).add(p)
+    return people | {last for last, owners in lasts.items() if len(owners) == 1 and len(last) >= 4}
+
+
+def bold_names(text, names, people=()):
+    """Escape a note for the page and put the given team names (and, with `people`, the players' names) in bold, wherever they appear."""
     out = esc(text)
-    for name in sorted(_name_variants(names), key=len, reverse=True):
+    for name in sorted(_name_variants(names) | _person_variants(people), key=len, reverse=True):
         out = re.sub(rf"(?<![\w>]){re.escape(esc(name))}(?![\w<])", lambda m: f"<strong>{m.group(0)}</strong>", out)
     return out
 

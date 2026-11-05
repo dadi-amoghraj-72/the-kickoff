@@ -190,6 +190,27 @@ def plain_managerial(cands, limit=4):
     return sorted(out, key=lambda i: i["published"], reverse=True)[:limit]
 
 
+RENEWAL = re.compile(r"\bnew contract\b|\bcontract (?:extension|renewal)\b|\bextends? (?:his|her|their|the) (?:contract|stay)\b|\bcommitt\w+ (?:his|her|their) future\b|\brenew\w*\b", re.I)
+
+
+def is_renewal(i):
+    """A player staying at his club on a new contract (Kane at Bayern): not Biggest News (D, 2026-11-05); it stays in Transfers And Managers."""
+    return bool(RENEWAL.search(f"{i.get('summary') or ''} {i.get('headline') or ''}"))
+
+
+def _names(text):
+    return set(re.findall(r"\b[A-Z][a-z\u00c0-\u024f]{2,}\b", text))
+
+
+def dedupe(items, text=lambda i: i.get("summary") or i.get("headline") or ""):
+    """The same story from two sources (BBC and ESPN on one contract) once: an item that shares two or more names with one already kept is dropped (the first stays)."""
+    out = []
+    for i in items:
+        if not any(len(_names(text(i)) & _names(text(o))) >= 2 for o in out):
+            out.append(i)
+    return out
+
+
 def item_html(i):
     from kickoff import render as r
     text = r.esc(i["summary"]) if i["summary"] else r.esc(i["headline"])
@@ -198,7 +219,7 @@ def item_html(i):
 
 
 def html(items, section, heading):
-    mine = sorted((i for i in items if i["section"] == section), key=lambda i: i["published"], reverse=True)
+    mine = dedupe(sorted((i for i in items if i["section"] == section), key=lambda i: i["published"], reverse=True))
     if not mine:
         return ""
     return f'<h3>{heading}</h3><ul class="news">' + "".join(item_html(i) for i in mine) + "</ul>"
