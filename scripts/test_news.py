@@ -165,6 +165,13 @@ plain = news.plain_managerial(cs)
 check("the two real 4 November West Ham headlines (BBC and Guardian, with their real blurbs) and an Arsenal transfer line are candidates; only the two manager stories are kept without Claude, and as one West Ham item (the newest: BBC's)", len(cs) == 3 and len(plain) == 1 and plain[0]["club"] == "West Ham" and plain[0]["source"] == "BBC Sport" and plain[0]["kind"] == "manager_news", plain)
 ph = news.html(plain, "football", "Transfers And Managers")
 check("it reads 'Manager' (not 'Appointed': code cannot tell), the source's own headline and a link", 'class="tag">Manager</span> West Ham confirm Parker as boss' in ph and "https://bbc/1" in ph and "Appointed" not in ph, ph)
+_mk = lambda title, link: {**cs[0], "title": title, "text": "", "link": link, "hint": "managerial", "clubs": ["West Ham United"], "published": cs[0]["published"]}  # noqa: E731
+_cases = [_mk("West Ham confirm Scott Parker as head coach after sacking Nuno Espirito Santo", "l1"), _mk("Dirk Kuyt hails 'another miracle in Istanbul' after Fenerbahce beat former club Liverpool", "l2"),
+          _mk("Viktor Gyokeres the difference as Arsenal claim nervy win against Slavia Prague", "l3"), _mk("Football Daily | Manchester United's one-match winning streak and manager under pressure", "l4"),
+          _mk("Fenerbahce v Liverpool: Champions League live, manager sacked talk", "l5"), {**_mk("Everton sack manager after fifth defeat", "l6"), "clubs": ["Everton"]},
+          {**_mk("Wolves pair hit by injury ahead of cup tie", "l7"), "text": "The manager says it is a worry; the club have not sacked anyone."}]
+_shown = [i["link"] for i in news.plain_managerial(_cases)]
+check("without Claude only headlines that say a manager was sacked, left or appointed are shown: a reaction, a match report, a column and a live blog are not (4 Nov: Kuyt, Gyokeres, Football Daily)", sorted(_shown) == ["l1", "l6"], _shown)
 check("a transfer item is not shown without Claude, and nothing gives nothing", all(i["kind"] == "manager_news" for i in plain) and news.plain_managerial([]) == [] and news.plain_managerial([c for c in cs if c["hint"] != "managerial"]) == [])
 
 print(f"\n{sum(results)} of {len(results)} passed")

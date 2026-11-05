@@ -16,6 +16,12 @@ CATEGORIES = {
                          r"setback|return\w* from)\b", re.I),
 }
 PRIORITY = ["managerial", "transfer_done", "injury", "transfer_talk"]
+# Without Claude (D, 2026-11-05: a Kuyt match reaction, a Gyokeres match report and a Football Daily column were shown as manager news): the headline itself must say a manager has been
+# sacked, has left or has been appointed, and must not be a reaction, a live blog, a column or a talking-points piece.
+MANAGER_CHANGE = re.compile(r"\b(sack(?:ed|s|ing)?|dismiss(?:ed|es|al)?|appoint(?:ed|s|ment)?|named (?:\w+ ){0,3}(?:as )?(?:the )?(?:new )?(?:manager|head coach|boss)|new (?:manager|head coach|boss)|"
+                            r"(?:interim|caretaker) (?:manager|head coach|boss)|takes? charge|hired|resign(?:ed|s)?|steps? down|parts? ways?|part company|leaves? (?:his |the )?(?:role|post|club)|replaces?)\b", re.I)
+MANAGER_WORD = re.compile(r"\b(manager|head coach|boss|coach)\b", re.I)
+NOT_NEWS = re.compile(r"\b(live|hails?|reacts?|reaction|player ratings|talking points|football daily|analysis|opinion|verdict|what we learned|observations)\b|\bv\b", re.I)
 RECENT = timedelta(hours=36)
 
 
@@ -171,6 +177,9 @@ def plain_managerial(cands, limit=4):
     best = {}
     for c in cands:
         if c.get("hint") != "managerial" or not c.get("clubs"):
+            continue
+        # the headline must name the manager's job and, with the blurb, say he was sacked, left or appointed; and must not be a reaction, a live blog or a column
+        if NOT_NEWS.search(c["title"]) or not MANAGER_WORD.search(c["title"]) or not MANAGER_CHANGE.search(f"{c['title']} {c['text']}"):
             continue
         club = c["clubs"][0]
         if club not in best or c["published"] > best[club]["published"]:
