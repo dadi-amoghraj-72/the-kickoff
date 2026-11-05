@@ -72,22 +72,10 @@ check("rugby: a finished Six Nations match in the window is a line with both tea
 check("rugby: the same match a week later is out of the window", around.rugby(Src(rugby={"180659": six}), when + timedelta(days=7)) == [])
 check("rugby: a league with odd data is skipped, the rest stay", [t for t, _ in around.rugby(Src(rugby={"180659": six, "164205": {"events": "junk"}}), when + timedelta(hours=5)) if t == expected] == [expected])
 
-# ---- golf (real PGA scoreboard, made a major) -----------------------------------------------------
-pga = load("other_golf_pga.json")
-major = copy.deepcopy(pga)
-major["events"][0]["name"] = "Masters Tournament"
-major["events"][0]["status"]["type"]["state"] = "post"
+# ---- golf (the real 2025 Masters, finished, as the block gets it) -----------------------------------------
+masters = json.loads((FX / "golf_masters_2025.json").read_text())
+major = copy.deepcopy(masters)
 major["events"][0]["endDate"] = "2026-11-04T20:00Z"
-top = sorted(major["events"][0]["competitions"][0]["competitors"], key=lambda x: x.get("order", 99))[0]
-top["score"] = "-12"
-got = around.golf(Src(golf={"pga": major}), NOW)
-check("golf: a finished major gives the winner and his score", got and got[0][0] == f"Masters Tournament: {top['athlete']['displayName']} wins on -12", got)
-live = copy.deepcopy(major)
-live["events"][0]["status"]["type"]["state"] = "in"
-live["events"][0]["status"]["period"] = 3
-got = around.golf(Src(golf={"pga": live}), NOW)
-check("golf: a major in progress gives the leader and the round", got and "round 3" in got[0][0] and "leads on -12" in got[0][0], got)
-check("golf: an ordinary tour event (not a major) is ignored", around.golf(Src(golf={"pga": pga}), NOW) == [])
 
 # ---- UFC (real scoreboard and rankings, made numbered and finished) ----------------------------------
 ufc = copy.deepcopy(load("other_ufc_scoreboard.json"))

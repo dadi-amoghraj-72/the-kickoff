@@ -110,7 +110,7 @@ def real_adapters(client=None, env=None):
 
     def around_go(now, day, st):
         got = around.run(now, copy.deepcopy(st.get("around") or {}), other_sports.Source(), client)
-        return {**got, "events": []}
+        return {**got, "events": got.get("events", [])}
 
     return [
         ("football", "Football", football_go),

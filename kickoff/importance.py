@@ -9,7 +9,7 @@ MINE = 6               # one of D's teams or players played (Arsenal and Arsenal
 KOHLI = 8              # Virat Kohli batted: on top of MINE, because he is D's favourite player in all of sport
 LISTED = 2             # one of the 17 listed football clubs
 WOW = 5                # something crazy happened (a huge margin, two overtimes, a comeback from far behind)
-SPORT_BASE = {"football": 0, "cricket": 0, "nfl": 1, "nba": 0, "mlb": 0, "f1": 8, "tennis": 0}   # a little extra for sports that are always big news on the morning
+SPORT_BASE = {"football": 0, "cricket": 0, "nfl": 1, "nba": 0, "mlb": 0, "f1": 8, "tennis": 0, "golf": 0}   # a little extra for sports that are always big news on the morning
 
 # Sports that take a back seat on a heavy morning when the game is a plain regular-season one and not D's (D: "a regular season basketball or a baseball or a cricket
 # game, unless it's an India cricket game, could take a backseat"; on Sunday and Monday mornings 90% of the news is football, NFL and F1).

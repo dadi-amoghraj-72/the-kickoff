@@ -411,3 +411,7 @@ tr.p3 td { color: #d08a52; font-weight: 700; }
 .ontoday .when { color: var(--gold); font-weight: 600; margin-right: 4px; white-space: nowrap; }
 .pod { color: var(--gold); font-size: 16px; line-height: 1.4; margin: 0 0 14px; }
 .bigstuff a { font-size: 13px; margin-left: 4px; }
+
+/* Golf (D's players below the top 25) and badminton scorecards */
+tr.also td { color: var(--muted); font-style: italic; }
+.tennis td.pl br + * { }

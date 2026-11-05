@@ -5,7 +5,7 @@ A fixture: {"sport", "comp", "text", "when" (UTC datetime), "score", "mine", "st
 Which games matter (D, 2026-11-05): D's teams and players; every playoff, play-off and knockout game (NBA, NFL, MLB, IPL, Champions League, cups), not only his teams'; Grand Slam
 quarter-finals and later; every F1 session; a ordinary league game only when one of the 17 listed clubs plays."""
 import re
-from datetime import timedelta, timezone
+from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from kickoff import champions, clubs, events, importance
@@ -252,12 +252,29 @@ def tennis(src, now, end, weekday):
     return out
 
 
+def golf(src, now, end, weekday):
+    """A men's major or THE PLAYERS Championship that starts in the window (from the PGA Tour's season calendar): 'Golf: Masters Tournament starts (US Thursday)'."""
+    from kickoff import golf as golf_mod
+    out = []
+    try:
+        board = src.golf("pga")
+    except Exception:
+        return out
+    for c in ((board.get("leagues") or [{}])[0].get("calendar") or []):
+        if not golf_mod.MEN.search(c.get("label", "")):
+            continue
+        start = golf_mod._utc(c["startDate"]) if hasattr(golf_mod, "_utc") else datetime.fromisoformat(c["startDate"].replace("Z", "+00:00"))
+        if now <= start < end:
+            out.append(fixture("golf", "Golf", f"Golf: {c['label']} starts ({start:%A}, US time)", start, importance.story_score("golf", "final"), False, "final"))
+    return out
+
+
 def collect(src, now, end, weekday, mine_nba=(), watch=False, tracked_nba=()):
     """Every fixture that matters between now and end (UTC datetimes). Returns (fixtures sorted by time, [sports that failed])."""
     out, failed = [], []
     for sport, fn in (("football", lambda: football(src, now, end, weekday, watch)), ("nba", lambda: nba(src, now, end, weekday, set(mine_nba), set(tracked_nba), watch)), ("nfl", lambda: nfl(src, now, end, weekday)),
                       ("mlb", lambda: mlb(src, now, end, weekday)), ("cricket", lambda: cricket(src, now, end, weekday)), ("f1", lambda: f1(src, now, end, weekday)),
-                      ("tennis", lambda: tennis(src, now, end, weekday))):
+                      ("tennis", lambda: tennis(src, now, end, weekday)), ("golf", lambda: golf(src, now, end, weekday))):
         try:
             out += fn()
         except Exception:

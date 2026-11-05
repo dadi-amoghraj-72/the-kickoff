@@ -1,6 +1,6 @@
 """Around The Sporting World and Interesting Stories (checkpoint 12): the major events of the sports we do not cover in full (SPEC.md, "Around the sporting world").
 
-Structured results from ESPN (rugby internationals, the golf majors, numbered UFC events) are written by code. Everything else is picked from the news feeds
+Structured results from ESPN (rugby internationals, numbered UFC events) are written by code; golf (kickoff/golf.py) and badminton (kickoff/badminton.py) have their own tables. Everything else is picked from the news feeds
 (kickoff/sources/other_sports.py): code narrows the last 36 hours' headlines to those about a covered event, or about an Indian or Southeast Asian athlete in the later rounds
 (the spotlight rule); Claude then sorts each as a result, news or neither and writes one sentence in its own words, checked like every other note. Without Claude the source's
 own headline is shown under a link, but only when it reads like a result. Each line carries its source link. A quiet day shows nothing, and a sport with nothing is not listed.
@@ -11,7 +11,7 @@ import json
 import re
 from datetime import datetime, timedelta, timezone
 
-from kickoff import chess_live, majors, notes, settings
+from kickoff import badminton, chess_live, golf, importance, majors, notes, settings
 from kickoff import render as r
 from kickoff.sources import other_sports
 from kickoff.sources.other_sports import RUGBY_LEAGUES
@@ -100,32 +100,6 @@ def rugby(source, now, fails=None):
                 out.append((f"{side['home']['team']['displayName']} {int(side['home']['score'])}–{int(side['away']['score'])} {side['away']['team']['displayName']} ({name})", f"rugby:{e['id']}"))
             except (KeyError, ValueError, TypeError, IndexError):          # one odd event costs only itself
                 continue
-    return out
-
-
-def golf(source, now, fails=None):
-    """The majors: the winner once an event has finished (last 36 hours), the leader on each day of one in progress."""
-    out = []
-    for tour in ("pga", "lpga"):
-        try:
-            events = source.golf(tour).get("events", [])
-        except Exception:
-            (fails if fails is not None else []).append("golf")
-            continue
-        for e in events:
-            if not MAJORS.search(e["name"]):
-                continue
-            state = e["status"]["type"].get("state")
-            comp = e["competitions"][0]["competitors"]
-            if not comp:
-                continue
-            top = sorted(comp, key=lambda x: x.get("order", 99))[0]
-            who, score = top["athlete"]["displayName"], top.get("score")
-            if state == "post" and timedelta(0) <= now - _utc(e.get("endDate") or e["date"]) <= RECENT + timedelta(days=1):
-                out.append((f"{e['name']}: {who} wins on {score}", f"golf:{e['id']}:post"))
-            elif state == "in":
-                rnd = e["status"].get("period") or ((e["competitions"][0].get("status") or {}).get("period"))
-                out.append((f"{e['name']}{', round ' + str(rnd) if rnd else ''}: {who} leads on {score}", f"golf:{e['id']}:{rnd}:{now:%Y-%m-%d}"))
     return out
 
 
@@ -291,7 +265,7 @@ def run(now, st, source, client=None):
     story_log = {k: v for k, v in (st.get("stories") or {}).items() if now - _utc(v) <= timedelta(days=STORY_DAYS)}
     lines = {k: [] for k in ORDER}
     stats = {"candidates": 0, "shown": 0, "failed": 0, "claude_usage": {"input": 0, "output": 0}}
-    for key, fn in (("rugby", rugby), ("golf", golf), ("ufc", ufc)):
+    for key, fn in (("rugby", rugby), ("ufc", ufc)):
         fails = []
         try:
             for text, uid in fn(source, now, fails):
@@ -302,7 +276,34 @@ def run(now, st, source, client=None):
             stats["failed"] += 1
         stats["failed"] += len(fails)
     sgt_today = (now + timedelta(hours=8)).date()
+    blocks = {"golf": [], "badminton": []}                # tables and notes that are not one-line items: the golf standings, the badminton draws and scorecards
+    story_events = []
+    boards = {}
+    for tour in ("pga", "lpga"):
+        try:
+            boards[tour] = source.golf(tour)
+        except Exception:
+            stats["failed"] += 1
+    golf_state = st.get("golf") or {}
+    g = golf.run(boards, now, golf_state) if boards else {"lines": [], "blocks": [], "winners": [], "state": golf_state}
+    for text, uid in g["lines"]:
+        if uid not in seen:
+            lines["golf"].append(line_html(text))
+            seen.append(uid)
+    blocks["golf"] += g["blocks"]
+    badminton_state = st.get("badminton") or {}
     wiki_fails = []
+    try:
+        b = badminton.run(source, (now + timedelta(hours=8)).date(), badminton_state, wiki_fails)
+        blocks["badminton"] += [h for _, h in b["blocks"]]
+        badminton_state = b["state"]
+    except Exception:
+        stats["failed"] += 1
+    try:
+        from kickoff import events as ev
+        story_events = [ev.story("golf", "Golf", t, importance.story_score("golf", "final"), False, "final") for t in g["winners"]]
+    except Exception:
+        story_events = []
     for fn in (lambda: [(sp, t, uid, link, "Wikipedia") for sp, t, uid, link in majors.run(source, sgt_today, wiki_fails)],
                lambda: [("chess", t, uid, link, "Lichess") for t, uid, link in chess_live.run(source, now)]):
         try:                                           # the majors from Wikipedia and the chess from Lichess: exact lines, written by code
@@ -331,9 +332,11 @@ def run(now, st, source, client=None):
             seen.append(c["link"])
     html = ""
     for key in ORDER:
-        if lines[key]:
-            html += f"<h4>{r.esc(HEADING[key])}</h4><ul class=\"standouts\">{''.join(lines[key][:PER_SPORT])}</ul>"
-            stats["shown"] += len(lines[key][:PER_SPORT])
+        extra = "".join(blocks.get(key, []))
+        if lines[key] or extra:
+            shown = lines[key][:PER_SPORT]
+            html += f"<h4>{r.esc(HEADING[key])}</h4>" + (f'<ul class="standouts">{"".join(shown)}</ul>' if shown else "") + extra
+            stats["shown"] += len(shown) + (1 if extra else 0)
     picks, usage2 = stories(client, items, now, set(seen) | set(story_log))
     stats["claude_usage"] = {k: stats["claude_usage"][k] + usage2[k] for k in usage2}
     for p in picks:
@@ -343,4 +346,4 @@ def run(now, st, source, client=None):
         sections.append({"id": "other-sports", "title": "Other Sports", "html": html})
     if picks:
         sections.append({"id": "stories", "title": "Interesting Stories", "html": stories_html(picks)})
-    return {"sections": sections, "state": {"around": {"seen": seen[-300:], "stories": story_log}}, "stats": stats}
+    return {"sections": sections, "state": {"around": {"seen": seen[-300:], "stories": story_log, "golf": g["state"], "badminton": badminton_state}}, "stats": stats, "events": story_events}

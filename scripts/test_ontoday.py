@@ -161,6 +161,17 @@ got, _ = fixtures.collect(Fake(tennis=[slam]), utc(2027, 1, 27, 0, 0), utc(2027,
 tn = [f for f in got if f["sport"] == "tennis"]
 check("tennis: the quarter-finals are one line at the first match's time; round 3 is not listed", len(tn) == 1 and "quarter-finals" in tn[0]["text"] and tn[0]["when"] == utc(2027, 1, 27, 3, 0))
 
+# golf: a men's major that starts in the window
+import json as _json  # noqa: E402
+_gb = _json.loads((ROOT / "tests" / "fixtures" / "golf_masters_2025.json").read_text())
+class _G(Fake):  # noqa: E302
+    def golf(self, tour):
+        return _gb if tour == "pga" else {"events": []}
+got, _ = fixtures.collect(_G(), utc(2025, 4, 7, 0, 0), utc(2025, 4, 14, 0, 0), 0)
+gf = [f for f in got if f["sport"] == "golf"]
+check("golf: the Masters' start is a fixture for the week (Games to Watch), named with its US day", len(gf) == 1 and gf[0]["text"] == "Golf: Masters Tournament starts (Thursday, US time)" and gf[0]["stage"] == "final", gf)
+check("golf: a major that has already started, or starts after the window, is not listed", [f for f in fixtures.collect(_G(), utc(2025, 4, 11, 0, 0), utc(2025, 4, 14, 0, 0), 0)[0] if f["sport"] == "golf"] == [])
+
 # a sport that breaks costs only itself
 got, failed = fixtures.collect(Fake(football=fb, boom=("nba", "cricket")), now, end, 3)
 check("a failing sport is skipped and reported; the others stay", any(f["sport"] == "football" for f in got), failed)

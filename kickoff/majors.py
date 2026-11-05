@@ -1,11 +1,8 @@
 """The major events of the sports without a proper data feed, read from Wikipedia's free API (checkpoint 12, second pass, 2026-11-05).
 
-A calendar of the events in SPEC.md ("Around the sporting world") says which Wikipedia pages to look at and in which months (so a quiet month costs no requests). Two page layouts are
-understood, both tested on real 2025 pages:
-  - the infobox with a champion (darts, handball, field hockey, chess, women's football): "winner", "champion" or "champions";
-  - the BWF tournament page: each discipline has a "Finals" bracket whose last round is the final (the bold side won) and whose first round is the semi-finals.
-An event is reported once, when its end date has passed (within the last three days) and a champion is there. For badminton the semi-finalists from India and Southeast Asia are named too
-(the spotlight rule). Volunteers edit these pages and sometimes rename them: a page that is missing or laid out differently gives nothing, never a wrong line."""
+A calendar of the events in SPEC.md ("Around the sporting world") says which Wikipedia pages to look at and in which months (so a quiet month costs no requests). The infobox with a champion
+(darts, handball, field hockey, chess, women's football: "winner", "champion" or "champions") is understood, tested on real 2025 pages. Badminton has its own module (kickoff/badminton.py).
+An event is reported once, when its end date has passed (within the last three days) and a champion is there. Volunteers edit these pages and sometimes rename them: a page that is missing or laid out differently gives nothing, never a wrong line."""
 import re
 from datetime import date, timedelta
 
@@ -19,12 +16,6 @@ COUNTRY = {"NED": "Netherlands", "DEN": "Denmark", "ARG": "Argentina", "AUS": "A
            "PAK": "Pakistan", "IRL": "Ireland", "SCO": "Scotland", "WAL": "Wales", "JOR": "Jordan", "QAT": "Qatar", "BHR": "Bahrain", "TPE": "Chinese Taipei", "HKG": "Hong Kong"}
 # (sport key, event name, [page titles to try, {y} the year], months it can be on (with a margin), layout)
 CALENDAR = [
-    ("badminton", "All England Open", ["{y} All England Open"], {3, 4}, "bwf"),
-    ("badminton", "Malaysia Open", ["{y} Malaysia Open (badminton)", "{y} Malaysia Open"], {1, 2}, "bwf"),
-    ("badminton", "Indonesia Open", ["{y} Indonesia Open (badminton)", "{y} Indonesia Open"], {6, 7}, "bwf"),
-    ("badminton", "China Open", ["{y} China Open (badminton)", "{y} China Open"], {7, 8, 11, 12}, "bwf"),     # July in 2025, November in 2024: both months are looked at
-    ("badminton", "BWF World Championships", ["{y} BWF World Championships"], {8, 9}, "bwf"),
-    ("badminton", "BWF World Tour Finals", ["{y} BWF World Tour Finals"], {12, 1}, "bwf"),
     ("darts", "PDC World Championship", ["{y} PDC World Darts Championship"], {12, 1, 2}, "infobox"),
     ("darts", "World Matchplay", ["{y} World Matchplay"], {7, 8}, "infobox"),
     ("darts", "Grand Slam of Darts", ["{y} Grand Slam of Darts"], {11, 12}, "infobox"),
@@ -120,68 +111,6 @@ def champion_of(box):
     return None
 
 
-def bwf_finals(w):
-    """{discipline: {"winner", "loser", "score", "semis": [(name, flag, won)]}} from a BWF event page, for every discipline whose final is complete.
-    Each 'Finals' section is a four-team bracket (RD1 semi-finals, RD2 the final); the side written in bold won."""
-    out = {}
-    for sec in re.split(r"(?m)^== ", w)[1:]:
-        title = sec.split("==", 1)[0].strip()
-        if not re.match(r"^(Men's|Women's) (singles|doubles)$|^Mixed doubles$", title):
-            continue
-        fin = sec.split("=== Finals ===", 1)
-        if len(fin) < 2:
-            continue
-        block = fin[1].split("=== Top half ===", 1)[0]
-        f = dict(re.findall(r"\|\s*(RD\d-(?:team|score)\d(?:-\d)?)\s*=\s*(.*)", block))
-        t1, t2 = f.get("RD2-team1", ""), f.get("RD2-team2", "")
-        if not t1 or not t2:
-            continue
-
-        def players(t):
-            return [(re.sub(r"\s*\(badminton\)$", "", (m.group(2) or m.group(1)).strip()), None) for m in re.finditer(r"\[\[([^\]|]*)(?:\|([^\]]*))?\]\]", t)]
-
-        def flags(t):
-            return re.findall(r"\{\{flagicon\|([A-Z]{3})", t)
-
-        win_first = "'''" in t1 and "'''" not in t2
-        win_second = "'''" in t2 and "'''" not in t1
-        if not (win_first or win_second):
-            continue
-        w_t, l_t, wi, li = (t1, t2, "1", "2") if win_first else (t2, t1, "2", "1")
-        games = []
-        for n in (1, 2, 3):
-            a, b = re.sub(r"[']", "", f.get(f"RD2-score{wi}-{n}", "")).strip(), re.sub(r"[']", "", f.get(f"RD2-score{li}-{n}", "")).strip()
-            if a.isdigit() and b.isdigit():
-                games.append(f"{a}–{b}")
-        semis = []
-        for k in (1, 2, 3, 4):
-            t = f.get(f"RD1-team{k}", "")
-            if t:
-                semis.append(([p for p, _ in players(t)], flags(t), "'''" in t))
-        out[title] = {"winner": [p for p, _ in players(w_t)], "winner_flag": (flags(w_t) or [""])[0], "loser": [p for p, _ in players(l_t)], "score": ", ".join(games), "semis": semis}
-    return out
-
-
-def badminton_lines(title, bw):
-    """(champions line, spotlight line or None) for one event's disciplines."""
-    short = {"Men's singles": "men's singles", "Women's singles": "women's singles", "Men's doubles": "men's doubles", "Women's doubles": "women's doubles", "Mixed doubles": "mixed doubles"}
-    parts, spot = [], []
-    for disc in ("Men's singles", "Women's singles", "Men's doubles", "Women's doubles", "Mixed doubles"):
-        d = bw.get(disc)
-        if not d:
-            continue
-        parts.append(f"{short[disc]} {' / '.join(d['winner'])}" + (f" ({d['winner_flag']})" if d["winner_flag"] else ""))
-        for names, fl, won in d["semis"]:
-            hits = [f for f in fl if f in SPOT_FLAGS]
-            if hits and names:
-                final = " / ".join(names) in [" / ".join(d["winner"]), " / ".join(d["loser"])]
-                outcome = ("won the title" if names == d["winner"] else "lost the final" if final else "reached the semi-finals")
-                spot.append(f"{' / '.join(names)} ({hits[0]}) {outcome} in {short[disc]}")
-    if not parts:
-        return None, None
-    return f"{title}: " + "; ".join(parts), (f"{title}, Indian and Southeast Asian athletes: " + "; ".join(spot)) if spot else None
-
-
 # ---- The run ------------------------------------------------------------------------------------
 
 def candidates(today):
@@ -215,22 +144,11 @@ def run(wiki, today, fails=None):
             continue
         link = "https://en.wikipedia.org/wiki/" + title.replace(" ", "_")
         try:
-            if layout == "bwf":
-                box = infobox(text)
-                end = end_date(box.get("dates") or box.get("date"), year)
-                if not end or not (timedelta(0) <= today - end <= WINDOW):
-                    continue
-                champs, spot = badminton_lines(name, bwf_finals(text))
-                if champs:
-                    lines.append((sport, champs, f"maj:{title}", link))
-                if spot:
-                    lines.append((sport, spot, f"maj:{title}:spot", link))
-            else:
-                box = infobox(text)
-                end = end_date(box.get("dates") or box.get("date"), year)
-                champ = champion_of(box)
-                if end and champ and timedelta(0) <= today - end <= WINDOW:
-                    lines.append((sport, f"{name} {year}: {champ} won", f"maj:{title}", link))
+            box = infobox(text)
+            end = end_date(box.get("dates") or box.get("date"), year)
+            champ = champion_of(box)
+            if end and champ and timedelta(0) <= today - end <= WINDOW:
+                lines.append((sport, f"{name} {year}: {champ} won", f"maj:{title}", link))
         except Exception:
             (fails if fails is not None else []).append(sport)
     return lines

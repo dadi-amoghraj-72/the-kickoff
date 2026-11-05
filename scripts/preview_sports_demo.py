@@ -4,8 +4,8 @@
   add --publish to put it at https://dadi-amoghraj-72.github.io/the-kickoff/demo/sports-demo.html, --no-open to skip opening it.
 
 Each block says whether it is real data (a real saved page or today's real feeds) or a made-up game in the real layout:
-  real:      rugby (a Six Nations match), badminton (the 2025 All England Open), darts (the 2025 Grand Slam of Darts), the live headlines of today (Yahoo, Hindu, Straits Times, Google News)
-  real shape, one field changed: golf (a real PGA board with a major's name and a finished status), UFC (a real card made a finished numbered event)
+  real:      rugby (a Six Nations match), golf (the 2025 Masters and Evian Championship), badminton (the 2025 All England Open day by day), darts (the 2025 Grand Slam of Darts), the live headlines of today (Yahoo, Hindu, Straits Times, Google News)
+  real shape, one field changed: UFC (a real card made a finished numbered event)
   made up:   chess (an elite round in the Lichess layout; none was on)"""
 import copy
 import json
@@ -79,13 +79,34 @@ six = load("other_rugby_six_nations.json")
 final = next(e for e in six["events"] if e["status"]["type"]["name"] == "STATUS_FINAL")
 add("Rugby", "Real data", "A Six Nations match from the saved ESPN scoreboard.", datetime.fromisoformat(final["date"].replace("Z", "+00:00")) + timedelta(hours=5), rugby=lambda lg: six if lg == "180659" else {"events": []})
 
-# golf: a real PGA board made a finished major
-pga = copy.deepcopy(load("other_golf_pga.json"))
-e = pga["events"][0]
-e["name"], e["status"]["type"]["state"], e["endDate"] = "Masters Tournament", "post", "2026-11-04T20:00Z"
-top = sorted(e["competitions"][0]["competitors"], key=lambda x: x.get("order", 99))[0]
-top["score"] = "-12"
-add("Golf", "Real shape, name and status changed", "A real PGA Tour board, renamed 'Masters Tournament' and marked finished, so the winner line shows (no major is on in November).", utc(2026, 11, 5, 0, 0), golf=lambda t: pga if t == "pga" else {"events": []})
+# golf: the real 2025 Masters and Evian Championship, as the code shows them after each round
+import copy as _copy  # noqa: E402
+from kickoff import badminton as bd, golf  # noqa: E402
+
+masters, evian = load("golf_masters_2025.json"), load("golf_evian_2025.json")
+
+
+def upto(board, n):
+    b = _copy.deepcopy(board)
+    for c in b["events"][0]["competitions"][0]["competitors"]:
+        for l in c["linescores"]:
+            if l["period"] > n:
+                l["holes"], l["value"], l["displayValue"] = 0, 0, "-"
+    b["events"][0]["status"]["type"].update(state="in", completed=False, name="STATUS_IN_PROGRESS")
+    return b
+
+
+def golf_block(title, kind, note, board, now, tour="pga"):
+    out = golf.run({tour: board}, now, {})
+    html = "".join(out["blocks"]) or "<p class='muted'>Nothing came out of this block.</p>"
+    html += "".join(f"<p class='muted'>Big Stuff line: {render.esc(w)}</p>" for w in out["winners"])
+    blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 {render.esc(kind)}.</strong> {render.esc(note)}</p><h4>Golf</h4>{html}")
+
+
+golf_block("Golf · men's major, Friday", "Real data", "The real 2025 Masters as it stood after round 2 (later rounds emptied): the first 25, then D's players below.", upto(masters, 2), utc(2025, 4, 12, 0, 0))
+golf_block("Golf · men's major, Monday", "Real data", "The real 2025 Masters, final: the winner in gold (after a playoff).", {**masters, "events": [{**masters["events"][0], "endDate": "2026-11-04T20:00Z"}]}, utc(2026, 11, 5, 0, 0))
+golf_block("Golf · women's major, Sunday morning", "Real data", "The real 2025 Evian Championship after round 3: the first 10 only (women's majors show the weekend only).", upto(evian, 3), utc(2025, 7, 13, 0, 0), "lpga")
+golf_block("Golf · women's major, Monday", "Real data", "The real 2025 Evian Championship, final top 10.", {**evian, "events": [{**evian["events"][0], "endDate": "2026-11-04T20:00Z"}]}, utc(2026, 11, 5, 0, 0), "lpga")
 
 # UFC: a real card made a finished numbered event
 ufc = copy.deepcopy(load("other_ufc_scoreboard.json"))
@@ -103,8 +124,23 @@ add("UFC", "Real shape, names and status changed", "A real upcoming card made a 
 
 # badminton and darts: real 2025 Wikipedia pages
 pages = {"2025 All England Open": rd("all_england_2025"), "2025 Grand Slam of Darts": rd("gsod_2025"), "2025 China Open (badminton)": rd("china_open_2025")}
-add("Badminton", "Real data", "The 2025 All England Open's real finals page, read the Monday after the final (16 March 2025), with the Indian and Southeast Asian line.", utc(2025, 3, 17, 0, 0), wiki=lambda t: pages.get(t, ""))
-add("Badminton · a second event", "Real data", "The 2025 China Open, where Satwik and Chirag reached the semi-finals.", utc(2025, 7, 29, 0, 0), wiki=lambda t: {"2025 China Open (badminton)": rd("china_open_2025")}.get(t, ""))
+# badminton: the real 2025 All England Open, shown the way it would come day by day
+ae = rd("all_england_2025")
+parsed = bd.parse(ae)
+tops = bd.top_seeds(parsed)
+
+
+def day(rounds, note=False):
+    fresh = {d: [m for m in info["matches"] if m["round"] in rounds and (m["round"] in bd.LATE or bd.interesting(m, d, tops))] for d, info in parsed.items()}
+    return bd.event_html("All England Open", parsed, {d: v for d, v in fresh.items() if v}, bd.draw_note(parsed, tops) if note else [], tops)
+
+
+for title, note, html in (("Badminton · the draw", "The note when the event starts: who from India and Southeast Asia is in the draw, and the top three singles seeds.", day([], True)),
+                          ("Badminton · first-round day", "One line for each first-round match with an Indian or Southeast Asian player or a top-three singles seed, win or lose.", day(["First round"])),
+                          ("Badminton · quarter-final day", "The same, one line each.", day(["Quarter-finals"])),
+                          ("Badminton · semi-final day", "Every semi-final of the five disciplines, as tables.", day(["Semi-finals"])),
+                          ("Badminton · final day", "Every final, as tables.", day(["Final"]))):
+    blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 Real data (the 2025 All England Open's real page).</strong> {render.esc(note)}</p><h4>Badminton</h4>{html}")
 add("Darts", "Real data", "The 2025 Grand Slam of Darts, read the day after the final (16 November 2025).", utc(2025, 11, 17, 0, 0), wiki=lambda t: pages.get(t, ""))
 
 # chess: made-up elite round in Lichess's layout

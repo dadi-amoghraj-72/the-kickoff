@@ -1,4 +1,4 @@
-"""Tests for the major events read from Wikipedia (badminton, darts, chess, hockey, handball ...) and the chess results from Lichess. The Wikipedia pages are real 2025 pages;
+"""Tests for the major events read from Wikipedia (darts, chess, hockey, handball, women's football ...; badminton has its own tests) and the chess results from Lichess. The Wikipedia pages are real 2025 pages;
 the Lichess tier 5 paths use made-up games in the real layout (no elite event was running when this was built). Run: .venv/bin/python scripts/test_majors.py"""
 import sys
 from datetime import date, datetime, timezone
@@ -21,8 +21,7 @@ def check(name, ok, detail=""):
 
 
 rd = lambda n: (FX / f"majors_{n}.txt").read_text()  # noqa: E731
-PAGES = {"2025 All England Open": rd("all_england_2025"), "2025 China Open (badminton)": rd("china_open_2025"), "2025 BWF World Tour Finals": rd("wtf_2025"),
-         "2025 Grand Slam of Darts": rd("gsod_2025"), "2025 PDC World Darts Championship": rd("pdc_wc_2025"), "2025 World Men's Handball Championship": rd("handball_m_2025"),
+PAGES = {"2025 Grand Slam of Darts": rd("gsod_2025"), "2025 PDC World Darts Championship": rd("pdc_wc_2025"), "2025 World Men's Handball Championship": rd("handball_m_2025"),
          "2025 Men's Hockey Asia Cup": rd("euro_hockey_w_2025")}
 
 
@@ -44,22 +43,10 @@ check("end dates: a range within a month, across a year, and without a year (the
       and majors.end_date("15 December 2024 – {{nowrap|3 January 2025}}", 2025) == date(2025, 1, 3) and majors.end_date("9–17 August", 2025) == date(2025, 8, 17) and majors.end_date("", 2025) is None)
 check("a country code in a flag template becomes the country (handball and hockey champions)", majors.champion_of(majors.infobox(rd("handball_m_2025"))) == "Denmark" and majors.champion_of(majors.infobox(rd("euro_hockey_w_2025"))) == "Netherlands")
 check("a champion field that says TBD or is empty is no champion", majors.champion_of({"winner": "TBD"}) is None and majors.champion_of({"champion": ""}) is None and majors.champion_of({}) is None)
-f = majors.bwf_finals(rd("all_england_2025"))
-check("badminton: all five finals of the 2025 All England are read with winners, runners-up and scores", set(f) == {"Men's singles", "Women's singles", "Men's doubles", "Women's doubles", "Mixed doubles"}
-      and f["Men's singles"]["winner"] == ["Shi Yuqi"] and f["Men's singles"]["loser"] == ["Lee Chia-hao"] and f["Men's singles"]["score"] == "21–17, 21–19"
-      and f["Women's singles"]["winner"] == ["An Se-young"] and f["Women's singles"]["score"] == "13–21, 21–18, 21–18", f)
-check("badminton: a doubles side is both players", f["Men's doubles"]["winner"] == ["Kim Won-ho", "Seo Seung-jae"] and f["Men's doubles"]["winner_flag"] == "KOR" and f["Mixed doubles"]["loser"] == ["Feng Yanzhe", "Wei Yaxin"])
-champs, spot = majors.badminton_lines("All England Open", f)
-check("badminton: the champions line has every discipline", champs == "All England Open: men's singles Shi Yuqi (CHN); women's singles An Se-young (KOR); men's doubles Kim Won-ho / Seo Seung-jae (KOR); women's doubles Nami Matsuyama / Chiharu Shida (JPN); mixed doubles Guo Xinwa / Chen Fanghui (CHN)", champs)
-check("badminton spotlight: the Indonesian pair who lost the final and the Indonesian pair knocked out in the semi-finals are named", spot and "Leo Rolly Carnando / Bagas Maulana (INA) lost the final in men's doubles" in spot and "(IDN) reached the semi-finals in men's doubles" in spot, spot)
-_, spot2 = majors.badminton_lines("China Open", majors.bwf_finals(rd("china_open_2025")))
-check("badminton spotlight: Indian players are named (Satwik and Chirag in the semi-finals), Malaysians and Indonesians too, and a title winner is 'won the title'",
-      "Satwiksairaj Rankireddy / Chirag Shetty (IND) reached the semi-finals in men's doubles" in spot2 and "Fajar Alfian / Muhammad Shohibul Fikri (IDN) won the title in men's doubles" in spot2 and "(MAS)" in spot2, spot2)
-check("a page with no finals gives nothing, not an error", majors.bwf_finals("== Men's singles ==\n=== Finals ===\nnothing yet\n") == {} and majors.badminton_lines("X", {}) == (None, None))
 
 # ---- the calendar -------------------------------------------------------------------------------------
 c = {(n, y) for _, n, _, _, y in majors.candidates(date(2025, 11, 17))}
-check("in November only the November events are looked at (China Open and Grand Slam of Darts, the women's handball worlds ...), never March's All England", ("Grand Slam of Darts", 2025) in c and ("China Open", 2025) in c and not any(n == "All England Open" for n, _ in c), sorted(c))
+check("in November only the November events are looked at (the Grand Slam of Darts, the women's handball worlds ...), never March's or July's events", ("Grand Slam of Darts", 2025) in c and not any(n in ("World Men's Handball Championship", "Candidates Tournament") for n, _ in c), sorted(c))
 check("in January the PDC World Championship is found under the title of that year, and the previous year's events still in their window", any(n == "PDC World Championship" for n, _ in {(n, y) for _, n, _, _, y in majors.candidates(date(2026, 1, 3))}))
 
 # ---- the run ----------------------------------------------------------------------------------------------
@@ -70,7 +57,6 @@ check("darts: the day after the Grand Slam of Darts final, the winner is reporte
 check("four days after the end the event is no longer news", majors.run(Wiki(PAGES), date(2025, 11, 20)) == [])
 check("before the end date nothing is reported (the champion field is not read ahead of the dates)", majors.run(Wiki(PAGES), date(2025, 11, 10)) == [])
 got = majors.run(Wiki(PAGES), date(2025, 3, 17))
-check("badminton: the Monday after the All England final, two lines: the champions and the Indian and Southeast Asian athletes", [s for s, *_ in got] == ["badminton", "badminton"] and got[0][1].startswith("All England Open: men's singles Shi Yuqi") and "Indian and Southeast Asian" in got[1][1], got)
 orig = majors.CALENDAR
 majors.CALENDAR = [("handball", "World Men's Handball Championship", ["{y} World Men's Handball Championship"], {2}, "infobox")]
 got = majors.run(Wiki(PAGES), date(2025, 2, 3))
