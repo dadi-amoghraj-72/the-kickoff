@@ -32,8 +32,8 @@ NOW = utc(2026, 11, 5, 0, 0)
 class Src:
     """A fake Source with canned answers; a name in `boom` raises."""
 
-    def __init__(self, rugby=None, golf=None, ufc=None, rankings=None, news=(), boom=()):
-        self.r, self.g, self.u, self.k, self.n, self.boom = rugby or {}, golf or {}, ufc, rankings, list(news), set(boom)
+    def __init__(self, rugby=None, golf=None, ufc=None, news=(), boom=()):
+        self.r, self.g, self.u, self.n, self.boom = rugby or {}, golf or {}, ufc, list(news), set(boom)
 
     def rugby(self, league):
         if "rugby" in self.boom:
@@ -50,8 +50,8 @@ class Src:
             raise RuntimeError
         return self.u or {"events": []}
 
-    def ufc_rankings(self):
-        return self.k or {"rankings": []}
+    def ufc_page(self, slug):
+        raise RuntimeError("no UFC.com in this fake")
 
     def news(self):
         if "news" in self.boom:
@@ -77,26 +77,6 @@ masters = json.loads((FX / "golf_masters_2025.json").read_text())
 major = copy.deepcopy(masters)
 major["events"][0]["endDate"] = "2026-11-04T20:00Z"
 
-# ---- UFC (real scoreboard and rankings, made numbered and finished) ----------------------------------
-ufc = copy.deepcopy(load("other_ufc_scoreboard.json"))
-ranks = load("other_ufc_rankings.json")
-ranked_name = ranks["rankings"][0]["ranks"][0]["athlete"]["displayName"]
-e = ufc["events"][0]
-e["name"] = "UFC 330: Test vs. Test"
-e["date"] = "2026-11-04T22:00Z"
-for c in e["competitions"]:
-    c["status"]["type"]["completed"] = True
-main, co = e["competitions"][-1], e["competitions"][-2]
-main["competitors"][0]["athlete"]["displayName"], main["competitors"][0]["winner"], main["competitors"][1]["winner"] = ranked_name, True, False
-co["competitors"][0]["athlete"]["displayName"], co["competitors"][1]["athlete"]["displayName"] = "Unranked One", "Unranked Two"
-co["competitors"][0]["winner"], co["competitors"][1]["winner"] = True, False
-got = around.ufc(Src(ufc=ufc, rankings=ranks), NOW)
-check("UFC: a numbered event's main event with a ranked fighter is a line; the co-main of two unranked fighters is not", len(got) == 1 and "main event" in got[0][0] and ranked_name in got[0][0] and "beat" in got[0][0], got)
-fight_night = copy.deepcopy(ufc)
-fight_night["events"][0]["name"] = "UFC Fight Night: A vs. B"
-check("UFC: a Fight Night is not covered (numbered events only)", around.ufc(Src(ufc=fight_night, rankings=ranks), NOW) == [])
-check("UFC: a card still to be fought gives nothing", around.ufc(Src(ufc=load("other_ufc_scoreboard.json"), rankings=ranks), NOW) == [])
-
 # ---- which headlines count ---------------------------------------------------------------------------
 sp = lambda t, x="": around.sport_of(item(t, x))  # noqa: E731
 check("badminton: an event at the bar is sorted; a Super 750 semi-final by an Indian is the spotlight", sp("Satwik and Chirag reach All England final", "badminton")[0] == "badminton" and sp("Sindhu into Japan Open semi-final", "badminton Super 750") == ("badminton", True))
@@ -116,8 +96,6 @@ cands = around.candidates([fresh, stale, preview, seen_l], NOW, seen=["https://x
 check("candidates: fresh, not seen, and reading like a result or news; a preview, an old story and a seen link are out", [c["link"] for c in cands] == [fresh["link"]], [c["title"] for c in cands])
 check("candidates: a withdrawal counts as news", len(around.candidates([item("Carlsen withdraws from Norway Chess after illness", "chess", hours=2)], NOW)) == 1)
 check("a theft is not sport: 'Olympic gold stolen from a former hockey captain' is dropped everywhere", around.sport_of(item("Olympic gold, Asian Games silver stolen from former India hockey captain", "hockey")) == (None, False))
-check("plain mode wants an outcome verb: 'Asian Games gold boosts a basketball season' is not a result, 'India storms into the final' is",
-      around.plain_pick([{"link": "a", "title": "Asian Games Gold, Foreign Players Boost KBL Season"}]) == {} and list(around.plain_pick([{"link": "b", "title": "ACT Hockey: Dominant India storms into the final"}])) == ["b"])
 
 check("a line of several results is one item with the title in bold and each result on its own line (readable on a phone); a plain line is unchanged",
       around.line_html("All England Open: men's singles A; women's singles B", "https://w", "Wikipedia", split=True) == '<li><strong>All England Open</strong><br>men&#x27;s singles A<br>women&#x27;s singles B <a href="https://w" rel="noopener">Wikipedia</a></li>'
@@ -168,7 +146,6 @@ check("Claude: 'none' keeps a headline off the page", v[c0["link"]]["kind"] == "
 around.notes.call_json = fake_claude([None])
 v, _ = around.classify(object(), cands)
 check("Claude failing gives an empty verdict, never an error", v == {})
-check("without Claude only headlines that read like a result are shown", list(around.plain_pick(cands)) == [c0["link"]] and around.plain_pick([{"link": "l", "title": "Darts schedule announced"}]) == {})
 
 # ---- stories --------------------------------------------------------------------------------------------
 pool = [item(f"Feature {i}: a surprising tale from the pool number {i}", f"Details about tale {i}.", hours=4, link=f"https://x/f{i}") for i in range(6)]
@@ -185,28 +162,46 @@ check("stories: a text with invented figures is rejected", around.stories(object
 
 # ---- the whole block -------------------------------------------------------------------------------------
 around.notes.call_json = real_call
-news = [item("Littler wins World Darts Championship final", hours=5), item("Gukesh wins Candidates in Toronto", "chess", hours=4, source="ChessBase"),
-        *[item(f"Rugby: England beat Wales {i}", hours=3) for i in range(0)]]
-src = Src(rugby={"180659": six}, golf={"pga": major}, news=news)
+
+
+def claude_all(client, system, schema, content, model=None):
+    """A fake Claude that calls every headline a result with a plain, checkable sentence; no stories."""
+    if system != around.SYSTEM:
+        return {"picks": []}, {"input": 1, "output": 1}
+    items = json.loads(content.split("Items:\n", 1)[1])
+    return {"items": [{"link": i["link"], "kind": "result", "summary": "A result was reported."} for i in items]}, {"input": 10, "output": 5}
+
+
+news = [item("Littler wins World Darts Championship final", hours=5), item("Gukesh wins Candidates in Toronto", "chess", hours=4, source="ChessBase")]
 six_now = copy.deepcopy(six)
 next(e for e in six_now["events"] if e["status"]["type"]["name"] == "STATUS_FINAL")["date"] = (NOW - timedelta(hours=5)).strftime("%Y-%m-%dT%H:%MZ")
-src = Src(rugby={"180659": six_now}, golf={"pga": major}, news=news)
-out = around.run(NOW, {}, src, None)
-ids = [s["id"] for s in out["sections"]]
+around.notes.call_json = claude_all
+out = around.run(NOW, {}, Src(rugby={"180659": six_now}, golf={"pga": major}, news=news), object())
 html = out["sections"][0]["html"]
 check("the block: rugby, then golf, then chess, then darts, each under its own heading", html.index("<h4>Rugby</h4>") < html.index("<h4>Golf</h4>") < html.index("<h4>Chess</h4>") < html.index("<h4>Darts</h4>"), html[:500])
-out2 = around.run(NOW, {}, Src(golf={"pga": major}, news=news), None)
-html2 = out2["sections"][0]["html"]
-check("the block: golf then chess then darts by the fixed order, each headline linked to its source", html2.index("Golf") < html2.index("Darts") and 'href="https://x/' in html2 and out2["stats"]["shown"] >= 2, html2[:400])
-again = around.run(NOW, out2["state"]["around"], Src(golf={"pga": major}, news=news), None)
+check("the feed lines are Claude's sentence with the source's link and name", "A result was reported." in html and 'href="https://x/' in html and ">ChessBase</a>" in html and ">BBC Sport</a>" in html)
+out2 = around.run(NOW, {}, Src(golf={"pga": major}, news=news), object())
+again = around.run(NOW, out2["state"]["around"], Src(golf={"pga": major}, news=news), object())
 check("the block: nothing shown twice — a second run with the saved state has no sections", again["sections"] == [], [s["id"] for s in again["sections"]])
 many = [item(f"Wins World Darts Championship round {i}", hours=2, link=f"https://x/d{i}") for i in range(6)]
-out3 = around.run(NOW, {}, Src(news=many), None)
-check("the block: at most 3 lines for one sport", out3["sections"][0]["html"].count("<li>") == 3)
-quiet = around.run(NOW, {}, Src(news=[item("Weather delays training")]), None)
+out3 = around.run(NOW, {}, Src(news=many), object())
+check("the block: at most 2 feed lines for one sport (D, 2026-11-05)", out3["sections"][0]["html"].count("<li>") == 2, out3["sections"][0]["html"].count("<li>"))
+around.notes.call_json = real_call
+nocl = around.run(NOW, {}, Src(rugby={"180659": six_now}, golf={"pga": major}, news=news), None)
+check("without Claude there are no feed lines at all (no plain headlines), only the structured sports", "<h4>Rugby</h4>" in nocl["sections"][0]["html"] and "Darts" not in nocl["sections"][0]["html"] and "Chess" not in nocl["sections"][0]["html"] and "<a href=\"https://x/" not in nocl["sections"][0]["html"])
+around.notes.call_json = claude_all
+tab = [item("Tanvi Patri scripts history, first Indian woman in the Youth Olympics final", hours=2, source="Facebook"), item("PV Sindhu qualifies for World Tour Finals after Hylo Open win", "badminton", hours=2, source="The News Mill"),
+       item("Satwik and Chirag win the All England Open title", "badminton", hours=2, source="The Hindu"), item("Scheffler wins the Masters", "golf", hours=2, source="BBC Sport"),
+       item("Diamond League final: Kerr wins the mile", "athletics", hours=2, source="BBC Sport"), item("Kerr wins the Diamond League mile in Brussels", "athletics", hours=2, source="Yahoo Sports", link="https://x/y")]
+got = around.candidates(tab, NOW)
+check("the feed candidates are only from the outlets D would trust (BBC, Guardian, ESPN, Straits Times, The Hindu, ChessBase): no Facebook, no small sites, no Yahoo", {c["source"] for c in got} <= {"BBC Sport"} and any("Diamond League" in c["title"] for c in got), [(c["source"], c["title"][:40]) for c in got])
+check("sports with a structured source of their own (badminton, golf, UFC) never come from the feeds", not any(c["sport"] in around.NO_FEED for c in around.candidates([item("Satwik and Chirag win the All England Open title", "badminton", hours=2), item("Scheffler wins the Masters", "golf", hours=2)], NOW)))
+check("there is no Spotlight section any more", "spotlight" not in around.ORDER or not any(c["sport"] == "spotlight" for c in around.candidates([item("Neeraj Chopra wins gold in Zurich", hours=2)], NOW)))
+quiet = around.run(NOW, {}, Src(news=[item("Weather delays training")]), object())
 check("a quiet day gives no sections", quiet["sections"] == [] and quiet["state"]["around"]["seen"] == [])
-broken = around.run(NOW, {}, Src(boom=("rugby", "golf", "ufc", "news")), None)
+broken = around.run(NOW, {}, Src(boom=("rugby", "golf", "ufc", "news")), object())
 check("every page failing gives an empty block and counts the failures, never an error", broken["sections"] == [] and broken["stats"]["failed"] >= 3, broken["stats"])
+around.notes.call_json = real_call
 
 # ---- the edition -------------------------------------------------------------------------------------------
 adapter = lambda n, d, s: around.run(NOW, {}, Src(golf={"pga": major}, news=news), None)  # noqa: E731

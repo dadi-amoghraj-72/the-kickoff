@@ -55,8 +55,10 @@ class Source:
     def ufc(self):
         return self._json(SITE + "mma/ufc/scoreboard")
 
-    def ufc_rankings(self):
-        return self._json(SITE + "mma/ufc/rankings")
+    def ufc_page(self, slug):
+        """UFC.com's event page ('ufc-309') as html: the official source of the fights' details (ranks, title bout, method, round, time)."""
+        self.calls += 1
+        return http.get_bytes(f"https://www.ufc.com/event/{slug}", retries=1, timeout=30).decode("utf-8", "replace")
 
     def wikitext(self, title):
         """A Wikipedia page's wikitext ('' when missing): the majors of the sports without a feed (kickoff.majors). Two seconds between pages keeps Wikipedia's rate limit happy."""

@@ -12,6 +12,7 @@ import re
 from datetime import datetime, timedelta, timezone
 
 from kickoff import badminton, chess_live, golf, importance, majors, notes, settings
+from kickoff import ufc as ufc_mod
 from kickoff import render as r
 from kickoff.sources import other_sports
 from kickoff.sources.other_sports import RUGBY_LEAGUES
@@ -51,6 +52,11 @@ STRICT = re.compile(r"\b(wins?|won|beats?|defeats?|champions?|crowned|claims? (?
 NEGATIVE = re.compile(r"\b(stolen|theft|robbery|burgled|arrested|funeral|obituary|tribute)\b", re.I)         # in the news, but not sport
 NEWS = re.compile(r"\b(withdraws?|withdrawn|ruled out|banned|ban\b|retires?|retirement|confirmed|confirms|doping|injur\w+|suspended)\b", re.I)
 EXCLUDE = {"games": re.compile(r"medall?ists?\b|\bstolen\b|\bformer\b|\blegend|\bdoping\b|\bwhereabouts\b", re.I)}      # a past medallist in the news is not the Games being played
+# D (2026-11-05): the feed headlines were tabloid noise (a Facebook post with emojis). Now: only these outlets, only for sports that have no structured source of their own, only when Claude has
+# written a checked sentence (no Claude, no feed lines), at most two a sport, and no 'Spotlight' section.
+WHITELIST = re.compile(r"\b(bbc|guardian|espn|straits times|the hindu|chessbase)\b", re.I)
+NO_FEED = {"badminton", "golf", "ufc", "spotlight"}
+FEED_PER_SPORT = 2
 KINDS = ["result", "news", "none"]
 
 SYSTEM = """You sort and summarise sports news items for The Kickoff, a personal daily digest. Each item is only a headline and a short blurb from BBC Sport, The Guardian,
@@ -103,35 +109,6 @@ def rugby(source, now, fails=None):
     return out
 
 
-def ufc(source, now, fails=None):
-    """Numbered events only; the main event and the co-main event; a fight only when someone in it is ranked (a champion counts)."""
-    try:
-        events = source.ufc().get("events", [])
-    except Exception:
-        (fails if fails is not None else []).append("ufc")
-        return []
-    out, ranked = [], None
-    for e in events:
-        if not re.match(r"^UFC \d+", e["name"]) or not (timedelta(0) <= now - _utc(e["date"]) <= RECENT + timedelta(hours=18)):
-            continue
-        fights = [c for c in e["competitions"] if c["status"]["type"].get("completed")]
-        if ranked is None:
-            try:
-                ranked = {x["athlete"]["displayName"] for division in source.ufc_rankings().get("rankings", []) for x in division.get("ranks", [])}
-            except Exception:
-                ranked = set()
-        for label, c in (("main event", e["competitions"][-1]), ("co-main event", e["competitions"][-2] if len(e["competitions"]) > 1 else None)):
-            if not c or c not in fights:
-                continue
-            win = next((x for x in c["competitors"] if x.get("winner")), None)
-            lose = next((x for x in c["competitors"] if not x.get("winner")), None)
-            if not win or not lose or not ({win["athlete"]["displayName"], lose["athlete"]["displayName"]} & ranked):
-                continue
-            how = ((c["status"].get("result") or {}).get("description") or (c["status"].get("result") or {}).get("name") or "").strip()
-            out.append((f"{e['name'].split(':')[0]} {label}: {win['athlete']['displayName']} beat {lose['athlete']['displayName']}" + (f" ({how})" if how else ""), f"ufc:{e['id']}:{label}"))
-    return out
-
-
 # ---- Feed items -----------------------------------------------------------------------------------
 
 def sport_of(item):
@@ -169,6 +146,8 @@ def candidates(items, now, seen=()):
             continue
         titles.add(key)
         key, spot = sport_of(i)
+        if key in NO_FEED or not WHITELIST.search(i["source"]):
+            continue
         if key and (RESULT.search(i["title"]) or NEWS.search(i["title"])):            # a preview or a feature is not a result; Claude then sorts the rest
             out.append({**i, "sport": key, "spotlight": spot})
     return out[:MAX_CANDIDATES]
@@ -211,11 +190,6 @@ def classify(client, cands):
         if not pending:
             break
     return out, total
-
-
-def plain_pick(cands):
-    """Without Claude: the source's own headline for an item that reads like a result."""
-    return {c["link"]: {"kind": "result", "summary": None} for c in cands if STRICT.search(c["title"])}
 
 
 def line_html(text, link=None, source=None, split=False):
@@ -265,7 +239,7 @@ def run(now, st, source, client=None):
     story_log = {k: v for k, v in (st.get("stories") or {}).items() if now - _utc(v) <= timedelta(days=STORY_DAYS)}
     lines = {k: [] for k in ORDER}
     stats = {"candidates": 0, "shown": 0, "failed": 0, "claude_usage": {"input": 0, "output": 0}}
-    for key, fn in (("rugby", rugby), ("ufc", ufc)):
+    for key, fn in (("rugby", rugby),):
         fails = []
         try:
             for text, uid in fn(source, now, fails):
@@ -276,7 +250,7 @@ def run(now, st, source, client=None):
             stats["failed"] += 1
         stats["failed"] += len(fails)
     sgt_today = (now + timedelta(hours=8)).date()
-    blocks = {"golf": [], "badminton": []}                # tables and notes that are not one-line items: the golf standings, the badminton draws and scorecards
+    blocks = {"golf": [], "badminton": [], "ufc": []}                # tables and notes that are not one-line items: the golf standings, the badminton draws and scorecards
     story_events = []
     boards = {}
     for tour in ("pga", "lpga"):
@@ -291,6 +265,15 @@ def run(now, st, source, client=None):
             lines["golf"].append(line_html(text))
             seen.append(uid)
     blocks["golf"] += g["blocks"]
+    ufc_state = st.get("ufc") or {}
+    ufc_fails = []
+    try:
+        u = ufc_mod.run(source, now, ufc_state, ufc_fails)
+        blocks["ufc"] = u["blocks"]
+        ufc_state = u["state"]
+    except Exception:
+        stats["failed"] += 1
+    stats["failed"] += min(len(ufc_fails), 1)
     badminton_state = st.get("badminton") or {}
     wiki_fails = []
     try:
@@ -321,13 +304,17 @@ def run(now, st, source, client=None):
         stats["failed"] += 1
     cands = candidates(items, now, seen)
     stats["candidates"] = len(cands)
+    feed_count = {}
     if cands:
-        verdicts, usage = classify(client, cands) if client else (plain_pick(cands), {"input": 0, "output": 0})
+        verdicts, usage = classify(client, cands) if client else ({}, {"input": 0, "output": 0})
         stats["claude_usage"] = usage
         for c in cands:
             v = verdicts.get(c["link"])
             if not v or v["kind"] == "none":
                 continue
+            if feed_count.get(c["sport"], 0) >= FEED_PER_SPORT:
+                continue
+            feed_count[c["sport"]] = feed_count.get(c["sport"], 0) + 1
             lines[c["sport"]].append(line_html(v["summary"] or c["title"], c["link"], c["source"]))
             seen.append(c["link"])
     html = ""
@@ -346,4 +333,4 @@ def run(now, st, source, client=None):
         sections.append({"id": "other-sports", "title": "Other Sports", "html": html})
     if picks:
         sections.append({"id": "stories", "title": "Interesting Stories", "html": stories_html(picks)})
-    return {"sections": sections, "state": {"around": {"seen": seen[-300:], "stories": story_log, "golf": g["state"], "badminton": badminton_state}}, "stats": stats, "events": story_events}
+    return {"sections": sections, "state": {"around": {"seen": seen[-300:], "stories": story_log, "golf": g["state"], "badminton": badminton_state, "ufc": ufc_state}}, "stats": stats, "events": story_events}

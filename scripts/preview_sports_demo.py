@@ -5,7 +5,7 @@
 
 Each block says whether it is real data (a real saved page or today's real feeds) or a made-up game in the real layout:
   real:      rugby (a Six Nations match), golf (the 2025 Masters and Evian Championship), badminton (the 2025 All England Open day by day), darts (the 2025 Grand Slam of Darts), the live headlines of today (Yahoo, Hindu, Straits Times, Google News)
-  real shape, one field changed: UFC (a real card made a finished numbered event)
+  real: UFC 309 and UFC 316 from UFC.com's saved pages
   made up:   chess (an elite round in the Lichess layout; none was on)"""
 import copy
 import json
@@ -108,22 +108,30 @@ golf_block("Golf · men's major, Monday", "Real data", "The real 2025 Masters, f
 golf_block("Golf · women's major, Sunday morning", "Real data", "The real 2025 Evian Championship after round 3: the first 10 only (women's majors show the weekend only).", upto(evian, 3), utc(2025, 7, 13, 0, 0), "lpga")
 golf_block("Golf · women's major, Monday", "Real data", "The real 2025 Evian Championship, final top 10.", {**evian, "events": [{**evian["events"][0], "endDate": "2026-11-04T20:00Z"}]}, utc(2026, 11, 5, 0, 0), "lpga")
 
-# UFC: a real card made a finished numbered event
-ufc = copy.deepcopy(load("other_ufc_scoreboard.json"))
-ranks = load("other_ufc_rankings.json")
-ev = ufc["events"][0]
-ev["name"], ev["date"] = "UFC 330: Test vs. Test", "2026-11-04T22:00Z"
-for c in ev["competitions"]:
-    c["status"]["type"]["completed"] = True
-main, co = ev["competitions"][-1], ev["competitions"][-2]
-main["competitors"][0]["athlete"]["displayName"] = ranks["rankings"][0]["ranks"][0]["athlete"]["displayName"]
-main["competitors"][0]["winner"], main["competitors"][1]["winner"] = True, False
-co["competitors"][0]["athlete"]["displayName"] = ranks["rankings"][1]["ranks"][0]["athlete"]["displayName"]
-co["competitors"][0]["winner"], co["competitors"][1]["winner"] = True, False
-add("UFC", "Real shape, names and status changed", "A real upcoming card made a finished UFC 330 with ranked winners (the real finished-card layout has not been seen yet).", utc(2026, 11, 5, 0, 0), ufc=ufc, rankings=ranks)
+# UFC: the real UFC 309 and UFC 316 pages from UFC.com (saved), as the code shows them
+from kickoff import ufc  # noqa: E402
 
-# badminton and darts: real 2025 Wikipedia pages
-pages = {"2025 All England Open": rd("all_england_2025"), "2025 Grand Slam of Darts": rd("gsod_2025"), "2025 China Open (badminton)": rd("china_open_2025")}
+espn309 = load("ufc_espn_309.json")
+html309, html316 = (FX / "ufc_com_309.html").read_text(), (FX / "ufc_com_316.html").read_text()
+ev316 = {"id": "316", "name": "UFC 316: Dvalishvili vs. O'Malley 2", "date": "2025-06-08T00:00Z", "venues": [{"address": {"city": "Newark"}}], "status": {"type": {"state": "post", "completed": True}}}
+
+
+class UfcSrc:
+    def __init__(self, board, pages):
+        self.b, self.p = board, pages
+
+    def ufc(self):
+        return self.b
+
+    def ufc_page(self, slug):
+        return self.p[slug]
+
+
+for title, note, board, now_, pages in (("UFC · a card with one title fight", "UFC 309 from UFC.com's real page: the main event, the co-main event and the top bout of the Prelims; the ranks are as the card listed them.", espn309, utc(2024, 11, 17, 2, 0), {"ufc-309": html309}),
+                                        ("UFC · a card with two title fights", "UFC 316 from UFC.com's real page: a challenger beating the champion shows the winner with his own rank and the champion on the right.", {"events": [ev316]}, utc(2025, 6, 8, 12, 0), {"ufc-316": html316})):
+    got = ufc.run(UfcSrc(board, pages), now_, {})
+    blocks.append(f"<p class='muted'><strong>Demo \u00b7 {render.esc(title)} \u00b7 Real data.</strong> {render.esc(note)}</p><h4>UFC</h4>{''.join(got['blocks'])}")
+
 # badminton: the real 2025 All England Open, shown the way it would come day by day
 ae = rd("all_england_2025")
 parsed = bd.parse(ae)

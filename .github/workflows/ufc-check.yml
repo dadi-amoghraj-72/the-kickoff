@@ -1,0 +1,19 @@
+# Manual check: can GitHub's servers read UFC.com's event page (the official source of the UFC fight details)? Builds, commits and sends nothing.
+name: UFC check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - run: python scripts/ufc_check.py

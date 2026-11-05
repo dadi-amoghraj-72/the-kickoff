@@ -422,3 +422,16 @@ tr.also td { color: var(--muted); font-style: italic; }
 .pts.f1.golf tr.p1 td { color: var(--gold); font-weight: 700; }
 .standouts.bd li { margin-bottom: 12px; line-height: 1.45; }
 .standouts.bd li strong { color: var(--chalk); }
+
+/* UFC: one box a fight, built like an NBA game (winner, def., loser) with the details under it */
+.ufc { margin: 14px 0 8px; }
+.ufc table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 16px; }
+.ufc th.tt { text-align: center; white-space: normal; letter-spacing: 0; text-transform: none; color: var(--chalk); font-size: 16px; padding: 10px 8px 8px; }
+.ufc td { padding: 6px 4px; white-space: normal; border-bottom: 0; vertical-align: middle; }
+.ufc tr.vs td { padding-top: 10px; padding-bottom: 12px; line-height: 1.3; }
+.ufc td.wn { text-align: left; padding-left: 8px; overflow-wrap: anywhere; }
+.ufc td.df { text-align: center; color: var(--muted); font-size: 14px; padding-left: 0; padding-right: 0; }
+.ufc td.ls { text-align: right; padding-right: 8px; overflow-wrap: anywhere; }
+.ufc tr.dt td { font-size: 14px; border-top: 1px solid var(--hairline); }
+.ufc td.k { color: var(--muted); padding-left: 8px; }
+.ufc td.v { text-align: right; padding-right: 8px; }
