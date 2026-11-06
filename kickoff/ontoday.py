@@ -46,6 +46,12 @@ def _line(f, with_day=False):
     return f'<li><span class="when">{(t.strftime("%a ") if with_day else "")}{stamp}</span> {r.esc(f["text"])}</li>'
 
 
+def plain_line(f):
+    """'Under way · Cricket: A v B', '9:15am · NFL: A at B' or 'All day · Golf: ...' as one text line (the Telegram ping's Today block)."""
+    stamp = "Under way" if "live" in f["flags"] else "All day" if "dateonly" in f["flags"] else clock(f["when"])
+    return f"{stamp} \u00b7 {f['text']}"
+
+
 def today_html(found):
     """'While You're Up' then 'Overnight'; '' when nothing matters today."""
     chosen = pick_today(found)

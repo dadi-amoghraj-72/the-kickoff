@@ -116,6 +116,19 @@ def headlines(stories, limit=3):
     return [s["text"] for s in stories[:limit]]
 
 
+def fill_headlines(selected, stories, stars_, limit=3):
+    """The Telegram ping's headlines can never be empty (D, 2026-11-05: a quiet Friday sent the date and a link): the key scores first, then the Stars Of The Night, then the best of
+    the rest of the finished games even if they are below the bar (that is how the Heat's overtime game would have got there)."""
+    out = [s["text"] for s in selected[:limit]]
+    for p in stars_:
+        if len(out) < limit:
+            out.append(f"Star Of The Night: {p['text']}")
+    for s in sorted((x for x in stories if x["text"] not in out), key=lambda x: (-x["score"], x["text"])):
+        if len(out) < limit:
+            out.append(s["text"])
+    return out[:limit]
+
+
 def lead_sport(stories):
     """Which sport group leads (kickoff/order.py ids). Plain rules from SPEC: D's teams first; among several, the most important stage then the score; else a big
     competition moment (a knockout or playoff story); else None (normal order)."""
@@ -141,5 +154,5 @@ def build(events, news=(), injuries=(), weekday=1):
     selected = select(stories, weekday)
     star_list = stars([e for e in events if e.get("kind") == "perf"])
     major = {p: next(s["text"].split(": ", 1)[-1] for s in stories if s.get("promote") == p) for p in promoted(stories)}
-    return {"html": html(selected, star_list, news, injuries), "headlines": headlines(selected), "lead": lead_sport(stories), "promoted": list(major),
+    return {"html": html(selected, star_list, news, injuries), "headlines": fill_headlines(selected, stories, star_list), "quiet": len(selected) < 3, "lead": lead_sport(stories), "promoted": list(major),
             "majors": major, "selected": selected, "stars": star_list}

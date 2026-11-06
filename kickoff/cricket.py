@@ -201,7 +201,7 @@ def day_of(m, entry=None, now=None):
             return int(found.group(1))
     if now is not None and m.get("matchType") == "test" and m.get("dateTimeGMT"):
         try:
-            return max(1, min(5, (now.date() - started(m).date()).days + 1))
+            return max(1, min(5, int((now - started(m)) / timedelta(days=1)) + 1))                # the latest day whose start has passed (a Test starts at the same time every day)
         except (ValueError, TypeError):
             return None
     return None
@@ -478,18 +478,38 @@ def full_scorecard_html(innings, from_index=0):
 # ---- Standouts, from the scorecard ------------------------------------------------------------
 
 CENTURY, FIVE_FOR, FAST_FIFTY_BALLS, T20_FOUR_FOR = 100, 5, 25, 4
+FIFTY, ECON_WICKETS, ECON_MAX, TEN_FOR = 50, 3, 5.0, 10          # D, 2026-11-05: any T20 fifty; 3 or 4 wickets under 5 an over (T20, ODI); ten wickets in a match (both innings added)
+LADDER = (100, 150, 200, 250, 300)                               # a big innings is announced again at each step (a 111* on day 1 and 160* on day 2: the second is news)
 KOHLI = re.compile(r"\bkohli\b", re.I)    # D's favourite player in all of sport (2026-11-05): always listed in the standouts when he batted, at the top
-TIER = {"century": 0, "five-for": 1, "fast fifty": 2, "four-for": 3, "kohli": 4}  # ranking order: rarer and bigger first
+TIER = {"ten-for": 0, "century": 0, "five-for": 1, "fast fifty": 2, "four-for": 3, "fifty": 4, "economy": 5, "kohli": 6}  # ranking order: rarer and bigger first
 MAX_STANDOUTS = 5
 
 
+def balls_of(overs):
+    """Balls from an overs figure written 4.0, 3.4 (3 overs and 4 balls) or '4'."""
+    try:
+        o = float(overs)
+    except (TypeError, ValueError):
+        return 0
+    whole = int(o)
+    return whole * 6 + int(round((o - whole) * 10))
+
+
+def economy_of(runs, overs):
+    balls = balls_of(overs)
+    return round(runs / (balls / 6), 2) if balls else None
+
+
 def standouts(card, match):
-    """Performances that meet the spec's thresholds, from a scorecard. From a final scorecard we can only say that a fifty
-    came off 25 balls or fewer when the whole innings did (a 50 reached early in an 80 is invisible), so that rule is
-    conservative. T20 hat-tricks and career milestones are not in a scorecard and are not claimed."""
+    """Performances that meet D's thresholds (2026-11-05), from a scorecard: a hundred (any format); in a T20 any fifty (a 'fast fifty' when it came off 25 balls or fewer: only that
+    one is a Star Of The Night); five wickets (any format); in a T20 four wickets; in a T20 or an ODI three or four wickets at under five an over; and ten wickets in the match, a bowler's
+    wickets in every innings added (it can come before the match ends). T20 hat-tricks and career milestones are not in a scorecard and are not claimed."""
     out = []
-    t20 = match.get("matchType") == "t20"
+    mtype = match.get("matchType")
+    t20 = mtype == "t20"
+    short = mtype in ("t20", "odi")
     teams = match.get("teams") or []
+    spells = {}
     for inn in card.get("scorecard") or []:
         batting_team = team_of(inn.get("inning", ""), teams)
         bowling_team = next((t for t in teams if t != batting_team), "")
@@ -499,18 +519,32 @@ def standouts(card, match):
                    "fours": b.get("4s") or 0, "sixes": b.get("6s") or 0, "not_out": (b.get("dismissal-text") or "").lower() == "not out"}
             if runs >= CENTURY:
                 out.append({**who, "kind": "century"})
-            elif t20 and runs >= 50 and 0 < balls <= FAST_FIFTY_BALLS:         # D, 2026-11-05: fifties and four-wicket hauls matter in T20; in ODIs and Tests only hundreds and five-fors
+            elif t20 and runs >= FIFTY and 0 < balls <= FAST_FIFTY_BALLS:
                 out.append({**who, "kind": "fast fifty"})
+            elif t20 and runs >= FIFTY:
+                out.append({**who, "kind": "fifty"})
             elif KOHLI.search(who["name"]) and balls > 0:
                 out.append({**who, "kind": "kohli"})
         for b in inn.get("bowling") or []:
-            wickets = b.get("w") or 0
-            who = {"name": b["bowler"]["name"], "team": bowling_team, "against": batting_team, "wickets": wickets, "runs_conceded": b.get("r") or 0,
-                   "overs": b.get("o"), "maidens": b.get("m") or 0}
+            wickets, conceded = b.get("w") or 0, b.get("r") or 0
+            who = {"name": b["bowler"]["name"], "team": bowling_team, "against": batting_team, "wickets": wickets, "runs_conceded": conceded,
+                   "overs": b.get("o"), "maidens": b.get("m") or 0, "economy": economy_of(conceded, b.get("o"))}
+            spell = spells.setdefault((who["name"], bowling_team), {**who, "wickets": 0, "runs_conceded": 0, "parts": [], "balls": 0})
+            spell["wickets"] += wickets
+            spell["runs_conceded"] += conceded
+            spell["balls"] += balls_of(b.get("o"))
+            spell["parts"].append((wickets, conceded))
             if wickets >= FIVE_FOR:
                 out.append({**who, "kind": "five-for"})
             elif t20 and wickets >= T20_FOUR_FOR:
                 out.append({**who, "kind": "four-for"})
+            elif short and wickets >= ECON_WICKETS and who["economy"] is not None and who["economy"] < ECON_MAX:
+                out.append({**who, "kind": "economy"})
+    for spell in spells.values():                       # ten wickets in the match: one line, instead of the two five-fors that made it
+        if len(spell["parts"]) >= 2 and spell["wickets"] >= TEN_FOR:
+            out = [o for o in out if not (o.get("name") == spell["name"] and o["kind"] in ("five-for", "four-for", "economy"))]
+            out.append({**{k: spell[k] for k in ("name", "team", "against", "wickets", "runs_conceded", "maidens", "parts")}, "overs": f"{spell['balls'] // 6}.{spell['balls'] % 6}" if spell["balls"] % 6 else spell["balls"] // 6,
+                        "economy": economy_of(spell["runs_conceded"], spell["balls"] // 6 + (spell["balls"] % 6) / 10), "kind": "ten-for"})
     return [{**o, "match": match["name"], "result": match.get("status") or ""} for o in out]
 
 
@@ -522,8 +556,10 @@ def rank(items, limit=MAX_STANDOUTS):
             return (-1, -o.get("runs", 0), o.get("balls", 0))       # Virat Kohli first, whatever he scored
         if o["kind"] == "century":
             return (k, -o["runs"], o["balls"])
-        if o["kind"] in ("five-for", "four-for"):
+        if o["kind"] in ("ten-for", "five-for", "four-for", "economy"):
             return (k, -o["wickets"], o["runs_conceded"])
+        if o["kind"] == "fifty":
+            return (k, -o["runs"], o["balls"])
         return (k, o["balls"], -o["runs"])
     return sorted(items, key=key)[:limit]
 
@@ -535,18 +571,22 @@ def standout_text(o):
 
 
 def standout_html(o, context=True):
-    """One standout as a clean bullet (D, 2026-11-05): 'Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W' and
-    'Sophie Molineux (Melbourne Renegades W): 4/22 (4 ov) v Hobart Hurricanes W'. `context` is kept for the callers; the match context is no longer written."""
+    """One standout as a clean bullet (D, 2026-11-05): 'Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W',
+    'Sophie Molineux (Melbourne Renegades W): 3/18 (4 ov, 4.5 econ) v Hobart Hurricanes W' and, for ten in a match, 'Taskin Ahmed (Bangladesh): 10/121 in the match (5/60, 5/61) v West Indies'.
+    `context` is kept for the callers; the match context is no longer written."""
     who = f"<strong>{r.esc(o['name'])}</strong> ({r.esc(wname(o['team']))})"
     against = f" v {r.esc(wname(o['against']))}" if o.get("against") else ""
-    if o["kind"] in ("century", "fast fifty", "kohli"):
+    if o["kind"] in ("century", "fast fifty", "fifty", "kohli"):
         bits = [f"{o['runs']}{'*' if o['not_out'] else ''} ({o['balls']})"]
         for key, one, many in (("fours", "four", "fours"), ("sixes", "six", "sixes")):
             if o[key]:
                 bits.append(f"{o[key]} {one if o[key] == 1 else many}")
         return f"<li>{who}: {', '.join(bits)}{against}</li>"
+    if o["kind"] == "ten-for":
+        return f"<li>{who}: {o['wickets']}/{o['runs_conceded']} in the match ({', '.join(f'{w}/{rc}' for w, rc in o['parts'])}){against}</li>"
     overs = f"{o['overs']:g}" if isinstance(o["overs"], (int, float)) else str(o["overs"])
-    return f"<li>{who}: {o['wickets']}/{o['runs_conceded']} ({overs} ov){against}</li>"
+    econ = f", {o['economy']:.1f} econ" if o.get("economy") is not None else ""
+    return f"<li>{who}: {o['wickets']}/{o['runs_conceded']} ({overs} ov{econ}){against}</li>"
 
 
 def standouts_html(items, inline=False):
@@ -663,9 +703,11 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
            "ipl": ipl_state, "cards": dict(list(cards.items())[-60:]), "test_done": dict(list({**prev_done, **test_done}.items())[-20:]), "test_sig": dict(list({**prev_sig, **test_sig}.items())[-20:])}
     try:                                                   # for The Big Stuff (kickoff/events.py): finished matches, with Virat Kohli's figures when he batted
         from kickoff import events                         # here, not at the top: events reads this module too
-        story_events, perfs = events.cricket(picked, shown_cards, (now + timedelta(hours=8)).weekday())
+        story_events, perfs, new_keys = events.cricket(picked, shown_cards, (now + timedelta(hours=8)).weekday(), st.get("milestones", []))
+        new["milestones"] = sorted(set(st.get("milestones", [])) | new_keys)[-400:]
     except Exception:
         story_events, perfs = [], []
+        new["milestones"] = list(st.get("milestones", []))
     return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": total_standouts},
             "events": story_events + perfs}
 

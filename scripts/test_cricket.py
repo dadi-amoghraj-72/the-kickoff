@@ -207,13 +207,13 @@ check("end to end: the stale card is not shown and not saved (no 'Gill batting')
 real_card_consistent = ck.card_consistent
 ck.card_consistent = lambda card, match: True   # the older tests below hand ONE saved card to every match; the real check would rightly refuse it for the others
 so = ck.standouts(CARD, CARD)
-check("the real NZ v India scorecard has exactly two standouts: Iyer's fast fifty and Milne's T20 four-for", sorted((o["name"], o["kind"]) for o in so) ==
-      [("Adam Milne", "four-for"), ("Shreyas Iyer", "fast fifty")], [(o["name"], o["kind"]) for o in so])
+check("the real NZ v India T20 scorecard: Iyer's fast fifty, Milne's four-for and three ordinary fifties (Kishan, Seifert, Phillips)", sorted((o["name"], o["kind"]) for o in so) ==
+      [("Adam Milne", "four-for"), ("Glenn Phillips", "fifty"), ("Ishan Kishan", "fifty"), ("Shreyas Iyer", "fast fifty"), ("Tim Seifert", "fifty")], [(o["name"], o["kind"]) for o in so])
 iyer = next(o for o in so if o["name"] == "Shreyas Iyer")
 milne = next(o for o in so if o["name"] == "Adam Milne")
 check("Iyer: 50 off 23 balls for India, against New Zealand", (iyer["runs"], iyer["balls"], iyer["team"], iyer["against"]) == (50, 23, "India", "New Zealand"), iyer)
 check("Milne: 4 for 19 for New Zealand (the bowling side is the other team), against India", (milne["wickets"], milne["runs_conceded"], milne["team"], milne["against"]) == (4, 19, "New Zealand", "India"), milne)
-check("Seifert's 93 off 50, Kishan's 61 off 32 and Phillips' 65 off 38 are not standouts", not any(o["name"] in ("Tim Seifert", "Ishan Kishan", "Glenn Phillips") for o in so))
+check("Seifert's 93 off 50, Kishan's 61 off 32 and Phillips' 65 off 38 are ordinary T20 fifties: standouts, but not fast fifties", all(o["kind"] == "fifty" for o in so if o["name"] in ("Tim Seifert", "Ishan Kishan", "Glenn Phillips")) and sum(1 for o in so if o["kind"] == "fifty") == 3)
 
 # ---- The thresholds, exactly ----
 def bat(name, r, b, out="b X"):
@@ -231,10 +231,10 @@ def card_of(batting=(), bowling=(), fmt="t20"):
 
 
 kinds = lambda batting=(), bowling=(), fmt="t20": [(o["name"], o["kind"]) for o in ck.standouts(*card_of(batting, bowling, fmt))]  # noqa: E731
-check("100 is a century, 99 is not", kinds([bat("P", 100, 60)]) == [("P", "century")] and kinds([bat("P", 99, 60)]) == [])
+check("100 is a century; 99 in a T20 is a fifty (any T20 fifty is a standout, D 2026-11-05)", kinds([bat("P", 100, 60)]) == [("P", "century")] and kinds([bat("P", 99, 60)]) == [("P", "fifty")])
 check("a century that is also fast is a century, not a fast fifty", kinds([bat("P", 104, 22)]) == [("P", "century")])
-check("50 off 25 balls is a fast fifty, 50 off 26 is not, 49 off 20 is not", kinds([bat("P", 50, 25)]) == [("P", "fast fifty")] and kinds([bat("P", 50, 26)]) == [] and kinds([bat("P", 49, 20)]) == [])
-check("a missing ball count (0) never counts as a fast fifty", kinds([bat("P", 60, 0)]) == [])
+check("50 off 25 balls is a fast fifty (the Star Of The Night one), 50 off 26 is an ordinary fifty, 49 off 20 is nothing", kinds([bat("P", 50, 25)]) == [("P", "fast fifty")] and kinds([bat("P", 50, 26)]) == [("P", "fifty")] and kinds([bat("P", 49, 20)]) == [])
+check("a missing ball count (0) never counts as a fast fifty (it is an ordinary fifty)", kinds([bat("P", 60, 0)]) == [("P", "fifty")])
 check("five wickets is a five-wicket haul in any format; four is not in an ODI", kinds(bowling=[bowl("Q", 5)], fmt="odi") == [("Q", "five-for")] and kinds(bowling=[bowl("Q", 4)], fmt="odi") == [])
 check("four wickets is a standout in a T20 only", kinds(bowling=[bowl("Q", 4)], fmt="t20") == [("Q", "four-for")] and kinds(bowling=[bowl("Q", 3)], fmt="t20") == [])
 check("a five-wicket haul in a T20 is a five-for, not a four-for", kinds(bowling=[bowl("Q", 5)], fmt="t20") == [("Q", "five-for")])
@@ -253,7 +253,7 @@ check("fast fifties: fewer balls first, then more runs", [o["name"] for o in ck.
 hi, hm = ck.standout_html(iyer), ck.standout_html(milne)
 check("a fast fifty line: name (team): runs (balls), fours, sixes v opponent (D, 2026-11-05)", "<strong>Shreyas Iyer</strong> (India): 50 (23), 3 fours, 4 sixes v New Zealand" in hi
       and "5th T20I" not in hi and "won by" not in hi, hi)
-check("a bowling line: name (team): wickets/runs (overs ov) v opponent", "<strong>Adam Milne</strong> (New Zealand): 4/19 (4 ov) v India" in hm, hm)
+check("a bowling line: name (team): wickets/runs (overs ov) v opponent", "<strong>Adam Milne</strong> (New Zealand): 4/19 (4 ov, 4.8 econ) v India" in hm, hm)
 check("no standouts, no heading", ck.standouts_html([]) == "" and 'class="standouts"' in ck.standouts_html(so))
 check("names are escaped", "&lt;" in ck.standout_html({**iyer, "name": "<b>"}) and "<b>" not in ck.standout_html({**iyer, "name": "<b>"}).replace("<strong>", ""))
 
@@ -391,6 +391,20 @@ _t20 = {**_odi, "matchType": "t20"}
 _cardb = lambda bat_, w=None: {"scorecard": [{"inning": "A Inning 1", "batting": [{"batsman": {"name": "P"}, "r": bat_[0], "b": bat_[1], "4s": 4, "6s": 2, "dismissal-text": "c x b y"}], "bowling": [{"bowler": {"name": "Q"}, "w": w or 0, "r": 22, "o": 4, "m": 0}]}]}  # noqa: E731
 check("a fast fifty counts in a T20 and not in an ODI; a century counts in both", [o["kind"] for o in ck.standouts(_cardb((50, 24)), _t20)] == ["fast fifty"] and ck.standouts(_cardb((50, 24)), _odi) == [] and [o["kind"] for o in ck.standouts(_cardb((104, 61)), _odi)] == ["century"])
 check("a four-wicket haul counts in a T20 and not in an ODI; a five-for counts in both", [o["kind"] for o in ck.standouts(_cardb((0, 1), 4), _t20) if o["kind"] != "kohli"] == ["four-for"] and not [o for o in ck.standouts(_cardb((0, 1), 4), _odi) if o["kind"] in ("four-for", "five-for")] and [o["kind"] for o in ck.standouts(_cardb((0, 1), 5), _odi)] == ["five-for"])
+
+# ---- economy, ten in a match (D, 2026-11-05)
+_ctest = {"matchType": "test", "name": "A vs B, 1st Test", "teams": ["A", "B"]}
+_bowl = lambda inning, name, w, r_, o: {"inning": inning, "batting": [], "bowling": [{"bowler": {"name": name}, "w": w, "r": r_, "o": o, "m": 0}]}  # noqa: E731
+check("3 or 4 wickets under 5 an over is a standout in a T20 and an ODI, not in a Test (every Test spell is under 5)",
+      [o["kind"] for o in ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 18, 4)]}, _t20)] == ["economy"] and [o["kind"] for o in ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 40, 10)]}, _odi)] == ["economy"]
+      and ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 40, 20)]}, _ctest) == [])
+check("under 5 means strictly under: 3 for 20 off 4 overs (5.0) is not a standout, 3 for 19 off 4 (4.75) is", ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 20, 4)]}, _t20) == [] and len(ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 19, 4)]}, _t20)) == 1)
+check("economy is in the bullet: 3/18 (4 ov, 4.5 econ)", "3/18 (4 ov, 4.5 econ)" in ck.standout_html(ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 18, 4)]}, _t20)[0]))
+_two = {"scorecard": [_bowl("A Inning 1", "Taskin Ahmed", 5, 60, 20), _bowl("A Inning 2", "Taskin Ahmed", 5, 61, 18)]}
+_ten = ck.standouts(_two, _ctest)
+check("ten wickets across both innings of a Test is one 'ten-for' line, replacing the two five-fors", [o["kind"] for o in _ten] == ["ten-for"] and _ten[0]["wickets"] == 10 and _ten[0]["runs_conceded"] == 121, _ten)
+check("the ten-for bullet: Taskin Ahmed (B): 10/121 in the match (5/60, 5/61) v A", "10/121 in the match (5/60, 5/61) v A" in ck.standout_html(_ten[0]), ck.standout_html(_ten[0]))
+check("nine wickets are not ten, and it can come before the match ends (two innings are enough)", [o["kind"] for o in ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 5, 60, 20), _bowl("A Inning 2", "Q", 4, 50, 15)]}, _ctest)] == ["five-for"])
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

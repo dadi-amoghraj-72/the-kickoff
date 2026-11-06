@@ -176,9 +176,11 @@ def build_edition(now, day, st, adapters, mode="normal", today=None, client=None
         stats["youngguns"] = {"candidates": len(found), "why": yg["why"], "lines": yg["lines"], "plain": yg["plain"], "claude_usage": yg["usage"]}
     except Exception as e:
         problems.append(f"young guns ({type(e).__name__})")
+    today_fixtures, ping_today = [], []
     if today:                                                    # On Today (and on Mondays Games to Watch): what is still to come, in Singapore time
         try:
             got_today = today(now, day, st)
+            today_fixtures = got_today.get("today") or []
             if got_today["html"]:
                 content["on-today"] = {"title": "On Today", "html": got_today["html"]}
             problems += [f"on today: {s_}" for s_ in got_today["failed"]]
@@ -194,6 +196,8 @@ def build_edition(now, day, st, adapters, mode="normal", today=None, client=None
                 content[p_]["headline"] = text
         if big["headlines"]:
             headlines = big["headlines"]
+        if big.get("quiet") and today_fixtures:                  # a quiet morning: the ping also says what is on today (D, 2026-11-05); a busy one stays short
+            ping_today = [ontoday.plain_line(f_) for f_ in ontoday.pick_today(today_fixtures, 3)]
         lead, promoted = big["lead"], big["promoted"]
         stats["bigstuff"] = {"stories": len(events), "shown": [s["why"] for s in big["selected"]], "lead": lead, "promoted": promoted, "stars": [p_["text"] for p_ in big["stars"]]}
     except Exception as e:
@@ -205,7 +209,7 @@ def build_edition(now, day, st, adapters, mode="normal", today=None, client=None
     sections = order.assemble(content, lead, promoted)
     if not sections:
         sections = [{"id": "quiet", "title": "A quiet morning", "html": "<p>Nothing finished overnight in the sports we follow.</p>"}]
-    edition = {"date": day.isoformat(), "dummy": False, "headlines": list(dict.fromkeys(headlines))[:3], "sections": sections,
+    edition = {"date": day.isoformat(), "dummy": False, "headlines": list(dict.fromkeys(headlines))[:3], **({"ping_today": ping_today} if ping_today else {}), "sections": sections,
                "built": now.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "claude": mode}
     return {"edition": edition, "state": new_state, "problems": problems, "failed": failed, "stats": stats}
 

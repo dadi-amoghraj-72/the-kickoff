@@ -768,6 +768,12 @@ def run(now, day, st, source):
     keep["series_notes"] = dict(list(keep["series_notes"].items())[-120:])
     stats["calls"] = getattr(source, "calls", 0)
     try:                                                  # for The Big Stuff: the finished games (D's five teams are his) and the best single night
+        for gid_, g_ in by_id.items():                    # a game-winner in the last seconds makes the game a dramatic finish for The Big Stuff (D, 2026-11-05)
+            try:
+                if deciding_play(g_, boxes.get(gid_)):
+                    g_["clutch"] = True
+            except Exception:
+                pass
         mine_teams = set(FIRST)                           # D's five teams; the tracked stars' big nights come in as Performances of the Day
         found = [(weight(p, kinds_of(p)), p) for p in flat if kinds_of(p)]
         nights = [(f"{p['name']} ({p['team']}): {line(p)}", w) for w, p in sorted(found, key=lambda x: -x[0])[:3]]

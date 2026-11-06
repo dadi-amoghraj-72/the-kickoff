@@ -8,6 +8,7 @@ STAGE = {"final": 10, "knockout": 7, "playoff": 7, "top": 5, "regular": 2}   # p
 MINE = 6               # one of D's teams or players played (Arsenal and Arsenal Women, Sunrisers, Royal Challengers Bengaluru, India men, tracked NBA stars, Jaguars, Steelers, Dodgers in the postseason)
 KOHLI = 8              # Virat Kohli batted: on top of MINE, because he is D's favourite player in all of sport
 LISTED = 2             # one of the 17 listed football clubs
+DRAMA = 4              # a dramatic finish: a game-winner in the last seconds, overtime decided by 3 or less, a one-point game, a winning goal in stoppage time
 WOW = 5                # something crazy happened (a huge margin, two overtimes, a comeback from far behind)
 SPORT_BASE = {"football": 0, "cricket": 0, "nfl": 1, "nba": 0, "mlb": 0, "f1": 8, "tennis": 0, "golf": 0}   # a little extra for sports that are always big news on the morning
 
@@ -30,8 +31,9 @@ def heavy(weekday):
     return weekday in HEAVY_DAYS
 
 
-def story_score(sport, stage="regular", mine=False, listed=False, kohli=False, margin_bonus=0.0, wow=False, weekday=1):
-    """The score of one finished game. weekday: of the edition's date (Monday 0)."""
+def story_score(sport, stage="regular", mine=False, listed=False, kohli=False, margin_bonus=0.0, wow=False, weekday=1, drama=False):
+    """The score of one finished game. weekday: of the edition's date (Monday 0). drama: a dramatic finish (a buzzer-beater, overtime by a point or two, a stoppage-time winner): worth DRAMA on top,
+    added after the quiet-day mark-down so a thriller of any sport is never lost on a quiet morning (D, 2026-11-05: the Heat's buzzer-beater was not even a headline)."""
     s = STAGE.get(stage, STAGE["regular"]) + SPORT_BASE.get(sport, 0) + margin_bonus
     s += MINE if mine else 0
     s += KOHLI if kohli else 0
@@ -43,4 +45,6 @@ def story_score(sport, stage="regular", mine=False, listed=False, kohli=False, m
             s *= DOWNSHIFT_LIGHT
     if wow:
         s += WOW
+    if drama:
+        s += DRAMA
     return round(s, 2)

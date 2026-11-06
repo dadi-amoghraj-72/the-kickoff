@@ -211,8 +211,20 @@ _live = [{"id": "t1", "name": "Bangladesh vs West Indies, 2nd Test, WI tour of B
          {"id": "t3", "name": "Sydney Thunder Women vs Perth Scorchers Women, 11th Match, Women's Big Bash League", "teams": ["Sydney Thunder Women", "Perth Scorchers Women"], "matchType": "t20", "dateTimeGMT": "2026-11-05T08:10:00", "matchStarted": False, "matchEnded": False}]
 got, _ = fixtures.collect(Fake(cricket=_live), now, end, 3)
 _lv = [f for f in got if f["sport"] == "cricket"]
-check("cricket: a Test in progress is listed ('Under way', every day of the match), a Test that has ended (even on day four) is not, and a league that is not the IPL is not",
-      len(_lv) == 1 and "Bangladesh v West Indies · 2nd Test · Day 3" in _lv[0]["text"] and "live" in _lv[0]["flags"] and _lv[0]["when"] == now and "Under way" in ontoday._line(_lv[0]), [(f["text"], f["flags"]) for f in _lv])
+check("cricket (8am Singapore, between days): the Test is listed with the NEXT day and its start time, not 'Under way': day 3 starts at 12pm; the ended Test and the non-IPL league are not listed",
+      len(_lv) == 1 and "Bangladesh v West Indies \u00b7 2nd Test \u00b7 Day 3" in _lv[0]["text"] and "live" not in _lv[0]["flags"] and _lv[0]["when"] == utc(2026, 11, 5, 4, 0) and ">12pm<" in ontoday._line(_lv[0]) and "Under way" not in ontoday._line(_lv[0]), [(f["text"], f["flags"], f["when"]) for f in _lv])
+got, _ = fixtures.collect(Fake(cricket=_live), utc(2026, 11, 5, 6, 0), utc(2026, 11, 6, 0, 0), 3)
+_lv2 = [f for f in got if f["sport"] == "cricket"]
+check("cricket (2pm, play on): the same Test is 'Under way' on day 3", len(_lv2) == 1 and "live" in _lv2[0]["flags"] and "Under way" in ontoday._line(_lv2[0]) and "Day 3" in _lv2[0]["text"], [(f["text"], f["flags"]) for f in _lv2])
+got, _ = fixtures.collect(Fake(cricket=_live), utc(2026, 11, 5, 20, 0), utc(2026, 11, 6, 0, 0), 3)
+check("cricket (play over for the day, next start after the window): nothing is listed", [f for f in got if f["sport"] == "cricket"] == [])
+_d = fixtures.multiday_day
+_s0 = utc(2026, 11, 5, 3, 30)
+check("multi-day days: before the start it is day 1 (not under way); during play under way; after play the next day and its start; after the last day nothing",
+      _d(_s0, utc(2026, 11, 5, 2, 0)) == (1, False, _s0) and _d(_s0, utc(2026, 11, 5, 5, 0)) == (1, True, _s0) and _d(_s0, utc(2026, 11, 5, 23, 15)) == (2, False, utc(2026, 11, 6, 3, 30))
+      and _d(_s0, utc(2026, 11, 6, 5, 0)) == (2, True, utc(2026, 11, 6, 3, 30)) and _d(_s0, utc(2026, 11, 9, 5, 0)) == (5, True, utc(2026, 11, 9, 3, 30)) and _d(_s0, utc(2026, 11, 9, 23, 0)) is None)
+check("the 7:15am Singapore edition of a Test that began the day before reads 'Day 2' with the start at 11:30am Singapore (the 6 November case)",
+      ontoday.clock(_d(_s0, utc(2026, 11, 5, 23, 15))[2]) == "11:30am" and _d(_s0, utc(2026, 11, 5, 23, 15))[0] == 2)
 
 # a sport that breaks costs only itself
 got, failed = fixtures.collect(Fake(football=fb, boom=("nba", "cricket")), now, end, 3)

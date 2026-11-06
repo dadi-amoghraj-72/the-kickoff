@@ -157,5 +157,13 @@ check("so the budget guard sees them: a month of Around alone can reach the plai
 _pg = render.render_edition({"date": "2026-11-05", "dummy": False, "sections": [{"id": "x", "title": "X", "html": "<p>a</p>"}]})
 check("every edition ends with a gold line, 'The End', a gold line, above the footer, once", _pg.count("The End</b>") == 1 and _pg.index('class="theend"') < _pg.index("<footer>") and _pg.index("<p>a</p>") < _pg.index('class="theend"') and _pg.count('class="ln"') == 2)
 
+# ---- the ping on a quiet morning also says what is on today (D, 2026-11-05)
+_qe = {"date": "2026-11-06", "dummy": False, "headlines": ["NBA: Miami Heat 117\u2013116 Los Angeles Clippers (OT)"], "ping_today": ["11:30am \u00b7 Cricket: Bangladesh v West Indies \u00b7 2nd Test \u00b7 Day 2", "9:15am \u00b7 NFL: Jacksonville Jaguars at Baltimore Ravens"], "sections": []}
+_msg = telegram.build_message(_qe)
+check("the quiet-morning ping: the date, the headline, then a Today block of bullets, then the link", _msg.splitlines()[0].startswith("The Kickoff") and "1. NBA: Miami Heat" in _msg and "Today:" in _msg and "\u2022 11:30am \u00b7 Cricket" in _msg and _msg.rstrip().endswith("/editions/2026-11-06/"), _msg)
+_be = {**_qe}
+_be.pop("ping_today")
+check("a busy morning's ping has no Today block", "Today:" not in telegram.build_message(_be))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

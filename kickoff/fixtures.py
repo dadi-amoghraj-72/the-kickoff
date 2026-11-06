@@ -210,6 +210,22 @@ def mlb(src, now, end, weekday):
     return out
 
 
+PLAY_HOURS = 8        # a day's play of a Test, from the scheduled start (three sessions and the intervals), for telling "under way" from "play has not started today"
+
+
+def multiday_day(start, now, days=5, play=timedelta(hours=PLAY_HOURS)):
+    """(day number, under way now, start of that day) for an event played in daily sessions that begin at the same time each day (a Test: days of play from `start`). Before the day's
+    start, or once its play is over, it is the NEXT day that matters (not under way); None once the last scheduled day is over (D, 2026-11-05: 'under way' must not read as live
+    when play has not started; the same logic serves any multi-day event with a daily start)."""
+    if now < start:
+        return 1, False, start
+    n = int((now - start) / timedelta(days=1)) + 1
+    s_n = start + timedelta(days=n - 1)
+    if now < s_n + play:
+        return (n, True, s_n) if n <= days else None
+    return (n + 1, False, start + timedelta(days=n)) if n + 1 <= days else None
+
+
 def cricket(src, now, end, weekday):
     out = []
     try:
@@ -223,7 +239,15 @@ def cricket(src, now, end, weekday):
         except Exception:
             continue
         live = bool(m.get("matchStarted")) and not m.get("matchEnded") and when < now          # on now: a Test on day two, three or four, an ODI half way (D, 2026-11-05)
-        if c["kind"] is None or m.get("matchEnded") or not (live or now <= when < end):
+        day, at = None, when
+        if live and m.get("matchType") == "test":                                              # a Test is under way only while a day's play is on; between days the next day and its start time are shown
+            md = multiday_day(when, now)
+            if md is None:
+                continue
+            day, live, at = md
+            if not live and not (now <= at < end):
+                continue
+        if c["kind"] is None or m.get("matchEnded") or not (live or now <= at < end):
             continue
         if c["kind"] == "league" and c.get("label") != "IPL":                  # leagues: the IPL only (D); the test-playing nations' internationals are all in
             continue
@@ -232,11 +256,10 @@ def cricket(src, now, end, weekday):
         name = m.get("name", "")
         stage = "final" if re.search(r"\bfinal\b", name, re.I) and not re.search(r"semi|quarter", name, re.I) else "knockout" if events.KNOCKOUT_WORDS.search(name) else "regular"
         teams, first = cricket_mod.heading(m)
-        day = cricket_mod.day_of(m, None, now) if live and m.get("matchType") == "test" else None
-        first = f"{first} · Day {day}" if day and first else first                  # a Test under way says which day (D, 2026-11-05)
+        first = f"{first} \u00b7 Day {day}" if day and first else first                  # a Test says which day (D, 2026-11-05)
         label = c.get("label", "")
         out.append(fixture("cricket", label or "Cricket", f"Cricket: {teams}" + (f" · {first}" if first else "") + (f" ({label})" if label and label != "International" else ""),
-                           now if live else when, importance.story_score("cricket", stage, mine, weekday=weekday), mine, stage, {"live"} if live else ()))
+                           now if live else at, importance.story_score("cricket", stage, mine, weekday=weekday), mine, stage, {"live"} if live else ()))
     return out
 
 

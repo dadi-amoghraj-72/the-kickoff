@@ -185,10 +185,13 @@ def review_html(review):
     return out
 
 
-def watch_items(players, seen, now):
-    """Heavily owned players with new injury or suspension news, each shown once."""
+def watch_items(players, seen, now, exclude=()):
+    """Heavily owned players with new injury or suspension news, each shown once. `exclude`: player ids already in D's own squad (their news is in the Injuries list above;
+    D, 2026-11-05: Konsa and Calvert-Lewin were there twice)."""
     out = []
     for p in players:
+        if p["id"] in exclude:
+            continue
         if p["owned"] >= WATCH_OWNERSHIP and p["status"] in ("i", "d", "s") and p["news_added"] and is_recent(p["news_added"], now) \
                 and seen.get(str(p["id"])) != p["news_added"]:
             out.append({"name": p["name"], "team": p["team"], "status": p["status"], "news": p["news"], "chance": p["chance_next"],
@@ -222,7 +225,7 @@ def build(bootstrap, players, entry, picks, history, live, draft, my_draft_entry
             if trend:
                 parts.append(f'<div class="fplrev">{review_html(transfer_review(picks, trend, by_id, players))}</div>')
     if dl:
-        watch = watch_items(players, state.get("watch_seen", {}), now)
+        watch = watch_items(players, state.get("watch_seen", {}), now, {x["element"] for x in (picks or {}).get("picks", [])})
         if watch:
             lis = "".join(f"<li><strong>{r.esc(w['name'])}</strong> ({r.esc(w['team'])}) <span class=\"muted\">{FLAGGED[w['status']]}</span>"
                           f"{(': ' + r.esc(w['news'])) if w['news'] else ''} <span class=\"muted\">· owned by {w['owned']:.0f}%</span></li>" for w in watch)

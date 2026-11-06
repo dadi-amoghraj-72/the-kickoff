@@ -103,6 +103,9 @@ NOW = T(2026, 11, 3, 12)
 w = fc.watch_items(PLAYERS, {}, NOW)
 check("watch: heavily owned players with new news (Cash, 20% owned) - but not Saka (old news) or Dan (3% owned)", [x["name"] for x in w] == ["Matty Cash"], w)
 check("watch: shown once", fc.watch_items(PLAYERS, {"3": "2026-11-03T09:00:00Z"}, NOW) == [])
+_cash = next(p_["id"] for p_ in PLAYERS if p_["name"] == "Matty Cash")
+check("watch: a player already in D's own squad is left out (his news is in the Injuries list above, D 2026-11-05); another squad member changes nothing",
+      fc.watch_items(PLAYERS, {}, NOW, exclude={_cash}) == [] and [x["name"] for x in fc.watch_items(PLAYERS, {}, NOW, exclude={999999})] == ["Matty Cash"])
 
 # ---- The three FPL lists (D, 2026-11-04): Bench Swaps, Underperforming Players, Potential Pick Ups - averages over the last 3 gameweeks ----
 def pick(el, pos, typ):

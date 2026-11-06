@@ -14,7 +14,8 @@ def build_message(edition, base_url=None):
     d = date.fromisoformat(edition["date"])
     head = f"The Kickoff · {d:%a} {d.day} {d:%b}" + (" (test edition)" if edition.get("dummy") else "")
     lines = [f"{i}. {h}" for i, h in enumerate(edition["headlines"][:3], 1)]
-    return "\n".join([head, "", *lines, "", f"{base}/editions/{edition['date']}/"])
+    today = ["", "Today:", *[f"\u2022 {x}" for x in edition["ping_today"][:3]]] if edition.get("ping_today") else []     # only on a quiet morning (D, 2026-11-05)
+    return "\n".join([head, "", *lines, *today, "", f"{base}/editions/{edition['date']}/"])
 
 
 def send_document(path, caption="", name=None):

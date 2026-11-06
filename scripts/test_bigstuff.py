@@ -150,8 +150,48 @@ check("an ordinary performance of the same score still waits outside the three",
 _wm = {"id": "w1", "name": "Brisbane Heat Women vs Adelaide Strikers Women, 10th Match, Women's Big Bash League", "teams": ["Brisbane Heat Women", "Adelaide Strikers Women"], "matchType": "t20", "matchEnded": True,
        "status": "Brisbane Heat Women won by 14 runs", "class": {"kind": "league", "label": "WBBL", "women": True}}
 _wo = {"kind": "century", "name": "Charli Knott", "team": "Brisbane Heat Women", "against": "Adelaide Strikers Women", "runs": 104, "balls": 61, "fours": 12, "sixes": 4, "not_out": False, "match": "x", "result": ""}
-_, _wp = events.cricket([_wm], {"w1": {"innings": [], "standouts": [_wo]}}, 1)
+_, _wp, _wk = events.cricket([_wm], {"w1": {"innings": [], "standouts": [_wo]}}, 1)
 check("a century in the Women's Big Bash is a milestone performance in the clean standout style", len(_wp) == 1 and _wp[0]["milestone"] and _wp[0]["text"] == "Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W", _wp)
+
+# ---- live Tests: a day-one century is a Star and a headline once; 150 is announced again (D, 2026-11-05)
+_tm = {"id": "t9", "name": "Afghanistan vs Zimbabwe, 1st Test, Zimbabwe tour", "teams": ["Afghanistan", "Zimbabwe"], "matchType": "test", "matchEnded": False, "matchStarted": True,
+       "status": "Zimbabwe won toss & batted", "class": {"kind": "international", "label": "International"}}
+_bt = lambda runs, balls: {"kind": "century", "name": "Brendan Taylor", "team": "Zimbabwe", "against": "Afghanistan", "runs": runs, "balls": balls, "fours": 14, "sixes": 4, "not_out": True}  # noqa: E731
+_s1, _p1, _k1 = events.cricket([_tm], {"t9": {"innings": [], "standouts": [_bt(131, 168)]}}, 4)
+check("a century on day 1 of a live Test: a Star Of The Night (milestone) and a Key Overnight Scores line, with the match and the day", len(_p1) == 1 and _p1[0]["milestone"] and _p1[0]["text"].startswith("Brendan Taylor (Zimbabwe): 131* (168)")
+      and len(_s1) == 1 and _s1[0]["text"].startswith("Cricket: Brendan Taylor (Zimbabwe): 131* (168)") and _s1[0]["score"] >= importance.MIN_SCORE, (_s1, _p1))
+_s2, _p2, _k2 = events.cricket([_tm], {"t9": {"innings": [], "standouts": [_bt(131, 168)]}}, 4, _k1)
+check("announced once: the next morning, still 131, nothing again", _s2 == [] and _p2 == [], (_s2, _p2))
+_s3, _p3, _k3 = events.cricket([_tm], {"t9": {"innings": [], "standouts": [_bt(163, 200)]}}, 4, _k1)
+check("163 on day 2 passes 150: announced again, ranked above an ordinary century, and its story is the top line", len(_p3) == 1 and _s3[0]["score"] > _s1[0]["score"] and _p3[0]["score"] > _p1[0]["score"], (_s3, _p3))
+_s4, _p4, _k4 = events.cricket([_tm], {"t9": {"innings": [], "standouts": [_bt(205, 260)]}}, 4, _k3)
+check("205 passes 200: announced once more; a later 210 is silent", len(_p4) == 1 and events.cricket([_tm], {"t9": {"innings": [], "standouts": [_bt(210, 270)]}}, 4, _k4)[1] == [])
+_ten = {"kind": "ten-for", "name": "Taskin Ahmed", "team": "Bangladesh", "against": "West Indies", "wickets": 10, "runs_conceded": 121, "overs": 38, "maidens": 6, "economy": 3.18, "parts": [(5, 60), (5, 61)]}
+_s5, _p5, _k5 = events.cricket([_tm], {"t9": {"innings": [], "standouts": [_ten]}}, 4)
+check("ten wickets in a match: a Star (92) and a headline, once; a five-for already announced is not repeated as a five-for", _p5 and _p5[0]["score"] >= 92 and _s5 and events.cricket([_tm], {"t9": {"innings": [], "standouts": [_ten]}}, 4, _k5)[1] == [])
+_ff = {"kind": "fast fifty", "name": "P", "team": "A", "against": "B", "runs": 62, "balls": 24, "fours": 6, "sixes": 4, "not_out": False}
+_pf = events.cricket([{**_tm, "matchType": "t20", "matchEnded": True}], {"t9": {"innings": [], "standouts": [_ff, {**_ff, "kind": "fifty", "name": "Q", "balls": 40}]}}, 4)[1]
+check("a T20 fast fifty can be a Star (at least the bar), an ordinary fifty never is", len([p for p in _pf if p["text"].startswith("P ")]) == 1 and [p for p in _pf if p["text"].startswith("P ")][0]["score"] >= importance.PERFORMANCE_MIN and not [p for p in _pf if p["text"].startswith("Q ")])
+
+# ---- a dramatic finish clears the bar even on a quiet morning (D, 2026-11-05: the Heat's buzzer-beater)
+_ng = lambda a_, h_, **k: {"status": "final", "phase": "regular", "away": {"abbr": "LAC", "name": "Los Angeles Clippers", "score": a_}, "home": {"abbr": "MIA", "name": "Miami Heat", "score": h_}, "ot": False, "headline": "", "cup": None, "series": None, **k}  # noqa: E731
+_plain = events.nba([_ng(95, 110)], set(), 4)[0]["score"]
+_thriller = events.nba([_ng(116, 117, ot=True, clutch=True)], set(), 4)[0]["score"]
+check("a buzzer-beater in overtime by a point scores above the bar on a Friday, an ordinary 15-point game does not", _thriller >= importance.MIN_SCORE > _plain, (_thriller, _plain))
+check("a one-point game and an overtime game by three each earn the bonus; an overtime game by ten does not", events.nba([_ng(110, 111)], set(), 4)[0]["score"] > _plain and events.nba([_ng(108, 111, ot=True)], set(), 4)[0]["score"] > events.nba([_ng(100, 110, ot=True)], set(), 4)[0]["score"])
+_fm = lambda hs, as_, minute: {"home": {"id": "1", "name": "A", "short": "A"}, "away": {"id": "2", "name": "B", "short": "B"}, "home_score": hs, "away_score": as_, "completed": True, "goals": [{"minute": minute, "player": "P", "side": "home" if hs > as_ else "away"}]}  # noqa: E731
+check("a winning goal in the 90th minute or later (one-goal game) is a late winner; one in the 60th, a draw, and a 3-goal win are not",
+      events.late_winner(_fm(1, 0, "90'+3'")) and events.late_winner(_fm(2, 1, "90'")) and not events.late_winner(_fm(1, 0, "60'")) and not events.late_winner(_fm(1, 1, "90'")) and not events.late_winner(_fm(3, 0, "90'")))
+
+# ---- the ping's headlines are never empty (D, 2026-11-05)
+_st = lambda text, score: {"kind": "result", "sport": "nba", "comp": "NBA", "text": text, "score": score, "mine": False, "stage": "regular"}  # noqa: E731
+_heat = _st("NBA: Miami Heat 117\u2013116 Los Angeles Clippers (OT)", 3.9)
+_star = {**events.perf("cricket", "Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W", 86), "milestone": True}
+check("a quiet morning with nothing above the bar still has headlines: the Stars first, then the best game below the bar", bigstuff.fill_headlines([], [_heat], [_star]) == ["Star Of The Night: " + _star["text"], _heat["text"]], bigstuff.fill_headlines([], [_heat], [_star]))
+check("three key scores fill the ping on their own, nothing else is added", bigstuff.fill_headlines([_st("a", 9), _st("b", 8), _st("c", 7)], [_heat], [_star]) == ["a", "b", "c"])
+check("no games and no stars: still nothing to invent (an empty list, handled by the Today block)", bigstuff.fill_headlines([], [], []) == [])
+_b = bigstuff.build([_heat], [], [], 4)
+check("a quiet morning is flagged (fewer than three key scores) and its headline list comes from the fill", _b["quiet"] is True and _b["headlines"] == [_heat["text"]], _b["headlines"])
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

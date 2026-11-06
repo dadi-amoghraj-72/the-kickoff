@@ -228,7 +228,7 @@ i_nz = h.index("New Zealand v <strong>India</strong>")
 i_next = h.index("Namibia v Ireland")
 check("NZ v India: result, then Player of the match, then the scorecard, then its own standouts, all before the next match",
       i_nz < h.index("Player of the match: <strong>Adam Milne</strong> (New Zealand)", i_nz) < h.index("<table class=\"sc\">", i_nz) < h.index("<strong>Standouts</strong>", i_nz) < i_next, h[i_nz:i_nz + 200])
-check("the standouts under NZ v India are about that match and do not repeat the series and result", "Adam Milne</strong> (New Zealand): 4/19 (4 ov) v India</li>" in h[i_nz:i_next])
+check("the standouts under NZ v India are about that match and do not repeat the series and result", "Adam Milne</strong> (New Zealand): 4/19 (4 ov, 4.8 econ) v India</li>" in h[i_nz:i_next])
 check("matches with only a result line still show Player of the match when we have it (Namibia v Ireland)", h.index("Player of the match", i_next) < h.index("Afghanistan v Zimbabwe"), h[i_next:i_next + 400])
 check("their standouts (Noor Ahmad's five-for) are in the closing list, as clean bullets", h.index("<h3>Standouts</h3>") > h.index("Afghanistan v Zimbabwe") and "Noor Ahmad" in h[h.index("<h3>Standouts</h3>"):], h[-600:])
 check("the closing list holds only the no-scorecard matches' standouts, not NZ v India's", "Adam Milne" not in h[h.index("<h3>Standouts</h3>"):] and "Shreyas Iyer" not in h[h.index("<h3>Standouts</h3>"):])
@@ -422,6 +422,22 @@ bat0, bowl0 = raw_card[0]["batting"][0]["batsman"]["name"], raw_card[0]["bowling
 nz_block = run_c["html"].split("New Zealand v")[1].split("</li>")[0] if "New Zealand v" in run_c["html"] else ""
 check("the whole run on GitHub with the Mac's cache: the New Zealand v India block has the full ESPN scorecard from the cache (the first batter and first bowler of the saved page, by surname), no CricketData scorecard bought, and the WBBL points table is there",
       sur(bat0) in nz_block and sur(bowl0) in nz_block and "WBBL table" in run_c["html"], (bat0, bowl0, nz_block[:200]))
+
+# ---- a live match the scores page does not list: its own series and event ids make the address (the two Tests of 6 November)
+_hid = {**nzind, "name": "Hidden v Match, 1st Test", "teams": ["Hidden", "Match"], "series": "24756", "event": "1553296"}
+_seen = []
+def _fetch_hidden(u):
+    _seen.append(u)
+    if u == ec.SCORES_URL:
+        return SCORES                                 # the scores page, without this match
+    if "/series/24756/scorecard/1553296" in u:
+        return CARD_PAGE
+    raise OSError(u)
+_idx_miss = ec.Source(_fetch_hidden, pause=0)
+_idx_miss.index = {}                                  # nothing on the scores page
+_got = _idx_miss.card({**nzind, "series": "24756", "event": "1553296"})
+check("a match missing from ESPN's scores page is still read from its own series and event ids (the address is built, then the card must still agree with the match)", _got is not None and any("/series/24756/scorecard/1553296" in u for u in _seen), _seen)
+check("with no ids and no index entry there is no card, not an error", ec.Source(_fetch_hidden, pause=0).card({**nzind, "series": None, "event": None, "teams": ["Nobody", "Else"], "name": "Nobody vs Else"}) is None)
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

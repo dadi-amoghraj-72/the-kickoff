@@ -46,6 +46,21 @@ def winner_first(m):
     return f"{a} {as_}{DASH}{hs} {h}" if as_ > hs else f"{h} {hs}{DASH}{as_} {a}"
 
 
+def late_winner(m):
+    """True when the match was won (not drawn) by a goal in the 90th minute or later that made it a one-goal game or gave the lead: a stoppage-time winner."""
+    hs, as_ = m.get("home_score"), m.get("away_score")
+    if hs is None or as_ is None or hs == as_ or abs(hs - as_) > 1:
+        return False
+    win_side = "home" if hs > as_ else "away"
+    goals = [g for g in (m.get("goals") or []) if g.get("side") == win_side]
+    last = max((g for g in goals), key=lambda g: g.get("minute") or 0, default=None)
+    try:
+        minute = int(str(last.get("minute")).split("+")[0].replace("'", "")) if last else 0
+    except ValueError:
+        minute = 0
+    return minute >= 90
+
+
 def football(comps, weekday):
     """comps: [(competition name, [match dicts from espn.parse_match])]. Finished matches only. Arsenal's (men and women) is flagged "first"."""
     out = []
@@ -59,9 +74,10 @@ def football(comps, weekday):
             listed = any(clubs.is_listed(i) for i in ids)
             bonus = min(0.5 * d["margin"] + 0.3 * d["total_goals"] + (1 if d["comeback"] else 0), 4)
             wow = d["margin"] >= 5 or (d["comeback"] and d["total_goals"] >= 5)
+            drama = late_winner(m)
             stage = football_stage(comp, m)
             text = f"{comp.replace('UEFA ', '')}: {winner_first(m)}"
-            e = story("football", comp, text, importance.story_score("football", stage, mine, listed, margin_bonus=bonus, wow=wow, weekday=weekday), mine, stage)
+            e = story("football", comp, text, importance.story_score("football", stage, mine, listed, margin_bonus=bonus, wow=wow, weekday=weekday, drama=drama), mine, stage)
             if any(i == "359" for i in ids):
                 e["first"] = True
             out.append(e)
@@ -99,7 +115,8 @@ def nba(games, mine_teams, weekday):
             text += f" · {g['series']}"
         wow = margin >= 35
         bonus = (0.5 if g.get("ot") else 0) + (0.05 * max(margin - 20, 0))
-        out.append(story("nba", "NBA", text, importance.story_score("nba", stage, mine, margin_bonus=bonus, wow=wow, weekday=weekday), mine, stage))
+        drama = bool(g.get("clutch")) or (bool(g.get("ot")) and margin <= 3) or margin <= 1             # a game-winner in the last seconds, a close overtime, a one-point game
+        out.append(story("nba", "NBA", text, importance.story_score("nba", stage, mine, margin_bonus=bonus, wow=wow, weekday=weekday, drama=drama), mine, stage))
     return out
 
 
@@ -174,36 +191,75 @@ def kohli_text(innings):
     return ", ".join(f"Virat Kohli {r}{'*' if n else ''} ({b})" for r, b, n in innings)
 
 
-def cricket(picked, cards, weekday):
-    """picked: cricket.pick output (ended matches only are stories). cards: {match id: saved scorecard entry}. A match with Virat Kohli in it gets his figures
-    on its line and his own score bonus; a Kohli innings is also a Performance of the Day candidate."""
+def cricket(picked, cards, weekday, reported=()):
+    """picked: cricket.pick output (ended matches are results; every match with a scorecard can give milestones). cards: {match id: saved scorecard entry}. A match with Virat Kohli in it gets
+    his figures on its line and his own score bonus; a Kohli innings is also a Star Of The Night candidate.
+    Milestones (D, 2026-11-05) come from live matches too, so a day-one Test century is news the same morning, once: a hundred and then 150, 200, 250, 300 each get one announcement;
+    five wickets and ten in a match once; a T20 fast fifty once. `reported`: the keys already announced. Returns (stories, performances, the new keys)."""
+    reported, new_keys = set(reported), set()
     out, perfs = [], []
     for m in picked:
-        if not m.get("matchEnded"):
-            continue
+        ended = bool(m.get("matchEnded"))
         teams, rest = cricket_mod.title(m)
         label = (m.get("class") or {}).get("label", "")
-        result = cricket_mod.short_result(m.get("status"))
         mine = is_mine_cricket(m)
         k = kohli_innings(cards.get(m["id"]))
         name = m.get("name", "")
         stage = "final" if re.search(r"\bfinal\b", name, re.I) and not re.search(r"semi|quarter", name, re.I) else "knockout" if KNOCKOUT_WORDS.search(name) else "regular"
-        text = f"Cricket: {teams}" + (f" ({label})" if label and label != "International" else "") + (f", {result}" if result else "") + (f" · {kohli_text(k)}" if k else "")
-        sc = importance.story_score("cricket", stage, mine, kohli=bool(k), weekday=weekday)
-        out.append(story("cricket", label or "Cricket", text, sc, mine or bool(k), stage, kohli=bool(k)))
+        if ended:
+            result = cricket_mod.short_result(m.get("status"))
+            text = f"Cricket: {teams}" + (f" ({label})" if label and label != "International" else "") + (f", {result}" if result else "") + (f" \u00b7 {kohli_text(k)}" if k else "")
+            sc = importance.story_score("cricket", stage, mine, kohli=bool(k), weekday=weekday)
+            out.append(story("cricket", label or "Cricket", text, sc, mine or bool(k), stage, kohli=bool(k)))
         card_standouts = (cards.get(m["id"]) or {}).get("standouts", [])
-        for r_, b_, n_ in k:
-            mine_k = next((o for o in card_standouts if o["kind"] in ("kohli", "century") and cricket_mod.KOHLI.search(o["name"]) and o["runs"] == r_), None)
-            perfs.append(perf("cricket", cricket_mod.standout_text(mine_k) if mine_k else f"Virat Kohli {r_}{'*' if n_ else ''} ({b_} balls) in {teams}", kohli_perf(r_), True))
+        if ended:
+            for r_, b_, n_ in k:
+                mine_k = next((o for o in card_standouts if o["kind"] in ("kohli", "century") and cricket_mod.KOHLI.search(o["name"]) and o["runs"] == r_), None)
+                perfs.append(perf("cricket", cricket_mod.standout_text(mine_k) if mine_k else f"Virat Kohli {r_}{'*' if n_ else ''} ({b_} balls) in {teams}", kohli_perf(r_), True))
+        is_test = m.get("matchType") == "test"
+        bonus = 10 if mine else 0
         for o in card_standouts:
-            bonus = 10 if mine else 0
-            if cricket_mod.KOHLI.search(o.get("name", "")):                       # his own innings is the Kohli performance above
+            if ended and cricket_mod.KOHLI.search(o.get("name", "")):          # his own innings is the Kohli performance above
                 continue
-            if o["kind"] == "century":                                            # a century or a five-wicket haul in any match we report is a star of the night, whatever the competition (D, 2026-11-05)
-                perfs.append({**perf("cricket", cricket_mod.standout_text(o), 85 + 0.3 * (o["runs"] - 100) + bonus, mine), "milestone": True})
-            elif o["kind"] == "five-for":
-                perfs.append({**perf("cricket", cricket_mod.standout_text(o), 80 + 5 * (o["wickets"] - 5) + bonus, mine), "milestone": True})
-    return out, perfs
+            kind, who = o["kind"], o["name"]
+            if kind == "century":
+                steps = [s_ for s_ in cricket_mod.LADDER if o["runs"] >= s_]
+                top = steps[-1]
+                key = f"{m['id']}|{who}|bat{top}"
+                if key in reported:
+                    continue
+                new_keys.update(f"{m['id']}|{who}|bat{s_}" for s_ in steps)
+                score = min(100, 85 + 0.3 * (o["runs"] - 100) + bonus + (8 if top >= 150 else 0))
+                p = {**perf("cricket", cricket_mod.standout_text(o), score, mine), "milestone": True}
+                story_score = 20 if top >= 150 else 12 if is_test else 8
+            elif kind == "five-for":
+                key = f"{m['id']}|{who}|5w"
+                if key in reported or f"{m['id']}|{who}|10w" in reported:
+                    continue
+                new_keys.add(key)
+                p = {**perf("cricket", cricket_mod.standout_text(o), 80 + 5 * (o["wickets"] - 5) + bonus, mine), "milestone": True}
+                story_score = 10 if is_test else 0
+            elif kind == "ten-for":
+                key = f"{m['id']}|{who}|10w"
+                if key in reported:
+                    continue
+                new_keys.update({key, f"{m['id']}|{who}|5w"})
+                p = {**perf("cricket", cricket_mod.standout_text(o), 92 + bonus, mine), "milestone": True}
+                story_score = 16
+            elif kind == "fast fifty":
+                key = f"{m['id']}|{who}|ff{o['runs']}"
+                if key in reported:
+                    continue
+                new_keys.add(key)
+                p = perf("cricket", cricket_mod.standout_text(o), min(95, 72 + 0.2 * (o["runs"] - 50) + 0.4 * (cricket_mod.FAST_FIFTY_BALLS - o["balls"]) + bonus), mine)
+                story_score = 0
+            else:
+                continue
+            perfs.append(p)
+            if story_score and not ended:                                       # a live match has no result story yet: the milestone is the headline (a finished match's result line already tells it)
+                day = cricket_mod.day_of(m, cards.get(m["id"]))
+                out.append(story("cricket", label or "Cricket", f"Cricket: {p['text']}" + (f" ({teams}, Day {day})" if day else f" ({teams})"), story_score, mine, "final" if story_score >= 12 else "knockout"))
+    return out, perfs, new_keys
 
 
 # ---- F1 and tennis ------------------------------------------------------------------------------

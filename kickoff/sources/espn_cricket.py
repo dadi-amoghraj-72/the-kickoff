@@ -300,7 +300,9 @@ class Source:
         try:
             from kickoff import cricket
             game = self._game(match, True)
-            if not game:
+            if not game and match.get("series") and match.get("event"):      # ESPN's scores page does not list every live match (not the two Tests of 6 Nov): the match's own series and event ids make the address
+                game = {"scorecard": GAME_URL.format(series=match["series"], game=match["event"])}
+            if not game or not game.get("scorecard"):
                 return None
             found = re.search(r"/series/(\d+)/scorecard/(\d+)", game["scorecard"])
             plain = GAME_URL.format(series=found.group(1), game=found.group(2)) if found else None
