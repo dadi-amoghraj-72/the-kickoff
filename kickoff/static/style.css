@@ -480,3 +480,6 @@ h4.sport.first { margin-top: 14px; padding-top: 0; border-top: 0; }
 .rail-icon.on { opacity: 1; }
 .rail-icon .ri { display: block; width: 18px; height: 18px; will-change: transform; }
 .rail-icon svg { display: block; width: 100%; height: 100%; }
+
+/* Cricket: the player of the match that was not out yet at print time stays quiet */
+.cricket .potm.muted { color: var(--muted); font-weight: 400; }

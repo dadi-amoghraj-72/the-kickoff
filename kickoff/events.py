@@ -191,11 +191,13 @@ def kohli_text(innings):
     return ", ".join(f"Virat Kohli {r}{'*' if n else ''} ({b})" for r, b, n in innings)
 
 
-def cricket(picked, cards, weekday, reported=()):
+def cricket(picked, cards, weekday, reported=(), changed=None, now=None):
     """picked: cricket.pick output (ended matches are results; every match with a scorecard can give milestones). cards: {match id: saved scorecard entry}. A match with Virat Kohli in it gets
     his figures on its line and his own score bonus; a Kohli innings is also a Star Of The Night candidate.
     Milestones (D, 2026-11-05) come from live matches too, so a day-one Test century is news the same morning, once: a hundred and then 150, 200, 250, 300 each get one announcement;
-    five wickets and ten in a match once; a T20 fast fifty once. `reported`: the keys already announced. Returns (stories, performances, the new keys)."""
+    five wickets and ten in a match once; a T20 fast fifty once. `reported`: the keys already announced. Key Overnight Scores are team scores (D, 2026-11-06): a finished match's result,
+    and for a Test in progress its team scores and day, on the mornings its score moved (`changed`: the ids; None means every one); the individual performances are the Stars (short team codes).
+    Returns (stories, performances, the new keys)."""
     reported, new_keys = set(reported), set()
     out, perfs = [], []
     for m in picked:
@@ -212,10 +214,14 @@ def cricket(picked, cards, weekday, reported=()):
             sc = importance.story_score("cricket", stage, mine, kohli=bool(k), weekday=weekday)
             out.append(story("cricket", label or "Cricket", text, sc, mine or bool(k), stage, kohli=bool(k)))
         card_standouts = (cards.get(m["id"]) or {}).get("standouts", [])
+        if not ended and m.get("matchType") == "test" and m.get("score") and (changed is None or m["id"] in changed):
+            day = cricket_mod.day_of(m, cards.get(m["id"]), now)
+            scores = ", ".join(cricket_mod.wname(cricket_mod.innings_line(x, m.get("teams") or [])) for x in m["score"])
+            out.append(story("cricket", label or "Cricket", f"Cricket: {teams}" + (f" \u00b7 Day {day}" if day else "") + f": {scores}", 6, mine, "regular"))
         if ended:
             for r_, b_, n_ in k:
                 mine_k = next((o for o in card_standouts if o["kind"] in ("kohli", "century") and cricket_mod.KOHLI.search(o["name"]) and o["runs"] == r_), None)
-                perfs.append(perf("cricket", cricket_mod.standout_text(mine_k) if mine_k else f"Virat Kohli {r_}{'*' if n_ else ''} ({b_} balls) in {teams}", kohli_perf(r_), True))
+                perfs.append(perf("cricket", cricket_mod.standout_text(mine_k, short=True) if mine_k else f"Virat Kohli {r_}{'*' if n_ else ''} ({b_} balls) in {teams}", kohli_perf(r_), True))
         is_test = m.get("matchType") == "test"
         bonus = 10 if mine else 0
         for o in card_standouts:
@@ -230,35 +236,28 @@ def cricket(picked, cards, weekday, reported=()):
                     continue
                 new_keys.update(f"{m['id']}|{who}|bat{s_}" for s_ in steps)
                 score = min(100, 85 + 0.3 * (o["runs"] - 100) + bonus + (8 if top >= 150 else 0))
-                p = {**perf("cricket", cricket_mod.standout_text(o), score, mine), "milestone": True}
-                story_score = 20 if top >= 150 else 12 if is_test else 8
+                p = {**perf("cricket", cricket_mod.standout_text(o, short=True), score, mine), "milestone": True}
             elif kind == "five-for":
                 key = f"{m['id']}|{who}|5w"
                 if key in reported or f"{m['id']}|{who}|10w" in reported:
                     continue
                 new_keys.add(key)
-                p = {**perf("cricket", cricket_mod.standout_text(o), 80 + 5 * (o["wickets"] - 5) + bonus, mine), "milestone": True}
-                story_score = 10 if is_test else 0
+                p = {**perf("cricket", cricket_mod.standout_text(o, short=True), 80 + 5 * (o["wickets"] - 5) + bonus, mine), "milestone": True}
             elif kind == "ten-for":
                 key = f"{m['id']}|{who}|10w"
                 if key in reported:
                     continue
                 new_keys.update({key, f"{m['id']}|{who}|5w"})
-                p = {**perf("cricket", cricket_mod.standout_text(o), 92 + bonus, mine), "milestone": True}
-                story_score = 16
+                p = {**perf("cricket", cricket_mod.standout_text(o, short=True), 92 + bonus, mine), "milestone": True}
             elif kind == "fast fifty":
                 key = f"{m['id']}|{who}|ff{o['runs']}"
                 if key in reported:
                     continue
                 new_keys.add(key)
-                p = perf("cricket", cricket_mod.standout_text(o), min(95, 72 + 0.2 * (o["runs"] - 50) + 0.4 * (cricket_mod.FAST_FIFTY_BALLS - o["balls"]) + bonus), mine)
-                story_score = 0
+                p = perf("cricket", cricket_mod.standout_text(o, short=True), min(95, 72 + 0.2 * (o["runs"] - 50) + 0.4 * (cricket_mod.FAST_FIFTY_BALLS - o["balls"]) + bonus), mine)
             else:
                 continue
             perfs.append(p)
-            if story_score and not ended:                                       # a live match has no result story yet: the milestone is the headline (a finished match's result line already tells it)
-                day = cricket_mod.day_of(m, cards.get(m["id"]))
-                out.append(story("cricket", label or "Cricket", f"Cricket: {p['text']}" + (f" ({teams}, Day {day})" if day else f" ({teams})"), story_score, mine, "final" if story_score >= 12 else "knockout"))
     return out, perfs, new_keys
 
 

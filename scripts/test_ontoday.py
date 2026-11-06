@@ -95,7 +95,17 @@ check("times read like 8:30pm and 4am, in Singapore time", ontoday.clock(utc(202
 fb = {"eng.1": [espn.parse_match(future(chelsea_mu, utc(2026, 11, 5, 12, 30)), "eng.1"), espn.parse_match(future(plain, utc(2026, 11, 5, 12, 30)), "eng.1")]}
 got, failed = fixtures.collect(Fake(football=fb), now, end, 3)
 texts = [f["text"] for f in got]
-check("a league game with a listed club is on; one without is not", any("Chelsea" in t for t in texts) and not any(plain["competitions"][0]["competitors"][0]["team"]["displayName"] in t for t in texts), texts)
+check("a thin Premier League day (two matches): both are listed, the unlisted pair too (Everton v Coventry at 4am, D 2026-11-06)", any("Chelsea" in t for t in texts) and any(plain["competitions"][0]["competitors"][0]["team"]["displayName"] in t for t in texts), texts)
+def _clone(e, i):
+    c = copy.deepcopy(e)
+    c["id"] = str(i)
+    return c
+fb3 = {"eng.1": [espn.parse_match(future(chelsea_mu, utc(2026, 11, 5, 12, 30)), "eng.1"), espn.parse_match(future(plain, utc(2026, 11, 5, 12, 30)), "eng.1"),
+                 espn.parse_match(future(_clone(plain, 9001), utc(2026, 11, 5, 12, 30)), "eng.1"), espn.parse_match(future(_clone(plain, 9002), utc(2026, 11, 5, 14, 0)), "eng.1")]}
+got3, _ = fixtures.collect(Fake(football=fb3), now, end, 3)
+texts3 = [f["text"] for f in got3]
+check("a busy Premier League day (four matches): only a listed club's game is on, the unlisted ones are not", any("Chelsea" in t for t in texts3) and not any(plain["competitions"][0]["competitors"][0]["team"]["displayName"] in t for t in texts3), texts3)
+check("the thin-day rule is the Premier League's alone: two unlisted La Liga games are never added", not [f for f in fixtures.collect(Fake(football={"esp.1": [espn.parse_match(future(plain, utc(2026, 11, 5, 12, 30)), "esp.1")]}), now, end, 3)[0] if f["sport"] == "football"])
 check("a game already finished or outside the window is not listed", fixtures.collect(Fake(football={"eng.1": [espn.parse_match(chelsea_mu, "eng.1")]}), now, end, 3)[0] == [])
 
 # Champions League: league phase needs a listed club, a knockout game always counts

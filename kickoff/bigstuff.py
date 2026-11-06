@@ -75,7 +75,7 @@ def html(stories, stars_=(), news=(), injuries=()):
     if injuries:
         out += "<h3>Major Injuries</h3>" + _list_html(injuries[:MAX_INJURIES])
     if stars_:
-        out += "<h3>Stars Of The Night</h3>" + _list(p["text"] for p in stars_)
+        out += "<h3>Stars Of The Night</h3>" + _list_gold(p["text"] for p in stars_)
     return out
 
 
@@ -96,6 +96,17 @@ def _grouped(stories):
         head, line = split_story(s)
         groups.setdefault(head, []).append(line)
     return "".join(f'<p class="subhead">{r.esc(h)}</p>' + _list(lines) for h, lines in groups.items())
+
+
+def gold_figures(text):
+    """The main figure of a star line in gold (D, 2026-11-06): a cricketer's '111* (171)' or '4/35', and '52 pts', '3 goals' style figures for the other sports; the rest is plain."""
+    out = r.esc(text)
+    out = re.sub(r"(?<=: )(\*?\d+\*? \(\d+\)|\d+/\d+)", lambda m: f'<span class="n">{m.group(1)}</span>', out, count=1)
+    return re.sub(r"(\d+) (pts|reb|ast|stl|blk|goals?|assists?|saves?)\b", r'<span class="n">\1 \2</span>', out)
+
+
+def _list_gold(texts):
+    return '<ul class="standouts bigstuff">' + "".join(f"<li>{gold_figures(t)}</li>" for t in texts) + "</ul>"
 
 
 def _list(texts):
@@ -119,9 +130,15 @@ def headlines(stories, limit=3):
 def fill_headlines(selected, stories, stars_, limit=3):
     """The Telegram ping's headlines can never be empty (D, 2026-11-05: a quiet Friday sent the date and a link): the key scores first, then the Stars Of The Night, then the best of
     the rest of the finished games even if they are below the bar (that is how the Heat's overtime game would have got there)."""
-    out = [s["text"] for s in selected[:limit]]
-    for p in stars_:
+    out = [s["text"] for s in selected[:limit - 1]]                     # two team scores ...
+    top = next((p for p in stars_ if p.get("milestone")), None)         # ... then the best milestone Star (a hundred, 150+, ten in a match) in the third slot (D, 2026-11-06)
+    if top is not None:
+        out.append(f"Star Of The Night: {top['text']}")
+    for s in selected[limit - 1:limit]:
         if len(out) < limit:
+            out.append(s["text"])
+    for p in stars_:
+        if len(out) < limit and f"Star Of The Night: {p['text']}" not in out:
             out.append(f"Star Of The Night: {p['text']}")
     for s in sorted((x for x in stories if x["text"] not in out), key=lambda x: (-x["score"], x["text"])):
         if len(out) < limit:

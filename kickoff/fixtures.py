@@ -87,8 +87,27 @@ def _days(now, end, tz):
         d += timedelta(days=1)
 
 
+EPL_THIN = 2           # D, 2026-11-06: on a day with only one (or two) Premier League matches in the window, show them whoever plays; on a busy day only the listed clubs'
+
+
+def epl_thin_day(src, now, end):
+    """True when the window has one or two Premier League matches (still to come or under way): then every one of them is listed, not only the listed clubs' (Everton v Coventry at 4am)."""
+    ids = set()
+    for d in _days(now, end, timezone.utc):
+        try:
+            matches = src.football("eng.1", d)
+        except Exception:
+            continue
+        for m in matches:
+            when = espn.parse_time(m["kickoff"])
+            if not m.get("completed") and (now <= when < end or when < now <= when + espn.MATCH_LENGTH):
+                ids.add(m["id"])
+    return 0 < len(ids) <= EPL_THIN
+
+
 def football(src, now, end, weekday, watch=False):
     out, tables = [], {}
+    thin = epl_thin_day(src, now, end)
     comps = [(lg, n) for lg, n in espn.LEAGUES.items()] + [(espn.CHAMPIONS_LEAGUE, "Champions League"), (espn.FA_CUP, "FA Cup"), (espn.WSL, "Women's Super League")]
     for lg, name in comps:
         for d in _days(now, end, timezone.utc):
@@ -114,7 +133,7 @@ def football(src, now, end, weekday, watch=False):
                 elif lg == espn.FA_CUP:
                     if stage == "regular" and not (mine or listed):
                         continue
-                elif lg != espn.WSL and not (mine or listed):
+                elif lg != espn.WSL and not (mine or listed) and not (lg == "eng.1" and thin):
                     continue
                 if frozenset(ids) in DERBIES:
                     flags.add("derby")

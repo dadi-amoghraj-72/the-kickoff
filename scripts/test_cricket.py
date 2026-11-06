@@ -251,9 +251,9 @@ check("fast fifties: fewer balls first, then more runs", [o["name"] for o in ck.
 
 # ---- How a standout reads ----
 hi, hm = ck.standout_html(iyer), ck.standout_html(milne)
-check("a fast fifty line: name (team): runs (balls), fours, sixes v opponent (D, 2026-11-05)", "<strong>Shreyas Iyer</strong> (India): 50 (23), 3 fours, 4 sixes v New Zealand" in hi
+check("a fast fifty line: name (team): runs (balls), fours, sixes v opponent (D, 2026-11-05)", '<strong>Shreyas Iyer</strong> (India): <span class="n">50 (23)</span>, 3\u00d74, 4\u00d76 v New Zealand' in hi
       and "5th T20I" not in hi and "won by" not in hi, hi)
-check("a bowling line: name (team): wickets/runs (overs ov) v opponent", "<strong>Adam Milne</strong> (New Zealand): 4/19 (4 ov, 4.8 econ) v India" in hm, hm)
+check("a bowling line: name (team): wickets/runs (overs ov) v opponent", '<strong>Adam Milne</strong> (New Zealand): <span class="n">4/19</span> (4 ov, 4.8 econ) v India' in hm, hm)
 check("no standouts, no heading", ck.standouts_html([]) == "" and 'class="standouts"' in ck.standouts_html(so))
 check("names are escaped", "&lt;" in ck.standout_html({**iyer, "name": "<b>"}) and "<b>" not in ck.standout_html({**iyer, "name": "<b>"}).replace("<strong>", ""))
 
@@ -376,7 +376,7 @@ ipl_rows = [{"pos": 1, "team": "RCB", "name": "Royal Challengers Bengaluru", "p"
 tbl = ck.table_html("IPL", ipl_rows)
 check("the IPL table: only the Sunrisers Hyderabad row carries the gold class; another league's table never does", tbl.count('class="hl"') == 1 and "SRH" in tbl.split('class="hl"')[1].split("</tr>")[0] and ck.table_html("WBBL", ipl_rows).count("hl") == 0, tbl[:300])
 
-check("singular figures: 1 four, 1 six, never '1 sixes'; a zero is left out (D, 2026-11-05)", "1 four, 1 six v" in ck.standout_html({**iyer, "fours": 1, "sixes": 1}) and "2 fours v" in ck.standout_html({**iyer, "fours": 2, "sixes": 0}) and "sixes" not in ck.standout_html({**iyer, "fours": 2, "sixes": 0}))
+check("singular and short figures: 1\u00d74, 1\u00d76 (the x notation); a zero is left out (D, 2026-11-05)", "1\u00d74, 1\u00d76 v" in ck.standout_html({**iyer, "fours": 1, "sixes": 1}) and "2\u00d74 v" in ck.standout_html({**iyer, "fours": 2, "sixes": 0}) and "\u00d76" not in ck.standout_html({**iyer, "fours": 2, "sixes": 0}))
 
 # ---- the day of a Test from the start date when the status line has none (D, 2026-11-05)
 _t = {"matchType": "test", "dateTimeGMT": "2026-11-03T04:00:00", "status": "Stumps"}
@@ -399,12 +399,21 @@ check("3 or 4 wickets under 5 an over is a standout in a T20 and an ODI, not in 
       [o["kind"] for o in ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 18, 4)]}, _t20)] == ["economy"] and [o["kind"] for o in ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 40, 10)]}, _odi)] == ["economy"]
       and ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 40, 20)]}, _ctest) == [])
 check("under 5 means strictly under: 3 for 20 off 4 overs (5.0) is not a standout, 3 for 19 off 4 (4.75) is", ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 20, 4)]}, _t20) == [] and len(ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 19, 4)]}, _t20)) == 1)
-check("economy is in the bullet: 3/18 (4 ov, 4.5 econ)", "3/18 (4 ov, 4.5 econ)" in ck.standout_html(ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 18, 4)]}, _t20)[0]))
+check("economy is in the bullet: 3/18 (4 ov, 4.5 econ)", '<span class="n">3/18</span> (4 ov, 4.5 econ)' in ck.standout_html(ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 3, 18, 4)]}, _t20)[0]))
 _two = {"scorecard": [_bowl("A Inning 1", "Taskin Ahmed", 5, 60, 20), _bowl("A Inning 2", "Taskin Ahmed", 5, 61, 18)]}
 _ten = ck.standouts(_two, _ctest)
 check("ten wickets across both innings of a Test is one 'ten-for' line, replacing the two five-fors", [o["kind"] for o in _ten] == ["ten-for"] and _ten[0]["wickets"] == 10 and _ten[0]["runs_conceded"] == 121, _ten)
-check("the ten-for bullet: Taskin Ahmed (B): 10/121 in the match (5/60, 5/61) v A", "10/121 in the match (5/60, 5/61) v A" in ck.standout_html(_ten[0]), ck.standout_html(_ten[0]))
+check("the ten-for bullet: Taskin Ahmed (B): 10/121 in the match (5/60, 5/61) v A", '<span class="n">10/121</span> in the match (5/60, 5/61) v A' in ck.standout_html(_ten[0]), ck.standout_html(_ten[0]))
 check("nine wickets are not ten, and it can come before the match ends (two innings are enough)", [o["kind"] for o in ck.standouts({"scorecard": [_bowl("A Inning 1", "Q", 5, 60, 20), _bowl("A Inning 2", "Q", 4, 50, 15)]}, _ctest)] == ["five-for"])
+
+# ---- short team codes, gold figures, grouped list, the award note (D, 2026-11-06)
+check("short team codes: nations by their code, league sides by their initials, women with -W, a one-word club keeps its name", [ck.short_team(x) for x in ("West Indies", "Bangladesh", "India Women", "Brisbane Heat W", "Adelaide Strikers Women", "Sunrisers Hyderabad", "Royal Challengers Bengaluru", "Warriors")] == ["WI", "BAN", "IND-W", "BH-W", "AS-W", "SRH", "RCB", "Warriors"])
+_k = {"kind": "century", "name": "Amir Jangoo", "team": "West Indies", "against": "Bangladesh", "runs": 111, "balls": 171, "fours": 11, "sixes": 2, "not_out": True}
+check("the short text: 'Amir Jangoo (WI): 111* (171), 11\u00d74, 2\u00d76 v BAN' and the plain full one keeps the names", ck.standout_text(_k, short=True) == "Amir Jangoo (WI): 111* (171), 11\u00d74, 2\u00d76 v BAN" and ck.standout_text(_k) == "Amir Jangoo (West Indies): 111* (171), 11\u00d74, 2\u00d76 v Bangladesh")
+_g = ck.standouts_html([{**_k, "label": "International"}, {**_k, "name": "Charli Knott", "team": "Brisbane Heat Women", "label": "WBBL"}])
+check("the closing list has a header for each competition, the bullets under it, the figure in gold", _g.index(">International<") < _g.index("Amir Jangoo") < _g.index(">WBBL<") < _g.index("Charli Knott") and '<span class="n">111* (171)</span>' in _g, _g)
+_pm = ck.potm_html({"potm": []}, ended=True)
+check("a finished match with a scorecard and no award yet says so quietly; a live match and a match with no scorecard say nothing", "not available at time of print" in _pm and ck.potm_html({"potm": []}, ended=False) == "" and ck.potm_html(None, ended=True) == "")
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

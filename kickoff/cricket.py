@@ -31,6 +31,25 @@ def wname(text):
     return re.sub(r"\s+Women\b(?!['\u2019]s)", " W", text or "")
 
 
+NATION_CODES = {"afghanistan": "AFG", "australia": "AUS", "bangladesh": "BAN", "england": "ENG", "india": "IND", "ireland": "IRE", "new zealand": "NZ", "pakistan": "PAK", "south africa": "SA",
+                "sri lanka": "SL", "west indies": "WI", "zimbabwe": "ZIM", "netherlands": "NED", "scotland": "SCO", "namibia": "NAM", "nepal": "NEP", "united arab emirates": "UAE", "oman": "OMA",
+                "united states": "USA", "usa": "USA", "canada": "CAN", "papua new guinea": "PNG", "hong kong": "HK"}
+CLUB_CODES = {"sunrisers hyderabad": "SRH", "chennai super kings": "CSK", "kolkata knight riders": "KKR", "delhi capitals": "DC", "gujarat titans": "GT", "lucknow super giants": "LSG",
+              "punjab kings": "PBKS", "rajasthan royals": "RR", "royal challengers bengaluru": "RCB", "royal challengers bangalore": "RCB", "mumbai indians": "MI"}
+
+
+def short_team(name):
+    """The short form for Stars Of The Night and Key Overnight Scores (D, 2026-11-06): 'West Indies' -> 'WI', 'Bangladesh' -> 'BAN', 'Brisbane Heat W' -> 'BH-W', 'India Women' -> 'IND-W';
+    a league side by the initials of its name (the same codes as the league tables: SS, PS, BH), the IPL's well-known codes; a one-word club keeps its name."""
+    text = (name or "").strip()
+    women = bool(re.search(r"\s(?:W|Women)$", text))
+    base = re.sub(r"\s+(?:W|Women)$", "", text)
+    low = base.lower()
+    words = [w for w in base.split() if w[:1].isalpha()]
+    code = NATION_CODES.get(low) or CLUB_CODES.get(low) or ("".join(w[0] for w in words).upper() if len(words) > 1 else base)
+    return code + ("-W" if women else "")
+
+
 def match_type(m):
     """'t20', 'odi' or 'test': the list's own matchType, else read from the match name. The free list sometimes leaves matchType out of a newly added match
     (the 4 November New Zealand v India ODI came with none and was dropped as out of scope)."""
@@ -207,10 +226,10 @@ def day_of(m, entry=None, now=None):
     return None
 
 
-def potm_html(entry):
+def potm_html(entry, ended=False):
     people = (entry or {}).get("potm") or []
     if not people:
-        return ""
+        return '<span class="potm muted">Player of the match: not available at time of print</span>' if entry and ended else ""
     return '<span class="potm">Player of the match: ' + ", ".join(f"<strong>{r.esc(p['name'])}</strong>" + (f" ({r.esc(wname(p['team']))})" if p.get("team") else "") for p in people) + "</span>"
 
 
@@ -283,9 +302,10 @@ def result_html(m, entry=None, series="", from_innings=0, now=None):
         day = day_of(m, entry, now)
         flag = '<span class="dayflag">Test · in progress</span>'                                  # the day sits in the heading line: '2nd Test · Day 3' (D, 2026-11-05)
     full = bool(entry) and scorecard_tier(m) < 3
+    ended_ = bool(m.get("matchEnded"))
     first = f"{first} · Day {day}" if day and first else first
     return (f'<li>{flag}<span class="cm">{names}{" · " + r.esc(first) if first else ""}</span>'
-            f'<span class="cr">{live}{r.esc(short_result(m.get("status")))}</span><span class="cs">{scores_html(m)}</span>{potm_html(entry)}'
+            f'<span class="cr">{live}{r.esc(short_result(m.get("status")))}</span><span class="cs">{scores_html(m)}</span>{potm_html(entry, ended_)}'
             f'{full_scorecard_html(entry["innings"], from_innings) if full else ""}{match_summary_html(entry["innings"]) if full and m.get("matchType") == "test" and m.get("matchEnded") else ""}'
             f'{standouts_html(entry["standouts"], inline=True) if full else ""}{series}</li>')
 
@@ -564,29 +584,31 @@ def rank(items, limit=MAX_STANDOUTS):
     return sorted(items, key=key)[:limit]
 
 
-def standout_text(o):
-    """The plain text of a standout: 'Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W' or 'Sophie Molineux (Melbourne Renegades W): 4/22 (4 ov) v Hobart Hurricanes W'."""
+def standout_text(o, short=False):
+    """The plain text of a standout: 'Charli Knott (Brisbane Heat W): 104 (61), 12\u00d74, 4\u00d76 v Adelaide Strikers W'; short=True uses the team codes ('Charli Knott (BH-W): 104 (61), 12\u00d74, 4\u00d76 v AS-W')."""
     import re as _re
-    return _re.sub(r"<[^>]+>", "", standout_html(o)).replace("&#x27;", "'").replace("&amp;", "&")
+    return _re.sub(r"<[^>]+>", "", standout_html(o, short=short)).replace("&#x27;", "'").replace("&amp;", "&")
 
 
-def standout_html(o, context=True):
-    """One standout as a clean bullet (D, 2026-11-05): 'Charli Knott (Brisbane Heat W): 104 (61), 12 fours, 4 sixes v Adelaide Strikers W',
+def standout_html(o, context=True, short=False):
+    """One standout as a clean bullet (D, 2026-11-05/06), the main figure in gold: 'Charli Knott (Brisbane Heat W): 104 (61), 12\u00d74, 4\u00d76 v Adelaide Strikers W',
     'Sophie Molineux (Melbourne Renegades W): 3/18 (4 ov, 4.5 econ) v Hobart Hurricanes W' and, for ten in a match, 'Taskin Ahmed (Bangladesh): 10/121 in the match (5/60, 5/61) v West Indies'.
-    `context` is kept for the callers; the match context is no longer written."""
-    who = f"<strong>{r.esc(o['name'])}</strong> ({r.esc(wname(o['team']))})"
-    against = f" v {r.esc(wname(o['against']))}" if o.get("against") else ""
+    short: the team codes. `context` is kept for the callers; the match context is no longer written."""
+    team = short_team(o["team"]) if short else wname(o["team"])
+    who = f"<strong>{r.esc(o['name'])}</strong> ({r.esc(team)})"
+    against = f" v {r.esc(short_team(o['against']) if short else wname(o['against']))}" if o.get("against") else ""
+    gold = lambda t: f'<span class="n">{t}</span>'  # noqa: E731
     if o["kind"] in ("century", "fast fifty", "fifty", "kohli"):
-        bits = [f"{o['runs']}{'*' if o['not_out'] else ''} ({o['balls']})"]
-        for key, one, many in (("fours", "four", "fours"), ("sixes", "six", "sixes")):
+        bits = [gold(f"{o['runs']}{'*' if o['not_out'] else ''} ({o['balls']})")]
+        for key, mark in (("fours", "4"), ("sixes", "6")):
             if o[key]:
-                bits.append(f"{o[key]} {one if o[key] == 1 else many}")
+                bits.append(f"{o[key]}\u00d7{mark}")
         return f"<li>{who}: {', '.join(bits)}{against}</li>"
     if o["kind"] == "ten-for":
-        return f"<li>{who}: {o['wickets']}/{o['runs_conceded']} in the match ({', '.join(f'{w}/{rc}' for w, rc in o['parts'])}){against}</li>"
+        return f"<li>{who}: {gold(str(o['wickets']) + '/' + str(o['runs_conceded']))} in the match ({', '.join(f'{w}/{rc}' for w, rc in o['parts'])}){against}</li>"
     overs = f"{o['overs']:g}" if isinstance(o["overs"], (int, float)) else str(o["overs"])
     econ = f", {o['economy']:.1f} econ" if o.get("economy") is not None else ""
-    return f"<li>{who}: {o['wickets']}/{o['runs_conceded']} ({overs} ov{econ}){against}</li>"
+    return f"<li>{who}: {gold(str(o['wickets']) + '/' + str(o['runs_conceded']))} ({overs} ov{econ}){against}</li>"
 
 
 def standouts_html(items, inline=False):
@@ -595,7 +617,10 @@ def standouts_html(items, inline=False):
         return ""
     if inline:
         return '<p class="muted fow"><strong>Standouts</strong></p><ul class="standouts in">' + "".join(standout_html(o, context=False) for o in rank(items)) + "</ul>"
-    return '<h3>Standouts</h3><ol class="standouts">' + "".join(standout_html(o) for o in items) + "</ol>"
+    groups = {}
+    for o in items:
+        groups.setdefault(o.get("label") or "Other", []).append(o)
+    return '<h3>Standouts</h3>' + "".join(f'<p class="subhead">{r.esc(label)}</p><ul class="standouts">' + "".join(standout_html(o) for o in rank(group, 9)) + "</ul>" for label, group in groups.items())
 
 
 # ---- The whole cricket block, within the daily call budget -------------------------------------
@@ -632,7 +657,7 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
         checked += 1
         total_standouts += len(entry["standouts"])
         if scorecard_tier(m) == 3:
-            found.extend(entry["standouts"])
+            found.extend({**x, "label": m["class"]["label"]} for x in entry["standouts"])
         shown_cards[m["id"]] = entry
 
     for m in sorted(picked, key=lambda x: (scorecard_tier(x), -x["class"]["priority"], x["dateTimeGMT"])):
@@ -703,7 +728,8 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
            "ipl": ipl_state, "cards": dict(list(cards.items())[-60:]), "test_done": dict(list({**prev_done, **test_done}.items())[-20:]), "test_sig": dict(list({**prev_sig, **test_sig}.items())[-20:])}
     try:                                                   # for The Big Stuff (kickoff/events.py): finished matches, with Virat Kohli's figures when he batted
         from kickoff import events                         # here, not at the top: events reads this module too
-        story_events, perfs, new_keys = events.cricket(picked, shown_cards, (now + timedelta(hours=8)).weekday(), st.get("milestones", []))
+        changed = {m["id"] for m in picked if m.get("matchType") == "test" and not m.get("matchEnded") and prev_sig.get(m["id"]) != repr(m.get("score"))}
+        story_events, perfs, new_keys = events.cricket(picked, shown_cards, (now + timedelta(hours=8)).weekday(), st.get("milestones", []), changed, now)
         new["milestones"] = sorted(set(st.get("milestones", [])) | new_keys)[-400:]
     except Exception:
         story_events, perfs = [], []
