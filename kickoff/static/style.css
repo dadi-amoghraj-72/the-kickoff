@@ -483,3 +483,6 @@ h4.sport.first { margin-top: 14px; padding-top: 0; border-top: 0; }
 
 /* Cricket: the player of the match that was not out yet at print time stays quiet */
 .cricket .potm.muted { color: var(--muted); font-weight: 400; }
+
+/* The edition counter, small at the bottom right of the page (D, 2026-11-06) */
+footer .edno { display: block; margin-top: 10px; text-align: right; font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }

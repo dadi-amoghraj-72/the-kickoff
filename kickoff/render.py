@@ -207,6 +207,15 @@ def _masthead(dateline):
             f'<p class="dateline">{esc(dateline)}</p></header>')
 
 
+FIRST_EDITION = date(2026, 11, 7)      # D, 2026-11-06: the daily counter starts with the first automatic edition, "Edition #001"
+
+
+def edition_number(day):
+    """1 for the first live edition (7 November 2026), 2 the day after and so on (one a day, so a skipped day leaves a gap); None for an earlier date (the test mornings)."""
+    n = (day - FIRST_EDITION).days + 1
+    return n if n >= 1 else None
+
+
 def render_edition(ed):
     sections = ed["sections"]
     n = len(sections)
@@ -226,7 +235,9 @@ def render_edition(ed):
         for i, s in enumerate(sections))
     rail = f'<nav class="rail" aria-label="Sections"><div class="rail-fill" id="rail-fill"></div>{ticks}<div class="rail-icon" id="rail-icon" aria-hidden="true"></div></nav>'
     end = '<div class="theend"><span class="ln"></span><b>The End</b><span class="ln"></span></div>'        # a gold line, "The End", a gold line (D, 2026-11-05)
-    footer = f'<footer><a href="{home}">All editions</a> · The Kickoff, your daily sports digest.</footer>'
+    no = None if (ed.get("banner") or ed.get("dummy")) else edition_number(date.fromisoformat(ed["date"]))
+    counter = f'<span class="edno">Edition #{no:03d}</span>' if no else ""
+    footer = f'<footer><a href="{home}">All editions</a> · The Kickoff, your daily sports digest.{counter}</footer>'
     body = f"<main>{_masthead(nice_date(ed['date']))}{banner}{secs}{end}{footer}</main>{rail}"
     script = f"<script>{(STATIC / 'rail-icons.js').read_text()}\n{(STATIC / 'rail.js').read_text()}</script>"
     return _page(f"The Kickoff · {nice_date(ed['date'])}", topbar, body, script)

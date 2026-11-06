@@ -165,5 +165,12 @@ _be = {**_qe}
 _be.pop("ping_today")
 check("a busy morning's ping has no Today block", "Today:" not in telegram.build_message(_be))
 
+# ---- the edition counter (D, 2026-11-06): #001 on 7 November 2026, one more each day, nothing before and nothing on demo pages
+_pg = lambda d, **k: render.render_edition({"date": d, "dummy": False, "sections": [{"id": "x", "title": "X", "html": "<p>a</p>"}], **k})  # noqa: E731
+check("the first live edition (7 Nov 2026) reads Edition #001, the next day #002, a month on #030, in the footer, once",
+      'Edition #001' in _pg("2026-11-07") and 'Edition #002' in _pg("2026-11-08") and 'Edition #030' in _pg("2026-12-06") and _pg("2026-11-07").count("Edition #") == 1 and _pg("2026-11-07").index("Edition #001") > _pg("2026-11-07").index("<footer>"))
+check("the test mornings (6 Nov and before), dummy editions and demo pages carry no number", all("Edition #" not in x for x in (_pg("2026-11-06"), _pg("2026-11-05"), _pg("2026-11-09", banner="Demo"), _pg("2026-11-09", dummy=True))))
+check("the number is a count of days since the launch: 1 on 7 Nov, 365 a year on", render.edition_number(date(2026, 11, 7)) == 1 and render.edition_number(date(2027, 11, 6)) == 365 and render.edition_number(date(2026, 11, 6)) is None)
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
