@@ -1,5 +1,346 @@
 {
   "cards": {
+    "0e3699f8-43b2-461b-a659-4d38daf9bf35": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 57,
+              "fours": 13,
+              "mark": "",
+              "name": "Ellyse Perry",
+              "out": "not out",
+              "r": 84,
+              "sixes": 1,
+              "sr": 147.37
+            },
+            {
+              "b": 7,
+              "fours": 0,
+              "mark": "",
+              "name": "Sophia Dunkley",
+              "out": "c Garth b Day",
+              "r": 1,
+              "sixes": 0,
+              "sr": 14.29
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Melie Kerr",
+              "out": "c Day b Gibson",
+              "r": 3,
+              "sixes": 0,
+              "sr": 75
+            },
+            {
+              "b": 23,
+              "fours": 1,
+              "mark": "",
+              "name": "Ashleigh Gardner",
+              "out": "st Jones b Charlie Dean",
+              "r": 34,
+              "sixes": 2,
+              "sr": 147.83
+            },
+            {
+              "b": 8,
+              "fours": 0,
+              "mark": "",
+              "name": "Alice Capsey",
+              "out": "b Sutherland",
+              "r": 3,
+              "sixes": 0,
+              "sr": 37.5
+            },
+            {
+              "b": 21,
+              "fours": 3,
+              "mark": "",
+              "name": "Erin Burns",
+              "out": "run out (Prestwidge/Jones)",
+              "r": 29,
+              "sixes": 1,
+              "sr": 138.1
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 6.8,
+              "m": 0,
+              "name": "Charlotte Dean",
+              "nb": 0,
+              "o": 4,
+              "r": 27,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 9.2,
+              "m": 0,
+              "name": "Kim Garth",
+              "nb": 0,
+              "o": 4,
+              "r": 37,
+              "w": 0,
+              "wd": 3
+            },
+            {
+              "eco": 5,
+              "m": 0,
+              "name": "Sophie Day",
+              "nb": 0,
+              "o": 4,
+              "r": 20,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 9,
+              "m": 0,
+              "name": "Maisy Gibson",
+              "nb": 0,
+              "o": 2,
+              "r": 18,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 8.5,
+              "m": 0,
+              "name": "Annabel Sutherland",
+              "nb": 0,
+              "o": 4,
+              "r": 34,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 11.5,
+              "m": 0,
+              "name": "Danielle Gibson",
+              "nb": 0,
+              "o": 2,
+              "r": 23,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Melbourne Stars Women",
+          "dnb": [],
+          "extras": {
+            "b_lb": 1,
+            "nb": 0,
+            "total": 6,
+            "w": 5
+          },
+          "fow": "",
+          "label": "",
+          "overs": 20,
+          "runs": 160,
+          "team": "Sydney Sixers Women",
+          "wickets": 5
+        },
+        {
+          "batting": [
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Rhys McKenna",
+              "out": "b Cheatle",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0
+            },
+            {
+              "b": 6,
+              "fours": 0,
+              "mark": "",
+              "name": "Meg Lanning",
+              "out": "lbw b Kerr",
+              "r": 2,
+              "sixes": 0,
+              "sr": 33.33
+            },
+            {
+              "b": 26,
+              "fours": 4,
+              "mark": "",
+              "name": "Amy Jones",
+              "out": "b Nicklin",
+              "r": 28,
+              "sixes": 0,
+              "sr": 107.69
+            },
+            {
+              "b": 15,
+              "fours": 2,
+              "mark": "",
+              "name": "Annabel Sutherland",
+              "out": "c Dunkley b Perry",
+              "r": 22,
+              "sixes": 1,
+              "sr": 146.67
+            },
+            {
+              "b": 17,
+              "fours": 0,
+              "mark": "",
+              "name": "Naomi Stalenberg",
+              "out": "run out (Capsey/Kerr)",
+              "r": 19,
+              "sixes": 0,
+              "sr": 111.76
+            },
+            {
+              "b": 21,
+              "fours": 2,
+              "mark": "",
+              "name": "Charlotte Dean",
+              "out": "lbw b Gardner",
+              "r": 25,
+              "sixes": 0,
+              "sr": 119.05
+            },
+            {
+              "b": 20,
+              "fours": 2,
+              "mark": "",
+              "name": "Danielle Gibson",
+              "out": "c Kerr b Coyte",
+              "r": 31,
+              "sixes": 2,
+              "sr": 155
+            },
+            {
+              "b": 13,
+              "fours": 1,
+              "mark": "",
+              "name": "Georgia Prestwidge",
+              "out": "not out",
+              "r": 21,
+              "sixes": 0,
+              "sr": 161.54
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Kim Garth",
+              "out": "not out",
+              "r": 1,
+              "sixes": 0,
+              "sr": 100
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 7.2,
+              "m": 1,
+              "name": "Lauren Cheatle",
+              "nb": 0,
+              "o": 4,
+              "r": 29,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 9.3,
+              "m": 0,
+              "name": "Caoimhe Bray",
+              "nb": 0,
+              "o": 3,
+              "r": 28,
+              "w": 0,
+              "wd": 4
+            },
+            {
+              "eco": 7,
+              "m": 0,
+              "name": "Melie Kerr",
+              "nb": 0,
+              "o": 3,
+              "r": 21,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 9.2,
+              "m": 0,
+              "name": "Ashleigh Gardner",
+              "nb": 0,
+              "o": 4,
+              "r": 37,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 5,
+              "m": 0,
+              "name": "Ellyse Perry",
+              "nb": 0,
+              "o": 1,
+              "r": 5,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 5,
+              "m": 0,
+              "name": "Frankie Nicklin",
+              "nb": 0,
+              "o": 2,
+              "r": 10,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 9,
+              "m": 0,
+              "name": "Sarah Coyte",
+              "nb": 0,
+              "o": 3,
+              "r": 27,
+              "w": 1,
+              "wd": 2
+            }
+          ],
+          "bowling_team": "Sydney Sixers Women",
+          "dnb": [],
+          "extras": {
+            "b_lb": 2,
+            "nb": 0,
+            "total": 10,
+            "w": 8
+          },
+          "fow": "",
+          "label": "",
+          "overs": 20,
+          "runs": 159,
+          "team": "Melbourne Stars Women",
+          "wickets": 7
+        }
+      ],
+      "potm": [],
+      "standouts": [
+        {
+          "against": "Melbourne Stars Women",
+          "balls": 57,
+          "fours": 13,
+          "kind": "fifty",
+          "match": "Melbourne Stars Women vs Sydney Sixers Women, 12th Match, Womens Big Bash League 2026",
+          "name": "Ellyse Perry",
+          "not_out": true,
+          "result": "Sydney Sixers Women won by 1 run",
+          "runs": 84,
+          "sixes": 1,
+          "team": "Sydney Sixers Women"
+        }
+      ],
+      "status": "Sydney Sixers Women won by 1 run"
+    },
     "1988bf46-6ee2-4af0-88e5-559ae4b89a76": {
       "innings": [
         {
@@ -2103,22 +2444,24 @@
     }
   },
   "ipl": {},
+  "milestones": [],
   "seen": [
+    "0e3699f8-43b2-461b-a659-4d38daf9bf35",
     "786781a5-0548-479e-b268-a87521ea2e36",
     "c547eb46-2025-413a-b7f2-6d1584daa42f",
     "de774f34-7940-44c4-acce-8918a8069613",
     "f6bfa913-6f79-4fd9-ab8a-fe0b4cf5a456"
   ],
   "status": {
-    "espn-1553296": "West Indies won toss & batted",
-    "espn-1555123": "Zimbabwe won toss & batted"
+    "espn-1553296": "Bangladesh trail by 268 runs",
+    "espn-1555123": "Afghanistan trail by 391 runs"
   },
   "test_done": {
     "espn-1553296": 0,
     "espn-1555123": 0
   },
   "test_sig": {
-    "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 235, 'w': 4, 'o': 70.0}]",
-    "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 326, 'w': 5, 'o': 87.0}]"
+    "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 356, 'w': 10, 'o': 106.4}, {'inning': 'Bangladesh Inning 1', 'r': 88, 'w': 3, 'o': 40.0}]",
+    "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 504, 'w': 10, 'o': 134.3}, {'inning': 'Afghanistan Inning 1', 'r': 113, 'w': 1, 'o': 35.0}]"
   }
 }
