@@ -1,0 +1,852 @@
+{{Use British English|date=October 2018}}
+{{Use dmy dates|date=October 2018}}
+{{Infobox Athletics Championships
+| Name                   = 20th World Athletics Indoor Championships
+| Logo                   = File:World Athletics Indoor Championships Nanjing 2025.png 
+| Size                   = 300px
+| Host city              = [[Nanjing]], China
+| Edition                = 20th
+| Optional caption       = 
+| Nations participating  = 118
+| Athletes participating = 517
+| Events                 = 26
+| Dates                  = 21–23 March 2025
+| Stadium                = Nanjing's Cube at [[Nanjing Youth Olympic Sports Park]]
+| Previous               = [[2024 World Athletics Indoor Championships|Glasgow 2024]]
+| Next                   = [[2026 World Athletics Indoor Championships|Kujawy Pomorze 2026]]
+}}
+{{2025 World Athletics Indoor Championships}}
+The 20th '''[[World Athletics Indoor Championships]]''' were held from 21 to 23 March 2025 in [[Nanjing]], [[People's Republic of China]], at the newly built Nanjing's Cube gymnasium in the [[Nanjing Youth Olympic Sports Park]].<ref>{{Cite web |date=1 September 2022 |title=World Indoor Athletics Championships 2023 in China postponed to 2025 due to COVID-19 |url=https://www.firstpost.com/sports/world-indoor-athletics-championships-2023-in-china-postponed-to-2025-due-to-covid-19-11164091.html |access-date=1 September 2022 |website=[[Firstpost]]}}</ref><ref>{{Cite web |date=22 May 2023 |title=World Athletics Council competition decisions announced |url=https://worldathletics.org/news/press-releases/world-athletics-council-competition-decisions |access-date=22 May 2023 |website=[[World Athletics]]}}</ref>
+
+Nanjing was originally due to host the World Athletics Indoor Championships in 2020, then in 2021, and then again in 2023, but all these dates were cancelled due to [[COVID-19 pandemic in China|COVID-19 pandemic]] regulations in China.<ref>{{Cite news|date=29 January 2020|title=World Athletics to postpone World Athletics Indoor Championships Nanjing 2020|url=https://www.worldathletics.org/news/press-releases/indoor-championships-nanjing-2020-postponed|access-date=29 January 2020|work=[[World Athletics]]}}</ref><ref>{{Cite news|date=1 September 2022|title=World Athletics Indoor Championships Nanjing 2023 to be postponed|url=https://www.worldathletics.org/news/press-releases/world-indoor-championships-nanjing-2023-postponed|access-date=1 September 2022|work=[[World Athletics]]}}</ref> The [[2022 World Athletics Indoor Championships|2022 edition]] took place in [[Belgrade]], Serbia, and the [[2024 World Athletics Indoor Championships|2024 edition]] in [[Glasgow]], United Kingdom.
+
+==Bidding process==
+On 26 November 2017, delegations from the three candidate cities made their presentations at the 212th [[IAAF]] Council Meeting: Nanjing, Serbia's capital [[Belgrade]], and [[Toruń]], Poland. Nanjing won the bid for the 2020 World Athletics Indoor Championships.<ref>{{cite web|url=https://www.iaaf.org/news/press-release/nanjing-is-awarded-2020-world-indoor-champion |title=Nanjing is Awarded 2020 World Indoor Championships – IAAF Council, Day 2 |publisher=[[IAAF]] |date=26 November 2017 |access-date=20 October 2018}}</ref>
+
+==Venue==
+The facility, a brand new purpose-built gymnasium at the [[Nanjing Youth Olympic Sports Park]], known as Nanjing's Cube, was the centrepiece of the event. Construction started in September 2017 and was completed in time for the event. The venue for track and field, along with swimming, were located in Block A of the park, and to the east was the Yangtze River complex. It provided catering and hotels, as well as security work for the event.<ref>{{Cite web|url=https://www.worldathleticsnanjing2020.com/html/enindex/entournament/Eventdate/2019/0619/98.html|title=World Athletics Indoor Championships Nanjing 2020 Organising Committee|website=www.worldathleticsnanjing2020.com|access-date=13 December 2019|archive-date=6 December 2019|archive-url=https://web.archive.org/web/20191206000000/https://www.worldathleticsnanjing2020.com/html/enindex/entournament/Eventdate/2019/0619/98.html|url-status=dead}}</ref>
+
+== Schedule ==
+''All times were local ([[Time in China|UTC+8]])''.<ref name=":0">{{Cite web |date=5 December 2024 |title=World Athletics Indoor Championships Nanjing 2025 Timetable |url=https://assets.aws.worldathletics.org/67507449fa771a82a0d48cd6.jpg |archive-url=https://web.archive.org/web/20241211200416/https://assets.aws.worldathletics.org/67507449fa771a82a0d48cd6.jpg |archive-date=11 December 2024 |access-date=6 December 2024 |website=[[World Athletics]]}}</ref>
+
+{|class="wikitable" style="margin:0.5em auto; font-size:90%;position:relative; line-height:1.6em;" width=40%
+|-
+|bgcolor="#D0A9F5" align=center|R1||Round 1
+|bgcolor="#D9FFB2" align=center|SF||Semi-finals
+|bgcolor="#FFDF80" align=center|F||Final
+|-
+| colspan="6" align="center" |M = morning session, E = evening session
+|}
+
+{{columns-start|width=100%}}
+{{row hover highlight}}
+{|class="wikitable mw-datatable" style="margin:0.5em auto; font-size:90%; line-height:1.5em;"
+|+Men
+|- align=center
+! Date → || width=80px colspan=4|21 March || width=80px colspan=4|22 March || width=80px colspan=4|23 March
+|-
+! Event ↓ || width=40px colspan=2|M || width=40px colspan=2|E || width=40px colspan=2|M || width=40px colspan=2|E || width=40px colspan=2|M || width=40px colspan=2|E
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's 60 metres|60 m]] || bgcolor="#D0A9F5" colspan=2|R1 || bgcolor="#D9FFB2"|S || bgcolor="#FFDF80"|F  || colspan=2| || colspan=2| || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's 400 metres|400 m]] || bgcolor="#D0A9F5" colspan=2|R1 || bgcolor="#D9FFB2" colspan=2|S || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's 800 metres|800 m]] || bgcolor="#D0A9F5" colspan=2|R1 || colspan=2| || bgcolor="#D9FFB2" colspan=2|S || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's 1500 metres|1500 m]] || colspan=2| || bgcolor="#D0A9F5" colspan=2|R1 || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's 3000 metres|3000 m]] || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's 60 metres hurdles|60 m hurdles]] || colspan=2| || colspan=2| || bgcolor="#D0A9F5" colspan=2|R1 || bgcolor="#D9FFB2"|S || bgcolor="#FFDF80"|F || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's 4 × 400 metres relay|4 × 400 m]] || colspan=2| || colspan=2| || colspan=2| || colspan=2| ||  colspan=2| || bgcolor="#FFDF80" colspan=2|F
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's high jump|High jump]] || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2| || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's pole vault|Pole vault]] || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's long jump|Long jump]] || colspan=2| || colspan=2| || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's triple jump|Triple jump]] || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2| || colspan=2| || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's shot put|Shot put]] || colspan=2| || colspan=2| || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Men's heptathlon|Heptathlon]] || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=8|F
+|}
+
+{{column}}
+{{row hover highlight}}
+{|class="wikitable mw-datatable" style="margin:0.5em auto; font-size:90%; line-height:1.5em;"
+|+Women
+|- align=center
+! Date → || width=80px colspan=4|21 March || width=80px colspan=4|22 March  || width=80px colspan=4|23 March
+|-
+! Event ↓ || width=40px colspan=2|M || width=40px colspan=2|E || width=40px colspan=2|M || width=40px colspan=2|E || width=40px colspan=2|M || width=40px colspan=2|E
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's 60 metres|60 m]] || colspan=2| || colspan=2| || bgcolor="#D0A9F5" colspan=2|R1 || bgcolor="#D9FFB2"|S || bgcolor="#FFDF80"|F || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's 400 metres|400 m]] || colspan=2| || bgcolor="#D9FFB2" colspan=2|S || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's 800 metres|800 m]] || bgcolor="#D0A9F5" colspan=2|R1 || colspan=2| || bgcolor="#D9FFB2" colspan=2|S || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's 1500 metres|1500 m]] || colspan=2| || bgcolor="#D0A9F5" colspan=2|R1 || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's 3000 metres|3000 m]] || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's 60 metres hurdles|60 m hurdles]] || colspan=2| || colspan=2| || colspan=2| || colspan=2| || bgcolor="#D0A9F5" colspan=2|R1 || bgcolor="#D9FFB2"|S || bgcolor="#FFDF80"|F
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's 4 × 400 metres relay|4 × 400 m]] || colspan=2| || colspan=2| || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's high jump|High jump]] || colspan=2| || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's pole vault|Pole vault]] || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's long jump|Long jump]] || colspan=2| || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's triple jump|Triple jump]] || colspan=2| || colspan=2| || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's shot put|Shot put]] || colspan=2| || bgcolor="#FFDF80" colspan=2|F || colspan=2| || colspan=2| || colspan=2| || colspan=2|
+|- align=center
+| align=left| [[2025 World Athletics Indoor Championships – Women's pentathlon|Pentathlon]] || bgcolor="#FFDF80" colspan=4|F || colspan=2| || colspan=2| || colspan=2| || colspan=2|
+|}
+{{columns-end}}
+
+{| class="wikitable collapsible collapsed" style="border:0; position:relative; font-size:100%;"
+|+{{nowrap|Event detailed schedule}}<ref name=":0" />
+! colspan="4" |Day 1 — Friday, 21 March 2025
+|-
+! style="width:5em" |'''Time'''
+!'''Event'''
+!'''Gender'''
+!'''Round'''
+|-
+| align="center" |10:05
+|60 metres hurdles
+| align="center" |W
+|Pentathlon
+|-
+| align="center" |10:23
+|400 metres
+| align="center" |M
+|Round 1
+|-
+| align="center" |10:45
+|High jump
+| align="center" |W
+|Pentathlon
+|-
+| align="center" |11:05
+|Triple jump
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |11:15
+|800 metres
+| align="center" |W
+|Round 1
+|-
+| align="center" |11:55
+|800 metres
+| align="center" |M
+|Round 1
+|-
+| align="center" |12:55
+|60 metres
+| align="center" |M
+|Round 1
+|-
+| align="center" |13:15
+|Shot put
+| align="center" |W
+|Pentathlon
+|-
+! colspan="4" |
+|-
+| align="center" |18:30
+|High jump
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |18:33
+|1500 metres
+| align="center" |W
+|Round 1
+|-
+| align="center" |18:42
+|Long jump
+| align="center" |W
+|Pentathlon
+|-
+| align="center" |19:18
+|1500 metres
+| align="center" |M
+|Round 1
+|-
+| align="center" |19:50
+|Shot put
+| align="center" |W
+|'''Final'''
+|-
+| align="center" |20:03
+|60 metres
+| align="center" |M
+|Semi-final
+|-
+| align="center" |20:26
+|400 metres
+| align="center" |W
+|Round 1
+|-
+| align="center" |20:47
+|400 metres
+| align="center" |M
+|Semi-final
+|-
+| align="center" |21:15
+|800 metres
+| align="center" |W
+|'''Final pentathlon'''
+|-
+| align="center" |21:24
+|60 metres
+| align="center" |M
+|'''Final'''
+|-
+! colspan="4" |Day 2 — Saturday, 22 March 2025
+|-
+!'''Time'''
+!'''Event'''
+!'''Gender'''
+!'''Round'''
+|-
+| align="center" |10:05
+|60 metres
+| align="center" |M
+|Heptathlon
+|-
+| align="center" |10:10
+|Pole vault
+| align="center" |W
+|'''Final'''
+|-
+| align="center" |10:25
+|60 metres hurdles
+| align="center" |M
+|Round 1
+|-
+| align="center" |10:45
+|Long jump
+| align="center" |M
+|Heptathlon
+|-
+| align="center" |11:15
+|60 metres
+| align="center" |W
+|Round 1
+|-
+| align="center" |12:05
+|800 metres
+| align="center" |W
+|Semi-final
+|-
+| align="center" |12:10
+|Shot put
+| align="center" |M
+|Heptathlon
+|-
+| align="center" |12:31
+|800 metres
+| align="center" |M
+|Semi-final
+|-
+! colspan="4" |
+|-
+| align="center" |18:34
+|Pole vault
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |18:37
+|High jump
+| align="center" |M
+|Heptathlon
+|-
+| align="center" |19:10
+|3000 metres
+| align="center" |W
+|'''Final'''
+|-
+| align="center" |19:15
+|Triple jump
+| align="center" |W
+|'''Final'''
+|-
+| align="center" |19:33
+|3000 metres
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |19:50
+|60 metres hurdles
+| align="center" |M
+|Semi-final
+|-
+| align="center" |20:15
+|60 metres
+| align="center" |W
+|Semi-final
+|-
+| align="center" |20:44
+|400 metres
+| align="center" |W
+|'''Final'''
+|-
+| align="center" |20:55
+|400 metres
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |21:05
+|60 metres hurdles
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |21:18
+|60 metres
+| align="center" |W
+|'''Final'''
+|-
+! colspan="4" |Day 3 — Sunday, 23 March 2025
+|-
+!'''Time'''
+!'''Event'''
+!'''Gender'''
+!'''Round'''
+|-
+| align="center" |10:05
+|60 metres hurdles
+| align="center" |M
+|Heptathlon
+|-
+| align="center" |10:19
+|Long jump
+| align="center" |W
+|'''Final'''
+|-
+| align="center" |10:25
+|60 metres hurdles
+| align="center" |W
+|Round 1
+|-
+| align="center" |11:10
+|Pole vault
+| align="center" |M
+|Heptathlon
+|-
+| align="center" |11:35
+|High jump
+| align="center" |W
+|'''Final'''
+|-
+! colspan="4" |
+|-
+| align="center" |19:35
+|60 metres hurdles
+| align="center" |W
+|Semi-final
+|-
+| align="center" |19:38
+|Shot put
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |19:40
+|Long jump
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |20:02
+|1000 metres
+| align="center" |M
+|'''Final heptathlon'''
+|-
+| align="center" |20:15
+|1500 metres
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |20:28
+|1500 metres
+| align="center" |W
+|'''Final'''
+|-
+| align="center" |20:40
+|800 metres
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |20:54
+|800 metres
+| align="center" |W
+|'''Final'''
+|-
+| align="center" |21:01
+|60 metres hurdles
+| align="center" |W
+|'''Final'''
+|-
+| align="center" |21:11
+|4 x 400 metres relay
+| align="center" |M
+|'''Final'''
+|-
+| align="center" |21:21
+|4 x 400 metres relay
+| align="center" |W
+|'''Final'''
+|}
+
+==Medal table==
+{{Medals table
+ | caption        = 
+ | host           = CHN
+ | show_limit     = 
+ | remaining_link = 
+ | flag_template  = flagcountry
+ | event          = 
+ | team           = 
+ | gold_USA = 6 | silver_USA = 4 | bronze_USA = 6
+ | gold_NOR = 3 | silver_NOR = 0 | bronze_NOR = 1
+ | gold_ETH = 2 | silver_ETH = 2 | bronze_ETH = 0
+ | gold_GBR = 2 | silver_GBR = 1 | bronze_GBR = 1
+ | gold_ITA = 2 | silver_ITA = 1 | bronze_ITA = 0
+ | gold_AUS = 1 | silver_AUS = 2 | bronze_AUS = 4
+ | gold_SUI = 1 | silver_SUI = 2 | bronze_SUI = 1
+ | gold_CUB = 1 | silver_CUB = 1 | bronze_CUB = 0
+ | gold_FRA = 1 | silver_FRA = 1 | bronze_FRA = 0
+ | gold_NZL = 1 | silver_NZL = 1 | bronze_NZL = 0
+ | gold_RSA = 1 | silver_RSA = 0 | bronze_RSA = 1
+ | gold_BAH = 1 | silver_BAH = 0 | bronze_BAH = 0
+ | gold_CAN = 1 | silver_CAN = 0 | bronze_CAN = 0
+ | gold_FIN = 1 | silver_FIN = 0 | bronze_FIN = 0
+ | gold_KOR = 1 | silver_KOR = 0 | bronze_KOR = 0
+ | gold_SWE = 1 | silver_SWE = 0 | bronze_SWE = 0
+ | gold_JAM = 0 | silver_JAM = 2 | bronze_JAM = 2
+ | gold_CHN = 0 | silver_CHN = 1 | bronze_CHN = 1 | host_CHN = yes
+ | gold_BEL = 0 | silver_BEL = 1 | bronze_BEL = 0
+ | gold_EST = 0 | silver_EST = 1 | bronze_EST = 0
+ | gold_GRE = 0 | silver_GRE = 1 | bronze_GRE = 0
+ | gold_IRL = 0 | silver_IRL = 1 | bronze_IRL = 0
+ | gold_NED = 0 | silver_NED = 1 | bronze_NED = 0
+ | gold_POL = 0 | silver_POL = 1 | bronze_POL = 0
+ | gold_SLO = 0 | silver_SLO = 1 | bronze_SLO = 0
+ | gold_ESP = 0 | silver_ESP = 0 | bronze_ESP = 3
+ | gold_BUR = 0 | silver_BUR = 0 | bronze_BUR = 1
+ | gold_GER = 0 | silver_GER = 0 | bronze_GER = 1
+ | gold_HUN = 0 | silver_HUN = 0 | bronze_HUN = 1
+ | gold_LUX = 0 | silver_LUX = 0 | bronze_LUX = 1
+ | gold_POR = 0 | silver_POR = 0 | bronze_POR = 1
+ | gold_UKR = 0 | silver_UKR = 0 | bronze_UKR = 1
+}}
+
+==Placing table==
+[[United States national Olympic track and field team|United States]] won the [[placing table]].<ref>{{cite web|url=https://worldathletics.org/competitions/world-athletics-indoor-championships/world-athletics-indoor-championships-7136586/placingtable|title=World Athletics Indoor Championships Nanjing 25 - Placing table|website=worldathletics.org|access-date=24 March 2026}}</ref>
+
+{| class="wikitable sortable" style="width:font-size:90%; text-align:center"
+|-
+!Rank!!Country!!{{Gold1}}!!{{Silver2}}!!{{Bronze3}}!!4!!5!!6!!7!!8!!Medals!!Points
+|-
+|1 ||align=left|{{USA}} ||6 ||4 ||6 ||4 ||6 ||3 ||4 ||2 || 16 || 175
+|-
+|2 ||align=left|{{AUS}} ||1 ||2 ||4 ||1 ||1 ||0 ||0 ||0 || 7 || 55
+|-
+|3 ||align=left|{{ETH}} ||2 ||3 ||0 ||0 ||1 ||1 ||0 ||0 || 5 || 44
+|-
+|3 ||align=left|{{CHN}} ||0 ||1 ||1 ||3 ||2 ||1 ||1 ||3 || 2 || 44
+|-
+|5 ||align=left|{{ITA}} ||2 ||1 ||0 ||2 ||0 ||1 ||2 ||2 || 3 || 42
+|-
+|6 ||align=left|{{JAM}} ||0 ||2 ||2 ||1 ||1 ||1 ||1 ||1 || 4 || 41
+|-
+|7 ||align=left|{{GBR2}} ||2 ||1 ||1 ||1 ||1 ||0 ||0 ||0 || 4 || 38
+|-
+|8 ||align=left|{{SUI}} ||1 ||2 ||1 ||1 ||0 ||0 ||0 ||0 || 4 || 33
+|-
+|9 ||align=left|{{NOR}} ||3 ||0 ||1 ||0 ||0 ||0 ||1 ||0 || 4 || 32
+|-
+|10 ||align=left|{{POL}} ||0 ||1 ||0 ||2 ||2 ||0 ||1 ||0 || 1 || 27
+|}
+
+==Medal summary==
+===Men===
+{| {{MedalistTable|type=Event|columns=2}}
+|-
+| {{AthleticsLink|60 metres|Men}}
+| {{Flag medalist|[[Jeremiah Azu]]|GBR}}|| 6.49 ={{AthAbbr|PB}}
+| {{Flag medalist|[[Lachlan Kennedy (sprinter)|Lachlan Kennedy]]|AUS}}|| 6.50
+| {{Flag medalist|[[Akani Simbine]]|RSA}}|| 6.54
+|-
+| {{AthleticsLink|400 metres|Men}}
+| {{Flag medalist|[[Christopher Bailey (runner)|Christopher Bailey]]|USA}} || 45.08
+| {{Flag medalist|[[Brian Faust]]|USA}} || 45.47 ={{AthAbbr|PB}}
+| {{Flag medalist|[[Jacory Patterson]]|USA}} || 45.54
+|-
+| {{AthleticsLink|800 metres|Men}}
+| {{Flag medalist|[[Josh Hoey]]|USA}} || 1:44.77
+| {{Flag medalist|[[Eliott Crestan]]|BEL}} || 1:44.81
+| {{Flag medalist|[[Elvin Josué Canales]]|ESP}} || 1:45.03
+|-
+| {{AthleticsLink|1500 metres|Men}}
+| {{Flag medalist|[[Jakob Ingebrigtsen]]|NOR}} || 3:38.79
+| {{Flag medalist|[[Neil Gourley]]|GBR}} || 3:39.07
+| {{Flag medalist|[[Luke Houser]]|USA}} || 3:39.17
+|-
+| {{AthleticsLink|3000 metres|Men}}
+| {{Flag medalist|[[Jakob Ingebrigtsen]]|NOR}} || 7:46.09 {{AthAbbr|SB}}
+| {{Flag medalist|[[Berihu Aregawi]]|ETH}} || 7:46.25 {{AthAbbr|SB}}
+| {{Flag medalist|[[Ky Robinson]]|AUS}} || 7:47.09
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{AthleticsLink|60 metres hurdles|Men}}
+| {{Flag medalist|[[Grant Holloway]]|USA}} || 7.42
+| {{Flag medalist|[[Wilhem Belocian]]|FRA}}|| 7.54
+| {{Flag medalist|[[Liu Junxi]]|CHN}} || 7.55
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-valign=top
+| {{AthleticsLink|4 × 400 metres relay|Men}}
+| {{flagcountry|USA}}<br>[[Elija Godwin]]<br>[[Brian Faust]]<br>[[Jacory Patterson]]<br>[[Christopher Bailey (runner)|Christopher Bailey]] || 3:03.13 {{AthAbbr|SB}}
+| {{flagcountry|JAM}}<br>[[Rusheen McDonald]]<br>[[Jasauna Dennis]]<br>[[Kimar Farquharson]]<br>[[Demar Francis]] || 3:05.05 {{AthAbbr|SB}}
+| {{flagcountry|HUN}}<br>[[Patrik Simon Enyingi]]<br>[[Zoltán Wahl]]<br>[[Árpád Kovács]]<br>[[Attila Molnár (runner)|Attila Molnár]] || 3:06.03 '''{{AthAbbr|NR|Hungarian}}'''
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{AthleticsLink|High jump|Men}}
+| {{Flag medalist|[[Woo Sang-hyeok]]|KOR}} || 2.31 m ={{AthAbbr|SB}}
+| {{Flag medalist|[[Hamish Kerr]]|NZL}} || 2.28 m
+| {{Flag medalist|[[Raymond Richards (high jumper)|Raymond Richards]]|JAM}} || 2.28 m
+|-
+| {{AthleticsLink|Pole vault|Men}}
+| {{Flag medalist|[[Armand Duplantis]]|SWE}} || 6.15 m
+| {{Flag medalist|[[Emmanouil Karalis]]|GRE}} || 6.05 m '''{{AthAbbr|NR|Greek}}'''
+| {{Flag medalist|[[Sam Kendricks]]|USA}} || 5.90 m ={{AthAbbr|SB}}
+|-
+| {{AthleticsLink|Long jump|Men}}
+| {{Flag medalist|[[Mattia Furlani]]|ITA}} || 8.30 m 
+| {{Flag medalist|[[Wayne Pinnock]]|JAM}} || 8.29 m {{AthAbbr|SB}}
+| {{Flag medalist|[[Liam Adcock]]|AUS}} || 8.28 m
+|-
+| {{AthleticsLink|Triple jump|Men}} {{ref label|a|a|triple jump}}
+| {{Flag medalist|[[Andy Díaz]]|ITA}} || 17.80 m {{AthAbbr|WL}}
+| {{Flag medalist|[[Zhu Yaming]]|CHN}} || 17.33 m {{AthAbbr|SB}}
+| {{Flag medalist|[[Hugues Fabrice Zango]]|BUR}} || 17.15 m {{AthAbbr|SB}}
+|-
+| {{AthleticsLink|Shot put|Men}}
+| {{Flag medalist|[[Tom Walsh (shot putter)|Tom Walsh]]|NZL}} || 21.65 m {{AthAbbr|SB}}
+| {{Flag medalist|[[Roger Steen]]|USA}} || 21.62 m {{AthAbbr|SB}}
+| {{Flag medalist|[[Adrian Piperi]]|USA}} || 21.48 m 
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{AthleticsLink|Heptathlon|Men}}
+| {{Flag medalist|[[Sander Skotheim]]|NOR}} || 6475 pts
+| {{Flag medalist|[[Johannes Erm]]|EST}} || 6437 pts '''{{AthAbbr|NR|Estonian}}'''
+| {{Flag medalist|[[Till Steinforth]]|GER}} || 6275 pts
+|- style="background:#e8e8e8;"
+|colspan=7|{{Sports record codes}}
+|}<!-- 
+*Note: * = Relay athletes who only ran in heats -->
+* {{note label|a|a|triple jump}} [[Almir dos Santos]] of Brazil originally won the bronze medal, but was disqualified for wearing non-regulation shoes.
+
+===Women===
+{| {{MedalistTable|type=Event|columns=2}}
+|-
+| {{AthleticsLink|60 metres|Women}}
+| {{Flag medalist|[[Mujinga Kambundji]]|SUI}} || 7.04
+| {{Flag medalist|[[Zaynab Dosso]]|ITA}} || 7.06
+| {{Flag medalist|[[Patrizia van der Weken]]|LUX}} || 7.07
+|-
+| {{AthleticsLink|400 metres|Women}}
+| {{Flag medalist|[[Amber Anning]]|GBR}} || 50.60
+| {{Flag medalist|[[Alexis Holmes]]|USA}} || 50.63
+| {{Flag medalist|[[Henriette Jæger]]|NOR}} || 50.92
+|-
+| {{AthleticsLink|800 metres|Women}}
+| {{Flag medalist|[[Prudence Sekgodiso]]|RSA}} || 1:58.40 {{AthAbbr|WL}}
+| {{Flag medalist|[[Nigist Getachew]]|ETH}} || 1:59.63 {{AthAbbr|PB}}
+| {{Flag medalist|[[Patricia Silva (runner)|Patricia Silva]]|POR}} || 1:59.80 '''{{AthAbbr|NR|Portuguese}}'''
+|-
+| {{AthleticsLink|1500 metres|Women}}{{ref label|a|a|1500m}}
+| {{Flag medalist|[[Gudaf Tsegay]]|ETH}} || 3:54.86 '''[[World Athletics Indoor Championships#Women|CR]]'''
+| ''Vacant'' || 
+| {{Flag medalist|[[Georgia Bell|Georgia Hunter Bell]]|GBR}} || 3:59.84 {{AthAbbr|PB}}
+|-
+| {{AthleticsLink|3000 metres|Women}}
+| {{Flag medalist|[[Freweyni Hailu]]|ETH}} || 8:37.21
+| {{Flag medalist|[[Shelby Houlihan]]|USA}} || 8:38.26
+| {{Flag medalist|[[Jessica Hull]]|AUS}} || 8:38.28
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{AthleticsLink|60 metres hurdles|Women}}
+| {{Flag medalist|[[Devynne Charlton]]|BAH}} || 7.72 {{AthAbbr|SB}}
+| {{Flag medalist|[[Ditaji Kambundji]]|SUI}} || 7.73
+| {{Flag medalist|[[Ackera Nugent]]|JAM}} || 7.74 {{AthAbbr|SB}}
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-valign=top
+| {{AthleticsLink|4 × 400 metres relay|Women}}
+| {{flagcountry|USA}}<br>[[Quanera Hayes]]<br>[[Bailey Lear]]<br>[[Rosey Effiong]]<br>[[Alexis Holmes]] || 3:27.45  
+| {{flagcountry|POL}}<br>[[Justyna Święty-Ersetic]]<br>[[Aleksandra Formella]]<br>[[Anastazja Kuś]]<br>[[Anna Gryc]] || 3:32.05 {{AthAbbr|SB}}
+| {{flagcountry|AUS}}<br>[[Ellie Beer]]<br>[[Ella Connolly]]<br>[[Bella Pasquali]]<br>[[Jemma Pollard]] || 3:32.65 {{AthAbbr|SB}}
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{AthleticsLink|High jump|Women}}
+| {{Flag medalist|[[Nicola Olyslagers]]|AUS}} || 1.97 m {{AthAbbr|SB}}
+| {{Flag medalist|[[Eleanor Patterson]]|AUS}} || 1.97 m
+| {{Flag medalist|[[Yaroslava Mahuchikh]]|UKR}} || 1.95 m
+|-
+| {{AthleticsLink|Pole vault|Women}}
+| {{Flag medalist|[[Marie-Julie Bonnin]]|FRA}} || 4.75 m '''={{AthAbbr|NR|French}}'''
+| {{Flag medalist|[[Tina Šutej]]|SLO}} || 4.70 m
+| {{Flag medalist|[[Angelica Moser]]|SUI}} || 4.70 m
+|-
+| {{AthleticsLink|Long jump|Women}}
+| {{Flag medalist|[[Claire Bryant]]|USA}} || 6.96 m {{AthAbbr|PB}}
+| {{Flag medalist|[[Annik Kälin]]|SUI}} || 6.83 m
+| {{Flag medalist|[[Fátima Diame]]|ESP}} || 6.72 m
+|-
+| {{AthleticsLink|Triple jump|Women}}
+| {{Flag medalist|[[Leyanis Pérez Hernández]]|CUB}} || 14.93 m {{AthAbbr|WL}}
+| {{Flag medalist|[[Liadagmis Povea]]|CUB}} || 14.57 m ={{AthAbbr|SB}}
+| {{Flag medalist|[[Ana Peleteiro-Compaoré]]|ESP}} || 14.29 m
+|-
+| {{AthleticsLink|Shot put|Women}}
+| {{Flag medalist|[[Sarah Mitton]]|CAN}} || 20.48 m
+| {{Flag medalist|[[Jessica Schilder]]|NED}} || 20.07 m
+| {{Flag medalist|[[Chase Jackson]]|USA}} || 20.06 m
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{AthleticsLink|Pentathlon|Women}}
+| {{Flag medalist|[[Saga Vanninen]]|FIN}}|| 4821 pts
+| {{Flag medalist|[[Kate O'Connor (athlete)|Kate O'Connor]]|IRE}}||4742 pts
+| {{Flag medalist|[[Taliyah Brooks]]|USA}}|| 4669 pts {{AthAbbr|PB}}
+|- style="background:#e8e8e8;"
+|colspan=7|{{Sports record codes}}
+|}
+
+* {{note label|a|a|1500m}} [[Diribe Welteji]] of Ethiopia originally won the silver medal, but was disqualified due to anti-doping violations.
+
+== Qualification ==
+The qualification period for all events ran from 1 September 2024 to 9 March 2025 (midnight Monaco time).  Athletes could qualify by achieving the Entry Standard within the qualification period or by [[World Athletics Indoor Tour|World Indoor Tour]] Wildcard, or by virtue of their position in the [[World Athletics Rankings|World Rankings]] as of 9 March 2025 to complete, where necessary, the target number of athletes in each event. In total no more than two male and two female athletes from any one Member were invited. The winners of the World Indoor tour received wildcards to the championships, allowing nations with wildcards to enter up to 3 athletes into individual events.<ref>{{cite web |title=Timetable and qualification system approved for WCH Tokyo 25 and WIC Nanjing 25 |url=https://worldathletics.org/news/press-releases/timetable-qualification-system-world-championships-tokyo-25-indoor-nanjing-25}}</ref>{{row hover highlight}}
+{|class="wikitable mw-datatable mw-collapsible" style="text-align:center;"
+|+{{nowrap|Entry Standards and target numbers of athletes / teams per event}}
+! rowspan=2|Event
+! colspan=2|Women
+! colspan=2|Men
+! rowspan=2|Quota
+|-
+! Indoor
+! Outdoor
+! Indoor
+! Outdoor
+|-
+| align=left|[[60 metres]]
+| 7.15 || 10.90 for [[100 metres|100 m]] || 6.55 || 9.92 for 100 m
+| 56
+|-
+| align=left|[[400 metres]]
+| 51.00 || 51.00 || 45.20 || 45.20
+| 30
+|-
+| align=left|[[800 metres]]
+| 2:00.00 || 2:00.00 || 1:45.00 || 1:45.00
+| 30
+|-
+| align=left|[[1500 metres]]<br />([[Mile run|Mile]])
+| 4:03.00<br />(4:22.50) || 4:03.00<br />(4:22.50) || 3:33.50<br />(3:50.50) || 3:33.50<br />(3:50.50)
+| 30
+|-
+| align=left|[[3000 metres]]<br />([[5000 metres]])
+| 8:33.00 || 8:33.00<br />(14:25.00) || 7:31.00 || 7:31.00<br />(12:45.00)
+| 15
+|-
+| align=left|[[60 metres hurdles|60 m hurdles]]
+| 7.94 ||  [[100 metres hurdles|100 mH]] || 7.57 ||  [[110 metres hurdles|110 mH]]
+| 48
+|-
+| align=left|[[High jump]]
+| colspan=2|{{T&Fcalc|1.97}} || colspan=2|{{T&Fcalc|2.34}}
+| 12
+|-
+| align=left|[[Pole vault]]
+| colspan=2|{{T&Fcalc|4.75}} || colspan=2|{{T&Fcalc|5.85}}
+| 12
+|-
+| align=left|[[Long jump]]
+| colspan=2|{{T&Fcalc|6.90}} || colspan=2|{{T&Fcalc|8.26}}
+| 16
+|-
+| align=left|[[Triple jump]]
+| colspan=2|{{T&Fcalc|14.60}} || colspan=2|{{T&Fcalc|17.40}}
+| 16
+|-
+| align=left|[[Shot put]]
+| colspan=2|{{T&Fcalc|19.50}} || colspan=2|{{T&Fcalc|22.00}}
+| 16
+|-
+| align=left|[[Combined track and field events|Combined events]]
+| colspan=4 {{n/a|''see above''}}
+| 14
+|-
+| align=left|Relays
+| colspan=5 {{n/a|''see above''}}
+|}
+<ref name="standards">{{cite web |title=World Athletics Indoor Championships Nanjing 25 Qualification System and Entry Standards |url=https://assets.aws.worldathletics.org/document/66aa79105e6a655f85e64215.pdf |website=[[World Athletics]] |access-date=19 March 2025}}</ref>
+
+==Participating nations==
+576 athletes from 127 countries were entered.<ref>{{cite web|title=World Athletics Indoor Championships Nanjing 25 – Athletes by Country|url=https://assets.aws.worldathletics.org/document/67d5b6fdda45fa9d06b5ec30.pdf?_gl=1*13zebt7*_gcl_au*ODE2NDkwNzAuMTc0MDQwMDgzMw..*_ga*MTk4OTY2NTIyMi4xNTkzODkzMjc1*_ga_7FE9YV46NW*MTc0MjA3ODI1OC4xNDMuMS4xNzQyMDc4MjY1LjAuMC4w|publisher=[[World Athletics]]|date=15 March 2025|access-date=15 March 2025}}</ref> Of that number 517 athletes from 118 countries actually got to compete.<ref>[https://worldathletics.org/competitions/world-athletics-indoor-championships/nanjing25/athletes?competitionGroup=world-athletics-indoor-championships&urlSlug=nanjing25&countryCode=&sexCode= Official database of participating athletes]</ref>
+{{div col|colwidth=20em}}
+*{{ALG}} (1)
+*{{ANG}} (1)
+*{{ATG}} (1)
+*{{ARG}} (1)
+*{{ARM}} (1)
+*{{AUS}} (20)
+*{{AUT}} (2)
+*{{BAH}} (5)
+*{{BAN}} (1)
+*{{BAR}} (4)
+*{{BEL}} (4)
+*{{BEN}} (1)
+*{{BOL}} (1)
+*{{BRA}} (17)
+*{{IVB}} (2)
+*{{BUL}} (2)
+*{{BUR}} (2)
+*{{CAN}} (14)
+*{{CHI}} (2)
+*{{CHN}} (32)
+*{{TPE}} (1)
+*{{COK}} (1)
+*{{CRO}} (2)
+*{{CUB}} (3)
+*{{CYP}} (1)
+*{{CZE}} (10)
+*{{DEN}} (2)
+*{{DMA}} (1)
+*{{EGY}} (3)
+*{{ERI}} (1)
+*{{EST}} (5)
+*{{SWZ}} (1)
+*{{ETH}} (12)
+*{{FSM}} (1)
+*{{FIJ}} (1)
+*{{FIN}} (5)
+*{{FRA}} (9)
+*{{PYF}} (1)
+*{{GEO}} (1)
+*{{GER}} (8)
+*{{GBR2}} (11)
+*{{GRE}} (5)
+*{{GUM}} (1)
+*{{flag|Honduras|2022}} (1)
+*{{HKG}} (1)
+*{{HUN}} (11)
+*{{IRI}} (1)
+*{{IRL}} (6)
+*{{ISR}} (2)
+*{{ITA}} (21)
+*{{CIV}} (2)
+*{{JAM}} (20)
+*{{JPN}} (13)
+*{{KEN}} (9)
+*{{KIR}} (1)
+*{{KUW}} (2)
+*{{KGZ}} (1)
+*{{LAO}} (1)
+*{{LAT}} (3)
+*{{LBR}} (1)
+*{{LTU}} (2)
+*{{LUX}} (2)
+*{{MAC}} (1)
+*{{MAD}} (1)
+*{{MDV}} (1)
+*{{MLI}} (1)
+*{{MLT}} (1)
+*{{MRI}} (1)
+*{{MAR}} (3)
+*{{MOZ}} (1)
+*{{NRU}} (1)
+*{{NEP}} (1)
+*{{NED}} (6)
+*{{NZL}} (11)
+*{{NIG}} (1)
+*{{NGR}} (1)<ref>{{Cite news |last1=Adewale |first1=Abiodun |title=Nigeria’s sole rep Enekwechi fifth at World Indoor Champs |url=https://punchng.com/nigerias-sole-rep-enekwechi-fifth-at-world-indoor-champs/ |newspaper=[[The Punch]]|access-date=25 March 2025 |date=24 March 2025}}</ref>
+*{{NOR}} (4)
+*{{OMA}} (1)
+*{{PNG}} (1)
+*{{PAR}} (1)
+*{{PER}} (1)
+*{{PHI}} (1)
+*{{POL}} (13)
+*{{POR}} (7)
+*{{PUR}} (3)
+*{{QAT}} (1)
+*{{CGO}} (1)
+*{{ROU}} (5)
+*{{RWA}} (1)
+*{{LCA}} (1)
+*{{VIN}} (1)
+*{{ESA}} (1)
+*{{SAM}} (1)
+*{{SEN}} (1)
+*{{SRB}} (6)
+*{{SEY}} (1)
+*{{SGP}} (1)
+*{{SVK}} (5)
+*{{SLO}} (6)
+*{{SOL}} (1)
+*{{RSA}} (4)
+*{{KOR}} (1)
+*{{ESP}} (12)
+*{{SRI}} (10)
+*{{SWE}} (11)
+*{{SUI}} (11)
+*{{TJK}} (1)
+*{{TGA}} (1)
+*{{TTO}} (2)
+*{{TUR}} (4)
+*{{TKM}} (1)
+*{{UGA}} (2)
+*{{UKR}} (7)
+*{{USA}} (50)<ref>{{cite web|title=Returning medalists lead Team USATF roster for World Athletics Indoor Championships|url=https://www.usatf.org/news/2025/returning-medalists-lead-team-usatf-roster-for-wor|publisher=[[USATF]]|date=14 March 2025|access-date=14 March 2025}}</ref>
+*{{URU}} (1)
+*{{UZB}} (1)
+*{{VAN}} (1)
+*{{ZIM}} (1)
+{{div col end}}
+
+==References==
+{{reflist}}
+
+==External links==
+*[https://worldathletics.org/competitions/world-athletics-indoor-championships/nanjing25 World Athletics website]
+
+{{IAAF Championships}}
+{{World championships in 2025}}
+{{2025 in athletics}}
+{{Nanjing}}
+
+[[Category:2025 World Athletics Indoor Championships| ]]
+[[Category:World Athletics Indoor Championships]]
+[[Category:2025 in the sport of athletics|World Indoor Championships]]
+[[Category:International athletics competitions hosted by China]]
+[[Category:2025 in international sports]]
+[[Category:March 2025 sports events in China|World Athletics Indoor Championships]]
+[[Category:Sport of athletics events postponed due to the COVID-19 pandemic|World Athletics Indoor Championshipss]]
+[[Category:2025 in Nanjing]]
+[[Category:Sport in Nanjing]]

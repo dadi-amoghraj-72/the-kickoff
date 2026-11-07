@@ -1,0 +1,4738 @@
+{{Short description|International athletics championship series}}
+{{Infobox Athletics Championships
+|Name = 2025 Diamond League
+|Logo = Diamond League logo.svg
+|Size = 
+|Edition = 16th
+|Dates = 26 April – 28 August 2025
+|Meetings = 15
+|Diamond Races = 32
+|Ambassadors = 
+|World records = 
+|Total prize money = $9.24 million
+|Broadcasters =
+|Sponsors =
+|previous = [[2024 Diamond League|2024]]
+|next = [[2026 Diamond League|2026]]
+}}
+
+The '''2025 Diamond League''' was the sixteenth season of the [[Diamond League|annual series]] of outdoor [[track and field]] meetings, organised by [[World Athletics]]. The competition was a revision to the top level [[sport of athletics|athletics]] series since [[Diamond League]] foundation in 2010. The number of Diamond Discipline events was 32. Each meeting hosted a number of Diamond Discipline events and some of these events would not be broadcast. Events losing Diamond Discipline status would feature on the [[World Athletics Continental Tour]], the second tier of track and field meetings.
+
+Starting in 2025, each meeting nominated 4 events (2 male and 2 female) to be Diamond+ Disciplines, these events will have increased levels of prize money; this will mean at regular meetings a doubling of the 1st place prize from $10,000 to $20,000 and at the Diamond League Finals an increase to $50,000.<ref name=":0">{{cite web |title=Wanda Diamond League prize money structure in 2025 |url=https://www.diamondleague.com/news/general/wanda-diamond-league-prize-money-structure-in-2025/ |website=Diamond League |access-date=9 April 2025 |date=23 December 2024}}</ref>
+
+The series concluded with the Diamond League Finals in [[Zürich]], on the 27th and 28th August 2025.
+
+==Schedule==
+The following fifteen meetings are scheduled to be included in the 2025 season.<ref>{{Cite web |url=https://worldathletics.org/competitions/diamond-league/calendar-results?season=2025 |title=Diamond League calendar 2025 |access-date=10 September 2024 |website=[[World Athletics]]}}</ref><ref>{{Cite web |date=26 September 2024 |title=Wanda Diamond League 2025: Allocation of Diamond Disciplines |url=https://www.diamondleague.com/fileadmin/IDL_Silesia/user_upload/WDL_2025_-_Allocation_of_disciplines_by_meeting.pdf |access-date=7 October 2024 |website=[[Diamond League]]}}</ref>
+{| class="wikitable sortable"
+!Leg
+!Date
+!Meet
+!Stadium
+!City
+!Country
+!Diamond events (M+W) <br> {{small|Diamond+ events}}
+|-
+| align="center" | [[2025 Xiamen Diamond League|1]]
+| {{Sort|04-26|26 April}}
+| [[Xiamen Diamond League]]
+| [[Xiamen Egret Stadium]]
+| [[Xiamen]]
+|rowspan=2| {{CHN}}
+| align="center" |7 + 7 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Shanghai Diamond League|2]]
+| {{Sort|05-03|3 May}}
+|Yangtze Delta Athletics Diamond Gala<br>{{sma|(temporary location of [[Diamond League Shanghai]])}}
+| [[Shaoxing China Textile City Sports Center|China Textile City Sports Centre]]
+| [[Shaoxing]]
+| align="center" |8 + 6 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Doha Diamond League|3]]
+| {{Sort|05-16|16 May}}
+| [[Doha Diamond League]]
+| [[Suheim bin Hamad Stadium]]
+| [[Doha]]
+| {{QAT}}
+| align="center" |8 + 6 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Meeting International Mohammed VI d'Athlétisme de Rabat|4]]
+| {{Sort|05-25|25 May}}
+| [[Meeting International Mohammed VI d'Athlétisme de Rabat]]
+| [[Prince Moulay Abdellah Stadium#Prince Moulay Abdellah Olympic Annex Stadium|Rabat Olympic Stadium]]
+| [[Rabat]]
+| {{MAR}}
+| align="center" |8 + 6 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Golden Gala|5]]
+| {{Sort|06-06|6 June}}
+| [[Golden Gala|Golden Gala Pietro Mennea]]
+| [[Stadio Olimpico]]
+| [[Rome]]
+| {{ITA}}
+| align="center" |7 + 7 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Bislett Games|6]]
+| {{Sort|06-11|11-12 June}}
+| [[Bislett Games]]
+| [[Bislett Stadium]]
+| [[Oslo]]
+| {{NOR}}
+| align="center" |7 + 6 = 13 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Bauhausgalan|7]]
+| {{Sort|06-14|14-15 June}}
+| [[Bauhausgalan]]
+| [[Stockholm Olympic Stadium]]
+| [[Stockholm]]
+| {{SWE}}
+| align="center" |6 + 9 = 15 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Meeting de Paris|8]]
+| {{Sort|06-20|20 June}}
+| [[Meeting de Paris]]
+| [[Stade Sébastien Charléty]]
+| [[Paris]]
+| {{FRA}}
+| align="center" |6 + 8 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Prefontaine Classic|9]]
+| {{Sort|07-5|5 July}}
+| [[Prefontaine Classic]]
+| [[Hayward Field]]
+| [[Eugene, Oregon|Eugene]]
+| {{USA}}
+| align="center" |6 + 8 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Herculis|10]]
+| {{Sort|07-11|11 July}}
+| [[Herculis|Herculis EBS]]
+| [[Stade Louis II]]
+| [[Fontvieille, Monaco|Fontvieille]]
+| {{MON}}
+| align="center" |8 + 6 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 London Athletics Meet|11]]
+| {{Sort|07-19|19 July}}
+| [[London Athletics Meet]]
+| [[London Stadium]]
+| [[London, England|London]]
+| {{GBR2}}
+| align="center" |6 + 8 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Kamila Skolimowska Memorial|12]]
+| {{Sort|08-15|15&ndash;16 August}}
+| [[Kamila Skolimowska Memorial]]
+| [[Stadion Śląski]]
+| [[Chorzów]]
+| {{POL}}
+| align="center" |7 + 7 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Athletissima|13]]
+| {{Sort|08-19|19&ndash;20 August}}
+| [[Athletissima]]
+| [[Stade Olympique de la Pontaise]]
+| [[Lausanne]]
+| {{SUI}}
+| align="center" |7 + 7 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-
+| align="center" | [[2025 Memorial Van Damme|14]]
+| {{Sort|08-22|22 August}}
+| [[Memorial Van Damme|AG Memorial Van Damme]]
+| [[King Baudouin Stadium]]
+| [[Brussels]]
+| {{BEL}}
+| align="center" |7 + 7 = 14 <br> {{Small|1=2 + 2 = 4}}
+|-bgcolor=#9acdff
+| align="center" | [[2025 Weltklasse Zürich|15]]
+| {{Sort|08-27|27&ndash;28 August}}
+| [[Weltklasse Zürich]]
+| [[Letzigrund]]
+| [[Zürich]]
+| {{SUI}}
+| align="center" |16 + 16 = 32 <br> {{Small|1=4 + 4 = 8}}
+|}
+
+== Men's results ==
+{{legend|#F2F5A9|Denotes the event is a Diamond+ discipline|border=solid 1px #AAAAAA}}
+
+{{legend|#CCC|Denotes the event was not included as part of qualification for the Diamond League Finals|border=solid 1px #AAAAAA}}
+
+=== Track ===
+{|{{Diamond League Men's Track}}
+|-
+| 1
+| [[2025 Xiamen Diamond League|Xiamen]]
+| {{Flag athlete|[[Akani Simbine]]|RSA}}<br> 9.99
+| -
+| {{Flag athlete|[[Bayapo Ndori]]|BOT}}<br> 44.25 '''[[Xiamen_Diamond_League#Men|MR]]''', {{AthAbbr|SB}}
+| -
+| -
+| -
+|bgcolor=#F2F5A9| {{Flag athlete|[[Cordell Tinch]]|USA}}<br> 13.06 {{AthAbbr|WL}}
+| {{Flag athlete|[[Karsten Warholm]]|NOR}}<br> 33.05 {{AthAbbr|WR}}, {{AthAbbr|WBP}}<br> ([[300 m hurdles]])
+| {{Flag athlete|[[Samuel Firewu]]|ETH}}<br> 8:05.61 '''[[Xiamen_Diamond_League#Men|MR]]''', {{AthAbbr|WL}}  
+|-
+| 2
+| [[2025 Shanghai Diamond League|Shanghai/Keqiao]]
+|bgcolor=#F2F5A9| {{Flag athlete|[[Akani Simbine]]|RSA}}<br> 9.98
+| -
+| {{Flag athlete|[[Christopher Bailey (runner)|Christopher Bailey]]|USA}}<br> 44.17 {{AthAbbr|PB}}
+| -
+| -
+| {{Flag athlete|[[Berihu Aregawi]]|ETH}}<br> 12:50.45 '''[[Shanghai Diamond League#Men|MR]]''', {{AthAbbr|SB}}
+|bgcolor=#F2F5A9| {{Flag athlete|[[Cordell Tinch]]|USA}}<br> 12.87 '''[[Shanghai Diamond League#Men|MR]]''', {{AthAbbr|WL}}, {{AthAbbr|PB}}
+| {{Flag athlete|[[Karsten Warholm]]|NOR}}<br> 47.28 {{AthAbbr|WL}}
+| {{Flag athlete|[[Abrham Sime]]|ETH}}<br> 8:07.92 {{AthAbbr|SB}}
+|-
+| 3
+| [[2025 Doha Diamond League|Doha]]
+| -
+| {{Flag athlete|[[Letsile Tebogo]]|BOT}}<br> 20.10 {{AthAbbr|SB}} 
+| -
+| {{Flag athlete|[[Tshepiso Masalela]]|BOT}}<br> 1:43.11 {{AthAbbr|WL}} 
+| -
+| {{Flag athlete|[[Reynold Cheruiyot]]|KEN}}<br> 13:16.40 {{AthAbbr|PB}} 
+| {{Flag athlete|[[Rasheed Broadbell]]|JAM}}<br> 13.14 {{AthAbbr|SB}}
+|bgcolor=#F2F5A9| {{Flag athlete|[[Alessandro Sibilio]]|ITA}}<br> 49.32 {{AthAbbr|SB}}
+| -
+|-
+| 4
+| [[2025 Meeting International Mohammed VI d'Athlétisme de Rabat|Meeting International de Rabat]]
+| {{Flag athlete|[[Akani Simbine]]|RSA}}<br> 9.95
+|bgcolor=#F2F5A9| {{Flag athlete|[[Courtney Lindsey]]|USA}}<br> 20.04
+| {{Flag athlete|[[Jacory Patterson]]|USA}}<br>44.37
+| {{Flag athlete|[[Tshepiso Masalela]]|BOT}}<br> 1:42.70 '''[[Meeting International Mohammed VI d'Athlétisme de Rabat#Men|MR]]''', {{AthAbbr|WL}}
+| {{Flag athlete|[[Jonah Koech]]|USA}}<br>3:31.43 '''[[Meeting International Mohammed VI d'Athlétisme de Rabat#Men|MR]]''', {{AthAbbr|PB}}
+| -
+| -
+| -
+| {{Flag athlete|[[Soufiane El Bakkali]]|MAR}}<br>8:00.70 {{AthAbbr|WL}}
+|-
+| 5
+| [[2025 Golden Gala|Golden Gala]]
+|bgcolor=#F2F5A9| {{Flag athlete|[[Trayvon Bromell]]|USA}}<br> 9.84 {{AthAbbr|WL}}
+| -
+| {{Flag athlete|[[Quincy Hall]]|USA}}<br>44.22 {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Azeddine Habz]]|FRA}}<br>3:29.72 {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Jason Joseph]]|SUI}}<br> 13.14 {{AthAbbr|SB}} 
+| -
+| -
+|-
+| 6
+| [[2025 Bislett Games|Bislett Games]]
+| -
+| {{Flag athlete|[[Reynier Mena]]|CUB}}<br> 20.20
+| -
+| {{Flag athlete|[[Emmanuel Wanyonyi]]|KEN}}<br> 1:42.78 {{AthAbbr|SB}}
+| {{Flag athlete|[[Isaac Nader]]|POR}}<br> 3:48.25 '''{{AthAbbr|NR|Portuguese}}''' ([[Mile run|Mile]])
+|bgcolor=#F2F5A9| {{Flag athlete|[[Nico Young]]|USA}}<br>12:45.27 {{AthAbbr|PB}}
+| -
+| {{Flag athlete|[[Karsten Warholm]]|NOR}}<br> 32.67 {{AthAbbr|WR}}, {{AthAbbr|WBP}}, '''[[Diamond_League#Men|DLR]]'''<br> ([[300 m hurdles]])
+| -
+|-
+| 7
+| [[2025 Bauhausgalan|Bauhausgalan]]
+| bgcolor=#CCC | {{Flag athlete|[[Benjamin Azamati]]|GHA}}<br> 10.18
+| {{Flag athlete|[[Reynier Mena]]|CUB}}<br> 20.05 {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Emmanuel Wanyonyi]]|KEN}}<br> 1:41.95 {{AthAbbr|WL}}
+| bgcolor=#CCC | {{Flag athlete|[[Samuel Pihlström]]|SWE}}<br> 3:31.53
+| {{Flag athlete|[[Andreas Almgren]]|SWE}}<br> 12:44.27 '''{{AthAbbr|AR|European}}''', '''[[Bauhausgalan#Men|MR]]'''
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Rai Benjamin]]|USA}}<br> 46.54 '''[[Bauhausgalan#Men|MR]]''', {{AthAbbr|WL}}
+| bgcolor=#CCC | {{Flag athlete|[[Karl Bebendorf]]|GER}}<br> 8:11.81 {{AthAbbr|PB}}
+|-
+| 8
+| [[2025 Meeting de Paris|Meeting de Paris]]
+| -
+| -
+| -
+| {{Flag athlete|[[Mohamed Attaoui]]|ESP}}<br> 1:42.73 {{AthAbbr|SB}}
+| bgcolor=#CCC | {{Flag athlete|[[Azeddine Habz]]|FRA}}<br>3:27.49 '''[[Meeting de Paris#Men|MR]]''', {{AthAbbr|WL}}, '''{{AthAbbr|NR|French}}'''
+| {{Flag athlete|[[Yomif Kejelcha]]|ETH}}<br>12:47.84 {{AthAbbr|SB}}
+|bgcolor=#F2F5A9| {{Flag athlete|[[Trey Cunningham]]|USA}}<br> 13.00 ={{AthAbbr|PB}}
+|bgcolor=#F2F5A9| {{Flag athlete|[[Rai Benjamin]]|USA}}<br> 46.93 '''[[Meeting de Paris#Men|MR]]'''
+| bgcolor=#CCC | {{Flag athlete|[[Lamecha Girma]]|ETH}}<br> 8:07.01 {{AthAbbr|SB}}
+|-
+| 9
+| [[2025 Prefontaine Classic|Prefontaine Classic]]
+|bgcolor=#F2F5A9| {{Flag athlete|[[Kishane Thompson]]|JAM}}<br> 9.85
+| {{Flag athlete|[[Letsile Tebogo]]|BOT}}<br> 19.76 {{AthAbbr|WL}} 
+| {{Flag athlete|[[Matthew Hudson-Smith]]|GBR}}<br> 44.10 {{AthAbbr|SB}}
+| -
+|bgcolor=#F2F5A9| {{Flag athlete|[[Niels Laros]]|NED}}<br> 3:45.94 '''{{AthAbbr|NR|Dutch}}''' ([[Mile run|Mile]])
+| -
+| -
+| {{Flag athlete|[[Alison dos Santos]]|BRA}}<br> 46.66 {{AthAbbr|SB}}
+| -
+|-
+| 10
+| [[2025 Herculis|Herculis]]
+| -
+|bgcolor=#F2F5A9| {{Flag athlete|[[Noah Lyles]]|USA}}<br> 19.88 {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Emmanuel Wanyonyi]]|KEN}}<br> 1:41.44 '''[[Herculis#Men|MR]]''', {{AthAbbr|WL}}
+| -
+| {{Flag athlete|[[Yomif Kejelcha]]|ETH}}<br>12:49.46
+| {{Flag athlete|[[Trey Cunningham]]|USA}}<br> 13.09
+| -
+| {{Flag athlete|[[Soufiane El Bakkali]]|MAR}}<br> 8:03.18
+|-
+| 11
+| [[2025 London Athletics Meet|London Athletics Meet]]
+|bgcolor=#F2F5A9| {{Flag athlete|[[Oblique Seville]]|JAM}}<br> 9.86
+| -
+| {{Flag athlete|[[Charlie Dobson|Charles Dobson]]|GBR}}<br> 44.14 {{AthAbbr|PB}}
+| {{Flag athlete|[[Emmanuel Wanyonyi]]|KEN}}<br> 1:42.00
+|bgcolor=#F2F5A9| {{Flag athlete|[[Phanuel Koech]]|KEN}}<br> 3:28.82 '''[[Herculis#Men|MR]]'''
+| -
+| -
+| -
+| -
+|-
+| 12
+| [[2025 Kamila Skolimowska Memorial|Kamila Skolimowska Memorial]]
+|bgcolor=#F2F5A9| {{Flag athlete|[[Kishane Thompson]]|JAM}}<br> 9.87 ='''[[Kamila Skolimowska Memorial#Men|MR]]'''
+| -
+| -
+| -
+| {{Flag athlete|[[Yared Nuguse]]|USA}}<br>3:33.19
+| -
+| bgcolor=#CCC | {{Flag athlete|[[Cordell Tinch]]|USA}}<br> 13.03 ='''[[Kamila Skolimowska Memorial#Men|MR]]'''
+| {{Flag athlete|[[Karsten Warholm]]|NOR}} 46.28 '''[[Diamond_League#Men|DLR]]''', {{AthAbbr|WL}}
+| -
+|-
+| 13
+| [[2025 Athletissima|Athletissima]]
+|bgcolor=#F2F5A9| {{Flag athlete|[[Oblique Seville]]|JAM}}<br> 9.87
+| -
+| -
+|bgcolor=#F2F5A9| {{Flag athlete|[[Josh Hoey]]|USA}}<br> 1:42.82
+| -
+| {{Flag athlete|[[Isaac Kimeli]]|BEL}}<br> 13:07.67
+| {{Flag athlete|[[Cordell Tinch]]|USA}}<br> 12.98
+| bgcolor=#CCC | {{Flag athlete|[[Ezekiel Nathaniel]]|NGR}}<br> 48.08
+| -
+|-
+| 14
+| [[2025 Memorial Van Damme|Memorial Van Damme]]
+| -
+| {{Flag athlete|[[Alexander Ogando]]|DOM}}<br> 20.16
+| {{Flag athlete|[[Jacory Patterson]]|USA}}<br> 44.05
+| -
+| {{Flag athlete|[[Niels Laros]]|NED}}<br> 3:30.58 {{AthAbbr|SB}}
+| -
+| -
+| -
+|bgcolor=#F2F5A9| {{Flag athlete|[[Ruben Querinjean]]|LUX}}<br>8:09.47 '''{{AthAbbr|NR|Luxembourgish}}'''
+|-
+|-bgcolor=#9acdff
+| 15
+| [[2025 Weltklasse Zürich|Weltklasse Zürich]]
+| {{Flag athlete|[[Christian Coleman]]|USA}}<br> 9.97
+| {{Flag athlete|[[Noah Lyles]]|USA}}<br> 19.74
+| {{Flag athlete|[[Jacory Patterson]]|USA}}<br>43.85 {{AthAbbr|PB}}
+| {{Flag athlete|[[Emmanuel Wanyonyi]]|KEN}}<br> 1:42.37
+| {{Flag athlete|[[Niels Laros]]|NED}}<br> 3:29.20 '''{{AthAbbr|NR|Dutch}}'''
+| {{Flag athlete|[[Jimmy Gressier]]|FRA}}<br> 7:36.78 ([[3000 metres|3000 m]])
+| {{Flag athlete|[[Cordell Tinch]]|USA}}<br> 12.92 ='''[[Weltklasse Zürich#Men|MR]]'''
+| {{Flag athlete|[[Karsten Warholm]]|NOR}} 46.70 '''[[Weltklasse Zürich#Men|MR]]'''
+| {{Flag athlete|[[Frederik Ruppert]]|GER}}<br>8:09.02
+|}
+
+=== Field ===
+{|{{Diamond League Field}}
+|-
+| 1
+| [[2025 Xiamen Diamond League|Xiamen]]
+| {{Flag athlete|[[Zhang Mingkun]]|CHN}}<br> 8.18 m
+|bgcolor=#CCC| {{Flag athlete|[[Jordan Scott (triple jumper)|Jordan Scott]]|JAM}}<br> 17.27 m {{AthAbbr|PB}}
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Armand Duplantis]]|SWE}}<br> 5.92 m
+| -
+| -
+| -
+|-
+| 2
+| [[2025 Shanghai Diamond League|Shanghai/Keqiao]]
+|bgcolor=#CCC| {{Flag athlete|[[Shi Yuhao]]|CHN}}<br> 8.21 m {{AthAbbr|SB}}
+| {{Flag athlete|[[Pedro Pichardo]]|POR}}<br> 17.03 m {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Armand Duplantis]]|SWE}}<br> 6.11 m '''[[Shanghai Diamond League#Men|MR]]'''
+| -
+| -
+| -
+|-
+| 3
+| [[2025 Doha Diamond League|Doha]]
+| -
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Shelby McEwen]]|USA}}<br> 2.26 m ={{AthAbbr|SB}}
+| -
+| -
+| {{Flag athlete|[[Matthew Denny]]|AUS}}<br> 68.97 m
+| {{Flag athlete|[[Julian Weber]]|GER}}<br> 91.06 m {{AthAbbr|WL}}, {{AthAbbr|PB}}
+|-
+| 4
+| [[2025 Meeting International Mohammed VI d'Athlétisme de Rabat|Meeting International de Rabat]]
+| -
+| -
+| {{Flag athlete|[[Hamish Kerr]]|NZL}}<br> 2.25 m 
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Payton Otterdahl]]|USA}}<br> 21.97 m {{AthAbbr|WL}}
+| -
+| -
+|-
+| 5
+| [[2025 Golden Gala|Golden Gala]]
+| {{Flag athlete|[[Liam Adcock]]|AUS}}<br> 8.34 m {{AthAbbr|PB}}
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Sanghyeok Woo]]|KOR}}<br> 2.32 m {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Tom Walsh (shot putter)|Tom Walsh]]|NZL}}<br> 21.89 m {{AthAbbr|SB}}
+| -
+| -
+|-
+| 6
+| [[2025 Bislett Games|Bislett Games]]
+| -
+| {{Flag athlete|[[Jordan Scott (triple jumper)|Jordan Scott]]|JAM}}<br> 17.34 m {{AthAbbr|PB}}
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Armand Duplantis]]|SWE}}<br> 6.15 m '''[[Bislett Games#Men|MR]]'''
+| -
+| -
+| -
+|-
+| 7
+| [[2025 Bauhausgalan|Bauhausgalan]]
+| -
+| -
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Armand Duplantis]]|SWE}}<br> 6.28 m '''{{AthAbbr|WR}}'''
+| -
+| {{Flag athlete|[[Kristjan Čeh]]|SLO}}<br> 69.73 m
+| -
+|-
+| 8
+| [[2025 Meeting de Paris|Meeting de Paris]]
+| -
+| {{Flag athlete|[[Jordan Scott (triple jumper)|Jordan Scott]]|JAM}}<br> 17.27 m
+| -
+| -
+| -
+| -
+| {{Flag athlete|[[Neeraj Chopra]]|IND}}<br> 88.16 m 
+|-
+| 9
+| [[2025 Prefontaine Classic|Prefontaine Classic]]
+| -
+| -
+| -
+|bgcolor=#CCC|{{Flagathlete|[[Armand Duplantis]]|SWE}}<br> 6.00 m
+| {{Flag athlete|[[Joe Kovacs]]|USA}}<br> 22.48 m {{AthAbbr|WL}}
+|bgcolor=#CCC|{{Flagathlete|[[Mykolas Alekna]]|LIT}}<br> 70.97 m
+| -
+|-
+| 10
+| [[2025 Herculis|Herculis]]
+| -
+| {{Flag athlete|[[Jordan Scott (triple jumper)|Jordan Scott]]|JAM}}<br> 17.52 m {{AthAbbr|PB}}
+| {{Flag athlete|[[Sanghyeok Woo]]|KOR}}<br> 2.34 m ={{AthAbbr|WL}}
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Armand Duplantis]]|SWE}}<br> 6.05 m '''[[Herculis#Men|MR]]'''
+| -
+| -
+| -
+|-
+| 11
+| [[2025 London Athletics Meet|London Athletics Meet]]
+| {{Flag athlete|[[Wayne Pinnock]]|JAM}}<br> 8.20 m
+| -
+| -
+| -
+| -
+| {{Flagathlete|[[Mykolas Alekna]]|LIT}}<br> 71.70 m '''[[Diamond_League#Men|DLR]]'''
+| -
+|-
+| 12
+| [[2025 Kamila Skolimowska Memorial|Kamila Skolimowska Memorial]]
+| -
+| -
+| {{Flag athlete|[[Hamish Kerr]]|NZL}}<br> 2.33 m {{AthAbbr|SB}} 
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Armand Duplantis]]|SWE}}<br> 6.10 m
+| {{Flag athlete|[[Payton Otterdahl]]|USA}}<br> 22.28 m 
+| -
+| {{Flag athlete|[[Julius Yego]]|KEN}} <br> 83.60 m
+|-
+| 13
+| [[2025 Athletissima|Athletissima]]
+| {{Flag athlete|[[Anvar Anvarov]]|UZB}}<br> 7.84 m
+| -
+| -
+| {{Flag athlete|[[Emmanouil Karalis]]|GRE}}<br> 6.02 m
+| {{Flag athlete|[[Joe Kovacs]]|USA}}<br> 22.04 m
+| -
+| -
+|-
+| 14
+| [[2025 Memorial Van Damme|Memorial Van Damme]]
+| -
+| -
+| {{Flag athlete|[[Oleh Doroshchuk]]|UKR}}<br>2.25 m
+| -
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Ralford Mullings]]|JAM}}<br>69.66 m
+| {{Flag athlete|[[Julian Weber]]|GER}}<br>89.65 m
+|-
+|-bgcolor=#9acdff
+| 15
+| [[2025 Weltklasse Zürich|Weltklasse Zürich]]
+| {{Flagathlete|[[Simon Ehammer]]|SUI}}<br> 8.32 m
+| {{Flagathlete|[[Andy Díaz Hernández]]|ITA}}<br> 17.56 m
+| {{Flag athlete|[[Hamish Kerr]]|NZL}}<br> 2.32 m 
+| {{Flag athlete|[[Armand Duplantis]]|SWE}}<br> 6.00 m
+| {{Flag athlete|[[Joe Kovacs]]|USA}}<br> 22.46 m
+| {{Flag athlete|[[Mykolas Alekna]]|LTU}}<br> 68.89 m
+| {{Flag athlete|[[Julian Weber]]|GER}}<br>91.51 m {{AthAbbr|WL}}, {{AthAbbr|PB}}
+|}
+
+== Women's results ==
+{{legend|#F2F5A9|Denotes the event is a Diamond+ discipline|border=solid 1px #AAAAAA}}
+
+{{legend|#CCC|Denotes the event was not included as part of qualification for the Diamond League Finals|border=solid 1px #AAAAAA}}
+
+=== Track ===
+{|{{Diamond League Women's Track}}
+|-
+| 1
+| [[2025 Xiamen Diamond League|Xiamen]]
+| -
+| {{Flag athlete|[[Anavia Battle]]|USA}}<br> 22.41 '''[[Xiamen_Diamond_League#Women|MR]]''', {{AthAbbr|SB}}
+| -
+|{{Flag athlete|[[Faith Kipyegon]]|KEN}}<br> 2:29.21 '''[[Xiamen_Diamond_League#Women|MR]]''', {{AthAbbr|WL}}<br> ([[1000 m]])
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Beatrice Chebet]]|KEN}}<br> 14:27.12 '''[[Xiamen_Diamond_League#Women|MR]]''', {{AthAbbr|WL}}
+| {{Flag athlete| [[Danielle Williams]] | JAM}}<br> 12.53 {{AthAbbr|SB}}
+| -
+| -
+|-
+| 2
+| [[2025 Shanghai Diamond League|Shanghai/Keqiao]]
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Anavia Battle]]|USA}}<br> 22.38 {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Tsige Duguma]]|ETH}}<br> 1:56.64 '''[[Shanghai Diamond League#Women|MR]]''', {{AthAbbr|WL}}, {{AthAbbr|NR|Ethiopian}}
+| -
+| -
+| {{Flag athlete|[[Grace Stark]]|USA}}<br> 12.42 '''[[Shanghai Diamond League#Women|MR]]''', {{AthAbbr|WL}}
+| -
+| -
+|-
+| 3
+| [[2025 Doha Diamond League|Doha]]
+| {{Flag athlete|[[Tia Clayton]]|JAM}}<br> 10.92 {{AthAbbr|WL}}
+| -
+| {{Flag athlete|[[Salwa Eid Naser]]|BHR}}<br> 49.83 '''=[[Doha Diamond League#Women|MR]]'''
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Nelly Chepchirchir]]|KEN}}<br> 4:05.00 {{AthAbbr|SB}}
+| -
+| -
+| -
+| {{Flag athlete|[[Faith Cherotich]]|KEN}}<br> 9:05.08 {{AthAbbr|WL}}
+|-
+| 4
+| [[2025 Meeting International Mohammed VI d'Athlétisme de Rabat|Meeting International de Rabat]]
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Shericka Jackson]]|JAM}}<br> 11.04 {{AthAbbr|SB}}
+| -
+| -
+| {{Flag athlete|[[Tsige Duguma]]|ETH}}<br> 1:57.42 
+|bgcolor=#CCC| {{Flag athlete|[[Nelly Chepchirchir]]|KEN}}<br> 3:58.04 {{AthAbbr|SB}}
+| {{Flag athlete|[[Beatrice Chebet]]|KEN}}<br> 8:11.56 '''{{AthAbbr|AR|African}}''', '''[[Diamond_League#Women|DLR]]''',{{AthAbbr|WL}}<br> ([[3000 m]])
+|bgcolor=#CCC| {{Flag athlete|[[Tobi Amusan]]|NGR}}<br> 12.45 '''[[Meeting International Mohammed VI d'Athlétisme de Rabat#Women|MR]]''', {{AthAbbr|SB}}
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Femke Bol]]|NED}}<br> 52.46 '''[[Meeting International Mohammed VI d'Athlétisme de Rabat#Women|MR]]''', {{AthAbbr|SB}}
+| -
+|-
+| 5
+| [[2025 Golden Gala|Golden Gala]]
+| -
+| {{Flag athlete|[[Anavia Battle]]|USA}}<br> 22.53
+| -
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Sarah Healy]]|IRL}}<br> 3:59.17 {{AthAbbr|SB}}
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Beatrice Chebet]]|KEN}}<br> 14:03.69 '''[[Golden Gala#Women|MR]]''', {{AthAbbr|WL}}, '''{{AthAbbr|NR|Kenyan}}'''
+| -
+| {{Flag athlete|[[Andrenette Knight]]|JAM}}<br> 53.67 {{AthAbbr|SB}}
+| -
+|-
+| 6
+| [[2025 Bislett Games|Bislett Games]]
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Julien Alfred]]|LCA}}<br> 10.89 {{AthAbbr|SB}}
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Isabella Whittaker]]|USA}}<br> 49.58
+| -
+| -
+| -
+| -
+| {{Flag athlete|[[Dalilah Muhammad]]|USA}}<br>53.34 {{AthAbbr|SB}}
+| {{Flag athlete|[[Faith Cherotich]]|KEN}}<br> 9:02.60 '''[[Bislett Games#Women|MR]]''', {{AthAbbr|WL}}
+|-
+| 7
+| [[2025 Bauhausgalan|Bauhausgalan]]
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Julien Alfred]]|LCA}}<br> 10.75 '''[[Bauhausgalan#Women|MR]]''', {{AthAbbr|SB}}
+| bgcolor=#CCC | {{Flag athlete|[[Thelma Davies]]|LBR}}<br> 22.41
+| {{Flag athlete|[[Isabella Whittaker]]|USA}}<br> 49.78
+| {{Flag athlete|[[Georgia Hunter Bell]]|GBR}}<br> 1:57.66 {{AthAbbr|SB}}
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Linden Hall (athlete)|Linden Hall]]|AUS}}<br> 8:30.01 {{AthAbbr|PB}}<br> ([[3000 m]])
+| {{Flag athlete|[[Grace Stark]]|USA}}<br> 12.33 '''[[Bauhausgalan#Women|MR]]''', {{AthAbbr|SB}}
+| {{Flag athlete|[[Femke Bol]]|NED}}<br>52.11 '''[[Bauhausgalan#Women|MR]]''', {{AthAbbr|SB}}
+| -
+|-
+| 8
+| [[2025 Meeting de Paris|Meeting de Paris]]
+| -
+| {{Flag athlete|[[Anavia Battle]]|USA}}<br> 22.27 {{AthAbbr|SB}}
+| {{Flag athlete|[[Marileidy Paulino]]|DOM}}<br> 48.81 '''[[Meeting de Paris#Women|MR]]''', {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Nelly Chepchirchir]]|KEN}}<br> 3:57.02 {{AthAbbr|SB}}
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Grace Stark]]|USA}}<br> 12.21 '''[[Meeting de Paris#Women|MR]]''', {{AthAbbr|PB}}
+| -
+| {{Flag athlete|[[Faith Cherotich]]|KEN}}<br> 8:53.37 {{AthAbbr|WL}}, {{AthAbbr|PB}}
+|-
+| 9
+| [[2025 Prefontaine Classic|Prefontaine Classic]]
+| {{Flag athlete|[[Melissa Jefferson-Wooden]]|USA}}<br> 10.75
+| -
+|bgcolor=#CCC| {{Flag athlete|[[Sydney McLaughlin-Levrone]]|USA}}<br> 49.43 {{AthAbbr|SB}}
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Tsige Duguma]]|ETH}}<br> 1:57.10
+| {{Flag athlete|[[Faith Kipyegon]]|KEN}}<br> 3:48.68 '''{{AthAbbr|WR}}''' 
+| {{Flag athlete|[[Beatrice Chebet]]|KEN}}<br> 13:58.06 '''{{AthAbbr|WR}}'''
+|bgcolor=#CCC| {{Flag athlete|[[Ackera Nugent]]|JAM}}<br> 12.32
+| -
+| {{Flag athlete| [[Winfred Yavi]] |BHR}}<br> 8:45.25 '''[[Prefontaine Classic#Women|MR]]''', {{AthAbbr|WL}}
+|-
+| 10
+| [[2025 Herculis|Herculis]]
+| {{Flag athlete|[[Julien Alfred]]|LCA}}<br> 10.79
+| -
+| {{Flag athlete|[[Marileidy Paulino]]|DOM}}<br> 49.06
+| {{Flag athlete|[[Nelly Chepchirchir]]|KEN}}<br> 2:29.77 {{AthAbbr|PB}}<br> ([[1000 m]])
+| -
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Megan Tapper]]|JAM}}<br>12.34 ={{AthAbbr|PB}}
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Femke Bol]]|NED}}<br>51.95 '''[[Herculis#Women|MR]]''', {{AthAbbr|WL}}
+| -
+|-
+| 11
+| [[2025 London Athletics Meet|London Athletics Meet]]
+| -
+| {{Flag athlete|[[Julien Alfred]]|LCA}}<br> 21.71 '''[[London Athletics Meet#Women|MR]]''', {{AthAbbr|WL}}, '''{{AthAbbr|NR|Saint Lucian}}''', {{AthAbbr|PB}} 
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Georgia Hunter Bell]]|GBR}}<br> 1:56.74 {{AthAbbr|SB}}
+| {{Flag athlete|[[Gudaf Tsegay]]|ETH}}<br> 4:11.88 '''[[London Athletics Meet#Women|MR]]''', '''{{AthAbbr|NR|Ethiopian}}''', {{AthAbbr|WL}}<br> ([[Mile run|Mile]])
+| {{Flag athlete|[[Medina Eisa]]|ETH}}<br> 14:30.57
+| -
+| {{Flag athlete|[[Femke Bol]]|NED}}<br> 52.10
+| -
+|-
+| 12
+| [[2025 Kamila Skolimowska Memorial|Kamila Skolimowska Memorial]]
+| {{Flag athlete|[[Melissa Jefferson-Wooden]]|USA}}<br> 10.66 ='''[[Kamila Skolimowska Memorial#Women|MR]]'''
+| {{Flag athlete|[[Shericka Jackson]]|JAM}}<br> 22.17 {{AthAbbr|SB}}
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Marileidy Paulino]]|DOM}}<br> 49.18
+| bgcolor=#CCC | {{Flag athlete|[[Keely Hodgkinson]]|GBR}}<br> 1:54.74 '''[[Kamila Skolimowska Memorial#Women|MR]]''', {{AthAbbr|WL}} 
+| {{Flag athlete|[[Gudaf Tsegay]]|ETH}}<br> 3:50.62 '''[[Kamila Skolimowska Memorial#Women|MR]]''', {{AthAbbr|SB}}
+| {{Flag athlete|[[Faith Kipyegon]]|KEN}}<br> 8:07.04 '''{{AthAbbr|AR|African}}''', '''[[Diamond_League#Women|DLR]]''', {{AthAbbr|WL}}<br> ([[3000 m]])
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Masai Russell]]|USA}}<br> 12.19 '''[[Diamond_League#Women|DLR]]'''
+| {{Flag athlete|[[Femke Bol]]|NED}}<br>51.91 '''[[Kamila Skolimowska Memorial#Women|MR]]''', {{AthAbbr|WL}}
+| -
+|-
+| 13
+| [[2025 Athletissima|Athletissima]]
+| -
+| {{Flag athlete|[[Brittany Brown (sprinter)|Brittany Brown]]|USA}}<br> 22.23
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Henriette Jæger]]|NOR}}<br> 50.09
+| {{Flag athlete|[[Keely Hodgkinson]]|GBR}}<br> 1:55.69 '''[[Athletissima#Women|MR]]'''
+| -
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Nadine Visser]]|NED}}<br>12.45
+| -
+| {{Flag athlete|[[Doris Lemngole]]|KEN}}<br> 9:16.36
+|-
+| 14
+| [[2025 Memorial Van Damme|Memorial Van Damme]]
+| {{Flag athlete|[[Melissa Jefferson-Wooden]]|USA}}<br>10.76
+| -
+| -
+| -
+| {{Flag athlete|[[Nikki Hiltz]]|USA}}<br>3:55.94 {{AthAbbr|SB}}
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Agnes Jebet Ngetich]]|KEN}}<br>14:24.99
+| -
+| {{Flag athlete|[[Anna Cockrell]]|USA}}<br>53.66
+| -
+|-bgcolor=#9acdff
+| 15
+| [[2025 Weltklasse Zürich|Weltklasse Zürich]]
+| {{Flag athlete|[[Julien Alfred]]|LCA}}<br> 10.76
+| {{Flag athlete|[[Brittany Brown (sprinter)|Brittany Brown]]|USA}}<br> 22.13 {{AthAbbr|SB}}
+| {{Flag athlete|[[Salwa Eid Naser]]|BHR}}<br>48.70 '''[[Weltklasse Zürich#Women|MR]]'''
+| {{Flag athlete|[[Audrey Werro]]|SUI}}<br>1:55.91 '''{{AthAbbr|NR|Swiss}}'''
+| {{Flag athlete|[[Nelly Chepchirchir]]|KEN}}<br> 3:56.99 {{AthAbbr|SB}}
+| {{Flag athlete|[[Fantaye Belayneh]]|ETH}}<br>8:40.56 ([[3000 metres|3000 m]])
+| {{Flag athlete|[[Ackera Nugent]]|JAM}}<br>12.30 ={{AthAbbr|SB}}
+| {{Flag athlete|[[Femke Bol]]|NED}}<br>52.18 '''[[Weltklasse Zürich#Women|MR]]'''
+| {{Flag athlete|[[Faith Cherotich]]|KEN}}<br> 8:57.24
+|}
+
+=== Field ===
+{|{{Diamond League Field}}
+|-
+| 1
+| [[2025 Xiamen Diamond League|Xiamen]]
+| -
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Yaroslava Mahuchikh]]|UKR}}<br> 1.97 m 
+| -
+| {{Flag athlete|[[Jessica Schilder]]|NED}}<br> 20.47 m '''[[Xiamen_Diamond_League#Women|MR]]'''
+| {{Flag athlete|[[Valarie Allman]]|USA}}<br> 68.95 m
+|bgcolor=#CCC| {{Flag athlete|[[Elina Tzengko]]|GRE}}<br> 64.75 m '''[[Xiamen_Diamond_League#Women|MR]]''', {{AthAbbr|SB}} 
+|-
+| 2
+| [[2025 Shanghai Diamond League|Shanghai/Keqiao]]
+| -
+| -
+| {{Flag athlete|[[Yaroslava Mahuchikh]]|UKR}}<br> 2.00 m
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Chase Jackson]]|USA}}<br> 20.54 m '''[[Shanghai Diamond League#Women|MR]]''', {{AthAbbr|SB}}
+|bgcolor=#CCC| {{Flag athlete|[[Valarie Allman]]|USA}}<br> 70.08 m
+| {{Flag athlete|[[Elina Tzengko]]|GRE}}<br> 64.90 m {{AthAbbr|SB}}
+|-
+| 3
+| [[2025 Doha Diamond League|Doha]]
+| -
+| {{Flag athlete|[[Shanieka Ricketts]]|JAM}}<br> 14.72 m {{AthAbbr|w}}
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Molly Caudery]]|GBR}}<br> 4.75 m
+| -
+| -
+| -
+|-
+| 4
+| [[2025 Meeting International Mohammed VI d'Athlétisme de Rabat|Meeting International de Rabat]]
+| -
+| -
+| -
+| {{Flag athlete|[[Katie Moon]]|USA}}<br> 4.73 m
+| -
+| -
+| {{Flag athlete|[[Elina Tzengko]]|GRE}}<br> 64.60 m 
+|-
+| 5
+| [[2025 Golden Gala|Golden Gala]]
+| -
+| {{Flag athlete|[[Shanieka Ricketts]]|JAM}}<br> 14.64 m {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Sandi Morris]]|USA}}<br> 4.80 m {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Valarie Allman]]|USA}}<br> 69.21 m '''[[Golden Gala#Women|MR]]'''
+| -
+|-
+| 6
+| [[2025 Bislett Games|Bislett Games]]
+| -
+| {{Flag athlete|[[Leyanis Pérez Hernández]]|CUB}}<br> 14.72 m 
+| -
+| -
+| -
+| -
+| {{Flag athlete|[[Haruka Kitaguchi]]|JPN}}<br> 64.63 m {{AthAbbr|SB}} 
+|-
+| 7
+| [[2025 Bauhausgalan|Bauhausgalan]]
+| {{Flag athlete|[[Tara Davis-Woodhall]]|USA}}<br> 7.05 m {{Wind|+1.3}}  ='''[[Bauhausgalan#Women|MR]]''', {{AthAbbr|SB}}
+| -
+| {{Flag athlete|[[Nicola Olyslagers]]|AUS}}<br> 2.01 m {{AthAbbr|SB}} 
+| {{Flag athlete|[[Sandi Morris]]|USA}}<br> 4.82 m {{AthAbbr|SB}}
+| -
+|bgcolor=#CCC| {{Flag athlete|[[Kristin Pudenz]]|GER}}<br> 64.85 m 
+| -
+|-
+| 8
+| [[2025 Meeting de Paris|Meeting de Paris]]
+| -
+| -
+| {{Flag athlete|[[Nicola Olyslagers]]|AUS}}<br> 2.00 m
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Katie Moon]]|USA}}<br> 4.73 m 
+| -
+| {{Flag athlete|[[Valarie Allman]]|USA}}<br> 67.56 m
+| -
+|-
+| 9
+| [[2025 Prefontaine Classic|Prefontaine Classic]]
+| {{Flag athlete|[[Tara Davis-Woodhall]]|USA}}<br> 7.07 m {{Wind|+1.8}}  ={{AthAbbr|WL}} 
+| -
+| -
+| -
+| {{Flag athlete|[[Chase Jackson]]|USA}}<br> 20.94 m '''[[Prefontaine Classic#Women|MR]]'''
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Valarie Allman]]|USA}}<br> 70.68 m '''[[Prefontaine Classic#Women|MR]]'''
+| -
+|-
+| 10
+| [[2025 Herculis|Herculis]]
+| -
+| -
+| -
+| -
+| {{Flag athlete|[[Jessica Schilder]]|NED}}<br> 20.39 m
+| -
+| -
+|-
+| 11
+| [[2025 London Athletics Meet|London Athletics Meet]]
+| {{Flag athlete|[[Malaika Mihambo]]|GER}}<br> 6.93 m
+| -
+| {{Flag athlete|[[Morgan Lake]]|GBR}}<br> 1.96 m ={{AthAbbr|SB}}
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Olivia McTaggart]]|NZL}}<br> 4.73 m {{AthAbbr|PB}}
+| -
+| -
+| -
+|-
+| 12
+| [[2025 Kamila Skolimowska Memorial|Kamila Skolimowska Memorial]]
+| {{Flag athlete|[[Jasmine Moore]]|USA}}<br> 6.85 m '''[[Kamila_Skolimowska_Memorial#Women|MR]]'''
+| -
+|bgcolor=#CCC| {{Flag athlete|[[Yaroslava Mahuchikh]]|UKR}}<br> 2.00 m '''[[Kamila_Skolimowska_Memorial#Women|MR]]'''
+|bgcolor=#CCC| {{Flag athlete|[[Marie-Julie Bonnin]]|FRA}}<br> 4.70 m 
+|bgcolor=#CCC| {{Flag athlete|[[Jessica Schilder]]|NED}}<br> 19.66 m 
+| -
+| -
+|-
+| 13
+| [[2025 Athletissima|Athletissima]]
+| -
+| -
+| {{Flag athlete|[[Christina Honsel]]|GER}}<br> {{Flag athlete|[[Nicola Olyslagers]]|AUS}}<br> {{Flag athlete|[[Maria Żodzik]]|POL}}<br> 1.91 m
+|bgcolor=#CCC| {{Flag athlete|[[Lea Bachmann]]|SUI}}<br> {{Flag athlete|[[Hanga Klekner]]|HUN}}<br> {{Flag athlete|[[Angelica Moser]]|SUI}}<br> 4.35 m
+| -
+| -
+| {{Flag athlete|[[Adriana Vilagoš]]|SRB}}<br> 63.02 m
+|-
+| 14
+| [[2025 Memorial Van Damme|Memorial Van Damme]]
+| -
+| {{Flag athlete|[[Leyanis Pérez Hernández]]|CUB}}<br>14.78 m
+| -
+| bgcolor=#F2F5A9 | {{Flag athlete|[[Katie Moon]]|USA}}<br>4.85 m
+| {{Flag athlete|[[Chase Jackson]]|USA}}<br> 20.90 m '''[[Memorial van Damme#Women|MR]]'''
+| -
+| -
+|-
+|-bgcolor=#9acdff
+| 15
+| [[2025 Weltklasse Zürich|Weltklasse Zürich]]
+| {{Flag athlete|[[Larissa Iapichino]]|ITA}}<br>6.93 m
+| {{Flag athlete|[[Leyanis Pérez Hernández]]|CUB}}<br>14.91 m
+| {{Flag athlete|[[Nicola Olyslagers]]|AUS}}<br>2.04 m '''{{AthAbbr|AR|Oceanian}}''', {{AthAbbr|WL}}
+| {{Flag athlete|[[Katie Moon]]|USA}}<br>4.82 m
+| {{Flag athlete|[[Jessica Schilder]]|NED}}<br> 20.26 m
+| {{Flag athlete|[[Valarie Allman]]|USA}}<br> 69.18 m
+| {{Flag athlete|[[Elina Tzengko]]|GRE}}<br> 64.57 m 
+|}
+
+==Diamond League Finals==
+===Men===
+====100 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Akani Simbine]] ||align=left| {{RSA}} || 3 || '''35'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Kishane Thompson]] ||align=left| {{JAM}} ||  2 || '''23'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Noah Lyles]] ||align=left| {{USA}} ||  || '''21'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Emmanuel Eseme]] ||align=left| {{CMR}} ||  || '''20'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Ferdinand Omanyala]] ||align=left| {{KEN}} ||  || '''20'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Trayvon Bromell]] ||align=left| {{USA}} || 1  || '''18'''
+|-bgcolor=ccffcc style="border-bottom:3px solid green;"
+| 7 || align=left| [[Zharnel Hughes]] ||align=left| {{GBR2}} ||  || '''17'''
+|-bgcolor=ddffdd
+| 8 || align=left| [[Brandon Hicklin]] ||align=left| {{USA}} ||  || '''17*'''
+|-
+| 9 || align=left| [[Oblique Seville]] ||align=left| {{JAM}} || 2 || 16
+|-bgcolor=ddffdd
+| 10 || align=left| [[Christian Coleman]] ||align=left| {{USA}} ||  || '''16*'''
+|-bgcolor=ddffdd
+| 11 || align=left| [[Ackeem Blake]] ||align=left| {{JAM}} ||  || '''16*'''
+|-bgcolor=ddffdd
+| 12 || align=left| [[Jeremiah Azu]] ||align=left| {{GBR2}} ||  || '''11*'''
+|-
+| 13 || align=left| [[Letsile Tebogo]] ||align=left| {{BOT}} ||  || 10
+|-
+| 14 || align=left| [[Fred Kerley]] ||align=left| {{USA}} ||  || 10
+|-
+| 15 || align=left| [[Courtney Lindsey]] ||align=left| {{USA}} ||  || 8
+|-
+| 16 || align=left| [[Kenny Bednarek]] ||align=left| {{USA}} ||  || 6
+|-
+| 17 || align=left| [[Lachlan Kennedy (sprinter)|Lachlan Kennedy]] ||align=left| {{AUS}} ||  || 5
+|-bgcolor=ddffdd
+| 18 || align=left| [[Bayanda Walaza]] ||align=left| {{RSA}} ||  || '''3*'''
+|-
+| 19 || align=left| [[Rohan Watson]] ||align=left| {{JAM}} ||  || 3
+|-bgcolor=ddffdd
+| 20 || align=left| [[Shaun Maswanganyi]] ||align=left| {{RSA}} ||  || '''3*'''
+|-
+| 21 || align=left| [[Filippo Tortu]] ||align=left| {{ITA}} ||  || 2
+|-
+| 22 || align=left| [[Xie Zhenye]] ||align=left| {{CHN}} ||  || 2
+|-
+| 23 || align=left| [[Jeff Erius]] ||align=left| {{FRA}} ||  || 2
+|-
+| 24 || align=left| [[Louie Hinchliffe]] ||align=left| {{GBR2}} ||  || 1
+|-
+| 25 || align=left| [[Kyree King]] ||align=left| {{USA}} ||  || 1
+|-
+| 26 || align=left| [[Abdul Hakim Sani Brown]] ||align=left| {{JPN}} ||  || 1
+|-
+| 27 || align=left| [[Timothé Mumenthaler]] ||align=left| {{SUI}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Men's Diamond+ - 100 metres results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHM100M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250827171309/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHM100M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 7 qualified as of right.</small>
+<br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|- bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Christian Coleman]]
+| align="left" | {{USA}}
+| 9.97
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Akani Simbine]]
+| align="left" | {{RSA}}
+| 9.98
+|
+|-
+| 3
+| align="left" | [[Ackeem Blake]]
+| align="left" | {{JAM}}
+| 9.99
+|
+|-
+| 4
+| align="left" | [[Jeremiah Azu]]
+| align="left" | {{GBN}}
+| 10.03
+|
+|-
+| 5
+| align="left" | [[Brandon Hicklin]]
+| align="left" | {{USA}}
+| 10.09
+|
+|-
+| 6
+| align="left" | [[Trayvon Bromell]]
+| align="left" | {{USA}}
+| 10.14
+|
+|-
+| 7
+| align="left" | [[Shaun Maswanganyi]]
+| align="left" | {{RSA}}
+| 10.19
+|
+|-
+| 8
+| align="left" | [[Bayanda Walaza]]
+| align="left" | {{RSA}}
+| 12.10
+|
+|- class="sortbottom"
+| colspan="3" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond+ - 100 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHM100M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+| colspan="2" | Wind: {{Wind|-0.4}}
+|}
+{{col-end}}
+
+====200 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Joseph Fahnbulleh]] ||align=left| {{LBR}} ||  || '''29'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Letsile Tebogo]] ||align=left| {{BOT}} || 2 || '''23'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Courtney Lindsey]] ||align=left| {{USA}} || 1 || '''22'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Alexander Ogando]] ||align=left| {{DOM}} || 1 || '''19'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Robert Gregory (sprinter)|Robert Gregory]] ||align=left| {{USA}} ||  || '''17'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Reynier Mena]] ||align=left| {{CUB}} ||  2 || '''16'''
+|-bgcolor=ccffcc style="border-bottom:3px solid green;"
+| 7 || align=left| [[Kyree King]] ||align=left| {{USA}} ||  || '''15'''
+|-
+| 8 || align=left| [[Makanakaishe Charamba]] ||align=left| {{ZIM}} ||  || 10
+|-
+| 9 || align=left| [[Aaron Brown (sprinter)|Aaron Brown]] ||align=left| {{CAN}} ||  || 10
+|-
+| 10 || align=left| [[Timothé Mumenthaler]] ||align=left| {{SUI}} ||  || 9
+|-bgcolor=ddffdd
+| 11 || align=left| [[Noah Lyles]] ||align=left| {{USA}} || 1 || '''8*'''
+|-
+| 12 || align=left| [[Filippo Tortu]] ||align=left| {{ITA}} ||  || 8
+|-
+| 13 || align=left| [[Jereem Richards]] ||align=left| {{TTO}} ||  || 7
+|-
+| 14 || align=left| [[Fred Kerley]] ||align=left| {{USA}} ||  || 6
+|-bgcolor=ddffdd
+| 15 || align=left| [[Udodi Chudi Onwuzurike]] ||align=left| {{NGR}} ||  || '''6*'''
+|-
+| 16 || align=left| [[Andre de Grasse]] ||align=left| {{CAN}} ||  || 6
+|-
+| 17 || align=left| [[Christian Coleman]] ||align=left| {{USA}} ||  || 5
+|-
+| 18 || align=left| [[Henrik Larsson (sprinter)|Henrik Larsson]] ||align=left| {{SWE}} ||  || 5
+|-
+| 19 || align=left| [[Wayde van Niekerk]] ||align=left| {{RSA}} ||  || 4
+|-
+| 20 || align=left| [[Xavi Mo-Ajok]] ||align=left| {{NED}} ||  || 4
+|-
+| 21 || align=left| [[Abduraqhman Karriem]] ||align=left| {{RSA}} ||  || 4
+|-
+| 22 || align=left| [[Bryan Levell]] ||align=left| {{JAM}} ||  || 3
+|-
+| 23 || align=left| [[Erik Erlandsson]] ||align=left| {{SWE}} ||  || 3
+|-
+| 24 || align=left| [[Benjamin Richardson (sprinter)|Benjamin Richardson]] ||align=left| {{RSA}} ||  || 2
+|-
+| 25 || align=left| [[Vernon Norwood]] ||align=left| {{USA}} ||  || 2
+|-
+| 26 || align=left| [[Shaun Maswanganyi]] ||align=left| {{RSA}} ||  || 2
+|-
+| 27 || align=left| [[Joshua Hartmann]] ||align=left| {{GER}} ||  || 2
+|-
+| 28 || align=left| [[Ryan Zeze]] ||align=left| {{FRA}} ||  || 1
+|-
+| 29 || align=left| [[Téo Andant]] ||align=left| {{FRA}} ||  || 1
+|-
+| 30 || align=left| [[William Reais]] ||align=left| {{SUI}} ||  || 1
+|-
+| 31 || align=left| [[Kobe Vleminckx]] ||align=left| {{BEL}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Men's Diamond - 200 metres results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHM200M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250827150416/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHM200M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 7 qualified as of right.</small><br>
+<small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|- bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Noah Lyles]]
+| align="left" | {{USA}}
+| 19.74
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Letsile Tebogo]]
+| align="left" | {{BOT}}
+| 19.76
+| ={{AthAbbr|SB}}
+|-
+| 3
+| align="left" | [[Alexander Ogando]]
+| align="left" | {{DOM}}
+| 20.14
+|
+|-
+| 4
+| align="left" | [[Robert Gregory (sprinter)|Robert Gregory]]
+| align="left" | {{USA}}
+| 20.20
+|
+|-
+| 5
+| align="left" | [[Reynier Mena]]
+| align="left" | {{CUB}}
+| 20.26
+|
+|-
+| 6
+| align="left" | [[Kyree King]]
+| align="left" | {{USA}}
+| 20.43
+|
+|-
+| 7
+| align="left" | [[Udodi Onwuzurike]]
+| align="left" | {{NGR}}
+| 20.46
+|
+|-
+| 8
+| align="left" | [[Joseph Fahnbulleh]]
+| align="left" | {{LBR}}
+| 20.54
+|
+|- class="sortbottom"
+| colspan="3" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - 200 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHM200M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+| colspan="2" | Wind: {{Wind|-0.6}}
+|}
+{{col-end}}
+
+====400 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Busang Kebinatshipi]] ||align=left| {{BOT}} || || '''25'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Vernon Norwood]] ||align=left| {{USA}} ||  || '''24'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Jacory Patterson]] ||align=left| {{USA}} || 2 || '''22'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Charlie Dobson]] ||align=left| {{GBR2}} || 1 || '''22'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Christopher Bailey (runner)|Christopher Bailey]] ||align=left| {{USA}} || 1 || '''22'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Zakithi Nene]] ||align=left| {{RSA}} || || '''20'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Bayapo Ndori]] ||align=left| {{BOT}} || 1 || '''18'''
+|-style="border-top:3px solid green;"
+| 8 || align=left| [[Matthew Hudson-Smith]] ||align=left| {{GBR2}} || 1 || 15
+|-
+| 9 || align=left| [[Quincy Hall]] ||align=left| {{USA}} || 1 || 15
+|-
+| 10 || align=left| [[Kirani James]] ||align=left| {{GRN}} ||  || 14
+|-bgcolor=dfffdf
+| 11 || align=left| [[Alexander  Doom]] ||align=left| {{BEL}} ||  || '''12*'''
+|-bgcolor=dfffdf
+| 12 || align=left| [[Muzala Samukonga]] ||align=left| {{ZAM}} ||  || '''8*'''
+|-
+| 13 || align=left| [[Khaleb McCrae]] ||align=left| {{USA}} ||  || 5
+|-bgcolor=dfffdf
+| 14 || align=left| [[Daniel Seger]] ||align=left| {{BEL}} ||  || '''5*'''
+|-
+| 15 || align=left| [[Bryce Deadmon]] ||align=left| {{USA}} ||  || 5
+|-
+| 16 || align=left| [[Christopher Morales Williams]] ||align=left| {{CAN}} ||  || 4
+|-
+| 17 || align=left| [[Lythe Pillay]] ||align=left| {{RSA}} ||  || 4
+|-
+| 18 || align=left| [[Reece Holder]] ||align=left| {{AUS}} ||  || 3
+|-
+| 19 || align=left| [[Johnnie Blockburger]] ||align=left| {{USA}} ||  || 3
+|-
+| 20 || align=left| [[Leungo Scotch]] ||align=left| {{BOT}} ||  || 2
+|-
+| 21 || align=left| [[Håvard Bentdal Ingvaldsen]] ||align=left| {{NOR}} ||  || 1
+|-
+| 22 || align=left| [[Toby Harries]] ||align=left| {{GBR2}} ||  || 1
+|-
+| 23 || align=left| [[Edoardo Scotti]] ||align=left| {{ITA}} ||  || 1
+|-
+| 24 || align=left| [[Walid El Boussiri]] ||align=left| {{MAR}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Men's Diamond - 400 metres results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHM400M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250827150547/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHM400M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 7 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|- bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Jacory Patterson]]
+| align="left" | {{USA}}
+| 43.85
+| {{AthAbbr|PB}}
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Bayapo Ndori]]
+| align="left" | {{BOT}}
+| 44.40
+|
+|-
+| 3
+| align="left" | [[Vernon Norwood]]
+| align="left" | {{USA}}
+| 44.45
+|
+|-
+| 4
+| align="left" | [[Muzala Samukonga]]
+| align="left" | {{ZAM}}
+| 44.49
+|
+|-
+| 5
+| align="left" | [[Christopher Bailey (runner)|Christopher Bailey]]
+| align="left" | {{USA}}
+| 44.75
+|
+|-
+| 6
+| align="left" | [[Daniel Segers]]
+| align="left" | {{BEL}}
+| 45.01
+|
+|-
+| 7
+| align="left" | [[Collen Kebinatshipi]]
+| align="left" | {{BOT}}
+| 45.40
+|
+|-
+| 8
+| align="left" | [[Alexander Doom]]
+| align="left" | {{BEL}}
+| 45.61
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - 400 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHM400M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====800 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Emmanuel Wanyonyi]] ||align=left| {{KEN}} || 4 || '''45'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Josh Hoey]] ||align=left| {{USA}} ||  1 || '''28'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Mohamed Attaoui]] ||align=left| {{ESP}} ||  1|| '''25'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Max Burgin]] ||align=left| {{GBR2}} ||  || '''23'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Tshepiso Masalela]] ||align=left| {{BOT}} || 2 || '''21'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Bryce Hoppel]] ||align=left| {{USA}} ||  || '''20'''
+|-bgcolor=ccffcc style="border-bottom:3px solid green;"
+| 7 || align=left| [[Djamel Sedjati]] ||align=left| {{ALG}} ||  || '''19'''
+|-bgcolor=ddffdd
+| 8 || align=left| [[Marco Arop]] ||align=left| {{CAN}} ||  || '''15*'''
+|-
+| 9 || align=left| [[Gabriel Tual]] ||align=left| {{FRA}} || || 14
+|-
+| 10 || align=left| [[Slimane Moula]] ||align=left| {{ALG}} ||  || 12
+|-
+| 11 || align=left| [[Wyclife Kinyamal]] ||align=left| {{KEN}} ||  || 11
+|-
+| 12 || align=left| [[Kethobogile Haingura]] ||align=left| {{BOT}} ||  || 11
+|-
+| 13 || align=left| [[Andreas Kramer]] ||align=left| {{SWE}} ||  || 10
+|-
+| 14 || align=left| [[Mark English (athlete)|Mark English]] ||align=left| {{IRL}} ||  || 7
+|-
+| 15 || align=left| [[Peter Bol (runner)|Peter Bol]] ||align=left| {{AUS}} ||  || 5
+|-
+| 16 || align=left| [[Brandon Miller (runner)|Brandon Miller]] ||align=left| {{USA}} ||  || 5
+|-
+| 17 || align=left| [[Ibrahim Abass M Chuot]] ||align=left| {{QAT}} ||  || 4
+|-
+| 18 || align=left| [[Donavan Brazier]] ||align=left| {{USA}} ||  || 3
+|-
+| 19 || align=left| [[Yanis Meziane]] ||align=left| {{FRA}} ||  || 3
+|-
+| 20 || align=left| [[Abderrahman El Assa,]] ||align=left| {{MAR}} ||  || 2
+|-
+| 21 || align=left| [[Abdelati El Guesse]] ||align=left| {{MAR}} ||  || 2
+|-
+| 22 || align=left| [[Aaron Cheminingwa]] ||align=left| {{KEN}} ||  || 1
+|-
+| 23 || align=left| [[Ivan Pelizza]] ||align=left| {{SUI}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Men's Diamond+ - 800 metres results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHM800M----DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-url=https://web.archive.org/web/20250827171420/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHM800M----DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 7 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|- bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Emmanuel Wanyonyi]]
+| align="left" | {{KEN}}
+| 1:42.37
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Max Burgin]]
+| align="left" | {{GBN}}
+| 1:42.42
+|
+|-
+| 3
+| align="left" | [[Marco Arop]]
+| align="left" | {{CAN}}
+| 1:42.57
+|
+|-
+| 4
+| align="left" | [[Djamel Sedjati]]
+| align="left" | {{ALG}}
+| 1:42.84
+|
+|-
+| 5
+| align="left" | [[Tshepiso Masalela]]
+| align="left" | {{BOT}}
+| 1:43.16
+|
+|-
+| 6
+| align="left" | [[Mohamed Attaoui]]
+| align="left" | {{ESP}}
+| 1:43.35
+|
+|-
+| 7
+| align="left" | [[Bryce Hoppel]]
+| align="left" | {{USA}}
+| 1:43.78
+|
+|-
+| 8
+| align="left" | [[Josh Hoey]]
+| align="left" | {{USA}}
+| 1:44.25
+|
+|-
+| —
+| align="left" | [[Patryk Sieradzki]]
+| align="left" | {{POL}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - 800 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHM800M----DIAMOND---FNL-000100--_C73C1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====1500 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Reynold Cheruiyot]] ||align=left| {{KEN}} ||  || '''23'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Yared Nuguse]] ||align=left| {{USA}} || 1 || '''21'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Timothy Cheruiyot]] ||align=left| {{KEN}} ||  || '''21'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Azeddine Habz]] ||align=left| {{FRA}} || 1 || '''19'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Isaac Nader]] ||align=left| {{POR}} || 1 || '''19'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Niels Laros]] ||align=left| {{NED}} || 2 || '''16'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Phanuel Koech]] ||align=left| {{KEN}} || 1 || '''15'''
+|-bgcolor=ccffcc
+| 8 || align=left| [[Anass Essayi]] ||align=left| {{MAR}} ||  || '''13'''
+|-bgcolor=ccffcc
+| 9 || align=left| [[Cameron Myers]] ||align=left| {{AUS}} ||  || '''13'''
+|-bgcolor=ccffcc
+| 10 || align=left| [[Robert Farken]] ||align=left| {{GER}} ||  || '''9'''
+|-style="border-top:3px solid green;"
+| 11 || align=left| [[Jonah Koech]] ||align=left| {{USA}} || 1 || 8
+|-bgcolor=ddffdd
+| 12 || align=left| [[Narve Gilje Nordås]] ||align=left| {{NOR}} ||  || '''8*'''
+|-
+| 13 || align=left| [[Josh Kerr]] ||align=left| {{GBR2}} ||  || 7
+|-
+| 14 || align=left| [[Samuel Pihlström]] ||align=left| {{SWE}} ||  || 7
+|-
+| 15 || align=left| [[Elliot Giles]] ||align=left| {{GBR2}} ||  || 7
+|-
+| 16 || align=left| [[Jake Wightman]] ||align=left| {{GBR2}} ||  || 6
+|-
+| 17 || align=left| [[Festus Lagat]] ||align=left| {{KEN}} ||  || 6
+|-
+| 18 || align=left| [[Stefan Nillessen]] ||align=left| {{NED}} ||  || 6
+|-
+| 19 || align=left| [[Cole Hocker]] ||align=left| {{USA}} ||  || 5
+|-
+| 20 || align=left| [[Vincent Ciattei]] ||align=left| {{USA}} ||  || 4
+|-
+| 21 || align=left| [[Thomas Jude]] ||align=left| {{AUS}} ||  || 4
+|-
+| 22 || align=left| [[Ruben Verheyden]] ||align=left| {{BEL}} ||  || 4
+|-
+| 23 || align=left| [[Josh Hoey]] ||align=left| {{USA}} ||  || 4
+|-
+| 24 || align=left| [[Hobbs Kessler]] ||align=left| {{USA}} ||  || 2
+|-
+| 25 || align=left| [[Brian Komen]] ||align=left| {{KEN}} ||  || 1
+|-
+| 26 || align=left| [[Cathal Doyle]] ||align=left| {{IRL}} ||  || 1
+|-
+| 27 || align=left| [[Louis Gilavert]] ||align=left| {{FRA}} ||  || 1
+|-
+| 28 || align=left| [[Adam Spencer (runner)|Adam Spencer]] ||align=left| {{AUS}} ||  || 1
+|-
+| 29 || align=left| [[Olli Hoare|Oliver Hoare]] ||align=left| {{AUS}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Men's Diamond - 1500 metres results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHM1500M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-url=https://web.archive.org/web/20250827150638/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHM1500M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 10 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|- bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Niels Laros]]
+| align="left" | {{NED}}
+| 3:29.20
+| '''{{AthAbbr|NR|Dutch}}'''
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Reynold Cheruiyot]]
+| align="left" | {{KEN}}
+| 3:29.91
+| {{AthAbbr|PB}}
+|-
+| 3
+| align="left" | [[Phanuel Koech]]
+| align="left" | {{KEN}}
+| 3:30.02
+|
+|-
+| 4
+| align="left" | [[Timothy Cheruiyot]]
+| align="left" | {{KEN}}
+| 3:30.13
+|
+|-
+| 5
+| align="left" | [[Azeddine Habz]]
+| align="left" | {{FRA}}
+| 3:30.39
+|
+|-
+| 6
+| align="left" | [[Anass Essayi]]
+| align="left" | {{MAR}}
+| 3:30.67
+| {{AthAbbr|PB}}
+|-
+| 7
+| align="left" | [[Yared Nuguse]]
+| align="left" | {{USA}}
+| 3:30.84
+|
+|-
+| 8
+| align="left" | [[Samuel Pihlström]]
+| align="left" | {{SWE}}
+| 3:31.15
+|
+|-
+| 9
+| align="left" | [[Robert Farken]]
+| align="left" | {{GER}}
+| 3:31.30
+|
+|-
+| 10
+| align="left" | [[Isaac Nader]]
+| align="left" | {{POR}}
+| 3:35.70
+|
+|-
+| —
+| align="left" | [[Filip Rak]]
+| align="left" | {{POL}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|-
+| —
+| align="left" | [[Žan Rudolf]]
+| align="left" | {{SLO}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond+ - 1500 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHM1500M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====5000 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Kuma Girma]] ||align=left| {{ETH}} || || '''20'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Birhanu Balew]] ||align=left| {{BHR}} ||  || '''19'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Yomif Kejelcha]] ||align=left| {{ETH}} || 2  || '''17'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Samuel Tefera]] ||align=left| {{ETH}} ||  || '''14'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Jimmy Gressier]] ||align=left| {{FRA}} ||  || '''12'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Nico Young]] ||align=left| {{USA}} || 1  || '''10'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Dominic Lobalu]] ||align=left| {{SUI}} ||  || '''10'''
+|-bgcolor=ccffcc
+| 8 || align=left| [[Mohamed Abdilaahi]] ||align=left| {{GER}} ||  || '''10'''
+|-bgcolor=ccffcc
+| 9 || align=left| [[Graham Blanks]] ||align=left| {{USA}} || || '''9'''
+|-bgcolor=ccffcc style="border-bottom:3px solid green;"
+| 10 || align=left| [[Andreas Almgren]] ||align=left| {{SWE}} || 1  || '''8'''
+|-
+| 11 || align=left| [[Hagos Gebrhiwet]] ||align=left| {{ETH}} ||  || 8
+|-
+| 12 || align=left| [[Berihu Aregawi]] ||align=left| {{ETH}} || 1 || 8
+|-
+| 13 || align=left| [[Keneth Kiprop]] ||align=left| {{UGA}} ||  || 8
+|-
+| 14 || align=left| [[Isaac Kimeli]] ||align=left| {{BEL}} || 1 || 8
+|-
+| 15 || align=left| [[Reynold Cheruiyot]] ||align=left| {{KEN}} || 1 || 8
+|-bgcolor=ddffdd
+| 16 || align=left| [[Biniam Mehary]] ||align=left| {{ETH}} ||  || '''7*'''
+|-bgcolor=ddffdd
+| 17 || align=left| [[Grant Fisher]] ||align=left| {{USA}} ||  || '''7*'''
+|-
+| 18 || align=left| [[Edwin Kurgat]] ||align=left| {{KEN}} ||  || 7
+|-
+| 19 || align=left| [[Mezgebu Sime]] ||align=left| {{ETH}} ||  || 6
+|-
+| 20 || align=left| [[Ky Robinson]] ||align=left| {{AUS}} ||  || 6
+|-
+| 21 || align=left| [[Eduardo Herrera (runner)|Eduardo Herrera]] ||align=left| {{MEX}} ||  || 6
+|-
+| 22 || align=left| [[George Mills (runner)|George Mills]] ||align=left| {{GBR2}} ||  || 5
+|-
+| 23 || align=left| [[Nicholas Kimeli|Nicholas Kipkorir]] ||align=left| {{KEN}} ||  || 5
+|-
+| 24 || align=left| [[Mike Foppen]] ||align=left| {{NED}} ||  || 5
+|-
+| 25 || align=left| [[Etienne Daguinos]] ||align=left| {{FRA}} ||  || 4
+|-
+| 26 || align=left| [[Ishmael Kipkurui]] ||align=left| {{KEN}} ||  || 4
+|-
+| 27 || align=left| [[Cornelius Kemboi]] ||align=left| {{KEN}} ||  || 4
+|-
+| 28 || align=left| [[Thierry Ndikumwenayo]] ||align=left| {{ESP}} ||  || 3
+|-
+| 29 || align=left| [[Soufiane El Bakkali]] ||align=left| {{MAR}} ||  || 3
+|-
+| 30 || align=left| [[Denis Kipkoech]] ||align=left| {{KEN}} ||  || 3
+|-
+| 31 || align=left| [[Cole Hocker]] ||align=left| {{USA}} ||  || 2
+|-
+| 32 || align=left| [[Benson Kiplangat]] ||align=left| {{KEN}} ||  || 2
+|-
+| 33 || align=left| [[Yann Schrub]] ||align=left| {{FRA}} ||  || 1
+|-
+| 34 || align=left| [[Telahun Haile Bekele]] ||align=left| {{ETH}} ||  || 1
+|-
+| 35 || align=left| [[Morgan Beadlescomb]] ||align=left| {{USA}} ||  || 1
+|-
+| 36 || align=left| [[Abdullahi Jama Mahamed]] ||align=left| {{SOM}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Men's Diamond - 5000 metres results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHM5000M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-url=https://web.archive.org/web/20250827171555/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHM5000M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 10 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|- bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Jimmy Gressier]]
+| align="left" | {{FRA}}
+| 7:36.78
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Grant Fisher]]
+| align="left" | {{USA}}
+| 7:36.81
+|
+|-
+| 3
+| align="left" | [[Andreas Almgren]]
+| align="left" | {{SWE}}
+| 7:36.82
+|
+|-
+| 4
+| align="left" | [[Mohamed Abdilaahi]]
+| align="left" | {{GER}}
+| 7:37.31
+|{{AthAbbr|PB}}
+|-
+| 5
+| align="left" | [[Biniam Mehary]]
+| align="left" | {{ETH}}
+| 7:37.33
+|
+|-
+| 6
+| align="left" | [[Graham Blanks]]
+| align="left" | {{USA}}
+| 7:38.15
+|
+|-
+| 7
+| align="left" | [[George Mills (runner)|George Mills]]
+| align="left" | {{GBN}}
+| 7:38.71
+|
+|-
+| 8
+| align="left" | [[Samuel Tefera]]
+| align="left" | {{ETH}}
+| 7:38.93
+|
+|-
+| 9
+| align="left" | [[Jonas Raess]]
+| align="left" | {{SUI}}
+| 7:46.82
+|
+|-
+| 10
+| align="left" | [[Mike Foppen]]
+| align="left" | {{NED}}
+| 7:47.04
+|
+|-
+| 11
+| align="left" | [[Kuma Girma]]
+| align="left" | {{ETH}}
+| 7:51.33
+|
+|-
+| 12
+| align="left" | [[Wegene Adisu]]
+| align="left" | {{ETH}}
+| 7:54.16
+| {{AthAbbr|PB}}, {{Abbr|PM|Pacemaker}}
+|-
+| —
+| align="left" | [[Mounir Akbache]]
+| align="left" | {{FRA}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - 3000 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHM3000M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====110 metres hurdles====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Cordell Tinch]] ||align=left| {{USA}} || 3 || '''38'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Rachid Muratake]] ||align=left| {{JPN}} ||  || '''24'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Trey Cunningham]] ||align=left| {{USA}} || 2 || '''22'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Dylan Beard]] ||align=left| {{USA}} ||  || '''19'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Jason Joseph]] ||align=left| {{SUI}} || 1 || '''19'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Jamal Britt]] ||align=left| {{USA}} ||  || '''17'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Rasheed Broadbell]] ||align=left| {{JAM}} || 1 || '''14'''
+|-style="border-top:3px solid green;" bgcolor=ddffdd
+| 8 || align=left| [[Enrique Llopis]] ||align=left| {{ESP}} ||  || '''13*'''
+|-
+| 9 || align=left| [[Liu Junxi]] ||align=left| {{CHN}} ||  || 10
+|-
+| 10 || align=left| [[Daniel Roberts (hurdler)|Daniel Roberts]] ||align=left| {{USA}} ||  || 10
+|-
+| 11 || align=left| [[Lorenzo Simonelli (athlete)|Lorenzo Simonelli]] ||align=left| {{ITA}} ||  || 9
+|-
+| 12 || align=left| [[Just Kwaou-Mathey]] ||align=left| {{FRA}} ||  || 9
+|-
+| 13 || align=left| [[Xu Zhuoyi]] ||align=left| {{CHN}} ||  || 7
+|-
+| 14 || align=left| [[Ja'Kobe Tharp]] ||align=left| {{USA}} ||  || 6
+|-bgcolor=ddffdd
+| 15 || align=left| [[Orlando Bennett]] ||align=left| {{JAM}} ||  || '''6*'''
+|-bgcolor=ddffdd
+| 16 || align=left| [[Freddie Crittenden]] ||align=left| {{USA}} ||  || '''5*'''
+|-
+| 17 || align=left| [[Asier Martínez]] ||align=left| {{ESP}} ||  || 5
+|-
+| 18 || align=left| [[Grant Holloway]] ||align=left| {{USA}} ||  || 4
+|-
+| 19 || align=left| [[Hansle Parchment]] ||align=left| {{JAM}} ||  || 3
+|-
+| 20 || align=left| [[Wilhem Belocian]] ||align=left| {{FRA}} ||  || 3
+|-
+| 21 || align=left| [[Oumar Doudai Abakar]] ||align=left| {{QAT}} ||  || 3
+|-
+| 22 || align=left| [[Erwann Cinna]] ||align=left| {{FRA}} ||  || 2
+|-
+| 23 || align=left| [[Shunsuke Izumiya]] ||align=left| {{JPN}} ||  || 1
+|-
+| 24 || align=left| [[Omar McLeod]] ||align=left| {{JAM}} ||  || 1
+|-
+| 25 || align=left| [[Yaqoub Alyouha]] ||align=left| {{KUW}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Men's Diamond - 110 metres hurdles results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHM110MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250827171659/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHM110MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 7 qualified as of right.</small><br>
+<small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|- bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Cordell Tinch]]
+| align="left" | {{USA}}
+| 12.92
+| ='''[[Weltklasse Zürich#Men|MR]]'''
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Enrique Llopis]]
+| align="left" | {{ESP}}
+| 13.12
+| {{AthAbbr|SB}}
+|-
+| 3
+| align="left" | [[Jamal Britt]]
+| align="left" | {{USA}}
+| 13.21
+|
+|-
+| 4
+| align="left" | [[Jason Joseph]]
+| align="left" | {{SUI}}
+| 13.22
+|
+|-
+| 5
+| align="left" | [[Freddie Crittenden]]
+| align="left" | {{USA}}
+| 13.23
+|
+|-
+| 6
+| align="left" | [[Trey Cunningham]]
+| align="left" | {{USA}}
+| 13.32
+|
+|-
+| 7
+| align="left" | [[Orlando Bennett]]
+| align="left" | {{JAM}}
+| 13.35
+|
+|-
+| 8
+| align="left" | [[Rachid Muratake]]
+| align="left" | {{JPN}}
+| 14.39
+|
+|- class="sortbottom"
+| colspan="3" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - 110 metres hurdles results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHM110MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+| colspan="2" | Wind: {{Wind|+0.3}}
+|}
+{{col-end}}
+
+====400 metres hurdles====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Karsten Warholm]] ||align=left| {{NOR}} || 4 || '''38'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Rai Benjamin]] ||align=left| {{USA}} || 2 || '''30'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Matheus Lima]] ||align=left| {{BRA}} ||  || '''23'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Abderrahman Samba]] ||align=left| {{QAT}} ||  || '''22'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Alison dos Santos]] ||align=left| {{BRA}} || 1 || '''21'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Carl Bengtström]] ||align=left| {{SWE}} ||  || '''18'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Trevor Bassitt]] ||align=left| {{USA}} ||  || '''17'''
+|-style="border-top:3px solid green;" bgcolor=ddffdd
+| 8 || align=left| [[Berke Akçam]] ||align=left| {{TUR}} ||  || '''15*'''
+|-bgcolor=ddffdd
+| 9 || align=left| [[Ezekiel Nathaniel]] ||align=left| {{NGR}} ||  || '''13*'''
+|-bgcolor=ddffdd
+| 10 || align=left| [[CJ Allen (hurdler)|CJ Allen]] ||align=left| {{USA}} ||  || '''11*'''
+|-
+| 11 || align=left| [[Alessandro Sibilio]] ||align=left| {{ITA}} || 1 || 9
+|-
+| 12 || align=left| [[Emil Agyekum]] ||align=left| {{GER}} ||  || 8
+|-bgcolor=ddffdd
+| 13 || align=left| [[Alastair Chalmers]] ||align=left| {{GBR2}} ||  || '''8*'''
+|-
+| 14 || align=left| [[Kyron McMaster]] ||align=left| {{IVB}} ||  || 7
+|-
+| 15 || align=left| [[İsmail Nezir]] ||align=left| {{TUR}} ||  || 7
+|-
+| 16 || align=left| [[Ken Toyoda]] ||align=left| {{JPN}} ||  || 6
+|-
+| 17 || align=left| [[Matic Ian Guček]] ||align=left| {{SLO}} ||  || 6
+|-
+| 18 || align=left| [[Chris Robinson (hurdler)|Chris Robinson]] ||align=left| {{USA}} ||  || 5
+|-
+| 19 || align=left| [[Roshawn Clarke]] ||align=left| {{JAM}} ||  || 3
+|-
+| 20 || align=left| [[Fantin Crisci]] ||align=left| {{FRA}} ||  || 3
+|-
+| 21 || align=left| [[Xie Zhiyu]] ||align=left| {{CHN}} ||  || 3
+|-
+| 22 || align=left| [[Nick Smidt]] ||align=left| {{NED}} ||  || 3
+|-
+| 23 || align=left| [[Gerald Drummond (athlete)|Gerald Drummond]] ||align=left| {{CRC}} ||  || 2
+|-
+| 24 || align=left| [[Assinie Wilson]] ||align=left| {{JAM}} ||  || 2
+|-
+| 25 || align=left| {{ill|Karl Wållgren|sv}} ||align=left| {{SWE}} ||  || 2
+|-
+| 26 || align=left| [[Hugo Menin]] ||align=left| {{FRA}} ||  || 2
+|-
+| 27 || align=left| [[Patrik Dömötör]] ||align=left| {{SVK}} ||  || 1
+|-
+| 28 || align=left| [[Malik James-King]] ||align=left| {{JAM}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=16 August 2025 |title=Men's Diamond - 400 metres hurdles results |url=https://ath-wdl-archive.azureedge.net/2025/silesia/ATHM400MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250820194052/https://ath-wdl-archive.azureedge.net/2025/silesia/ATHM400MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=20 August 2025 |access-date=19 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 7 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|- bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Karsten Warholm]]
+| align="left" | {{NOR}}
+| 46.70
+| '''[[Weltklasse Zürich#Men|MR]]'''
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Abderrahman Samba]]
+| align="left" | {{QAT}}
+| 47.45
+|
+|-
+| 3
+| align="left" | [[Ezekiel Nathaniel]]
+| align="left" | {{NGR}}
+| 47.56
+|
+|-
+| 4
+| align="left" | [[CJ Allen (hurdler)|CJ Allen]]
+| align="left" | {{USA}}
+| 48.00
+| {{AthAbbr|SB}}
+|-
+| 5
+| align="left" | [[Matheus Lima]]
+| align="left" | {{BRA}}
+| 48.21
+|
+|-
+| 6
+| align="left" | [[Trevor Bassitt]]
+| align="left" | {{USA}}
+| 48.29
+|
+|-
+| 7
+| align="left" | [[Alastair Chalmers]]
+| align="left" | {{GBN}}
+| 48.88
+|
+|-
+| 8
+| align="left" | [[Berke Akçam]]
+| align="left" | {{TUR}}
+| 49.01
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond+ - 400 metres hurdles results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHM400MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====3000 metres steeplechase====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Edmund Serem]] ||align=left| {{KEN}} ||  || '''24'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Soufiane El Bakkali]] ||align=left| {{MAR}} || 2 || '''23'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Samuel Firewu]] ||align=left| {{ETH}} || 1 || '''19'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Simon Koech]] ||align=left| {{KEN}} ||  || '''12'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Getnet Wale]] ||align=left| {{ETH}} ||  || '''11'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Ryuji Miura]] ||align=left| {{JPN}} || || '''10'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Mohamed Amin Jhinaoui]] ||align=left| {{TUN}} ||  || '''9'''
+|-bgcolor=ccffcc
+| 8 || align=left| [[Abraham Kibiwot]] ||align=left| {{KEN}} ||  || '''9'''
+|-bgcolor=ccffcc
+| 9 || align=left| [[Abrham Sime]] ||align=left| {{ETH}} || 1 || '''8'''
+|-bgcolor=ccffcc
+| 10 || align=left| [[Ruben Querinjean]] ||align=left| {{LUX}} || 1 || '''8'''
+|-style="border-top:3px solid green;"
+| 11 || align=left| [[Frederik Ruppert]] ||align=left| {{GER}} ||  || 7
+|-
+| 12 || align=left| [[Daniel Arce]] ||align=left| {{ESP}} ||  || 7
+|-bgcolor=ddffdd
+| 13 || align=left| [[Salaheddine Ben Yazide]] ||align=left| {{MAR}} ||  || '''6*'''
+|-
+| 14 || align=left| [[Karl Bebendorf]] ||align=left| {{GER}} ||  || 6
+|-bgcolor=ddffdd
+| 15 || align=left| [[Isaac Updike]] ||align=left| {{USA}} ||  || '''6*'''
+|-
+| 16 || align=left| [[Hailemariyam Amare]] ||align=left| {{ETH}} ||  || 4
+|-bgcolor=ddffdd
+| 17 || align=left| [[Nicolas-Marie Daru]] ||align=left| {{FRA}} ||  || '''4*'''
+|-
+| 18 || align=left| [[Matthew Wilkinson (runner)|Matthew Wilkinson]] ||align=left| {{USA}} ||  || 2
+|-bgcolor=ddffdd
+| 19 || align=left| {{ill|Tim van de Velde|nl}} ||align=left| {{BEL}} ||  || '''2*'''
+|-
+| 20 || align=left| [[Samuel Duguna]] ||align=left| {{ETH}} ||  || 1
+|-
+| 21 || align=left| [[Zakaria El Ahlaami]] ||align=left| {{QAT}} ||  || 1
+|-
+| 22 || align=left| [[Avinash Mukund Sable]] ||align=left| {{IND}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Men's Diamond+ - 3000 metres steeplechase results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHM3000MST-DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-url=https://web.archive.org/web/20250827145046/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHM3000MST-DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 10 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|- bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Frederik Ruppert]]
+| align="left" | {{GER}}
+| 8:09.02
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Edmund Serem]]
+| align="left" | {{KEN}}
+| 8:09.96
+|
+|-
+| 3
+| align="left" | [[Salaheddine Ben Yazide]]
+| align="left" | {{MAR}}
+| 8:14.10
+|
+|-
+| 4
+| align="left" | [[Daniel Arce]]
+| align="left" | {{ESP}}
+| 8:14.36
+|
+|-
+| 5
+| align="left" | [[Nicolas-Marie Daru]]
+| align="left" | {{FRA}}
+| 8:18.68
+|
+|-
+| 6
+| align="left" | [[Isaac Updike]]
+| align="left" | {{USA}}
+| 8:19.47
+|
+|-
+| 7
+| align="left" | [[Mohamed Amin Jhinaoui]]
+| align="left" | {{TUN}}
+| 8:24.75
+|
+|-
+| 8
+| align="left" | [[Abrham Sime]]
+| align="left" | {{ETH}}
+| 8:28.13
+|
+|-
+| 9
+| align="left" | [[Tim Van de Velde]]
+| align="left" | {{BEL}}
+| 8:31.52
+|
+|-
+| —
+| align="left" | [[Wilberforce Kones]]
+| align="left" | {{KEN}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|-
+| —
+| align="left" | [[Wesley Langat]]
+| align="left" | {{KEN}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - 3000 metres steeplechase results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHM3000MST-DIAMOND---FNL-000100--_C73C1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====High Jump====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Hamish Kerr]] ||align=left| {{NZL}} || 2 || '''34'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Romaine Beckford]] ||align=left| {{JAM}} ||  || '''28'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[JuVaughn Harrison]] ||align=left| {{USA}} ||  || '''23'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Oleh Doroshchuk]] ||align=left| {{UKR}} || 1 || '''21'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Shelby McEwen]] ||align=left| {{USA}} || 1 || '''18'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Woo Sanghyeok]] ||align=left| {{KOR}} || 2 || '''16'''
+|-style="border-top:3px solid green;" bgcolor=ddffdd
+| 7 || align=left| [[Marco Fassinotti]] ||align=left| {{ITA}} ||  || '''13*'''
+|-
+| 8 || align=left| [[Jan Štefela]] ||align=left| {{CZE}} ||  || 11
+|-
+| 9 || align=left| [[Matteo Sioli]] ||align=left| {{ITA}} ||  || 8
+|-
+| 10 || align=left| [[Thomas Carmoy]] ||align=left| {{BEL}} ||  || 7
+|-
+| 11 || align=left| [[Yual Reath]] ||align=left| {{AUS}} ||  || 7
+|-
+| 12 || align=left| [[Raymond Richards (high jumper)|Raymond Richards]] ||align=left| {{JAM}} ||  || 7
+|-
+| 13 || align=left| [[Ryoichi Akamatsu]] ||align=left| {{JPN}} ||  || 7
+|-
+| 14 || align=left| [[Jonathan Kapitolnik]] ||align=left| {{ISR}} ||  || 5
+|-
+| 15 || align=left| [[Vernon Turner (high jumper)|Vernon Turner]] ||align=left| {{USA}} ||  || 5
+|-
+| 16 || align=left| [[Tomohiro Shinno]] ||align=left| {{JPN}} ||  || 5
+|-
+| 17 || align=left| [[Elijah Kosiba]] ||align=left| {{USA}} ||  || 3
+|-
+| 18 || align=left| [[Edgar Rivera]] ||align=left| {{MEX}} ||  || 3
+|-
+| 19 || align=left| [[Mateusz Kołodziejski]] ||align=left| {{POL}} ||  || 2
+|-
+| 20 || align=left| [[Donald Thomas (high jumper)|Donald Thomas]] ||align=left| {{BAH}} ||  || 2
+|-
+| 21 || align=left| [[Manuel Lando]] ||align=left| {{ITA}} ||  || 2
+|-
+| 22 || align=left| {{ill|Jef Vermeiren|nl|Jef Vermeiren}} ||align=left| {{BEL}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Men's Diamond - High jump results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHMHIGHJUMPDIAMOND---FNL-000100--_C73G2_1.0.PDF |archive-url=https://web.archive.org/web/20250827151130/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHMHIGHJUMPDIAMOND---FNL-000100--_C73G2_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 6 qualified as of right.</small><br>
+<small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Height
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Hamish Kerr]]
+| align="left" | {{NZL}}
+| 2.32 m
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Oleh Doroshchuk]]
+| align="left" | {{UKR}}
+| 2.30 m
+|
+|-
+| 3
+| align="left" | [[JuVaughn Harrison]]
+| align="left" | {{USA}}
+| 2.25 m
+|
+|-
+| 4
+| align="left" | [[Romaine Beckford]]
+| align="left" | {{JAM}}
+| 2.22 m
+|
+|-
+| 5
+| align="left" | [[Marco Fassinotti]]
+| align="left" | {{ITA}}
+| 2.19 m
+|
+|-
+| 6
+| align="left" | [[Shelby McEwen]]
+| align="left" | {{USA}}
+| 2.13 m
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - High jump results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHMHIGHJUMPDIAMOND---FNL-000100--_C73G2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====Pole Vault====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Armand Duplantis]] ||align=left| {{SWE}} || 6 || '''48'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Emmanouil Karalis]] ||align=left| {{GRE}} || 1 || '''44'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Menno Vloon]] ||align=left| {{NED}} ||  || '''35'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Kurtis Marschall]] ||align=left| {{AUS}} || || '''33'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Renaud Lavillenie]] ||align=left| {{FRA}} || || '''26'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Sam Kendricks]] ||align=left| {{USA}} ||  || '''21'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Ersu Şaşma]] ||align=left| {{TUR}} ||  || 15
+|-
+| 8 || align=left| [[Ben Broeders]] ||align=left| {{BEL}} ||  || 12
+|-
+| 9 || align=left| [[Ernest John Obiena]] ||align=left| {{PHI}} ||  || 10
+|-
+| 10 || align=left| [[Thibaut Collet]] ||align=left| {{FRA}} ||  || 7
+|-
+| 11 || align=left| [[Daniel Keaton]] ||align=left| {{USA}} ||  || 4
+|-
+| 12 || align=left| [[Sondre Guttormsen]] ||align=left| {{NOR}} ||  || 2
+|-
+| 13 || align=left| [[Austin Miller (pole vaulter)|Austin Miller]] ||align=left| {{USA}} ||  || 2
+|-
+| 14 || align=left| [[Li Chenyang (pole vaulter)|Li Chenyang]] ||align=left| {{CHN}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Men's Diamond - Pole vault results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHMPLEVAULTDIAMOND---FNL-000100--_C73G2_1.0.PDF |archive-url=https://web.archive.org/web/20250827171819/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHMPLEVAULTDIAMOND---FNL-000100--_C73G2_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 6 qualified as of right.</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Height
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Armand Duplantis]]
+| align="left" | {{SWE}}
+| 6.00 m
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Emmanouil Karalis]]
+| align="left" | {{GRE}}
+| 6.00 m
+|
+|-
+| 3
+| align="left" | [[Sam Kendricks]]
+| align="left" | {{USA}}
+| 5.80 m
+|
+|-
+| 4
+| align="left" | [[Kurtis Marschall]]
+| align="left" | {{AUS}}
+| 5.65 m
+|
+|-
+| 4
+| align="left" | [[Menno Vloon]]
+| align="left" | {{NED}}
+| 5.65 m
+|
+|-
+| —
+| align="left" | [[Renaud Lavillenie]]
+| align="left" | {{FRA}}
+| {{AthAbbr|NM}}
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond+ - Pole vault results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHMPLEVAULTDIAMOND---FNL-000100--_C73G2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====Long Jump====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Liam Adcock]] ||align=left| {{AUS}} || 1 || '''19'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Wayne Pinnock]] ||align=left| {{JAM}} || 1 || '''16'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Miltiadis Tentoglou]] ||align=left| {{GRE}} ||  || '''15'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Mattia Furlani]] ||align=left| {{ITA}} ||  || '''15'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Carey McLeod]] ||align=left| {{JAM}} ||  || '''15'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Simon Ehammer]] ||align=left| {{SUI}} ||  || '''14'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Zhang Mingkun]] ||align=left| {{CHN}} || 1 || 8
+|-
+| 8 || align=left| [[Anvar Anvarov]] ||align=left| {{UZB}} || 1 || 8
+|-
+| 9 || align=left| [[Tajay Gayle]] ||align=left| {{JAM}} ||  || 7
+|-
+| 10 || align=left| [[Marquis Dendy]] ||align=left| {{USA}} ||  || 6
+|-
+| 11 || align=left| [[Shu Heng]] ||align=left| {{CHN}} ||  || 5
+|-
+| 12 || align=left| [[Lester Lescay]] ||align=left| {{ESP}} ||  || 5
+|-
+| 13 || align=left| [[Isaac Grimes]] ||align=left| {{USA}} ||  || 3
+|-
+| 14 || align=left| [[Bozhidar Sarâboyukov]] ||align=left| {{BUL}} ||  || 2
+|-
+| 15 || align=left| [[Simon Batz]] ||align=left| {{GER}} ||  || 2
+|-
+| 16 || align=left| [[Samuel Khogali]] ||align=left| {{GBR2}} ||  || 2
+|-
+| 17 || align=left| [[Thobias Montler]] ||align=left| {{SWE}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Men's Diamond - Long jump results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHMLONGJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |archive-url=https://web.archive.org/web/20250827171856/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHMLONGJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 6 qualified as of right.</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Simon Ehammer]]
+| align="left" | {{SUI}}
+| 8.32 m {{Wind|-0.6}}
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Mattia Furlani]]
+| align="left" | {{ITA}}
+| 8.30 m {{Wind|+0.7}}
+|
+|-
+| 3
+| align="left" | [[Liam Adcock]]
+| align="left" | {{AUS}}
+| 8.24 m {{Wind|-0.3}}
+|
+|-
+| 4
+| align="left" | [[Wayne Pinnock]]
+| align="left" | {{JAM}}
+| 8.15 m {{Wind|N/W}}
+|
+|-
+| 5
+| align="left" | [[Carey McLeod]]
+| align="left" | {{JAM}}
+| 8.07 m {{Wind|+0.5}}
+|
+|-
+| 6
+| align="left" | [[Miltiadis Tentoglou]]
+| align="left" | {{GRE}}
+| 7.66 m {{Wind|-0.2}}
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - Long jump results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHMLONGJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====Triple Jump====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Jordan Scott (triple jumper)|Jordan Scott]] ||align=left| {{JAM}} || 3 || '''31'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Hugues Fabrice Zango]] ||align=left| {{BUR}} ||  || '''18'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Yasser Triki]] ||align=left| {{ALG}} ||  || '''15'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Pedro Pichardo]] ||align=left| {{POR}} || 1 || '''15'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Thomas Gogois]] ||align=left| {{FRA}} ||  || '''10'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Max Heß]] ||align=left| {{GER}} ||  || '''10'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Donald Scott (triple jumper)|Donald Scott]] ||align=left| {{USA}} ||  || 7
+|-bgcolor=ddffdd
+| 8 || align=left| [[Andy Díaz]] ||align=left| {{ITA}} ||  || '''6'''
+|-
+| 9 || align=left| [[Zhu Yaming]] ||align=left| {{CHN}} ||  || 6
+|-
+| 10 || align=left| [[Lázaro Martínez (triple jumper)|Lázaro Martínez]] ||align=left| {{CUB}} ||  || 6
+|-
+| 11 || align=left| [[Ethan Olivier]] ||align=left| {{AUS}} ||  || 6
+|-
+| 12 || align=left| [[Jonathan Seremes]] ||align=left| {{FRA}} ||  || 5
+|-bgcolor=ddffdd
+| 13 || align=left| [[Endiorass Kingley]] ||align=left| {{AUT}} ||  || '''3*'''
+|-
+| 14 || align=left| [[Su Wen (triple jumper)|Su Wen]] ||align=left| {{CHN}} ||  || 2
+|-
+| 15 || align=left| [[Almir dos Santos]] ||align=left| {{BRA}} ||  || 2
+|-
+| 16 || align=left| [[Russell Robinson (triple jumper)|Russell Robinson]] ||align=left| {{USA}} ||  || 1
+|-
+| 17 || align=left| [[Salif Mane]] ||align=left| {{USA}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=11 July 2025 |title=Men's Diamond - Triple jump results |url=https://ath-wdl-archive.azureedge.net/2025/monaco/ATHMTRPLJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |archive-url=https://web.archive.org/web/20250827180905/https://ath-wdl-archive.azureedge.net/2025/monaco/ATHMTRPLJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |archive-date=27 August 2025 |access-date=12 July 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 6 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Andy Díaz]]
+| align="left" | {{ITA}}
+| 17.56 m {{Wind|-0.3}}
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Pedro Pichardo]]
+| align="left" | {{POR}}
+| 17.47 m {{Wind|+0.4}}
+| {{AthAbbr|SB}}
+|-
+| 3
+| align="left" | [[Yasser Triki]]
+| align="left" | {{ALG}}
+| 17.42 m {{Wind|-0.3}}
+| {{AthAbbr|SB}}
+|-
+| 4
+| align="left" | [[Jordan Scott (triple jumper)|Jordan Scott]]
+| align="left" | {{JAM}}
+| 17.16 m {{Wind|+0.6}}
+|
+|-
+| 5
+| align="left" | [[Almir dos Santos]]
+| align="left" | {{BRA}}
+| 16.50 m {{Wind|+0.5}}
+|
+|-
+| 6
+| align="left" | [[Endiorass Kingley]]
+| align="left" | {{AUT}}
+| 16.36 m {{Wind|-0.1}}
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - Triple jump results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHMTRPLJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====Shot Put====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Joe Kovacs]] ||align=left| {{USA}} || 2 || '''33'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Payton Otterdahl]] ||align=left| {{USA}} || 2 || '''25'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Adrian Piperi]] ||align=left| {{USA}} ||  || '''24'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Tomas Walsh|Tom Walsh]] ||align=left| {{NZL}} || 1 || '''22'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Rajindra Campbell]] ||align=left| {{JAM}} ||  || '''21'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Leonardo Fabbri]] ||align=left| {{ITA}} ||  || '''19'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Chukwuebuka Enekwechi]] ||align=left| {{NGR}} ||  || 13
+|-
+| 8 || align=left| [[Roger Steen]] ||align=left| {{USA}} ||  || 12
+|-
+| 9 || align=left| [[Zane Weir]] ||align=left| {{ITA}} ||  || 7
+|-
+| 10 || align=left| [[Jordan Geist]] ||align=left| {{USA}} ||  || 4
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Men's Diamond - Shot put results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHMSHOTPUT-DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-url=https://web.archive.org/web/20250827174518/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHMSHOTPUT-DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Joe Kovacs]]
+| align="left" | {{USA}}
+| 22.46 m
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Payton Otterdahl]]
+| align="left" | {{USA}}
+| 22.07 m
+|
+|-
+| 3
+| align="left" | [[Rajindra Campbell]]
+| align="left" | {{JAM}}
+| 21.87 m
+|
+|-
+| 4
+| align="left" | [[Adrian Piperi]]
+| align="left" | {{USA}}
+| 21.84 m
+|
+|-
+| 5
+| align="left" | [[Tom Walsh (shot putter)|Tom Walsh]]
+| align="left" | {{NZL}}
+| 21.55 m
+|
+|-
+| 6
+| align="left" | [[Leonardo Fabbri]]
+| align="left" | {{ITA}}
+| 21.47 m
+|
+|-
+| 7
+| align="left" | [[Stefan Wieland]]
+| align="left" | {{SUI}}
+| 18.61 m
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - Shot put results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHMSHOTPUT-DIAMOND---FNL-000100--_C73I2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+<small>Top 6 qualified as of right.</small>
+====Discus Throw====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Kristjan Čeh]] ||align=left| {{SLO}} || 1 || '''27'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Daniel Ståhl]] ||align=left| {{SWE}} ||  || '''24'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Matthew Denny]] ||align=left| {{AUS}} || 1 || '''18'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Mykolas Alekna]] ||align=left| {{LTU}} || 1 || '''15'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Henrik Janssen]] ||align=left| {{GER}} ||  || '''15'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Lawrence Okoye]] ||align=left| {{GBR2}} ||  || '''11'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Roje Stona]] ||align=left| {{JAM}} ||  || 9
+|-
+| 8 || align=left| [[Ralford Mullings]] ||align=left| {{JAM}} || 1 || 8
+|-
+| 9 || align=left| [[Clemens Prüfer]] ||align=left| {{GER}} ||  || 6
+|-
+| 10 || align=left| [[Sam Mattis]] ||align=left| {{USA}} ||  || 4
+|-
+| 11 || align=left| [[Fedrick Dacres]] ||align=left| {{JAM}} ||  || 2
+|-
+| 12 || align=left| [[Claudio Romero]] ||align=left| {{CHI}} ||  || 2
+|-
+| 13 || align=left| [[Lukas Weißhaidinger]] ||align=left| {{AUT}} ||  || 1
+|-
+| 14 || align=left| [[Nicholas Percy]] ||align=left| {{GBR2}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Men's Diamond+ - Discus throw  results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHMDISCUS--DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-url=https://web.archive.org/web/20250827145139/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHMDISCUS--DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Mykolas Alekna]]
+| align="left" | {{LTU}}
+| 68.89 m
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Kristjan Čeh]]
+| align="left" | {{SLO}}
+| 67.18 m
+|
+|-
+| 3
+| align="left" | [[Rojé Stona]]
+| align="left" | {{JAM}}
+| 67.06 m
+|
+|-
+| 4
+| align="left" | [[Matthew Denny]]
+| align="left" | {{AUS}}
+| 66.62 m
+|
+|-
+| 5
+| align="left" | [[Daniel Ståhl]]
+| align="left" | {{SWE}}
+| 66.47 m
+|
+|-
+| 6
+| align="left" | [[Henrik Janssen]]
+| align="left" | {{GER}}
+| 66.37 m
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - Discus throw results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHMDISCUS--DIAMOND---FNL-000100--_C73I2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+
+{{col-end}}
+
+<small>Top 6 qualified as of right.</small>
+
+====Javelin Throw====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Keshorn Walcott]] ||align=left| {{TTO}} ||  || '''24'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Julian Weber]] ||align=left| {{GER}} || 2 || '''23'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Anderson Peters]] ||align=left| {{GRN}} ||  || '''19'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Neeraj Chopra]] ||align=left| {{IND}} || 1 || '''15'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Julius Yego]] ||align=left| {{KEN}} || 1 || '''15'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Andrian Mardare]] ||align=left| {{MDA}} ||  || '''10'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Oliver Helander]] ||align=left| {{FIN}} ||  || 8
+|-
+| 8 || align=left| [[Luiz Mauricio da Silva]] ||align=left| {{BRA}} ||  || 6
+|-
+| 9 || align=left| [[Dawid Wegner]] ||align=left| {{POL}} ||  || 5
+|-
+| 10 || align=left| [[Edis Matusevicius]] ||align=left| {{LTU}} ||  || 5
+|-
+| 11 || align=left| [[Cyprian Mrzygłód]] ||align=left| {{POL}} ||  || 4
+|-
+| 12 || align=left| [[Ahmed Sameh Mohamed Hussein]] ||align=left| {{EGY}} ||  || 4
+|-
+| 13 || align=left| [[Jakub Vadlejch]] ||align=left| {{CZE}} ||  || 2
+|-
+| 14 || align=left| [[Kishore Jena]] ||align=left| {{IND}} ||  || 1
+|-
+| 15 || align=left| [[Timothy Herman]] ||align=left| {{BEL}} ||  || 1
+|-
+| 16 || align=left| [[Remi Rougetet]] ||align=left| {{FRA}} ||  || 1
+|-
+| 17 || align=left| [[Roderick Genki Dean]] ||align=left| {{JPN}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Men's Diamond - Javelin throw results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHMJAVELIN-DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-url=https://web.archive.org/web/20250827151226/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHMJAVELIN-DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 6 qualified as of right.</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Julian Weber]]
+| align="left" | {{GER}}
+| 91.51 m
+| {{AthAbbr|PB}}, {{AthAbbr|WL}}
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Neeraj Chopra]]
+| align="left" | {{IND}}
+| 85.01 m
+|
+|-
+| 3
+| align="left" | [[Keshorn Walcott]]
+| align="left" | {{TTO}}
+| 84.95 m
+|
+|-
+| 4
+| align="left" | [[Anderson Peters]]
+| align="left" | {{GRN}}
+| 82.06 m
+|
+|-
+| 5
+| align="left" | [[Julius Yego]]
+| align="left" | {{KEN}}
+| 82.01 m
+|
+|-
+| 6
+| align="left" | [[Andrian Mardare]]
+| align="left" | {{MDA}}
+| 81.81 m
+|
+|-
+| 7
+| align="left" | [[Simon Wieland]]
+| align="left" | {{SUI}}
+| 81.29 m
+| {{AthAbbr|PB}}
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Men's Diamond - Javelin throw results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHMJAVELIN-DIAMOND---FNL-000100--_C73I2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+===Women===
+====100 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Julien Alfred]] ||align=left| {{LCA}} || 3 || '''31'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Marie Josée Ta Lou-Smith]] ||align=left| {{CIV}} ||  || '''25'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Maia McCoy]] ||align=left| {{USA}} ||  || '''25'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Melissa Jefferson-Wooden]] ||align=left| {{USA}} || 3 || '''24'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Dina Asher-Smith]] ||align=left| {{GBR2}} || 1 || '''18'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Tina Clayton]] ||align=left| {{JAM}} ||  || '''17'''
+|-style="border-bottom:3px solid green;" | bgcolor=ccffcc
+| 7 || align=left| [[Jacious Sears]] ||align=left| {{USA}} ||  || '''17'''
+|-bgcolor=ddffdd
+| 8 || align=left| [[Tia Clayton]] ||align=left| {{JAM}} || 1 || '''15*'''
+|-bgcolor=ddffdd
+| 9 || align=left| [[Patrizia van der Weken]] ||align=left| {{LUX}} ||  || '''13*'''
+|-bgcolor=ddffdd
+| 10 || align=left| [[Zoe Hobbs]] ||align=left| {{NZL}} ||  || '''12*'''
+|-
+| 11 || align=left| [[Daryll Neita]] ||align=left| {{GBR2}} ||  || 12
+|-
+| 12 || align=left| [[Sha'Carri Richardson]] ||align=left| {{USA}} ||  || 10
+|-
+| 13 || align=left| [[Shelly-Ann Fraser-Pryce]] ||align=left| {{JAM}} ||  || 10
+|-
+| 14 || align=left| [[Amy Hunt]] ||align=left| {{GBR2}} ||  || 9
+|-
+| 15 || align=left| [[Shericka Jackson]] ||align=left| {{JAM}} || 1 || 8
+|-
+| 16 || align=left| [[Favour Ofili]] ||align=left| {{NGR}} ||  || 8
+|-
+| 17 || align=left| [[Aleia Hobbs]] ||align=left| {{USA}} ||  || 5
+|-
+| 18 || align=left| [[Celera Barnes]] ||align=left| {{USA}} ||  || 5
+|-
+| 19 || align=left| [[Thelma Davies]] ||align=left| {{LBR}} ||  || 4
+|-
+| 20 || align=left| [[Gina Lückenkemper]] ||align=left| {{GER}} ||  || 3
+|-
+| 21 || align=left| [[Cambrea Sturgis]] ||align=left| {{USA}} ||  || 3
+|-
+| 22 || align=left| [[Twanisha Terry]] ||align=left| {{USA}} ||  || 2
+|-
+| 23 || align=left| [[Julia Henriksson]] ||align=left| {{SWE}} ||  || 2
+|-
+| 24 || align=left| [[Delphine Nkansa]] ||align=left| {{BEL}} ||  || 2
+|-
+| 25 || align=left| [[Zaynab Dosso]] ||align=left| {{ITA}} ||  || 2
+|-
+| 26 || align=left| [[Rani Rosius]] ||align=left| {{BEL}} ||  || 2
+|-
+| 27 || align=left| [[Ewa Swoboda]] ||align=left| {{POL}} ||  || 1
+|-
+| 28 || align=left| [[Boglárka Takács]] ||align=left| {{HUN}} ||  || 1
+|-
+| 29 || align=left| [[Deajah Stevens]] ||align=left| {{USA}} ||  || 1
+|-
+| 30 || align=left| [[Mujinga Kambundji]] ||align=left| {{SUI}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Women's Diamond - 100 metres results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHW100M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250827151819/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHW100M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 7 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Julien Alfred]]
+| align="left" | {{LCA}}
+| 10.76
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Tia Clayton]]
+| align="left" | {{JAM}}
+| 10.84
+|
+|-
+| 3
+| align="left" | [[Marie Josée Ta Lou-Smith]]
+| align="left" | {{CIV}}
+| 10.92
+|
+|-
+| 4
+| align="left" | [[Dina Asher-Smith]]
+| align="left" | {{GBN}}
+| 10.94
+|
+|-
+| 5
+| align="left" | [[Jacious Sears]]
+| align="left" | {{USA}}
+| 10.96
+|
+|-
+| 6
+| align="left" | [[Zoe Hobbs]]
+| align="left" | {{NZL}}
+| 11.09
+|
+|-
+| 7
+| align="left" | [[Maia McCoy]]
+| align="left" | {{USA}}
+| 11.14
+|
+|-
+| 8
+| align="left" | [[Salomé Kora]]
+| align="left" | {{SUI}}
+| 11.21
+|
+|-
+| 9
+| align="left" | [[Patrizia van der Weken]]
+| align="left" | {{LUX}}
+| 11.26
+|
+|- class="sortbottom"
+| colspan="3" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond+ - 100 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHW100M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+| colspan="2" | Wind: {{Wind|+0.3}}
+|}
+{{col-end}}
+
+====200 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Amy Hunt]] ||align=left| {{GBR2}} ||  || '''34'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Anavia Battle]] ||align=left| {{USA}} || 4 || '''32'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Brittany Brown (sprinter)|Brittany Brown]] ||align=left| {{USA}} || 1 || '''19'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Shericka Jackson]] ||align=left| {{JAM}} || 1 || '''15'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Dina Asher-Smith]] ||align=left| {{GBR2}} ||  || '''14'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[McKenzie Long]] ||align=left| {{USA}} ||  || '''14'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Favour Ofili]] ||align=left| {{NGR}} ||  || '''13'''
+|-style="border-top:3px solid green;" bgcolor=ddffdd
+| 8 || align=left| [[Marie Josée Ta Lou-Smith]] ||align=left| {{CIV}} || || '''12*'''
+|-
+| 9 || align=left| [[Rhasidat Adeleke]] ||align=left| {{IRL}} ||  || 12
+|-bgcolor=ddffdd
+| 10 || align=left| [[Jenna Prandini]] ||align=left| {{USA}} ||  || '''12*'''
+|-
+| 11 || align=left| [[Daryll Neita]] ||align=left| {{GBR2}} ||  || 9
+|-bgcolor=ddffdd
+| 12 || align=left| [[Jessika Gbai]] ||align=left| {{CIV}} ||  || '''9*'''
+|-
+| 13 || align=left| [[Julien Alfred]] ||align=left| {{LCA}} || 1 || 8
+|-
+| 14 || align=left| [[Jaël Bestué]] ||align=left| {{ESP}} ||  || 7
+|-
+| 15 || align=left| [[Henriette Jæger]] ||align=left| {{NOR}} ||  || 6
+|-
+| 16 || align=left| [[Marileidy Paulino]] ||align=left| {{DOM}} ||  || 5
+|-
+| 17 || align=left| [[Deajah Stevens]] ||align=left| {{USA}} ||  || 5
+|-
+| 18 || align=left| [[Chen Yujie]] ||align=left| {{CHN}} ||  || 5
+|-
+| 19 || align=left| [[Maia McCoy]] ||align=left| {{USA}} ||  || 4
+|-
+| 20 || align=left| [[Ashanti Moore]] ||align=left| {{JAM}} ||  || 2
+|-
+| 21 || align=left| [[Audrey Leduc]] ||align=left| {{CAN}} ||  || 2
+|-
+| 22 || align=left| [[Dalia Kaddari]] ||align=left| {{ITA}} ||  || 2
+|-
+| 23 || align=left| [[Jessica-Bianca Wessolly]] ||align=left| {{GER}} ||  || 2
+|-
+| 24 || align=left| [[Li Yuting]] ||align=left| {{CHN}} ||  || 2
+|-
+| 25 || align=left| [[Twanisha Terry]] ||align=left| {{USA}} ||  || 2
+|-
+| 26 || align=left| [[Minke Bisschops]] ||align=left| {{NED}} ||  || 1
+|-
+| 27 || align=left| [[Helene Parisot]] ||align=left| {{FRA}} ||  || 1
+|-
+| 28 || align=left| [[Torrie Lewis]] ||align=left| {{AUS}} ||  || 1
+|-
+| 29 || align=left| [[Paula Sevilla]] ||align=left| {{ESP}} ||  || 1
+|-
+| 30 || align=left| [[Léonie Pointet]] ||align=left| {{SUI}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Women's Diamond - 200 metres results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW200M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250827174633/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW200M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 7 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Brittany Brown (sprinter)|Brittany Brown]]
+| align="left" | {{USA}}
+| 22.13
+| {{AthAbbr|SB}}
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Dina Asher-Smith]]
+| align="left" | {{GBN}}
+| 22.18
+|
+|-
+| 3
+| align="left" | [[Marie Josée Ta Lou-Smith]]
+| align="left" | {{CIV}}
+| 22.25
+| {{AthAbbr|SB}}
+|-
+| 4
+| align="left" | [[Anavia Battle]]
+| align="left" | {{USA}}
+| 22.49
+|
+|-
+| 5
+| align="left" | [[Amy Hunt]]
+| align="left" | {{GBN}}
+| 22.61
+|
+|-
+| 6
+| align="left" | [[Jenna Prandini]]
+| align="left" | {{USA}}
+| 22.70
+|
+|-
+| 7
+| align="left" | [[Jessika Gbai]]
+| align="left" | {{CIV}}
+| 22.71
+| {{AthAbbr|SB}}
+|-
+| 8
+| align="left" | [[McKenzie Long]]
+| align="left" | {{USA}}
+| 22.72
+|
+|- class="sortbottom"
+| colspan="3" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - 200 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHW200M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+| colspan="2" | Wind: {{Wind|-0.4}}
+|}
+{{col-end}}
+
+====400 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Lieke Klaver]] ||align=left| {{NED}} ||  || '''29'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Henriette Jæger]] ||align=left| {{NOR}} || 1 || '''28'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Salwa Eid Naser]] ||align=left| {{BHR}} || 1 || '''26'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Isabella Whittaker]] ||align=left| {{USA}} || 2 || '''25'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Marileidy Paulino]] ||align=left| {{DOM}} || 3 || '''24'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Natalia Bukowiecka]] ||align=left| {{POL}} ||  || '''22'''
+|-style="border-bottom:3px solid green;" bgcolor=ccffcc
+| 7 || align=left| [[Amber Anning]] ||align=left| {{GBR2}} ||  || '''21'''
+|- bgcolor=ddffdd
+| 8 || align=left| [[Martina Weil]] ||align=left| {{CHI}} ||  || '''15*'''
+|-
+| 9 || align=left| [[Sada Williams]] ||align=left| {{BAR}} ||  || 9
+|-
+| 10 || align=left| [[Alexis Holmes]] ||align=left| {{USA}} ||  || 8
+|-
+| 11 || align=left| [[Rhasidat Adeleke]] ||align=left| {{IRL}} ||  || 8
+|-
+| 12 || align=left| [[Aaliyah Butler]] ||align=left| {{USA}} ||  || 7
+|-
+| 13 || align=left| [[Nickisha Pryce]] ||align=left| {{JAM}} ||  || 6
+|-
+| 14 || align=left| [[Lynna Irby-Jackson]] ||align=left| {{USA}} ||  || 5
+|-
+| 15 || align=left| [[Shafiqua Maloney]] ||align=left| {{VIN}} ||  || 4
+|-
+| 16 || align=left| [[Susanne Gogl-Walli]] ||align=left| {{AUT}} ||  || 3
+|-
+| 17 || align=left| [[Paula Sevilla]] ||align=left| {{ESP}} ||  || 2
+|-
+| 18 || align=left| [[Yemi Mary John]] ||align=left| {{GBR2}} ||  || 2
+|-
+| 19 || align=left| [[Britton Wilson]] ||align=left| {{USA}} ||  || 2
+|-
+| 20 || align=left| [[Laviai Nielsen]] ||align=left| {{GBR2}} ||  || 2
+|-
+| 21 || align=left| [[Amandine Brossier]] ||align=left| {{FRA}} ||  || 2
+|-
+| 22 || align=left| [[Andrea Miklós]] ||align=left| {{ROM}} ||  || 1
+|-
+| 23 || align=left| [[Bakhita Jamal Saber Marisio]] ||align=left| {{QAT}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Women's Diamond+ - 400 metres results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW400M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250827174818/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW400M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 7 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Salwa Eid Naser]]
+| align="left" | {{BHR}}
+| 48.70
+| '''[[Weltklasse Zürich#Women|MR]]'''
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Marileidy Paulino]]
+| align="left" | {{DOM}}
+| 49.23
+|
+|-
+| 3
+| align="left" | [[Henriette Jæger]]
+| align="left" | {{NOR}}
+| 49.49
+| '''{{AthAbbr|NR|Norwegian}}'''
+|-
+| 4
+| align="left" | [[Martina Weil]]
+| align="left" | {{CHI}}
+| 49.72
+| '''{{AthAbbr|NR|Chilean}}'''
+|-
+| 5
+| align="left" | [[Amber Anning]]
+| align="left" | {{GBN}}
+| 49.75
+| {{AthAbbr|SB}}
+|-
+| 6
+| align="left" | [[Isabella Whittaker]]
+| align="left" | {{USA}}
+| 49.99
+|
+|-
+| 7
+| align="left" | [[Lieke Klaver]]
+| align="left" | {{NED}}
+| 50.23
+|
+|-
+| 8
+| align="left" | [[Natalia Bukowiecka]]
+| align="left" | {{POL}}
+| 51.06
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - 400 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHW400M----DIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====800 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Addison Wiley]] ||align=left| {{USA}} ||  || '''26'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Tsige Duguma]] ||align=left| {{ETH}} || 3 || '''24'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Halimah Nakaayi]] ||align=left| {{UGA}} ||  || '''23'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Prudence Sekgodiso]] ||align=left| {{RSA}} ||  || '''23'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Georgia Hunter Bell]] ||align=left| {{GBR2}} || 2 || '''22'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Sarah Billings]] ||align=left| {{AUS}} ||  || '''17'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Anaïs Bourgoin]] ||align=left| {{FRA}} ||  || '''16'''
+|-style="border-top:3px solid green;"
+| 8 || align=left| [[Jemma Reekie]] ||align=left| {{GBR2}} ||  || 13
+|-bgcolor=ddffdd
+| 9 || align=left| [[Audrey Werro]] ||align=left| {{SUI}} ||  || '''12*'''
+|-
+| 10 || align=left| [[Shafiqua Maloney]] ||align=left| {{VIN}} ||  || 12
+|-
+| 11 || align=left| [[Natoya Goule-Toppin]] ||align=left| {{JAM}} ||  || 10
+|-
+| 12 || align=left| [[Faith Kipyegon]] ||align=left| {{KEN}} || 1 || 8
+|-
+| 13 || align=left| [[Keely Hodgkinson]] ||align=left| {{GBR2}} || 1 || 8
+|-
+| 14 || align=left| [[Nelly Chepchirchir]] ||align=left| {{KEN}} || 1 || 8
+|-
+| 15 || align=left| [[Mary Moraa]] ||align=left| {{KEN}} ||  || 7
+|-
+| 16 || align=left| [[Claudia Hollingsworth]] ||align=left| {{AUS}} ||  || 7
+|-
+| 17 || align=left| [[Abbey Caldwell]] ||align=left| {{AUS}} ||  || 7
+|-
+| 18 || align=left| [[Sage Hurta-Klecker]] ||align=left| {{USA}} ||  || 7
+|-
+| 19 || align=left| [[Oratile Nowe]] ||align=left| {{BOT}} ||  || 7
+|-
+| 20 || align=left| [[Jessica Hull]] ||align=left| {{AUS}} ||  || 6
+|-
+| 21 || align=left| [[Sinclaire Johnson]] ||align=left| {{USA}} ||  || 5
+|-
+| 22 || align=left| [[Assia Raziki]] ||align=left| {{MAR}} ||  || 3
+|-
+| 22 || align=left| [[Raevyn Rogers]] ||align=left| {{USA}} ||  || 3
+|-
+| 24 || align=left| [[Nigist Getachew]] ||align=left| {{ETH}} ||  || 3
+|-
+| 25 || align=left| [[Habitam Alemu]] ||align=left| {{ETH}} ||  || 3
+|-
+| 26 || align=left| [[Carley Thomas]] ||align=left| {{AUS}} ||  || 3
+|-
+| 27 || align=left| [[Eloisa Coiro]] ||align=left| {{ITA}} ||  || 2
+|-
+| 28 || align=left| [[Rénelle Lamote]] ||align=left| {{FRA}} ||  || 1
+|-
+| 29 || align=left| [[Worknesh Mesele]] ||align=left| {{ETH}} ||  || 1
+|-
+| 30 || align=left| [[Noélie Yarigo]] ||align=left| {{BEN}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Women's Diamond - 800 metres results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW800M----DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-url=https://web.archive.org/web/20250827174716/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW800M----DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 7 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Audrey Werro]]
+| align="left" | {{SUI}}
+| 1:55.91
+| '''{{AthAbbr|NR|Swiss}}'''
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Georgia Hunter Bell]]
+| align="left" | {{GBN}}
+| 1:55.96
+| {{AthAbbr|PB}}
+|-
+| 3
+| align="left" | [[Anaïs Bourgoin]]
+| align="left" | {{FRA}}
+| 1:56.97
+| {{AthAbbr|PB}}
+|-
+| 4
+| align="left" | [[Shafiqua Maloney]]
+| align="left" | {{VIN}}
+| 1:57.29
+| '''{{AthAbbr|NR|Vincentian}}'''
+|-
+| 5
+| align="left" | [[Halimah Nakaayi]]
+| align="left" | {{UGA}}
+| 1:58.43
+|
+|-
+| 6
+| align="left" | [[Prudence Sekgodiso]]
+| align="left" | {{RSA}}
+| 1:58.57
+|
+|-
+| 7
+| align="left" | [[Sarah Billings]]
+| align="left" | {{AUS}}
+| 1:58.76
+|
+|-
+| 8
+| align="left" | [[Addison Wiley]]
+| align="left" | {{USA}}
+| 1:59.14
+|
+|-
+| —
+| align="left" | [[Lisanne de Witte]]
+| align="left" | {{NED}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - 800 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHW800M----DIAMOND---FNL-000100--_C73C1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====1500 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Sarah Healy]] ||align=left| {{IRL}} || 1 || '''23'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Nelly Chepchirchir]] ||align=left| {{KEN}} || 2 || '''22'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Nikki Hiltz]] ||align=left| {{USA}} || 1 || '''17'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Gudaf Tsegay]] ||align=left| {{ETH}} || 2 || '''16'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Linden Hall (athlete)|Linden Hall]] ||align=left| {{AUS}} || || '''15'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Agathe Guillemot]] ||align=left| {{FRA}} ||  || '''15'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Georgia Hunter Bell]] ||align=left| {{GBR2}} || || '''14'''
+|-bgcolor=ccffcc
+| 8 || align=left| [[Jessica Hull]] ||align=left| {{AUS}} ||  || '''13'''
+|-bgcolor=ccffcc
+| 9 || align=left| [[Susan Ejore]] ||align=left| {{KEN}} ||  || '''12'''
+|-bgcolor=ccffcc
+| 10 || align=left| [[Faith Kipyegon]] ||align=left| {{KEN}} || 1 || '''8'''
+|-style="border-top:3px solid green;" bgcolor=ddffdd
+| 11 || align=left| [[Birke Haylom]] ||align=left| {{ETH}} ||  || '''8*'''
+|-bgcolor=ddffdd
+| 12 || align=left| [[Sinclaire Johnson]] ||align=left| {{USA}} || || '''8*'''
+|-
+| 13 || align=left| [[Diribe Welteji]] ||align=left| {{ETH}} ||  || 7
+|-
+| 14 || align=left| [[Beatrice Chebet]] ||align=left| {{KEN}} ||  || 7
+|-
+| 15 || align=left| [[Sarah Billings]] ||align=left| {{AUS}} ||  || 7
+|-
+| 16 || align=left| [[Saron Berhe]] ||align=left| {{ETH}} ||  || 6
+|-bgcolor=ddffdd
+| 17 || align=left| [[Heather MacLean (runner)|Heather Maclean]] ||align=left| {{USA}} ||  || '''6*'''
+|-
+| 18 || align=left| [[Marta Zenoni]] ||align=left| {{ITA}} ||  || 6
+|-
+| 19 || align=left| [[Abbey Caldwell]] ||align=left| {{AUS}} ||  || 6
+|-
+| 20 || align=left| [[Jemma Reekie]] ||align=left| {{GBR2}} ||  || 6
+|-
+| 21 || align=left| [[Laura Muir]] ||align=left| {{GBR2}} ||  || 5
+|-
+| 22 || align=left| [[Freweyni Hailu]] ||align=left| {{ETH}} ||  || 4
+|-
+| 23 || align=left| [[Worknesh Mesele]] ||align=left| {{ETH}} ||  || 4
+|-
+| 24 || align=left| [[Marta Pérez (athlete)|Marta Pérez]] ||align=left| {{ESP}} ||  || 3
+|-
+| 25 || align=left| [[Águeda Marqués]] ||align=left| {{ESP}} ||  || 3
+|-
+| 26 || align=left| [[Elsabet Amare]] ||align=left| {{ETH}} ||  || 3
+|-
+| 27 || align=left| [[Esther Guerrero]] ||align=left| {{ESP}} ||  || 2
+|-
+| 28 || align=left| [[Revee Walcott-Nolan]] ||align=left| {{GBR2}} ||  || 2
+|-
+| 29 || align=left| [[Teresia Muthoni Gateri]] ||align=left| {{KEN}} ||  || 2
+|-
+| 30 || align=left| [[Salomé Afonso]] ||align=left| {{POR}} ||  || 1
+|-
+| 31 || align=left| [[Tigist Girma]] ||align=left| {{ETH}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Women's Diamond - 1500 metres results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHW1500M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-url=https://web.archive.org/web/20250827151922/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHW1500M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 10 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Nelly Chepchirchir]]
+| align="left" | {{KEN}}
+| 3:56.99
+| {{AthAbbr|SB}}
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Jessica Hull]]
+| align="left" | {{AUS}}
+| 3:57.02
+|
+|-
+| 3
+| align="left" | [[Linden Hall (athlete)|Linden Hall]]
+| align="left" | {{AUS}}
+| 3:57.44
+|
+|-
+| 4
+| align="left" | [[Sinclaire Johnson]]
+| align="left" | {{USA}}
+| 3:57.80
+|
+|-
+| 5
+| align="left" | [[Heather MacLean (runner)|Heather MacLean]]
+| align="left" | {{USA}}
+| 3:59.43
+|
+|-
+| 6
+| align="left" | [[Susan Ejore]]
+| align="left" | {{KEN}}
+| 3:59.48
+|
+|-
+| 7
+| align="left" | [[Birke Haylom]]
+| align="left" | {{ETH}}
+| 3:59.70
+|
+|-
+| 8
+| align="left" | [[Sarah Healy]]
+| align="left" | {{IRL}}
+| 3:59.90
+|
+|-
+| 9
+| align="left" | [[Agathe Guillemot]]
+| align="left" | {{FRA}}
+| 4:00.40
+|
+|-
+| 10
+| align="left" | [[Marta Zenoni]]
+| align="left" | {{ITA}}
+| 4:00.71
+|
+|-
+| 11
+| align="left" | [[Joceline Wind]]
+| align="left" | {{SUI}}
+| 4:08.37
+|
+|-
+| —
+| align="left" | [[Catriona Bisset]]
+| align="left" | {{AUS}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - 1500 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHW1500M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====5000 metres====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Beatrice Chebet]] ||align=left| {{KEN}} || 4 || '''32'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Gudaf Tsegay]] ||align=left| {{ETH}} ||  || '''17'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Agnes Ngetich]] ||align=left| {{KEN}} || 1  || '''15'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Nadia Battocletti]] ||align=left| {{ITA}} ||  || '''13'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Birke Haylom]] ||align=left| {{ETH}} ||  || '''11'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Aleshign Baweke]] ||align=left| {{ETH}} || || '''11'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Medina Eisa]] ||align=left| {{ETH}} || 1 || '''11'''
+|-bgcolor=ccffcc
+| 8 || align=left| [[Likina Amebaw]] ||align=left| {{ETH}} ||  || '''11'''
+|-bgcolor=ccffcc
+| 9 || align=left| [[Hirut Meshesha]] ||align=left| {{ETH}} ||  || '''10'''
+|-bgcolor=ccffcc
+| 10 || align=left| [[Caroline Nyaga]] ||align=left| {{KEN}} ||  || '''10'''
+|-style="border-top:3px solid green;" bgcolor=ddffdd
+| 11 || align=left| [[Josette Andrews]] ||align=left| {{USA}} ||  || '''8*'''
+|-bgcolor=ddffdd
+| 12 || align=left| [[Fantaye Belayneh]] ||align=left| {{ETH}} ||  || '''8*'''
+|-
+| 13 || align=left| [[Linden Hall (athlete)|Linden Hall]] ||align=left| {{AUS}} || 1 || 8
+|-
+| 14 || align=left| [[Freweyni Hailu]] ||align=left| {{ETH}} ||  || 7
+|-
+| 15 || align=left| [[Sarah Chelangat]] ||align=left| {{UGA}} ||  || 7
+|-bgcolor=ddffdd
+| 16 || align=left| [[Rose Davies (athlete)|Rose Davies]] ||align=left| {{AUS}} ||  || '''6*'''
+|-
+| 17 || align=left| [[Sarah Healy]] ||align=left| {{IRL}} ||  || 6
+|-
+| 18 || align=left| [[Innes Fitzgerald]] ||align=left| {{GBR2}} ||  || 6
+|-
+| 19 || align=left| [[Margaret Akidor]] ||align=left| {{KEN}} ||  || 5
+|-
+| 20 || align=left| [[Fotyen Tesfay]] ||align=left| {{ETH}} ||  || 5
+|-bgcolor=ddffdd
+| 21 || align=left| [[Marta García (runner)|Marta García]] ||align=left| {{ESP}} ||  || '''5*'''
+|-
+| 22 || align=left| [[Ejgayehu Taye]] ||align=left| {{ETH}} ||  || 5
+|-bgcolor=ddffdd
+| 23 || align=left| [[Hannah Nuttall]] ||align=left| {{GBR2}} ||  || '''5*'''
+|-bgcolor=ddffdd
+| 24 || align=left| [[Georgia Griffith]] ||align=left| {{AUS}} ||  || '''4*'''
+|-
+| 25 || align=left| [[Maureen Koster]] ||align=left| {{NED}} ||  || 4
+|-
+| 26 || align=left| [[Marta Alemayo]] ||align=left| {{ETH}} ||  || 4
+|-
+| 27 || align=left| [[Yenenesh Shimket]] ||align=left| {{ETH}} ||  || 4
+|-
+| 28 || align=left| [[Asayech Ayichew]] ||align=left| {{ETH}} ||  || 3
+|-
+| 29 || align=left| [[Hellen Ekalale Lobun]] ||align=left| {{KEN}} ||  || 3
+|-
+| 30 || align=left| [[Chaltu Dida]] ||align=left| {{ETH}} ||  || 2
+|-
+| 31 || align=left| [[Aynadis Mebratu]] ||align=left| {{ETH}} ||  || 2
+|-
+| 32 || align=left| [[Nozomi Tanaka]] ||align=left| {{JPN}} ||  || 2
+|-
+| 33 || align=left| [[Águeda Marqués]] ||align=left| {{ESP}} ||  || 2
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Women's Diamond+ - 5000 metres results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHW5000M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-url=https://web.archive.org/web/20250827145245/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHW5000M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 10 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Fantaye Belayneh]]
+| align="left" | {{ETH}}
+| 8:40.56
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Josette Andrews]]
+| align="left" | {{USA}}
+| 8:40.95
+|
+|-
+| 3
+| align="left" | [[Likina Amebaw]]
+| align="left" | {{ETH}}
+| 8:41.06
+|
+|-
+| 4
+| align="left" | [[Georgia Griffith]]
+| align="left" | {{AUS}}
+| 8:41.36
+|
+|-
+| 5
+| align="left" | [[Aleshign Baweke]]
+| align="left" | {{ETH}}
+| 8:42.35
+|
+|-
+| 6
+| align="left" | [[Marta García (runner)|Marta García]]
+| align="left" | {{ESP}}
+| 8:42.63
+|
+|-
+| 7
+| align="left" | [[Caroline Nyaga]]
+| align="left" | {{KEN}}
+| 8:43.43
+|
+|-
+| 8
+| align="left" | [[Hannah Nuttall]]
+| align="left" | {{GBN}}
+| 8:44.74
+|
+|-
+| 9
+| align="left" | [[Rose Davies (athlete)|Rose Davies]]
+| align="left" | {{AUS}}
+| 8:46.11
+|
+|-
+| 10
+| align="left" | [[Hirut Meshesha]]
+| align="left" | {{ETH}}
+| 8:52.48
+|
+|-
+| —
+| align="left" | [[Salomé Afonso]]
+| align="left" | {{POR}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond+ - 3000 metres results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHW3000M---DIAMOND---FNL-000100--_C73C1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====100 metres hurdles====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Grace Stark]] ||align=left| {{USA}} || 3 || '''35'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Tobi Amusan]] ||align=left| {{NGR}} || || '''27'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Nadine Visser]] ||align=left| {{NED}} || 1 || '''25'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Masai Russell]] ||align=left| {{USA}} || 1 || '''20'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Ackera Nugent]] ||align=left| {{JAM}} ||  || '''20'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Danielle Williams]] ||align=left| {{JAM}} || 1 || '''20'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Tonea Marshall]] ||align=left| {{USA}} ||  || '''14'''
+|-style="border-top:3px solid green;" bgcolor=dfffdf
+| 8 || align=left| [[Kendra Harrison]] ||align=left| {{USA}} || || '''13*'''
+|-bgcolor=dfffdf
+| 9 || align=left| [[Ditaji Kambundji]] ||align=left| {{SUI}} ||  || '''13*'''
+|-
+| 10 || align=left| [[Devynne Charlton]] ||align=left| {{BAH}} ||  || 12
+|-
+| 11 || align=left| [[Marione Fourie]] ||align=left| {{RSA}} ||  || 12
+|-
+| 12 || align=left| [[Megan Tapper]] ||align=left| {{JAM}} || 1  || 10
+|-
+| 13 || align=left| [[Pia Skrzyszowska]] ||align=left| {{POL}} ||  || 10
+|-
+| 14 || align=left| [[Alia Armstrong]] ||align=left| {{USA}} ||  || 7
+|-
+| 15 || align=left| [[Alaysha Johnson]] ||align=left| {{USA}} ||  || 6
+|-
+| 16 || align=left| [[Giada Carmassi]] ||align=left| {{ITA}} ||  || 4
+|-
+| 17 || align=left| [[Wu Yanni]] ||align=left| {{CHN}} ||  || 3
+|-
+| 18 || align=left| [[Liz Clay]] ||align=left| {{AUS}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Women's Diamond+ - 100 metres hurdles results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW100MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250827175419/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW100MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 7 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Ackera Nugent]]
+| align="left" | {{JAM}}
+| 12.30
+| ={{AthAbbr|SB}}
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Ditaji Kambundji]]
+| align="left" | {{SUI}}
+| 12.40
+| ='''{{AthAbbr|NR|Swiss}}'''
+|-
+| 3
+| align="left" | [[Grace Stark]]
+| align="left" | {{USA}}
+| 12.40 {{Small|[.434]}}
+|
+|-
+| 4
+| align="left" | [[Danielle Williams]]
+| align="left" | {{JAM}}
+| 12.40 {{Small|[.440]}}
+|
+|-
+| 5
+| align="left" | [[Nadine Visser]]
+| align="left" | {{NED}}
+| 12.45
+|
+|-
+| 6
+| align="left" | [[Tonea Marshall]]
+| align="left" | {{USA}}
+| 12.49
+|
+|-
+| 7
+| align="left" | [[Devynne Charlton]]
+| align="left" | {{BAH}}
+| 12.52
+| {{AthAbbr|SB}}
+|-
+| 8
+| align="left" | [[Kendra Harrison]]
+| align="left" | {{USA}}
+| 12.72
+|
+|-
+| 9
+| align="left" | {{ill|Selina von Jackowski|de}}
+| align="left" | {{SUI}}
+| 13.24
+|
+|- class="sortbottom"
+| colspan="3" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond+ - 100 metres hurdles results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHW100MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+| colspan="2" | Wind: {{Wind|-0.6}}
+|}
+{{col-end}}
+
+====400 metres hurdles====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Femke Bol]] ||align=left| {{NED}} || 5 || '''40'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Andrenette Knight]] ||align=left| {{JAM}} || 1 || '''30'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Gianna Woodruff]] ||align=left| {{PAN}} || || '''25'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Ayomide Folorunso]] ||align=left| {{ITA}} ||  || '''25'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Emma Zapletalová]] ||align=left| {{SVK}} ||  || '''23'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Dalilah Muhammad]] ||align=left| {{USA}} || 1 || '''22'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Amalie Iuel]] ||align=left| {{NOR}} ||  || '''16'''
+|-style="border-top:3px solid green;"
+| 8 || align=left| [[Anna Cockrell]] ||align=left| {{USA}} || 1  || 14
+|-
+| 9 || align=left| [[Jasmine Jones]] ||align=left| {{USA}} ||  || 13
+|-
+| 10 || align=left| [[Rushell Clayton]] ||align=left| {{JAM}} ||  || 11
+|-bgcolor=dfffdf
+| 11 || align=left| [[Zenéy van der Walt]] ||align=left| {{RSA}} ||  || '''9*'''
+|-bgcolor=dfffdf
+| 12 || align=left| [[Naomi Van Den Broeck]] ||align=left| {{BEL}} ||  || '''8*'''
+|-
+| 13 || align=left| [[Lina Nielsen]] ||align=left| {{GBR2}} ||  || 8
+|-
+| 14 || align=left| [[Shiann Salmon]] ||align=left| {{JAM}} ||  || 6
+|-
+| 15 || align=left| [[Sarah Carli]] ||align=left| {{AUS}} ||  || 6
+|-
+| 16 || align=left| [[Elena Kelety]] ||align=left| {{GER}} ||  || 5
+|-
+| 17 || align=left| [[Louise Maraval]] ||align=left| {{FRA}} ||  || 4
+|-
+| 18 || align=left| [[Savannah Sutherland]] ||align=left| {{CAN}} ||  || 3
+|-
+| 19 || align=left| [[Moa Granat]] ||align=left| {{SWE}} ||  || 3
+|-
+| 21 || align=left| [[Fatoumata Diallo]] ||align=left| {{POR}} ||  || 3
+|-
+| 21 || align=left| [[Kemi Adekoya]] ||align=left| {{BHR}} ||  || 2
+|-
+| 22 || align=left| [[Daniela Ledecká]] ||align=left| {{SVK}} ||  || 2
+|-
+| 23 || align=left| [[Alexandra Stefania Uta]] ||align=left| {{ROM}} ||  || 2
+|-
+| 24 || align=left| [[Andrea Rooth]] ||align=left| {{NOR}} ||  || 2
+|-
+| 25 || align=left| [[Paulien Couckuyt]] ||align=left| {{BEL}} ||  || 1
+|-
+| 26 || align=left| [[Cassandra Tate]] ||align=left| {{USA}} ||  || 1
+|-
+| 27 || align=left| [[Linda Olivieri]] ||align=left| {{ITA}} ||  || 1
+|-
+| 28 || align=left| [[Anna Gryc]] ||align=left| {{POL}} ||  || 1
+|-
+| 29 || align=left| [[Janieve Russell]] ||align=left| {{JAM}} ||  || 1
+|-
+| 30 || align=left| [[Anna Hall (heptathlete)|Anna Hall]] ||align=left| {{USA}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Women's Diamond - 400 metres hurdles results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHW400MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-url=https://web.archive.org/web/20250827152007/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHW400MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 7 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Femke Bol]]
+| align="left" | {{NED}}
+| 52.18
+| '''[[Weltklasse Zürich#Women|MR]]'''
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Emma Zapletalová]]
+| align="left" | {{SVK}}
+| 53.18
+| '''{{AthAbbr|NR|Slovak}}'''
+|-
+| 3
+| align="left" | [[Andrenette Knight]]
+| align="left" | {{JAM}}
+| 53.76
+|
+|-
+| 4
+| align="left" | [[Gianna Woodruff]]
+| align="left" | {{PAN}}
+| 54.24
+|
+|-
+| 5
+| align="left" | [[Naomi Van den Broeck]]
+| align="left" | {{BEL}}
+| 54.83
+|
+|-
+| 6
+| align="left" | [[Amalie Iuel]]
+| align="left" | {{NOR}}
+| 55.34
+|
+|-
+| 7
+| align="left" | [[Ayomide Folorunso]]
+| align="left" | {{ITA}}
+| 55.77
+|
+|-
+| 8
+| align="left" | [[Zenéy Geldenhuys|Zenéy van der Walt]]
+| align="left" | {{RSA}}
+| 56.90
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - 400 metres hurdles results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHW400MHURDDIAMOND---FNL-000100--_C73B1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====3000 metres steeplechase====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Faith Cherotich]] ||align=left| {{KEN}} || 3 || '''31'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Sembo Almayew]] ||align=left| {{ETH}} ||  || '''23'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Winfred Yavi]] ||align=left| {{BHR}} || 1 || '''22'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Peruth Chemutai]] ||align=left| {{UGA}} ||  || '''15'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Courtney Wayment]] ||align=left| {{USA}} ||  || '''11'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Norah Jeruto]] ||align=left| {{KAZ}} ||  || '''10'''
+|-bgcolor=ccffcc
+| 7 || align=left| [[Marwa Bouzayani]] ||align=left| {{TUN}} || 1 || '''10'''
+|-bgcolor=ccffcc
+| 8 || align=left| [[Gabrielle Jennings]] ||align=left| {{USA}} ||  || '''9'''
+|-bgcolor=ccffcc
+| 9 || align=left| [[Lea Meyer]] ||align=left| {{GER}} ||  || '''8'''
+|-bgcolor=ccffcc
+| 10 || align=left| [[Doris Lemngole]] ||align=left| {{KEN}} ||  || '''7'''
+|-style="border-top:3px solid green;"
+| 11 || align=left| [[Elise Thorner]] ||align=left| {{GBR2}} ||  || 7
+|-bgcolor=ddffdd
+| 12 || align=left| [[Olivia Markezich]] ||align=left| {{USA}} ||  || '''6'''
+|-
+| 13 || align=left| [[Alemnat Walle]] ||align=left| {{ETH}} ||  || 5
+|-
+| 14 || align=left| [[Lomi Muleta]] ||align=left| {{ETH}} ||  || 4
+|-
+| 15 || align=left| [[Parul Chaudhary]] ||align=left| {{IND}} ||  || 3
+|-
+| 16 || align=left| [[Angelina Napoleon]] ||align=left| {{USA}} ||  || 2
+|-bgcolor=ddffdd
+| 17 || align=left| [[Kinga Królik]] ||align=left| {{POL}} ||  || '''1'''
+|-
+| 18 || align=left| [[Kaylee Mitchell]] ||align=left| {{USA}} ||  || 1
+|-
+| 19 || align=left| [[Alice Finot]] ||align=left| {{FRA}} ||  || 1
+|-
+| 20 || align=left| [[Daisy Jepkemei]] ||align=left| {{KEN}} ||  || 1
+|-
+| 21 || align=left| [[Rihab Dhahri]] ||align=left| {{TUN}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Women's Diamond - 3000 metres steeplechase results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW3000MST-DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-url=https://web.archive.org/web/20250827175521/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHW3000MST-DIAMOND---FNL-000100--_C73C1_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 10 qualified as of right.</small>
+<small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Time
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Faith Cherotich]]
+| align="left" | {{KEN}}
+| 8:57.24
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Norah Jeruto]]
+| align="left" | {{KAZ}}
+| 9:10.87
+|
+|-
+| 3
+| align="left" | [[Marwa Bouzayani]]
+| align="left" | {{TUN}}
+| 9:12.03
+|
+|-
+| 4
+| align="left" | [[Courtney Wayment]]
+| align="left" | {{USA}}
+| 9:14.91
+|
+|-
+| 5
+| align="left" | [[Gabrielle Jennings]]
+| align="left" | {{USA}}
+| 9:15.56
+|
+|-
+| 6
+| align="left" | [[Daisy Jepkemei]]
+| align="left" | {{KAZ}}
+| 9:15.98
+| {{AthAbbr|SB}}
+|-
+| 7
+| align="left" | [[Olivia Markezich]]
+| align="left" | {{USA}}
+| 9:22.20
+|
+|-
+| 8
+| align="left" | [[Lea Meyer]]
+| align="left" | {{GER}}
+| 9:26.08
+|
+|-
+| 9
+| align="left" | [[Rihab Dhahri]]
+| align="left" | {{TUN}}
+| 9:51.96
+|
+|-
+| —
+| align="left" | [[Kinga Królik]]
+| align="left" | {{POL}}
+| {{AthAbbr|DNF}}
+|
+|-
+| —
+| align="left" | [[Gesa Felicitas Krause]]
+| align="left" | {{GER}}
+| {{AthAbbr|DNF}}
+| {{Abbr|PM|Pacemaker}}
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - 3000 metres steeplechase results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHW3000MST-DIAMOND---FNL-000100--_C73C1_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====High Jump====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Nicola Olyslagers]] ||align=left| {{AUS}} || 3 || '''37'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Eleanor Patterson]] ||align=left| {{AUS}} ||  || '''36'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Yaroslava Mahuchikh]] ||align=left| {{UKR}} || 2 || '''35'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Morgan Lake]] ||align=left| {{GBR2}} ||  1 || '''23'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Christina Honsel]] ||align=left| {{GER}} || 1 || '''23'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Yuliya Levchenko]] ||align=left| {{UKR}} ||  || '''18'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Maria Żodzik]] ||align=left| {{POL}} || 1 || 14
+|-
+| 8 || align=left| [[Imke Onnen]] ||align=left| {{GER}} ||  || 12
+|-
+| 9 || align=left| [[Vashti Cunningham]] ||align=left| {{USA}} ||  || 10
+|-
+| 10 || align=left| [[Angelina Topić]] ||align=left| {{SRB}} ||  || 6
+|-
+| 11 || align=left| [[Charity Hufnagel]] ||align=left| {{USA}} ||  || 5
+|-
+| 12 || align=left| [[Engela Nilsson]] ||align=left| {{SWE}} ||  || 5
+|-
+| 13 || align=left| [[Elena Kulichenko]] ||align=left| {{CYP}} ||  || 3
+|-
+| 14 || align=left| [[Lamara Distin]] ||align=left| {{JAM}} ||  || 2
+|-
+| 15 || align=left| [[Tatiana Gkousin]] ||align=left| {{GRE}} ||  || 1
+|-
+| 16 || align=left| [[Elisabeth Pihela]] ||align=left| {{EST}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Women's Diamond - High jump results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHWHIGHJUMPDIAMOND---FNL-000100--_C73G2_1.0.PDF |archive-url=https://web.archive.org/web/20250827175633/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHWHIGHJUMPDIAMOND---FNL-000100--_C73G2_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 6 qualified as of right.</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Height
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Nicola Olyslagers]]
+| align="left" | {{AUS}}
+| 2.04 m
+| '''{{AthAbbr|AR|Oceanian}}''', {{AthAbbr|WL}}
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Yaroslava Mahuchikh]]
+| align="left" | {{UKR}}
+| 2.02 m
+| ={{AthAbbr|SB}}
+|-
+| 3
+| align="left" | [[Morgan Lake]]
+| align="left" | {{GBN}}
+| 2.00 m
+| '''{{AthAbbr|NR|British}}'''
+|-
+| 4
+| align="left" | [[Yuliya Levchenko]]
+| align="left" | {{UKR}}
+| 2.00 m
+| {{AthAbbr|SB}}
+|-
+| 5
+| align="left" | [[Christina Honsel]]
+| align="left" | {{GER}}
+| 1.97 m
+|
+|-
+| 6
+| align="left" | [[Eleanor Patterson]]
+| align="left" | {{AUS}}
+| 1.91 m
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - High jump results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHWHIGHJUMPDIAMOND---FNL-000100--_C73G2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====Pole Vault====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Katie Moon]] ||align=left| {{USA}} || 3 || '''38'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Sandi Morris]] ||align=left| {{USA}} || 2 || '''29'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Angelica Moser]] ||align=left| {{SUI}} ||  || '''27'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Tina Šutej]] ||align=left| {{SLO}} ||  || '''27'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Emily Grove (athlete)|Emily Grove]] ||align=left| {{USA}} ||  || '''24'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Roberta Bruni]] ||align=left| {{ITA}} || || '''24'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Gabriela Leon]] ||align=left| {{USA}} ||  || 21
+|-
+| 8 || align=left| [[Molly Caudery]] ||align=left| {{GBR2}} || 1 || 19
+|-
+| 9 || align=left| [[Amálie Švábíková]] ||align=left| {{CZE}} ||  || 17
+|-
+| 10 || align=left| [[Imogen Ayris]] ||align=left| {{AUS}} ||  || 11
+|-
+| 11 || align=left| [[Marie-Julie Bonnin]] ||align=left| {{FRA}} ||  || 10
+|-
+| 12 || align=left| [[Olivia McTaggart]] ||align=left| {{AUS}} || 1 || 8
+|-
+| 13 || align=left| [[Hana Moll]] ||align=left| {{USA}} ||  || 6
+|-
+| 14 || align=left| [[Elien Vekemans]] ||align=left| {{BEL}} ||  || 1
+|-
+| 15 || align=left| [[Alysha Newman]] ||align=left| {{CAN}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |title=Women's Diamond+ - Pole vault results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHWPLEVAULTDIAMOND---FNL-000100--_C73G2_1.0.PDF |website=Diamond League |archive-url=https://web.archive.org/web/20250827144201/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHWPLEVAULTDIAMOND---FNL-000100--_C73G2_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |date=22 August 2025}}</ref>
+|}
+
+<small>Top 6 qualified as of right.</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Height
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Katie Moon]]
+| align="left" | {{USA}}
+| 4.82 m
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Sandi Morris]]
+| align="left" | {{USA}}
+| 4.75 m
+|
+|-
+| 3
+| align="left" | [[Emily Grove (athlete)|Emily Grove]]
+| align="left" | {{USA}}
+| 4.75 m
+| ={{AthAbbr|PB}}
+|-
+| 4
+| align="left" | [[Angelica Moser]]
+| align="left" | {{SUI}}
+| 4.65 m
+|
+|-
+| 5
+| align="left" | [[Tina Šutej]]
+| align="left" | {{SLO}}
+| 4.65 m
+|
+|-
+| 6
+| align="left" | [[Roberta Bruni]]
+| align="left" | {{ITA}}
+| 4.45 m
+|
+|-
+| 7
+| align="left" | [[Lea Bachmann]]
+| align="left" | {{SUI}}
+| 4.30 m
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - Pole vault results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHWPLEVAULTDIAMOND---FNL-000100--_C73G2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====Long Jump====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Malaika Mihambo]] ||align=left| {{GER}} || 1 || '''25'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Claire Bryant]] ||align=left| {{USA}} ||  || '''21'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Jasmine Moore]] ||align=left| {{USA}} || 1  || '''19'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Larissa Iapichino]] ||align=left| {{ITA}} || || '''17'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Tara Davis-Woodhall]] ||align=left| {{USA}} || 2 || '''16'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Hilary Kpatcha]] ||align=left| {{FRA}} ||  || '''13'''
+|-style="border-top:3px solid green;" bgcolor=ddffdd
+| 7 || align=left| [[Annik Kälin]] ||align=left| {{SUI}} || || '''6*'''
+|-bgcolor=ddffdd
+| 8 || align=left| [[Monae' Nichols]] ||align=left| {{USA}} ||  || '''5*'''
+|-
+| 9 || align=left| [[Alexis Brown|Lex Brown]] ||align=left| {{USA}} ||  || 5
+|-
+| 10 || align=left| [[Ackelia Smith]] ||align=left| {{JAM}} ||  || 5
+|-
+| 11 || align=left| [[Quanesha Burks]] ||align=left| {{USA}} ||  || 5
+|-
+| 12 || align=left| [[Maja Åskag]] ||align=left| {{SWE}} ||  || 2
+|-
+| 13 || align=left| [[Jazmin Sawyers]] ||align=left| {{USA}} ||  || 2
+|-
+| 14 || align=left| [[Ivana Španović]] ||align=left| {{SRB}} ||  || 2
+|-
+| 15 || align=left| [[Katarina Johnson-Thompson]] ||align=left| {{GBR2}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=16 August 2025 |title=Women's Diamond - Long jump results |url=https://ath-wdl-archive.azureedge.net/2025/silesia/ATHWLONGJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |archive-url=https://web.archive.org/web/20250827180434/https://ath-wdl-archive.azureedge.net/2025/silesia/ATHWLONGJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |archive-date=27 August 2025 |access-date=19 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 6 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Larissa Iapichino]]
+| align="left" | {{ITA}}
+| 6.93 m {{Wind|-1.1}}
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Malaika Mihambo]]
+| align="left" | {{GER}}
+| 6.92 m {{Wind|+0.1}}
+|
+|-
+| 3
+| align="left" | [[Hilary Kpatcha]]
+| align="left" | {{FRA}}
+| 6.75 m {{Wind|-0.8}}
+|
+|-
+| 4
+| align="left" | [[Claire Bryant]]
+| align="left" | {{USA}}
+| 6.66 m {{Wind|-0.3}}
+|
+|-
+| 5
+| align="left" | [[Annik Kälin]]
+| align="left" | {{SUI}}
+| 6.55 m {{Wind|-0.8}}
+|
+|-
+| 6
+| align="left" | [[Monae' Nichols]]
+| align="left" | {{USA}}
+| 6.45 m {{Wind|0.0}}
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond+ - Long jump results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHWLONGJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====Triple Jump====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Shanieka Ricketts]] ||align=left| {{JAM}} || 2 || '''28'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Leyanis Pérez Hernández]] ||align=left| {{CUB}} || 2 || '''23'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Thea LaFond]] ||align=left| {{DMA}} ||  || '''20'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Jasmine Moore]] ||align=left| {{USA}} || || '''16'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Liadagmis Povea]] ||align=left| {{CUB}} ||  || '''14'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Davisleydi Velazco]] ||align=left| {{CUB}} ||  || '''7'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Neja Filipič]] ||align=left| {{SLO}} ||  || 7
+|-
+| 8 || align=left| [[Ilionis Guillaume]] ||align=left| {{FRA}} ||  || 7
+|-
+| 9 || align=left| [[Ackelia Smith]] ||align=left| {{JAM}} ||  || 5
+|-
+| 10 || align=left| [[Tuğba Danışmaz]] ||align=left| {{TUR}} ||  || 5
+|-
+| 11 || align=left| [[Diana Ana Maria Ion]] ||align=left| {{ROM}} ||  || 3
+|-
+| 12 || align=left| [[Senni Salminen]] ||align=left| {{FIN}} ||  || 3
+|-
+| 13 || align=left| [[Maja Åskag]] ||align=left| {{SWE}} ||  || 2
+|-
+| 14 || align=left| [[Ivana Španović]] ||align=left| {{SRB}} ||  || 2
+|-
+| 15 || align=left| [[Ilona Masson]] ||align=left| {{BEL}} ||  || 1
+|-
+| 16 || align=left| [[Ana Peleteiro|Ana Peleteiro-Compaoré]] ||align=left| {{ESP}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Women's Diamond - Triple jump results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHWTRPLJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |archive-url=https://web.archive.org/web/20250827152103/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHWTRPLJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 6 qualified as of right.</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Leyanis Pérez]]
+| align="left" | {{CUB}}
+| 14.91 m {{Wind|-0.5}}
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Liadagmis Povea]]
+| align="left" | {{CUB}}
+| 14.72 m {{Wind|-0.6}}
+|
+|-
+| 3
+| align="left" | [[Davisleydi Velazco]]
+| align="left" | {{CUB}}
+| 14.65 m {{Wind|-0.6}}
+|
+|-
+| 4
+| align="left" | [[Thea LaFond]]
+| align="left" | {{DMA}}
+| 14.62 m {{Wind|+0.3}}
+|{{AthAbbr|SB}}
+|-
+| 5
+| align="left" | [[Shanieka Ricketts]]
+| align="left" | {{JAM}}
+| 14.35 m {{Wind|-0.6}}
+|
+|-
+| 6
+| align="left" | [[Jasmine Moore]]
+| align="left" | {{USA}}
+| 14.24 m {{Wind|-0.2}}
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - Triple jump results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHWTRPLJUMPDIAMOND---FNL-000100--_C73H2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====Shot put====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Chase Jackson]] ||align=left| {{USA}} ||  3 || '''38'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Jessica Schilder]] ||align=left| {{NED}} || 2 || '''33'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Sarah Mitton]] ||align=left| {{CAN}} ||  || '''29'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Fanny Roos]] ||align=left| {{SWE}} ||  || '''17'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Maggie Ewen]] ||align=left| {{USA}} ||  || '''15'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Jaida Ross]] ||align=left| {{USA}} ||  || '''11'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Maddison-Lee Wesche]] ||align=left| {{NZL}} ||  || 11
+|-
+| 8 || align=left| [[Yemisi Ogunleye]] ||align=left| {{GER}} ||  || 10
+|-
+| 9 || align=left| [[Gong Lijiao]] ||align=left| {{CHN}} ||  || 7
+|-
+| 10 || align=left| [[Danniel Thomas-Dodd]] ||align=left| {{JAM}} ||  || 4
+|-
+| 11 || align=left| [[Song Jiayuan]] ||align=left| {{CHN}} ||  || 2
+|-
+| 12 || align=left| [[Abby Moore]] ||align=left| {{USA}} ||  || 1
+|-
+| 13 || align=left| [[Jessica Inchude]] ||align=left| {{POR}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=22 August 2025 |title=Women's Diamond - Shot put results |url=https://ath-wdl-archive.azureedge.net/2025/brussels/ATHWSHOTPUT-DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-url=https://web.archive.org/web/20250827152155/https://ath-wdl-archive.azureedge.net/2025/brussels/ATHWSHOTPUT-DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-date=27 August 2025 |access-date=23 August 2025 |website=Diamond League}}</ref>
+|}
+
+<small>Top 6 qualified as of right.</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Jessica Schilder]]
+| align="left" | {{NED}}
+| 20.26 m
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Chase Jackson]]
+| align="left" | {{USA}}
+| 20.08 m
+|
+|-
+| 3
+| align="left" | [[Sarah Mitton]]{{efn|Mitton was originally awarded the Diamond League title, however a protest was launched over her winning throw and after a review it was deemed a foul. Mitton was demoted to third place with Schilder becoming the champion.<ref>{{cite web |title=Sarah Mitton stripped of Diamond League Trophy after winning throw disqualified |url=https://www.cbc.ca/sports/olympics/summer/athletics/field/sarah-mitton-diamond-league-final-august-27-1.7618836 |website=CBC.ca |access-date=27 August 2025 |date=27 August 2025}}</ref>}}
+| align="left" | {{CAN}}
+| 19.99 m
+|
+|-
+| 4
+| align="left" | [[Jaida Ross]]
+| align="left" | {{USA}}
+| 19.26 m
+|
+|-
+| 5
+| align="left" | [[Fanny Roos]]
+| align="left" | {{SWE}}
+| 19.11 m
+|
+|-
+| 6
+| align="left" | [[Maggie Ewen]]
+| align="left" | {{USA}}
+| 18.45 m
+|
+|-
+| 7
+| align="left" | {{ill|Miryam Mazenauer|de||no}}
+| align="left" | {{SUI}}
+| 16.91 m
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - Shot put results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHWSHOTPUT-DIAMOND---FNL-000100--_C73I2_2.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{notelist}}
+{{col-end}}
+
+====Discus Throw====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Valarie Allman]] ||align=left| {{USA}} || 4 || '''32'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Yaime Pérez]] ||align=left| {{CUB}} || || '''24'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Jorinde van Klinken]] ||align=left| {{NED}} ||  || '''23'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Sandra Elkasević]] ||align=left| {{CRO}} ||  || '''19'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Feng Bin]] ||align=left| {{CHN}} ||  || '''11'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Laulauga Tausaga]] ||align=left| {{USA}} ||  || '''10'''
+|-style="border-top:3px solid green;" bgcolor=ddffdd
+| 7 || align=left| [[Cierra Jackson]] ||align=left| {{USA}} ||  || '''7*'''
+|-
+| 8 || align=left| [[Marike Steinacker]] ||align=left| {{GER}} ||  || 6
+|-
+| 9 || align=left| [[Amanda Ngandu-Ntumba]] ||align=left| {{FRA}} ||  || 3
+|-
+| 10 || align=left| [[Kristin Pudenz]] ||align=left| {{GER}} ||  || 2
+|-
+| 11 || align=left| [[Melina Robert-Michon]] ||align=left| {{FRA}}||  || 2
+|-
+| 12 || align=left| [[Daisy Osakue]] ||align=left| {{ITA}} ||  || 2
+|-
+| 13 || align=left| [[Jayden Ulrich]] ||align=left| {{USA}} ||  || 1
+|-
+| 14 || align=left| [[Vanessa Kamga]] ||align=left| {{SWE}} ||  || 1
+|-
+| 15 || align=left| [[Jiang Zhichao]] ||align=left| {{CHN}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=5 July 2025 |title=Women's Diamond+ - Discus throw results |url=https://ath-wdl-archive.azureedge.net/2025/eugene/ATHWDISCUS--DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-url=https://web.archive.org/web/20250706172007/https://ath-wdl-archive.azureedge.net/2025/eugene/ATHWDISCUS--DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-date=6 July 2025 |access-date=6 July 2025 |website=Diamond league}}</ref>
+|}
+
+<small>Top 6 qualified as of right.</small><br><small>Athletes marked with '''*''' called up as reserves for Final</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Valarie Allman]]
+| align="left" | {{USA}}
+| 69.18 m
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Jorinde van Klinken]]
+| align="left" | {{NED}}
+| 67.15 m
+| {{AthAbbr|SB}}
+|-
+| 3
+| align="left" | [[Yaime Pérez]]
+| align="left" | {{CUB}}
+| 66.08 m
+|
+|-
+| 4
+| align="left" | [[Sandra Elkasević]]
+| align="left" | {{CRO}}
+| 65.10 m
+|
+|-
+| 5
+| align="left" | [[Cierra Jackson]]
+| align="left" | {{USA}}
+| 64.40 m
+|
+|-
+| 6
+| align="left" | [[Laulauga Tausaga]]
+| align="left" | {{USA}}
+| 63.51 m
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - Discus throw results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHWDISCUS--DIAMOND---FNL-000100--_C73I2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+====Javelin Throw====
+{{col-begin|width=auto}}
+{{col-break}}
+;Qualification
+{| class="wikitable sortable" style="text-align:center"
+|-
+!Rank !! Name !! Nationality !! Wins !! Points
+|-bgcolor=ccffcc
+| 1 || align=left| [[Elina Tzengko]] ||align=left| {{GRE}} || 2 || '''27'''
+|-bgcolor=ccffcc
+| 2 || align=left| [[Jo-Ané du Plessis]] ||align=left| {{RSA}} || || '''23'''
+|-bgcolor=ccffcc
+| 3 || align=left| [[Adriana Vilagoš]] ||align=left| {{SRB}} || 1 || '''22'''
+|-bgcolor=ccffcc
+| 4 || align=left| [[Haruka Kitaguchi]] ||align=left| {{JPN}} || 1 || '''13'''
+|-bgcolor=ccffcc
+| 5 || align=left| [[Mackenzie Little]] ||align=left| {{AUS}} ||  || '''10'''
+|-bgcolor=ccffcc
+| 6 || align=left| [[Flor Ruiz]] ||align=left| {{COL}} ||  || '''8'''
+|-style="border-top:3px solid green;"
+| 7 || align=left| [[Sigrid Borge]] ||align=left| {{NOR}} ||  || 8
+|-
+| 8 || align=left| [[Dai Qianqian]] ||align=left| {{CHN}} ||  || 7
+|-
+| 9 || align=left| [[Anete Sietina]] ||align=left| {{LAT}} ||  || 6
+|-
+| 10 || align=left| [[Maria Andrejczyk]] ||align=left| {{POL}} ||  || 6
+|-
+| 11 || align=left| [[Yan Ziyi]] ||align=left| {{CHN}} ||  || 4
+|-
+| 12 || align=left| [[Marie-Therese Obst]] ||align=left| {{NOR}} ||  || 3
+|-
+| 13 || align=left| [[Tori Peeters|Tori Moorby]] ||align=left| {{AUS}} ||  || 2
+|-
+| 14 || align=left| [[Sara Kolak]] ||align=left| {{CRO}} ||  || 2
+|-
+| 15 || align=left| [[Maggie Malone-Hardin]] ||align=left| {{USA}} ||  || 1
+|-
+| 16 || align=left| [[Yulenmis Aguilar]] ||align=left| {{ESP}} ||  || 1
+|-
+| 17 || align=left| [[Victoria Hudson (athlete)|Victoria Hudson]] ||align=left| {{AUT}} ||  || 1
+|-
+|colspan=5|<ref>{{cite web |date=20 August 2025 |title=Women's Diamond - Javelin throw results |url=https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHWJAVELIN-DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-url=https://web.archive.org/web/20250827175740/https://ath-wdl-archive.azureedge.net/2025/lausanne/ATHWJAVELIN-DIAMOND---FNL-000100--_C73I2_1.0.PDF |archive-date=27 August 2025 |access-date=21 August 2025 |website=Diamond League}}</ref>
+|}
+<small>Top 6 qualified as of right.</small>
+
+{{col-break|gap=2em}}
+;Final
+{| class="wikitable mw-datatable sortable" style="text-align:center;"
+!scope="col"| Place
+!scope="col"| Athlete
+!scope="col"| Nation
+!scope="col"| Distance
+!scope="col"| Notes
+|-bgcolor=#daefff
+| {{sort|1|[[File:Diamond blue.svg|18px]]}}
+| align="left" | [[Elina Tzengko]]
+| align="left" | {{GRE}}
+| 64.57 m
+|
+|-style="border-top:3px solid blue;"
+| 2
+| align="left" | [[Adriana Vilagoš]]
+| align="left" | {{SRB}}
+| 62.96 m
+|
+|-
+| 3
+| align="left" | [[Jo-Ané du Plessis]]
+| align="left" | {{RSA}}
+| 62.26 m
+|
+|-
+| 4
+| align="left" | [[Mackenzie Little]]
+| align="left" | {{AUS}}
+| 61.96 m
+| {{AthAbbr|SB}}
+|-
+| 5
+| align="left" | [[Flor Ruiz]]
+| align="left" | {{COL}}
+| 60.86 m
+|
+|-
+| 6
+| align="left" | [[Haruka Kitaguchi]]
+| align="left" | {{JPN}}
+| 60.72 m
+|
+|- class="sortbottom"
+| colspan="5" | <ref>{{cite web |date=28 August 2025 |title=Women's Diamond - Javelin throw results |url=https://ath-wdl-archive.azureedge.net/2025/zurich/ATHWJAVELIN-DIAMOND---FNL-000100--_C73I2_1.0.PDF |access-date=30 August 2025 |website=Diamond League}}</ref>
+|}
+{{col-end}}
+
+== Diamond+ Disciplines ==
+Starting in 2025, each Diamond League meeting can nominate four “Diamond+ Disciplines” (two male and two female). These disciplines will offer higher levels of prize money, with the maximum for individual athletes rising from $10,000 to $20,000.<ref name=":0" /> In March 2025, the Diamond+ disciplines at the first four meetings were announced.<ref>{{Cite web |date=3 March 2025 |title=Diamond+ Disciplines announced for first four meetings |url=https://www.diamondleague.com/diamond-disciplines-announced-for-last-three-series-meetings/ |access-date=10 April 2025 |website=[[Diamond League|diamondleague.com]]}}</ref> More Diamond+ Disciplines were announced throughout the rest of the season.<ref>{{Cite web |date=9 April 2025 |title=Diamond+ Disciplines announced for second four meetings |url=https://www.diamondleague.com/diamond-disciplines-announced-for-second-four-meetings/ |access-date=26 July 2025 |website=[[Diamond League|diamondleague.com]]}}</ref><ref>{{Cite web |date=12 May 2025 |title=Diamond+ Disciplines announced for July meetings |url=https://www.diamondleague.com/diamond-disciplines-announced-for-july-meetings/ |access-date=26 July 2025 |website=[[Diamond League|diamondleague.com]]}}</ref><ref>{{Cite web |date=18 June 2025 |title=Diamond+ Disciplines announced for last three series meetings |url=https://www.diamondleague.com/diamond-disciplines-announced-for-last-three-series-meetings/ |access-date=26 July 2025 |website=[[Diamond League|diamondleague.com]]}}</ref><ref>{{Cite web |date=15 July 2025 |title=Diamond+ Disciplines Announced for the Wanda Diamond League Final 2025 |url=https://zurich.diamondleague.com/en/diamond-disciplines-announced-for-the-wanda-diamond-league-final-2025/ |access-date=26 July 2025 |website=[[Diamond League|diamondleague.com]]}}</ref> 
+{| class="wikitable" style="margin:0.5em auto; font-size:90%;position:relative;" width=60%
+! scope="col" |Meeting
+! scope="col" |Men's disciplines
+! scope="col" |Women's disciplines
+|-
+|[[Xiamen Diamond League|Xiamen]]
+| align="left" |[[110 metres hurdles]]<br>[[Pole vault]]
+| align="left" |[[5000 metres]]<br>[[High jump]]
+|-
+|[[Diamond League Shanghai|Shanghai/Keqiao]]
+| align="left" |[[100 metres]]<br>[[110 metres hurdles]]
+| align="left" |[[200 metres]]<br>[[Shot put]]
+|-
+|[[Doha Diamond League|Doha]]
+| align="left" |[[400 metres hurdles]]<br>[[High jump]]
+| align="left" |[[1500 metres]]<br>[[Pole vault]]
+|-
+|[[Meeting International Mohammed VI d'Athlétisme de Rabat|Rabat]]
+| align="left" |[[200 metres]]<br>[[Shot put]]
+| align="left" |[[100 metres]]<br>[[400 metres hurdles]]
+|-
+|[[Golden Gala|Rome]]
+| align="left" |[[100 metres]]<br>[[High jump]]
+| align="left" |[[1500 metres]]<br>[[5000 metres]]
+|-
+|[[Bislett Games|Oslo]]
+| align="left" |[[5000 metres]]<br>[[Pole vault]]
+| align="left" |[[100 metres]]<br>[[400 metres]]
+|-
+|[[Bauhausgalan|Stockholm]]
+| align="left" |[[200 metres]]<br>[[400 metres hurdles]]
+| align="left" |[[100 metres]]<br>[[3000 metres]]
+|-
+|[[Meeting de Paris|Paris]]
+| align="left" |[[110 metres hurdles]]<br>[[400 metres hurdles]]
+| align="left" |[[100 metres hurdles]]<br>[[Pole vault]]
+|-
+|[[Prefontaine Classic|Eugene]]
+| align="left" |[[100 metres]]<br>[[Mile run|Mile]]
+| align="left" |[[800 metres]]<br>[[Discus throw]]
+|-
+|[[Herculis|Monaco]]
+| align="left" |[[200 metres]]<br>[[Pole vault]]
+| align="left" |[[100 metres hurdles]]<br>[[400 metres hurdles]]
+|-
+|[[London Athletics Meet|London]]
+| align="left" |[[100 metres]]<br>[[1500 metres]]
+| align="left" |[[800 metres]]<br>[[Pole vault]]
+|-
+|[[Kamila Skolimowska Memorial|Silesia]]
+| align="left" | [[100 metres]]<br>[[Pole vault]]
+| align="left" |[[Pole vault|400 metres]]<br>[[100 metres hurdles]]
+|-
+|[[Athletissima|Lausanne]]
+| align="left" |[[100 metres]]<br>[[800 metres]]
+| align="left" |[[Pole vault|400 metres]]<br>[[100 metres hurdles]]
+|-
+|[[Memorial Van Damme|Brussels]]
+| align="left" |[[3000 metres steeplechase]]<br>[[Discus throw]]
+| align="left" |[[5000 metres]]<br>[[Pole vault]]
+|-
+|[[Weltklasse Zürich|Zurich]]
+| align="left" |[[100 metres]]<br>[[1500 metres]]<br>[[400 metres hurdles]]<br>[[Pole vault]]
+| align="left" |[[100 metres]]<br>[[3000 metres]]<br>[[100 metres hurdles]]<br>[[Long jump]]
+|}
+
+==References==
+{{Reflist|3}}
+
+==External links==
+*[http://www.diamondleague.com Official website]
+
+{{2025 in athletics}}
+{{Diamond League navbox}}
+{{Xiamen Diamond League}}
+{{Diamond League Shanghai}}
+{{Doha Diamond League}}
+{{Meeting International Mohammed VI d'Athlétisme de Rabat}}
+{{Golden Gala}}
+{{Bislett Games}}
+{{BAUHAUS-galan}}
+{{Meeting de Paris}}
+{{Prefontaine Classic}}
+{{Herculis}}
+{{London Athletics Meet}}
+{{Kamila Skolimowska Memorial}}
+{{Athletissima}}
+{{Memorial Van Damme}}
+{{Weltklasse Zürich}}
+
+[[Category:Diamond League]]
+[[Category:2025 in the sport of athletics|Diamond League]]
+[[Category:2025 Diamond League| ]]

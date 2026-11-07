@@ -11,7 +11,7 @@ import json
 import re
 from datetime import datetime, timedelta, timezone
 
-from kickoff import badminton, chess_live, golf, importance, majors, notes, rugbytables, settings
+from kickoff import athletics, badminton, chess_live, golf, importance, majors, notes, rugbytables, settings
 from kickoff import ufc as ufc_mod
 from kickoff import ufcrank
 from kickoff import render as r
@@ -43,7 +43,7 @@ def games_html(on):
 
 RECENT = timedelta(hours=36)                                 # feed items
 RESULTS_RECENT = timedelta(days=3)                              # rugby results: a skipped day is caught up (each is shown once)
-PER_SPORT = 3                 # lines per sport
+PER_SPORT = 3                 # lines per sport (athletics and swimming: RECORD_LINES)
 MAX_CANDIDATES = 20           # headlines sent to Claude in one call
 STORY_POOL = 40
 STORY_DAYS = 7
@@ -60,8 +60,9 @@ RULES = [
     ("games", "Multi-sport games", r"games|olympic|olympics", r"\b(asian|sea|southeast asian|commonwealth|olympic|paralympic|youth olympic) games\b|\bolympics\b"),
     ("womens-football", "Women's football", r"women'?s (world cup|euro)|\bwwc\b", r"women'?s (world cup|euro)|\bfinal\b"),
 ]
-ORDER = ["rugby", "golf", "ufc", "badminton", "athletics", "handball", "hockey", "chess", "darts", "games", "womens-football", "spotlight"]
-HEADING = {"rugby": "Rugby", "ufc": "UFC", "spotlight": "Spotlight", **{k: h for k, h, _, _ in RULES}}
+ORDER = ["rugby", "golf", "ufc", "badminton", "athletics", "swimming", "handball", "hockey", "chess", "darts", "games", "womens-football", "spotlight"]
+HEADING = {"rugby": "Rugby", "ufc": "UFC", "spotlight": "Spotlight", "swimming": "Swimming", **{k: h for k, h, _, _ in RULES}}
+RECORD_LINES = {"athletics": 5, "swimming": 5}      # world records, close finishes, world leads and meeting records (kickoff/athletics.py): more room than a feed sport
 
 # The spotlight rule: an Indian or Southeast Asian athlete reaching a semi-final, final or podium at a notable event gets a line even below the usual bar.
 SPOT_PLACE = re.compile(r"\b(india|indian|singapore|singaporean|malaysia|malaysian|indonesia|indonesian|thailand|thai|philippines|filipino|vietnam|vietnamese)\b", re.I)
@@ -352,6 +353,22 @@ def run(now, st, source, client=None):
                     seen.append(uid)
         except Exception:
             stats["failed"] += 1
+    record_perfs = []
+    try:                                               # athletics and swimming (D, 2026-11-08): world records, close finishes, world leads and meeting records only
+        from kickoff import events as ev_
+        for sp, found in athletics.run(source, sgt_today, wiki_fails).items():
+            room = RECORD_LINES[sp]
+            for kind, text, uid in found:
+                if uid in seen or room <= 0:
+                    continue                           # a line not shown today is not marked seen: tomorrow it can still come
+                lead, _, rest = text.partition(": ") if kind == "wr" else (("Close finish", "", text) if kind == "close" else ("", "", text))
+                lines[sp].append(line_html(rest if lead else text, lead=lead))
+                seen.append(uid)
+                room -= 1
+                if kind == "wr":                       # a world record is a Star Of The Night and can make the headlines
+                    record_perfs.append({**ev_.perf(sp, "World record: " + rest, 96), "milestone": True})
+    except Exception:
+        stats["failed"] += 1
     stats["failed"] += min(len(wiki_fails), 1)         # a page that did not answer, however many events looked at it
     items = []
     try:
@@ -383,7 +400,7 @@ def run(now, st, source, client=None):
     for key in (["games"] + [k for k in ORDER if k != "games"]) if on else ORDER:
         extra = "".join(blocks.get(key, []))
         if lines[key] or extra:
-            shown = lines[key][:PER_SPORT]
+            shown = lines[key][:RECORD_LINES.get(key, PER_SPORT)]
             head = on[0] if key == "games" and on else HEADING[key]
             body = f'<ul class="standouts">{"".join(shown)}</ul>' if shown else ""
             html += f'<h4 class="sport{" first" if not html else ""}">{r.esc(head)}</h4>' + ((extra + body) if key == "games" else (body + extra))
@@ -397,4 +414,5 @@ def run(now, st, source, client=None):
         sections.append({"id": "other-sports", "title": "Other Sports", "html": html})
     if picks:
         sections.append({"id": "stories", "title": "Interesting Stories", "html": stories_html(picks)})
+    story_events = story_events + record_perfs
     return {"sections": sections, "state": {"around": {"seen": seen[-300:], "stories": story_log, "golf": g["state"], "badminton": badminton_state, "ufc": ufc_state, "ufcrank": rank_state}}, "stats": stats, "events": story_events}

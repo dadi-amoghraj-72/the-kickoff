@@ -1,0 +1,1693 @@
+{{Short description|Athletics competition in Tokyo, Japan}}
+{{Use dmy dates|date=August 2024}}
+{{for|the World Para Athletics Championships organised by IPC|2025 World Para Athletics Championships}} 
+{{Infobox games
+| name      = World Athletics Championships<br />Tokyo 2025
+| logo      = 2025 World Athletics Championships logo.svg
+| size      =
+| host_city = [[Tokyo]]
+| country   = {{JPN}}
+| dates     = 13–21 September 2025
+| motto     = ''Every Second, Sugoi''
+| caption   = 
+| nations   = 198
+| athletes  = 2202
+| events    = 49
+| opened_by = [[Fumihito, Crown Prince of Japan]]
+| closed_by = World Athletics President [[Sebastian Coe]]
+| previous  = [[2023 World Athletics Championships|Budapest 2023]]
+| next      = ''[[2027 World Athletics Championships|Beijing 2027]]''
+| organizer = [[World Athletics]], [[Japan Association of Athletics Federations|JAAF]]
+| sports    = [[Sport of athletics|Athletics]]
+| edition   = 20th
+| stadium   = [[Japan National Stadium|National Stadium]]
+| website   = [https://worldathletics.org/competitions/world-athletics-championships/tokyo25 Tokyo25]
+}}
+{{2025 World Athletics Championships}}
+The '''2025 World Athletics Championships''' ([[Japanese language|Japanese]]: 2025年世界陸上競技選手権大会) were the twentieth edition of the [[World Athletics Championships]], and were held from 13 to 21 September 2025 in [[Tokyo]],<ref>{{cite web | url=https://worldathletics.org/news/press-releases/decisions-229-council-meeting-rome-2022 | title=Decisions made at World Athletics Council Meeting in Rome |website=WorldAthletics.org|publisher=World Athletics | access-date=November 30, 2022 | archive-date=November 30, 2022 | archive-url=https://web.archive.org/web/20221130212305/https://worldathletics.org/news/press-releases/decisions-229-council-meeting-rome-2022 | url-status=live }}</ref> [[Japan]]. 
+
+The championships used the [[Japan National Stadium|National Stadium]], rebuilt for the Tokyo 2020 [[2020 Summer Olympics|Olympic]] and [[2020 Summer Paralympics|Paralympic]] Games. Full capacity attendances were permitted at a major sporting event in Japan for the first time since the [[COVID-19 pandemic]] in the early 2020s (the most recent with full capacity had been the [[2019 Rugby World Cup]]).<ref name=":0" />
+
+This was the third time that the championships were held in Japan, following the [[1991 World Championships in Athletics|1991]] event in Tokyo at the [[National Stadium (Tokyo)|former National Stadium]], and the [[2007 World Championships in Athletics|2007]] event in [[Osaka]].<ref name=":0">{{cite web|url=https://www.worldathletics.org/news/press-releases/tokyo-2025-world-athletics-championships|title=Tokyo to host 2025 World Athletics Championships|date=14 July 2022|website=WorldAthletics.org|publisher=World Athletics|access-date=July 14, 2022|archive-date=December 8, 2022|archive-url=https://web.archive.org/web/20221208190341/https://www.worldathletics.org/news/press-releases/tokyo-2025-world-athletics-championships|url-status=live}}
+</ref> 
+
+K, member of the Japanese boy band [[&Team|&TEAM]], was selected as the official supporter for 2025 World Athletics Championships.
+
+A total of 53 nations won medals at the championships, more than in any previous edition. [[Samoa]], [[Saint Lucia]] and [[Uruguay]] won their first ever medals at the championships, while [[Tanzania]] won their first ever gold medal.<ref>{{Cite web |date=22 September 2025 |title=Record number of nations win medals at WCH Tokyo 25 |url=https://worldathletics.org/competitions/world-athletics-championships/tokyo25/news/press-releases/record-number-nations-medals-wch-tokyo-25 |access-date=26 September 2025 |website=worldathletics.org}}</ref> The United States has won the most medals in the latest edition of World Athletics Championships, with over 450 total medals.<ref>{{Cite web |title=Medal Table {{!}} Tokyo 25 {{!}} World Athletics Championships |url=https://worldathletics.org/competitions/world-athletics-championships/world-athletics-championships-tokyo-2025-7190593/medaltable |access-date=2025-12-16 |website=worldathletics.org}}</ref>
+
+== Host selection and venue ==
+[[File:Japan National Stadium, September 20, 2025.jpg|thumb|left|220px|Japan National Stadium on Sept. 20, 2025, the eighth night of the 2025 World Athletics Championships]]
+*{{flagicon|Kenya}} [[Nairobi]], [[Kenya]] ([[Moi International Sports Centre|Kasarani Stadium]])<ref name=":1" />
+*{{flagicon|Singapore}} [[Singapore]] ([[National Stadium, Singapore|National Stadium]])<ref name=":2" />
+*{{flagicon|Japan}} [[Tokyo]], Japan ([[Japan National Stadium|National Stadium]])<ref name=":3" />
+*{{flagicon|Poland}} [[Chorzów]], [[Poland]] ([[Silesian Stadium]])<ref>{{Cite web |last=S.A |first=Telewizja Polska |title=Silesia puts in official bid for World Athletics Championships 2025 |url=https://tvpworld.com/53657719/silesia-puts-in-official-bid-for-world-athletics-championships-2025 |access-date=2022-07-16 |website=tvpworld.com |language=en |archive-date=July 16, 2022 |archive-url=https://web.archive.org/web/20220716174530/https://tvpworld.com/53657719/silesia-puts-in-official-bid-for-world-athletics-championships-2025 |url-status=live }}</ref>
+
+In October 2019, [[World Athletics]] president [[Sebastian Coe]] stated consideration of a direct choice for Kenya to host this championship.<ref>{{cite web|url=https://www.insidethegames.biz/articles/1085603/coe-kenya|title=Coe backs proposed Kenya bid for 2025 IAAF World Championships|publisher=insidethegames.biz|date=5 October 2019|access-date=October 7, 2019|archive-date=August 1, 2022|archive-url=https://web.archive.org/web/20220801122453/https://www.insidethegames.biz/articles/1085603/coe-kenya|url-status=live}}</ref><ref>{{cite web|url=http://www.thesportsexaminer.com/lane-one-were-the-iaaf-world-championships-a-success-or-failure-in-doha/|title=LANE ONE: Was the IAAF World Championships a success or failure in Doha?|date=6 October 2019|work=thesportsexaminer.com|access-date=October 7, 2019|archive-date=July 15, 2022|archive-url=https://web.archive.org/web/20220715095202/http://www.thesportsexaminer.com/lane-one-were-the-iaaf-world-championships-a-success-or-failure-in-doha/|url-status=live}}</ref>
+
+Kenya confirmed its bid for the championships in October 2021.<ref name=":1">{{cite web|url=https://www.japantimes.co.jp/sports/2021/10/05/more-sports/track-field/kenya-world-athletics-2025-bid/|title=Kenya confirms bid for 2025 World Athletics Championships|date=5 October 2021|publisher=The Japan Times|access-date=November 17, 2021|archive-date=November 17, 2021|archive-url=https://web.archive.org/web/20211117142600/https://www.japantimes.co.jp/sports/2021/10/05/more-sports/track-field/kenya-world-athletics-2025-bid/|url-status=dead}}</ref> 
+
+In 2022, Japan and Singapore entered bids to host the championships.<ref name=":2">{{cite web |title=Singapore announces bid to host World Athletics Championships in 2025 |url=https://www.channelnewsasia.com/sport/singapore-announces-bid-host-world-athletics-championships-2025-2570601 |website=CNA |access-date=17 March 2022 |language=en |date=17 March 2022 |archive-date=March 17, 2022 |archive-url=https://web.archive.org/web/20220317102057/https://www.channelnewsasia.com/sport/singapore-announces-bid-host-world-athletics-championships-2025-2570601 |url-status=live }}</ref><ref name=":3">{{cite web|url=https://www.japantimes.co.jp/sports/2021/10/03/more-sports/track-field/athletics-worlds-2025-japan/|title=Japan bidding to host 2025 World Athletics Championships|date=3 October 2021|publisher=The Japan Times|access-date=November 17, 2021|archive-date=November 17, 2021|archive-url=https://web.archive.org/web/20211117142859/https://www.japantimes.co.jp/sports/2021/10/03/more-sports/track-field/athletics-worlds-2025-japan/|url-status=live}}</ref><ref name="singapore_bidding_to_host_world_athletics_championships_2025">{{Cite news|last=Berkeley|first=Geoff|date=17 March 2022|title=Singapore bidding to host 2025 World Athletics Championships|work=[[Inside the Games|InsideTheGames.biz]]|url=https://www.insidethegames.biz/articles/1120648/singapore-world-athletics-championships|url-status=live|access-date=17 March 2022|archive-date=April 6, 2022|archive-url=https://web.archive.org/web/20220406125139/https://www.insidethegames.biz/articles/1120648/singapore-world-athletics-championships}}</ref> In July 2022, Tokyo was selected by World Athletics to host the 2025 event,<ref name=":0" /> after it scored the highest in the bid evaluation. The National Stadium in Tokyo became the first major spectator event for athletics after the [[2020 Summer Olympics]] were held [[Behind closed doors (sport)|behind closed doors]] in response with the then-still ongoing [[COVID-19 pandemic]].<ref>{{Cite web |last=Rédaction Africanews |date=2022-07-15 |title=Kenya loses 2025 World Athletics Championships bid to Japan |url=https://www.africanews.com/2022/07/15/kenya-loses-2025-world-athletics-championships-bid-to-japan/ |access-date=2022-07-16 |website=Africa News |quote=Tokyo scored the highest in the bid evaluation across the four focused areas: the potential for a powerful narrative; revenue generating opportunities for World Athletics; a destination that will enhance the international profile of the sport; and appropriate climate. |archive-date=July 16, 2022 |archive-url=https://web.archive.org/web/20220716174530/https://www.africanews.com/2022/07/15/kenya-loses-2025-world-athletics-championships-bid-to-japan/ |url-status=live }}</ref><ref>{{Cite web|url=https://www.pulselive.co.ke/sports/other-sports/kenya-lost-bid-to-host-2025-world-athletics-championships/0xx3p03|title=EXPLAINED Why Nairobi lost bid to host 2025 World Championships|publisher=Pulse Live|last=Kimutai|first=Cyprian|work=Pulselive Kenya |date=15 July 2022|access-date=July 23, 2022|archive-date=July 15, 2022|archive-url=https://web.archive.org/web/20220715121752/https://www.pulselive.co.ke/sports/other-sports/kenya-lost-bid-to-host-2025-world-athletics-championships/0xx3p03|url-status=live}}</ref> Coe welcomed the selection, but stated that his "ambition to see a World Championships in [[Africa]]... is undiminished".<ref>{{Cite news |title=Tokyo to host 2025 World Championships |language=en-GB |work=BBC Sport |url=https://www.bbc.com/sport/athletics/62176668 |access-date=2022-07-16 |quote="My ambition to see a World Championships in Africa, and possibly in Nairobi, is undiminished," he told BBC Sport Africa. |archive-date=July 16, 2022 |archive-url=https://web.archive.org/web/20220716174530/https://www.bbc.com/sport/athletics/62176668 |url-status=live }}</ref>
+
+== Qualification ==
+[[World Athletics]] approved the timetable and qualification system for the 2025 World Athletics Championships on 31 July 2024.<ref>{{cite web |date=31 July 2024 |title=Timetable and qualification system approved for WCH Tokyo 25 and WIC Nanjing 25|url=https://worldathletics.org/news/press-releases/timetable-qualification-system-world-championships-tokyo-25-indoor-nanjing-25 |accessdate=15 August 2024 |website=WorldAthletics.org|publisher=World Athletics|archive-url=https://web.archive.org/web/20240731190945/https://worldathletics.org/news/press-releases/timetable-qualification-system-world-championships-tokyo-25-indoor-nanjing-25|archive-date=31 July 2024|url-status=live}}</ref>
+
+=== Window ===
+The qualifying window for the marathon and 35 km race walk was 5 November 2023 until 4 May 2025. For the 10,000 m, 20 km race walk, combined events and relays, the window ran from 25 February 2024 to 24 August 2025. For all other events, entry standards could be achieved from 1 August 2024 to 24 August 2025.
+
+=== Entry standards ===
+The qualification system for the championships was based on a combination of entry standards and world rankings. The entry standards<ref>{{cite web |date=31 July 2024 |title=World Athletics Championships Tokyo 25 - Target number of athletes / teams by event|url=https://assets.aws.worldathletics.org/document/66aa789d5e6a655f85e64212.pdf |accessdate=15 August 2024 |website=WorldAthletics.org|publisher=World Athletics|archive-url=https://web.archive.org/web/20240801000541/https://assets.aws.worldathletics.org/document/66aa789d5e6a655f85e64212.pdf|archive-date=1 August 2024|url-status=live}}</ref> were set with the aim of qualifying about 50% of the athletes.
+
+The top five finishers at Platinum Label marathons and winners of individual events at area championships (except for the marathon), regardless of marks, were considered as having achieved the entry standard.
+
+The top three athletes in the [[2024–25 World Athletics Cross Country Tour]] – not qualified through entry standards or other ways – were deemed to be qualified for the 10,000 m.
+
+The [[2025 World Athletics Relays]] in [[Guangzhou]], [[China]] were used as a qualifying event for the relays, with the top 14 teams in each event securing their place at the World Championships.
+
+{| class="wikitable sortable collapsible collapsed" style="text-align:right;"
+|-
+! Event !! Men !! Quota !! Women !! Quota
+|-
+| style="text-align:left;"| [[100 metres]]
+| 10.00 || 48 || 11.07 || 48
+|-
+| style="text-align:left;"| [[200 metres]]
+| 20.16 || 48 || 22.57 || 48
+|-
+| style="text-align:left;"| [[400 metres]]
+| 44.85 || 48 || 50.75 || 48
+|-
+| style="text-align:left;"| [[800 metres]]
+| 1:44.50 || 56 || 1:59.00 || 56
+|-
+| style="text-align:left;"| [[1500 metres]] / Mile
+| 3:33.00 / 3:50.00 || 56 || 4:01.50 / 4:19.90 || 56
+|-
+| style="text-align:left;"| [[5000 metres]]
+| 13:01.00 || 42 || 14:50.00 || 42
+|-
+| style="text-align:left;"| [[10,000 metres]] / 10&nbsp;km road
+| 27:00.00 || 27 || 30:20.00 || 27
+|-
+| style="text-align:left;"| [[Marathon]]
+| 2:06:30 || 100 || 2:23:30 || 100
+|-
+| style="text-align:left;"| [[3000 metres steeplechase]]
+| 8:15.00 || 36 || 9:18.00 || 36
+|-
+| style="text-align:left;"| [[110 metres hurdles|110]]/[[100 metres hurdles]]
+| 13.27 || 40 || 12.73 || 40
+|-
+| style="text-align:left;"| [[400 metres hurdles]]
+| 48.50 || 40 || 54.65 || 40
+|-
+| style="text-align:left;"| [[High jump]]
+| 2.33 || 36 || 1.97 || 36
+|-
+| style="text-align:left;"| [[Pole vault]]
+| 5.82 || 36 || 4.73 || 36
+|-
+| style="text-align:left;"| [[Long jump]]
+| 8.27 || 36 || 6.86 || 36
+|-
+| style="text-align:left;"| [[Triple jump]]
+| 17.22 || 36 || 14.55 || 36
+|-
+| style="text-align:left;"| [[Shot put]]
+| 21.50 || 36 || 18.80 || 36
+|-
+| style="text-align:left;"| [[Discus throw]]
+| 67.50 || 36 || 64.50 || 36
+|-
+| style="text-align:left;"| [[Hammer throw]]
+| 78.20 || 36 || 74.00 || 36
+|-
+| style="text-align:left;"| [[Javelin throw]]
+| 85.50 || 36 || 64.00 || 36
+|-
+| style="text-align:left;"| [[Decathlon]] / [[Heptathlon]]
+| 8550 || 24 || 6500 || 24
+|-
+| style="text-align:left;"| [[20 kilometres race walk]]
+| 1:19:20 || 50 || 1:29:00 || 50
+|-
+| style="text-align:left;"| [[35 kilometres race walk]]
+| 2:28:00 || 50 || 2:48:00 || 50
+|-
+| style="text-align:left;"| [[4 × 100 metres relay]]
+| Top 14 at the [[2025 World Athletics Relays – Men's 4 × 100 metres relay|2025 World Athletics Relays]]<br />+ 2 from Top Lists || 16 || Top 14 at the [[2025 World Athletics Relays – Women's 4 × 100 metres relay|2025 World Athletics Relays]]<br />+ 2 from Top Lists || 16
+|-
+| style="text-align:left;"| [[4 × 400 metres relay]]
+| Top 14 at the [[2025 World Athletics Relays – Men's 4 × 400 metres relay|2025 World Athletics Relays]]<br />+ 2 from Top Lists || 16 || Top 14 at the [[2025 World Athletics Relays – Women's 4 × 400 metres relay|2025 World Athletics Relays]]<br />+ 2 from Top Lists || 16
+|-
+| style="text-align:left;"| [[4 × 400 metres relay]] mixed
+| Top 14 at the [[2025 World Athletics Relays - Mixed 4 × 400 metres relay|2025 World Athletics Relays]]<br />+ 2 from Top Lists || 16 || | Top 14 at the [[2025 World Athletics Relays - Mixed 4 × 400 metres relay|2025 World Athletics Relays]]<br />+ 2 from Top Lists || 16
+|}
+
+==Event schedule==
+In August 2024, World Athletics released the timetable for the championships.<ref>{{Cite web |date=1 August 2024 |title=Timetable released for World Athletics Championships Tokyo 25 |url=https://worldathletics.org/competitions/world-athletics-championships/tokyo25/news/press-releases/timetable-released-for-world-athletics-championships-tokyo-25 |access-date=19 August 2025 |website=[[World Athletics]] |archive-date=August 13, 2024|archive-url=https://web.archive.org/web/20240813020909/https://worldathletics.org/competitions/world-athletics-championships/tokyo25/news/press-releases/timetable-released-for-world-athletics-championships-tokyo-25|url-status=live}}</ref><ref>{{Cite web |title=Timetable {{!}} Tokyo 2025 {{!}} World Athletics Championship |url=https://worldathletics.org/competitions/world-athletics-championships/tokyo25/timetable |access-date=19 August 2025 |website=[[World Athletics]] |archive-date=September 9, 2025|archive-url=https://web.archive.org/web/20250909230003/https://worldathletics.org/competitions/world-athletics-championships/tokyo25/timetable|url-status=live}}</ref>{{athletics schedule legend}}
+M = morning session, E = evening session
+{{col-begin}}{{col-2}}
+{| class="wikitable athletics-schedule" style="font-size:90%"
+|+ Men
+|-
+! scope="row" | Date
+! scope="col" colspan=2|Sep 13
+! scope="col" colspan=3|Sep 14
+! scope="col" colspan=2|Sep 15
+! scope="col" colspan=2|Sep 16
+! scope="col" |Sep 17
+! scope="col" |Sep 18
+! scope="col" |Sep 19
+! scope="col" colspan=2|Sep 20
+! scope="col" colspan=2|Sep 21
+|-
+! scope="col" | Event
+! scope="col" | M
+! scope="col" | E
+! scope="col" | M
+! scope="col" colspan=2| E
+! scope="col" | M
+! scope="col" | E
+! scope="col" colspan=2| E
+! scope="col" | E
+! scope="col" | E
+! scope="col" | E
+! scope="col" | M
+! scope="col" | E
+! scope="col" | M
+! scope="col" | E
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 100 metres|100 m]] || class="heats" | P || class="heats" | H || || class="semifinals" | ½ || class="final" | F || || || colspan=2| || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 200 metres|200 m]] || || || || colspan=2| || || || colspan=2| || class="heats" | H || class="semifinals" | ½ || class="final" | F || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 400 metres|400 m]] || || || || colspan=2 class="heats" | H || || || colspan=2 class="semifinals" | ½ || || class="final" | F || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 800 metres|800 m]] || || || || colspan=2| || || || colspan=2 class="heats" | H || || class="semifinals" | ½ || || || class="final" | F || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 1500 metres|1500 m]] || || || class="heats" | H || colspan=2| || || class="semifinals" | ½ || colspan=2| || class="final" | F || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 5000 metres|5000 m]] || || || || colspan=2| || || || colspan=2| || || || class="heats" | H || || || || class="final" | F
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 10,000 metres|10,000 m]] || || || || colspan=2 class="final" | F || || || colspan=2| || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's marathon|Marathon]] || || || || colspan=2| || class="final" | F || || colspan=2| || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 3000 metres steeplechase|3000 m steeplechase]] || || class="heats" | H || || colspan=2| || || class="final" | F || colspan=2| || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 110 metres hurdles|110 m hurdles]] || || || || colspan=2| || || class="heats" | H || class="semifinals" | ½ || class="final" | F || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 400 metres hurdles|400 m hurdles]] || || || || colspan=2| || || class="heats" | H || colspan=2| || class="semifinals" | ½ || || class="final" | F || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's decathlon|Decathlon]] || || || || colspan=2| || || || colspan=2| || || || || colspan=4 class="final" | F
+|-
+| class="event" | [[2025 World Athletics Championships – Men's high jump|High jump]] || || || || colspan=2 class="heats" | Q || || || colspan=2 class="final" | F || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's pole vault|Pole vault]] || || class="heats" | Q || || colspan=2| || || class="final" | F || colspan=2| || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's long jump|Long jump]] || || || || colspan=2| || || class="heats" | Q || colspan=2| || class="final" | F || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's triple jump|Triple jump]] || || || || colspan=2| || || || colspan=2| || class="heats" | Q || || class="final" | F || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's shot put|Shot put]] || class="heats" | Q || class="final" | F || || colspan=2| || || || colspan=2| || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's discus throw|Discus throw]] || || || || colspan=2| || || || colspan=2| || || || || class="heats" | Q || || || class="final" | F
+|-
+| class="event" | [[2025 World Athletics Championships – Men's hammer throw|Hammer throw]] || || || || colspan=2| || class="heats" | Q || || colspan=2 class="final" | F || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's javelin throw|Javelin throw]] || || || || colspan=2| || || || colspan=2| || class="heats" | Q || class="final" | F || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 20 kilometres walk|20 km walk]] || || || || colspan=2| || || || colspan=2| || || || || class="final" | F || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 35 kilometres walk|35 km walk]] || class="final" | F || || || colspan=2| || || || colspan=2| || || || || || || ||
+|-
+| class="event" | {{nowrap|[[2025 World Athletics Championships – Men's 4 × 100 metres relay|4 × 100 m relay]]}} || || || || colspan=2| || || || colspan=2| || || || || || class="heats" | H || || class="final" | F
+|-
+| class="event" | [[2025 World Athletics Championships – Men's 4 × 400 metres relay|4 × 400 m relay]] || || || || colspan=2| || || || colspan=2| || || || || || class="heats" | H || || class="final" | F
+|}
+{{col-2}}
+{| class="wikitable athletics-schedule" style="font-size:90%"
+|+ Women
+|-
+! scope="row" | Date
+! scope="col" colspan=2|Sep 13
+! scope="col" colspan=3|Sep 14
+! scope="col" colspan=3|Sep 15
+! scope="col" |Sep 16
+! scope="col" |Sep 17
+! scope="col" |Sep 18
+! scope="col" |Sep 19
+! scope="col" colspan=2|Sep 20
+! scope="col" colspan=2|Sep 21
+|-
+! scope="col" | Event
+! scope="col" | M
+! scope="col" | E
+! scope="col" | M
+! scope="col" colspan=2| E
+! scope="col" | M
+! scope="col" colspan=2| E
+! scope="col" | E
+! scope="col" | E
+! scope="col" | E
+! scope="col" | E
+! scope="col" | M
+! scope="col" | E
+! scope="col" | M
+! scope="col" | E
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 100 metres|100 m]] || || class="heats" | H || || class="semifinals" | ½ || class="final" | F || || colspan=2| || || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 200 metres|200 m]] || || || || colspan=2| || || colspan=2| || || class="heats" | H || class="semifinals" | ½ || class="final" | F || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 400 metres|400 m]] || || || || colspan=2 class="heats" | H || || colspan=2| || class="semifinals" | ½ || || class="final" | F || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 800 metres|800 m]] || || || || colspan=2| || || colspan=2| || || || class="heats" | H || class="semifinals" | ½ || || || || class="final" | F
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 1500 metres|1500 m]] || || class="heats" | H || || colspan=2 class="semifinals" | ½ || || colspan=2| || class="final" | F || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 5000 metres|5000 m]] || || || || colspan=2| || || colspan=2| || || || class="heats" | H || || || class="final" | F || || 
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 10,000 metres|10,000 m]] || || class="final" | F || || colspan=2| || || colspan=2| || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's marathon|Marathon]] || || || class="final" | F || colspan=2| ||  || colspan=2| || || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 3000 metres steeplechase|3000 m steeplechase]] || || || || colspan=2| || class="heats" | H || colspan=2| || || class="final" | F || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 100 metres hurdles|100 m hurdles]] || || || class="heats" | H || colspan=2| || || class="semifinals" | ½ || class="final" | F || || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 400 metres hurdles|400 m hurdles]] || || || || colspan=2| || class="heats" | H || colspan=2| ||  || class="semifinals" | ½ || || class="final" | F || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's heptathlon|Heptathlon]] || || || || colspan=2| || || colspan=2| || || || || colspan=3 class="final" | F || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's high jump|High jump]] || || || || colspan=2| || || colspan=2| || || || class="heats" | Q || || || || || class="final" | F
+|-
+| class="event" | [[2025 World Athletics Championships – Women's pole vault|Pole vault]] || || || || colspan=2| || class="heats" | Q || colspan=2| || || class="final" | F || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's long jump|Long jump]] || || class="heats" | Q || || colspan=2 class="final" | F || || colspan=2| || || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's triple jump|Triple jump]] || || || || colspan=2| || || colspan=2| || class="heats" | Q || || class="final" | F || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's shot put|Shot put]] || || || || colspan=2| || || colspan=2| || || || || || class="heats" | Q || class="final" | F || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's discus throw|Discus throw]] || class="heats" | Q || || || colspan=2 class="final" | F || || colspan=2| || || || || ||  || || || 
+|-
+| class="event" | [[2025 World Athletics Championships – Women's hammer throw|Hammer throw]] || || || class="heats" | Q || colspan=2| ||  || colspan=2 class="final" | F || || || || || || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's javelin throw|Javelin throw]] || || || || colspan=2| || || colspan=2| || || || || class="heats" | Q || || class="final" | F || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 20 kilometres walk|20 km walk]] || || || || colspan=2| || || colspan=2| || || || || || class="final" | F || || ||
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 35 kilometres walk|35 km walk]] || class="final" | F || || || colspan=2| || || colspan=2| || || || || || || || ||
+|-
+| class="event" | {{nowrap|[[2025 World Athletics Championships – Women's 4 × 100 metres relay|4 × 100 m relay]]}} || || || || colspan=2| || || colspan=2|  || || || || || || class="heats" | H || || class="final" | F
+|-
+| class="event" | [[2025 World Athletics Championships – Women's 4 × 400 metres relay|4 × 400 m relay]] || || || || colspan=2| || || colspan=2| || || || || || || class="heats" | H || || class="final" | F
+|}
+{{col-end}}
+{| class="wikitable athletics-schedule" style="font-size:90%"
+|+ Mixed
+|-
+! scope="row" | Date
+! scope="col" colspan=2|Sep 13
+|-
+! scope="col" | Event
+! scope="col" | M
+! scope="col" | E
+|-
+| class="event" | [[2025 World Athletics Championships – Mixed 4 × 400 metres relay|4 × 400 m relay]] || class="heats" | H || class="final" | F
+|}
+
+==Medal table==
+{{Medals table
+ | caption        =
+ | host           = JPN
+ | show_limit     =
+ | remaining_link =
+ | flag_template  = Flag link team
+ | event          =
+ | team           =
+ | gold_USA = 16 | silver_USA = 5 | bronze_USA = 5
+ | gold_KEN = 7 | silver_KEN = 2 | bronze_KEN = 2
+ | gold_CAN = 3 | silver_CAN = 1 | bronze_CAN = 1
+ | gold_NED = 2 | silver_NED = 2 | bronze_NED = 2
+ | gold_BOT = 2 | silver_BOT = 0 | bronze_BOT = 1
+ | gold_NZL = 2 | silver_NZL = 0 | bronze_NZL = 1
+ | gold_ESP = 2 | silver_ESP = 0 | bronze_ESP = 1
+ | gold_SWE = 2 | silver_SWE = 0 | bronze_SWE = 1
+ | gold_POR = 2 | silver_POR = 0 | bronze_POR = 0
+ | gold_JAM = 1 | silver_JAM = 6 | bronze_JAM = 3
+ | gold_ITA = 1 | silver_ITA = 3 | bronze_ITA = 3
+ | gold_GER = 1 | silver_GER = 3 | bronze_GER = 1
+ | gold_BRA = 1 | silver_BRA = 2 | bronze_BRA = 0
+ | gold_TTO = 1 | silver_TTO = 1 | bronze_TTO = 0
+ | gold_AUS = 1 | silver_AUS = 0 | bronze_AUS = 3
+ | gold_CUB = 1 | silver_CUB = 0 | bronze_CUB = 2
+ | gold_ECU = 1 | silver_ECU = 0 | bronze_ECU = 1
+ | gold_FRA = 1 | silver_FRA = 0 | bronze_FRA = 1
+ | gold_SUI = 1 | silver_SUI = 0 | bronze_SUI = 0
+ | gold_TAN = 1 | silver_TAN = 0 | bronze_TAN = 0
+ | gold_GBR = 0 | silver_GBR = 3 | bronze_GBR = 2
+ | gold_CHN = 0 | silver_CHN = 2 | bronze_CHN = 2
+ | gold_ETH = 0 | silver_ETH = 2 | bronze_ETH = 2
+ | gold_MEX = 0 | silver_MEX = 2 | bronze_MEX = 0
+ | gold_BHR = 0 | silver_BHR = 1 | bronze_BHR = 1
+ | gold_BEL = 0 | silver_BEL = 1 | bronze_BEL = 1
+ | gold_ALG = 0 | silver_ALG = 1 | bronze_ALG = 0
+ | gold_DMA = 0 | silver_DMA = 1 | bronze_DMA = 0
+ | gold_DOM = 0 | silver_DOM = 1 | bronze_DOM = 0
+ | gold_GRE = 0 | silver_GRE = 1 | bronze_GRE = 0
+ | gold_GRN = 0 | silver_GRN = 1 | bronze_GRN = 0
+ | gold_IRL = 0 | silver_IRL = 1 | bronze_IRL = 0
+ | gold_LAT = 0 | silver_LAT = 1 | bronze_LAT = 0
+ | gold_LTU = 0 | silver_LTU = 1 | bronze_LTU = 0
+ | gold_MAR = 0 | silver_MAR = 1 | bronze_MAR = 0
+ | gold_NGR = 0 | silver_NGR = 1 | bronze_NGR = 0
+ | gold_POL = 0 | silver_POL = 1 | bronze_POL = 0
+ | gold_PUR = 0 | silver_PUR = 1 | bronze_PUR = 0
+ | gold_KOR = 0 | silver_KOR = 1 | bronze_KOR = 0
+ | gold_JPN = 0 | silver_JPN = 0 | bronze_JPN = 2 | host_JPN = yes
+ | gold_COL = 0 | silver_COL = 0 | bronze_COL = 1
+ | gold_CZE = 0 | silver_CZE = 0 | bronze_CZE = 1
+ | gold_HUN = 0 | silver_HUN = 0 | bronze_HUN = 1
+ | gold_QAT = 0 | silver_QAT = 0 | bronze_QAT = 1
+ | gold_LCA = 0 | silver_LCA = 0 | bronze_LCA = 1
+ | gold_SAM = 0 | silver_SAM = 0 | bronze_SAM = 1
+ | gold_SRB = 0 | silver_SRB = 0 | bronze_SRB = 1
+ | gold_SVK = 0 | silver_SVK = 0 | bronze_SVK = 1
+ | gold_SLO = 0 | silver_SLO = 0 | bronze_SLO = 1
+ | gold_RSA = 0 | silver_RSA = 0 | bronze_RSA = 1
+ | gold_UKR = 0 | silver_UKR = 0 | bronze_UKR = 1
+ | gold_URU = 0 | silver_URU = 0 | bronze_URU = 1
+ | gold_VEN = 0 | silver_VEN = 0 | bronze_VEN = 1
+}}
+
+== Medal summary ==
+===Men===
+{| {{MedalistTable|type=Event|columns=2}}
+|-
+| {{EventLink|100 metres|Men}}
+| {{FlagIOC2medalist|[[Oblique Seville]]|JAM|2025 World Athletics Championships}} || 9.77 {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Kishane Thompson]]|JAM|2025 World Athletics Championships}} || 9.82
+| {{FlagIOC2medalist|[[Noah Lyles]]|USA|2025 World Athletics Championships}} || 9.89 {{AthAbbr|SB}}
+|-
+| {{EventLink|200 metres|Men}}
+| {{FlagIOC2medalist|[[Noah Lyles]]|USA|2025 World Athletics Championships}} || 19.52
+| {{FlagIOC2medalist|[[Kenny Bednarek]]|USA|2025 World Athletics Championships}} || 19.58 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Bryan Levell]]|JAM|2025 World Athletics Championships}} || 19.64  {{AthAbbr|PB}}
+|-
+| {{EventLink|400 metres|Men}}
+| {{FlagIOC2medalist|[[Collen Kebinatshipi]]|BOT|2025 World Athletics Championships}} || 43.53 '''{{AthAbbr|NR|Botswana}}''', {{AthAbbr|WL}}
+| {{FlagIOC2medalist|[[Jereem Richards]]|TTO|2025 World Athletics Championships}} || 43.72  '''{{AthAbbr|NR|Trinidad and Tobago}}'''
+| {{FlagIOC2medalist|[[Bayapo Ndori]]|BOT|2025 World Athletics Championships}} || 44.20 {{AthAbbr|SB}}
+|-
+| {{EventLink|800 metres|Men}}
+| {{FlagIOC2medalist|[[Emmanuel Wanyonyi]]|KEN|2025 World Athletics Championships}} || 1:41.86 '''{{AthAbbr|CR|World Athletics Championships}}'''
+| {{FlagIOC2medalist|[[Djamel Sedjati]]|ALG|2025 World Athletics Championships}} || 1:41.90 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Marco Arop]]|CAN|2025 World Athletics Championships}} || 1:41.95 {{AthAbbr|SB}}
+|-
+| {{EventLink|1500 metres|Men}}
+| {{FlagIOC2medalist|[[Isaac Nader]]|POR|2025 World Athletics Championships}} || 3:34.10
+| {{FlagIOC2medalist|[[Jake Wightman]]|GBR|2025 World Athletics Championships}} || 3:34.12
+| {{FlagIOC2medalist|[[Reynold Cheruiyot]]|KEN|2025 World Athletics Championships}} || 3:34.25
+|-
+| {{EventLink|5000 metres|Men}}
+| {{FlagIOC2medalist|[[Cole Hocker]]|USA|2025 World Athletics Championships}} || 12:58.30
+| {{FlagIOC2medalist|[[Isaac Kimeli]]|BEL|2025 World Athletics Championships}} || 12:58.78 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Jimmy Gressier]]|FRA|2025 World Athletics Championships}} || 12:59.33 
+|-
+| {{EventLink|10,000 metres|Men}}
+| {{FlagIOC2medalist|[[Jimmy Gressier]]|FRA|2025 World Athletics Championships}} || 28:55.77 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Yomif Kejelcha]]|ETH|2025 World Athletics Championships}} || 28:55.83 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Andreas Almgren]]|SWE|2025 World Athletics Championships}} || 28:56.02
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-valign="top"
+| {{EventLink|4 × 100 metres relay|Men}}
+| {{flaglinkteam|USA}}<br />[[Christian Coleman]]<br />[[Kenny Bednarek]]<br />[[Courtney Lindsey]]<br />[[Noah Lyles]]<br />[[Ronnie Baker (athlete)|Ronnie Baker]]*<br />[[Trayvon Bromell]]*<br />[[T'Mars McCallum]]* || 37.29 {{AthAbbr|WL}}
+| {{flaglinkteam|CAN}}<br />[[Aaron Brown (sprinter)|Aaron Brown]]<br />[[Jerome Blake]]<br />[[Brendon Rodney]]<br />[[Andre De Grasse]] || 37.55 {{AthAbbr|SB}}
+| {{flaglinkteam|NED}}<br />[[Nsikak Ekpo]]<br />[[Taymir Burnet]]<br />[[Xavi Mo-Ajok]]<br />[[Elvis Afrifa]] || 37.81 '''{{AthAbbr|NR|Dutch}}'''
+|-valign="top"
+| {{EventLink|4 × 400 metres relay|Men}}
+| {{flaglinkteam|BOT}}<br />[[Lee Eppie]]<br />[[Letsile Tebogo]]<br />[[Bayapo Ndori]]<br />[[Collen Kebinatshipi]]<br />[[Leungo Scotch]]* || 2:57.76
+| {{flaglinkteam|USA}}<br />[[Vernon Norwood]]<br />[[Jacory Patterson]]<br />[[Khaleb McRae]]<br />[[Rai Benjamin]]<br />[[Demarius Smith]]*<br />[[Christopher Bailey (runner)|Christopher Bailey]]*<br />[[Jenoah McKiver]]*<br />[[Bryce Deadmon]]* || 2:57.83 {{AthAbbr|SB}}
+| {{flaglinkteam|RSA}}<br />[[Lythe Pillay]]<br />[[Udeme Okon]]<br />[[Wayde van Niekerk]]<br />[[Zakhiti Nene]]<br />[[Gardeo Isaacs]]*<br />[[Leendert Koekemoer]]* || 2:57.83
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{EventLink|110 metres hurdles|Men}}
+| {{FlagIOC2medalist|[[Cordell Tinch]]|USA|2025 World Athletics Championships}} || 12.99
+| {{FlagIOC2medalist|[[Orlando Bennett]]|JAM|2025 World Athletics Championships}} || 13.08 {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Tyler Mason]]|JAM|2025 World Athletics Championships}} || 13.12 ={{AthAbbr|PB}}
+|-
+| {{EventLink|400 metres hurdles|Men}}
+| {{FlagIOC2medalist|[[Rai Benjamin]]|USA|2025 World Athletics Championships}} || 46.52 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Alison dos Santos]]|BRA|2025 World Athletics Championships}} || 46.84 
+| {{FlagIOC2medalist|[[Abderrahman Samba]]|QAT|2025 World Athletics Championships}} || 47.06 {{AthAbbr|SB}}
+|-
+| {{EventLink|3000 metres steeplechase|Men}}
+| {{FlagIOC2medalist|[[Geordie Beamish]]|NZL|2025 World Athletics Championships}} || 8:33.88	
+| {{FlagIOC2medalist|[[Soufiane El Bakkali]]|MAR|2025 World Athletics Championships}} || 8:33.95
+| {{FlagIOC2medalist|[[Edmund Serem]]|KEN|2025 World Athletics Championships}} || 8:34.56	
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{EventLink|Marathon|Men}}
+| {{FlagIOC2medalist|[[Alphonce Simbu]]|TAN|2025 World Athletics Championships}} || 2:09:48 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Amanal Petros]]|GER|2025 World Athletics Championships}} || 2:09:48
+| {{FlagIOC2medalist|[[Iliass Aouani]]|ITA|2025 World Athletics Championships}} || 2:09:53
+|-
+| {{EventLink|20 kilometres walk|Men}}
+| {{FlagIOC2medalist|[[Caio Bonfim]]|BRA|2025 World Athletics Championships}} || 1:18:35
+| {{FlagIOC2medalist|[[Wang Zhaozhao]]|CHN|2025 World Athletics Championships}} || 1:18:43
+| {{FlagIOC2medalist|[[Paul McGrath (race walker)|Paul McGrath]]|ESP|2025 World Athletics Championships}} || 1:18:45
+|-
+| {{EventLink|35 kilometres walk|Men}}
+| {{FlagIOC2medalist|[[Evan Dunfee]]|CAN|2025 World Athletics Championships}} || 2:28:22
+| {{FlagIOC2medalist|[[Caio Bonfim]]|BRA|2025 World Athletics Championships}} || 2:28:55 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Hayato Katsuki]]|JPN|2025 World Athletics Championships}} || 2:29:16
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{EventLink|High jump|Men}}
+| {{FlagIOC2medalist|[[Hamish Kerr]]|NZL|2025 World Athletics Championships}} || 2.36 m ='''{{AthAbbr|AR|Oceanian}}''', {{AthAbbr|WL}}
+| {{FlagIOC2medalist|[[Woo Sang-hyeok]]|KOR|2025 World Athletics Championships}} || 2.34 m ={{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Jan Štefela]]|CZE|2025 World Athletics Championships}} || 2.31 m
+|-
+| {{EventLink|Pole vault|Men}}
+| {{FlagIOC2medalist|[[Armand Duplantis]]|SWE|2025 World Athletics Championships}} || 6.30 m '''{{AthAbbr|WR}}'''
+| {{FlagIOC2medalist|[[Emmanouil Karalis]]|GRE|2025 World Athletics Championships}} || 6.00 m 
+| {{FlagIOC2medalist|[[Kurtis Marschall]]|AUS|2025 World Athletics Championships}} || 5.95 m {{AthAbbr|PB}}
+|-
+| {{EventLink|Long jump|Men}}
+| {{FlagIOC2medalist|[[Mattia Furlani]]|ITA|2025 World Athletics Championships}} || 8.39 m {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Tajay Gayle]]|JAM|2025 World Athletics Championships}} || 8.34 m ={{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Shi Yuhao]]|CHN|2025 World Athletics Championships}} || 8.33 m {{AthAbbr|SB}}
+|-
+| {{EventLink|Triple jump|Men}}
+| {{FlagIOC2medalist|[[Pedro Pichardo]]|POR|2025 World Athletics Championships}} || 17.91 m {{AthAbbr|WL}}
+| {{FlagIOC2medalist|[[Andrea Dallavalle]]|ITA|2025 World Athletics Championships}} || 17.64 m {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Lázaro Martínez (triple jumper)|Lázaro Martínez]]|CUB|2025 World Athletics Championships}} || 17.49 m {{AthAbbr|SB}}
+|-
+| {{EventLink|Shot put|Men}}
+| {{FlagIOC2medalist|[[Ryan Crouser]]|USA|2025 World Athletics Championships}} || 22.34 m {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Uziel Muñoz]]|MEX|2025 World Athletics Championships}} || 21.97 m '''{{AthAbbr|NR|Mexican}}'''
+| {{FlagIOC2medalist|[[Leonardo Fabbri]]|ITA|2025 World Athletics Championships}} || 21.94 m
+|-
+| {{EventLink|Discus throw|Men}}
+| {{FlagIOC2medalist|[[Daniel Ståhl]]|SWE|2025 World Athletics Championships}} || 70.47 m {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Mykolas Alekna]]|LTU|2025 World Athletics Championships}} || 67.84 m
+| {{FlagIOC2medalist|[[Alex Rose (athlete)|Alex Rose]]|SAM|2025 World Athletics Championships}} || 66.96 m
+|-
+| {{EventLink|Javelin throw|Men}}
+| {{FlagIOC2medalist|[[Keshorn Walcott]]|TTO|2025 World Athletics Championships}} || 88.16 m {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Anderson Peters]]|GRN|2025 World Athletics Championships}} || 87.38 m
+| {{FlagIOC2medalist|[[Curtis Thompson (javelin thrower)|Curtis Thompson]]|USA|2025 World Athletics Championships}} || 86.67 m
+|-
+| {{EventLink|Hammer throw|Men}}
+| {{FlagIOC2medalist|[[Ethan Katzberg]]|CAN|2025 World Athletics Championships}} || 84.70 m '''{{AthAbbr|CR|World Athletics Championships}}''', '''{{AthAbbr|AR|North, Central American and Caribbean}}'''
+| {{FlagIOC2medalist|[[Merlin Hummel]]|GER|2025 World Athletics Championships}} || 82.77 m {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Bence Halász]]|HUN|2025 World Athletics Championships}} || 82.69 m
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{EventLink|Decathlon|Men}}
+| {{FlagIOC2medalist|[[Leo Neugebauer]]|GER|2025 World Athletics Championships}} || 8804 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Ayden Owens-Delerme]]|PUR|2025 World Athletics Championships}} || 8784 '''{{AthAbbr|NR|Puerto Rican}}'''
+| {{FlagIOC2medalist|[[Kyle Garland]]|USA|2025 World Athletics Championships}} || 8703 
+|- style="background:#e8e8e8;"
+|colspan=7|{{Sports record codes}}
+|}
+<small><nowiki>*</nowiki> Indicates the athletes only competed in the preliminary heats and received medals</small>
+
+===Women===
+{| {{MedalistTable|type=Event|columns=2}}
+|-
+| {{EventLink|100 metres|Women}}
+| {{FlagIOC2medalist|[[Melissa Jefferson-Wooden]]|USA|2025 World Athletics Championships}} || 10.61 '''{{AthAbbr|CR|World Athletics Championships}}'''
+| {{FlagIOC2medalist|[[Tina Clayton]]|JAM|2025 World Athletics Championships}} || 10.76 {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Julien Alfred]]|LCA|2025 World Athletics Championships}} || 10.84
+|-
+| {{EventLink|200 metres|Women}}
+| {{FlagIOC2medalist|[[Melissa Jefferson-Wooden]]|USA|2025 World Athletics Championships}} || 21.68 {{AthAbbr|WL}}
+| {{FlagIOC2medalist|[[Amy Hunt]]|GBR|2025 World Athletics Championships}} || 22.14
+| {{FlagIOC2medalist|[[Shericka Jackson]]|JAM|2025 World Athletics Championships}} || 22.18
+|-
+| {{EventLink|400 metres|Women}}
+| {{FlagIOC2medalist|[[Sydney McLaughlin-Levrone]]|USA|2025 World Athletics Championships}} || 47.78 '''{{AthAbbr|CR|World Athletics Championships}}''', '''{{AthAbbr|AR|North, Central American and Caribbean}}''', {{AthAbbr|WL}}
+| {{FlagIOC2medalist|[[Marileidy Paulino]]|DOM|2025 World Athletics Championships}} || 47.98 '''{{AthAbbr|NR|Dominican}}'''
+| {{FlagIOC2medalist|[[Salwa Eid Naser]]|BHR|2025 World Athletics Championships}} || 48.19 {{AthAbbr|SB}}
+|-
+| {{EventLink|800 metres|Women}}
+| {{FlagIOC2medalist|[[Lilian Odira]]|KEN|2025 World Athletics Championships}} || 1:54.62 '''{{AthAbbr|CR|World Athletics Championships}}''', {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Georgia Hunter Bell]]|GBR|2025 World Athletics Championships}} || 1:54.90 {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Keely Hodgkinson]]|GBR|2025 World Athletics Championships}} || 1:54.91
+|-
+| {{EventLink|1500 metres|Women}}
+| {{FlagIOC2medalist|[[Faith Kipyegon]]|KEN|2025 World Athletics Championships}} || 3:52.15
+| {{FlagIOC2medalist|[[Dorcus Ewoi]]|KEN|2025 World Athletics Championships}} || 3:54.92 {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Jessica Hull]]|AUS|2025 World Athletics Championships}} || 3:55.16
+|-
+| {{EventLink|5000 metres|Women}}
+| {{FlagIOC2medalist|[[Beatrice Chebet]]|KEN|2025 World Athletics Championships}} || 14:54.36
+| {{FlagIOC2medalist|[[Faith Kipyegon]]|KEN|2025 World Athletics Championships}} || 14:55.07 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Nadia Battocletti]]|ITA|2025 World Athletics Championships}} || 14:55.42
+|-
+| {{EventLink|10,000 metres|Women}}
+| {{FlagIOC2medalist|[[Beatrice Chebet]]|KEN|2025 World Athletics Championships}} || 30:37.61
+| {{FlagIOC2medalist|[[Nadia Battocletti]]|ITA|2025 World Athletics Championships}} || 30:38.23 '''{{AthAbbr|NR|Italian}}'''
+| {{FlagIOC2medalist|[[Gudaf Tsegay]]|ETH|2025 World Athletics Championships}} || 30:39.65 {{AthAbbr|SB}}
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-valign="top"
+| {{EventLink|4 × 100 metres relay|Women}}
+| {{flaglinkteam|USA}}<br />[[Melissa Jefferson-Wooden]]<br />[[Twanisha Terry]]<br />[[Kayla White]]<br />[[Sha'Carri Richardson]]<br />[[Jacious Sears]]* || 41.75
+| {{flaglinkteam|JAM}}<br />[[Shelly-Ann Fraser-Pryce]]<br />[[Tia Clayton]]<br />[[Tina Clayton]]<br />[[Jonielle Smith]]<br />[[Jodean Williams]]* || 41.79 {{AthAbbr|SB}}
+| {{flaglinkteam|GER}}<br />[[Sina Mayer]]<br />[[Rebekka Haase]]<br />[[Sophia Junk]]<br />[[Gina Lückenkemper]] || 41.87
+|-valign="top"
+| {{EventLink|4 × 400 metres relay|Women}}
+| {{flaglinkteam|USA}}<br />[[Isabella Whittaker]]<br />[[Lynna Irby-Jackson]]<br />[[Aaliyah Butler]]<br />[[Sydney McLaughlin-Levrone]]<br />[[Alexis Holmes]]*<br />[[Rosey Effiong]]*<br />[[Quanera Hayes]]*<br />[[Britton Wilson]]* || 3:16.61 '''{{AthAbbr|CR|World Athletics Championships}}'''
+| {{flaglinkteam|JAM}}<br />[[Dejanea Oakley]]<br />[[Stacey Ann Williams]]<br />[[Andrenette Knight]]<br />[[Nickisha Pryce]]<br />[[Roneisha McGregor]]* || 3:19.25 {{AthAbbr|SB}}
+| {{flaglinkteam|NED}}<br />[[Eveline Saalberg]]<br />[[Lieke Klaver]]<br />[[Lisanne De Witte]]<br />[[Femke Bol]]<br />[[Myrte van der Schoot]]*  || 3:20.18 {{AthAbbr|SB}}
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{EventLink|100 metres hurdles|Women}}
+| {{FlagIOC2medalist|[[Ditaji Kambundji]]|SUI|2025 World Athletics Championships}}  ||  12.24 '''{{AthAbbr|NR|Swiss}}'''
+| {{FlagIOC2medalist|[[Tobi Amusan]]|NGR|2025 World Athletics Championships}} || 12.29
+| {{FlagIOC2medalist|[[Grace Stark]]|USA|2025 World Athletics Championships}} || 12.34
+|-
+| {{EventLink|400 metres hurdles|Women}}
+| {{FlagIOC2medalist|[[Femke Bol]]|NED|2025 World Athletics Championships}} || 51.54 {{AthAbbr|WL}}
+| {{FlagIOC2medalist|[[Jasmine Jones]]|USA|2025 World Athletics Championships}} || 52.08 {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Emma Zapletalová]]|SVK|2025 World Athletics Championships}} || 53.00 '''{{AthAbbr|NR|Slovak}}'''
+|-
+| {{EventLink|3000 metres steeplechase|Women}}
+| {{FlagIOC2medalist|[[Faith Cherotich]]|KEN|2025 World Athletics Championships}} || 8:51.59 '''{{AthAbbr|CR|World Athletics Championships}}'''
+| {{FlagIOC2medalist|[[Winfred Yavi]]|BHR|2025 World Athletics Championships}} || 8:56.46
+| {{FlagIOC2medalist|[[Sembo Almayew]]|ETH|2025 World Athletics Championships}} || 8:58.86 {{AthAbbr|PB}}
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{EventLink|Marathon|Women}}
+| {{FlagIOC2medalist|[[Peres Jepchirchir]]|KEN|2025 World Athletics Championships}} || 2:24:43 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Tigst Assefa]]|ETH|2025 World Athletics Championships}} || 2:24:45
+| {{FlagIOC2medalist|[[Julia Paternain]]|URU|2025 World Athletics Championships}} || 2:27:23
+|-
+| {{EventLink|20 kilometres walk|Women}}
+| {{FlagIOC2medalist|[[María Pérez (race walker)|María Pérez]]|ESP|2025 World Athletics Championships}} || 1:25:54 {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Alegna González]]|MEX|2025 World Athletics Championships}} || 1:26:06 '''{{AthAbbr|AR|North, Central American and Caribbean}}'''
+| {{FlagIOC2medalist|[[Nanako Fujii]]|JPN|2025 World Athletics Championships}} || 1:26:18 '''{{AthAbbr|NR|Japanese}}'''
+|-
+| {{EventLink|35 kilometres walk|Women}}
+| {{FlagIOC2medalist|[[María Pérez (race walker)|María Pérez]]|ESP|2025 World Athletics Championships}} || 2:39:01
+| {{FlagIOC2medalist|[[Antonella Palmisano]]|ITA|2025 World Athletics Championships}} || 2:42:24
+| {{FlagIOC2medalist|[[Paula Milena Torres]]|ECU|2025 World Athletics Championships}} || 2:42:44 '''{{AthAbbr|NR|Ecuadorian}}'''
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{EventLink|High jump|Women}}
+| {{FlagIOC2medalist|[[Nicola Olyslagers]]|AUS|2025 World Athletics Championships}} || 2.00 m
+| {{FlagIOC2medalist|[[Maria Żodzik]]|POL|2025 World Athletics Championships}} || 2.00 m {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Yaroslava Mahuchikh]]|UKR|2025 World Athletics Championships}}<hr>{{FlagIOC2medalist|[[Angelina Topić]]|SRB|2025 World Athletics Championships}} || 1.97 m <hr> 1.97 m {{AthAbbr|SB}}
+|-
+| {{EventLink|Pole vault|Women}}
+| {{FlagIOC2medalist|[[Katie Moon]]|USA|2025 World Athletics Championships}} || 4.90 m {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Sandi Morris]]|USA|2025 World Athletics Championships}} || 4.85 m {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Tina Šutej]]|SLO|2025 World Athletics Championships}} || 4.80 m {{AthAbbr|SB}}
+|-
+| {{EventLink|Long jump|Women}}
+| {{FlagIOC2medalist|[[Tara Davis-Woodhall]]|USA|2025 World Athletics Championships}} || 7.13 m {{AthAbbr|WL}}
+| {{FlagIOC2medalist|[[Malaika Mihambo]]|GER|2025 World Athletics Championships}} || 6.99 m
+| {{FlagIOC2medalist|[[Natalia Linares]]|COL|2025 World Athletics Championships}} || 6.92 m =[[List of South American under-23 records in athletics|AU23R]]
+|-
+| {{EventLink|Triple jump|Women}}
+| {{FlagIOC2medalist|[[Leyanis Pérez]]|CUB|2025 World Athletics Championships}} || 14.94 m {{AthAbbr|WL}}
+| {{FlagIOC2medalist|[[Thea LaFond]]|DMA|2025 World Athletics Championships}} || 14.89 m {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Yulimar Rojas]]|VEN|2025 World Athletics Championships}} || 14.76 m {{AthAbbr|SB}}
+|-
+| {{EventLink|Shot put|Women}}
+| {{FlagIOC2medalist|[[Jessica Schilder]]|NED|2025 World Athletics Championships}} || 20.29 m 
+| {{FlagIOC2medalist|[[Chase Jackson]]|USA|2025 World Athletics Championships}} || 20.21 m 
+| {{FlagIOC2medalist|[[Maddi Wesche]]|NZL|2025 World Athletics Championships}} || 20.06 m ={{AthAbbr|PB}} 
+|-
+| {{EventLink|Discus throw|Women}}
+| {{FlagIOC2medalist|[[Valarie Allman]]|USA|2025 World Athletics Championships}} || 69.48 m
+| {{FlagIOC2medalist|[[Jorinde van Klinken]]|NED|2025 World Athletics Championships}} || 67.50 m {{AthAbbr|SB}}
+| {{FlagIOC2medalist|[[Silinda Morales]]|CUB|2025 World Athletics Championships}} || 67.25 m {{AthAbbr|PB}}
+|-
+| {{EventLink|Javelin throw|Women}}
+| {{FlagIOC2medalist|[[Juleisy Angulo]]|ECU|2025 World Athletics Championships}} || 65.12 m '''{{AthAbbr|NR|Ecuadorian}}'''
+| {{FlagIOC2medalist|[[Anete Sietiņa]]|LAT|2025 World Athletics Championships}} || 64.64 m {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Mackenzie Little]]|AUS|2025 World Athletics Championships}} || 63.58 m 
+|-
+| {{EventLink|Hammer throw|Women}}
+| {{FlagIOC2medalist|[[Camryn Rogers]]|CAN|2025 World Athletics Championships}} || 80.51 m '''{{AthAbbr|AR|North, Central American and Caribbean}}''', {{AthAbbr|WL}}
+| {{FlagIOC2medalist|[[Zhao Jie]]|CHN|2025 World Athletics Championships}} || 77.60 m {{AthAbbr|PB}}
+| {{FlagIOC2medalist|[[Zhang Jiale]]|CHN|2025 World Athletics Championships}} || 77.10 m 
+|-
+| bgcolor="#dddddd" colspan="7" |
+|-
+| {{EventLink|Heptathlon|Women}}
+| {{FlagIOC2medalist|[[Anna Hall (heptathlete)|Anna Hall]]|USA|2025 World Athletics Championships}} || 6888
+| {{FlagIOC2medalist|[[Kate O'Connor (athlete)|Kate O'Connor]]|IRL|2025 World Athletics Championships}} || 6714 '''{{AthAbbr|NR|Irish}}'''
+| {{FlagIOC2medalist|[[Katarina Johnson-Thompson]]|GBR|2025 World Athletics Championships}}<hr>{{FlagIOC2medalist|[[Taliyah Brooks]]|USA|2025 World Athletics Championships}} || 6581 {{AthAbbr|SB}}<hr>6581 {{AthAbbr|PB}}
+|- style="background:#e8e8e8;"
+|colspan=7|{{Sports record codes}}
+|}
+<small><nowiki>*</nowiki> Indicates the athletes only competed in the preliminary heats and received medals</small>
+
+=== Mixed ===
+{| {{MedalistTable|type=Event|columns=2}}
+|-valign="top"
+| {{EventLink|4 × 400 metres relay|Mixed}}
+| {{flaglinkteam|USA}}<br />[[Bryce Deadmon]]<br />[[Lynna Irby]]<br />[[Jenoah McKiver]]<br />[[Alexis Holmes]] || 3:08.80 ='''{{AthAbbr|CR|World Athletics Championships}}'''
+| {{flaglinkteam|NED}}<br />[[Eugene Omalla]]<br />[[Lieke Klaver]]<br />[[Jonas Phijffers]]<br />[[Femke Bol]]<br />[[Eveline Saalberg]]* || 3:09.96 {{AthAbbr|SB}}
+| {{flaglinkteam|BEL}}<br />[[Dylan Borlée]]<br />[[Imke Vervaet]]<br />[[Alexander Doom]]<br />[[Helena Ponette]]<br />[[Jonathan Sacoor]]* || 3:10.61
+|}
+
+==Participating nations==
+{{Update section|date=September 2025|reason=numbers of athletes per nation are outdated}}
+On 5 September 2025, World Athletics officially published the final entry lists to the championships.<ref>{{Cite web |date=5 September 2025 |title=ATHLETES by FEDERATION and EVENT |url=https://assets.aws.worldathletics.org/document/68baa3e6145009983c0bd020.pdf |access-date=5 September 2025 |website=assets.aws.worldathletics.org|archive-date=September 5, 2025|archive-url=https://web.archive.org/web/20250905165521/https://assets.aws.worldathletics.org/document/68baa3e6145009983c0bd020.pdf|url-status=live}}</ref><ref>{{Cite web |date=5 September 2025 |title=ATHLETES by EVENT and FEDERATION |url=https://assets.aws.worldathletics.org/document/68baa3bc145009983c0bd01d.pdf |access-date=5 September 2025 |website=assets.aws.worldathletics.org|archive-date=5 September 2025|archive-url=https://web.archive.org/web/20250905165521/https://assets.aws.worldathletics.org/document/68baa3bc145009983c0bd01d.pdf|url-status=live}}</ref><ref>{{Cite web |date=5 September 2025 |title=ATHLETES by EVENT and SEASON BEST |url=https://assets.aws.worldathletics.org/document/68baa455bf7985f765e20898.pdf |access-date=5 September 2025 |website=assets.aws.worldathletics.org|archive-date=5 September 2025|archive-url=https://web.archive.org/web/20250905165521/https://assets.aws.worldathletics.org/document/68baa455bf7985f765e20898.pdf|url-status=live}}</ref> 2127 athletes from 196 competed at the championships.<ref>{{Cite web |date=5 September 2025 |title=Final entry lists published for World Athletics Championships Tokyo 25 |url=https://worldathletics.org/competitions/world-athletics-championships/tokyo25/news/press-releases/final-entry-lists-world-athletics-championships-tokyo-25 |access-date=5 September 2025 |website=[[World Athletics]]|archive-date=5 September 2025|archive-url=https://web.archive.org/web/20250905165516/https://worldathletics.org/competitions/world-athletics-championships/tokyo25/news/press-releases/final-entry-lists-world-athletics-championships-tokyo-25|url-status=live}}</ref><ref>{{Cite web | title=Athletes {{!}} Tokyo 25 {{!}} World Athletics Championships | url=https://worldathletics.org/competitions/world-athletics-championships/world-athletics-championships-tokyo-2025-7190593/athletes | access-date=2026-08-03 | website=worldathletics.org}}</ref>{{div col|colwidth=14em}}
+*{{flagIOC2|ART|2025 World Athletics Championships|6}}
+*{{flagIOC2|ALB|2025 World Athletics Championships|1}}
+*{{flagIOC2|ALG|2025 World Athletics Championships|9}}
+*{{flagIOC2|ASA|2025 World Athletics Championships|1}}
+*{{flagIOC2|AND|2025 World Athletics Championships|1}}
+*{{flagIOC2|ANG|2025 World Athletics Championships|1}}
+*{{flagIOC2|AIA|2025 World Athletics Championships|1}}
+*{{flagIOC2|ANT|2025 World Athletics Championships|1}}
+*{{flagIOC2|ARG|2025 World Athletics Championships|5}}
+*{{flagIOC2|ARM|2025 World Athletics Championships|2}}
+*{{flagIOC2|AUS|2025 World Athletics Championships|86}}
+*{{flagIOC2|AUT|2025 World Athletics Championships|10}}
+*{{flagIOC2|AZE|2025 World Athletics Championships|1}}
+*{{flagIOC2|BAH|2025 World Athletics Championships|15}}
+*{{flagIOC2|BRN|2025 World Athletics Championships|8}}
+*{{flagIOC2|BAN|2025 World Athletics Championships|1}}
+*{{flagIOC2|BAR|2025 World Athletics Championships|3}}
+*{{flagIOC2|BEL|2025 World Athletics Championships|47}}
+*{{flagIOC2|BIZ|2025 World Athletics Championships|1}}
+*{{flagIOC2|BEN|2025 World Athletics Championships|2}}
+*{{flagIOC2|BER|2025 World Athletics Championships|1}}
+*{{flagIOC2|BOL|2025 World Athletics Championships|1}}
+*{{flagIOC2|BIH|2025 World Athletics Championships|1}}
+*{{flagIOC2|BOT|2025 World Athletics Championships|12}}
+*{{flagIOC2|BRA|2025 World Athletics Championships|47}}
+*{{flagIOC2|IVB|2025 World Athletics Championships|6}}
+*{{flagIOC2|BRU|2025 World Athletics Championships|1}}
+*{{flagIOC2|BUL|2025 World Athletics Championships|4}}
+*{{flagIOC2|BUR|2025 World Athletics Championships|2}}
+*{{flagIOC2|BDI|2025 World Athletics Championships|4}}
+*{{flagIOC2|CAM|2025 World Athletics Championships|1}}
+*{{flagIOC2|CMR|2025 World Athletics Championships|4}}
+*{{flagIOC2|CAN|2025 World Athletics Championships|59}}
+*{{flagIOC2|CPV|2025 World Athletics Championships|1}}
+*{{flagIOC2|CAY|2025 World Athletics Championships|1}}
+*{{flagIOC2|CHA|2025 World Athletics Championships|1}}
+*{{flagIOC2|CHI|2025 World Athletics Championships|14}}
+*{{flagIOC2|CHN|2025 World Athletics Championships|73}}
+*{{flagIOC2|COL|2025 World Athletics Championships|18}}
+*{{flagIOC2|COM|2025 World Athletics Championships|1}}
+*{{flagIOC2|CGO|2025 World Athletics Championships|1}}
+*{{flagIOC2|COK|2025 World Athletics Championships|1}}
+*{{flagIOC2|CRC|2025 World Athletics Championships|3}}
+*{{flagIOC2|CRO|2025 World Athletics Championships|8}}
+*{{flagIOC2|CUB|2025 World Athletics Championships|17}}
+*{{flagIOC2|CYP|2025 World Athletics Championships|5}}
+*{{flagIOC2|CZE|2025 World Athletics Championships|25}}
+*{{flagIOC2|COD|2025 World Athletics Championships|1}}
+*{{flagIOC2|DEN|2025 World Athletics Championships|9}}
+*{{flagIOC2|DJI|2025 World Athletics Championships|3}}
+*{{flagIOC2|DMA|2025 World Athletics Championships|3}}
+*{{flagIOC2|DOM|2025 World Athletics Championships|4}}
+*{{flagIOC2|ECU|2025 World Athletics Championships|14}}
+*{{flagIOC2|EGY|2025 World Athletics Championships|4}}
+*{{flagIOC2|ESA|2025 World Athletics Championships|1}}
+*{{flagIOC2|GEQ|2025 World Athletics Championships|1}}
+*{{flagIOC2|ERI|2025 World Athletics Championships|6}}
+*{{flagIOC2|EST|2025 World Athletics Championships|10}}
+*{{flagIOC2|ETH|2025 World Athletics Championships|36}}
+*{{flagIOC2|FIJ|2025 World Athletics Championships|1}}
+*{{flagIOC2|FIN|2025 World Athletics Championships|27}}
+*{{flagIOC2|FRA|2025 World Athletics Championships|73}}
+*{{flagIOC2|PYF|2025 World Athletics Championships|1}}
+*{{flagIOC2|GAB|2025 World Athletics Championships|1}}
+*{{flagIOC2|GAM|2025 World Athletics Championships|1}}
+*{{flagIOC2|GEO|2025 World Athletics Championships|1}}
+*{{flagIOC2|GER|2025 World Athletics Championships|82}}
+*{{flagIOC2|GHA|2025 World Athletics Championships|8}}
+*{{flagIOC2|GIB|2025 World Athletics Championships|1}}
+*{{flagIOC2|GBR|2025 World Athletics Championships|64}}
+*{{flagIOC2|GRE|2025 World Athletics Championships|19}}
+*{{flagIOC2|GRN|2025 World Athletics Championships|4}}
+*{{flagIOC2|GUM|2025 World Athletics Championships|1}}
+*{{flagIOC2|GUA|2025 World Athletics Championships|3}}
+*{{flagIOC2|GUI|2025 World Athletics Championships|2}}
+*{{flagIOC2|GBS|2025 World Athletics Championships|1}}
+*{{flagIOC2|GUY|2025 World Athletics Championships|1}}
+*{{flagIOC2|HAI|2025 World Athletics Championships|2}}
+*{{flagIOC2|HON|2025 World Athletics Championships|1}}
+*{{flagIOC2|HKG|2025 World Athletics Championships|1}}
+*{{flagIOC2|HUN|2025 World Athletics Championships|17}}
+*{{flagIOC2|ISL|2025 World Athletics Championships|3}}
+*{{flagIOC2|IND|2025 World Athletics Championships|19}}
+*{{flagIOC2|INA|2025 World Athletics Championships|1}}
+*{{flagIOC2|IRQ|2025 World Athletics Championships|1}}
+*{{flagIOC2|IRI|2025 World Athletics Championships|1}}
+*{{flagIOC2|IRL|2025 World Athletics Championships|29}}
+*{{flagIOC2|ISR|2025 World Athletics Championships|8}}
+*{{flagIOC2|ITA|2025 World Athletics Championships|89}}
+*{{flagIOC2|CIV|2025 World Athletics Championships|5}}
+*{{flagIOC2|JAM|2025 World Athletics Championships|62}}
+*{{flagIOC2|JPN|2025 World Athletics Championships|80}} '''(hosts)'''
+*{{flagIOC2|JOR|2025 World Athletics Championships|1}}
+*{{flagIOC2|KAZ|2025 World Athletics Championships|5}}
+*{{flagIOC2|KEN|2025 World Athletics Championships|56}}
+*{{flagIOC2|KIR|2025 World Athletics Championships|1}}
+*{{flagIOC2|KOR|2025 World Athletics Championships|8}}
+*{{flagIOC2|KOS|2025 World Athletics Championships|1}}
+*{{flagIOC2|KUW|2025 World Athletics Championships|1}}
+*{{flagIOC2|KGZ|2025 World Athletics Championships|1}}
+*{{flagIOC2|LAO|2025 World Athletics Championships|1}}
+*{{flagIOC2|LAT|2025 World Athletics Championships|4}}
+*{{flagIOC2|LBN|2025 World Athletics Championships|1}}
+*{{flagIOC2|LES|2025 World Athletics Championships|1}}
+*{{flagIOC2|LBR|2025 World Athletics Championships|3}}
+*{{flagIOC2|LTU|2025 World Athletics Championships|11}}
+*{{flagIOC2|LUX|2025 World Athletics Championships|4}}
+*{{flagIOC2|MAC|2025 World Athletics Championships|1}}
+*{{flagIOC2|MAD|2025 World Athletics Championships|1}}
+*{{flagIOC2|MAS|2025 World Athletics Championships|1}}
+*{{flagIOC2|MDV|2025 World Athletics Championships|1}}
+*{{flagIOC2|MLI|2025 World Athletics Championships|1}}
+*{{flagIOC2|MLT|2025 World Athletics Championships|1}}
+*{{flagIOC2|MHL|2025 World Athletics Championships|1}}
+*{{flagIOC2|MRI|2025 World Athletics Championships|1}}
+*{{flagIOC2|MEX|2025 World Athletics Championships|19}}
+*{{flagIOC2|FSM|2025 World Athletics Championships|1}}
+*{{flagIOC2|MDA|2025 World Athletics Championships|2}}
+*{{flagIOC2|MGL|2025 World Athletics Championships|4}}
+*{{flagIOC2|MNE|2025 World Athletics Championships|1}}
+*{{flagIOC2|MSR|2025 World Athletics Championships|1}}
+*{{flagIOC2|MAR|2025 World Athletics Championships|19}}
+*{{flagIOC2|MOZ|2025 World Athletics Championships|1}}
+*{{flagIOC2|MYA|2025 World Athletics Championships|1}}
+*{{flagIOC2|NAM|2025 World Athletics Championships|2}}
+*{{flagIOC2|NIC|2025 World Athletics Championships|1}}
+*{{flagIOC2|NRU|2025 World Athletics Championships|1}}
+*{{flagIOC2|NEP|2025 World Athletics Championships|1}}
+*{{flagIOC2|NED|2025 World Athletics Championships|53}}
+*{{flagIOC2|NZL|2025 World Athletics Championships|14}}
+*{{flagIOC2|NIG|2025 World Athletics Championships|2}}
+*{{flagIOC2|NGR|2025 World Athletics Championships|15}}
+*{{flagIOC2|MKD|2025 World Athletics Championships|2}}
+*{{flagIOC2|MNP|2025 World Athletics Championships|1}}
+*{{flagIOC2|NOR|2025 World Athletics Championships|28}}
+*{{flagIOC2|OMA|2025 World Athletics Championships|1}}
+*{{flagIOC2|PAK|2025 World Athletics Championships|1}}
+*{{flagIOC2|PLW|2025 World Athletics Championships|1}}
+*{{flagIOC2|PLE|2025 World Athletics Championships|1}}
+*{{flagIOC2|PAN|2025 World Athletics Championships|2}}
+*{{flagIOC2|PNG|2025 World Athletics Championships|1}}
+*{{flagIOC2|PAR|2025 World Athletics Championships|2}}
+*{{flagIOC2|PHI|2025 World Athletics Championships|2}}
+*{{flagIOC2|PER|2025 World Athletics Championships|10}}
+*{{flagIOC2|POL|2025 World Athletics Championships|62}}
+*{{flagIOC2|POR|2025 World Athletics Championships|31}}
+*{{flagIOC2|PUR|2025 World Athletics Championships|12}}
+*{{flagIOC2|QAT|2025 World Athletics Championships|11}}
+*{{flagIOC2|ROU|2025 World Athletics Championships|9}}
+*{{flagIOC2|RWA|2025 World Athletics Championships|3}}
+*{{flagIOC2|SKN|2025 World Athletics Championships|1}}
+*{{flagIOC2|LCA|2025 World Athletics Championships|2}}
+*{{flagIOC2|VIN|2025 World Athletics Championships|2}}
+*{{flagIOC2|SAM|2025 World Athletics Championships|1}}
+*{{flagIOC2|SMR|2025 World Athletics Championships|1}}
+*{{flagIOC2|STP|2025 World Athletics Championships|1}}
+*{{flagIOC2|KSA|2025 World Athletics Championships|5}}
+*{{flagIOC2|SEN|2025 World Athletics Championships|4}}
+*{{flagIOC2|SRB|2025 World Athletics Championships|6}}
+*{{flagIOC2|SEY|2025 World Athletics Championships|1}}
+*{{flagIOC2|SGP|2025 World Athletics Championships|2}}
+*{{flagIOC2|SVK|2025 World Athletics Championships|9}}
+*{{flagIOC2|SLO|2025 World Athletics Championships|10}}
+*{{flagIOC2|SOL|2025 World Athletics Championships|1}}
+*{{flagIOC2|RSA|2025 World Athletics Championships|48}}
+*{{flagIOC2|SSD|2025 World Athletics Championships|1}}
+*{{flagIOC2|ESP|2025 World Athletics Championships|56}}
+*{{flagIOC2|SRI|2025 World Athletics Championships|3}}
+*{{flagIOC2|SUD|2025 World Athletics Championships|1}}
+*{{flagIOC2|SUR|2025 World Athletics Championships|1}}
+*{{flagIOC2|SWE|2025 World Athletics Championships|35}}
+*{{flagIOC2|SYR|2025 World Athletics Championships|1}}
+*{{flagIOC2|SUI|2025 World Athletics Championships|32}}
+*{{flagIOC2|TPE|2025 World Athletics Championships|2}}
+*{{flagIOC2|TJK|2025 World Athletics Championships|1}}
+*{{flagIOC2|TAN|2025 World Athletics Championships|2}}
+*{{flagIOC2|THA|2025 World Athletics Championships|2}}
+*{{flagIOC2|TLS|2025 World Athletics Championships|1}}
+*{{flagIOC2|TGA|2025 World Athletics Championships|1}}
+*{{flagIOC2|TOG|2025 World Athletics Championships|1}}
+*{{flagIOC2|TTO|2025 World Athletics Championships|4}}
+*{{flagIOC2|TUN|2025 World Athletics Championships|4}}
+*{{flagIOC2|TUR|2025 World Athletics Championships|20}}
+*{{flagIOC2|TKM|2025 World Athletics Championships|1}}
+*{{flagIOC2|TCA|2025 World Athletics Championships|1}}
+*{{flagIOC2|UGA|2025 World Athletics Championships|21}}
+*{{flagIOC2|UKR|2025 World Athletics Championships|23}}
+*{{flagIOC2|USA|2025 World Athletics Championships|143}}
+*{{flagIOC2|URU|2025 World Athletics Championships|9}}
+*{{flagIOC2|UZB|2025 World Athletics Championships|3}}
+*{{flagIOC2|VAN|2025 World Athletics Championships|1}}
+*{{flagIOC2|VEN|2025 World Athletics Championships|4}}
+*{{flagIOC2|VIE|2025 World Athletics Championships|1}}
+*{{flagIOC2|ISV|2025 World Athletics Championships|2}}
+*{{flagIOC2|ZAM|2025 World Athletics Championships|7}}
+*{{flagIOC2|ZIM|2025 World Athletics Championships|8}}
+{{div col end}}
+
+<big>Number of athletes by nation</big>
+{| class="wikitable collapsible collapsed sortable" style="border:0;"
+! width="50" |[[Ranking]]
+! width="200" |[[List of IOC country codes|NOC]]
+! width="25" |[[Athletes]]
+|-
+| align="center" |1
+|{{flagIOC2|USA|2025 World Athletics Championships}}
+| align="center" |141
+|-
+| align="center" |2
+|{{flagIOC2|AUS|2025 World Athletics Championships}}
+| align="center" |88
+|-
+| align="center" |2
+|{{flagIOC2|CHN|2025 World Athletics Championships}}
+| align="center" |88
+|- 
+| align="center" |2
+|{{flagIOC2|ITA|2025 World Athletics Championships}}
+| align="center" |88
+|-
+| align="center" |5
+|{{flagIOC2|GER|2025 World Athletics Championships}}
+| align="center" |83
+|-
+| align="center" |6
+|{{flagIOC2|JPN|2025 World Athletics Championships}}
+| align="center" |80
+|-
+| align="center" |7
+|{{flagIOC2|FRA|2025 World Athletics Championships}}
+| align="center" |77
+|-
+| align="center" |8
+|{{flagIOC2|GBR|2025 World Athletics Championships}}
+| align="center" |67
+|-
+| align="center" |8
+|{{flagIOC2|JAM|2025 World Athletics Championships}}
+| align="center" |67
+|-
+| align="center" |10
+|{{flagIOC2|KEN|2025 World Athletics Championships}}
+| align="center" |62
+|-
+| align="center" |11
+|{{flagIOC2|CAN|2025 World Athletics Championships}}
+| align="center" |59
+|-
+| align="center" |11
+|{{flagIOC2|POL|2025 World Athletics Championships}}
+| align="center" |59
+|-
+| align="center" |13
+|{{flagIOC2|ESP|2025 World Athletics Championships}}
+| align="center" |55
+|-
+| align="center" |14
+|{{flagIOC2|NED|2025 World Athletics Championships}}
+| align="center" |53
+|-
+| align="center" |15
+|{{flagIOC2|RSA|2025 World Athletics Championships}}
+| align="center" |49
+|-
+| align="center" |16
+|{{flagIOC2|BRA|2025 World Athletics Championships}}
+| align="center" |47
+|-
+| align="center" |17
+|{{flagIOC2|BEL|2025 World Athletics Championships}}
+| align="center" |45
+|-
+| align="center" |18
+|{{flagIOC2|ETH|2025 World Athletics Championships}}
+| align="center" |36
+|-
+| align="center" |19
+|{{flagIOC2|SWE|2025 World Athletics Championships}}
+| align="center" |35
+|-
+| align="center" |20
+|{{flagIOC2|POR|2025 World Athletics Championships}}
+| align="center" |32
+|-
+| align="center" |21
+|{{flagIOC2|SUI|2025 World Athletics Championships}}
+| align="center" |31
+|-
+| align="center" |22
+|{{flagIOC2|FIN|2025 World Athletics Championships}}
+| align="center" |29
+|-
+| align="center" |23
+|{{flagIOC2|NOR|2025 World Athletics Championships}}
+| align="center" |28
+|-
+| align="center" |24
+|{{flagIOC2|CZE|2025 World Athletics Championships}}
+| align="center" |25
+|-
+| align="center" |24
+|{{flagIOC2|IRL|2025 World Athletics Championships}}
+| align="center" |25
+|-
+| align="center" |26
+|{{flagIOC2|UKR|2025 World Athletics Championships}}
+| align="center" |23
+|-
+| align="center" |27
+|{{flagIOC2|GRE|2025 World Athletics Championships}}
+| align="center" |21
+|-
+| align="center" |27
+|{{flagIOC2|UGA|2025 World Athletics Championships}}
+| align="center" |21
+|-
+| align="center" |29
+|{{flagIOC2|TUR|2025 World Athletics Championships}}
+| align="center" |20
+|-
+| align="center" |30
+|{{flagIOC2|IND|2025 World Athletics Championships}}
+| align="center" |19
+|-
+| align="center" |30
+|{{flagIOC2|MEX|2025 World Athletics Championships}}
+| align="center" |19
+|-
+| align="center" |30
+|{{flagIOC2|MAR|2025 World Athletics Championships}}
+| align="center" |19
+|-
+| align="center" |33
+|{{flagIOC2|COL|2025 World Athletics Championships}}
+| align="center" |18
+|-
+| align="center" |33
+|{{flagIOC2|HUN|2025 World Athletics Championships}}
+| align="center" |18
+|-
+| align="center" |35
+|{{flagIOC2|CUB|2025 World Athletics Championships}}
+| align="center" |17
+|-
+| align="center" |36
+|{{flagIOC2|BAH|2025 World Athletics Championships}}
+| align="center" |15
+|-
+| align="center" |36
+|{{flagIOC2|NGR|2025 World Athletics Championships}}
+| align="center" |15
+|-
+| align="center" |38
+|{{flagIOC2|CHI|2025 World Athletics Championships}}
+| align="center" |14
+|-
+| align="center" |38
+|{{flagIOC2|ECU|2025 World Athletics Championships}}
+| align="center" |14
+|-
+| align="center" |38
+|{{flagIOC2|NZL|2025 World Athletics Championships}}
+| align="center" |14
+|-
+| align="center" |41
+|{{flagIOC2|BOT|2025 World Athletics Championships}}
+| align="center" |12
+|-
+| align="center" |41
+|{{flagIOC2|PUR|2025 World Athletics Championships}}
+| align="center" |12
+|-
+| align="center" |41
+|{{flagIOC2|QAT|2025 World Athletics Championships}}
+| align="center" |12
+|-
+| align="center" |44
+|{{flagIOC2|LTU|2025 World Athletics Championships}}
+| align="center" |11
+|-
+| align="center" |45
+|{{flagIOC2|ALG|2025 World Athletics Championships}}
+| align="center" |10
+|-
+| align="center" |45
+|{{flagIOC2|AUT|2025 World Athletics Championships}}
+| align="center" |10
+|-
+| align="center" |45
+|{{flagIOC2|EST|2025 World Athletics Championships}}
+| align="center" |10
+|-
+| align="center" |45
+|{{flagIOC2|PER|2025 World Athletics Championships}}
+| align="center" |10
+|-
+| align="center" |45
+|{{flagIOC2|SLO|2025 World Athletics Championships}}
+| align="center" |10
+|-
+| align="center" |50
+|{{flagIOC2|DEN|2025 World Athletics Championships}}
+| align="center" |9
+|-
+| align="center" |50
+|{{flagIOC2|ISR|2025 World Athletics Championships}}
+| align="center" |9
+|-
+| align="center" |50
+|{{flagIOC2|ROM|2025 World Athletics Championships}}
+| align="center" |9
+|-
+| align="center" |50
+|{{flagIOC2|SKN|2025 World Athletics Championships}}
+| align="center" |9
+|-
+| align="center" |50
+|{{flagIOC2|URU|2025 World Athletics Championships}}
+| align="center" |9
+|-
+| align="center" |55
+|{{flagIOC2|BRN|2025 World Athletics Championships}}
+| align="center" |8
+|-
+| align="center" |55
+|{{flagIOC2|CRO|2025 World Athletics Championships}}
+| align="center" |8
+|-
+| align="center" |55
+|{{flagIOC2|GHA|2025 World Athletics Championships}}
+| align="center" |8
+|-
+| align="center" |55
+|{{flagIOC2|KOR|2025 World Athletics Championships}}
+| align="center" |8
+|-
+| align="center" |55
+|{{flagIOC2|ZIM|2025 World Athletics Championships}}
+| align="center" |8
+|-
+| align="center" |60
+|{{flagIOC2|ERI|2025 World Athletics Championships}}
+| align="center" |7
+|-
+| align="center" |61
+|{{flagIOC2|ART|2025 World Athletics Championships}}
+| align="center" |6
+|-
+| align="center" |61
+|{{flagIOC2|IVB|2025 World Athletics Championships}}
+| align="center" |6
+|-
+| align="center" |61
+|{{flagIOC2|SRB|2025 World Athletics Championships}}
+| align="center" |6
+|-
+| align="center" |61
+|{{flagIOC2|ZAM|2025 World Athletics Championships}}
+| align="center" |6
+|-
+| align="center" |65
+|{{flagIOC2|ARG|2025 World Athletics Championships}}
+| align="center" |5
+|-
+| align="center" |65
+|{{flagIOC2|CYP|2025 World Athletics Championships}}
+| align="center" |5
+|-
+| align="center" |65
+|{{flagIOC2|CIV|2025 World Athletics Championships}}
+| align="center" |5
+|-
+| align="center" |65
+|{{flagIOC2|KSA|2025 World Athletics Championships}}
+| align="center" |5
+|-
+| align="center" |69
+|{{flagIOC2|BUL|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|BDI|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|CAM|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|DOM|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|EGY|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|GRN|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|LAT|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|LUX|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|MGL|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|SEN|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|TTO|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|TUN|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |69
+|{{flagIOC2|VEN|2025 World Athletics Championships}}
+| align="center" |4
+|-
+| align="center" |82
+|{{flagIOC2|BAR|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |82
+|{{flagIOC2|CRC|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |82
+|{{flagIOC2|DJI|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |82
+|{{flagIOC2|DMA|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |82
+|{{flagIOC2|GUA|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |82
+|{{flagIOC2|ISL|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |82
+|{{flagIOC2|LBR|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |82
+|{{flagIOC2|RWA|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |82
+|{{flagIOC2|SRI|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |82
+|{{flagIOC2|UZB|2025 World Athletics Championships}}
+| align="center" |3
+|-
+| align="center" |92
+|{{flagIOC2|ARM|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|BEN|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|BUR|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|GUI|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|HAI|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|MKD|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|NAM|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|NIG|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|MDA|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|PAN|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|PAR|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|PHI|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|LCA|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|SVG|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|SGP|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|TPE|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|TAN|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|THA|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|ISV|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |92
+|{{flagIOC2|TUV|2025 World Athletics Championships}}
+| align="center" |2
+|-
+| align="center" |111
+|{{flagIOC2|AFG|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|ALB|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|ASA|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|AND|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|ANG|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|AIA|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|ANT|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|AZE|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|BAN|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|BIZ|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|BER|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|BOL|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|BIH|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|BRU|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|CAM|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|CPV|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|CAY|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|CHA|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|COM|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|CGO|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|COK|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|COD|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|ESA|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|GEQ|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|FIJ|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|PYF|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|GAB|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|GAM|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|GEO|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|GIB|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|GUM|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|GBS|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|GUY|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|HON|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|HKG|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|INA|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|IRQ|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|IRI|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|JOR|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|KIR|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|KUW|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|KGZ|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|LAO|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|LBN|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|LES|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MAC|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MAD|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MAW|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MAS|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MDV|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MLI|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MLT|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MHL|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MRI|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|FSM|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MNE|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MSR|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MOZ|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MYA|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|NIC|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|NRU|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|NEP|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|MNP|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|OMA|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|PAK|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|PLW|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|PLE|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|PNG|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|SKN|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|SAM|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|SMR|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|STP|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|SEY|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|SOL|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|SSD|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|SUD|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|SUR|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|SYR|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|TJK|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|TLS|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|TGA|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|TOG|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|TKM|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|TCA|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|VAN|2025 World Athletics Championships}}
+| align="center" |1
+|-
+| align="center" |111
+|{{flagIOC2|VIE|2025 World Athletics Championships}}
+| align="center" |1
+|-
+! 196 
+|Total
+!2,107
+|}
+
+==References==
+{{Reflist|2}}
+
+==External links==
+{{Commons category}}
+* {{Official website|https://worldathletics.org/en/competitions/world-athletics-championships/tokyo25}}
+
+{{World Athletics Championships in Athletics}}
+{{Nations at the 2025 World Athletics Championships}}
+{{Championships organised by World Athletics}}
+{{World championships in 2025}}
+{{2025 in athletics}}
+{{Portal bar|Athletics|Japan}}
+
+{{Authority control}}
+{{DEFAULTSORT:Athletics, World Championships, 2025}}
+[[Category:2025 World Athletics Championships| ]]
+[[Category:2025 in the sport of athletics|World Championships]]
+[[Category:2025 in Tokyo]]
+[[Category:Athletics in Tokyo]]
+[[Category:International athletics competitions hosted by Japan]]
+[[Category:September 2025 sports events in Japan]]
+[[Category:Sports competitions in Tokyo]]
+[[Category:World Athletics Championships|2025]]
+[[Category:2025 in international sports]]
