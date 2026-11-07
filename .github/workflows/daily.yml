@@ -1,10 +1,11 @@
 # The Kickoff daily run.
-# OFF until every checkpoint has passed its test run (D's rule): this workflow can only be started by hand (Actions tab > Run workflow).
-# To go live, D adds a `schedule:` block here: cron "15 23 * * *" is 7:15am Singapore time. Nothing else needs to change (a scheduled run
-# uses Claude and sends the ping on its own; a manual run does so only when its boxes are set to true).
+# LIVE since 8 November 2026 (D's go after the three test mornings): every day at 7:15am Singapore time (cron "15 23 * * *" is 23:15 UTC the day before).
+# A scheduled run uses Claude and sends the ping on its own; a manual run (Actions tab > Run workflow) does so only when its boxes are set to true.
 name: Daily edition
 
 on:
+  schedule:
+    - cron: "15 23 * * *"
   workflow_dispatch:
     inputs:
       date:

@@ -126,10 +126,10 @@ check("cricket no longer needs CricketData's key: without it the backup list is 
 check("the state names cover every sport and no file is named twice", len(set(daily.STATE_NAMES)) == len(daily.STATE_NAMES) and {"cricket", "f1", "tennis", "nfl", "nba", "mlb", "tables", "costs"} <= set(daily.STATE_NAMES))
 check("the order module knows the MLB section by its real id 'mlb'", ["mlb"] in order.GROUPS and ["baseball"] not in order.GROUPS)
 
-# ---- The workflow file (D's rule: the schedule stays off) ---------------------------------------------------------
+# ---- The workflow file (live since D's go on 8 November 2026) -------------------------------------------------------
 wf = (ROOT / ".github" / "workflows" / "daily.yml").read_text()
 live = "\n".join(line for line in wf.splitlines() if not line.lstrip().startswith("#"))
-check("the workflow can only be started by hand: there is no active 'schedule:' block and no push or pull_request trigger", "schedule:" not in live.replace("event_name == 'schedule'", "").replace('"schedule"', "") and "workflow_dispatch:" in live and not re.search(r"^\s*(push|pull_request):", live, re.M))
+check("the workflow runs on its 7:15am schedule and by hand, never on a push or pull request", '- cron: "15 23 * * *"' in live and "workflow_dispatch:" in live and not re.search(r"^\s*(push|pull_request):", live, re.M))
 check("the workflow takes every secret from GitHub's secrets and never holds a value", all(f"secrets.{k}" in wf for k in ("ANTHROPIC_API_KEY", "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "CRICKET_DATA_API_KEY"))
       and not re.search(r"(sk-ant|[0-9]{8,}:[A-Za-z0-9_-]{30,})", wf))
 check("the workflow builds, publishes (data and docs only), pings on request and alerts on failure", all(x in wf for x in ("scripts/daily.py", "git add data docs", "scripts/send_ping.py", "scripts/alert.py", "if: failure()")))

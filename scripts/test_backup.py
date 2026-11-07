@@ -139,7 +139,7 @@ wf = (ROOT / ".github/workflows/daily.yml").read_text()
 ping = wf[wf.index("- name: Telegram ping"):wf.index("- name: Alert D")]
 check("the workflow's ping runs even if the publish step failed, waits for the page, and falls back to text and file", "always()" in ping and "--wait" in ping and "sleep 60" not in ping)
 check("the alert step still runs on any failure", "if: failure()" in wf[wf.index("- name: Alert D"):])
-check("the daily schedule is still OFF", "schedule:" not in re.sub(r"#.*", "", wf))
+check("the daily schedule is ON at 7:15am Singapore time (23:15 UTC), live since D's go on 8 November", '- cron: "15 23 * * *"' in wf and re.sub(r"#.*", "", wf).count("schedule:") == 1)
 plist = (ROOT / "scripts/com.thekickoff.watchdog.plist").read_text()
 check("the Mac job runs the watchdog at 7:40", "scripts/watchdog.py" in plist and "<integer>7</integer><key>Minute</key><integer>40</integer>" in plist)
 sp = (ROOT / "scripts/send_ping.py").read_text()
