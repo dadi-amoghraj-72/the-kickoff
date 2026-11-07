@@ -36,6 +36,7 @@ cache = cricketcache.collect(picked, espn_cricket.Source(), now, cricketcache.lo
 print(f"cache now holds {len(cache['cards'])} scorecards, {len(cache['tables'])} points tables, {len(cache['series'])} series tables")
 if "--dry-run" in sys.argv:
     sys.exit(0)
+cache["ran"] = cricketcache.stamp(now)                 # the morning health check reads this: the job ran, even on a day with no cricket to collect
 cricketcache.save(cache)
 print(f"saved {cricketcache.PATH.relative_to(ROOT)}")
 if "--push" in sys.argv:

@@ -17,7 +17,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from kickoff import daily, render, telegram  # noqa: E402
+from kickoff import cricketcache, daily, health, render, telegram  # noqa: E402
 from kickoff import state as state_files  # noqa: E402
 from kickoff.envfile import load_env  # noqa: E402
 
@@ -47,13 +47,16 @@ now = datetime.now(timezone.utc)
 before = daily.load_state(state_dir)
 out = daily.run_day(now, day, before, daily.real_adapters, use_claude=use_claude, today=daily.real_today)
 ed = out["edition"]
+health_lines = health.check(out, now, use_claude, cricketcache.load())        # what should have come through and did not: said in D's ping (D, 2026-11-08)
+if health_lines:
+    ed["warnings"] = list(dict.fromkeys(ed.get("warnings", []) + health_lines))
 if len(out["failed"]) == len(daily.real_adapters(None)):
     print("Every sport failed:", ", ".join(out["problems"]), file=sys.stderr)
     sys.exit(1)
 
 (data_dir / f"{day.isoformat()}.json").write_text(json.dumps(ed, indent=2, ensure_ascii=False) + "\n")
 changed = daily.save_state(out["state"], before, state_dir)
-state_files.save("run_log", {"date": day.isoformat(), "built": ed["built"], "failed": out["failed"], "problems": out["problems"], "claude": ed["claude"],
+state_files.save("run_log", {"date": day.isoformat(), "built": ed["built"], "failed": out["failed"], "problems": out["problems"], "warnings": ed.get("warnings", []), "claude": ed["claude"],
                              "budget": out["budget"]}, state_dir)
 dates = render.build_site(data_dir, docs_dir)
 

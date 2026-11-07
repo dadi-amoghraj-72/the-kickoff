@@ -15,7 +15,8 @@ def build_message(edition, base_url=None):
     head = f"The Kickoff · {d:%a} {d.day} {d:%b}" + (" (test edition)" if edition.get("dummy") else "")
     lines = [f"{i}. {h}" for i, h in enumerate(edition["headlines"][:3], 1)]
     today = ["", "Today:", *[f"\u2022 {x}" for x in edition["ping_today"][:3]]] if edition.get("ping_today") else []     # only on a quiet morning (D, 2026-11-05)
-    warn = ["", *[f"\u26a0 {w}" for w in edition["warnings"][:3]]] if edition.get("warnings") else []          # missing data is never silent (D, 2026-11-08)
+    w_ = edition.get("warnings") or []                     # missing data and the morning health check are never silent (D, 2026-11-08)
+    warn = ["", *[f"\u26a0 {w}" for w in w_[:4]], *([f"\u26a0 and {len(w_) - 4} more (see the run log on GitHub)"] if len(w_) > 4 else [])] if w_ else []
     return "\n".join([head, "", *lines, *today, *warn, "", f"{base}/editions/{edition['date']}/"])
 
 

@@ -27,7 +27,7 @@ def load(path=None):
         data = json.loads(path.read_text())
     except (OSError, ValueError):
         data = {}
-    return {k: dict(data.get(k) or {}) for k in KINDS}
+    return {**{k: dict(data.get(k) or {}) for k in KINDS}, **({"ran": data["ran"]} if isinstance(data.get("ran"), str) else {})}
 
 
 def fresh(cache, now, max_age_days=MAX_AGE_DAYS):
