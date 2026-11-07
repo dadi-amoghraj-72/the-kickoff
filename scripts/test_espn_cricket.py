@@ -290,7 +290,11 @@ check("a source that fails returns None, not an error", ec.Source(lambda url: 1 
 FEED = json.loads((FX / "espn_cricket_feed.json").read_text())
 
 
+feed_urls = []
+
+
 def feed_get(url):
+    feed_urls.append(url)
     if "scoreboard/header" in url:
         return FEED["header"]
     return FEED["series"][url.split("/cricket/")[1].split("/")[0]]
@@ -308,7 +312,9 @@ check("the scores come from the line scores in batting order: New Zealand 185 al
       and {c["team"]["displayName"]: c["score"] for c in raw_ev["competitions"][0]["competitors"]}["New Zealand"].startswith("185 (40.2") and ck.innings_line(odi["score"][1], odi["teams"]) == "India 143/5 (22.4)", odi["score"])
 wbbl = next((m for m in got if m["event"] and "Big Bash" in m["name"]), None)
 check("the Women's Big Bash game on now is recognised as a league match but is not finished, so the picker will not report it yet", wbbl and ck.classify(wbbl)["label"] == "WBBL" and not wbbl["matchEnded"] and "require" in wbbl["status"], wbbl and (wbbl["name"], wbbl["status"]))
-check("series that are not in scope (Ranji Trophy, Ford Trophy, Quaid-e-Azam, an A-team tour) are never read: only the series with a wanted match cost a call", feed.calls == 3 and all(ck.classify(m)["kind"] for m in got), (feed.calls, [m["name"] for m in got]))
+_series_read = sorted({u.split("/cricket/")[1].split("/")[0] for u in feed_urls if "scoreboard/header" not in u})
+check("series that are not in scope (Ranji Trophy, Ford Trophy, Quaid-e-Azam, an A-team tour) are never read: only the series with a wanted match cost a call (the header is read live and for yesterday and today by date)",
+      len(_series_read) == 2 and sum(1 for u in feed_urls if "scoreboard/header" in u) == 3 and all(ck.classify(m)["kind"] for m in got), (_series_read, [m["name"] for m in got]))
 check("same_match: the same two teams and the same number are one match, whatever the order or the Women suffix; another number or other teams are not", ck.same_match({"teams": ["New Zealand", "India"], "name": "New Zealand vs India, 1st ODI, tour"}, {"teams": ["India", "New Zealand"], "name": "India v New Zealand, 1st ODI"})
       and not ck.same_match({"teams": ["New Zealand", "India"], "name": "x, 1st ODI"}, {"teams": ["New Zealand", "India"], "name": "x, 2nd ODI"}) and ck.same_match({"teams": ["Sydney Sixers Women", "Perth Scorchers Women"], "name": "a, 3rd Match"}, {"teams": ["Sydney Sixers", "Perth Scorchers"], "name": "b, 3rd Match"}))
 down = ec.Feed(lambda url: feed_get(url) if "header" in url else (_ for _ in ()).throw(OSError("down")), pause=0)
