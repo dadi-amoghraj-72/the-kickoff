@@ -106,8 +106,10 @@ def real_adapters(client=None, env=None):
                 new["ipl_awards"] = old.get("ipl_awards")
         got = {**got, "html": html_awards + got["html"]}
         new["cards"] = dict(list({**old.get("cards", {}), **new.get("cards", {})}.items())[-60:])   # bought scorecards are never paid for twice
+        missing = got["stats"].get("missing_cards") or []
         return {"sections": [{"id": "cricket", "title": "Cricket", "html": got["html"]}] if got["html"] else [], "state": {"cricket": new},
-                "stats": {**got["stats"], "calls_used_today": got["used"]}, "events": got.get("events", [])}
+                "stats": {**got["stats"], "calls_used_today": got["used"]}, "events": got.get("events", []),
+                "problems": [f"cricket: no scorecard for {n}" for n in missing], "warnings": [f"Cricket: no scorecard for {n}" for n in missing]}
 
     def around_go(now, day, st):
         got = around.run(now, copy.deepcopy(st.get("around") or {}), other_sports.Source(), client)
@@ -139,7 +141,7 @@ def build_edition(now, day, st, adapters, mode="normal", today=None, client=None
     """Run every adapter. Returns {"edition", "state", "problems", "failed", "stats"}.
     edition: the dict the site renders; state: the new state for every sport (a failed sport keeps its old state); failed: the adapters that raised."""
     content, new_state, problems, failed, headlines, stats = {}, copy.deepcopy(st), [], [], [], {}
-    events, news, injuries, young_in = [], [], [], {}
+    events, news, injuries, young_in, warnings = [], [], [], {}, []
     for sid, title, go in adapters:
         try:
             got = go(now, day, st)
@@ -159,6 +161,7 @@ def build_edition(now, day, st, adapters, mode="normal", today=None, client=None
         for k_, v_ in (got.get("young_in") or {}).items():
             young_in.setdefault(k_, []).extend(v_)
         problems += got.get("problems", [])
+        warnings += got.get("warnings", [])                     # data that should be there and is not: also in D's Telegram message (D, 2026-11-08)
         stats[sid] = got.get("stats", {})
     try:                                                         # Young Guns: rookies and under-21s who did something notable (kickoff/youngguns.py)
         yst = copy.deepcopy(st.get("youngguns") or {})
@@ -209,7 +212,8 @@ def build_edition(now, day, st, adapters, mode="normal", today=None, client=None
     sections = order.assemble(content, lead, promoted)
     if not sections:
         sections = [{"id": "quiet", "title": "A quiet morning", "html": "<p>Nothing finished overnight in the sports we follow.</p>"}]
-    edition = {"date": day.isoformat(), "dummy": False, "headlines": list(dict.fromkeys(headlines))[:3], **({"ping_today": ping_today} if ping_today else {}), "sections": sections,
+    edition = {"date": day.isoformat(), "dummy": False, "headlines": list(dict.fromkeys(headlines))[:3], **({"ping_today": ping_today} if ping_today else {}),
+               **({"warnings": warnings} if warnings else {}), "sections": sections,
                "built": now.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "claude": mode}
     return {"edition": edition, "state": new_state, "problems": problems, "failed": failed, "stats": stats}
 

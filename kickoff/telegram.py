@@ -15,7 +15,8 @@ def build_message(edition, base_url=None):
     head = f"The Kickoff · {d:%a} {d.day} {d:%b}" + (" (test edition)" if edition.get("dummy") else "")
     lines = [f"{i}. {h}" for i, h in enumerate(edition["headlines"][:3], 1)]
     today = ["", "Today:", *[f"\u2022 {x}" for x in edition["ping_today"][:3]]] if edition.get("ping_today") else []     # only on a quiet morning (D, 2026-11-05)
-    return "\n".join([head, "", *lines, *today, "", f"{base}/editions/{edition['date']}/"])
+    warn = ["", *[f"\u26a0 {w}" for w in edition["warnings"][:3]]] if edition.get("warnings") else []          # missing data is never silent (D, 2026-11-08)
+    return "\n".join([head, "", *lines, *today, *warn, "", f"{base}/editions/{edition['date']}/"])
 
 
 def send_document(path, caption="", name=None):

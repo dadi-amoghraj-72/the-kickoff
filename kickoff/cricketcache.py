@@ -55,15 +55,21 @@ def save(cache, path=None):
 
 
 def getters(cache, source=None):
-    """(card, table, series) functions for cricket.run: each looks in the cache first (by match id, or league label for a table), then asks `source`
-    (espn_cricket.Source, which fails quietly from GitHub), then gives None. The card returned has the shape espn_cricket.Source.card gives."""
+    """(card, table, series) functions for cricket.run. One fixed order (D, 2026-11-08): ESPN's JSON feed first (it works from GitHub), then this cache from the Mac
+    (by match id, or league label for a table), then ESPN's pages (which fail quietly from GitHub), then None. The card has the shape espn_cricket.Source.card gives."""
     def card(m):
+        got = source.feed_card(m) if source and hasattr(source, "feed_card") else None
+        if got:
+            return got
         e = cache["cards"].get(m["id"])
         if e:
             return {"scorecard": e["scorecard"], "status": e.get("status", ""), "potm": e.get("potm", [])}
         return source.card(m) if source else None
 
     def table(m):
+        got = source.feed_table(m) if source and hasattr(source, "feed_table") else None
+        if got:
+            return got
         e = cache["tables"].get(m["class"]["label"]) if m.get("class") else None
         return e["rows"] if e else (source.table(m) if source else None)
 

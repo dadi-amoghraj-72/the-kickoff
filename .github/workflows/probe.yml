@@ -1,0 +1,25 @@
+name: Source probe
+# Started by hand (gh workflow run probe.yml). Tries every outside source the daily run reads, from GitHub's own servers, and reads today's cricket the way the
+# daily run does (JSON feeds only). No keys, no secrets, nothing committed, nothing sent.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Every source, from GitHub
+        run: python scripts/probe_sources.py
+      - name: Cricket as the daily run reads it
+        if: always()
+        run: python scripts/check_cricket_live.py

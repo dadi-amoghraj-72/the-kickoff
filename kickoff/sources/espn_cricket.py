@@ -270,6 +270,94 @@ def _get(url):
     return http.get_bytes(url).decode("utf-8", "replace")
 
 
+# ---- ESPN's cricket data feed (JSON): the main scorecard source (D, 2026-11-08) ------------------------------
+# GitHub's servers cannot read ESPN's cricket web pages (they come back empty), but ESPN's JSON feeds work from anywhere. One request per match gives every
+# innings' batting and bowling, the state or result line, Player of the Match and a league's points table. The pages (and the Mac's cache of them) are only backups.
+
+SUMMARY_URL = "https://site.api.espn.com/apis/site/v2/sports/cricket/{series}/summary?event={event}"
+ORDINAL = {1: "1st", 2: "2nd", 3: "3rd", 4: "4th"}
+
+
+def _stats(line):
+    """{name: displayValue} of one player's line in one innings."""
+    cats = ((line.get("statistics") or {}).get("categories") or [{}])
+    return {x["name"]: x.get("displayValue") for x in cats[0].get("stats") or [] if "name" in x}
+
+
+def _overs(text):
+    try:
+        return float(text)
+    except (TypeError, ValueError):
+        return None
+
+
+def parse_summary(data):
+    """A match's scorecard from the JSON feed, in the shape of parse_scorecard + parse_meta: {"scorecard": [innings in match order], "status", "potm"}.
+    An innings: {"inning": "Zimbabwe 1st Innings", "batting": [...], "bowling": [...], "espn": {"extras", "total", "dnb", "fow"}}. None when the feed has no innings."""
+    comp = ((data.get("header") or {}).get("competitions") or [{}])[0]
+    teams = {str(c["team"]["id"]): c for c in comp.get("competitors") or [] if c.get("team")}
+    lines = {}                                                     # (period, team id) -> [(order, player, stats, batting details)]
+    for roster in data.get("rosters") or []:
+        tid = str((roster.get("team") or {}).get("id"))
+        for p in roster.get("roster") or []:
+            name = (p.get("athlete") or {}).get("displayName") or ""
+            for per in p.get("linescores") or []:
+                for line in per.get("linescores") or []:
+                    lines.setdefault((per.get("period"), tid), []).append((line.get("order") or 99, name, _stats(line), (line.get("statistics") or {}).get("batting") or {}, p))
+    innings, number = [], {}
+    periods = sorted({ls.get("period") for c in teams.values() for ls in c.get("linescores") or [] if ls.get("period")})
+    for period in periods:
+        bat_id = next((tid for tid, c in teams.items() for ls in c.get("linescores") or [] if ls.get("period") == period and ls.get("score")), None)
+        if not bat_id:
+            continue
+        bowl_id = next((tid for tid in teams if tid != bat_id), None)
+        ls = next(x for x in teams[bat_id]["linescores"] if x.get("period") == period)
+        batting = []
+        for order, name, st, det, p in sorted(lines.get((period, bat_id), []), key=lambda x: int(x[2].get("battingPosition") or x[0] or 99)):
+            if st.get("batted") != "1":
+                continue
+            out = st.get("dismissal") == "1" or (det.get("outDetails") or {}).get("shortText")
+            text = htmllib.unescape((det.get("outDetails") or {}).get("shortText") or "out") if out else "not out"
+            marks = (" (c)" if p.get("captain") else "")
+            batting.append({"batsman": {"name": name}, "dismissal-text": text, "mark": marks.strip(), "r": _int(st.get("runs")), "b": _int(st.get("ballsFaced")),
+                            "m": _int(st.get("minutes"), None), "4s": _int(st.get("fours")), "6s": _int(st.get("sixes")), "sr": _float(st.get("strikeRate"))})
+        bowling = []
+        for order, name, st, det, p in sorted(lines.get((period, bowl_id), []), key=lambda x: int(x[2].get("bowlingPosition") or 99)):
+            if st.get("bowled") != "1":
+                continue
+            bowling.append({"bowler": {"name": name}, "o": _overs(st.get("overs")), "m": _int(st.get("maidens")), "r": _int(st.get("conceded")), "w": _int(st.get("wickets")),
+                            "eco": _float(st.get("economyRate")), "0s": _int(st.get("dots")), "wd": _int(st.get("wides")), "nb": _int(st.get("noballs"))})
+        if not batting:
+            continue
+        name = teams[bat_id]["team"].get("displayName") or ""
+        number[bat_id] = number.get(bat_id, 0) + 1
+        total = {"r": int(ls.get("runs") or 0), "w": int(ls.get("wickets") or 0), "o": _overs(ls.get("overs")), "rr": None}
+        innings.append({"inning": f"{name} {ORDINAL.get(number[bat_id], '')} Innings".replace("  ", " "), "batting": batting, "bowling": bowling,
+                        "espn": {"extras": None, "total": total, "dnb": [], "fow": ""}})
+    if not innings:
+        return None
+    status = comp.get("status") or {}
+    potm = [{"name": (a.get("athlete") or {}).get("displayName") or "", "team": (a.get("team") or {}).get("name") or ""}
+            for a in status.get("featuredAthletes") or [] if a.get("name") == "playerOfTheMatch"]
+    return {"scorecard": innings, "status": status.get("summary") or "", "potm": potm}
+
+
+def parse_standings(data):
+    """A league's points table from the same feed, in parse_table's shape, or None (no table, or a tournament with several groups)."""
+    groups = [g for g in ((data.get("standings") or {}).get("children") or []) if (g.get("standings") or {}).get("entries")]
+    if len(groups) != 1:
+        return None
+    rows = []
+    for e in groups[0]["standings"]["entries"]:
+        v = {x.get("name") or x.get("abbreviation"): x.get("displayValue") for x in e.get("stats") or []}
+        t = e.get("team") or {}
+        rows.append({"pos": _int(v.get("rank") or v.get("position")), "name": t.get("displayName") or "", "team": t.get("abbreviation") or t.get("displayName") or "",
+                     "p": _int(v.get("matchesPlayed") or v.get("gamesPlayed")), "w": _int(v.get("matchesWon") or v.get("wins")), "l": _int(v.get("matchesLost") or v.get("losses")),
+                     "t": _int(v.get("matchesTied") or v.get("ties")), "nr": _int(v.get("noresult") or v.get("matchesNoResult")), "pts": _int(v.get("matchPoints") or v.get("points")),
+                     "nrr": _float(v.get("netrr") or v.get("netRunRate"))})
+    return rows or None
+
+
 GAME_URL = BASE + "/cricket/series/{series}/scorecard/{game}"      # the plain address of a scorecard; ESPN redirects it to the full page
 
 
@@ -277,8 +365,9 @@ class Source:
     """Reads the day's scores page once, then a scorecard or points table per match. Nothing here raises: any problem gives
     None, and the caller falls back to the other source (or leaves the table out)."""
 
-    def __init__(self, fetch=_get, pause=PAUSE):
+    def __init__(self, fetch=_get, pause=PAUSE, fetch_json=None):
         self.fetch, self.pause, self.index, self.fetched, self.tables = fetch, pause, None, 0, {}
+        self.json = fetch_json or http.get_json
 
     def _page(self, url):
         if self.fetched:
@@ -291,6 +380,28 @@ class Source:
         if self.index is None:
             self.index = parse_index(self._page(SCORES_URL))
         return find_game(self.index, match.get("teams") or [], match.get("name", ""), need_scorecard)
+
+    def feed_card(self, match):
+        """The scorecard from ESPN's JSON feed (works from GitHub), or None: no ESPN ids on the match, the feed has no innings yet, or its card disagrees with
+        the match's own score line (then the backups are tried)."""
+        try:
+            from kickoff import cricket
+            if not (match.get("series") and match.get("event")):
+                return None
+            card = parse_summary(self.json(SUMMARY_URL.format(series=match["series"], event=match["event"])))
+            return card if card and cricket.card_consistent(card, match) else None
+        except Exception:
+            return None
+
+    def feed_table(self, match):
+        """A league's points table from the same JSON feed, or None."""
+        try:
+            key = ("feed", match.get("series"))
+            if key not in self.tables:
+                self.tables[key] = parse_standings(self.json(SUMMARY_URL.format(series=match["series"], event=match["event"]))) if match.get("series") and match.get("event") else None
+            return self.tables[key]
+        except Exception:
+            return None
 
     def card(self, match):
         """The scorecard of a match in CricketData's shape (+ "status", "potm"), or None. ESPN serves some scorecard pages from an old cache (on 4 November the

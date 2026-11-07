@@ -734,7 +734,10 @@ def run(now, window_start, st, get_matches, get_scorecard, affordable, espn_card
     except Exception:
         story_events, perfs = [], []
         new["milestones"] = list(st.get("milestones", []))
-    return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": total_standouts},
+    # Never silent again (D, 2026-11-08: two Tests' centuries were missed because no scorecard arrived and nothing said so): a match that has a score but no batting card is named.
+    missing = [" v ".join(m.get("teams") or []) or m.get("name", "") for m in picked
+               if m.get("score") and not (shown_cards.get(m["id"]) or {}).get("innings")]
+    return {"html": html, "state": new, "used": used, "stats": {"picked": len(picked), "checked": checked, "skipped": skipped, "standouts": total_standouts, "missing_cards": missing},
             "events": story_events + perfs}
 
 
