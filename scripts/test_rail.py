@@ -113,5 +113,7 @@ check("every section id the page can make has a drawing (big-stuff, on-today, ar
 from kickoff import render  # noqa: E402
 pg = render.render_edition({"date": "2026-11-05", "dummy": False, "sections": [{"id": "cricket", "title": "Cricket", "html": "<p>a</p>"}]})
 check("the page carries the icon element and both scripts, in one file", 'id="rail-icon"' in pg and "RAIL_ICONS" in pg and "rail-fill" in pg and pg.index("RAIL_ICONS") < pg.index("moveIcon"))
+check("swimming and athletics have their own drawings (D, 2026-11-08), used for their Other Sports headings, and neither spins",
+      all(f"{k}: {{ spin: false, svg: '" in ICONS for k in ("swimming", "athletics")) and 'athletics: "athletics", swimming: "swimming"' in ICONS)
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
