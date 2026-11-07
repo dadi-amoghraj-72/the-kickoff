@@ -10,6 +10,7 @@
   --blue: #8DB4CC;
   --lilac: #B3A6CC;
   --rose: #C99590;
+  --rust: #DB6A45;
 }
 
 /* Light mode follows the phone's setting. Same accents, darkened to pass 4.5:1. */
@@ -24,6 +25,7 @@
     --blue: #2F6280;
     --lilac: #5E4F8A;
     --rose: #9A4A43;
+    --rust: #A33A16;
   }
 }
 
@@ -409,6 +411,10 @@ tr.p3 td { color: #d08a52; font-weight: 700; }
 
 /* The Big Stuff and On Today (13b): the lines reuse the gold-diamond standouts list; the time is gold, the Performance of the Day a gold line */
 .ontoday .when { color: var(--gold); font-weight: 600; margin-right: 4px; white-space: nowrap; }
+/* Don't Miss (D, 2026-11-07): the big games of the day; in the time list the same games keep their place but their time and diamond turn rust */
+.ontoday li.big .when, .ontoday li.big::before { color: var(--rust); }
+.ontoday li.big { font-weight: 600; }
+.subhead.comp { margin: 6px 0 0; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--muted); font-weight: 500; font-style: italic; }   /* a competition under the Football header (Key Overnight Scores) */
 .pod { color: var(--gold); font-size: 16px; line-height: 1.4; margin: 0 0 14px; }
 .bigstuff a { font-size: 13px; margin-left: 4px; }
 

@@ -66,7 +66,7 @@ def block(name, rows, decision, leaders="", before=None):
     yours = [x for x in rest if is_listed(x["id"])]
     if yours:
         line = ", ".join(f"{code(x['id'], x['abbr'])} {ordinal(x['rank'])} ({x['points']} pts)" for x in yours)
-        html += f"<p>Your clubs outside the top 6: {r.esc(line)}.</p>"
+        html += f"<p>Other major clubs: {r.esc(line)}.</p>"
     return html + leaders
 
 

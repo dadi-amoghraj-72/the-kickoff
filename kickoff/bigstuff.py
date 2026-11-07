@@ -90,12 +90,35 @@ def split_story(s):
 
 
 def _grouped(stories):
-    """The sport named once as a header, its games as gold-diamond bullets under it (D, 2026-11-05); the groups in the order of their best story (Arsenal's result leads)."""
+    """The sport named once as a header, its games as gold-diamond bullets under it (D, 2026-11-05); the groups in the order of their best story (Arsenal's result leads).
+    Football is one sport (D, 2026-11-07): one "Football" header, each competition a smaller label under it. The scores are in gold."""
     groups = {}
     for s in stories:
         head, line = split_story(s)
-        groups.setdefault(head, []).append(line)
-    return "".join(f'<p class="subhead">{r.esc(h)}</p>' + _list(lines) for h, lines in groups.items())
+        if s["sport"] == "football":
+            groups.setdefault("Football", {}).setdefault("" if head.lower() == "football" else head, []).append(line)
+        else:
+            groups.setdefault(head, {}).setdefault("", []).append(line)
+    out = ""
+    for h, comps in groups.items():
+        out += f'<p class="subhead">{r.esc(h)}</p>'
+        for comp, lines in comps.items():
+            out += (f'<p class="subhead comp">{r.esc(comp)}</p>' if comp else "") + _list_scores(lines)
+    return out
+
+
+SCORE = re.compile(r"\d+\u2013\d+(?: \d+\u2013\d+)*"                       # a score: 3\u20131, 33\u201310, tennis sets 6\u20134 7\u20135
+                   r"|\d+(?:/\d+)?[d*]? \(\d+(?:\.\d)?\)"                   # a cricket innings: 504 (134.3), 113/1 (35), Kohli's 74* (51)
+                   r"|(?<=won by )\d+ (?:runs?|wickets?)")                  # a cricket margin: India won by 5 wickets
+
+
+def gold_scores(text):
+    """The scores of a Key Overnight Scores line in gold (D, 2026-11-07); team names, 'Day 2' and the rest stay plain."""
+    return SCORE.sub(lambda m: f'<span class="n">{m.group(0)}</span>', r.esc(text))
+
+
+def _list_scores(texts):
+    return '<ul class="standouts bigstuff">' + "".join(f"<li>{gold_scores(t)}</li>" for t in texts) + "</ul>"
 
 
 def gold_figures(text):

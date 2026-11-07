@@ -45,7 +45,7 @@ html4, st4 = tables.tables_html({"eng.1": moved}, st2, THU, LEAGUES)
 check("changed table shows top 6 only (7 rows with the header)", html4.count("<tr") == 7, html4.count("<tr"))
 outside = [x for x in PL[6:] if tables.is_listed(x["id"])]
 check("line names the listed clubs outside the top 6",
-      all(tables.code(x["id"]) in html4 for x in outside) and "Your clubs outside the top 6" in html4, [x["team"] for x in outside])
+      all(tables.code(x["id"]) in html4 for x in outside) and "Other major clubs: " in html4, [x["team"] for x in outside])
 check("changed table updates the snapshot to today", st4["eng.1"]["published"] == "2026-11-05")
 check("'No change since' now uses the new publish day",
       "since Thursday" in tables.tables_html({"eng.1": moved}, st4, date(2026, 11, 6), LEAGUES)[0])

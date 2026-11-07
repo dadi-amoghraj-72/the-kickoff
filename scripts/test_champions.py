@@ -80,7 +80,7 @@ check("a heavier line marks the cuts after 8th and 24th only", t.count("cut") ==
 listed = [x for x in rows if champions.is_listed(x["id"])]
 check("listed clubs are bold-marked, nobody else", t.count("mine") == len(listed) and len(listed) >= 5, (t.count("mine"), len(listed)))
 check("caption has the matchday", "League Phase After Matchday 3" in t)
-check("no legend and none of the old text lines", all(x not in t for x in ("legend", "Your clubs", "cut line", "play off")))
+check("no legend and none of the old text lines", all(x not in t for x in ("legend", "Your clubs", "Other major clubs", "cut line", "play off")))
 check("a table that is too short is left out", champions.table_html(rows[:10]) == "")
 check("zones", [champions.zone(n) for n in (1, 8, 9, 24, 25, 36)] == ["blue", "blue", "lilac", "lilac", "rose", "rose"])
 

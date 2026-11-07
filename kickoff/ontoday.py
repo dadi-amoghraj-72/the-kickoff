@@ -1,6 +1,7 @@
 """On Today and Games to Watch: what is still to come, in Singapore time, from the fixtures kickoff/fixtures.py collects.
 
-  On Today        the next 24 hours until the next edition at 7am: "While You're Up" (sun, 7am to 11pm SGT) then "Overnight" (moon, 11pm to 7am)
+  On Today        the next 24 hours until the next edition at 7am: "Don't Miss" (up to three big games, D 2026-11-07), "While You're Up" (sun, 7am to 11pm SGT)
+                  then "Overnight" (moon, 11pm to 7am); the Don't Miss games are also marked in rust in the time list
   In The Week Ahead  Mondays only: the rest of the week, grouped by day (D's teams, playoffs and finals, derbies, top-of-the-table clashes, tracked NBA stars facing each other,
                   every F1 race, the late rounds of a Slam)
 
@@ -14,6 +15,7 @@ from kickoff import render as r
 SGT = ZoneInfo("Asia/Singapore")
 SUN_FROM, SUN_TO = 7, 23          # "While you're up" is 7am to 11pm SGT, "Overnight" 11pm to 7am (D, 2026-11-05)
 MAX_TODAY = 12
+MAX_DONT_MISS = 3
 MAX_WATCH = 10
 WATCH_PER_SPORT = 4       # one sport never fills the week (D's teams and finals excepted)
 
@@ -40,10 +42,11 @@ def pick_today(found, cap=MAX_TODAY):
     return sorted(best, key=lambda f: f["when"])
 
 
-def _line(f, with_day=False):
+def _line(f, with_day=False, big=False):
     t = f["when"].astimezone(SGT)
     stamp = "Under way" if "live" in f["flags"] else "All day" if "dateonly" in f["flags"] else clock(f["when"])
-    return f'<li><span class="when">{(t.strftime("%a ") if with_day else "")}{stamp}</span> {r.esc(f["text"])}</li>'
+    cls = ' class="big"' if big else ""
+    return f'<li{cls}><span class="when">{(t.strftime("%a ") if with_day else "")}{stamp}</span> {r.esc(f["text"])}</li>'
 
 
 def plain_line(f):
@@ -52,15 +55,37 @@ def plain_line(f):
     return f"{stamp} \u00b7 {f['text']}"
 
 
+def is_big(f):
+    """A Don't Miss game (D, 2026-11-07): D's teams (Arsenal, India, the Jaguars and Steelers; not a plain NBA or MLB regular-season game), a semi-final or final or playoff,
+    a derby or a top-of-the-table clash, the F1 race (not qualifying or the sprint). A listed club's ordinary game is not one."""
+    if f["sport"] == "f1":
+        return f["text"].endswith("Race")
+    if f["sport"] in ("nba", "mlb") and f["stage"] == "regular":
+        return bool(f["flags"] & {"derby", "clash"})
+    return f["mine"] or f["stage"] in ("final", "knockout", "playoff") or bool(f["flags"] & {"derby", "clash"})
+
+
+def dont_miss(chosen, cap=MAX_DONT_MISS):
+    """Up to `cap` big games, the most important first by score, then shown in time order."""
+    best = sorted((f for f in chosen if is_big(f)), key=lambda f: (-f["score"], f["when"]))[:cap]
+    return sorted(best, key=lambda f: f["when"])
+
+
 def today_html(found):
-    """'While You're Up' then 'Overnight'; '' when nothing matters today."""
+    """'Don't Miss', then 'While You're Up' then 'Overnight'; '' when nothing matters today. The Don't Miss games stay in the time list too, marked in rust."""
     chosen = pick_today(found)
+    if not chosen:
+        return ""
+    first_day = chosen[0]["when"].astimezone(SGT).date()
+    other_day = lambda f: f["when"].astimezone(SGT).date() != first_day  # noqa: E731
+    picks = dont_miss(chosen)
     out = ""
-    for which, heading in (("sun", "☀︎ While You're Up"), ("moon", "☾ Overnight")):
+    if picks:
+        out += '<h3>\u2605 Don\'t Miss</h3><ul class="standouts ontoday dontmiss">' + "".join(_line(f, other_day(f), big=True) for f in picks) + "</ul>"
+    for which, heading in (("sun", "\u2600\ufe0e While You're Up"), ("moon", "\u263e Overnight")):
         rows = [f for f in chosen if tag(f["when"]) == which]
         if rows:
-            first_day = chosen[0]["when"].astimezone(SGT).date()
-            out += f'<h3>{heading}</h3><ul class="standouts ontoday">' + "".join(_line(f, f["when"].astimezone(SGT).date() != first_day) for f in rows) + "</ul>"
+            out += f'<h3>{heading}</h3><ul class="standouts ontoday">' + "".join(_line(f, other_day(f), big=any(f is p for p in picks)) for f in rows) + "</ul>"
     return out
 
 

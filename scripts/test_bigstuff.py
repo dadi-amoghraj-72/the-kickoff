@@ -108,7 +108,7 @@ out = daily.build_edition(now, day, {}, [("football", "Football", fake(stories, 
 ed = out["edition"]
 big = next(s for s in ed["sections"] if s["id"] == "big-stuff")
 check("the edition's first section is The Big Stuff, with scores, news, injuries and the Performance of the Day",
-      ed["sections"][0]["id"] == "big-stuff" and all(x in big["html"] for x in ("Key Overnight Scores", "Biggest News", "Major Injuries", "Stars Of The Night", "Arsenal 3")), big["html"][:300])
+      ed["sections"][0]["id"] == "big-stuff" and all(x in big["html"] for x in ("Key Overnight Scores", "Biggest News", "Major Injuries", "Stars Of The Night", 'Arsenal <span class="n">3\u20130</span>')), big["html"][:300])
 check("the headlines for the ping are the top stories, Arsenal first", ed["headlines"][0].startswith("Football: Arsenal") and len(ed["headlines"]) <= 3)
 check("with no events at all the Big Stuff section is simply left out", "big-stuff" not in [s["id"] for s in daily.build_edition(now, day, {}, [("football", "Football", fake([]))])["edition"]["sections"]])
 bad = daily.build_edition(now, day, {}, [("football", "Football", fake([{"kind": "result"}]))])
@@ -128,15 +128,24 @@ _gs = [{"kind": "result", "sport": "football", "comp": "Champions League", "text
        {"kind": "result", "sport": "ufc", "comp": "UFC", "text": "UFC 330: Jon Jones def. Stipe Miocic", "score": 22, "mine": False, "stage": "final"}]
 _gh = bigstuff.html(_gs)
 check("each sport is named once as a header, its games are the bullets under it, without the repeated prefix",
-      _gh.count("Champions League") == 1 and '<p class="subhead">Champions League</p><ul class="standouts bigstuff"><li>Arsenal 2\u20131 Slavia Prague</li><li>Como 9\u20131 Lens</li></ul>' in _gh
-      and "<li>Champions League:" not in _gh and '<p class="subhead">NBA</p>' in _gh and "<li>Boston Celtics 109\u2013102 Milwaukee Bucks</li>" in _gh, _gh)
+      _gh.count("Champions League") == 1 and '<p class="subhead comp">Champions League</p><ul class="standouts bigstuff"><li>Arsenal <span class="n">2\u20131</span> Slavia Prague</li><li>Como <span class="n">9\u20131</span> Lens</li></ul>' in _gh
+      and "<li>Champions League:" not in _gh and '<p class="subhead">NBA</p>' in _gh and '<li>Boston Celtics <span class="n">109\u2013102</span> Milwaukee Bucks</li>' in _gh, _gh)
 check("the groups follow the order of their best story: Champions League, Cricket, NBA", _gh.index("Champions League") < _gh.index("Cricket") < _gh.index("NBA"))
 check("a story that does not begin with its competition keeps its whole text under the header (UFC)", '<p class="subhead">UFC</p><ul class="standouts bigstuff"><li>UFC 330: Jon Jones def. Stipe Miocic</li>' in _gh, _gh)
+_fb = bigstuff.html([{"kind": "result", "sport": "football", "comp": "Premier League", "text": "Premier League: Everton 3\u20131 Coventry City", "score": 20, "mine": False, "stage": "regular"},
+                     {"kind": "result", "sport": "cricket", "comp": "International", "text": "Cricket: Afghanistan v Zimbabwe \u00b7 Day 2: Zimbabwe 504 (134.3), Afghanistan 113/1 (35)", "score": 6, "mine": False, "stage": "regular"},
+                     {"kind": "result", "sport": "football", "comp": "FA Cup", "text": "FA Cup: Leicester City 4\u20132 Oxford City", "score": 5, "mine": False, "stage": "regular"}])
+check("football is one header with its competitions under it, even when another sport ranks between them (D, 2026-11-07)",
+      _fb.count('<p class="subhead">Football</p>') == 1 and _fb.index("Football") < _fb.index("Premier League") < _fb.index("FA Cup") < _fb.index("Cricket") and '<p class="subhead comp">FA Cup</p>' in _fb, _fb)
+check("the scores are gold and the rest is plain: '504 (134.3)' and '113/1 (35)' gold, 'Day 2' not",
+      '<span class="n">504 (134.3)</span>' in _fb and '<span class="n">113/1 (35)</span>' in _fb and '<span class="n">2</span>' not in _fb and "Day 2:" in _fb, _fb)
+check("a tennis line's sets are gold, an F1 winner line has nothing to gold", bigstuff.gold_scores("Tennis: Sinner beat Alcaraz 6\u20134 7\u20136 in the final") == 'Tennis: Sinner beat Alcaraz <span class="n">6\u20134 7\u20136</span> in the final'
+      and "<span" not in bigstuff.gold_scores("F1: Max Verstappen wins the Brazilian Grand Prix"))
 check("the Telegram headlines keep the sport prefix on every line (they stand alone)", bigstuff.headlines(_gs)[0] == "Champions League: Arsenal 2\u20131 Slavia Prague")
 
 # ---- review of the first real rehearsal (D, 2026-11-05)
 _cr = bigstuff.html([{"kind": "result", "sport": "cricket", "comp": "International", "text": "Cricket: New Zealand v India, India won by 5 wickets", "score": 30, "mine": True, "stage": "regular"}])
-check("cricket is headed 'Cricket', not its competition ('International')", '<p class="subhead">Cricket</p>' in _cr and "International" not in _cr and "<li>New Zealand v India, India won by 5 wickets</li>" in _cr, _cr)
+check("cricket is headed 'Cricket', not its competition ('International')", '<p class="subhead">Cricket</p>' in _cr and "International" not in _cr and '<li>New Zealand v India, India won by <span class="n">5 wickets</span></li>' in _cr, _cr)
 _nw = [{"text": "England captain Harry Kane has signed a new contract with Bayern Munich that lasts until 2029.", "source": "BBC Sport"}, {"text": "Harry Kane has put pencil to paper on a new contract, committing his future to Bayern Munich.", "source": "ESPN"},
        {"text": "Chelsea have sacked their manager Enzo Maresca.", "source": "BBC Sport"}]
 check("the same story from two sources is shown once (Kane's contract on BBC and ESPN), a different story stays", len(bigstuff.dedupe_news(_nw)) == 2 and bigstuff.dedupe_news(_nw)[1]["text"].startswith("Chelsea"), bigstuff.dedupe_news(_nw))

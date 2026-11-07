@@ -137,7 +137,7 @@ def football(src, now, end, weekday, watch=False):
                     continue
                 if frozenset(ids) in DERBIES:
                     flags.add("derby")
-                if watch and lg in espn.LEAGUES:
+                if lg in espn.LEAGUES:                                              # top-of-the-table clashes: Games to Watch and On Today's Don't Miss (D, 2026-11-07)
                     if lg not in tables:
                         try:
                             tables[lg] = {r["id"]: r["rank"] for r in src.table(lg)}
