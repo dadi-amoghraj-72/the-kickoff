@@ -512,23 +512,40 @@ class Feed:
         return [d for league in header["sports"][0]["leagues"] for ev in league.get("events", []) for d in [_draft(league, ev)]
                 if ev.get("status") in states and wanted(d)]
 
-    def matches(self, wanted=lambda draft: True, limit=6):
+    def matches(self, wanted=lambda draft: True, limit=6, dates=(), rank=lambda draft: 0):
         """CricketData-shaped matches for the current events that `wanted(draft)` accepts, each with "status", "score" and "_card" ({"scorecard": [], "status",
-        "potm"}); at most `limit` series are read. A series that fails is skipped."""
-        header = self._call(HEADER)
+        "potm"}); at most `limit` series are read, the most important first (`rank`: lower first). A series that fails is skipped.
+        `dates` ("20261107"): the header of those days is read too. The plain header drops a finished match some hours after it ends (on 8 November the New Zealand
+        v India ODI of the 7th had gone by the morning run), so the days of the edition's window are asked for by date (D, 2026-11-08)."""
+        boards = [self._call(HEADER)]
+        for day in dates:
+            try:
+                boards.append(self._call(HEADER + f"&dates={day}"))
+            except Exception:                              # a day that fails costs only that day's extra matches
+                pass
         chosen = {}
-        for league in header["sports"][0]["leagues"]:
-            for ev in league.get("events", []):
-                d = _draft(league, ev)
-                if d["matchStarted"] and wanted(d):
-                    chosen.setdefault(league["id"], {})[ev["id"]] = d
+        for header in boards:
+            for league in header["sports"][0]["leagues"]:
+                for ev in league.get("events", []):
+                    d = _draft(league, ev)
+                    if d["matchStarted"] and wanted(d):
+                        chosen.setdefault(league["id"], {})[ev["id"]] = d
         out = []
-        for sid, evs in list(chosen.items())[:limit]:
+        order = sorted(chosen.items(), key=lambda kv: min(rank(d) for d in kv[1].values()))
+        for sid, evs in order[:limit]:
             try:
                 board = self._call(SERIES_FEED.format(series=sid))
             except Exception:
                 continue
-            for e in board.get("events", []):
+            events = {e["id"]: e for e in board.get("events", [])}
+            for day in dates:                              # a series' scoreboard moves on to its next games (on 8 November the WBBL's showed only that day's): yesterday's by date
+                if set(evs) <= set(events):
+                    break
+                try:
+                    events.update({e["id"]: e for e in self._call(SERIES_FEED.format(series=sid) + f"?dates={day}").get("events", [])})
+                except Exception:
+                    pass
+            for e in events.values():
                 d = evs.get(e["id"])
                 if not d:
                     continue

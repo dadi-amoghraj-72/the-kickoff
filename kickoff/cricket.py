@@ -146,12 +146,15 @@ def same_match(a, b):
     return pair_of(a) == pair_of(b) and ordinal_of(a.get("name")) == ordinal_of(b.get("name"))
 
 
-def espn_matches(feed):
+def espn_matches(feed, now=None):
     """The current in-scope matches from ESPN's cricket JSON feed (espn_cricket.Feed): CricketData-shaped, each with ESPN's result line, scores and player of
     the match, ids 'espn-<event>'. ESPN is the main source (D, 2026-11-04): fresher than the free CricketData list, which runs behind (on 4 November it lacked
     the finished New Zealand v India ODI, then listed it without a matchType), has no daily call limit, and works from GitHub's servers like the other sports'
     ESPN feeds. At most MAX_EXTRA_SERIES series are read."""
-    return feed.matches(lambda draft: classify(draft)["kind"] is not None, MAX_EXTRA_SERIES)
+    now = now or datetime.now(timezone.utc)
+    days = sorted({(now - timedelta(days=n)).strftime("%Y%m%d") for n in (0, 1)})       # the edition's window: a match that ended yesterday afternoon is still found
+    return feed.matches(lambda draft: classify(draft)["kind"] is not None, MAX_EXTRA_SERIES, dates=days,
+                        rank=lambda draft: (scorecard_tier(draft), -(classify(draft).get("priority") or 0)))     # India's and the Tests' series first, if the cap bites
 
 
 def title(m):

@@ -84,5 +84,28 @@ cache_only = cricketcache.getters({"cards": {"espn-1555123": {"built": "x", "sco
                                   espn_cricket.Source(fetch=blocked, fetch_json=lambda *a, **k: (_ for _ in ()).throw(RuntimeError("feed down"))))[0]
 check("the order is fixed: the feed first, then the Mac's cache (used when the feed is down)", cache_only({"id": "espn-1555123", "series": "24799", "event": "1555123"})["scorecard"] == card["scorecard"])
 
+# ---- A match that ended yesterday afternoon (8 Nov: New Zealand v India and two WBBL games had left ESPN's live feeds by the morning run) ----
+_live_hdr = next(v for u, v in SAVED.items() if u == espn_cricket.HEADER)
+_lg = {"id": "24469", "name": "India tour of New Zealand 2026/27", "events": [{"id": "1539438", "name": "New Zealand v India", "status": "post", "date": "2026-11-07T02:00Z",
+       "summary": "India won by 4 runs", "title": "2nd ODI (D/N), India tour of New Zealand 2026/27", "description": "2nd ODI", "competitors": []}]}
+_dated = {"sports": [{"leagues": [_lg]}]}
+_board = {"events": [{"id": "1539438", "name": "New Zealand v India", "date": "2026-11-07T02:00Z", "status": {"summary": "India won by 4 runs", "type": {"state": "post"}},
+                      "competitions": [{"competitors": [{"team": {"id": "1", "displayName": "New Zealand"}, "linescores": []}, {"team": {"id": "6", "displayName": "India"}, "linescores": []}]}]}]}
+
+
+def _gone(url, *a, **k):
+    if url == espn_cricket.HEADER:
+        return _live_hdr                                   # the live header no longer has it
+    if url.startswith(espn_cricket.HEADER + "&dates="):
+        return _dated if url.endswith("20261107") else {"sports": [{"leagues": []}]}
+    if "/24469/scoreboard" in url:
+        return _board if "dates=" in url else {"events": []}      # the series' board has moved on too
+    return replay(url)
+
+
+_found = cricket.espn_matches(espn_cricket.Feed(get_json=_gone, pause=0), now=datetime(2026, 11, 7, 23, 15, tzinfo=timezone.utc))
+check("a match that left the live feeds is still found by its date: New Zealand v India of 7 November", any(m["id"] == "espn-1539438" for m in _found), [m["name"][:30] for m in _found])
+check("and the matches still in the live feed are kept", any(m["id"] == "espn-1555123" for m in _found))
+
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
