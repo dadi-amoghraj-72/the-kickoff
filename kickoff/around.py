@@ -11,12 +11,35 @@ import json
 import re
 from datetime import datetime, timedelta, timezone
 
-from kickoff import badminton, chess_live, golf, importance, majors, notes, settings
+from kickoff import badminton, chess_live, golf, importance, majors, notes, rugbytables, settings
 from kickoff import ufc as ufc_mod
 from kickoff import ufcrank
 from kickoff import render as r
 from kickoff.sources import other_sports
 from kickoff.sources.other_sports import RUGBY_LEAGUES
+
+# Multi-sport Games (D, 2026-11-08: the Youth Olympics were on and the page only had one line that did not even name its sport). While one is on, Other Sports opens with it:
+# its name, host and day, then its lines, each starting with its sport. Only Games whose dates are fixed are listed; add the next ones when they are.
+GAMES = [("Youth Olympic Games", "Dakar", "2026-10-31", "2026-11-13"),
+         ("Olympic Games", "Los Angeles", "2028-07-14", "2028-07-30"),
+         ("Paralympic Games", "Los Angeles", "2028-08-15", "2028-08-27"),
+         ("Winter Olympic Games", "French Alps", "2030-02-01", "2030-02-17")]
+
+
+def games_on(day):
+    """(name, host, day number, days in all, last day) for a Games on `day` (a date in Singapore), or None."""
+    from datetime import date as date_
+    for name, host, a, b in GAMES:
+        start, end = date_.fromisoformat(a), date_.fromisoformat(b)
+        if start <= day <= end:
+            return name, host, (day - start).days + 1, (end - start).days + 1, end
+    return None
+
+
+def games_html(on):
+    name, host, n, total, end = on
+    return f'<p class="games-sub">{r.esc(host)} \u00b7 Day {n} of {total} \u00b7 until {end:%a} {end.day} {end:%b}</p>'
+
 
 RECENT = timedelta(hours=36)                                 # feed items
 RESULTS_RECENT = timedelta(days=3)                              # rugby results: a skipped day is caught up (each is shown once)
@@ -31,7 +54,7 @@ RULES = [
     ("badminton", "Badminton", r"badminton|shuttler|\bbwf\b", r"world championships?|world tour finals|super ?(1000|750)|all england|indonesia open|china open|malaysia open|japan open"),
     ("athletics", "Athletics", r"athletics|diamond league|sprinter|world athletics", r"diamond league|world (athletics )?(indoor )?championships?"),
     ("handball", "Handball", r"handball", r"world championships?|european championships?|euros?\b|champions league|final four"),
-    ("hockey", "Field hockey", r"field hockey|\bhockey\b|\bfih\b", r"pro league|world cup|asia cup"),
+    ("hockey", "Field hockey", r"field hockey|\bhockey\b|\bfih\b", r"pro league|world cup|asia cup|champions trophy|nations cup|asian games|olympic"),
     ("chess", "Chess", r"\bchess\b|\bfide\b|grandmaster", r"world (chess )?championship|candidates|olympiad|tata steel|norway chess|grand chess tour|sinquefield|women'?s world"),
     ("darts", "Darts", r"\bdarts?\b|\bpdc\b", r"world (darts )?championship|world matchplay|grand slam of darts|premier league|ally pally|alexandra palace"),
     ("games", "Multi-sport games", r"games|olympic|olympics", r"\b(asian|sea|southeast asian|commonwealth|olympic|paralympic|youth olympic) games\b|\bolympics\b"),
@@ -45,6 +68,10 @@ SPOT_PLACE = re.compile(r"\b(india|indian|singapore|singaporean|malaysia|malaysi
 SPOT_NAMES = re.compile(r"\b(sindhu|satwik|chirag shetty|lakshya sen|prannoy|treesa jolly|gayatri gopichand|neeraj chopra|gukesh|praggnanandhaa|arjun erigaisi|koneru humpy|divya deshmukh|vaishali|"
                         r"manu bhaker|sreeshankar|avinash sable|loh kean yew|carlos yulo|joseph schooling|ng on yee|jonatan christie|anthony ginting|kunlavut vitidsarn)\b", re.I)
 SPOT_STAGE = re.compile(r"semi-?final|\bfinal\b|\bmedal|podium|bronze|silver|\bgold\b|\btitle\b|champion|crowned|wins?\b|won\b", re.I)
+# D (2026-11-08): India and Singapore reaching a semi-final or final, or a medal, in any of these sports' tournaments gets a line even when the event is not on the list above
+# (at most two lines a sport, like every feed line): India's hockey team won the Asian Champions Trophy at home and nothing said so.
+OURS = re.compile(r"\b(india|indian|indians|singapore|singaporean)\b", re.I)
+OURS_STAGE = re.compile(r"semi-?finals?|\bfinals?\b|\bgold\b|\bsilver\b|\bbronze\b|\bmedal|\btitle\b|\bchampions?\b|\bcrowned\b|\blift(s|ed)?\b", re.I)
 NOT_SPOT = re.compile(r"\b(cricket|ipl|test match|odi|t20|football|premier league|nba|nfl|formula|f1|tennis|rugby|golf)\b", re.I)    # sports we cover in full elsewhere
 RESULT = re.compile(r"\b(wins?|won|beats?|beat|defeats?|champion|title|crowned|claims?|retains?|seals?|clinch|secures?|medal|gold|silver|bronze|reaches?|into the final|semi-?final|"
                     r"knockout|thrash|stun|triumph|victory|lifts?)\b", re.I)
@@ -70,9 +97,10 @@ For every item choose one "kind":
 - none: anything else. Previews, opinion, interviews, "could" and "may", lists, and anything you are unsure about are "none". When in doubt, "none".
 
 For result and news give a "summary": ONE sentence of at most 30 words in your own words, using only the headline and blurb; add nothing from memory; never copy a run of more than
-five words; no hype, no emojis. Return one entry per item, using the item's link as its id."""
+five words; no hype, no emojis. Also give "sport": the sport the item is about, in one or two words with a capital letter (Badminton, Athletics, Swimming, Field hockey), only when
+the headline or blurb says it or names its event; otherwise "". Return one entry per item, using the item's link as its id."""
 SCHEMA = {"type": "object", "properties": {"items": {"type": "array", "items": {"type": "object", "properties": {
-    "link": {"type": "string"}, "kind": {"type": "string", "enum": KINDS}, "summary": {"type": "string"}}, "required": ["link", "kind", "summary"], "additionalProperties": False}}},
+    "link": {"type": "string"}, "kind": {"type": "string", "enum": KINDS}, "summary": {"type": "string"}, "sport": {"type": "string"}}, "required": ["link", "kind", "summary", "sport"], "additionalProperties": False}}},
     "required": ["items"], "additionalProperties": False}
 
 STORY_SYSTEM = """You pick the most interesting stories for The Kickoff, a personal daily sports digest read by one fan in Singapore, from a numbered list of headlines and blurbs.
@@ -119,7 +147,7 @@ def sport_of(item):
     if NEGATIVE.search(text):
         return None, False
     for key, _, words, events in RULES:
-        if re.search(words, text, re.I) and re.search(events, text, re.I) and not (key in EXCLUDE and EXCLUDE[key].search(text)):
+        if re.search(words, text, re.I) and (re.search(events, text, re.I) or (OURS.search(text) and OURS_STAGE.search(text))) and not (key in EXCLUDE and EXCLUDE[key].search(text)):
             return key, bool(SPOT_PLACE.search(text) or SPOT_NAMES.search(text))
     if (SPOT_PLACE.search(text) or SPOT_NAMES.search(text)) and SPOT_STAGE.search(text) and not NOT_SPOT.search(text):
         for key, _, words, _e in RULES:
@@ -187,21 +215,29 @@ def classify(client, cands):
                 out[item["link"]] = {"kind": x["kind"], "summary": None}
                 redo.append({**next(p for p in pending if p["link"] == item["link"]), "problems": problems})
             else:
-                out[item["link"]] = {"kind": x["kind"], "summary": x["summary"].strip()}
+                out[item["link"]] = {"kind": x["kind"], "summary": x["summary"].strip(), "sport": sport_named(x.get("sport", ""), item)}
         pending = redo
         if not pending:
             break
     return out, total
 
 
-def line_html(text, link=None, source=None, split=False):
+def sport_named(sport, item):
+    """Claude's sport for an item, kept only when the headline or blurb backs it (the word itself, or a word of it); '' otherwise. Never from memory."""
+    sport = (sport or "").strip()
+    text = f"{item['title']} {item['text']}".lower()
+    words = [w for w in re.findall(r"[a-z]+", sport.lower()) if len(w) > 3]
+    return sport[:1].upper() + sport[1:] if sport and words and any(w[:5] in text for w in words) else ""
+
+
+def line_html(text, link=None, source=None, split=False, lead=""):
     """One list item. split=True (a line of several results, 'Title: a; b; c') puts the title in bold and each result on its own line, so it reads on a phone."""
     tail = f' <a href="{r.esc(link)}" rel="noopener">{r.esc(source)}</a>' if link else ""
     if split and "; " in text and ": " in text:
         head, rest = text.split(": ", 1)
         body = f"<strong>{r.esc(head)}</strong>" + "".join(f"<br>{r.esc(part)}" for part in rest.split("; "))
         return f"<li>{body}{tail}</li>"
-    return f"<li>{r.esc(text)}{tail}</li>"
+    return f"<li>{f'<strong>{r.esc(lead)}:</strong> ' if lead else ''}{r.esc(text)}{tail}</li>"
 
 
 # ---- Stories ----------------------------------------------------------------------------------------
@@ -241,18 +277,26 @@ def run(now, st, source, client=None):
     story_log = {k: v for k, v in (st.get("stories") or {}).items() if now - _utc(v) <= timedelta(days=STORY_DAYS)}
     lines = {k: [] for k in ORDER}
     stats = {"candidates": 0, "shown": 0, "failed": 0, "claude_usage": {"input": 0, "output": 0}}
+    rugby_shown = []
     for key, fn in (("rugby", rugby),):
         fails = []
         try:
             for text, uid in fn(source, now, fails):
                 if uid not in seen:                       # a match, a result or a day's leader line is shown once
                     lines[key].append(line_html(text))
+                    rugby_shown.append(text)
                     seen.append(uid)
         except Exception:
             stats["failed"] += 1
         stats["failed"] += len(fails)
     sgt_today = (now + timedelta(hours=8)).date()
-    blocks = {"golf": [], "badminton": [], "ufc": []}                # tables and notes that are not one-line items: the golf standings, the badminton draws and scorecards
+    blocks = {"golf": [], "badminton": [], "ufc": [], "rugby": []}    # tables and notes that are not one-line items: the golf standings, the badminton draws and scorecards, rugby tables
+    for league, name in rugbytables.TABLES.items():        # a competition that played this morning gets its table under the results (D, 2026-11-08)
+        if any(t.endswith(f"({name})") for t in rugby_shown):
+            try:
+                blocks["rugby"].append(rugbytables.table_html(league, source.rugby_table(league)))
+            except Exception:
+                stats["failed"] += 1
     story_events = []
     boards = {}
     for tour in ("pga", "lpga"):
@@ -326,15 +370,23 @@ def run(now, st, source, client=None):
                 continue
             if feed_count.get(c["sport"], 0) >= FEED_PER_SPORT:
                 continue
+            lead = v.get("sport") or ""
+            if c["sport"] == "games" and not lead:               # a Games line always says its sport (D, 2026-11-08); when the source does not, the line is left out
+                continue
             feed_count[c["sport"]] = feed_count.get(c["sport"], 0) + 1
-            lines[c["sport"]].append(line_html(v["summary"] or c["title"], c["link"], c["source"]))
+            lines[c["sport"]].append(line_html(v["summary"] or c["title"], c["link"], c["source"], lead=lead if c["sport"] == "games" else ""))
             seen.append(c["link"])
     html = ""
-    for key in ORDER:
+    on = games_on(sgt_today)
+    if on:                                             # a Games on: it leads Other Sports, named, with its day, even before its first result line
+        blocks["games"] = [games_html(on)] + blocks.get("games", [])
+    for key in (["games"] + [k for k in ORDER if k != "games"]) if on else ORDER:
         extra = "".join(blocks.get(key, []))
         if lines[key] or extra:
             shown = lines[key][:PER_SPORT]
-            html += f'<h4 class="sport{" first" if not html else ""}">{r.esc(HEADING[key])}</h4>' + (f'<ul class="standouts">{"".join(shown)}</ul>' if shown else "") + extra
+            head = on[0] if key == "games" and on else HEADING[key]
+            body = f'<ul class="standouts">{"".join(shown)}</ul>' if shown else ""
+            html += f'<h4 class="sport{" first" if not html else ""}">{r.esc(head)}</h4>' + ((extra + body) if key == "games" else (body + extra))
             stats["shown"] += len(shown) + (1 if extra else 0)
     picks, usage2 = stories(client, items, now, set(seen) | set(story_log))
     stats["claude_usage"] = {k: stats["claude_usage"][k] + usage2[k] for k in usage2}

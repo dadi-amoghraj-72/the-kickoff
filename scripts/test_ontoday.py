@@ -255,12 +255,14 @@ _dm = [fx("nba", "NBA", "NBA: Boston Celtics at Charlotte Hornets", utc(2026, 11
        fx("football", "La Liga", "La Liga: Valencia v Real Madrid", utc(2026, 11, 7, 20, 0), 5)]
 _dmh = ontoday.today_html(_dm)
 _top = _dmh[:_dmh.index("While You")]
-check("Don't Miss comes first: Arsenal, India and the top-of-the-table clash (D, 2026-11-07)", _dmh.startswith("<h3>\u2605 Don't Miss</h3>") and all(x in _top for x in ("Arsenal v Hull City", "New Zealand v India", "Nottingham Forest")), _top)
-check("not in Don't Miss: a plain NBA game of D's teams, F1 qualifying, a listed club's ordinary game", all(x not in _top for x in ("Celtics", "Qualifying", "Bayern", "Real Madrid")), _top)
+check("Don't Miss comes first: Arsenal, India and the F1 qualifying (it outranks a top-of-the-table clash for the third place; D, 2026-11-08)", _dmh.startswith("<h3>\u2605 Don't Miss</h3>") and all(x in _top for x in ("Arsenal v Hull City", "New Zealand v India", "Qualifying")) and "Nottingham Forest" not in _top, _top)
+check("without the F1 session the clash takes the third place", "Nottingham Forest" in ontoday.today_html([f for f in _dm if f["sport"] != "f1"]).split("While You")[0])
+check("not in Don't Miss: a plain NBA game of D's teams, a listed club's ordinary game", all(x not in _top for x in ("Celtics", "Bayern", "Real Madrid")), _top)
 check("the Don't Miss games stay in the time list, marked big (rust); the others are plain", _dmh.count('<li class="big">') == 6 and _dmh.count("Arsenal v Hull City") == 2, _dmh.count('<li class="big">'))
 check("Don't Miss holds three at most, in time order", ontoday.dont_miss(_dm + [fx("tennis", "ATP", "Tennis: ATP Finals final", utc(2026, 11, 7, 12, 0), 10, stage="final")])
       == sorted(ontoday.dont_miss(_dm + [fx("tennis", "ATP", "Tennis: ATP Finals final", utc(2026, 11, 7, 12, 0), 10, stage="final")]), key=lambda f: f["when"]) and len(ontoday.dont_miss(_dm + [fx("tennis", "ATP", "Tennis: ATP Finals final", utc(2026, 11, 7, 12, 0), 10, stage="final")])) == 3)
-check("the F1 race is a Don't Miss, its qualifying is not", ontoday.is_big(fx("f1", "F1", "F1: Brazilian Grand Prix \u00b7 Race", utc(2026, 11, 8, 17, 0), 9, stage="final")) and not ontoday.is_big(_dm[5]))
+check("the F1 race, qualifying and sprint are Don't Miss (D, 2026-11-08); practice is not", ontoday.is_big(fx("f1", "F1", "F1: Brazilian Grand Prix \u00b7 Race", utc(2026, 11, 8, 17, 0), 9, stage="final")) and ontoday.is_big(_dm[5])
+      and ontoday.is_big(fx("f1", "F1", "F1: Brazilian Grand Prix \u00b7 Sprint", utc(2026, 11, 8, 17, 0), 8, stage="knockout")) and not ontoday.is_big(fx("f1", "F1", "F1: Brazilian Grand Prix \u00b7 Practice 1", utc(2026, 11, 8, 17, 0), 3)))
 check("no big game: no Don't Miss heading", "Don't Miss" not in ontoday.today_html([_dm[0], _dm[2]]))
 many = [fixtures.fixture("nba", "NBA", f"NBA: game {i}", utc(2026, 11, 5, 1 + i % 10, 0), float(i)) for i in range(20)]
 check("On Today never lists more than 12 lines; the cut keeps the highest scores, back in time order", len(ontoday.pick_today(many)) == 12 and min(f["score"] for f in ontoday.pick_today(many)) == 8.0)

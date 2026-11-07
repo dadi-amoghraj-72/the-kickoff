@@ -473,6 +473,7 @@ p.key .dog { color: var(--chalk); font-weight: 700; }
 
 /* Other Sports: each sport named in gold on its own line, a faint line between sports (D, 2026-11-05) */
 h4.sport { margin: 30px 0 8px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 20px; font-weight: 700; letter-spacing: 0.02em; text-transform: none; color: var(--gold); }
+.games-sub { margin: -2px 0 10px; color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }   /* a Games on: host, day and last day under its name (D, 2026-11-08) */
 h4.sport.first { margin-top: 14px; padding-top: 0; border-top: 0; }
 
 /* The end of an edition */
@@ -492,3 +493,11 @@ h4.sport.first { margin-top: 14px; padding-top: 0; border-top: 0; }
 
 /* The edition counter, small at the bottom right of the page (D, 2026-11-06) */
 footer .edno { display: block; margin-top: 10px; text-align: right; font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
+
+/* Rugby tables (D, 2026-11-08): fixed column widths, so the Nations Championship's two pools line up column for column */
+.rugbyt table { table-layout: fixed; width: 100%; }
+.rugbyt th:nth-child(1), .rugbyt td:nth-child(1) { width: 9%; }
+.rugbyt th:nth-child(2), .rugbyt td:nth-child(2) { width: 35%; }
+.rugbyt th:nth-child(3), .rugbyt td:nth-child(3), .rugbyt th:nth-child(4), .rugbyt td:nth-child(4), .rugbyt th:nth-child(5), .rugbyt td:nth-child(5) { width: 9%; }
+.rugbyt th:nth-child(6), .rugbyt td:nth-child(6) { width: 15%; }
+.rugbyt th:nth-child(7), .rugbyt td:nth-child(7) { width: 14%; }

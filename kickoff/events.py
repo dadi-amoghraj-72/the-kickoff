@@ -263,6 +263,12 @@ def cricket(picked, cards, weekday, reported=(), changed=None, now=None):
 
 # ---- F1 and tennis ------------------------------------------------------------------------------
 
+def f1_pole(poles):
+    """poles: [(race name, driver's full name, constructor)] for each qualifying shown this morning: a Key Overnight Scores line that can make the headlines (D, 2026-11-08),
+    ranked below a race win (stage 'top', not 'final') and without promoting the F1 section."""
+    return [story("f1", "F1", f"F1: {d} on pole for the {name}" + (f" ({c})" if c else ""), importance.story_score("f1", "top"), False, "top") for name, d, c in poles]
+
+
 def f1(races):
     """races: [(race name, winner's full name, constructor)] for each Grand Prix whose race result was shown this morning. Always a headline (D): promoted to its own section."""
     return [story("f1", "F1", f"F1: {w} wins the {name}" + (f" for {c}" if c else ""), importance.story_score("f1", "final"), False, "final", promote="f1") for name, w, c in races]

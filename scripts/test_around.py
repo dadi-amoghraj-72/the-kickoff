@@ -27,6 +27,8 @@ def utc(*a):
 
 load = lambda n: json.loads((FX / n).read_text())  # noqa: E731
 NOW = utc(2026, 11, 5, 0, 0)
+REAL_GAMES = around.GAMES
+around.GAMES = []                      # the older tests below are not about a Games; NOW falls inside the 2026 Youth Olympics, which have their own tests at the end
 
 
 class Src:
@@ -57,6 +59,11 @@ class Src:
         if "news" in self.boom:
             raise RuntimeError
         return self.n
+
+    def rugby_table(self, league):
+        if "rugby" in self.boom:
+            raise RuntimeError
+        return self.tables.get(league, {}) if hasattr(self, "tables") else {}
 
 
 item = lambda title, text="", source="BBC Sport", hours=3, link=None: {"source": source, "title": title, "text": text, "link": link or f"https://x/{abs(hash(title))}", "published": NOW - timedelta(hours=hours)}  # noqa: E731
@@ -201,6 +208,58 @@ quiet = around.run(NOW, {}, Src(news=[item("Weather delays training")]), object(
 check("a quiet day gives no sections", quiet["sections"] == [] and quiet["state"]["around"]["seen"] == [])
 broken = around.run(NOW, {}, Src(boom=("rugby", "golf", "ufc", "news")), object())
 check("every page failing gives an empty block and counts the failures, never an error", broken["sections"] == [] and broken["stats"]["failed"] >= 3, broken["stats"])
+around.notes.call_json = real_call
+
+# ---- 8 November 2026 (D): the Games named while they are on, every Games line with its sport, India and Singapore finals, rugby tables ----
+around.GAMES = REAL_GAMES
+from datetime import date as _date  # noqa: E402
+on = around.games_on(_date(2026, 11, 8))
+check("the Youth Olympic Games are on 8 November: Dakar, day 9 of 14, until Friday 13 November", on and on[:4] == ("Youth Olympic Games", "Dakar", 9, 14) and "Dakar \u00b7 Day 9 of 14 \u00b7 until Fri 13 Nov" in around.games_html(on), on)
+check("no Games on 20 November", around.games_on(_date(2026, 11, 20)) is None)
+
+
+def claude_sport(client, system, schema, content, model=None):
+    if system != around.SYSTEM:
+        return {"picks": []}, {"input": 1, "output": 1}
+    items = json.loads(content.split("Items:\n", 1)[1])
+    return {"items": [{"link": i["link"], "kind": "result", "summary": "A result was reported.", "sport": "Badminton" if "badminton" in (i["headline"] + i["blurb"]).lower() else "Judo"} for i in items]}, {"input": 10, "output": 5}
+
+
+around.notes.call_json = claude_sport
+G_NOW = utc(2026, 11, 7, 23, 15)
+gitem = lambda title, text="", hours=3, link=None: {"source": "The Hindu", "title": title, "text": text, "link": link or f"https://x/{abs(hash(title))}", "published": G_NOW - timedelta(hours=hours)}  # noqa: E731
+yog = around.run(G_NOW, {}, Src(news=[gitem("Tanvi Patri wins Youth Olympic Games silver", "The badminton prodigy saved six match points in the final"),
+                                       gitem("Indian teenager claims Youth Olympic Games bronze", "a result in Dakar")]), object())
+gh = yog["sections"][0]["html"]
+check("while the Games are on, Other Sports opens with them, named, with the host and the day", gh.startswith('<h4 class="sport first">Youth Olympic Games</h4><p class="games-sub">Dakar'), gh[:200])
+check("a Games line starts with its sport in bold when the source names it", "<li><strong>Badminton:</strong> A result was reported." in gh, gh)
+check("a Games line whose source does not name the sport is left out, never guessed (Claude said Judo, the text never did)", "Judo" not in gh and gh.count("<li>") == 1, gh)
+quiet_games = around.run(G_NOW, {}, Src(), object())
+check("the Games are named even on a day with no Games result yet", quiet_games["sections"] and "Youth Olympic Games" in quiet_games["sections"][0]["html"])
+check("the sport has to be backed by the text: 'Badminton' with 'badminton' in the blurb is kept, 'Judo' is not",
+      around.sport_named("Badminton", {"title": "x", "text": "the badminton prodigy"}) == "Badminton" and around.sport_named("Judo", {"title": "silver", "text": "final"}) == "")
+around.GAMES = []
+hk = [gitem("India beat Japan 4-1 to lift the Asian Champions Trophy hockey title"), gitem("Singapore reach hockey semi-final at the regional cup", link="https://x/sg"),
+      gitem("India hockey team names new coach", link="https://x/coach")]
+hko = around.run(G_NOW, {}, Src(news=hk), object())
+hh = hko["sections"][0]["html"] if hko["sections"] else ""
+check("hockey: India's Asian Champions Trophy title and Singapore's semi-final both get a line (D, 2026-11-08), a coach story does not", '">Field hockey</h4>' in hh and hh.count("<li>") == 2, hh)
+check("the India and Singapore rule: a final or semi-final in a covered sport counts even when the event is not on the list",
+      around.sport_of({"title": "Singapore win handball title at SEA championship", "text": ""})[0] == "handball" and around.sport_of({"title": "India handball team arrives", "text": ""})[0] is None)
+from kickoff import rugbytables  # noqa: E402
+nc = {"children": [{"standings": {"entries": [{"team": {"displayName": t}, "stats": [{"name": "gamesPlayed", "displayValue": "4"}, {"name": "gamesWon", "displayValue": str(w)}, {"name": "gamesLost", "displayValue": str(4 - w)},
+      {"name": "pointsDifference", "displayValue": f"{pd:+d}"}, {"name": "points", "displayValue": str(p)}]} for t, w, pd, p in
+      [("Ireland", 3, 29, 15), ("South Africa", 4, 140, 20), ("France", 2, 41, 12), ("New Zealand", 4, 73, 20), ("Italy", 0, -153, 0), ("Japan", 1, -33, 5)]]}}]}
+th = rugbytables.table_html("17567", nc)
+check("Nations Championship: two pools, the Six Nations sides North, the others South, each ranked by points then difference",
+      th.index("Northern pool") < th.index("Ireland") < th.index("France") < th.index("Italy") < th.index("Southern pool") < th.index("South Africa") < th.index("New Zealand") < th.index("Japan"), th)
+check("the rugby table columns fit a phone: # Team P W L PD Pts, the difference signed", "<th class=\"n\">PD</th>" in th and ">+140<" in th and ">-153<" in th and 'class="rugbyt"' in th, th[:300])
+check("a season not started (every side on 0 played) or an unreadable feed gives no table", rugbytables.table_html("244293", {"children": [{"standings": {"entries": []}}]}) == "" and rugbytables.table_html("180659", {"children": [{"standings": {"entries": [{"team": {"displayName": "France"}, "stats": []}]}}]}) == "")
+rs = Src(rugby={"180659": six_now})
+rs.tables = {"180659": {"children": [{"standings": {"entries": [{"team": {"displayName": "France"}, "stats": [{"name": "gamesPlayed", "displayValue": "1"}, {"name": "gamesWon", "displayValue": "1"},
+             {"name": "gamesLost", "displayValue": "0"}, {"name": "pointsDifference", "displayValue": "+12"}, {"name": "points", "displayValue": "5"}]}]}}]}}
+rt = around.run(NOW, {}, rs, None)["sections"][0]["html"]
+check("a morning with a Six Nations result shows the Six Nations table under the rugby results", rt.index('">Rugby</h4>') < rt.index("Ireland 43") < rt.index("<caption>Six Nations</caption>"), rt[:400])
 around.notes.call_json = real_call
 
 # ---- the edition -------------------------------------------------------------------------------------------

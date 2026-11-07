@@ -30,6 +30,8 @@ CALENDAR = [
     ("hockey", "Women's FIH Hockey World Cup", ["{y} Women's FIH Hockey World Cup", "{y} FIH Women's Hockey World Cup"], {8, 9}, "infobox"),
     ("hockey", "Men's Hockey Asia Cup", ["{y} Men's Hockey Asia Cup"], {8, 9, 10}, "infobox"),
     ("hockey", "Women's Hockey Asia Cup", ["{y} Women's Hockey Asia Cup"], {9, 10, 11}, "infobox"),
+    ("hockey", "Men's Asian Champions Trophy", ["{y} Men's Asian Champions Trophy"], {8, 9, 10, 11}, "infobox"),          # D, 2026-11-08: India beat Japan in the 2026 final at home and it was missed
+    ("hockey", "Women's Asian Champions Trophy", ["{y} Women's Asian Champions Trophy"], {10, 11, 12}, "infobox"),
     ("handball", "World Men's Handball Championship", ["{y} World Men's Handball Championship"], {1, 2}, "infobox"),
     ("handball", "World Women's Handball Championship", ["{y} World Women's Handball Championship"], {11, 12}, "infobox"),
     ("handball", "European Men's Handball Championship", ["{y} European Men's Handball Championship"], {1, 2}, "infobox"),

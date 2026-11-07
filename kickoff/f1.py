@@ -374,6 +374,8 @@ def session_html(due, api, story=None, used=None, capture=None, schedule=None, r
         rows = (data or {}).get("QualifyingResults")
         if not rows:
             return None, False
+        if rows_out is not None:
+            rows_out[(season, rnd, kind)] = rows                # pole for The Big Stuff (D, 2026-11-08)
         return (f'<p class="f1sum">{r.esc(quali_summary(rows))}</p>' + qualifying_table(rows)
                 + _list(quali_standouts(rows, api.poles))), False
     data = api.sprint(season, rnd) if kind == "sprint" else api.results(season, rnd)
@@ -469,14 +471,17 @@ def run(now, window_start, st, api, season="current", story=None):
     pending = {k: v for k, v in pending.items() if datetime.fromisoformat(v) >= horizon}
     try:                                                   # for The Big Stuff: each Grand Prix whose race result was shown this morning (always a headline)
         from kickoff import events
-        races = [(next(x["raceName"] for x in schedule if x["season"] == s_ and x["round"] == r_), _full(rows[0]), team(rows[0]["Constructor"]["name"]))
+        races = [(next(x["raceName"] for x in schedule if str(x["season"]) == str(s_) and int(x["round"]) == int(r_)), _full(rows[0]), team(rows[0]["Constructor"]["name"]))
                  for (s_, r_, k_), rows in race_rows.items() if k_ == "race" and rows]
         story_events = events.f1(races)
+        poles = [(next(x["raceName"] for x in schedule if str(x["season"]) == str(s_) and int(x["round"]) == int(r_)), _full(rows[0]), team(rows[0]["Constructor"]["name"]))
+                 for (s_, r_, k_), rows in race_rows.items() if k_ == "qualifying" and rows]
+        story_events += events.f1_pole(poles)
     except Exception:
         story_events = []
     races_in = []
     try:
-        races_in = [(rows, next(x["raceName"] for x in schedule if x["season"] == s_ and x["round"] == r_)) for (s_, r_, k_), rows in race_rows.items() if k_ == "race" and rows]
+        races_in = [(rows, next(x["raceName"] for x in schedule if str(x["season"]) == str(s_) and int(x["round"]) == int(r_))) for (s_, r_, k_), rows in race_rows.items() if k_ == "race" and rows]
     except Exception:
         pass
     return {"html": out, "state": {"reported": reported[-60:], "pending": pending, "closed": closed[-10:]},

@@ -57,9 +57,9 @@ def plain_line(f):
 
 def is_big(f):
     """A Don't Miss game (D, 2026-11-07): D's teams (Arsenal, India, the Jaguars and Steelers; not a plain NBA or MLB regular-season game), a semi-final or final or playoff,
-    a derby or a top-of-the-table clash, the F1 race (not qualifying or the sprint). A listed club's ordinary game is not one."""
+    a derby or a top-of-the-table clash, the F1 race, qualifying and sprint (not practice). A listed club's ordinary game is not one."""
     if f["sport"] == "f1":
-        return f["text"].endswith("Race")
+        return f["text"].endswith(("Race", "Qualifying", "Sprint"))        # qualifying and the sprint too (D, 2026-11-08: the Brazilian GP qualifying was missed among the football)
     if f["sport"] in ("nba", "mlb") and f["stage"] == "regular":
         return bool(f["flags"] & {"derby", "clash"})
     return f["mine"] or f["stage"] in ("final", "knockout", "playoff") or bool(f["flags"] & {"derby", "clash"})

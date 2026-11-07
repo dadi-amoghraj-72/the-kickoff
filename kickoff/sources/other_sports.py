@@ -48,6 +48,10 @@ class Source:
         """The scoreboard of one ESPN rugby league (the current round or window)."""
         return self._json(SITE + f"rugby/{league}/scoreboard")
 
+    def rugby_table(self, league):
+        """The standings of one ESPN rugby competition (Six Nations, The Rugby Championship, Nations Championship)."""
+        return self._json(f"https://site.api.espn.com/apis/v2/sports/rugby/{league}/standings")
+
     def golf(self, tour):
         """'pga' or 'lpga': the tour's current or latest event."""
         return self._json(SITE + f"golf/{tour}/scoreboard")
