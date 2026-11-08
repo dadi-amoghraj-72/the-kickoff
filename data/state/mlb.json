@@ -1,7 +1,30 @@
 {
   "awards": {
     "names": {},
-    "rows": [],
+    "rows": [
+      {
+        "data": {
+          "AL": [
+            {
+              "name": "Cody Bellinger",
+              "team": "NYY"
+            }
+          ],
+          "NL": [
+            {
+              "name": "Pete Crow-Armstrong",
+              "team": "CHC"
+            }
+          ]
+        },
+        "key": "wiki:plat",
+        "kind": "league",
+        "label": "Platinum Glove Awardees",
+        "note": "",
+        "sig": "Cody Bellinger|Pete Crow-Armstrong",
+        "text": "Cody Bellinger; Pete Crow-Armstrong"
+      }
+    ],
     "season": 2026,
     "seen": {
       "58": "32758,33912,40576,42457,4345278,4345620,4987382,4990055,5007615,5080641,32767,34886,35304,41179,41355,42404,42464,4433874,4717833,4917869",
@@ -11,7 +34,8 @@
       "68": "39895",
       "74": "32129",
       "wiki:asg:AL": "{\"pitchers\": [\"Bryan Baker\", \"Dylan Cease\", \"Aroldis Chapman\", \"Jacob Latz\", \"Nick Martinez\", \"Parker Messick\", \"Drew Rasmussen\", \"Joe Ryan\", \"Cam Schlittler\", \"Cade Smith\", \"Ranger Su\\u00e1rez\", \"Louis Varland\", \"Justin Verlander\", \"Michael Wacha\"], \"reserves\": [\"Dillon Dingler\", \"Adley Rutschman\", \"Willson Contreras\", \"Nick Kurtz\", \"Munetaka Murakami\", \"Ben Rice\", \"Travis Bazzana\", \"Miguel Vargas\", \"Kevin McGonigle\", \"Randy Arozarena\", \"Cody Bellinger\", \"Riley Greene\", \"Tristan Peters\", \"Ceddanne Rafaela\", \"Yandy D\\u00edaz\"], \"starters\": [\"Shea Langeliers\", \"Vladimir Guerrero Jr.\", \"Ernie Clement\", \"Junior Caminero\", \"Bobby Witt Jr.\", \"Byron Buxton\", \"Aaron Judge\", \"Mike Trout\", \"Yordan Alvarez\"]}",
-      "wiki:asg:NL": "{\"pitchers\": [\"Braxton Ashcraft\", \"Chase Burns\", \"Jhoan Dur\\u00e1n\", \"Foster Griffin\", \"Raisel Iglesias\", \"Jes\\u00fas Luzardo\", \"Max Meyer\", \"Mason Miller\", \"Jacob Misiorowski\", \"Riley O'Brien\", \"Eduardo Rodr\\u00edguez\", \"Chris Sale\", \"Cristopher S\\u00e1nchez\", \"Paul Skenes\", \"Logan Webb\", \"Justin Wrobleski\", \"Yoshinobu Yamamoto\"], \"reserves\": [\"William Contreras\", \"Hunter Goodman\", \"Bryce Harper\", \"Matt Olson\", \"Luis Arr\\u00e1ez\", \"Sal Stewart\", \"Otto Lopez\", \"Corbin Carroll\", \"Pete Crow-Armstrong\", \"Jordan Walker\", \"James Wood\", \"Iv\\u00e1n Herrera\", \"Kyle Schwarber\"], \"starters\": [\"Drake Baldwin\", \"Freddie Freeman\", \"Ozzie Albies\", \"Max Muncy\", \"CJ Abrams\", \"Brandon Marsh\", \"Andy Pages\", \"Juan Soto\", \"Shohei Ohtani\"]}"
+      "wiki:asg:NL": "{\"pitchers\": [\"Braxton Ashcraft\", \"Chase Burns\", \"Jhoan Dur\\u00e1n\", \"Foster Griffin\", \"Raisel Iglesias\", \"Jes\\u00fas Luzardo\", \"Max Meyer\", \"Mason Miller\", \"Jacob Misiorowski\", \"Riley O'Brien\", \"Eduardo Rodr\\u00edguez\", \"Chris Sale\", \"Cristopher S\\u00e1nchez\", \"Paul Skenes\", \"Logan Webb\", \"Justin Wrobleski\", \"Yoshinobu Yamamoto\"], \"reserves\": [\"William Contreras\", \"Hunter Goodman\", \"Bryce Harper\", \"Matt Olson\", \"Luis Arr\\u00e1ez\", \"Sal Stewart\", \"Otto Lopez\", \"Corbin Carroll\", \"Pete Crow-Armstrong\", \"Jordan Walker\", \"James Wood\", \"Iv\\u00e1n Herrera\", \"Kyle Schwarber\"], \"starters\": [\"Drake Baldwin\", \"Freddie Freeman\", \"Ozzie Albies\", \"Max Muncy\", \"CJ Abrams\", \"Brandon Marsh\", \"Andy Pages\", \"Juan Soto\", \"Shohei Ohtani\"]}",
+      "wiki:plat": "Cody Bellinger|Pete Crow-Armstrong"
     }
   },
   "closed": null,

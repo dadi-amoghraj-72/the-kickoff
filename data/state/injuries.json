@@ -89,6 +89,11 @@
     "reported": false,
     "status": "a"
   },
+  "155": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
   "156": {
     "news_added": null,
     "reported": false,
@@ -155,9 +160,9 @@
     "status": "a"
   },
   "388": {
-    "news_added": null,
+    "news_added": "2026-11-07T21:30:08.741792Z",
     "reported": false,
-    "status": "a"
+    "status": "d"
   },
   "390": {
     "news_added": null,
@@ -165,6 +170,11 @@
     "status": "a"
   },
   "391": {
+    "news_added": "2026-11-07T21:30:08.752464Z",
+    "reported": false,
+    "status": "d"
+  },
+  "399": {
     "news_added": null,
     "reported": false,
     "status": "a"
@@ -261,6 +271,11 @@
   },
   "522": {
     "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "557": {
+    "news_added": "2026-10-02T15:00:11.091226Z",
     "reported": false,
     "status": "a"
   },

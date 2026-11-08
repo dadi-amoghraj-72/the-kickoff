@@ -10,6 +10,7 @@
   --blue: #8DB4CC;
   --lilac: #B3A6CC;
   --rose: #C99590;
+  --rust: #DB6A45;
 }
 
 /* Light mode follows the phone's setting. Same accents, darkened to pass 4.5:1. */
@@ -24,6 +25,7 @@
     --blue: #2F6280;
     --lilac: #5E4F8A;
     --rose: #9A4A43;
+    --rust: #A33A16;
   }
 }
 
@@ -409,6 +411,10 @@ tr.p3 td { color: #d08a52; font-weight: 700; }
 
 /* The Big Stuff and On Today (13b): the lines reuse the gold-diamond standouts list; the time is gold, the Performance of the Day a gold line */
 .ontoday .when { color: var(--gold); font-weight: 600; margin-right: 4px; white-space: nowrap; }
+/* Don't Miss (D, 2026-11-07): the big games of the day; in the time list the same games keep their place but their time and diamond turn rust */
+.ontoday li.big .when, .ontoday li.big::before { color: var(--rust); }
+.ontoday li.big { font-weight: 600; }
+.subhead.comp { margin: 6px 0 0; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--muted); font-weight: 500; font-style: italic; }   /* a competition under the Football header (Key Overnight Scores) */
 .pod { color: var(--gold); font-size: 16px; line-height: 1.4; margin: 0 0 14px; }
 .bigstuff a { font-size: 13px; margin-left: 4px; }
 
@@ -467,6 +473,7 @@ p.key .dog { color: var(--chalk); font-weight: 700; }
 
 /* Other Sports: each sport named in gold on its own line, a faint line between sports (D, 2026-11-05) */
 h4.sport { margin: 30px 0 8px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 20px; font-weight: 700; letter-spacing: 0.02em; text-transform: none; color: var(--gold); }
+.games-sub { margin: -2px 0 10px; color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }   /* a Games on: host, day and last day under its name (D, 2026-11-08) */
 h4.sport.first { margin-top: 14px; padding-top: 0; border-top: 0; }
 
 /* The end of an edition */
@@ -486,4 +493,12 @@ h4.sport.first { margin-top: 14px; padding-top: 0; border-top: 0; }
 
 /* The edition counter, small at the bottom right of the page (D, 2026-11-06) */
 footer .edno { display: block; margin-top: 10px; text-align: right; font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
-</style></head><body><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Archive</p></header><section style="border-top:0;margin-top:24px"><ul class="archive"><li><a class="d" href="editions/2026-11-07/index.html">Saturday 7 November 2026</a><span class="muted">NFL: Jacksonville Jaguars 33–10 Baltimore Ravens</span></li><li><a class="d" href="editions/2026-11-06/index.html">Friday 6 November 2026</a><span class="muted"></span></li><li><a class="d" href="editions/2026-11-05/index.html">Thursday 5 November 2026</a><span class="muted">Champions League: Arsenal 2–1 Slavia Prague</span></li><li><a class="d" href="editions/2026-11-04/index.html">Wednesday 4 November 2026</a><span class="muted">Champions League: Manchester United 3-2 AS Roma</span></li><li><a class="d" href="editions/2026-11-02/index.html">Monday 2 November 2026 (dummy)</a><span class="muted">Dummy headline one: placeholder for the biggest story</span></li></ul></section></main></body></html>
+
+/* Rugby tables (D, 2026-11-08): fixed column widths, so the Nations Championship's two pools line up column for column */
+.rugbyt table { table-layout: fixed; width: 100%; }
+.rugbyt th:nth-child(1), .rugbyt td:nth-child(1) { width: 9%; }
+.rugbyt th:nth-child(2), .rugbyt td:nth-child(2) { width: 35%; }
+.rugbyt th:nth-child(3), .rugbyt td:nth-child(3), .rugbyt th:nth-child(4), .rugbyt td:nth-child(4), .rugbyt th:nth-child(5), .rugbyt td:nth-child(5) { width: 9%; }
+.rugbyt th:nth-child(6), .rugbyt td:nth-child(6) { width: 15%; }
+.rugbyt th:nth-child(7), .rugbyt td:nth-child(7) { width: 14%; }
+</style></head><body><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Archive</p></header><section style="border-top:0;margin-top:24px"><ul class="archive"><li><a class="d" href="editions/2026-11-08/index.html">Sunday 8 November 2026</a><span class="muted">Premier League: Arsenal 1–0 Hull City</span></li><li><a class="d" href="editions/2026-11-07/index.html">Saturday 7 November 2026</a><span class="muted">NFL: Jacksonville Jaguars 33–10 Baltimore Ravens</span></li><li><a class="d" href="editions/2026-11-06/index.html">Friday 6 November 2026</a><span class="muted"></span></li><li><a class="d" href="editions/2026-11-05/index.html">Thursday 5 November 2026</a><span class="muted">Champions League: Arsenal 2–1 Slavia Prague</span></li><li><a class="d" href="editions/2026-11-04/index.html">Wednesday 4 November 2026</a><span class="muted">Champions League: Manchester United 3-2 AS Roma</span></li><li><a class="d" href="editions/2026-11-02/index.html">Monday 2 November 2026 (dummy)</a><span class="muted">Dummy headline one: placeholder for the biggest story</span></li></ul></section></main></body></html>
