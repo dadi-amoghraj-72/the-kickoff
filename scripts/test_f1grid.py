@@ -41,6 +41,11 @@ f1grid.notes.call_json = lambda client, system, schema, content, model=None: ({"
 pens, usage = f1grid.find(object(), "São Paulo Grand Prix", ROWS, ITEMS, NOW)
 check("only what the reports back is kept: Verstappen, Hamilton, Russell, Leclerc (not Alonso, not a name off the sheet, not 99 places)", sorted(pens) == ["Charles Leclerc", "George Russell", "Lewis Hamilton", "Max Verstappen"], pens)
 check("no Claude or no penalty report: nothing, and no call", f1grid.find(None, "x", ROWS, ITEMS, NOW) == ({}, {"input": 0, "output": 0}) and f1grid.find(object(), "x", ROWS, ITEMS[3:4], NOW)[0] == {})
+f1grid.notes.call_json = lambda client, system, schema, content, model=None: ({"penalties": [x for x in CLAUDE if x["driver"] != "Charles Leclerc"]}, {"input": 100, "output": 20})
+pens2, _ = f1grid.find(object(), "São Paulo Grand Prix", ROWS, ITEMS, NOW)
+check("a driver a penalty report names is never left out: Claude skipped Leclerc ('both Ferrari drivers'), code adds him, size not reported",
+      pens2.get("Charles Leclerc") == {"kind": "unsized", "places": 0, "reason": ""} and pens2["George Russell"]["places"] == 5, pens2)
+check("and a driver no penalty report names is not added (Norris, Piastri)", "Lando Norris" not in pens2 and "Oscar Piastri" not in pens2)
 grid = f1grid.provisional(ROWS, pens)
 check("provisional grid: Russell (2nd) drops five to 7th, those behind move up; Leclerc's unsized penalty does not move him; Hamilton and Verstappen at the back in their qualifying order",
       grid[:8] == ["Lando Norris", "Andrea Kimi Antonelli", "Charles Leclerc", "Liam Lawson", "Nico Hülkenberg", "Isack Hadjar", "George Russell", "Oliver Bearman"]

@@ -65,7 +65,23 @@ def find(client, race, rows, items, now):
     listing = "\n".join(f"- [{i['source']}] {i['title']} | {i['text']}" for i in rep[:12])
     content = f"Race: {race}\nDrivers: {', '.join(drivers_of(rows))}\nReports:\n{listing}"
     obj, usage = notes.call_json(client, SYSTEM, SCHEMA, content, model=settings.NEWS_MODEL)
-    return checked((obj or {}).get("penalties"), rows, rep), usage
+    pens = checked((obj or {}).get("penalties"), rows, rep)
+    for name in named(rows, rep):                          # a driver a penalty report names is never left out (D, 2026-11-08: Leclerc came and went between runs)
+        pens.setdefault(name, {"kind": "unsized", "places": 0, "reason": ""})
+    return pens, usage
+
+
+def named(rows, items):
+    """The drivers a grid-penalty report names: by surname, or as 'both <team> drivers' / '<team> drivers'. Code only, so it never varies between runs."""
+    out = []
+    for i in items:
+        text = f"{i['title']} {i['text']}"
+        if not re.search(r"grid penalt|back of the grid|start from the back|pit ?lane start", text, re.I):
+            continue
+        for full, (surname, team) in drivers_of(rows).items():
+            if re.search(rf"\b{re.escape(surname)}\b", text) or re.search(rf"\b(?:both )?{re.escape(team.split()[0])}(?: driver| drivers)\b", text, re.I):
+                out.append(full)
+    return list(dict.fromkeys(out))
 
 
 def provisional(rows, pens):
