@@ -128,12 +128,14 @@ def best_time(row):
     return next(((k, row[k]) for k in ("Q3", "Q2", "Q1") if row.get(k)), ("", ""))
 
 
-def qualifying_table(rows):
+def qualifying_table(rows, marked=()):
+    """marked: full names of drivers with a grid penalty, starred (D, 2026-11-08)."""
+    star = lambda x: " *" if f"{x['Driver']['givenName']} {x['Driver']['familyName']}" in marked else ""  # noqa: E731
     if not any(best_time(x)[1] for x in rows):            # published before the lap times (Brazil, 8 Nov 2026): the order alone, no empty columns
-        body = [[x["position"], short_name(x["Driver"])] for x in rows]
+        body = [[x["position"], short_name(x["Driver"]) + star(x)] for x in rows]
         return (_tight(r.table("Qualifying Results", [("P", True), ("Driver", False)], body, row_classes=["p1"] + [""] * (len(body) - 1)), (12, 88))
                 + '<p class="muted">Lap times were not published by the data source yet.</p>')
-    body = [[x["position"], short_name(x["Driver"]), *best_time(x)] for x in rows]
+    body = [[x["position"], short_name(x["Driver"]) + star(x), *best_time(x)] for x in rows]
     return _tight(r.table("Qualifying Results", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body, row_classes=["p1"] + [""] * (len(body) - 1)), (12, 44, 16, 28))   # pole in gold (D)
 
 
@@ -368,7 +370,7 @@ def title_notes(ds, cs, schedule, rnd, season, closed=()):
 
 # ---- One session, and the whole block ------------------------------------------------------------
 
-def session_html(due, api, story=None, used=None, capture=None, schedule=None, rows_out=None):
+def session_html(due, api, story=None, used=None, capture=None, schedule=None, rows_out=None, grid=None):
     """(HTML, standings still to come) for one due session, or (None, False) when its results are not published yet. Raises when the source fails.
     story: optional, for Sunday races only: story(race, rows, start, extras) -> (html, usage). Its tokens are added into `used`.
     A failing story is left out; it never costs the tables."""
@@ -380,8 +382,17 @@ def session_html(due, api, story=None, used=None, capture=None, schedule=None, r
             return None, False
         if rows_out is not None:
             rows_out[(season, rnd, kind)] = rows                # pole for The Big Stuff (D, 2026-11-08)
-        return (f'<p class="f1sum">{r.esc(quali_summary(rows))}</p>' + qualifying_table(rows)
-                + _list(quali_standouts(rows, api.poles))), False
+        pens = {}
+        if grid:                                               # grid penalties from the weekend's reports (kickoff/f1grid.py); never costs the table
+            try:
+                pens, usage = grid(due["race"]["raceName"], rows)
+                if used is not None:
+                    used.update({k: used.get(k, 0) + usage.get(k, 0) for k in ("input", "output")})
+            except Exception:
+                pens = {}
+        from kickoff import f1grid
+        return (f'<p class="f1sum">{r.esc(quali_summary(rows))}</p>' + qualifying_table(rows, marked=set(pens))
+                + _list(quali_standouts(rows, api.poles)) + f1grid.html(rows, pens, short_name)), False
     data = api.sprint(season, rnd) if kind == "sprint" else api.results(season, rnd)
     rows = (data or {}).get("SprintResults" if kind == "sprint" else "Results")
     if not rows:
@@ -413,7 +424,7 @@ def session_html(due, api, story=None, used=None, capture=None, schedule=None, r
     return html, stale
 
 
-def run(now, window_start, st, api, season="current", story=None):
+def run(now, window_start, st, api, season="current", story=None, grid=None):
     """{"html", "state", "stats"}. st: {"reported": [session ids], "pending": {id: iso end}}. A failing or not-yet-published session
     is kept as pending (and mentioned) rather than lost; one failure never stops the others."""
     reported, pending, closed = list(st.get("reported", [])), dict(st.get("pending", {})), list(st.get("closed", []))
@@ -425,7 +436,7 @@ def run(now, window_start, st, api, season="current", story=None):
     for d in due:
         stale = False
         try:
-            html, stale = session_html(d, api, story, used, got_standings, schedule, race_rows)
+            html, stale = session_html(d, api, story, used, got_standings, schedule, race_rows, grid)
         except Exception:
             failed += 1
             html = None

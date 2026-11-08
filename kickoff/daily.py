@@ -12,6 +12,7 @@ import copy
 import os
 from datetime import datetime, timezone
 
+from kickoff import f1blurb, f1grid
 from kickoff import around, awards, bigstuff, budget, ontoday, young_sports, youngguns, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
 from kickoff import notes, settings
 from kickoff import state as state_files
@@ -118,7 +119,8 @@ def real_adapters(client=None, env=None):
     return [
         ("football", "Football", football_go),
         ("cricket", "Cricket", cricket_go),
-        _simple("f1", "F1", lambda now, day, s: f1.run(now, espn.window_start(day), s, jolpica.Api()), "f1"),
+        _simple("f1", "F1", lambda now, day, s: f1.run(now, espn.window_start(day), s, jolpica.Api(),
+                                                        grid=lambda race, rows: f1grid.find(client, race, rows, feeds.fetch_all(f1blurb.FEEDS), now)), "f1"),
         _simple("tennis", "Tennis", lambda now, day, s: tennis.run(now, s, espn_tennis.Source(), fetch_news=lambda: feeds.fetch_all(tennis.FEEDS)), "tennis"),
         _simple("nfl", "NFL", _with_extras(lambda now, day, s: nfl.run(now, day, s, espn_nfl.Source()), "nfl", "football", "NFL", client), "nfl"),
         _simple("nba", "NBA", _with_extras(lambda now, day, s: nba.run(now, day, s, espn_nba.Source()), "nba", "basketball", "NBA", client), "nba"),
@@ -225,8 +227,8 @@ def extra_costs(stats):
         if isinstance(s, dict) and s.get("preview_cost"):
             total += float(s["preview_cost"])
             calls += 1
-    for sid, model in (("youngguns", None), ("around", settings.NEWS_MODEL)):
-        usage = (stats.get(sid) or {}).get("claude_usage")
+    for sid, model in (("youngguns", None), ("around", settings.NEWS_MODEL), ("f1", settings.NEWS_MODEL)):        # F1: the grid penalties (kickoff/f1grid.py)
+        usage = (stats.get(sid) or {}).get("claude_usage") or ((stats.get(sid) or {}).get("claude_tokens") if sid == "f1" else None)
         if usage and (usage.get("input") or usage.get("output")):
             total += notes.cost(usage, model)
             calls += 1
