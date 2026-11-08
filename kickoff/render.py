@@ -237,6 +237,8 @@ def render_edition(ed):
     end = '<div class="theend"><span class="ln"></span><b>The End</b><span class="ln"></span></div>'        # a gold line, "The End", a gold line (D, 2026-11-05)
     no = None if (ed.get("banner") or ed.get("dummy")) else edition_number(date.fromisoformat(ed["date"]))
     counter = f'<span class="edno">Edition #{no:03d}</span>' if no else ""
+    if ed.get("edition_label"):                              # a rehearsal of a day's edition with newer code (D, 2026-11-08: 'Edition #002-b')
+        counter = f'<span class="edno">Edition #{esc(ed["edition_label"])}</span>'
     footer = f'<footer><a href="{home}">All editions</a> · The Kickoff, your daily sports digest.{counter}</footer>'
     body = f"<main>{_masthead(nice_date(ed['date']))}{banner}{secs}{end}{footer}</main>{rail}"
     script = f"<script>{(STATIC / 'rail-icons.js').read_text()}\n{(STATIC / 'rail.js').read_text()}</script>"

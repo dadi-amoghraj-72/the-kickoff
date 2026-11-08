@@ -6,6 +6,7 @@
   add --ping to send the Telegram message for this rehearsal (the headlines and the demo page's link; needs the Telegram key in .env, so D runs it)
   --state-from <commit>   the saved state to start from (default 1974d1f: the state before the first test morning, so games already reported on 5 Nov show again)
   --date 2026-11-05       the Singapore edition date (default: today)
+  --label 002-b           the footer reads 'Edition #002-b' (a re-run of a day's edition with newer code)
 
 Why not the real run? The real run remembers what it has reported, so a second run on the same day shows only what is new (and `--force` would replace the first edition of the day).
 This rehearsal starts from an older state, so the page is as full as a morning edition, and On Today shows what is still to come from the minute you run it."""
@@ -44,6 +45,8 @@ spent_by = daily.extra_costs(out["stats"])
 ed["banner"] = (f"Rehearsal of {render.nice_date(day.isoformat())} on real data, built at {now.astimezone(ZoneInfo('Asia/Singapore')):%-I:%M%p} Singapore time"
                 + (" with Claude" if out["client_used"] else " without Claude") + ". Nothing was saved or sent; it starts from an older state, so games already reported this morning show again.")
 ed["home"] = "../index.html"
+if "--label" in sys.argv:
+    ed["edition_label"] = arg("--label", "")
 page = ROOT / "docs" / "demo" / "today-real.html"
 page.write_text(render.render_edition(ed))
 print(f"Sections: {', '.join(s['id'] for s in ed['sections'])}")
@@ -65,7 +68,7 @@ if "--publish" in sys.argv:
 if "--ping" in sys.argv:
     lines = build_message(ed).splitlines()
     lines[-1] = "https://dadi-amoghraj-72.github.io/the-kickoff/demo/today-real.html"          # the rehearsal page, not the real edition's address
-    lines[0] += " (rehearsal)"
+    lines[0] += f" (Edition #{ed['edition_label']})" if ed.get("edition_label") else " (rehearsal)"
     message = "\n".join(lines)
     print("Telegram message:\n" + message)
     try:
