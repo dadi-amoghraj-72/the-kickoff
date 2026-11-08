@@ -228,14 +228,15 @@ def claude_sport(client, system, schema, content, model=None):
 around.notes.call_json = claude_sport
 G_NOW = utc(2026, 11, 7, 23, 15)
 gitem = lambda title, text="", hours=3, link=None: {"source": "The Hindu", "title": title, "text": text, "link": link or f"https://x/{abs(hash(title))}", "published": G_NOW - timedelta(hours=hours)}  # noqa: E731
-yog = around.run(G_NOW, {}, Src(news=[gitem("Tanvi Patri wins Youth Olympic Games silver", "The badminton prodigy saved six match points in the final"),
-                                       gitem("Indian teenager claims Youth Olympic Games bronze", "a result in Dakar")]), object())
+yog = around.run(G_NOW, {}, Src(news=[gitem("Tanvi Patri wins Youth Olympic Games silver", "The Indian badminton prodigy saved six match points in the final"),
+                                       gitem("Indian teenager claims Youth Olympic Games bronze", "a result in Dakar"),
+                                       gitem("Kenyan teenager wins Youth Olympic Games gold", "the badminton final in Dakar", link="https://x/ken")]), object())
 gh = yog["sections"][0]["html"]
 check("while the Games are on, Other Sports opens with them, named, with the host and the day", gh.startswith('<h4 class="sport first">Youth Olympic Games</h4><p class="games-sub">Dakar'), gh[:200])
 check("a Games line starts with its sport in bold when the source names it", "<li><strong>Badminton:</strong> A result was reported." in gh, gh)
-check("a Games line whose source does not name the sport is left out, never guessed (Claude said Judo, the text never did)", "Judo" not in gh and gh.count("<li>") == 1, gh)
+check("a Games line whose source does not name the sport is left out, never guessed (Claude said Judo, the text never did); one about neither India nor Singapore too (D, 2026-11-08)", "Judo" not in gh and gh.count("<li>") == 1 and "Kenyan" not in gh, gh)
 quiet_games = around.run(G_NOW, {}, Src(), object())
-check("the Games are named even on a day with no Games result yet", quiet_games["sections"] and "Youth Olympic Games" in quiet_games["sections"][0]["html"])
+check("a Games day with nothing for India or Singapore: no Games header at all (D, 2026-11-08)", not quiet_games["sections"] or "Youth Olympic Games" not in quiet_games["sections"][0]["html"])
 check("the sport has to be backed by the text: 'Badminton' with 'badminton' in the blurb is kept, 'Judo' is not",
       around.sport_named("Badminton", {"title": "x", "text": "the badminton prodigy"}) == "Badminton" and around.sport_named("Judo", {"title": "silver", "text": "final"}) == "")
 around.GAMES = []

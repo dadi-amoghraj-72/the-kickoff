@@ -1,6 +1,7 @@
 """Athletics and swimming: only what is worth a look (D, 2026-11-08). Not every meet, only:
   athletics  a world record (anywhere), a world lead or meeting/championship record at a top meet, and a close finish in a running final at a top meet
   swimming   a world record (long or short course, individual or relay)
+  both       a youth record: the official World U20 record in athletics, the world junior record in swimming (D, 2026-11-08)
 
 Sources, all public Wikipedia pages (no keys; the results bodies' own data services are not public): the official world-record lists, whose rows carry the date each
 record was set; the season's Diamond League calendar and each meeting's page (every final in full: place, athlete, mark, and the official notes WR/WL/MR/SB copied from
@@ -27,7 +28,9 @@ CHAMPIONSHIPS = [("{y} World Athletics Championships", "World Championships", {8
                  ("Athletics at the {y} Commonwealth Games", "Commonwealth Games", {7, 8}),
                  ("Athletics at the {y} Asian Games", "Asian Games", {9, 10})]
 DL_MONTHS = {4, 5, 6, 7, 8, 9}
-WR_PAGES = [("athletics", "List of world records in athletics"), ("swimming", "List of world records in swimming")]
+WR_PAGES = [("athletics", "List of world records in athletics", "World record"), ("swimming", "List of world records in swimming", "World record"),
+            ("athletics", "List of world under-20 records in athletics", "World U20 record"),          # youth records too (D, 2026-11-08): the official under-20 records
+            ("swimming", "List of world junior records in swimming", "World junior record")]
 
 
 # ---- Reading wikitext ---------------------------------------------------------------------------------
@@ -35,6 +38,7 @@ WR_PAGES = [("athletics", "List of world records in athletics"), ("swimming", "L
 def plain(text):
     """Wikitext to plain text: links to their label, templates and refs gone, bold and italics gone."""
     text = re.sub(r"<ref[^>]*/>|<ref[^>]*>.*?</ref>", "", text or "", flags=re.S)
+    text = re.sub(r"<br\s*/?>", " ", text)
     text = re.sub(r"\{\{#invoke:sort\|name\|([^|}]+)\|([^|}]+)[^}]*\}\}", r"\1 \2", text)
     text = re.sub(r"\{\{(?:nowrap|right|small|sort\|[^|}]*)\|([^{}]*)\}\}", r"\1", text, flags=re.I)
     text = re.sub(r"\[\[(?:[^|\]]*\|)?([^\]]*)\]\]", r"\1", text)
@@ -71,7 +75,7 @@ def metres(event):
     relay = re.search(r"4\s*[x×]\s*(\d+)", e)
     if relay:
         return int(relay.group(1))                      # a relay is judged by its leg: 4x100 like a sprint, 4x400 like an 800
-    m = re.search(r"([\d,]+)\s*met(?:re|er)s?", e)
+    m = re.search(r"([\d,]+)\s*met(?:re|er)s?", e) or re.search(r"\b([\d,]+)\s*m\b", e)
     if m:
         return int(m.group(1).replace(",", ""))
     if re.search(r"\bmile\b", e):
@@ -86,10 +90,10 @@ def margin_needed(distance):
 
 def short_event(event, sex):
     """'Men's 200m', 'Women's 3000m steeplechase', 'Men's pole vault'."""
-    e = re.sub(r"\s*metres?\b", "m", event.strip(), flags=re.I)
+    e = re.sub(r"\s*metres?\b|(?<=\d) m\b", "m", event.strip(), flags=re.I)
     e = re.sub(r"(\d),(\d)", r"\1\2", e)
     e = e[:1].lower() + e[1:] if not re.match(r"\d", e) else e
-    return f"Mixed {e}" if sex == "Mixed" else f"{sex}'s {e}" if sex else e
+    return f"Mixed {e}" if sex == "Mixed" else f"{sex}' {e}" if sex.endswith("s") else f"{sex}'s {e}" if sex else e
 
 
 def show_mark(mark, event):
@@ -244,22 +248,22 @@ def champ_dates_city(wikitext, year):
 
 # ---- World-record lists ------------------------------------------------------------------------------------
 
-def recent_records(sport, wikitext, today):
+def recent_records(sport, wikitext, today, label="World record"):
     """[(text, uid)] for the world records on the official list set in the last three days. Athletics: the table rows ({{#invoke:dts|main|12 Mar 2026}}); swimming: the
     {{swimmingrecord ...}} entries (long course, then short course)."""
-    out = []
+    out, rec_label = [], label
     if sport == "swimming":
         course = ""
-        for chunk in re.split(r"(^==\s*(?:Long|Short) course[^=]*==\s*$)", wikitext, flags=re.M):
-            hc = re.match(r"^==\s*(Long|Short)", chunk)
+        for chunk in re.split(r"(^==\s*(?:Long|Short) course[^=]*==\s*$)", wikitext, flags=re.M | re.I):
+            hc = re.match(r"^==\s*(Long|Short)", chunk, re.I)
             if hc:
                 course = "long course" if hc.group(1) == "Long" else "short course"
                 continue
             if not course:
                 continue
             sex = ""
-            for part in re.split(r"(^===\s*(?:Men|Women|Mixed)[^=]*===\s*$)", chunk, flags=re.M):
-                hs = re.match(r"^===\s*(Men|Women|Mixed)", part)
+            for part in re.split(r"(^===\s*(?:Men|Women|Mixed|Boys|Girls)[^=]*===\s*$)", chunk, flags=re.M):
+                hs = re.match(r"^===\s*(Men|Women|Mixed|Boys|Girls)", part)
                 if hs:
                     sex = hs.group(1)
                     continue
@@ -271,9 +275,11 @@ def recent_records(sport, wikitext, today):
                     who = plain(f.get("chinesename") or "") or f"{plain(f.get('firstname', ''))} {plain(f.get('lastname', ''))}".strip() or plain(f.get("club", ""))
                     ev = plain(f.get("event", ""))
                     meet = ", ".join(x for x in (plain(f.get("meet", "")), plain(f.get("city", ""))) if x)
-                    label = f"{sex}'s {ev}" if sex and sex != "Mixed" else f"mixed {ev}" if sex == "Mixed" else ev
-                    out.append((f"World record: {who}, {label} ({course}), {plain(f.get('time', ''))}" + (f" ({meet})" if meet else ""), f"wr:swim:{course}:{label}:{plain(f.get('time', ''))}"))
+                    label_ = short_event(ev, sex) if sex else ev
+                    out.append((f"{rec_label}: {who}, {label_} ({course}), {plain(f.get('time', ''))}" + (f" ({meet})" if meet else ""), f"wr:swim:{rec_label}:{course}:{label_}:{plain(f.get('time', ''))}"))
         return out
+    if label != "World record":                            # the under-20 list: a plain table (Event, Record, Athlete, Nationality, Date, Meet, Place), outdoor then indoor
+        return u20_records(wikitext, today, label)
     i = wikitext.find("==World records==")
     j = wikitext.find("==World best performances==")
     body = wikitext[i:j if j > i else None] if i >= 0 else ""
@@ -305,6 +311,35 @@ def recent_records(sport, wikitext, today):
     return out
 
 
+def u20_records(wikitext, today, label):
+    """[(text, uid)] for the under-20 records set in the last three days: each row's date is a plain '16 June 2026'; the event cell can span two rows."""
+    out, sex, event = [], "", ""
+    for part in re.split(r"(^===\s*(?:Men|Women|Mixed)\s*===\s*$)", wikitext, flags=re.M):
+        hs = re.match(r"^===\s*(Men|Women|Mixed)", part)
+        if hs:
+            sex = hs.group(1)
+            continue
+        for row in part.split("\n|-"):
+            cells = [c.strip() for c in re.findall(r"^\|(?![-+}])\s*(.*)$", row, re.M)]
+            cells = [re.sub(r'^(?:rowspan|style|align)="?[^|]*\|\s*', "", c) for c in cells]
+            di = next((k for k, c in enumerate(cells) if re.fullmatch(r"\d{1,2} [A-Z][a-z]+ \d{4}", plain(c))), None)
+            if di is None or di < 3 or not sex:
+                if cells and di is None and len(cells) > 3:
+                    event = plain(cells[0])
+                continue
+            if di >= 4:
+                event = plain(cells[di - 4])
+            when = _parse_date(plain(cells[di]))
+            if not when or not (timedelta(0) <= today - when <= WINDOW) or "background:pink" in row:
+                continue
+            mark = re.match(r"\s*([\d:.,]+)", plain(cells[di - 3]))
+            who, meet = plain(cells[di - 2]), plain(cells[di + 1]) if di + 1 < len(cells) else ""
+            e = short_event(event, sex if sex != "Mixed" else "")
+            mk = show_mark(mark.group(1) if mark else "", event)
+            out.append((f"{label}: {who}, {e}, {mk}" + (f" ({meet})" if meet else ""), "u20:" + wr_uid(e, mk)))
+    return out
+
+
 def _parse_date(text):
     m = re.search(r"(\d{1,2})\s+([A-Za-z]{3,})\.?\s+(\d{4})", text or "")
     if not m:
@@ -322,9 +357,9 @@ def run(source, today, fails=None):
     A page that fails is skipped and counted in `fails`; nothing raises."""
     fails = fails if fails is not None else []
     got = {"athletics": [], "swimming": []}
-    for sport, title in WR_PAGES:
+    for sport, title, label in WR_PAGES:
         try:
-            got[sport] += [("wr", t, u) for t, u in recent_records(sport, source.wikitext(title), today)]
+            got[sport] += [("wr" if label == "World record" else "youth", t, u) for t, u in recent_records(sport, source.wikitext(title), today, label)]
         except Exception:
             fails.append(title)
     year = today.year
@@ -355,7 +390,7 @@ def run(source, today, fails=None):
         except Exception:
             fails.append(page)
     seen, out = set(), {"athletics": [], "swimming": got["swimming"]}
-    for k, t, u in sorted(got["athletics"], key=lambda x: {"wr": 0, "close": 1, "mark": 2}[x[0]]):
+    for k, t, u in sorted(got["athletics"], key=lambda x: {"wr": 0, "close": 1, "mark": 2, "youth": 3}[x[0]]):
         if u.startswith("wr:"):
             key = u.lower()
             if key in seen:

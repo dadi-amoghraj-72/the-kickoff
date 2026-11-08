@@ -61,6 +61,12 @@ sw = a.recent_records("swimming", page("wr_swimming_2026-11-08"), date(2026, 11,
 check("the swimming list: the six short-course world records of the US trials on 30 October 2026, each with its course",
       len(sw) == 6 and "World record: Jack Alexy, Men's 100m freestyle (short course), 44.64 (U.S. Short Course World Championship Trials, Westmont)" in [t for t, _ in sw], [t for t, _ in sw])
 check("nothing on a day with no new record", a.recent_records("swimming", page("wr_swimming_2026-11-08"), date(2026, 11, 20)) == [])
+_u = page("u20_athletics_2026-11-08")
+check("youth records (D, 2026-11-08): the World U20 record list, Gout Gout's 19.67 of 12 April 2026 the next morning, a time with no stray 'm'",
+      a.recent_records("athletics", _u, date(2026, 4, 13), "World U20 record") == [("World U20 record: Gout Gout, Men's 200m, 19.67 (Australian Championships)", "u20:wr:men's 200m:19.67")],
+      a.recent_records("athletics", _u, date(2026, 4, 13), "World U20 record"))
+_j = a.recent_records("swimming", page("junior_swimming_2026-11-08"), date(2026, 8, 14), "World junior record")
+check("and swimming's world junior records (Boys' and Girls', long and short course): the Pan Pacs of 13 August 2026", len(_j) == 3 and any("World junior record: Shin Ohashi, Boys' 100m breaststroke (long course), 58.54" in t for t, _ in _j), [t for t, _ in _j])
 check("one record, one id, however it is written (the meeting's '6.30' and the list's '6.30m')", a.wr_uid("Men's pole vault", "6.30") == a.wr_uid("Men's pole vault", "6.30m"))
 
 

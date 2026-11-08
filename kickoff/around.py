@@ -147,9 +147,11 @@ def sport_of(item):
     text = f"{item['title']} {item['text']}"
     if NEGATIVE.search(text):
         return None, False
-    for key, _, words, events in RULES:
-        if re.search(words, text, re.I) and (re.search(events, text, re.I) or (OURS.search(text) and OURS_STAGE.search(text))) and not (key in EXCLUDE and EXCLUDE[key].search(text)):
-            return key, bool(SPOT_PLACE.search(text) or SPOT_NAMES.search(text))
+    for ours in (False, True):                          # a covered event first (a Youth Olympics silver is the Games, not badminton); then India and Singapore finals anywhere
+        for key, _, words, events in RULES:
+            hit = (OURS.search(text) and OURS_STAGE.search(text)) if ours else re.search(events, text, re.I)
+            if re.search(words, text, re.I) and hit and not (key in EXCLUDE and EXCLUDE[key].search(text)):
+                return key, bool(SPOT_PLACE.search(text) or SPOT_NAMES.search(text))
     if (SPOT_PLACE.search(text) or SPOT_NAMES.search(text)) and SPOT_STAGE.search(text) and not NOT_SPOT.search(text):
         for key, _, words, _e in RULES:
             if re.search(words, text, re.I):
@@ -361,7 +363,7 @@ def run(now, st, source, client=None):
             for kind, text, uid in found:
                 if uid in seen or room <= 0:
                     continue                           # a line not shown today is not marked seen: tomorrow it can still come
-                lead, _, rest = text.partition(": ") if kind == "wr" else (("Close finish", "", text) if kind == "close" else ("", "", text))
+                lead, _, rest = text.partition(": ") if kind in ("wr", "youth") else (("Close finish", "", text) if kind == "close" else ("", "", text))
                 lines[sp].append(line_html(rest if lead else text, lead=lead))
                 seen.append(uid)
                 room -= 1
@@ -388,20 +390,20 @@ def run(now, st, source, client=None):
             if feed_count.get(c["sport"], 0) >= FEED_PER_SPORT:
                 continue
             lead = v.get("sport") or ""
-            if c["sport"] == "games" and not lead:               # a Games line always says its sport (D, 2026-11-08); when the source does not, the line is left out
+            if c["sport"] == "games" and not (lead and OURS.search(f"{c['title']} {c['text']}")):   # a Games line says its sport and is about India or Singapore (D, 2026-11-08)
                 continue
             feed_count[c["sport"]] = feed_count.get(c["sport"], 0) + 1
             lines[c["sport"]].append(line_html(v["summary"] or c["title"], c["link"], c["source"], lead=lead if c["sport"] == "games" else ""))
             seen.append(c["link"])
     html = ""
     on = games_on(sgt_today)
-    if on:                                             # a Games on: it leads Other Sports, named, with its day, even before its first result line
+    if on and lines["games"]:                          # a Games on with something to say (D, 2026-11-08: an empty header was no use): it leads Other Sports, named, with its day
         blocks["games"] = [games_html(on)] + blocks.get("games", [])
-    for key in (["games"] + [k for k in ORDER if k != "games"]) if on else ORDER:
+    for key in (["games"] + [k for k in ORDER if k != "games"]) if on and lines["games"] else ORDER:
         extra = "".join(blocks.get(key, []))
         if lines[key] or extra:
             shown = lines[key][:RECORD_LINES.get(key, PER_SPORT)]
-            head = on[0] if key == "games" and on else HEADING[key]
+            head = on[0] if key == "games" and on and lines["games"] else HEADING[key]
             body = f'<ul class="standouts">{"".join(shown)}</ul>' if shown else ""
             html += f'<h4 class="sport{" first" if not html else ""}">{r.esc(head)}</h4>' + ((extra + body) if key == "games" else (body + extra))
             stats["shown"] += len(shown) + (1 if extra else 0)

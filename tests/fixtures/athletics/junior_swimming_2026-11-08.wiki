@@ -1,0 +1,2011 @@
+{{Short description|None}}
+The '''World Junior Records''' in [[Swimming (sport)|Swimming]] are ratified by [[World Aquatics]].<ref name="Swimming World Magazine"/> They are the fastest times recorded by a swimmer aged 14 to 18 years,  as of 31 December of the year of competition.<ref name=age/>
+
+The [[long course]] (50 m pool) records were established in March 2014 and used the competition records from the [[World Aquatics Junior Swimming Championships|World Junior Championships]] as standard times.<ref name="Swimming World Magazine">{{cite magazine|title=FINA World Junior Records Can Begin Being Set Today|url=http://www.swimmingworldmagazine.com/lane9/news/World/38557.asp?q=FINA-World-Junior-Records-Can-Begin-Being-Set-Today|magazine=[[Swimming World Magazine]]|date=1 April 2014|access-date=2 April 2014|url-status=dead|archive-url=https://web.archive.org/web/20140407102832/http://www.swimmingworldmagazine.com/lane9/news/World/38557.asp?q=FINA-World-Junior-Records-Can-Begin-Being-Set-Today|archive-date=7 April 2014}}</ref> 
+[[Short course (swimming)|Short course]] (25 m pool) records were established on 1 January 2015, and were shortly followed by the release of "Junior World Bests," which served as standard times for each event.<ref>{{cite magazine|title=FINA Releases ‘Junior World Bests’ Short Course Standards In Order To Identify Junior World Records|url=https://swimswam.com/fina-releases-world-best-times-short-course-standards-order-identify-junior-world-record/|magazine=[[SwimSwam]]|author=Mitch Bowmile|date=6 January 2015|access-date=30 October 2025}}</ref> Initially, the age groups were 15 to 18 years for boys and 14 to 17 years for girls. In 2023, they were changed to 14 to 18 years for all athletes.<ref name=age>{{cite magazine|title=World Aquatics Shifts Ages of Eligibilty for Girls World Junior Records|url=https://swimswam.com/world-aquatics-shifts-ages-of-eligibilty-for-girls-world-junior-records/|magazine=[[SwimSwam]]|author=Braden Keith|date=8 March 2023|access-date=30 October 2025}}</ref>
+
+Records are recognized for long course and short course in the following events:
+*[[Freestyle swimming|freestyle]]: 50, 100, 200, 400, 800 and 1500;
+*[[backstroke]]: 50, 100 and 200;
+*[[breaststroke]]: 50, 100 and 200;
+*[[Butterfly swimming|butterfly]]: 50, 100 and 200;
+*[[Individual medley]]: 100 (short course only), 200 and 400;
+*[[Relay race|relays]]: 4×50 freestyle (short course only), 4×100 freestyle, 4×200 freestyle, 4×50 medley (short course only) and 4×100 medley;
+*Mixed relays: 4×100 freestyle (long course only), 4×50 medley (short course only) and 4×100 medley (long course only).
+
+All records were swum in finals unless noted otherwise.
+
+==Long Course (50 m)==
+===Boys===
+{{Swimmingrecordlisttop|meet=yes|nationality=yes}}
+{{Swimmingrecord
+|eventsort = 01.1
+|event = 50m freestyle
+|time = 21.75
+|recordinfo = h, =
+|firstname = Michael
+|lastname = Andrew
+|namearticle = Michael Andrew (swimmer)
+|club = {{flagu|United States}}
+|date = 25 August 2017
+|meet = [[2017 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Indianapolis
+|country = USA
+|ref = <ref>{{cite web|title=Men's 50m Freestyle Heats Results|url=http://www.omegatiming.com/File/Download?id=000111010000000000FFFFFFFFFFFF02|publisher=Omega Timing|access-date=25 August 2017|date=25 August 2017}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 01.2
+|event = 50m freestyle
+|time = 21.75
+|recordinfo = =
+|firstname = Michael
+|lastname = Andrew
+|namearticle = Michael Andrew (swimmer)
+|club = {{flagu|United States}}
+|date = 26 August 2017
+|meet = [[2017 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Indianapolis
+|country = USA
+|ref = <ref>{{cite web|title=Men's 50m Freestyle Final Results|url=http://www.omegatiming.com/File/Download?id=000111010000000002FFFFFFFFFFFF02|publisher=Omega Timing|access-date=26 August 2017|date=26 August 2017}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 01.3
+|event = 50m freestyle
+|time = 21.75
+|recordinfo = sf, =
+|firstname = Nikita
+|lastname = Sheremet
+|namearticle = 
+|club = {{flagu|Ukraine}}
+|date = 21 August 2025
+|meet = [[2025 World Aquatics Junior Swimming Championships|World Junior Championships]]
+|city = Otopeni
+|country = ROU
+|ref = <ref>{{cite web|title=Men's 50m Freestyle Semifinals Results|url=https://www.omegatiming.com/File/00011900050101EB0102FFFFFFFFFF01.pdf|publisher=Omega Timing|date=21 August 2025|access-date=21 August 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 02
+|event = 100m freestyle
+|time = 46.86
+|recordinfo = 
+|firstname = David
+|lastname = Popovici
+|namearticle = 
+|club = {{flagu|Romania}}
+|date = 13 August 2022
+|meet = [[Swimming at the 2022 European Aquatics Championships – Men's 100 metre freestyle|European Championships]]
+|city = Rome
+|country = ITA
+|ref = <ref>{{cite web|title=Men's 100m Freestyle Final Results|url=https://roma2022.microplustimingservices.com/export/NU_ROMA2022/NU/pdf/SWMM100MFR------------FNL---------_73A2%201.0.pdf?x=00:30:37|publisher=microplustiming.com|date=13 August 2022|accessdate=13 August 2022}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 03
+|event = 200m freestyle
+|time = 1:42.97
+|recordinfo = 
+|firstname = David
+|lastname = Popovici
+|namearticle = 
+|club = {{flagu|Romania}}
+|date = 15 August 2022
+|meet = [[Swimming at the 2022 European Aquatics Championships – Men's 100 metre freestyle|European Championships]]
+|city = Rome
+|country = ITA
+|ref = <ref>{{cite web|title=Men's 200m Freestyle Final Results|url=https://roma2022.microplustimingservices.com/export/NU_ROMA2022/NU/pdf/SWMM200MFR------------FNL---------_73A2%201.0.pdf?x=00:14:58|publisher=microplustiming.com|date=15 August 2022|accessdate=15 August 2022}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 4.1
+|event = 400m freestyle
+|time = 3:42.82
+|recordinfo = 
+|firstname = Zhang
+|lastname = Zhanshuo
+|namearticle = 
+|club = {{flagu|China}}
+|date = 10 November 2025
+|meet = [[2025 National Games of China| National Games]]
+|city = Shenzhen
+|country = CHN
+|ref = <ref>{{cite web|title=Men's 400m Freestyle Final Results|url=https://infoapi.baygames.cn/QYH2025/data/SWM/SWMM400MFR------------FNL-000100--_DT_PDF_C73A1.pdf?random=0.7892508687666834|publisher=baygames.cn|date=10 November 2025|accessdate=10 November 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 04.3
+|event = 400m freestyle
+|time = 3:40.59
+|recordinfo = {{efn|name=LC|Performance predates the establishment of long course records (March 2014), but was not achieved at the [[World Aquatics Junior Swimming Championships|World Junior Championships]]. Fastest junior of all time, unratified.}}
+|firstname = Ian
+|lastname = Thorpe
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 16 September 2000
+|meet = [[Swimming at the 2000 Summer Olympics – Men's 400 metre freestyle|Olympic Games]]
+|city = Sydney
+|country = AUS
+|ref = <ref>{{cite web|title=Men's 400m Freestyle Final Results|url=https://websitedevsa.blob.core.windows.net/sitefinity/docs/default-source/eventsdocuments/meet-results/international-event-results/olympic-games/2000-olympic-games.pdf#page=60|work=[[Omega SA|Omega Timing]]|date=29 September 2000|access-date=26 June 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 05
+|event = 800m freestyle
+|time = 7:43.37
+|recordinfo = 
+|firstname = Lorenzo
+|lastname = Galossi
+|namearticle = 
+|club = {{flagu|Italy}}
+|date = 13 August 2022
+|meet = [[Swimming at the 2022 European Aquatics Championships – Men's 800 metre freestyle|European Championships]]
+|city = Rome
+|country = ITA
+|ref = <ref>{{cite web|title=Men's 800m Freestyle Final Results|url=https://roma2022.microplustimingservices.com/export/NU_ROMA2022/NU/pdf/SWMM800MFR------------FNL---------_73A2%201.0.pdf?x=02:04:16|publisher=microplustiming.com|date=13 August 2022|accessdate=13 August 2022}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 06
+|event = 1500m freestyle
+|time = 14:41.22
+|recordinfo = 
+|firstname = Kuzey
+|lastname = Tunçelli
+|namearticle = 
+|club = {{flagu|Turkey}}
+|date = 4 August 2024
+|meet = [[Swimming at the 2024 Summer Olympics – Men's 1500 metre freestyle|Olympic Games]]
+|city = Paris
+|country = FRA
+|ref = <ref>{{cite web|title=Men's 1500m Freestyle Final Results|url=https://olympics.com/OG2024/pdf/OG2024/SWM/OG2024_SWM_C73A1_SWMM1500MFR-----------FNL-000100--.pdf|publisher=olympics.com|date=4 August 2024|access-date=4 August 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 07
+|event = 50m backstroke
+|time = 24.00
+|recordinfo = 
+|firstname = Kliment
+|lastname = Kolesnikov
+|namearticle =
+|club = {{flagu|Russia}}
+|date = 4 August 2018
+|meet = [[Swimming at the 2018 European Aquatics Championships – Men's 50 metre backstroke|European Championships]]
+|city = Glasgow
+|country = GBR
+|ref = <ref>{{cite web|title=Men's 50m Backstroke Final Results|url=http://glasgow2018.microplustiming.com/export/NU_Glasgow2018/NU/pdf/SWMM50MBA-------------FNL-000100--_73A1%201.0.pdf?x=01:26:52|publisher=MicroPlus Timing|date=4 August 2018|access-date=4 August 2018}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 08
+|event = 100m backstroke
+|time = 52.08
+|recordinfo = r
+|firstname = Miron
+|lastname = Lifintsev
+|namearticle = 
+|club = {{flagu|Russia}}
+|date = 28 July 2024
+|meet = Russian Cup
+|city = Yekaterinburg
+|country = RUS
+|ref = <ref>{{cite web|title=Men's 4x100m Medley Relay Final Results|url=https://russwimming.ru/upload/live/ruscup2024_ekaterinburg/ResultList_140F.pdf|publisher=russwimming.ru|date=28 July 2024|access-date=28 July 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 09.1
+|event = 200m backstroke
+|time = 1:54.87
+|recordinfo = h
+|firstname = Nathan
+|lastname = Muratory
+|namearticle = 
+|club = {{flagu|France}}
+|date = 11 August 2026
+|meet = [[Swimming at the 2026 European Aquatics Championships – Men's 200 metre backstroke|European Championships]]
+|city = Paris
+|country = FRA
+|ref = <ref>{{cite web|title=Men's 200m Backstroke Heats Results|url=https://www.omegatiming.com/File/00011A00010102EE0101FFFFFFFFFF01.pdf|publisher=Omega Timing|date=11 August 2026|access-date=11 August 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 09.2
+|event = 200m backstroke
+|time = 1:54.77
+|recordinfo = {{efn|name=LC}}
+|firstname = Ryosuke
+|lastname = Irie
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 7 June 2008
+|meet = Japan Open
+|city = Tokyo
+|country = JPN
+|ref =
+}}
+{{Swimmingrecord
+|eventsort = 10
+|event = 50m breaststroke
+|time = 26.95
+|recordinfo = h
+|firstname = Jan Malte
+|lastname = Gräfe
+|namearticle = 
+|club = {{flagu|Germany}}
+|date = 23 August 2025
+|meet = [[2025 World Aquatics Junior Swimming Championships|World Junior Championships]]
+|city = Otopeni
+|country = ROU
+|ref = <ref>{{cite web|title=Men's 50m Breaststroke Heats Results|url=https://www.omegatiming.com/File/00011900050103EB0101FFFFFFFFFF01.pdf|publisher=Omega Timing|date=23 August 2025|access-date=23 August 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 10
+|event = 50m breaststroke
+|time = 26.75
+|recordinfo = h, #
+|firstname = Yusei
+|lastname = Imaizumi
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 18 October 2026
+|meet = Niigata OPEN Kohei Kawamoto Cup / 31st Niigata Prefecture Sprint Championships
+|city = Nagaoka
+|country = Japan
+|ref = <ref>https://swimswam.com/17-year-old-yusei-imaizumi-breaks-world-junior-record-in-50-breaststroke-long-course/</ref>
+}}
+{{swimmingrecord
+|eventsort = 11
+|event = 100m breaststroke
+|time = 58.54
+|recordinfo = 
+|firstname = Shin
+|lastname = Ohashi
+|namearticle =
+|club = {{flagu|Japan}}
+|date = 13 August 2026
+|meet = [[2026 Pan Pacific Swimming Championships|Pan Pacific Championships]]
+|city = Irvine
+|cityarticle = Irvine, California
+|country = USA
+|ref = <ref>{{cite web|title=Men's 100m Breaststroke Final Results|url=https://www.omegatiming.com/File/00011A00030103EC0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=13 August 2026|access-date=13 August 2026}}</ref>
+}}
+{{swimmingrecord
+|eventsort = 12
+|event = 200m breaststroke
+|time = 2:04.83
+|recordinfo = WR
+|firstname = Shin
+|lastname = Ohashi
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 24 September 2026
+|meet = [[Swimming at the 2026 Asian Games|Asian Games]]
+|city = Tokyo
+|country = JPN
+|ref = <ref>{{cite web|title=Men's 200m Breaststroke Final Results|url=https://results.asiangames2026.org/ag2026/reports/ENG.SWMM200MBR------------FNL-000100--.C73A1_2_0.pdf|publisher=results.asiangames2026.org|date=24 September 2026|access-date=24 September 2026}}</ref><ref>{{cite web|title=Video - Men's 200m Breaststroke Final|url=https://www.youtube.com/watch?v=t7aGKR3-LaM|publisher=TBS News Dig|language=ja|date=24 September 2026|access-date=24 September 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 13
+|event = 50m butterfly
+|time = 22.96
+|recordinfo = 
+|firstname = Diogo
+|lastname = Ribeiro
+|namearticle = Diogo Ribeiro (swimmer)
+|club = {{flagu|Portugal}}
+|date = 3 September 2022
+|meet = [[2022 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Lima
+|country = PER
+|ref = <ref>{{cite web|title=Men's 50m Butterfly Final Results|url=https://www.omegatiming.com/File/00011700050104EB0104FFFFFFFFFF01.pdf|publisher=Omega Timing|access-date=3 September 2022|date=3 September 2022}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 14
+|event = 100m butterfly
+|time = 50.62
+|recordinfo = 
+|firstname = Kristóf
+|lastname = Milák
+|namearticle = 
+|club = {{flagu|Hungary}}
+|date = 29 July 2017
+|meet = [[Swimming at the 2017 World Aquatics Championships – Men's 100 metre butterfly|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Men's 100m Butterfly Final Results|url=http://omegatiming.com/File/Download?id=000111010A0104EC04FFFFFFFFFFFF01|publisher=omegatiming.com|date=29 July 2017|access-date=29 July 2017|archive-url=https://web.archive.org/web/20170729223038/http://omegatiming.com/File/Download?id=000111010A0104EC04FFFFFFFFFFFF01|archive-date=29 July 2017|url-status=dead}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 15.1
+|event = 200m butterfly
+|time = 1:53.79
+|recordinfo = 
+|firstname = Kristóf
+|lastname = Milák
+|namearticle = 
+|club = {{flagu|Hungary}}
+|date = 30 June 2017
+|meet = [[2017 European Junior Swimming Championships|European Junior Championships]]
+|city = Netanya
+|country = ISR
+|ref = <ref>{{cite magazine|title=Kristof Milak Eclipses 200 Fly World Jr, Euro Jr & Meet Records at Euro Jr Champs|url=http://www.swimmingworldmagazine.com/news/kristof-milak-eclipses-200-fly-world-jr-euro-jr-meet-records-at-euro-jr-champs/|magazine=[[Swimming World]]|date=30 June 2017|access-date=30 June 2017}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 15.2
+|event = 200m butterfly
+|time = 1:52.71
+|recordinfo = not ratified
+|firstname = Kristóf
+|lastname = Milák
+|namearticle = 
+|club = {{flagu|Hungary}}
+|date = 28 March 2018
+|meet = Hungarian Championships
+|city = Debrecen
+|country = HUN
+|ref = <ref>{{cite magazine|title=Kristof Milak Swims Monster 1:52 in LCM 200 Fly; Moves To Third All-Time|url=https://www.swimmingworldmagazine.com/news/kristof-milak-swims-monster-152-in-lcm-200-fly-moves-to-third-all-time/|magazine=[[Swimming World]]|date=28 March 2018|access-date=29 March 2018}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 16.1
+|event = 200m<br />individual medley
+|time = 1:56.16
+|recordinfo = 
+|firstname = Mikhail
+|lastname = Shcherbakov
+|namearticle = Mikhail Shcherbakov (swimmer)
+|club = [[File:European Aquatics flag 2024.svg|border|23px|Neutral Athletes B]] Neutral Athletes B
+|date = 16 August 2026
+|meet = [[Swimming at the 2026 European Aquatics Championships – Men's 200 metre individual medley|European Championships]]
+|city = Paris
+|country = FRA
+|ref = <ref>{{cite web|title=Men's 200m IM Final Results|url=https://www.omegatiming.com/File/00011A00010105EE0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=16 August 2026|access-date=16 August 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 16.2
+|event = 200m<br />individual medley
+|time = 1:55.94
+|recordinfo = {{efn|name=LC}}
+|firstname = Michael
+|lastname = Phelps
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 9 August 2003
+|meet = [[United States Swimming National Championships|USA Championships]]
+|city = College Park
+|cityarticle = College Park, Maryland
+|country = USA
+|ref = <ref>{{cite news|title=SWIMMING; For a Grand Finale At Nationals, Phelps Sets Another Record|url=https://www.nytimes.com/2003/08/10/sports/swimming-for-a-grand-finale-at-nationals-phelps-sets-another-record.html|newspaper=[[The New York Times]]|author=Frank Litsky|date=10 August 2003|access-date=9 August 2017}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 16.3
+|event = 200m<br />individual medley
+|time = 1:55.36
+|recordinfo = <nowiki>#</nowiki>
+|firstname = Yumeki
+|lastname = Kojima
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 20 September 2026
+|meet = [[Swimming at the 2026 Asian Games – Men's 200 metre individual medley|Asian Games]]
+|city = Tokyo
+|country = JPN
+|ref = <ref>{{cite web|title=Men's 200m Individual Medley – Final – Results|url=https://results.asiangames2026.org/ag2026/reports/ENG.SWMM200MIM------------FNL-000100--.C73A1_2_0.pdf|website=results.asiangames2026.org|date=20 September 2026|access-date=20 September 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 17.2
+|event = 400m<br />individual medley
+|time = 4:08.69
+|recordinfo = h
+|firstname = Yumeki
+|lastname = Kojima
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 13 August 2026
+|meet = [[2026 Pan Pacific Swimming Championships|Pan Pacific Championships]]
+|city = Irvine
+|cityarticle = Irvine, California
+|country = USA
+|ref = <ref>{{cite web|title=Men's 400m IM Heats Results|url=https://www.omegatiming.com/File/00011A00030105EF0101FFFFFFFFFF01.pdf|publisher=Omega Timing|date=13 August 2026|access-date=17 August 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 17.3
+|event = 400m<br />individual medley
+|time = 4:07.02
+|recordinfo = <nowiki>#</nowiki>
+|firstname = Yumeki
+|lastname = Kojima
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 22 September 2026
+|meet = [[Swimming at the 2026 Asian Games – Men's 400 metre individual medley|Asian Games]]
+|city = Tokyo
+|country = JPN
+|ref = <ref>{{cite web|title=Men's 400m Individual Medley – Final – Results|url=https://results.asiangames2026.org/ag2026/reports/ENG.SWMM400MIM------------FNL-000100--.C73A1_2_0.pdf|website=results.asiangames2026.org|date=22 September 2026|access-date=22 September 2026}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 18
+|event = 4 × 100m<br />freestyle relay
+|time = 3:12.75
+|recordinfo = 
+|1name = [[Bogdan Toropkin]]
+|1split = 49.21
+|2name = [[Egor Proshin]]
+|2split = 47.58
+|3name = [[Matvei Miliaev]]
+|3split = 48.36
+|4name = [[Mikhail Shcherbakov (swimmer)|Mikhail Shcherbakov]]
+|4split = 47.60
+|club = {{noflag}} [[Authorised Neutral Athletes|Neutral Individual Athletes]]
+|date = 7 July 2026
+|meet = [[2026 European Junior Swimming Championships|European Junior Championships]]
+|city = Munich
+|country = GER
+|ref = <ref>{{cite web|title=Men's 4x100m Freestyle Relay Final Results|url=https://events.europeanaquatics.org/Junior-Swimming-Munich-2026/schedule-results/#/result/SWM/RE/M/4X100MFR----------/FNL-/000100--|publisher=[[European Aquatics]]|date=7 July 2027|access-date=7 July 2026}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 19
+|event = 4 × 200m<br />freestyle relay
+|time = 7:08.37
+|recordinfo = 
+|1name = [[Jake Magahey]]
+|1split = 1:48.11
+|2name = [[Luca Urlando]]
+|2split = 1:47.13
+|3name = [[Jake Mitchell]]
+|3split = 1:47.03
+|4name = [[Carson Foster]]
+|4split = 1:46.10
+|club = {{flagu|United States}}
+|date = 23 August 2019
+|meet = [[2019 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Men's 4×200m Freestyle Relay Final Results|url=http://www.omegatiming.com/File/00011301100101F804FFFFFFFFFFFF01.pdf|publisher=Omega Timing|access-date=23 August 2019|date=23 August 2019}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 20
+|event = 4 × 100m<br />medley relay
+|time = 3:33.19
+|recordinfo = 
+|1name = [[Nikolay Zuev (swimmer)|Nikolay Zuev]]
+|1split = 53.84
+|2name = [[Vladislav Gerasimenko]]
+|2split = 59.53
+|3name = [[Andrey Minakov]]
+|3split = 50.93
+|4name = [[Aleksandr Shchegolev (swimmer)|Aleksandr Shchegolev]]
+|4split = 48.89
+|club = {{flagu|Russia}}
+|date = 25 August 2019
+|meet = [[2019 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Men's 4 x 100m Medley Relay Final Results|url=http://www.omegatiming.com/File/00011301100105F704FFFFFFFFFFFF01.pdf|publisher=Omega Timing|access-date=25 August 2019|date=25 August 2019}}</ref>
+}}
+{{end}}
+{{swimmingrecordlegend|ratifier=World Aquatics|WR=yes|ER=yes]}}
+
+===Girls===
+{{Swimmingrecordlisttop|meet=yes|nationality=yes}}
+{{Swimmingrecord
+|eventsort = 01.1
+|event = 50m freestyle
+|time = 24.17
+|recordinfo = 
+|firstname = Claire
+|lastname = Curzan
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 14 May 2021
+|meet = TAC Titans Spring Invitational Meet
+|city = Cary
+|cityarticle = Cary, North Carolina
+|country = USA
+|ref = <ref>{{cite news|title=16-year-old Claire Curzan made waves on the first day of the meet, breaking the World Jr Record in the women's 50 free (24.17)|url=https://swimswam.com/tac-spring-invite-claire-curzan-wjr-lance-norris-wave-ii-cut-highlight-day-1/|work=[[SwimSwam]]|author=Spencer Penland|date=15 May 2021|access-date=16 May 2021}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 01.2
+|event = 50m freestyle
+|time = 23.99
+|recordinfo = {{efn|name=LC}}
+|firstname = Cate
+|lastname = Campbell
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 2 August 2009
+|meet = [[Swimming at the 2009 World Aquatics Championships – Women's 50 metre freestyle|World Championships]]
+|city = Rome
+|country = ITA
+|ref = <ref>{{cite web|title=Women's 50m Freestyle Final Results|url=http://www.omegatiming.com/File/Download?id=0001090B0069000000FFFFFFFFFFFF01|publisher=Omega Timing|date=2 August 2009|access-date=24 April 2018}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 02
+|event = 100m freestyle
+|time = 52.70
+|recordinfo = 
+|firstname = Penny
+|lastname = Oleksiak
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 11 August 2016
+|meet = [[Swimming at the 2016 Summer Olympics – Women's 100 metre freestyle|Olympic Games]]
+|city = Rio de Janeiro
+|country = BRA
+|ref = <ref>{{cite web|title=Women's 100m Freestyle Results|url=https://smsprio2016-a.akamaihd.net/_odf-documents/S/W/SWW011101_Results_2016_08_11_7bd044b9_da17_4dba_a12b_9012337cdaa3.pdf|work=Rio 2016 official website|date=11 August 2016|access-date=12 August 2016|url-status=dead|archive-url=https://web.archive.org/web/20160920092049/https://smsprio2016-a.akamaihd.net/_odf-documents/S/W/SWW011101_Results_2016_08_11_7bd044b9_da17_4dba_a12b_9012337cdaa3.pdf|archive-date=20 September 2016}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 02
+|event = 100m freestyle
+|time = 52.49
+|recordinfo = {{efn|name=Age}}
+|firstname = Mollie
+|lastname = O'Callaghan
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 18 May 2022
+|meet = Australian Championships
+|city = Adelaide
+|country = AUS
+|ref =
+}}
+{{swimmingrecord
+|eventsort = 03
+|event = 200m freestyle
+|time = 1:53.65
+|recordinfo = 
+|firstname = Summer
+|lastname = McIntosh
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 26 July 2023
+|meet = [[Swimming at the 2023 World Aquatics Championships – Women's 200 metre freestyle|World Championships]]
+|city = Fukuoka
+|country = JPN
+|ref = <ref>{{cite web|title=Women's 200m Freestyle Final Results|url=https://www.omegatiming.com/File/00011600010201EE0104FFFFFFFFFF01.pdf|work=Omega Timing|date=26 July 2023|access-date=26 July 2023}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 04
+|event = 400m freestyle
+|time = 3:56.08
+|recordinfo =
+|firstname = Summer
+|lastname = McIntosh
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 28 March 2023
+|meet = Canadian Trials
+|city = Toronto
+|country = CAN
+|ref = <ref>{{cite web|title=Women's 400m Freestyle Final Results|url=https://results.swimming.ca/2023_Bell_Canadian_Trials/230328F009.htm|publisher=swimming.ca|date=28 March 2023|accessdate=28 March 2023}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 05
+|event = 800m freestyle
+|time = 8:11.00
+|recordinfo = 
+|firstname = Katie
+|lastname = Ledecky
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 22 June 2014
+|meet = Woodlands Senior Invitational Meet
+|city = Shenandoah
+|cityarticle = Shenandoah, Texas
+|country = USA
+|ref = <ref>{{cite web|title=Katie Ledecky Smashes 800 Free World Record in Conroe, Texas|url=http://swimswam.com/katie-ledecky-smashes-800-free-world-record-conroe-texas/|work=[[SwimSwam]]|date=22 June 2014|access-date=22 June 2014}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 05
+|event = 800m freestyle
+|time = 8:07.39
+|recordinfo = {{efn|name=Age}}
+|firstname = Katie
+|lastname = Ledecky
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 8 August 2015
+|meet =  [[Swimming at the 2015 World Aquatics Championships – Women's 800 metre freestyle|World Championships]]
+|city = Kazan
+|cityarticle =
+|country = RUS
+|ref = <ref>{{cite web|title=Women's 800m Freestyle Final Results|url=http://www.omegatiming.com/File/Download?id=00010F020001001802FFFFFFFFFFFF02|publisher=Omega Timing|date=8 August 2015|access-date=10 August 2015}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 06
+|event = 1500m freestyle
+|time = 15:28.36
+|recordinfo = 
+|firstname = Katie
+|lastname = Ledecky
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 24 August 2014
+|meet = [[2014 Pan Pacific Swimming Championships|Pan Pacific Championships]]
+|city = Gold Coast
+|cityarticle = Gold Coast, Queensland
+|country = AUS
+|ref = <ref>{{cite magazine|title=Pan Pacific Championships: Day Four Finals Live Recap; Huge World Record for Katie Ledecky|url=http://www.swimmingworldmagazine.com/news/pan-pacific-championships-day-four-finals-live-recap/|magazine=[[Swimming World Magazine]]|date=24 August 2014|access-date=24 August 2014}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 06
+|event = 1500m freestyle
+|time = 15:25.48
+|recordinfo = {{efn|name=Age|Past performances by 18-year-old girls were not retroactively ratified following the change to the age group in 2023. Fastest junior of all time, unratified.}} 
+|firstname = Katie
+|lastname = Ledecky
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 4 August 2015
+|meet =  [[Swimming at the 2015 World Aquatics Championships – Women's 1500 metre freestyle|World Championships]]
+|city = Kazan
+|cityarticle =
+|country = RUS
+|ref = <ref>{{cite web|title=Women's 1500m Freestyle Final Results|url=http://www.omegatiming.com/File/Download?id=00010F020001001902FFFFFFFFFFFF02|publisher=Omega Timing|date=4 August 2015|access-date=4 August 2015}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 07.1
+|event = 50m backstroke
+|time = 27.49
+|recordinfo = 
+|firstname = Minna
+|lastname = Atherton
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 7 February 2016
+|meet = Brisbane Sprint Championships
+|city = Brisbane
+|country = AUS
+|ref = <ref>{{cite web |url=https://swimswam.com/minna-atherton-breaks-junior-world-record-at-local-brisbane-meet/ |title=Minna Atherton Breaks Junior World Record at Local Brisbane Meet |first1=Braden |last1=Keith |date=February 7, 2016 |work=[[SwimSwam]]|access-date=February 8, 2016 }}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 07.2
+|event = 50m backstroke
+|time = 27.22
+|recordinfo = {{efn|name=LC}}
+|firstname = Fu
+|lastname = Yuanhui
+|namearticle = 
+|club = {{flagu|China}}
+|date = 1 April 2013
+|meet = Chinese Championships
+|city = Zhengzhou
+|country = CHN
+|ref =
+}}
+{{Swimmingrecord
+|eventsort = 08
+|event = 100m backstroke
+|time = 57.57
+|recordinfo = r
+|firstname = Regan
+|lastname = Smith
+|namearticle = Regan Smith (swimmer)
+|club = {{flagu|United States}}
+|date = 28 July 2019
+|meet = [[Swimming at the 2019 World Aquatics Championships – Women's 4 × 100 metre medley relay|World Championships]]
+|city = Gwangju
+|country = KOR
+|ref = <ref>{{cite web|title=Women's 4x100m Medley Relay Final Results|url=http://omegatiming.com/File/00011301070205F704FFFFFFFFFFFF01.pdf|publisher=Omega Timing|date=28 July 2019|access-date=28 July 2019|archive-url=https://web.archive.org/web/20190728132929/http://omegatiming.com/File/00011301070205F704FFFFFFFFFFFF01.pdf|archive-date=28 July 2019|url-status=dead}}</ref>
+}}
+{{swimmingrecord
+|eventsort = 09
+|event = 200m backstroke
+|time = 2:03.35
+|recordinfo = sf, AM
+|firstname = Regan
+|lastname = Smith
+|namearticle = Regan Smith (swimmer)
+|club = {{flagu|United States}}
+|date = 26 July 2019
+|meet = [[Swimming at the 2019 World Aquatics Championships – Women's 200 metre backstroke|World Championships]]
+|city = Gwangju
+|country = KOR
+|ref = <ref>{{cite web|title=Women's 200m Backstroke Semifinal Results|url=http://www.omegatiming.com/File/00011301070202EE02FFFFFFFFFFFF01.pdf|publisher=[[Omega Timing]]|date=26 July 2019|access-date=26 July 2019|archive-url=https://web.archive.org/web/20190726115319/http://omegatiming.com/File/00011301070202EE02FFFFFFFFFFFF01.pdf|archive-date=26 July 2019|url-status=dead}}</ref>
+}}
+{{swimmingrecord
+|eventsort = 10
+|event = 50m breaststroke
+|time = 29.30
+|recordinfo = sf
+|firstname = Benedetta
+|lastname = Pilato
+|namearticle = 
+|club = {{flagu|Italy}}
+|date = 22 May 2021
+|meet = [[Swimming at the 2020 European Aquatics Championships – Women's 50 metre breaststroke|European Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Women's 50m Breaststroke Semifinals Results|url=http://budapest2020.microplustiming.com/export/NU_Budapest2021/NU/pdf/SWMW50MBR-------------SFNL--------_74A%201.0.pdf?x=01:05:24|publisher=microplustiming.com|date=22 May 2021|accessdate=22 May 2021}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 11
+|event = 100m breaststroke
+|time = 1:04.35
+|recordinfo = sf, ER
+|firstname = Rūta
+|lastname = Meilutytė
+|namearticle =
+|club = {{flagu|Lithuania}}
+|date = 29 July 2013
+|meet = [[Swimming at the 2013 World Aquatics Championships – Women's 100 metre breaststroke|World Championships]]
+|city = Barcelona
+|country = ESP
+|ref = <ref>{{cite web|title=Swimming at the 2013 World Aquatics Championships – Women's 100 metre breaststroke Semifinal Results|url=http://www.omegatiming.com/File/Download?id=00010D020101021E01FFFFFFFFFFFF02|publisher=Omegatiming|date=29 July 2013|access-date=24 April 2018}}</ref><ref name="Anderson27Aug19">Anderson, Jared (27 August 2019). [https://swimswam.com/true-world-junior-records-in-swimming-as-of-august-2019/ "'True' World Junior Records In Swimming As of August 2019"]. ''[[SwimSwam]]''. Retrieved 19 June 2021.</ref>
+}}
+{{Swimmingrecord
+|eventsort = 12
+|event = 200m breaststroke
+|time = 2:19.64
+|recordinfo = 
+|firstname = Viktoriya Zeynep
+|lastname = Gunes
+|namearticle = 
+|club = {{flagu|Turkey}}
+|date = 30 August 2015
+|meet = [[2015 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Singapore
+|country = SIN
+|ref = <ref>{{cite web|title=Women's 200m Breaststroke Results|url=http://www.omegatiming.com/File/Download?id=00010F020E01021F02FFFFFFFFFFFF02|publisher=Omega Timing|date=30 August 2015|access-date=30 August 2015}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 13
+|event = 50m butterfly
+|time = 25.46
+|recordinfo = 
+|firstname = Rikako
+|lastname = Ikee
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 26 August 2017
+|meet = [[2017 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Indianapolis
+|country = USA
+|ref = <ref>{{cite web|title=Women's 50m Butterfly Results|url=http://www.omegatiming.com/File/Download?id=000111010001032002FFFFFFFFFFFF02|publisher=Omega Timing|access-date=26 August 2017|date=26 August 2017}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 13
+|event = 50m butterfly
+|time = 25.11
+|recordinfo = {{efn|name=Age}}
+|firstname = Rikako
+|lastname = Ikee
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 10 June 2018
+|meet = Mare Nostrum
+|city = Canet-en-Roussillon
+|country = FRA
+|ref = 
+}}
+{{Swimmingrecord
+|eventsort = 14.1
+|event = 100m butterfly
+|time = 56.33
+|recordinfo = 
+|firstname = Mizuki
+|lastname = Hirai
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 22 June 2024
+|meet = Kanagawa Prefectural High School General Athletic Meet
+|city = Kanagawa
+|country = JPN
+|ref = <ref>{{cite web|title=Women's 100m Butterfly Final Results|url=https://swmexp.japan-swimming.jp/webexpswim/ResultsRankingGroup?gameid=1424303&eventno=031|publisher=japan-swimming.jp|access-date=22 June 2024|date=22 June 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 14.2
+|event = 100m butterfly
+|time = 56.20
+|recordinfo = not<br />ratified
+|firstname = Claire
+|lastname = Curzan
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 10 April 2021
+|meet = TAC Titans Premier Invitational
+|city = Cary
+|cityarticle = Cary, North Carolina
+|country = USA
+|ref = <ref>{{cite news|title=Claire Curzan Goes 56.20 in the 100 Fly; Passes Dahlia for #2 American All-time|url=https://swimswam.com/claire-curzan-goes-56-20-in-the-100-fly-passes-dahlia-for-2-american-all-time/|website=swimswam.com|author=Anne Lepesant|date=10 April 2021|access-date=16 April 2021}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 14.4
+|event = 100m butterfly
+|time = 56.06
+|recordinfo = {{efn|name=LC}}
+|firstname = Sarah
+|lastname = Sjöström
+|namearticle = 
+|club = {{flagu|Sweden}}
+|date = 27 July 2009
+|meet = [[Swimming at the 2009 World Aquatics Championships – Women's 100 metre butterfly|World Championships]]
+|city = Rome
+|country = ITA
+|ref = <ref>{{cite web|title=Women's 100m Butterfly Final Results|url=http://omegatiming.com/File/Download?id=0001090B0017000000FFFFFFFFFFFF01|publisher=Omega Timing|date=27 July 2009|access-date=24 April 2018}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 15
+|event = 200m butterfly
+|time = 2:03.03
+|recordinfo =
+|firstname = Summer
+|lastname = McIntosh
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 1 August 2024
+|meet = [[Swimming at the 2024 Summer Olympics – Women's 200 metre butterfly|Olympic Games]]
+|city = Paris
+|country = FRA
+|ref = <ref>{{cite web|title=Women's 200m Butterfly Final Results|url=https://olympics.com/OG2024/pdf/OG2024/SWM/OG2024_SWM_C73A1_SWMW200MBF------------FNL-000100--.pdf|website=olympics.com|date=1 August 2024|access-date=3 August 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 16
+|event = 200m individual medley
+|time = 2:06.56
+|recordinfo = 
+|firstname = Summer
+|lastname = McIntosh
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 3 August 2024
+|meet = [[Swimming at the 2024 Summer Olympics – Women's 200 metre individual medley|Olympic Games]]
+|city = Paris
+|country = FRA
+|ref = <ref>{{cite web|title=Women's 200m IM Final Results|url=https://olympics.com/OG2024/pdf/OG2024/SWM/OG2024_SWM_C73A1_SWMW200MIM------------FNL-000100--.pdf|publisher=olympics.com|date=3 August 2024|accessdate=3 August 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 16
+|event = 200m<br />individual medley
+|time = 2:06.10
+|recordinfo = <nowiki>#</nowiki>, AS
+|firstname = Yu
+|lastname = Zidi
+|namearticle = 
+|club = {{flagu|China}}
+|date = 21 September 2026
+|meet = [[Swimming at the 2026 Asian Games – Women's 200 metre individual medley|Asian Games]]
+|city = Tokyo
+|country = JPN
+|ref = <ref>{{cite magazine|title=Teen Prodigy Yu Zidi Rips Asian Record in 200 IM; Scares Summer McIntosh’s World Record|url=https://www.swimmingworldmagazine.com/news/teen-prodigy-yu-zidi-rips-asian-record-in-200-im-scares-summer-mcintoshs-world-record/|author=John Lohn|magazine=[[Swimming World]]|date=21 September 2026|access-date=20 September 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 17
+|event = 400m individual medley
+|time = 4:24.38
+|recordinfo =
+|firstname = Summer
+|lastname = McIntosh
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 16 May 2024
+|meet = Canadian Trials
+|city = Toronto
+|country = CAN
+|ref = <ref>{{cite web|title=Women's 400m IM Final Results|url=https://results.swimming.ca/2024_Olympic_Paralympic_Trials/ResultList_13F.pdf|publisher=swimming.ca|date=16 May 2023|accessdate=16 May 2023}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 18
+|event = 4 × 100m<br />freestyle relay
+|time = 3:35.53
+|recordinfo = 
+|1name = Rylee Erisman
+|1split = 53.41
+|2name = [[Liberty Clark]]
+|2split = 53.85
+|3name = [[Julie Mishler]]
+|3split = 54.65
+|4name = [[Lily King (swimmer)|Lily King]]
+|4split = 53.62
+|club = {{flagu|United States}}
+|date = 23 August 2025
+|meet = [[2025 World Aquatics Junior Swimming Championships|World Junior Championships]]
+|city = Otopeni
+|country = ROU
+|ref = <ref>{{cite web|title=Women's 4×100m Freestyle Relay Final Results|url=https://www.omegatiming.com/File/00011900050201F70104FFFFFFFFFF01.pdf|publisher=Omega Timing|access-date=23 August 2025|date=23 August 2025}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 19
+|event = 4 × 200m<br />freestyle relay
+|time = 7:51.47
+|recordinfo = 
+|1name = [[Kayla Sanchez]]
+|1split = 1:59.01
+|2name = [[Penny Oleksiak]]
+|2split = 1:56.86
+|3name = [[Rebecca Smith (swimmer)|Rebecca Smith]]
+|3split = 1:58.66
+|4name = [[Taylor Ruck]]
+|4split = 1:56.94
+|club = {{flagu|Canada}}
+|date = 23 August 2017
+|meet = [[2017 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Indianapolis
+|country = USA
+|ref = <ref>{{cite web|title=Women's 4x200m Freestyle Results|url=http://www.omegatiming.com/File/Download?id=000111010001003402FFFFFFFFFFFF02|publisher=Omega Timing|access-date=23 August 2017|date=23 August 2017}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 20
+|event = 4 × 100m<br />medley relay
+|time = 3:58.38
+|recordinfo = 
+|1name = [[Jade Hannah]]
+|1split = 1:00.68
+|2name = [[Faith Knelson]]
+|2split = 1:07.86
+|3name = [[Penny Oleksiak]]
+|3split = 56.91
+|4name = [[Taylor Ruck]]
+|4split = 52.93
+|club = {{flagu|Canada}}
+|date = 28 August 2017
+|meet = [[2017 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Indianapolis
+|country = USA
+|ref = <ref>{{cite web|title=Women's 4×100m Medley Relay Results|url=http://www.omegatiming.com/File/Download?id=000111010001043902FFFFFFFFFFFF02|publisher=Omega Timing|access-date=28 August 2017|date=28 August 2017}}</ref>
+}}
+{{end}}
+{{Swimmingrecordlegend|ratifier=World Aquatics|WR=yes|AM=yes|ER=yes|AS=yes}}
+
+===Mixed===
+{{Swimmingrecordlisttop|meet=yes|nationality=yes}}
+{{Swimmingrecordrelay
+|eventsort = 01
+|event = 4 × 100 m freestyle relay
+|time = 3:23.96
+|recordinfo = 
+|1name = [[Egor Proshin]]
+|1split = 47.94
+|2name = [[Mikhail Shcherbakov (swimmer)|Mikhail Shcherbakov]]
+|2split = 48.37
+|3name = [[Kseniia Sorokina]]
+|3split = 53.75
+|4name = [[Kira Manokhina]]
+|4split = 53.90
+|club = {{noflag}} [[Authorised Neutral Athletes|Neutral Individual Athletes]]
+|date = 8 July 2026
+|meet = [[2026 European Junior Swimming Championships|European Junior Championships]]
+|city = Munich
+|country = GER
+|ref = <ref>{{cite web|title=Mixed 4x100m Freestyle Relay Final Results|url=https://events.europeanaquatics.org/Junior-Swimming-Munich-2026/schedule-results/#/result/SWM/RE/M/4X100MFR----------/FNL-/000100--|publisher=[[European Aquatics]]|date=8 July 2027|access-date=8 July 2026}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 02
+|event = 4 × 100 m medley relay
+|time = 3:44.84
+|recordinfo = 
+|1name = [[William Grant (swimmer)|William Grant]]
+|1split = 53.89
+|2name = [[Josh Matheny]]
+|2split = 59.31
+|3name = [[Torri Huske]]
+|3split = 58.04
+|4name = [[Gretchen Walsh]]
+|4split = 53.60
+|club = {{flagu|United States}}
+|date = 21 August 2019
+|meet = [[2019 FINA World Junior Swimming Championships|World Junior Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Mixed 4×100m Medley Relay Results|url=http://www.omegatiming.com/File/00011301100305F704FFFFFFFFFFFF01.pdf|publisher=Omega Timing|date=21 August 2019|access-date=22 August 2019}}</ref>
+}}
+{{end}}
+{{Swimmingrecordlegend|ratifier=World Aquatics|WR=yes|r=no|b=no|sf=no|tt=no|†=no}}
+
+==Short Course (25 m)==
+===Boys===
+{{Swimmingrecordlisttop|meet=yes|nationality=yes}}
+{{Swimmingrecord
+|eventsort = 01
+|event = 50m freestyle
+|time = 20.81
+|recordinfo = 
+|firstname = Nikita
+|lastname = Sheremet
+|namearticle = 
+|club = {{flagu|Ukraine}}
+|date = 7 December 2025
+|meet = [[2025 European Short Course Swimming Championships|European Championships]]
+|city = Lublin
+|country = POL
+|ref = <ref>{{cite web|title=Men's 50m Freestyle Final Results|url=https://www.omegatiming.com/File/000119000A0101EB0104FFFFFFFFFF01.pdf|work=omegatiming.com|date=7 December 2025|access-date=7 December 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 01.1
+|event = 50m freestyle
+|time = 20.70
+|recordinfo = rh, {{efn|name=SC}}
+|firstname = Evgeny
+|lastname = Sedov
+|namearticle = 
+|club = {{flagu|Russia}}
+|date = 6 December 2014
+|meet = [[2014 FINA World Swimming Championships (25 m)|World Championships]]
+|city = Doha
+|country = Qatar
+|ref = <ref>{{cite web|title=12th FINA World Championships - Men's 4×50m Freestyle Relay Heats Results|url=https://www.omegatiming.com/File/00010E010D00002800FFFFFFFFFFFF02.pdf|publisher=Omega Timing|date=6 December 2014|accessdate=7 May 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 02
+|event = 100m freestyle
+|time = 45.64
+|recordinfo = 
+|firstname = David
+|lastname = Popovici
+|namearticle = 
+|club = {{flagu|Romania}}
+|date = 15 December 2022
+|meet = [[2022 FINA World Swimming Championships (25 m) – Men's 100 metre freestyle|World Championships]]
+|city = Melbourne
+|country = AUS
+|ref = <ref>{{cite web|title=Men's 100m Freestyle Final Results|url=https://www.omegatiming.com/File/00011700030101EC0104FFFFFFFFFF01.pdf|work=Omega Timing|date=15 December 2022|access-date=15 December 2022}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 03
+|event = 200m freestyle
+|time = 1:40.65
+|recordinfo = AF
+|firstname = Matthew
+|lastname = Sates
+|namearticle = 
+|club = {{flagu|South Africa}}
+|date = 3 October 2021
+|meet = [[2021 FINA Swimming World Cup|World Cup]]
+|city = Berlin
+|country = GER
+|ref = <ref>{{cite web|title=Men's 200m Freestyle Final Results|url=https://www.omegatiming.com/File/000115000F0101EE04FFFFFFFFFFFF01.pdf|publisher=Omega Timing|date=3 October 2021|accessdate=7 October 2021}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 03.1
+|event = 200m freestyle
+|time = 1:40.08
+|recordinfo = {{efn|name=SC|Performance predates the establishment of short course records (1 January 2015), but was not considered a Junior World Best. Fastest junior of all time, unratified.}} 
+|firstname = Danila
+|lastname = Izotov
+|namearticle = 
+|club = {{flagu|Russia}}
+|date = 13 December 2009
+|meet = [[2009 European Short Course Swimming Championships|European Championships]]
+|city = Istanbul
+|country = TUR
+|ref = <ref>{{cite web|title=2009 European Championships – Men's 200m Freestyle Final Results|url=https://www.omegatiming.com/File/000109010059000000FFFFFFFFFFFF01.pdf|publisher=Omega Timing|date=13 December 2009|accessdate=5 April 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 04
+|event = 400m freestyle
+|time = 3:36.57
+|recordinfo = 
+|firstname = Grigorii
+|lastname = Vekovishchev
+|namearticle = 
+|club = {{flagu|Russia}}
+|date = 9 November 2025
+|meet = Russian Championships
+|city = Kazan
+|country = RUS
+|ref = <ref>{{cite web|title=Men's 400m Freestyle Final Results|url=https://russwimming.ru/upload/live/4R_SC_2025/ResultList_123F.pdf|language=ru|date=9 November 2025|access-date=9 November 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 04.1
+|event = 400m freestyle
+|time = 3:35.64
+|recordinfo = {{efn|name=SC}}
+|firstname = Ian
+|lastname = Thorpe
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 2 April 1999
+|meet = [[1999 FINA World Swimming Championships (25 m)|World Championships]]
+|city = Hong Kong
+|country = HKG
+|ref =
+}}
+{{Swimmingrecord
+|eventsort = 04.2
+|event = 400m freestyle
+|time = 3:35.45
+|recordinfo = not ratified, fastest all-time junior
+|chinesename = Zhang Zhanshuo
+|namearticle = Zhang Zhanshuo
+|club = {{flagu|China}}
+|date = 28 October 2026
+|meet = -
+|city = Beijing
+|country = CHN
+|ref = <ref>{{cite web|title=Zhang Zhanshuo Profile|url=https://www.worldaquatics.com/athletes/1554038/zhanshuo-zhang|website=World Aquatics|access-date=7 November 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 05
+|event = 800m freestyle
+|time = 7:30.47
+|recordinfo = 
+|firstname = Johannes
+|lastname = Liebmann
+|namearticle = 
+|club = {{flagu|Germany}}
+|date = 6 December 2025
+|meet = [[2025 European Short Course Swimming Championships|European Championships]]
+|city = Lublin
+|country = POL
+|ref = <ref>{{cite web|title=Men's 800m Freestyle Final Results|url=https://www.omegatiming.com/File/000119000A0101F10104FFFFFFFFFF01.pdf|work=omegatiming.com|date=6 December 2025|access-date=6 December 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 06
+|event = 1500m freestyle
+|time = 14:20.64
+|recordinfo = 
+|firstname = Kuzey
+|lastname = Tunçelli
+|namearticle = 
+|club = {{flagu|Turkey}}
+|date = 10 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Men's 1500 metre freestyle|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Men's 1500m Freestyle Results|url=https://www.omegatiming.com/File/00011800080101F30104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=10 December 2024|accessdate=10 December 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 06.1
+|event = 1500m freestyle
+|time = 14:19.55
+|recordinfo = {{efn|name=SC}}
+|firstname = Grant
+|lastname = Hackett
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 27 September 1998
+|meet = Australian Championships
+|city = Perth
+|country = AUS
+|ref =
+}}
+{{swimmingrecord
+|eventsort = 07
+|event = 50m backstroke
+|time = 22.47
+|recordinfo = 
+|firstname = Miron
+|lastname = Lifintsev
+|namearticle = 
+|club = {{flagu|Russia}}
+|date = 13 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Men's 50 metre backstroke|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Men's 50m Backstroke Final Results|url=https://www.omegatiming.com/File/00011800080102EB0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=13 December 2024|accessdate=13 December 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 08
+|event = 100m backstroke
+|time = 48.76
+|recordinfo = 
+|firstname = Miron
+|lastname = Lifintsev
+|namearticle = 
+|club = {{flagu|Russia}}
+|date = 11 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Men's 100 metre backstroke|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Men's 100m Backstroke Final Results|url=https://www.omegatiming.com/File/00011800080102EC0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=11 December 2024|accessdate=11 December 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 09
+|event = 200m backstroke
+|time = 1:47.89
+|recordinfo = 
+|firstname = John
+|lastname = Shortt
+|namearticle = John Shortt (swimmer)
+|club = {{flagu|Ireland}}
+|date = 3 December 2025
+|meet = [[2025 European Short Course Swimming Championships|European Championships]]
+|city = Lublin
+|country = POL
+|ref = <ref>{{cite web|title=Men's 200m Backstroke Final Results|url=https://www.omegatiming.com/File/000119000A0102EE0104FFFFFFFFFF01.pdf|work=omegatiming.com|date=3 December 2025|access-date=3 December 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 10
+|event = 50m breaststroke
+|time = 25.66
+|recordinfo = sf
+|firstname = Chris
+|lastname = Smith
+|namearticle = Chris Smith (swimmer)
+|club = {{flagu|South Africa}}
+|date = 14 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Men's 50 metre breaststroke|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Men's 50m Breaststroke Semifinals Results|url=https://www.omegatiming.com/File/00011800080103EB0102FFFFFFFFFF01.pdf|publisher=Omega Timing|date=14 December 2024|accessdate=14 December 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 11
+|event = 100m breaststroke
+|time = 56.35
+|recordinfo = 
+|firstname = Yusei
+|lastname = Imaizumi
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 4 September 2026
+|meet = Niigata Prefecture High School Autumn Athletic Meet
+|city = Niigata
+|cityarticle = 
+|country = JPN
+|ref = 
+}}
+{{Swimmingrecord
+|eventsort = 11
+|event = 100m breaststroke
+|time = 55.82
+|recordinfo = <nowiki>#</nowiki>
+|firstname = Yusei
+|lastname = Imaizumi
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 10 October 2026
+|meet = Japanese Championships
+|city = Saga
+|cityarticle = Saga (city)
+|country = JPN
+|ref = <ref>{{cite web|title=Men's 100m Breaststroke Final Results|url=https://swim.seiko.co.jp/2026/S70702/ranking/01R038.pdf|publisher=seiko.co.jp|date=10 October 2026|access-date=10 October 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 12
+|event = 200m breaststroke
+|time = 2:01.24
+|recordinfo = 
+|firstname = Shin
+|lastname = Ohashi
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 29 March 2026
+|meet = All Japan Junior Olympic Cup
+|city = Tokyo
+|country = JPN
+|ref = <ref>{{cite magazine|title=17-Yr-Old Shin Ohashi Crushes SCM 200 Breast World Junior Record – 2:01.24|url=https://swimswam.com/17-yr-old-shin-ohashi-crushes-scm-200-breast-world-junior-record-201-24/|magazine=[[SwimSwam]]|author=Retta Race|date=29 March 2026|access-date=30 March 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 12
+|event = 200m breaststroke
+|time = 2:00.12
+|recordinfo = <nowiki>#</nowiki>
+|firstname = Shin
+|lastname = Ohashi
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 12 October 2026
+|meet = Japanese Championships
+|city = Saga
+|country = JPN
+|ref = <ref>https://www.worldaquatics.com/swimming/records?recordCode=WJ&eventTypeId=&region=&countryId=&gender=M&pool=SCM</ref>
+}}
+{{Swimmingrecord
+|eventsort = 13
+|event = 50m butterfly
+|time = 22.28
+|recordinfo = 
+|firstname = Ilya
+|lastname = Kharun
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 14 December 2022
+|meet = [[2022 FINA World Swimming Championships (25 m) – Men's 50 metre butterfly|World Championships]]
+|city = Melbourne
+|country = AUS
+|ref = <ref>{{cite web | url=https://www.swimrankings.net/index.php?page=recordDetail&recordListId=50008&agegroup=18&genderCourse=SCM_1 | title=Swimrankings - Swimming Rankings and Results - Worldwide, International Swim Sport }}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 14
+|event = 100m butterfly
+|time = 49.03
+|recordinfo = 
+|chinesename = Ilya Kharun
+|namearticle = Ilya Kharun
+|club = {{flagu|Canada}}
+|date = 18 December 2022
+|meet = [[2022 FINA World Swimming Championships (25 m) – Men's 100 metre butterfly|World Championships]]
+|city = Melbourne
+|country = AUS
+|ref = <ref>{{cite web | url=https://www.swimrankings.net/index.php?page=recordDetail&recordListId=50008&agegroup=18&genderCourse=SCM_1 | title=Swimrankings - Swimming Rankings and Results - Worldwide, International Swim Sport }}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 15
+|event = 200m butterfly
+|time = 1:49.61
+|recordinfo = 
+|chinesename = Chen Juner
+|namearticle = Chen Juner
+|club = {{flagu|China}}
+|date = 28 October 2022
+|meet = Chinese Championships
+|city = Beijing
+|country = CHN
+|ref = <ref>{{cite magazine|title=Chinese Championships: Chen Juner Breaks World Junior Record; Li Bingjie Breaks Two More Records|url=https://www.swimmingworldmagazine.com/news/chinese-championships-chen-juner-breaks-world-junior-record-li-bingjie-breaks-two-more-records/|magazine=[[Swimming World]]|author=Dan D'Addona|date=28 October 2022|access-date=30 October 2022}}</ref>
+}}
+{{swimmingrecord
+|eventsort = 16
+|event = 100m individual medley
+|time = 50.63
+|recordinfo = 
+|firstname = Kliment
+|lastname = Kolesnikov
+|namearticle = 
+|club = {{flagu|Russia}}
+|date = 14 December 2018
+|meet = [[2018 FINA World Swimming Championships (25 m) – Men's 100 metre individual medley|World Championships]]
+|city = Hangzhou
+|country = CHN
+|ref = <ref>{{cite web|title=Men's 100m Individual Medley Final Results|url=http://www.omegatiming.com/File/Download?id=000112010C0105EC04FFFFFFFFFFFF01|publisher=Omega Timing|date=14 December 2018|access-date=14 December 2018}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 17
+|event = 200m individual medley
+|time = 1:51.45
+|recordinfo = 
+|firstname = Matthew
+|lastname = Sates
+|namearticle = 
+|club = {{flagu|South Africa}}
+|date = 2 October 2021
+|meet = [[2021 FINA Swimming World Cup|World Cup]]
+|city = Berlin
+|country = GER
+|ref = <ref>{{cite web|title=Men's 200m IM Final Results|url=https://www.omegatiming.com/File/000115000F0105EE04FFFFFFFFFFFF01.pdf|publisher=Omega Timing|date=2 October 2021|accessdate=2 October 2021}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 18
+|event = 400m individual medley
+|time = 3:56.47
+|recordinfo = ER
+|firstname = Ilya
+|lastname = Borodin
+|namearticle = Ilya Borodin (swimmer)
+|club = {{flagu|Russia}}
+|date = 20 December 2021
+|meet = [[2021 FINA World Swimming Championships (25 m) – Men's 400 metre individual medley|World Championships]]
+|city = Kazan
+|country = RUS
+|ref = <ref>{{cite web|title=Men's 400m Individual Medley Final Results|url=https://www.omegatiming.com/File/00011500190105EF0104FFFFFFFFFF01.pdf|website=microplustiming.com|date=20 December 2021|access-date=20 December 2021}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 19
+|event = 4×50m freestyle relay
+|time = 1:27.46
+|recordinfo = 
+|1name = 
+|1split = 
+|2name = 
+|2split = 
+|3name = 
+|3split = 
+|4name = 
+|4split = 
+|nation = 
+|date = 
+|meet = 
+|city = 
+|country = 
+|ref = 
+}}
+{{Swimmingrecordrelay
+|eventsort = 20
+|event = 4 × 100m freestyle relay
+|time = 3:12.56
+|recordinfo = 
+|1name = 
+|1split = 
+|2name = 
+|2split = 
+|3name = 
+|3split = 
+|4name = 
+|4split = 
+|nation = 
+|date = 
+|meet = 
+|city = 
+|country = 
+|ref = 
+}}
+{{Swimmingrecordrelay
+|eventsort = 21
+|event = 4 × 200m freestyle relay
+|time = 6:59.66
+|recordinfo = 
+|1name = 
+|1split = 
+|2name = 
+|2split = 
+|3name = 
+|3split = 
+|4name = 
+|4split = 
+|nation = 
+|date = 
+|meet = 
+|city = 
+|country = 
+|ref = 
+}}
+{{Swimmingrecordrelay
+|eventsort = 22
+|event = 4×50m medley relay
+|time = 1:38.29
+|recordinfo = 
+|1name = 
+|1split = 
+|2name = 
+|2split = 
+|3name = 
+|3split = 
+|4name = 
+|4split = 
+|nation = 
+|date = 
+|meet = 
+|city = 
+|country = 
+|ref = 
+}}
+{{Swimmingrecordrelay
+|eventsort = 23
+|event = 4 × 100m medley relay
+|time = 3:28.05
+|recordinfo = 
+|1name = 
+|1split = 
+|2name = 
+|2split = 
+|3name = 
+|3split = 
+|4name = 
+|4split = 
+|nation = 
+|date = 
+|meet = 
+|city = 
+|country = 
+|ref = 
+}}
+{{end}}
+{{Swimmingrecordlegend|ratifier=World Aquatics|WR=yes|AF=yes|ER=yes|OC=yes}}
+
+===Girls===
+{{Swimmingrecordlisttop|meet=yes|nationality=yes}}
+{{Swimmingrecord
+|eventsort = 01
+|event = 50m freestyle
+|time = 23.66
+|recordinfo = 
+|firstname = Eva
+|lastname = Okaro
+|namearticle = 
+|club = {{flagu|Great Britain}}
+|date = 15 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Women's 50 metre freestyle|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Women's 50m Freestyle Final Results|url=https://www.omegatiming.com/File/00011800080201EB0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=15 December 2024|accessdate=15 December 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 02
+|event = 100m freestyle
+|time = 51.45
+|recordinfo = 
+|firstname = Kayla
+|lastname = Sanchez
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 14 December 2018
+|meet = Swim England Winter Championships
+|city = Sheffield
+|country = GBR
+|ref = <ref>{{cite web|title=Women's 100m Freestyle Final Results|url=https://swimmingresults.org.uk/swimming/results/2018/sesc18/RW2F171.HTM|publisher=swimmingresults.org.uk|date=14 December 2018|access-date=21 December 2018}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 03.1
+|event = 200m freestyle
+|time = 1:51.62
+|recordinfo = 
+|firstname = Claire
+|lastname = Weinstein
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 15 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Women's 200 metre freestyle|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Women's 200m Freestyle Final Results|url=https://www.omegatiming.com/File/00011800080201EE0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=15 December 2024|accessdate=15 December 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 03.2
+|event = 200m freestyle
+|time = 1:51.38
+|recordinfo = {{efn|name=Age}}
+|firstname = Ariarne
+|lastname = Titmus
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 11 December 2018
+|meet = [[2018 FINA World Swimming Championships (25 m) – Women's 200 metre freestyle|World Championships]]
+|city = Hangzhou
+|cityarticle =
+|country = CHN
+|ref = <ref>{{cite web|title=14th FINA World Championships (25m) - Women's 200m Freestyle Final Results|url=https://www.omegatiming.com/File/000112010C0201EE04FFFFFFFFFFFF01.pdf|publisher=Omega Timing|date=11 December 2018|access-date=30 April 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 04
+|event = 400m freestyle
+|time = 3:50.25
+|recordinfo = WR
+|firstname = Summer
+|lastname = McIntosh
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 10 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Women's 400 metre freestyle|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web |title=Women's 400m Freestyle - Final results |url=https://www.omegatiming.com/File/00011800080201EF0104FFFFFFFFFF01.pdf |website=Omega Timing |access-date=10 December 2024 |date=10 December 2024}}</ref>
+}}
+{{swimmingrecord
+|eventsort = 05
+|event = 800m freestyle
+|time = 7:59.44
+|recordinfo = AS
+|chinesename = Wang Jianjiahe
+|namearticle = Wang Jianjiahe
+|club = {{flagu|China}}
+|date = 6 October 2018
+|meet = [[2018 FINA Swimming World Cup|World Cup]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Women's 800m Freestyle Results|url=http://www.omegatiming.com/File/Download?id=00011201080201F104FFFFFFFFFFFF01|publisher=Omega Timing|date=6 October 2018|access-date=6 October 2018}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 06
+|event = 1500m freestyle
+|time = 15:42.05
+|recordinfo = 
+|firstname = Katie
+|lastname = Grimes
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 4 November 2022
+|meet = [[2022 FINA Swimming World Cup|World Cup]]
+|city = Indianapolis
+|country = USA
+|ref = <ref>{{cite web|title=Women's 1500m Freestyle Results|url=https://swimswam.com/wp-content/uploads/2022/11/C74A_Results-Summary_35_Heats_Womens-1500m-Freestyle.pdf|publisher=swimswam.com|date=4 November 2022|access-date=4 November 2022}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 07
+|event = 1500m freestyle
+|time = 15:28.33
+|recordinfo = {{efn|name=Age}}
+|firstname = Lani
+|lastname = Pallister
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 29 November 2020
+|meet = Australian Championships
+|city = Brisbane
+|country = Australia
+|ref = <ref>{{cite web|title=Mom-Trained Pallister Hits SCM 1500 Free Aussie Record|url=https://swimswam.com/mom-trained-pallister-hits-scm-1500free-aussie-record/|publisher=swimswam.com|date=29 November 2020|access-date=29 November 2020}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 07
+|event = 50m backstroke
+|time = 25.95
+|recordinfo = 
+|firstname = Mizuki
+|lastname = Hirai
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 18 October 2025
+|meet = Japanese Championships
+|city = Tokyo
+|country = JPN
+|ref = <ref>{{cite web|title=Women's 50m Backstroke Final Results|url=https://swim.seiko.co.jp/2025/S70702/ranking/01R043.pdf|publisher=seiko.co.jp|date=18 October 2025|access-date=18 October 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 07.1
+|event = 50m backstroke
+|time = 25.49
+|recordinfo = r, {{efn|name=Age}}
+|firstname = Mollie
+|lastname = O'Callaghan
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 17 December 2022
+|meet = [[2022 FINA World Swimming Championships (25 m)|World Championships]]
+|city = Melbourne
+|country = Australia
+|ref = <ref>{{cite web|title=2022 FINA World Championships (25m) - Women's 4×50m Medley Relay Final Results|url=https://www.omegatiming.com/File/00011700030205F60104FFFFFFFFFF01.pdf|work=Omega Timing|date=17 December 2022|access-date=18 December 2022}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 08
+|event = 100m backstroke
+|time = 55.75
+|recordinfo = 
+|firstname = Bella
+|lastname = Sims
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 4 November 2022
+|meet = [[2022 FINA Swimming World Cup|World Cup]]
+|city = Indianapolis
+|country = USA
+|ref = <ref>{{cite web|title=Women's 100m Backstroke Final Results|url=https://www.omegatiming.com/File/00011700090202EC0104FFFFFFFFFF01.pdf|publisher=omegatiming.com|date=4 November 2022|access-date=4 November 2022}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 08.1
+|event = 100m backstroke
+|time = 55.62
+|recordinfo = {{efn|name=Age}}
+|firstname = Mollie
+|lastname = O'Callaghan
+|namearticle = 
+|club = {{flagu|Australia}}
+|date = 14 December 2022
+|meet = [[2022 FINA World Swimming Championships (25 m)|World Championships]]
+|city = Melbourne
+|country = Australia
+|ref = <ref>{{cite web|title=Women's 100m Backstroke Final Results|url=https://www.omegatiming.com/File/00011700030202EC0104FFFFFFFFFF01.pdf|work=Omega Timing|date=14 December 2022|access-date=17 December 2022}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 09
+|event = 200m backstroke
+|time = 1:59.96
+|recordinfo = 
+|firstname = Summer
+|lastname = McIntosh
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 15 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Women's 200 metre backstroke|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Women's 200m Backstroke Final Results|url=https://www.omegatiming.com/File/00011800080202EE0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=15 December 2024|accessdate=15 December 2024}}</ref>
+}}
+{{swimmingrecord
+|eventsort = 10
+|event = 50m breaststroke
+|time = 28.81
+|recordinfo =
+|firstname = Benedetta
+|lastname = Pilato
+|namearticle = 
+|club = {{flagu|Italy}}
+|date = 21 November 2020
+|meet = [[2020 International Swimming League|International Swimming League]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Women's 50m Breaststroke Results|url=https://www.omegatiming.com/File/000114020F0203EB04FFFFFFFFFFFF01.pdf|publisher=omegatiming.com|date=21 November 2020|access-date=20 December 2020}}</ref>
+}}
+{{swimmingrecord
+|eventsort = 10.1
+|event = 50m breaststroke
+|time = 28.81
+|recordinfo = sf, {{efn|name=SC}}
+|firstname = Rūta
+|lastname = Meilutytė
+|namearticle = 
+|club = {{flagu|Lithuania}}
+|date = 3 December 2014
+|meet = [[2014 FINA World Swimming Championships (25 m)|World Championships]]
+|city = Doha
+|country = QAT
+|ref =
+}}
+{{Swimmingrecord
+|eventsort = 11
+|event = 100m breaststroke
+|time = 1:02.36
+|recordinfo = =WR
+|firstname = Rūta
+|lastname = Meilutytė
+|namearticle = 
+|club = {{flagu|Lithuania}}
+|date = 12 October 2013
+|meet = World Cup
+|city = Moscow
+|country = RUS
+|ref = <ref>{{cite web|title=2013 FINA World Cup (Moscow) - Women's 100m Breaststroke Final Results Summary|url=https://www.omegatiming.com/File/00010D020701021E02FFFFFFFFFFFF02.pdf|work=Omega Timing|date=12 October 2013|access-date=9 April 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 12
+|event = 200m breaststroke
+|time = 2:14.70
+|recordinfo = 
+|firstname = Evgeniia
+|lastname = Chikunova
+|namearticle = 
+|club = {{flagu|Russia}}
+|date = 25 November 2022
+|meet = Solidarity Games
+|city = Kazan
+|country = RUS
+|ref = <ref>{{cite magazine|title=18-Year Old Evgenia Chikunova Breaks European Record in 200 Breast, #2 All-Time
+|url=https://swimswam.com/18-year-old-evgenia-chikunova-breaks-european-record-in-200-breast-2-all-time/|magazine=[[SwimSwam]]|date=25 November 2022|access-date=20 October 2024}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 13
+|event = 50m butterfly
+|time = 24.55
+|recordinfo = 
+|firstname = Claire
+|lastname = Curzan
+|namearticle = 
+|club = {{flagu|United States}}
+|date = 19 December 2021
+|meet = [[2021 FINA World Swimming Championships (25 m) – Women's 50 metre butterfly|World Championships]]
+|city = Abu Dhabi
+|country = UAE
+|ref = <ref>{{cite web|title=Women's 50m Butterfly Final Results|url=https://www.omegatiming.com/File/00011500190204EB0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=19 December 2021|access-date=20 December 2021}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 14
+|event = 100m butterfly
+|time = 55.30
+|recordinfo = 
+|firstname = Mizuki
+|lastname = Hirai
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 20 December 2025
+|meet = Kanagawa Yume Kokutai Memorial Championships
+|city = Sagamihara
+|country = JPN
+|ref = <ref>{{cite web|title=Women's 100m Butterfly Final Results|url=https://sagamiharaswim.com/sokuhou/S_detail.php|publisher=sagamiharaswim.com|date=20 December 2025|access-date=23 January 2026}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 14
+|event = 100m butterfly
+|time = 55.10
+|recordinfo = AS, not ratified
+|firstname = Mizuki
+|lastname = Hirai
+|namearticle = 
+|club = {{flagu|Japan}}
+|date = 22 February 2025
+|meet = Sagamihara City Championships
+|city = Sagamihara
+|country = JPN
+|ref = <ref>{{cite web|title=Women's 100m Butterfly Final Results|url=https://swmexp.japan-swimming.jp/webexpswim/ResultsRankingGroup?gameid=1424726&eventno=042|work=japan-swimming.jp|date=22 February 2025|access-date=22 February 2025}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 15
+|event = 200m butterfly
+|time = 1:59.32
+|recordinfo = WR
+|firstname = Summer
+|lastname = McIntosh
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 12 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Women's 200 metre butterfly|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Women's 200m Butterfly Final Results|url=https://www.omegatiming.com/File/00011800080204EE0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=12 December 2024|accessdate=13 December 2024}}</ref>
+}}
+{{swimmingrecord
+|eventsort = 16.2
+|event = 100m individual medley
+|time = 57.59
+|recordinfo = 
+|firstname = Anastasiya
+|lastname = Shkurdai
+|namearticle = 
+|club = {{flagu|Belarus}}
+|date = 22 November 2020
+|meet = [[2020 International Swimming League|International Swimming League]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Women's 100m IM Results|url=https://www.omegatiming.com/File/000114020F0205EC04FFFFFFFFFFFF01.pdf|publisher=omegatiming.com|date=22 November 2020|accessdate=25 February 2021}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 17
+|event = 200m individual medley
+|time = 2:04.48
+|recordinfo = 
+|firstname = Yu
+|lastname = Yiting
+|namearticle = 
+|club = {{flagu|China}}
+|date = 20 December 2021
+|meet = [[2021 FINA World Swimming Championships (25 m) – Women's 200 metre individual medley|World Championships]]
+|city = Abu Dhabi
+|country = UAE
+|ref = <ref>{{cite web|title=Women's 200m IM Final Results|url=https://www.omegatiming.com/File/00011500190205EE0104FFFFFFFFFF01.pdf|work=Omega Timing|date=20 December 2021|access-date=20 December 2021}}</ref>
+}}
+{{Swimmingrecord
+|eventsort = 18
+|event = 400m individual medley
+|time = 4:15.48
+|recordinfo = WR
+|firstname = Summer
+|lastname = McIntosh
+|namearticle = 
+|club = {{flagu|Canada}}
+|date = 14 December 2024
+|meet = [[2024 World Aquatics Swimming Championships (25 m) – Women's 400 metre individual medley|World Championships]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Women's 400m IM Final Results|url=https://www.omegatiming.com/File/00011800080205EF0104FFFFFFFFFF01.pdf|publisher=Omega Timing|date=14 December 2024|accessdate=15 December 2024}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 19
+|event = 4×50m freestyle relay
+|time = 1:40.59
+|recordinfo = 
+|1name = 
+|1split = 
+|2name = 
+|2split = 
+|3name = 
+|3split = 
+|4name = 
+|4split = 
+|nation = 
+|date = 
+|meet = 
+|city = 
+|country = 
+|ref = 
+}}
+{{Swimmingrecordrelay
+|eventsort = 20
+|event = 4 × 100m freestyle relay
+|time = 3:32.63
+|recordinfo = 
+|1name = 
+|1split = 
+|2name = 
+|2split = 
+|3name = 
+|3split = 
+|4name = 
+|4split = 
+|nation = 
+|date = 
+|meet = 
+|city = 
+|country = 
+|ref = 
+}}
+{{Swimmingrecordrelay
+|eventsort = 21
+|event = 4 × 200m freestyle relay
+|time = 7:43.73
+|recordinfo = 
+|1name = 
+|1split = 
+|2name = 
+|2split = 
+|3name = 
+|3split = 
+|4name = 
+|4split = 
+|nation = 
+|date = 
+|meet = 
+|city = 
+|country = 
+|ref = 
+}}
+{{Swimmingrecordrelay
+|eventsort = 22
+|event = 4×50m medley relay
+|time = 1:44.43
+|recordinfo = not ratified
+|1name = Wan Letian
+|1split = 26.42
+|2name = Tang Qianting
+|2split =  28.96
+|3name = Yu Yiting
+|3split = 25.28
+|4name = Cheng Yujie
+|4split = 23.78
+|club = {{flagu|China}}
+|date = 17 December 2021
+|meet = [[2021 FINA World Swimming Championships (25 m)|World Championships]]
+|city = Abu Dhabi
+|country = UAE
+|ref = <ref>{{cite web|title=Women's 4x50 Medley Final Results|url=https://www.omegatiming.com/File/00011500190205F60104FFFFFFFFFF01.pdf|publisher=omega timing|date=17 December 2021|access-date=17 December 2021}}</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 23
+|event = 4 × 100m medley relay
+|time = 3:49.16
+|recordinfo = 
+|1name = 
+|1split = 
+|2name = 
+|2split = 
+|3name = 
+|3split = 
+|4name = 
+|4split = 
+|nation = 
+|date = 
+|meet = 
+|city = 
+|country = 
+|ref = 
+}}
+{{end}}
+{{Swimmingrecordlegend|ratifier=World Aquatics|WR=yes|AS=yes|AM=yes|OC=yes}}
+
+===Mixed===
+{{Swimmingrecordlisttop|meet=yes|nationality=yes}}
+{{Swimmingrecordrelay
+|eventsort = 01
+|event = 4×50 m freestyle relay
+|time = 1:31.50
+|recordinfo = not ratified
+|1name = [[Daniel Diehl]]
+|1split = 22.07
+|2name = [[Quintin McCarty]]
+|2split = 21.35
+|3name = [[Kristina Paegle]]
+|3split = 23.78
+|4name = [[Carly Novelline]]
+|4split = 24.30
+|club = {{flagu|United States}}
+|date = 2 October 2021
+|meet = [[2021 FINA Swimming World Cup|World Cup]]
+|city = Berlin
+|country = GER
+|ref = <ref name="Hart6Oct2021">Hart, Torrey (6 October 2021). [https://swimswam.com/u-s-team-swims-under-mixed-4x50-free-relay-wjr-in-berlin-pending-ratification/ "U.S. Team Swims Under Mixed 4x50 Free Relay WJR In Berlin, Pending Ratification"]. ''[[SwimSwam]]''. Retrieved 6 October 2021.</ref>
+}}
+{{Swimmingrecordrelay
+|eventsort = 01
+|event = 4×50 m freestyle relay
+|time = 1:31.23
+|recordinfo = not ratified
+|1name = [[Jacob Mills]]
+|1split = 22.22
+|2name = [[Nicholas Finch]]
+|2split = 21.61
+|3name = [[Skye Carter]]
+|3split = 23.98
+|4name = [[Eva Okaro]]
+|4split = 23.42
+|club = {{flagu|Great Britain}}
+|date = 14 December 2023
+|meet = Ontario Junior International
+|city = Toronto
+|country = CAN
+|ref = {{cn|date=February 2024}}
+}}
+{{Swimmingrecordrelay
+|eventsort = 02
+|event = 4×50 m medley relay
+|time = 1:41.21
+|recordinfo = 
+|1name = [[Quintin McCarty]]
+|1split = 24.07
+|2name = [[Zhier Fan]]
+|2split = 26.75
+|3name = [[Charlotte Hook]]
+|3split = 26.27
+|4name = [[Kristina Paegle]]
+|4split = 24.12
+|club = {{flagu|United States}}
+|date = 9 October 2021
+|meet = [[2021 FINA Swimming World Cup|World Cup]]
+|city = Budapest
+|country = HUN
+|ref = <ref>{{cite web|title=Mixed 4x50m Medley Relay Results Summary|url=https://www.omegatiming.com/File/00011500100305F604FFFFFFFFFFFF01.pdf|publisher=[[Omega Timing]]|date=9 October 2021|access-date=10 October 2021}}</ref>
+}}
+{{end}}
+{{Swimmingrecordlegend|ratifier=World Aquatics|WR=yes}}
+
+==Notes==
+{{notelist}}
+
+==References==
+;General
+*[https://www.worldaquatics.com/swimming/records?recordCode=WJ&eventTypeId=&region=&countryId=&gender=M&pool=LCM World Junior Records – Men Long Course] <small>''18 October 2026 updated''</small>
+*[https://www.worldaquatics.com/swimming/records?recordCode=WJ&eventTypeId=&region=&countryId=&gender=F&pool=LCM World Junior Records – Women Long Course] <small>''23 August 2024 updated''</small>
+*[https://www.worldaquatics.com/swimming/records?recordCode=WJ&eventTypeId=&region=&countryId=&gender=X&pool=LCM World Junior Records – Mixed Relay Long Course] <small>''6 September 2023 updated''</small>
+*[https://www.worldaquatics.com/swimming/records?recordCode=WJ&eventTypeId=&region=&countryId=&gender=M&pool=SCM World Junior Records – Men Short Course] <small>''17 April 2026 updated''</small>
+*[https://www.worldaquatics.com/swimming/records?recordCode=WJ&eventTypeId=&region=&countryId=&gender=F&pool=SCM World Junior Records – Women Short Course] <small>''20 December 2025 updated''</small>
+*[https://www.worldaquatics.com/swimming/records?recordCode=WJ&eventTypeId=&region=&countryId=&gender=X&pool=SCM World Junior Records – Mixed Relay Short Course] <small>''9 October 2021 updated''</small>
+;Specific
+{{Reflist|30em}}
+
+{{International swimming}}
+{{Records in swimming}}
+
+[[Category:Swimming records and statistics|Junior]]
