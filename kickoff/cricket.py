@@ -350,8 +350,10 @@ def table_html(label, rows):
 def results_html(picked, cards=None, tables=None, series=None, from_innings=None, now=None):
     """Matches grouped under International, Women's international, and each league, in priority order. '' if none.
     tables: {league label: points table html}, shown straight after that league's results."""
+    from kickoff.events import is_mine_cricket            # here, not at the top: events reads this module too
+    mine = lambda m: is_mine_cricket(m)  # noqa: E731
     groups, order = {}, []
-    for m in picked:
+    for m in sorted(picked, key=lambda m: not mine(m)):     # D, 2026-11-08: an India match (or Sunrisers, Royal Challengers) always opens the section; the rest keep their order
         label = m["class"]["label"]
         if label not in groups:
             groups[label] = []

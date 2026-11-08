@@ -422,5 +422,8 @@ check("the closing list has a header for each competition, the bullets under it,
 _pm = ck.potm_html({"potm": []}, ended=True)
 check("a finished match with a scorecard and no award yet says so quietly; a live match and a match with no scorecard say nothing", "not available at time of print" in _pm and ck.potm_html({"potm": []}, ended=False) == "" and ck.potm_html(None, ended=True) == "")
 
+_cl = lambda mid, teams, label="International", kind="international": {"id": mid, "name": f"{teams[0]} vs {teams[1]}, 1st ODI, tour", "teams": list(teams), "matchType": "odi", "matchEnded": True, "status": "x won", "class": {"label": label, "kind": kind, "priority": 50}}  # noqa: E731
+_order = ck.results_html([_cl("a", ("Bangladesh", "West Indies")), _cl("b", ("Afghanistan", "Zimbabwe")), _cl("w", ("Sydney Sixers Women", "Perth Scorchers Women"), "WBBL", "league"), _cl("c", ("New Zealand", "India"))])
+check("D, 2026-11-08: an India match always opens the cricket section, the rest keep their order", _order.index("New Zealand v <strong>India") < _order.index("Bangladesh v West Indies") < _order.index("Afghanistan v Zimbabwe"), _order[:200])
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

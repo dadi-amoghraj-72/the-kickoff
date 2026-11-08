@@ -345,13 +345,13 @@ def key_players(g, players, shown):
 
 
 def game_notes(g, box, players, tracked, info):
-    """The lines under a game: each tracked player's stat line (best first), then the best performer of the game when he is not one of those, and
+    """The lines under a game: the tracked players and the key players together, by points scored, most first (D, 2026-11-08), and
     last each tracked player of the two teams who did not play (DNP and the reason): the DNP lines always sit below every player who played. `players`: everyone in this game's box score;
     info: {"teams": latest team of each tracked player, "auto": names of the auto-added players}."""
     here = {p["id"]: p for p in players}
-    mine = sorted((p for p in players if p["id"] in tracked and not p["dnp"]), key=lambda p: -weight(p, kinds_of(p)))
-    out = [full_line(p) for p in mine]
-    out += [full_line(p) for p in key_players(g, players, {p["id"] for p in mine})]
+    mine = [p for p in players if p["id"] in tracked and not p["dnp"]]
+    shown = mine + key_players(g, players, {p["id"] for p in mine})
+    out = [full_line(p) for p in sorted(shown, key=lambda p: (-(p.get("PTS") or 0), p["name"]))]     # D, 2026-11-08: every player by points, most first, tracked or not
     teams = {g["home"]["abbr"], g["away"]["abbr"]}
     for pid in sorted(tracked, key=lambda x: list(TRACKED).index(x) if x in TRACKED else 999):  # the DNP lines come last, below every player who played
         p = here.get(pid)

@@ -198,8 +198,10 @@ check("independent: the best performer of every game (best weighted stat line, f
 check("no player appears twice under one game", not dup)
 check("key players (D, 2026-11-05): the Spurs game has Wembanyama (tracked and best), then everyone else with 25 points or more (Dosunmu 27, Harper 25), then Edwards as DNP",
       [n.split(":")[0] for n in notes_for("401909901")] == ["V. Wembanyama (SAS)", "A. Dosunmu (MIN)", "D. Harper (SAS)", "A. Edwards (MIN)"], notes_for("401909901"))
-check("the 76ers game: Brown's line, then the untracked best performer Maxey and Allen's 27 for the losing side (25 or more), and only then LeBron and Embiid as DNP",
-      [n.split(":")[0] for n in notes_for("401909897")] == ["J. Brown (PHI)", "T. Maxey (PHI)", "G. Allen (CHA)", "L. James (PHI)", "J. Embiid (PHI)"], notes_for("401909897"))
+check("the 76ers game, by points (D, 2026-11-08): Maxey 38, Allen 27, then the tracked Brown's 16, and only then LeBron and Embiid as DNP",
+      [n.split(":")[0] for n in notes_for("401909897")] == ["T. Maxey (PHI)", "G. Allen (CHA)", "J. Brown (PHI)", "L. James (PHI)", "J. Embiid (PHI)"], notes_for("401909897"))
+_pts = lambda n: int(n.split(": ")[1].split(" pts")[0]) if " pts" in n else None  # noqa: E731
+check("in every game the players who played are in points order, most first, tracked or not", all((lambda ps: ps == sorted(ps, reverse=True))([_pts(n) for n in notes_for(g) if _pts(n) is not None]) for g in BOXES))
 bad_order = [gid for gid in BOXES if (lambda ns: any("DNP" in a and "DNP" not in b for a, b in zip(ns, ns[1:])))(notes_for(gid))]
 check("in every game the DNP lines come after every line of a player who played (D's own players included)", not bad_order and sum("DNP" in n for gid in BOXES for n in notes_for(gid)) >= 5, bad_order)
 inj = BOXES["401909897"]["injuries"]
