@@ -130,6 +130,10 @@ check("constructor standings: all 11 teams, Mercedes first on 607", len(re.finda
 
 # ---- Round-up lines ----
 check("race line: winner, start, margin, fastest lap, retirements", f1.race_summary(ROWS) == "Kimi Antonelli (Mercedes) won from pole, 13.078s ahead of Charles Leclerc. 3 did not finish.\nFastest lap: Charles Leclerc, 1:37.976.", f1.race_summary(ROWS))
+_bare = [{k: v for k, v in x.items() if k not in ("Q1", "Q2", "Q3")} for x in Q18["QualifyingResults"]]
+check("qualifying published before its lap times (Brazil, 8 Nov 2026): the pole line has no dangling comma and the table shows the order without empty columns",
+      f1.quali_summary(_bare) == "Pole: Kimi Antonelli (Mercedes)." and ">Time</th>" not in f1.qualifying_table(_bare) and "not published by the data source yet" in f1.qualifying_table(_bare)
+      and "<td class=\"n\"></td>" not in f1.qualifying_table(_bare), (f1.quali_summary(_bare), f1.qualifying_table(_bare)[:300]))
 check("qualifying line: pole, time, margin to P2 (94.214 - 94.035 = 0.179)", f1.quali_summary(Q18["QualifyingResults"]) == "Pole: Kimi Antonelli (Mercedes), 1:34.035, 0.179s ahead of Max Verstappen.", f1.quali_summary(Q18["QualifyingResults"]))
 check("the fastest lap is always on its own line, in the page too", f1.race_summary(ROWS).split("\n")[1].startswith("Fastest lap:") and "<br>Fastest lap:" in f1.session_html({"season": "2026", "round": 18, "session": "race", "race": RACE18}, FakeApi(results_for={18: RACE18}))[0])
 check("seconds() reads lap times and gaps", f1.seconds("1:34.035") == 94.035 and f1.seconds("+13.078") == 13.078 and abs(f1.seconds("+1:19.183") - 79.183) < 1e-9 and f1.seconds("DNF") is None and f1.seconds(None) is None)

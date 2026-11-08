@@ -129,6 +129,10 @@ def best_time(row):
 
 
 def qualifying_table(rows):
+    if not any(best_time(x)[1] for x in rows):            # published before the lap times (Brazil, 8 Nov 2026): the order alone, no empty columns
+        body = [[x["position"], short_name(x["Driver"])] for x in rows]
+        return (_tight(r.table("Qualifying Results", [("P", True), ("Driver", False)], body, row_classes=["p1"] + [""] * (len(body) - 1)), (12, 88))
+                + '<p class="muted">Lap times were not published by the data source yet.</p>')
     body = [[x["position"], short_name(x["Driver"]), *best_time(x)] for x in rows]
     return _tight(r.table("Qualifying Results", [("P", True), ("Driver", False), ("Q", False), ("Time", True)], body, row_classes=["p1"] + [""] * (len(body) - 1)), (12, 44, 16, 28))   # pole in gold (D)
 
@@ -205,7 +209,7 @@ def quali_summary(rows):
     if not rows:
         return ""
     pole = rows[0]
-    out = f"Pole: {_full(pole)} ({team(pole['Constructor']['name'])}), {best_time(pole)[1]}"
+    out = f"Pole: {_full(pole)} ({team(pole['Constructor']['name'])})" + (f", {best_time(pole)[1]}" if best_time(pole)[1] else "")
     gap = pole_margin(rows)
     if gap is not None:
         out += f", {gap:.3f}s ahead of {_full(rows[1])}"
