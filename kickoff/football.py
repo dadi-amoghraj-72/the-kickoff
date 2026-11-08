@@ -319,7 +319,11 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         big_news, big_injuries = events.football_news(shown_news), events.football_injuries(inj_items)
     except Exception:
         story_events, big_news, big_injuries = [], [], []
+    for lg_ in LEAGUE_ORDER:                             # Young Guns reads every league's goalscorers and assisters too, not only the Premier League's (D, 2026-11-08)
+        for m in results[lg_] or []:
+            if m.get("completed") and m.get("goals"):
+                guard(f"{leagues[lg_]} players", cached_players, lg_, m["id"])
     match_of = {m["id"]: overview.label(m).replace("-", "\u2013") for m in [*cl_matches, *[x for lg_ in leagues for x in (results[lg_] or [])]]}
-    young_players = [{**pl, "match": match_of.get(ev_)} for (lg_, ev_), pls in seen_players.items() for pl in pls]       # every player of the Premier League and Champions League matches read above
+    young_players = [{**pl, "match": match_of.get(ev_)} for (lg_, ev_), pls in seen_players.items() for pl in pls]       # every player of the league and Champions League matches read above
     return {"sections": sections, "headlines": unique, "new_state": new, "ledger": ledger, "problems": problems, "stats": stats,
             "events": story_events, "news": big_news, "injuries": big_injuries, "young_in": {"soccer": young_players}}

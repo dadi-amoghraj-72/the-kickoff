@@ -17,7 +17,7 @@ A personal daily sports digest for D, one reader in Singapore, reading on an iPh
 - **Every day at 7:15am SGT** GitHub Actions (`.github/workflows/daily.yml`, cron `15 23 * * *`, pinned to Ubuntu 24.04) builds the edition (`scripts/daily.py`), commits the page, edition and state, and pings Telegram. GitHub can start a scheduled run 5 to 30 minutes late. A manual run (`gh workflow run daily.yml -f claude=true -f ping=true`) does the same; `-f force=true` rebuilds a day that already has an edition.
 - **Pages:** each edition at `/editions/<date>/` plus an archive (GitHub Pages, noindex). A footer counter, "Edition #001" for 7 November 2026, adds one a day.
 - **State:** small JSON files in `data/state/` remember what has been reported, so each edition shows what is new since the last one and a missed day catches up.
-- **Keys** live in GitHub's secrets and in a local `.env` that git ignores. D runs anything that needs them on the Mac (Telegram sends, Claude rehearsals, starting workflows).
+- **Keys** live in GitHub's secrets and in a local `.env` that git ignores; never printed or committed. Runs that use them (Telegram sends, Claude rehearsals, starting workflows) are usually started by D; Claude Code may run one when it really matters (D, 2026-11-08).
 - **Python 3.9** today (Apple's built-in version). It is past its end of life; moving to 3.12 is an open item (section 12).
 
 **Reliability: nothing fails silently**
@@ -126,7 +126,7 @@ A section appears only when it has something in it.
 
 (`kickoff/youngguns.py`, `young_sports.py`)
 
-- Rookies (NBA, NFL, MLB) and anyone **under 21** on the day, in every sport with a feed, shown only when they did something notable: NBA 20 points, 12 rebounds, 10 assists, 4 steals or 4 blocks; NFL 250 passing yards or 2 passing TDs, 100 rushing or receiving yards or 2 TDs, 2 sacks or an interception; football a goal or an assist (**Premier League and Champions League matches only**); F1 a podium, points, pole or fastest lap; tennis a last-16 win or a win over a seed.
+- Rookies (NBA, NFL, MLB) and anyone **under 21** on the day, in every sport with a feed, shown only when they did something notable: NBA 20 points, 12 rebounds, 10 assists, 4 steals or 4 blocks; NFL 250 passing yards or 2 passing TDs, 100 rushing or receiving yards or 2 TDs, 2 sacks or an interception; football a goal or an assist (every league covered and the Champions League; D, 2026-11-08: young budding stars wherever they play); F1 a podium, points, pole or fastest lap; tennis a last-16 win or a win over a seed.
 - Up to five lines, grouped by sport, the stat phrase in gold, full names. A player notable on three different days joins the watchlist and then needs only 70% of the thresholds.
 
 ## 10. Around The Sporting World: Other Sports
@@ -152,12 +152,10 @@ Each sport under its own gold heading; a sport with nothing is left out. Structu
 - **Fonts:** Newsreader for the masthead; Josefin Sans for everything else, body 18px.
 - **Progress rail:** a gold rail on the right fills as you read, with a chip showing the percentage and minutes left. A gold icon rides the head of the bar, one per section and per Other Sports heading: **20 designs, frozen** (football, cannon for Arsenal, cricket ball, basketball, NFL goalposts, baseball, tennis, golf flag, rugby, F1 helmet, chequered flag at The End, UFC glove, badminton, darts, chess king, trophy, clock, star, swimmer, runner). Balls turn as you scroll; the others sway.
 
-## 12. Open items and questions for D
+## 12. Open items
 
-1. **Python 3.12 upgrade** (Mac and GitHub): 3.9 is past its end of life. About 30 minutes; D installs Python 3.12 from python.org once.
-2. **The Mac watchdog failed to start at 7:40 on 8 November** ("spawn failed" in macOS). To investigate with a harmless test job.
-3. **Young Guns in football reads only Premier League and Champions League matches,** so a Serie A teenager is never seen (Gustavo Varela question, 7 Nov). Option discussed: read the other four big leagues too. D has not decided.
-4. **Keep the Mac cricket job?** Since 8 November ESPN's JSON feed gives every scorecard from GitHub, so the Mac job is only a backup. Keeping it costs nothing; removing it removes one moving part.
-5. **The edition lands "by 8am"?** The 7:15 run usually pings around 7:20 to 7:45. Is that fine, or should the run start earlier?
-6. **Thresholds to review after a month of real editions** (early December): NBA standouts, Stars Of The Night (bar 70), the Key Overnight Scores caps, the bowling haul table.
-7. **Not built yet:** season-closing notes for the Champions League, FA Cup, F1 and tennis; tournament mode for the Rugby World Cup 2027 and similar events (results, then group tables, then knockouts; to be built a month before each); WPL source; IPL live caps outside Wikipedia.
+1. **Python 3.12 upgrade** (Mac and GitHub): 3.9 is past its end of life. D is doing it on 8 November.
+2. **The Mac watchdog failed to start at 7:40 on 8 November** ("spawn failed" in macOS): to fix together with the Python upgrade.
+3. **The Mac cricket job stays for a month** (review around 8 December 2026): if ESPN's feed on GitHub has carried every scorecard, it is removed.
+4. **Thresholds to review after a month of real editions** (early December): NBA standouts, Stars Of The Night (bar 70), the Key Overnight Scores caps, the bowling haul table.
+5. **Not built yet:** season-closing notes for the Champions League, FA Cup, F1 and tennis; tournament mode for the Rugby World Cup 2027 and similar events (results, then group tables, then knockouts; built a month before each); the WPL's source; the IPL's live caps outside Wikipedia.

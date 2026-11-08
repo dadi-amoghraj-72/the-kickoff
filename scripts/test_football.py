@@ -137,6 +137,13 @@ out_pf = football.run(DAY, client=None, st={}, now=NOW)
 pf_html = " ".join(s["html"] for s in out_pf["sections"])
 pf_pl = pf_html.split("<h3>Premier League</h3>")[1].split("<h3>")[0]
 check("the Premier League block has the best performers (the top three of the day) after the scores and before the table; a league other than the Premier League and the Champions League has none", "Best performers" in pf_pl and pf_pl.index('class="scores"') < pf_pl.index("Best performers") < pf_pl.index("<table") and "T. Scorer (ARS)" in pf_pl and pf_html.count("Best performers") == 1, pf_pl[:300])
+_asked, _rr = [], espn.recent_results
+_pl = [m for m in (_rr("eng.1", DAY) or []) if m.get("completed") and m.get("goals")]
+espn.recent_results = lambda lg, d: [dict(m, id="it" + str(m["id"]), league="ita.1") for m in _pl] if lg == "ita.1" else _rr(lg, d)        # a Serie A day with goals
+espn.get_player_stats = lambda lg, mid: (_asked.append(lg), [])[1]
+_yg = football.run(DAY, client=None, st={}, now=NOW)
+espn.recent_results = _rr
+check("Young Guns reads the goalscorers of every league, not only the Premier League (D, 2026-11-08: a Serie A teenager must be seen)", _pl and "ita.1" in _asked, (len(_pl), sorted(set(_asked))))
 espn.get_player_stats = lambda lg, mid: (_ for _ in ()).throw(SourceError("HTTP 500"))
 out_pd = football.run(DAY, client=None, st={}, now=NOW)
 check("if ESPN's player stats fail the rest of the block is unaffected and there is simply no Best performers heading", "Best performers" not in " ".join(s["html"] for s in out_pd["sections"]) and "<h3>Premier League</h3>" in " ".join(s["html"] for s in out_pd["sections"]) and "class=\"scores\"" in " ".join(s["html"] for s in out_pd["sections"]))
