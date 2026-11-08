@@ -1341,822 +1341,6 @@
    ],
    "status": "India won by 4 runs (DLS)"
   },
-  "c547eb46-2025-413a-b7f2-6d1584daa42f": {
-   "built": "2026-11-04T11:05:07Z",
-   "potm": [
-    {
-     "name": "Anshul Kamboj",
-     "team": "India"
-    }
-   ],
-   "scorecard": [
-    {
-     "batting": [
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 11,
-       "batsman": {
-        "name": "Will Young"
-       },
-       "dismissal-text": "c Iyer b Arshdeep Singh",
-       "m": 20,
-       "mark": "",
-       "r": 9,
-       "sr": 81.81
-      },
-      {
-       "4s": 3,
-       "6s": 2,
-       "b": 43,
-       "batsman": {
-        "name": "Tim Seifert"
-       },
-       "dismissal-text": "c sub (RD Gaikwad) b Gurnoor Brar",
-       "m": 75,
-       "mark": "",
-       "r": 38,
-       "sr": 88.37
-      },
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 11,
-       "batsman": {
-        "name": "Henry Nicholls"
-       },
-       "dismissal-text": "c Naman Dhir b Arshdeep Singh",
-       "m": 19,
-       "mark": "",
-       "r": 9,
-       "sr": 81.81
-      },
-      {
-       "4s": 3,
-       "6s": 1,
-       "b": 41,
-       "batsman": {
-        "name": "Daryl Mitchell"
-       },
-       "dismissal-text": "run out (Sharma/†Rahul)",
-       "m": 67,
-       "mark": "",
-       "r": 28,
-       "sr": 68.29
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 11,
-       "batsman": {
-        "name": "Tom Latham"
-       },
-       "dismissal-text": "c & b Gurnoor Brar",
-       "m": 13,
-       "mark": "†",
-       "r": 3,
-       "sr": 27.27
-      },
-      {
-       "4s": 2,
-       "6s": 1,
-       "b": 51,
-       "batsman": {
-        "name": "Glenn Phillips"
-       },
-       "dismissal-text": "c Iyer b Arshdeep Singh",
-       "m": 88,
-       "mark": "",
-       "r": 30,
-       "sr": 58.82
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 16,
-       "batsman": {
-        "name": "Mitchell Santner"
-       },
-       "dismissal-text": "b Kamboj",
-       "m": 19,
-       "mark": "(c)",
-       "r": 4,
-       "sr": 25.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 9,
-       "batsman": {
-        "name": "Nathan Smith"
-       },
-       "dismissal-text": "c Kohli b Kamboj",
-       "m": 9,
-       "mark": "",
-       "r": 1,
-       "sr": 11.11
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 6,
-       "batsman": {
-        "name": "Kyle Jamieson"
-       },
-       "dismissal-text": "c Kohli b Arshdeep Singh",
-       "m": 13,
-       "mark": "",
-       "r": 1,
-       "sr": 16.66
-      },
-      {
-       "4s": 3,
-       "6s": 0,
-       "b": 21,
-       "batsman": {
-        "name": "Jacob Duffy"
-       },
-       "dismissal-text": "not out",
-       "m": 46,
-       "mark": "",
-       "r": 15,
-       "sr": 71.42
-      },
-      {
-       "4s": 1,
-       "6s": 4,
-       "b": 23,
-       "batsman": {
-        "name": "Blair Tickner"
-       },
-       "dismissal-text": "c †Rahul b Gurnoor Brar",
-       "m": 24,
-       "mark": "",
-       "r": 34,
-       "sr": 147.82
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 38,
-       "bowler": {
-        "name": "Arshdeep Singh"
-       },
-       "eco": 7.0,
-       "m": 0,
-       "nb": 0,
-       "o": 10.0,
-       "r": 70,
-       "w": 4,
-       "wd": 2
-      },
-      {
-       "0s": 25,
-       "bowler": {
-        "name": "Auqib Nabi"
-       },
-       "eco": 5.5,
-       "m": 0,
-       "nb": 0,
-       "o": 6.0,
-       "r": 33,
-       "w": 0,
-       "wd": 0
-      },
-      {
-       "0s": 46,
-       "bowler": {
-        "name": "Anshul Kamboj"
-       },
-       "eco": 2.2,
-       "m": 2,
-       "nb": 0,
-       "o": 10.0,
-       "r": 22,
-       "w": 2,
-       "wd": 1
-      },
-      {
-       "0s": 37,
-       "bowler": {
-        "name": "Gurnoor Brar"
-       },
-       "eco": 4.71,
-       "m": 0,
-       "nb": 1,
-       "o": 9.2,
-       "r": 44,
-       "w": 3,
-       "wd": 1
-      },
-      {
-       "0s": 18,
-       "bowler": {
-        "name": "Axar Patel"
-       },
-       "eco": 2.4,
-       "m": 0,
-       "nb": 0,
-       "o": 5.0,
-       "r": 12,
-       "w": 0,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [],
-      "extras": {
-       "lb": 4,
-       "nb": 1,
-       "total": 13,
-       "w": 8
-      },
-      "fow": "1-22 (Young, 4.3), 2-40 (Nicholls, 8.3), 3-73 (Seifert, 14.2), 4-84 (Latham, 16.6), 5-97 (Mitchell, 21.1), 6-113 (Santner, 26.1), 7-115 (Smith, 28.3), 8-131 (Jamieson, 31.1), 9-146 (Phillips, 35.1), 10-185 (Tickner, 40.2)",
-      "total": {
-       "o": 40.2,
-       "r": 185,
-       "rr": 4.58,
-       "w": 10
-      }
-     },
-     "inning": "New Zealand Innings"
-    },
-    {
-     "batting": [
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 6,
-       "batsman": {
-        "name": "Rohit Sharma"
-       },
-       "dismissal-text": "c Santner b Jamieson",
-       "m": 5,
-       "mark": "",
-       "r": 0,
-       "sr": 0.0
-      },
-      {
-       "4s": 5,
-       "6s": 0,
-       "b": 56,
-       "batsman": {
-        "name": "Shubman Gill"
-       },
-       "dismissal-text": "c †Latham b Smith",
-       "m": 88,
-       "mark": "(c)",
-       "r": 37,
-       "sr": 66.07
-      },
-      {
-       "4s": 13,
-       "6s": 1,
-       "b": 51,
-       "batsman": {
-        "name": "Virat Kohli"
-       },
-       "dismissal-text": "c Seifert b Duffy",
-       "m": 91,
-       "mark": "",
-       "r": 74,
-       "sr": 145.09
-      },
-      {
-       "4s": 1,
-       "6s": 1,
-       "b": 13,
-       "batsman": {
-        "name": "Shreyas Iyer"
-       },
-       "dismissal-text": "c Nicholls b Duffy",
-       "m": 19,
-       "mark": "",
-       "r": 15,
-       "sr": 115.38
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Axar Patel"
-       },
-       "dismissal-text": "c Phillips b Duffy",
-       "m": 2,
-       "mark": "",
-       "r": 0,
-       "sr": 0.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 5,
-       "batsman": {
-        "name": "KL Rahul"
-       },
-       "dismissal-text": "not out",
-       "m": 15,
-       "mark": "†",
-       "r": 3,
-       "sr": 60.0
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 3,
-       "batsman": {
-        "name": "Naman Dhir"
-       },
-       "dismissal-text": "not out",
-       "m": 5,
-       "mark": "",
-       "r": 5,
-       "sr": 166.66
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 27,
-       "bowler": {
-        "name": "Kyle Jamieson"
-       },
-       "eco": 4.85,
-       "m": 0,
-       "nb": 0,
-       "o": 7.0,
-       "r": 34,
-       "w": 1,
-       "wd": 2
-      },
-      {
-       "0s": 22,
-       "bowler": {
-        "name": "Jacob Duffy"
-       },
-       "eco": 7.0,
-       "m": 0,
-       "nb": 0,
-       "o": 7.0,
-       "r": 49,
-       "w": 3,
-       "wd": 2
-      },
-      {
-       "0s": 11,
-       "bowler": {
-        "name": "Blair Tickner"
-       },
-       "eco": 9.5,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 38,
-       "w": 0,
-       "wd": 0
-      },
-      {
-       "0s": 19,
-       "bowler": {
-        "name": "Nathan Smith"
-       },
-       "eco": 4.5,
-       "m": 0,
-       "nb": 0,
-       "o": 4.4,
-       "r": 21,
-       "w": 1,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [],
-      "extras": {
-       "lb": 1,
-       "total": 9,
-       "w": 8
-      },
-      "fow": "1-1 (Sharma, 0.6), 2-114 (Gill, 18.2), 3-124 (Kohli, 19.4), 4-124 (Patel, 19.6), 5-136 (Iyer, 21.4)",
-      "total": {
-       "o": 22.4,
-       "r": 143,
-       "rr": 6.3,
-       "w": 5
-      }
-     },
-     "inning": "India Innings"
-    }
-   ],
-   "status": "India won by 5 wkts (56b rem) (DLS)"
-  },
-  "espn-1539437": {
-   "built": "2026-11-04T12:02:36Z",
-   "potm": [
-    {
-     "name": "Anshul Kamboj",
-     "team": "India"
-    }
-   ],
-   "scorecard": [
-    {
-     "batting": [
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 11,
-       "batsman": {
-        "name": "Will Young"
-       },
-       "dismissal-text": "c Iyer b Arshdeep Singh",
-       "m": 20,
-       "mark": "",
-       "r": 9,
-       "sr": 81.81
-      },
-      {
-       "4s": 3,
-       "6s": 2,
-       "b": 43,
-       "batsman": {
-        "name": "Tim Seifert"
-       },
-       "dismissal-text": "c sub (RD Gaikwad) b Gurnoor Brar",
-       "m": 75,
-       "mark": "",
-       "r": 38,
-       "sr": 88.37
-      },
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 11,
-       "batsman": {
-        "name": "Henry Nicholls"
-       },
-       "dismissal-text": "c Naman Dhir b Arshdeep Singh",
-       "m": 19,
-       "mark": "",
-       "r": 9,
-       "sr": 81.81
-      },
-      {
-       "4s": 3,
-       "6s": 1,
-       "b": 41,
-       "batsman": {
-        "name": "Daryl Mitchell"
-       },
-       "dismissal-text": "run out (Sharma/†Rahul)",
-       "m": 67,
-       "mark": "",
-       "r": 28,
-       "sr": 68.29
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 11,
-       "batsman": {
-        "name": "Tom Latham"
-       },
-       "dismissal-text": "c & b Gurnoor Brar",
-       "m": 13,
-       "mark": "†",
-       "r": 3,
-       "sr": 27.27
-      },
-      {
-       "4s": 2,
-       "6s": 1,
-       "b": 51,
-       "batsman": {
-        "name": "Glenn Phillips"
-       },
-       "dismissal-text": "c Iyer b Arshdeep Singh",
-       "m": 88,
-       "mark": "",
-       "r": 30,
-       "sr": 58.82
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 16,
-       "batsman": {
-        "name": "Mitchell Santner"
-       },
-       "dismissal-text": "b Kamboj",
-       "m": 19,
-       "mark": "(c)",
-       "r": 4,
-       "sr": 25.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 9,
-       "batsman": {
-        "name": "Nathan Smith"
-       },
-       "dismissal-text": "c Kohli b Kamboj",
-       "m": 9,
-       "mark": "",
-       "r": 1,
-       "sr": 11.11
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 6,
-       "batsman": {
-        "name": "Kyle Jamieson"
-       },
-       "dismissal-text": "c Kohli b Arshdeep Singh",
-       "m": 13,
-       "mark": "",
-       "r": 1,
-       "sr": 16.66
-      },
-      {
-       "4s": 3,
-       "6s": 0,
-       "b": 21,
-       "batsman": {
-        "name": "Jacob Duffy"
-       },
-       "dismissal-text": "not out",
-       "m": 46,
-       "mark": "",
-       "r": 15,
-       "sr": 71.42
-      },
-      {
-       "4s": 1,
-       "6s": 4,
-       "b": 23,
-       "batsman": {
-        "name": "Blair Tickner"
-       },
-       "dismissal-text": "c †Rahul b Gurnoor Brar",
-       "m": 24,
-       "mark": "",
-       "r": 34,
-       "sr": 147.82
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 38,
-       "bowler": {
-        "name": "Arshdeep Singh"
-       },
-       "eco": 7.0,
-       "m": 0,
-       "nb": 0,
-       "o": 10.0,
-       "r": 70,
-       "w": 4,
-       "wd": 2
-      },
-      {
-       "0s": 25,
-       "bowler": {
-        "name": "Auqib Nabi"
-       },
-       "eco": 5.5,
-       "m": 0,
-       "nb": 0,
-       "o": 6.0,
-       "r": 33,
-       "w": 0,
-       "wd": 0
-      },
-      {
-       "0s": 46,
-       "bowler": {
-        "name": "Anshul Kamboj"
-       },
-       "eco": 2.2,
-       "m": 2,
-       "nb": 0,
-       "o": 10.0,
-       "r": 22,
-       "w": 2,
-       "wd": 1
-      },
-      {
-       "0s": 37,
-       "bowler": {
-        "name": "Gurnoor Brar"
-       },
-       "eco": 4.71,
-       "m": 0,
-       "nb": 1,
-       "o": 9.2,
-       "r": 44,
-       "w": 3,
-       "wd": 1
-      },
-      {
-       "0s": 18,
-       "bowler": {
-        "name": "Axar Patel"
-       },
-       "eco": 2.4,
-       "m": 0,
-       "nb": 0,
-       "o": 5.0,
-       "r": 12,
-       "w": 0,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [],
-      "extras": {
-       "lb": 4,
-       "nb": 1,
-       "total": 13,
-       "w": 8
-      },
-      "fow": "1-22 (Young, 4.3), 2-40 (Nicholls, 8.3), 3-73 (Seifert, 14.2), 4-84 (Latham, 16.6), 5-97 (Mitchell, 21.1), 6-113 (Santner, 26.1), 7-115 (Smith, 28.3), 8-131 (Jamieson, 31.1), 9-146 (Phillips, 35.1), 10-185 (Tickner, 40.2)",
-      "total": {
-       "o": 40.2,
-       "r": 185,
-       "rr": 4.58,
-       "w": 10
-      }
-     },
-     "inning": "New Zealand Innings"
-    },
-    {
-     "batting": [
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 6,
-       "batsman": {
-        "name": "Rohit Sharma"
-       },
-       "dismissal-text": "c Santner b Jamieson",
-       "m": 5,
-       "mark": "",
-       "r": 0,
-       "sr": 0.0
-      },
-      {
-       "4s": 5,
-       "6s": 0,
-       "b": 56,
-       "batsman": {
-        "name": "Shubman Gill"
-       },
-       "dismissal-text": "c †Latham b Smith",
-       "m": 88,
-       "mark": "(c)",
-       "r": 37,
-       "sr": 66.07
-      },
-      {
-       "4s": 13,
-       "6s": 1,
-       "b": 51,
-       "batsman": {
-        "name": "Virat Kohli"
-       },
-       "dismissal-text": "c Seifert b Duffy",
-       "m": 91,
-       "mark": "",
-       "r": 74,
-       "sr": 145.09
-      },
-      {
-       "4s": 1,
-       "6s": 1,
-       "b": 13,
-       "batsman": {
-        "name": "Shreyas Iyer"
-       },
-       "dismissal-text": "c Nicholls b Duffy",
-       "m": 19,
-       "mark": "",
-       "r": 15,
-       "sr": 115.38
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Axar Patel"
-       },
-       "dismissal-text": "c Phillips b Duffy",
-       "m": 2,
-       "mark": "",
-       "r": 0,
-       "sr": 0.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 5,
-       "batsman": {
-        "name": "KL Rahul"
-       },
-       "dismissal-text": "not out",
-       "m": 15,
-       "mark": "†",
-       "r": 3,
-       "sr": 60.0
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 3,
-       "batsman": {
-        "name": "Naman Dhir"
-       },
-       "dismissal-text": "not out",
-       "m": 5,
-       "mark": "",
-       "r": 5,
-       "sr": 166.66
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 27,
-       "bowler": {
-        "name": "Kyle Jamieson"
-       },
-       "eco": 4.85,
-       "m": 0,
-       "nb": 0,
-       "o": 7.0,
-       "r": 34,
-       "w": 1,
-       "wd": 2
-      },
-      {
-       "0s": 22,
-       "bowler": {
-        "name": "Jacob Duffy"
-       },
-       "eco": 7.0,
-       "m": 0,
-       "nb": 0,
-       "o": 7.0,
-       "r": 49,
-       "w": 3,
-       "wd": 2
-      },
-      {
-       "0s": 11,
-       "bowler": {
-        "name": "Blair Tickner"
-       },
-       "eco": 9.5,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 38,
-       "w": 0,
-       "wd": 0
-      },
-      {
-       "0s": 19,
-       "bowler": {
-        "name": "Nathan Smith"
-       },
-       "eco": 4.5,
-       "m": 0,
-       "nb": 0,
-       "o": 4.4,
-       "r": 21,
-       "w": 1,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [],
-      "extras": {
-       "lb": 1,
-       "total": 9,
-       "w": 8
-      },
-      "fow": "1-1 (Sharma, 0.6), 2-114 (Gill, 18.2), 3-124 (Kohli, 19.4), 4-124 (Patel, 19.6), 5-136 (Iyer, 21.4)",
-      "total": {
-       "o": 22.4,
-       "r": 143,
-       "rr": 6.3,
-       "w": 5
-      }
-     },
-     "inning": "India Innings"
-    }
-   ],
-   "status": "India won by 5 wkts (56b rem) (DLS)"
-  },
   "espn-1539438": {
    "built": "2026-11-07T22:50:05Z",
    "potm": [
@@ -3502,8 +2686,815 @@
    ],
    "status": "Heat won by 4 wkts (10b rem)"
   },
+  "espn-1543958": {
+   "built": "2026-11-08T22:50:05Z",
+   "potm": [
+    {
+     "name": "Ashleigh Gardner",
+     "team": "Sydney Sixers Women"
+    }
+   ],
+   "scorecard": [
+    {
+     "batting": [
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 15,
+       "batsman": {
+        "name": "Sophia Dunkley"
+       },
+       "dismissal-text": "c †Wilson b Bell",
+       "m": 14,
+       "mark": "",
+       "r": 15,
+       "sr": 100.0
+      },
+      {
+       "4s": 11,
+       "6s": 0,
+       "b": 41,
+       "batsman": {
+        "name": "Ellyse Perry"
+       },
+       "dismissal-text": "not out",
+       "m": 61,
+       "mark": "",
+       "r": 59,
+       "sr": 143.9
+      },
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 17,
+       "batsman": {
+        "name": "Melie Kerr"
+       },
+       "dismissal-text": "retired out",
+       "m": 19,
+       "mark": "",
+       "r": 14,
+       "sr": 82.35
+      },
+      {
+       "4s": 5,
+       "6s": 5,
+       "b": 25,
+       "batsman": {
+        "name": "Ashleigh Gardner"
+       },
+       "dismissal-text": "not out",
+       "m": 27,
+       "mark": "(c)",
+       "r": 64,
+       "sr": 256.0
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 7,
+       "bowler": {
+        "name": "Samantha Bates"
+       },
+       "eco": 12.0,
+       "m": 0,
+       "nb": 1,
+       "o": 4.0,
+       "r": 48,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 7,
+       "bowler": {
+        "name": "Lauren Bell"
+       },
+       "eco": 8.66,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 26,
+       "w": 1,
+       "wd": 3
+      },
+      {
+       "0s": 6,
+       "bowler": {
+        "name": "Hannah Darlington"
+       },
+       "eco": 8.33,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 25,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 9,
+       "bowler": {
+        "name": "Georgia Voll"
+       },
+       "eco": 5.0,
+       "m": 0,
+       "nb": 0,
+       "o": 2.0,
+       "r": 10,
+       "w": 0,
+       "wd": 1
+      },
+      {
+       "0s": 3,
+       "bowler": {
+        "name": "Nadine de Klerk"
+       },
+       "eco": 12.0,
+       "m": 0,
+       "nb": 1,
+       "o": 2.0,
+       "r": 24,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 4,
+       "bowler": {
+        "name": "Jemma Barsby"
+       },
+       "eco": 12.5,
+       "m": 0,
+       "nb": 0,
+       "o": 2.0,
+       "r": 25,
+       "w": 0,
+       "wd": 0
+      }
+     ],
+     "espn": {
+      "dnb": [
+       "Capsey",
+       "Burns",
+       "Ragg",
+       "Cheatle",
+       "Coyte",
+       "Bray",
+       "Nicklin"
+      ],
+      "extras": {
+       "lb": 4,
+       "nb": 2,
+       "total": 10,
+       "w": 4
+      },
+      "fow": "1-22 (Dunkley, 3.3), 2-65 (Kerr, 8.6)",
+      "total": {
+       "o": 16.0,
+       "r": 162,
+       "rr": 10.12,
+       "w": 2
+      }
+     },
+     "inning": "Sydney Sixers Women Innings"
+    },
+    {
+     "batting": [
+      {
+       "4s": 0,
+       "6s": 1,
+       "b": 5,
+       "batsman": {
+        "name": "Phoebe Litchfield"
+       },
+       "dismissal-text": "b Bray",
+       "m": 6,
+       "mark": "(c)",
+       "r": 8,
+       "sr": 160.0
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 7,
+       "batsman": {
+        "name": "Georgia Voll"
+       },
+       "dismissal-text": "c Kerr b Bray",
+       "m": 19,
+       "mark": "",
+       "r": 8,
+       "sr": 114.28
+      },
+      {
+       "4s": 3,
+       "6s": 0,
+       "b": 9,
+       "batsman": {
+        "name": "Anika Learoyd"
+       },
+       "dismissal-text": "run out (Perry)",
+       "m": 10,
+       "mark": "",
+       "r": 14,
+       "sr": 155.55
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 8,
+       "batsman": {
+        "name": "Heather Knight"
+       },
+       "dismissal-text": "c Gardner b Coyte",
+       "m": 17,
+       "mark": "",
+       "r": 6,
+       "sr": 75.0
+      },
+      {
+       "4s": 5,
+       "6s": 0,
+       "b": 24,
+       "batsman": {
+        "name": "Nadine de Klerk"
+       },
+       "dismissal-text": "c †Capsey b Bray",
+       "m": 29,
+       "mark": "",
+       "r": 30,
+       "sr": 125.0
+      },
+      {
+       "4s": 2,
+       "6s": 4,
+       "b": 10,
+       "batsman": {
+        "name": "Laura Harris"
+       },
+       "dismissal-text": "c Coyte b Bray",
+       "m": 16,
+       "mark": "",
+       "r": 35,
+       "sr": 350.0
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 6,
+       "batsman": {
+        "name": "Tahlia Wilson"
+       },
+       "dismissal-text": "c Bray b Gardner",
+       "m": 6,
+       "mark": "†",
+       "r": 12,
+       "sr": 200.0
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 1,
+       "batsman": {
+        "name": "Jemma Barsby"
+       },
+       "dismissal-text": "c Cheatle b Gardner",
+       "m": 4,
+       "mark": "",
+       "r": 0,
+       "sr": 0.0
+      },
+      {
+       "4s": 1,
+       "6s": 1,
+       "b": 8,
+       "batsman": {
+        "name": "Hannah Darlington"
+       },
+       "dismissal-text": "b Coyte",
+       "m": 9,
+       "mark": "",
+       "r": 14,
+       "sr": 175.0
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 8,
+       "batsman": {
+        "name": "Lauren Bell"
+       },
+       "dismissal-text": "not out",
+       "m": 13,
+       "mark": "",
+       "r": 11,
+       "sr": 137.5
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 7,
+       "batsman": {
+        "name": "Samantha Bates"
+       },
+       "dismissal-text": "run out (Gardner/Coyte)",
+       "m": 8,
+       "mark": "",
+       "r": 10,
+       "sr": 142.85
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 5,
+       "bowler": {
+        "name": "Lauren Cheatle"
+       },
+       "eco": 9.33,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 28,
+       "w": 0,
+       "wd": 2
+      },
+      {
+       "0s": 11,
+       "bowler": {
+        "name": "Caoimhe Bray"
+       },
+       "eco": 7.0,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 28,
+       "w": 4,
+       "wd": 2
+      },
+      {
+       "0s": 3,
+       "bowler": {
+        "name": "Melie Kerr"
+       },
+       "eco": 13.0,
+       "m": 0,
+       "nb": 0,
+       "o": 2.0,
+       "r": 26,
+       "w": 0,
+       "wd": 1
+      },
+      {
+       "0s": 4,
+       "bowler": {
+        "name": "Frankie Nicklin"
+       },
+       "eco": 7.0,
+       "m": 0,
+       "nb": 0,
+       "o": 2.0,
+       "r": 14,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 6,
+       "bowler": {
+        "name": "Sarah Coyte"
+       },
+       "eco": 8.4,
+       "m": 0,
+       "nb": 0,
+       "o": 2.3,
+       "r": 21,
+       "w": 2,
+       "wd": 0
+      },
+      {
+       "0s": 2,
+       "bowler": {
+        "name": "Ashleigh Gardner"
+       },
+       "eco": 18.5,
+       "m": 0,
+       "nb": 0,
+       "o": 2.0,
+       "r": 37,
+       "w": 2,
+       "wd": 1
+      }
+     ],
+     "espn": {
+      "dnb": [],
+      "extras": {
+       "lb": 4,
+       "total": 10,
+       "w": 6
+      },
+      "fow": "1-12 (Litchfield, 1.2), 2-34 (Learoyd, 3.2), 3-34 (Voll, 3.3), 4-56 (Knight, 7.3), 5-108 (de Klerk, 10.1), 6-115 (Harris, 10.6), 7-121 (Wilson, 11.3), 8-128 (Barsby, 11.6), 9-137 (Darlington, 13.2), 10-158 (Bates, 15.3)",
+      "total": {
+       "o": 15.3,
+       "r": 158,
+       "rr": 10.19,
+       "w": 10
+      }
+     },
+     "inning": "Sydney Thunder Women Innings"
+    }
+   ],
+   "status": "Sixers won by 9 runs (DLS)"
+  },
+  "espn-1543959": {
+   "built": "2026-11-08T22:50:05Z",
+   "potm": [
+    {
+     "name": "Sophie Devine",
+     "team": "Perth Scorchers Women"
+    }
+   ],
+   "scorecard": [
+    {
+     "batting": [
+      {
+       "4s": 10,
+       "6s": 0,
+       "b": 46,
+       "batsman": {
+        "name": "Meg Lanning"
+       },
+       "dismissal-text": "c Piparo b Devine",
+       "m": 74,
+       "mark": "(c)",
+       "r": 56,
+       "sr": 121.73
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 18,
+       "batsman": {
+        "name": "Rhys McKenna"
+       },
+       "dismissal-text": "b Fatima Sana",
+       "m": 28,
+       "mark": "",
+       "r": 12,
+       "sr": 66.66
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 7,
+       "batsman": {
+        "name": "Amy Jones"
+       },
+       "dismissal-text": "lbw b Edgar",
+       "m": 8,
+       "mark": "†",
+       "r": 4,
+       "sr": 57.14
+      },
+      {
+       "4s": 3,
+       "6s": 0,
+       "b": 9,
+       "batsman": {
+        "name": "Annabel Sutherland"
+       },
+       "dismissal-text": "b Devine",
+       "m": 9,
+       "mark": "",
+       "r": 14,
+       "sr": 155.55
+      },
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 10,
+       "batsman": {
+        "name": "Naomi Stalenberg"
+       },
+       "dismissal-text": "run out (†Mooney)",
+       "m": 10,
+       "mark": "",
+       "r": 7,
+       "sr": 70.0
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 5,
+       "batsman": {
+        "name": "Dani Gibson"
+       },
+       "dismissal-text": "c King b Edgar",
+       "m": 5,
+       "mark": "",
+       "r": 3,
+       "sr": 60.0
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 14,
+       "batsman": {
+        "name": "Charlie Dean"
+       },
+       "dismissal-text": "not out",
+       "m": 20,
+       "mark": "",
+       "r": 10,
+       "sr": 71.42
+      },
+      {
+       "4s": 2,
+       "6s": 2,
+       "b": 11,
+       "batsman": {
+        "name": "Georgia Prestwidge"
+       },
+       "dismissal-text": "not out",
+       "m": 10,
+       "mark": "",
+       "r": 23,
+       "sr": 209.09
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 10,
+       "bowler": {
+        "name": "Fatima Sana"
+       },
+       "eco": 8.25,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 33,
+       "w": 1,
+       "wd": 1
+      },
+      {
+       "0s": 11,
+       "bowler": {
+        "name": "Chloe Ainsworth"
+       },
+       "eco": 4.33,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 13,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 10,
+       "bowler": {
+        "name": "Sophie Devine"
+       },
+       "eco": 6.0,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 18,
+       "w": 2,
+       "wd": 1
+      },
+      {
+       "0s": 16,
+       "bowler": {
+        "name": "Alana King"
+       },
+       "eco": 3.0,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 12,
+       "w": 0,
+       "wd": 1
+      },
+      {
+       "0s": 5,
+       "bowler": {
+        "name": "Amy Edgar"
+       },
+       "eco": 11.0,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 33,
+       "w": 2,
+       "wd": 1
+      },
+      {
+       "0s": 5,
+       "bowler": {
+        "name": "Lilly Mills"
+       },
+       "eco": 8.0,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 24,
+       "w": 0,
+       "wd": 0
+      }
+     ],
+     "espn": {
+      "dnb": [
+       "Garth",
+       "Gibson",
+       "Day"
+      ],
+      "extras": {
+       "lb": 3,
+       "total": 7,
+       "w": 4
+      },
+      "fow": "1-38 (McKenna, 6.3), 2-49 (Jones, 8.4), 3-65 (Sutherland, 10.3), 4-86 (Stalenberg, 13.2), 5-95 (Gibson, 14.4), 6-105 (Lanning, 17.1)",
+      "total": {
+       "o": 20.0,
+       "r": 136,
+       "rr": 6.8,
+       "w": 6
+      }
+     },
+     "inning": "Melbourne Stars Women Innings"
+    },
+    {
+     "batting": [
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 3,
+       "batsman": {
+        "name": "Katie Mack"
+       },
+       "dismissal-text": "b Day",
+       "m": 8,
+       "mark": "",
+       "r": 2,
+       "sr": 66.66
+      },
+      {
+       "4s": 4,
+       "6s": 0,
+       "b": 24,
+       "batsman": {
+        "name": "Beth Mooney"
+       },
+       "dismissal-text": "c McKenna b Garth",
+       "m": 45,
+       "mark": "(c) †",
+       "r": 28,
+       "sr": 116.66
+      },
+      {
+       "4s": 8,
+       "6s": 3,
+       "b": 24,
+       "batsman": {
+        "name": "Sophie Devine"
+       },
+       "dismissal-text": "c Garth b Day",
+       "m": 22,
+       "mark": "",
+       "r": 55,
+       "sr": 229.16
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 4,
+       "batsman": {
+        "name": "Freya Kemp"
+       },
+       "dismissal-text": "b Sutherland",
+       "m": 4,
+       "mark": "",
+       "r": 2,
+       "sr": 50.0
+      },
+      {
+       "4s": 3,
+       "6s": 0,
+       "b": 19,
+       "batsman": {
+        "name": "Mikayla Hinkley"
+       },
+       "dismissal-text": "not out",
+       "m": 27,
+       "mark": "",
+       "r": 24,
+       "sr": 126.31
+      },
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 16,
+       "batsman": {
+        "name": "Chloe Piparo"
+       },
+       "dismissal-text": "not out",
+       "m": 17,
+       "mark": "",
+       "r": 14,
+       "sr": 87.5
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 9,
+       "bowler": {
+        "name": "Charlie Dean"
+       },
+       "eco": 8.66,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 26,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 8,
+       "bowler": {
+        "name": "Kim Garth"
+       },
+       "eco": 8.0,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 32,
+       "w": 1,
+       "wd": 1
+      },
+      {
+       "0s": 7,
+       "bowler": {
+        "name": "Sophie Day"
+       },
+       "eco": 8.5,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 34,
+       "w": 2,
+       "wd": 2
+      },
+      {
+       "0s": 8,
+       "bowler": {
+        "name": "Annabel Sutherland"
+       },
+       "eco": 8.0,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 24,
+       "w": 1,
+       "wd": 2
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Dani Gibson"
+       },
+       "eco": 15.0,
+       "m": 0,
+       "nb": 0,
+       "o": 1.0,
+       "r": 15,
+       "w": 0,
+       "wd": 1
+      }
+     ],
+     "espn": {
+      "dnb": [
+       "Sana",
+       "Ainsworth",
+       "King",
+       "Mills",
+       "Edgar"
+      ],
+      "extras": {
+       "lb": 6,
+       "total": 12,
+       "w": 6
+      },
+      "fow": "1-14 (Mack, 2.2), 2-86 (Devine, 7.3), 3-90 (Kemp, 8.2), 4-109 (Mooney, 10.1)",
+      "total": {
+       "o": 15.0,
+       "r": 137,
+       "rr": 9.13,
+       "w": 4
+      }
+     },
+     "inning": "Perth Scorchers Women Innings"
+    }
+   ],
+   "status": "Scorchers won by 6 wkts (30b rem)"
+  },
   "espn-1553296": {
-   "built": "2026-11-07T22:50:05Z",
+   "built": "2026-11-08T22:50:05Z",
    "potm": [],
    "scorecard": [
     {
@@ -3972,30 +3963,69 @@
     {
      "batting": [
       {
-       "4s": 1,
-       "6s": 0,
-       "b": 13,
+       "4s": 10,
+       "6s": 1,
+       "b": 84,
        "batsman": {
         "name": "Brandon King"
+       },
+       "dismissal-text": "c Najmul Hossain Shanto b Mehidy Hasan Miraz",
+       "m": null,
+       "mark": "",
+       "r": 61,
+       "sr": 72.61
+      },
+      {
+       "4s": 4,
+       "6s": 0,
+       "b": 70,
+       "batsman": {
+        "name": "Joshua Da Silva"
+       },
+       "dismissal-text": "lbw b Taijul Islam",
+       "m": null,
+       "mark": "",
+       "r": 36,
+       "sr": 51.42
+      },
+      {
+       "4s": 17,
+       "6s": 1,
+       "b": 189,
+       "batsman": {
+        "name": "Kavem Hodge"
        },
        "dismissal-text": "not out",
        "m": null,
        "mark": "",
-       "r": 5,
-       "sr": 38.46
+       "r": 140,
+       "sr": 74.07
+      },
+      {
+       "4s": 7,
+       "6s": 2,
+       "b": 107,
+       "batsman": {
+        "name": "Kevin Wickham"
+       },
+       "dismissal-text": "c & b Taijul Islam",
+       "m": null,
+       "mark": "",
+       "r": 78,
+       "sr": 72.89
       },
       {
        "4s": 0,
        "6s": 0,
-       "b": 11,
+       "b": 49,
        "batsman": {
-        "name": "Joshua Da Silva"
+        "name": "Amir Jangoo"
        },
        "dismissal-text": "not out",
        "m": null,
-       "mark": "",
-       "r": 2,
-       "sr": 18.18
+       "mark": "†",
+       "r": 20,
+       "sr": 40.81
       }
      ],
      "bowling": [
@@ -4004,11 +4034,11 @@
        "bowler": {
         "name": "Taskin Ahmed"
        },
-       "eco": 3.5,
+       "eco": 4.63,
        "m": 0,
-       "nb": 0,
-       "o": 2.0,
-       "r": 7,
+       "nb": 1,
+       "o": 11.0,
+       "r": 51,
        "w": 0,
        "wd": 0
       },
@@ -4017,11 +4047,11 @@
        "bowler": {
         "name": "Hasan Mahmud"
        },
-       "eco": 0.0,
+       "eco": 5.54,
        "m": 1,
        "nb": 0,
-       "o": 1.0,
-       "r": 0,
+       "o": 11.0,
+       "r": 61,
        "w": 0,
        "wd": 0
       },
@@ -4030,11 +4060,37 @@
        "bowler": {
         "name": "Taijul Islam"
        },
-       "eco": 0.0,
+       "eco": 4.06,
        "m": 1,
        "nb": 0,
-       "o": 1.0,
-       "r": 0,
+       "o": 29.0,
+       "r": 118,
+       "w": 2,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Mehidy Hasan Miraz"
+       },
+       "eco": 2.63,
+       "m": 4,
+       "nb": 0,
+       "o": 22.0,
+       "r": 58,
+       "w": 1,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Nayeem Hasan"
+       },
+       "eco": 4.8,
+       "m": 0,
+       "nb": 0,
+       "o": 10.0,
+       "r": 48,
        "w": 0,
        "wd": 0
       }
@@ -4042,23 +4098,26 @@
      "espn": {
       "dnb": [],
       "extras": {
-       "total": 0
+       "b": 4,
+       "lb": 5,
+       "nb": 1,
+       "total": 10
       },
-      "fow": "",
+      "fow": "1-85 (Da Silva, 21.2), 2-119 (King, 30.5), 3-284 (Wickham, 67.4)",
       "total": {
-       "o": 4.0,
-       "r": 7,
-       "rr": 1.75,
-       "w": 0
+       "o": 83.0,
+       "r": 345,
+       "rr": 4.15,
+       "w": 3
       }
      },
      "inning": "West Indies 2nd Innings"
     }
    ],
-   "status": "Day 3: West Indies trail by 23 runs"
+   "status": "Day 4: West Indies lead by 315 runs"
   },
   "espn-1555123": {
-   "built": "2026-11-07T22:50:05Z",
+   "built": "2026-11-08T22:50:05Z",
    "potm": [],
    "scorecard": [
     {
@@ -4314,7 +4373,7 @@
         "name": "Sediqullah Atal"
        },
        "dismissal-text": "c †Tsiga b Cremer",
-       "m": null,
+       "m": 287,
        "mark": "",
        "r": 105,
        "sr": 49.29
@@ -4327,7 +4386,7 @@
         "name": "Abdul Malik"
        },
        "dismissal-text": "c †Tsiga b Nyamhuri",
-       "m": null,
+       "m": 29,
        "mark": "",
        "r": 2,
        "sr": 14.28
@@ -4340,23 +4399,23 @@
         "name": "Rahmanullah"
        },
        "dismissal-text": "run out (Madhevere)",
-       "m": null,
+       "m": 288,
        "mark": "",
        "r": 113,
        "sr": 60.1
       },
       {
-       "4s": 8,
-       "6s": 1,
-       "b": 194,
+       "4s": 14,
+       "6s": 3,
+       "b": 347,
        "batsman": {
         "name": "Rahmat Shah"
        },
-       "dismissal-text": "not out",
-       "m": null,
+       "dismissal-text": "st †Tsiga b Cremer",
+       "m": 433,
        "mark": "(c)",
-       "r": 94,
-       "sr": 48.45
+       "r": 173,
+       "sr": 49.85
       },
       {
        "4s": 0,
@@ -4366,7 +4425,7 @@
         "name": "Hashmatullah Shahidi"
        },
        "dismissal-text": "c Bennett b Nyamhuri",
-       "m": null,
+       "m": 31,
        "mark": "",
        "r": 6,
        "sr": 42.85
@@ -4379,7 +4438,7 @@
         "name": "Shahidullah"
        },
        "dismissal-text": "c †Tsiga b Nyamhuri",
-       "m": null,
+       "m": 8,
        "mark": "",
        "r": 0,
        "sr": 0.0
@@ -4392,7 +4451,7 @@
         "name": "Ikram Alikhil"
        },
        "dismissal-text": "c Curran b Cremer",
-       "m": null,
+       "m": 91,
        "mark": "†",
        "r": 40,
        "sr": 48.19
@@ -4405,23 +4464,49 @@
         "name": "Qais Ahmad"
        },
        "dismissal-text": "c †Tsiga b Nyamhuri",
-       "m": null,
+       "m": 71,
        "mark": "",
        "r": 27,
        "sr": 69.23
       },
       {
-       "4s": 0,
+       "4s": 2,
        "6s": 0,
-       "b": 0,
+       "b": 99,
        "batsman": {
         "name": "Zia-ur-Rehman"
        },
-       "dismissal-text": "not out",
-       "m": null,
+       "dismissal-text": "c †Tsiga b Muzarabani",
+       "m": 162,
        "mark": "",
-       "r": 0,
-       "sr": null
+       "r": 15,
+       "sr": 15.15
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 14,
+       "batsman": {
+        "name": "Mohammad Saleem"
+       },
+       "dismissal-text": "b Nyamhuri",
+       "m": 42,
+       "mark": "",
+       "r": 9,
+       "sr": 64.28
+      },
+      {
+       "4s": 0,
+       "6s": 1,
+       "b": 3,
+       "batsman": {
+        "name": "Ziaur Rahman"
+       },
+       "dismissal-text": "not out",
+       "m": 8,
+       "mark": "",
+       "r": 7,
+       "sr": 233.33
       }
      ],
      "bowling": [
@@ -4430,12 +4515,12 @@
        "bowler": {
         "name": "Blessing Muzarabani"
        },
-       "eco": 2.8,
-       "m": 7,
+       "eco": 2.65,
+       "m": 9,
        "nb": 1,
-       "o": 26.0,
-       "r": 73,
-       "w": 0,
+       "o": 35.0,
+       "r": 93,
+       "w": 1,
        "wd": 0
       },
       {
@@ -4443,12 +4528,12 @@
        "bowler": {
         "name": "Newman Nyamhuri"
        },
-       "eco": 2.69,
+       "eco": 2.67,
        "m": 6,
        "nb": 0,
-       "o": 23.0,
-       "r": 62,
-       "w": 4,
+       "o": 30.4,
+       "r": 82,
+       "w": 5,
        "wd": 1
       },
       {
@@ -4456,11 +4541,11 @@
        "bowler": {
         "name": "Wessly Madhevere"
        },
-       "eco": 2.75,
+       "eco": 2.53,
        "m": 2,
        "nb": 0,
-       "o": 12.0,
-       "r": 33,
+       "o": 15.0,
+       "r": 38,
        "w": 0,
        "wd": 0
       },
@@ -4469,12 +4554,12 @@
        "bowler": {
         "name": "Graeme Cremer"
        },
-       "eco": 3.53,
-       "m": 3,
-       "nb": 0,
-       "o": 41.0,
-       "r": 145,
-       "w": 2,
+       "eco": 3.21,
+       "m": 5,
+       "nb": 1,
+       "o": 55.0,
+       "r": 177,
+       "w": 3,
        "wd": 0
       },
       {
@@ -4482,11 +4567,11 @@
        "bowler": {
         "name": "Antum Naqvi"
        },
-       "eco": 3.22,
+       "eco": 3.17,
        "m": 0,
        "nb": 0,
-       "o": 18.0,
-       "r": 58,
+       "o": 29.0,
+       "r": 92,
        "w": 0,
        "wd": 0
       },
@@ -4508,26 +4593,176 @@
       "dnb": [],
       "extras": {
        "b": 4,
-       "lb": 9,
-       "nb": 1,
-       "total": 15,
+       "lb": 10,
+       "nb": 2,
+       "total": 17,
        "w": 1
       },
-      "fow": "1-14 (Malik, 5.2), 2-220 (Atal, 65.5), 3-251 (Rahmanullah, 75.2), 4-275 (Shahidi, 82.2), 5-275 (Shahidullah, 84.2), 6-340 (Alikhil, 107.6), 7-395 (Ahmad, 122.6)",
+      "fow": "1-14 (Malik, 5.2), 2-220 (Atal, 65.5), 3-251 (Rahmanullah, 75.2), 4-275 (Shahidi, 82.2), 5-275 (Shahidullah, 84.2), 6-340 (Alikhil, 107.6), 7-395 (Ahmad, 122.6), 8-487 (Zia-ur-Rehman, 162.3), 9-502 (Shah, 168.2), 10-514 (Saleem, 169.4)",
       "total": {
-       "o": 125.0,
-       "r": 402,
-       "rr": 3.21,
-       "w": 7
+       "o": 169.4,
+       "r": 514,
+       "rr": 3.02,
+       "w": 10
       }
      },
      "inning": "Afghanistan 1st Innings"
+    },
+    {
+     "batting": [
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 14,
+       "batsman": {
+        "name": "Innocent Kaia"
+       },
+       "dismissal-text": "lbw b Zia-ur-Rehman",
+       "m": null,
+       "mark": "",
+       "r": 1,
+       "sr": 7.14
+      },
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 22,
+       "batsman": {
+        "name": "Ben Curran"
+       },
+       "dismissal-text": "c Shahidullah b Zia-ur-Rehman",
+       "m": null,
+       "mark": "",
+       "r": 12,
+       "sr": 54.54
+      },
+      {
+       "4s": 11,
+       "6s": 2,
+       "b": 88,
+       "batsman": {
+        "name": "Brendan Taylor"
+       },
+       "dismissal-text": "run out (Zia-ur-Rehman/†Ikram Alikhil)",
+       "m": null,
+       "mark": "",
+       "r": 82,
+       "sr": 93.18
+      },
+      {
+       "4s": 5,
+       "6s": 0,
+       "b": 77,
+       "batsman": {
+        "name": "Brian Bennett"
+       },
+       "dismissal-text": "not out",
+       "m": null,
+       "mark": "(c)",
+       "r": 49,
+       "sr": 63.63
+      },
+      {
+       "4s": 3,
+       "6s": 0,
+       "b": 39,
+       "batsman": {
+        "name": "Craig Ervine"
+       },
+       "dismissal-text": "not out",
+       "m": null,
+       "mark": "",
+       "r": 20,
+       "sr": 51.28
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Ziaur Rahman"
+       },
+       "eco": 5.0,
+       "m": 1,
+       "nb": 0,
+       "o": 4.0,
+       "r": 20,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Zia-ur-Rehman"
+       },
+       "eco": 3.25,
+       "m": 2,
+       "nb": 0,
+       "o": 20.0,
+       "r": 65,
+       "w": 2,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Mohammad Saleem"
+       },
+       "eco": 4.0,
+       "m": 1,
+       "nb": 0,
+       "o": 7.0,
+       "r": 28,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Qais Ahmad"
+       },
+       "eco": 6.25,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 25,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Hashmatullah Shahidi"
+       },
+       "eco": 5.2,
+       "m": 0,
+       "nb": 0,
+       "o": 5.0,
+       "r": 26,
+       "w": 0,
+       "wd": 0
+      }
+     ],
+     "espn": {
+      "dnb": [],
+      "extras": {
+       "total": 0
+      },
+      "fow": "1-7 (Kaia, 3.4), 2-38 (Curran, 11.4), 3-120 (Taylor, 26.3)",
+      "total": {
+       "o": 40.0,
+       "r": 164,
+       "rr": 4.1,
+       "w": 3
+      }
+     },
+     "inning": "Zimbabwe 2nd Innings"
     }
    ],
-   "status": "Day 3: Afghanistan trail by 102 runs"
+   "status": "Day 4: Zimbabwe lead by 154 runs"
   }
  },
- "ran": "2026-11-07T22:50:05Z",
+ "ran": "2026-11-08T22:50:05Z",
  "series": {
   "8d868342-e1d5-4f86-a4f0-093f6abab3f9": {
    "built": "2026-11-07T17:59:54Z",
@@ -4668,436 +4903,6 @@
        "abbr": "IND",
        "name": "India",
        "score": "113/7"
-      }
-     ],
-     "venue": "Wellington"
-    },
-    {
-     "date": "Nov 10 2026",
-     "format": "ODI",
-     "n": "3rd",
-     "result": null,
-     "starts": "Starts at 15:00 local time",
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
-      }
-     ],
-     "venue": "Hamilton"
-    },
-    {
-     "date": "Nov 13 2026",
-     "format": "ODI",
-     "n": "4th",
-     "result": null,
-     "starts": "Starts at 15:00 local time",
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
-      }
-     ],
-     "venue": "Mount Maunganui"
-    },
-    {
-     "date": "Nov 15 2026",
-     "format": "ODI",
-     "n": "5th",
-     "result": null,
-     "starts": "Starts at 15:00 local time",
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
-      }
-     ],
-     "venue": "Mount Maunganui"
-    },
-    {
-     "date": "Nov 19-23 2026",
-     "format": "Test",
-     "n": "1st",
-     "result": null,
-     "starts": "Starts at 11:00 local time",
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
-      }
-     ],
-     "venue": "Wellington"
-    }
-   ]
-  },
-  "c547eb46-2025-413a-b7f2-6d1584daa42f": {
-   "built": "2026-11-04T11:05:07Z",
-   "rows": [
-    {
-     "date": "Oct 22 2026",
-     "format": "T20I",
-     "n": "1st",
-     "result": "India won by 4 wkts (2b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "225/4"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "230/6"
-      }
-     ],
-     "venue": "Christchurch"
-    },
-    {
-     "date": "Oct 24 2026",
-     "format": "T20I",
-     "n": "2nd",
-     "result": "India won by 4 wkts (1b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "180/5"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "181/6"
-      }
-     ],
-     "venue": "Christchurch"
-    },
-    {
-     "date": "Oct 27 2026",
-     "format": "T20I",
-     "n": "3rd",
-     "result": "India won by 6 wkts (40b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "198/3"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "199/4"
-      }
-     ],
-     "venue": "Wellington"
-    },
-    {
-     "date": "Oct 30 2026",
-     "format": "T20I",
-     "n": "4th",
-     "result": "New Zealand won by 87 runs",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "259/7"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "172/9"
-      }
-     ],
-     "venue": "Auckland"
-    },
-    {
-     "date": "Nov 1 2026",
-     "format": "T20I",
-     "n": "5th",
-     "result": "New Zealand won by 7 wkts (12b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "191/8"
-      },
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "195/3"
-      }
-     ],
-     "venue": "Hamilton"
-    },
-    {
-     "date": "Nov 4 2026",
-     "format": "ODI",
-     "n": "1st",
-     "result": "India require 40 runs",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "185"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "103/1 *"
-      }
-     ],
-     "venue": "Auckland"
-    },
-    {
-     "date": "Nov 7 2026",
-     "format": "ODI",
-     "n": "2nd",
-     "result": null,
-     "starts": "Starts at 15:00 local time",
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
-      }
-     ],
-     "venue": "Wellington"
-    },
-    {
-     "date": "Nov 10 2026",
-     "format": "ODI",
-     "n": "3rd",
-     "result": null,
-     "starts": "Starts at 15:00 local time",
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
-      }
-     ],
-     "venue": "Hamilton"
-    },
-    {
-     "date": "Nov 13 2026",
-     "format": "ODI",
-     "n": "4th",
-     "result": null,
-     "starts": "Starts at 15:00 local time",
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
-      }
-     ],
-     "venue": "Mount Maunganui"
-    },
-    {
-     "date": "Nov 15 2026",
-     "format": "ODI",
-     "n": "5th",
-     "result": null,
-     "starts": "Starts at 15:00 local time",
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
-      }
-     ],
-     "venue": "Mount Maunganui"
-    }
-   ]
-  },
-  "espn-1539437": {
-   "built": "2026-11-04T12:02:36Z",
-   "rows": [
-    {
-     "date": "Oct 22 2026",
-     "format": "T20I",
-     "n": "1st",
-     "result": "India won by 4 wkts (2b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "225/4"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "230/6"
-      }
-     ],
-     "venue": "Christchurch"
-    },
-    {
-     "date": "Oct 24 2026",
-     "format": "T20I",
-     "n": "2nd",
-     "result": "India won by 4 wkts (1b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "180/5"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "181/6"
-      }
-     ],
-     "venue": "Christchurch"
-    },
-    {
-     "date": "Oct 27 2026",
-     "format": "T20I",
-     "n": "3rd",
-     "result": "India won by 6 wkts (40b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "198/3"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "199/4"
-      }
-     ],
-     "venue": "Wellington"
-    },
-    {
-     "date": "Oct 30 2026",
-     "format": "T20I",
-     "n": "4th",
-     "result": "New Zealand won by 87 runs",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "259/7"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "172/9"
-      }
-     ],
-     "venue": "Auckland"
-    },
-    {
-     "date": "Nov 1 2026",
-     "format": "T20I",
-     "n": "5th",
-     "result": "New Zealand won by 7 wkts (12b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "191/8"
-      },
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "195/3"
-      }
-     ],
-     "venue": "Hamilton"
-    },
-    {
-     "date": "Nov 4 2026",
-     "format": "ODI",
-     "n": "1st",
-     "result": "India require 40 runs",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "185"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "103/1 *"
-      }
-     ],
-     "venue": "Auckland"
-    },
-    {
-     "date": "Nov 7 2026",
-     "format": "ODI",
-     "n": "2nd",
-     "result": null,
-     "starts": "Starts at 15:00 local time",
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
       }
      ],
      "venue": "Wellington"
@@ -5410,7 +5215,7 @@
    ]
   },
   "espn-1553296": {
-   "built": "2026-11-07T22:50:05Z",
+   "built": "2026-11-08T22:50:05Z",
    "rows": [
     {
      "date": "Oct 28-31 2026",
@@ -5436,13 +5241,13 @@
      "date": "Nov 5-9 2026",
      "format": "Test",
      "n": "2nd",
-     "result": "Day 3: West Indies trail by 23 runs",
+     "result": "Day 4: West Indies lead by 315 runs",
      "starts": null,
      "teams": [
       {
        "abbr": "WI",
        "name": "West Indies",
-       "score": "356 & 7/0 *"
+       "score": "356 & 345/3 *"
       },
       {
        "abbr": "BAN",
@@ -5455,7 +5260,7 @@
    ]
   },
   "espn-1555123": {
-   "built": "2026-11-07T22:50:05Z",
+   "built": "2026-11-08T22:50:05Z",
    "rows": [
     {
      "date": "Oct 27 2026",
@@ -5521,38 +5326,18 @@
      "date": "Nov 5-9 2026",
      "format": "Test",
      "n": "1st",
-     "result": "Day 3: Afghanistan trail by 102 runs",
+     "result": "Day 4: Zimbabwe lead by 154 runs",
      "starts": null,
      "teams": [
       {
        "abbr": "ZIM",
        "name": "Zimbabwe",
-       "score": "504"
+       "score": "504 & 164/3 *"
       },
       {
        "abbr": "AFG",
        "name": "Afghanistan",
-       "score": "402/7 *"
-      }
-     ],
-     "venue": "Sharjah"
-    },
-    {
-     "date": "Nov 13-17 2026",
-     "format": "Test",
-     "n": "2nd",
-     "result": null,
-     "starts": "Starts at 10:00 local time",
-     "teams": [
-      {
-       "abbr": "AFG",
-       "name": "Afghanistan",
-       "score": ""
-      },
-      {
-       "abbr": "ZIM",
-       "name": "Zimbabwe",
-       "score": ""
+       "score": "514"
       }
      ],
      "venue": "Sharjah"
@@ -5562,38 +5347,38 @@
  },
  "tables": {
   "WBBL": {
-   "built": "2026-11-07T22:50:05Z",
+   "built": "2026-11-08T22:50:05Z",
    "rows": [
-    {
-     "l": 0,
-     "name": "Sydney Sixers Women",
-     "nr": 0,
-     "nrr": 1.517,
-     "p": 3,
-     "pos": 1,
-     "pts": 6,
-     "t": 0,
-     "team": "SS-W",
-     "w": 3
-    },
     {
      "l": 0,
      "name": "Perth Scorchers Women",
      "nr": 0,
-     "nrr": 1.468,
-     "p": 3,
-     "pos": 2,
-     "pts": 6,
+     "nrr": 1.659,
+     "p": 4,
+     "pos": 1,
+     "pts": 8,
      "t": 0,
      "team": "PS-W",
-     "w": 3
+     "w": 4
     },
     {
-     "l": 1,
+     "l": 0,
+     "name": "Sydney Sixers Women",
+     "nr": 0,
+     "nrr": 1.316,
+     "p": 4,
+     "pos": 2,
+     "pts": 8,
+     "t": 0,
+     "team": "SS-W",
+     "w": 4
+    },
+    {
+     "l": 2,
      "name": "Sydney Thunder Women",
      "nr": 0,
-     "nrr": 0.739,
-     "p": 3,
+     "nrr": 0.481,
+     "p": 4,
      "pos": 3,
      "pts": 4,
      "t": 0,
@@ -5625,27 +5410,27 @@
      "w": 2
     },
     {
-     "l": 3,
-     "name": "Melbourne Stars Women",
-     "nr": 0,
-     "nrr": -0.238,
-     "p": 4,
-     "pos": 6,
-     "pts": 2,
-     "t": 0,
-     "team": "MS-W",
-     "w": 1
-    },
-    {
      "l": 2,
      "name": "Adelaide Strikers Women",
      "nr": 0,
      "nrr": -0.483,
      "p": 3,
-     "pos": 7,
+     "pos": 6,
      "pts": 2,
      "t": 0,
      "team": "AS-W",
+     "w": 1
+    },
+    {
+     "l": 4,
+     "name": "Melbourne Stars Women",
+     "nr": 0,
+     "nrr": -0.611,
+     "p": 5,
+     "pos": 7,
+     "pts": 2,
+     "t": 0,
+     "team": "MS-W",
      "w": 1
     },
     {
