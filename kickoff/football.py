@@ -180,7 +180,10 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         if parts:
             football += f"<h3>{r.esc(name)}</h3>{parts}"
     if fa_cup:
-        top_ids = {x["id"] for x in rows["eng.1"] or []} | {x["id"] for x in guard("Championship table", espn.get_table, "eng.2") or []}
+        pyr = facup.pyramid(lambda lg: rows["eng.1"] if lg == "eng.1" and rows.get("eng.1") else espn.get_table(lg))
+        fa_cup = [m for m in fa_cup if facup.matters(m, pyr)]          # only the ties that matter (D, 2026-11-08); the stories below use this list too
+    if fa_cup:
+        top_ids = {k for k, v in pyr.items() if v <= 44}
         football += facup.html(fa_cup, top_ids) + season_out["fa"]
         overviews["FA Cup"] = overview.matchday_facts("FA Cup", fa_cup, {}, None)      # so its big results can make the headlines
     wsl_res = guard("Women's Super League results", espn.recent_results, espn.WSL, day) or []

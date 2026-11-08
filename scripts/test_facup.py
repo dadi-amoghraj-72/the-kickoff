@@ -53,5 +53,18 @@ check("independent: for the first five ties the printed score equals the raw com
 check("the first-round Saturday is 33 ties not yet played: nothing is shown (an unfinished tie never appears)", len(first) == 33 and not any(m["completed"] for m in first) and facup.html(first, set()) == "")
 check("no matches means no block", facup.html([], set()) == "")
 
+# ---- only the ties that matter (D, 2026-11-08) ----
+_rows = lambda prefix, n: [{"id": f"{prefix}{k}"} for k in range(1, n + 1)]  # noqa: E731
+_tables = {"eng.1": _rows("p", 20), "eng.2": _rows("c", 24), "eng.3": _rows("o", 24), "eng.4": _rows("t", 24), "eng.5": _rows("n", 24)}
+_pyr = facup.pyramid(lambda lg: _tables[lg])
+check("the pyramid: Premier League 1-20, Championship 21-44, League One 45-68, League Two 69-92, National League 93-116", (_pyr["p1"], _pyr["c1"], _pyr["o1"], _pyr["t24"], _pyr["n24"]) == (1, 21, 45, 92, 116))
+_m = lambda h, a, hs, as_, w=None: {"home": {"id": h}, "away": {"id": a}, "home_score": hs, "away_score": as_, "winner": w}  # noqa: E731
+check("a Premier League club playing always counts, win or lose", facup.matters(_m("p5", "n3", 4, 0, "home"), _pyr) and facup.matters(_m("o3", "p18", 1, 0, "home"), _pyr))
+check("a Championship club beaten by a lower club counts (League One's 10th beats the Championship's 12th)", facup.matters(_m("o10", "c12", 2, 1, "home"), _pyr))
+check("a Championship club winning, against anyone below, does not", not facup.matters(_m("c12", "o10", 2, 1, "home"), _pyr))
+check("a giant-killing of 20 places or more counts (National League 5th beats League One 20th: 97 v 64, 33 places)", facup.matters(_m("n5", "o20", 1, 0, "home"), _pyr))
+check("an ordinary early-round tie does not (League Two 3rd beats National League 10th; a club below the National League beats another)", not facup.matters(_m("t3", "n10", 3, 0, "home"), _pyr) and not facup.matters(_m("x1", "x2", 2, 0, "home"), _pyr))
+check("a tie settled on penalties uses the winner ESPN names (League Two 20th beats League One 2nd on penalties: 88 v 46, 42 places)", facup.matters(_m("t20", "o2", 1, 1, "home"), _pyr))
+check("a club below the National League beating a League Two side counts (117 v 70)", facup.matters(_m("x9", "t2", 1, 0, "home"), _pyr))
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

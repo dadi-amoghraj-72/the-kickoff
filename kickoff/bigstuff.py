@@ -50,17 +50,39 @@ def select(stories, weekday):
     return out
 
 
+STARS_PER_MATCH = 2      # D, 2026-11-08: one Test's three centuries cannot fill the list
+
+
+def two_per_match(best):
+    """At most two performances from one match: its best, then the best of the other discipline when there is one (a six-for beside a double hundred), else its
+    next best. best: sorted best first; performances with no match (NBA, football) pass through."""
+    by_match = {}
+    for p in best:
+        if p.get("match"):
+            by_match.setdefault(p["match"], []).append(p)
+    keep = set()
+    for ps in by_match.values():
+        first = ps[0]
+        other = next((p for p in ps[1:] if p.get("disc") and p.get("disc") != first.get("disc")), None)
+        keep.update(id(p) for p in [first, other or (ps[1] if len(ps) > 1 else None)] if p)
+    return [p for p in best if not p.get("match") or id(p) in keep]
+
+
 def stars(perfs, limit=STARS_MAX):
     """Stars Of The Night (D, 2026-11-05: was one Performance of the Day): up to three individual performances on the common 0-100 scale, each at least PERFORMANCE_MIN, best first (D's own
     players win ties); at most two from one sport, so one sport cannot fill the list."""
     best = sorted((p for p in perfs if p.get("kind") == "perf" and p["score"] >= importance.PERFORMANCE_MIN), key=lambda p: (-p["score"], not p.get("mine", False), p["text"]))
-    out, per = [], {}
+    best = two_per_match(best)
+    out, per, per_match = [], {}, {}
+    room = lambda p: not p.get("match") or per_match.get(p["match"], 0) < STARS_PER_MATCH  # noqa: E731
     for p in best:
-        if len(out) < limit and per.get(p["sport"], 0) < STARS_PER_SPORT:
+        if len(out) < limit and per.get(p["sport"], 0) < STARS_PER_SPORT and room(p):
             per[p["sport"]] = per.get(p["sport"], 0) + 1
+            per_match[p.get("match")] = per_match.get(p.get("match"), 0) + 1
             out.append(p)
     for p in best:                                          # a century or a five-wicket haul always makes it (D, 2026-11-05), up to five stars in all
-        if p.get("milestone") and p not in out and len(out) < STARS_MILESTONE_MAX:
+        if p.get("milestone") and p not in out and len(out) < STARS_MILESTONE_MAX and room(p):
+            per_match[p.get("match")] = per_match.get(p.get("match"), 0) + 1
             out.append(p)
     return out
 

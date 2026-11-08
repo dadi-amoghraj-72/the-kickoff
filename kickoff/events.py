@@ -182,6 +182,16 @@ def kohli_innings(entry):
     return out
 
 
+# A bowling haul as the runs it is worth for the Stars (D, 2026-11-08): five wickets are a hundred in any format; each wicket after that is worth more the
+# shorter the game, because the bowler had fewer overs (4 in a T20, 10 in an ODI). The figure then scores like a century; fewer runs conceded breaks a tie.
+HAUL_RUNS = {"t20": {5: 100, 6: 150, 7: 200, 8: 250}, "odi": {5: 100, 6: 125, 7: 150, 8: 200}, "test": {5: 100, 6: 115, 7: 130, 8: 150}}
+
+
+def haul_runs(wickets, fmt):
+    table = HAUL_RUNS.get(fmt or "test", HAUL_RUNS["test"])
+    return table[min(max(wickets, 5), 8)]
+
+
 def kohli_perf(runs):
     """His innings on the 0-100 Performance of the Day scale: 30 plus 0.9 a run plus 15 because he is D's favourite player. A duck stays under the bar; 28 runs clears it."""
     return 30 + 0.9 * runs + 15
@@ -246,7 +256,8 @@ def cricket(picked, cards, weekday, reported=(), changed=None, now=None):
                 if key in reported or f"{m['id']}|{who}|10w" in reported:
                     continue
                 new_keys.add(key)
-                p = {**perf("cricket", cricket_mod.standout_text(o, short=True), 80 + 5 * (o["wickets"] - 5) + bonus, mine), "milestone": True}
+                eq = haul_runs(o["wickets"], m.get("matchType"))
+                p = {**perf("cricket", cricket_mod.standout_text(o, short=True), min(100, 85 + 0.3 * (eq - 100) + (8 if eq >= 150 else 0) + bonus) - 0.01 * o.get("runs_conceded", 0), mine), "milestone": True}
             elif kind == "ten-for":
                 key = f"{m['id']}|{who}|10w"
                 if key in reported:
@@ -261,7 +272,7 @@ def cricket(picked, cards, weekday, reported=(), changed=None, now=None):
                 p = perf("cricket", cricket_mod.standout_text(o, short=True), min(95, 72 + 0.2 * (o["runs"] - 50) + 0.4 * (cricket_mod.FAST_FIFTY_BALLS - o["balls"]) + bonus), mine)
             else:
                 continue
-            perfs.append(p)
+            perfs.append({**p, "match": m["id"], "disc": "bowl" if kind in ("five-for", "ten-for") else "bat"})
     return out, perfs, new_keys
 
 

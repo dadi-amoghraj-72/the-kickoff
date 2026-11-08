@@ -66,7 +66,12 @@ check("every Test century of the day is a milestone Star candidate: " + ", ".joi
 check("Hridoy's 242* is one line, not three (100, 150 and 200 at once)", sum(1 for e in perfs if e["text"].startswith("Towhid Hridoy")) == 1)
 check("Hasan Mahmud's six-for is a milestone too", any(e["text"].startswith("Hasan Mahmud (BAN): 6/90") for e in perfs), [e["text"][:40] for e in perfs])
 stars = bigstuff.stars(perfs)
-check("Stars Of The Night takes the milestones (up to five)", len(stars) == 5 and all(s.get("milestone") for s in stars), [s["text"][:30] for s in stars])
+check("Stars Of The Night takes the milestones, at most two from one match (D, 2026-11-08): two Tests here, so four", len(stars) == 4 and all(s.get("milestone") for s in stars)
+      and max(sum(1 for x in stars if x.get("match") == s.get("match")) for s in stars) <= 2, [s["text"][:30] for s in stars])
+check("a match's second place goes to the other discipline: Hasan Mahmud's six-for joins Hridoy's 242*, ahead of Jangoo's 133 from the same Test", any(s["text"].startswith("Hasan Mahmud") for s in stars), [s["text"][:30] for s in stars])
+from kickoff import events as _ev  # noqa: E402
+check("the haul scale: five wickets are a hundred in every format; seven are a 200 in a T20, a 150 in an ODI, a 130 in a Test",
+      [_ev.haul_runs(5, f) for f in ("t20", "odi", "test")] == [100, 100, 100] and [_ev.haul_runs(7, f) for f in ("t20", "odi", "test")] == [200, 150, 130] and _ev.haul_runs(9, "t20") == 250)
 again = cricket.run(now, espn.window_start(date(2026, 11, 8)), got["state"], lambda: ([], 0), lambda i: (_ for _ in ()).throw(RuntimeError("no key")), lambda u: 0,
                     espn_card=get_card, espn_table=get_table, espn_series=get_series, espn_extra=lambda ms: cricket.espn_matches(espn_cricket.Feed(get_json=replay, pause=0)))
 check("a milestone is announced once: the next run with the same scores repeats none", not [e for e in again["events"] if e.get("milestone")], [e["text"][:40] for e in again["events"] if e.get("milestone")])

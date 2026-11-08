@@ -130,8 +130,13 @@ def football(src, now, end, weekday, watch=False):
                 if lg == espn.CHAMPIONS_LEAGUE:
                     if stage == "top" and not (listed or mine):                    # a league-phase game without a listed club
                         continue
-                elif lg == espn.FA_CUP:
-                    if stage == "regular" and not (mine or listed):
+                elif lg == espn.FA_CUP:                                            # D, 2026-11-08: only ties with a Premier League club (an upset is only known after)
+                    if "eng.1" not in tables:
+                        try:
+                            tables["eng.1"] = {r["id"]: r["rank"] for r in src.table("eng.1")}
+                        except Exception:
+                            tables["eng.1"] = {}
+                    if not (mine or listed or any(i in tables["eng.1"] for i in ids)):
                         continue
                 elif lg != espn.WSL and not (mine or listed) and not (lg == "eng.1" and thin):
                     continue
