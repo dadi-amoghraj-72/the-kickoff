@@ -16,11 +16,14 @@
     "rugby:603995",
     "rugby:603996",
     "rugby:603997",
-    "maj:2026 Men's Asian Champions Trophy"
+    "maj:2026 Men's Asian Champions Trophy",
+    "rugby:603998"
   ],
   "stories": {},
   "ufc": {
-    "done": []
+    "done": [
+      "600061268"
+    ]
   },
   "ufcrank": {
     "month": "2026-11",

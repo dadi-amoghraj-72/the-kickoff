@@ -1,7 +1,11 @@
 {
-  "closed": [],
+  "closed": [
+    "2026-drivers",
+    "2026-constructors"
+  ],
   "pending": {},
   "reported": [
-    "2026-20-qualifying"
+    "2026-20-qualifying",
+    "2026-20-race"
   ]
 }
