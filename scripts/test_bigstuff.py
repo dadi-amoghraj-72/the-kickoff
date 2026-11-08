@@ -149,6 +149,8 @@ check("the scores are gold and the rest is plain: '504 (134.3)' and '113/1 (35)'
       '<span class="n">504 (134.3)</span>' in _fb and '<span class="n">113/1 (35)</span>' in _fb and '<span class="n">2</span>' not in _fb and "Day 2:" in _fb, _fb)
 check("a tennis line's sets are gold, an F1 winner line has nothing to gold", bigstuff.gold_scores("Tennis: Sinner beat Alcaraz 6\u20134 7\u20136 in the final") == 'Tennis: Sinner beat Alcaraz <span class="n">6\u20134 7\u20136</span> in the final'
       and "<span" not in bigstuff.gold_scores("F1: Max Verstappen wins the Brazilian Grand Prix"))
+_pl = events.f1_pole([("Brazilian Grand Prix", "Lando Norris", "McLaren", "1:27.470")])[0]
+check("F1 pole reads 'On pole · Lando Norris · Brazilian Grand Prix · 1:27.470' with 'On pole' in gold (D, 2026-11-08)", '<li><span class="n">On pole</span> \u00b7 Lando Norris \u00b7 Brazilian Grand Prix \u00b7 1:27.470</li>' in bigstuff.html([_pl]), bigstuff.html([_pl]))
 check("the Telegram headlines keep the sport prefix on every line (they stand alone)", bigstuff.headlines(_gs)[0] == "Champions League: Arsenal 2\u20131 Slavia Prague")
 
 # ---- review of the first real rehearsal (D, 2026-11-05)

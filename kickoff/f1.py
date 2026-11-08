@@ -478,7 +478,7 @@ def run(now, window_start, st, api, season="current", story=None):
         races = [(next(x["raceName"] for x in schedule if str(x["season"]) == str(s_) and int(x["round"]) == int(r_)), _full(rows[0]), team(rows[0]["Constructor"]["name"]))
                  for (s_, r_, k_), rows in race_rows.items() if k_ == "race" and rows]
         story_events = events.f1(races)
-        poles = [(next(x["raceName"] for x in schedule if str(x["season"]) == str(s_) and int(x["round"]) == int(r_)), _full(rows[0]), team(rows[0]["Constructor"]["name"]))
+        poles = [(next(x["raceName"] for x in schedule if str(x["season"]) == str(s_) and int(x["round"]) == int(r_)), _full(rows[0]), team(rows[0]["Constructor"]["name"]), best_time(rows[0])[1])
                  for (s_, r_, k_), rows in race_rows.items() if k_ == "qualifying" and rows]
         story_events += events.f1_pole(poles)
     except Exception:

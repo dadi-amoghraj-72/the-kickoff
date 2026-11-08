@@ -57,7 +57,7 @@ def _table_html(name, rows, before=None, gap_before=None):
     body = [[x.get("short") or x["team"], x["played"], f"{x['gd']:+d}", x["points"], movement(x, before)] for x in rows]
     body = [[x["rank"]] + b for x, b in zip(rows, body)]
     gold = [("hl" if is_arsenal(x) else "") + (" gapabove" if i == gap_before else "") for i, x in enumerate(rows)]       # D: Arsenal's row in gold in a league table
-    return r.table(name, COLUMNS, body, zones=zones, row_classes=gold)
+    return r.title_row(r.table(name, COLUMNS, body, zones=zones, row_classes=gold))
 
 
 def block(name, rows, decision, leaders="", before=None):
@@ -71,7 +71,7 @@ def block(name, rows, decision, leaders="", before=None):
         return _table_html(name, rows, before) + leaders
     top, rest = rows[:6], rows[6:]
     ars = next((x for x in rest if is_arsenal(x)), None)
-    html = _table_html(f"{name}: top 6", top + ([ars] if ars else []), before, gap_before=6 if ars else None)     # Arsenal outside the top 6: their own row, set apart (D, 2026-11-08)
+    html = _table_html(f"{name} (top 6 only)", top + ([ars] if ars else []), before, gap_before=6 if ars else None)     # Arsenal outside the top 6: their own row, set apart (D, 2026-11-08)
     yours = [x for x in rest if is_listed(x["id"]) and not is_arsenal(x)]
     if yours:
         line = ", ".join(f"{code(x['id'], x['abbr'])} {ordinal(x['rank'])} ({x['points']} pts)" for x in yours)

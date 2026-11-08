@@ -154,7 +154,7 @@ check("every team's played = won + lost + tied + no result, and the points are 2
 check("abbreviations are the official ones, with the '-W' kept (D, 2026-11-04: IND-W, AUS-W)", [x["team"] for x in rows] == ["SS-W", "ST-W", "PS-W", "AS-W", "MS-W", "BH-W", "MR-W", "HH-W"], [x["team"] for x in rows])
 th = ck.table_html("WBBL", rows)
 check("the table block: caption, numbers right-aligned, signed three-place NRR, no Ties column when nobody has tied",
-      "<caption>WBBL table</caption>" in th and "+2.250" in th and "-2.625" in th and "<th class=\"n\">T</th>" not in th and th.count("<tr>") == 8 + 1, th[:300])
+      ">WBBL table</th>" in th and "+2.250" in th and "-2.625" in th and "<th class=\"n\">T</th>" not in th and th.count("<tr>") == 8 + 2, th[:300])
 tied = [dict(x) for x in rows]
 tied[0].update(t=1, p=3, pts=5)
 check("a Ties column appears when a team has tied", "<th class=\"n\">T</th>" in ck.table_html("WBBL", tied))
@@ -172,9 +172,9 @@ check("the Source finds a league's table from the scores page's series id", tbl 
 check("the table is read once per series", (src_.table(wbbl), src_.fetched)[1] == 2, src_.fetched)
 out_t = ck.run(NOW, START, {}, lambda: (M, 17), paid, src.scorecards_affordable, espn_card=fresh_card, espn_table=src_.table)
 check("in the block the WBBL table follows the WBBL results and the International section has none",
-      out_t["html"].index("<h3>WBBL</h3>") < out_t["html"].index("WBBL table") < out_t["html"].index("<h3>Standouts</h3>") and out_t["html"].count("<caption>") == 1, out_t["html"].count("<caption>"))
-check("without a table source nothing changes", "<caption>" not in ck.run(NOW, START, {}, lambda: (M, 17), paid, src.scorecards_affordable, espn_card=fresh_card)["html"])
-check("a failing table fetch leaves the results and no table", "<caption>" not in ck.run(NOW, START, {}, lambda: (M, 17), paid, src.scorecards_affordable, espn_card=fresh_card,
+      out_t["html"].index("<h3>WBBL</h3>") < out_t["html"].index("WBBL table") < out_t["html"].index("<h3>Standouts</h3>") and out_t["html"].count('class="tt"') == 1, out_t["html"].count("<caption>"))
+check("without a table source nothing changes", 'class="tt"' not in ck.run(NOW, START, {}, lambda: (M, 17), paid, src.scorecards_affordable, espn_card=fresh_card)["html"])
+check("a failing table fetch leaves the results and no table", 'class="tt"' not in ck.run(NOW, START, {}, lambda: (M, 17), paid, src.scorecards_affordable, espn_card=fresh_card,
                                                                                           espn_table=ec.Source(lambda u: (_ for _ in ()).throw(OSError("down")), pause=0).table)["html"])
 
 # ---- Player of the match, standouts under the scorecard, Tests every day, World Cups ----

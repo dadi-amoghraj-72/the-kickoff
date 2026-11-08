@@ -129,7 +129,8 @@ def _grouped(stories):
     return out
 
 
-SCORE = re.compile(r"\d+\u2013\d+(?: \d+\u2013\d+)*"                       # a score: 3\u20131, 33\u201310, tennis sets 6\u20134 7\u20135
+SCORE = re.compile(r"^On pole\b"                                         # F1: 'On pole · Lando Norris · ...' (D, 2026-11-08)
+                   r"|\d+\u2013\d+(?: \d+\u2013\d+)*"                       # a score: 3\u20131, 33\u201310, tennis sets 6\u20134 7\u20135
                    r"|\d+(?:/\d+)?[d*]? \(\d+(?:\.\d)?\)"                   # a cricket innings: 504 (134.3), 113/1 (35), Kohli's 74* (51)
                    r"|(?<=won by )\d+ (?:runs?|wickets?)")                  # a cricket margin: India won by 5 wickets
 

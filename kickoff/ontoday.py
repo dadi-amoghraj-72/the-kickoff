@@ -67,7 +67,7 @@ def is_big(f):
 
 def dont_miss(chosen, cap=MAX_DONT_MISS):
     """Up to `cap` big games, the most important first by score, then shown in time order."""
-    best = sorted((f for f in chosen if is_big(f)), key=lambda f: (-f["score"], f["when"]))[:cap]
+    best = sorted((f for f in chosen if is_big(f)), key=lambda f: (-f["score"], f.get("ranks", 99), f["when"]))[:cap]      # equal scores: the higher-placed clubs first
     return sorted(best, key=lambda f: f["when"])
 
 

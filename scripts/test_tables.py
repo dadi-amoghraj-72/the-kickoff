@@ -26,12 +26,12 @@ def check(name, ok, detail=""):
 
 # 1. No saved state yet: show the full table and remember it
 html, st = tables.tables_html({"eng.1": PL}, {}, WED, LEAGUES)
-check("first run shows the full table (20 rows)", html.count("<tr") == 21, html.count("<tr"))
+check("first run shows the full table (20 rows, the header and the title row)", html.count("<tr") == 22, html.count("<tr"))
 check("first run saves a snapshot", st["eng.1"]["published"] == "2026-11-04" and len(st["eng.1"]["rows"]) == 20)
 
 # 2. Tuesday is full-table day even when nothing changed
 html2, st2 = tables.tables_html({"eng.1": PL}, st, TUE, LEAGUES)
-check("Tuesday shows the full table even if unchanged", html2.count("<tr") == 21)
+check("Tuesday shows the full table even if unchanged", html2.count("<tr") == 22)
 
 # 3. Unchanged midweek: one line, state untouched
 html3, st3 = tables.tables_html({"eng.1": PL}, st2, THU, LEAGUES)
@@ -42,7 +42,7 @@ check("unchanged table leaves the snapshot alone", st3 == st2)
 moved = copy.deepcopy(PL)
 moved[10]["points"] += 3
 html4, st4 = tables.tables_html({"eng.1": moved}, st2, THU, LEAGUES)
-check("changed table shows top 6 only (7 rows with the header)", html4.count("<tr") == 7, html4.count("<tr"))
+check("changed table shows top 6 only (6 rows, the header and the title row 'Table (top 6 only)', D 2026-11-08)", html4.count("<tr") == 8 and '(top 6 only)</th>' in html4, html4.count("<tr"))
 outside = [x for x in PL[6:] if tables.is_listed(x["id"])]
 check("line names the listed clubs outside the top 6",
       all(tables.code(x["id"]) in html4 for x in outside) and "Other major clubs: " in html4, [x["team"] for x in outside])
@@ -117,7 +117,7 @@ _wsl = [_mk(1, "Man City", "382x", "MCI"), _mk(2, "Chelsea", "363x", "CHE"), _mk
         _mk(6, "Brighton", "2", "BHA"), _mk(7, "Aston Villa", "3", "AVL"), _mk(8, "Everton", "4", "EVE"), _mk(9, "Arsenal", "19973", "ARS"), _mk(10, "Liverpool", "364x", "LIV")]
 _h = tables.block("Table", _wsl, {"mode": "top6"})
 check("D, 2026-11-08: Arsenal outside the top 6 get their own row in the table, set apart and in gold (Arsenal Women 9th in the WSL)",
-      _h.count("<tr") == 8 and '<tr class="hl gapabove"><td class="n">9</td><td class="">Arsenal</td>' in _h and "Aston Villa" not in _h, _h[-600:])
+      _h.count("<tr") == 9 and '<tr class="hl gapabove"><td class="n">9</td><td class="">Arsenal</td>' in _h and "Aston Villa" not in _h, _h[-600:])
 check("and are not repeated in the 'Other major clubs' line", "Other major clubs" not in _h or "ARS" not in _h.split("Other major clubs")[1])
 _top = tables.block("Table", [_wsl[8]] + _wsl[:8], {"mode": "top6"})
 check("Arsenal inside the top 6: no extra row", _top.count("gapabove") == 0)

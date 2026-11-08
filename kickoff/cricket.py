@@ -344,7 +344,7 @@ def table_html(label, rows):
     columns = [("#", True), ("Team", False), ("P", True), ("W", True), ("L", True)] + ([("T", True)] if ties else []) + [("NR", True), ("Pts", True), ("NRR", True)]
     body = [[x["pos"], x["team"], x["p"], x["w"], x["l"]] + ([x["t"]] if ties else []) + [x["nr"], x["pts"], f"{x['nrr']:+.3f}" if x["nrr"] is not None else ""] for x in rows]
     gold = ["hl" if label == "IPL" and x["team"] in ("SRH", "Sunrisers Hyderabad") else "" for x in rows]       # D: Sunrisers Hyderabad's row in gold
-    return f'<div class="pts">{r.table(f"{label} table", columns, body, row_classes=gold)}</div>'
+    return f'<div class="pts">{r.title_row(r.table(f"{label} table", columns, body, row_classes=gold))}</div>'
 
 
 def results_html(picked, cards=None, tables=None, series=None, from_innings=None, now=None):

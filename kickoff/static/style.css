@@ -504,3 +504,6 @@ footer .edno { display: block; margin-top: 10px; text-align: right; font-size: 1
 
 /* Arsenal below a top 6 (D, 2026-11-08): their own row, set apart by a strip of the page colour */
 tr.gapabove td { border-top: 12px solid var(--pitch); }
+
+/* A table's title as its own top row, inside the table (D, 2026-11-08): league, rugby and cricket points tables, like the F1 tables */
+table th.tt { text-align: center; font-size: 16px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 8px 8px; }

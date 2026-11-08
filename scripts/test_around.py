@@ -259,7 +259,7 @@ rs = Src(rugby={"180659": six_now})
 rs.tables = {"180659": {"children": [{"standings": {"entries": [{"team": {"displayName": "France"}, "stats": [{"name": "gamesPlayed", "displayValue": "1"}, {"name": "gamesWon", "displayValue": "1"},
              {"name": "gamesLost", "displayValue": "0"}, {"name": "pointsDifference", "displayValue": "+12"}, {"name": "points", "displayValue": "5"}]}]}}]}}
 rt = around.run(NOW, {}, rs, None)["sections"][0]["html"]
-check("a morning with a Six Nations result shows the Six Nations table under the rugby results", rt.index('">Rugby</h4>') < rt.index("Ireland 43") < rt.index("<caption>Six Nations</caption>"), rt[:400])
+check("a morning with a Six Nations result shows the Six Nations table under the rugby results", rt.index('">Rugby</h4>') < rt.index("Ireland 43") < rt.index(">Six Nations</th>"), rt[:400])
 around.notes.call_json = real_call
 
 # ---- the edition -------------------------------------------------------------------------------------------

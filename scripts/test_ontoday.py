@@ -263,6 +263,14 @@ check("Don't Miss holds three at most, in time order", ontoday.dont_miss(_dm + [
       == sorted(ontoday.dont_miss(_dm + [fx("tennis", "ATP", "Tennis: ATP Finals final", utc(2026, 11, 7, 12, 0), 10, stage="final")]), key=lambda f: f["when"]) and len(ontoday.dont_miss(_dm + [fx("tennis", "ATP", "Tennis: ATP Finals final", utc(2026, 11, 7, 12, 0), 10, stage="final")])) == 3)
 check("the F1 race, qualifying and sprint are Don't Miss (D, 2026-11-08); practice is not", ontoday.is_big(fx("f1", "F1", "F1: Brazilian Grand Prix \u00b7 Race", utc(2026, 11, 8, 17, 0), 9, stage="final")) and ontoday.is_big(_dm[5])
       and ontoday.is_big(fx("f1", "F1", "F1: Brazilian Grand Prix \u00b7 Sprint", utc(2026, 11, 8, 17, 0), 8, stage="knockout")) and not ontoday.is_big(fx("f1", "F1", "F1: Brazilian Grand Prix \u00b7 Practice 1", utc(2026, 11, 8, 17, 0), 3)))
+from kickoff import importance as _imp  # noqa: E402
+check("a Test under way is a running story in On Today: above a listed club's routine league game, below D's teams and the big games (D, 2026-11-08)",
+      _imp.story_score("football", "regular", False, True) < _imp.RUNNING_STORY < _imp.story_score("football", "regular", True) and _imp.RUNNING_STORY < _imp.story_score("football", "regular", False, True, margin_bonus=2))
+_a = fx("football", "La Liga", "La Liga: Atlético Madrid v Barcelona", utc(2026, 11, 8, 20, 0), 6, flags={"clash"}); _a["ranks"] = 7
+_b = fx("football", "Serie A", "Serie A: Internazionale v Como", utc(2026, 11, 8, 17, 0), 6, flags={"clash"}); _b["ranks"] = 5
+_c = fx("football", "Bundesliga", "Bundesliga: Mainz v Bayern Munich", utc(2026, 11, 8, 14, 30), 6, flags={"clash"}); _c["ranks"] = 12
+check("Don't Miss among equal big matches: the higher-placed clubs first (Inter v Como, then Atlético v Barcelona, before Mainz v Bayern)",
+      [f["text"] for f in ontoday.dont_miss([_c, _a, _b], cap=2)] == ["Serie A: Internazionale v Como", "La Liga: Atlético Madrid v Barcelona"])
 check("no big game: no Don't Miss heading", "Don't Miss" not in ontoday.today_html([_dm[0], _dm[2]]))
 many = [fixtures.fixture("nba", "NBA", f"NBA: game {i}", utc(2026, 11, 5, 1 + i % 10, 0), float(i)) for i in range(20)]
 check("On Today never lists more than 12 lines; the cut keeps the highest scores, back in time order", len(ontoday.pick_today(many)) == 12 and min(f["score"] for f in ontoday.pick_today(many)) == 8.0)

@@ -150,10 +150,14 @@ def football(src, now, end, weekday, watch=False):
                             tables[lg] = {}
                     if all(tables[lg].get(i, 99) <= TOP for i in ids):
                         flags.add("clash")
+                if all(clubs.is_listed(i) for i in ids):                    # two of the big clubs meeting (Atlético v Barcelona, Inter v Milan) is a big match, wherever they stand (D, 2026-11-08)
+                    flags.add("clash")
                 score = importance.story_score("football", stage, mine, listed, margin_bonus=2 if flags else 0, weekday=weekday)
                 if live:
                     flags.add("live")
-                out.append(fixture("football", name, f"{name.replace('UEFA ', '')}: {m['home']['name']} v {m['away']['name']}", now if live else when, score, mine, stage, flags))
+                f_ = fixture("football", name, f"{name.replace('UEFA ', '')}: {m['home']['name']} v {m['away']['name']}", now if live else when, score, mine, stage, flags)
+                f_["ranks"] = sum(tables.get(lg, {}).get(i, 30) for i in ids)       # the two clubs' table places: lower is the bigger meeting (Don't Miss tie-break)
+                out.append(f_)
     return out
 
 
@@ -282,8 +286,11 @@ def cricket(src, now, end, weekday):
         teams, first = cricket_mod.heading(m)
         first = f"{first} \u00b7 Day {day}" if day and first else first                  # a Test says which day (D, 2026-11-05)
         label = c.get("label", "")
+        score = importance.story_score("cricket", stage, mine, weekday=weekday)
+        if day and c["kind"] == "international":                             # a Test already under way: a running story (D, 2026-11-08)
+            score = max(score, importance.RUNNING_STORY)
         out.append(fixture("cricket", label or "Cricket", f"Cricket: {teams}" + (f" · {first}" if first else "") + (f" ({label})" if label and label != "International" else ""),
-                           now if live else at, importance.story_score("cricket", stage, mine, weekday=weekday), mine, stage, {"live"} if live else ()))
+                           now if live else at, score, mine, stage, {"live"} if live else ()))
     return out
 
 

@@ -201,9 +201,9 @@ check("qualifying published but race not: the qualifying table shows, the race w
       and "Mexico City Grand Prix race" in mixed["html"] and mixed["state"]["reported"] == ["2026-19-qualifying"], mixed["state"])
 check("a race shown this morning really reaches The Big Stuff from the F1 run (it never did: the round was compared as text with a number; found 8 Nov)",
       [e["text"] for e in out["events"] if "wins the" in e["text"]] == ["F1: Kimi Antonelli wins the United States Grand Prix for Mercedes"], [e["text"] for e in out["events"]])
-_pole = [e for e in mixed["events"] if "on pole" in e["text"]]
+_pole = [e for e in mixed["events"] if "On pole" in e["text"]]
 check("qualifying shown this morning: pole is a Big Stuff story that can make the headlines, below a race win, without promoting the F1 section (D, 2026-11-08)",
-      len(_pole) == 1 and _pole[0]["text"].startswith("F1: ") and "on pole for the Mexico City Grand Prix" in _pole[0]["text"] and not _pole[0].get("promote")
+      len(_pole) == 1 and _pole[0]["text"].startswith("F1: On pole \u00b7 ") and "\u00b7 Mexico City Grand Prix \u00b7 " in _pole[0]["text"] and not _pole[0].get("promote")
       and _pole[0]["score"] < [e for e in out["events"] if "wins the" in e["text"]][0]["score"], [e["text"] for e in mixed["events"]])
 down = f1.run(SGT_MORNING, W, {}, FakeApi(results_for={18: RACE18}, broken=[("results", 18)]))
 check("a source failure on one session is kept pending, counted, and does not raise", down["stats"]["failed"] == 1 and "2026-18-race" in down["state"]["pending"] and "Not published" in down["html"], down["stats"])

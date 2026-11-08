@@ -97,6 +97,14 @@ def move(n):
     return "–" if not n else (f"▲{n}" if n > 0 else f"▼{-n}")
 
 
+def title_row(html):
+    """A table() whose caption becomes its own title row across the top, inside the table (D, 2026-11-08: 'Table (top 6 only)' as the table's header, not a loose line above it)."""
+    def to_row(m):
+        cols = len(re.findall(r"<th\b", m.group(2)))
+        return f'<thead><tr><th class="tt" colspan="{cols}">{m.group(1)}</th></tr>{m.group(2)}'
+    return re.sub(r"<caption>(.*?)</caption><thead>(<tr>.*?</tr>)", to_row, html, count=1, flags=re.S)
+
+
 def compact(html, widths, extra=""):
     """Wrap a table from table() in the compact fixed-layout style (even column widths in per cent): the caption becomes a centred title
     row across the top of the table, and the widths go in a colgroup because a fixed layout reads them from the first row (the title)."""

@@ -42,5 +42,5 @@ def table_html(league, data):
         if not pool:
             continue
         body = [[i, x["team"], x["p"], x["w"], x["l"], f"{x['pd']:+d}", x["pts"]] for i, x in enumerate(ranked(pool), 1)]
-        out += r.table(caption, COLUMNS, body)
+        out += r.title_row(r.table(caption, COLUMNS, body))
     return f'<div class="rugbyt">{out}</div>'
