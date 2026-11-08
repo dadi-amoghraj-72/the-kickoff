@@ -29,7 +29,7 @@ results = [
     check("default order",
           ids(FULL),
           ["big-stuff", "on-today", "arsenal", "football", "cricket", "nba", "nfl", "mlb",
-           "young-guns", "around", "stories"]),
+           "young-guns", "f1", "tennis", "around", "stories"]),
     check("cricket lead moves cricket above football",
           ids(FULL, lead="cricket")[:5], ["big-stuff", "on-today", "cricket", "arsenal", "football"]),
     check("arsenal lead keeps Arsenal and Football together, first",
@@ -47,11 +47,11 @@ big = next(s for s in assemble(FULL, promoted=["f1", "tennis"]) if s["id"] == "b
 results.append(check("Big Stuff mentions F1 and tennis",
                      ["F1 headline" in big["html"], "Tennis headline" in big["html"]], [True, True]))
 
-# Without a promotion, F1 and tennis sit first inside Around The Sporting World
+# Without a promotion, F1 and tennis are still their own sections (D, 2026-11-08: the rail showed no helmet when F1 sat inside Around), before Around, which keeps the other sports
 around = next(s for s in assemble(FULL) if s["id"] == "around")
-results.append(check("Around lists F1, then Tennis, then Other Sports",
-                     [around["html"].index(f"<h3>{t}</h3>") for t in ("F1", "Tennis", "Other Sports")] ==
-                     sorted(around["html"].index(f"<h3>{t}</h3>") for t in ("F1", "Tennis", "Other Sports")), True))
+results.append(check("F1 and tennis are their own sections in Around's place; Around holds only the other sports",
+                     ["<h3>F1</h3>" in around["html"], "<h3>Tennis</h3>" in around["html"], "<h3>Other Sports</h3>" in around["html"],
+                      ids(FULL).index("f1") < ids(FULL).index("tennis") < ids(FULL).index("around")], [False, False, True, True]))
 
 # Missing content is skipped, and a promotion with no Big Stuff creates one
 thin = {k: FULL[k] for k in ("on-today", "f1", "stories")}

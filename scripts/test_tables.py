@@ -112,5 +112,14 @@ check("independent: exactly one row in the table has it, and it is the row of th
 changed = tables.block("Premier League", PL, {"mode": "changed"})
 check("the 'top 6' view has it too when Arsenal is in it", changed.count("hl") >= 1 if any(x["short"] == "Arsenal" and x["rank"] <= 6 for x in PL) else True)
 
+_mk = lambda i, team, tid, abbr: {"rank": i, "team": team, "short": team, "id": tid, "abbr": abbr, "played": 8, "gd": 10 - i, "points": 30 - 2 * i, "zone": ""}  # noqa: E731
+_wsl = [_mk(1, "Man City", "382x", "MCI"), _mk(2, "Chelsea", "363x", "CHE"), _mk(3, "London City", "1", "LCL"), _mk(4, "Spurs", "367x", "TOT"), _mk(5, "Man Utd", "360x", "MUN"),
+        _mk(6, "Brighton", "2", "BHA"), _mk(7, "Aston Villa", "3", "AVL"), _mk(8, "Everton", "4", "EVE"), _mk(9, "Arsenal", "19973", "ARS"), _mk(10, "Liverpool", "364x", "LIV")]
+_h = tables.block("Table", _wsl, {"mode": "top6"})
+check("D, 2026-11-08: Arsenal outside the top 6 get their own row in the table, set apart and in gold (Arsenal Women 9th in the WSL)",
+      _h.count("<tr") == 8 and '<tr class="hl gapabove"><td class="n">9</td><td class="">Arsenal</td>' in _h and "Aston Villa" not in _h, _h[-600:])
+check("and are not repeated in the 'Other major clubs' line", "Other major clubs" not in _h or "ARS" not in _h.split("Other major clubs")[1])
+_top = tables.block("Table", [_wsl[8]] + _wsl[:8], {"mode": "top6"})
+check("Arsenal inside the top 6: no extra row", _top.count("gapabove") == 0)
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

@@ -72,8 +72,16 @@ check("Kohli's innings is found by name in a saved scorecard", k == [(82, 54, Tr
 check("his figures read 'Virat Kohli 82* (54)'", events.kohli_text(k) == "Virat Kohli 82* (54)")
 check("a Kohli innings of 30 clears the Stars Of The Night bar, a duck does not",
       events.kohli_perf(30) >= importance.PERFORMANCE_MIN and events.kohli_perf(0) < importance.PERFORMANCE_MIN)
-check("a Kohli match in the Cricket section: he is first in its standouts whatever he scored",
-      __import__("kickoff.cricket", fromlist=["x"]).rank([{"kind": "century", "name": "A B", "runs": 140, "balls": 80}, {"kind": "kohli", "name": "Virat Kohli", "runs": 12, "balls": 9}])[0]["name"] == "Virat Kohli")
+_ck = __import__("kickoff.cricket", fromlist=["x"])
+_kcard = {"scorecard": [{"inning": "India Inning 1", "batting": [{"batsman": {"name": "Virat Kohli"}, "r": 7, "b": 7, "4s": 1, "6s": 0, "dismissal-text": "c X b Y"}], "bowling": []}]}
+check("D, 2026-11-08: Kohli's 7 off 7 is not a standout (only a fifty, a century or a fast fifty would be)", not any("Kohli" in o["name"] for o in _ck.standouts(_kcard, {"matchType": "odi", "teams": ["India", "New Zealand"]})))
+check("but his score is always shown under his match, small and muted", _ck.kohli_note({"innings": [{"batting": [{"name": "Virat Kohli", "r": 7, "b": 7, "out": "c X b Y"}]}]}) == '<span class="potm muted">Virat Kohli: 7 (7)</span>')
+_ks = events.cricket([{"id": "k1", "name": "New Zealand vs India, 2nd ODI", "teams": ["New Zealand", "India"], "matchType": "odi", "matchEnded": True, "status": "India won by 4 runs", "class": {"label": "International"}}],
+                     {"k1": {"innings": [{"batting": [{"name": "Virat Kohli", "r": 7, "b": 7, "out": "c X b Y"}]}], "standouts": []}}, 1)
+check("and a 7 does not reach The Big Stuff, the headlines or the Stars: no Kohli on the result line, no Kohli performance", not any("Kohli" in x["text"] for x in _ks[0] + _ks[1]), [x["text"] for x in _ks[0] + _ks[1]])
+_ks2 = events.cricket([{"id": "k2", "name": "New Zealand vs India, 2nd ODI", "teams": ["New Zealand", "India"], "matchType": "odi", "matchEnded": True, "status": "India won by 4 runs", "class": {"label": "International"}}],
+                      {"k2": {"innings": [{"batting": [{"name": "Virat Kohli", "r": 82, "b": 54, "out": "not out"}]}], "standouts": []}}, 1)
+check("an 82 does: on the result line and as a Star candidate", any("Virat Kohli 82" in x["text"] for x in _ks2[0]) and any("Kohli" in x["text"] for x in _ks2[1]), [x["text"] for x in _ks2[0] + _ks2[1]])
 
 # ---- the lead sport ------------------------------------------------------------------------------
 check("D's team first: Sunrisers/RCB/India cricket leads over a bigger non-mine story",

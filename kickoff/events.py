@@ -187,6 +187,9 @@ def kohli_perf(runs):
     return 30 + 0.9 * runs + 15
 
 
+KOHLI_HEADLINE = 50          # a fifty or more: below that his score is only in the cricket section, under his match
+
+
 def kohli_text(innings):
     return ", ".join(f"Virat Kohli {r}{'*' if n else ''} ({b})" for r, b, n in innings)
 
@@ -205,7 +208,7 @@ def cricket(picked, cards, weekday, reported=(), changed=None, now=None):
         teams, rest = cricket_mod.title(m)
         label = (m.get("class") or {}).get("label", "")
         mine = is_mine_cricket(m)
-        k = kohli_innings(cards.get(m["id"]))
+        k = [x for x in kohli_innings(cards.get(m["id"])) if x[0] >= KOHLI_HEADLINE]       # his score reaches the headlines and Stars only when it is a real innings (D, 2026-11-08)
         name = m.get("name", "")
         stage = "final" if re.search(r"\bfinal\b", name, re.I) and not re.search(r"semi|quarter", name, re.I) else "knockout" if KNOCKOUT_WORDS.search(name) else "regular"
         if ended:
@@ -217,7 +220,8 @@ def cricket(picked, cards, weekday, reported=(), changed=None, now=None):
         if not ended and m.get("matchType") == "test" and m.get("score") and (changed is None or m["id"] in changed):
             day = cricket_mod.day_of(m, cards.get(m["id"]), now)
             scores = ", ".join(cricket_mod.wname(cricket_mod.innings_line(x, m.get("teams") or [])) for x in m["score"])
-            out.append(story("cricket", label or "Cricket", f"Cricket: {teams}" + (f" \u00b7 Day {day}" if day else "") + f": {scores}", 6, mine, "regular"))
+            where = cricket_mod.test_state(m, day)
+            out.append(story("cricket", label or "Cricket", f"Cricket: {teams}" + (f" \u00b7 {where}" if where else "") + f": {scores}", 6, mine, "regular"))
         if ended:
             for r_, b_, n_ in k:
                 mine_k = next((o for o in card_standouts if o["kind"] in ("kohli", "century") and cricket_mod.KOHLI.search(o["name"]) and o["runs"] == r_), None)

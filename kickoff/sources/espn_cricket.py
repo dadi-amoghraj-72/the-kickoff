@@ -555,6 +555,8 @@ class Feed:
                 potm = [{"name": f["athlete"].get("displayName") or f["athlete"].get("name", ""), "team": names.get(str((f["athlete"].get("team") or {}).get("id")), "")}
                         for f in fa if f.get("abbreviation") == "POTM"]
                 status = st.get("summary") or d["status"]
-                out.append({**d, "status": status, "matchEnded": (st.get("type") or {}).get("state") == "post", "score": _scores(e),
+                desc, state_ = (st.get("type") or {}).get("description") or "", (st.get("type") or {}).get("state")
+                phase = desc if desc in ("Stumps", "Lunch", "Tea", "Drinks", "Rain", "Bad light", "Innings break") else "Live" if state_ == "in" else ""
+                out.append({**d, "status": status, "matchEnded": state_ == "post", "score": _scores(e), "phase": phase, "session": st.get("session") or "",
                             "_card": {"scorecard": [], "status": status, "potm": potm}})
         return out

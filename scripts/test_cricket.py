@@ -128,13 +128,13 @@ done_sa = dict(sa_m, id="sa3", matchEnded=True, status="South Africa won by 176 
 sa_card_cd = {"scorecard": sa_card, "status": "", "potm": [{"name": "Simon Harmer", "team": "South Africa"}]}
 NOW_T, START_T = datetime(2026, 10, 31, 10, 0, tzinfo=timezone.utc), datetime(2026, 10, 30, 23, 15, tzinfo=timezone.utc)
 mid_run = ck.run(NOW_T, START_T, {}, lambda: ([live_sa], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no")), src.scorecards_affordable, espn_card=lambda m: {"scorecard": sa_card[:3], "status": "", "potm": []}, espn_series=lambda m: SA_ROWS)
-check("a Test in progress has no series table (no other matches of the series on days 1 to 4), shows its day, and the state remembers that two innings were complete (the third is still going)", 'ser sm tst' not in mid_run["html"] and "Test · Day 4" in mid_run["html"] and mid_run["state"]["test_done"]["sa3"] == 2, (mid_run["state"].get("test_done"), mid_run["html"][:200]))
+check("a Test in progress has no series table (no other matches of the series on days 1 to 4), shows its state and day (D, 2026-11-08: 'Stumps, Day 4', not the day beside the number), and the state remembers that two innings were complete (the third is still going)", 'ser sm tst' not in mid_run["html"] and "Day 4</strong>" in mid_run["html"] and "3rd Test · Day" not in mid_run["html"] and mid_run["state"]["test_done"]["sa3"] == 2, (mid_run["state"].get("test_done"), mid_run["html"][:200]))
 day4 = ck.run(NOW_T, START_T, {"test_done": {"sa3": 2}}, lambda: ([dict(live_sa, status="Day 4: Stumps - Australia need 200 runs", score=sa_m["score"])], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no")), src.scorecards_affordable, espn_card=lambda m: sa_card_cd, espn_series=lambda m: SA_ROWS)
 check("end of day 4 (South Africa's second innings done, Australia's second in progress): innings 3 and 4 move (2 complete before), and the state records 3 complete", day4["html"].count('class="inn"') == 2 and day4["state"]["test_done"]["sa3"] == 3, (day4["state"].get("test_done"), day4["html"].count('class="inn"')))
 end_run = ck.run(NOW_T, START_T, day4["state"], lambda: ([done_sa], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no")), src.scorecards_affordable, espn_card=lambda m: sa_card_cd, espn_series=lambda m: SA_ROWS)
 check("D's day-5 rule: South Africa's second innings was complete at the end of day 4, so day 5 shows only Australia's second innings in full (one innings table pair), the result, the match summary and the series table, and the state records all four", 'ser sm tst' in end_run["html"] and end_run["html"].count('class="inn"') == 1 and "Australia</strong> 2nd innings" in end_run["html"] and "South Africa won by 176 runs" in end_run["html"] and 'class="sc ms"' in end_run["html"] and end_run["state"]["test_done"]["sa3"] == 4, (end_run["state"].get("test_done"), end_run["html"].count('class="inn"')))
 rain = ck.run(NOW_T, START_T, day4["state"], lambda: ([dict(live_sa, status="Day 5: No play - rain", score=sa_m["score"])], 5), lambda mid: (_ for _ in ()).throw(AssertionError("no")), src.scorecards_affordable, espn_card=lambda m: sa_card_cd, espn_series=lambda m: SA_ROWS)
-check("a day with no play (the scores are the same as at the last edition): the day flag, the status and the scores, and no scorecard repeated", "Test · Day 5" in rain["html"] and "No play" in rain["html"] and '<table class="sc">' not in rain["html"] and "sc ms" not in rain["html"] and "ser sm tst" not in rain["html"], rain["html"][:300])
+check("a day with no play (the scores are the same as at the last edition): the day flag, the status and the scores, and no scorecard repeated", "Day 5</strong>" in rain["html"] and "No play" in rain["html"] and '<table class="sc">' not in rain["html"] and "sc ms" not in rain["html"] and "ser sm tst" not in rain["html"], rain["html"][:300])
 ms = ck.match_summary_html(ck.slim_card({"scorecard": sa_card}, sa_m))
 raw_inns = [(i["inning"], max(i["batting"], key=lambda b: b["r"]), max(i["bowling"], key=lambda b: (b["w"], -b["r"]))) for i in sa_card]
 check("the match summary of the real Test: four innings, each a shaded row with the batting team and score ('South Africa 329') and its label, then the top batter with his runs and the best bowler with figures, all from the raw scorecard (the highest score and most wickets of each innings are found separately)",
@@ -154,7 +154,7 @@ check("a result shows the teams (India in bold), both innings, the result and th
       and "New Zealand won by 7 wickets" in h and "India tour of New Zealand" not in h and h.index('class="cr"') < h.index('class="cs"'), h)
 check("an all-out innings has no '/10' and overs keep their decimal", ck.innings_line({"r": 109, "w": 10, "o": 17.4, "inning": "Hobart Hurricanes Women Inning 1"}) == "Hobart Hurricanes Women 109 (17.4)")
 live_t20 = {**live, "matchType": "t20", "name": "England vs Pakistan, 1st T20I, tour"}
-check("a live limited-overs match carries an In progress tag; a live Test carries its day flag instead (no second tag)", '<span class="tag">In progress</span>' in ck.result_html(live_t20) and '<span class="tag">In progress</span>' not in ck.result_html(live) and "Test · Day 2" in ck.result_html(live))
+check("a live limited-overs match carries an In progress tag; a live Test carries its day flag instead (no second tag)", '<span class="tag">In progress</span>' in ck.result_html(live_t20) and '<span class="tag">In progress</span>' not in ck.result_html(live) and "Day 2</strong>" in ck.result_html(live))
 grouped = ck.results_html(picked)
 check("results are grouped under International and then WBBL, each with its matches", grouped.index("<h3>International</h3>") < grouped.index("<h3>WBBL</h3>") and grouped.count("<li>") == 5, grouped[:200])
 check("no matches, no block", ck.results_html([]) == "")
@@ -290,7 +290,7 @@ check("the checked count is in the stats, not on the page (developer chatter, D 
 check("a failing scorecard loses only the standouts for that match: the results are all still shown", block(17, fail=True)["html"].count('<li><span class="cm">') == 5 and block(17, fail=True)["stats"]["checked"] == 0)
 check("no matches in the window means no cricket block", block(17, matches=[])["html"] == "")
 check("a live Test is in the block every day, even with the same status as yesterday",
-      block(17, st={"status": {"t1": live["status"]}}, matches=[live])["html"].count("Test · Day 2") == 1)
+      block(17, st={"status": {"t1": live["status"]}}, matches=[live])["html"].count("Day 2</strong>") == 1)
 
 # ---- Which matches get a full scorecard ----
 T = lambda name, teams, typ="odi": {"name": name, "matchType": typ, "teams": teams}  # noqa: E731
@@ -383,7 +383,14 @@ _t = {"matchType": "test", "dateTimeGMT": "2026-11-03T04:00:00", "status": "Stum
 _utc = lambda d, h=23: __import__("datetime").datetime(2026, 11, d, h, 15, tzinfo=__import__("datetime").timezone.utc)  # noqa: E731
 check("the day is counted from the start date: day 1 on the first day, day 3 on the third, never above 5", ck.day_of(_t, None, _utc(3)) == 1 and ck.day_of(_t, None, _utc(5)) == 3 and ck.day_of(_t, None, _utc(20)) == 5)
 check("a status line that names the day wins, and with no clock the day stays unknown", ck.day_of({**_t, "status": "Day 4: Lunch"}, None, _utc(5)) == 4 and ck.day_of(_t) is None)
-check("the heading says '2nd Test · Day 3' and the pill stays 'Test · in progress'", "2nd Test · Day 3" in ck.result_html({**_t, "id": "x", "name": "Bangladesh vs West Indies, 2nd Test, WI tour", "teams": ["Bangladesh", "West Indies"], "matchStarted": True, "matchEnded": False}, None, "", 0, _utc(5)))
+_h = ck.result_html({**_t, "id": "x", "name": "Bangladesh vs West Indies, 2nd Test, WI tour", "teams": ["Bangladesh", "West Indies"], "matchStarted": True, "matchEnded": False}, None, "", 0, _utc(5))
+check("D, 2026-11-08: the heading is '2nd Test', the status line says where the match stands ('Stumps, Day 3'), the pill stays 'Test · in progress'",
+      "Bangladesh v West Indies · 2nd Test</span>" in _h and '<strong class="state">Stumps, Day 3</strong>' in _h and "Test · in progress" in _h, _h)
+_e = ck.result_html({**_t, "id": "y", "name": "Afghanistan vs Zimbabwe, 1st Test, tour", "teams": ["Afghanistan", "Zimbabwe"], "matchStarted": True, "matchEnded": False,
+                     "status": "Afghanistan trail by 102 runs", "phase": "Stumps", "session": "Day 3"}, None, "", 0, _utc(5))
+check("ESPN's own state and day: 'Stumps, Day 3 · Afghanistan trail by 102 runs'", '<strong class="state">Stumps, Day 3</strong> \u00b7 Afghanistan trail by 102 runs' in _e, _e)
+_l = ck.result_html({**_t, "id": "z", "name": "A vs B, 1st Test, tour", "teams": ["A", "B"], "matchStarted": True, "matchEnded": False, "status": "A lead by 5 runs", "phase": "Live", "session": "Day 4"}, None, "", 0, _utc(5))
+check("during play: 'Live, Day 4'", '<strong class="state">Live, Day 4</strong>' in _l, _l)
 
 # ---- fifties and four-wicket hauls only in T20; ODIs and Tests keep hundreds and five-fors (D, 2026-11-05)
 _odi = {"matchType": "odi", "name": "A vs B, 1st ODI", "teams": ["A", "B"]}

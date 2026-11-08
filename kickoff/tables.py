@@ -43,12 +43,20 @@ def movement(x, before):
     return r.move(before[x["id"]] - x["rank"]) if before and x["id"] in before else ""
 
 
-def _table_html(name, rows, before=None):
-    """Club names are the short ones (Man City, Brighton), so the six columns fit a 360px screen on one line each."""
+ARSENAL = {"359", "19973"}      # Arsenal and Arsenal Women (ESPN team ids)
+
+
+def is_arsenal(x):
+    return str(x.get("id")) in ARSENAL or x.get("abbr") == "ARS" or (x.get("short") or x.get("team")) in ("Arsenal", "Arsenal Women")
+
+
+def _table_html(name, rows, before=None, gap_before=None):
+    """Club names are the short ones (Man City, Brighton), so the six columns fit a 360px screen on one line each. gap_before: the index of a row that sits
+    apart from the rows above it (Arsenal below a top 6)."""
     zones = [zone_for(x["zone"]) for x in rows]
     body = [[x.get("short") or x["team"], x["played"], f"{x['gd']:+d}", x["points"], movement(x, before)] for x in rows]
     body = [[x["rank"]] + b for x, b in zip(rows, body)]
-    gold = ["hl" if x["abbr"] == "ARS" or (x.get("short") or x["team"]) == "Arsenal" else "" for x in rows]       # D: Arsenal's row in gold in a league table
+    gold = [("hl" if is_arsenal(x) else "") + (" gapabove" if i == gap_before else "") for i, x in enumerate(rows)]       # D: Arsenal's row in gold in a league table
     return r.table(name, COLUMNS, body, zones=zones, row_classes=gold)
 
 
@@ -62,8 +70,9 @@ def block(name, rows, decision, leaders="", before=None):
     if mode == "full":
         return _table_html(name, rows, before) + leaders
     top, rest = rows[:6], rows[6:]
-    html = _table_html(f"{name}: top 6", top, before)
-    yours = [x for x in rest if is_listed(x["id"])]
+    ars = next((x for x in rest if is_arsenal(x)), None)
+    html = _table_html(f"{name}: top 6", top + ([ars] if ars else []), before, gap_before=6 if ars else None)     # Arsenal outside the top 6: their own row, set apart (D, 2026-11-08)
+    yours = [x for x in rest if is_listed(x["id"]) and not is_arsenal(x)]
     if yours:
         line = ", ".join(f"{code(x['id'], x['abbr'])} {ordinal(x['rank'])} ({x['points']} pts)" for x in yours)
         html += f"<p>Other major clubs: {r.esc(line)}.</p>"

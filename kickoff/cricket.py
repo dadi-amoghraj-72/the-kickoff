@@ -229,6 +229,21 @@ def day_of(m, entry=None, now=None):
     return None
 
 
+def test_state(m, day=None):
+    """Where a Test in progress stands (D, 2026-11-08: 'Day 3' alone did not say whether day 3 was over): ESPN's own state and day, 'Stumps, Day 3', 'Lunch, Day 4',
+    'Live, Day 2'; without them the day worked out from the start, 'Day 3'."""
+    phase, session = m.get("phase") or "", m.get("session") or (f"Day {day}" if day else "")
+    return f"{phase}, {session}" if phase and session else session or phase
+
+
+def kohli_note(entry):
+    """Virat Kohli's score under his match, small and muted, whatever he scored (D, 2026-11-08): D wants to know it, but it is not a standout unless it is one."""
+    inns = [b for inn in (entry or {}).get("innings") or [] for b in inn.get("batting") or [] if KOHLI.search(b.get("name", ""))]
+    if not inns:
+        return ""
+    return '<span class="potm muted">' + "; ".join(f"Virat Kohli: {b.get('r') or 0}{'*' if (b.get('out') or '').strip().lower() in NOT_OUT else ''} ({b.get('b') or 0})" for b in inns) + "</span>"
+
+
 def potm_html(entry, ended=False):
     people = (entry or {}).get("potm") or []
     if not people:
@@ -306,9 +321,16 @@ def result_html(m, entry=None, series="", from_innings=0, now=None):
         flag = '<span class="dayflag">Test · in progress</span>'                                  # the day sits in the heading line: '2nd Test · Day 3' (D, 2026-11-05)
     full = bool(entry) and scorecard_tier(m) < 3
     ended_ = bool(m.get("matchEnded"))
-    first = f"{first} · Day {day}" if day and first else first
+    where, result = (test_state(m, day), short_result(m.get("status"))) if flag else ("", short_result(m.get("status")))
+    said = re.match(r"^(Day \d+):\s*(?:(Stumps|Lunch|Tea|Drinks|Innings break)\s*,?\s*)?(.*)$", result) if flag else None
+    if said:                                               # the older source writes 'Day 3: Stumps, England lead by 40 runs': one state, said once
+        phase = said.group(2) or m.get("phase") or ""
+        where, result = (f"{phase}, {said.group(1)}" if phase else said.group(1)), said.group(3)
+    if flag and result in ("Stumps", "Lunch", "Tea", "Drinks", "Innings break") and "," not in where:     # a bare 'Stumps' with the day worked out: 'Stumps, Day 3'
+        where, result = (f"{result}, {where}" if where else result), ""
+    line = (f'<strong class="state">{r.esc(where)}</strong>' + (f" \u00b7 {r.esc(result)}" if result else "")) if where else r.esc(result)
     return (f'<li>{flag}<span class="cm">{names}{" · " + r.esc(first) if first else ""}</span>'
-            f'<span class="cr">{live}{r.esc(short_result(m.get("status")))}</span><span class="cs">{scores_html(m)}</span>{potm_html(entry, ended_)}'
+            f'<span class="cr">{live}{line}</span><span class="cs">{scores_html(m)}</span>{potm_html(entry, ended_)}{kohli_note(entry)}'
             f'{full_scorecard_html(entry["innings"], from_innings) if full else ""}{match_summary_html(entry["innings"]) if full and m.get("matchType") == "test" and m.get("matchEnded") else ""}'
             f'{standouts_html(entry["standouts"], inline=True) if full else ""}{series}</li>')
 
@@ -503,7 +525,7 @@ def full_scorecard_html(innings, from_index=0):
 CENTURY, FIVE_FOR, FAST_FIFTY_BALLS, T20_FOUR_FOR = 100, 5, 25, 4
 FIFTY, ECON_WICKETS, ECON_MAX, TEN_FOR = 50, 3, 5.0, 10          # D, 2026-11-05: any T20 fifty; 3 or 4 wickets under 5 an over (T20, ODI); ten wickets in a match (both innings added)
 LADDER = (100, 150, 200, 250, 300)                               # a big innings is announced again at each step (a 111* on day 1 and 160* on day 2: the second is news)
-KOHLI = re.compile(r"\bkohli\b", re.I)    # D's favourite player in all of sport (2026-11-05): always listed in the standouts when he batted, at the top
+KOHLI = re.compile(r"\bkohli\b", re.I)    # D's favourite player in all of sport: his score is always shown under his match (kohli_note), but he is a standout only on the normal rules (D, 2026-11-08)
 TIER = {"ten-for": 0, "century": 0, "five-for": 1, "fast fifty": 2, "four-for": 3, "fifty": 4, "economy": 5, "kohli": 6}  # ranking order: rarer and bigger first
 MAX_STANDOUTS = 5
 
@@ -546,8 +568,6 @@ def standouts(card, match):
                 out.append({**who, "kind": "fast fifty"})
             elif t20 and runs >= FIFTY:
                 out.append({**who, "kind": "fifty"})
-            elif KOHLI.search(who["name"]) and balls > 0:
-                out.append({**who, "kind": "kohli"})
         for b in inn.get("bowling") or []:
             wickets, conceded = b.get("w") or 0, b.get("r") or 0
             who = {"name": b["bowler"]["name"], "team": bowling_team, "against": batting_team, "wickets": wickets, "runs_conceded": conceded,
@@ -575,8 +595,6 @@ def rank(items, limit=MAX_STANDOUTS):
     """Best first: centuries (most runs), five-fors (most wickets, fewest runs), fast fifties (fewest balls), four-fors (fewest runs)."""
     def key(o):
         k = TIER[o["kind"]]
-        if o["kind"] == "kohli" or KOHLI.search(o.get("name", "")):
-            return (-1, -o.get("runs", 0), o.get("balls", 0))       # Virat Kohli first, whatever he scored
         if o["kind"] == "century":
             return (k, -o["runs"], o["balls"])
         if o["kind"] in ("ten-for", "five-for", "four-for", "economy"):

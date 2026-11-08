@@ -78,7 +78,7 @@ out = daily.build_edition(NOW, DAY, ST, fake)
 ed = out["edition"]
 check("the input state is never changed by a run", ST == st0)
 ids = [s["id"] for s in ed["sections"]]
-check("sections come in the house order: arsenal, football, cricket, nba, nfl, mlb, then Around the Sporting World (F1; tennis had nothing)", ids == ["arsenal", "football", "cricket", "nba", "nfl", "mlb", "around"], ids)
+check("sections come in the house order: arsenal, football, cricket, nba, nfl, mlb, then F1 as its own section (tennis had nothing)", ids == ["arsenal", "football", "cricket", "nba", "nfl", "mlb", "f1"], ids)
 check("a sport that raises shows a 'No data this morning' line in its own place and is reported (not an exception)", "No data this morning" in next(s["html"] for s in ed["sections"] if s["id"] == "nba")
       and out["failed"] == ["nba"] and "nba (ValueError)" in out["problems"])
 check("a failed sport keeps its old state exactly; the sports that worked get their new state", out["state"]["nba"] == {"seen": ["old"]} and out["state"]["tables"] == {"x": 1} and out["state"]["mlb"]["seen"][0] == "mlb")

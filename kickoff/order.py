@@ -2,14 +2,14 @@
 
 Order: The Big Stuff, On Today, then the lead sport group, then any promoted major event
 (F1 race, Grand Slam quarter-final or later), then the other sport groups, Young Guns,
-Around The Sporting World and Interesting Stories. A section with nothing in it is left out.
+F1 and tennis (their own sections even without a major moment), Around The Sporting World and Interesting Stories. A section with nothing in it is left out.
 """
 
 TOP = ["big-stuff", "on-today"]
 # Sport groups in their normal order. Arsenal and Football always travel together.
 GROUPS = [["arsenal", "football"], ["cricket"], ["nba"], ["nfl"], ["mlb"]]
 PROMOTABLE = ["f1", "tennis"]
-AROUND_PARTS = ["f1", "tennis", "other-sports"]  # F1 and tennis first, then the rest
+AROUND_PARTS = ["other-sports"]  # since 8 Nov 2026 F1 and tennis are always their own sections
 
 
 def assemble(content, lead=None, promoted=()):
@@ -38,11 +38,13 @@ def assemble(content, lead=None, promoted=()):
     sections = [{"id": i, "title": content[i]["title"], "html": content[i]["html"]}
                 for i in order if i in content]
 
-    # Around The Sporting World: F1 and tennis first (unless promoted), then the others
-    parts = [p for p in AROUND_PARTS if p in content and p not in promoted]
-    if parts:
-        html = "".join(f"<h3>{content[p]['title']}</h3>{content[p]['html']}" for p in parts)
-        sections.append({"id": "around", "title": "Around The Sporting World", "html": html})
+    # F1 and tennis without a major moment: still their own sections (D, 2026-11-08: folded into Around The Sporting World, a qualifying-only F1 weekend had no
+    # helmet on the rail, only the default), in Around's place, before the other sports
+    for p in PROMOTABLE:
+        if p in content and p not in promoted:
+            sections.append({"id": p, "title": content[p]["title"], "html": content[p]["html"]})
+    if "other-sports" in content:
+        sections.append({"id": "around", "title": "Around The Sporting World", "html": f"<h3>{content['other-sports']['title']}</h3>{content['other-sports']['html']}"})
     if "stories" in content:
         sections.append({"id": "stories", "title": content["stories"]["title"], "html": content["stories"]["html"]})
     return sections

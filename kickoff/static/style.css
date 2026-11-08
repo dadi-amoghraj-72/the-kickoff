@@ -501,3 +501,6 @@ footer .edno { display: block; margin-top: 10px; text-align: right; font-size: 1
 .rugbyt th:nth-child(3), .rugbyt td:nth-child(3), .rugbyt th:nth-child(4), .rugbyt td:nth-child(4), .rugbyt th:nth-child(5), .rugbyt td:nth-child(5) { width: 9%; }
 .rugbyt th:nth-child(6), .rugbyt td:nth-child(6) { width: 15%; }
 .rugbyt th:nth-child(7), .rugbyt td:nth-child(7) { width: 14%; }
+
+/* Arsenal below a top 6 (D, 2026-11-08): their own row, set apart by a strip of the page colour */
+tr.gapabove td { border-top: 12px solid var(--pitch); }
