@@ -77,7 +77,8 @@ def football(comps, weekday):
             drama = late_winner(m)
             stage = football_stage(comp, m)
             text = f"{comp.replace('UEFA ', '')}: {winner_first(m)}"
-            e = story("football", comp, text, importance.story_score("football", stage, mine, listed, margin_bonus=bonus, wow=wow, weekday=weekday, drama=drama), mine, stage)
+            sc = importance.story_score("football", stage, mine, listed, margin_bonus=bonus, wow=wow, weekday=weekday, drama=drama) + importance.UPSET.get(m.get("upset"), 0)
+            e = story("football", comp, text, round(sc, 2), mine, stage)
             if any(i == "359" for i in ids):
                 e["first"] = True
             out.append(e)

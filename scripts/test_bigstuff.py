@@ -151,6 +151,12 @@ check("a tennis line's sets are gold, an F1 winner line has nothing to gold", bi
       and "<span" not in bigstuff.gold_scores("F1: Max Verstappen wins the Brazilian Grand Prix"))
 _pl = events.f1_pole([("Brazilian Grand Prix", "Lando Norris", "McLaren", "1:27.470")])[0]
 check("F1 pole reads 'On pole · Lando Norris · Brazilian Grand Prix · 1:27.470' with 'On pole' in gold (D, 2026-11-08)", '<li><span class="n">On pole</span> \u00b7 Lando Norris \u00b7 Brazilian Grand Prix \u00b7 1:27.470</li>' in bigstuff.html([_pl]), bigstuff.html([_pl]))
+_mk = lambda h, a, hs, as_, hid, aid, **k: {"home": {"name": h, "id": hid}, "away": {"name": a, "id": aid}, "home_score": hs, "away_score": as_, "completed": True, "goals": [], "reds": [], "stage": "", **k}  # noqa: E731
+_up = {e["text"]: e["score"] for e in events.football([("Premier League", [_mk("Nottingham Forest", "Manchester City", 3, 1, "393", "382", upset="upset"), _mk("Nottingham Forest", "Manchester City", 3, 1, "393", "382")]),
+                                                      ("FA Cup", [_mk("Barrow", "Gillingham", 1, 0, "1", "2")]), ("Bundesliga", [_mk("RB Leipzig", "FC Augsburg", 5, 2, "11420", "3")])], 6)}
+_ups = sorted(e["score"] for e in events.football([("Premier League", [_mk("Nottingham Forest", "Manchester City", 3, 1, "393", "382", upset="upset")])], 6) + events.football([("Premier League", [_mk("Nottingham Forest", "Manchester City", 3, 1, "393", "382")])], 6))
+check("D, 2026-11-08: an upset (the favourite lost, from the odds) scores: Forest 3–1 Man City is worth 4 more and outranks Leipzig's 5–2 and Barrow's 1–0",
+      abs(_ups[1] - _ups[0] - importance.UPSET["upset"]) < 1e-6 and _ups[1] > _up["Bundesliga: RB Leipzig 5\u20132 FC Augsburg"] > _up["FA Cup: Barrow 1\u20130 Gillingham"], (_ups, _up))
 check("the Telegram headlines keep the sport prefix on every line (they stand alone)", bigstuff.headlines(_gs)[0] == "Champions League: Arsenal 2\u20131 Slavia Prague")
 
 # ---- review of the first real rehearsal (D, 2026-11-05)

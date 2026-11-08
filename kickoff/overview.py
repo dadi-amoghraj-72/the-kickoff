@@ -195,6 +195,7 @@ def matchday_facts(competition, matches, odds_by_id, table_rows=None):
         v = verdict(m, pct)
         if v in ("upset", "big_upset"):
             m["dog"] = "home" if m["home_score"] > m["away_score"] else "away"      # the scoreboard puts an asterisk on this team (D, 2026-11-05), like the NBA
+            m["upset"] = v                                                          # and The Big Stuff scores it (D, 2026-11-08: Forest 3-1 Man City was missing)
         timeline = goal_timeline(m)
         row = {"match": label(m), "codes": f"{team_code(m['home'])} {m['home_score']}-{m['away_score']} {team_code(m['away'])}",
                "total_goals": d["total_goals"], "margin": d["margin"], "lead_changes": d["lead_changes"], "teams": [m["home"].get("id"), m["away"].get("id")], "goals": timeline}
