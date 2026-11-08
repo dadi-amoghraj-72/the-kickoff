@@ -33,7 +33,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04            # pinned (8 Nov 2026): ubuntu-latest moved to Ubuntu 26.04, which has no Python 3.9, and the first scheduled run failed
     timeout-minutes: 30
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

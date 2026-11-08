@@ -129,6 +129,10 @@ check("the order module knows the MLB section by its real id 'mlb'", ["mlb"] in 
 # ---- The workflow file (live since D's go on 8 November 2026) -------------------------------------------------------
 wf = (ROOT / ".github" / "workflows" / "daily.yml").read_text()
 live = "\n".join(line for line in wf.splitlines() if not line.lstrip().startswith("#"))
+import glob as _glob  # noqa: E402
+_wfs = {Path(f).name: re.sub(r"#.*", "", Path(f).read_text()) for f in _glob.glob(str(ROOT / ".github" / "workflows" / "*.yml"))}
+check("every workflow is pinned to Ubuntu 24.04 (8 Nov 2026: ubuntu-latest became Ubuntu 26.04, which has no Python 3.9, and the first scheduled run failed)",
+      all("runs-on: ubuntu-24.04" in t and "ubuntu-latest" not in t for t in _wfs.values()), [n for n, t in _wfs.items() if "ubuntu-latest" in t])
 check("the workflow runs on its 7:15am schedule and by hand, never on a push or pull request", '- cron: "15 23 * * *"' in live and "workflow_dispatch:" in live and not re.search(r"^\s*(push|pull_request):", live, re.M))
 check("the workflow takes every secret from GitHub's secrets and never holds a value", all(f"secrets.{k}" in wf for k in ("ANTHROPIC_API_KEY", "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "CRICKET_DATA_API_KEY"))
       and not re.search(r"(sk-ant|[0-9]{8,}:[A-Za-z0-9_-]{30,})", wf))

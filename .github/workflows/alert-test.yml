@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   fail-on-purpose:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04            # pinned: ubuntu-latest (Ubuntu 26.04) has no Python 3.9
     timeout-minutes: 5
     env:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

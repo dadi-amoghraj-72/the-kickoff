@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   debug:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04            # pinned: ubuntu-latest (Ubuntu 26.04) has no Python 3.9
     timeout-minutes: 10
     env:
       CRICKET_DATA_API_KEY: ${{ secrets.CRICKET_DATA_API_KEY }}
