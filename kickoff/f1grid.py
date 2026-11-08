@@ -51,6 +51,8 @@ def checked(found, rows, items):
         if p.get("kind") == "places" and not (1 <= int(p.get("places") or 0) <= 30):
             continue
         reason = " ".join((p.get("reason") or "").split()[:6])
+        if re.search(r"penalt|place|grid|back of", reason, re.I):             # the cause, never the penalty again ('five-place penalty' says nothing new)
+            reason = ""
         out[name] = {"kind": p["kind"], "places": int(p.get("places") or 0), "reason": reason}
     return out
 

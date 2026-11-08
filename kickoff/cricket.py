@@ -232,7 +232,9 @@ def day_of(m, entry=None, now=None):
 def test_state(m, day=None):
     """Where a Test in progress stands (D, 2026-11-08: 'Day 3' alone did not say whether day 3 was over): ESPN's own state and day, 'Stumps, Day 3', 'Lunch, Day 4',
     'Live, Day 2'; without them the day worked out from the start, 'Day 3'."""
-    phase, session = m.get("phase") or "", m.get("session") or (f"Day {day}" if day else "")
+    phase = m.get("phase") or ""
+    found = re.search(r"Day \d+", m.get("session") or "")              # ESPN can say 'Day 4  Session 1': the day is what matters
+    session = found.group(0) if found else (f"Day {day}" if day else "")
     return f"{phase}, {session}" if phase and session else session or phase
 
 

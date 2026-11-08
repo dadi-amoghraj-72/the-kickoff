@@ -391,6 +391,8 @@ _e = ck.result_html({**_t, "id": "y", "name": "Afghanistan vs Zimbabwe, 1st Test
 check("ESPN's own state and day: 'Stumps, Day 3 · Afghanistan trail by 102 runs'", '<strong class="state">Stumps, Day 3</strong> \u00b7 Afghanistan trail by 102 runs' in _e, _e)
 _l = ck.result_html({**_t, "id": "z", "name": "A vs B, 1st Test, tour", "teams": ["A", "B"], "matchStarted": True, "matchEnded": False, "status": "A lead by 5 runs", "phase": "Live", "session": "Day 4"}, None, "", 0, _utc(5))
 check("during play: 'Live, Day 4'", '<strong class="state">Live, Day 4</strong>' in _l, _l)
+_s = ck.result_html({**_t, "id": "s", "name": "A vs B, 1st Test, tour", "teams": ["A", "B"], "matchStarted": True, "matchEnded": False, "status": "A lead by 5 runs", "phase": "Live", "session": "Day 4  Session 1"}, None, "", 0, _utc(5))
+check("ESPN's 'Day 4  Session 1' reads 'Live, Day 4'", '<strong class="state">Live, Day 4</strong>' in _s, _s)
 
 # ---- fifties and four-wicket hauls only in T20; ODIs and Tests keep hundreds and five-fors (D, 2026-11-05)
 _odi = {"matchType": "odi", "name": "A vs B, 1st ODI", "teams": ["A", "B"]}

@@ -34,7 +34,7 @@ ITEMS = [item("Max Verstappen, Lewis Hamilton, Charles Leclerc to take grid pena
 check("only the weekend's penalty reports are read (not the pole story, not last week's)", [i["title"][:20] for i in f1grid.reports(ITEMS, NOW)] == ["Max Verstappen, Lewi", "Hamilton & Verstappe", "George Russell hit w"])
 
 CLAUDE = [{"driver": "Max Verstappen", "kind": "back", "places": 0, "reason": "new power unit parts"}, {"driver": "Lewis Hamilton", "kind": "back", "places": 0, "reason": "new power unit parts"},
-          {"driver": "George Russell", "kind": "places", "places": 5, "reason": "new engine"}, {"driver": "Charles Leclerc", "kind": "unsized", "places": 0, "reason": "new power unit parts"},
+          {"driver": "George Russell", "kind": "places", "places": 5, "reason": "five-place penalty"}, {"driver": "Charles Leclerc", "kind": "unsized", "places": 0, "reason": "new power unit parts"},
           {"driver": "Fernando Alonso", "kind": "places", "places": 3, "reason": "impeding"},            # in no report: dropped
           {"driver": "Toto Wolff", "kind": "back", "places": 0, "reason": "x"}, {"driver": "Oscar Piastri", "kind": "places", "places": 99, "reason": "x"}]
 f1grid.notes.call_json = lambda client, system, schema, content, model=None: ({"penalties": CLAUDE}, {"input": 100, "output": 20})
@@ -48,8 +48,8 @@ check("provisional grid: Russell (2nd) drops five to 7th, those behind move up; 
 check("two drivers landing on the same place: the higher qualifier first", f1grid.provisional(ROWS[:6], {"Lando Norris": {"kind": "places", "places": 3}, "George Russell": {"kind": "places", "places": 2}})[:5]
       == ["Andrea Kimi Antonelli", "Charles Leclerc", "Liam Lawson", "Lando Norris", "George Russell"])
 h = f1grid.html(ROWS, pens, f1.short_name)
-check("the block: each penalty in one line with its cause, the provisional grid titled as our calculation, the note", "<strong>Hamilton:</strong> back of the grid (new power unit parts)" in h
-      and "<strong>Russell:</strong> 5-place grid penalty (new engine)" in h and "size not reported" in h and "Provisional grid (our calculation)" in h and "official grid can differ" in h, h[:500])
+check("the block: each penalty in one line with its cause (a 'reason' that only repeats the penalty is dropped: Russell), the provisional grid titled as our calculation, the note", "<strong>Hamilton:</strong> back of the grid (new power unit parts)" in h
+      and "<strong>Russell:</strong> 5-place grid penalty</li>" in h and "size not reported" in h and "Provisional grid (our calculation)" in h and "official grid can differ" in h, h[:500])
 q = f1.qualifying_table(ROWS, set(pens))
 check("the official qualifying table stars the penalised drivers and no one else", q.count(" *<") == 4 and "L. Norris *" not in q, q.count(" *<"))
 check("no penalties: no block, the table unstarred", f1grid.html(ROWS, {}, f1.short_name) == "" and " *" not in f1.qualifying_table(ROWS))
