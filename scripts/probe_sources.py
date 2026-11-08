@@ -29,6 +29,7 @@ SOURCES = [
     ("MLB: ESPN scoreboard", E + "/site/v2/sports/baseball/mlb/scoreboard", '"events"'),
     ("Tennis: ESPN ATP scoreboard", E + "/site/v2/sports/tennis/atp/scoreboard", '"events"'),
     ("F1: Jolpica", "https://api.jolpi.ca/ergast/f1/current/last/results.json", '"MRData"'),
+    ("F1: OpenF1 (backup for lap and race times)", "https://api.openf1.org/v1/sessions?year=2026&session_name=Qualifying", '"session_key"'),
     ("Golf: ESPN PGA scoreboard", E + "/site/v2/sports/golf/pga/scoreboard", '"events"'),
     ("Rugby: ESPN scoreboard", E + "/site/v2/sports/rugby/180659/scoreboard", '"events"'),
     ("UFC: events page", "https://www.ufc.com/events", "c-card-event"),

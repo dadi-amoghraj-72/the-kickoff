@@ -489,5 +489,5 @@ def run(now, window_start, st, api, season="current", story=None):
     except Exception:
         pass
     return {"html": out, "state": {"reported": reported[-60:], "pending": pending, "closed": closed[-10:]},
-            "stats": {"due": len(due), "shown": shown, "waiting": len(waiting), "failed": failed, "calls": api.calls, "claude_tokens": used}, "events": story_events,
+            "stats": {"due": len(due), "shown": shown, "waiting": len(waiting), "failed": failed, "calls": api.calls, "filled_from_openf1": list(getattr(api, "filled", [])), "claude_tokens": used}, "events": story_events,
             "young_in": {"f1": races_in}}
