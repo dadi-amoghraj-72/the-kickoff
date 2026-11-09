@@ -3493,6 +3493,206 @@
    ],
    "status": "Scorchers won by 6 wkts (30b rem)"
   },
+  "espn-1550711": {
+   "built": "2026-11-09T22:50:03Z",
+   "potm": [],
+   "scorecard": [
+    {
+     "batting": [
+      {
+       "4s": 7,
+       "6s": 0,
+       "b": 50,
+       "batsman": {
+        "name": "Azan Awais"
+       },
+       "dismissal-text": "c †BKG Mendis b Rathnayaka",
+       "m": null,
+       "mark": "",
+       "r": 30,
+       "sr": 60.0
+      },
+      {
+       "4s": 9,
+       "6s": 1,
+       "b": 51,
+       "batsman": {
+        "name": "Tayyab Arif"
+       },
+       "dismissal-text": "c †BKG Mendis b Fernando",
+       "m": null,
+       "mark": "",
+       "r": 57,
+       "sr": 111.76
+      },
+      {
+       "4s": 6,
+       "6s": 0,
+       "b": 105,
+       "batsman": {
+        "name": "Mohammad Taha"
+       },
+       "dismissal-text": "c de Silva b Dinusha",
+       "m": null,
+       "mark": "",
+       "r": 51,
+       "sr": 48.57
+      },
+      {
+       "4s": 7,
+       "6s": 0,
+       "b": 58,
+       "batsman": {
+        "name": "Babar Azam"
+       },
+       "dismissal-text": "c †BKG Mendis b Madushanka",
+       "m": null,
+       "mark": "(c)",
+       "r": 50,
+       "sr": 86.2
+      },
+      {
+       "4s": 7,
+       "6s": 0,
+       "b": 112,
+       "batsman": {
+        "name": "Saud Shakeel"
+       },
+       "dismissal-text": "not out",
+       "m": null,
+       "mark": "",
+       "r": 57,
+       "sr": 50.89
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 22,
+       "batsman": {
+        "name": "Salman Agha"
+       },
+       "dismissal-text": "c †BKG Mendis b Fernando",
+       "m": null,
+       "mark": "",
+       "r": 16,
+       "sr": 72.72
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 10,
+       "batsman": {
+        "name": "Ghazi Ghori"
+       },
+       "dismissal-text": "not out",
+       "m": null,
+       "mark": "†",
+       "r": 7,
+       "sr": 70.0
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Asitha Fernando"
+       },
+       "eco": 4.17,
+       "m": 2,
+       "nb": 1,
+       "o": 15.2,
+       "r": 64,
+       "w": 2,
+       "wd": 1
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Dilshan Madushanka"
+       },
+       "eco": 5.43,
+       "m": 1,
+       "nb": 1,
+       "o": 16.0,
+       "r": 87,
+       "w": 1,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Lahiru Kumara"
+       },
+       "eco": 4.37,
+       "m": 1,
+       "nb": 0,
+       "o": 16.0,
+       "r": 70,
+       "w": 0,
+       "wd": 1
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Milan Rathnayaka"
+       },
+       "eco": 2.68,
+       "m": 1,
+       "nb": 2,
+       "o": 16.0,
+       "r": 43,
+       "w": 1,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Dhananjaya de Silva"
+       },
+       "eco": 0.0,
+       "m": 1,
+       "nb": 0,
+       "o": 1.0,
+       "r": 0,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Sonal Dinusha"
+       },
+       "eco": 3.33,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 10,
+       "w": 1,
+       "wd": 0
+      }
+     ],
+     "espn": {
+      "dnb": [],
+      "extras": {
+       "b": 6,
+       "lb": 1,
+       "nb": 4,
+       "total": 13,
+       "w": 2
+      },
+      "fow": "1-86 (Awais, 15.6), 2-90 (Arif, 16.4), 3-159 (Azam, 34.5), 4-227 (Taha, 55.1), 5-253 (Agha, 63.2)",
+      "total": {
+       "o": 67.2,
+       "r": 281,
+       "rr": 4.17,
+       "w": 5
+      }
+     },
+     "inning": "Pakistan 1st Innings"
+    }
+   ],
+   "status": "Day 1: Sri Lanka won toss & fielded"
+  },
   "espn-1553296": {
    "built": "2026-11-08T22:50:05Z",
    "potm": [],
@@ -4117,8 +4317,13 @@
    "status": "Day 4: West Indies lead by 315 runs"
   },
   "espn-1555123": {
-   "built": "2026-11-08T22:50:05Z",
-   "potm": [],
+   "built": "2026-11-09T22:50:03Z",
+   "potm": [
+    {
+     "name": "Brendan Taylor",
+     "team": "Zimbabwe"
+    }
+   ],
    "scorecard": [
     {
      "batting": [
@@ -4618,7 +4823,7 @@
         "name": "Innocent Kaia"
        },
        "dismissal-text": "lbw b Zia-ur-Rehman",
-       "m": null,
+       "m": 16,
        "mark": "",
        "r": 1,
        "sr": 7.14
@@ -4631,7 +4836,7 @@
         "name": "Ben Curran"
        },
        "dismissal-text": "c Shahidullah b Zia-ur-Rehman",
-       "m": null,
+       "m": 52,
        "mark": "",
        "r": 12,
        "sr": 54.54
@@ -4644,36 +4849,62 @@
         "name": "Brendan Taylor"
        },
        "dismissal-text": "run out (Zia-ur-Rehman/†Ikram Alikhil)",
-       "m": null,
+       "m": 99,
        "mark": "",
        "r": 82,
        "sr": 93.18
       },
       {
-       "4s": 5,
+       "4s": 6,
        "6s": 0,
-       "b": 77,
+       "b": 86,
        "batsman": {
         "name": "Brian Bennett"
        },
-       "dismissal-text": "not out",
-       "m": null,
+       "dismissal-text": "b Mohammad Saleem",
+       "m": 130,
        "mark": "(c)",
-       "r": 49,
-       "sr": 63.63
+       "r": 58,
+       "sr": 67.44
       },
       {
-       "4s": 3,
-       "6s": 0,
-       "b": 39,
+       "4s": 23,
+       "6s": 2,
+       "b": 279,
        "batsman": {
         "name": "Craig Ervine"
        },
        "dismissal-text": "not out",
-       "m": null,
+       "m": 386,
        "mark": "",
-       "r": 20,
-       "sr": 51.28
+       "r": 206,
+       "sr": 73.83
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 136,
+       "batsman": {
+        "name": "Antum Naqvi"
+       },
+       "dismissal-text": "c Shahidullah b Abdul Malik",
+       "m": 188,
+       "mark": "",
+       "r": 61,
+       "sr": 44.85
+      },
+      {
+       "4s": 2,
+       "6s": 3,
+       "b": 108,
+       "batsman": {
+        "name": "Wessly Madhevere"
+       },
+       "dismissal-text": "not out",
+       "m": 129,
+       "mark": "",
+       "r": 100,
+       "sr": 92.59
       }
      ],
      "bowling": [
@@ -4682,11 +4913,11 @@
        "bowler": {
         "name": "Ziaur Rahman"
        },
-       "eco": 5.0,
-       "m": 1,
+       "eco": 2.92,
+       "m": 5,
        "nb": 0,
-       "o": 4.0,
-       "r": 20,
+       "o": 14.0,
+       "r": 41,
        "w": 0,
        "wd": 0
       },
@@ -4695,11 +4926,11 @@
        "bowler": {
         "name": "Zia-ur-Rehman"
        },
-       "eco": 3.25,
-       "m": 2,
+       "eco": 3.46,
+       "m": 4,
        "nb": 0,
-       "o": 20.0,
-       "r": 65,
+       "o": 50.0,
+       "r": 173,
        "w": 2,
        "wd": 0
       },
@@ -4708,12 +4939,12 @@
        "bowler": {
         "name": "Mohammad Saleem"
        },
-       "eco": 4.0,
+       "eco": 3.87,
        "m": 1,
        "nb": 0,
-       "o": 7.0,
-       "r": 28,
-       "w": 0,
+       "o": 16.0,
+       "r": 62,
+       "w": 1,
        "wd": 0
       },
       {
@@ -4721,11 +4952,11 @@
        "bowler": {
         "name": "Qais Ahmad"
        },
-       "eco": 6.25,
+       "eco": 6.4,
        "m": 0,
        "nb": 0,
-       "o": 4.0,
-       "r": 25,
+       "o": 5.0,
+       "r": 32,
        "w": 0,
        "wd": 0
       },
@@ -4734,35 +4965,81 @@
        "bowler": {
         "name": "Hashmatullah Shahidi"
        },
-       "eco": 5.2,
+       "eco": 5.33,
        "m": 0,
        "nb": 0,
-       "o": 5.0,
-       "r": 26,
+       "o": 12.0,
+       "r": 64,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Abdul Malik"
+       },
+       "eco": 5.82,
+       "m": 0,
+       "nb": 0,
+       "o": 11.1,
+       "r": 65,
+       "w": 1,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Shahidullah"
+       },
+       "eco": 5.7,
+       "m": 1,
+       "nb": 0,
+       "o": 10.0,
+       "r": 57,
+       "w": 0,
+       "wd": 1
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Sediqullah Atal"
+       },
+       "eco": 6.75,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 27,
        "w": 0,
        "wd": 0
       }
      ],
      "espn": {
-      "dnb": [],
+      "dnb": [
+       "Tsiga",
+       "Cremer",
+       "Nyamhuri",
+       "Muzarabani"
+      ],
       "extras": {
-       "total": 0
+       "lb": 2,
+       "total": 3,
+       "w": 1
       },
-      "fow": "1-7 (Kaia, 3.4), 2-38 (Curran, 11.4), 3-120 (Taylor, 26.3)",
+      "fow": "1-7 (Kaia, 3.4), 2-38 (Curran, 11.4), 3-120 (Taylor, 26.3), 4-175 (Bennett, 42.3), 5-315 (Naqvi, 84.4)",
       "total": {
-       "o": 40.0,
-       "r": 164,
-       "rr": 4.1,
-       "w": 3
+       "o": 122.1,
+       "r": 523,
+       "rr": 4.28,
+       "w": 5
       }
      },
      "inning": "Zimbabwe 2nd Innings"
     }
    ],
-   "status": "Day 4: Zimbabwe lead by 154 runs"
+   "status": "Match drawn"
   }
  },
- "ran": "2026-11-08T22:50:05Z",
+ "ran": "2026-11-09T22:50:03Z",
  "series": {
   "8d868342-e1d5-4f86-a4f0-093f6abab3f9": {
    "built": "2026-11-07T17:59:54Z",
@@ -5214,8 +5491,113 @@
     }
    ]
   },
+  "espn-1550711": {
+   "built": "2026-11-09T22:50:03Z",
+   "rows": [
+    {
+     "date": "Oct 9 2026",
+     "format": "T20I",
+     "n": "1st",
+     "result": "Pakistan won by 4 wkts (7b rem)",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "SL",
+       "name": "Sri Lanka",
+       "score": "182/8"
+      },
+      {
+       "abbr": "PAK",
+       "name": "Pakistan",
+       "score": "187/6"
+      }
+     ],
+     "venue": "Rawalpindi"
+    },
+    {
+     "date": "Oct 11 2026",
+     "format": "T20I",
+     "n": "2nd",
+     "result": "Pakistan won by 82 runs",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "PAK",
+       "name": "Pakistan",
+       "score": "215/3"
+      },
+      {
+       "abbr": "SL",
+       "name": "Sri Lanka",
+       "score": "133/7"
+      }
+     ],
+     "venue": "Rawalpindi"
+    },
+    {
+     "date": "Oct 13 2026",
+     "format": "T20I",
+     "n": "3rd",
+     "result": "Sri Lanka won by 8 wkts (17b rem)",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "PAK",
+       "name": "Pakistan",
+       "score": "168/8"
+      },
+      {
+       "abbr": "SL",
+       "name": "Sri Lanka",
+       "score": "172/2"
+      }
+     ],
+     "venue": "Rawalpindi"
+    },
+    {
+     "date": "Nov 9-13 2026",
+     "format": "Test",
+     "n": "1st",
+     "result": "Day 1: Sri Lanka won toss & fielded",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "PAK",
+       "name": "Pakistan",
+       "score": "281/5 *"
+      },
+      {
+       "abbr": "SL",
+       "name": "Sri Lanka",
+       "score": ""
+      }
+     ],
+     "venue": "Rawalpindi"
+    },
+    {
+     "date": "Nov 17-21 2026",
+     "format": "Test",
+     "n": "2nd",
+     "result": null,
+     "starts": "Starts at 09:30 local time",
+     "teams": [
+      {
+       "abbr": "PAK",
+       "name": "Pakistan",
+       "score": ""
+      },
+      {
+       "abbr": "SL",
+       "name": "Sri Lanka",
+       "score": ""
+      }
+     ],
+     "venue": "Lahore"
+    }
+   ]
+  },
   "espn-1553296": {
-   "built": "2026-11-08T22:50:05Z",
+   "built": "2026-11-09T22:50:03Z",
    "rows": [
     {
      "date": "Oct 28-31 2026",
@@ -5241,18 +5623,18 @@
      "date": "Nov 5-9 2026",
      "format": "Test",
      "n": "2nd",
-     "result": "Day 4: West Indies lead by 315 runs",
+     "result": "Match drawn",
      "starts": null,
      "teams": [
       {
        "abbr": "WI",
        "name": "West Indies",
-       "score": "356 & 345/3 *"
+       "score": "356 & 398/6d"
       },
       {
        "abbr": "BAN",
        "name": "Bangladesh",
-       "score": "386"
+       "score": "386 & 184/4"
       }
      ],
      "venue": "Sylhet"
