@@ -504,13 +504,26 @@ class Feed:
         self.calls += 1
         return self.get_json(url)
 
-    def upcoming(self, wanted=lambda draft: True, under_way=False):
+    def upcoming(self, wanted=lambda draft: True, under_way=False, dates=()):
         """CricketData-shaped drafts (no scores) of the matches in the header feed that have not started, for 'On Today' and 'Games to Watch'; with under_way=True the matches in
-        progress too (a Test that has finished, even on day four, is 'post' and never comes). One request."""
-        header = self._call(HEADER)
+        progress too (a Test that has finished, even on day four, is 'post' and never comes). One request, plus one per day in `dates` ("20261110"): the live header lists a match
+        only from about a day before, so the days ahead are asked for by date (a day that fails costs only its own matches)."""
+        boards = [self._call(HEADER)]
+        for day in dates:
+            try:
+                boards.append(self._call(HEADER + f"&dates={day}"))
+            except Exception:
+                pass
         states = ("pre", "in") if under_way else ("pre",)
-        return [d for league in header["sports"][0]["leagues"] for ev in league.get("events", []) for d in [_draft(league, ev)]
-                if ev.get("status") in states and wanted(d)]
+        out, seen = [], set()
+        for header in boards:
+            for league in header["sports"][0]["leagues"]:
+                for ev in league.get("events", []):
+                    d = _draft(league, ev)
+                    if ev.get("status") in states and wanted(d) and ev["id"] not in seen:
+                        seen.add(ev["id"])
+                        out.append(d)
+        return out
 
     def matches(self, wanted=lambda draft: True, limit=6, dates=(), rank=lambda draft: 0):
         """CricketData-shaped matches for the current events that `wanted(draft)` accepts, each with "status", "score" and "_card" ({"scorecard": [], "status",

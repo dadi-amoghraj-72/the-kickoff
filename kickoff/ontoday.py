@@ -16,7 +16,7 @@ SGT = ZoneInfo("Asia/Singapore")
 SUN_FROM, SUN_TO = 7, 23          # "While you're up" is 7am to 11pm SGT, "Overnight" 11pm to 7am (D, 2026-11-05)
 MAX_TODAY = 12
 MAX_DONT_MISS = 3
-MAX_WATCH = 10
+MAX_WATCH = 12          # D, 2026-11-09: room for the NFL prime-time games beside D's teams
 WATCH_PER_SPORT = 4       # one sport never fills the week (D's teams and finals excepted)
 
 
@@ -91,12 +91,13 @@ def today_html(found):
 
 def watch_pick(found, cap=MAX_WATCH):
     """Games to Watch: D's teams, every playoff/knockout/final, derbies, top-of-the-table clashes, tracked NBA stars facing each other, every F1 race, a Slam's late rounds."""
-    wanted = [f for f in found if f["mine"] or f["stage"] in ("final", "knockout", "playoff") or f["flags"] & {"derby", "clash", "stars"}]
-    wanted = [f for f in wanted if not (f["sport"] == "f1" and f["text"].endswith("Qualifying")) and (f["mine"] or f["score"] >= importance.MIN_SCORE)      # F1: the race, not every session
+    wanted = [f for f in found if f["mine"] or f["stage"] in ("final", "knockout", "playoff") or f["flags"] & {"derby", "clash", "stars"}
+              or (f["sport"] == "nfl" and "night" in f["flags"])]                      # the NFL's prime-time games: Thursday, Sunday and Monday nights (D, 2026-11-09)
+    wanted = [f for f in wanted if not (f["sport"] == "f1" and f["text"].endswith("Qualifying")) and (f["mine"] or f["score"] >= importance.MIN_SCORE or "night" in f["flags"])      # F1: the race, not every session
               and not (f["sport"] in ("nba", "mlb") and f["stage"] == "regular" and "stars" not in f["flags"])]        # a plain NBA game of D's teams is On Today, not the week's big games
     best, per = [], {}
     for f in sorted(wanted, key=lambda f: (-f["score"], f["when"])):
-        if len(best) < cap and (per.get(f["sport"], 0) < WATCH_PER_SPORT or f["mine"] or f["stage"] == "final"):
+        if len(best) < cap and (per.get(f["sport"], 0) < WATCH_PER_SPORT or (f["mine"] and f["sport"] != "nba") or f["stage"] == "final"):   # NBA at most 4 too: six NBA lines pushed MNF out (D, 2026-11-09)
             per[f["sport"]] = per.get(f["sport"], 0) + 1
             best.append(f)
     return sorted(best, key=lambda f: f["when"])

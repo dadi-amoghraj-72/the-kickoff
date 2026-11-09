@@ -446,5 +446,14 @@ _got = _idx_miss.card({**nzind, "series": "24756", "event": "1553296"})
 check("a match missing from ESPN's scores page is still read from its own series and event ids (the address is built, then the card must still agree with the match)", _got is not None and any("/series/24756/scorecard/1553296" in u for u in _seen), _seen)
 check("with no ids and no index entry there is no card, not an error", ec.Source(_fetch_hidden, pause=0).card({**nzind, "series": None, "event": None, "teams": ["Nobody", "Else"], "name": "Nobody vs Else"}) is None)
 
+_days_asked = []
+def _hdr(url):
+    _days_asked.append(url)
+    if "dates=20261110" in url:
+        return {"sports": [{"leagues": [{"id": "24469", "name": "India tour of New Zealand 2026/27", "events": [{"id": "1539439", "name": "New Zealand v India", "status": "pre", "date": "2026-11-10T02:00:00Z",
+                "title": "3rd ODI (D/N), India tour of New Zealand 2026/27", "description": "3rd ODI", "competitors": []}]}]}]}
+    return {"sports": [{"leagues": []}]}
+_up = ec.Feed(_hdr, pause=0).upcoming(dates=["20261109", "20261110"])
+check("D, 2026-11-09: a match the live feed does not list yet is found by its date (India's Tuesday ODI for In The Week Ahead)", [d["name"].split(",")[0] for d in _up] == ["New Zealand vs India"] and len(_days_asked) == 3, [d["name"] for d in _up])
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

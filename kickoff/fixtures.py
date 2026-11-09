@@ -68,8 +68,8 @@ class Sources:
     def mlb(self, day):
         return self.mlb_s.scoreboard(day)
 
-    def cricket(self):
-        return self.cricket_f.upcoming(lambda d: cricket_mod.classify(d)["kind"] is not None, under_way=True)
+    def cricket(self, days=()):
+        return self.cricket_f.upcoming(lambda d: cricket_mod.classify(d)["kind"] is not None, under_way=True, dates=days)
 
     def f1(self, season):
         return self.f1_a.schedule(season)
@@ -213,7 +213,8 @@ def nfl(src, now, end, weekday):
             night = nfl_mod.slot(g)[1] == "night"
             if stage == "regular" and not (mine or night):
                 continue
-            out.append(fixture("nfl", "NFL", f"NFL: {a['name']} at {h['name']}", now if live else g["date"], importance.story_score("nfl", stage, mine, weekday=weekday), mine, stage, {"live"} if live else ()))
+            out.append(fixture("nfl", "NFL", f"NFL: {a['name']} at {h['name']}", now if live else g["date"], importance.story_score("nfl", stage, mine, weekday=weekday), mine, stage,
+                               ({"live"} if live else set()) | ({"night"} if night else set())))          # a prime-time game (TNF, SNF, MNF) is In The Week Ahead too (D, 2026-11-09)
     return out
 
 
@@ -256,7 +257,10 @@ def multiday_day(start, now, days=5, play=timedelta(hours=PLAY_HOURS)):
 
 def cricket(src, now, end, weekday):
     out = []
-    try:
+    days = [d.strftime("%Y%m%d") for d in _days(now, end, timezone.utc)]          # ESPN's live feed lists a match only from about a day before: the window's days are asked by date too
+    try:                                                                            # (D, 2026-11-09: India's Tuesday ODI was missing from In The Week Ahead)
+        drafts = src.cricket(days)
+    except TypeError:
         drafts = src.cricket()
     except Exception:
         return out

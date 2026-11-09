@@ -271,6 +271,12 @@ _b = fx("football", "Serie A", "Serie A: Internazionale v Como", utc(2026, 11, 8
 _c = fx("football", "Bundesliga", "Bundesliga: Mainz v Bayern Munich", utc(2026, 11, 8, 14, 30), 6, flags={"clash"}); _c["ranks"] = 12
 check("Don't Miss among equal big matches: the higher-placed clubs first (Inter v Como, then Atlético v Barcelona, before Mainz v Bayern)",
       [f["text"] for f in ontoday.dont_miss([_c, _a, _b], cap=2)] == ["Serie A: Internazionale v Como", "La Liga: Atlético Madrid v Barcelona"])
+_wk = [fx("nba", "NBA", f"NBA: game {i}", utc(2026, 11, 10 + i, 1, 0), 9, True, flags={"stars"}) for i in range(6)]
+_wk += [fx("nfl", "NFL", "NFL: Buffalo Bills at Minnesota Vikings", utc(2026, 11, 10, 1, 15), 3, flags={"night"}), fx("nfl", "NFL", "NFL: Lions at Bears", utc(2026, 11, 15, 18, 0), 3)]
+_wp = ontoday.watch_pick(_wk)
+check("D, 2026-11-09: In The Week Ahead takes the NFL's prime-time games (MNF) but not an ordinary afternoon game, and NBA at most four, D's teams included",
+      any("Bills" in f["text"] for f in _wp) and not any("Lions" in f["text"] for f in _wp) and sum(1 for f in _wp if f["sport"] == "nba") == 4, [f["text"] for f in _wp])
+check("In The Week Ahead holds up to 12 lines", ontoday.MAX_WATCH == 12)
 check("no big game: no Don't Miss heading", "Don't Miss" not in ontoday.today_html([_dm[0], _dm[2]]))
 many = [fixtures.fixture("nba", "NBA", f"NBA: game {i}", utc(2026, 11, 5, 1 + i % 10, 0), float(i)) for i in range(20)]
 check("On Today never lists more than 12 lines; the cut keeps the highest scores, back in time order", len(ontoday.pick_today(many)) == 12 and min(f["score"] for f in ontoday.pick_today(many)) == 8.0)
