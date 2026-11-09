@@ -46,6 +46,34 @@ def winner_first(m):
     return f"{a} {as_}{DASH}{hs} {h}" if as_ > hs else f"{h} {hs}{DASH}{as_} {a}"
 
 
+def _minute(g):
+    try:
+        return int(str(g.get("minute")).split("+")[0].replace("'", ""))
+    except ValueError:
+        return 0
+
+
+def late_equaliser(m):
+    """True when a draw was made level by a goal in the 90th minute or later (Man Utd 4-4 Aston Villa, 9 Nov 2026: Dorgu in the 96th minute)."""
+    if m.get("home_score") is None or m.get("home_score") != m.get("away_score") or not m.get("goals"):
+        return False
+    last = max(m["goals"], key=_minute)
+    return _minute(last) >= 90
+
+
+def level_from_behind(m):
+    """True when a draw came back from two goals down."""
+    if m.get("home_score") != m.get("away_score"):
+        return False
+    score = {"home": 0, "away": 0}
+    for g in sorted(m.get("goals") or [], key=_minute):
+        if g.get("side") in score:
+            score[g["side"]] += 1
+            if abs(score["home"] - score["away"]) >= 2:
+                return True
+    return False
+
+
 def late_winner(m):
     """True when the match was won (not drawn) by a goal in the 90th minute or later that made it a one-goal game or gave the lead: a stoppage-time winner."""
     hs, as_ = m.get("home_score"), m.get("away_score")
@@ -71,16 +99,27 @@ def football(comps, weekday):
             ids = [str(m["home"].get("id")), str(m["away"].get("id"))]
             d = overview.drama(m)
             mine = any(i in MY_FOOTBALL for i in ids)
+            big = [clubs.is_listed(i) or i in MY_FOOTBALL for i in ids]
             listed = any(clubs.is_listed(i) for i in ids)
-            bonus = min(0.5 * d["margin"] + 0.3 * d["total_goals"] + (1 if d["comeback"] else 0), 4)
-            wow = d["margin"] >= 5 or (d["comeback"] and d["total_goals"] >= 5)
-            drama = late_winner(m)
+            cares = any(big)                                    # excitement only counts for the clubs D cares about (D, 2026-11-09)
+            draw_back = level_from_behind(m)
+            bonus = min(0.5 * d["margin"] + 0.3 * d["total_goals"] + (1 if d["comeback"] or draw_back else 0), 4)
+            expected = (m.get("verdict") == "favourite_won" and (m.get("fav_pct") or 0) >= importance.EXPECTED)
+            wow = cares and not expected and (d["margin"] >= 5 or ((d["comeback"] or draw_back) and d["total_goals"] >= 5))
+            drama = cares and (late_winner(m) or late_equaliser(m))
             stage = football_stage(comp, m)
             text = f"{comp.replace('UEFA ', '')}: {winner_first(m)}"
-            sc = importance.story_score("football", stage, mine, listed, margin_bonus=bonus, wow=wow, weekday=weekday, drama=drama) + importance.UPSET.get(m.get("upset"), 0)
+            sc = importance.story_score("football", stage, mine, listed, margin_bonus=bonus, wow=wow, weekday=weekday, drama=drama)
+            loser = None if m["home_score"] == m["away_score"] else (1 if m["home_score"] > m["away_score"] else 0)
+            if loser is not None and big[loser] and not big[1 - loser]:                     # a big club beaten by a club outside the 17
+                sc += importance.UPSET_FAVOURITE if m.get("upset") else importance.UPSET
+            if all(clubs.is_listed(i) for i in ids):
+                sc += importance.BIG_MEETING
             e = story("football", comp, text, round(sc, 2), mine, stage)
-            if any(i == "359" for i in ids):
-                e["first"] = True
+            if "359" in ids:
+                e["first"] = 1                                  # Arsenal first, Arsenal Women right after (D, 2026-11-09)
+            elif mine:
+                e["first"] = 2
             out.append(e)
     return out
 

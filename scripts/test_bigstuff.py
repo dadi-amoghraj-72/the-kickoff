@@ -152,11 +152,28 @@ check("a tennis line's sets are gold, an F1 winner line has nothing to gold", bi
 _pl = events.f1_pole([("Brazilian Grand Prix", "Lando Norris", "McLaren", "1:27.470")])[0]
 check("F1 pole reads 'On pole · Lando Norris · Brazilian Grand Prix · 1:27.470' with 'On pole' in gold (D, 2026-11-08)", '<li><span class="n">On pole</span> \u00b7 Lando Norris \u00b7 Brazilian Grand Prix \u00b7 1:27.470</li>' in bigstuff.html([_pl]), bigstuff.html([_pl]))
 _mk = lambda h, a, hs, as_, hid, aid, **k: {"home": {"name": h, "id": hid}, "away": {"name": a, "id": aid}, "home_score": hs, "away_score": as_, "completed": True, "goals": [], "reds": [], "stage": "", **k}  # noqa: E731
-_up = {e["text"]: e["score"] for e in events.football([("Premier League", [_mk("Nottingham Forest", "Manchester City", 3, 1, "393", "382", upset="upset"), _mk("Nottingham Forest", "Manchester City", 3, 1, "393", "382")]),
-                                                      ("FA Cup", [_mk("Barrow", "Gillingham", 1, 0, "1", "2")]), ("Bundesliga", [_mk("RB Leipzig", "FC Augsburg", 5, 2, "11420", "3")])], 6)}
-_ups = sorted(e["score"] for e in events.football([("Premier League", [_mk("Nottingham Forest", "Manchester City", 3, 1, "393", "382", upset="upset")])], 6) + events.football([("Premier League", [_mk("Nottingham Forest", "Manchester City", 3, 1, "393", "382")])], 6))
-check("D, 2026-11-08: an upset (the favourite lost, from the odds) scores: Forest 3–1 Man City is worth 4 more and outranks Leipzig's 5–2 and Barrow's 1–0",
-      abs(_ups[1] - _ups[0] - importance.UPSET["upset"]) < 1e-6 and _ups[1] > _up["Bundesliga: RB Leipzig 5\u20132 FC Augsburg"] > _up["FA Cup: Barrow 1\u20130 Gillingham"], (_ups, _up))
+_g = lambda side, minute: {"side": side, "minute": minute, "player": "x"}  # noqa: E731
+def _sc(comp, *args, **k):
+    return events.football([(comp, [_mk(*args, **k)])], 0)[0]["score"]
+_city_odds, _city = _sc("Premier League", "Nottingham Forest", "Manchester City", 3, 1, "393", "382", upset="upset"), _sc("Premier League", "Nottingham Forest", "Manchester City", 3, 1, "393", "382")
+check("D, 2026-11-09: a big club beaten by a club outside the 17 is an upset: +4 (Sunderland 1–0 Chelsea), +6 when the odds also made it the clear favourite (Forest 3–1 Man City)",
+      abs(_city - _sc("Premier League", "Nottingham Forest", "Brentford", 3, 1, "393", "337") - importance.UPSET - importance.LISTED) < 1e-6 and abs(_city_odds - _city - (importance.UPSET_FAVOURITE - importance.UPSET)) < 1e-6
+      and _sc("Premier League", "Sunderland", "Chelsea", 1, 0, "366", "363") > _sc("Premier League", "Sunderland", "Brentford", 1, 0, "366", "337"), (_city_odds, _city))
+_mu = [_g("away", "1'"), _g("away", "4'"), _g("home", "16'"), _g("home", "44'"), _g("away", "48'"), _g("away", "53'"), _g("home", "90'+2'"), _g("home", "90'+6'")]
+_mu_sc = _sc("Premier League", "Manchester United", "Aston Villa", 4, 4, "360", "362", goals=_mu)
+check("a stoppage-time equaliser from 4–2 down is drama for a big club: Man Utd 4–4 Aston Villa outranks Barcelona 2–1 Atlético and Sunderland 1–0 Chelsea, and a plain 4–4 by 4",
+      _mu_sc > max(_sc("La Liga", "Atlético Madrid", "Barcelona", 1, 2, "1068", "83"), _sc("Premier League", "Sunderland", "Chelsea", 1, 0, "366", "363"))
+      and _mu_sc - _sc("Premier League", "Manchester United", "Aston Villa", 4, 4, "360", "362", goals=[_g(side, f"{m}'") for m, side in zip(range(10, 90, 10), ["home", "away"] * 4)]) >= importance.DRAMA, _mu_sc)
+check("two big clubs meeting add 3 (Barcelona's win at Atlético against the same win at Getafe)", abs(_sc("La Liga", "Atlético Madrid", "Barcelona", 1, 2, "1068", "83") - _sc("La Liga", "Getafe", "Barcelona", 1, 2, "2922", "83") - importance.BIG_MEETING) < 1e-6)
+_pc = [_g("away", "10'"), _g("home", "20'"), _g("away", "30'"), _g("home", "60'"), _g("home", "90'+3'")]
+check("no excitement bonus when no big club played: WSL Palace 3–2 Charlton (comeback, late winner) stays below Arsenal Women's win and Man Utd's draw",
+      _sc("Women's Super League", "Crystal Palace", "Charlton Athletic", 3, 2, "a1", "a2", goals=_pc) < _sc("Women's Super League", "Liverpool", "Arsenal", 1, 2, "x9", "19973") < _sc("Premier League", "Manchester United", "Aston Villa", 4, 4, "360", "362", goals=_mu))
+check("an expected thrashing is not 'crazy': Bayern 6–0 as an 85% favourite gets no bonus for the margin, an even game's 6–0 does",
+      _sc("Bundesliga", "Bayern Munich", "Minnows", 6, 0, "132", "9", verdict="favourite_won", fav_pct=85) + importance.WOW == _sc("Bundesliga", "Bayern Munich", "Minnows", 6, 0, "132", "9", verdict="favourite_won", fav_pct=55))
+_st = events.football([("Women's Super League", [_mk("Liverpool", "Arsenal", 1, 2, "x9", "19973")]), ("Premier League", [_mk("Manchester United", "Aston Villa", 4, 4, "360", "362", goals=_mu)])], 0)
+check("Arsenal Women's result is pinned right after Arsenal's, above a bigger score", [x["text"] for x in bigstuff.select(_st, 0)][0].startswith("Women's Super League: Arsenal"))
+_bh = bigstuff.build(_st + events.f1([("Brazilian Grand Prix", "Lando Norris", "McLaren")]), weekday=0)["headlines"]
+check("an F1 race win always leads the ping (D, 2026-11-09: Norris's Brazil win was missing)", _bh[0] == "F1: Lando Norris wins the Brazilian Grand Prix for McLaren" and _bh[1].startswith("Women's Super League: Arsenal"), _bh)
 check("the Telegram headlines keep the sport prefix on every line (they stand alone)", bigstuff.headlines(_gs)[0] == "Champions League: Arsenal 2\u20131 Slavia Prague")
 
 # ---- review of the first real rehearsal (D, 2026-11-05)

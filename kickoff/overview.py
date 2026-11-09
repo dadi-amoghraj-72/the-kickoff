@@ -193,6 +193,9 @@ def matchday_facts(competition, matches, odds_by_id, table_rows=None):
     for m in matches:
         pct, d = odds_by_id.get(m["id"]), drama(m)
         v = verdict(m, pct)
+        if pct:
+            m["fav_pct"] = max(pct.get("home", 0), pct.get("away", 0))                # The Big Stuff: an expected thrashing is not 'crazy' (D, 2026-11-09)
+            m["verdict"] = v
         if v in ("upset", "big_upset"):
             m["dog"] = "home" if m["home_score"] > m["away_score"] else "away"      # the scoreboard puts an asterisk on this team (D, 2026-11-05), like the NBA
             m["upset"] = v                                                          # and The Big Stuff scores it (D, 2026-11-08: Forest 3-1 Man City was missing)

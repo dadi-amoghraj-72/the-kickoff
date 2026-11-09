@@ -9,7 +9,10 @@ MINE = 6               # one of D's teams or players played (Arsenal and Arsenal
 KOHLI = 8              # Virat Kohli batted: on top of MINE, because he is D's favourite player in all of sport
 LISTED = 2             # one of the 17 listed football clubs
 DRAMA = 4              # a dramatic finish: a game-winner in the last seconds, overtime decided by 3 or less, a one-point game, a winning goal in stoppage time
-UPSET = {"upset": 4, "big_upset": 6}   # the clear favourite lost (football, from the pre-match odds; a big upset when it had 65% or more): Forest 3-1 Man City is a key score (D, 2026-11-08)
+UPSET, UPSET_FAVOURITE = 4, 6   # football: one of the 17 big clubs lost to a club outside them (Sunderland 1-0 Chelsea); 6 when the odds also made it the clear favourite (Forest 3-1 Man City) (D, 2026-11-09)
+BIG_MEETING = 3        # football: two of the 17 big clubs met (Barcelona v Atlético)
+EXPECTED = 65          # a favourite at this chance or more winning big is expected, not 'crazy'
+# Excitement (drama, something crazy, an upset) only counts when a big club or D's team played (D, 2026-11-09: Palace 3-2 Charlton and Fenerbahce 5-0 outranked Man Utd 4-4)
 WOW = 5                # something crazy happened (a huge margin, two overtimes, a comeback from far behind)
 SPORT_BASE = {"football": 0, "cricket": 0, "nfl": 1, "nba": 0, "mlb": 0, "f1": 8, "tennis": 0, "golf": 0}   # a little extra for sports that are always big news on the morning
 

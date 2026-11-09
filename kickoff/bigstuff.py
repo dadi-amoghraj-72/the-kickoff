@@ -36,7 +36,7 @@ def select(stories, weekday):
     story is D's team's or a final (those are never squeezed out); a story under MIN_SCORE is dropped (a quiet morning has fewer lines)."""
     cap = importance.CAP.get(weekday, 5)
     ranked = sorted((s for s in stories if s.get("kind", "result") == "result" and s["score"] >= importance.MIN_SCORE and not s.get("promote")),   # F1 and tennis have Major Events
-                    key=lambda s: (not s.get("first"), -s["score"], s["text"]))
+                    key=lambda s: (s.get("first") or 9, -s["score"], s["text"]))       # Arsenal (1), then Arsenal Women (2), then by score
     per, out = {}, []
     for s in ranked:
         n = per.get(s["sport"], 0)
@@ -217,5 +217,8 @@ def build(events, news=(), injuries=(), weekday=1):
     selected = select(stories, weekday)
     star_list = stars([e for e in events if e.get("kind") == "perf"])
     major = {p: next(s["text"].split(": ", 1)[-1] for s in stories if s.get("promote") == p) for p in promoted(stories)}
-    return {"html": html(selected, star_list, news, injuries), "headlines": fill_headlines(selected, stories, star_list), "quiet": len(selected) < 3, "lead": lead_sport(stories), "promoted": list(major),
+    tops = [x["text"] for x in sorted((x for x in stories if x.get("promote") == "f1" or (x.get("promote") == "tennis" and x.get("stage") == "final")), key=lambda x: -x["score"])][:2]
+    rest = fill_headlines(selected, [x for x in stories if x["text"] not in tops], star_list, limit=3 - len(tops))
+    headlines = tops + [h for h in rest if h not in tops]          # an F1 race win or a Slam final always leads the ping (D, 2026-11-09: Norris's Brazil win was missing)
+    return {"html": html(selected, star_list, news, injuries), "headlines": headlines[:3], "quiet": len(selected) < 3, "lead": lead_sport(stories), "promoted": list(major),
             "majors": major, "selected": selected, "stars": star_list}
