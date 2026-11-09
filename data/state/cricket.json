@@ -3933,6 +3933,1388 @@
       ],
       "status": "Scorchers won by 6 wkts (30b rem)"
     },
+    "espn-1553296": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 18,
+              "fours": 2,
+              "mark": "",
+              "name": "Brandon King",
+              "out": " b Ahmed",
+              "r": 9,
+              "sixes": 0,
+              "sr": 50.0
+            },
+            {
+              "b": 17,
+              "fours": 0,
+              "mark": "",
+              "name": "Joshua Da Silva",
+              "out": "lbw b Ahmed",
+              "r": 12,
+              "sixes": 0,
+              "sr": 70.58
+            },
+            {
+              "b": 10,
+              "fours": 0,
+              "mark": "",
+              "name": "Kavem Hodge",
+              "out": " b Mahmud",
+              "r": 1,
+              "sixes": 0,
+              "sr": 10.0
+            },
+            {
+              "b": 145,
+              "fours": 5,
+              "mark": "",
+              "name": "Kevin Wickham",
+              "out": " b Mahmud",
+              "r": 61,
+              "sixes": 0,
+              "sr": 42.06
+            },
+            {
+              "b": 212,
+              "fours": 13,
+              "mark": "",
+              "name": "Amir Jangoo",
+              "out": " b Mahmud",
+              "r": 133,
+              "sixes": 2,
+              "sr": 62.73
+            },
+            {
+              "b": 112,
+              "fours": 4,
+              "mark": "",
+              "name": "Justin Greaves",
+              "out": " b Miraz",
+              "r": 51,
+              "sixes": 0,
+              "sr": 45.53
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "(c)",
+              "name": "Roston Chase",
+              "out": "c †Litton Das b Mahmud",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 25,
+              "fours": 5,
+              "mark": "",
+              "name": "Joshua Bishop",
+              "out": "st †Litton Das b Mahmud",
+              "r": 23,
+              "sixes": 0,
+              "sr": 92.0
+            },
+            {
+              "b": 18,
+              "fours": 2,
+              "mark": "",
+              "name": "Shamar Joseph",
+              "out": " b Mahmud",
+              "r": 16,
+              "sixes": 1,
+              "sr": 88.88
+            },
+            {
+              "b": 48,
+              "fours": 4,
+              "mark": "",
+              "name": "Jomel Warrican",
+              "out": "not out",
+              "r": 27,
+              "sixes": 0,
+              "sr": 56.25
+            },
+            {
+              "b": 38,
+              "fours": 2,
+              "mark": "",
+              "name": "Jayden Seales",
+              "out": "lbw b Miraz",
+              "r": 15,
+              "sixes": 0,
+              "sr": 39.47
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 4.28,
+              "m": 0,
+              "name": "Taskin Ahmed",
+              "nb": 4,
+              "o": 21.0,
+              "r": 90,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 3.75,
+              "m": 1,
+              "name": "Hasan Mahmud",
+              "nb": 0,
+              "o": 24.0,
+              "r": 90,
+              "w": 6,
+              "wd": 0
+            },
+            {
+              "eco": 2.58,
+              "m": 5,
+              "name": "Mehidy Hasan Miraz",
+              "nb": 0,
+              "o": 31.4,
+              "r": 82,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 2.84,
+              "m": 3,
+              "name": "Taijul Islam",
+              "nb": 0,
+              "o": 19.0,
+              "r": 54,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 3.36,
+              "m": 1,
+              "name": "Nayeem Hasan",
+              "nb": 0,
+              "o": 11.0,
+              "r": 37,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Bangladesh",
+          "dnb": [],
+          "extras": {
+            "b_lb": 3,
+            "nb": 4,
+            "total": 8,
+            "w": 1
+          },
+          "fow": "",
+          "label": "1st innings",
+          "overs": 106.4,
+          "runs": 356,
+          "team": "West Indies",
+          "wickets": 10
+        },
+        {
+          "batting": [
+            {
+              "b": 33,
+              "fours": 2,
+              "mark": "",
+              "name": "Tanzid Hasan",
+              "out": "c Wickham b Greaves",
+              "r": 16,
+              "sixes": 0,
+              "sr": 48.48
+            },
+            {
+              "b": 6,
+              "fours": 1,
+              "mark": "",
+              "name": "Nayeem Hasan",
+              "out": "c King b Seales",
+              "r": 5,
+              "sixes": 0,
+              "sr": 83.33
+            },
+            {
+              "b": 65,
+              "fours": 1,
+              "mark": "(c)",
+              "name": "Najmul Hossain Shanto",
+              "out": " b Joseph",
+              "r": 18,
+              "sixes": 1,
+              "sr": 27.69
+            },
+            {
+              "b": 359,
+              "fours": 22,
+              "mark": "",
+              "name": "Towhid Hridoy",
+              "out": "not out",
+              "r": 242,
+              "sixes": 11,
+              "sr": 67.4
+            },
+            {
+              "b": 76,
+              "fours": 4,
+              "mark": "",
+              "name": "Mushfiqur Rahim",
+              "out": "c King b Warrican",
+              "r": 34,
+              "sixes": 0,
+              "sr": 44.73
+            },
+            {
+              "b": 7,
+              "fours": 2,
+              "mark": "",
+              "name": "Litton Das",
+              "out": "c King b Warrican",
+              "r": 8,
+              "sixes": 0,
+              "sr": 114.28
+            },
+            {
+              "b": 30,
+              "fours": 3,
+              "mark": "",
+              "name": "Mehidy Hasan Miraz",
+              "out": "c Greaves b Chase",
+              "r": 16,
+              "sixes": 0,
+              "sr": 53.33
+            },
+            {
+              "b": 12,
+              "fours": 0,
+              "mark": "",
+              "name": "Hasan Mahmud",
+              "out": "c †Jangoo b Warrican",
+              "r": 1,
+              "sixes": 0,
+              "sr": 8.33
+            },
+            {
+              "b": 56,
+              "fours": 3,
+              "mark": "",
+              "name": "Taijul Islam",
+              "out": "st †Jangoo b Warrican",
+              "r": 22,
+              "sixes": 0,
+              "sr": 39.28
+            },
+            {
+              "b": 29,
+              "fours": 2,
+              "mark": "",
+              "name": "Taskin Ahmed",
+              "out": "c Bishop b Seales",
+              "r": 12,
+              "sixes": 0,
+              "sr": 41.37
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 3.66,
+              "m": 2,
+              "name": "Jayden Seales",
+              "nb": 0,
+              "o": 15.5,
+              "r": 58,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 4.1,
+              "m": 5,
+              "name": "Shamar Joseph",
+              "nb": 2,
+              "o": 20.0,
+              "r": 82,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 1.66,
+              "m": 2,
+              "name": "Justin Greaves",
+              "nb": 0,
+              "o": 6.0,
+              "r": 10,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 2.53,
+              "m": 7,
+              "name": "Jomel Warrican",
+              "nb": 0,
+              "o": 41.0,
+              "r": 104,
+              "w": 4,
+              "wd": 0
+            },
+            {
+              "eco": 3.68,
+              "m": 1,
+              "name": "Joshua Bishop",
+              "nb": 0,
+              "o": 16.0,
+              "r": 59,
+              "w": 0,
+              "wd": 1
+            },
+            {
+              "eco": 5.07,
+              "m": 2,
+              "name": "Roston Chase",
+              "nb": 0,
+              "o": 13.0,
+              "r": 66,
+              "w": 1,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "West Indies",
+          "dnb": [],
+          "extras": {
+            "b_lb": 8,
+            "nb": 2,
+            "total": 12,
+            "w": 2
+          },
+          "fow": "",
+          "label": "1st innings",
+          "overs": 111.5,
+          "runs": 386,
+          "team": "Bangladesh",
+          "wickets": 9
+        },
+        {
+          "batting": [
+            {
+              "b": 84,
+              "fours": 10,
+              "mark": "",
+              "name": "Brandon King",
+              "out": "c Najmul Hossain Shanto b Miraz",
+              "r": 61,
+              "sixes": 1,
+              "sr": 72.61
+            },
+            {
+              "b": 70,
+              "fours": 4,
+              "mark": "",
+              "name": "Joshua Da Silva",
+              "out": "lbw b Islam",
+              "r": 36,
+              "sixes": 0,
+              "sr": 51.42
+            },
+            {
+              "b": 194,
+              "fours": 17,
+              "mark": "",
+              "name": "Kavem Hodge",
+              "out": "c Mahmud b Hasan",
+              "r": 142,
+              "sixes": 1,
+              "sr": 73.19
+            },
+            {
+              "b": 107,
+              "fours": 7,
+              "mark": "",
+              "name": "Kevin Wickham",
+              "out": "c & b Islam",
+              "r": 78,
+              "sixes": 2,
+              "sr": 72.89
+            },
+            {
+              "b": 74,
+              "fours": 0,
+              "mark": "",
+              "name": "Amir Jangoo",
+              "out": "not out",
+              "r": 39,
+              "sixes": 0,
+              "sr": 52.7
+            },
+            {
+              "b": 16,
+              "fours": 0,
+              "mark": "",
+              "name": "Justin Greaves",
+              "out": "lbw b Miraz",
+              "r": 9,
+              "sixes": 0,
+              "sr": 56.25
+            },
+            {
+              "b": 3,
+              "fours": 0,
+              "mark": "",
+              "name": "Shamar Joseph",
+              "out": "c Tanzid Hasan b Hasan",
+              "r": 1,
+              "sixes": 0,
+              "sr": 33.33
+            },
+            {
+              "b": 11,
+              "fours": 1,
+              "mark": "",
+              "name": "Joshua Bishop",
+              "out": "not out",
+              "r": 20,
+              "sixes": 2,
+              "sr": 181.81
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 4.63,
+              "m": 0,
+              "name": "Taskin Ahmed",
+              "nb": 1,
+              "o": 11.0,
+              "r": 51,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 5.54,
+              "m": 1,
+              "name": "Hasan Mahmud",
+              "nb": 0,
+              "o": 11.0,
+              "r": 61,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 4.06,
+              "m": 1,
+              "name": "Taijul Islam",
+              "nb": 0,
+              "o": 29.0,
+              "r": 118,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 3.14,
+              "m": 4,
+              "name": "Mehidy Hasan Miraz",
+              "nb": 0,
+              "o": 27.0,
+              "r": 85,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 4.8,
+              "m": 0,
+              "name": "Nayeem Hasan",
+              "nb": 0,
+              "o": 15.0,
+              "r": 72,
+              "w": 2,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Bangladesh",
+          "dnb": [],
+          "extras": {
+            "b_lb": 11,
+            "nb": 1,
+            "total": 12,
+            "w": 0
+          },
+          "fow": "",
+          "label": "2nd innings",
+          "overs": 93.0,
+          "runs": 398,
+          "team": "West Indies",
+          "wickets": 6
+        },
+        {
+          "batting": [
+            {
+              "b": 32,
+              "fours": 4,
+              "mark": "",
+              "name": "Tanzid Hasan",
+              "out": "c Da Silva b Warrican",
+              "r": 21,
+              "sixes": 0,
+              "sr": 65.62
+            },
+            {
+              "b": 27,
+              "fours": 1,
+              "mark": "(c)",
+              "name": "Najmul Hossain Shanto",
+              "out": "lbw b Warrican",
+              "r": 14,
+              "sixes": 0,
+              "sr": 51.85
+            },
+            {
+              "b": 140,
+              "fours": 8,
+              "mark": "",
+              "name": "Towhid Hridoy",
+              "out": " b Warrican",
+              "r": 82,
+              "sixes": 0,
+              "sr": 58.57
+            },
+            {
+              "b": 123,
+              "fours": 6,
+              "mark": "",
+              "name": "Mushfiqur Rahim",
+              "out": " b Joseph",
+              "r": 49,
+              "sixes": 0,
+              "sr": 39.83
+            },
+            {
+              "b": 29,
+              "fours": 1,
+              "mark": "",
+              "name": "Litton Das",
+              "out": "not out",
+              "r": 7,
+              "sixes": 0,
+              "sr": 24.13
+            },
+            {
+              "b": 3,
+              "fours": 0,
+              "mark": "",
+              "name": "Mehidy Hasan Miraz",
+              "out": "not out",
+              "r": 1,
+              "sixes": 0,
+              "sr": 33.33
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 3.66,
+              "m": 0,
+              "name": "Jayden Seales",
+              "nb": 0,
+              "o": 3.0,
+              "r": 11,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 3.1,
+              "m": 3,
+              "name": "Shamar Joseph",
+              "nb": 0,
+              "o": 10.0,
+              "r": 31,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 2.93,
+              "m": 3,
+              "name": "Roston Chase",
+              "nb": 0,
+              "o": 16.0,
+              "r": 47,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 2.44,
+              "m": 4,
+              "name": "Jomel Warrican",
+              "nb": 0,
+              "o": 18.0,
+              "r": 44,
+              "w": 3,
+              "wd": 0
+            },
+            {
+              "eco": 3.88,
+              "m": 0,
+              "name": "Joshua Bishop",
+              "nb": 0,
+              "o": 9.0,
+              "r": 35,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 2.0,
+              "m": 1,
+              "name": "Justin Greaves",
+              "nb": 0,
+              "o": 3.0,
+              "r": 6,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "West Indies",
+          "dnb": [],
+          "extras": {
+            "b_lb": 10,
+            "nb": 0,
+            "total": 10,
+            "w": 0
+          },
+          "fow": "",
+          "label": "2nd innings",
+          "overs": 59.0,
+          "runs": 184,
+          "team": "Bangladesh",
+          "wickets": 4
+        }
+      ],
+      "potm": [
+        {
+          "name": "Towhid Hridoy",
+          "team": "Bangladesh"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "Bangladesh",
+          "balls": 212,
+          "fours": 13,
+          "kind": "century",
+          "match": "Bangladesh vs West Indies, 2nd Test, West Indies tour of Bangladesh 2026/27",
+          "name": "Amir Jangoo",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 133,
+          "sixes": 2,
+          "team": "West Indies"
+        },
+        {
+          "against": "West Indies",
+          "economy": 3.75,
+          "kind": "five-for",
+          "maidens": 1,
+          "match": "Bangladesh vs West Indies, 2nd Test, West Indies tour of Bangladesh 2026/27",
+          "name": "Hasan Mahmud",
+          "overs": 24.0,
+          "result": "Match drawn",
+          "runs_conceded": 90,
+          "team": "Bangladesh",
+          "wickets": 6
+        },
+        {
+          "against": "West Indies",
+          "balls": 359,
+          "fours": 22,
+          "kind": "century",
+          "match": "Bangladesh vs West Indies, 2nd Test, West Indies tour of Bangladesh 2026/27",
+          "name": "Towhid Hridoy",
+          "not_out": true,
+          "result": "Match drawn",
+          "runs": 242,
+          "sixes": 11,
+          "team": "Bangladesh"
+        },
+        {
+          "against": "Bangladesh",
+          "balls": 194,
+          "fours": 17,
+          "kind": "century",
+          "match": "Bangladesh vs West Indies, 2nd Test, West Indies tour of Bangladesh 2026/27",
+          "name": "Kavem Hodge",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 142,
+          "sixes": 1,
+          "team": "West Indies"
+        }
+      ],
+      "status": "Match drawn"
+    },
+    "espn-1555123": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 51,
+              "fours": 5,
+              "mark": "",
+              "name": "Innocent Kaia",
+              "out": "c Rahmanullah b Ahmad",
+              "r": 34,
+              "sixes": 0,
+              "sr": 66.66
+            },
+            {
+              "b": 113,
+              "fours": 3,
+              "mark": "",
+              "name": "Ben Curran",
+              "out": " b Saleem",
+              "r": 42,
+              "sixes": 0,
+              "sr": 37.16
+            },
+            {
+              "b": 168,
+              "fours": 14,
+              "mark": "",
+              "name": "Brendan Taylor",
+              "out": "c Rahman b Shahidi",
+              "r": 131,
+              "sixes": 4,
+              "sr": 77.97
+            },
+            {
+              "b": 206,
+              "fours": 11,
+              "mark": "(c)",
+              "name": "Brian Bennett",
+              "out": "c Zia-ur-Rehman b Ahmad",
+              "r": 128,
+              "sixes": 0,
+              "sr": 62.13
+            },
+            {
+              "b": 16,
+              "fours": 0,
+              "mark": "",
+              "name": "Craig Ervine",
+              "out": "lbw b Zia-ur-Rehman",
+              "r": 4,
+              "sixes": 0,
+              "sr": 25.0
+            },
+            {
+              "b": 15,
+              "fours": 1,
+              "mark": "",
+              "name": "Antum Naqvi",
+              "out": "c †Ikram Alikhil b Zia-ur-Rehman",
+              "r": 9,
+              "sixes": 0,
+              "sr": 60.0
+            },
+            {
+              "b": 70,
+              "fours": 9,
+              "mark": "",
+              "name": "Wessly Madhevere",
+              "out": "c †Ikram Alikhil b Rahman",
+              "r": 54,
+              "sixes": 0,
+              "sr": 77.14
+            },
+            {
+              "b": 81,
+              "fours": 5,
+              "mark": "",
+              "name": "Tafadzwa Tsiga",
+              "out": "lbw b Ahmad",
+              "r": 44,
+              "sixes": 1,
+              "sr": 54.32
+            },
+            {
+              "b": 51,
+              "fours": 4,
+              "mark": "",
+              "name": "Graeme Cremer",
+              "out": "not out",
+              "r": 34,
+              "sixes": 0,
+              "sr": 66.66
+            },
+            {
+              "b": 25,
+              "fours": 0,
+              "mark": "",
+              "name": "Newman Nyamhuri",
+              "out": "lbw b Saleem",
+              "r": 8,
+              "sixes": 0,
+              "sr": 32.0
+            },
+            {
+              "b": 11,
+              "fours": 1,
+              "mark": "",
+              "name": "Blessing Muzarabani",
+              "out": " b Saleem",
+              "r": 5,
+              "sixes": 0,
+              "sr": 45.45
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 2.98,
+              "m": 6,
+              "name": "Mohammad Saleem",
+              "nb": 0,
+              "o": 27.3,
+              "r": 82,
+              "w": 3,
+              "wd": 0
+            },
+            {
+              "eco": 3.95,
+              "m": 3,
+              "name": "Ziaur Rahman",
+              "nb": 0,
+              "o": 20.0,
+              "r": 79,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 3.69,
+              "m": 7,
+              "name": "Zia-ur-Rehman",
+              "nb": 0,
+              "o": 46.0,
+              "r": 170,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 4.44,
+              "m": 2,
+              "name": "Qais Ahmad",
+              "nb": 0,
+              "o": 27.0,
+              "r": 120,
+              "w": 3,
+              "wd": 0
+            },
+            {
+              "eco": 5.5,
+              "m": 0,
+              "name": "Shahidullah",
+              "nb": 0,
+              "o": 2.0,
+              "r": 11,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 2.58,
+              "m": 2,
+              "name": "Hashmatullah Shahidi",
+              "nb": 0,
+              "o": 12.0,
+              "r": 31,
+              "w": 1,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Afghanistan",
+          "dnb": [],
+          "extras": {
+            "b_lb": 11,
+            "nb": 0,
+            "total": 11,
+            "w": 0
+          },
+          "fow": "",
+          "label": "1st innings",
+          "overs": 134.3,
+          "runs": 504,
+          "team": "Zimbabwe",
+          "wickets": 10
+        },
+        {
+          "batting": [
+            {
+              "b": 213,
+              "fours": 6,
+              "mark": "",
+              "name": "Sediqullah Atal",
+              "out": "c †Tsiga b Cremer",
+              "r": 105,
+              "sixes": 3,
+              "sr": 49.29
+            },
+            {
+              "b": 14,
+              "fours": 0,
+              "mark": "",
+              "name": "Abdul Malik",
+              "out": "c †Tsiga b Nyamhuri",
+              "r": 2,
+              "sixes": 0,
+              "sr": 14.28
+            },
+            {
+              "b": 188,
+              "fours": 12,
+              "mark": "",
+              "name": "Rahmanullah",
+              "out": "run out (Madhevere)",
+              "r": 113,
+              "sixes": 1,
+              "sr": 60.1
+            },
+            {
+              "b": 347,
+              "fours": 14,
+              "mark": "(c)",
+              "name": "Rahmat Shah",
+              "out": "st †Tsiga b Cremer",
+              "r": 173,
+              "sixes": 3,
+              "sr": 49.85
+            },
+            {
+              "b": 14,
+              "fours": 0,
+              "mark": "",
+              "name": "Hashmatullah Shahidi",
+              "out": "c Bennett b Nyamhuri",
+              "r": 6,
+              "sixes": 1,
+              "sr": 42.85
+            },
+            {
+              "b": 6,
+              "fours": 0,
+              "mark": "",
+              "name": "Shahidullah",
+              "out": "c †Tsiga b Nyamhuri",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 83,
+              "fours": 5,
+              "mark": "",
+              "name": "Ikram Alikhil",
+              "out": "c Curran b Cremer",
+              "r": 40,
+              "sixes": 0,
+              "sr": 48.19
+            },
+            {
+              "b": 39,
+              "fours": 5,
+              "mark": "",
+              "name": "Qais Ahmad",
+              "out": "c †Tsiga b Nyamhuri",
+              "r": 27,
+              "sixes": 0,
+              "sr": 69.23
+            },
+            {
+              "b": 99,
+              "fours": 2,
+              "mark": "",
+              "name": "Zia-ur-Rehman",
+              "out": "c †Tsiga b Muzarabani",
+              "r": 15,
+              "sixes": 0,
+              "sr": 15.15
+            },
+            {
+              "b": 14,
+              "fours": 2,
+              "mark": "",
+              "name": "Mohammad Saleem",
+              "out": " b Nyamhuri",
+              "r": 9,
+              "sixes": 0,
+              "sr": 64.28
+            },
+            {
+              "b": 3,
+              "fours": 0,
+              "mark": "",
+              "name": "Ziaur Rahman",
+              "out": "not out",
+              "r": 7,
+              "sixes": 1,
+              "sr": 233.33
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 2.65,
+              "m": 9,
+              "name": "Blessing Muzarabani",
+              "nb": 1,
+              "o": 35.0,
+              "r": 93,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 2.67,
+              "m": 6,
+              "name": "Newman Nyamhuri",
+              "nb": 0,
+              "o": 30.4,
+              "r": 82,
+              "w": 5,
+              "wd": 1
+            },
+            {
+              "eco": 2.53,
+              "m": 2,
+              "name": "Wessly Madhevere",
+              "nb": 0,
+              "o": 15.0,
+              "r": 38,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 3.21,
+              "m": 5,
+              "name": "Graeme Cremer",
+              "nb": 1,
+              "o": 55.0,
+              "r": 177,
+              "w": 3,
+              "wd": 0
+            },
+            {
+              "eco": 3.17,
+              "m": 0,
+              "name": "Antum Naqvi",
+              "nb": 0,
+              "o": 29.0,
+              "r": 92,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 3.6,
+              "m": 0,
+              "name": "Brian Bennett",
+              "nb": 0,
+              "o": 5.0,
+              "r": 18,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Zimbabwe",
+          "dnb": [],
+          "extras": {
+            "b_lb": 14,
+            "nb": 2,
+            "total": 17,
+            "w": 1
+          },
+          "fow": "",
+          "label": "1st innings",
+          "overs": 169.4,
+          "runs": 514,
+          "team": "Afghanistan",
+          "wickets": 10
+        },
+        {
+          "batting": [
+            {
+              "b": 14,
+              "fours": 0,
+              "mark": "",
+              "name": "Innocent Kaia",
+              "out": "lbw b Zia-ur-Rehman",
+              "r": 1,
+              "sixes": 0,
+              "sr": 7.14
+            },
+            {
+              "b": 22,
+              "fours": 1,
+              "mark": "",
+              "name": "Ben Curran",
+              "out": "c Shahidullah b Zia-ur-Rehman",
+              "r": 12,
+              "sixes": 0,
+              "sr": 54.54
+            },
+            {
+              "b": 88,
+              "fours": 11,
+              "mark": "",
+              "name": "Brendan Taylor",
+              "out": "run out (Zia-ur-Rehman/†Ikram Alikhil)",
+              "r": 82,
+              "sixes": 2,
+              "sr": 93.18
+            },
+            {
+              "b": 86,
+              "fours": 6,
+              "mark": "(c)",
+              "name": "Brian Bennett",
+              "out": " b Saleem",
+              "r": 58,
+              "sixes": 0,
+              "sr": 67.44
+            },
+            {
+              "b": 279,
+              "fours": 23,
+              "mark": "",
+              "name": "Craig Ervine",
+              "out": "not out",
+              "r": 206,
+              "sixes": 2,
+              "sr": 73.83
+            },
+            {
+              "b": 136,
+              "fours": 2,
+              "mark": "",
+              "name": "Antum Naqvi",
+              "out": "c Shahidullah b Malik",
+              "r": 61,
+              "sixes": 0,
+              "sr": 44.85
+            },
+            {
+              "b": 108,
+              "fours": 2,
+              "mark": "",
+              "name": "Wessly Madhevere",
+              "out": "not out",
+              "r": 100,
+              "sixes": 3,
+              "sr": 92.59
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 2.92,
+              "m": 5,
+              "name": "Ziaur Rahman",
+              "nb": 0,
+              "o": 14.0,
+              "r": 41,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 3.46,
+              "m": 4,
+              "name": "Zia-ur-Rehman",
+              "nb": 0,
+              "o": 50.0,
+              "r": 173,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 3.87,
+              "m": 1,
+              "name": "Mohammad Saleem",
+              "nb": 0,
+              "o": 16.0,
+              "r": 62,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 6.4,
+              "m": 0,
+              "name": "Qais Ahmad",
+              "nb": 0,
+              "o": 5.0,
+              "r": 32,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 5.33,
+              "m": 0,
+              "name": "Hashmatullah Shahidi",
+              "nb": 0,
+              "o": 12.0,
+              "r": 64,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 5.82,
+              "m": 0,
+              "name": "Abdul Malik",
+              "nb": 0,
+              "o": 11.1,
+              "r": 65,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 5.7,
+              "m": 1,
+              "name": "Shahidullah",
+              "nb": 0,
+              "o": 10.0,
+              "r": 57,
+              "w": 0,
+              "wd": 1
+            },
+            {
+              "eco": 6.75,
+              "m": 0,
+              "name": "Sediqullah Atal",
+              "nb": 0,
+              "o": 4.0,
+              "r": 27,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Afghanistan",
+          "dnb": [],
+          "extras": {
+            "b_lb": 2,
+            "nb": 0,
+            "total": 3,
+            "w": 1
+          },
+          "fow": "",
+          "label": "2nd innings",
+          "overs": 122.1,
+          "runs": 523,
+          "team": "Zimbabwe",
+          "wickets": 5
+        }
+      ],
+      "potm": [
+        {
+          "name": "Brendan Taylor",
+          "team": "Zimbabwe"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "Afghanistan",
+          "balls": 168,
+          "fours": 14,
+          "kind": "century",
+          "match": "Afghanistan vs Zimbabwe, 1st Test, Zimbabwe tour of United Arab Emirates 2026/27",
+          "name": "Brendan Taylor",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 131,
+          "sixes": 4,
+          "team": "Zimbabwe"
+        },
+        {
+          "against": "Afghanistan",
+          "balls": 206,
+          "fours": 11,
+          "kind": "century",
+          "match": "Afghanistan vs Zimbabwe, 1st Test, Zimbabwe tour of United Arab Emirates 2026/27",
+          "name": "Brian Bennett",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 128,
+          "sixes": 0,
+          "team": "Zimbabwe"
+        },
+        {
+          "against": "Zimbabwe",
+          "balls": 213,
+          "fours": 6,
+          "kind": "century",
+          "match": "Afghanistan vs Zimbabwe, 1st Test, Zimbabwe tour of United Arab Emirates 2026/27",
+          "name": "Sediqullah Atal",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 105,
+          "sixes": 3,
+          "team": "Afghanistan"
+        },
+        {
+          "against": "Zimbabwe",
+          "balls": 188,
+          "fours": 12,
+          "kind": "century",
+          "match": "Afghanistan vs Zimbabwe, 1st Test, Zimbabwe tour of United Arab Emirates 2026/27",
+          "name": "Rahmanullah",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 113,
+          "sixes": 1,
+          "team": "Afghanistan"
+        },
+        {
+          "against": "Zimbabwe",
+          "balls": 347,
+          "fours": 14,
+          "kind": "century",
+          "match": "Afghanistan vs Zimbabwe, 1st Test, Zimbabwe tour of United Arab Emirates 2026/27",
+          "name": "Rahmat Shah",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 173,
+          "sixes": 3,
+          "team": "Afghanistan"
+        },
+        {
+          "against": "Afghanistan",
+          "economy": 2.67,
+          "kind": "five-for",
+          "maidens": 6,
+          "match": "Afghanistan vs Zimbabwe, 1st Test, Zimbabwe tour of United Arab Emirates 2026/27",
+          "name": "Newman Nyamhuri",
+          "overs": 30.4,
+          "result": "Match drawn",
+          "runs_conceded": 82,
+          "team": "Zimbabwe",
+          "wickets": 5
+        },
+        {
+          "against": "Afghanistan",
+          "balls": 279,
+          "fours": 23,
+          "kind": "century",
+          "match": "Afghanistan vs Zimbabwe, 1st Test, Zimbabwe tour of United Arab Emirates 2026/27",
+          "name": "Craig Ervine",
+          "not_out": true,
+          "result": "Match drawn",
+          "runs": 206,
+          "sixes": 2,
+          "team": "Zimbabwe"
+        },
+        {
+          "against": "Afghanistan",
+          "balls": 108,
+          "fours": 2,
+          "kind": "century",
+          "match": "Afghanistan vs Zimbabwe, 1st Test, Zimbabwe tour of United Arab Emirates 2026/27",
+          "name": "Wessly Madhevere",
+          "not_out": true,
+          "result": "Match drawn",
+          "runs": 100,
+          "sixes": 3,
+          "team": "Zimbabwe"
+        }
+      ],
+      "status": "Match drawn"
+    },
     "f6bfa913-6f79-4fd9-ab8a-fe0b4cf5a456": {
       "innings": [
         {
@@ -4286,11 +5668,15 @@
     "espn-1553296|Towhid Hridoy|bat200",
     "espn-1555123|Brendan Taylor|bat100",
     "espn-1555123|Brian Bennett|bat100",
+    "espn-1555123|Craig Ervine|bat100",
+    "espn-1555123|Craig Ervine|bat150",
+    "espn-1555123|Craig Ervine|bat200",
     "espn-1555123|Newman Nyamhuri|5w",
     "espn-1555123|Rahmanullah|bat100",
     "espn-1555123|Rahmat Shah|bat100",
     "espn-1555123|Rahmat Shah|bat150",
-    "espn-1555123|Sediqullah Atal|bat100"
+    "espn-1555123|Sediqullah Atal|bat100",
+    "espn-1555123|Wessly Madhevere|bat100"
   ],
   "seen": [
     "0e3699f8-43b2-461b-a659-4d38daf9bf35",
@@ -4302,18 +5688,23 @@
     "espn-1543957",
     "espn-1543958",
     "espn-1543959",
+    "espn-1553296",
+    "espn-1555123",
     "f6bfa913-6f79-4fd9-ab8a-fe0b4cf5a456"
   ],
   "status": {
+    "espn-1550711": "Sri Lanka won toss & fielded",
     "espn-1553296": "West Indies lead by 315 runs",
     "espn-1555123": "Zimbabwe lead by 154 runs"
   },
   "test_done": {
-    "espn-1553296": 2,
-    "espn-1555123": 2
+    "espn-1550711": 0,
+    "espn-1553296": 4,
+    "espn-1555123": 3
   },
   "test_sig": {
-    "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 356, 'w': 10, 'o': 106.4}, {'inning': 'Bangladesh Inning 1', 'r': 386, 'w': 10, 'o': 111.5}, {'inning': 'West Indies Inning 2', 'r': 345, 'w': 3, 'o': 83.0}]",
-    "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 504, 'w': 10, 'o': 134.3}, {'inning': 'Afghanistan Inning 1', 'r': 514, 'w': 10, 'o': 169.4}, {'inning': 'Zimbabwe Inning 2', 'r': 164, 'w': 3, 'o': 40.0}]"
+    "espn-1550711": "[{'inning': 'Pakistan Inning 1', 'r': 281, 'w': 5, 'o': 67.2}]",
+    "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 356, 'w': 10, 'o': 106.4}, {'inning': 'Bangladesh Inning 1', 'r': 386, 'w': 9, 'o': 111.5}, {'inning': 'West Indies Inning 2', 'r': 398, 'w': 6, 'o': 93.0}, {'inning': 'Bangladesh Inning 2', 'r': 184, 'w': 4, 'o': 59.0}]",
+    "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 504, 'w': 10, 'o': 134.3}, {'inning': 'Afghanistan Inning 1', 'r': 514, 'w': 10, 'o': 169.4}, {'inning': 'Zimbabwe Inning 2', 'r': 523, 'w': 5, 'o': 122.1}]"
   }
 }

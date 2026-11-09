@@ -4,16 +4,6 @@
     "reported": false,
     "status": "a"
   },
-  "10": {
-    "news_added": "2026-09-20T19:30:08.247780Z",
-    "reported": false,
-    "status": "a"
-  },
-  "106": {
-    "news_added": "2026-11-08T14:30:09.097484Z",
-    "reported": true,
-    "status": "s"
-  },
   "109": {
     "news_added": null,
     "reported": false,
@@ -21,11 +11,6 @@
   },
   "112": {
     "news_added": "2026-09-30T16:00:09.552205Z",
-    "reported": false,
-    "status": "a"
-  },
-  "113": {
-    "news_added": "2026-10-25T17:30:09.883815Z",
     "reported": false,
     "status": "a"
   },
@@ -43,11 +28,6 @@
     "news_added": "2026-09-22T09:30:09.629652Z",
     "reported": false,
     "status": "a"
-  },
-  "12": {
-    "news_added": "2026-10-21T20:30:09.540957Z",
-    "reported": false,
-    "status": "i"
   },
   "124": {
     "news_added": null,
@@ -89,22 +69,52 @@
     "reported": false,
     "status": "a"
   },
-  "155": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
   "156": {
     "news_added": null,
     "reported": false,
     "status": "a"
   },
-  "200": {
-    "news_added": "2026-10-28T23:00:10.088612Z",
-    "reported": true,
-    "status": "i"
+  "226": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "229": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "230": {
+    "news_added": "2026-11-05T16:57:40.272082Z",
+    "reported": false,
+    "status": "a"
+  },
+  "233": {
+    "news_added": "2026-10-24T19:00:09.907289Z",
+    "reported": false,
+    "status": "a"
+  },
+  "236": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
   },
   "237": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "239": {
+    "news_added": "2026-09-06T18:00:08.301702Z",
+    "reported": false,
+    "status": "a"
+  },
+  "244": {
+    "news_added": "2026-09-17T08:30:08.942299Z",
+    "reported": false,
+    "status": "a"
+  },
+  "249": {
     "news_added": null,
     "reported": false,
     "status": "a"
@@ -125,9 +135,9 @@
     "status": "a"
   },
   "356": {
-    "news_added": null,
+    "news_added": "2026-11-09T18:00:09.325472Z",
     "reported": false,
-    "status": "a"
+    "status": "d"
   },
   "358": {
     "news_added": null,
@@ -141,16 +151,6 @@
   },
   "366": {
     "news_added": "2026-10-25T17:00:09.888666Z",
-    "reported": false,
-    "status": "a"
-  },
-  "367": {
-    "news_added": "2026-09-27T21:30:07.786183Z",
-    "reported": false,
-    "status": "a"
-  },
-  "368": {
-    "news_added": "2026-10-17T15:00:08.293301Z",
     "reported": false,
     "status": "a"
   },
@@ -184,11 +184,6 @@
     "reported": false,
     "status": "d"
   },
-  "399": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
   "4": {
     "news_added": null,
     "reported": false,
@@ -221,11 +216,6 @@
   },
   "418": {
     "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "419": {
-    "news_added": "2026-10-31T14:00:08.592593Z",
     "reported": false,
     "status": "a"
   },
@@ -284,58 +274,13 @@
     "reported": false,
     "status": "a"
   },
-  "557": {
-    "news_added": "2026-10-02T15:00:11.091226Z",
-    "reported": false,
-    "status": "a"
-  },
-  "565": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
   "579": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "627": {
     "news_added": null,
     "reported": false,
     "status": "a"
   },
   "8": {
     "news_added": "2026-10-24T18:30:08.735545Z",
-    "reported": false,
-    "status": "a"
-  },
-  "82": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "86": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "87": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "88": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "94": {
-    "news_added": "2026-10-10T16:30:08.848962Z",
-    "reported": false,
-    "status": "a"
-  },
-  "98": {
-    "news_added": "2026-10-17T16:30:09.272910Z",
     "reported": false,
     "status": "a"
   }
