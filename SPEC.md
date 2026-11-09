@@ -26,7 +26,7 @@ A personal daily sports digest for D, one reader in Singapore, reading on an iPh
 - **Health check** (`kickoff/health.py`): up to four ⚠ lines in the ping when something should have come through and did not: a sport that could not be built, a skipped part, a cricket match with a score but no scorecard, Claude off or in cheaper mode, the Mac's cricket backup not run for over a day, nothing from any sport. A good morning adds nothing.
 - **Ping fallback:** the ping waits up to 15 minutes for the page; if it is not live, it sends the digest as text plus the whole page as an HTML file.
 - **Failure alert:** if the run fails, D gets a Telegram alert.
-- **Mac jobs** (launchd; python3.9 has Full Disk Access): the **cricket backup** at 6:50am fetches ESPN's cricket pages into `data/cricket_cache.json` and pushes it (a backup only since 8 Nov); the **watchdog** at 7:40am builds and sends the edition from the Mac if the page is not live.
+- **Mac jobs** (launchd; python3.9 has Full Disk Access): the **cricket backup** at 6:50am fetches ESPN's cricket pages into `data/cricket_cache.json` and pushes it (a backup only since 8 Nov); the **watchdog** at 8:30am builds and sends the edition from the Mac if the page is not live, after waiting (up to 45 minutes) for a GitHub run still in progress, so it never sends a second edition beside a late one.
 - **Probe** (`.github/workflows/probe.yml`, started by hand): tries every outside source and today's cricket from GitHub's own servers.
 
 **Cost:** every Claude call is logged by section and day; the monthly budget is **$10** (`settings.MONTHLY_BUDGET_USD`): at 80% the expensive model steps down, at 100% Claude is skipped and code writes plain lines. Models: Sonnet 5.5 for notes and news, Opus 5.5 for matchday overviews (`kickoff/settings.py`). Claude only ever sees a facts sheet; code checks every name, number and claim it writes, retries once, then falls back to plain lines.
@@ -155,7 +155,6 @@ Each sport under its own gold heading; a sport with nothing is left out. Structu
 ## 12. Open items
 
 1. **Python 3.12 upgrade** (Mac and GitHub): 3.9 is past its end of life. D is doing it on 8 November.
-2. **The Mac watchdog failed to start at 7:40 on 8 November** ("spawn failed" in macOS): to fix together with the Python upgrade.
-3. **The Mac cricket job stays for a month** (review around 8 December 2026): if ESPN's feed on GitHub has carried every scorecard, it is removed.
-4. **Thresholds to review after a month of real editions** (early December): NBA standouts, Stars Of The Night (bar 70), the Key Overnight Scores caps, the bowling haul table.
-5. **Not built yet:** season-closing notes for the Champions League, FA Cup, F1 and tennis; tournament mode for the Rugby World Cup 2027 and similar events (results, then group tables, then knockouts; built a month before each); the WPL's source; the IPL's live caps outside Wikipedia.
+2. **The Mac cricket job stays for a month** (review around 8 December 2026): if ESPN's feed on GitHub has carried every scorecard, it is removed.
+3. **Thresholds to review after a month of real editions** (early December): NBA standouts, Stars Of The Night (bar 70), the Key Overnight Scores caps, the bowling haul table.
+4. **Not built yet:** season-closing notes for the Champions League, FA Cup, F1 and tennis; tournament mode for the Rugby World Cup 2027 and similar events (results, then group tables, then knockouts; built a month before each); the WPL's source; the IPL's live caps outside Wikipedia.

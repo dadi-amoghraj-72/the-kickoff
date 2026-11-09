@@ -95,6 +95,10 @@ def fallback(edition, send_text, send_file, write, note="The page is not live ye
     return ["text", "file"]
 
 
+WAIT_FOR_GITHUB = 45 * 60      # seconds the watchdog waits for a GitHub run still in progress
+POLL = 120
+
+
 def run_watchdog(day, deps):
     """The Mac's morning check. deps: live(day) -> bool, pull(), have_local(day) -> bool, build(day) -> bool, send(day), push(), alert(text), already_sent(day) -> bool,
     mark_sent(day). Returns 'ok', 'sent', 'sent-not-pushed', 'already' or 'failed'."""
@@ -108,6 +112,12 @@ def run_watchdog(day, deps):
         return "ok"
     if deps.already_sent(day):
         return "already"
+    waited = 0
+    while getattr(deps, "github_running", lambda: False)() and waited < WAIT_FOR_GITHUB:    # GitHub's run is still going (it starts up to 30+ minutes late): let it finish
+        deps.wait(POLL)                                                                     # rather than send a second edition beside it (D, 2026-11-09)
+        waited += POLL
+        if deps.live(day):
+            return "ok"
     try:
         deps.pull()
     except Exception:

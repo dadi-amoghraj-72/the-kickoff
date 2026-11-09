@@ -1,4 +1,5 @@
-"""The Mac's morning check (the backup for GitHub). Runs at 7:40am Singapore time (scripts/com.thekickoff.watchdog.plist) and does nothing at all when today's page is live.
+"""The Mac's morning check (the backup for GitHub). Runs at 8:30am Singapore time (scripts/com.thekickoff.watchdog.plist) and does nothing at all when today's page is live.
+If GitHub's daily run is still queued or running (it can start more than 30 minutes late), it waits up to 45 minutes for it before doing anything (D, 2026-11-09).
 
   .venv/bin/python scripts/watchdog.py --dry-run     say what it would do now; build nothing, send nothing
   .venv/bin/python scripts/watchdog.py               the real check
@@ -52,6 +53,24 @@ class Deps:
     def pull(self):
         git("pull", "--rebase", "--autostash")
 
+    def github_running(self):
+        """True when the daily workflow has a run queued or in progress (GitHub's public API; the repo is public, no key)."""
+        import urllib.request
+        for status in ("in_progress", "queued"):
+            try:
+                url = f"https://api.github.com/repos/dadi-amoghraj-72/the-kickoff/actions/workflows/daily.yml/runs?status={status}&per_page=1"
+                with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "TheKickoff/1.0"}), timeout=20) as r:
+                    if json.loads(r.read()).get("total_count"):
+                        log(f"GitHub's daily run is {status.replace('_', ' ')}: waiting for it")
+                        return True
+            except Exception:
+                pass
+        return False
+
+    def wait(self, seconds):
+        import time
+        time.sleep(seconds)
+
     def have_local(self, d):
         return edition_path(d).exists()
 
@@ -86,6 +105,9 @@ class Deps:
 
 
 class DryDeps(Deps):
+    def wait(self, seconds):
+        log(f"(dry) would wait {seconds}s for GitHub's run")
+
     def pull(self):
         log("(dry) would pull")
 

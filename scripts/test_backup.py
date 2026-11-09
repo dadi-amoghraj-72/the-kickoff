@@ -108,6 +108,29 @@ class Deps:
         self.log.append("mark")
 
 
+class Slow(Deps):
+    """GitHub's run is still going for `busy` polls, then the page comes up (or not)."""
+    def __init__(self, busy, comes_up, **k):
+        super().__init__(**k)
+        self.busy, self.comes_up, self.polls = busy, comes_up, 0
+
+    def github_running(self):
+        return self.polls < self.busy
+
+    def wait(self, seconds):
+        self.polls += 1
+
+    def live(self, d):
+        return self.comes_up and self.polls >= self.busy
+
+
+_s = Slow(3, True, live=False)
+check("GitHub's run still going: the watchdog waits, and when the page comes up it does nothing (no second edition)", backup.run_watchdog("2026-11-09", _s) == "ok" and _s.log == [] and _s.polls == 3, (_s.log, _s.polls))
+_s = Slow(2, False, live=False)
+check("GitHub's run finished but the page is not up: the backup goes ahead", backup.run_watchdog("2026-11-09", _s) == "sent" and "send" in _s.log, _s.log)
+_s = Slow(10 ** 6, False, live=False)
+check("a run that never ends: the watchdog stops waiting after 45 minutes and sends", backup.run_watchdog("2026-11-09", _s) == "sent" and _s.polls * backup.POLL >= backup.WAIT_FOR_GITHUB, _s.polls)
+
 d = Deps(live=True)
 check("the page is live: the watchdog does nothing at all", backup.run_watchdog("2026-11-09", d) == "ok" and d.log == [] and d.alerts == [])
 d = Deps(local=True)
@@ -141,7 +164,7 @@ check("the workflow's ping runs even if the publish step failed, waits for the p
 check("the alert step still runs on any failure", "if: failure()" in wf[wf.index("- name: Alert D"):])
 check("the daily schedule is ON at 7:15am Singapore time (23:15 UTC), live since D's go on 8 November", '- cron: "15 23 * * *"' in wf and re.sub(r"#.*", "", wf).count("schedule:") == 1)
 plist = (ROOT / "scripts/com.thekickoff.watchdog.plist").read_text()
-check("the Mac job runs the watchdog at 7:40", "scripts/watchdog.py" in plist and "<integer>7</integer><key>Minute</key><integer>40</integer>" in plist)
+check("the Mac job runs the watchdog at 8:30 (D, 2026-11-09: GitHub's 7:15 run started at 7:47)", "scripts/watchdog.py" in plist and "<integer>8</integer><key>Minute</key><integer>30</integer>" in plist)
 sp = (ROOT / "scripts/send_ping.py").read_text()
 check("in the daily mode only today's edition is ever sent (never yesterday's)", "not today" in sp and "wait is not None and not args" in sp)
 
