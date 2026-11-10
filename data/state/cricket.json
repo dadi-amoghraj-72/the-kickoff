@@ -2484,6 +2484,12 @@
       ],
       "status": "India won by 4 runs (DLS)"
     },
+    "espn-1539439": {
+      "innings": [],
+      "potm": [],
+      "standouts": [],
+      "status": "No result (abandoned with a toss)"
+    },
     "espn-1543956": {
       "innings": [
         {
@@ -3932,6 +3938,354 @@
         }
       ],
       "status": "Scorchers won by 6 wkts (30b rem)"
+    },
+    "espn-1543960": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 18,
+              "fours": 4,
+              "mark": "",
+              "name": "Lizelle Lee",
+              "out": "lbw b Ecclestone",
+              "r": 19,
+              "sixes": 0,
+              "sr": 105.55
+            },
+            {
+              "b": 26,
+              "fours": 0,
+              "mark": "",
+              "name": "Chamari Athapaththu",
+              "out": "retired out",
+              "r": 10,
+              "sixes": 0,
+              "sr": 38.46
+            },
+            {
+              "b": 5,
+              "fours": 2,
+              "mark": "",
+              "name": "Rachel Trenaman",
+              "out": "c & b Penna",
+              "r": 9,
+              "sixes": 0,
+              "sr": 180.0
+            },
+            {
+              "b": 53,
+              "fours": 9,
+              "mark": "(c)",
+              "name": "Nicola Carey",
+              "out": "not out",
+              "r": 66,
+              "sixes": 0,
+              "sr": 124.52
+            },
+            {
+              "b": 13,
+              "fours": 1,
+              "mark": "",
+              "name": "Heather Graham",
+              "out": "run out (Penna/Schutt)",
+              "r": 14,
+              "sixes": 0,
+              "sr": 107.69
+            },
+            {
+              "b": 5,
+              "fours": 0,
+              "mark": "",
+              "name": "Chinelle Henry",
+              "out": "run out (Penna/†Johnston)",
+              "r": 6,
+              "sixes": 0,
+              "sr": 120.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 6.5,
+              "m": 0,
+              "name": "Eleanor Larosa",
+              "nb": 0,
+              "o": 2.0,
+              "r": 13,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 3.0,
+              "m": 0,
+              "name": "Ella Wilson",
+              "nb": 0,
+              "o": 4.0,
+              "r": 12,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 6.0,
+              "m": 0,
+              "name": "Megan Schutt",
+              "nb": 0,
+              "o": 4.0,
+              "r": 24,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 9.25,
+              "m": 0,
+              "name": "Sophie Ecclestone",
+              "nb": 0,
+              "o": 4.0,
+              "r": 37,
+              "w": 1,
+              "wd": 2
+            },
+            {
+              "eco": 14.0,
+              "m": 0,
+              "name": "Madeline Penna",
+              "nb": 0,
+              "o": 1.0,
+              "r": 14,
+              "w": 1,
+              "wd": 2
+            },
+            {
+              "eco": 7.66,
+              "m": 0,
+              "name": "Tahlia McGrath",
+              "nb": 0,
+              "o": 3.0,
+              "r": 23,
+              "w": 0,
+              "wd": 1
+            },
+            {
+              "eco": 5.0,
+              "m": 0,
+              "name": "Amanda-Jade Wellington",
+              "nb": 0,
+              "o": 2.0,
+              "r": 10,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Adelaide Strikers Women",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 9,
+            "nb": 0,
+            "total": 14,
+            "w": 5
+          },
+          "fow": "",
+          "label": "",
+          "overs": 20.0,
+          "runs": 138,
+          "team": "Hobart Hurricanes Women",
+          "wickets": 5
+        },
+        {
+          "batting": [
+            {
+              "b": 37,
+              "fours": 4,
+              "mark": "",
+              "name": "Emma de Broughe",
+              "out": "c Carey b Malgioglio",
+              "r": 41,
+              "sixes": 0,
+              "sr": 110.81
+            },
+            {
+              "b": 19,
+              "fours": 5,
+              "mark": "",
+              "name": "Maia Bouchier",
+              "out": "c Silver-Holmes b Smith",
+              "r": 26,
+              "sixes": 0,
+              "sr": 136.84
+            },
+            {
+              "b": 27,
+              "fours": 2,
+              "mark": "",
+              "name": "Laura Wolvaardt",
+              "out": "c Trenaman b Strano",
+              "r": 27,
+              "sixes": 0,
+              "sr": 100.0
+            },
+            {
+              "b": 14,
+              "fours": 2,
+              "mark": "(c)",
+              "name": "Tahlia McGrath",
+              "out": "c Green b Smith",
+              "r": 14,
+              "sixes": 0,
+              "sr": 100.0
+            },
+            {
+              "b": 13,
+              "fours": 2,
+              "mark": "",
+              "name": "Madeline Penna",
+              "out": "c Graham b Strano",
+              "r": 14,
+              "sixes": 0,
+              "sr": 107.69
+            },
+            {
+              "b": 5,
+              "fours": 0,
+              "mark": "",
+              "name": "Ellie Johnston",
+              "out": "c Graham b Carey",
+              "r": 3,
+              "sixes": 0,
+              "sr": 60.0
+            },
+            {
+              "b": 2,
+              "fours": 0,
+              "mark": "",
+              "name": "Amanda-Jade Wellington",
+              "out": "not out",
+              "r": 1,
+              "sixes": 0,
+              "sr": 50.0
+            },
+            {
+              "b": 3,
+              "fours": 2,
+              "mark": "",
+              "name": "Sophie Ecclestone",
+              "out": "not out",
+              "r": 9,
+              "sixes": 0,
+              "sr": 300.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 7.5,
+              "m": 0,
+              "name": "Molly Strano",
+              "nb": 0,
+              "o": 4.0,
+              "r": 30,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 7.5,
+              "m": 0,
+              "name": "Nicola Carey",
+              "nb": 0,
+              "o": 4.0,
+              "r": 30,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 12.0,
+              "m": 0,
+              "name": "Chinelle Henry",
+              "nb": 0,
+              "o": 1.0,
+              "r": 12,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 5.0,
+              "m": 0,
+              "name": "Heather Graham",
+              "nb": 0,
+              "o": 4.0,
+              "r": 20,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 8.33,
+              "m": 0,
+              "name": "Isabella Malgioglio",
+              "nb": 0,
+              "o": 3.0,
+              "r": 25,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 3.0,
+              "m": 0,
+              "name": "Lauren Smith",
+              "nb": 0,
+              "o": 2.0,
+              "r": 6,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 7.5,
+              "m": 0,
+              "name": "Hayley Silver-Holmes",
+              "nb": 0,
+              "o": 2.0,
+              "r": 15,
+              "w": 0,
+              "wd": 2
+            }
+          ],
+          "bowling_team": "Hobart Hurricanes Women",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 1,
+            "nb": 0,
+            "total": 4,
+            "w": 3
+          },
+          "fow": "",
+          "label": "",
+          "overs": 20.0,
+          "runs": 139,
+          "team": "Adelaide Strikers Women",
+          "wickets": 6
+        }
+      ],
+      "potm": [
+        {
+          "name": "Emma de Broughe",
+          "team": "Adelaide Strikers Women"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "Adelaide Strikers Women",
+          "balls": 53,
+          "fours": 9,
+          "kind": "fifty",
+          "match": "Hobart Hurricanes Women vs Adelaide Strikers Women, 17th Match, Women's Big Bash League",
+          "name": "Nicola Carey",
+          "not_out": true,
+          "result": "Strikers won by 4 wkts (0b rem)",
+          "runs": 66,
+          "sixes": 0,
+          "team": "Hobart Hurricanes Women"
+        }
+      ],
+      "status": "Strikers won by 4 wkts (0b rem)"
     },
     "espn-1553296": {
       "innings": [
@@ -5684,26 +6038,28 @@
     "c547eb46-2025-413a-b7f2-6d1584daa42f",
     "de774f34-7940-44c4-acce-8918a8069613",
     "espn-1539438",
+    "espn-1539439",
     "espn-1543956",
     "espn-1543957",
     "espn-1543958",
     "espn-1543959",
+    "espn-1543960",
     "espn-1553296",
     "espn-1555123",
     "f6bfa913-6f79-4fd9-ab8a-fe0b4cf5a456"
   ],
   "status": {
-    "espn-1550711": "Sri Lanka won toss & fielded",
+    "espn-1550711": "Sri Lanka trail by 320 runs",
     "espn-1553296": "West Indies lead by 315 runs",
     "espn-1555123": "Zimbabwe lead by 154 runs"
   },
   "test_done": {
-    "espn-1550711": 0,
+    "espn-1550711": 1,
     "espn-1553296": 4,
     "espn-1555123": 3
   },
   "test_sig": {
-    "espn-1550711": "[{'inning': 'Pakistan Inning 1', 'r': 281, 'w': 5, 'o': 67.2}]",
+    "espn-1550711": "[{'inning': 'Pakistan Inning 1', 'r': 434, 'w': 9, 'o': 106.3}, {'inning': 'Sri Lanka Inning 1', 'r': 114, 'w': 3, 'o': 27.1}]",
     "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 356, 'w': 10, 'o': 106.4}, {'inning': 'Bangladesh Inning 1', 'r': 386, 'w': 9, 'o': 111.5}, {'inning': 'West Indies Inning 2', 'r': 398, 'w': 6, 'o': 93.0}, {'inning': 'Bangladesh Inning 2', 'r': 184, 'w': 4, 'o': 59.0}]",
     "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 504, 'w': 10, 'o': 134.3}, {'inning': 'Afghanistan Inning 1', 'r': 514, 'w': 10, 'o': 169.4}, {'inning': 'Zimbabwe Inning 2', 'r': 523, 'w': 5, 'o': 122.1}]"
   }
