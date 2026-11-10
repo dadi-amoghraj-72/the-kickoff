@@ -498,14 +498,15 @@ def half_up(v):
 
 def leaders_html(by_stat):
     """Friday's table (D, 2026-11-10): the top five per game in points, rebounds, assists, blocks and steals, from ESPN's qualified players; one table, a gold sub-row
-    per stat, then # · player (initial and surname) · team · average. '' when ESPN gave nothing."""
+    per stat, then # · player (initial and surname) · team · average; each stat's leader in gold. '' when ESPN gave nothing."""
     rows = ""
     for label, _ in LEADER_STATS:
         top = by_stat.get(label) or []
         if not top:
             continue
         rows += f'<tr class="grp"><td colspan="4">{r.esc(label)} per game</td></tr>'
-        rows += "".join(f'<tr><td class="n">{i}</td><td>{r.esc(short_name(x["name"]))}</td><td>{r.esc(code(x["team"]))}</td><td class="n">{half_up(x["value"])}</td></tr>'
+        gold = ' class="p1"'
+        rows += "".join(f'<tr{gold if i == 1 else ""}><td class="n">{i}</td><td>{r.esc(short_name(x["name"]))}</td><td>{r.esc(code(x["team"]))}</td><td class="n">{half_up(x["value"])}</td></tr>'
                         for i, x in enumerate(top, 1))
     if not rows:
         return ""

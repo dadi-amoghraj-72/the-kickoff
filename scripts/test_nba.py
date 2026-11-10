@@ -605,6 +605,7 @@ _lh = nba.leaders_html(_by)
 check("League Leaders: one table, a sub-row per stat in order, initial and surname, three-letter codes, averages to one decimal rounded as the NBA does (31.25 -> 31.3)",
       _lh.index("Points per game") < _lh.index("Rebounds per game") < _lh.index("Blocks per game") and "Assists per game" not in _lh
       and ">S. Curry</td><td>GSW</td><td class=\"n\">31.3<" in _lh and ">V. Wembanyama</td><td>SAS</td>" in _lh and ">40.1<" in _lh, _lh[:400])
+check("each stat's leader in gold (D, 2026-11-10), only the leader", _lh.count('<tr class="p1">') == 3 and '<tr class="p1"><td class="n">1</td><td>L. Doncic</td>' in _lh)
 check("nothing from ESPN: no table", nba.leaders_html({}) == "")
 _src = nba.__dict__.get("LEADER_STATS")
 check("the five stats D asked for: points, rebounds, assists, blocks, steals", [l for l, _ in _src] == ["Points", "Rebounds", "Assists", "Blocks", "Steals"])
