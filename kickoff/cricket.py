@@ -175,7 +175,8 @@ def heading(m):
 def short_result(status):
     """A result line that reads at a glance: 'India won by 5 wkts - 2nd inns reduced to 32 overs - DLS Target 143' becomes 'India won by 5 wickets (DLS)'; the bracket
     of balls remaining goes. A live Test's 'Day 3: Stumps - Australia lead by 42 runs' becomes 'Day 3: Stumps, Australia lead by 42 runs'."""
-    text = wname((status or "").strip())
+    import html as htmllib
+    text = wname(htmllib.unescape((status or "").strip()))          # ESPN's feed can carry 'won toss &amp; fielded': unescaped once here, escaped once when shown
     if not text:
         return ""
     dls = bool(re.search(r"\bDLS\b", text))

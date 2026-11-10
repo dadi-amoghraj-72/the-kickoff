@@ -427,5 +427,6 @@ check("a finished match with a scorecard and no award yet says so quietly; a liv
 _cl = lambda mid, teams, label="International", kind="international": {"id": mid, "name": f"{teams[0]} vs {teams[1]}, 1st ODI, tour", "teams": list(teams), "matchType": "odi", "matchEnded": True, "status": "x won", "class": {"label": label, "kind": kind, "priority": 50}}  # noqa: E731
 _order = ck.results_html([_cl("a", ("Bangladesh", "West Indies")), _cl("b", ("Afghanistan", "Zimbabwe")), _cl("w", ("Sydney Sixers Women", "Perth Scorchers Women"), "WBBL", "league"), _cl("c", ("New Zealand", "India"))])
 check("D, 2026-11-08: an India match always opens the cricket section, the rest keep their order", _order.index("New Zealand v <strong>India") < _order.index("Bangladesh v West Indies") < _order.index("Afghanistan v Zimbabwe"), _order[:200])
+check("ESPN's escaped status reads plainly: 'Sri Lanka won toss & fielded', never '&amp;'", ck.short_result("Sri Lanka won toss &amp; fielded") == "Sri Lanka won toss & fielded")
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
