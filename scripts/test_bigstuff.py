@@ -174,6 +174,19 @@ _st = events.football([("Women's Super League", [_mk("Liverpool", "Arsenal", 1, 
 check("Arsenal Women's result is pinned right after Arsenal's, above a bigger score", [x["text"] for x in bigstuff.select(_st, 0)][0].startswith("Women's Super League: Arsenal"))
 _bh = bigstuff.build(_st + events.f1([("Brazilian Grand Prix", "Lando Norris", "McLaren")]), weekday=0)["headlines"]
 check("an F1 race win always leads the ping (D, 2026-11-09: Norris's Brazil win was missing)", _bh[0] == "F1: Lando Norris wins the Brazilian Grand Prix for McLaren" and _bh[1].startswith("Women's Super League: Arsenal"), _bh)
+_drawn = events.cricket([{"id": "t5", "name": "Bangladesh vs West Indies, 2nd Test, tour", "teams": ["Bangladesh", "West Indies"], "matchType": "test", "matchEnded": True, "status": "Match drawn",
+                         "class": {"label": "International", "kind": "international"}}], {}, 1)[0]
+check("D, 2026-11-10: a finished Test between Test nations is always a key score, draw included, with its number",
+      _drawn and _drawn[0]["score"] >= importance.TEST_RESULT >= importance.MIN_SCORE and _drawn[0]["text"] == "Cricket: Bangladesh v West Indies \u00b7 2nd Test, Match drawn", [x["text"] for x in _drawn])
+_news = [{"kind": "transfer_rumour", "club": "Arsenal", "summary": "Zubimendi is reportedly a target for Atletico, according to the gossip column.", "headline": "Gossip", "link": "l1", "source": "BBC Sport", "published": 1},
+         {"kind": "transfer", "club": "Arsenal", "summary": "Zubimendi is reportedly a target for Atletico Madrid, per the gossip column.", "headline": "Gossip", "link": "l2", "source": "BBC Sport", "published": 2},
+         {"kind": "sacked", "club": "Chelsea", "summary": "Chelsea sacked their manager.", "headline": "Chelsea sack manager", "link": "l3", "source": "BBC Sport", "published": 3}]
+check("D, 2026-11-10: Biggest News is confirmed news only: no rumour, no gossip column, Arsenal's neither", [x["link"] for x in events.football_news(_news)] == ["l3"], events.football_news(_news))
+from kickoff import nba as _nba  # noqa: E402
+_p = lambda pts, reb, ast: {"id": "1", "PTS": pts, "REB": reb, "AST": ast, "STL": 0, "BLK": 0, "dnp": False, "pos": "G", "name": "A", "team": "LAL"}  # noqa: E731
+check("D, 2026-11-10: a 40-point game or a triple-double always reaches the Stars bar (Reaves's 43 did not); a 30-point game does not",
+      _nba.star_weight(_p(43, 4, 5)) >= importance.PERFORMANCE_MIN and _nba.star_weight(_p(12, 11, 10)) >= importance.PERFORMANCE_MIN and _nba.star_weight(_p(30, 4, 4)) < importance.PERFORMANCE_MIN
+      and _nba.star_weight(_p(53, 9, 8)) > _nba.star_weight(_p(43, 4, 5)))
 check("the Telegram headlines keep the sport prefix on every line (they stand alone)", bigstuff.headlines(_gs)[0] == "Champions League: Arsenal 2\u20131 Slavia Prague")
 
 # ---- review of the first real rehearsal (D, 2026-11-05)

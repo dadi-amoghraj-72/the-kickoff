@@ -263,8 +263,12 @@ def cricket(picked, cards, weekday, reported=(), changed=None, now=None):
         stage = "final" if re.search(r"\bfinal\b", name, re.I) and not re.search(r"semi|quarter", name, re.I) else "knockout" if KNOCKOUT_WORDS.search(name) else "regular"
         if ended:
             result = cricket_mod.short_result(m.get("status"))
-            text = f"Cricket: {teams}" + (f" ({label})" if label and label != "International" else "") + (f", {result}" if result else "") + (f" \u00b7 {kohli_text(k)}" if k else "")
+            is_test = m.get("matchType") == "test"
+            number = cricket_mod.heading(m)[1] if is_test else ""
+            text = f"Cricket: {teams}" + (f" \u00b7 {number}" if number else "") + (f" ({label})" if label and label != "International" else "") + (f", {result}" if result else "") + (f" \u00b7 {kohli_text(k)}" if k else "")
             sc = importance.story_score("cricket", stage, mine, kohli=bool(k), weekday=weekday)
+            if is_test and (m.get("class") or {}).get("kind") == "international":
+                sc = max(sc, importance.TEST_RESULT)             # a Test the edition followed for five days ends with a key score, draw or win (D, 2026-11-10)
             out.append(story("cricket", label or "Cricket", text, sc, mine or bool(k), stage, kohli=bool(k)))
         card_standouts = (cards.get(m["id"]) or {}).get("standouts", [])
         if not ended and m.get("matchType") == "test" and m.get("score") and (changed is None or m["id"] in changed):
@@ -359,12 +363,16 @@ STRONG_NEWS = re.compile(r"\b(sack|appoint|confirm|named|unveil|head coach|new m
 LIVE_BLOG = re.compile(r"\b(live|as it happened|minute-by-minute)\b|\bv\b", re.I)                                         # ... and must not be a live blog or a match preview
 
 
+GOSSIP = re.compile(r"\bgossip\b|\breportedly\b|\brumou?r|\btarget for\b|\binterest(?:ed)? in\b|\bmonitoring\b|\bconsidering a move\b", re.I)
+
+
 def football_news(shown):
-    """The biggest news: Arsenal's stories first, then sackings and appointments, confirmed transfers, injuries; rumours last. [{"text", "link", "source"}]."""
+    """The biggest news: Arsenal's stories first, then sackings and appointments, confirmed transfers, injuries; never a rumour or the gossip column. [{"text", "link", "source"}]."""
     from kickoff import news as news_mod
     ranked = sorted((i for i in shown if not news_mod.is_renewal(i)), key=lambda i: (i.get("club") != "Arsenal", NEWS_RANK.get(i["kind"], 9), i["published"]))
     return [{"text": i["summary"] or i["headline"], "link": i["link"], "source": i["source"]} for i in ranked
-            if (i["kind"] != "transfer_rumour" or i.get("club") == "Arsenal") and (i["summary"] or STRONG_NEWS.search(i["headline"]) and not LIVE_BLOG.search(i["headline"]))]
+            if i["kind"] != "transfer_rumour" and not GOSSIP.search(f"{i.get('summary') or ''} {i['headline']}")          # confirmed news only: no rumour, no gossip column (D, 2026-11-10);
+            and (i["summary"] or STRONG_NEWS.search(i["headline"]) and not LIVE_BLOG.search(i["headline"]))]               # Arsenal's rumours stay in the Arsenal section, labelled
 
 
 def football_injuries(items):

@@ -334,7 +334,7 @@ def result_html(m, entry=None, series="", from_innings=0, now=None):
     line = (f'<strong class="state">{r.esc(where)}</strong>' + (f" \u00b7 {r.esc(result)}" if result else "")) if where else r.esc(result)
     return (f'<li>{flag}<span class="cm">{names}{" · " + r.esc(first) if first else ""}</span>'
             f'<span class="cr">{live}{line}</span><span class="cs">{scores_html(m)}</span>{potm_html(entry, ended_)}{kohli_note(entry)}'
-            f'{full_scorecard_html(entry["innings"], from_innings) if full else ""}{match_summary_html(entry["innings"]) if full and m.get("matchType") == "test" and m.get("matchEnded") else ""}'
+            f'{full_scorecard_html(entry["innings"], from_innings) if full else ""}{match_summary_html(entry["innings"], result_row(m.get("status"), m.get("teams"))) if full and m.get("matchType") == "test" and m.get("matchEnded") else ""}'
             f'{standouts_html(entry["standouts"], inline=True) if full else ""}{series}</li>')
 
 
@@ -456,7 +456,7 @@ def slim_card(card, match):
                 extras = {"total": total_extras, "w": wides, "nb": noballs, "b_lb": total_extras - wides - noballs}
         number = re.search(r"\b(\d)(?:st|nd|rd|th)\s+innings\b", inn.get("inning", ""), re.I) or re.search(r"\binning\s*(\d)\b", inn.get("inning", ""), re.I)
         label = {"1": "1st", "2": "2nd", "3": "3rd", "4": "4th"}.get(number.group(1), "") + " innings" if number and match.get("matchType") == "test" else ""
-        out.append({"team": team, "label": label.strip(), "bowling_team": next((t for t in teams if t != team), ""), "runs": runs, "wickets": sc.get("w"),
+        out.append({"team": team, "label": label.strip(), "bowling_team": next((t for t in teams if t != team), ""), "runs": runs, "wickets": 10 if (total or {}).get("all_out") else sc.get("w"), "declared": bool((total or {}).get("declared")),
                     "overs": sc.get("o"), "extras": extras, "batting": bat, "bowling": bowl,
                     "dnb": espn.get("dnb") or [], "fow": espn.get("fow") or ""})
     return out
@@ -466,16 +466,27 @@ def _num(value, places=2):
     return f"{float(value):.{places}f}" if isinstance(value, (int, float)) else ""
 
 
-def match_summary_html(innings):
-    """The Test's match summary, as a broadcaster prints it when the match ends: one pair of rows per innings, the batting team with its score and 'Nst innings', then
-    that innings' top batter (his runs, a * when not out) and the best bowler of the side in the field (wickets-runs). Built from the slimmed scorecard (slim_card)."""
+def result_row(status, teams):
+    """The summary's last row (D, 2026-11-10): 'Drawn', 'IND won by 45 runs', 'IND won by an innings and 12 runs' (ESPN's own wording, the winner as its code)."""
+    text = short_result(status)
+    if re.match(r"^match drawn$|^drawn$", text, re.I):
+        return "Drawn"
+    for t in sorted(teams or [], key=len, reverse=True):
+        text = re.sub(rf"^{re.escape(wname(t))}\b", short_team(wname(t)), text)
+    return text
+
+
+def match_summary_html(innings, result=""):
+    """The Test's match summary, as a broadcaster prints it when the match ends: one pair of rows per innings, the batting team and 'Nst innings' on the left and its
+    total in gold on the right ('386/9d' for a declaration), then that innings' top batter (his runs, a * when not out) and the best bowler of the side in the field
+    (wickets-runs); last, a row with the match result (D, 2026-11-10). Built from the slimmed scorecard (slim_card)."""
     rows = ""
     for inn in innings or []:
         if inn.get("runs") is None:
             continue
-        wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}"
-        rows += (f'<tr class="sum"><td class="name"><strong>{r.esc(wname(inn["team"]))}</strong></td><td class="n"><strong>{inn["runs"]}{wickets}</strong></td>'
-                 f'<td class="name" colspan="2">{r.esc(inn.get("label") or "")}</td></tr>')
+        wickets = "" if inn["wickets"] in (None, 10) else f"/{inn['wickets']}" + ("d" if inn.get("declared") else "")
+        rows += (f'<tr class="sum"><td class="name" colspan="3"><strong>{r.esc(wname(inn["team"]))}</strong> \u00b7 {r.esc(inn.get("label") or "")}</td>'
+                 f'<td class="n tot"><strong>{inn["runs"]}{wickets}</strong></td></tr>')
         bats = [b for b in inn["batting"] if b.get("b") or b.get("r")]
         bowls = [b for b in inn["bowling"] if b.get("w")]
         bat = max(bats, key=lambda b: (b["r"], -b["b"]), default=None)
@@ -483,6 +494,8 @@ def match_summary_html(innings):
         left = f'<td class="name">{r.esc(bat["name"])}</td><td class="n"><strong>{bat["r"]}{"*" if (bat["out"] or "").strip().lower() in NOT_OUT else ""}</strong></td>' if bat else '<td colspan="2"></td>'
         right = f'<td class="name">{r.esc(bowl["name"])}</td><td class="n">{bowl["w"]}-{bowl["r"]}</td>' if bowl else '<td colspan="2"></td>'
         rows += f"<tr>{left}{right}</tr>"
+    if rows and result:
+        rows += f'<tr class="res"><td class="name" colspan="4"><strong>Match result:</strong> {r.esc(result)}</td></tr>'
     return f'<div class="table-wrap"><table class="sc ms"><thead><tr><th colspan="4">Match summary</th></tr></thead><tbody>{rows}</tbody></table></div>' if rows else ""
 
 

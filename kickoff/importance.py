@@ -26,6 +26,7 @@ DOWNSHIFT_LIGHT = 0.7  # and on every other morning (basketball and baseball sti
 # How many lines The Big Stuff carries by weekday of the edition (0 Monday ... 6 Sunday). Weekends have football, NFL, F1 and more all at once (D).
 CAP = {0: 8, 1: 6, 2: 5, 3: 5, 4: 5, 5: 6, 6: 8}
 PER_SPORT = 4          # at most this many lines of one sport, unless they are D's teams' or a final (those are never squeezed out)
+TEST_RESULT = 6        # a finished Test between Test nations is always a key score (above the bar, below D's teams and finals)
 RUNNING_STORY = 5      # On Today: a Test the cricket section is already following (in progress) outranks the routine league games of the listed clubs (4), not D's teams or the big games (D, 2026-11-08)
 MIN_SCORE = 4          # a story below this is not worth a line (a quiet morning shows fewer)
 

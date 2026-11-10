@@ -331,7 +331,9 @@ def parse_summary(data):
             continue
         name = teams[bat_id]["team"].get("displayName") or ""
         number[bat_id] = number.get(bat_id, 0) + 1
-        total = {"r": int(ls.get("runs") or 0), "w": int(ls.get("wickets") or 0), "o": _overs(ls.get("overs")), "rr": None}
+        total = {"r": int(ls.get("runs") or 0), "w": int(ls.get("wickets") or 0), "o": _overs(ls.get("overs")), "rr": None,
+                 "declared": "declar" in (ls.get("description") or "").lower() or bool(re.search(r"\d+/\d+\s*d\b", ls.get("score") or "")),
+                 "all_out": "all out" in (ls.get("description") or "").lower()}          # all out with a batter absent reads 386, not 386/9
         innings.append({"inning": f"{name} {ORDINAL.get(number[bat_id], '')} Innings".replace("  ", " "), "batting": batting, "bowling": bowling,
                         "espn": {"extras": None, "total": total, "dnb": [], "fow": ""}})
     if not innings:

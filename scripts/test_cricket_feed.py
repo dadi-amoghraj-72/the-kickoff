@@ -37,7 +37,7 @@ summary = next(v for u, v in SAVED.items() if "event=1555123" in u)
 card = espn_cricket.parse_summary(summary)
 zim = card["scorecard"][0]
 taylor = next(b for b in zim["batting"] if b["batsman"]["name"] == "Brendan Taylor")
-check("the feed's scorecard: Zimbabwe's 1st innings first, 504 all out in 134.3 overs", zim["inning"] == "Zimbabwe 1st Innings" and zim["espn"]["total"] == {"r": 504, "w": 10, "o": 134.3, "rr": None}, zim["espn"])
+check("the feed's scorecard: Zimbabwe's 1st innings first, 504 all out in 134.3 overs", zim["inning"] == "Zimbabwe 1st Innings" and zim["espn"]["total"] == {"r": 504, "w": 10, "o": 134.3, "rr": None, "declared": False, "all_out": True}, zim["espn"])
 check("Brendan Taylor 131 off 168, 14 fours, 4 sixes, out caught", (taylor["r"], taylor["b"], taylor["4s"], taylor["6s"]) == (131, 168, 14, 4) and taylor["dismissal-text"].startswith("c "), taylor)
 check("the batters are in batting order and the not-out batter says 'not out'", [b["batsman"]["name"] for b in zim["batting"]][:3] == ["Innocent Kaia", "Ben Curran", "Brendan Taylor"]
       and any(b["dismissal-text"] == "not out" for b in zim["batting"]), [b["batsman"]["name"] for b in zim["batting"]])

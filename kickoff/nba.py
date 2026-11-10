@@ -182,6 +182,16 @@ def kinds_of(p, deciding_ids=()):
     return k
 
 
+def star_weight(p):
+    """A night's weight for Stars Of The Night: a 40-point game or a triple-double always reaches the bar (D, 2026-11-10: 'a 50-point game equal to a hundred is
+    harsh, 40 is enough'), and is ranked above it by its stat line."""
+    from kickoff import importance
+    w = weight(p, kinds_of(p))
+    if p["PTS"] >= POINTS or doubles(p) >= 3:
+        w = max(w, importance.PERFORMANCE_MIN + (w - 60) * 0.5 if w > 60 else importance.PERFORMANCE_MIN)
+    return w
+
+
 def weight(p, kinds=()):
     return p["PTS"] + 1.2 * p["REB"] + 1.5 * p["AST"] + 3 * p["STL"] + 3 * p["BLK"] + 8 * len(kinds)
 
@@ -775,7 +785,7 @@ def run(now, day, st, source):
             except Exception:
                 pass
         mine_teams = set(FIRST)                           # D's five teams; the tracked stars' big nights come in as Performances of the Day
-        found = [(weight(p, kinds_of(p)), p) for p in flat if kinds_of(p)]
+        found = [(star_weight(p), p) for p in flat if kinds_of(p)]
         nights = [(f"{p['name']} ({p['team']}): {line(p)}", w) for w, p in sorted(found, key=lambda x: -x[0])[:3]]
         story_events = events.nba(new, mine_teams, day.weekday()) + events.nba_perf(nights)
     except Exception:

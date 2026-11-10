@@ -428,5 +428,15 @@ _cl = lambda mid, teams, label="International", kind="international": {"id": mid
 _order = ck.results_html([_cl("a", ("Bangladesh", "West Indies")), _cl("b", ("Afghanistan", "Zimbabwe")), _cl("w", ("Sydney Sixers Women", "Perth Scorchers Women"), "WBBL", "league"), _cl("c", ("New Zealand", "India"))])
 check("D, 2026-11-08: an India match always opens the cricket section, the rest keep their order", _order.index("New Zealand v <strong>India") < _order.index("Bangladesh v West Indies") < _order.index("Afghanistan v Zimbabwe"), _order[:200])
 check("ESPN's escaped status reads plainly: 'Sri Lanka won toss & fielded', never '&amp;'", ck.short_result("Sri Lanka won toss &amp; fielded") == "Sri Lanka won toss & fielded")
+# ---- the Test match summary (D, 2026-11-10) ----
+_inn = [{"team": "West Indies", "label": "1st innings", "runs": 356, "wickets": 10, "declared": False, "batting": [{"name": "Amir Jangoo", "r": 133, "b": 212, "out": "c x b y"}], "bowling": [{"name": "Hasan Mahmud", "w": 6, "r": 90}]},
+        {"team": "Bangladesh", "label": "1st innings", "runs": 386, "wickets": 10, "declared": False, "batting": [{"name": "Towhid Hridoy", "r": 242, "b": 359, "out": "not out"}], "bowling": [{"name": "Jomel Warrican", "w": 4, "r": 104}]},
+        {"team": "West Indies", "label": "2nd innings", "runs": 398, "wickets": 6, "declared": True, "batting": [{"name": "Kavem Hodge", "r": 142, "b": 194, "out": "c x b y"}], "bowling": [{"name": "Nayeem Hasan", "w": 2, "r": 72}]}]
+_ms = ck.match_summary_html(_inn, ck.result_row("Match drawn", ["Bangladesh", "West Indies"]))
+check("each innings' total sits right-aligned in gold ('356', an all-out '386' with a batter absent, a declared '398/6d'), the result row last ('Match result: Drawn')",
+      '<td class="n tot"><strong>356</strong></td>' in _ms and '<td class="n tot"><strong>386</strong></td>' in _ms and '<td class="n tot"><strong>398/6d</strong></td>' in _ms
+      and _ms.index("398/6d") < _ms.index("<strong>Match result:</strong> Drawn"), _ms[:300])
+check("a win reads with the winner's code, in ESPN's own words", ck.result_row("India won by an innings and 12 runs", ["India", "England"]) == "IND won by an innings and 12 runs"
+      and ck.result_row("West Indies won by 45 runs", ["Bangladesh", "West Indies"]) == "WI won by 45 runs")
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)
