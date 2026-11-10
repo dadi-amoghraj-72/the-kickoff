@@ -598,5 +598,15 @@ check("flags: a 52-point night is a star game, a 30-point one is not", _g1["star
 _oh = out["html"]
 check("the DNP line has its own class (smaller and grey) and a played line does not", _oh.count('class="pl dnp"') >= 1 and _oh.count('class="pl dnp"') == _oh.count("DNP"), (_oh.count('class="pl dnp"'), _oh.count("DNP")))
 
+# ---- Friday's League Leaders (D, 2026-11-10) ----
+_by = {"Points": [{"name": "Luka Doncic", "team": "LAL", "value": 40.11111}, {"name": "Stephen Curry", "team": "GS", "value": 31.25}],
+       "Rebounds": [{"name": "Domantas Sabonis", "team": "SAC", "value": 14.555555}], "Assists": [], "Blocks": [{"name": "Victor Wembanyama", "team": "SA", "value": 3.9}], "Steals": []}
+_lh = nba.leaders_html(_by)
+check("League Leaders: one table, a sub-row per stat in order, initial and surname, three-letter codes, averages to one decimal rounded as the NBA does (31.25 -> 31.3)",
+      _lh.index("Points per game") < _lh.index("Rebounds per game") < _lh.index("Blocks per game") and "Assists per game" not in _lh
+      and ">S. Curry</td><td>GSW</td><td class=\"n\">31.3<" in _lh and ">V. Wembanyama</td><td>SAS</td>" in _lh and ">40.1<" in _lh, _lh[:400])
+check("nothing from ESPN: no table", nba.leaders_html({}) == "")
+_src = nba.__dict__.get("LEADER_STATS")
+check("the five stats D asked for: points, rebounds, assists, blocks, steals", [l for l, _ in _src] == ["Points", "Rebounds", "Assists", "Blocks", "Steals"])
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

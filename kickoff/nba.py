@@ -486,6 +486,33 @@ def seeds_of(std):
     return {c["name"]: {code(e["team"]["abbreviation"]): num(_stat(e, "playoffSeed")) for e in c["standings"]["entries"]} for c in std["children"]}
 
 
+LEADER_STATS = [("Points", "offensive.avgPoints"), ("Rebounds", "general.avgRebounds"), ("Assists", "offensive.avgAssists"), ("Blocks", "defensive.avgBlocks"),
+                ("Steals", "defensive.avgSteals")]
+
+
+def half_up(v):
+    """One decimal the way the NBA prints it: 31.25 -> '31.3' (Python alone rounds a half to even)."""
+    from decimal import ROUND_HALF_UP, Decimal
+    return str(Decimal(str(v)).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP))
+
+
+def leaders_html(by_stat):
+    """Friday's table (D, 2026-11-10): the top five per game in points, rebounds, assists, blocks and steals, from ESPN's qualified players; one table, a gold sub-row
+    per stat, then # · player (initial and surname) · team · average. '' when ESPN gave nothing."""
+    rows = ""
+    for label, _ in LEADER_STATS:
+        top = by_stat.get(label) or []
+        if not top:
+            continue
+        rows += f'<tr class="grp"><td colspan="4">{r.esc(label)} per game</td></tr>'
+        rows += "".join(f'<tr><td class="n">{i}</td><td>{r.esc(short_name(x["name"]))}</td><td>{r.esc(code(x["team"]))}</td><td class="n">{half_up(x["value"])}</td></tr>'
+                        for i, x in enumerate(top, 1))
+    if not rows:
+        return ""
+    return (f'<div class="pts f1 nba lead"><div class="table-wrap"><table><colgroup><col style="width:12%"><col style="width:52%"><col style="width:16%"><col style="width:20%"></colgroup>'
+            f'<thead><tr><th class="tt" colspan="4">League Leaders</th></tr></thead><tbody>{rows}</tbody></table></div></div>')
+
+
 def standings_html(std, before=None):
     """Both conferences by playoff seed: blue for the top six, lilac for the play-in places (7 to 10). +/- is the places moved since the last
     table that was shown (`before`, from seeds_of); no arrows the first time."""
@@ -768,6 +795,11 @@ def run(now, day, st, source):
     conf_of = {}
     if std and standings_ok(std):
         html += "<h4>Standings</h4>" + standings_html(std, keep["seeds"])
+        if day.weekday() == 4:                              # Friday: the season's per-game leaders (D, 2026-11-10)
+            try:
+                html += leaders_html({lab: source.leaders(sort) for lab, sort in LEADER_STATS})
+            except Exception:
+                stats["failed"] += 1
         keep["seeds"] = seeds_of(std)
         conf_of = {t: c.replace(" Conference", "") for c, ts in keep["seeds"].items() for t in ts}
     if cup_games and cup_new:                               # the Cup tables come only on days Cup group games are in the edition

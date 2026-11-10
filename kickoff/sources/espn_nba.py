@@ -23,6 +23,21 @@ class Source:
         self.calls += 1
         return self._get(url)
 
+    def leaders(self, sort, limit=5):
+        """The season's per-game leaders for one stat (ESPN's qualified players only), e.g. sort 'offensive.avgPoints':
+        [{"name", "team", "value"}], best first."""
+        group, key = sort.split(".")
+        j = self._call(f"https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/statistics/byathlete?category=offensive&sort={sort}:desc&limit={limit}")
+        names = {c["name"]: c.get("names") or [] for c in j.get("categories") or []}
+        out = []
+        for a in j.get("athletes") or []:
+            vals = {c["name"]: c.get("values") or [] for c in a.get("categories") or []}
+            i = names.get(group, []).index(key) if key in names.get(group, []) else None
+            if i is None or i >= len(vals.get(group, [])):
+                continue
+            out.append({"name": a["athlete"]["displayName"], "team": a["athlete"].get("teamShortName") or "", "value": float(vals[group][i])})
+        return out[:limit]
+
     def scoreboard(self, day):
         """The games of one US calendar date (a `date`)."""
         return self._call(SITE + f"scoreboard?dates={day:%Y%m%d}")
