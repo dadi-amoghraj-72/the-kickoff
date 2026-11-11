@@ -247,11 +247,30 @@ def kohli_note(entry):
     return '<span class="potm muted">' + "; ".join(f"Virat Kohli: {b.get('r') or 0}{'*' if (b.get('out') or '').strip().lower() in NOT_OUT else ''} ({b.get('b') or 0})" for b in inns) + "</span>"
 
 
+def potm_figures(entry, name):
+    """The player of the match's own figures from the scorecard, in gold: '41 (37)', '2/24 (4 ov)', both for an all-rounder, every innings in a Test (D, 2026-11-11:
+    Emma de Broughe won it with 41, under the Standouts bar, and the edition never said why). '' when the name is not on the card."""
+    gold = lambda t: f'<span class="n">{t}</span>'  # noqa: E731
+    bits = []
+    for inn in (entry or {}).get("innings") or []:
+        for b in inn.get("batting") or []:
+            if b.get("name") == name and b.get("b"):
+                bits.append(gold(f"{b.get('r') or 0}{'*' if (b.get('out') or '').strip().lower() in NOT_OUT else ''} ({b['b']})"))
+        for b in inn.get("bowling") or []:
+            if b.get("name") == name and b.get("w"):
+                overs = f"{b['o']:g}" if isinstance(b.get("o"), (int, float)) else str(b.get("o") or "")
+                bits.append(gold(f"{b['w']}/{b.get('r') or 0}") + f" ({overs} ov)")
+    return ", ".join(bits)
+
+
 def potm_html(entry, ended=False):
     people = (entry or {}).get("potm") or []
     if not people:
         return '<span class="potm muted">Player of the match: not available at time of print</span>' if entry and ended else ""
-    return '<span class="potm">Player of the match: ' + ", ".join(f"<strong>{r.esc(p['name'])}</strong>" + (f" ({r.esc(wname(p['team']))})" if p.get("team") else "") for p in people) + "</span>"
+    def one(p):
+        figs = potm_figures(entry, p["name"])
+        return f"<strong>{r.esc(p['name'])}</strong>" + (f" ({r.esc(wname(p['team']))})" if p.get("team") else "") + (f" · {figs}" if figs else "")
+    return '<span class="potm">Player of the match: ' + ", ".join(one(p) for p in people) + "</span>"
 
 
 SERIES_FORMATS = ("test", "odi")   # D: series tables for Test and ODI series (add "t20" to widen it to T20I series)

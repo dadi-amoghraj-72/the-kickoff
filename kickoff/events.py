@@ -161,8 +161,9 @@ def nba(games, mine_teams, weekday):
 
 
 def nba_perf(rows):
-    """rows: [(text, weight)] the day's tracked-or-standout lines with nba.weight (about 70 for a monster night)."""
-    return [perf("nba", t, w) for t, w in rows]
+    """rows: [(text, weight)] or [(text, weight, milestone)]: the day's tracked-or-standout lines with nba.weight (about 70 for a monster night). A milestone (40 points,
+    a triple-double) always makes Stars Of The Night, like a century."""
+    return [{**perf("nba", row[0], row[1]), **({"milestone": True} if len(row) > 2 and row[2] else {})} for row in rows]
 
 
 # ---- NFL ---------------------------------------------------------------------------------------
@@ -179,8 +180,14 @@ def nfl(games, season_type, week, weekday):
         mine = a["abbr"] in MY_NFL or h["abbr"] in MY_NFL
         text = f"NFL: {win['name']} {win['score']}{DASH}{lose['score']} {lose['name']}" + (" (OT)" if g.get("ot") else "")
         bonus = (0.5 if g.get("ot") else 0) + min(0.1 * margin, 2)
-        out.append(story("nfl", "NFL", text, importance.story_score("nfl", stage, mine, margin_bonus=bonus, wow=margin >= 35, weekday=weekday), mine, stage))
+        out.append({**story("nfl", "NFL", text, importance.story_score("nfl", stage, mine, margin_bonus=bonus, wow=margin >= 35, weekday=weekday), mine, stage),
+                    **({"primetime": True} if g.get("date") and nfl_slot(g)[1] == "night" else {})})
     return out
+
+
+def nfl_slot(g):
+    from kickoff import nfl as nfl_mod
+    return nfl_mod.slot(g)
 
 
 # ---- MLB ---------------------------------------------------------------------------------------

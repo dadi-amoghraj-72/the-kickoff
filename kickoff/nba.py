@@ -182,6 +182,12 @@ def kinds_of(p, deciding_ids=()):
     return k
 
 
+def big_night(p):
+    """A 40-point game or a triple-double: the NBA's hundred, always a Star Of The Night like a century (D, 2026-11-11: Anthony Davis's 44 and Cooper Flagg's 43 were
+    kept out by the two-per-sport limit)."""
+    return p["PTS"] >= POINTS or doubles(p) >= 3
+
+
 def star_weight(p):
     """A night's weight for Stars Of The Night: a 40-point game or a triple-double always reaches the bar (D, 2026-11-10: 'a 50-point game equal to a hundred is
     harsh, 40 is enough'), and is ranked above it by its stat line."""
@@ -819,7 +825,8 @@ def run(now, day, st, source):
                 pass
         mine_teams = set(FIRST)                           # D's five teams; the tracked stars' big nights come in as Performances of the Day
         found = [(star_weight(p), p) for p in flat if kinds_of(p)]
-        nights = [(f"{p['name']} ({p['team']}): {line(p)}", w) for w, p in sorted(found, key=lambda x: -x[0])[:3]]
+        ranked = sorted(found, key=lambda x: -x[0])
+        nights = [(f"{p['name']} ({p['team']}): {line(p)}", w, big_night(p)) for i, (w, p) in enumerate(ranked) if i < 3 or big_night(p)]
         story_events = events.nba(new, mine_teams, day.weekday()) + events.nba_perf(nights)
     except Exception:
         story_events = []

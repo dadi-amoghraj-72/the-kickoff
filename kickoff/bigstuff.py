@@ -31,16 +31,23 @@ def dedupe_news(items):
     return out
 
 
+def top_news(news, limit=MAX_NEWS):
+    """Biggest News: football's best item first, then at most one NFL/NBA move (kickoff/usnews.py, D, 2026-11-11: the Kirk Cousins trade), then football's next."""
+    items = dedupe_news(list(news))
+    ours, us = [i for i in items if not i.get("us")], [i for i in items if i.get("us")]
+    return (ours[:1] + us[:1] + ours[1:])[:limit]
+
+
 def select(stories, weekday):
     """The stories that make the list, best first. Arsenal's result ("first") leads; the cap depends on the weekday; a sport is limited to PER_SPORT lines unless the
     story is D's team's or a final (those are never squeezed out); a story under MIN_SCORE is dropped (a quiet morning has fewer lines)."""
     cap = importance.CAP.get(weekday, 5)
-    ranked = sorted((s for s in stories if s.get("kind", "result") == "result" and s["score"] >= importance.MIN_SCORE and not s.get("promote")),   # F1 and tennis have Major Events
+    ranked = sorted((s for s in stories if s.get("kind", "result") == "result" and (s["score"] >= importance.MIN_SCORE or s.get("primetime")) and not s.get("promote")),   # F1 and tennis have Major Events
                     key=lambda s: (s.get("first") or 9, -s["score"], s["text"]))       # Arsenal (1), then Arsenal Women (2), then by score
     per, out = {}, []
     for s in ranked:
         n = per.get(s["sport"], 0)
-        protected = s.get("mine") or s.get("stage") == "final"
+        protected = s.get("mine") or s.get("stage") == "final" or s.get("primetime")      # a prime-time NFL game (Thursday, Sunday, Monday night) always makes it (D, 2026-11-11: MNF was squeezed out)
         if len(out) >= cap and not (protected and len(out) < cap + 3):
             continue
         if n >= importance.PER_SPORT and not protected:
@@ -93,7 +100,7 @@ def html(stories, stars_=(), news=(), injuries=()):
     if stories:
         out += "<h3>Key Overnight Scores</h3>" + _grouped(stories)
     if news:
-        out += "<h3>Biggest News</h3>" + _list_html(dedupe_news(list(news))[:MAX_NEWS])
+        out += "<h3>Biggest News</h3>" + _list_html(top_news(news))
     if injuries:
         out += "<h3>Major Injuries</h3>" + _list_html(injuries[:MAX_INJURIES])
     if stars_:

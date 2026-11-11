@@ -120,7 +120,7 @@ with tempfile.TemporaryDirectory() as td:
 
 # ---- The real adapter list ----------------------------------------------------------------------------------
 real = daily.real_adapters(None, env={})
-check("the real adapters: football, cricket, F1, tennis, NFL, NBA, MLB and the other sports, in that order", [a[0] for a in real] == ["football", "cricket", "f1", "tennis", "nfl", "nba", "mlb", "around"])
+check("the real adapters: football, cricket, F1, tennis, NFL, NBA, MLB, the other sports and the NFL/NBA news, in that order", [a[0] for a in real] == ["football", "cricket", "f1", "tennis", "nfl", "nba", "mlb", "around", "usnews"])
 from kickoff.sources import cricket as _cricket_source  # noqa: E402
 check("cricket no longer needs CricketData's key: without it the backup list is just empty (ESPN's feed is the main source), with it the real list is used", daily.backup_matches({})() == ([], 0) and daily.backup_matches({"CRICKET_DATA_API_KEY": "x"}) is _cricket_source.get_matches)
 check("the state names cover every sport and no file is named twice", len(set(daily.STATE_NAMES)) == len(daily.STATE_NAMES) and {"cricket", "f1", "tennis", "nfl", "nba", "mlb", "tables", "costs"} <= set(daily.STATE_NAMES))

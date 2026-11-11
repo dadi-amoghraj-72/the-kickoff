@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 
 from kickoff import f1blurb, f1grid
 from kickoff import around, awards, bigstuff, budget, ontoday, young_sports, youngguns, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
-from kickoff import notes, settings
+from kickoff import notes, settings, usnews
 from kickoff import state as state_files
 from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica, wikipedia
 from kickoff.sources import cricket as cricket_source
@@ -116,6 +116,13 @@ def real_adapters(client=None, env=None):
         got = around.run(now, copy.deepcopy(st.get("around") or {}), other_sports.Source(), client)
         return {**got, "events": got.get("events", [])}
 
+    def usnews_go(now, day, st):                                  # NFL and NBA moves for Biggest News (kickoff/usnews.py): no section of its own
+        try:
+            items, usage = usnews.find(client, now)
+        except Exception:
+            items, usage = [], {"input": 0, "output": 0}
+        return {"sections": [], "state": {}, "news": items, "stats": {"claude_usage": usage, "items": len(items)}}
+
     return [
         ("football", "Football", football_go),
         ("cricket", "Cricket", cricket_go),
@@ -126,6 +133,7 @@ def real_adapters(client=None, env=None):
         _simple("nba", "NBA", _with_extras(lambda now, day, s: nba.run(now, day, s, espn_nba.Source()), "nba", "basketball", "NBA", client), "nba"),
         _simple("mlb", "MLB", _with_extras(lambda now, day, s: mlb.run(now, day, s, espn_mlb.Source()), "mlb", "baseball", "MLB", client), "mlb"),
         ("around", "Other Sports", around_go),
+        ("usnews", "NFL and NBA news", usnews_go),
     ]
 
 
@@ -227,7 +235,7 @@ def extra_costs(stats):
         if isinstance(s, dict) and s.get("preview_cost"):
             total += float(s["preview_cost"])
             calls += 1
-    for sid, model in (("youngguns", None), ("around", settings.NEWS_MODEL), ("f1", settings.NEWS_MODEL)):        # F1: the grid penalties (kickoff/f1grid.py)
+    for sid, model in (("youngguns", None), ("around", settings.NEWS_MODEL), ("f1", settings.NEWS_MODEL), ("usnews", settings.NEWS_MODEL)):        # F1: the grid penalties (kickoff/f1grid.py)
         usage = (stats.get(sid) or {}).get("claude_usage") or ((stats.get(sid) or {}).get("claude_tokens") if sid == "f1" else None)
         if usage and (usage.get("input") or usage.get("output")):
             total += notes.cost(usage, model)
