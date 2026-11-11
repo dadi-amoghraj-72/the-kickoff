@@ -117,7 +117,7 @@ A section appears only when it has something in it.
 
 **NFL:** the week's scoreboard (home icon, underdog asterisk, OT), weekly leaders (D's quarterbacks Lawrence and Rodgers always listed), highlights, and on Wednesdays Top Performances, division tables and, from week 14, the playoff picture.
 
-**NBA:** every game finished since the last edition (Lakers, 76ers, Cavaliers, Spurs and Celtics first). Under each game, **the tracked players and the key players together, by points, most first** (the winning team's top scorer from 20, anyone from 25, at most three key players), then the absent tracked players as small grey DNP lines. Best game, standouts, standings with movement, Cup tables on Cup days, playoff series tables. **Fridays (regular season): League Leaders**, the top five per game in points, rebounds, assists, blocks and steals (ESPN's qualified players), one table with a gold sub-row per stat.
+**NBA:** every game finished since the last edition (Lakers, 76ers, Cavaliers, Spurs and Celtics first). Under each game, **the tracked players and the key players together, by points, most first** (the winning team's top scorer from 20, anyone from 25, at most three key players), then the absent tracked players as small grey DNP lines. Best game, standouts, standings with movement, Cup tables on Cup days, playoff series tables. **Fridays (regular season): League Leaders**, the top five per game in points, rebounds, assists, blocks and steals (ESPN's qualified players), one table with a gold sub-row per stat, each leader in gold.
 
 **MLB:** a Thursday round-up of the Dodgers, Ohtani and Yamamoto through the regular season; daily from the Dodgers' 155th game; series tables in the postseason; a closing note.
 
