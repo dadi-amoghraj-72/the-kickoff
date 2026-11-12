@@ -4,6 +4,260 @@
     "rows": [
       {
         "data": {
+          "AL": [
+            {
+              "league": "AL",
+              "name": "Sonny Gray",
+              "team": "BOS"
+            },
+            {
+              "league": "AL",
+              "name": "Willson Contreras",
+              "team": "BOS"
+            },
+            {
+              "league": "AL",
+              "name": "Randy Arozarena",
+              "team": "SEA"
+            },
+            {
+              "league": "AL",
+              "name": "Bryan Baker",
+              "team": "TB"
+            },
+            {
+              "league": "AL",
+              "name": "Drew Rasmussen",
+              "team": "TB"
+            },
+            {
+              "league": "AL",
+              "name": "Cade Smith",
+              "team": "CLE"
+            },
+            {
+              "league": "AL",
+              "name": "Ben Rice",
+              "team": "NYY"
+            }
+          ],
+          "NL": [
+            {
+              "league": "NL",
+              "name": "Alex Bregman",
+              "team": "CHC"
+            },
+            {
+              "league": "NL",
+              "name": "Jesus Luzardo",
+              "team": "PHI"
+            },
+            {
+              "league": "NL",
+              "name": "William Contreras",
+              "team": "MIL"
+            },
+            {
+              "league": "NL",
+              "name": "Brandon Lowe",
+              "team": "PIT"
+            },
+            {
+              "league": "NL",
+              "name": "Tarik Skubal",
+              "team": "LAD"
+            },
+            {
+              "league": "NL",
+              "name": "Jordan Walker",
+              "team": "STL"
+            },
+            {
+              "league": "NL",
+              "name": "Yoshinobu Yamamoto",
+              "team": "LAD"
+            },
+            {
+              "league": "NL",
+              "name": "Elly De La Cruz",
+              "team": "CIN"
+            },
+            {
+              "league": "NL",
+              "name": "James Wood",
+              "team": "WSH"
+            }
+          ]
+        },
+        "key": "417",
+        "kind": "league",
+        "label": "All-MLB 2nd Team",
+        "note": "",
+        "sig": "32082,32532,36488,40884,42584,4987924,5016968,34886,39667,39895,39961,42409,4684778,4872587,4917694,4918256",
+        "text": "Sonny Gray, Willson Contreras, Randy Arozarena, Bryan Baker, Drew Rasmussen, Cade Smith, Ben Rice, Alex Bregman, Jesus Luzardo, William Contreras, Brandon Lowe, Tarik Skubal, Jordan Walker, Yoshinobu Yamamoto, Elly De La Cruz, James Wood"
+      },
+      {
+        "data": {
+          "AL": [
+            {
+              "league": "AL",
+              "name": "Dylan Cease",
+              "team": "TOR"
+            },
+            {
+              "league": "AL",
+              "name": "Yordan Alvarez",
+              "team": "HOU"
+            },
+            {
+              "league": "AL",
+              "name": "Pete Alonso",
+              "team": "BAL"
+            },
+            {
+              "league": "AL",
+              "name": "Bobby Witt Jr.",
+              "team": "KC"
+            },
+            {
+              "league": "AL",
+              "name": "Junior Caminero",
+              "team": "TB"
+            },
+            {
+              "league": "AL",
+              "name": "Louis Varland",
+              "team": "TOR"
+            },
+            {
+              "league": "AL",
+              "name": "Cam Schlittler",
+              "team": "NYY"
+            }
+          ],
+          "NL": [
+            {
+              "league": "NL",
+              "name": "Chris Sale",
+              "team": "ATL"
+            },
+            {
+              "league": "NL",
+              "name": "Fernando Tatis Jr.",
+              "team": "SD"
+            },
+            {
+              "league": "NL",
+              "name": "Brice Turang",
+              "team": "MIL"
+            },
+            {
+              "league": "NL",
+              "name": "Cristopher Sanchez",
+              "team": "PHI"
+            },
+            {
+              "league": "NL",
+              "name": "Gabriel Moreno",
+              "team": "ARI"
+            },
+            {
+              "league": "NL",
+              "name": "Pete Crow-Armstrong",
+              "team": "CHC"
+            },
+            {
+              "league": "NL",
+              "name": "Mason Miller",
+              "team": "SD"
+            },
+            {
+              "league": "NL",
+              "name": "Jackson Chourio",
+              "team": "MIL"
+            },
+            {
+              "league": "NL",
+              "name": "Jacob Misiorowski",
+              "team": "MIL"
+            }
+          ]
+        },
+        "key": "397",
+        "kind": "league",
+        "label": "All-MLB 1st Team",
+        "note": "",
+        "sig": "34943,36018,37498,42403,4905921,4917888,5134581,30948,35983,41179,42359,42464,4717833,4730225,4917869,5080761",
+        "text": "Dylan Cease, Yordan Alvarez, Pete Alonso, Bobby Witt Jr., Junior Caminero, Louis Varland, Cam Schlittler, Chris Sale, Fernando Tatis Jr., Brice Turang, Cristopher Sanchez, Gabriel Moreno, Pete Crow-Armstrong, Mason Miller, Jackson Chourio, Jacob Misiorowski"
+      },
+      {
+        "data": {
+          "winners": [
+            {
+              "league": "AL",
+              "name": "Cam Schlittler",
+              "team": "NYY"
+            },
+            {
+              "league": "NL",
+              "name": "Jacob Misiorowski",
+              "team": "MIL"
+            }
+          ]
+        },
+        "key": "59",
+        "kind": "pair",
+        "label": "Cy Young",
+        "note": "",
+        "sig": "5134581,5080761",
+        "text": "Cam Schlittler (NYY); Jacob Misiorowski (MIL)"
+      },
+      {
+        "data": {
+          "winners": [
+            {
+              "league": "AL",
+              "name": "Yordan Alvarez",
+              "team": "HOU"
+            },
+            {
+              "league": "NL",
+              "name": "Pete Crow-Armstrong",
+              "team": "CHC"
+            }
+          ]
+        },
+        "key": "70",
+        "kind": "pair",
+        "label": "Hank Aaron",
+        "note": "",
+        "sig": "36018,4717833",
+        "text": "Yordan Alvarez (HOU); Pete Crow-Armstrong (CHC)"
+      },
+      {
+        "data": {
+          "winners": [
+            {
+              "league": "AL",
+              "name": "Bryan Baker",
+              "team": "TB"
+            },
+            {
+              "league": "NL",
+              "name": "Mason Miller",
+              "team": "SD"
+            }
+          ]
+        },
+        "key": "72",
+        "kind": "pair",
+        "label": "Relief Man",
+        "note": "",
+        "sig": "40884,4730225",
+        "text": "Bryan Baker (TB); Mason Miller (SD)"
+      },
+      {
+        "data": {
           "winners": [
             {
               "league": "AL",
@@ -71,12 +325,17 @@
     ],
     "season": 2026,
     "seen": {
+      "397": "34943,36018,37498,42403,4905921,4917888,5134581,30948,35983,41179,42359,42464,4717833,4730225,4917869,5080761",
+      "417": "32082,32532,36488,40884,42584,4987924,5016968,34886,39667,39895,39961,42409,4684778,4872587,4917694,4918256",
       "58": "32758,33912,40576,42457,4345278,4345620,4987382,4990055,5007615,5080641,32767,34886,35304,41179,41355,42404,42464,4433874,4717833,4917869",
+      "59": "5134581,5080761",
       "60": "5149072,5080771",
       "62": "33912",
       "64": "35013",
       "65": "39825",
       "68": "39895",
+      "70": "36018,4717833",
+      "72": "40884,4730225",
       "74": "32129",
       "wiki:asg:AL": "{\"pitchers\": [\"Bryan Baker\", \"Dylan Cease\", \"Aroldis Chapman\", \"Jacob Latz\", \"Nick Martinez\", \"Parker Messick\", \"Drew Rasmussen\", \"Joe Ryan\", \"Cam Schlittler\", \"Cade Smith\", \"Ranger Su\\u00e1rez\", \"Louis Varland\", \"Justin Verlander\", \"Michael Wacha\"], \"reserves\": [\"Dillon Dingler\", \"Adley Rutschman\", \"Willson Contreras\", \"Nick Kurtz\", \"Munetaka Murakami\", \"Ben Rice\", \"Travis Bazzana\", \"Miguel Vargas\", \"Kevin McGonigle\", \"Randy Arozarena\", \"Cody Bellinger\", \"Riley Greene\", \"Tristan Peters\", \"Ceddanne Rafaela\", \"Yandy D\\u00edaz\"], \"starters\": [\"Shea Langeliers\", \"Vladimir Guerrero Jr.\", \"Ernie Clement\", \"Junior Caminero\", \"Bobby Witt Jr.\", \"Byron Buxton\", \"Aaron Judge\", \"Mike Trout\", \"Yordan Alvarez\"]}",
       "wiki:asg:NL": "{\"pitchers\": [\"Braxton Ashcraft\", \"Chase Burns\", \"Jhoan Dur\\u00e1n\", \"Foster Griffin\", \"Raisel Iglesias\", \"Jes\\u00fas Luzardo\", \"Max Meyer\", \"Mason Miller\", \"Jacob Misiorowski\", \"Riley O'Brien\", \"Eduardo Rodr\\u00edguez\", \"Chris Sale\", \"Cristopher S\\u00e1nchez\", \"Paul Skenes\", \"Logan Webb\", \"Justin Wrobleski\", \"Yoshinobu Yamamoto\"], \"reserves\": [\"William Contreras\", \"Hunter Goodman\", \"Bryce Harper\", \"Matt Olson\", \"Luis Arr\\u00e1ez\", \"Sal Stewart\", \"Otto Lopez\", \"Corbin Carroll\", \"Pete Crow-Armstrong\", \"Jordan Walker\", \"James Wood\", \"Iv\\u00e1n Herrera\", \"Kyle Schwarber\"], \"starters\": [\"Drake Baldwin\", \"Freddie Freeman\", \"Ozzie Albies\", \"Max Muncy\", \"CJ Abrams\", \"Brandon Marsh\", \"Andy Pages\", \"Juan Soto\", \"Shohei Ohtani\"]}",
