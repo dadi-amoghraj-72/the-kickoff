@@ -21,9 +21,16 @@
     "https://en.chessbase.com/post/chola-chess-open-2026-final-report",
     "https://en.chessbase.com/post/tegernsee-open-2026-r9",
     "chess:kcbv23gt",
-    "chess:kcbv23gt:Praggnanandhaa"
+    "chess:kcbv23gt:Praggnanandhaa",
+    "https://www.thehindu.com/sport/vaishali-pulls-off-upset-wins-over-niemann-and-so-carlsen-wins-blitz-event/article71690803.ece",
+    "https://news.google.com/rss/articles/CBMijwFBVV95cUxOQUhKQWJEWVZLOUpUV3d2eWlabGMxbVl5b1I2S2dIOWJHYkx2Qy1Oc0hfdFRQMUN5NUthOHc4RW14S29sNnRuYmdraUtNU3J4S19hRWdFcjF0VWJ3S2djeHl3cnVrU284X1M4TjZMV1hDZTU1UW9mbUJoMm1Ib1B5OUNFUXdTcWVPcUxDN0dOUQ?oc=5",
+    "https://www.thehindu.com/sport/india-clinches-25m-pistol-team-gold-medal-manu-bhaker-esha-singh-miss-olympic-quota/article71688289.ece"
   ],
-  "stories": {},
+  "stories": {
+    "https://sports.yahoo.com/articles/tennessee-basketball-mock-cba-offers-233229786.html": "2026-11-11T23:58:33Z",
+    "https://sports.yahoo.com/mlb/article/dodgers-mets-padres-blue-jays-emerge-as-tarik-skubal-suitors-as-market-for-top-mlb-free-agent-takes-shape-233934893.html": "2026-11-11T23:58:33Z",
+    "https://sports.yahoo.com/mma/article/conor-mcgregors-manager-expects-stars-ufc-career-to-come-to-an-end-in-late-2027-234509014.html": "2026-11-11T23:58:33Z"
+  },
   "ufc": {
     "done": [
       "600061268"
