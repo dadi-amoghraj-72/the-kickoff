@@ -2102,6 +2102,337 @@
       ],
       "status": "Brisbane Heat Women won by 14 runs"
     },
+    "espn-1528703": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 27,
+              "fours": 5,
+              "mark": "",
+              "name": "Tom Banton",
+              "out": "c †Inglis b Bartlett",
+              "r": 25,
+              "sixes": 0,
+              "sr": 92.59
+            },
+            {
+              "b": 14,
+              "fours": 1,
+              "mark": "",
+              "name": "Ben Duckett",
+              "out": "c Edwards b Johnson",
+              "r": 9,
+              "sixes": 0,
+              "sr": 64.28
+            },
+            {
+              "b": 36,
+              "fours": 1,
+              "mark": "",
+              "name": "Joe Root",
+              "out": "c †Inglis b Beardman",
+              "r": 17,
+              "sixes": 0,
+              "sr": 47.22
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "(c)",
+              "name": "Harry Brook",
+              "out": "c †Inglis b Beardman",
+              "r": 1,
+              "sixes": 0,
+              "sr": 25.0
+            },
+            {
+              "b": 7,
+              "fours": 0,
+              "mark": "",
+              "name": "Jordan Cox",
+              "out": "c †Inglis b Beardman",
+              "r": 2,
+              "sixes": 0,
+              "sr": 28.57
+            },
+            {
+              "b": 7,
+              "fours": 0,
+              "mark": "",
+              "name": "Sam Curran",
+              "out": "c Zampa b Beardman",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 47,
+              "fours": 2,
+              "mark": "",
+              "name": "Will Jacks",
+              "out": "c †Inglis b Johnson",
+              "r": 25,
+              "sixes": 0,
+              "sr": 53.19
+            },
+            {
+              "b": 6,
+              "fours": 0,
+              "mark": "",
+              "name": "Liam Dawson",
+              "out": "c Edwards b Beardman",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 6,
+              "fours": 0,
+              "mark": "",
+              "name": "Jamie Overton",
+              "out": "c & b Johnson",
+              "r": 4,
+              "sixes": 0,
+              "sr": 66.66
+            },
+            {
+              "b": 32,
+              "fours": 3,
+              "mark": "",
+              "name": "Gus Atkinson",
+              "out": "not out",
+              "r": 29,
+              "sixes": 1,
+              "sr": 90.62
+            },
+            {
+              "b": 16,
+              "fours": 2,
+              "mark": "",
+              "name": "Jofra Archer",
+              "out": "c Edwards b Beardman",
+              "r": 11,
+              "sixes": 0,
+              "sr": 68.75
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 4.6,
+              "m": 0,
+              "name": "Xavier Bartlett",
+              "nb": 0,
+              "o": 10.0,
+              "r": 46,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 4.66,
+              "m": 0,
+              "name": "Spencer Johnson",
+              "nb": 0,
+              "o": 9.0,
+              "r": 42,
+              "w": 3,
+              "wd": 1
+            },
+            {
+              "eco": 3.13,
+              "m": 1,
+              "name": "Mahli Beardman",
+              "nb": 0,
+              "o": 7.4,
+              "r": 24,
+              "w": 6,
+              "wd": 2
+            },
+            {
+              "eco": 2.5,
+              "m": 1,
+              "name": "Jack Edwards",
+              "nb": 0,
+              "o": 4.0,
+              "r": 10,
+              "w": 0,
+              "wd": 1
+            },
+            {
+              "eco": 2.33,
+              "m": 1,
+              "name": "Adam Zampa",
+              "nb": 0,
+              "o": 3.0,
+              "r": 7,
+              "w": 0,
+              "wd": 1
+            }
+          ],
+          "bowling_team": "Australia",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 2,
+            "nb": 0,
+            "total": 8,
+            "w": 6
+          },
+          "fow": "",
+          "label": "",
+          "overs": 33.4,
+          "runs": 131,
+          "team": "England",
+          "wickets": 10
+        },
+        {
+          "batting": [
+            {
+              "b": 30,
+              "fours": 4,
+              "mark": "(c)",
+              "name": "Mitchell Marsh",
+              "out": "c Duckett b Overton",
+              "r": 50,
+              "sixes": 4,
+              "sr": 166.66
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Travis Head",
+              "out": " b Atkinson",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 30,
+              "fours": 2,
+              "mark": "",
+              "name": "Cooper Connolly",
+              "out": "c Jacks b Archer",
+              "r": 27,
+              "sixes": 2,
+              "sr": 90.0
+            },
+            {
+              "b": 42,
+              "fours": 2,
+              "mark": "",
+              "name": "Josh Inglis",
+              "out": "not out",
+              "r": 23,
+              "sixes": 0,
+              "sr": 54.76
+            },
+            {
+              "b": 38,
+              "fours": 5,
+              "mark": "",
+              "name": "Matt Renshaw",
+              "out": "not out",
+              "r": 26,
+              "sixes": 0,
+              "sr": 68.42
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 6.0,
+              "m": 0,
+              "name": "Jofra Archer",
+              "nb": 0,
+              "o": 8.0,
+              "r": 48,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 4.0,
+              "m": 1,
+              "name": "Gus Atkinson",
+              "nb": 0,
+              "o": 10.0,
+              "r": 40,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 7.77,
+              "m": 0,
+              "name": "Jamie Overton",
+              "nb": 0,
+              "o": 4.3,
+              "r": 35,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 4.0,
+              "m": 0,
+              "name": "Sam Curran",
+              "nb": 0,
+              "o": 1.0,
+              "r": 4,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "England",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 5,
+            "nb": 0,
+            "total": 6,
+            "w": 1
+          },
+          "fow": "",
+          "label": "",
+          "overs": 23.3,
+          "runs": 132,
+          "team": "Australia",
+          "wickets": 3
+        }
+      ],
+      "potm": [
+        {
+          "name": "Mahli Beardman",
+          "team": "Australia"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "England",
+          "economy": 4.67,
+          "kind": "economy",
+          "maidens": 0,
+          "match": "Australia vs England, 1st ODI, England tour of Australia 2026/27",
+          "name": "Spencer Johnson",
+          "overs": 9.0,
+          "result": "Australia won by 7 wkts (159b rem)",
+          "runs_conceded": 42,
+          "team": "Australia",
+          "wickets": 3
+        },
+        {
+          "against": "England",
+          "economy": 3.13,
+          "kind": "five-for",
+          "maidens": 1,
+          "match": "Australia vs England, 1st ODI, England tour of Australia 2026/27",
+          "name": "Mahli Beardman",
+          "overs": 7.4,
+          "result": "Australia won by 7 wkts (159b rem)",
+          "runs_conceded": 24,
+          "team": "Australia",
+          "wickets": 6
+        }
+      ],
+      "status": "Australia won by 7 wkts (159b rem)"
+    },
     "espn-1539438": {
       "innings": [
         {
@@ -2489,6 +2820,430 @@
       "potm": [],
       "standouts": [],
       "status": "No result (abandoned with a toss)"
+    },
+    "espn-1539440": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 108,
+              "fours": 14,
+              "mark": "",
+              "name": "Will Young",
+              "out": "c sub (K Kushagra) b Dhir",
+              "r": 125,
+              "sixes": 4,
+              "sr": 115.74
+            },
+            {
+              "b": 48,
+              "fours": 6,
+              "mark": "",
+              "name": "Tim Seifert",
+              "out": "c †Ishan Kishan b Brar",
+              "r": 58,
+              "sixes": 3,
+              "sr": 120.83
+            },
+            {
+              "b": 8,
+              "fours": 0,
+              "mark": "",
+              "name": "Nick Kelly",
+              "out": "st †Ishan Kishan b Patel",
+              "r": 4,
+              "sixes": 0,
+              "sr": 50.0
+            },
+            {
+              "b": 13,
+              "fours": 0,
+              "mark": "",
+              "name": "Dean Foxcroft",
+              "out": "c Brar b Nabi",
+              "r": 8,
+              "sixes": 0,
+              "sr": 61.53
+            },
+            {
+              "b": 30,
+              "fours": 5,
+              "mark": "",
+              "name": "Finn Allen",
+              "out": "c Sharma b Patel",
+              "r": 41,
+              "sixes": 2,
+              "sr": 136.66
+            },
+            {
+              "b": 20,
+              "fours": 1,
+              "mark": "",
+              "name": "Michael Bracewell",
+              "out": "c Dhir b Brar",
+              "r": 15,
+              "sixes": 0,
+              "sr": 75.0
+            },
+            {
+              "b": 29,
+              "fours": 1,
+              "mark": "(c)",
+              "name": "Mitchell Santner",
+              "out": "c †Ishan Kishan b Singh",
+              "r": 24,
+              "sixes": 2,
+              "sr": 82.75
+            },
+            {
+              "b": 22,
+              "fours": 1,
+              "mark": "",
+              "name": "Kristian Clarke",
+              "out": "lbw b Nabi",
+              "r": 22,
+              "sixes": 1,
+              "sr": 100.0
+            },
+            {
+              "b": 21,
+              "fours": 1,
+              "mark": "",
+              "name": "Kyle Jamieson",
+              "out": "not out",
+              "r": 19,
+              "sixes": 0,
+              "sr": 90.47
+            },
+            {
+              "b": 2,
+              "fours": 0,
+              "mark": "",
+              "name": "Matt Henry",
+              "out": "run out (Nabi)",
+              "r": 2,
+              "sixes": 0,
+              "sr": 100.0
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Matthew Fisher",
+              "out": "run out (Kohli/†Ishan Kishan)",
+              "r": 1,
+              "sixes": 0,
+              "sr": 100.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 5.5,
+              "m": 0,
+              "name": "Arshdeep Singh",
+              "nb": 0,
+              "o": 10.0,
+              "r": 55,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 7.37,
+              "m": 0,
+              "name": "Auqib Nabi",
+              "nb": 1,
+              "o": 8.0,
+              "r": 59,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 6.9,
+              "m": 0,
+              "name": "Gurnoor Brar",
+              "nb": 0,
+              "o": 10.0,
+              "r": 69,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 3.9,
+              "m": 0,
+              "name": "Axar Patel",
+              "nb": 0,
+              "o": 10.0,
+              "r": 39,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 9.12,
+              "m": 0,
+              "name": "Kuldeep Yadav",
+              "nb": 1,
+              "o": 8.0,
+              "r": 73,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 7.25,
+              "m": 0,
+              "name": "Naman Dhir",
+              "nb": 0,
+              "o": 4.0,
+              "r": 29,
+              "w": 1,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "India",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 9,
+            "nb": 2,
+            "total": 14,
+            "w": 3
+          },
+          "fow": "",
+          "label": "",
+          "overs": 50.0,
+          "runs": 333,
+          "team": "New Zealand",
+          "wickets": 10
+        },
+        {
+          "batting": [
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Rohit Sharma",
+              "out": "c Allen b Henry",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 13,
+              "fours": 0,
+              "mark": "",
+              "name": "Ruturaj Gaikwad",
+              "out": "c Bracewell b Jamieson",
+              "r": 5,
+              "sixes": 0,
+              "sr": 38.46
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Virat Kohli",
+              "out": " b Henry",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "(c)",
+              "name": "Shreyas Iyer",
+              "out": "lbw b Henry",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 53,
+              "fours": 4,
+              "mark": "",
+              "name": "Ishan Kishan",
+              "out": " b Henry",
+              "r": 27,
+              "sixes": 0,
+              "sr": 50.94
+            },
+            {
+              "b": 36,
+              "fours": 3,
+              "mark": "",
+              "name": "Axar Patel",
+              "out": "c Allen b Fisher",
+              "r": 21,
+              "sixes": 0,
+              "sr": 58.33
+            },
+            {
+              "b": 24,
+              "fours": 0,
+              "mark": "",
+              "name": "Naman Dhir",
+              "out": "c Santner b Fisher",
+              "r": 21,
+              "sixes": 2,
+              "sr": 87.5
+            },
+            {
+              "b": 8,
+              "fours": 1,
+              "mark": "",
+              "name": "Auqib Nabi",
+              "out": "c †Seifert b Fisher",
+              "r": 5,
+              "sixes": 0,
+              "sr": 62.5
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Kuldeep Yadav",
+              "out": " b Henry",
+              "r": 1,
+              "sixes": 0,
+              "sr": 25.0
+            },
+            {
+              "b": 13,
+              "fours": 0,
+              "mark": "",
+              "name": "Gurnoor Brar",
+              "out": " b Henry",
+              "r": 2,
+              "sixes": 0,
+              "sr": 15.38
+            },
+            {
+              "b": 3,
+              "fours": 0,
+              "mark": "",
+              "name": "Arshdeep Singh",
+              "out": "not out",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 2.79,
+              "m": 2,
+              "name": "Matt Henry",
+              "nb": 0,
+              "o": 9.4,
+              "r": 27,
+              "w": 6,
+              "wd": 2
+            },
+            {
+              "eco": 2.0,
+              "m": 2,
+              "name": "Kyle Jamieson",
+              "nb": 0,
+              "o": 6.0,
+              "r": 12,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 6.5,
+              "m": 0,
+              "name": "Kristian Clarke",
+              "nb": 0,
+              "o": 2.0,
+              "r": 13,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 4.42,
+              "m": 1,
+              "name": "Matthew Fisher",
+              "nb": 0,
+              "o": 7.0,
+              "r": 31,
+              "w": 3,
+              "wd": 4
+            },
+            {
+              "eco": 3.0,
+              "m": 0,
+              "name": "Michael Bracewell",
+              "nb": 0,
+              "o": 2.0,
+              "r": 6,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "New Zealand",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 0,
+            "nb": 0,
+            "total": 7,
+            "w": 7
+          },
+          "fow": "",
+          "label": "",
+          "overs": 26.4,
+          "runs": 89,
+          "team": "India",
+          "wickets": 10
+        }
+      ],
+      "potm": [
+        {
+          "name": "Matt Henry",
+          "team": "New Zealand"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "India",
+          "balls": 108,
+          "fours": 14,
+          "kind": "century",
+          "match": "New Zealand vs India, 4th ODI, India tour of New Zealand 2026/27",
+          "name": "Will Young",
+          "not_out": false,
+          "result": "New Zealand won by 244 runs",
+          "runs": 125,
+          "sixes": 4,
+          "team": "New Zealand"
+        },
+        {
+          "against": "India",
+          "economy": 2.79,
+          "kind": "five-for",
+          "maidens": 2,
+          "match": "New Zealand vs India, 4th ODI, India tour of New Zealand 2026/27",
+          "name": "Matt Henry",
+          "overs": 9.4,
+          "result": "New Zealand won by 244 runs",
+          "runs_conceded": 27,
+          "team": "New Zealand",
+          "wickets": 6
+        },
+        {
+          "against": "India",
+          "economy": 4.43,
+          "kind": "economy",
+          "maidens": 1,
+          "match": "New Zealand vs India, 4th ODI, India tour of New Zealand 2026/27",
+          "name": "Matthew Fisher",
+          "overs": 7.0,
+          "result": "New Zealand won by 244 runs",
+          "runs_conceded": 31,
+          "team": "New Zealand",
+          "wickets": 3
+        }
+      ],
+      "status": "New Zealand won by 244 runs"
     },
     "espn-1543956": {
       "innings": [
@@ -5366,6 +6121,591 @@
       ],
       "status": "Sixers won by 11 runs"
     },
+    "espn-1550711": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 50,
+              "fours": 7,
+              "mark": "",
+              "name": "Azan Awais",
+              "out": "c †BKG Mendis b Rathnayaka",
+              "r": 30,
+              "sixes": 0,
+              "sr": 60.0
+            },
+            {
+              "b": 51,
+              "fours": 9,
+              "mark": "",
+              "name": "Tayyab Arif",
+              "out": "c †BKG Mendis b Fernando",
+              "r": 57,
+              "sixes": 1,
+              "sr": 111.76
+            },
+            {
+              "b": 105,
+              "fours": 6,
+              "mark": "",
+              "name": "Mohammad Taha",
+              "out": "c de Silva b Dinusha",
+              "r": 51,
+              "sixes": 0,
+              "sr": 48.57
+            },
+            {
+              "b": 58,
+              "fours": 7,
+              "mark": "(c)",
+              "name": "Babar Azam",
+              "out": "c †BKG Mendis b Madushanka",
+              "r": 50,
+              "sixes": 0,
+              "sr": 86.2
+            },
+            {
+              "b": 199,
+              "fours": 9,
+              "mark": "",
+              "name": "Saud Shakeel",
+              "out": "c †BKG Mendis b Fernando",
+              "r": 93,
+              "sixes": 0,
+              "sr": 46.73
+            },
+            {
+              "b": 22,
+              "fours": 2,
+              "mark": "",
+              "name": "Salman Agha",
+              "out": "c †BKG Mendis b Fernando",
+              "r": 16,
+              "sixes": 0,
+              "sr": 72.72
+            },
+            {
+              "b": 72,
+              "fours": 2,
+              "mark": "",
+              "name": "Ghazi Ghori",
+              "out": "c Sooriyabandara b Madushanka",
+              "r": 48,
+              "sixes": 0,
+              "sr": 66.66
+            },
+            {
+              "b": 72,
+              "fours": 9,
+              "mark": "",
+              "name": "Arafat Minhas",
+              "out": "c de Silva b Madushanka",
+              "r": 52,
+              "sixes": 1,
+              "sr": 72.22
+            },
+            {
+              "b": 11,
+              "fours": 1,
+              "mark": "",
+              "name": "Razaullah",
+              "out": "c Fernando b Kumara",
+              "r": 10,
+              "sixes": 1,
+              "sr": 90.9
+            },
+            {
+              "b": 5,
+              "fours": 0,
+              "mark": "",
+              "name": "Saqib Khan",
+              "out": "not out",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 4.11,
+              "m": 2,
+              "name": "Asitha Fernando",
+              "nb": 2,
+              "o": 26.0,
+              "r": 107,
+              "w": 3,
+              "wd": 1
+            },
+            {
+              "eco": 4.69,
+              "m": 3,
+              "name": "Dilshan Madushanka",
+              "nb": 1,
+              "o": 23.0,
+              "r": 108,
+              "w": 3,
+              "wd": 0
+            },
+            {
+              "eco": 4.42,
+              "m": 1,
+              "name": "Lahiru Kumara",
+              "nb": 0,
+              "o": 23.3,
+              "r": 104,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 2.88,
+              "m": 2,
+              "name": "Milan Rathnayaka",
+              "nb": 3,
+              "o": 25.0,
+              "r": 72,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 0.66,
+              "m": 1,
+              "name": "Dhananjaya de Silva",
+              "nb": 0,
+              "o": 3.0,
+              "r": 2,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 3.83,
+              "m": 0,
+              "name": "Sonal Dinusha",
+              "nb": 0,
+              "o": 6.0,
+              "r": 23,
+              "w": 1,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Sri Lanka",
+          "declared": true,
+          "dnb": [],
+          "extras": {
+            "b_lb": 18,
+            "nb": 6,
+            "total": 27,
+            "w": 3
+          },
+          "fow": "",
+          "label": "1st innings",
+          "overs": 106.3,
+          "runs": 434,
+          "team": "Pakistan",
+          "wickets": 9
+        },
+        {
+          "batting": [
+            {
+              "b": 52,
+              "fours": 7,
+              "mark": "",
+              "name": "Lahiru Udara",
+              "out": "c †Ghazi Ghori b Khan",
+              "r": 42,
+              "sixes": 0,
+              "sr": 80.76
+            },
+            {
+              "b": 7,
+              "fours": 0,
+              "mark": "",
+              "name": "Pasindu Sooriyabandara",
+              "out": "c †Ghazi Ghori b Abbas",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 3,
+              "fours": 0,
+              "mark": "",
+              "name": "Dinesh Chandimal",
+              "out": "c Agha b Khan",
+              "r": 1,
+              "sixes": 0,
+              "sr": 33.33
+            },
+            {
+              "b": 131,
+              "fours": 8,
+              "mark": "",
+              "name": "Kamindu Mendis",
+              "out": "c †Ghazi Ghori b Abbas",
+              "r": 58,
+              "sixes": 0,
+              "sr": 44.27
+            },
+            {
+              "b": 246,
+              "fours": 20,
+              "mark": "",
+              "name": "Dhananjaya de Silva",
+              "out": "c †Ghazi Ghori b Khan",
+              "r": 167,
+              "sixes": 0,
+              "sr": 67.88
+            },
+            {
+              "b": 202,
+              "fours": 10,
+              "mark": "(c)",
+              "name": "Kusal Mendis",
+              "out": "c †Ghazi Ghori b Khan",
+              "r": 119,
+              "sixes": 4,
+              "sr": 58.91
+            },
+            {
+              "b": 35,
+              "fours": 3,
+              "mark": "",
+              "name": "Sonal Dinusha",
+              "out": "c Agha b Khan",
+              "r": 20,
+              "sixes": 0,
+              "sr": 57.14
+            },
+            {
+              "b": 28,
+              "fours": 2,
+              "mark": "",
+              "name": "Milan Rathnayaka",
+              "out": "c Tayyab Arif b Razaullah",
+              "r": 12,
+              "sixes": 0,
+              "sr": 42.85
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Lahiru Kumara",
+              "out": "lbw b Khan",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 7,
+              "fours": 1,
+              "mark": "",
+              "name": "Asitha Fernando",
+              "out": "c †Ghazi Ghori b Khan",
+              "r": 4,
+              "sixes": 0,
+              "sr": 57.14
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Dilshan Madushanka",
+              "out": "not out",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 2.06,
+              "m": 12,
+              "name": "Mohammad Abbas",
+              "nb": 3,
+              "o": 33.0,
+              "r": 68,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 3.82,
+              "m": 5,
+              "name": "Saqib Khan",
+              "nb": 3,
+              "o": 34.0,
+              "r": 130,
+              "w": 7,
+              "wd": 1
+            },
+            {
+              "eco": 5.31,
+              "m": 2,
+              "name": "Razaullah",
+              "nb": 6,
+              "o": 26.2,
+              "r": 140,
+              "w": 1,
+              "wd": 2
+            },
+            {
+              "eco": 4.38,
+              "m": 2,
+              "name": "Arafat Minhas",
+              "nb": 0,
+              "o": 21.0,
+              "r": 92,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 3.0,
+              "m": 1,
+              "name": "Salman Agha",
+              "nb": 0,
+              "o": 3.0,
+              "r": 9,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Pakistan",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 7,
+            "nb": 12,
+            "total": 23,
+            "w": 4
+          },
+          "fow": "",
+          "label": "1st innings",
+          "overs": 117.2,
+          "runs": 446,
+          "team": "Sri Lanka",
+          "wickets": 10
+        },
+        {
+          "batting": [
+            {
+              "b": 66,
+              "fours": 3,
+              "mark": "",
+              "name": "Azan Awais",
+              "out": "c PHKD Mendis b Kumara",
+              "r": 22,
+              "sixes": 0,
+              "sr": 33.33
+            },
+            {
+              "b": 8,
+              "fours": 2,
+              "mark": "",
+              "name": "Tayyab Arif",
+              "out": "lbw b Fernando",
+              "r": 11,
+              "sixes": 0,
+              "sr": 137.5
+            },
+            {
+              "b": 57,
+              "fours": 3,
+              "mark": "",
+              "name": "Mohammad Taha",
+              "out": "c †BKG Mendis b Fernando",
+              "r": 24,
+              "sixes": 0,
+              "sr": 42.1
+            },
+            {
+              "b": 48,
+              "fours": 6,
+              "mark": "(c)",
+              "name": "Babar Azam",
+              "out": "c Udara b Rathnayaka",
+              "r": 34,
+              "sixes": 0,
+              "sr": 70.83
+            },
+            {
+              "b": 210,
+              "fours": 7,
+              "mark": "",
+              "name": "Saud Shakeel",
+              "out": " b Kumara",
+              "r": 97,
+              "sixes": 0,
+              "sr": 46.19
+            },
+            {
+              "b": 19,
+              "fours": 2,
+              "mark": "",
+              "name": "Salman Agha",
+              "out": "c Sooriyabandara b Rathnayaka",
+              "r": 13,
+              "sixes": 0,
+              "sr": 68.42
+            },
+            {
+              "b": 69,
+              "fours": 3,
+              "mark": "",
+              "name": "Ghazi Ghori",
+              "out": "c †BKG Mendis b Rathnayaka",
+              "r": 35,
+              "sixes": 0,
+              "sr": 50.72
+            },
+            {
+              "b": 29,
+              "fours": 3,
+              "mark": "",
+              "name": "Arafat Minhas",
+              "out": "c Dinusha b de Silva",
+              "r": 16,
+              "sixes": 0,
+              "sr": 55.17
+            },
+            {
+              "b": 8,
+              "fours": 1,
+              "mark": "",
+              "name": "Razaullah",
+              "out": "not out",
+              "r": 6,
+              "sixes": 0,
+              "sr": 75.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 2.69,
+              "m": 2,
+              "name": "Asitha Fernando",
+              "nb": 2,
+              "o": 13.0,
+              "r": 35,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 4.0,
+              "m": 3,
+              "name": "Dilshan Madushanka",
+              "nb": 0,
+              "o": 17.0,
+              "r": 68,
+              "w": 0,
+              "wd": 1
+            },
+            {
+              "eco": 3.64,
+              "m": 3,
+              "name": "Lahiru Kumara",
+              "nb": 0,
+              "o": 17.5,
+              "r": 65,
+              "w": 2,
+              "wd": 1
+            },
+            {
+              "eco": 2.35,
+              "m": 6,
+              "name": "Milan Rathnayaka",
+              "nb": 2,
+              "o": 20.0,
+              "r": 47,
+              "w": 3,
+              "wd": 0
+            },
+            {
+              "eco": 3.12,
+              "m": 1,
+              "name": "Sonal Dinusha",
+              "nb": 0,
+              "o": 8.0,
+              "r": 25,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 2.77,
+              "m": 0,
+              "name": "Dhananjaya de Silva",
+              "nb": 1,
+              "o": 9.0,
+              "r": 25,
+              "w": 1,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Sri Lanka",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 19,
+            "nb": 5,
+            "total": 26,
+            "w": 2
+          },
+          "fow": "",
+          "label": "2nd innings",
+          "overs": 84.5,
+          "runs": 284,
+          "team": "Pakistan",
+          "wickets": 8
+        }
+      ],
+      "potm": [
+        {
+          "name": "Saqib Khan",
+          "team": "Pakistan"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "Pakistan",
+          "balls": 246,
+          "fours": 20,
+          "kind": "century",
+          "match": "Pakistan vs Sri Lanka, 1st Test, Sri Lanka tour of Pakistan 2026/27",
+          "name": "Dhananjaya de Silva",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 167,
+          "sixes": 0,
+          "team": "Sri Lanka"
+        },
+        {
+          "against": "Pakistan",
+          "balls": 202,
+          "fours": 10,
+          "kind": "century",
+          "match": "Pakistan vs Sri Lanka, 1st Test, Sri Lanka tour of Pakistan 2026/27",
+          "name": "Kusal Mendis",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 119,
+          "sixes": 4,
+          "team": "Sri Lanka"
+        },
+        {
+          "against": "Sri Lanka",
+          "economy": 3.82,
+          "kind": "five-for",
+          "maidens": 5,
+          "match": "Pakistan vs Sri Lanka, 1st Test, Sri Lanka tour of Pakistan 2026/27",
+          "name": "Saqib Khan",
+          "overs": 34.0,
+          "result": "Match drawn",
+          "runs_conceded": 130,
+          "team": "Pakistan",
+          "wickets": 7
+        }
+      ],
+      "status": "Match drawn"
+    },
     "espn-1553296": {
       "innings": [
         {
@@ -7091,6 +8431,9 @@
   },
   "ipl": {},
   "milestones": [
+    "espn-1528703|Mahli Beardman|5w",
+    "espn-1539440|Matt Henry|5w",
+    "espn-1539440|Will Young|bat100",
     "espn-1543958|Ashleigh Gardner|ff64",
     "espn-1543959|Sophie Devine|ff55",
     "espn-1550711|Dhananjaya de Silva|bat100",
@@ -7120,8 +8463,10 @@
     "786781a5-0548-479e-b268-a87521ea2e36",
     "c547eb46-2025-413a-b7f2-6d1584daa42f",
     "de774f34-7940-44c4-acce-8918a8069613",
+    "espn-1528703",
     "espn-1539438",
     "espn-1539439",
+    "espn-1539440",
     "espn-1543956",
     "espn-1543957",
     "espn-1543958",
@@ -7130,6 +8475,7 @@
     "espn-1543961",
     "espn-1543962",
     "espn-1543963",
+    "espn-1550711",
     "espn-1553296",
     "espn-1555123",
     "f6bfa913-6f79-4fd9-ab8a-fe0b4cf5a456"
@@ -7137,16 +8483,19 @@
   "status": {
     "espn-1550711": "Pakistan lead by 45 runs",
     "espn-1553296": "West Indies lead by 315 runs",
-    "espn-1555123": "Zimbabwe lead by 154 runs"
+    "espn-1555123": "Zimbabwe lead by 154 runs",
+    "espn-1555124": "Zimbabwe won toss & batted"
   },
   "test_done": {
-    "espn-1550711": 2,
+    "espn-1550711": 3,
     "espn-1553296": 4,
-    "espn-1555123": 3
+    "espn-1555123": 3,
+    "espn-1555124": 0
   },
   "test_sig": {
-    "espn-1550711": "[{'inning': 'Pakistan Inning 1', 'r': 434, 'w': 9, 'o': 106.3}, {'inning': 'Sri Lanka Inning 1', 'r': 446, 'w': 10, 'o': 117.2}, {'inning': 'Pakistan Inning 2', 'r': 57, 'w': 1, 'o': 21.2}]",
+    "espn-1550711": "[{'inning': 'Pakistan Inning 1', 'r': 434, 'w': 9, 'o': 106.3}, {'inning': 'Sri Lanka Inning 1', 'r': 446, 'w': 10, 'o': 117.2}, {'inning': 'Pakistan Inning 2', 'r': 284, 'w': 8, 'o': 84.5}]",
     "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 356, 'w': 10, 'o': 106.4}, {'inning': 'Bangladesh Inning 1', 'r': 386, 'w': 9, 'o': 111.5}, {'inning': 'West Indies Inning 2', 'r': 398, 'w': 6, 'o': 93.0}, {'inning': 'Bangladesh Inning 2', 'r': 184, 'w': 4, 'o': 59.0}]",
-    "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 504, 'w': 10, 'o': 134.3}, {'inning': 'Afghanistan Inning 1', 'r': 514, 'w': 10, 'o': 169.4}, {'inning': 'Zimbabwe Inning 2', 'r': 523, 'w': 5, 'o': 122.1}]"
+    "espn-1555123": "[{'inning': 'Zimbabwe Inning 1', 'r': 504, 'w': 10, 'o': 134.3}, {'inning': 'Afghanistan Inning 1', 'r': 514, 'w': 10, 'o': 169.4}, {'inning': 'Zimbabwe Inning 2', 'r': 523, 'w': 5, 'o': 122.1}]",
+    "espn-1555124": "[{'inning': 'Zimbabwe Inning 1', 'r': 250, 'w': 5, 'o': 82.0}]"
   }
 }

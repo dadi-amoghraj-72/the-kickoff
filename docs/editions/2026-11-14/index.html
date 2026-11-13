@@ -1,0 +1,666 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><meta name="color-scheme" content="dark light"><title>The Kickoff · Saturday 14 November 2026</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Newsreader:wght@600&display=swap"><style>/* The Kickoff design system: floodlit pitch, chalk text, trophy gold. Dark first. */
+:root {
+  color-scheme: dark light;
+  --pitch: #13251E;
+  --surface: #1A2F27;
+  --hairline: #2A4238;
+  --chalk: #E8E3D6;
+  --muted: #A3B0A6;
+  --gold: #CFB06E;
+  --blue: #8DB4CC;
+  --lilac: #B3A6CC;
+  --rose: #C99590;
+  --rust: #DB6A45;
+}
+
+/* Light mode follows the phone's setting. Same accents, darkened to pass 4.5:1. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --pitch: #E9EFEA;
+    --surface: #DCE6DF;
+    --hairline: #B7C6BB;
+    --chalk: #13251E;
+    --muted: #44574B;
+    --gold: #7A5C14;
+    --blue: #2F6280;
+    --lilac: #5E4F8A;
+    --rose: #9A4A43;
+    --rust: #A33A16;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--pitch);
+  color: var(--chalk);
+  font: 400 18px/1.7 "Josefin Sans", system-ui, -apple-system, sans-serif;
+}
+
+/* Top bar: holds the reading chip so it never sits on top of the text */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  height: 40px; padding: 0 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--pitch);
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px; color: var(--muted);
+}
+.topbar a { color: var(--muted); }
+.chip {
+  padding: 1px 12px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  color: var(--chalk);
+  font-variant-numeric: tabular-nums;
+}
+
+/* One column, left-aligned, about 62 characters wide. Right padding keeps the rail clear of text. */
+main { max-width: calc(62ch + 64px); margin: 0 auto; padding: 0 48px 96px 20px; }
+
+.masthead { text-align: center; padding: 40px 0 8px; }
+.masthead h1 {
+  margin: 0;
+  font: 600 clamp(40px, 11vw, 60px)/1.05 "Newsreader", Georgia, serif;
+  letter-spacing: 0.01em;
+}
+.masthead .rule {
+  margin: 14px 0 8px;
+  border-top: 3px double var(--gold);
+}
+.masthead .dateline { margin: 0; font-size: 15px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+a { color: var(--gold); text-underline-offset: 3px; }
+/* Headings: trophy gold, bold, every word capitalised, so they stand apart from chalk body text */
+h2, h3 { color: var(--gold); font-weight: 700; line-height: 1.25; text-transform: capitalize; }
+h2 { font-size: 30px; margin: 0 0 12px; }
+h3 { font-size: 21px; margin: 28px 0 6px; }
+h4 { margin: 20px 0 4px; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.f1sum { margin: 6px 0 4px; }
+p { margin: 0 0 14px; }
+.muted { color: var(--muted); }
+strong { font-weight: 600; }
+
+section { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--hairline); scroll-margin-top: 52px; }
+section > :last-child { margin-bottom: 0; }
+
+.banner {
+  margin: 24px 0 0; padding: 10px 14px;
+  background: var(--surface); border: 1px dashed var(--gold); border-radius: 8px;
+  font-size: 15px; color: var(--muted);
+}
+
+/* Performance of the Day */
+.potd { margin: 18px 0; padding: 16px 18px; background: var(--surface); border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; }
+.potd .label { display: block; color: var(--gold); font-size: 14px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* On today */
+.today { list-style: none; margin: 0; padding: 0; }
+.today li { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; padding: 12px 0; border-bottom: 1px solid var(--hairline); }
+.today time { font-variant-numeric: tabular-nums; font-weight: 600; }
+.tag { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+.tag svg { width: 16px; height: 16px; }
+
+/* Standouts, ranked */
+.standouts { margin: 0 0 14px; padding-left: 0; list-style: none; }
+.standouts li { margin-bottom: 6px; padding-left: 20px; font-size: 16px; line-height: 1.4; }   /* the same size as the NFL highlights (.dlist .pl): the NBA's standouts used to inherit the page's 18px */
+.standouts li::before { content: "\25C6"; display: inline-block; width: 20px; margin-left: -20px; padding-left: 4px; box-sizing: border-box; font-size: 9px; color: var(--gold); vertical-align: middle; }   /* the house gold diamond bullet, on every standouts list */
+
+/* Tables: numbers right-aligned, zone bars on the left edge of a row */
+.table-wrap { margin: 14px 0 6px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 16px; font-variant-numeric: tabular-nums; }
+caption { text-align: left; padding: 0 0 6px; font-weight: 600; background: transparent; }
+th, td { padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--hairline); white-space: nowrap; }
+th:first-child, td:first-child { padding-left: 8px; }
+th:last-child, td:last-child { padding-right: 10px; }
+.table-wrap td:not(.n) { white-space: normal; }   /* a long club name wraps instead of pushing the numbers off a 360px screen */
+th { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+th.n, td.n { text-align: right; }
+tr[class^="z-"] td:first-child { padding-left: 14px; }
+tr.z-blue td:first-child { box-shadow: inset 4px 0 0 var(--blue); }
+tr.z-lilac td:first-child { box-shadow: inset 4px 0 0 var(--lilac); }
+tr.z-rose td:first-child { box-shadow: inset 4px 0 0 var(--rose); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0 0 14px; padding: 0; list-style: none; font-size: 14px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 2px; }
+.legend .z-blue { background: var(--blue); }
+.legend .z-lilac { background: var(--lilac); }
+.legend .z-rose { background: var(--rose); }
+
+/* Three fixed columns (label, number, names) so every row lines up exactly */
+.leaders { list-style: none; margin: 4px 0 18px; padding: 0; font-size: 15px; }
+.leaders li { display: grid; grid-template-columns: 7.4em 2.2ch 1fr; column-gap: 10px; align-items: baseline; padding: 4px 0; }
+.leaders .lbl { min-width: 0; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.leaders .n { color: var(--gold); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.leaders .who { min-width: 0; }
+.leaders .p { white-space: nowrap; }
+
+tr.cut td { border-bottom: 2px solid var(--muted); }
+tr.mine td:nth-child(2) { font-weight: 700; }
+
+/* Scoreboard: home team right-aligned, score in the middle, away team left-aligned, so scores line up */
+.scores { list-style: none; margin: 8px 0 14px; padding: 0; font-size: 16px; }
+.scores li { display: grid; grid-template-columns: 1fr 3.6em 1fr; column-gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--hairline); }
+.scores .h { text-align: right; }
+.scores .s { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--gold); }
+.scores .gh, .scores .ga { font-size: 14px; color: var(--muted); line-height: 1.5; }
+.scores .gh { grid-column: 1; text-align: right; }
+.scores .ga { grid-column: 3; }
+.scores .mine { font-weight: 700; }
+.scores .p { white-space: nowrap; }
+
+.roundup { list-style: none; margin: 4px 0 16px; padding: 10px 14px; background: var(--surface); border-radius: 8px; font-size: 16px; }
+.roundup li { display: grid; grid-template-columns: 9em 1fr; column-gap: 10px; align-items: baseline; padding: 3px 0; }
+.roundup .lbl { color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.roundup .n { color: var(--gold); font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; }
+.roundup .sub { display: block; color: var(--muted); font-size: 14px; margin-top: 1px; }
+
+.nodata { display: inline-block; padding: 4px 12px; background: var(--surface); border: 1px solid var(--hairline); border-radius: 8px; color: var(--muted); font-size: 16px; }
+
+footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 15px; color: var(--muted); }
+
+/* Archive list */
+.archive { list-style: none; margin: 24px 0 0; padding: 0; }
+.archive li { padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+.archive .d { display: block; font-weight: 600; }
+
+/* Progress rail: thin, right edge, one tick per section, fills gold as you read */
+.rail { position: fixed; right: 16px; top: 64px; bottom: 24px; width: 4px; background: var(--hairline); border-radius: 2px; z-index: 5; }
+.rail-fill { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: var(--gold); border-radius: 2px;
+  transform: scaleY(0); transform-origin: top; will-change: transform; }
+.rail-tick { position: absolute; left: -12px; width: 28px; height: 28px; margin-top: -14px; display: block; }
+.rail-tick::after { content: ""; position: absolute; left: 8px; top: 13px; width: 12px; height: 2px; border-radius: 1px; background: var(--muted); }
+.rail-tick.done::after { background: var(--gold); }
+.rail-tick[aria-current="true"]::after { left: 5px; width: 18px; height: 3px; top: 12px; background: var(--gold); }
+.rail-tick:focus-visible { outline: 2px solid var(--gold); border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+@media (min-width: 900px) { main { padding-right: 20px; } }
+
+/* News and team-news lists */
+.news, .team-news { list-style: none; margin: 4px 0 14px; padding: 0; font-size: 16px; }
+.news li, .team-news li { padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+ol.inj { margin: 4px 0 14px; padding-left: 1.7em; font-size: 16px; }   /* the FPL Injuries list, numbered */
+ol.inj li { padding: 6px 0; }
+ol.inj.tight li { padding: 2px 0; }       /* the FPL review lists are compact (D) */
+p.sub { margin: 14px 0 2px; font-size: 15px; font-weight: 600; }
+.tag { margin-right: 6px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* Cricket results: teams, innings scores, result, series */
+.cricket { list-style: none; margin: 4px 0 14px; padding: 0; }
+.cricket li { display: grid; gap: 1px; padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+.cricket .cm { font-weight: 400; font-size: 17px; margin-bottom: 8px; }   /* air between the teams line and the result */
+.cricket .cm strong { font-weight: 700; }
+.cricket .cs { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 15px; }
+.cricket .cs b { font-weight: 700; color: var(--chalk); }
+.cricket .cs b.w { color: var(--gold); }
+.cricket .cs .sl { display: block; }   /* one team per line, in batting order */
+.cricket .cr { color: var(--chalk); font-weight: 700; font-size: 18px; }   /* the result is the main line */
+.cricket .ct { color: var(--muted); font-size: 15px; }
+.cricket .dayflag { justify-self: start; margin-bottom: 4px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.cricket .potm { font-size: 15px; color: var(--muted); }
+.cricket .potm strong { color: var(--chalk); font-weight: 600; }
+.cricket ul.standouts.in { margin: 2px 0 6px; padding-left: 0; font-size: 15px; line-height: 1.5; }
+.cricket .cd { color: var(--muted); font-size: 15px; line-height: 1.5; }
+.cricket .cd strong { color: var(--chalk); font-weight: 600; }
+
+/* Full cricket scorecard */
+.cricket .inn { margin: 10px 0 2px; font-size: 17px; }
+.cricket table.sc { font-size: 14px; }
+.cricket table.sc td.name { white-space: normal; min-width: 7em; }
+.cricket table.sc .dis { display: block; color: var(--muted); font-size: 14px; line-height: 1.3; }
+.cricket table.sc tr.sum td { font-weight: 400; }
+.cricket table.sc tr.sum.total td { font-weight: 700; }
+.cricket table.sc th.lc { text-transform: none; }
+.cricket table.sc.ms tr.sum td { background: rgba(255, 255, 255, 0.04); padding-top: 7px; }   /* the match summary: a shaded row for each innings, then its top batter and bowler */   /* 4s and 6s, not 4S and 6S */
+.cricket table.sc th, .cricket table.sc td { padding: 5px 3px; }
+.cricket table.sc th:first-child, .cricket table.sc td:first-child { padding-left: 6px; }
+.cricket table.sc th:last-child, .cricket table.sc td:last-child { padding-right: 12px; }   /* room on the right, as in the other sports' tables */
+.cricket table.sc th { font-size: 12px; letter-spacing: 0; }
+.pts table { font-size: 15px; }
+.pts th, .pts td { padding: 7px 4px; }
+.pts th { font-size: 12px; letter-spacing: 0; }
+.pts th:first-child, .pts td:first-child { padding-left: 8px; }
+.pts.f1 table { font-size: 15px; width: 100%; max-width: 520px; table-layout: fixed; }
+.pts.f1 th:last-child, .pts.f1 td:last-child { padding-right: 16px; }
+.pts.f1 th.tt { text-align: center; font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 3px 8px 8px; }
+.pts.f1 th, .pts.f1 td { padding-left: 3px; padding-right: 3px; }
+.pts.f1 th:nth-child(n+3), .pts.f1 td:nth-child(n+3) { padding-left: 9px; }
+.cricket p.fow { font-size: 15px; line-height: 1.5; margin: 8px 0 4px; }
+.f1story { margin: 0 0 12px; line-height: 1.55; }
+
+/* Tennis: each match is two rows (winner above), one column per set */
+.tennis { margin: 14px 0 6px; }
+.tennis table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 16px; }
+.tennis th.tt { white-space: normal; text-align: center; font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 8px 8px; }
+.tennis td { padding: 4px 3px; border-bottom: 0; white-space: normal; vertical-align: middle; }
+.tennis td.pl { padding-left: 8px; overflow-wrap: anywhere; }
+.tennis td.s { text-align: center; color: var(--muted); }
+.tennis tr.w td.pl { font-weight: 700; }
+.tennis tr.w td.s { color: var(--chalk); }
+.tennis tr.l { border-bottom: 1px solid var(--hairline); }
+.tennis tr.l td { padding-bottom: 7px; }
+.tennis tr.w td { padding-top: 7px; }
+.tennis sup { font-size: 10px; margin-left: 1px; }
+.tennis td.tag { text-align: left; color: var(--muted); padding-left: 0; white-space: nowrap; overflow: visible; }
+.tennis th.tt .prog { display: block; margin-top: 2px; font-weight: 400; font-size: 14px; color: var(--muted); }
+
+/* NFL: two rows per game (away above home), a white house marks the home team, a thicker line between kickoff groups, YTP in the middle of a game not yet played */
+.nflsb { margin: 14px 0 6px; }
+.nflsb table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 16px; }
+.nflsb th.tt { white-space: normal; text-align: center; font-size: 18px; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 12px 8px 10px; }
+.nflsb th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 14px; color: var(--muted); }
+.nflsb td { padding: 4px 3px; border-bottom: 0; vertical-align: middle; }
+.nflsb td.tm { padding-left: 10px; padding-right: 6px; white-space: normal; font-size: 15px; }
+.nflsb td.sc { text-align: right; color: var(--muted); padding-right: 6px; }
+.nflsb td.ytp { text-align: center; padding-right: 3px; font-size: 15px; font-weight: 600; letter-spacing: 0.08em; }
+.nflsb td.ot { text-align: left; font-size: 13px; padding-left: 4px; color: var(--muted); }
+.nflsb tr.w td.tm, .nflsb tr.w td.sc { font-weight: 700; color: var(--chalk); }
+.nflsb tr.h { border-bottom: 1px solid var(--hairline); }
+.nflsb tr.h td { padding-bottom: 8px; }
+.nflsb tr.a td { padding-top: 8px; }
+.nflsb tr.gap { border-bottom: 2px solid var(--muted); }
+.nflsb tr.gap td { padding: 0; height: 2px; }
+.nflsb svg.home { color: var(--chalk); vertical-align: -1px; margin-left: 2px; }
+.nflsb .rec { font-size: 12px; font-weight: 400; color: var(--muted); white-space: nowrap; }
+.pts.f1.nfl th.tt { font-size: 16px; padding: 12px 8px 10px; }
+.pts.f1.nfl td:nth-child(2) { font-weight: 600; }
+.pts.f1.nfl.div td:first-child { font-weight: 700; }
+.pts.f1.nfl.div td:nth-child(2) { font-weight: 400; }
+.pts.f1.nfl tr.sub td { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); background: rgba(255, 255, 255, 0.04); }
+.pts.f1.nfl .new, .new { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); margin-left: 2px; }
+.pts.f1.nfl.st thead tr:nth-child(2) { display: none; }
+.pts.f1.nfl.div th:first-child, .pts.f1.nfl.div td:first-child { padding-left: 14px; }
+.pts.f1.nfl.po th:first-child, .pts.f1.nfl.po td:first-child { text-align: center; padding-left: 3px; }
+.pts.f1.nfl.po th:last-child, .pts.f1.nfl.po td:last-child { text-align: center; padding-left: 3px; }
+.pts.f1.nfl tr.bye td { color: var(--gold); font-weight: 700; }
+.nflsb .dog { color: var(--chalk); font-weight: 700; margin-left: 1px; }
+.nflsb th.tt .prog .dog { font-size: 15px; }
+.nbaone td { padding: 5px 4px; }
+.nbaone td.aw { text-align: right; }
+.nbaone td.mid { text-align: center; color: var(--muted); white-space: nowrap; font-size: 13px; }
+.nbaone td.hm { text-align: left; }
+.nbaone td.w { font-weight: 700; color: var(--chalk); }
+.pts.f1.nba th.tt { font-size: 16px; padding: 12px 8px 10px; white-space: normal; }
+.pts.f1.nba th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 14px; color: var(--muted); }   /* the small line under a table title: season numbers (Dodgers, Ohtani) */
+.pts.f1.nba td:nth-child(2) { font-weight: 600; }
+.pts.f1.mlbwk th, .pts.f1.mlbwk td { text-align: center; padding-left: 3px; padding-right: 3px; }   /* the weekly tables: everything centred */
+.pts.f1.mlbwk td:nth-child(2) { font-weight: 400; }
+.pts.f1.mlbwk .hi { color: var(--gold); font-weight: 700; }
+.nflsb tr.tag td { padding: 10px 10px 0; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-align: center; }
+.nflsb tr.note td { padding: 0 10px 10px; font-size: 13px; white-space: normal; overflow-wrap: anywhere; }
+.nflsb tr.note .pl { color: var(--chalk); }
+.nbaone tr.end td { border-bottom: 1px solid var(--hairline); }
+.nbaone tr.pre td { color: var(--muted); }
+.nbaone.ser th { padding: 6px 4px 8px; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--chalk); font-weight: 600; }
+.nbaone.ser .ws { color: var(--gold); font-size: 16px; }
+.nbaone.ser td.aw { text-align: left; padding-left: 12px; }
+.nbaone.ser td.hm { text-align: right; padding-right: 12px; }
+.nflsb .pl .n { color: var(--gold); font-weight: 600; }
+.nbaone td.aw, .nbaone td.hm { white-space: normal; line-height: 1.25; }
+/* NBA: bigger type (the tables are what D checks the games and series with) */
+.nbaone table { font-size: 16px; }
+.nbaone td { padding: 7px 4px; }
+.nbaone td.mid { font-size: 18px; font-weight: 700; color: var(--chalk); padding-left: 2px; padding-right: 2px; }
+.nbaone td.aw, .nbaone td.hm { font-size: 15px; }
+.nflsb tr.note td { font-size: 14px; padding: 2px 10px 12px; }
+.nflsb tr.note .pl { display: flex; align-items: flex-start; padding-top: 5px; line-height: 1.35; }
+.nflsb tr.note .pl::before { content: "\25C6"; flex: 0 0 16px; box-sizing: border-box; height: 19px; padding-left: 3px; display: flex; align-items: center; font-size: 8px; line-height: 1; color: var(--gold); }
+.nflsb tr.note .pl .t { flex: 1 1 auto; min-width: 0; }
+.nflsb tr.tag td { font-size: 12px; }
+.nbaone.ser td.aw, .nbaone.ser td.hm { font-size: 24px; font-weight: 600; padding-top: 9px; padding-bottom: 6px; }
+.nbaone.ser td.aw.w, .nbaone.ser td.hm.w { color: var(--chalk); font-weight: 800; }
+.nbaone.ser td.aw:not(.w), .nbaone.ser td.hm:not(.w) { color: var(--muted); }
+.nbaone.ser td.mid { font-size: 14px; font-weight: 400; color: var(--muted); }
+.nbaone.ser .hd { display: flex; align-items: center; }
+.nbaone.ser .hd > .tn, .nbaone.ser .hd > .ws { flex: 1 1 0; min-width: 0; text-align: center; }
+.nbaone.ser .hd > .gap { flex: 0 0 72px; text-align: center; }
+.nbaone.ser .tn { font-size: 16px; font-weight: 700; color: var(--chalk); line-height: 1.2; }
+.nbaone.ser .ws { font-size: 30px; font-weight: 700; line-height: 1.1; }
+.nbaone.ser .lab { display: block; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.nbaone.ser .bo { display: block; font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; }
+.nbaone.ser tr.sh th { padding: 10px 4px 2px; white-space: normal; }
+.nbaone.ser tr.sc th { padding: 2px 4px 10px; }
+.nbaone.ser.tst td.aw, .nbaone.ser.tst td.hm { font-size: 16px; font-weight: 600; line-height: 1.3; }   /* a Test series row holds two innings, "390 & 314/6d" */
+.nbaone.ser tr.sc .ws { font-size: 30px; font-weight: 800; color: var(--gold); }
+.nbaone.ser tr.sc .lab { margin: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.standouts .hl { color: var(--gold); font-weight: 600; }
+@media (prefers-color-scheme: light) {
+}
+/* Notes lines outside a table (NFL Players of the Week and highlights): the same gold diamond bullet and hanging indent as the NBA notes */
+.dlist { margin: 6px 0 14px; }
+.dlist .pl { display: flex; align-items: flex-start; padding: 5px 0; font-size: 16px; line-height: 1.4; }
+.dlist .pl::before { content: "\25C6"; flex: 0 0 20px; box-sizing: border-box; height: 22px; padding-left: 4px; display: flex; align-items: center; font-size: 9px; line-height: 1; color: var(--gold); }
+.dlist .pl .t { flex: 1 1 auto; min-width: 0; }
+.dlist .n { color: var(--gold); font-weight: 600; white-space: nowrap; }   /* a score like 16-0 never breaks across two lines */
+.dlist.indent { margin-left: 18px; margin-top: 2px; }
+.subhead { margin: 14px 0 0; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.nbaone.ser.sm td.aw, .nbaone.ser.sm td.hm { font-size: 18px; }
+.nbaone.ser.sm td.mid { font-size: 13px; }
+
+/* Awards (NBA and NFL): winners in gold, every MVP in an iridescent pearl, the All-NBA teams in gold, silver and bronze; team awards as full-width blocks */
+.awards table { width: 100%; }
+.awards tr:not(.blk) td { font-size: 13.5px; }
+.awards th, .awards td { white-space: normal; overflow-wrap: break-word; }
+.awards td.win .tc { white-space: nowrap; }
+.awards td.win { text-align: left; padding-left: 8px; }
+.awards th:nth-child(2) { padding-left: 8px; }
+.awards .wn { color: var(--gold); font-weight: 600; }
+.awards .wn.silver { color: #c5ccd6; }
+.awards .wn.bronze { color: #d08a52; }
+.awards .wn.mvp { color: #dfe9ff; background: linear-gradient(90deg, #f4f8ff 0%, #c9dcff 25%, #f1d9ff 50%, #c8fff0 75%, #f4f8ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.awards .tc, .awards .ct, .awards .fl { color: var(--muted); font-weight: 400; font-size: 13px; }
+.awards .ct { color: var(--chalk); }
+.awards tr.blk td { padding: 10px 8px 12px; }
+.awards .bt { font-weight: 700; margin-bottom: 4px; }
+.awards .bs { font-size: 13px; margin-bottom: 6px; }
+.awards .lines .pl, .awards .asg .pl { padding: 2px 0; line-height: 1.35; }
+.awards .asg .pl { text-align: center; }
+.awards .asg { display: flex; gap: 12px; }
+.awards .asg .col { flex: 1; min-width: 0; }
+.awards .asg .ch { text-align: center; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--hairline); margin-bottom: 4px; padding-bottom: 2px; }
+.awards table.pos { width: 100%; margin-top: 2px; }
+.awards table.pos td { padding: 3px 4px 3px 6px; border: 0; }
+.awards table.pos td.pp { width: 28%; color: var(--muted); font-size: 13px; }
+@media (prefers-color-scheme: light) {
+  .awards .wn.silver { color: #6c7683; }
+  .awards .wn.bronze { color: #9a5a22; }
+  .awards .wn.mvp { background: linear-gradient(90deg, #2f5fae 0%, #7b4bb5 35%, #1c8a74 70%, #2f5fae 100%); -webkit-background-clip: text; background-clip: text; }
+}
+.awards th:first-child, .awards tr:not(.blk) td:first-child { padding-left: 12px; }   /* the award names sit in from the table's left edge */
+.awards .pr { padding: 1px 0; }
+.awards .lg { color: var(--muted); font-size: 12px; font-weight: 600; margin-right: 4px; }
+.awards .asg .pl .tc { white-space: nowrap; }
+tr.hl td { color: var(--gold); font-weight: 600; }   /* D's favourites' rows in league tables: Sunrisers Hyderabad (and Arsenal, when built) */
+@media (prefers-color-scheme: light) {
+}
+.awards .wn.orange { color: #f2994a; }
+.awards .wn.purple { color: #b58be6; }
+@media (prefers-color-scheme: light) { .awards .wn.orange { color: #b3560d; } .awards .wn.purple { color: #6b3fa8; } }
+.awards .asg.three { gap: 6px; }
+.awards .asg.three .pl { font-size: 12.5px; }   /* three columns on a phone: a smaller size keeps names such as D. Rasmussen on one line */
+.awards .asg.three .ch { font-size: 11px; }
+.caps tr.orange td { color: #f2994a; font-weight: 600; }
+.caps tr.purple td { color: #b58be6; font-weight: 600; }
+@media (prefers-color-scheme: light) { .caps tr.orange td { color: #b3560d; } .caps tr.purple td { color: #6b3fa8; } }
+.caps td { font-size: 13.5px; }
+/* The FPL corner's Injuries and review lists: one font size for everything (D, 2026-11-04) */
+.fplrev p, .fplrev ol, .fplrev li, .fplrev strong { font-size: 16px; }
+.fplrev p { margin: 0 0 4px; }
+.fplrev p.gp { margin: 12px 0 2px; }
+.fplrev p.muted { margin-bottom: 6px; }
+.fplrev .n { color: var(--gold); font-weight: 600; }
+.fplrev .n.bad { color: #f19a9a; }                 /* the underperformers' figures: pastel red, worse than the average */
+.fplrev .sq { color: #f19a9a; font-weight: 700; }   /* the squad average's number alone: bold pastel red */
+@media (prefers-color-scheme: light) { .fplrev .n.bad, .fplrev .sq { color: #b03a3a; } }
+/* F1: the fastest lap's time in purple, the podium in gold, silver and bronze, the championship leader in gold and platinum once the title is decided (D, 2026-11-04) */
+.f1sum .fl { color: #b57bf0; font-weight: 700; }
+tr.p1 td { color: var(--gold); font-weight: 700; }
+tr.p2 td { color: #c5ccd6; font-weight: 700; }
+tr.p3 td { color: #d08a52; font-weight: 700; }
+.plat { color: #dfe9ff; font-weight: 700; background: linear-gradient(90deg, #f4f8ff 0%, #c9dcff 25%, #f1d9ff 50%, #c8fff0 75%, #f4f8ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+@media (prefers-color-scheme: light) {
+  .f1sum .fl { color: #7b3fb8; }
+  tr.p2 td { color: #6c7683; }
+  tr.p3 td { color: #9a5a22; }
+  .plat { background: linear-gradient(90deg, #2f5fae 0%, #7b4bb5 35%, #1c8a74 70%, #2f5fae 100%); -webkit-background-clip: text; background-clip: text; }
+}
+
+/* The Big Stuff and On Today (13b): the lines reuse the gold-diamond standouts list; the time is gold, the Performance of the Day a gold line */
+.ontoday .when { color: var(--gold); font-weight: 600; margin-right: 4px; white-space: nowrap; }
+/* Don't Miss (D, 2026-11-07): the big games of the day; in the time list the same games keep their place but their time and diamond turn rust */
+.ontoday li.big .when, .ontoday li.big::before { color: var(--rust); }
+.ontoday li.big { font-weight: 600; }
+.subhead.comp { margin: 6px 0 0; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--muted); font-weight: 500; font-style: italic; }   /* a competition under the Football header (Key Overnight Scores) */
+.pod { color: var(--gold); font-size: 16px; line-height: 1.4; margin: 0 0 14px; }
+.bigstuff a { font-size: 13px; margin-left: 4px; }
+
+/* Golf (D's players below the top 25) and badminton scorecards */
+tr.also td { color: var(--muted); font-style: italic; }
+.tennis td.pl br + * { }
+.pts.f1.golf table { font-size: 15px; }
+.pts.f1.golf th:nth-child(2), .pts.f1.golf td:nth-child(2) { padding-left: 4px; padding-right: 4px; line-height: 1.25; overflow-wrap: anywhere; }
+.pts.f1.golf th:nth-child(n+3), .pts.f1.golf td:nth-child(n+3) { padding-left: 4px; padding-right: 6px; }
+.pts.f1.golf td { padding-top: 7px; padding-bottom: 7px; }
+.pts.f1.golf tr.p1 td { color: var(--gold); font-weight: 700; }
+.standouts.bd li { margin-bottom: 12px; line-height: 1.45; }
+.standouts.bd li strong { color: var(--chalk); }
+
+/* UFC: one box a fight, built like an NBA game (winner, def., loser) with the details under it */
+.ufc { margin: 14px 0 8px; }
+.ufc table { width: 100%; max-width: 520px; table-layout: fixed; font-size: 16px; }
+.ufc th.tt { text-align: center; white-space: normal; letter-spacing: 0; text-transform: none; color: var(--chalk); font-size: 16px; padding: 10px 8px 8px; }
+.ufc td { padding: 6px 4px; white-space: normal; border-bottom: 0; vertical-align: middle; }
+.ufc tr.vs td { padding-top: 10px; padding-bottom: 12px; line-height: 1.3; }
+.ufc td.wn { text-align: left; padding-left: 8px; overflow-wrap: anywhere; }
+.ufc td.df { text-align: center; color: var(--muted); font-size: 14px; padding-left: 0; padding-right: 0; }
+.ufc td.ls { text-align: right; padding-right: 8px; overflow-wrap: anywhere; }
+.ufc tr.dt td { font-size: 14px; border-top: 1px solid var(--hairline); }
+.ufc td.k { color: var(--muted); padding-left: 8px; }
+.ufc td.v { text-align: right; padding-right: 8px; }
+.ufcrank table { font-size: 15px; }
+.ufcrank td { padding-top: 5px; padding-bottom: 5px; }
+.ufcrank tr.sub td { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); background: rgba(255, 255, 255, 0.04); padding-top: 9px; padding-bottom: 7px; }
+.ufcrank td:nth-child(3) { text-align: right; color: var(--muted); }
+.ufcrank th:first-child, .ufcrank td:first-child { padding-left: 12px; }   /* D: the numbers were flush against the left edge */
+.ufcrank tr.gap td { height: 18px; padding: 0; border: 0; background: var(--pitch); }
+.pts.f1.golf th:first-child, .pts.f1.golf td:first-child { padding-left: 12px; }
+.ufcrank tr.p1 td, .ufcrank tr.p1 td:nth-child(3) { color: var(--gold); font-weight: 700; }
+
+/* Football results: the underdog asterisk (as in the NFL and NBA tables) and its one-line key */
+.scores .dog { color: var(--chalk); font-weight: 700; margin-left: 1px; }
+p.key { margin: 4px 0 10px; font-size: 13px; color: var(--muted); }
+p.key .dog { color: var(--chalk); font-weight: 700; }
+
+/* Day-1 review fixes (D, 2026-11-05): cricket alignment */
+.cricket .dayflag { display: inline-flex; align-items: center; justify-content: center; line-height: 1; padding: 6px 12px 4px; }   /* the text centred in the bubble, both ways (the font sits high, so a little more above) */
+.cricket ul.standouts li { display: block; padding: 0 0 0 20px; border-bottom: 0; }   /* the cricket list rule made a grid of the standout: the diamond and the name sat on separate rows */
+.nbaone.ser th.tt { padding: 12px 8px; vertical-align: middle; }
+.nbaone.ser tr.sh th { padding: 10px 4px 5px; vertical-align: middle; }
+.nbaone.ser tr.sc th { padding: 5px 4px 10px; vertical-align: middle; }
+.nbaone.ser .hd { align-items: center; }
+
+/* NBA: a wanted player who did not play (DNP) is a smaller, grey line so it does not look like a performance (D, 2026-11-05) */
+.nflsb tr.note .pl.dnp { font-size: 13px; color: var(--muted); padding-top: 2px; }
+.nflsb tr.note .pl.dnp::before { color: var(--muted); }
+
+/* Young Guns: one blank row between sports, gold figures (D, 2026-11-05) */
+.standouts.yg li.sport-gap { margin-top: 22px; }
+.standouts .n { color: var(--gold); font-weight: 600; }
+
+/* Other Sports: each sport named in gold on its own line, a faint line between sports (D, 2026-11-05) */
+h4.sport { margin: 30px 0 8px; padding-top: 20px; border-top: 1px solid var(--hairline); font-size: 20px; font-weight: 700; letter-spacing: 0.02em; text-transform: none; color: var(--gold); }
+.games-sub { margin: -2px 0 10px; color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }   /* a Games on: host, day and last day under its name (D, 2026-11-08) */
+h4.sport.first { margin-top: 14px; padding-top: 0; border-top: 0; }
+
+/* The end of an edition */
+.theend { display: flex; align-items: center; gap: 16px; margin: 44px 0 26px; }
+.theend .ln { flex: 1 1 0; height: 1px; background: var(--gold); opacity: 0.7; }
+.theend b { color: var(--gold); font-size: 22px; font-weight: 700; letter-spacing: 0.06em; text-transform: none; white-space: nowrap; }
+
+/* The sport icon at the head of the progress rail (D, 2026-11-05): a gold drawing on a dark disc that rides the fill; balls turn as you scroll. Hidden until the script has placed it. */
+.rail-icon { position: absolute; left: 50%; top: 0; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: var(--pitch); border: 1.5px solid var(--gold); color: var(--gold);
+  display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; will-change: transform; z-index: 2; }
+.rail-icon.on { opacity: 1; }
+.rail-icon .ri { display: block; width: 18px; height: 18px; will-change: transform; }
+.rail-icon svg { display: block; width: 100%; height: 100%; }
+
+/* Cricket: the player of the match that was not out yet at print time stays quiet */
+.cricket .potm.muted { color: var(--muted); font-weight: 400; }
+
+/* The edition counter, small at the bottom right of the page (D, 2026-11-06) */
+footer .edno { display: block; margin-top: 10px; text-align: right; font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
+
+/* Rugby tables (D, 2026-11-08): fixed column widths, so the Nations Championship's two pools line up column for column */
+.rugbyt table { table-layout: fixed; width: 100%; }
+.rugbyt th:nth-child(1), .rugbyt td:nth-child(1) { width: 9%; }
+.rugbyt th:nth-child(2), .rugbyt td:nth-child(2) { width: 35%; }
+.rugbyt th:nth-child(3), .rugbyt td:nth-child(3), .rugbyt th:nth-child(4), .rugbyt td:nth-child(4), .rugbyt th:nth-child(5), .rugbyt td:nth-child(5) { width: 9%; }
+.rugbyt th:nth-child(6), .rugbyt td:nth-child(6) { width: 15%; }
+.rugbyt th:nth-child(7), .rugbyt td:nth-child(7) { width: 14%; }
+
+/* Arsenal below a top 6 (D, 2026-11-08): their own row, set apart by a strip of the page colour */
+tr.gapabove td { border-top: 12px solid var(--pitch); }
+
+/* A table's title as its own top row, inside the table (D, 2026-11-08): league, rugby and cricket points tables, like the F1 tables */
+table th.tt { text-align: center; font-size: 16px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--chalk); padding: 10px 8px 8px; }
+
+/* Test match summary (D, 2026-11-10): each innings' total right-aligned in gold, the match result as the last row */
+table.ms tr.sum td.tot { color: var(--gold); text-align: right; }
+table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
+
+/* NBA League Leaders (Fridays, D 2026-11-10): one table, a gold sub-row per stat */
+.lead tr.grp td { color: var(--gold); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding-top: 12px; }
+.lead td:first-child { padding-left: 12px; }
+.stake { margin: 6px 0 18px; font-size: 15px; }
+.stake .g { color: var(--gold); font-weight: 600; }   /* Nations League: the teams whose place is decided (D, 2026-11-13) */
+</style></head><body><div class="topbar"><a href="../../index.html">Archive</a><span class="chip" id="chip">12 min read</span></div><main><header class="masthead"><h1>The Kickoff</h1><div class="rule"></div><p class="dateline">Saturday 14 November 2026</p></header><section id="big-stuff"><h2>The Big Stuff</h2><h3>Key Overnight Scores</h3><p class="subhead">Cricket</p><ul class="standouts bigstuff"><li>New Zealand v India, New Zealand won by <span class="n">244 runs</span></li><li>Afghanistan v Zimbabwe · Stumps, Day 1: Zimbabwe <span class="n">250/5 (82)</span></li><li>Pakistan v Sri Lanka · 1st Test, Match drawn</li></ul><p class="subhead">NBA</p><ul class="standouts bigstuff"><li>Philadelphia 76ers <span class="n">123–112</span> Toronto Raptors</li><li>Minnesota Timberwolves <span class="n">133–94</span> Dallas Mavericks</li></ul><p class="subhead">NFL</p><ul class="standouts bigstuff"><li>Washington Commanders <span class="n">24–21</span> New York Giants</li></ul><h3>Biggest News</h3><ul class="standouts bigstuff"><li>Manchester United have appointed Mauricio Pochettino as their new head coach, while England&#x27;s Harry Kane has become the nation&#x27;s outright record appearance maker. <a href="https://www.theguardian.com/football/video/2026/nov/13/mauricio-pochettino-to-manchester-united-and-record-breaker-kane-football-weekly-video">The Guardian</a></li><li>Cricket: IPL 2027: MI and PBKS complete Hardik Pandya-Arshdeep Singh swap <a href="https://www.cricinfo.com/ci/content/story/1562157.html?ex_cid=OTC-RSS">ESPNcricinfo</a></li><li>Crystal Palace have announced the exit of manager Pierre Sage, who left the club in a brief statement. <a href="https://www.theguardian.com/football/2026/nov/13/pierre-sage-crystal-palace-football-daily-newsletter">The Guardian</a></li></ul><h3>Stars Of The Night</h3><ul class="standouts bigstuff"><li>Will Young (NZ): <span class="n">125 (108)</span>, 14×4, 4×6 v IND</li><li>Matt Henry (NZ): <span class="n">6/27</span> (9.4 ov, 2.8 econ) v IND</li><li>Cade Cunningham (DET): <span class="n">52 pts</span>, <span class="n">11 ast</span></li><li>Mahli Beardman (AUS): <span class="n">6/24</span> (7.4 ov, 3.1 econ) v ENG</li><li>Ausar Thompson (DET): <span class="n">17 pts</span>, <span class="n">11 reb</span>, <span class="n">11 ast</span>, <span class="n">3 stl</span>, <span class="n">3 blk</span></li></ul></section><section id="on-today"><h2>On Today</h2><h3>☀︎ While You're Up</h3><ul class="standouts ontoday"><li><span class="when">9am</span> NBA: Cleveland Cavaliers at Miami Heat</li><li><span class="when">10:30am</span> NBA: Golden State Warriors at San Antonio Spurs</li><li><span class="when">2pm</span> Cricket: Afghanistan v Zimbabwe · 2nd Test · Day 2</li></ul></section><section id="cricket"><h2>Cricket</h2><h3>International</h3><ul class="cricket"><li><span class="cm">New Zealand v <strong>India</strong> · 4th ODI</span><span class="cr">New Zealand won by 244 runs</span><span class="cs"><span class="sl">New Zealand <b class="w">333 (50)</b></span><span class="sl">India <b class="n">89 (26.4)</b></span></span><span class="potm">Player of the match: <strong>Matt Henry</strong> (New Zealand) · <span class="n">2 (2)</span>, <span class="n">6/27</span> (9.4 ov)</span><span class="potm muted">Virat Kohli: 0 (4)</span><p class="inn"><strong>New Zealand</strong> 333 (50 ov)</p><div class="table-wrap"><table class="sc"><thead><tr><th>Batting</th><th class="n">R</th><th class="n">B</th><th class="n lc">4s</th><th class="n lc">6s</th><th class="n">SR</th></tr></thead><tbody><tr><td class="name">Will Young<span class="dis">c sub (K Kushagra) b Dhir</span></td><td class="n"><strong>125</strong></td><td class="n">108</td><td class="n">14</td><td class="n">4</td><td class="n">115.74</td></tr><tr><td class="name">Tim Seifert<span class="dis">c †Ishan Kishan b Brar</span></td><td class="n"><strong>58</strong></td><td class="n">48</td><td class="n">6</td><td class="n">3</td><td class="n">120.83</td></tr><tr><td class="name">Nick Kelly<span class="dis">st †Ishan Kishan b Patel</span></td><td class="n"><strong>4</strong></td><td class="n">8</td><td class="n">0</td><td class="n">0</td><td class="n">50.00</td></tr><tr><td class="name">Dean Foxcroft<span class="dis">c Brar b Nabi</span></td><td class="n"><strong>8</strong></td><td class="n">13</td><td class="n">0</td><td class="n">0</td><td class="n">61.53</td></tr><tr><td class="name">Finn Allen<span class="dis">c Sharma b Patel</span></td><td class="n"><strong>41</strong></td><td class="n">30</td><td class="n">5</td><td class="n">2</td><td class="n">136.66</td></tr><tr><td class="name">Michael Bracewell<span class="dis">c Dhir b Brar</span></td><td class="n"><strong>15</strong></td><td class="n">20</td><td class="n">1</td><td class="n">0</td><td class="n">75.00</td></tr><tr><td class="name">Mitchell Santner (c)<span class="dis">c †Ishan Kishan b Singh</span></td><td class="n"><strong>24</strong></td><td class="n">29</td><td class="n">1</td><td class="n">2</td><td class="n">82.75</td></tr><tr><td class="name">Kristian Clarke<span class="dis">lbw b Nabi</span></td><td class="n"><strong>22</strong></td><td class="n">22</td><td class="n">1</td><td class="n">1</td><td class="n">100.00</td></tr><tr><td class="name">Kyle Jamieson<span class="dis">not out</span></td><td class="n"><strong>19</strong></td><td class="n">21</td><td class="n">1</td><td class="n">0</td><td class="n">90.47</td></tr><tr><td class="name">Matt Henry<span class="dis">run out (Nabi)</span></td><td class="n"><strong>2</strong></td><td class="n">2</td><td class="n">0</td><td class="n">0</td><td class="n">100.00</td></tr><tr><td class="name">Matthew Fisher<span class="dis">run out (Kohli/†Ishan Kishan)</span></td><td class="n"><strong>1</strong></td><td class="n">1</td><td class="n">0</td><td class="n">0</td><td class="n">100.00</td></tr><tr class="sum"><td class="name">Extras<span class="dis">w 3, nb 2, b/lb 9</span></td><td class="n">14</td><td colspan="4"></td></tr><tr class="sum total"><td class="name">Total<span class="dis">50 ov, run rate 6.66</span></td><td class="n">333</td><td colspan="4"></td></tr></tbody></table></div><div class="table-wrap"><table class="sc"><thead><tr><th>Bowling</th><th class="n">O</th><th class="n">M</th><th class="n">R</th><th class="n">W</th><th class="n">Econ</th><th class="n">WD</th><th class="n">NB</th></tr></thead><tbody><tr><td class="name">Arshdeep Singh</td><td class="n">10</td><td class="n">0</td><td class="n">55</td><td class="n"><strong>1</strong></td><td class="n">5.50</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Auqib Nabi</td><td class="n">8</td><td class="n">0</td><td class="n">59</td><td class="n"><strong>2</strong></td><td class="n">7.38</td><td class="n">1</td><td class="n">1</td></tr><tr><td class="name">Gurnoor Brar</td><td class="n">10</td><td class="n">0</td><td class="n">69</td><td class="n"><strong>2</strong></td><td class="n">6.90</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Axar Patel</td><td class="n">10</td><td class="n">0</td><td class="n">39</td><td class="n"><strong>2</strong></td><td class="n">3.90</td><td class="n">0</td><td class="n">0</td></tr><tr><td class="name">Kuldeep Yadav</td><td class="n">8</td><td class="n">0</td><td class="n">73</td><td class="n"><strong>0</strong></td><td class="n">9.12</td><td class="n">0</td><td class="n">1</td></tr><tr><td class="name">Naman Dhir</td><td class="n">4</td><td class="n">0</td><td class="n">29</td><td class="n"><strong>1</strong></td><td class="n">7.25</td><td class="n">0</td><td class="n">0</td></tr></tbody></table></div><p class="inn"><strong>India</strong> 89 (26.4 ov)</p><div class="table-wrap"><table class="sc"><thead><tr><th>Batting</th><th class="n">R</th><th class="n">B</th><th class="n lc">4s</th><th class="n lc">6s</th><th class="n">SR</th></tr></thead><tbody><tr><td class="name">Rohit Sharma<span class="dis">c Allen b Henry</span></td><td class="n"><strong>0</strong></td><td class="n">1</td><td class="n">0</td><td class="n">0</td><td class="n">0.00</td></tr><tr><td class="name">Ruturaj Gaikwad<span class="dis">c Bracewell b Jamieson</span></td><td class="n"><strong>5</strong></td><td class="n">13</td><td class="n">0</td><td class="n">0</td><td class="n">38.46</td></tr><tr><td class="name">Virat Kohli<span class="dis"> b Henry</span></td><td class="n"><strong>0</strong></td><td class="n">4</td><td class="n">0</td><td class="n">0</td><td class="n">0.00</td></tr><tr><td class="name">Shreyas Iyer (c)<span class="dis">lbw b Henry</span></td><td class="n"><strong>0</strong></td><td class="n">1</td><td class="n">0</td><td class="n">0</td><td class="n">0.00</td></tr><tr><td class="name">Ishan Kishan<span class="dis"> b Henry</span></td><td class="n"><strong>27</strong></td><td class="n">53</td><td class="n">4</td><td class="n">0</td><td class="n">50.94</td></tr><tr><td class="name">Axar Patel<span class="dis">c Allen b Fisher</span></td><td class="n"><strong>21</strong></td><td class="n">36</td><td class="n">3</td><td class="n">0</td><td class="n">58.33</td></tr><tr><td class="name">Naman Dhir<span class="dis">c Santner b Fisher</span></td><td class="n"><strong>21</strong></td><td class="n">24</td><td class="n">0</td><td class="n">2</td><td class="n">87.50</td></tr><tr><td class="name">Auqib Nabi<span class="dis">c †Seifert b Fisher</span></td><td class="n"><strong>5</strong></td><td class="n">8</td><td class="n">1</td><td class="n">0</td><td class="n">62.50</td></tr><tr><td class="name">Kuldeep Yadav<span class="dis"> b Henry</span></td><td class="n"><strong>1</strong></td><td class="n">4</td><td class="n">0</td><td class="n">0</td><td class="n">25.00</td></tr><tr><td class="name">Gurnoor Brar<span class="dis"> b Henry</span></td><td class="n"><strong>2</strong></td><td class="n">13</td><td class="n">0</td><td class="n">0</td><td class="n">15.38</td></tr><tr><td class="name">Arshdeep Singh<span class="dis">not out</span></td><td class="n"><strong>0</strong></td><td class="n">3</td><td class="n">0</td><td class="n">0</td><td class="n">0.00</td></tr><tr class="sum"><td class="name">Extras<span class="dis">w 7</span></td><td class="n">7</td><td colspan="4"></td></tr><tr class="sum total"><td class="name">Total<span class="dis">26.4 ov, run rate 3.34</span></td><td class="n">89</td><td colspan="4"></td></tr></tbody></table></div><div class="table-wrap"><table class="sc"><thead><tr><th>Bowling</th><th class="n">O</th><th class="n">M</th><th class="n">R</th><th class="n">W</th><th class="n">Econ</th><th class="n">WD</th><th class="n">NB</th></tr></thead><tbody><tr><td class="name">Matt Henry</td><td class="n">9.4</td><td class="n">2</td><td class="n">27</td><td class="n"><strong>6</strong></td><td class="n">2.79</td><td class="n">2</td><td class="n">0</td></tr><tr><td class="name">Kyle Jamieson</td><td class="n">6</td><td class="n">2</td><td class="n">12</td><td class="n"><strong>1</strong></td><td class="n">2.00</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Kristian Clarke</td><td class="n">2</td><td class="n">0</td><td class="n">13</td><td class="n"><strong>0</strong></td><td class="n">6.50</td><td class="n">0</td><td class="n">0</td></tr><tr><td class="name">Matthew Fisher</td><td class="n">7</td><td class="n">1</td><td class="n">31</td><td class="n"><strong>3</strong></td><td class="n">4.43</td><td class="n">4</td><td class="n">0</td></tr><tr><td class="name">Michael Bracewell</td><td class="n">2</td><td class="n">0</td><td class="n">6</td><td class="n"><strong>0</strong></td><td class="n">3.00</td><td class="n">0</td><td class="n">0</td></tr></tbody></table></div><p class="muted fow"><strong>Standouts</strong></p><ul class="standouts in"><li><strong>Will Young</strong> (New Zealand): <span class="n">125 (108)</span>, 14×4, 4×6 v India</li><li><strong>Matt Henry</strong> (New Zealand): <span class="n">6/27</span> (9.4 ov, 2.8 econ) v India</li><li><strong>Matthew Fisher</strong> (New Zealand): <span class="n">3/31</span> (7 ov, 4.4 econ) v India</li></ul><div class="nflsb nbaone ser sm"><table><colgroup><col style="width:30%"><col style="width:40%"><col style="width:30%"></colgroup><thead><tr><th class="tt" colspan="3">New Zealand v India · ODI series</th></tr><tr class="sh"><th colspan="3"><div class="hd"><span class="tn">New Zealand</span><span class="gap"></span><span class="tn">India</span></div></th></tr><tr class="sc"><th colspan="3"><div class="hd"><span class="ws">1</span><span class="gap"><span class="lab">series</span></span><span class="ws">2</span></div></th></tr></thead><tbody><tr class="one"><td class="aw">185</td><td class="mid">1st ODI · 4 Nov</td><td class="hm w">143/5</td></tr><tr class="note end"><td colspan="3"><div class="pl"><span class="t">India won by 5 wkts (56b rem) (DLS)</span></div></td></tr><tr class="one"><td class="aw">134</td><td class="mid">2nd ODI · 7 Nov</td><td class="hm w">113/7</td></tr><tr class="note end"><td colspan="3"><div class="pl"><span class="t">India won by 4 runs (DLS)</span></div></td></tr><tr class="one"><td class="aw"></td><td class="mid">3rd ODI · 10 Nov</td><td class="hm"></td></tr><tr class="note end"><td colspan="3"><div class="pl"><span class="t">No result (abandoned with a toss)</span></div></td></tr><tr class="one"><td class="aw w">333</td><td class="mid">4th ODI · 13 Nov</td><td class="hm">89</td></tr><tr class="note end"><td colspan="3"><div class="pl"><span class="t">New Zealand won by 244 runs</span></div></td></tr><tr class="one end pre"><td class="mid" colspan="3">5th ODI · 15 Nov · Starts at 15:00 local time</td></tr></tbody></table></div></li><li><span class="cm">Pakistan v Sri Lanka · 1st Test</span><span class="cr">Match drawn</span><span class="cs"><span class="sl">Pakistan <b class="n">434/9 &amp; 284/8 (84.5)</b></span><span class="sl">Sri Lanka <b class="n">446 (117.2)</b></span></span><span class="potm">Player of the match: <strong>Saqib Khan</strong> (Pakistan) · <span class="n">0* (5)</span>, <span class="n">7/130</span> (34 ov)</span><p class="inn"><strong>Pakistan</strong> 2nd innings 284/8 (84.5 ov)</p><div class="table-wrap"><table class="sc"><thead><tr><th>Batting</th><th class="n">R</th><th class="n">B</th><th class="n lc">4s</th><th class="n lc">6s</th><th class="n">SR</th></tr></thead><tbody><tr><td class="name">Azan Awais<span class="dis">c PHKD Mendis b Kumara</span></td><td class="n"><strong>22</strong></td><td class="n">66</td><td class="n">3</td><td class="n">0</td><td class="n">33.33</td></tr><tr><td class="name">Tayyab Arif<span class="dis">lbw b Fernando</span></td><td class="n"><strong>11</strong></td><td class="n">8</td><td class="n">2</td><td class="n">0</td><td class="n">137.50</td></tr><tr><td class="name">Mohammad Taha<span class="dis">c †BKG Mendis b Fernando</span></td><td class="n"><strong>24</strong></td><td class="n">57</td><td class="n">3</td><td class="n">0</td><td class="n">42.10</td></tr><tr><td class="name">Babar Azam (c)<span class="dis">c Udara b Rathnayaka</span></td><td class="n"><strong>34</strong></td><td class="n">48</td><td class="n">6</td><td class="n">0</td><td class="n">70.83</td></tr><tr><td class="name">Saud Shakeel<span class="dis"> b Kumara</span></td><td class="n"><strong>97</strong></td><td class="n">210</td><td class="n">7</td><td class="n">0</td><td class="n">46.19</td></tr><tr><td class="name">Salman Agha<span class="dis">c Sooriyabandara b Rathnayaka</span></td><td class="n"><strong>13</strong></td><td class="n">19</td><td class="n">2</td><td class="n">0</td><td class="n">68.42</td></tr><tr><td class="name">Ghazi Ghori<span class="dis">c †BKG Mendis b Rathnayaka</span></td><td class="n"><strong>35</strong></td><td class="n">69</td><td class="n">3</td><td class="n">0</td><td class="n">50.72</td></tr><tr><td class="name">Arafat Minhas<span class="dis">c Dinusha b de Silva</span></td><td class="n"><strong>16</strong></td><td class="n">29</td><td class="n">3</td><td class="n">0</td><td class="n">55.17</td></tr><tr><td class="name">Razaullah<span class="dis">not out</span></td><td class="n"><strong>6</strong></td><td class="n">8</td><td class="n">1</td><td class="n">0</td><td class="n">75.00</td></tr><tr class="sum"><td class="name">Extras<span class="dis">w 2, nb 5, b/lb 19</span></td><td class="n">26</td><td colspan="4"></td></tr><tr class="sum total"><td class="name">Total<span class="dis">84.5 ov, run rate 3.35</span></td><td class="n">284/8</td><td colspan="4"></td></tr></tbody></table></div><div class="table-wrap"><table class="sc"><thead><tr><th>Bowling</th><th class="n">O</th><th class="n">M</th><th class="n">R</th><th class="n">W</th><th class="n">Econ</th><th class="n">WD</th><th class="n">NB</th></tr></thead><tbody><tr><td class="name">Asitha Fernando</td><td class="n">13</td><td class="n">2</td><td class="n">35</td><td class="n"><strong>2</strong></td><td class="n">2.69</td><td class="n">0</td><td class="n">2</td></tr><tr><td class="name">Dilshan Madushanka</td><td class="n">17</td><td class="n">3</td><td class="n">68</td><td class="n"><strong>0</strong></td><td class="n">4.00</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Lahiru Kumara</td><td class="n">17.5</td><td class="n">3</td><td class="n">65</td><td class="n"><strong>2</strong></td><td class="n">3.64</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Milan Rathnayaka</td><td class="n">20</td><td class="n">6</td><td class="n">47</td><td class="n"><strong>3</strong></td><td class="n">2.35</td><td class="n">0</td><td class="n">2</td></tr><tr><td class="name">Sonal Dinusha</td><td class="n">8</td><td class="n">1</td><td class="n">25</td><td class="n"><strong>0</strong></td><td class="n">3.12</td><td class="n">0</td><td class="n">0</td></tr><tr><td class="name">Dhananjaya de Silva</td><td class="n">9</td><td class="n">0</td><td class="n">25</td><td class="n"><strong>1</strong></td><td class="n">2.78</td><td class="n">0</td><td class="n">1</td></tr></tbody></table></div><div class="table-wrap"><table class="sc ms"><thead><tr><th colspan="4">Match summary</th></tr></thead><tbody><tr class="sum"><td class="name" colspan="3"><strong>Pakistan</strong> · 1st innings</td><td class="n tot"><strong>434/9d</strong></td></tr><tr><td class="name">Saud Shakeel</td><td class="n"><strong>93</strong></td><td class="name">Asitha Fernando</td><td class="n">3-107</td></tr><tr class="sum"><td class="name" colspan="3"><strong>Sri Lanka</strong> · 1st innings</td><td class="n tot"><strong>446</strong></td></tr><tr><td class="name">Dhananjaya de Silva</td><td class="n"><strong>167</strong></td><td class="name">Saqib Khan</td><td class="n">7-130</td></tr><tr class="sum"><td class="name" colspan="3"><strong>Pakistan</strong> · 2nd innings</td><td class="n tot"><strong>284/8</strong></td></tr><tr><td class="name">Saud Shakeel</td><td class="n"><strong>97</strong></td><td class="name">Milan Rathnayaka</td><td class="n">3-47</td></tr><tr class="res"><td class="name" colspan="4"><strong>Match result:</strong> Drawn</td></tr></tbody></table></div><p class="muted fow"><strong>Standouts</strong></p><ul class="standouts in"><li><strong>Dhananjaya de Silva</strong> (Sri Lanka): <span class="n">167 (246)</span>, 20×4 v Pakistan</li><li><strong>Kusal Mendis</strong> (Sri Lanka): <span class="n">119 (202)</span>, 10×4, 4×6 v Pakistan</li><li><strong>Saqib Khan</strong> (Pakistan): <span class="n">7/130</span> (34 ov, 3.8 econ) v Sri Lanka</li></ul><div class="nflsb nbaone ser sm tst"><table><colgroup><col style="width:30%"><col style="width:40%"><col style="width:30%"></colgroup><thead><tr><th class="tt" colspan="3">Pakistan v Sri Lanka · Test series</th></tr><tr class="sh"><th colspan="3"><div class="hd"><span class="tn">Pakistan</span><span class="gap"></span><span class="tn">Sri Lanka</span></div></th></tr><tr class="sc"><th colspan="3"><div class="hd"><span class="ws">0</span><span class="gap"><span class="lab">series</span></span><span class="ws">0</span></div></th></tr></thead><tbody><tr class="one"><td class="aw">434/9 &amp; 284/8</td><td class="mid">1st Test · 9–13 Nov</td><td class="hm">446</td></tr><tr class="note end"><td colspan="3"><div class="pl"><span class="t">Match drawn</span></div></td></tr><tr class="one end pre"><td class="mid" colspan="3">2nd Test · 17–21 Nov · Starts at 09:30 local time</td></tr></tbody></table></div></li><li><span class="dayflag">Test · in progress</span><span class="cm">Afghanistan v Zimbabwe · 2nd Test</span><span class="cr"><strong class="state">Stumps, Day 1</strong> · Zimbabwe won toss &amp; batted</span><span class="cs"><span class="sl">Zimbabwe <b class="w">250/5 (82)</b></span></span><p class="inn"><strong>Zimbabwe</strong> 1st innings 250/5 (82 ov)</p><div class="table-wrap"><table class="sc"><thead><tr><th>Batting</th><th class="n">R</th><th class="n">B</th><th class="n lc">4s</th><th class="n lc">6s</th><th class="n">SR</th></tr></thead><tbody><tr><td class="name">Innocent Kaia<span class="dis">lbw b Maroofkhil</span></td><td class="n"><strong>96</strong></td><td class="n">167</td><td class="n">11</td><td class="n">1</td><td class="n">57.48</td></tr><tr><td class="name">Ben Curran<span class="dis">lbw b Maroofkhil</span></td><td class="n"><strong>44</strong></td><td class="n">77</td><td class="n">4</td><td class="n">1</td><td class="n">57.14</td></tr><tr><td class="name">Brendan Taylor<span class="dis">not out</span></td><td class="n"><strong>96</strong></td><td class="n">163</td><td class="n">12</td><td class="n">1</td><td class="n">58.89</td></tr><tr><td class="name">Brian Bennett (c)<span class="dis">c Afsar Zazai b Maroofkhil</span></td><td class="n"><strong>0</strong></td><td class="n">6</td><td class="n">0</td><td class="n">0</td><td class="n">0.00</td></tr><tr><td class="name">Wessly Madhevere<span class="dis">c Rahman b Maroofkhil</span></td><td class="n"><strong>3</strong></td><td class="n">19</td><td class="n">0</td><td class="n">0</td><td class="n">15.78</td></tr><tr><td class="name">Antum Naqvi<span class="dis">c Rahmanullah b Rahman</span></td><td class="n"><strong>8</strong></td><td class="n">44</td><td class="n">0</td><td class="n">1</td><td class="n">18.18</td></tr><tr><td class="name">Tafadzwa Tsiga<span class="dis">not out</span></td><td class="n"><strong>2</strong></td><td class="n">16</td><td class="n">0</td><td class="n">0</td><td class="n">12.50</td></tr><tr class="sum"><td class="name">Extras<span class="dis">w 1</span></td><td class="n">1</td><td colspan="4"></td></tr><tr class="sum total"><td class="name">Total<span class="dis">82 ov, run rate 3.05</span></td><td class="n">250/5</td><td colspan="4"></td></tr></tbody></table></div><div class="table-wrap"><table class="sc"><thead><tr><th>Bowling</th><th class="n">O</th><th class="n">M</th><th class="n">R</th><th class="n">W</th><th class="n">Econ</th><th class="n">WD</th><th class="n">NB</th></tr></thead><tbody><tr><td class="name">Yamin Ahmadzai</td><td class="n">18</td><td class="n">2</td><td class="n">57</td><td class="n"><strong>0</strong></td><td class="n">3.17</td><td class="n">0</td><td class="n">0</td></tr><tr><td class="name">Ziaur Rahman</td><td class="n">13</td><td class="n">2</td><td class="n">28</td><td class="n"><strong>1</strong></td><td class="n">2.15</td><td class="n">0</td><td class="n">0</td></tr><tr><td class="name">Mohammad Saleem</td><td class="n">16</td><td class="n">3</td><td class="n">35</td><td class="n"><strong>0</strong></td><td class="n">2.19</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Naseer Khan Maroofkhil</td><td class="n">34</td><td class="n">8</td><td class="n">118</td><td class="n"><strong>4</strong></td><td class="n">3.47</td><td class="n">0</td><td class="n">0</td></tr><tr><td class="name">Hashmatullah Shahidi</td><td class="n">1</td><td class="n">0</td><td class="n">12</td><td class="n"><strong>0</strong></td><td class="n">12.00</td><td class="n">0</td><td class="n">0</td></tr></tbody></table></div></li><li><span class="cm">Australia v England · 1st ODI</span><span class="cr">Australia won by 7 wickets</span><span class="cs"><span class="sl">England <b class="n">131 (33.4)</b></span><span class="sl">Australia <b class="w">132/3 (23.3)</b></span></span><span class="potm">Player of the match: <strong>Mahli Beardman</strong> (Australia) · <span class="n">6/24</span> (7.4 ov)</span><p class="inn"><strong>England</strong> 131 (33.4 ov)</p><div class="table-wrap"><table class="sc"><thead><tr><th>Batting</th><th class="n">R</th><th class="n">B</th><th class="n lc">4s</th><th class="n lc">6s</th><th class="n">SR</th></tr></thead><tbody><tr><td class="name">Tom Banton<span class="dis">c †Inglis b Bartlett</span></td><td class="n"><strong>25</strong></td><td class="n">27</td><td class="n">5</td><td class="n">0</td><td class="n">92.59</td></tr><tr><td class="name">Ben Duckett<span class="dis">c Edwards b Johnson</span></td><td class="n"><strong>9</strong></td><td class="n">14</td><td class="n">1</td><td class="n">0</td><td class="n">64.28</td></tr><tr><td class="name">Joe Root<span class="dis">c †Inglis b Beardman</span></td><td class="n"><strong>17</strong></td><td class="n">36</td><td class="n">1</td><td class="n">0</td><td class="n">47.22</td></tr><tr><td class="name">Harry Brook (c)<span class="dis">c †Inglis b Beardman</span></td><td class="n"><strong>1</strong></td><td class="n">4</td><td class="n">0</td><td class="n">0</td><td class="n">25.00</td></tr><tr><td class="name">Jordan Cox<span class="dis">c †Inglis b Beardman</span></td><td class="n"><strong>2</strong></td><td class="n">7</td><td class="n">0</td><td class="n">0</td><td class="n">28.57</td></tr><tr><td class="name">Sam Curran<span class="dis">c Zampa b Beardman</span></td><td class="n"><strong>0</strong></td><td class="n">7</td><td class="n">0</td><td class="n">0</td><td class="n">0.00</td></tr><tr><td class="name">Will Jacks<span class="dis">c †Inglis b Johnson</span></td><td class="n"><strong>25</strong></td><td class="n">47</td><td class="n">2</td><td class="n">0</td><td class="n">53.19</td></tr><tr><td class="name">Liam Dawson<span class="dis">c Edwards b Beardman</span></td><td class="n"><strong>0</strong></td><td class="n">6</td><td class="n">0</td><td class="n">0</td><td class="n">0.00</td></tr><tr><td class="name">Jamie Overton<span class="dis">c &amp; b Johnson</span></td><td class="n"><strong>4</strong></td><td class="n">6</td><td class="n">0</td><td class="n">0</td><td class="n">66.66</td></tr><tr><td class="name">Gus Atkinson<span class="dis">not out</span></td><td class="n"><strong>29</strong></td><td class="n">32</td><td class="n">3</td><td class="n">1</td><td class="n">90.62</td></tr><tr><td class="name">Jofra Archer<span class="dis">c Edwards b Beardman</span></td><td class="n"><strong>11</strong></td><td class="n">16</td><td class="n">2</td><td class="n">0</td><td class="n">68.75</td></tr><tr class="sum"><td class="name">Extras<span class="dis">w 6, b/lb 2</span></td><td class="n">8</td><td colspan="4"></td></tr><tr class="sum total"><td class="name">Total<span class="dis">33.4 ov, run rate 3.89</span></td><td class="n">131</td><td colspan="4"></td></tr></tbody></table></div><div class="table-wrap"><table class="sc"><thead><tr><th>Bowling</th><th class="n">O</th><th class="n">M</th><th class="n">R</th><th class="n">W</th><th class="n">Econ</th><th class="n">WD</th><th class="n">NB</th></tr></thead><tbody><tr><td class="name">Xavier Bartlett</td><td class="n">10</td><td class="n">0</td><td class="n">46</td><td class="n"><strong>1</strong></td><td class="n">4.60</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Spencer Johnson</td><td class="n">9</td><td class="n">0</td><td class="n">42</td><td class="n"><strong>3</strong></td><td class="n">4.67</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Mahli Beardman</td><td class="n">7.4</td><td class="n">1</td><td class="n">24</td><td class="n"><strong>6</strong></td><td class="n">3.13</td><td class="n">2</td><td class="n">0</td></tr><tr><td class="name">Jack Edwards</td><td class="n">4</td><td class="n">1</td><td class="n">10</td><td class="n"><strong>0</strong></td><td class="n">2.50</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Adam Zampa</td><td class="n">3</td><td class="n">1</td><td class="n">7</td><td class="n"><strong>0</strong></td><td class="n">2.33</td><td class="n">1</td><td class="n">0</td></tr></tbody></table></div><p class="inn"><strong>Australia</strong> 132/3 (23.3 ov)</p><div class="table-wrap"><table class="sc"><thead><tr><th>Batting</th><th class="n">R</th><th class="n">B</th><th class="n lc">4s</th><th class="n lc">6s</th><th class="n">SR</th></tr></thead><tbody><tr><td class="name">Mitchell Marsh (c)<span class="dis">c Duckett b Overton</span></td><td class="n"><strong>50</strong></td><td class="n">30</td><td class="n">4</td><td class="n">4</td><td class="n">166.66</td></tr><tr><td class="name">Travis Head<span class="dis"> b Atkinson</span></td><td class="n"><strong>0</strong></td><td class="n">1</td><td class="n">0</td><td class="n">0</td><td class="n">0.00</td></tr><tr><td class="name">Cooper Connolly<span class="dis">c Jacks b Archer</span></td><td class="n"><strong>27</strong></td><td class="n">30</td><td class="n">2</td><td class="n">2</td><td class="n">90.00</td></tr><tr><td class="name">Josh Inglis<span class="dis">not out</span></td><td class="n"><strong>23</strong></td><td class="n">42</td><td class="n">2</td><td class="n">0</td><td class="n">54.76</td></tr><tr><td class="name">Matt Renshaw<span class="dis">not out</span></td><td class="n"><strong>26</strong></td><td class="n">38</td><td class="n">5</td><td class="n">0</td><td class="n">68.42</td></tr><tr class="sum"><td class="name">Extras<span class="dis">w 1, b/lb 5</span></td><td class="n">6</td><td colspan="4"></td></tr><tr class="sum total"><td class="name">Total<span class="dis">23.3 ov, run rate 5.62</span></td><td class="n">132/3</td><td colspan="4"></td></tr></tbody></table></div><div class="table-wrap"><table class="sc"><thead><tr><th>Bowling</th><th class="n">O</th><th class="n">M</th><th class="n">R</th><th class="n">W</th><th class="n">Econ</th><th class="n">WD</th><th class="n">NB</th></tr></thead><tbody><tr><td class="name">Jofra Archer</td><td class="n">8</td><td class="n">0</td><td class="n">48</td><td class="n"><strong>1</strong></td><td class="n">6.00</td><td class="n">1</td><td class="n">0</td></tr><tr><td class="name">Gus Atkinson</td><td class="n">10</td><td class="n">1</td><td class="n">40</td><td class="n"><strong>1</strong></td><td class="n">4.00</td><td class="n">0</td><td class="n">0</td></tr><tr><td class="name">Jamie Overton</td><td class="n">4.3</td><td class="n">0</td><td class="n">35</td><td class="n"><strong>1</strong></td><td class="n">7.78</td><td class="n">0</td><td class="n">0</td></tr><tr><td class="name">Sam Curran</td><td class="n">1</td><td class="n">0</td><td class="n">4</td><td class="n"><strong>0</strong></td><td class="n">4.00</td><td class="n">0</td><td class="n">0</td></tr></tbody></table></div><p class="muted fow"><strong>Standouts</strong></p><ul class="standouts in"><li><strong>Mahli Beardman</strong> (Australia): <span class="n">6/24</span> (7.4 ov, 3.1 econ) v England</li><li><strong>Spencer Johnson</strong> (Australia): <span class="n">3/42</span> (9 ov, 4.7 econ) v England</li></ul></li></ul></section><section id="football"><h2>Football</h2><h3>Other football leagues</h3><p class="muted">No new games: Premier League, La Liga, Serie A, Bundesliga, Ligue 1, Süper Lig and Women&#x27;s Super League.</p><h3>International Football</h3><h3>UEFA Nations League</h3><p class="muted">Matchday 5 of 6 played</p><p class="subhead">League A</p><ul class="scores"><li><span class="h">Netherlands</span><span class="s">7–0</span><span>Greece</span><span class="gh"><span class="p">Summerville 6&#x27;</span>, <span class="p">Reijnders 12&#x27;, 18&#x27;, 33&#x27;</span>, <span class="p">Timber 40&#x27;, 59&#x27;</span>, <span class="p">Malen 61&#x27;</span></span></li><li><span class="h">Serbia</span><span class="s">1–3</span><span>Germany</span><span class="gh"><span class="p">Babic 56&#x27;</span></span><span class="ga"><span class="p">Babic 3&#x27; (OG)</span>, <span class="p">Wirtz 14&#x27;</span>, <span class="p">Gruda 50&#x27;</span></span></li></ul><div class="table-wrap"><table><caption>Group A2</caption><thead><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">W</th><th class="n">D</th><th class="n">L</th><th class="n">GD</th><th class="n">Pts</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">Netherlands</td><td class="n">5</td><td class="n">3</td><td class="n">2</td><td class="n">0</td><td class="n">+9</td><td class="n">11</td></tr><tr class="z-blue"><td class="n">2</td><td class="">Greece</td><td class="n">5</td><td class="n">2</td><td class="n">2</td><td class="n">1</td><td class="n">-5</td><td class="n">8</td></tr><tr class="z-lilac"><td class="n">3</td><td class="">Germany</td><td class="n">5</td><td class="n">2</td><td class="n">2</td><td class="n">1</td><td class="n">+3</td><td class="n">8</td></tr><tr class="z-rose"><td class="n">4</td><td class="">Serbia</td><td class="n">5</td><td class="n">0</td><td class="n">0</td><td class="n">5</td><td class="n">-7</td><td class="n">0</td></tr></tbody></table></div><ul class="legend"><li><i class="z-blue"></i>Quarter-finals</li><li><i class="z-lilac"></i>Relegation play-off</li><li><i class="z-rose"></i>Relegated</li></ul><p class="stake"><strong>Relegated:</strong> <span class="g">Serbia</span></p><p class="subhead">League B</p><ul class="scores"><li><span class="h">Scotland</span><span class="s">2–1</span><span>North Macedonia</span><span class="gh"><span class="p">McGinn 54&#x27;, 74&#x27; (pen)</span></span><span class="ga"><span class="p">Rastoder 57&#x27;</span></span></li><li><span class="h">Slovenia</span><span class="s">0–0</span><span>Switzerland</span></li></ul><div class="table-wrap"><table><caption>Group B1</caption><thead><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">W</th><th class="n">D</th><th class="n">L</th><th class="n">GD</th><th class="n">Pts</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">Switzerland</td><td class="n">5</td><td class="n">4</td><td class="n">1</td><td class="n">0</td><td class="n">+10</td><td class="n">13</td></tr><tr class="z-lilac"><td class="n">2</td><td class="">Slovenia</td><td class="n">5</td><td class="n">2</td><td class="n">2</td><td class="n">1</td><td class="n">+2</td><td class="n">8</td></tr><tr class="z-lilac"><td class="n">3</td><td class="">Scotland</td><td class="n">5</td><td class="n">2</td><td class="n">1</td><td class="n">2</td><td class="n">-1</td><td class="n">7</td></tr><tr class="z-rose"><td class="n">4</td><td class="">North Macedonia</td><td class="n">5</td><td class="n">0</td><td class="n">0</td><td class="n">5</td><td class="n">-11</td><td class="n">0</td></tr></tbody></table></div><ul class="legend"><li><i class="z-blue"></i>Promoted</li><li><i class="z-lilac"></i>Play-offs</li><li><i class="z-rose"></i>Relegated</li></ul><p class="stake"><strong>Promoted:</strong> <span class="g">Switzerland</span> · <strong>Relegated:</strong> <span class="g">North Macedonia</span></p><p class="muted">Leagues B and C: only groups with a top-30 side.</p><h3>Transfers And Managers</h3><ul class="news"><li><span class="tag">Appointed</span> Manchester United have announced Mauricio Pochettino as their new manager, and he has left his role as US men&#x27;s national team coach. <a href="https://www.theguardian.com/football/2026/nov/13/mauricio-pochettino-usmnt-manchester-united" rel="noopener">The Guardian</a></li><li><span class="tag">Sacked</span> Crystal Palace have announced the exit of manager Pierre Sage, who left the club in a brief statement. <a href="https://www.theguardian.com/football/2026/nov/13/pierre-sage-crystal-palace-football-daily-newsletter" rel="noopener">The Guardian</a></li></ul></section><section id="nba"><h2>NBA</h2><ul class="roundup"><li><span class="lbl">Underdogs won</span><span class="who"><span class="n">0/4</span> </span></li><li><span class="lbl">Best game</span><span class="who">DET 144–140 WSH</span></li></ul><div class="nflsb nbaone"><table><colgroup><col style="width:35%"><col style="width:30%"><col style="width:35%"></colgroup><thead><tr><th class="tt" colspan="3">Yesterday's Games</th></tr></thead><tbody><tr class="one"><td class="aw">Toronto Raptors</td><td class="mid">112–123</td><td class="hm w">Philadelphia 76ers</td></tr><tr class="note end"><td colspan="3"><div class="pl"><span class="t">R. Barrett (TOR): <span class="n">31</span> pts, <span class="n">14</span> reb</span></div><div class="pl"><span class="t">T. Maxey (PHI): <span class="n">27</span> pts, <span class="n">8</span> ast</span></div><div class="pl"><span class="t">I. Quickley (TOR): <span class="n">26</span> pts</span></div><div class="pl"><span class="t">J. Embiid (PHI): <span class="n">20</span> pts</span></div><div class="pl"><span class="t">J. Brown (PHI): <span class="n">18</span> pts</span></div><div class="pl dnp"><span class="t">L. James (PHI): DNP (Day-To-Day, Back)</span></div></td></tr><tr class="one"><td class="aw w">Detroit Pistons</td><td class="mid">144–140 OT</td><td class="hm">Washington Wizards</td></tr><tr class="note end"><td colspan="3"><div class="pl"><span class="t">C. Cunningham (DET): <span class="n">52</span> pts, <span class="n">11</span> ast</span></div><div class="pl"><span class="t">T. Young (WSH): <span class="n">37</span> pts, <span class="n">14</span> ast</span></div><div class="pl"><span class="t">A. Sarr (WSH): <span class="n">30</span> pts</span></div><div class="pl"><span class="t">A. Davis (WSH): <span class="n">30</span> pts, <span class="n">15</span> reb</span></div><div class="pl"><span class="t">A. Thompson (DET): <span class="n">17</span> pts, <span class="n">11</span> reb, <span class="n">11</span> ast, <span class="n">3</span> stl, <span class="n">3</span> blk</span></div></td></tr><tr class="one"><td class="aw">Dallas Mavericks</td><td class="mid">94–133</td><td class="hm w">Minnesota Timberwolves</td></tr><tr class="note end"><td colspan="3"><div class="pl"><span class="t">B. Hyland (MIN): <span class="n">24</span> pts, <span class="n">8</span> ast</span></div><div class="pl"><span class="t">C. Flagg (DAL): <span class="n">12</span> pts</span></div><div class="pl dnp"><span class="t">A. Edwards (MIN): DNP (Out, Knee)</span></div></td></tr><tr class="one"><td class="aw">Charlotte Hornets</td><td class="mid">96–101</td><td class="hm w">Phoenix Suns</td></tr><tr class="note end"><td colspan="3"><div class="pl"><span class="t">D. Booker (PHX): <span class="n">30</span> pts, <span class="n">7</span> ast, <span class="n">3</span> stl</span></div></td></tr></tbody></table></div><h4>Standouts</h4><ul class="standouts"><li>Cade Cunningham (DET): <span class="hl">52 pts</span>, 11 ast</li><li>Ausar Thompson (DET): <span class="hl">17 pts</span>, <span class="hl">11 reb</span>, <span class="hl">11 ast</span>, 3 stl, 3 blk <span class="hl">(triple-double)</span></li><li>Anthony Davis (WSH): 30 pts, <span class="hl">15 reb</span></li><li>Collin Murray-Boyles (TOR): 14 pts, <span class="hl">5 blk</span></li></ul><h4>Standings</h4><div class="pts f1 nba"><div class="table-wrap"><table><colgroup><col style="width:10%"><col style="width:22%"><col style="width:20%"><col style="width:16%"><col style="width:16%"><col style="width:16%"></colgroup><thead><tr><th class="tt" colspan="6">Eastern Conference (top 8)</th></tr><tr><th class="n">#</th><th class="">Team</th><th class="n">W-L</th><th class="n">GB</th><th class="n">Strk</th><th class="n">+/-</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">BOS</td><td class="n">10-2</td><td class="n">-</td><td class="n">W5</td><td class="n">–</td></tr><tr class="z-blue"><td class="n">2</td><td class="">PHI</td><td class="n">10-3</td><td class="n">0.5</td><td class="n">W1</td><td class="n">–</td></tr><tr class="z-blue"><td class="n">3</td><td class="">DET</td><td class="n">8-3</td><td class="n">1.5</td><td class="n">W2</td><td class="n">–</td></tr><tr class="z-blue"><td class="n">4</td><td class="">ATL</td><td class="n">7-5</td><td class="n">3</td><td class="n">L1</td><td class="n">–</td></tr><tr class="z-blue"><td class="n">5</td><td class="">NYK</td><td class="n">6-5</td><td class="n">3.5</td><td class="n">L1</td><td class="n">–</td></tr><tr class="z-blue"><td class="n">6</td><td class="">CLE</td><td class="n">6-6</td><td class="n">4</td><td class="n">W1</td><td class="n">–</td></tr><tr class="z-lilac"><td class="n">7</td><td class="">MIA</td><td class="n">5-6</td><td class="n">4.5</td><td class="n">W2</td><td class="n">▲1</td></tr><tr class="z-lilac"><td class="n">8</td><td class="">TOR</td><td class="n">5-7</td><td class="n">5</td><td class="n">L3</td><td class="n">▼1</td></tr></tbody></table></div></div><div class="pts f1 nba"><div class="table-wrap"><table><colgroup><col style="width:10%"><col style="width:22%"><col style="width:20%"><col style="width:16%"><col style="width:16%"><col style="width:16%"></colgroup><thead><tr><th class="tt" colspan="6">Western Conference (top 8)</th></tr><tr><th class="n">#</th><th class="">Team</th><th class="n">W-L</th><th class="n">GB</th><th class="n">Strk</th><th class="n">+/-</th></tr></thead><tbody><tr class="z-blue"><td class="n">1</td><td class="">LAL</td><td class="n">11-2</td><td class="n">-</td><td class="n">W7</td><td class="n">–</td></tr><tr class="z-blue"><td class="n">2</td><td class="">SAS</td><td class="n">10-2</td><td class="n">0.5</td><td class="n">W10</td><td class="n">–</td></tr><tr class="z-blue"><td class="n">3</td><td class="">MIN</td><td class="n">9-3</td><td class="n">1.5</td><td class="n">W5</td><td class="n">▲2</td></tr><tr class="z-blue"><td class="n">4</td><td class="">HOU</td><td class="n">9-3</td><td class="n">1.5</td><td class="n">W2</td><td class="n">▼1</td></tr><tr class="z-blue"><td class="n">5</td><td class="">POR</td><td class="n">8-3</td><td class="n">2</td><td class="n">W2</td><td class="n">▼1</td></tr><tr class="z-blue"><td class="n">6</td><td class="">GSW</td><td class="n">8-4</td><td class="n">2.5</td><td class="n">L1</td><td class="n">–</td></tr><tr class="z-lilac"><td class="n">7</td><td class="">OKC</td><td class="n">8-4</td><td class="n">2.5</td><td class="n">L2</td><td class="n">–</td></tr><tr class="z-lilac"><td class="n">8</td><td class="">MEM</td><td class="n">7-4</td><td class="n">3</td><td class="n">L1</td><td class="n">▲1</td></tr></tbody></table></div></div></section><section id="nfl"><h2>NFL</h2><ul class="roundup"><li><span class="lbl">Games played</span><span class="who"><span class="n">1/14</span> <span class="sub">Rest still to play</span></span></li><li><span class="lbl">Underdogs won</span><span class="who"><span class="n">1/1</span> </span></li><li><span class="lbl">Best game</span><span class="who">WSH 24–21 NYG</span></li></ul><div class="nflsb"><table><colgroup><col style="width:75%"><col style="width:12%"><col style="width:13%"></colgroup><thead><tr><th class="tt" colspan="3">Week 10</th></tr></thead><tbody><tr class="a w"><td class="tm">Washington Commanders<span class="dog" title="Underdog win">*</span> <span class="rec">3-5-1</span></td><td class="sc">24</td><td class="ot"></td></tr><tr class="h"><td class="tm">New York Giants <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-3-1</span></td><td class="sc">21</td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">New England Patriots <span class="rec">5-4</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Detroit Lions <span class="rec">6-2</span></td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Kansas City Chiefs <span class="rec">6-2</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Atlanta Falcons <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">3-6</span></td><td class="ot"></td></tr><tr class="a"><td class="tm">Houston Texans <span class="rec">3-5</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Cleveland Browns <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">5-4</span></td><td class="ot"></td></tr><tr class="a"><td class="tm">Minnesota Vikings <span class="rec">6-2</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Green Bay Packers <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">6-3</span></td><td class="ot"></td></tr><tr class="a"><td class="tm">Jacksonville Jaguars <span class="rec">6-2</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Tennessee Titans <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">1-7</span></td><td class="ot"></td></tr><tr class="a"><td class="tm">Miami Dolphins <span class="rec">1-7</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Indianapolis Colts <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">2-7</span></td><td class="ot"></td></tr><tr class="a"><td class="tm">Carolina Panthers <span class="rec">3-5</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">New Orleans Saints <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">3-5</span></td><td class="ot"></td></tr><tr class="a"><td class="tm">Buffalo Bills <span class="rec">7-1</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">New York Jets <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">2-7</span></td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Seattle Seahawks <span class="rec">5-4</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Las Vegas Raiders <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">4-5</span></td><td class="ot"></td></tr><tr class="a"><td class="tm">Los Angeles Rams <span class="rec">5-4</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Arizona Cardinals <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">3-6</span></td><td class="ot"></td></tr><tr class="a"><td class="tm">San Francisco 49ers <span class="rec">7-1</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Dallas Cowboys <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">4-5</span></td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Pittsburgh Steelers <span class="rec">6-2</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Cincinnati Bengals <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">6-2</span></td><td class="ot"></td></tr><tr class="gap"><td></td><td></td><td></td></tr><tr class="a"><td class="tm">Los Angeles Chargers <span class="rec">0-8</span></td><td class="sc ytp" rowspan="2">YTP</td><td class="ot"></td></tr><tr class="h"><td class="tm">Baltimore Ravens <svg class="home" viewBox="0 0 16 16" width="13" height="13" role="img" aria-label="Home team"><path fill="currentColor" d="M8 1.2 0.8 7.6h2.1V14h3.6v-3.9h3V14h3.6V7.6h2.1z"/></svg> <span class="rec">4-5</span></td><td class="ot"></td></tr></tbody></table></div><p class="muted">On bye: Bears, Broncos, Eagles, Buccaneers.</p><h4>Highlights</h4><div class="dlist"><div class="pl"><span class="t"><strong>Longest play:</strong> <strong>Isaiah Likely</strong> <span class="n">66</span> Yd pass from J.J. McCarthy for a touchdown (NYG).</span></div></div></section><section id="mlb"><h2>MLB</h2><div class="pts f1 awards"><table><colgroup><col style="width:31%"><col style="width:69%"></colgroup><thead><tr><th class="tt" colspan="2">MLB Awards</th></tr><tr><th>Award</th><th>Winner</th></tr></thead><tbody><tr><td>MVP</td><td class="win"><div class="pr"><span class="lg">AL</span> <span class="wn mvp">Yordan Alvarez</span> <span class="tc">(HOU)</span></div><div class="pr"><span class="lg">NL</span> <span class="wn mvp">Pete Crow-Armstrong</span> <span class="tc">(CHC)</span></div></td></tr><tr class="blk"><td colspan="2"><div class="bt">All-MLB 2nd Team</div><div class="asg"><div class="col"><div class="ch">American League</div><div class="pl">S. Gray <span class="tc">(BOS)</span></div><div class="pl">Willson Contreras <span class="tc">(BOS)</span></div><div class="pl">R. Arozarena <span class="tc">(SEA)</span></div><div class="pl">B. Baker <span class="tc">(TB)</span></div><div class="pl">D. Rasmussen <span class="tc">(TB)</span></div><div class="pl">C. Smith <span class="tc">(CLE)</span></div><div class="pl">B. Rice <span class="tc">(NYY)</span></div></div><div class="col"><div class="ch">National League</div><div class="pl">A. Bregman <span class="tc">(CHC)</span></div><div class="pl">J. Luzardo <span class="tc">(PHI)</span></div><div class="pl">William Contreras <span class="tc">(MIL)</span></div><div class="pl">B. Lowe <span class="tc">(PIT)</span></div><div class="pl">T. Skubal <span class="tc">(LAD)</span></div><div class="pl">J. Walker <span class="tc">(STL)</span></div><div class="pl">Y. Yamamoto <span class="tc">(LAD)</span></div><div class="pl">E. De La Cruz <span class="tc">(CIN)</span></div><div class="pl">J. Wood <span class="tc">(WSH)</span></div></div></div></td></tr><tr class="blk"><td colspan="2"><div class="bt">All-MLB 1st Team</div><div class="asg"><div class="col"><div class="ch">American League</div><div class="pl">D. Cease <span class="tc">(TOR)</span></div><div class="pl">Y. Alvarez <span class="tc">(HOU)</span></div><div class="pl">P. Alonso <span class="tc">(BAL)</span></div><div class="pl">B. Witt Jr. <span class="tc">(KC)</span></div><div class="pl">J. Caminero <span class="tc">(TB)</span></div><div class="pl">L. Varland <span class="tc">(TOR)</span></div><div class="pl">C. Schlittler <span class="tc">(NYY)</span></div></div><div class="col"><div class="ch">National League</div><div class="pl">C. Sale <span class="tc">(ATL)</span></div><div class="pl">F. Tatis Jr. <span class="tc">(SD)</span></div><div class="pl">B. Turang <span class="tc">(MIL)</span></div><div class="pl">C. Sanchez <span class="tc">(PHI)</span></div><div class="pl">G. Moreno <span class="tc">(ARI)</span></div><div class="pl">P. Crow-Armstrong <span class="tc">(CHC)</span></div><div class="pl">M. Miller <span class="tc">(SD)</span></div><div class="pl">J. Chourio <span class="tc">(MIL)</span></div><div class="pl">J. Misiorowski <span class="tc">(MIL)</span></div></div></div></td></tr><tr><td>Cy Young</td><td class="win"><div class="pr"><span class="lg">AL</span> <span class="wn">Cam Schlittler</span> <span class="tc">(NYY)</span></div><div class="pr"><span class="lg">NL</span> <span class="wn">Jacob Misiorowski</span> <span class="tc">(MIL)</span></div></td></tr><tr><td>Hank Aaron</td><td class="win"><div class="pr"><span class="lg">AL</span> <span class="wn">Yordan Alvarez</span> <span class="tc">(HOU)</span></div><div class="pr"><span class="lg">NL</span> <span class="wn">Pete Crow-Armstrong</span> <span class="tc">(CHC)</span></div></td></tr><tr><td>Relief Man</td><td class="win"><div class="pr"><span class="lg">AL</span> <span class="wn">Bryan Baker</span> <span class="tc">(TB)</span></div><div class="pr"><span class="lg">NL</span> <span class="wn">Mason Miller</span> <span class="tc">(SD)</span></div></td></tr><tr><td>MOTY</td><td class="win"><div class="pr"><span class="lg">AL</span> <span class="wn">Will Venable</span></div><div class="pr"><span class="lg">NL</span> <span class="wn">Pat Murphy</span></div></td></tr><tr><td>ROTY</td><td class="win"><div class="pr"><span class="lg">AL</span> <span class="wn">Kevin McGonigle</span> <span class="tc">(DET)</span></div><div class="pr"><span class="lg">NL</span> <span class="wn">Sal Stewart</span> <span class="tc">(CIN)</span></div></td></tr><tr class="blk"><td colspan="2"><div class="bt">Platinum Glove Awardees</div><div class="asg"><div class="col"><div class="ch">American League</div><div class="pl">C. Bellinger <span class="tc">(NYY)</span></div></div><div class="col"><div class="ch">National League</div><div class="pl">P. Crow-Armstrong <span class="tc">(CHC)</span></div></div></div></td></tr></tbody></table></div></section><section id="tennis"><h2>Tennis</h2><h3>WTA Finals</h3><p class="muted">Fri 13 – Sat 14 Nov SGT</p><div class="tennis"><table><colgroup><col style="width:64%"><col style="width:12%"><col style="width:12%"><col style="width:12%"></colgroup><thead><tr><th class="tt" colspan="4">Women&#x27;s Singles · Group Stage</th></tr></thead><tbody><tr class="w"><td class="pl">J. Pegula [5]</td><td class="s">7</td><td class="s">4</td><td class="s">7</td></tr><tr class="l"><td class="pl">L. Noskova [8]</td><td class="s">6<sup>2</sup></td><td class="s">6</td><td class="s">5</td></tr><tr class="w"><td class="pl">M. Andreeva [3]</td><td class="s">6</td><td class="s">6</td><td class="s"></td></tr><tr class="l"><td class="pl">D. Shnaider</td><td class="s">2</td><td class="s">1</td><td class="s"></td></tr><tr class="w"><td class="pl">E. Svitolina [6]</td><td class="s">6</td><td class="s">3</td><td class="s">6</td></tr><tr class="l"><td class="pl">A. Sabalenka [2]</td><td class="s">3</td><td class="s">6</td><td class="s">1</td></tr></tbody></table></div><div class="tennis"><table><colgroup><col style="width:46%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:18%"></colgroup><thead><tr><th class="tt" colspan="5">WTA Finals · Group A<span class="prog">6/6 played</span></th></tr><tr><th></th><th class="s">P</th><th class="s">W</th><th class="s">L</th><th class="s">Sets</th></tr></thead><tbody><tr class="l"><td class="pl">M. Andreeva [3]</td><td class="s">3</td><td class="s">3</td><td class="s">0</td><td class="s">6-0</td></tr><tr class="l"><td class="pl">E. Svitolina [6]</td><td class="s">3</td><td class="s">2</td><td class="s">1</td><td class="s">4-4</td></tr><tr class="l"><td class="pl">A. Sabalenka [2]</td><td class="s">3</td><td class="s">1</td><td class="s">2</td><td class="s">3-4</td></tr><tr class="l"><td class="pl">D. Shnaider</td><td class="s">1</td><td class="s">0</td><td class="s">1</td><td class="s">0-2</td></tr><tr class="l"><td class="pl">K. Muchova [7]</td><td class="s">2</td><td class="s">0</td><td class="s">2</td><td class="s">1-4</td></tr></tbody></table></div><div class="tennis"><table><colgroup><col style="width:46%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:18%"></colgroup><thead><tr><th class="tt" colspan="5">WTA Finals · Group B<span class="prog">complete: the top two go through</span></th></tr><tr><th></th><th class="s">P</th><th class="s">W</th><th class="s">L</th><th class="s">Sets</th></tr></thead><tbody><tr class="w"><td class="pl">L. Noskova [8] <span class="muted">Q</span></td><td class="s">3</td><td class="s">2</td><td class="s">1</td><td class="s">5-2</td></tr><tr class="w"><td class="pl">J. Pegula [5] <span class="muted">Q</span></td><td class="s">3</td><td class="s">2</td><td class="s">1</td><td class="s">5-3</td></tr><tr class="l"><td class="pl">C. Gauff [4]</td><td class="s">3</td><td class="s">2</td><td class="s">1</td><td class="s">4-3</td></tr><tr class="l"><td class="pl">M. Kostyuk [9]</td><td class="s">3</td><td class="s">0</td><td class="s">3</td><td class="s">0-6</td></tr></tbody></table></div></section><section id="around"><h2>Around The Sporting World</h2><h3>Other Sports</h3><h4 class="sport first">Rugby</h4><ul class="standouts"><li>France 21–19 South Africa (Nations Championship)</li></ul><div class="rugbyt"><div class="table-wrap"><table><thead><tr><th class="tt" colspan="7">Nations Championship: Northern pool</th></tr><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">W</th><th class="n">L</th><th class="n">PD</th><th class="n">Pts</th></tr></thead><tbody><tr><td class="n">1</td><td class="">France</td><td class="n">5</td><td class="n">4</td><td class="n">1</td><td class="n">+80</td><td class="n">21</td></tr><tr><td class="n">2</td><td class="">England</td><td class="n">4</td><td class="n">3</td><td class="n">1</td><td class="n">+71</td><td class="n">15</td></tr><tr><td class="n">3</td><td class="">Ireland</td><td class="n">4</td><td class="n">3</td><td class="n">1</td><td class="n">+29</td><td class="n">15</td></tr><tr><td class="n">4</td><td class="">Scotland</td><td class="n">4</td><td class="n">2</td><td class="n">2</td><td class="n">-11</td><td class="n">11</td></tr><tr><td class="n">5</td><td class="">Wales</td><td class="n">4</td><td class="n">2</td><td class="n">2</td><td class="n">-35</td><td class="n">10</td></tr><tr><td class="n">6</td><td class="">Italy</td><td class="n">4</td><td class="n">0</td><td class="n">4</td><td class="n">-153</td><td class="n">0</td></tr></tbody></table></div><div class="table-wrap"><table><thead><tr><th class="tt" colspan="7">Nations Championship: Southern pool</th></tr><tr><th class="n">#</th><th class="">Team</th><th class="n">P</th><th class="n">W</th><th class="n">L</th><th class="n">PD</th><th class="n">Pts</th></tr></thead><tbody><tr><td class="n">1</td><td class="">South Africa</td><td class="n">5</td><td class="n">4</td><td class="n">1</td><td class="n">+138</td><td class="n">21</td></tr><tr><td class="n">2</td><td class="">New Zealand</td><td class="n">4</td><td class="n">4</td><td class="n">0</td><td class="n">+73</td><td class="n">20</td></tr><tr><td class="n">3</td><td class="">Australia</td><td class="n">4</td><td class="n">1</td><td class="n">3</td><td class="n">+6</td><td class="n">8</td></tr><tr><td class="n">4</td><td class="">Argentina</td><td class="n">4</td><td class="n">1</td><td class="n">3</td><td class="n">-32</td><td class="n">7</td></tr><tr><td class="n">5</td><td class="">Japan</td><td class="n">4</td><td class="n">1</td><td class="n">3</td><td class="n">-33</td><td class="n">5</td></tr><tr><td class="n">6</td><td class="">Fiji</td><td class="n">4</td><td class="n">0</td><td class="n">4</td><td class="n">-133</td><td class="n">0</td></tr></tbody></table></div></div><h4 class="sport">Chess</h4><ul class="standouts"><li>Caruana beat Praggnanandhaa and Niemann beat Vaishali in Budapest, while Assaubayeva upset Erigaisi, with Caruana leading Group B on 10 points. <a href="https://en.chessbase.com/post/total-chess-budapest-2026-groups-2" rel="noopener">ChessBase</a></li></ul></section><div class="theend"><span class="ln"></span><b>The End</b><span class="ln"></span></div><footer><a href="../../index.html">All editions</a> · The Kickoff, your daily sports digest.<span class="edno">Edition #008</span></footer></main><nav class="rail" aria-label="Sections"><div class="rail-fill" id="rail-fill"></div><a class="rail-tick" href="#big-stuff" style="top:0.00%" aria-label="Jump to The Big Stuff" title="The Big Stuff"></a><a class="rail-tick" href="#on-today" style="top:11.11%" aria-label="Jump to On Today" title="On Today"></a><a class="rail-tick" href="#cricket" style="top:22.22%" aria-label="Jump to Cricket" title="Cricket"></a><a class="rail-tick" href="#football" style="top:33.33%" aria-label="Jump to Football" title="Football"></a><a class="rail-tick" href="#nba" style="top:44.44%" aria-label="Jump to NBA" title="NBA"></a><a class="rail-tick" href="#nfl" style="top:55.56%" aria-label="Jump to NFL" title="NFL"></a><a class="rail-tick" href="#mlb" style="top:66.67%" aria-label="Jump to MLB" title="MLB"></a><a class="rail-tick" href="#tennis" style="top:77.78%" aria-label="Jump to Tennis" title="Tennis"></a><a class="rail-tick" href="#around" style="top:88.89%" aria-label="Jump to Around The Sporting World" title="Around The Sporting World"></a><div class="rail-icon" id="rail-icon" aria-hidden="true"></div></nav><script>/* Silhouettes for the head of the progress rail (D, 2026-11-05; swimming and athletics added 2026-11-08, D-approved): one small gold drawing per sport, 24 x 24, drawn in the page's own colours (currentColor for the shape, var(--pitch) for the seams
+   cut into it). `spin` icons are balls and turn as you scroll; the others only sway a little. Nothing here is loaded from outside: the page stays one file. */
+window.RAIL_ICONS = {
+  football: { spin: true, svg: '<defs><clipPath id="fb"><circle cx="12" cy="12" r="10"/></clipPath></defs><circle cx="12" cy="12" r="10" fill="currentColor"/><g clip-path="url(#fb)" fill="var(--pitch)"><polygon points="12.0,8.0 15.8,10.8 14.4,15.2 9.6,15.2 8.2,10.8"/><polygon points="15.6,4.2 17.2,1.8 20.1,3.9 18.3,6.1"/><polygon points="20.5,13.0 23.4,13.8 22.2,17.2 19.5,16.2"/><polygon points="13.6,20.4 13.8,23.4 10.2,23.4 10.4,20.4"/><polygon points="4.5,16.2 1.8,17.2 0.6,13.8 3.5,13.0"/><polygon points="5.7,6.1 3.9,3.9 6.8,1.8 8.4,4.2"/></g><path d="M12.0 8.0L12.0 3.6M15.8 10.8L20.0 9.4M14.4 15.2L16.9 18.8M9.6 15.2L7.1 18.8M8.2 10.8L4.0 9.4M12.0 3.6L15.5 4.1M12.0 3.6L8.5 4.1M20.0 9.4L20.7 12.9M20.0 9.4L18.5 6.2M16.9 18.8L13.8 20.5M16.9 18.8L19.5 16.3M7.1 18.8L4.5 16.3M7.1 18.8L10.2 20.5M4.0 9.4L5.5 6.2M4.0 9.4L3.3 12.9" stroke="var(--pitch)" stroke-width="1.1" fill="none"/>' },
+  cannon: { spin: false, svg: '<g transform="rotate(-26 12 11)"><rect x="2.2" y="7.4" width="19" height="5.6" rx="2.5" fill="currentColor"/><rect x="17.6" y="6.4" width="4.4" height="7.6" rx="1.4" fill="currentColor"/><circle cx="4" cy="10.2" r="2.6" fill="currentColor"/></g><path d="M4.2 14.6h10l2.6 5.4H3z" fill="currentColor"/><circle cx="10" cy="17" r="5.4" fill="currentColor" stroke="var(--pitch)" stroke-width="1.5"/><circle cx="10" cy="17" r="1.7" fill="var(--pitch)"/><path d="M10 12v-.5M10 22.5V22M4.6 17h-.5M15.9 17h-.5" stroke="var(--pitch)" stroke-width="1.2"/>' },
+  cricket: { spin: true, svg: '<circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M10.2 2.6v18.8M13.8 2.6v18.8" stroke="var(--pitch)" stroke-width="1.3" stroke-dasharray="1.3 1.5" fill="none"/>' },
+  basketball: { spin: true, svg: '<circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v20M2 12h20M4.8 4.6C8.6 8.2 8.6 15.8 4.8 19.4M19.2 4.6C15.4 8.2 15.4 15.8 19.2 19.4" stroke="currentColor" stroke-width="1.5" fill="none"/>' },
+  nfl: { spin: false, svg: '<rect x="10.9" y="12" width="2.2" height="10" fill="currentColor"/><rect x="4.2" y="11" width="15.6" height="2.2" fill="currentColor"/><rect x="4.2" y="2" width="2.2" height="10" fill="currentColor"/><rect x="17.6" y="2" width="2.2" height="10" fill="currentColor"/><rect x="2.6" y="3.2" width="5.4" height="1.4" fill="currentColor"/><rect x="16" y="3.2" width="5.4" height="1.4" fill="currentColor"/>' },
+  baseball: { spin: true, svg: '<circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6.4 3.6C9.6 8.2 9.6 15.8 6.4 20.4M17.6 3.6C14.4 8.2 14.4 15.8 17.6 20.4" stroke="currentColor" stroke-width="1.6" stroke-dasharray="1.6 1.6" fill="none"/>' },
+  tennis: { spin: true, svg: '<circle cx="12" cy="12" r="10" fill="currentColor"/><circle cx="12" cy="12" r="10" fill="none" stroke="var(--pitch)" stroke-width="0"/><path d="M4.6 3.6C10.4 8 10.4 16 4.6 20.4M19.4 3.6C13.6 8 13.6 16 19.4 20.4" stroke="var(--pitch)" stroke-width="1.7" stroke-linecap="round" fill="none"/>' },
+  golf: { spin: false, svg: '<rect x="11.2" y="2" width="1.6" height="17.5" fill="currentColor"/><polygon points="12.8,2 20.5,5.4 12.8,8.8" fill="currentColor"/><ellipse cx="12" cy="20.6" rx="8" ry="2.2" fill="currentColor"/>' },
+  rugby: { spin: true, svg: '<g transform="rotate(-35 12 12)"><ellipse cx="12" cy="12" rx="10.5" ry="7" fill="currentColor"/><path d="M5.2 12h13.6M9.6 10v4M12 9.6v4.8M14.4 10v4" stroke="var(--pitch)" stroke-width="1.2" fill="none"/></g>' },
+  f1: { spin: false, svg: '<path d="M2.5 14.6C2.5 8.4 6.9 4 12.7 4c5.1 0 9 3.3 9.5 8.3l.1 2.7c0 1.6-1.2 2.8-2.8 2.8H11.2l-3.3 2.2H5.5c-1.7 0-3-1.4-3-3.1z" fill="currentColor"/><path d="M12.3 8.4h8.8l.5 5h-9.9z" fill="var(--pitch)"/><path d="M2.8 12.4h7.4" stroke="var(--pitch)" stroke-width="1.4" fill="none"/>' },
+  flag: { spin: false, svg: '<rect x="3" y="2" width="1.8" height="20" rx=".9" fill="currentColor"/><g fill="currentColor"><rect x="5.0" y="3.0" width="4.4" height="4.4"/><rect x="13.8" y="3.0" width="4.4" height="4.4"/><rect x="9.4" y="7.4" width="4.4" height="4.4"/><rect x="18.2" y="7.4" width="4.4" height="4.4"/><rect x="5.0" y="11.8" width="4.4" height="4.4"/><rect x="13.8" y="11.8" width="4.4" height="4.4"/></g><rect x="5" y="3" width="17.6" height="13.2" fill="none" stroke="currentColor" stroke-width="1.3"/>' },
+  ufc: { spin: false, svg: '<path d="M6.5 9c0-3.6 2.4-6 6.2-6h1.6c3.4 0 5.2 2.2 5.2 5.4V13c0 2.2-1.2 3.6-3 3.9V21H8.6v-4.6C7.2 15.6 6.5 14 6.5 12z" fill="currentColor"/><path d="M8.6 18.2h8.4" stroke="var(--pitch)" stroke-width="1.3" fill="none"/><path d="M7 11.2c-1.8-.2-3 .8-2.8 2.2.2 1.2 1.4 1.8 2.8 1.6" fill="currentColor"/>' },
+  badminton: { spin: false, svg: '<path d="M8.5 13L5.4 2.5h13.2L15.5 13z" fill="currentColor"/><path d="M9.2 5.5l1.2 7M12 5.5v7M14.8 5.5l-1.2 7" stroke="var(--pitch)" stroke-width="1" fill="none"/><path d="M8.5 14.2h7v2.2a3.5 3.5 0 0 1-7 0z" fill="currentColor"/>' },
+  darts: { spin: false, svg: '<circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/>' },
+  chess: { spin: false, svg: '<rect x="11" y="1.5" width="2" height="5" fill="currentColor"/><rect x="9.2" y="3.2" width="5.6" height="1.8" fill="currentColor"/><circle cx="12" cy="10.2" r="3.2" fill="currentColor"/><path d="M6.8 21.5h10.4v-2.2c0-3-2.4-4.2-3.2-6.2h-4c-.8 2-3.2 3.2-3.2 6.2z" fill="currentColor"/>' },
+  trophy: { spin: false, svg: '<path d="M7 3h10v5.2a5 5 0 0 1-10 0z" fill="currentColor"/><path d="M7 5H3.8v2.2c0 1.8 1.4 3.2 3.4 3.4M17 5h3.2v2.2c0 1.8-1.4 3.2-3.4 3.4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M10.6 13.4h2.8v4h-2.8zM7.6 17.4h8.8v3.4H7.6z" fill="currentColor"/>' },
+  clock: { spin: false, svg: '<circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6.4V12l3.6 2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>' },
+  swimming: { spin: false, svg: '<circle cx="18.6" cy="11.6" r="2.4" fill="currentColor"/><path d="M2.2 15.4 6.2 13.8 15.2 12.8" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M12.6 12.6Q15 4.2 22 8.6" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" fill="none"/><path d="M1.8 19.4c1.7 0 1.7-1.6 3.4-1.6s1.7 1.6 3.4 1.6 1.7-1.6 3.4-1.6 1.7 1.6 3.4 1.6 1.7-1.6 3.4-1.6 1.7 1.6 3.4 1.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/>' },
+  athletics: { spin: false, svg: '<circle cx="15.4" cy="3.9" r="2.4" fill="currentColor"/><path d="M13.6 7.4 10.4 13" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" fill="none"/><path d="M13.2 8.4l3.9 2.6 2.4-.6M13.1 8.2 9.2 7.6 7 10.2M10.4 13l3.7 3.1-.9 5.2M10.4 13l-3 4.1-4.1.3" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' },
+  star: { spin: false, svg: '<polygon points="12,2 14.9,8.6 22,9.3 16.7,14 18.2,21 12,17.4 5.8,21 7.3,14 2,9.3 9.1,8.6" fill="currentColor"/>' }
+};
+/* Which drawing leads the bar in which section (by section id), and in Other Sports which one for each sport's gold heading (by its text). Anything unlisted gets the chess king. */
+window.RAIL_SECTION_ICON = { "big-stuff": "trophy", "on-today": "clock", arsenal: "cannon", football: "football", cricket: "cricket", nba: "basketball", nfl: "nfl", mlb: "baseball", f1: "f1",
+  tennis: "tennis", tour: "tennis", "young-guns": "star", "other-sports": "chess", stories: "chess", quiet: "trophy" };
+window.RAIL_SPORT_ICON = { rugby: "rugby", golf: "golf", ufc: "ufc", badminton: "badminton", darts: "darts", chess: "chess", athletics: "athletics", swimming: "swimming" };
+
+/* Progress rail: fills as you read, highlights the current section, drives the corner chip.
+   Written to stay cheap while scrolling on a phone: it measures only when the page width changes (iPhone Safari
+   fires a resize every time the address bar slides), moves the fill with a transform, and touches the page
+   only when a value actually changed. */
+(function () {
+  var secs = [].slice.call(document.querySelectorAll("main section[id]"));
+  var ticks = [].slice.call(document.querySelectorAll(".rail-tick"));
+  var fill = document.getElementById("rail-fill");
+  var chip = document.getElementById("chip");
+  if (!secs.length || !fill || !chip) return;
+
+  /* The sport icon at the head of the fill (D, 2026-11-05): it follows the fill down the rail, changes with the section (and, in Other Sports, with the sport named by each gold heading)
+     and balls turn as you scroll. Everything is optional: with no icon element or no drawings the bar behaves exactly as before. */
+  var icon = document.getElementById("rail-icon");
+  var railEl = document.querySelector(".rail");
+  var ICONS = window.RAIL_ICONS || {}, BY_SECTION = window.RAIL_SECTION_ICON || {}, BY_SPORT = window.RAIL_SPORT_ICON || {};
+  var iconMarks = [], railH = 1, lastKey = "", lastTop = -1, lastDeg = -999, lastInnerH = 0, endY = 0;
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var WPM = 230;
+  var words = document.querySelector("main").innerText.trim().split(/\s+/).length;
+  var tops = [], max = 1, queued = false;
+  var lastWidth = window.innerWidth, lastCur = -1, lastText = "", lastScale = -1;
+
+  function measure() {
+    max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    tops = secs.map(function (s) {
+      return Math.min(max, Math.max(0, s.getBoundingClientRect().top + window.scrollY - 52));
+    });
+    tops[0] = 0;
+    for (var i = 1; i < tops.length; i++) tops[i] = Math.max(tops[i], tops[i - 1]);
+    if (icon && railEl) {
+      railH = Math.max(1, railEl.getBoundingClientRect().height);
+      lastInnerH = window.innerHeight;
+      iconMarks = [];
+      secs.forEach(function (s) {
+        var top = s.getBoundingClientRect().top + window.scrollY;
+        var sports = [].slice.call(s.querySelectorAll("h4.sport"));
+        var first = sports.length ? BY_SPORT[(sports[0].textContent || "").trim().toLowerCase()] : "";
+        iconMarks.push({ y: top, key: first || BY_SECTION[s.id] || "chess" });       // Other Sports opens with its first sport's drawing, not a generic one
+        sports.forEach(function (h) {
+          var name = (h.textContent || "").trim().toLowerCase();
+          iconMarks.push({ y: h.getBoundingClientRect().top + window.scrollY, key: BY_SPORT[name] || "chess" });
+        });
+      });
+      var endEl = document.querySelector(".theend");                                 // "The End": the chequered flag
+      endY = endEl ? endEl.getBoundingClientRect().top + window.scrollY : 0;
+      iconMarks.sort(function (a, b) { return a.y - b.y; });
+    }
+  }
+
+  function moveIcon(y, p) {
+    if (!icon || !iconMarks.length) return;
+    if (window.innerHeight !== lastInnerH && railEl) {                               // the rail's height follows the window (iPhone Safari's address bar): measure it again so the icon stays on the head of the fill
+      railH = Math.max(1, railEl.getBoundingClientRect().height);
+      lastInnerH = window.innerHeight;
+      lastTop = -1;
+    }
+    var line = y + window.innerHeight * 0.35, key = iconMarks[0].key;
+    for (var m = 0; m < iconMarks.length; m++) if (iconMarks[m].y <= line) key = iconMarks[m].key;
+    if (endY && y + window.innerHeight * 0.85 >= endY) key = "flag";               // "The End" has come into view: the chequered flag
+    var d = ICONS[key] || ICONS.chess;
+    if (!d) return;
+    if (key !== lastKey) {
+      icon.innerHTML = '<span class="ri"><svg viewBox="0 0 24 24" aria-hidden="true">' + d.svg + "</svg></span>";
+      icon.classList.add("on");
+      lastKey = key; lastDeg = -999;
+    }
+    var top = Math.round(p * railH * 2) / 2;
+    if (top !== lastTop) { icon.style.transform = "translate3d(0," + top + "px,0)"; lastTop = top; }
+    var deg = calm ? 0 : d.spin ? Math.round((y * 0.6) % 360 / 2) * 2 : Math.round(Math.sin(y / 90) * 7);
+    if (deg !== lastDeg) { var ri = icon.firstChild; if (ri) ri.style.transform = "rotate(" + deg + "deg)"; lastDeg = deg; }
+  }
+
+  function update() {
+    queued = false;
+    var n = secs.length;
+    var y = Math.min(max, Math.max(0, window.scrollY));
+    var cur = 0;
+    for (var k = 0; k < n; k++) if (tops[k] <= y + 1) cur = k;
+    var end = cur + 1 < n ? tops[cur + 1] : max;
+    var span = end - tops[cur];
+    var frac = span > 0 ? Math.min(1, (y - tops[cur]) / span) : 0;
+    var p = y >= max - 1 ? 1 : (cur + frac) / n;
+
+    var scale = Math.round(p * 1000) / 1000;
+    if (scale !== lastScale) { fill.style.transform = "scaleY(" + scale + ")"; lastScale = scale; }
+    moveIcon(y, p);
+
+    if (cur !== lastCur) {
+      ticks.forEach(function (t, i) {
+        t.classList.toggle("done", i <= cur);
+        if (i === cur) t.setAttribute("aria-current", "true");
+        else t.removeAttribute("aria-current");
+      });
+      lastCur = cur;
+    }
+
+    var read = y / max;
+    var pct = Math.round(read * 100);
+    var mins = Math.max(1, Math.ceil((words * (1 - read)) / WPM));
+    var text = pct >= 100 ? "100% · finished" : pct + "% · " + mins + " min left";
+    if (text !== lastText) { chip.textContent = text; lastText = text; }
+  }
+
+  function queue() {
+    if (!queued) { queued = true; window.requestAnimationFrame(update); }
+  }
+
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", function () {
+    if (window.innerWidth !== lastWidth) { lastWidth = window.innerWidth; measure(); queue(); }
+  });
+  window.addEventListener("load", function () { measure(); queue(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); queue(); });
+  measure();
+  update();
+})();
+</script></body></html>

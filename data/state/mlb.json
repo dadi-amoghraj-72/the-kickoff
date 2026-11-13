@@ -4,6 +4,28 @@
     "rows": [
       {
         "data": {
+          "winners": [
+            {
+              "league": "AL",
+              "name": "Yordan Alvarez",
+              "team": "HOU"
+            },
+            {
+              "league": "NL",
+              "name": "Pete Crow-Armstrong",
+              "team": "CHC"
+            }
+          ]
+        },
+        "key": "63",
+        "kind": "pair",
+        "label": "MVP",
+        "note": "",
+        "sig": "36018,4717833",
+        "text": "Yordan Alvarez (HOU); Pete Crow-Armstrong (CHC)"
+      },
+      {
+        "data": {
           "AL": [
             {
               "league": "AL",
@@ -331,6 +353,7 @@
       "59": "5134581,5080761",
       "60": "5149072,5080771",
       "62": "33912",
+      "63": "36018,4717833",
       "64": "35013",
       "65": "39825",
       "68": "39895",
