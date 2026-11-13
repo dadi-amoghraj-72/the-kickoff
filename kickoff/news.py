@@ -82,6 +82,10 @@ For every item choose one "kind":
 For every kind except none also give "club" (exactly one of the clubs listed for that item) and a "summary":
 ONE sentence of at most 30 words in your own words. Use only the headline and blurb. Add nothing from memory. Never copy
 a run of more than five words. No hype, no emojis. Say "reportedly" or "is linked with" for a rumour; never state a rumour as fact.
+Start with the club and say plainly what happened, so a reader who knows nothing else understands it: "Crystal Palace have sacked manager
+Pierre Sage after five months, with the team bottom of the Premier League." Give every person their role (manager, chairman, striker) the
+first time they appear, and never start with a chairman or an owner. For a sacking say "sacked", "dismissed" or "has resigned", never "parted
+ways" or "parted company". When the text says a move reported earlier is now official, say so ("have confirmed").
 Return one entry per item, using the item's link as its id."""
 SCHEMA = {"type": "object", "properties": {"items": {"type": "array", "items": {
     "type": "object", "properties": {"link": {"type": "string"}, "kind": {"type": "string", "enum": KINDS},
@@ -98,6 +102,21 @@ def check_summary(summary, item):
     if notes.copied_run(summary, [item["title"], item["text"]]):
         problems.append("copies a run of six or more words from the source")
     return problems
+
+
+SOFT_EXIT = re.compile(r"\bpart(?:s|ed|ing)? (?:ways|company)\b", re.I)
+
+
+def plain_problems(summary, club, kind):
+    """D, 2026-11-13 ('Steve Parish has parted ways with Pierre Sage' did not say Parish is Palace's chairman or Sage its manager): the summary must name the
+    club in its first words, and a manager's exit must be said plainly."""
+    out = []
+    words = summary.split()
+    if club and club.lower() not in " ".join(words[:8]).lower():
+        out.append(f"does not start with the club ({club})")
+    if kind.startswith("manager") and SOFT_EXIT.search(summary):
+        out.append('says "parted ways"; say sacked, dismissed or resigned')
+    return out
 
 
 def classify(client, cands):
@@ -124,6 +143,7 @@ def classify(client, cands):
             problems = check_summary(r.get("summary", ""), item)
             if r.get("club") not in item["clubs"]:
                 problems.append("club is not one of the item's clubs")
+            problems += plain_problems(r.get("summary", ""), r.get("club", ""), r["kind"])
             if problems:
                 out[item["link"]] = {"kind": r["kind"], "club": r.get("club", ""), "summary": None, "problems": problems}
                 redo.append({**next(p for p in payload if p["link"] == item["link"]), "problems": problems})

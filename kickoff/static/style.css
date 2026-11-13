@@ -515,3 +515,5 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
 /* NBA League Leaders (Fridays, D 2026-11-10): one table, a gold sub-row per stat */
 .lead tr.grp td { color: var(--gold); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding-top: 12px; }
 .lead td:first-child { padding-left: 12px; }
+.stake { margin: 6px 0 18px; font-size: 15px; }
+.stake .g { color: var(--gold); font-weight: 600; }   /* Nations League: the teams whose place is decided (D, 2026-11-13) */

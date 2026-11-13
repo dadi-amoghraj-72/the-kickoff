@@ -40,10 +40,11 @@ class Source:
         return out
 
     def athlete(self, season, athlete_id):
-        """{"name": 'Shai Gilgeous-Alexander', "short": 'S. Gilgeous-Alexander'}; asked once per player and season (a player wins several awards)."""
+        """{"name": 'Shai Gilgeous-Alexander', "short": 'S. Gilgeous-Alexander', "pos": 'G'}; asked once per player and season (a player wins several awards)."""
         if (season, athlete_id) not in self._athletes:
             j = self._call(self.base + f"seasons/{season}/athletes/{athlete_id}")
-            self._athletes[(season, athlete_id)] = {"name": j.get("displayName") or j.get("fullName") or "", "short": j.get("shortName") or j.get("displayName") or ""}
+            self._athletes[(season, athlete_id)] = {"name": j.get("displayName") or j.get("fullName") or "", "short": j.get("shortName") or j.get("displayName") or "",
+                                                  "pos": (j.get("position") or {}).get("abbreviation") or ""}
         return self._athletes[(season, athlete_id)]
 
     def team(self, season, team_id):

@@ -1,5 +1,6 @@
 """Offline tests for the international block. Run: .venv/bin/python scripts/test_international.py"""
 import json
+import re
 import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -65,8 +66,9 @@ NOW = datetime(2026, 10, 5, 0, 30, tzinfo=timezone.utc)
 out = intl.run(date(2026, 10, 5), NOW)
 h = out["html"]
 check("after a matchday the block appears, headed 'International Football' then 'UEFA Nations League'", h.startswith("<h3>International Football</h3><h3>UEFA Nations League</h3>"), h[:120])
-check("it has the four League A group tables and some League B ones", all(f"Group A{i} · League A" in h for i in (1, 2, 3, 4)) and "League B" in h)
-check("REGRESSION: after matchday 4 no group is called finished: every shown group has two matchdays left", "The group is finished" not in h and h.count("2 matchdays left") >= 4, h.count("2 matchdays left"))
+check("it has the tables of the groups that played on 4-5 October (A2, A4) under 'League A' (D, 2026-11-13)", all(f"Group A{i}<" in h for i in (2, 4)) and "Group A1<" not in h and "League A</p>" in h)
+check("after matchday 4 only what is proven: Portugal (12 points, nobody else can pass 12 and only two go through) are through, and nothing else",
+      re.findall(r'<p class="stake">.*?</p>', h) == ['<p class="stake"><strong>Through:</strong> <span class="g">Portugal</span></p>'], re.findall(r'<p class="stake">.*?</p>', h))
 check("it has the matchday's scoreboard with scorers", '<li><span class="h">' in h and 'class="gh"' in h)
 check("no friendlies were looked at", not any("friendly" in u for u in requested), [u for u in requested if "friendly" in u][:2])
 check("nothing else broke: no problems reported", out["problems"] == [], out["problems"])
@@ -79,7 +81,7 @@ check("and the Nations League standings are never even requested", not any("stan
 
 # ---- The morning of a matchday: fixtures within 30 hours ----
 before = intl.run(date(2026, 11, 12), datetime(2026, 11, 12, 0, 30, tzinfo=timezone.utc))
-check("on a matchday morning the block appears before any result exists, with stake lines", "UEFA Nations League" in before["html"] and "matchday" in before["html"] and "left" in before["html"], before["html"][:300])
+check("on a matchday morning before any result there is no Nations League block (only groups that played are shown)", "UEFA Nations League" not in before["html"], before["html"][:300])
 check("with no result yet there is no scoreboard", 'class="scores"' not in before["html"])
 far = intl.run(date(2026, 11, 8), datetime(2026, 11, 8, 0, 30, tzinfo=timezone.utc))
 check("four days before the break: nothing", far["html"] == "")
@@ -108,7 +110,7 @@ def boom(today, saved=None):
 
 rankings.load = boom
 nr = intl.run(date(2026, 10, 5), NOW)
-check("if the ranking fails, League A is still shown and the problem is recorded", "Group A1" in nr["html"] and "League B" not in nr["html"] and any("ranking" in p for p in nr["problems"]), nr["problems"])
+check("if the ranking fails, League A is still shown and the problem is recorded", "Group A2" in nr["html"] and "League B" not in nr["html"] and any("ranking" in p for p in nr["problems"]), nr["problems"])
 rankings.load = lambda today, saved=None: (TOP, None)
 espn.get_json = lambda *a, **k: (_ for _ in ()).throw(__import__("kickoff.http", fromlist=["x"]).SourceError("HTTP 500"))
 src.get_json = espn.get_json

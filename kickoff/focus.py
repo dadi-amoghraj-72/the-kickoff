@@ -79,22 +79,42 @@ def next_up_html(fixtures):
     return f'<p><strong>Next up</strong></p><ul class="standouts bd">{items}</ul>'
 
 
+def score_lines_html(facts):
+    """One line per game above the Arsenal story: 'Women's Champions League · Arsenal 1–1 Barcelona', the score in gold (D, 2026-11-13: the story came first and the
+    score was buried in it)."""
+    from kickoff import render as r
+    dash, dot = "\u2013", "\u00b7"
+    rows = ""
+    for f in facts:
+        score = f["final_score"].replace("-", dash)
+        rows += (f'<li><span class="muted">{r.esc(short_name(f.get("competition") or ""))}</span> {dot} {r.esc(f["home"])} '
+                 f'<span class="n">{r.esc(score)}</span> {r.esc(f["away"])}</li>')
+    return f'<ul class="standouts ascore">{rows}</ul>' if rows else ""
+
+
+def short_name(comp):
+    """'UEFA Women's Champions League' -> 'Women's Champions League'; 'English Premier League' -> 'Premier League'."""
+    return comp.replace("UEFA ", "").replace("English ", "")
+
+
 def match_dict(game, details):
     return {**game, "goals": details["goals"], "reds": details["reds"]}
 
 
 def build(club, edition_date, tables, previous=None, now=None, tier="arsenal"):
-    """{"facts": [...], "next": [...]} for one club. facts has one entry per game in this edition's window.
+    """{"facts": [...], "next": [...], "games": [...]} for one club. facts has one entry per game in this edition's window; games are the same games as match dicts
+    (with "league" and "competition"), for Key Overnight Scores when the competition is not one the football run reads (the Women's Champions League, the League Cup).
     tables: {league slug: table rows}. Raises SourceError if the schedule can't be read."""
     now = now or datetime.now(timezone.utc)
     games = espn.get_team_games(club["id"], club["domestic"], today=edition_date)
     window = espn.window_start(edition_date)
     new = [g for g in games if g["completed"] and datetime.strptime(g["kickoff"], "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc)
            + espn.MATCH_LENGTH > window]
-    facts = []
+    facts, played = [], []
     for g in new:
         details = espn.get_match_details(g["id"], g["league"])
-        f = notes.match_facts(match_dict(g, details), tier, tables.get(g["league"]), (previous or {}).get(g["league"]),
+        played.append(match_dict(g, details))
+        f = notes.match_facts(played[-1], tier, tables.get(g["league"]), (previous or {}).get(g["league"]),
                               g["competition"] or "match")
         f["focus_team"] = club["name"]
         f["form"] = form(games, club["id"], upto=g)
@@ -104,4 +124,4 @@ def build(club, edition_date, tables, previous=None, now=None, tier="arsenal"):
         nxt = next_up(upcoming, club["id"], now)
     except espn.SourceError:
         nxt = []
-    return {"facts": facts, "next": nxt}
+    return {"facts": facts, "next": nxt, "games": played}

@@ -89,6 +89,16 @@ TONES = {"1st": "gold", "2nd": "silver", "3rd": "bronze"}
 SHORT_POS = {"placekicker": "K", "kickoff returner": "KR", "slot cornerback": "Slot CB"}
 
 
+MLB_POS_ORDER = ["C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "OF", "DH", "SP", "RP", "P"]
+
+
+def mlb_positions(infos, teams):
+    """An All-MLB team as [(position, name, team)] in the diamond's order, catcher first and the pitchers last; a position held twice is numbered ('SP 1', 'SP 2')."""
+    rank = lambda pos: MLB_POS_ORDER.index(pos) if pos in MLB_POS_ORDER else len(MLB_POS_ORDER)  # noqa: E731
+    rows = sorted(((i.get("pos") or "", i["name"], t) for i, t in zip(infos, teams)), key=lambda x: (rank(x[0]), x[1]))
+    return numbered(rows)
+
+
 def is_mvp(label_):
     return "MVP" in label_ or "Most Valuable" in label_
 
@@ -330,6 +340,8 @@ def run(source, title, state, season, extra=(), skip=SKIP):
                 lg = getattr(source, "league", "")
                 if len(infos) == 1:
                     it.update(kind="single", data={"name": infos[0]["name"], "team": teams[0]}, text=winner_text([infos[0]["name"]], teams[0]))
+                elif lg == "mlb" and lab.startswith("All-MLB"):     # one team from all of baseball, not AL and NL: listed by position (D, 2026-11-13)
+                    it.update(kind="pos", data={"rows": mlb_positions(infos, teams)}, text=", ".join(i["name"] for i in infos))
                 elif lg == "mlb":                       # two league winners (MVP, Cy Young, Rookie): a pair; the clubs' Gold Gloves and Silver Sluggers: a block by league
                     rows_ = [{"name": i["name"], "team": t, "league": MLB_LEAGUE.get(t, "")} for i, t in zip(infos, teams)]
                     if len(rows_) == 2:

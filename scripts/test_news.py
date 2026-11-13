@@ -100,7 +100,7 @@ B = {**mk("Forest sack Glasner after another defeat", "Nottingham Forest have pa
 C = {**mk("Glasner fears he will be next Forest sacking", "The Forest boss admits pressure is growing.", link="https://x/pressure"),
      "hint": "managerial", "clubs": ["Nottingham Forest"]}
 good = {"link": A["link"], "kind": "transfer_confirmed", "club": "Arsenal", "summary": "Arsenal have signed a Spanish midfielder to a four-year contract."}
-sack = {"link": B["link"], "kind": "manager_sacked", "club": "Nottingham Forest", "summary": "Nottingham Forest have parted ways with head coach Glasner."}
+sack = {"link": B["link"], "kind": "manager_sacked", "club": "Nottingham Forest", "summary": "Nottingham Forest have sacked head coach Glasner after another defeat."}
 none = {"link": C["link"], "kind": "none", "club": "", "summary": ""}
 c = Fake([reply([good, sack, none])])
 res, usage = news.classify(c, [A, B, C])

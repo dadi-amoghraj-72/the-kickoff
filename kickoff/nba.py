@@ -520,10 +520,16 @@ def leaders_html(by_stat):
             f'<thead><tr><th class="tt" colspan="4">League Leaders</th></tr></thead><tbody>{rows}</tbody></table></div></div>')
 
 
+FULL_TABLE_FROM, TOP_SEEDS = 60, 8
+
+
 def standings_html(std, before=None):
     """Both conferences by playoff seed: blue for the top six, lilac for the play-in places (7 to 10). +/- is the places moved since the last
-    table that was shown (`before`, from seeds_of); no arrows the first time."""
+    table that was shown (`before`, from seeds_of); no arrows the first time. Only the top 8 of each until a team has played FULL_TABLE_FROM games
+    (D, 2026-11-13: the same full table every day was tiring); from then on all 15."""
     out = ""
+    most = max((sum(int(x) for x in re.findall(r"\d+", _stat(e, "overall") or "")[:2]) for c in std["children"] for e in c["standings"]["entries"]), default=0)
+    show = None if most >= FULL_TABLE_FROM else TOP_SEEDS
     for c in std["children"]:
         rows, zones = [], []
         prev = (before or {}).get(c["name"])
@@ -532,7 +538,8 @@ def standings_html(std, before=None):
             rows.append([seed, abbr, _stat(e, "overall"), _stat(e, "gamesBehind") if seed > 1 else "-", _stat(e, "streak"),
                          move(prev[abbr] - seed) if prev and abbr in prev else ""])
             zones.append("blue" if seed <= 6 else "lilac" if seed <= 10 else None)
-        out += r.compact(r.table(c["name"], [("#", True), ("Team", False), ("W-L", True), ("GB", True), ("Strk", True), ("+/-", True)], rows, zones=zones),
+        rows, zones = rows[:show], zones[:show]
+        out += r.compact(r.table(c["name"] + (f" (top {show})" if show else ""), [("#", True), ("Team", False), ("W-L", True), ("GB", True), ("Strk", True), ("+/-", True)], rows, zones=zones),
                          (10, 22, 20, 16, 16, 16), " nba")
     return out
 

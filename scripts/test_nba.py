@@ -281,7 +281,7 @@ check("under the games every name is an initial and a surname (no 'Firstname Sur
 # ---- No game colours in the tables below (dropped 2026-11-04: all white) ----
 shown = sorted([g for g in GAMES if g["id"] in [e["id"] for e in SBS["2026-11-01"]["events"]]], key=nba.order_key)
 sun = nba.run(NOW, TUE, {"reported": [e["id"] for e in SBS["2026-10-31"]["events"]]}, Saved())
-check("the standings below the games have no coloured teams: every team cell is plain text", "<h4>Standings</h4>" in sun["html"] and 'class="gc' not in sun["html"] and len(re.findall(r'<td class="">[A-Z]+</td>', sun["html"])) >= 30)
+check("the standings below the games have no coloured teams: every team cell is plain text", "<h4>Standings</h4>" in sun["html"] and 'class="gc' not in sun["html"] and len(re.findall(r'<td class="">[A-Z]+</td>', sun["html"])) >= 16)
 css2 = (ROOT / "kickoff" / "static" / "style.css").read_text()
 check("the colour machinery is gone from the code and the stylesheet", not hasattr(nba, "game_colours") and not hasattr(nba, "paint") and ".gc0" not in css2)
 
@@ -326,8 +326,17 @@ check("all of D's players' starting teams and the order list use three-letter co
 east = next(c for c in STAND["children"] if c["name"].startswith("East"))
 seeds = sorted(int(next(s["displayValue"] for s in e["stats"] if s["name"] == "playoffSeed")) for e in east["standings"]["entries"])
 st_html = nba.standings_html(STAND)
-check("independent: ESPN gives seeds 1 to 15 for each conference; the table lists 15 per conference in seed order, PHI before DET", seeds == list(range(1, 16)) and st_html.count("<tbody>") == 2 and text(st_html).index(" PHI ") < text(st_html).index(" DET "))
-check("zones: seeds 1 to 6 blue, 7 to 10 lilac, none after (12 blue and 8 lilac rows for the two conferences)", st_html.count("z-blue") == 12 and st_html.count("z-lilac") == 8)
+check("independent: ESPN gives seeds 1 to 15 for each conference; the tables are in seed order, PHI before DET", seeds == list(range(1, 16)) and st_html.count("<tbody>") == 2 and text(st_html).index(" PHI ") < text(st_html).index(" DET "))
+check("early season: the top 8 of each conference only, so 1 to 6 blue and 7 and 8 lilac (12 blue, 4 lilac), captioned (top 8)", st_html.count("z-blue") == 12 and st_html.count("z-lilac") == 4
+      and st_html.count("<tr class=\"z-") == 16 and "(top 8)" in st_html, (st_html.count("z-blue"), st_html.count("z-lilac")))
+late = json.loads(json.dumps(STAND))
+for c_ in late["children"]:
+    for e_ in c_["standings"]["entries"]:
+        for s_ in e_["stats"]:
+            if s_["name"] == "overall":
+                s_["displayValue"] = "40-20"
+late_html = nba.standings_html(late)
+check("once a team has played 60 games: all 15 of each, 7 to 10 lilac (12 blue, 8 lilac), no (top 8)", late_html.count("z-blue") == 12 and late_html.count("z-lilac") == 8 and "(top 8)" not in late_html)
 check("the table has a +/- column, empty the first time (no earlier table to compare with)", "+/-" in st_html and "▲" not in st_html and "▼" not in st_html)
 std2 = copy.deepcopy(STAND)
 for e in next(c for c in std2["children"] if c["name"].startswith("East"))["standings"]["entries"]:
@@ -337,7 +346,7 @@ for e in next(c for c in std2["children"] if c["name"].startswith("East"))["stan
 tt = text(nba.standings_html(std2, nba.seeds_of(STAND)))
 check("movement arrows: with PHI and DET swapped since the last table, DET is up 1 and PHI down 1; everyone else shows a dash", "DET 5-1 - W2 ▲1" in tt.replace("0.5", "-") or ("1 DET" in tt and "▲1" in tt and "▼1" in tt), tt[:300])
 check("exactly one up arrow and one down arrow in that East table, and none in the West", tt.count("▲") == 1 and tt.count("▼") == 1)
-check("no movement shows '–' for all 30 teams", text(nba.standings_html(STAND, nba.seeds_of(STAND))).count("–") == 30)
+check("no movement shows '–' for all 16 teams shown", text(nba.standings_html(STAND, nba.seeds_of(STAND))).count("–") == 16)
 check("move(): up, down, level", nba.move(3) == "▲3" and nba.move(-2) == "▼2" and nba.move(0) == "–")
 run2 = nba.run(NOW, MON, {"seeds": nba.seeds_of(std2)}, Saved())
 check("the run uses the saved seeds as 'since the last table': with the swapped seeds saved, today's real order shows PHI up 1 and DET down 1", "▲1" in run2["html"] and "▼1" in run2["html"] and run2["state"]["seeds"] == nba.seeds_of(STAND))

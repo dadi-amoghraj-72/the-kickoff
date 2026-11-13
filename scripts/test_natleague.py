@@ -121,7 +121,7 @@ b1 = next(g for g in G if g["name"] == "Group B1")
 check("League B table uses the promotion legend", "Promoted" in nl.table_html(b1, R) and "Quarter-finals" not in nl.table_html(b1, R))
 d1 = next(g for g in G if g["name"] == "Group D1")
 check("League D's group of three draws three rows", nl.table_html(d1, R).count("<tr") == 4)
-check("the caption names the group and the league", "Group A1 · League A" in h)
+check("the caption is the group, under its League heading", "Group A1<" in h and "· League" not in h)
 check("team names in the lines are bold", "<strong>France</strong>" in nl.group_html(a1, R, ["France are close."]))
 
 # ---- The safety net: never draw conclusions without every remaining fixture ----
@@ -203,20 +203,30 @@ TOP = {"source": "test list", "teams": ["Spain", "Argentina", "England", "France
 window = espn.recent_results("uefa.nations", date(2026, 10, 5))
 remaining_all = [m for m in matches if not m["completed"]]
 html, use, facts = nl.build(G, TOP, window, remaining_all)
-check("with a ranking: all four League A groups, and the League B groups with a top-30 side", all(f"Group A{i} · League A" in html for i in (1, 2, 3, 4)) and "League B" in html, html.count("<table"))
+check("only the groups that played (D, 2026-11-13): A2, A4 and B3 played on 4-5 October", all(f"Group {n}<" in html for n in ("A2", "A4", "B3"))
+      and "Group A1<" not in html and "Group A3<" not in html and html.count("<table") == 3, html.count("<table"))
+check("league by league: League A's heading, its results, its tables, then League B", html.index('League A</p>') < html.index('<span class="h">') < html.index("Group A2<")
+      < html.index('League B</p>') < html.index("Group B3<"))
 check("League C groups without a top-30 side are not shown", "League C" not in html or html.count("League C") <= 1)
 html_a, _, facts_a = nl.build(G, None, window, remaining_all)
-check("without any ranking only League A is shown", html_a.count("<table") == 4 and "League B" not in html_a)
-check("the block says how far the league phase is, and names the ranking used", "Matchday 4 of 6 played" in html and "ranking: test list" in html)
+check("without any ranking only League A is shown", html_a.count("<table") == 2 and "League B" not in html_a)
+check("the block says how far the league phase is, and names the ranking used", "Matchday 4 of 6 played" in html and "only groups with a top-30 side" in html)
 ids = {x["id"] for g in nl.groups_to_show(G, TOP) for x in g["rows"]}
 check("the scoreboard has one line for each of the window's results in the shown groups", html.count('<li><span class="h">') == sum(1 for m in window if m["home"]["id"] in ids), html.count('<li><span class="h">'))
-check("every shown group has plain stake lines when Claude is not used", all(len(v) >= 1 for v in [nl.stake_lines(f) for f in facts.values()]) and "left" in html)
+check("no long stake sentences any more", "matchday" not in html.lower().replace("matchday 4 of 6 played", "") and "goal difference" not in html)
 check("an empty ranking and no League A would show nothing", nl.build([g for g in G if g["league"] != "A"], None, [], remaining_all)[0] == "")
 no_fx_html, _, _ = nl.build(G, TOP, window, [])
-check("with no fixtures found the block still builds, says so, and never claims a group is finished", "could not be confirmed" in no_fx_html and "finished" not in no_fx_html)
+check("with no fixtures found the block still builds and never claims anything is decided", "<table" in no_fx_html and 'class="stake"' not in no_fx_html)
 calls = Fake([])
 nl.build(G, TOP, window, [], calls)
 check("and Claude is not asked to phrase groups whose fixtures are unconfirmed", calls.calls == [])
+
+a_facts = {"fixtures_confirmed": True, "teams": [{"team": "Spain", "settled": "the quarter-finals"}, {"team": "England", "settled": "the quarter-finals"},
+                                                  {"team": "Croatia", "settled": None}, {"team": "Türkiye", "settled": "relegation"}]}
+line = nl.settled_line(a_facts)
+check("the one line: 'Through: Spain, England · Relegated: Türkiye', the teams in gold", line.count('class="g"') == 3 and "<strong>Through:</strong>" in line
+      and "<strong>Relegated:</strong>" in line and line.index("Spain") < line.index("England") < line.index("Türkiye"), line)
+check("nothing decided: no line", nl.settled_line({"fixtures_confirmed": True, "teams": [{"team": "X", "settled": None}]}) == "")
 
 # ---- The ranking helpers ----
 check("names match across spellings and accents (Turkey, Türkiye)", rankings.normalise("Türkiye") == rankings.normalise("Turkey") == "turkiye")

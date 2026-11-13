@@ -136,7 +136,7 @@ def table_html(group, rules):
     body = [[x["rank"], x["team"], x["played"], x["won"], x["drawn"], x["lost"], f"{x['gd']:+d}", x["points"]] for x in rows]
     legend_for = LEGEND["A" if group["league"] == "A" else "other"]
     legend = [(z, legend_for[z]) for z in ("blue", "lilac", "rose") if z in zones]
-    return r.table(f"{group['name']} · League {group['league']}", COLUMNS, body, zones=zones, legend=legend)
+    return r.table(group["name"], COLUMNS, body, zones=zones, legend=legend)
 
 
 def group_html(group, rules, lines):
@@ -229,8 +229,28 @@ def phrase(client, facts_by_group, code_lines):
     return out, total
 
 
+SETTLED = {"the quarter-finals": "Through", "promotion": "Promoted", "the promotion play-offs": "Play-offs", "the relegation play-offs": "Relegation play-off",
+           "relegation": "Relegated", "relegation or the relegation play-offs": "Relegated or play-off"}
+
+
+def settled_line(facts, names=()):
+    """One short line under a table, only when something is decided (D, 2026-11-13: three sentences a group was too wordy): 'Through: Spain, England ·
+    Relegated: Türkiye', the teams in gold. '' when nothing is settled or the fixtures could not be confirmed."""
+    if not facts.get("fixtures_confirmed", True):
+        return ""
+    got = {}
+    for t in facts["teams"]:
+        if t["settled"]:
+            got.setdefault(SETTLED.get(t["settled"], t["settled"].capitalize()), []).append(t["team"])
+    if not got:
+        return ""
+    return '<p class="stake">' + " \u00b7 ".join(f"<strong>{r.esc(k)}:</strong> " + ", ".join(f'<span class="g">{r.esc(n)}</span>' for n in ts) for k, ts in got.items()) + "</p>"
+
+
 def build(groups, top30, window_matches, all_matches, client=None):
-    """The Nations League block: scoreboard of the window's results, then each shown group's table and stake lines.
+    """The Nations League block (D, 2026-11-13), league by league: 'League A', its results since the last edition, then the tables of its groups that played,
+    each with one line on what is decided; then League B, then League C. On a morning a group played its last matchday every shown group's table appears
+    (the full picture of who went up, down and through). All by code: no Claude.
     window_matches: finished matches since the last edition. all_matches: every match known (to find the remaining ones).
     Returns (html, usage, facts_by_group). Empty html if no group is shown."""
     rules = parse_rules(groups)
@@ -238,22 +258,24 @@ def build(groups, top30, window_matches, all_matches, client=None):
     if not shown:
         return "", {"input": 0, "output": 0}, {}
     owner = group_of(groups)
-    facts, code = {}, {}
+    facts = {}
     for g in shown:
         remaining = [m for m in all_matches if not m["completed"] and owner.get(m["home"]["id"]) is g]
         facts[g["name"]] = analyse(g, remaining, rules)
-        code[g["name"]] = stake_lines(facts[g["name"]])
-    usage = {"input": 0, "output": 0}
-    lines = code
-    sure = {n: f for n, f in facts.items() if f.get("fixtures_confirmed", True)}  # Claude only phrases what is proven
-    if client and sure:
-        said, usage = phrase(client, sure, {n: code[n] for n in sure})
-        lines = {**code, **said}
-    shown_ids = {x["id"] for g in shown for x in g["rows"]}
-    results = [m for m in window_matches if m["home"]["id"] in shown_ids and m["completed"]]
+    results = [m for m in window_matches if m["completed"] and any(owner.get(m["home"]["id"]) is g for g in shown)]
+    played_in = {owner[m["home"]["id"]]["name"] for m in results}
+    final_day = any(facts[n].get("matchdays_left") == 0 for n in played_in)
     played = max((x["played"] for g in shown for x in g["rows"]), default=0)
-    head = f'<p class="muted">Matchday {played} of 6 played</p>'
-    if top30:
-        head += f'<p class="muted">League B and C groups are shown when they contain a top-30 side (ranking: {r.esc(top30["source"])}).</p>'
-    html = head + scoreboard.scores_html(results) + "".join(group_html(g, rules, lines[g["name"]]) for g in shown)
-    return html, usage, facts
+    html = f'<p class="muted">Matchday {played} of 6 played</p>'
+    for letter in ("A", "B", "C", "D"):
+        groups_here = [g for g in shown if g["league"] == letter and (final_day or g["name"] in played_in)]
+        if not groups_here:
+            continue
+        res = [m for m in results if owner[m["home"]["id"]]["league"] == letter]
+        html += f'<p class="subhead">League {letter}</p>' + (scoreboard.scores_html(res) if res else "")
+        html += "".join(table_html(g, rules) + settled_line(facts[g["name"]]) for g in groups_here)
+    if "<table" not in html:                                    # no shown group played since the last edition: no block (a matchday morning before any result)
+        return "", {"input": 0, "output": 0}, facts
+    if top30 and any(g["league"] != "A" and g["name"] in played_in for g in shown):
+        html += '<p class="muted">Leagues B and C: only groups with a top-30 side.</p>'
+    return html, {"input": 0, "output": 0}, facts

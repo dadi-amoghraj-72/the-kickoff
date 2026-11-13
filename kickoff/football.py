@@ -13,6 +13,7 @@ from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
 
 LEAGUE_ORDER = ["eng.1", "esp.1", "ita.1", "ger.1", "fra.1", "tur.1"]
+COVERED = set(LEAGUE_ORDER) | {espn.CHAMPIONS_LEAGUE, espn.FA_CUP, espn.WSL}   # the competitions whose results the football run reads; an Arsenal game anywhere else comes from the Arsenal section (D, 2026-11-13: Arsenal Women 1-1 Barcelona was missing)
 
 
 class Ledger:
@@ -275,15 +276,18 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         football += html
 
     # ---- The Arsenal section ----
-    arsenal, headline_result = "", None
+    arsenal, headline_result, arsenal_extra = "", None, []
     for club, tier in ((focus.ARSENAL, "arsenal"), (focus.ARSENAL_WOMEN, "women")):
         block = guard(club["name"], focus.build, club, day, all_rows, previous, now, tier)
         if not block:
             continue
+        arsenal_extra += [(g.get("competition") or "", [g]) for g in block.get("games") or [] if g.get("league") not in COVERED]   # the Women's Champions League, the League Cup
         match_by_id = {f["id"]: {"home": {"name": f["home"], "short": f["home"]}, "away": {"name": f["away"], "short": f["away"]},
                                  "goals": [{"player": g["scorer"], "assist": g.get("assist"), "side": "home" if g["for"] == f["home"] else "away"} for g in f["goals"]]}
                        for f in block["facts"]}
         body = write_notes_for(f"{club['name']} note", block["facts"], match_by_id)
+        if body:
+            body = focus.score_lines_html(block["facts"]) + body          # the score first, then the story (D, 2026-11-13)
         if block["facts"] and club is focus.ARSENAL:
             f = block["facts"][0]
             headline_result = f"{f['home']} {f['final_score'].replace('-', '–')} {f['away']}"
@@ -313,7 +317,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
     stats = {"matches": {**{leagues[lg]: len(results[lg] or []) for lg in LEAGUE_ORDER}, "Women's Super League": len(wsl_res)},
              "cl_matches": len(cl_matches),
              "season_cost": round(season_out.get("cost", 0.0), 5), "news_candidates": len(cands), "news_shown": len(shown_news), "injury_items": len(inj_items)}
-    comps = [(leagues[lg], results[lg] or []) for lg in LEAGUE_ORDER] + [("Champions League", cl_matches), ("FA Cup", fa_cup), ("Women's Super League", wsl_res)]
+    comps = [(leagues[lg], results[lg] or []) for lg in LEAGUE_ORDER] + [("Champions League", cl_matches), ("FA Cup", fa_cup), ("Women's Super League", wsl_res)] + arsenal_extra
     try:                                                 # the stories and facts The Big Stuff picks from (kickoff/bigstuff.py); never costs the section its games
         story_events = events.football(comps, day.weekday()) + [p for lst in perf_lists for p in events.football_perf("", lst)]
         big_news, big_injuries = events.football_news(shown_news), events.football_injuries(inj_items)
