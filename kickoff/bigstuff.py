@@ -12,7 +12,7 @@ import re
 from kickoff import importance
 from kickoff import render as r
 
-MAX_NEWS = 2
+MAX_NEWS = 3                 # D, 2026-11-13: football's best, the other sports' best, one more
 MAX_INJURIES = 2
 STARS_MAX, STARS_PER_SPORT, STARS_MILESTONE_MAX = 3, 2, 5
 SPORT_HEADER = {"cricket": "Cricket", "nfl": "NFL", "mlb": "MLB", "nba": "NBA", "f1": "F1"}
@@ -32,10 +32,11 @@ def dedupe_news(items):
 
 
 def top_news(news, limit=MAX_NEWS):
-    """Biggest News: football's best item first, then at most one NFL/NBA move (kickoff/usnews.py, D, 2026-11-11: the Kirk Cousins trade), then football's next."""
+    """Biggest News: football's best item first, then the other sports' best (NFL, NBA, F1, cricket: kickoff/sportsnews.py; D, 2026-11-13), then football's next,
+    or the other sports' second when football has no more."""
     items = dedupe_news(list(news))
-    ours, us = [i for i in items if not i.get("us")], [i for i in items if i.get("us")]
-    return (ours[:1] + us[:1] + ours[1:])[:limit]
+    ours, other = [i for i in items if not i.get("us")], [i for i in items if i.get("us")]
+    return (ours[:1] + other[:1] + ours[1:2] + other[1:2] + ours[2:])[:limit]
 
 
 def select(stories, weekday):

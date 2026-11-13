@@ -14,14 +14,14 @@ from datetime import datetime, timezone
 
 from kickoff import f1blurb, f1grid
 from kickoff import around, awards, bigstuff, budget, ontoday, young_sports, youngguns, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
-from kickoff import notes, settings, usnews
+from kickoff import notes, settings, sportsnews
 from kickoff import state as state_files
 from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica, wikipedia
 from kickoff.sources import cricket as cricket_source
 from kickoff.sources import other_sports
 
 FOOTBALL_STATE = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs", "top30", "seasons"]
-STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb", "youngguns", "around"]
+STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb", "youngguns", "around", "sportsnews"]
 
 
 def load_state(directory=None):
@@ -116,12 +116,12 @@ def real_adapters(client=None, env=None):
         got = around.run(now, copy.deepcopy(st.get("around") or {}), other_sports.Source(), client)
         return {**got, "events": got.get("events", [])}
 
-    def usnews_go(now, day, st):                                  # NFL and NBA moves for Biggest News (kickoff/usnews.py): no section of its own
+    def sportsnews_go(now, day, st):                              # the NFL, NBA, F1 and cricket news for Biggest News (kickoff/sportsnews.py): no section of its own
         try:
-            items, usage = usnews.find(client, now)
+            items, new_st, usage = sportsnews.find(client, now, st.get("sportsnews") or {})
         except Exception:
-            items, usage = [], {"input": 0, "output": 0}
-        return {"sections": [], "state": {}, "news": items, "stats": {"claude_usage": usage, "items": len(items)}}
+            items, new_st, usage = [], st.get("sportsnews") or {}, {"input": 0, "output": 0}
+        return {"sections": [], "state": {"sportsnews": new_st}, "news": items, "stats": {"claude_usage": usage, "items": len(items)}}
 
     return [
         ("football", "Football", football_go),
@@ -133,7 +133,7 @@ def real_adapters(client=None, env=None):
         _simple("nba", "NBA", _with_extras(lambda now, day, s: nba.run(now, day, s, espn_nba.Source()), "nba", "basketball", "NBA", client), "nba"),
         _simple("mlb", "MLB", _with_extras(lambda now, day, s: mlb.run(now, day, s, espn_mlb.Source()), "mlb", "baseball", "MLB", client), "mlb"),
         ("around", "Other Sports", around_go),
-        ("usnews", "NFL and NBA news", usnews_go),
+        ("sportsnews", "Other sports news", sportsnews_go),
     ]
 
 
@@ -235,7 +235,7 @@ def extra_costs(stats):
         if isinstance(s, dict) and s.get("preview_cost"):
             total += float(s["preview_cost"])
             calls += 1
-    for sid, model in (("youngguns", None), ("around", settings.NEWS_MODEL), ("f1", settings.NEWS_MODEL), ("usnews", settings.NEWS_MODEL)):        # F1: the grid penalties (kickoff/f1grid.py)
+    for sid, model in (("youngguns", None), ("around", settings.NEWS_MODEL), ("f1", settings.NEWS_MODEL), ("sportsnews", settings.NEWS_MODEL)):        # F1: the grid penalties (kickoff/f1grid.py)
         usage = (stats.get(sid) or {}).get("claude_usage") or ((stats.get(sid) or {}).get("claude_tokens") if sid == "f1" else None)
         if usage and (usage.get("input") or usage.get("output")):
             total += notes.cost(usage, model)

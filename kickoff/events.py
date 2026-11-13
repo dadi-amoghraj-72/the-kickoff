@@ -363,7 +363,7 @@ def tennis(slams, matches):
 
 # ---- News and injuries for The Big Stuff (collected by the football section) ----------------------
 
-NEWS_RANK = {"manager_sacked": 0, "manager_appointed": 0, "manager_news": 0, "transfer_confirmed": 1, "injury": 2, "transfer_rumour": 3}
+NEWS_RANK = {"manager_sacked": 0, "manager_appointed": 0, "manager_news": 0, "milestone": 0.5, "transfer_confirmed": 1, "injury": 2, "transfer_rumour": 3}
 
 
 STRONG_NEWS = re.compile(r"\b(sack|appoint|confirm|named|unveil|head coach|new manager|signs?|agree|complete)", re.I)    # an item nobody has judged (Claude off) needs words like these ...

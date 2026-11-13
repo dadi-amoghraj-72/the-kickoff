@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from kickoff import bigstuff, cricket, events, nba, usnews  # noqa: E402
+from kickoff import bigstuff, cricket, events, nba  # noqa: E402
 
 results = []
 
@@ -55,40 +55,13 @@ dull = {**mnf, "away": {**mnf["away"], "score": 10}, "home": {**mnf["home"], "sc
 picked = [s["text"] for s in bigstuff.select(events.nfl([dull], 2, 10, 2), 2)]
 check("a dull prime-time game still makes it (below the usual bar)", len(picked) == 1, picked)
 
-# 4. NFL and NBA moves for Biggest News
-now = datetime(2026, 11, 11, 23, 15, tzinfo=timezone.utc)
-art = lambda h, t="HeadlineNews", when="2026-11-11T14:30:00Z": {"headline": h, "type": t, "published": when, "links": {"web": {"href": "https://espn.com/x"}}}  # noqa: E731
-arts = [art("Raiders name Fernando Mendoza starting QB after trading Kirk Cousins"), art("Sources: Giants called Falcons to ask about Bijan Robinson before trade deadline"),
-        art("RB Jonathan Taylor, QB Daniel Jones remain with Colts as trade deadline passes"), art("What the Kirk Cousins trade means", "Story"),
-        art("Stephen A. has some words after Vikings trade for Kirk Cousins", "Media"), art("Falcons trade center Ryan Neuzil to Ravens", when="2026-11-09T10:00:00Z"),
-        art("Giants' Nabers calls analyst's critique a 'lie'")]
-got = [c["text"] for c in usnews.candidates(arts, now, "NFL")]
-check("only the confirmed hard-news move of the last day", got == ["NFL: Raiders name Fernando Mendoza starting QB after trading Kirk Cousins"], got)
-
-
-class Fake:
-    def __init__(self, reply):
-        self.reply = reply
-
-
-calls = []
-usnews.notes.call_json, real = (lambda client, system, schema, content, model=None: (calls.append(content) or client.reply, {"input": 100, "output": 10})), usnews.notes.call_json
-feed = {"football/nfl": {"articles": arts}, "basketball/nba": {"articles": []}}
-items, usage = usnews.find(Fake({"nfl": 1, "nba": 0}), now, get_json=lambda url: feed["football/nfl" if "nfl" in url else "basketball/nba"])
-check("Claude's pick is kept, marked as US news, with the ESPN link", [(i["text"], i["us"], i["link"]) for i in items] ==
-      [("NFL: Raiders name Fernando Mendoza starting QB after trading Kirk Cousins", True, "https://espn.com/x")], items)
-items, _ = usnews.find(Fake({"nfl": 0, "nba": 0}), now, get_json=lambda url: feed["football/nfl" if "nfl" in url else "basketball/nba"])
-check("nothing big: nothing", items == [])
-n = len(calls)
-items, usage = usnews.find(None, now, get_json=lambda url: feed["football/nfl" if "nfl" in url else "basketball/nba"])
-check("no Claude: no call and nothing", items == [] and len(calls) == n and usage == {"input": 0, "output": 0})
-usnews.notes.call_json = real
-
-foot = [{"text": "Arsenal sign A Player"}, {"text": "Spurs sack Their Manager"}]
-us = [{"text": "NFL: Raiders name Fernando Mendoza starting QB after trading Kirk Cousins", "us": True}]
-check("Biggest News: football first, then the US move", [i["text"] for i in bigstuff.top_news(foot + us)] == ["Arsenal sign A Player", us[0]["text"]])
-check("only the US move: it shows", [i["text"] for i in bigstuff.top_news(us)] == [us[0]["text"]])
-check("no US move: football's two", [i["text"] for i in bigstuff.top_news(foot)] == ["Arsenal sign A Player", "Spurs sack Their Manager"])
+# 4. Biggest News order (the other sports' reader itself is tested in test_morning6.py)
+foot = [{"text": "Arsenal sign A Player"}, {"text": "Spurs sack Their Manager"}, {"text": "Chelsea appoint New Boss"}]
+us = [{"text": "NFL: Raiders name Fernando Mendoza starting QB after trading Kirk Cousins", "us": True}, {"text": "F1: Racing Bulls keep Lawson and Lindblad", "us": True}]
+check("Biggest News: football first, then the other sports' best, then football's next", [i["text"] for i in bigstuff.top_news(foot + us)] == [foot[0]["text"], us[0]["text"], foot[1]["text"]])
+check("only other sports: their two", [i["text"] for i in bigstuff.top_news(us)] == [us[0]["text"], us[1]["text"]])
+check("one football item: it, then the other sports' two", [i["text"] for i in bigstuff.top_news(foot[:1] + us)] == [foot[0]["text"], us[0]["text"], us[1]["text"]])
+check("no other sports: football's three", [i["text"] for i in bigstuff.top_news(foot)] == [f["text"] for f in foot])
 
 print(f"\n{sum(results)}/{len(results)} passed")
 sys.exit(0 if all(results) else 1)

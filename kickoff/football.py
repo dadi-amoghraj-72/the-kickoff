@@ -241,7 +241,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
     items = guard("news feeds", feeds.fetch_all) or []
     seen = dict(st.get("news_seen", {}))
     all_rows = {lg: v for lg, v in rows.items() if v}
-    cands = news.candidates(items, news.club_aliases(all_rows), now, seen_links=set(seen))
+    cands = news.candidates(items, news.club_aliases(all_rows), now, seen_links=set(seen), nations=set((st.get("top30") or {}).get("teams") or []) | {"England", "India", "Singapore"})
     if cands and client:
         verdicts, usage = news.classify(client, cands)
         ledger.add("news classification", settings.NEWS_MODEL, usage)

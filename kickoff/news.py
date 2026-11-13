@@ -15,7 +15,9 @@ CATEGORIES = {
     "injury": re.compile(r"\b(injur\w*|ruled out|out for|doubt\w*|sidelined|fitness|hamstring|knee|ankle|thigh|calf|surgery|"
                          r"setback|return\w* from)\b", re.I),
 }
-PRIORITY = ["managerial", "transfer_done", "injury", "transfer_talk"]
+CATEGORIES["milestone"] = re.compile(r"\b(record\w*|all-time|most-capped|caps?|milestone|landmark|first ever|becomes? (?:the )?first|retire\w*|"
+                                     r"\d{2,3}(?:st|nd|rd|th) (?:cap|goal|appearance|game|match))\b", re.I)    # D, 2026-11-13: Harry Kane's England caps record
+PRIORITY = ["managerial", "transfer_done", "milestone", "injury", "transfer_talk"]
 # Without Claude (D, 2026-11-05: a Kuyt match reaction, a Gyokeres match report and a Football Daily column were shown as manager news): the headline itself must say a manager has been
 # sacked, has left or has been appointed, and must not be a reaction, a live blog, a column or a talking-points piece.
 MANAGER_CHANGE = re.compile(r"\b(sack(?:ed|s|ing)?|dismiss(?:ed|es|al)?|appoint(?:ed|s|ment)?|named (?:\w+ ){0,3}(?:as )?(?:the )?(?:new )?(?:manager|head coach|boss)|new (?:manager|head coach|boss)|"
@@ -47,14 +49,17 @@ def category(item):
     return next((c for c in PRIORITY if CATEGORIES[c].search(text)), None)
 
 
-def candidates(items, names, now, seen_links=()):
+def candidates(items, names, now, seen_links=(), nations=()):
     """Items worth a closer look: published in the last 36 hours, not shown before, naming a covered club, and
-    matching a kind of news we report. Each gets a 'hint' and the 'clubs' it names."""
+    matching a kind of news we report. Each gets a 'hint' and the 'clubs' it names. A record or milestone may name a top-30 national team
+    (`nations`) instead of a club (D, 2026-11-13: Harry Kane became England's most-capped player and nothing said so)."""
     out = []
     for i in items:
         if now - i["published"] > RECENT or i["published"] > now + timedelta(hours=1) or i["link"] in seen_links:
             continue
         clubs, hint = mentioned(i, names), category(i)
+        if not clubs and nations and CATEGORIES["milestone"].search(f"{i['title']} {i['text']}"):
+            clubs, hint = mentioned(i, nations), "milestone"
         if clubs and hint:
             out.append({**i, "hint": hint, "clubs": clubs})
     return out
@@ -66,7 +71,7 @@ import json  # noqa: E402
 
 from kickoff import notes, settings  # noqa: E402
 
-KINDS = ["transfer_confirmed", "transfer_rumour", "manager_sacked", "manager_appointed", "injury", "none"]
+KINDS = ["transfer_confirmed", "transfer_rumour", "manager_sacked", "manager_appointed", "injury", "milestone", "none"]
 SYSTEM = """You sort and summarise football news items for The Kickoff, a personal daily digest. Each item is only a headline and
 a short blurb from BBC Sport, The Guardian or ESPN. You see nothing else, so know nothing else.
 
@@ -76,6 +81,8 @@ For every item choose one "kind":
 - manager_sacked: a manager or head coach has actually been sacked, has resigned or has left.
 - manager_appointed: a manager or head coach has actually been appointed, including interim.
 - injury: the text states that a named player is injured, ruled out or doubtful.
+- milestone: a historic record or landmark the text says HAS been reached (a country's most-capped player or all-time top scorer, a 100th cap,
+  a club or league record), or a great player retiring. A record that might fall in a coming game is "none".
 - none: anything else. Match reports, opinion, a manager "under pressure", a manager who "could be sacked", transfers
   that are only speculation about the future, and anything you are unsure about are all "none". When in doubt, "none".
 
@@ -178,16 +185,17 @@ def apply_rules(cands, results):
             or (listed and club != "Arsenal" and kind == "transfer_confirmed")
             or (kind in ("manager_sacked", "manager_appointed"))
             or (kind == "injury" and club in NON_PL_LISTED)
+            or kind == "milestone"
         )
         if keep:
             shown.append({"kind": kind, "club": club, "summary": r["summary"], "headline": c["title"], "source": c["source"],
                           "link": c["link"], "listed": listed, "published": c["published"],
-                          "section": "arsenal" if club == "Arsenal" else "football"})
+                          "section": "arsenal" if club == "Arsenal" else "records" if kind == "milestone" else "football"})   # a record goes to Biggest News only
     return shown
 
 
 TAG = {"transfer_confirmed": "Transfer", "transfer_rumour": "Rumour", "manager_sacked": "Sacked", "manager_appointed": "Appointed",
-       "injury": "Injury", "manager_news": "Manager"}
+       "injury": "Injury", "manager_news": "Manager", "milestone": "Milestone"}
 
 
 def plain_managerial(cands, limit=4):
