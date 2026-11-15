@@ -33,7 +33,12 @@
     "rugby:604003",
     "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTTN1MkRlR2NjdGxEUk9iZjNmWXpOSGVBZkFfUWUzaDEzTkhOQ1hmY0RoYzlCb1ZZVDQxN0Q5WXBxanJHdkZIbUxDT0RFRVBoblh3UVBpWHZrRVhMZTVrdFo5cDAzR29ESjhtY21VeGJnaE05ekZReUwwY3VWYm05XzF5YTdid2pDQlV4aWtnYjVYNGI1MmVn?oc=5",
     "https://www.theguardian.com/sport/2026/nov/14/mirra-andreeva-jessica-pegula-wta-finals-semi-final-indian-wells",
-    "https://www.straitstimes.com/sport/germanys-aicher-powers-to-first-world-cup-slalom-victory-in-levi"
+    "https://www.straitstimes.com/sport/germanys-aicher-powers-to-first-world-cup-slalom-victory-in-levi",
+    "rugby:604004",
+    "https://www.bbc.co.uk/sport/darts/articles/cxlylvy2m5lqo?at_medium=RSS&at_campaign=rss",
+    "https://www.straitstimes.com/sport/alpine-skiing-pinheiro-braathen-wins-levi-slalom-ahead-of-noel",
+    "https://www.bbc.co.uk/sport/rugby-league/articles/c50mdzx3j039o?at_medium=RSS&at_campaign=rss",
+    "https://www.bbc.co.uk/sport/darts/articles/c61mdlgd94zno?at_medium=RSS&at_campaign=rss"
   ],
   "stories": {
     "https://sports.yahoo.com/articles/tennessee-basketball-mock-cba-offers-233229786.html": "2026-11-11T23:58:33Z",
@@ -42,7 +47,8 @@
   },
   "ufc": {
     "done": [
-      "600061268"
+      "600061268",
+      "600061400"
     ]
   },
   "ufcrank": {

@@ -2,12 +2,12 @@
   "budget": {
     "budget": 10.0,
     "mode": "normal",
-    "pct": 0.063,
-    "spent": 0.6302
+    "pct": 0.069,
+    "spent": 0.691
   },
-  "built": "2026-11-14T23:49:02Z",
+  "built": "2026-11-15T23:56:36Z",
   "claude": "normal",
-  "date": "2026-11-15",
+  "date": "2026-11-16",
   "failed": [],
   "problems": [],
   "warnings": []
