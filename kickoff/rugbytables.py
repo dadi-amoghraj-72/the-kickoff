@@ -29,6 +29,11 @@ def ranked(rows):
     return sorted(rows, key=lambda x: (-x["pts"], -x["pd"], x["team"]))
 
 
+# Column widths (D, 2026-11-15: # narrow on the left, Team wide enough for 'South Africa'). Set on the table itself: with a fixed layout the browser reads
+# widths from the first row, and that row is the title spanning every column, so widths in the stylesheet split the columns evenly.
+COLS = "<table><colgroup>" + "".join(f'<col style="width:{w}%">' for w in (8, 40, 8, 8, 8, 16, 12)) + "</colgroup>"
+
+
 def table_html(league, data):
     """The table(s) of one competition, or '' when there is none yet (a season not started) or it cannot be read."""
     rows = [x for x in rows_of(data) if x["p"] > 0]
@@ -42,5 +47,5 @@ def table_html(league, data):
         if not pool:
             continue
         body = [[i, x["team"], x["p"], x["w"], x["l"], f"{x['pd']:+d}", x["pts"]] for i, x in enumerate(ranked(pool), 1)]
-        out += r.title_row(r.table(caption, COLUMNS, body))
+        out += r.title_row(r.table(caption, COLUMNS, body)).replace("<table>", COLS, 1)
     return f'<div class="rugbyt">{out}</div>'

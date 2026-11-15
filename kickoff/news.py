@@ -169,10 +169,10 @@ NON_PL_LISTED = {n for n, c, g in CLUBS.values() if n not in {"Arsenal", "Manche
 
 def apply_rules(cands, results):
     """Keep only what D's rules allow. Returns a list of items ready to show, each with a 'section'.
-    - Arsenal: confirmed transfers, rumours (labelled), managers, injuries.
+    - Arsenal: confirmed transfers, managers, injuries. No rumours anywhere (D, 2026-11-15: a gossip column's 'linked with' adds nothing).
     - Other listed clubs: confirmed transfers only; managers; injuries only for clubs outside the Premier League
       (the Premier League's injuries come from the official FPL status instead).
-    - Managers: any covered club. A rumour about any other club is dropped."""
+    - Managers: any covered club."""
     shown = []
     for c in cands:
         r = results.get(c["link"])
@@ -181,7 +181,7 @@ def apply_rules(cands, results):
         kind, club = r["kind"], r["club"]
         listed = club in {n for n, _, _ in CLUBS.values()}
         keep = (
-            (club == "Arsenal" and kind in ("transfer_confirmed", "transfer_rumour", "manager_sacked", "manager_appointed", "injury"))
+            (club == "Arsenal" and kind in ("transfer_confirmed", "manager_sacked", "manager_appointed", "injury"))
             or (listed and club != "Arsenal" and kind == "transfer_confirmed")
             or (kind in ("manager_sacked", "manager_appointed"))
             or (kind == "injury" and club in NON_PL_LISTED)

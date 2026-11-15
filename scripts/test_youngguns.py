@@ -94,16 +94,11 @@ check("no candidates, no section", yg.html([]) == "" and yg.build([], {}, DAY)["
 b = yg.build([c("1", 60, name="Cooper Flagg")], {}, DAY)
 check("the plain line reads 'Name (team, rookie, age): facts' with gold figures", "Cooper Flagg (DET, rookie, 19): " in b["lines"][0] and '<span class="n">20 pts</span>' in b["html"], b["html"])
 
-# ---- Claude phrasing ----------------------------------------------------------------------------
+# ---- one form for every line, no Claude (D, 2026-11-15) -----------------------------------------
 cand = yg.make("nba", "1", "Cooper Flagg", "DAL", "27 pts, 8 reb against Orlando Magic", 60, 19, True, DAY)
-good = {"lines": [{"n": 1, "text": "Cooper Flagg (DAL, 19) scored 27 points with 8 rebounds against Orlando Magic."}]}
-bad = {"lines": [{"n": 1, "text": "Cooper Flagg (DAL, 19) scored 31 points, a franchise record."}]}
-check("Claude's line is used when every name and number is in the facts", yg.phrase(object(), [cand], lambda *a: (good, {"input": 1, "output": 1}))[0] == {"nba:1": good["lines"][0]["text"]})
-check("a line with a number or claim not in the facts is dropped (the plain line stays)", yg.phrase(object(), [cand], lambda *a: (bad, {"input": 1, "output": 1}))[0] == {})
-check("without Claude there is no call and no cost", yg.phrase(None, [cand]) == ({}, {"input": 0, "output": 0}))
-check("a Claude failure never raises", yg.phrase(object(), [cand], lambda *a: 1 / 0)[0] == {})
 b = yg.build([cand], {}, DAY, object())
-check("build falls back to the plain line when Claude's call fails", b["lines"] == [yg.plain_line(cand)], b["lines"])
+check("with a client given, still the code's line and no cost", b["lines"] == ["Cooper Flagg (DAL, rookie, 19): 27 pts, 8 reb against Orlando Magic"] and b["usage"] == {"input": 0, "output": 0}, b)
+check("Young Guns has no Claude phrasing left", not hasattr(yg, "phrase") and not hasattr(yg, "SYSTEM"))
 
 # ---- the edition ---------------------------------------------------------------------------------
 now = datetime(2026, 11, 4, 23, 15, tzinfo=timezone.utc)
@@ -125,17 +120,13 @@ check("youngguns is one of the saved states", "youngguns" in daily.STATE_NAMES)
 
 # ---- one blank row between sports, gold figures, sports together (D, 2026-11-05)
 _h = yg.html(["Darius Acuff Jr. (SAC, rookie, 19) scored 22 points and gave out 12 assists.", "Dylan Harper (SAS, 20) scored 21 points.", "Mattia Liberali (COMO, 19): 1 goal, 2 assists (Lens 1\u20139 Como)"], ["nba", "nba", "soccer"])
-check("a blank row only where the sport changes: the first basketball line and the second have none, the first football line has it", _h.count("sport-gap") == 1 and _h.index("sport-gap") > _h.index("Harper"), _h)
+check("each sport under its own label: NBA over both basketball lines, Football over the football line", _h.count('class="subhead"') == 2 and _h.index(">NBA<") < _h.index("Acuff") < _h.index("Harper") < _h.index(">Football<") < _h.index("Liberali"), _h)
 check("the whole stat phrase is gold (22 points, 12 assists, 21 points, 1 goal, 2 assists) and the ages are not (19, 20)", all(f'<span class="n">{n}</span>' in _h for n in ("22 points", "12 assists", "21 points", "1 goal", "2 assists")) and '<span class="n">19' not in _h and '<span class="n">20' not in _h, _h)
 _c = lambda sp, i: yg.make(sp, i, f"P{i}", "T", "1 goal", 50 - i, 19, False, DAY)  # noqa: E731
 check("the picks are grouped by sport, sports in the order of their best player", [c["sport"] for c in yg.grouped([_c("nba", 1), _c("soccer", 2), _c("nba", 3), _c("soccer", 4)])] == ["nba", "nba", "soccer", "soccer"])
 
 _s = yg.html(["Mattia Liberali (COMO, 19) scored once as Como won 9\u20131 at Lens, with 2 assists."], ["soccer"])
 check("'scored once' and '2 assists' are gold, the score 9\u20131 and the age are not", '<span class="n">scored once</span>' in _s and '<span class="n">2 assists</span>' in _s and '<span class="n">9' not in _s and '9\u20131' in _s and '<span class="n">19' not in _s, _s)
-_c = {"name": "Mattia Liberali", "team": "COMO", "age": 19, "facts": "1 goal, 2 assists (Lens 1\u20139 Como)", "rookie": False}
-check("a count the facts do not carry is rejected: 'scored twice' for one goal, 'a hat-trick', '3 assists' (D, 2026-11-05)", not yg.supported("Mattia Liberali (COMO, 19) scored twice at Lens.", _c) and not yg.supported("Mattia Liberali (COMO, 19) scored a hat-trick.", _c)
-      and not yg.supported("Mattia Liberali (COMO, 19) set up 3 assists.", _c) and yg.supported("Mattia Liberali (COMO, 19) scored once and set up 2 assists.", _c), "")
-check("number words count too: 'two assists' passes, 'three assists' does not", yg.counts_agree("He had two assists.", "1 goal, 2 assists") and not yg.counts_agree("He had three assists.", "1 goal, 2 assists"))
 
 print(f"\n{sum(results)} of {len(results)} passed")
 sys.exit(0 if all(results) else 1)

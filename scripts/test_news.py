@@ -137,7 +137,7 @@ def shown(*pairs):
     return {i["link"] for i in news.apply_rules(cands, res)}
 
 
-check("Arsenal: confirmed transfer, rumour, sacking and injury are all kept", shown(R("1", "transfer_confirmed", "Arsenal"), R("2", "transfer_rumour", "Arsenal"), R("3", "manager_sacked", "Arsenal"), R("4", "injury", "Arsenal")) == {"1", "2", "3", "4"})
+check("Arsenal: confirmed transfer, sacking and injury are kept; a rumour is not (D, 2026-11-15)", shown(R("1", "transfer_confirmed", "Arsenal"), R("2", "transfer_rumour", "Arsenal"), R("3", "manager_sacked", "Arsenal"), R("4", "injury", "Arsenal")) == {"1", "3", "4"})
 check("a rumour about any other club is dropped", shown(R("1", "transfer_rumour", "Barcelona"), R("2", "transfer_rumour", "Chelsea")) == set())
 check("another listed club's confirmed transfer is kept", shown(R("1", "transfer_confirmed", "Barcelona")) == {"1"})
 check("a confirmed transfer at a club we don't list is dropped", shown(R("1", "transfer_confirmed", "Nottingham Forest")) == set())
@@ -152,7 +152,7 @@ ah, fh = news.html(items, "arsenal", "Team News"), news.html(items, "football", 
 check("Arsenal's item goes in the Arsenal block with a tag and a source link", "Team News" in ah and "Transfer" in ah and 'rel="noopener">BBC Sport</a>' in ah and "Forest" not in ah, ah)
 check("with no summary the headline is shown as the fallback", "Forest sack Glasner after another defeat" in fh and "Sacked" in fh, fh)
 check("no items for a section means no block", news.html(items, "arsenal", "x") != "" and news.html([], "arsenal", "x") == "")
-check("rumours are clearly tagged", "Rumour" in news.html(news.apply_rules([A], {A["link"]: {"kind": "transfer_rumour", "club": "Arsenal", "summary": "Arsenal are reportedly interested."}}), "arsenal", "Team News"))
+check("an Arsenal rumour is not shown at all (D, 2026-11-15)", "" == news.html(news.apply_rules([A], {A["link"]: {"kind": "transfer_rumour", "club": "Arsenal", "summary": "Arsenal are reportedly interested."}}), "arsenal", "Team News"))
 
 # ---- Without Claude: the manager stories still show (D, 2026-11-04: Scott Parker was missing from a run made with Claude off) ----
 from datetime import datetime as _dt, timezone as _tz  # noqa: E402

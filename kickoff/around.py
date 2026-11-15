@@ -58,9 +58,13 @@ RULES = [
     ("chess", "Chess", r"\bchess\b|\bfide\b|grandmaster", r"world (chess )?championship|candidates|olympiad|tata steel|norway chess|grand chess tour|sinquefield|women'?s world"),
     ("darts", "Darts", r"\bdarts?\b|\bpdc\b", r"world (darts )?championship|world matchplay|grand slam of darts|premier league|ally pally|alexandra palace"),
     ("games", "Multi-sport games", r"games|olympic|olympics", r"\b(asian|sea|southeast asian|commonwealth|olympic|paralympic|youth olympic) games\b|\bolympics\b"),
-    ("womens-football", "Women's football", r"women'?s (world cup|euro)|\bwwc\b", r"women'?s (world cup|euro)|\bfinal\b"),
+    ("womens-football", "Women's football", r"\b(football|soccer|wwc)\b", r"women'?s (world cup|euro)|\bwwc\b"),      # a football word: a 'women's World Cup slalom' is skiing (D, 2026-11-15)
+    # D (2026-11-15): other sports' World Cups and world championships are interesting (alpine skiing, cycling, archery...), shown under one heading, each line starting with its
+    # sport and saying what the event is. Last, so a sport with its own heading above keeps it.
+    ("worldcups", "World Cups", r"world cup|world championships?", r"world cup|world championships?"),
 ]
-ORDER = ["rugby", "golf", "ufc", "badminton", "athletics", "swimming", "handball", "hockey", "chess", "darts", "games", "womens-football", "spotlight"]
+ORDER = ["rugby", "golf", "ufc", "badminton", "athletics", "swimming", "handball", "hockey", "chess", "darts", "games", "womens-football", "worldcups", "spotlight"]
+LEAD = {"games", "worldcups"}      # lines that start with their sport ("Alpine skiing: ...")
 HEADING = {"rugby": "Rugby", "ufc": "UFC", "spotlight": "Spotlight", "swimming": "Swimming", **{k: h for k, h, _, _ in RULES}}
 RECORD_LINES = {"athletics": 5, "swimming": 5}      # world records, close finishes, world leads and meeting records (kickoff/athletics.py): more room than a feed sport
 
@@ -71,7 +75,7 @@ SPOT_NAMES = re.compile(r"\b(sindhu|satwik|chirag shetty|lakshya sen|prannoy|tre
 SPOT_STAGE = re.compile(r"semi-?final|\bfinal\b|\bmedal|podium|bronze|silver|\bgold\b|\btitle\b|champion|crowned|wins?\b|won\b", re.I)
 # D (2026-11-08): India and Singapore reaching a semi-final or final, or a medal, in any of these sports' tournaments gets a line even when the event is not on the list above
 # (at most two lines a sport, like every feed line): India's hockey team won the Asian Champions Trophy at home and nothing said so.
-OURS = re.compile(r"\b(india|indian|indians|singapore|singaporean)\b", re.I)
+OURS = re.compile(r"\b(india|indian(?! wells)|indians|singapore|singaporean)\b", re.I)
 OURS_STAGE = re.compile(r"semi-?finals?|\bfinals?\b|\bgold\b|\bsilver\b|\bbronze\b|\bmedal|\btitle\b|\bchampions?\b|\bcrowned\b|\blift(s|ed)?\b", re.I)
 NOT_SPOT = re.compile(r"\b(cricket|ipl|test match|odi|t20|football|premier league|nba|nfl|formula|f1|tennis|rugby|golf)\b", re.I)    # sports we cover in full elsewhere
 RESULT = re.compile(r"\b(wins?|won|beats?|beat|defeats?|champion|title|crowned|claims?|retains?|seals?|clinch|secures?|medal|gold|silver|bronze|reaches?|into the final|semi-?final|"
@@ -81,7 +85,10 @@ MAJORS = re.compile(r"masters tournament|pga championship|u\.?s\.? open|the open
 STRICT = re.compile(r"\b(wins?|won|beats?|defeats?|champions?|crowned|claims? (?:the )?(?:title|gold|silver|bronze|crown)|retains?|clinch\w*|secures?|lifts?|reaches? (?:the )?(?:\w+ )?final|into the final|storms into|triumph|victory|thrash\w*|stuns?)\b", re.I)
 NEGATIVE = re.compile(r"\b(stolen|theft|robbery|burgled|arrested|funeral|obituary|tribute)\b", re.I)         # in the news, but not sport
 NEWS = re.compile(r"\b(withdraws?|withdrawn|ruled out|banned|ban\b|retires?|retirement|confirmed|confirms|doping|injur\w+|suspended)\b", re.I)
-EXCLUDE = {"games": re.compile(r"medall?ists?\b|\bstolen\b|\bformer\b|\blegend|\bdoping\b|\bwhereabouts\b", re.I)}      # a past medallist in the news is not the Games being played
+EXCLUDE = {"games": re.compile(r"medall?ists?\b|\bstolen\b|\bformer\b|\blegend|\bdoping\b|\bwhereabouts\b", re.I),      # a past medallist in the news is not the Games being played
+           "worldcups": re.compile(r"\b(football|soccer|fifa|rugby|golf|badminton|chess|darts|hockey|handball|athletics|swimming)\b", re.I)}   # those have their own rules or sections
+# D (2026-11-15: Andreeva's WTA Finals semi-final showed up under Multi-sport games): a sport we cover in full in its own section never comes from these feeds.
+COVERED = re.compile(r"\b(tennis|wta|atp|cricket|ipl|formula (?:1|one)|f1|nba|nfl|mlb|premier league)\b", re.I)
 # D (2026-11-05): the feed headlines were tabloid noise (a Facebook post with emojis). Now: only these outlets, only for sports that have no structured source of their own, only when Claude has
 # written a checked sentence (no Claude, no feed lines), at most two a sport, and no 'Spotlight' section.
 WHITELIST = re.compile(r"\b(bbc|guardian|espn|straits times|the hindu|chessbase)\b", re.I)
@@ -98,7 +105,8 @@ For every item choose one "kind":
 - none: anything else. Previews, opinion, interviews, "could" and "may", lists, and anything you are unsure about are "none". When in doubt, "none".
 
 For result and news give a "summary": ONE sentence of at most 30 words in your own words, using only the headline and blurb; add nothing from memory; never copy a run of more than
-five words; no hype, no emojis. Also give "sport": the sport the item is about, in one or two words with a capital letter (Badminton, Athletics, Swimming, Field hockey), only when
+five words; no hype, no emojis. Give the context a reader new to the sport needs: name the event in plain words (the season's first women's slalom
+at Levi, the road cycling world championships) and, when the text says it, why the result matters (a first career win, the overall lead). Also give "sport": the sport the item is about, in one or two words with a capital letter (Badminton, Athletics, Swimming, Field hockey, Alpine skiing), only when
 the headline or blurb says it or names its event; otherwise "". Return one entry per item, using the item's link as its id."""
 SCHEMA = {"type": "object", "properties": {"items": {"type": "array", "items": {"type": "object", "properties": {
     "link": {"type": "string"}, "kind": {"type": "string", "enum": KINDS}, "summary": {"type": "string"}, "sport": {"type": "string"}}, "required": ["link", "kind", "summary", "sport"], "additionalProperties": False}}},
@@ -179,6 +187,8 @@ def candidates(items, now, seen=()):
             continue
         titles.add(key)
         key, spot = sport_of(i)
+        if COVERED.search(f"{i['title']} {i['text']}"):
+            continue
         if key in NO_FEED or not WHITELIST.search(i["source"]):
             continue
         if key and (RESULT.search(i["title"]) or NEWS.search(i["title"])):            # a preview or a feature is not a result; Claude then sorts the rest
@@ -218,7 +228,7 @@ def classify(client, cands):
                 out[item["link"]] = {"kind": x["kind"], "summary": None}
                 redo.append({**next(p for p in pending if p["link"] == item["link"]), "problems": problems})
             else:
-                out[item["link"]] = {"kind": x["kind"], "summary": x["summary"].strip(), "sport": sport_named(x.get("sport", ""), item)}
+                out[item["link"]] = {"kind": x["kind"], "summary": x["summary"].strip(), "sport": sport_named(x.get("sport", ""), item), "named": (x.get("sport") or "").strip()}
         pending = redo
         if not pending:
             break
@@ -390,10 +400,14 @@ def run(now, st, source, client=None):
             if feed_count.get(c["sport"], 0) >= FEED_PER_SPORT:
                 continue
             lead = v.get("sport") or ""
+            if c["sport"] == "worldcups" and not lead and re.fullmatch(r"[A-Z][a-z]+(?: [a-z]+){0,2}", v.get("named") or ""):
+                lead = v["named"]                                    # 'Alpine skiing' for a 'World Cup slalom': the sport's name only, never a person or a number
             if c["sport"] == "games" and not (lead and OURS.search(f"{c['title']} {c['text']}")):   # a Games line says its sport and is about India or Singapore (D, 2026-11-08)
                 continue
+            if c["sport"] == "worldcups" and not lead:                  # a World Cups line must be able to say its sport
+                continue
             feed_count[c["sport"]] = feed_count.get(c["sport"], 0) + 1
-            lines[c["sport"]].append(line_html(v["summary"] or c["title"], c["link"], c["source"], lead=lead if c["sport"] == "games" else ""))
+            lines[c["sport"]].append(line_html(v["summary"] or c["title"], c["link"], c["source"], lead=lead if c["sport"] in LEAD else ""))
             seen.append(c["link"])
     html = ""
     on = games_on(sgt_today)

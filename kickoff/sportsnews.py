@@ -26,15 +26,21 @@ SOURCES = {
 LOOKBACK = timedelta(hours=72)    # once a day can miss a story published just after a run; "seen" stops a story being judged twice
 PER_SPORT = 80                    # newest first; Claude reads only headlines and short blurbs, so this stays a small call
 MAX_PICKS = 2
+# D (2026-11-15: Zimbabwe's coach resigning was not needed): in cricket, a coach or captain story counts only for these sides (or an IPL franchise's). Code checks Claude's pick.
+CRICKET_STAFF = re.compile(r"\b(coach\w*|captain\w*|captaincy|skipper)\b", re.I)
+CRICKET_SIDES = re.compile(r"\b(india|indian|australia|australian|england|english|south africa|south african|new zealand|ipl)\b", re.I)
+OTHER_SIDES = re.compile(r"\b(zimbabwe|afghanistan|bangladesh|sri lanka|west indies|pakistan|ireland|scotland|netherlands|nepal|uae|usa|oman|namibia|canada|kenya|"
+                         r"hong kong|papua new guinea|uganda|italy|jersey)\b", re.I)
 NOT_YET = re.compile(r"\?|\b(sources?|reportedly|rumou?r\w*|could|would|might|expected|eyes?|eyeing|interest(?:ed)? in|considering|in talks|close to|nears?|"
-                     r"live|as it happened|verdict|talking points|podcast|quiz|predictions?|ratings|preview|what we learned|explained|q&a|chequered flag|"
+                     r"set to|poised|likely|on the verge|edges? closer|live|as it happened|verdict|talking points|podcast|quiz|predictions?|ratings|preview|what we learned|explained|q&a|chequered flag|"
                      r"video|in pictures|gallery|highlights)\b|\s\|\s", re.I)        # ' | ' ends a Guardian column's title with its writer's name
 
 SYSTEM = """You pick the biggest news of the last few days in the NFL, the NBA, Formula 1 and cricket for a sports fan in Singapore who follows India's
 cricket closely and the other sports as a keen fan. Each item is only a headline and a short blurb. You see nothing else, so know nothing else.
 Pick at most two items, most important first, and only items that report something that HAS happened and that a fan of that sport would call big:
-- a trade or signing of a star (a starting quarterback, an All-Star, an IPL trade of an India player), a driver's seat or contract for next season,
-  a head coach, team principal or national captain appointed or sacked;
+- a trade or signing of a star (a starting quarterback, an All-Star, an IPL trade of an IPL captain or a star India international), a driver's seat or
+  contract for next season, a head coach or team principal appointed or sacked, a national captain or head coach appointed, sacked or resigning (in
+  cricket only India, Australia, England, South Africa and New Zealand: never another country's coach or captain);
 - a historic record or milestone actually reached (most caps, an all-time record, a first ever), or a great player retiring.
 Depth players, assistant coaches, match reports, previews, opinion and anything that might happen are not big. Picking nothing is fine.
 For each pick give "n" (the item's number) and "summary": ONE sentence of at most 30 words in your own words, from the headline and blurb only.
@@ -87,6 +93,13 @@ def candidates(by_sport, now, seen=()):
     return out
 
 
+def wanted(sport, item):
+    """False for a cricket coach or captain story about another country: it names one, and its headline names none of India, Australia, England, South Africa,
+    New Zealand or the IPL ('Sammons resigns as Zimbabwe coach ... returns to South Africa' is Zimbabwe's story)."""
+    text = f"{item['title']} {item['text']}"
+    return not (sport == "Cricket" and CRICKET_STAFF.search(text) and OTHER_SIDES.search(text) and not CRICKET_SIDES.search(item["title"]))
+
+
 def check(summary, item):
     """The football news checks (invented names or numbers, copying, length)."""
     from kickoff import news
@@ -110,6 +123,8 @@ def find(client, now, st, fetched=None):
         if not 1 <= n <= len(cands):
             continue
         sport, item = cands[n - 1]
+        if not wanted(sport, item):
+            continue
         summary = (p.get("summary") or "").strip()
         text = summary if summary and not check(summary, item) else item["title"]     # a summary that fails the checks: the source's own headline
         out.append({"text": f"{sport}: {text}", "link": item["link"], "source": item["source"], "us": True})
