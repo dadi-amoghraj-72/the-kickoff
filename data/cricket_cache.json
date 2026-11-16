@@ -1,7 +1,7 @@
 {
  "cards": {
   "espn-1525662": {
-   "built": "2026-11-15T22:50:05Z",
+   "built": "2026-11-16T22:50:06Z",
    "potm": [],
    "scorecard": [
     {
@@ -85,17 +85,69 @@
        "sr": 0.0
       },
       {
-       "4s": 12,
-       "6s": 0,
-       "b": 138,
+       "4s": 14,
+       "6s": 1,
+       "b": 179,
        "batsman": {
         "name": "Litton Das"
        },
-       "dismissal-text": "not out",
-       "m": null,
+       "dismissal-text": "c Mulder b Paterson",
+       "m": 286,
        "mark": "†",
-       "r": 92,
+       "r": 120,
+       "sr": 67.03
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 16,
+       "batsman": {
+        "name": "Mehidy Hasan Miraz"
+       },
+       "dismissal-text": "c Mulder b Paterson",
+       "m": 32,
+       "mark": "",
+       "r": 10,
+       "sr": 62.5
+      },
+      {
+       "4s": 3,
+       "6s": 0,
+       "b": 24,
+       "batsman": {
+        "name": "Hasan Mahmud"
+       },
+       "dismissal-text": "c †Rickelton b Paterson",
+       "m": 42,
+       "mark": "",
+       "r": 16,
        "sr": 66.66
+      },
+      {
+       "4s": 2,
+       "6s": 1,
+       "b": 16,
+       "batsman": {
+        "name": "Taskin Ahmed"
+       },
+       "dismissal-text": "c Mulder b Paterson",
+       "m": 31,
+       "mark": "",
+       "r": 17,
+       "sr": 106.25
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 7,
+       "batsman": {
+        "name": "Ebadot Hossain"
+       },
+       "dismissal-text": "not out",
+       "m": 8,
+       "mark": "",
+       "r": 1,
+       "sr": 14.28
       }
      ],
      "bowling": [
@@ -104,11 +156,11 @@
        "bowler": {
         "name": "Kagiso Rabada"
        },
-       "eco": 3.0,
-       "m": 3,
+       "eco": 3.18,
+       "m": 4,
        "nb": 0,
-       "o": 17.0,
-       "r": 51,
+       "o": 22.0,
+       "r": 70,
        "w": 5,
        "wd": 1
       },
@@ -117,11 +169,11 @@
        "bowler": {
         "name": "Marco Jansen"
        },
-       "eco": 3.0,
-       "m": 2,
+       "eco": 3.32,
+       "m": 3,
        "nb": 0,
-       "o": 18.0,
-       "r": 54,
+       "o": 25.0,
+       "r": 83,
        "w": 1,
        "wd": 0
       },
@@ -130,12 +182,12 @@
        "bowler": {
         "name": "Dane Paterson"
        },
-       "eco": 4.0,
-       "m": 5,
+       "eco": 4.11,
+       "m": 7,
        "nb": 1,
-       "o": 17.0,
-       "r": 68,
-       "w": 0,
+       "o": 22.2,
+       "r": 92,
+       "w": 4,
        "wd": 0
       },
       {
@@ -182,23 +234,190 @@
       "dnb": [],
       "extras": {
        "b": 8,
-       "lb": 9,
+       "lb": 10,
        "nb": 1,
-       "total": 19,
+       "total": 20,
        "w": 1
       },
-      "fow": "1-0 (Islam, 0.1), 2-2 (Haque, 2.2), 3-22 (Shanto, 8.5), 4-121 (Hasan, 34.1), 5-121 (Rahim, 34.2), 6-327 (Hridoy, 83.6)",
+      "fow": "1-0 (Islam, 0.1), 2-2 (Haque, 2.2), 3-22 (Shanto, 8.5), 4-121 (Hasan, 34.1), 5-121 (Rahim, 34.2), 6-327 (Hridoy, 83.6), 7-359 (Miraz, 91.1), 8-370 (Das, 95.3), 9-391 (Mahmud, 99.3), 10-400 (Ahmed, 101.2)",
       "total": {
-       "o": 84.0,
-       "r": 327,
-       "rr": 3.89,
-       "w": 6
+       "o": 101.2,
+       "r": 400,
+       "rr": 3.94,
+       "w": 10
       }
      },
      "inning": "Bangladesh 1st Innings"
+    },
+    {
+     "batting": [
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 8,
+       "batsman": {
+        "name": "Aiden Markram"
+       },
+       "dismissal-text": "c †Litton Das b Hasan Mahmud",
+       "m": null,
+       "mark": "",
+       "r": 4,
+       "sr": 50.0
+      },
+      {
+       "4s": 21,
+       "6s": 1,
+       "b": 164,
+       "batsman": {
+        "name": "Marques Ackerman"
+       },
+       "dismissal-text": "c Taskin Ahmed b Hasan Mahmud",
+       "m": null,
+       "mark": "",
+       "r": 157,
+       "sr": 95.73
+      },
+      {
+       "4s": 12,
+       "6s": 0,
+       "b": 129,
+       "batsman": {
+        "name": "Zubayr Hamza"
+       },
+       "dismissal-text": "c †Litton Das b Mominul Haque",
+       "m": null,
+       "mark": "",
+       "r": 83,
+       "sr": 64.34
+      },
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 54,
+       "batsman": {
+        "name": "Temba Bavuma"
+       },
+       "dismissal-text": "not out",
+       "m": null,
+       "mark": "(c)",
+       "r": 19,
+       "sr": 35.18
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 17,
+       "batsman": {
+        "name": "Matthew Breetzke"
+       },
+       "dismissal-text": "c †Litton Das b Hasan Mahmud",
+       "m": null,
+       "mark": "",
+       "r": 2,
+       "sr": 11.76
+      },
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 7,
+       "batsman": {
+        "name": "Ryan Rickelton"
+       },
+       "dismissal-text": "not out",
+       "m": null,
+       "mark": "†",
+       "r": 7,
+       "sr": 100.0
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Taskin Ahmed"
+       },
+       "eco": 3.0,
+       "m": 4,
+       "nb": 3,
+       "o": 15.0,
+       "r": 45,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Hasan Mahmud"
+       },
+       "eco": 3.87,
+       "m": 2,
+       "nb": 1,
+       "o": 16.0,
+       "r": 62,
+       "w": 3,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Ebadot Hossain"
+       },
+       "eco": 5.14,
+       "m": 0,
+       "nb": 3,
+       "o": 7.0,
+       "r": 36,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Mehidy Hasan Miraz"
+       },
+       "eco": 6.31,
+       "m": 0,
+       "nb": 0,
+       "o": 16.0,
+       "r": 101,
+       "w": 0,
+       "wd": 1
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Mominul Haque"
+       },
+       "eco": 4.5,
+       "m": 1,
+       "nb": 0,
+       "o": 8.0,
+       "r": 36,
+       "w": 1,
+       "wd": 0
+      }
+     ],
+     "espn": {
+      "dnb": [],
+      "extras": {
+       "b": 4,
+       "lb": 3,
+       "nb": 7,
+       "total": 15,
+       "w": 1
+      },
+      "fow": "1-5 (Markram, 1.3), 2-207 (Hamza, 43.5), 3-268 (Ackerman, 54.1), 4-279 (Breetzke, 58.6)",
+      "total": {
+       "o": 62.0,
+       "r": 287,
+       "rr": 4.62,
+       "w": 4
+      }
+     },
+     "inning": "South Africa 1st Innings"
     }
    ],
-   "status": "Day 1: Bangladesh won toss & batted"
+   "status": "Day 2: South Africa trail by 113 runs"
   },
   "espn-1528703": {
    "built": "2026-11-13T22:50:04Z",
@@ -2078,840 +2297,6 @@
    ],
    "status": "India won by 22 runs"
   },
-  "espn-1543962": {
-   "built": "2026-11-12T22:50:05Z",
-   "potm": [
-    {
-     "name": "Georgia Redmayne",
-     "team": "Brisbane Heat Women"
-    }
-   ],
-   "scorecard": [
-    {
-     "batting": [
-      {
-       "4s": 7,
-       "6s": 0,
-       "b": 45,
-       "batsman": {
-        "name": "Meg Lanning"
-       },
-       "dismissal-text": "c O'Neil b Glenn",
-       "m": 55,
-       "mark": "(c)",
-       "r": 52,
-       "sr": 115.55
-      },
-      {
-       "4s": 10,
-       "6s": 0,
-       "b": 52,
-       "batsman": {
-        "name": "Amy Jones"
-       },
-       "dismissal-text": "st †Redmayne b Ginger",
-       "m": 78,
-       "mark": "†",
-       "r": 74,
-       "sr": 142.3
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 4,
-       "batsman": {
-        "name": "Annabel Sutherland"
-       },
-       "dismissal-text": "c O'Neil b Ginger",
-       "m": 4,
-       "mark": "",
-       "r": 2,
-       "sr": 50.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 9,
-       "batsman": {
-        "name": "Dani Gibson"
-       },
-       "dismissal-text": "b Prendergast",
-       "m": 11,
-       "mark": "",
-       "r": 7,
-       "sr": 77.77
-      },
-      {
-       "4s": 2,
-       "6s": 1,
-       "b": 8,
-       "batsman": {
-        "name": "Georgia Prestwidge"
-       },
-       "dismissal-text": "b Hamilton",
-       "m": 11,
-       "mark": "",
-       "r": 20,
-       "sr": 250.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Charlie Dean"
-       },
-       "dismissal-text": "not out",
-       "m": 6,
-       "mark": "",
-       "r": 3,
-       "sr": 150.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 1,
-       "batsman": {
-        "name": "Naomi Stalenberg"
-       },
-       "dismissal-text": "not out",
-       "m": 2,
-       "mark": "",
-       "r": 1,
-       "sr": 100.0
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 10,
-       "bowler": {
-        "name": "Lucy Hamilton"
-       },
-       "eco": 8.5,
-       "m": 0,
-       "nb": 1,
-       "o": 4.0,
-       "r": 34,
-       "w": 1,
-       "wd": 3
-      },
-      {
-       "0s": 3,
-       "bowler": {
-        "name": "Lily Bassingthwaighte"
-       },
-       "eco": 10.0,
-       "m": 0,
-       "nb": 0,
-       "o": 2.0,
-       "r": 20,
-       "w": 0,
-       "wd": 1
-      },
-      {
-       "0s": 6,
-       "bowler": {
-        "name": "Orla Prendergast"
-       },
-       "eco": 9.0,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 36,
-       "w": 1,
-       "wd": 0
-      },
-      {
-       "0s": 9,
-       "bowler": {
-        "name": "Sarah Glenn"
-       },
-       "eco": 5.25,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 21,
-       "w": 1,
-       "wd": 0
-      },
-      {
-       "0s": 7,
-       "bowler": {
-        "name": "Sianna Ginger"
-       },
-       "eco": 7.33,
-       "m": 0,
-       "nb": 0,
-       "o": 3.0,
-       "r": 22,
-       "w": 2,
-       "wd": 0
-      },
-      {
-       "0s": 1,
-       "bowler": {
-        "name": "Charli Knott"
-       },
-       "eco": 10.33,
-       "m": 0,
-       "nb": 0,
-       "o": 3.0,
-       "r": 31,
-       "w": 0,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [
-       "Leeson",
-       "Garth",
-       "Gibson",
-       "Day"
-      ],
-      "extras": {
-       "lb": 1,
-       "nb": 1,
-       "total": 6,
-       "w": 4
-      },
-      "fow": "1-108 (Lanning, 13.1), 2-113 (Sutherland, 14.1), 3-134 (Gibson, 17.1), 4-148 (Jones, 18.4), 5-162 (Prestwidge, 19.4)",
-      "total": {
-       "o": 20.0,
-       "r": 165,
-       "rr": 8.25,
-       "w": 5
-      }
-     },
-     "inning": "Melbourne Stars Women Innings"
-    },
-    {
-     "batting": [
-      {
-       "4s": 6,
-       "6s": 0,
-       "b": 24,
-       "batsman": {
-        "name": "Charli Knott"
-       },
-       "dismissal-text": "b Sutherland",
-       "m": 29,
-       "mark": "",
-       "r": 30,
-       "sr": 125.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 3,
-       "batsman": {
-        "name": "Grace Harris"
-       },
-       "dismissal-text": "c Dean b Garth",
-       "m": 5,
-       "mark": "",
-       "r": 2,
-       "sr": 66.66
-      },
-      {
-       "4s": 12,
-       "6s": 0,
-       "b": 50,
-       "batsman": {
-        "name": "Georgia Redmayne"
-       },
-       "dismissal-text": "not out",
-       "m": 73,
-       "mark": "(c) †",
-       "r": 74,
-       "sr": 148.0
-      },
-      {
-       "4s": 6,
-       "6s": 1,
-       "b": 36,
-       "batsman": {
-        "name": "Orla Prendergast"
-       },
-       "dismissal-text": "not out",
-       "m": 49,
-       "mark": "",
-       "r": 52,
-       "sr": 144.44
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 8,
-       "bowler": {
-        "name": "Sophie Day"
-       },
-       "eco": 6.5,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 26,
-       "w": 0,
-       "wd": 0
-      },
-      {
-       "0s": 9,
-       "bowler": {
-        "name": "Kim Garth"
-       },
-       "eco": 10.43,
-       "m": 0,
-       "nb": 0,
-       "o": 3.5,
-       "r": 40,
-       "w": 1,
-       "wd": 1
-      },
-      {
-       "0s": 11,
-       "bowler": {
-        "name": "Annabel Sutherland"
-       },
-       "eco": 8.0,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 32,
-       "w": 1,
-       "wd": 1
-      },
-      {
-       "0s": 5,
-       "bowler": {
-        "name": "Charlie Dean"
-       },
-       "eco": 9.0,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 36,
-       "w": 0,
-       "wd": 1
-      },
-      {
-       "0s": 1,
-       "bowler": {
-        "name": "Maisy Gibson"
-       },
-       "eco": 17.0,
-       "m": 0,
-       "nb": 0,
-       "o": 1.0,
-       "r": 17,
-       "w": 0,
-       "wd": 1
-      },
-      {
-       "0s": 2,
-       "bowler": {
-        "name": "Dani Gibson"
-       },
-       "eco": 6.5,
-       "m": 0,
-       "nb": 0,
-       "o": 2.0,
-       "r": 13,
-       "w": 0,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [
-       "Bhatia",
-       "Hamilton",
-       "O'Neil",
-       "Ginger",
-       "Wrigley",
-       "Glenn",
-       "Bassingthwaighte"
-      ],
-      "extras": {
-       "b": 1,
-       "lb": 1,
-       "total": 8,
-       "w": 6
-      },
-      "fow": "1-14 (Harris, 1.3), 2-61 (Knott, 6.6)",
-      "total": {
-       "o": 18.5,
-       "r": 166,
-       "rr": 8.81,
-       "w": 2
-      }
-     },
-     "inning": "Brisbane Heat Women Innings"
-    }
-   ],
-   "status": "Heat won by 8 wkts (7b rem)"
-  },
-  "espn-1543963": {
-   "built": "2026-11-12T22:50:05Z",
-   "potm": [
-    {
-     "name": "Melie Kerr",
-     "team": "Sydney Sixers Women"
-    }
-   ],
-   "scorecard": [
-    {
-     "batting": [
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 41,
-       "batsman": {
-        "name": "Ellyse Perry"
-       },
-       "dismissal-text": "run out (Wareham/Molineux)",
-       "m": 78,
-       "mark": "",
-       "r": 30,
-       "sr": 73.17
-      },
-      {
-       "4s": 2,
-       "6s": 1,
-       "b": 18,
-       "batsman": {
-        "name": "Sophia Dunkley"
-       },
-       "dismissal-text": "c Tryon b Illingworth",
-       "m": 25,
-       "mark": "",
-       "r": 20,
-       "sr": 111.11
-      },
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 21,
-       "batsman": {
-        "name": "Ashleigh Gardner"
-       },
-       "dismissal-text": "c Vlaeminck b Illingworth",
-       "m": 26,
-       "mark": "(c)",
-       "r": 22,
-       "sr": 104.76
-      },
-      {
-       "4s": 7,
-       "6s": 0,
-       "b": 34,
-       "batsman": {
-        "name": "Melie Kerr"
-       },
-       "dismissal-text": "c Dottin b Wareham",
-       "m": 33,
-       "mark": "",
-       "r": 53,
-       "sr": 155.88
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Alice Capsey"
-       },
-       "dismissal-text": "st †Faltum b Matthews",
-       "m": 4,
-       "mark": "†",
-       "r": 4,
-       "sr": 200.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Erin Burns"
-       },
-       "dismissal-text": "run out (†Faltum/Wareham)",
-       "m": 6,
-       "mark": "",
-       "r": 1,
-       "sr": 50.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Eva Ragg"
-       },
-       "dismissal-text": "not out",
-       "m": 2,
-       "mark": "",
-       "r": 1,
-       "sr": 50.0
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 12,
-       "bowler": {
-        "name": "Tayla Vlaeminck"
-       },
-       "eco": 6.5,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 26,
-       "w": 0,
-       "wd": 1
-      },
-      {
-       "0s": 10,
-       "bowler": {
-        "name": "Sophie Molineux"
-       },
-       "eco": 7.75,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 31,
-       "w": 0,
-       "wd": 1
-      },
-      {
-       "0s": 5,
-       "bowler": {
-        "name": "Milly Illingworth"
-       },
-       "eco": 8.0,
-       "m": 0,
-       "nb": 0,
-       "o": 3.0,
-       "r": 24,
-       "w": 2,
-       "wd": 4
-      },
-      {
-       "0s": 10,
-       "bowler": {
-        "name": "Georgia Wareham"
-       },
-       "eco": 5.25,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 21,
-       "w": 1,
-       "wd": 0
-      },
-      {
-       "0s": 2,
-       "bowler": {
-        "name": "Tess Flintoff"
-       },
-       "eco": 13.0,
-       "m": 0,
-       "nb": 0,
-       "o": 1.0,
-       "r": 13,
-       "w": 0,
-       "wd": 1
-      },
-      {
-       "0s": 7,
-       "bowler": {
-        "name": "Hayley Matthews"
-       },
-       "eco": 6.33,
-       "m": 0,
-       "nb": 0,
-       "o": 3.0,
-       "r": 19,
-       "w": 1,
-       "wd": 0
-      },
-      {
-       "0s": 2,
-       "bowler": {
-        "name": "Chloe Tryon"
-       },
-       "eco": 4.0,
-       "m": 0,
-       "nb": 0,
-       "o": 1.0,
-       "r": 4,
-       "w": 0,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [
-       "Cheatle",
-       "Coyte",
-       "Bray",
-       "Nicklin"
-      ],
-      "extras": {
-       "lb": 2,
-       "total": 9,
-       "w": 7
-      },
-      "fow": "1-32 (Dunkley, 5.2), 2-68 (Gardner, 11.5), 3-124 (Perry, 17.5), 4-134 (Capsey, 18.4), 5-138 (Kerr, 19.3), 6-140 (Burns, 19.6)",
-      "total": {
-       "o": 20.0,
-       "r": 140,
-       "rr": 7.0,
-       "w": 6
-      }
-     },
-     "inning": "Sydney Sixers Women Innings"
-    },
-    {
-     "batting": [
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 12,
-       "batsman": {
-        "name": "Olivia Porter"
-       },
-       "dismissal-text": "run out (Kerr)",
-       "m": 20,
-       "mark": "",
-       "r": 11,
-       "sr": 91.66
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 4,
-       "batsman": {
-        "name": "Hayley Matthews"
-       },
-       "dismissal-text": "c Kerr b Cheatle",
-       "m": 5,
-       "mark": "",
-       "r": 1,
-       "sr": 25.0
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 9,
-       "batsman": {
-        "name": "Courtney Webb"
-       },
-       "dismissal-text": "c Cheatle b Kerr",
-       "m": 12,
-       "mark": "",
-       "r": 7,
-       "sr": 77.77
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 21,
-       "batsman": {
-        "name": "Sophie Molineux"
-       },
-       "dismissal-text": "c Ragg b Bray",
-       "m": 28,
-       "mark": "(c)",
-       "r": 18,
-       "sr": 85.71
-      },
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 21,
-       "batsman": {
-        "name": "Nicole Faltum"
-       },
-       "dismissal-text": "c Gardner b Cheatle",
-       "m": 30,
-       "mark": "†",
-       "r": 21,
-       "sr": 100.0
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 16,
-       "batsman": {
-        "name": "Georgia Wareham"
-       },
-       "dismissal-text": "b Gardner",
-       "m": 34,
-       "mark": "",
-       "r": 17,
-       "sr": 106.25
-      },
-      {
-       "4s": 5,
-       "6s": 1,
-       "b": 31,
-       "batsman": {
-        "name": "Tess Flintoff"
-       },
-       "dismissal-text": "b Coyte",
-       "m": 27,
-       "mark": "",
-       "r": 44,
-       "sr": 141.93
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Chloe Tryon"
-       },
-       "dismissal-text": "c Kerr b Gardner",
-       "m": 6,
-       "mark": "",
-       "r": 0,
-       "sr": 0.0
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Deandra Dottin"
-       },
-       "dismissal-text": "c Cheatle b Gardner",
-       "m": 2,
-       "mark": "",
-       "r": 4,
-       "sr": 200.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 1,
-       "batsman": {
-        "name": "Milly Illingworth"
-       },
-       "dismissal-text": "not out",
-       "m": 2,
-       "mark": "",
-       "r": 1,
-       "sr": 100.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 1,
-       "batsman": {
-        "name": "Tayla Vlaeminck"
-       },
-       "dismissal-text": "run out (Cheatle/†Capsey)",
-       "m": 1,
-       "mark": "",
-       "r": 1,
-       "sr": 100.0
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 6,
-       "bowler": {
-        "name": "Caoimhe Bray"
-       },
-       "eco": 5.66,
-       "m": 0,
-       "nb": 0,
-       "o": 3.0,
-       "r": 17,
-       "w": 1,
-       "wd": 1
-      },
-      {
-       "0s": 9,
-       "bowler": {
-        "name": "Lauren Cheatle"
-       },
-       "eco": 5.0,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 20,
-       "w": 2,
-       "wd": 0
-      },
-      {
-       "0s": 9,
-       "bowler": {
-        "name": "Melie Kerr"
-       },
-       "eco": 7.25,
-       "m": 0,
-       "nb": 0,
-       "o": 4.0,
-       "r": 29,
-       "w": 1,
-       "wd": 1
-      },
-      {
-       "0s": 8,
-       "bowler": {
-        "name": "Ashleigh Gardner"
-       },
-       "eco": 4.33,
-       "m": 0,
-       "nb": 0,
-       "o": 3.0,
-       "r": 13,
-       "w": 3,
-       "wd": 0
-      },
-      {
-       "0s": 4,
-       "bowler": {
-        "name": "Frankie Nicklin"
-       },
-       "eco": 10.0,
-       "m": 0,
-       "nb": 0,
-       "o": 3.0,
-       "r": 30,
-       "w": 0,
-       "wd": 0
-      },
-      {
-       "0s": 7,
-       "bowler": {
-        "name": "Sarah Coyte"
-       },
-       "eco": 6.33,
-       "m": 0,
-       "nb": 0,
-       "o": 3.0,
-       "r": 19,
-       "w": 1,
-       "wd": 1
-      }
-     ],
-     "espn": {
-      "dnb": [],
-      "extras": {
-       "b": 1,
-       "total": 4,
-       "w": 3
-      },
-      "fow": "1-4 (Matthews, 1.2), 2-20 (Webb, 4.1), 3-22 (Porter, 4.3), 4-59 (Molineux, 10.5), 5-63 (Faltum, 11.4), 6-123 (Flintoff, 18.5), 7-123 (Wareham, 19.1), 8-127 (Dottin, 19.3), 9-128 (Tryon, 19.5), 10-129 (Vlaeminck, 19.6)",
-      "total": {
-       "o": 20.0,
-       "r": 129,
-       "rr": 6.45,
-       "w": 10
-      }
-     },
-     "inning": "Melbourne Renegades Women Innings"
-    }
-   ],
-   "status": "Sixers won by 11 runs"
-  },
   "espn-1543964": {
    "built": "2026-11-14T22:50:05Z",
    "potm": [
@@ -4199,6 +3584,494 @@
    ],
    "status": "Renegades won by 2 wkts (0b rem)"
   },
+  "espn-1543967": {
+   "built": "2026-11-16T22:50:06Z",
+   "potm": [
+    {
+     "name": "Georgia Prestwidge",
+     "team": "Melbourne Stars Women"
+    }
+   ],
+   "scorecard": [
+    {
+     "batting": [
+      {
+       "4s": 3,
+       "6s": 0,
+       "b": 12,
+       "batsman": {
+        "name": "Amy Jones"
+       },
+       "dismissal-text": "c Barsby b Bates",
+       "m": 12,
+       "mark": "†",
+       "r": 13,
+       "sr": 108.33
+      },
+      {
+       "4s": 2,
+       "6s": 1,
+       "b": 23,
+       "batsman": {
+        "name": "Meg Lanning"
+       },
+       "dismissal-text": "b de Klerk",
+       "m": 37,
+       "mark": "(c)",
+       "r": 28,
+       "sr": 121.73
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 5,
+       "batsman": {
+        "name": "Carly Leeson"
+       },
+       "dismissal-text": "lbw b de Klerk",
+       "m": 8,
+       "mark": "",
+       "r": 1,
+       "sr": 20.0
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 6,
+       "batsman": {
+        "name": "Zoe Samuel"
+       },
+       "dismissal-text": "c Barsby b Hancock",
+       "m": 8,
+       "mark": "",
+       "r": 1,
+       "sr": 16.66
+      },
+      {
+       "4s": 3,
+       "6s": 0,
+       "b": 26,
+       "batsman": {
+        "name": "Naomi Stalenberg"
+       },
+       "dismissal-text": "c Litchfield b Hancock",
+       "m": 45,
+       "mark": "",
+       "r": 27,
+       "sr": 103.84
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 7,
+       "batsman": {
+        "name": "Charlie Dean"
+       },
+       "dismissal-text": "c Voll b Hancock",
+       "m": 11,
+       "mark": "",
+       "r": 4,
+       "sr": 57.14
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 13,
+       "batsman": {
+        "name": "Dani Gibson"
+       },
+       "dismissal-text": "c Voll b Bates",
+       "m": 13,
+       "mark": "",
+       "r": 7,
+       "sr": 53.84
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 9,
+       "batsman": {
+        "name": "Georgia Prestwidge"
+       },
+       "dismissal-text": "c Learoyd b Hancock",
+       "m": 10,
+       "mark": "",
+       "r": 6,
+       "sr": 66.66
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 8,
+       "batsman": {
+        "name": "Rhys McKenna"
+       },
+       "dismissal-text": "not out",
+       "m": 13,
+       "mark": "",
+       "r": 7,
+       "sr": 87.5
+      },
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 12,
+       "batsman": {
+        "name": "Kim Garth"
+       },
+       "dismissal-text": "not out",
+       "m": 10,
+       "mark": "",
+       "r": 19,
+       "sr": 158.33
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 12,
+       "bowler": {
+        "name": "Samantha Bates"
+       },
+       "eco": 5.75,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 23,
+       "w": 2,
+       "wd": 1
+      },
+      {
+       "0s": 9,
+       "bowler": {
+        "name": "Lauren Bell"
+       },
+       "eco": 8.0,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 32,
+       "w": 0,
+       "wd": 1
+      },
+      {
+       "0s": 12,
+       "bowler": {
+        "name": "Nicola Hancock"
+       },
+       "eco": 4.25,
+       "m": 0,
+       "nb": 1,
+       "o": 4.0,
+       "r": 17,
+       "w": 4,
+       "wd": 0
+      },
+      {
+       "0s": 8,
+       "bowler": {
+        "name": "Nadine de Klerk"
+       },
+       "eco": 4.33,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 13,
+       "w": 2,
+       "wd": 0
+      },
+      {
+       "0s": 3,
+       "bowler": {
+        "name": "Jemma Barsby"
+       },
+       "eco": 6.5,
+       "m": 0,
+       "nb": 0,
+       "o": 2.0,
+       "r": 13,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 9,
+       "bowler": {
+        "name": "Georgia Voll"
+       },
+       "eco": 6.0,
+       "m": 0,
+       "nb": 0,
+       "o": 3.0,
+       "r": 18,
+       "w": 0,
+       "wd": 0
+      }
+     ],
+     "espn": {
+      "dnb": [
+       "Day"
+      ],
+      "extras": {
+       "lb": 4,
+       "nb": 1,
+       "total": 7,
+       "w": 2
+      },
+      "fow": "1-24 (Jones, 2.6), 2-28 (Leeson, 4.6), 3-38 (Samuel, 6.5), 4-53 (Lanning, 8.5), 5-64 (Dean, 10.6), 6-82 (Gibson, 14.3), 7-94 (Prestwidge, 16.3), 8-95 (Stalenberg, 16.6)",
+      "total": {
+       "o": 20.0,
+       "r": 120,
+       "rr": 6.0,
+       "w": 8
+      }
+     },
+     "inning": "Melbourne Stars Women Innings"
+    },
+    {
+     "batting": [
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 4,
+       "batsman": {
+        "name": "Phoebe Litchfield"
+       },
+       "dismissal-text": "st †Jones b Garth",
+       "m": 4,
+       "mark": "(c)",
+       "r": 1,
+       "sr": 25.0
+      },
+      {
+       "4s": 1,
+       "6s": 1,
+       "b": 8,
+       "batsman": {
+        "name": "Georgia Voll"
+       },
+       "dismissal-text": "c †Jones b Garth",
+       "m": 17,
+       "mark": "",
+       "r": 14,
+       "sr": 175.0
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 42,
+       "batsman": {
+        "name": "Anika Learoyd"
+       },
+       "dismissal-text": "c Dean b Gibson",
+       "m": 66,
+       "mark": "",
+       "r": 33,
+       "sr": 78.57
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 11,
+       "batsman": {
+        "name": "Heather Knight"
+       },
+       "dismissal-text": "c Garth b Prestwidge",
+       "m": 19,
+       "mark": "",
+       "r": 9,
+       "sr": 81.81
+      },
+      {
+       "4s": 3,
+       "6s": 0,
+       "b": 25,
+       "batsman": {
+        "name": "Tahlia Wilson"
+       },
+       "dismissal-text": "c Dean b Prestwidge",
+       "m": 29,
+       "mark": "†",
+       "r": 21,
+       "sr": 84.0
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 8,
+       "batsman": {
+        "name": "Laura Harris"
+       },
+       "dismissal-text": "c McKenna b Prestwidge",
+       "m": 12,
+       "mark": "",
+       "r": 12,
+       "sr": 150.0
+      },
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 6,
+       "batsman": {
+        "name": "Nadine de Klerk"
+       },
+       "dismissal-text": "b Gibson",
+       "m": 11,
+       "mark": "",
+       "r": 10,
+       "sr": 166.66
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 3,
+       "batsman": {
+        "name": "Jemma Barsby"
+       },
+       "dismissal-text": "b Prestwidge",
+       "m": 13,
+       "mark": "",
+       "r": 0,
+       "sr": 0.0
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 4,
+       "batsman": {
+        "name": "Nicola Hancock"
+       },
+       "dismissal-text": "b Prestwidge",
+       "m": 3,
+       "mark": "",
+       "r": 1,
+       "sr": 25.0
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 6,
+       "batsman": {
+        "name": "Lauren Bell"
+       },
+       "dismissal-text": "c & b Dean",
+       "m": 8,
+       "mark": "",
+       "r": 2,
+       "sr": 33.33
+      },
+      {
+       "4s": 0,
+       "6s": 0,
+       "b": 0,
+       "batsman": {
+        "name": "Samantha Bates"
+       },
+       "dismissal-text": "not out",
+       "m": 2,
+       "mark": "",
+       "r": 0,
+       "sr": null
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 15,
+       "bowler": {
+        "name": "Kim Garth"
+       },
+       "eco": 5.0,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 20,
+       "w": 2,
+       "wd": 4
+      },
+      {
+       "0s": 2,
+       "bowler": {
+        "name": "Rhys McKenna"
+       },
+       "eco": 11.0,
+       "m": 0,
+       "nb": 0,
+       "o": 2.0,
+       "r": 22,
+       "w": 0,
+       "wd": 0
+      },
+      {
+       "0s": 11,
+       "bowler": {
+        "name": "Charlie Dean"
+       },
+       "eco": 4.28,
+       "m": 0,
+       "nb": 0,
+       "o": 3.3,
+       "r": 15,
+       "w": 1,
+       "wd": 0
+      },
+      {
+       "0s": 12,
+       "bowler": {
+        "name": "Dani Gibson"
+       },
+       "eco": 4.25,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 17,
+       "w": 2,
+       "wd": 0
+      },
+      {
+       "0s": 3,
+       "bowler": {
+        "name": "Sophie Day"
+       },
+       "eco": 7.0,
+       "m": 0,
+       "nb": 0,
+       "o": 2.0,
+       "r": 14,
+       "w": 0,
+       "wd": 1
+      },
+      {
+       "0s": 12,
+       "bowler": {
+        "name": "Georgia Prestwidge"
+       },
+       "eco": 6.25,
+       "m": 0,
+       "nb": 0,
+       "o": 4.0,
+       "r": 25,
+       "w": 5,
+       "wd": 0
+      }
+     ],
+     "espn": {
+      "dnb": [],
+      "extras": {
+       "lb": 1,
+       "total": 11,
+       "w": 10
+      },
+      "fow": "1-7 (Litchfield, 0.5), 2-29 (Voll, 3.4), 3-50 (Knight, 7.3), 4-88 (Wilson, 14.3), 5-90 (Learoyd, 15.3), 6-106 (Harris, 16.5), 7-110 (de Klerk, 17.3), 8-111 (Hancock, 18.1), 9-114 (Barsby, 18.6), 10-114 (Bell, 19.3)",
+      "total": {
+       "o": 19.3,
+       "r": 114,
+       "rr": 5.84,
+       "w": 10
+      }
+     },
+     "inning": "Sydney Thunder Women Innings"
+    }
+   ],
+   "status": "Stars won by 6 runs"
+  },
   "espn-1550711": {
    "built": "2026-11-14T22:50:05Z",
    "potm": [
@@ -4900,7 +4773,7 @@
    "status": "Match drawn"
   },
   "espn-1555124": {
-   "built": "2026-11-15T22:50:05Z",
+   "built": "2026-11-16T22:50:06Z",
    "potm": [],
    "scorecard": [
     {
@@ -5372,7 +5245,7 @@
         "name": "Innocent Kaia"
        },
        "dismissal-text": "lbw b Ziaur Rahman",
-       "m": null,
+       "m": 101,
        "mark": "",
        "r": 33,
        "sr": 43.42
@@ -5385,7 +5258,7 @@
         "name": "Ben Curran"
        },
        "dismissal-text": "c †Ikram Alikhil b Mohammad Saleem",
-       "m": null,
+       "m": 55,
        "mark": "",
        "r": 19,
        "sr": 47.5
@@ -5398,7 +5271,7 @@
         "name": "Brendan Taylor"
        },
        "dismissal-text": "c Rahmanullah b Yamin Ahmadzai",
-       "m": null,
+       "m": 154,
        "mark": "",
        "r": 50,
        "sr": 55.55
@@ -5411,7 +5284,7 @@
         "name": "Brian Bennett"
        },
        "dismissal-text": "c †Ikram Alikhil b Naseer Khan Maroofkhil",
-       "m": null,
+       "m": 72,
        "mark": "(c)",
        "r": 28,
        "sr": 50.0
@@ -5424,7 +5297,7 @@
         "name": "Wessly Madhevere"
        },
        "dismissal-text": "c Sediqullah Atal b Yamin Ahmadzai",
-       "m": null,
+       "m": 13,
        "mark": "",
        "r": 3,
        "sr": 23.07
@@ -5437,23 +5310,23 @@
         "name": "Antum Naqvi"
        },
        "dismissal-text": "c Ziaur Rahman b Mohammad Saleem",
-       "m": null,
+       "m": 56,
        "mark": "",
        "r": 20,
        "sr": 111.11
       },
       {
-       "4s": 0,
+       "4s": 1,
        "6s": 0,
-       "b": 41,
+       "b": 57,
        "batsman": {
         "name": "Tafadzwa Tsiga"
        },
-       "dismissal-text": "not out",
-       "m": null,
+       "dismissal-text": "c †Ikram Alikhil b Mohammad Saleem",
+       "m": 76,
        "mark": "†",
-       "r": 8,
-       "sr": 19.51
+       "r": 15,
+       "sr": 26.31
       },
       {
        "4s": 0,
@@ -5463,23 +5336,49 @@
         "name": "Brad Evans"
        },
        "dismissal-text": "c †Ikram Alikhil b Ziaur Rahman",
-       "m": null,
+       "m": 5,
        "mark": "",
        "r": 2,
        "sr": 33.33
       },
       {
-       "4s": 0,
+       "4s": 5,
        "6s": 0,
-       "b": 8,
+       "b": 125,
        "batsman": {
         "name": "Graeme Cremer"
        },
        "dismissal-text": "not out",
-       "m": null,
+       "m": 191,
        "mark": "",
-       "r": 0,
-       "sr": 0.0
+       "r": 50,
+       "sr": 40.0
+      },
+      {
+       "4s": 10,
+       "6s": 1,
+       "b": 93,
+       "batsman": {
+        "name": "Blessing Muzarabani"
+       },
+       "dismissal-text": "c Mohammad Saleem b Naseer Khan Maroofkhil",
+       "m": 134,
+       "mark": "",
+       "r": 59,
+       "sr": 63.44
+      },
+      {
+       "4s": 1,
+       "6s": 0,
+       "b": 14,
+       "batsman": {
+        "name": "Vincent Masekesa"
+       },
+       "dismissal-text": "not out",
+       "m": 24,
+       "mark": "",
+       "r": 4,
+       "sr": 28.57
       }
      ],
      "bowling": [
@@ -5488,11 +5387,11 @@
        "bowler": {
         "name": "Yamin Ahmadzai"
        },
-       "eco": 2.33,
+       "eco": 2.93,
        "m": 2,
        "nb": 0,
-       "o": 12.0,
-       "r": 28,
+       "o": 15.0,
+       "r": 44,
        "w": 2,
        "wd": 0
       },
@@ -5501,12 +5400,12 @@
        "bowler": {
         "name": "Naseer Khan Maroofkhil"
        },
-       "eco": 2.96,
-       "m": 3,
+       "eco": 2.86,
+       "m": 6,
        "nb": 0,
-       "o": 25.0,
-       "r": 74,
-       "w": 1,
+       "o": 37.0,
+       "r": 106,
+       "w": 2,
        "wd": 0
       },
       {
@@ -5514,24 +5413,24 @@
        "bowler": {
         "name": "Mohammad Saleem"
        },
-       "eco": 3.63,
-       "m": 1,
+       "eco": 3.71,
+       "m": 3,
        "nb": 0,
-       "o": 11.0,
-       "r": 40,
-       "w": 2,
-       "wd": 0
+       "o": 21.0,
+       "r": 78,
+       "w": 3,
+       "wd": 1
       },
       {
        "0s": 0,
        "bowler": {
         "name": "Ziaur Rahman"
        },
-       "eco": 2.22,
-       "m": 3,
+       "eco": 2.4,
+       "m": 5,
        "nb": 0,
-       "o": 9.0,
-       "r": 20,
+       "o": 20.0,
+       "r": 48,
        "w": 2,
        "wd": 0
       },
@@ -5540,11 +5439,11 @@
        "bowler": {
         "name": "Hashmatullah Shahidi"
        },
-       "eco": 1.0,
+       "eco": 2.4,
        "m": 0,
        "nb": 0,
-       "o": 1.0,
-       "r": 1,
+       "o": 5.0,
+       "r": 12,
        "w": 0,
        "wd": 0
       }
@@ -5552,25 +5451,368 @@
      "espn": {
       "dnb": [],
       "extras": {
-       "lb": 6,
-       "total": 6
+       "lb": 7,
+       "total": 12,
+       "w": 5
       },
-      "fow": "1-38 (Curran, 13.4), 2-71 (Kaia, 23.5), 3-126 (Bennett, 40.3), 4-133 (Madhevere, 43.2), 5-148 (Taylor, 47.1), 6-162 (Naqvi, 54.1), 7-167 (Evans, 55.5)",
+      "fow": "1-38 (Curran, 13.4), 2-71 (Kaia, 23.5), 3-126 (Bennett, 40.3), 4-133 (Madhevere, 43.2), 5-148 (Taylor, 47.1), 6-162 (Naqvi, 54.1), 7-167 (Evans, 55.5), 8-177 (Tsiga, 60.5), 9-267 (Muzarabani, 92.4)",
       "total": {
-       "o": 58.0,
-       "r": 169,
-       "rr": 2.91,
-       "w": 7
+       "o": 98.0,
+       "r": 295,
+       "rr": 3.01,
+       "w": 9
       }
      },
      "inning": "Zimbabwe 2nd Innings"
+    },
+    {
+     "batting": [
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 8,
+       "batsman": {
+        "name": "Abdul Malik"
+       },
+       "dismissal-text": "c †Tsiga b Evans",
+       "m": null,
+       "mark": "",
+       "r": 8,
+       "sr": 100.0
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 24,
+       "batsman": {
+        "name": "Rahmanullah"
+       },
+       "dismissal-text": "c Kaia b Muzarabani",
+       "m": null,
+       "mark": "",
+       "r": 15,
+       "sr": 62.5
+      },
+      {
+       "4s": 3,
+       "6s": 0,
+       "b": 33,
+       "batsman": {
+        "name": "Sediqullah Atal"
+       },
+       "dismissal-text": "c †Tsiga b Evans",
+       "m": null,
+       "mark": "",
+       "r": 14,
+       "sr": 42.42
+      },
+      {
+       "4s": 2,
+       "6s": 1,
+       "b": 52,
+       "batsman": {
+        "name": "Rahmat Shah"
+       },
+       "dismissal-text": "c Taylor b Cremer",
+       "m": null,
+       "mark": "(c)",
+       "r": 30,
+       "sr": 57.69
+      },
+      {
+       "4s": 4,
+       "6s": 0,
+       "b": 64,
+       "batsman": {
+        "name": "Hashmatullah Shahidi"
+       },
+       "dismissal-text": "c Kaia b Masekesa",
+       "m": null,
+       "mark": "",
+       "r": 35,
+       "sr": 54.68
+      },
+      {
+       "4s": 2,
+       "6s": 1,
+       "b": 51,
+       "batsman": {
+        "name": "Afsar Zazai"
+       },
+       "dismissal-text": "not out",
+       "m": null,
+       "mark": "",
+       "r": 20,
+       "sr": 39.21
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 32,
+       "batsman": {
+        "name": "Ikram Alikhil"
+       },
+       "dismissal-text": "not out",
+       "m": null,
+       "mark": "†",
+       "r": 20,
+       "sr": 62.5
+      }
+     ],
+     "bowling": [
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Blessing Muzarabani"
+       },
+       "eco": 2.4,
+       "m": 3,
+       "nb": 0,
+       "o": 10.0,
+       "r": 24,
+       "w": 1,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Brad Evans"
+       },
+       "eco": 2.77,
+       "m": 2,
+       "nb": 0,
+       "o": 9.0,
+       "r": 25,
+       "w": 2,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Graeme Cremer"
+       },
+       "eco": 4.53,
+       "m": 1,
+       "nb": 0,
+       "o": 13.0,
+       "r": 59,
+       "w": 1,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Vincent Masekesa"
+       },
+       "eco": 2.6,
+       "m": 4,
+       "nb": 0,
+       "o": 10.0,
+       "r": 26,
+       "w": 1,
+       "wd": 0
+      },
+      {
+       "0s": 0,
+       "bowler": {
+        "name": "Wessly Madhevere"
+       },
+       "eco": 4.0,
+       "m": 0,
+       "nb": 0,
+       "o": 2.0,
+       "r": 8,
+       "w": 0,
+       "wd": 0
+      }
+     ],
+     "espn": {
+      "dnb": [],
+      "extras": {
+       "lb": 1,
+       "total": 1
+      },
+      "fow": "1-11 (Malik, 1.4), 2-31 (Rahmanullah, 8.3), 3-42 (Atal, 12.5), 4-90 (Shah, 27.3), 5-106 (Shahidi, 32.5)",
+      "total": {
+       "o": 44.0,
+       "r": 143,
+       "rr": 3.25,
+       "w": 5
+      }
+     },
+     "inning": "Afghanistan 2nd Innings"
     }
    ],
-   "status": "Day 3: Zimbabwe lead by 291 runs"
+   "status": "Day 4: Afghanistan require 275 runs"
   }
  },
- "ran": "2026-11-15T22:50:05Z",
+ "ran": "2026-11-16T22:50:06Z",
  "series": {
+  "espn-1525662": {
+   "built": "2026-11-16T22:50:06Z",
+   "rows": [
+    {
+     "date": "Nov 15-19 2026",
+     "format": "Test",
+     "n": "1st",
+     "result": "Day 2: South Africa trail by 113 runs",
+     "starts": null,
+     "teams": [
+      {
+       "abbr": "BAN",
+       "name": "Bangladesh",
+       "score": "400"
+      },
+      {
+       "abbr": "SA",
+       "name": "South Africa",
+       "score": "287/4 *"
+      }
+     ],
+     "venue": "Johannesburg"
+    },
+    {
+     "date": "Nov 23-27 2026",
+     "format": "Test",
+     "n": "2nd",
+     "result": null,
+     "starts": "Starts at 10:00 local time",
+     "teams": [
+      {
+       "abbr": "SA",
+       "name": "South Africa",
+       "score": ""
+      },
+      {
+       "abbr": "BAN",
+       "name": "Bangladesh",
+       "score": ""
+      }
+     ],
+     "venue": "Centurion"
+    },
+    {
+     "date": "Dec 1 2026",
+     "format": "ODI",
+     "n": "1st",
+     "result": null,
+     "starts": "Starts at 13:30 local time",
+     "teams": [
+      {
+       "abbr": "SA",
+       "name": "South Africa",
+       "score": ""
+      },
+      {
+       "abbr": "BAN",
+       "name": "Bangladesh",
+       "score": ""
+      }
+     ],
+     "venue": "KuGompo City"
+    },
+    {
+     "date": "Dec 4 2026",
+     "format": "ODI",
+     "n": "2nd",
+     "result": null,
+     "starts": "Starts at 13:30 local time",
+     "teams": [
+      {
+       "abbr": "SA",
+       "name": "South Africa",
+       "score": ""
+      },
+      {
+       "abbr": "BAN",
+       "name": "Bangladesh",
+       "score": ""
+      }
+     ],
+     "venue": "Gqeberha"
+    },
+    {
+     "date": "Dec 7 2026",
+     "format": "ODI",
+     "n": "3rd",
+     "result": null,
+     "starts": "Starts at 13:30 local time",
+     "teams": [
+      {
+       "abbr": "SA",
+       "name": "South Africa",
+       "score": ""
+      },
+      {
+       "abbr": "BAN",
+       "name": "Bangladesh",
+       "score": ""
+      }
+     ],
+     "venue": "Cape Town"
+    },
+    {
+     "date": "Dec 10 2026",
+     "format": "T20I",
+     "n": "1st",
+     "result": null,
+     "starts": "Starts at 18:00 local time",
+     "teams": [
+      {
+       "abbr": "SA",
+       "name": "South Africa",
+       "score": ""
+      },
+      {
+       "abbr": "BAN",
+       "name": "Bangladesh",
+       "score": ""
+      }
+     ],
+     "venue": "Kimberley"
+    },
+    {
+     "date": "Dec 12 2026",
+     "format": "T20I",
+     "n": "2nd",
+     "result": null,
+     "starts": "Starts at 14:30 local time",
+     "teams": [
+      {
+       "abbr": "SA",
+       "name": "South Africa",
+       "score": ""
+      },
+      {
+       "abbr": "BAN",
+       "name": "Bangladesh",
+       "score": ""
+      }
+     ],
+     "venue": "Benoni"
+    },
+    {
+     "date": "Dec 13 2026",
+     "format": "T20I",
+     "n": "3rd",
+     "result": null,
+     "starts": "Starts at 14:30 local time",
+     "teams": [
+      {
+       "abbr": "SA",
+       "name": "South Africa",
+       "score": ""
+      },
+      {
+       "abbr": "BAN",
+       "name": "Bangladesh",
+       "score": ""
+      }
+     ],
+     "venue": "Centurion"
+    }
+   ]
+  },
   "espn-1528704": {
    "built": "2026-11-15T22:50:05Z",
    "rows": [
@@ -6292,7 +6534,7 @@
    ]
   },
   "espn-1555124": {
-   "built": "2026-11-14T22:50:05Z",
+   "built": "2026-11-16T22:50:06Z",
    "rows": [
     {
      "date": "Oct 27 2026",
@@ -6378,18 +6620,18 @@
      "date": "Nov 13-17 2026",
      "format": "Test",
      "n": "2nd",
-     "result": "Day 2: Afghanistan trail by 180 runs",
+     "result": "Day 4: Afghanistan require 275 runs",
      "starts": null,
      "teams": [
       {
        "abbr": "ZIM",
        "name": "Zimbabwe",
-       "score": "339"
+       "score": "339 & 295/9d"
       },
       {
        "abbr": "AFG",
        "name": "Afghanistan",
-       "score": "159/6 *"
+       "score": "217 & 143/5 *"
       }
      ],
      "venue": "Sharjah"
@@ -6399,7 +6641,7 @@
  },
  "tables": {
   "WBBL": {
-   "built": "2026-11-15T22:50:05Z",
+   "built": "2026-11-16T22:50:06Z",
    "rows": [
     {
      "l": 1,
@@ -6462,11 +6704,11 @@
      "w": 3
     },
     {
-     "l": 3,
+     "l": 4,
      "name": "Sydney Thunder Women",
      "nr": 0,
-     "nrr": 0.215,
-     "p": 5,
+     "nrr": 0.1,
+     "p": 6,
      "pos": 6,
      "pts": 4,
      "t": 0,
@@ -6477,13 +6719,13 @@
      "l": 5,
      "name": "Melbourne Stars Women",
      "nr": 0,
-     "nrr": -0.602,
-     "p": 6,
+     "nrr": -0.456,
+     "p": 7,
      "pos": 7,
-     "pts": 2,
+     "pts": 4,
      "t": 0,
      "team": "MS-W",
-     "w": 1
+     "w": 2
     },
     {
      "l": 6,
