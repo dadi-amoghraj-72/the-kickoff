@@ -374,9 +374,10 @@ GOSSIP = re.compile(r"\bgossip\b|\breportedly\b|\brumou?r|\btarget for\b|\binter
 
 
 def football_news(shown):
-    """The biggest news: Arsenal's stories first, then sackings and appointments, confirmed transfers, injuries; never a rumour or the gossip column. [{"text", "link", "source"}]."""
+    """Football's Biggest News: records and milestones only (Kane's caps record), the one football news with no section of its own. Team news, transfers and managers
+    stay in Arsenal's Team News and Transfers And Managers, not repeated above (D, 2026-11-21). Never a rumour or the gossip column. [{"text", "link", "source"}]."""
     from kickoff import news as news_mod
-    ranked = sorted((i for i in shown if not news_mod.is_renewal(i)), key=lambda i: (i.get("club") != "Arsenal", NEWS_RANK.get(i["kind"], 9), i["published"]))
+    ranked = sorted((i for i in shown if i["kind"] == "milestone" and not news_mod.is_renewal(i)), key=lambda i: (i.get("club") != "Arsenal", NEWS_RANK.get(i["kind"], 9), i["published"]))
     return [{"text": i["summary"] or i["headline"], "link": i["link"], "source": i["source"]} for i in ranked
             if i["kind"] != "transfer_rumour" and not GOSSIP.search(f"{i.get('summary') or ''} {i['headline']}")          # confirmed news only: no rumour, no gossip column (D, 2026-11-10);
             and (i["summary"] or STRONG_NEWS.search(i["headline"]) and not LIVE_BLOG.search(i["headline"]))]               # Arsenal's rumours stay in the Arsenal section, labelled

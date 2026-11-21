@@ -1,0 +1,58 @@
+{
+  "told": [
+    {
+      "at": "2026-11-20T23:15:00+00:00",
+      "club": "Manchester United",
+      "kind": "manager_appointed",
+      "names": [
+        "Mauricio",
+        "Pochettino"
+      ]
+    },
+    {
+      "at": "2026-11-19T23:15:00+00:00",
+      "club": "Crystal Palace",
+      "kind": "manager_appointed",
+      "names": [
+        "Frank",
+        "Thomas"
+      ]
+    },
+    {
+      "at": "2026-11-18T23:15:00+00:00",
+      "club": "Strasbourg",
+      "kind": "manager_appointed",
+      "names": [
+        "Matos",
+        "Vitor"
+      ]
+    },
+    {
+      "at": "2026-11-20T23:15:00+00:00",
+      "club": "Arsenal",
+      "kind": "injury",
+      "names": [
+        "Bukayo",
+        "Saka"
+      ]
+    },
+    {
+      "at": "2026-11-20T23:15:00+00:00",
+      "club": "Bayern Munich",
+      "kind": "injury",
+      "names": [
+        "Harry",
+        "Kane"
+      ]
+    },
+    {
+      "at": "2026-11-17T23:15:00+00:00",
+      "club": "Arsenal",
+      "kind": "transfer_confirmed",
+      "names": [
+        "Declan",
+        "Rice"
+      ]
+    }
+  ]
+}

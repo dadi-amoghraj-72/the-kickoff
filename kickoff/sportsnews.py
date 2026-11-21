@@ -106,17 +106,44 @@ def check(summary, item):
     return news.check_summary(summary, {**item, "clubs": []})
 
 
+def names_of(sport, item):
+    """The names a story is about, each a run of capitalised words ('Valtteri Bottas', 'Mumbai Indians', 'Cadillac'), without common words."""
+    from kickoff import news
+    runs = re.findall(r"[A-Z][\w\u00c0-\u024f'\u2019.-]+(?:\s+[A-Z][\w\u00c0-\u024f'\u2019.-]+)*", f"{item['title']} {item['text']}")
+    out = set()
+    for run in runs:
+        words = [w.strip("'\u2019.-").removesuffix("'s").removesuffix("\u2019s") for w in run.split()]
+        words = [w for w in words if len(w) > 2 and w not in news.NOT_NAMES and w != sport and not w.isupper()]
+        if words:
+            out.add(" ".join(words))
+    return out
+
+
+def told_before(sport, item, told):
+    """True when the last TOLD_DAYS had this story already: the same sport and two different names in common (D, 2026-11-21: 'Bottas' stay at Cadillac confirmed'
+    one morning, 'Valtteri Bottas to race for Cadillac in 2027' the next). A two-word name counts once, so two different trades by the Mumbai Indians are two stories."""
+    for t in told:
+        if t["sport"] != sport:
+            continue
+        theirs = {w for n in t["names"] for w in n.split()}
+        if sum(1 for n in names_of(sport, item) if set(n.split()) & theirs) >= 2:
+            return True
+    return False
+
+
 def find(client, now, st, fetched=None):
     """(items for Biggest News, new state, usage). items: [{"text", "link", "source", "us": True}], most important first."""
+    from kickoff import news
     seen = dict((st or {}).get("seen") or {})
-    cands = candidates(fetched if fetched is not None else fetch(), now, seen)
+    told = [t for t in (st or {}).get("told") or [] if now - datetime.fromisoformat(t["at"]) <= timedelta(days=news.TOLD_DAYS)]
+    cands = [(sp, i) for sp, i in candidates(fetched if fetched is not None else fetch(), now, seen) if not told_before(sp, i, told)]
     none = {"input": 0, "output": 0}
     if not client or not cands:
-        return [], {"seen": prune(seen, now)}, none
+        return [], {"seen": prune(seen, now), "told": told}, none
     listing = "\n".join(f"{n}. [{sport}] {i['title']} | {i['text'][:300]}" for n, (sport, i) in enumerate(cands, 1))
     obj, usage = notes.call_json(client, SYSTEM, SCHEMA, listing, model=settings.NEWS_MODEL)
     if obj is None:                                        # a failed call judges nothing: tomorrow may try again
-        return [], {"seen": prune(seen, now)}, usage or none
+        return [], {"seen": prune(seen, now), "told": told}, usage or none
     out = []
     for p in (obj.get("picks") or [])[:MAX_PICKS]:
         n = int(p.get("n") or 0)
@@ -128,9 +155,10 @@ def find(client, now, st, fetched=None):
         summary = (p.get("summary") or "").strip()
         text = summary if summary and not check(summary, item) else item["title"]     # a summary that fails the checks: the source's own headline
         out.append({"text": f"{sport}: {text}", "link": item["link"], "source": item["source"], "us": True})
+        told.append({"sport": sport, "names": sorted(names_of(sport, item)), "at": now.isoformat()})
     for _, i in cands:
         seen[i["link"]] = now.isoformat()
-    return out, {"seen": prune(seen, now)}, usage or none
+    return out, {"seen": prune(seen, now), "told": told}, usage or none
 
 
 def prune(seen, now):

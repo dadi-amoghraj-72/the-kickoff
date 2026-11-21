@@ -1,7 +1,7 @@
 """Which news items are worth a closer look: recent, new to us, about a club we cover, and about a transfer,
 a manager change or an injury. This is the cheap code filter that runs before Claude sees anything."""
 import re
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from kickoff.clubs import CLUBS
 
@@ -228,6 +228,37 @@ def is_renewal(i):
 
 def _names(text):
     return set(re.findall(r"\b[A-Z][a-z\u00c0-\u024f]{2,}\b", text))
+
+
+# ---- Stories already told (D, 2026-11-21: Pochettino's appointment ran four mornings, Thomas Frank's three: each new article about it was a new link) ----
+TOLD_DAYS = 7
+MANAGER_KINDS = {"manager_sacked", "manager_appointed", "manager_news"}
+NOT_NAMES = {"The", "His", "Her", "They", "After", "With", "Premier", "League", "Champions", "Cup", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+             "Saturday", "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December", "Christmas", "New", "Year",
+             "Manager", "Head", "Coach", "Club", "England", "Football", "Sport", "World"}
+
+
+def story_names(text, club=""):
+    """The names a story is about (people, mostly): capitalised words, without the club's own and without common words."""
+    return _names(text) - _names(club or "") - NOT_NAMES
+
+
+def already_told(i, told):
+    """True when the last TOLD_DAYS already had this story: the same club and the same kind, and for a manager that is enough (a new manager is one story,
+    however many articles follow); for a transfer, an injury or a record, also a shared name (Saka's injury twice; Saka's and Odegaard's are two stories).
+    A different kind (a sacking, then an appointment) is new. A run without Claude ('manager_news', which cannot tell the two apart) repeats neither."""
+    names = story_names(f"{i.get('summary') or ''} {i.get('headline') or ''}", i.get("club"))
+    same = lambda t: t["kind"] == i["kind"] or (i["kind"] == "manager_news" and t["kind"] in MANAGER_KINDS)  # noqa: E731
+    return any(t["club"] == i.get("club") and same(t) and (i["kind"] in MANAGER_KINDS or names & set(t["names"])) for t in told)
+
+
+def fresh(shown, told, now):
+    """(the items not told before, the memory with today's added and anything older than TOLD_DAYS dropped)."""
+    told = [t for t in told if now - datetime.fromisoformat(t["at"]) <= timedelta(days=TOLD_DAYS)]
+    keep = [i for i in shown if not already_told(i, told)]
+    added = [{"club": i.get("club"), "kind": i["kind"], "names": sorted(story_names(f"{i.get('summary') or ''} {i.get('headline') or ''}", i.get("club"))),
+              "at": now.isoformat()} for i in keep]
+    return keep, told + added
 
 
 def dedupe(items, text=lambda i: i.get("summary") or i.get("headline") or ""):

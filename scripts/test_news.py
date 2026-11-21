@@ -180,7 +180,7 @@ _k1 = {"kind": "transfer_confirmed", "club": "Bayern Munich", "summary": "Englan
 _k2 = {**_k1, "summary": "Harry Kane has put pencil to paper on a new contract, committing his future to Bayern Munich.", "source": "ESPN", "link": "https://x/2", "published": 1}
 _sg = {**_k1, "summary": "Real Madrid have signed Jude Bellingham's brother Jobe from Sunderland for a club record fee.", "headline": "Jobe Bellingham joins Real Madrid", "link": "https://x/3", "club": "Real Madrid", "published": 3}
 check("a contract renewal is recognised (both Kane items), a real signing is not", news.is_renewal(_k1) and news.is_renewal(_k2) and not news.is_renewal(_sg))
-check("Biggest News leaves renewals out and keeps a real signing", [x["link"] for x in _ev.football_news([_k1, _k2, _sg])] == ["https://x/3"], _ev.football_news([_k1, _k2, _sg]))
+check("Biggest News has no transfers at all now, renewals or signings (D, 2026-11-21: they stay in Transfers And Managers)", _ev.football_news([_k1, _k2, _sg]) == [], _ev.football_news([_k1, _k2, _sg]))
 _h = news.html([_k1, _k2, _sg], "football", "Transfers And Managers")
 check("the section keeps the renewal but once: the same story from BBC and ESPN is one item (the newer source stays)", _h.count("Harry Kane") == 1 and "Jobe from Sunderland" in _h and _h.count("<li>") == 2, _h)
 

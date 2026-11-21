@@ -181,7 +181,8 @@ check("D, 2026-11-10: a finished Test between Test nations is always a key score
 _news = [{"kind": "transfer_rumour", "club": "Arsenal", "summary": "Zubimendi is reportedly a target for Atletico, according to the gossip column.", "headline": "Gossip", "link": "l1", "source": "BBC Sport", "published": 1},
          {"kind": "transfer", "club": "Arsenal", "summary": "Zubimendi is reportedly a target for Atletico Madrid, per the gossip column.", "headline": "Gossip", "link": "l2", "source": "BBC Sport", "published": 2},
          {"kind": "sacked", "club": "Chelsea", "summary": "Chelsea sacked their manager.", "headline": "Chelsea sack manager", "link": "l3", "source": "BBC Sport", "published": 3}]
-check("D, 2026-11-10: Biggest News is confirmed news only: no rumour, no gossip column, Arsenal's neither", [x["link"] for x in events.football_news(_news)] == ["l3"], events.football_news(_news))
+_rec = {"kind": "milestone", "club": "England", "summary": "England captain Harry Kane has become the country's most-capped men's player.", "headline": "Kane breaks caps record", "link": "l4", "source": "BBC Sport", "published": 4}
+check("D, 2026-11-21: football's Biggest News is records only: no rumour, no gossip, and a sacking stays in Transfers And Managers", [x["link"] for x in events.football_news(_news + [_rec])] == ["l4"], events.football_news(_news + [_rec]))
 from kickoff import nba as _nba  # noqa: E402
 _p = lambda pts, reb, ast: {"id": "1", "PTS": pts, "REB": reb, "AST": ast, "STL": 0, "BLK": 0, "dnp": False, "pos": "G", "name": "A", "team": "LAL"}  # noqa: E731
 check("D, 2026-11-10: a 40-point game or a triple-double always reaches the Stars bar (Reaves's 43 did not); a 30-point game does not",

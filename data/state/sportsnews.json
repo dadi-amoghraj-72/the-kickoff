@@ -315,5 +315,39 @@
     "https://www.theguardian.com/sport/2026/nov/20/lewis-hamilton-formula-one-activism-gaza": "2026-11-20T23:59:30.666975+00:00",
     "https://www.theguardian.com/sport/2026/nov/20/mitch-marsh-sandpaper-cricket-scandal-england-australia-t20": "2026-11-20T23:59:30.666975+00:00",
     "https://www.theguardian.com/sport/2026/nov/20/super-bowl-formula-one-las-vegas-grand-prix-jackpot": "2026-11-20T23:59:30.666975+00:00"
-  }
+  },
+  "told": [
+    {
+      "at": "2026-11-19T23:15:00+00:00",
+      "names": [
+        "Bottas",
+        "Cadillac",
+        "Valtteri Bottas"
+      ],
+      "sport": "F1"
+    },
+    {
+      "at": "2026-11-20T23:15:00+00:00",
+      "names": [
+        "Formula"
+      ],
+      "sport": "F1"
+    },
+    {
+      "at": "2026-11-17T23:15:00+00:00",
+      "names": [
+        "Chennai Super Kings",
+        "Dhoni"
+      ],
+      "sport": "Cricket"
+    },
+    {
+      "at": "2026-11-15T23:15:00+00:00",
+      "names": [
+        "Jason Kidd",
+        "LeBron James"
+      ],
+      "sport": "NBA"
+    }
+  ]
 }

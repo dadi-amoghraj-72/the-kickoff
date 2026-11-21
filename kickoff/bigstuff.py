@@ -32,8 +32,8 @@ def dedupe_news(items):
 
 
 def top_news(news, limit=MAX_NEWS):
-    """Biggest News: football's best item first, then the other sports' best (NFL, NBA, F1, cricket: kickoff/sportsnews.py; D, 2026-11-13), then football's next,
-    or the other sports' second when football has no more."""
+    """Biggest News: football's best record first, then the other sports' best (NFL, NBA, F1, cricket: kickoff/sportsnews.py; D, 2026-11-13), then football's next,
+    or the other sports' second when football has no more. Football's team news, transfers and managers are in their own sections only (D, 2026-11-21)."""
     items = dedupe_news(list(news))
     ours, other = [i for i in items if not i.get("us")], [i for i in items if i.get("us")]
     return (ours[:1] + other[:1] + ours[1:2] + other[1:2] + ours[2:])[:limit]

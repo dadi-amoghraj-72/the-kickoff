@@ -20,7 +20,7 @@ from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, es
 from kickoff.sources import cricket as cricket_source
 from kickoff.sources import other_sports
 
-FOOTBALL_STATE = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs", "top30", "seasons"]
+FOOTBALL_STATE = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs", "top30", "seasons", "news_told"]
 STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb", "youngguns", "around", "sportsnews"]
 
 

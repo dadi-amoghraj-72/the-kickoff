@@ -248,7 +248,9 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         shown_news = news.apply_rules(cands, verdicts)
     elif cands:                                          # no Claude (off, no key, budget used up): at least the manager stories, as the source's headline
         shown_news = news.plain_managerial(cands)
-    shown_links = {i["link"] for i in shown_news}
+    shown_links = {i["link"] for i in shown_news}          # judged: seen, even when it is a story already told
+    shown_news, new["news_told"] = news.fresh(shown_news, (st.get("news_told") or {}).get("told") or [], now)
+    new["news_told"] = {"told": new["news_told"]}
     for c in cands:
         if client or c["link"] in shown_links:           # an item nobody has judged is not "seen": a run with Claude may still want it (36 hours)
             seen[c["link"]] = now.isoformat()
