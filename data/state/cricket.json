@@ -15027,6 +15027,50 @@
     "espn-1555123": 3,
     "espn-1555124": 4
   },
+  "test_figs": {
+    "espn-1539442": [
+      {
+        "bat": {
+          "Daryl Mitchell": 1,
+          "Devon Conway": 4,
+          "Glenn Phillips": 118,
+          "Henry Nicholls": 175,
+          "Jacob Duffy": 4,
+          "Kyle Jamieson": 11,
+          "Matt Henry": 1,
+          "Nathan Smith": 14,
+          "Rachin Ravindra": 15,
+          "Tom Blundell": 5,
+          "Tom Latham": 0
+        },
+        "bowl": {
+          "Akash Deep": 3,
+          "Anshul Kamboj": 2,
+          "Jasprit Bumrah": 4,
+          "Prasidh Krishna": 1,
+          "Washington Sundar": 0
+        },
+        "runs": 368,
+        "wkts": 10
+      },
+      {
+        "bat": {
+          "Devdutt Padikkal": 53,
+          "KL Rahul": 93,
+          "Yashasvi Jaiswal": 85
+        },
+        "bowl": {
+          "Glenn Phillips": 0,
+          "Jacob Duffy": 0,
+          "Kyle Jamieson": 0,
+          "Matt Henry": 1,
+          "Nathan Smith": 0
+        },
+        "runs": 239,
+        "wkts": 1
+      }
+    ]
+  },
   "test_sig": {
     "espn-1525662": "[{'inning': 'Bangladesh Inning 1', 'r': 400, 'w': 10, 'o': 101.2}, {'inning': 'South Africa Inning 1', 'r': 557, 'w': 10, 'o': 124.1}, {'inning': 'Bangladesh Inning 2', 'r': 168, 'w': 10, 'o': 55.3}, {'inning': 'South Africa Inning 2', 'r': 12, 'w': 1, 'o': 1.3}]",
     "espn-1539442": "[{'inning': 'New Zealand Inning 1', 'r': 368, 'w': 10, 'o': 121.0}, {'inning': 'India Inning 1', 'r': 239, 'w': 1, 'o': 65.3}]",

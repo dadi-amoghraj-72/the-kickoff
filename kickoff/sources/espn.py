@@ -17,6 +17,9 @@ LEAGUES = {
 WSL = "eng.w.1"
 CHAMPIONS_LEAGUE = "uefa.champions"
 FA_CUP = "eng.fa"
+LEAGUE_CUP = "eng.league_cup"            # the Carabao Cup (D, 2026-11-22: every game from the quarter-finals)
+LEAGUE_CUP_LATE = {"quarterfinals", "semifinals", "final"}
+WOMENS_CL = "uefa.wchampions"            # the Women's Champions League: Arsenal Women's games only
 MATCH_LENGTH = timedelta(minutes=105)  # kick-off to full time, roughly
 
 

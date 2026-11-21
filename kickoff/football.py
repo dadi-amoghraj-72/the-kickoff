@@ -13,6 +13,7 @@ from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
 
 LEAGUE_ORDER = ["eng.1", "esp.1", "ita.1", "ger.1", "fra.1", "tur.1"]
+LC_ROUND = {"quarterfinals": "Quarter-finals", "semifinals": "Semi-finals", "final": "Final"}
 COVERED = set(LEAGUE_ORDER) | {espn.CHAMPIONS_LEAGUE, espn.FA_CUP, espn.WSL}   # the competitions whose results the football run reads; an Arsenal game anywhere else comes from the Arsenal section (D, 2026-11-13: Arsenal Women 1-1 Barcelona was missing)
 
 
@@ -187,6 +188,10 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         top_ids = {k for k, v in pyr.items() if v <= 44}
         football += facup.html(fa_cup, top_ids) + season_out["fa"]
         overviews["FA Cup"] = overview.matchday_facts("FA Cup", fa_cup, {}, None)      # so its big results can make the headlines
+    league_cup = [m for m in guard("League Cup results", espn.recent_results, espn.LEAGUE_CUP, day) or [] if m.get("stage") in espn.LEAGUE_CUP_LATE]
+    if league_cup:                                       # the League Cup from the quarter-finals, every tie (D, 2026-11-22); Arsenal's earlier rounds come from the Arsenal section
+        football += f"<h3>League Cup \u00b7 {LC_ROUND.get(league_cup[0]['stage'], '')}</h3>" + scoreboard.scores_html(league_cup)
+        overviews["League Cup"] = overview.matchday_facts("League Cup", league_cup, {}, None)
     wsl_res = guard("Women's Super League results", espn.recent_results, espn.WSL, day) or []
     wsl_parts = ""
     if wsl_res:
@@ -220,6 +225,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
 
     # ---- International football: only around a break, only competitive games ----
     intl = guard("international football", international.run, day, now, client, st.get("top30"))
+    intl_games = (intl or {}).get("games") or []
     if intl:
         football += intl["html"]
         ledger.add("Nations League lines", settings.NEWS_MODEL, intl["usage"])
@@ -283,7 +289,8 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         block = guard(club["name"], focus.build, club, day, all_rows, previous, now, tier)
         if not block:
             continue
-        arsenal_extra += [(g.get("competition") or "", [g]) for g in block.get("games") or [] if g.get("league") not in COVERED]   # the Women's Champions League, the League Cup
+        arsenal_extra += [(g.get("competition") or "", [g]) for g in block.get("games") or [] if g.get("league") not in COVERED
+                         and str(g.get("id")) not in {str(m["id"]) for m in league_cup}]   # the Women's Champions League, the League Cup's early rounds (a late round is in its own block)
         match_by_id = {f["id"]: {"home": {"name": f["home"], "short": f["home"]}, "away": {"name": f["away"], "short": f["away"]},
                                  "goals": [{"player": g["scorer"], "assist": g.get("assist"), "side": "home" if g["for"] == f["home"] else "away"} for g in f["goals"]]}
                        for f in block["facts"]}
@@ -319,7 +326,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
     stats = {"matches": {**{leagues[lg]: len(results[lg] or []) for lg in LEAGUE_ORDER}, "Women's Super League": len(wsl_res)},
              "cl_matches": len(cl_matches),
              "season_cost": round(season_out.get("cost", 0.0), 5), "news_candidates": len(cands), "news_shown": len(shown_news), "injury_items": len(inj_items)}
-    comps = [(leagues[lg], results[lg] or []) for lg in LEAGUE_ORDER] + [("Champions League", cl_matches), ("FA Cup", fa_cup), ("Women's Super League", wsl_res)] + arsenal_extra
+    comps = [(leagues[lg], results[lg] or []) for lg in LEAGUE_ORDER] + [("Champions League", cl_matches), ("FA Cup", fa_cup), ("League Cup", league_cup), ("Women's Super League", wsl_res)] + arsenal_extra + intl_games
     try:                                                 # the stories and facts The Big Stuff picks from (kickoff/bigstuff.py); never costs the section its games
         story_events = events.football(comps, day.weekday()) + [p for lst in perf_lists for p in events.football_perf("", lst)]
         big_news, big_injuries = events.football_news(shown_news), events.football_injuries(inj_items)

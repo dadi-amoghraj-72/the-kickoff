@@ -4,7 +4,7 @@
   .venv/bin/python scripts/cricket_collect.py --push     ... and commit and push data/cricket_cache.json so the daily run on GitHub can use it
   .venv/bin/python scripts/cricket_collect.py --dry-run  show what would be collected, save nothing
 
-To run it every morning at 6:50am Singapore time (a few minutes before the 7:15 edition builds), see scripts/com.thekickoff.cricket.plist for the one command.
+To run it every morning at 6:40am Singapore time (before the 6:55 edition builds), see scripts/com.thekickoff.cricket.plist for the one command.
 The Mac must be on and awake then; if it is not, the edition still goes out, without the batting and bowling cards. Uses 1 to 3 of CricketData's daily calls.
 Nothing secret is printed or committed (the cache holds only public scorecards)."""
 import subprocess

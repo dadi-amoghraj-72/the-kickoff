@@ -1,7 +1,7 @@
 """The cricket cache: scorecards, points tables and series tables that only ESPN's web pages have, collected on D's Mac and read by the daily run.
 
 Why: from GitHub's servers ESPN's cricket pages come back empty (HTTP 202) and Cricinfo answers 403; from a home connection they work. So a small job on the Mac
-Mini (scripts/cricket_collect.py, about 6:50am Singapore time) reads the pages and saves what it finds in data/cricket_cache.json, which it commits. The 7:15 daily
+Mini (scripts/cricket_collect.py, about 6:40am Singapore time) reads the pages and saves what it finds in data/cricket_cache.json, which it commits. The 6:55 daily
 run on GitHub uses those entries (by match id) and falls back to the live pages, which fail quietly there. If the Mac was off, the cache is simply old or empty and
 the edition has result lines and scores without the batting and bowling cards: it never depends on the Mac.
 

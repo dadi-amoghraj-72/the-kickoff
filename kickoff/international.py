@@ -1,7 +1,7 @@
-"""International football: appears only around an international break, and only for competitive games.
+"""International football: appears only around an international break.
 
-The Nations League gets group tables and stake lines. Qualifiers and finals involving a top-30 side, Singapore or India
-get a scoreboard. Friendlies are excluded."""
+The Nations League gets group tables and stake lines. Qualifiers and finals involving a top-30 side, Singapore or India get a scoreboard; friendlies only a
+top-20 side's (D, 2026-11-22). Every game of a top-20 side can make Key Overnight Scores and is in On Today (kickoff/fixtures.py)."""
 from datetime import timedelta
 
 from kickoff import natleague, rankings, scoreboard
@@ -20,6 +20,31 @@ COMPETITIONS = {"fifa.worldq.uefa": "World Cup qualifiers (Europe)", "fifa.world
                 "uefa.euro": "European Championship", "fifa.world": "World Cup"}
 
 
+# D, 2026-11-22: every game of a world top-20 side, friendlies too, is in On Today, In The Week Ahead, the results and Key Overnight Scores, labelled with
+# its competition ("Friendly", "World Cup qualifiers (South America)"). The ranking is the saved top-30 list (state top30), first 20.
+TOP_N = 20
+FRIENDLY = {"fifa.friendly": "Friendly"}
+ALL_COMPS = {src.LEAGUE: "Nations League", **COMPETITIONS, **FRIENDLY}
+
+
+def top20(top30):
+    return {rankings.normalise(t) for t in (top30 or {}).get("teams", [])[:TOP_N]}
+
+
+def top20_count(match, top):
+    """How many of the two sides are top-20 (0, 1 or 2)."""
+    return sum(rankings.normalise(match[s]["name"]) in top for s in ("home", "away"))
+
+
+def saved_top20():
+    """The top 20 from the saved ranking (D's manual FIFA list first), without fetching anything: On Today reads it."""
+    from kickoff import state
+    if rankings.MANUAL.exists():
+        import json
+        return top20(json.loads(rankings.MANUAL.read_text()))
+    return top20(state.load("top30"))
+
+
 def wanted(match, top30):
     """True if either side is a top-30 team, Singapore or India."""
     names = [match["home"]["name"], match["away"]["name"]]
@@ -34,6 +59,21 @@ def other_results(day, top30):
         mine = [m for m in found or [] if wanted(m, top30)]
         if mine:
             out.append((name, mine))
+    top = top20(top30)
+    for slug, name in FRIENDLY.items():                   # friendlies: only a top-20 side's
+        mine = [m for m in safe(f"{name} results", espn.recent_results, slug, day) or [] if top20_count(m, top)]
+        if mine:
+            out.append((name, mine))
+    return out
+
+
+def headline_games(nl_window, others, top30):
+    """[(competition name, [matches])] for The Big Stuff: every finished game with a top-20 side, each marked 'intl' (and 'big_intl' when both sides are top 20)."""
+    top, out = top20(top30), []
+    for name, matches in [("Nations League", nl_window)] + others:
+        keep = [{**m, "intl": True, "big_intl": top20_count(m, top) == 2} for m in matches if m.get("completed", True) and top20_count(m, top)]
+        if keep:
+            out.append((name, keep))
     return out
 
 
@@ -66,7 +106,8 @@ def run(day, now, client=None, saved_top30=None):
                 parts += "<h3>UEFA Nations League</h3>" + html
         else:
             problems.append("Nations League groups")
-    for name, matches in other_results(day, top30):
+    others = other_results(day, top30)
+    for name, matches in others:
         parts += f"<h3>{r.esc(name)}</h3>" + scoreboard.scores_html(matches)
     html = f"<h3>International Football</h3>{parts}" if parts else ""
-    return {"html": html, "usage": usage, "top30": new_top30, "problems": problems}
+    return {"html": html, "usage": usage, "top30": new_top30, "problems": problems, "games": headline_games(nl_window, others, top30)}

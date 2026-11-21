@@ -82,7 +82,7 @@ def detect(all_players, saved, today):
         else:
             reported = before.get("reported", False) and not is_new_event  # same event as last time: carry on
         if kind:
-            items.append({"kind": kind, "name": p["name"], "team": p["team"], "team_name": p["team_name"],
+            items.append({"kind": kind, "name": p["name"], "web_name": p.get("web_name"), "team": p["team"], "team_name": p["team_name"],
                           "detail": p["news"], "back": return_date(p), "chance": p["chance_next"], "minutes": p["minutes"]})
         new_saved[pid] = {"status": p["status"], "news_added": p["news_added"], "reported": reported}
     return items, new_saved

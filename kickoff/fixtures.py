@@ -108,7 +108,8 @@ def epl_thin_day(src, now, end):
 def football(src, now, end, weekday, watch=False):
     out, tables = [], {}
     thin = epl_thin_day(src, now, end)
-    comps = [(lg, n) for lg, n in espn.LEAGUES.items()] + [(espn.CHAMPIONS_LEAGUE, "Champions League"), (espn.FA_CUP, "FA Cup"), (espn.WSL, "Women's Super League")]
+    comps = [(lg, n) for lg, n in espn.LEAGUES.items()] + [(espn.CHAMPIONS_LEAGUE, "Champions League"), (espn.FA_CUP, "FA Cup"), (espn.WSL, "Women's Super League"),
+                                                            (espn.WOMENS_CL, "Women's Champions League"), (espn.LEAGUE_CUP, "League Cup")]
     for lg, name in comps:
         for d in _days(now, end, timezone.utc):
             try:
@@ -125,7 +126,9 @@ def football(src, now, end, weekday, watch=False):
                 listed = any(clubs.is_listed(i) for i in ids)
                 stage = events.football_stage(name, m)
                 flags = set()
-                if lg == espn.WSL and not mine:
+                if lg in (espn.WSL, espn.WOMENS_CL) and not mine:                     # D, 2026-11-22: Arsenal Women's Champions League nights were missing
+                    continue
+                if lg == espn.LEAGUE_CUP and not (mine or m.get("stage") in espn.LEAGUE_CUP_LATE):   # every League Cup game from the quarter-finals
                     continue
                 if lg == espn.CHAMPIONS_LEAGUE:
                     if stage == "top" and not (listed or mine):                    # a league-phase game without a listed club
@@ -138,7 +141,7 @@ def football(src, now, end, weekday, watch=False):
                             tables["eng.1"] = {}
                     if not (mine or listed or any(i in tables["eng.1"] for i in ids)):
                         continue
-                elif lg != espn.WSL and not (mine or listed) and not (lg == "eng.1" and thin):
+                elif lg not in (espn.WSL, espn.WOMENS_CL, espn.LEAGUE_CUP) and not (mine or listed) and not (lg == "eng.1" and thin):
                     continue
                 if frozenset(ids) in DERBIES:
                     flags.add("derby")
@@ -157,6 +160,37 @@ def football(src, now, end, weekday, watch=False):
                     flags.add("live")
                 f_ = fixture("football", name, f"{name.replace('UEFA ', '')}: {m['home']['name']} v {m['away']['name']}", now if live else when, score, mine, stage, flags)
                 f_["ranks"] = sum(tables.get(lg, {}).get(i, 30) for i in ids)       # the two clubs' table places: lower is the bigger meeting (Don't Miss tie-break)
+                out.append(f_)
+    return out + internationals(src, now, end, weekday)
+
+
+def internationals(src, now, end, weekday):
+    """D, 2026-11-22: every game of a world top-20 side (friendlies, qualifiers, the Nations League), labelled with its competition ('Friendly: Brazil v Japan').
+    Two top-20 sides meeting is a big night. Nothing when the saved ranking is missing."""
+    from kickoff import international
+    try:
+        top = international.saved_top20()
+    except Exception:
+        return []
+    out = []
+    if not top:
+        return out
+    for lg, name in international.ALL_COMPS.items():
+        for d in _days(now, end, timezone.utc):
+            try:
+                matches = src.football(lg, d)
+            except Exception:
+                continue
+            for m in matches:
+                when = espn.parse_time(m["kickoff"])
+                live = not m.get("completed") and when < now <= when + espn.MATCH_LENGTH
+                n = international.top20_count(m, top)
+                if m.get("completed") or not (live or now <= when < end) or not n:
+                    continue
+                stage = "top" if n == 2 else "regular"
+                f_ = fixture("football", name, f"{name}: {m['home']['name']} v {m['away']['name']}", now if live else when,
+                             importance.story_score("football", stage, weekday=weekday), False, stage, {"live"} if live else set())
+                f_["ranks"] = 60
                 out.append(f_)
     return out
 

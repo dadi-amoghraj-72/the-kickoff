@@ -1,11 +1,11 @@
 # The Kickoff daily run.
-# LIVE since 8 November 2026 (D's go after the three test mornings): every day at 7:15am Singapore time (cron "15 23 * * *" is 23:15 UTC the day before).
+# LIVE since 8 November 2026 (D's go after the three test mornings): every day at 6:55am Singapore time (cron "55 22 * * *" is 22:55 UTC the day before; D, 2026-11-22: GitHub starts it 30-45 minutes late, so it lands about 7:30-7:45, never after 8).
 # A scheduled run uses Claude and sends the ping on its own; a manual run (Actions tab > Run workflow) does so only when its boxes are set to true.
 name: Daily edition
 
 on:
   schedule:
-    - cron: "15 23 * * *"
+    - cron: "55 22 * * *"
   workflow_dispatch:
     inputs:
       date:

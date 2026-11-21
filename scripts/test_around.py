@@ -159,9 +159,9 @@ pool = [item(f"Feature {i}: a surprising tale from the pool number {i}", f"Detai
 picks = {"picks": [{"n": i, "text": f"Tale {i - 1} turns out to be a surprise."} for i in (1, 2, 3)]}
 around.notes.call_json = fake_claude([picks])
 got, _ = around.stories(object(), pool, NOW, set())
-check("stories: three picks that pass the check are shown, each with its link", len(got) == 3 and all(g["link"].startswith("https://x/f") for g in got), got)
-around.notes.call_json = fake_claude([{"picks": picks["picks"][:2]}])
-check("stories: fewer than three survivors means none (a thin list is worse than none)", around.stories(object(), pool, NOW, set())[0] == [])
+check("Story Of The Day: one story, the first pick, with its link (D, 2026-11-22)", len(got) == 1 and got[0]["link"] == "https://x/f0", got)
+around.notes.call_json = fake_claude([{"picks": []}])
+check("Story Of The Day: no pick means no story", around.stories(object(), pool, NOW, set())[0] == [])
 check("stories: a link shown in the last week is not offered again", around.story_pool(pool, NOW, {"https://x/f0", "https://x/f1"}) == pool[2:])
 check("stories: without Claude there are none", around.stories(None, pool, NOW, set())[0] == [])
 around.notes.call_json = fake_claude([{"picks": [{"n": 1, "text": "Mbappe scored 40 goals in 12 matches."}] * 3}])

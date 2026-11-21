@@ -32,10 +32,14 @@ def perf(sport, text, score, mine=False):
 
 def football_stage(comp, m):
     slug = m.get("stage", "")
+    if m.get("intl"):                                    # an international: two top-20 sides meeting is a big night (D, 2026-11-22)
+        return "top" if m.get("big_intl") else "regular"
     if comp in ("Champions League", "UEFA Champions League"):
         return ("final" if slug == "final" else "knockout") if slug in champions.KNOCKOUT_STAGES else "top"        # a league-phase night is a big competition moment
     if comp == "FA Cup":
         return "final" if slug == "final" else "regular"
+    if comp == "League Cup":
+        return "final" if slug == "final" else "knockout" if slug in ("quarterfinals", "semifinals") else "regular"
     return "regular"
 
 
@@ -89,6 +93,14 @@ def late_winner(m):
     return minute >= 90
 
 
+# D, 2026-11-22: 'Troyes 3-1 Le Havre' in the headlines on a quiet night is fine, with the context: the league's country, outside England.
+COUNTRY = {"La Liga": "Spain", "Ligue 1": "France", "Serie A": "Italy", "Bundesliga": "Germany", "Süper Lig": "Turkey"}
+
+
+def with_country(comp):
+    return f"{comp} ({COUNTRY[comp]})" if comp in COUNTRY else comp
+
+
 def football(comps, weekday):
     """comps: [(competition name, [match dicts from espn.parse_match])]. Finished matches only. Arsenal's (men and women) is flagged "first"."""
     out = []
@@ -108,14 +120,15 @@ def football(comps, weekday):
             wow = cares and not expected and (d["margin"] >= 5 or ((d["comeback"] or draw_back) and d["total_goals"] >= 5))
             drama = cares and (late_winner(m) or late_equaliser(m))
             stage = football_stage(comp, m)
-            text = f"{comp.replace('UEFA ', '')}: {winner_first(m)}"
+            label = with_country(comp.replace('UEFA ', ''))
+            text = f"{label}: {winner_first(m)}"
             sc = importance.story_score("football", stage, mine, listed, margin_bonus=bonus, wow=wow, weekday=weekday, drama=drama)
             loser = None if m["home_score"] == m["away_score"] else (1 if m["home_score"] > m["away_score"] else 0)
             if loser is not None and big[loser] and not big[1 - loser]:                     # a big club beaten by a club outside the 17
                 sc += importance.UPSET_FAVOURITE if m.get("upset") else importance.UPSET
             if all(clubs.is_listed(i) for i in ids):
                 sc += importance.BIG_MEETING
-            e = story("football", comp, text, round(sc, 2), mine, stage)
+            e = story("football", label, text, round(sc, 2), mine, stage)
             if "359" in ids:
                 e["first"] = 1                                  # Arsenal first, Arsenal Women right after (D, 2026-11-09)
             elif mine:
@@ -383,8 +396,22 @@ def football_news(shown):
             and (i["summary"] or STRONG_NEWS.search(i["headline"]) and not LIVE_BLOG.search(i["headline"]))]               # Arsenal's rumours stay in the Arsenal section, labelled
 
 
+def short_name(name, web_name=None):
+    """The name a fan knows (D, 2026-11-22: 'Igor Thiago Nascimento Rodrigues' was FPL's legal name): the first name and FPL's short name ('Ezri Konsa' from
+    'Ezri Konsa Ngoyo' and 'Konsa'); the short name alone when it already has the first name or is a single name ('Gabriel')."""
+    first = (name or "").split()[0] if name else ""
+    if not web_name:
+        return name
+    return web_name if " " in web_name or not first or web_name == first or web_name.startswith(first) else f"{first} {web_name}"
+
+
 def football_injuries(items):
-    """Major injuries: key players out or suspended (Arsenal's first). [{"text"}]."""
+    """Major injuries: key players out or suspended (Arsenal's first). [{"text"}]. 'Igor Thiago (BRE): suspended until 5 Dec', the status said once."""
     keep = [i for i in items if i["kind"] in ("out", "suspended")]
     keep.sort(key=lambda i: (i["team"] != "ARS", i["name"]))
-    return [{"text": f"{i['name']} ({i['team']}): {'suspended' if i['kind'] == 'suspended' else 'out'}" + (f", {i['detail']}" if i.get("detail") else "")} for i in keep]
+    out = []
+    for i in keep:
+        word, detail = ("suspended" if i["kind"] == "suspended" else "out"), (i.get("detail") or "").strip()
+        tail = (detail[:1].lower() + detail[1:]) if detail.lower().startswith(word) else (f"{word}, {detail}" if detail else word)
+        out.append({"text": f"{short_name(i['name'], i.get('web_name'))} ({i['team']}): {tail}"})
+    return out

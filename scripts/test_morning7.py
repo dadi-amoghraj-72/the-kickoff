@@ -83,7 +83,7 @@ class Src:
         return fail
 
 
-def classify(client, cands):
+def classify(client, cands, told=()):
     return {c["link"]: {"kind": "result", "summary": "Emma Aicher won the season's first women's slalom at Levi, her first career slalom win.", "sport": "", "named": "Alpine skiing"}
             for c in cands}, {"input": 0, "output": 0}
 

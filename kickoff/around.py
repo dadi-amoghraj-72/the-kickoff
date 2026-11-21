@@ -1,11 +1,12 @@
-"""Around The Sporting World and Interesting Stories (checkpoint 12): the major events of the sports we do not cover in full (SPEC.md, "Around the sporting world").
+"""Around The Sporting World and the Story Of The Day (checkpoint 12): the major events of the sports we do not cover in full (SPEC.md, "Around the sporting world").
 
 Structured results from ESPN (rugby internationals, numbered UFC events) are written by code; golf (kickoff/golf.py) and badminton (kickoff/badminton.py) have their own tables. Everything else is picked from the news feeds
 (kickoff/sources/other_sports.py): code narrows the last 36 hours' headlines to those about a covered event, or about an Indian or Southeast Asian athlete in the later rounds
 (the spotlight rule); Claude then sorts each as a result, news or neither and writes one sentence in its own words, checked like every other note. Without Claude the source's
 own headline is shown under a link, but only when it reads like a result. Each line carries its source link. A quiet day shows nothing, and a sport with nothing is not listed.
 
-Interesting Stories: three to five picks across everything read, two or three sentences each in our own words with the link; Claude only (no Claude, no stories), never one
+Story Of The Day (D, 2026-11-22; it was Interesting Stories, three to five picks): the one most interesting story across everything read, two or three sentences in our own
+words with the link; Claude only (no Claude, no story), never one
 already featured in the last week."""
 import json
 import re
@@ -47,6 +48,7 @@ PER_SPORT = 3                 # lines per sport (athletics and swimming: RECORD_
 MAX_CANDIDATES = 20           # headlines sent to Claude in one call
 STORY_POOL = 40
 STORY_DAYS = 7
+TOLD_DAYS = 7                 # feed lines remembered so the same result is not told twice
 
 # (key, heading, sport words, the events that count). Sport words keep "world championships" from matching the wrong sport.
 RULES = [
@@ -54,7 +56,7 @@ RULES = [
     ("badminton", "Badminton", r"badminton|shuttler|\bbwf\b", r"world championships?|world tour finals|super ?(1000|750)|all england|indonesia open|china open|malaysia open|japan open"),
     ("athletics", "Athletics", r"athletics|diamond league|sprinter|world athletics", r"diamond league|world (athletics )?(indoor )?championships?"),
     ("handball", "Handball", r"handball", r"world championships?|european championships?|euros?\b|champions league|final four"),
-    ("hockey", "Field hockey", r"field hockey|\bhockey\b|\bfih\b", r"pro league|world cup|asia cup|champions trophy|nations cup|asian games|olympic"),
+    ("hockey", "Field hockey", r"field hockey|(?<!ice )\bhockey\b|\bfih\b", r"pro league|world cup|asia cup|champions trophy|nations cup|asian games|olympic"),
     ("chess", "Chess", r"\bchess\b|\bfide\b|grandmaster", r"world (chess )?championship|candidates|olympiad|tata steel|norway chess|grand chess tour|sinquefield|women'?s world"),
     ("darts", "Darts", r"\bdarts?\b|\bpdc\b", r"world (darts )?championship|world matchplay|grand slam of darts|premier league|ally pally|alexandra palace"),
     ("games", "Multi-sport games", r"games|olympic|olympics", r"\b(asian|sea|southeast asian|commonwealth|olympic|paralympic|youth olympic) games\b|\bolympics\b"),
@@ -86,7 +88,8 @@ STRICT = re.compile(r"\b(wins?|won|beats?|defeats?|champions?|crowned|claims? (?
 NEGATIVE = re.compile(r"\b(stolen|theft|robbery|burgled|arrested|funeral|obituary|tribute)\b", re.I)         # in the news, but not sport
 NEWS = re.compile(r"\b(withdraws?|withdrawn|ruled out|banned|ban\b|retires?|retirement|confirmed|confirms|doping|injur\w+|suspended)\b", re.I)
 EXCLUDE = {"games": re.compile(r"medall?ists?\b|\bstolen\b|\bformer\b|\blegend|\bdoping\b|\bwhereabouts\b", re.I),      # a past medallist in the news is not the Games being played
-           "worldcups": re.compile(r"\b(football|soccer|fifa|rugby|golf|badminton|chess|darts|hockey|handball|athletics|swimming)\b", re.I)}   # those have their own rules or sections
+           "worldcups": re.compile(r"\b(football|soccer|fifa|rugby|golf|badminton|chess|darts|field hockey|handball|athletics|swimming)\b", re.I),
+           "hockey": re.compile(r"\bice hockey\b|\bnhl\b|\biihf\b", re.I)}     # D, 2026-11-22: a women's ice hockey world final showed under Field hockey; it goes to World Cups   # those have their own rules or sections
 # D (2026-11-15: Andreeva's WTA Finals semi-final showed up under Multi-sport games): a sport we cover in full in its own section never comes from these feeds.
 COVERED = re.compile(r"\b(tennis|wta|atp|cricket|ipl|formula (?:1|one)|f1|nba|nfl|mlb|premier league)\b", re.I)
 # D (2026-11-05): the feed headlines were tabloid noise (a Facebook post with emojis). Now: only these outlets, only for sports that have no structured source of their own, only when Claude has
@@ -107,16 +110,19 @@ For every item choose one "kind":
 For result and news give a "summary": ONE sentence of at most 30 words in your own words, using only the headline and blurb; add nothing from memory; never copy a run of more than
 five words; no hype, no emojis. Give the context a reader new to the sport needs: name the event in plain words (the season's first women's slalom
 at Levi, the road cycling world championships) and, when the text says it, why the result matters (a first career win, the overall lead). Also give "sport": the sport the item is about, in one or two words with a capital letter (Badminton, Athletics, Swimming, Field hockey, Alpine skiing), only when
-the headline or blurb says it or names its event; otherwise "". Return one entry per item, using the item's link as its id."""
+the headline or blurb says it or names its event; otherwise "". Return one entry per item, using the item's link as its id.
+
+You may also get "already_reported": what the digest said on the last few mornings. An item that reports the SAME result or news again (another outlet, a later
+write-up, the same match told differently) is "none". A new result involving the same people (the next round, another match) is new."""
 SCHEMA = {"type": "object", "properties": {"items": {"type": "array", "items": {"type": "object", "properties": {
     "link": {"type": "string"}, "kind": {"type": "string", "enum": KINDS}, "summary": {"type": "string"}, "sport": {"type": "string"}}, "required": ["link", "kind", "summary", "sport"], "additionalProperties": False}}},
     "required": ["items"], "additionalProperties": False}
 
-STORY_SYSTEM = """You pick the most interesting stories for The Kickoff, a personal daily sports digest read by one fan in Singapore, from a numbered list of headlines and blurbs.
-Pick three to five that a keen sports fan would most enjoy: human-interest stories, surprises, records, features and big non-routine news from any sport. Skip match reports that
-the digest already covers, previews, routine transfer talk and anything you are unsure about. For each pick write TWO or THREE sentences (at most 60 words) in your own words from
-the headline and blurb only, adding nothing from memory and never copying a run of more than five words. No hype, no emojis. Return the item's number and the text. If fewer than
-three items deserve a place, return fewer."""
+STORY_SYSTEM = """You pick the Story Of The Day for The Kickoff, a personal daily sports digest read by one fan in Singapore, from a numbered list of headlines and blurbs.
+Pick the ONE story a keen sports fan would most want to tell a friend about: a human-interest story, a surprise, a record, a feature or big non-routine news from any sport.
+Skip match reports and results (the digest already has them), previews, routine transfer talk, gossip and anything you are unsure about. Write TWO or THREE sentences
+(at most 60 words) in your own words from the headline and blurb only, adding nothing from memory and never copying a run of more than five words. No hype, no emojis.
+Return the item's number and the text. If nothing is genuinely interesting, return no pick."""
 STORY_SCHEMA = {"type": "object", "properties": {"picks": {"type": "array", "items": {"type": "object", "properties": {"n": {"type": "integer"}, "text": {"type": "string"}},
                 "required": ["n", "text"], "additionalProperties": False}}}, "required": ["picks"], "additionalProperties": False}
 
@@ -204,7 +210,7 @@ def check_summary(summary, item):
     return problems
 
 
-def classify(client, cands):
+def classify(client, cands, told=()):
     """({link: {"kind", "summary"}}, usage) for the candidates Claude kept (result or news); a summary that fails its checks twice is None (the headline is shown instead)."""
     if not cands:
         return {}, {"input": 0, "output": 0}
@@ -213,7 +219,8 @@ def classify(client, cands):
     out, total = {}, {"input": 0, "output": 0}
     for attempt in (1, 2):
         extra = "" if attempt == 1 else "Your earlier summaries for these items broke a rule (see problems). Rewrite them, or choose kind none if the text cannot support them.\n"
-        obj, usage = notes.call_json(client, SYSTEM, SCHEMA, extra + "Items:\n" + json.dumps(pending, ensure_ascii=False, indent=1), model=settings.NEWS_MODEL)
+        already = ("already_reported:\n" + "\n".join(f"- {t}" for t in told) + "\n\n") if told else ""
+        obj, usage = notes.call_json(client, SYSTEM, SCHEMA, already + extra + "Items:\n" + json.dumps(pending, ensure_ascii=False, indent=1), model=settings.NEWS_MODEL)
         total = {k: total[k] + usage[k] for k in total}
         redo = []
         for x in (obj or {}).get("items", []) if isinstance(obj, dict) else []:
@@ -263,7 +270,7 @@ def story_pool(items, now, shown):
 def stories(client, items, now, shown):
     """(picks [{"text", "link", "source"}], usage): three to five interesting stories, or none. Each text is checked against its own headline and blurb."""
     pool = story_pool(items, now, shown)
-    if not client or len(pool) < 3:
+    if not client or not pool:
         return [], {"input": 0, "output": 0}
     listing = "\n".join(f"{n}. [{p['source']}] {p['title']} — {p['text']}" for n, p in enumerate(pool, 1))
     obj, usage = notes.call_json(client, STORY_SYSTEM, STORY_SCHEMA, "Items:\n" + listing, model=settings.NEWS_MODEL)
@@ -275,7 +282,7 @@ def stories(client, items, now, shown):
         facts = {"headline": p["title"], "blurb": p["text"], "clubs": [], "source": p["source"], "length": notes.TIERS["standard"][0]}
         if not notes.check_note(x["text"], facts) and not notes.copied_run(x["text"], [p["title"], p["text"]]):
             out.append({"text": x["text"].strip(), "link": p["link"], "source": p["source"]})
-    return (out[:5] if len(out) >= 3 else []), usage
+    return out[:1], usage                              # D, 2026-11-22: one Story Of The Day (it was three to five, and it appeared once in two weeks)
 
 
 def stories_html(picks):
@@ -287,6 +294,8 @@ def stories_html(picks):
 def run(now, st, source, client=None):
     """{"sections", "state", "stats"}. st: {"seen": [links shown], "stories": {link: ISO date}}. Never raises: a failing page is skipped."""
     seen = list(st.get("seen") or [])
+    # D, 2026-11-22: 'Littler beat Greaves' ran two mornings from two outlets. The last TOLD_DAYS' feed lines go to Claude, which drops a result already reported.
+    told = [t for t in (st.get("told") or []) if now - _utc(t["at"]) <= timedelta(days=TOLD_DAYS)]
     story_log = {k: v for k, v in (st.get("stories") or {}).items() if now - _utc(v) <= timedelta(days=STORY_DAYS)}
     lines = {k: [] for k in ORDER}
     stats = {"candidates": 0, "shown": 0, "failed": 0, "claude_usage": {"input": 0, "output": 0}}
@@ -391,7 +400,7 @@ def run(now, st, source, client=None):
     stats["candidates"] = len(cands)
     feed_count = {}
     if cands:
-        verdicts, usage = classify(client, cands) if client else ({}, {"input": 0, "output": 0})
+        verdicts, usage = classify(client, cands, [t["text"] for t in told]) if client else ({}, {"input": 0, "output": 0})
         stats["claude_usage"] = usage
         for c in cands:
             v = verdicts.get(c["link"])
@@ -408,6 +417,7 @@ def run(now, st, source, client=None):
                 continue
             feed_count[c["sport"]] = feed_count.get(c["sport"], 0) + 1
             lines[c["sport"]].append(line_html(v["summary"] or c["title"], c["link"], c["source"], lead=lead if c["sport"] in LEAD else ""))
+            told.append({"text": v["summary"] or c["title"], "at": now.strftime("%Y-%m-%dT%H:%M:%SZ")})
             seen.append(c["link"])
     html = ""
     on = games_on(sgt_today)
@@ -429,6 +439,6 @@ def run(now, st, source, client=None):
     if html:
         sections.append({"id": "other-sports", "title": "Other Sports", "html": html})
     if picks:
-        sections.append({"id": "stories", "title": "Interesting Stories", "html": stories_html(picks)})
+        sections.append({"id": "stories", "title": "Story Of The Day", "html": stories_html(picks)})
     story_events = story_events + record_perfs
-    return {"sections": sections, "state": {"around": {"seen": seen[-300:], "stories": story_log, "golf": g["state"], "badminton": badminton_state, "ufc": ufc_state, "ufcrank": rank_state}}, "stats": stats, "events": story_events}
+    return {"sections": sections, "state": {"around": {"seen": seen[-300:], "stories": story_log, "told": told, "golf": g["state"], "badminton": badminton_state, "ufc": ufc_state, "ufcrank": rank_state}}, "stats": stats, "events": story_events}

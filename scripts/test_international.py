@@ -70,7 +70,7 @@ check("it has the tables of the groups that played on 4-5 October (A2, A4) under
 check("after matchday 4 only what is proven: Portugal (12 points, nobody else can pass 12 and only two go through) are through, and nothing else",
       re.findall(r'<p class="stake">.*?</p>', h) == ['<p class="stake"><strong>Through:</strong> <span class="g">Portugal</span></p>'], re.findall(r'<p class="stake">.*?</p>', h))
 check("it has the matchday's scoreboard with scorers", '<li><span class="h">' in h and 'class="gh"' in h)
-check("no friendlies were looked at", not any("friendly" in u for u in requested), [u for u in requested if "friendly" in u][:2])
+check("friendlies are looked at now, for the top-20 sides (D, 2026-11-22)", any("fifa.friendly" in u for u in requested))
 check("nothing else broke: no problems reported", out["problems"] == [], out["problems"])
 
 # ---- Quiet days ----
