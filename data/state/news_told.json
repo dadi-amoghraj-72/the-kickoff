@@ -53,6 +53,70 @@
         "Declan",
         "Rice"
       ]
+    },
+    {
+      "at": "2026-11-21T23:26:44.623451+00:00",
+      "club": "Arsenal",
+      "kind": "injury",
+      "names": [
+        "David",
+        "Newcastle",
+        "Raya",
+        "United"
+      ]
+    },
+    {
+      "at": "2026-11-21T23:26:44.623451+00:00",
+      "club": "Arsenal",
+      "kind": "injury",
+      "names": [
+        "Arteta",
+        "David",
+        "Mikel",
+        "Newcastle",
+        "Obviously",
+        "Raya"
+      ]
+    },
+    {
+      "at": "2026-11-21T23:26:44.623451+00:00",
+      "club": "Arsenal",
+      "kind": "injury",
+      "names": [
+        "Raya"
+      ]
+    },
+    {
+      "at": "2026-11-21T23:26:44.623451+00:00",
+      "club": "Paris Saint-Germain",
+      "kind": "injury",
+      "names": [
+        "Doué",
+        "European",
+        "Kane"
+      ]
+    },
+    {
+      "at": "2026-11-21T23:26:44.623451+00:00",
+      "club": "Bournemouth",
+      "kind": "milestone",
+      "names": [
+        "Evanilson",
+        "Marco",
+        "Nine",
+        "Rose"
+      ]
+    },
+    {
+      "at": "2026-11-21T23:26:44.623451+00:00",
+      "club": "Bournemouth",
+      "kind": "milestone",
+      "names": [
+        "Evanilson",
+        "Forest",
+        "Kluivert",
+        "Nottingham"
+      ]
     }
   ]
 }

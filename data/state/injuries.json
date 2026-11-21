@@ -1,8 +1,8 @@
 {
   "1": {
-    "news_added": null,
+    "news_added": "2026-11-21T19:00:05.753960Z",
     "reported": false,
-    "status": "a"
+    "status": "d"
   },
   "109": {
     "news_added": null,
@@ -172,7 +172,7 @@
   "388": {
     "news_added": "2026-11-07T21:30:08.741792Z",
     "reported": false,
-    "status": "d"
+    "status": "a"
   },
   "390": {
     "news_added": null,
@@ -240,7 +240,7 @@
     "status": "a"
   },
   "455": {
-    "news_added": "2026-09-14T14:30:07.387706Z",
+    "news_added": "2026-11-21T16:30:05.729405Z",
     "reported": false,
     "status": "a"
   },

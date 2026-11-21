@@ -405,6 +405,11 @@
       "dob": "1999-01-04",
       "years": 9
     },
+    "nba:4277813": {
+      "age": 28,
+      "dob": "1998-10-06",
+      "years": 6
+    },
     "nba:4277843": {
       "age": 27,
       "dob": "1999-01-18",
@@ -474,6 +479,11 @@
       "age": 28,
       "dob": "1998-07-23",
       "years": 9
+    },
+    "nba:4278355": {
+      "age": 28,
+      "dob": "1998-03-04",
+      "years": 7
     },
     "nba:4278402": {
       "age": 28,
@@ -1220,6 +1230,11 @@
       "dob": "2007-01-03",
       "years": 0
     },
+    "nba:5149115": {
+      "age": 20,
+      "dob": "2006-07-28",
+      "years": 0
+    },
     "nba:5160992": {
       "age": 21,
       "dob": "2005-04-26",
@@ -1313,6 +1328,11 @@
     "nba:6475": {
       "age": 36,
       "dob": "1990-02-08",
+      "years": 16
+    },
+    "nba:6478": {
+      "age": 36,
+      "dob": "1990-10-24",
       "years": 16
     },
     "nba:6583": {
@@ -2190,9 +2210,19 @@
       "dob": "1991-06-15",
       "years": null
     },
+    "soccer:138448": {
+      "age": 25,
+      "dob": "2001-05-25",
+      "years": null
+    },
     "soccer:139437": {
       "age": 33,
       "dob": "1993-05-13",
+      "years": null
+    },
+    "soccer:143564": {
+      "age": 34,
+      "dob": "1992-04-21",
       "years": null
     },
     "soccer:145078": {
@@ -2208,6 +2238,16 @@
     "soccer:162843": {
       "age": 32,
       "dob": "1994-10-18",
+      "years": null
+    },
+    "soccer:163068": {
+      "age": 32,
+      "dob": "1994-01-06",
+      "years": null
+    },
+    "soccer:16340": {
+      "age": 22,
+      "dob": "2004-04-06",
       "years": null
     },
     "soccer:164279": {
@@ -2243,6 +2283,11 @@
     "soccer:174980": {
       "age": 31,
       "dob": "1994-12-04",
+      "years": null
+    },
+    "soccer:175195": {
+      "age": 31,
+      "dob": "1995-02-11",
       "years": null
     },
     "soccer:175887": {
@@ -2290,6 +2335,26 @@
       "dob": "1997-05-07",
       "years": null
     },
+    "soccer:194115": {
+      "age": 29,
+      "dob": "1997-09-14",
+      "years": null
+    },
+    "soccer:194686": {
+      "age": 29,
+      "dob": "1997-08-12",
+      "years": null
+    },
+    "soccer:194801": {
+      "age": 29,
+      "dob": "1997-03-22",
+      "years": null
+    },
+    "soccer:197717": {
+      "age": 29,
+      "dob": "1997-03-16",
+      "years": null
+    },
     "soccer:199663": {
       "age": 30,
       "dob": "1995-12-02",
@@ -2303,6 +2368,11 @@
     "soccer:203669": {
       "age": 27,
       "dob": "1998-12-17",
+      "years": null
+    },
+    "soccer:207236": {
+      "age": 30,
+      "dob": "1996-02-28",
       "years": null
     },
     "soccer:208518": {
@@ -2328,6 +2398,11 @@
     "soccer:212330": {
       "age": 30,
       "dob": "1996-01-24",
+      "years": null
+    },
+    "soccer:212973": {
+      "age": 30,
+      "dob": "1996-02-11",
       "years": null
     },
     "soccer:213248": {
@@ -2378,6 +2453,31 @@
     "soccer:225607": {
       "age": 28,
       "dob": "1998-09-18",
+      "years": null
+    },
+    "soccer:226180": {
+      "age": 30,
+      "dob": "1996-01-19",
+      "years": null
+    },
+    "soccer:229744": {
+      "age": 29,
+      "dob": "1997-05-15",
+      "years": null
+    },
+    "soccer:231182": {
+      "age": 27,
+      "dob": "1999-06-11",
+      "years": null
+    },
+    "soccer:231190": {
+      "age": 27,
+      "dob": "1999-01-04",
+      "years": null
+    },
+    "soccer:231367": {
+      "age": 31,
+      "dob": "1995-06-05",
       "years": null
     },
     "soccer:231388": {
@@ -2435,6 +2535,21 @@
       "dob": "1994-04-24",
       "years": null
     },
+    "soccer:240233": {
+      "age": 28,
+      "dob": "1998-11-04",
+      "years": null
+    },
+    "soccer:243364": {
+      "age": 27,
+      "dob": "1999-03-22",
+      "years": null
+    },
+    "soccer:243386": {
+      "age": 28,
+      "dob": "1997-12-09",
+      "years": null
+    },
     "soccer:243396": {
       "age": 26,
       "dob": "2000-01-27",
@@ -2443,6 +2558,16 @@
     "soccer:243514": {
       "age": 27,
       "dob": "1998-12-27",
+      "years": null
+    },
+    "soccer:245623": {
+      "age": 29,
+      "dob": "1997-01-06",
+      "years": null
+    },
+    "soccer:245916": {
+      "age": 27,
+      "dob": "1999-05-05",
       "years": null
     },
     "soccer:246532": {
@@ -2465,14 +2590,29 @@
       "dob": "1999-05-07",
       "years": null
     },
+    "soccer:249548": {
+      "age": 28,
+      "dob": "1998-04-22",
+      "years": null
+    },
     "soccer:250850": {
       "age": 27,
       "dob": "1999-09-22",
       "years": null
     },
+    "soccer:251400": {
+      "age": 28,
+      "dob": "1998-06-29",
+      "years": null
+    },
     "soccer:252389": {
       "age": 28,
       "dob": "1998-09-06",
+      "years": null
+    },
+    "soccer:252747": {
+      "age": 26,
+      "dob": "2000-02-06",
       "years": null
     },
     "soccer:252971": {
@@ -2483,6 +2623,11 @@
     "soccer:253989": {
       "age": 26,
       "dob": "2000-07-21",
+      "years": null
+    },
+    "soccer:255344": {
+      "age": 27,
+      "dob": "1999-06-17",
       "years": null
     },
     "soccer:255850": {
@@ -2505,6 +2650,11 @@
       "dob": "1997-03-18",
       "years": null
     },
+    "soccer:258871": {
+      "age": 27,
+      "dob": "1999-08-16",
+      "years": null
+    },
     "soccer:258906": {
       "age": 28,
       "dob": "1998-06-04",
@@ -2515,9 +2665,24 @@
       "dob": "1998-04-08",
       "years": null
     },
+    "soccer:259481": {
+      "age": 27,
+      "dob": "1999-01-19",
+      "years": null
+    },
     "soccer:259486": {
       "age": 27,
       "dob": "1999-05-30",
+      "years": null
+    },
+    "soccer:259517": {
+      "age": 27,
+      "dob": "1999-08-20",
+      "years": null
+    },
+    "soccer:259653": {
+      "age": 26,
+      "dob": "2000-10-22",
       "years": null
     },
     "soccer:259743": {
@@ -2555,14 +2720,64 @@
       "dob": "1999-05-29",
       "years": null
     },
+    "soccer:263134": {
+      "age": 27,
+      "dob": "1999-07-05",
+      "years": null
+    },
     "soccer:264211": {
       "age": 32,
       "dob": "1994-10-07",
       "years": null
     },
+    "soccer:265234": {
+      "age": 32,
+      "dob": "1993-12-20",
+      "years": null
+    },
+    "soccer:265653": {
+      "age": 24,
+      "dob": "2002-07-26",
+      "years": null
+    },
+    "soccer:265869": {
+      "age": 26,
+      "dob": "2000-02-29",
+      "years": null
+    },
+    "soccer:265997": {
+      "age": 26,
+      "dob": "2000-07-23",
+      "years": null
+    },
+    "soccer:266575": {
+      "age": 26,
+      "dob": "2000-07-07",
+      "years": null
+    },
+    "soccer:267519": {
+      "age": 28,
+      "dob": "1998-06-04",
+      "years": null
+    },
     "soccer:267711": {
       "age": 26,
       "dob": "2000-08-09",
+      "years": null
+    },
+    "soccer:268478": {
+      "age": 27,
+      "dob": "1999-06-26",
+      "years": null
+    },
+    "soccer:268533": {
+      "age": 27,
+      "dob": "1999-09-13",
+      "years": null
+    },
+    "soccer:268591": {
+      "age": 28,
+      "dob": "1998-07-14",
       "years": null
     },
     "soccer:268601": {
@@ -2595,6 +2810,11 @@
       "dob": "2001-10-29",
       "years": null
     },
+    "soccer:274887": {
+      "age": 26,
+      "dob": "2000-07-11",
+      "years": null
+    },
     "soccer:276221": {
       "age": 25,
       "dob": "2001-10-01",
@@ -2620,9 +2840,29 @@
       "dob": "2001-01-14",
       "years": null
     },
+    "soccer:279155": {
+      "age": 24,
+      "dob": "2002-01-10",
+      "years": null
+    },
     "soccer:280061": {
       "age": 30,
       "dob": "1996-09-20",
+      "years": null
+    },
+    "soccer:281122": {
+      "age": 26,
+      "dob": "2000-10-10",
+      "years": null
+    },
+    "soccer:281558": {
+      "age": 26,
+      "dob": "2000-02-24",
+      "years": null
+    },
+    "soccer:282228": {
+      "age": 24,
+      "dob": "2002-05-16",
       "years": null
     },
     "soccer:282381": {
@@ -2650,6 +2890,16 @@
       "dob": "2001-01-17",
       "years": null
     },
+    "soccer:286569": {
+      "age": 25,
+      "dob": "2000-12-25",
+      "years": null
+    },
+    "soccer:286967": {
+      "age": 25,
+      "dob": "2001-06-14",
+      "years": null
+    },
     "soccer:288340": {
       "age": 26,
       "dob": "2000-02-03",
@@ -2658,6 +2908,11 @@
     "soccer:288896": {
       "age": 25,
       "dob": "2001-06-20",
+      "years": null
+    },
+    "soccer:290401": {
+      "age": 25,
+      "dob": "2001-02-25",
       "years": null
     },
     "soccer:290511": {
@@ -2675,14 +2930,39 @@
       "dob": "2001-06-09",
       "years": null
     },
+    "soccer:291550": {
+      "age": 25,
+      "dob": "2001-04-19",
+      "years": null
+    },
     "soccer:291629": {
       "age": 24,
       "dob": "2002-07-19",
       "years": null
     },
+    "soccer:292252": {
+      "age": 28,
+      "dob": "1998-01-25",
+      "years": null
+    },
     "soccer:293236": {
       "age": 24,
       "dob": "2002-03-10",
+      "years": null
+    },
+    "soccer:297084": {
+      "age": 24,
+      "dob": "2002-06-03",
+      "years": null
+    },
+    "soccer:297121": {
+      "age": 24,
+      "dob": "2002-09-13",
+      "years": null
+    },
+    "soccer:297370": {
+      "age": 24,
+      "dob": "2002-10-20",
       "years": null
     },
     "soccer:298008": {
@@ -2710,14 +2990,29 @@
       "dob": "2001-12-17",
       "years": null
     },
+    "soccer:300927": {
+      "age": 27,
+      "dob": "1999-10-10",
+      "years": null
+    },
     "soccer:301166": {
       "age": 24,
       "dob": "2002-10-21",
       "years": null
     },
+    "soccer:301416": {
+      "age": 24,
+      "dob": "2002-05-28",
+      "years": null
+    },
     "soccer:301525": {
       "age": 25,
       "dob": "2001-05-04",
+      "years": null
+    },
+    "soccer:302002": {
+      "age": 30,
+      "dob": "1996-10-22",
       "years": null
     },
     "soccer:303031": {
@@ -2730,6 +3025,11 @@
       "dob": "2003-05-08",
       "years": null
     },
+    "soccer:303444": {
+      "age": 25,
+      "dob": "2001-08-08",
+      "years": null
+    },
     "soccer:303748": {
       "age": 23,
       "dob": "2003-05-03",
@@ -2740,9 +3040,19 @@
       "dob": "2002-02-05",
       "years": null
     },
+    "soccer:304871": {
+      "age": 23,
+      "dob": "2003-02-03",
+      "years": null
+    },
     "soccer:304965": {
       "age": 26,
       "dob": "2000-02-15",
+      "years": null
+    },
+    "soccer:305555": {
+      "age": 24,
+      "dob": "2002-01-10",
       "years": null
     },
     "soccer:305957": {
@@ -2765,9 +3075,19 @@
       "dob": "1998-10-21",
       "years": null
     },
+    "soccer:307111": {
+      "age": 23,
+      "dob": "2003-07-12",
+      "years": null
+    },
     "soccer:307114": {
       "age": 23,
       "dob": "2003-02-08",
+      "years": null
+    },
+    "soccer:307364": {
+      "age": 24,
+      "dob": "2002-05-29",
       "years": null
     },
     "soccer:307381": {
@@ -2790,6 +3110,11 @@
       "dob": "2000-11-02",
       "years": null
     },
+    "soccer:308944": {
+      "age": 24,
+      "dob": "2002-02-12",
+      "years": null
+    },
     "soccer:309241": {
       "age": 23,
       "dob": "2003-01-07",
@@ -2798,6 +3123,21 @@
     "soccer:309518": {
       "age": 23,
       "dob": "2003-03-23",
+      "years": null
+    },
+    "soccer:309638": {
+      "age": 25,
+      "dob": "2001-01-28",
+      "years": null
+    },
+    "soccer:310640": {
+      "age": 25,
+      "dob": "2001-06-21",
+      "years": null
+    },
+    "soccer:310883": {
+      "age": 23,
+      "dob": "2003-03-31",
       "years": null
     },
     "soccer:311475": {
@@ -2835,6 +3175,11 @@
       "dob": "2005-04-17",
       "years": null
     },
+    "soccer:319431": {
+      "age": 23,
+      "dob": "2003-08-04",
+      "years": null
+    },
     "soccer:320074": {
       "age": 28,
       "dob": "1998-05-09",
@@ -2845,14 +3190,29 @@
       "dob": "2002-05-28",
       "years": null
     },
+    "soccer:322652": {
+      "age": 22,
+      "dob": "2004-02-01",
+      "years": null
+    },
     "soccer:322813": {
       "age": 26,
       "dob": "2000-10-27",
       "years": null
     },
+    "soccer:322841": {
+      "age": 28,
+      "dob": "1998-05-11",
+      "years": null
+    },
     "soccer:323113": {
       "age": 27,
       "dob": "1999-07-07",
+      "years": null
+    },
+    "soccer:323272": {
+      "age": 23,
+      "dob": "2002-12-31",
       "years": null
     },
     "soccer:323838": {
@@ -2865,9 +3225,19 @@
       "dob": "2002-03-11",
       "years": null
     },
+    "soccer:324323": {
+      "age": 28,
+      "dob": "1998-09-25",
+      "years": null
+    },
     "soccer:324660": {
       "age": 21,
       "dob": "2005-06-28",
+      "years": null
+    },
+    "soccer:324766": {
+      "age": 24,
+      "dob": "2002-02-08",
       "years": null
     },
     "soccer:328238": {
@@ -2890,6 +3260,16 @@
       "dob": "2002-08-08",
       "years": null
     },
+    "soccer:332354": {
+      "age": 23,
+      "dob": "2003-09-06",
+      "years": null
+    },
+    "soccer:334163": {
+      "age": 24,
+      "dob": "2002-04-23",
+      "years": null
+    },
     "soccer:335201": {
       "age": 22,
       "dob": "2004-08-20",
@@ -2898,6 +3278,11 @@
     "soccer:335996": {
       "age": 26,
       "dob": "2000-08-07",
+      "years": null
+    },
+    "soccer:336388": {
+      "age": 21,
+      "dob": "2005-06-03",
       "years": null
     },
     "soccer:337970": {
@@ -2920,6 +3305,11 @@
       "dob": "2003-09-25",
       "years": null
     },
+    "soccer:345645": {
+      "age": 22,
+      "dob": "2004-08-28",
+      "years": null
+    },
     "soccer:346619": {
       "age": 23,
       "dob": "2002-11-10",
@@ -2928,6 +3318,11 @@
     "soccer:354334": {
       "age": 23,
       "dob": "2003-05-11",
+      "years": null
+    },
+    "soccer:355998": {
+      "age": 21,
+      "dob": "2005-05-15",
       "years": null
     },
     "soccer:356075": {
@@ -2960,6 +3355,16 @@
       "dob": "2005-11-24",
       "years": null
     },
+    "soccer:361258": {
+      "age": 21,
+      "dob": "2005-03-19",
+      "years": null
+    },
+    "soccer:361749": {
+      "age": 25,
+      "dob": "2001-01-09",
+      "years": null
+    },
     "soccer:362150": {
       "age": 19,
       "dob": "2007-07-13",
@@ -2980,6 +3385,11 @@
       "dob": "2005-03-28",
       "years": null
     },
+    "soccer:364080": {
+      "age": 24,
+      "dob": "2002-07-25",
+      "years": null
+    },
     "soccer:364815": {
       "age": 22,
       "dob": "2004-05-05",
@@ -2995,9 +3405,24 @@
       "dob": "2002-11-03",
       "years": null
     },
+    "soccer:365821": {
+      "age": 26,
+      "dob": "2000-05-18",
+      "years": null
+    },
+    "soccer:366526": {
+      "age": 23,
+      "dob": "2003-06-28",
+      "years": null
+    },
     "soccer:366781": {
       "age": 22,
       "dob": "2004-10-26",
+      "years": null
+    },
+    "soccer:366911": {
+      "age": 20,
+      "dob": "2006-08-08",
       "years": null
     },
     "soccer:367360": {
@@ -3010,9 +3435,24 @@
       "dob": "2005-05-14",
       "years": null
     },
+    "soccer:374621": {
+      "age": 24,
+      "dob": "2002-08-29",
+      "years": null
+    },
     "soccer:376339": {
       "age": 20,
       "dob": "2006-04-16",
+      "years": null
+    },
+    "soccer:379088": {
+      "age": 20,
+      "dob": "2006-05-17",
+      "years": null
+    },
+    "soccer:380286": {
+      "age": 21,
+      "dob": "2005-07-24",
       "years": null
     },
     "soccer:380318": {
@@ -3045,6 +3485,11 @@
       "dob": "2005-04-02",
       "years": null
     },
+    "soccer:387204": {
+      "age": 19,
+      "dob": "2007-05-05",
+      "years": null
+    },
     "soccer:387723": {
       "age": 19,
       "dob": "2007-04-06",
@@ -3055,6 +3500,11 @@
       "dob": "2003-07-23",
       "years": null
     },
+    "soccer:395939": {
+      "age": 18,
+      "dob": "2008-10-01",
+      "years": null
+    },
     "soccer:400352": {
       "age": 19,
       "dob": "2007-08-14",
@@ -3063,6 +3513,11 @@
     "soccer:408780": {
       "age": 20,
       "dob": "2006-11-04",
+      "years": null
+    },
+    "soccer:409371": {
+      "age": 19,
+      "dob": "2007-08-17",
       "years": null
     },
     "soccer:410093": {
@@ -3163,7 +3618,8 @@
     },
     "nba:5041951": {
       "days": [
-        "2026-11-16"
+        "2026-11-16",
+        "2026-11-22"
       ],
       "name": "Meleek Thomas",
       "sport": "nba",
@@ -3176,7 +3632,8 @@
         "2026-11-12",
         "2026-11-13",
         "2026-11-15",
-        "2026-11-17"
+        "2026-11-17",
+        "2026-11-22"
       ],
       "name": "Darryn Peterson",
       "sport": "nba",
@@ -3185,7 +3642,8 @@
     "nba:5082206": {
       "days": [
         "2026-11-08",
-        "2026-11-20"
+        "2026-11-20",
+        "2026-11-22"
       ],
       "name": "Brayden Burries",
       "sport": "nba",
@@ -3207,7 +3665,8 @@
         "2026-11-12",
         "2026-11-15",
         "2026-11-17",
-        "2026-11-20"
+        "2026-11-20",
+        "2026-11-22"
       ],
       "name": "Darius Acuff Jr.",
       "sport": "nba",
@@ -3218,7 +3677,8 @@
         "2026-11-08",
         "2026-11-11",
         "2026-11-18",
-        "2026-11-20"
+        "2026-11-20",
+        "2026-11-22"
       ],
       "name": "AJ Dybantsa",
       "sport": "nba",
@@ -3229,15 +3689,25 @@
         "2026-11-08",
         "2026-11-10",
         "2026-11-18",
-        "2026-11-20"
+        "2026-11-20",
+        "2026-11-22"
       ],
       "name": "Jeremiah Fears",
       "sport": "nba",
       "team": "NOP"
     },
+    "nba:5149115": {
+      "days": [
+        "2026-11-22"
+      ],
+      "name": "Allen Graves",
+      "sport": "nba",
+      "team": "TOR"
+    },
     "nba:5174983": {
       "days": [
-        "2026-11-17"
+        "2026-11-17",
+        "2026-11-22"
       ],
       "name": "Aday Mara",
       "sport": "nba",
@@ -3452,6 +3922,14 @@
       "sport": "soccer",
       "team": "KOE"
     },
+    "soccer:366911": {
+      "days": [
+        "2026-11-22"
+      ],
+      "name": "Tidiam Gomis",
+      "sport": "soccer",
+      "team": "RBL"
+    },
     "soccer:376339": {
       "days": [
         "2026-11-09"
@@ -3459,6 +3937,14 @@
       "name": "Abdelhamid Aït Boudlal",
       "sport": "soccer",
       "team": "REN"
+    },
+    "soccer:379088": {
+      "days": [
+        "2026-11-22"
+      ],
+      "name": "Senny Mayulu",
+      "sport": "soccer",
+      "team": "PSG"
     },
     "soccer:380795": {
       "days": [
@@ -3485,6 +3971,14 @@
       "sport": "soccer",
       "team": "OLM"
     },
+    "soccer:387204": {
+      "days": [
+        "2026-11-22"
+      ],
+      "name": "Rodrigo Mora",
+      "sport": "soccer",
+      "team": "ROMA"
+    },
     "soccer:387723": {
       "days": [
         "2026-11-05"
@@ -3492,6 +3986,14 @@
       "name": "Mattia Liberali",
       "sport": "soccer",
       "team": "COMO"
+    },
+    "soccer:395939": {
+      "days": [
+        "2026-11-22"
+      ],
+      "name": "Luca Williams-Barnett",
+      "sport": "soccer",
+      "team": "TOT"
     },
     "soccer:400352": {
       "days": [
@@ -3508,6 +4010,14 @@
       "name": "Anis Ouzenadji",
       "sport": "soccer",
       "team": "TRY"
+    },
+    "soccer:409371": {
+      "days": [
+        "2026-11-22"
+      ],
+      "name": "Emanuele Lulli",
+      "sport": "soccer",
+      "team": "ROMA"
     },
     "soccer:411276": {
       "days": [
