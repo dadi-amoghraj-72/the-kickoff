@@ -553,7 +553,7 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
   .pl.g.y { text-decoration-color: #B38A00; }
   .pl.g.r { text-decoration-color: #B3261E; }
 }
-.pitch { position: relative; margin: 14px 0; border: 1px solid var(--hairline); border-radius: 10px; padding: 8px 4px; overflow: hidden; }
+.pitch { position: relative; margin: 0; border: 1px solid var(--hairline); border-radius: 10px; padding: 8px 4px; overflow: hidden; }
 .pitch i { position: absolute; pointer-events: none; border: 1px solid var(--hairline); }
 .pitch .ph { left: 0; right: 0; top: 50%; border-width: 1px 0 0; }
 .pitch .pc { left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; }
@@ -561,7 +561,9 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
 .pitch .bx.top { top: 0; border-top: 0; }
 .pitch .bx.bot { bottom: 0; border-bottom: 0; }
 .pitch .half { position: relative; z-index: 1; }
-.pt { display: flex; justify-content: space-between; align-items: center; padding: 2px 8px; font-size: 13px; color: var(--muted); font-weight: 600; }          /* the team and its formation sit outside the pitch lines */
+.pt { display: flex; justify-content: space-between; align-items: center; padding: 0 8px; line-height: 1.2; font-size: 13px; color: var(--muted); font-weight: 600; }          /* the team and its formation sit outside the pitch lines */
+.pt.home { margin: 22px 0 5px; }
+.pt.away { margin: 5px 0 22px; }
 .pitch .half.home { padding-bottom: 20px; }
 .pitch .half.away { padding-top: 20px; }
 .pt .fm { color: var(--gold); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
