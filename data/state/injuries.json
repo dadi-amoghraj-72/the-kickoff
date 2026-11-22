@@ -154,6 +154,11 @@
     "reported": false,
     "status": "a"
   },
+  "368": {
+    "news_added": "2026-10-17T15:00:08.293301Z",
+    "reported": false,
+    "status": "a"
+  },
   "372": {
     "news_added": null,
     "reported": false,
@@ -217,7 +222,12 @@
   "418": {
     "news_added": "2026-11-11T01:00:09.173434Z",
     "reported": false,
-    "status": "d"
+    "status": "a"
+  },
+  "419": {
+    "news_added": "2026-10-31T14:00:08.592593Z",
+    "reported": false,
+    "status": "a"
   },
   "426": {
     "news_added": null,
@@ -275,6 +285,11 @@
     "status": "a"
   },
   "579": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "627": {
     "news_added": null,
     "reported": false,
     "status": "a"
