@@ -529,37 +529,41 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
 .mbstats .hd th, .mbbench .hd th { color: var(--muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
 .mbstats .goals td { font-size: 14.5px; }
 .mb .gl { display: block; margin-bottom: 3px; }
-.mb .gl .mn, .mb .as, .mb .off, .mb .x2 { color: var(--muted); font-size: 12px; }
-.mb .gl .as { display: block; margin-top: -1px; }
+.mb .gl .mn, .mb .off, .mb .x2 { color: var(--muted); font-size: 12px; }
+.mb .as { color: var(--muted); }
+.mb .gl .as { display: block; margin-top: -1px; font-size: inherit; }          /* the assist: the same size as the scorer, grey, in brackets (D, 2026-11-22) */
 .mb .x2 { margin-left: 2px; }
 .mb .off { margin-left: 2px; }
 .mbbench { margin-top: 14px; }
+.mbbench colgroup col { width: 50%; }
+.mbbench td { overflow-wrap: anywhere; }
+.mbbench .as { display: block; font-size: 12px; }          /* who the substitute came on for, under the name so two columns never collide */
 .mbbench .ttl th { text-align: center; padding: 8px; color: var(--chalk); font-weight: 600; }
 .mbbench td:last-child, .mbbench .hd th:last-child { text-align: right; padding-right: 8px; }
 .pl.g { font-weight: 700; background: linear-gradient(90deg, #f4f8ff 0%, #c9dcff 25%, #f1d9ff 50%, #c8fff0 75%, #f4f8ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.pl.a { color: var(--blue); }
 .pl.y { color: #F2E14C; }
 .pl.r { color: #EF5B52; }
-.pl.g.y, .pl.a.y, .pl.g.r, .pl.a.r { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.pl.g.y, .pl.a.y { text-decoration-color: #F2E14C; }
-.pl.g.r, .pl.a.r { text-decoration-color: #EF5B52; }
+.pl.g.y, .pl.g.r { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.pl.g.y { text-decoration-color: #F2E14C; }
+.pl.g.r { text-decoration-color: #EF5B52; }
 @media (prefers-color-scheme: light) {
   .pl.g { background: linear-gradient(90deg, #2f5fae 0%, #7b4bb5 35%, #1c8a74 70%, #2f5fae 100%); -webkit-background-clip: text; background-clip: text; }
   .pl.y { color: #9A7600; }
   .pl.r { color: #B3261E; }
-  .pl.g.y, .pl.a.y { text-decoration-color: #B38A00; }
-  .pl.g.r, .pl.a.r { text-decoration-color: #B3261E; }
+  .pl.g.y { text-decoration-color: #B38A00; }
+  .pl.g.r { text-decoration-color: #B3261E; }
 }
 .pitch { position: relative; margin: 14px 0; border: 1px solid var(--hairline); border-radius: 10px; padding: 8px 4px; overflow: hidden; }
 .pitch i { position: absolute; pointer-events: none; border: 1px solid var(--hairline); }
 .pitch .ph { left: 0; right: 0; top: 50%; border-width: 1px 0 0; }
-.pitch .pc { left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; }
+.pitch .pc { left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; }
 .pitch .bx { left: 22%; width: 56%; height: 46px; }
 .pitch .bx.top { top: 0; border-top: 0; }
 .pitch .bx.bot { bottom: 0; border-bottom: 0; }
 .pitch .half { position: relative; z-index: 1; }
-.pitch .pt { display: flex; justify-content: space-between; align-items: center; padding: 2px 8px 8px; font-size: 13px; color: var(--muted); font-weight: 600; }
-.pitch .half.away .pt { padding: 8px 8px 2px; }
-.pitch .fm { color: var(--gold); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+.pt { display: flex; justify-content: space-between; align-items: center; padding: 2px 8px; font-size: 13px; color: var(--muted); font-weight: 600; }          /* the team and its formation sit outside the pitch lines */
+.pitch .half.home { padding-bottom: 20px; }
+.pitch .half.away { padding-top: 20px; }
+.pt .fm { color: var(--gold); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
 .pitch .pr { display: flex; justify-content: space-around; align-items: baseline; gap: 2px; padding: 9px 0; }
 .pitch .pn { flex: 1 1 0; min-width: 0; text-align: center; font-size: 13px; overflow-wrap: anywhere; line-height: 1.25; }

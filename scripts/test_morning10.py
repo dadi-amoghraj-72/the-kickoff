@@ -54,7 +54,13 @@ text = _html.unescape(re.sub(r"<[^>]+>", " ", board))
 check("goals come first in the stats, then shots, on target, possession, fouls, offsides, yellows, reds", [x for x in ("Goals", "Shots", "On target", "Possession", "Fouls", "Offsides", "Yellows", "Reds") if x in text] == ["Goals", "Shots", "On target", "Possession", "Fouls", "Offsides", "Yellows", "Reds"] and text.index("Goals") < text.index("Shots") < text.index("Reds"), text[:300])
 check("an assist sits in grey brackets under the scorer's goal", '<span class="as">(Havertz)</span>' in board and "Eze" in board, board[:600])
 check("possession is a whole percentage", "34%" in text and "66%" in text, text[:300])
-check("a scorer is pearl, an assist maker blue, a yellow-carded player yellow", 'class="pl g">Eze' in board and 'class="pl a">\u00d8degaard' in board and 'class="pl y">Rice' in board, board)
+pitch = board[board.index('class="pitch"'):board.index('class="mbbench"')]
+stats_part = board[:board.index('class="pitch"')]
+bench_part = board[board.index('class="mbbench"'):]
+check("on the pitch a scorer is pearl and a yellow-carded player yellow, an assist maker plain", 'class="pl g">Eze' in pitch and 'class="pl y">Rice' in pitch and 'class="pl">\u00d8degaard' in pitch, pitch)
+check("no blue assist colour anywhere", 'class="pl a' not in board and "var(--blue)" not in open(ROOT / "kickoff/static/style.css").read().split("Arsenal men's match board")[1], board)
+check("the goals above the pitch are plain bold names, not pearl", "<strong>Eze</strong>" in stats_part and "pl g" not in stats_part, stats_part)
+check("the bench has no coloured names (Livramento is plain)", 'class="pl' not in bench_part and '<span class="bn">Livramento</span>' in bench_part, bench_part)
 check("a scorer of two shows (2)", '<span class="x2">(2)</span>' in board, board)
 check("a scorer who was carded keeps the goal colour and the card colour as an underline", 'class="pl g y">Madueke' in board, board)
 check("no emojis anywhere in the board", not re.search("[\U0001F300-\U0001FAFF\u26BD]", board))

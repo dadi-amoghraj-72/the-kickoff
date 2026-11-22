@@ -1,8 +1,8 @@
 """Arsenal men's match board (D, 2026-11-22), directly under the big score line: the stats in two columns (goals first, with the assist in grey under each), the line-ups drawn on a
 pitch with names only, and the bench in a table with who each substitute came on for. Home on the left and on top, away on the right and at the bottom, as the score line reads.
-Name colours (no emojis, they widen the rows): a scorer in the champions' pearl shimmer ('(2)' for two goals), an assist maker in soft blue, yellow-carded in yellow, red-carded in red,
-everyone else plain. A scorer or assister who was also carded keeps the goal or assist colour and gets a thin underline in the card's colour. Everything comes from ESPN's match summary;
-nothing here is written by Claude."""
+Name colours only on the pitch (no emojis, they widen the rows): a scorer in the champions' pearl shimmer ('(2)' for two goals), yellow-carded in yellow, red-carded in red, everyone else plain;
+a scorer who was also carded keeps the pearl and gets a thin underline in the card's colour. Above the pitch (goals) and in the bench table names are plain; the assist is plain grey in brackets under the
+scorer, the same size. Everything comes from ESPN's match summary; nothing here is written by Claude."""
 from collections import Counter
 
 from kickoff import render as r
@@ -91,13 +91,11 @@ def marks(game):
 
 
 def name_html(full, shown, m, off=False):
-    """One player's name as a coloured span; '(2)' after a scorer of two or more."""
+    """One player's name on the pitch as a coloured span; '(2)' after a scorer of two or more. No colour for an assist (D, 2026-11-22)."""
     n = m["goals"].get(full, 0)
     cls = ["pl"]
     if n:
         cls.append("g")
-    elif full in m["assists"]:
-        cls.append("a")
     card = "r" if full in m["red"] else "y" if full in m["yellow"] else ""
     if card:
         cls.append(card)
@@ -118,7 +116,7 @@ def goals_cell(game, side, m):
         if g.get("side") != side:
             continue
         who = names.get(g["player"], surname(g["player"])) + (" (og)" if g.get("own_goal") else "")
-        mark = f'<span class="pl g">{r.esc(who)}</span>' if not g.get("own_goal") else r.esc(who)
+        mark = f"<strong>{r.esc(who)}</strong>"
         assist = f'<span class="as">({r.esc(names.get(g["assist"], surname(g["assist"])))})</span>' if g.get("assist") else ""
         out += f'<span class="gl">{mark} <span class="mn">{r.esc(g["minute"])}</span>{assist}</span>'
     return out or "-"
@@ -144,7 +142,7 @@ def pitch_html(game):
     if not (lu.get("home") and lu.get("away") and lu["home"]["starters"] and lu["away"]["starters"]):
         return ""
     m = marks(game)
-    names = {}
+    names, labels = {}, {}
     out = ""
     team_names = {"home": (game.get("home") or {}).get("name") or "", "away": (game.get("away") or {}).get("name") or ""}
     for side in ("home", "away"):
@@ -154,9 +152,9 @@ def pitch_html(game):
         for row in (rows if side == "home" else list(reversed(rows))):
             ordered = list(reversed(row)) if side == "home" else row              # the top team faces down: its right is on the viewer's left
             html_rows.append('<div class="pr">' + "".join(f'<span class="pn">{name_html(p["name"], names[side][p["name"]], m[side], p["off"])}</span>' for p in ordered) + "</div>")
-        label = f'<div class="pt"><span>{r.esc(team_names[side])}</span><span class="fm">{r.esc(lu[side]["formation"])}</span></div>'
-        out += f'<div class="half {side}">' + (label + "".join(html_rows) if side == "home" else "".join(html_rows) + label) + "</div>"
-    return f'<div class="pitch"><i class="ph"></i><i class="pc"></i><i class="bx top"></i><i class="bx bot"></i>{out}</div>'
+        labels[side] = f'<div class="pt {side}"><span>{r.esc(team_names[side])}</span><span class="fm">{r.esc(lu[side]["formation"])}</span></div>'
+        out += f'<div class="half {side}">' + "".join(html_rows) + "</div>"
+    return labels["home"] + f'<div class="pitch"><i class="ph"></i><i class="pc"></i><i class="bx top"></i><i class="bx bot"></i>{out}</div>' + labels["away"]
 
 
 def bench_html(game):
@@ -176,13 +174,13 @@ def bench_html(game):
                 bits = [f"for {sub_names.get(p['for'], surname(p['for']))}"] if p["for"] else []
                 bits.append(minute.get((side, p["name"]), ""))
                 hurt = any(e["kind"] == "sub" and e["side"] == side and e["player"] == p["name"] and e["injury"] for e in game.get("timeline") or [])
-                note = f' <span class="as">({r.esc(", ".join(b for b in bits if b))}{", injury" if hurt else ""})</span>'
-            cells.append(name_html(p["name"], sub_names[p["name"]], m[side]) + note)
+                note = f'<span class="as">({r.esc(", ".join(b for b in bits if b))}{", injury" if hurt else ""})</span>'
+            cells.append(f'<span class="bn">{r.esc(sub_names[p["name"]])}</span>' + note)
         cols[side] = cells
     n = max(len(cols["home"]), len(cols["away"]))
     ab = game.get("abbr") or {}
     rows = "".join(f'<tr><td>{(cols["home"] + [""] * n)[i]}</td><td>{(cols["away"] + [""] * n)[i]}</td></tr>' for i in range(n))
-    return (f'<table class="mbbench"><tr class="ttl"><th colspan="2">Bench</th></tr><tr class="hd"><th>{r.esc(ab.get("home") or "")}</th><th>{r.esc(ab.get("away") or "")}</th></tr>{rows}</table>')
+    return (f'<table class="mbbench"><colgroup><col><col></colgroup><tr class="ttl"><th colspan="2">Bench</th></tr><tr class="hd"><th>{r.esc(ab.get("home") or "")}</th><th>{r.esc(ab.get("away") or "")}</th></tr>{rows}</table>')
 
 
 def html(game):
