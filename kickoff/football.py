@@ -7,7 +7,7 @@ import copy
 import re
 from datetime import datetime, timezone
 
-from kickoff import champions, events, facup, focus, fplcorner, headlines, injuries, international, leaders, news, notes, overview, performers, roundup, scoreboard, settings, tables
+from kickoff import champions, events, facup, focus, fplcorner, headlines, injuries, international, leaders, matchboard, news, notes, overview, performers, roundup, scoreboard, settings, tables
 from kickoff import render as r
 from kickoff.http import safe
 from kickoff.sources import espn, feeds, fpl
@@ -299,7 +299,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
             body = focus.score_lines_html(block["facts"]) + body          # the score first, then the story (D, 2026-11-13)
             if club is focus.ARSENAL:                                       # the men's own scoreboard under the score: goals, cards, substitutions (D, 2026-11-22)
                 head = focus.score_lines_html(block["facts"])
-                body = head + "".join(focus.timeline_html(g, club["id"]) for g in block.get("games") or []) + body[len(head):]
+                body = head + "".join(matchboard.html(g) for g in block.get("games") or []) + body[len(head):]
                 for g in block.get("games") or []:
                     home = (g.get("home") or {}).get("id") == club["id"]
                     arsenal_hurt += [(who, ((g.get("away") if home else g.get("home")) or {}).get("name") or "") for who in focus.injured_off(g, club["id"])]

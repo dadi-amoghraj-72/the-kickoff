@@ -33,14 +33,39 @@ game = {"home": {"id": "361", "name": "Newcastle United", "abbr": "NEW"}, "away"
                      {"minute": "56'", "at": 3300, "kind": "yellow", "side": "away", "player": "Declan Rice", "other": "", "injury": False, "own_goal": False, "penalty": False},
                      {"minute": "70'", "at": 4200, "kind": "sub", "side": "away", "player": "Kepa Arrizabalaga", "other": "David Raya", "injury": True, "own_goal": False, "penalty": False},
                      {"minute": "75'", "at": 4500, "kind": "red", "side": "home", "player": "Dan Burn", "other": "", "injury": False, "own_goal": False, "penalty": False}]}
-t = focus.timeline_html(game, "359")
+from kickoff import matchboard  # noqa: E402
 import html as _html  # noqa: E402
-plain = _html.unescape(re.sub(r"<[^>]+>", " ", t))
-check("the scoreboard lists goal, card, substitution and red in order", all(x in plain for x in ("33'", "Eze (Kai Havertz)", "Rice", "Kepa Arrizabalaga on for David Raya (injury)", "Burn")) and plain.index("Eze") < plain.index("Rice") < plain.index("Kepa") < plain.index("Burn"), plain)
-check("cards are coloured boxes and each line has a team code", 'class="card yellow"' in t and 'class="card red"' in t and "<strong>ARS</strong>" in t and "<strong>NEW</strong>" in t, t)
+game.update({"goals": [{"minute": "33'", "player": "Eberechi Eze", "side": "away", "assist": "Kai Havertz", "own_goal": False}, {"minute": "78'", "player": "Noni Madueke", "side": "away", "assist": "Martin \u00d8degaard", "own_goal": False},
+                       {"minute": "49'", "player": "Harvey Barnes", "side": "home", "assist": "William Osula", "own_goal": False}, {"minute": "62'", "player": "Harvey Barnes", "side": "home", "assist": None, "own_goal": False}],
+             "reds": [], "abbr": {"home": "NEW", "away": "ARS"},
+             "stats": {"home": {"totalShots": 12, "shotsOnTarget": 3, "possessionPct": 33.6, "foulsCommitted": 19, "offsides": 3, "yellowCards": 3, "redCards": 0},
+                       "away": {"totalShots": 18, "shotsOnTarget": 6, "possessionPct": 66.4, "foulsCommitted": 10, "offsides": 2, "yellowCards": 2, "redCards": 1}}})
+def P(name, pos, place, **k):
+    return {"name": name, "starter": True, "pos": pos, "place": place, "off": False, "on": False, "for": "", **k}
+game["lineups"] = {"home": {"formation": "4-2-3-1", "starters": [P("Lukas Hornicek", "G", 1), P("Dan Burn", "CD-L", 6), P("Malick Thiaw", "CD-R", 5), P("Lewis Hall", "LB", 3), P("Amar Dedic", "RB", 2, off=True),
+                                                                     P("Joe Willock", "AM", 10, off=True), P("Lewis Miley", "LM", 4), P("Sean Steur", "RM", 8), P("William Osula", "F", 9), P("Harvey Barnes", "AM-L", 11), P("Jacob Murphy", "AM-R", 7)],
+                              "bench": [{"name": "Tino Livramento", "starter": False, "pos": "SUB", "place": 0, "off": False, "on": True, "for": "Amar Dedic"}, {"name": "Nick Pope", "starter": False, "pos": "SUB", "place": 0, "off": False, "on": False, "for": ""}]},
+                   "away": {"formation": "4-2-3-1", "starters": [P("David Raya", "G", 1, off=True), P("Gabriel Magalh\u00e3es", "CD-L", 6), P("Ezri Konsa", "CD-R", 5), P("Riccardo Calafiori", "LB", 3), P("Jurri\u00ebn Timber", "RB", 2),
+                                                                     P("Martin \u00d8degaard", "AM", 10), P("Declan Rice", "LM", 4), P("Bruno Guimar\u00e3es", "RM", 8), P("Kai Havertz", "F", 9), P("Eberechi Eze", "AM-L", 11), P("Noni Madueke", "AM-R", 7)],
+                             "bench": [{"name": "Kepa Arrizabalaga", "starter": False, "pos": "SUB", "place": 0, "off": False, "on": True, "for": "David Raya"}, {"name": "Ben White", "starter": False, "pos": "SUB", "place": 0, "off": False, "on": False, "for": ""}]}}
+game["timeline"] = game["timeline"] + [{"minute": "81'", "at": 4860, "kind": "yellow", "side": "away", "player": "Noni Madueke", "other": "", "injury": False, "own_goal": False, "penalty": False}]
+board = matchboard.html(game)
+text = _html.unescape(re.sub(r"<[^>]+>", " ", board))
+check("goals come first in the stats, then shots, on target, possession, fouls, offsides, yellows, reds", [x for x in ("Goals", "Shots", "On target", "Possession", "Fouls", "Offsides", "Yellows", "Reds") if x in text] == ["Goals", "Shots", "On target", "Possession", "Fouls", "Offsides", "Yellows", "Reds"] and text.index("Goals") < text.index("Shots") < text.index("Reds"), text[:300])
+check("an assist sits in grey brackets under the scorer's goal", '<span class="as">(Havertz)</span>' in board and "Eze" in board, board[:600])
+check("possession is a whole percentage", "34%" in text and "66%" in text, text[:300])
+check("a scorer is pearl, an assist maker blue, a yellow-carded player yellow", 'class="pl g">Eze' in board and 'class="pl a">\u00d8degaard' in board and 'class="pl y">Rice' in board, board)
+check("a scorer of two shows (2)", '<span class="x2">(2)</span>' in board, board)
+check("a scorer who was carded keeps the goal colour and the card colour as an underline", 'class="pl g y">Madueke' in board, board)
+check("no emojis anywhere in the board", not re.search("[\U0001F300-\U0001FAFF\u26BD]", board))
+rows = matchboard.rows_of("4-2-3-1", game["lineups"]["away"]["starters"])
+check("the away line-up is drawn 1-4-2-3-1 and left to right", [[p["name"].split()[-1] for p in row] for row in rows] == [["Raya"], ["Calafiori", "Magalh\u00e3es", "Konsa", "Timber"], ["Rice", "Guimar\u00e3es"], ["Eze", "\u00d8degaard", "Madueke"], ["Havertz"]], rows)
+check("the home side is on top with its goalkeeper first, the away side below with its goalkeeper last", board.index("Hornicek") < board.index("Raya") and board.index('class="half home"') < board.index('class="half away"'), board)
+check("the bench lists who each substitute replaced, with the minute", "(for Raya" in board and "(for Dedic" in board, board)
+check("an unused substitute is plain", "Pope" in board and "Pope</span> <span" not in board, board)
+check("no board without stats or line-ups", matchboard.html({"home": {}, "away": {}}) == "")
 check("Arsenal's injured substitution is named", focus.injured_off(game, "359") == ["David Raya"], focus.injured_off(game, "359"))
 check("it reaches Major Injuries", events.hurt_in_game([("David Raya", "Newcastle United")]) == [{"text": "David Raya (ARS): came off injured v Newcastle United"}])
-check("a game with no timeline gives no list", focus.timeline_html({"home": {}, "away": {}}, "359") == "")
 tl = espn.timeline([{"type": {"type": "substitution", "text": "Substitution"}, "text": "Substitution, Arsenal. A replaces B because of an injury.", "clock": {"value": 4200.0, "displayValue": "70'"},
                      "scoringPlay": False, "team": {"id": "359"}, "participants": [{"athlete": {"displayName": "A"}}, {"athlete": {"displayName": "B"}}]},
                     {"type": {"type": "start-delay", "text": "Start Delay"}, "text": "", "clock": {"value": 1.0}, "scoringPlay": False, "team": {}, "participants": []}], {"359": "away"})

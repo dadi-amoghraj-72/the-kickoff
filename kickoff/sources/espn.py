@@ -282,7 +282,49 @@ def get_match_details(event_id, league="all"):
         elif d.get("redCard"):
             reds.append({"minute": minute, "player": people[0] if people else "Unknown", "side": side})
     abbr = {c["homeAway"]: (c.get("team") or {}).get("abbreviation") or "" for c in comp["competitors"]}
-    return {"goals": goals, "reds": reds, "timeline": timeline(data.get("keyEvents") or [], side_of), "abbr": abbr}
+    return {"goals": goals, "reds": reds, "timeline": timeline(data.get("keyEvents") or [], side_of), "abbr": abbr,
+            "stats": team_stats(data), "lineups": lineups(data)}
+
+
+STAT_KEYS = ("possessionPct", "totalShots", "shotsOnTarget", "foulsCommitted", "offsides", "yellowCards", "redCards", "wonCorners")
+
+
+def team_stats(data):
+    """{"home": {stat name: number}, "away": {...}} from the match's box score: possession, shots, shots on target, fouls, offsides, cards, corners. {} when ESPN has none."""
+    out = {}
+    for t in (data.get("boxscore") or {}).get("teams") or []:
+        side = t.get("homeAway")
+        if side not in ("home", "away"):
+            continue
+        out[side] = {}
+        for st in t.get("statistics") or []:
+            if st.get("name") in STAT_KEYS:
+                try:
+                    out[side][st["name"]] = float(st.get("displayValue"))
+                except (TypeError, ValueError):
+                    pass
+    return out
+
+
+def lineups(data):
+    """{"home": {"formation", "starters": [...], "bench": [...]}, "away": ...}: each player {"name", "pos" (ESPN's position code), "place" (formationPlace), "off", "on", "for" (who a
+    substitute replaced)}. Names only (D, 2026-11-22: no faces, no ratings)."""
+    out = {}
+    for r in data.get("rosters") or []:
+        side = r.get("homeAway")
+        if side not in ("home", "away"):
+            continue
+        people = []
+        for p in r.get("roster") or []:
+            ath = p.get("athlete") or {}
+            if not ath.get("displayName"):
+                continue
+            people.append({"name": ath["displayName"], "starter": bool(p.get("starter")), "pos": (p.get("position") or {}).get("abbreviation") or "",
+                           "place": int(p["formationPlace"]) if str(p.get("formationPlace") or "").isdigit() else 0,
+                           "off": bool(p.get("subbedOut")), "on": bool(p.get("subbedIn")),
+                           "for": ((p.get("subbedInFor") or {}).get("athlete") or {}).get("displayName", "")})
+        out[side] = {"formation": r.get("formation") or "", "starters": [x for x in people if x["starter"]], "bench": [x for x in people if not x["starter"]]}
+    return out
 
 
 def timeline(key_events, side_of):

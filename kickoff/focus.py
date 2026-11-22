@@ -92,35 +92,6 @@ def score_lines_html(facts):
     return f'<ul class="standouts ascore">{rows}</ul>' if rows else ""
 
 
-ICON = {"goal": "\u26bd", "sub": "\u21c5"}
-
-
-def _line(e, game, club_id):
-    """(code, text) of one timeline event: 'ARS', 'Eze (Havertz)'; a substitution 'Kepa on for Raya (injury)'."""
-    side = e["side"]
-    code = ((game.get(side) or {}).get("abbr") or "").upper() if side in ("home", "away") else ""
-    if e["kind"] == "goal":
-        text = f"{e['player']} (o.g.)" if e["own_goal"] else f"{e['player']}" + (" (pen)" if e["penalty"] else "") + (f" ({e['other']})" if e["other"] else "")
-    elif e["kind"] == "sub":
-        text = f"{e['player']} on for {e['other']}" + (" (injury)" if e["injury"] else "")
-    else:
-        text = e["player"]
-    return code, text
-
-
-def timeline_html(game, club_id=None):
-    """Arsenal men's own scoreboard under the score (D, 2026-11-22): every goal, yellow card, red card and substitution in minute order, each with the team code. Empty when ESPN gave nothing."""
-    events = game.get("timeline") or []
-    if not events:
-        return ""
-    rows = ""
-    for e in events:
-        code, text = _line(e, game, club_id)
-        icon = f'<span class="card {e["kind"]}"></span>' if e["kind"] in ("yellow", "red") else f'<span class="ic">{ICON[e["kind"]]}</span>'
-        rows += (f'<li><span class="min">{r.esc(e["minute"])}</span>{icon}<span class="tx"><strong>{r.esc(code)}</strong> {r.esc(text)}</span></li>')
-    return f'<ul class="tl">{rows}</ul>'
-
-
 def injured_off(game, club_id):
     """[player] Arsenal substituted because of an injury in this game: the signal for Major Injuries (D, 2026-11-22: David Raya came off hurt and was missed)."""
     side = "home" if (game.get("home") or {}).get("id") == club_id else "away"
@@ -133,7 +104,8 @@ def short_name(comp):
 
 
 def match_dict(game, details):
-    return {**game, "goals": details["goals"], "reds": details["reds"], "timeline": details.get("timeline") or [], "abbr": details.get("abbr") or {}}
+    return {**game, "goals": details["goals"], "reds": details["reds"], "timeline": details.get("timeline") or [], "abbr": details.get("abbr") or {},
+            "stats": details.get("stats") or {}, "lineups": details.get("lineups") or {}}
 
 
 def build(club, edition_date, tables, previous=None, now=None, tier="arsenal"):
