@@ -176,7 +176,7 @@ def nba(games, mine_teams, weekday):
 def nba_perf(rows):
     """rows: [(text, weight)] or [(text, weight, milestone)]: the day's tracked-or-standout lines with nba.weight (about 70 for a monster night). A milestone (40 points,
     a triple-double) always makes Stars Of The Night, like a century."""
-    return [{**perf("nba", row[0], row[1]), **({"milestone": True} if len(row) > 2 and row[2] else {})} for row in rows]
+    return [{**perf("nba", row[0], row[1], len(row) > 3 and bool(row[3])), **({"milestone": True} if len(row) > 2 and row[2] else {})} for row in rows]
 
 
 # ---- NFL ---------------------------------------------------------------------------------------
@@ -314,7 +314,11 @@ def cricket(picked, cards, weekday, reported=(), changed=None, now=None):
                     continue
                 new_keys.update(f"{m['id']}|{who}|bat{s_}" for s_ in steps)
                 score = min(100, 85 + 0.3 * (o["runs"] - 100) + bonus + (8 if top >= 150 else 0))
-                p = {**perf("cricket", cricket_mod.standout_text(o, short=True), score, mine), "milestone": True}
+                part = o.get("today") is not None and o["today"] < o["runs"]
+                if part:                                         # D, 2026-11-22: 43 runs of a 136 are not a star night; judged on the day's runs like Kohli's, never forced in
+                    p = perf("cricket", cricket_mod.standout_text(o, short=True), 30 + 0.9 * o["today"], False)
+                else:
+                    p = {**perf("cricket", cricket_mod.standout_text(o, short=True), score, mine), "milestone": True}
             elif kind == "five-for":
                 key = f"{m['id']}|{who}|5w"
                 if key in reported or f"{m['id']}|{who}|10w" in reported:
@@ -391,7 +395,7 @@ def football_news(shown):
     stay in Arsenal's Team News and Transfers And Managers, not repeated above (D, 2026-11-21). Never a rumour or the gossip column. [{"text", "link", "source"}]."""
     from kickoff import news as news_mod
     ranked = sorted((i for i in shown if i["kind"] == "milestone" and not news_mod.is_renewal(i)), key=lambda i: (i.get("club") != "Arsenal", NEWS_RANK.get(i["kind"], 9), i["published"]))
-    return [{"text": i["summary"] or i["headline"], "link": i["link"], "source": i["source"]} for i in ranked
+    return [{"text": "Football: " + (i["summary"] or i["headline"]), "link": i["link"], "source": i["source"]} for i in ranked
             if i["kind"] != "transfer_rumour" and not GOSSIP.search(f"{i.get('summary') or ''} {i['headline']}")          # confirmed news only: no rumour, no gossip column (D, 2026-11-10);
             and (i["summary"] or STRONG_NEWS.search(i["headline"]) and not LIVE_BLOG.search(i["headline"]))]               # Arsenal's rumours stay in the Arsenal section, labelled
 
@@ -403,6 +407,11 @@ def short_name(name, web_name=None):
     if not web_name:
         return name
     return web_name if " " in web_name or not first or web_name == first or web_name.startswith(first) else f"{first} {web_name}"
+
+
+def hurt_in_game(pairs):
+    """[(player, opponent)] Arsenal took off injured: 'David Raya (ARS): came off injured v Newcastle United' (D, 2026-11-22). The first lines of Major Injuries."""
+    return [{"text": f"{who} (ARS): came off injured" + (f" v {opp}" if opp else "")} for who, opp in pairs]
 
 
 def football_injuries(items):

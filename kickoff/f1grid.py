@@ -57,6 +57,36 @@ def checked(found, rows, items):
     return out
 
 
+ARTICLE_CHARS, ARTICLES = 3500, 4
+
+
+def article_text(link):
+    """The readable text of a report page, the first ARTICLE_CHARS characters; '' when it cannot be read. (D, 2026-11-22: the headlines said 'grid penalty' but not how many places.)"""
+    from kickoff import http
+    try:
+        raw = http.get_bytes(link, timeout=15).decode("utf-8", "replace")
+    except Exception:
+        return ""
+    raw = re.sub(r"(?is)<(script|style|nav|footer|header)\b.*?</\1>", " ", raw)
+    return " ".join(re.sub(r"<[^>]+>", " ", raw).replace("&#x27;", "'").replace("&amp;", "&").split())[:ARTICLE_CHARS]
+
+
+def read_articles(client, race, rows, rep):
+    """The second look, when a headline says 'grid penalty' and not how many places: the penalty reports' own text goes to Claude. Returns ({driver: penalty}, usage) or ({}, no usage)."""
+    full = []
+    for i in rep:
+        if WORDS.search(f"{i['title']} {i['text']}") and len(full) < ARTICLES:
+            body = article_text(i["link"])
+            if body:
+                full.append({**i, "text": f"{i['text']} {body}"})
+    if not full:
+        return {}, {"input": 0, "output": 0}
+    listing = "\n".join(f"- [{i['source']}] {i['title']} | {i['text']}" for i in full)
+    obj, usage = notes.call_json(client, SYSTEM.replace("headlines and blurbs", "headlines and articles"),
+                                 SCHEMA, f"Race: {race}\nDrivers: {', '.join(drivers_of(rows))}\nReports:\n{listing}", model=settings.NEWS_MODEL)
+    return checked((obj or {}).get("penalties"), rows, full), usage
+
+
 def find(client, race, rows, items, now):
     """({full name: penalty}, usage): the checked penalties for this race, or ({}, no usage) when there is nothing to read or no Claude."""
     rep = reports(items, now)
@@ -66,7 +96,13 @@ def find(client, race, rows, items, now):
     content = f"Race: {race}\nDrivers: {', '.join(drivers_of(rows))}\nReports:\n{listing}"
     obj, usage = notes.call_json(client, SYSTEM, SCHEMA, content, model=settings.NEWS_MODEL)
     pens = checked((obj or {}).get("penalties"), rows, rep)
-    for name in named(rows, rep):                          # a driver a penalty report names is never left out (D, 2026-11-08: Leclerc came and went between runs)
+    guess = [n for n in named(rows, rep) if n not in pens]      # a driver a penalty report names is never left out (D, 2026-11-08: Leclerc came and went between runs)
+    if guess or not pens:                                  # a headline with no size: read the articles (D, 2026-11-22). What the articles say replaces the guess; a driver they leave out was only named
+        deeper, usage2 = read_articles(client, race, rows, rep)
+        usage = {k: usage.get(k, 0) + usage2.get(k, 0) for k in ("input", "output")}
+        if deeper:
+            return deeper, usage
+    for name in guess:
         pens.setdefault(name, {"kind": "unsized", "places": 0, "reason": ""})
     return pens, usage
 

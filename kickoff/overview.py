@@ -69,11 +69,11 @@ def winner_side(m):
 
 
 def verdict(m, pct):
-    """How the result sat against the pre-match chances. A 'clear favourite' has at least a 50% chance."""
+    """How the result sat against the pre-match chances. A 'clear favourite' has at least a 45% chance (D, 2026-11-22: Chelsea at 49% at home to Leeds, 4-1 lost, was called a close match)."""
     if not pct:
         return None
     fav = max(("home", "away"), key=lambda s: pct[s])
-    if pct[fav] < 50:
+    if pct[fav] < 45:
         return "close_match"
     won = winner_side(m)
     if won == fav:

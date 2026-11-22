@@ -281,7 +281,33 @@ def get_match_details(event_id, league="all"):
                           "assist": people[1] if len(people) > 1 and not d.get("ownGoal") else None})
         elif d.get("redCard"):
             reds.append({"minute": minute, "player": people[0] if people else "Unknown", "side": side})
-    return {"goals": goals, "reds": reds}
+    abbr = {c["homeAway"]: (c.get("team") or {}).get("abbreviation") or "" for c in comp["competitors"]}
+    return {"goals": goals, "reds": reds, "timeline": timeline(data.get("keyEvents") or [], side_of), "abbr": abbr}
+
+
+def timeline(key_events, side_of):
+    """Every goal, yellow card, red card and substitution of a match in minute order (D, 2026-11-22: Arsenal's own scoreboard). [{"minute": "70'", "kind": "goal"|"yellow"|"red"|"sub",
+    "side": "home"|"away", "player", "other" (the assist, or the player coming off), "injury": bool, "own_goal", "penalty"}]. Quiet kinds (delays, kick-offs) are left out."""
+    out = []
+    for k in key_events:
+        kind = (k.get("type") or {}).get("type") or ""
+        text = k.get("text") or ""
+        people = [p["athlete"]["displayName"] for p in k.get("participants", []) if p.get("athlete")]
+        if k.get("scoringPlay"):
+            what = "goal"
+        elif kind == "yellow-card":
+            what = "yellow"
+        elif kind in ("red-card", "yellow-red-card") or "red card" in kind:
+            what = "red"
+        elif kind == "substitution":
+            what = "sub"
+        else:
+            continue
+        clock = k.get("clock") or {}
+        out.append({"minute": clock.get("displayValue") or "", "at": clock.get("value") or 0, "kind": what, "side": side_of.get((k.get("team") or {}).get("id")),
+                    "player": people[0] if people else "", "other": people[1] if len(people) > 1 else "", "injury": what == "sub" and "injur" in text.lower(),
+                    "own_goal": what == "goal" and "own goal" in text.lower(), "penalty": what == "goal" and "penalty" in (k.get("type") or {}).get("text", "").lower()})
+    return sorted(out, key=lambda e: e["at"])
 
 
 def get_odds(event_id, league="all"):

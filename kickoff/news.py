@@ -82,7 +82,7 @@ For every item choose one "kind":
 - manager_appointed: a manager or head coach has actually been appointed, including interim.
 - injury: the text states that a named player is injured, ruled out or doubtful.
 - milestone: a historic record or landmark the text says HAS been reached (a country's most-capped player or all-time top scorer, a 100th cap,
-  a club or league record), or a great player retiring. A record that might fall in a coming game is "none".
+  a record for a whole league or competition), or a great player retiring. A club's own winning streak, unbeaten run or club record is "none". A record that might fall in a coming game is "none".
 - none: anything else. Match reports, opinion, a manager "under pressure", a manager who "could be sacked", transfers
   that are only speculation about the future, and anything you are unsure about are all "none". When in doubt, "none".
 
@@ -277,8 +277,9 @@ def item_html(i):
             f'<a href="{r.esc(i["link"])}" rel="noopener">{r.esc(i["source"])}</a></li>')
 
 
-def html(items, section, heading):
-    mine = dedupe(sorted((i for i in items if i["section"] == section), key=lambda i: i["published"], reverse=True))
+def html(items, section, heading, kinds=None, skip=()):
+    """kinds: only these kinds; skip: never these (D, 2026-11-22: an injury story sat under Transfers And Managers; it has its own heading)."""
+    mine = dedupe(sorted((i for i in items if i["section"] == section and (kinds is None or i["kind"] in kinds) and i["kind"] not in skip), key=lambda i: i["published"], reverse=True))
     if not mine:
         return ""
     return f'<h3>{heading}</h3><ul class="news">' + "".join(item_html(i) for i in mine) + "</ul>"

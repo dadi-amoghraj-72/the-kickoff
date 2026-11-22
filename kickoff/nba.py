@@ -29,6 +29,7 @@ TEAMS = {  # where each starts the season; the state keeps the latest team seen,
     "3059318": "PHI", "3917376": "PHI", "3908809": "CLE", "3992": "CLE", "3975": "GSW", "3202": "HOU", "4594268": "MIN", "4065648": "BOS",
     "4279888": "POR", "6606": "POR", "4277905": "WSH", "6583": "WSH", "4396993": "IND", "4395628": "NOP", "5041939": "DAL", "4432166": "DET"}
 FIRST = ("LAL", "PHI", "CLE", "SAS", "BOS")  # D's teams: their games always come first, in this order; every other game follows by tip-off time
+MINE_STAR = 8     # a night by a player of D's five teams ranks this much higher in Stars Of The Night
 POINTS, BIG_REB, BLOCKS, STEALS = 40, 20, 5, 5   # standout thresholds
 REBOUNDS, GUARD_REBOUNDS, ASSISTS = 15, 10, 15   # rebounds (10 for a guard, 15 for anyone else) and assists; D's choice, to be reviewed after a month of real use
 GUARDS = ("G", "PG", "SG")                       # ESPN's box score lists positions as G, F or C
@@ -833,7 +834,8 @@ def run(now, day, st, source):
         mine_teams = set(FIRST)                           # D's five teams; the tracked stars' big nights come in as Performances of the Day
         found = [(star_weight(p), p) for p in flat if kinds_of(p)]
         ranked = sorted(found, key=lambda x: -x[0])
-        nights = [(f"{p['name']} ({p['team']}): {line(p)}", w, big_night(p)) for i, (w, p) in enumerate(ranked) if i < 3 or big_night(p)]
+        nights = [(f"{p['name']} ({p['team']}): {line(p)}", w + (MINE_STAR if p["team"] in mine_teams else 0), big_night(p), p["team"] in mine_teams)      # D, 2026-11-22: James Harden (CLE) is D's player and leads a 51-point night
+                  for i, (w, p) in enumerate(ranked) if i < 3 or big_night(p)]
         story_events = events.nba(new, mine_teams, day.weekday()) + events.nba_perf(nights)
     except Exception:
         story_events = []

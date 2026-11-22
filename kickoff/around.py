@@ -299,13 +299,16 @@ def run(now, st, source, client=None):
     story_log = {k: v for k, v in (st.get("stories") or {}).items() if now - _utc(v) <= timedelta(days=STORY_DAYS)}
     lines = {k: [] for k in ORDER}
     stats = {"candidates": 0, "shown": 0, "failed": 0, "claude_usage": {"input": 0, "output": 0}}
-    rugby_shown = []
+    rugby_shown, rugby_comp = [], {}
     for key, fn in (("rugby", rugby),):
         fails = []
         try:
             for text, uid in fn(source, now, fails):
                 if uid not in seen:                       # a match, a result or a day's leader line is shown once
-                    lines[key].append(line_html(text))
+                    comp = re.search(r"\(([^()]+)\)$", text)
+                    li = line_html(text[:comp.start()].rstrip() if comp else text)           # D, 2026-11-22: the competition is a header over its scores, not a bracket on each
+                    lines[key].append(li)
+                    rugby_comp[li] = comp.group(1) if comp else ""
                     rugby_shown.append(text)
                     seen.append(uid)
         except Exception:
@@ -413,7 +416,7 @@ def run(now, st, source, client=None):
                 lead = v["named"]                                    # 'Alpine skiing' for a 'World Cup slalom': the sport's name only, never a person or a number
             if c["sport"] == "games" and not (lead and OURS.search(f"{c['title']} {c['text']}")):   # a Games line says its sport and is about India or Singapore (D, 2026-11-08)
                 continue
-            if c["sport"] == "worldcups" and not lead:                  # a World Cups line must be able to say its sport
+            if c["sport"] == "worldcups" and (not lead or EXCLUDE["worldcups"].search(lead)):   # a World Cups line must be able to say its sport, and it is not a sport with its own section (D, 2026-11-22: rugby's Nations Championship)
                 continue
             feed_count[c["sport"]] = feed_count.get(c["sport"], 0) + 1
             lines[c["sport"]].append(line_html(v["summary"] or c["title"], c["link"], c["source"], lead=lead if c["sport"] in LEAD else ""))
@@ -429,6 +432,10 @@ def run(now, st, source, client=None):
             shown = lines[key][:RECORD_LINES.get(key, PER_SPORT)]
             head = on[0] if key == "games" and on and lines["games"] else HEADING[key]
             body = f'<ul class="standouts">{"".join(shown)}</ul>' if shown else ""
+            if key == "rugby" and shown:
+                body = ""
+                for comp in dict.fromkeys(rugby_comp.get(li, "") for li in shown):
+                    body += (f'<p class="subhead">{r.esc(comp)}</p>' if comp else "") + f'<ul class="standouts">{"".join(li for li in shown if rugby_comp.get(li, "") == comp)}</ul>'
             html += f'<h4 class="sport{" first" if not html else ""}">{r.esc(head)}</h4>' + ((extra + body) if key == "games" else (body + extra))
             stats["shown"] += len(shown) + (1 if extra else 0)
     picks, usage2 = stories(client, items, now, set(seen) | set(story_log))

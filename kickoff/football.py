@@ -76,7 +76,7 @@ def _paragraphs(written, match_by_id):
         teams = (m["home"]["name"], m["away"]["name"], m["home"]["short"], m["away"]["short"])
         people = [x for g in m.get("goals", []) for x in (g.get("player"), g.get("assist"))]
         for para in split_note(short_form(w["note"]), m.get("goals", []), m["home"]["name"], m["away"]["name"]):
-            out += f"<p>{r.dash(r.bold_names(para, teams, people))}</p>"
+            out += f"<p>{r.highlight(r.dash(r.bold_names(para, teams, people)))}</p>"
     return out
 
 
@@ -262,7 +262,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
             seen[c["link"]] = now.isoformat()
     cutoff = (now.timestamp() - 14 * 86400)
     new["news_seen"] = {k: v for k, v in seen.items() if datetime.fromisoformat(v).timestamp() >= cutoff}
-    football += news.html(shown_news, "football", "Transfers And Managers")
+    football += news.html(shown_news, "football", "Transfers And Managers", skip=("injury",)) + news.html(shown_news, "football", "Injury News", kinds=("injury",))
 
     # ---- FPL corner ----
     if boot:
@@ -284,7 +284,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         football += html
 
     # ---- The Arsenal section ----
-    arsenal, headline_result, arsenal_extra = "", None, []
+    arsenal, headline_result, arsenal_extra, arsenal_hurt = "", None, [], []
     for club, tier in ((focus.ARSENAL, "arsenal"), (focus.ARSENAL_WOMEN, "women")):
         block = guard(club["name"], focus.build, club, day, all_rows, previous, now, tier)
         if not block:
@@ -297,6 +297,12 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
         body = write_notes_for(f"{club['name']} note", block["facts"], match_by_id)
         if body:
             body = focus.score_lines_html(block["facts"]) + body          # the score first, then the story (D, 2026-11-13)
+            if club is focus.ARSENAL:                                       # the men's own scoreboard under the score: goals, cards, substitutions (D, 2026-11-22)
+                head = focus.score_lines_html(block["facts"])
+                body = head + "".join(focus.timeline_html(g, club["id"]) for g in block.get("games") or []) + body[len(head):]
+                for g in block.get("games") or []:
+                    home = (g.get("home") or {}).get("id") == club["id"]
+                    arsenal_hurt += [(who, ((g.get("away") if home else g.get("home")) or {}).get("name") or "") for who in focus.injured_off(g, club["id"])]
         if block["facts"] and club is focus.ARSENAL:
             f = block["facts"][0]
             headline_result = f"{f['home']} {f['final_score'].replace('-', '–')} {f['away']}"
@@ -329,7 +335,7 @@ def run(day, client=None, st=None, now=None, demo=False, seasonal=None):
     comps = [(leagues[lg], results[lg] or []) for lg in LEAGUE_ORDER] + [("Champions League", cl_matches), ("FA Cup", fa_cup), ("League Cup", league_cup), ("Women's Super League", wsl_res)] + arsenal_extra + intl_games
     try:                                                 # the stories and facts The Big Stuff picks from (kickoff/bigstuff.py); never costs the section its games
         story_events = events.football(comps, day.weekday()) + [p for lst in perf_lists for p in events.football_perf("", lst)]
-        big_news, big_injuries = events.football_news(shown_news), events.football_injuries(inj_items)
+        big_news, big_injuries = events.football_news(shown_news), events.hurt_in_game(arsenal_hurt) + events.football_injuries(inj_items)
     except Exception:
         story_events, big_news, big_injuries = [], [], []
     for lg_ in LEAGUE_ORDER:                             # Young Guns reads every league's goalscorers and assisters too, not only the Premier League's (D, 2026-11-08)

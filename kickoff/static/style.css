@@ -514,3 +514,15 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
 .lead td:first-child { padding-left: 12px; }
 .stake { margin: 6px 0 18px; font-size: 15px; }
 .stake .g { color: var(--gold); font-weight: 600; }   /* Nations League: the teams whose place is decided (D, 2026-11-13) */
+
+.hl { color: var(--gold); font-weight: 600; white-space: nowrap; }   /* a paragraph's score and a team's new league position (D, 2026-11-22) */
+
+/* Arsenal men's scoreboard: goals, cards and substitutions in minute order (D, 2026-11-22) */
+.tl { list-style: none; margin: 8px 0 14px; padding: 0 0 0 8px; }
+.tl li { display: grid; grid-template-columns: 52px 22px 1fr; align-items: baseline; gap: 4px; padding: 3px 0; font-size: 15px; }
+.tl .min { color: var(--muted, #9aa8a0); font-variant-numeric: tabular-nums; }
+.tl .ic { text-align: center; }
+.tl .card { display: inline-block; width: 10px; height: 14px; border-radius: 2px; align-self: center; justify-self: center; }
+.tl .card.yellow { background: #e6c34a; }
+.tl .card.red { background: #d9534f; }
+.tl .tx strong { color: var(--gold); font-weight: 600; margin-right: 2px; }

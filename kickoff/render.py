@@ -183,6 +183,19 @@ def bold_names(text, names, people=()):
     return out
 
 
+ORDINAL = (r"(?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth"
+           r"|\d{1,2}(?:st|nd|rd|th))")
+SCORE = re.compile(r"(?<![\w:\u2013-])(\d{1,2}[\u2013-]\d{1,2})(?![\w:\u2013-])")
+PLACE = re.compile(rf"(\b(?:to|are|is|sit|sits|remain|remains|stay|stays|up to|down to)\s+(?:the\s+)?)({ORDINAL})\b(?!\s+minute)", re.I)
+
+
+def highlight(html):
+    """A football paragraph's score and each team's NEW league position in gold (D, 2026-11-22: 'from fifth to eighth', only eighth is picked out; the old position and goal minutes stay plain).
+    Positions count after 'to', 'are', 'is' and the like, never after 'from' and never a goal minute ('the 51st')."""
+    html = SCORE.sub(r'<span class="hl">\1</span>', html)
+    return PLACE.sub(lambda m: f'{m.group(1)}<span class="hl">{m.group(2)}</span>', html)
+
+
 def link(url, text):
     return f'<a href="{esc(url)}" rel="noopener">{esc(text)}</a>'
 
