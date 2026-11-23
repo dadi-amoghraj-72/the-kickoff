@@ -8,7 +8,7 @@ import re
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
-from kickoff import champions, clubs, events, importance
+from kickoff import champions, chess_live, clubs, events, importance
 from kickoff import cricket as cricket_mod
 from kickoff import f1 as f1_mod
 from kickoff import nba as nba_mod
@@ -76,6 +76,19 @@ class Sources:
 
     def tennis(self, now):
         return self.tennis_s.slam_events(now)
+
+    def chess(self):
+        """The running two-player chess matches (the World Championship) with their rounds: [{"name", "players", "url", "rounds": [{"name", "startsAt" (ms), "finished"}]}], from Lichess."""
+        other, out = self._other(), []
+        for it in other.top().get("active") or []:
+            tour = it.get("tour") or {}
+            if (tour.get("tier") or 0) < 5:
+                continue
+            full = other.tour(tour["id"])
+            if chess_live.is_match(full.get("tour") or tour):
+                info = (full.get("tour") or tour).get("info") or {}
+                out.append({"name": tour.get("name", ""), "players": info.get("players", ""), "url": tour.get("url", ""), "rounds": full.get("rounds", [])})
+        return out
 
 
 # ---- Producers ----------------------------------------------------------------------------------
@@ -428,13 +441,31 @@ def badminton(src, now, end, weekday):
     return out
 
 
+def chess(src, now, end, weekday, watch=False):
+    """A running world championship match (D, 2026-11-23: Gukesh is his player): the day's game in On Today, in Don't Miss; for the week ahead only the NEXT game, so the line
+    changes each time the next game changes. The time is the round's own start, shown in SGT."""
+    if not hasattr(src, "chess"):
+        return []
+    out = []
+    for m in src.chess():
+        names = [chess_live.short(x) for x in re.split(r"\s+vs\.?\s+", m.get("players") or "")]
+        lead = " v ".join(names) + " \u00b7 " if len(names) == 2 else ""
+        title = re.sub(r"^FIDE\s+|\s+20\d\d$", "", re.sub(r"\s*\|.*$", "", m.get("name", ""))).replace("Chess Championship", "Championship") or "Chess"
+        rounds = sorted((x for x in m.get("rounds", []) if x.get("startsAt") and not x.get("finished")), key=lambda x: x["startsAt"])
+        due = [x for x in rounds if now <= datetime.fromtimestamp(x["startsAt"] / 1000, tz=timezone.utc) < end]
+        for x in due[:1] if watch else due:
+            when = datetime.fromtimestamp(x["startsAt"] / 1000, tz=timezone.utc)
+            out.append(fixture("chess", "Chess", f"Chess: {lead}{title}, {x.get('name', 'game')}", when, importance.story_score("chess", "final", True, weekday=weekday), True, "final"))
+    return out
+
+
 def collect(src, now, end, weekday, mine_nba=(), watch=False, tracked_nba=()):
     """Every fixture that matters between now and end (UTC datetimes). Returns (fixtures sorted by time, [sports that failed])."""
     out, failed = [], []
     for sport, fn in (("football", lambda: football(src, now, end, weekday, watch)), ("nba", lambda: nba(src, now, end, weekday, set(mine_nba), set(tracked_nba), watch)), ("nfl", lambda: nfl(src, now, end, weekday)),
                       ("mlb", lambda: mlb(src, now, end, weekday)), ("cricket", lambda: cricket(src, now, end, weekday)), ("f1", lambda: f1(src, now, end, weekday)),
                       ("tennis", lambda: tennis(src, now, end, weekday)), ("golf", lambda: golf(src, now, end, weekday)),
-                      ("ufc", lambda: ufc(src, now, end, weekday)), ("badminton", lambda: badminton(src, now, end, weekday))):
+                      ("ufc", lambda: ufc(src, now, end, weekday)), ("badminton", lambda: badminton(src, now, end, weekday)), ("chess", lambda: chess(src, now, end, weekday, watch))):
         try:
             out += fn()
         except Exception:

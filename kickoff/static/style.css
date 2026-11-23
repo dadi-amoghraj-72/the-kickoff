@@ -512,6 +512,9 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
 /* NBA League Leaders (Fridays, D 2026-11-10): one table, a gold sub-row per stat */
 .lead tr.grp td { color: var(--gold); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding-top: 12px; }
 .lead td:first-child { padding-left: 12px; }
+.pts.f1.nba.chm td:nth-child(3) { text-align: center; padding-left: 3px; font-variant-numeric: tabular-nums; }   /* the chess match table (D, 2026-11-23): game, White, result, Black */
+.pts.f1.nba.chm tr.grp td { text-transform: none; font-size: 15px; text-align: center; letter-spacing: 0; padding-left: 8px; }
+.pts.f1.nba.chm td.note { color: var(--muted); font-size: 13px; font-weight: 400; text-align: left; padding: 8px 12px 10px; }
 .stake { margin: 6px 0 18px; font-size: 15px; }
 .stake .g { color: var(--gold); font-weight: 600; }   /* Nations League: the teams whose place is decided (D, 2026-11-13) */
 

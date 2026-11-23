@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 
 MAC_STALE = timedelta(hours=30)       # the Mac job runs once a day at 6:50am; a day and a bit without it means a missed morning
 
-NAMES = {"football": "Football", "cricket": "Cricket", "f1": "F1", "tennis": "Tennis", "nfl": "NFL", "nba": "NBA", "mlb": "MLB", "around": "Other Sports"}
+NAMES = {"football": "Football", "cricket": "Cricket", "f1": "F1", "tennis": "Tennis", "nfl": "NFL", "nba": "NBA", "mlb": "MLB", "nhl": "NHL", "around": "Other Sports"}
 
 
 def newest_built(cache):

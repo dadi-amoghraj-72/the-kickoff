@@ -7,7 +7,7 @@ F1 and tennis (their own sections even without a major moment), Around The Sport
 
 TOP = ["big-stuff", "on-today"]
 # Sport groups in their normal order. Arsenal and Football always travel together.
-GROUPS = [["arsenal", "football"], ["cricket"], ["nba"], ["nfl"], ["mlb"]]
+GROUPS = [["arsenal", "football"], ["cricket"], ["nba"], ["nfl"], ["mlb"], ["nhl"]]
 PROMOTABLE = ["f1", "tennis"]
 AROUND_PARTS = ["other-sports"]  # since 8 Nov 2026 F1 and tennis are always their own sections
 

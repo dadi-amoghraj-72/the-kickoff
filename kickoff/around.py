@@ -315,7 +315,7 @@ def run(now, st, source, client=None):
             stats["failed"] += 1
         stats["failed"] += len(fails)
     sgt_today = (now + timedelta(hours=8)).date()
-    blocks = {"golf": [], "badminton": [], "ufc": [], "rugby": []}    # tables and notes that are not one-line items: the golf standings, the badminton draws and scorecards, rugby tables
+    blocks = {"golf": [], "badminton": [], "ufc": [], "rugby": [], "chess": []}    # tables and notes that are not one-line items: the golf standings, the badminton draws and scorecards, rugby tables
     for league, name in rugbytables.TABLES.items():        # a competition that played this morning gets its table under the results (D, 2026-11-08)
         if any(t.endswith(f"({name})") for t in rugby_shown):
             try:
@@ -377,6 +377,13 @@ def run(now, st, source, client=None):
                     seen.append(uid)
         except Exception:
             stats["failed"] += 1
+    try:                                               # a running world championship match: its table, once per new game (kickoff/chess_live.py)
+        for html_, uid_, _ in chess_live.match_blocks(source, now):
+            if uid_ not in seen:
+                blocks["chess"].append(html_)
+                seen.append(uid_)
+    except Exception:
+        stats["failed"] += 1
     record_perfs = []
     try:                                               # athletics and swimming (D, 2026-11-08): world records, close finishes, world leads and meeting records only
         from kickoff import events as ev_

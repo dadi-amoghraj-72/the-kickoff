@@ -13,15 +13,15 @@ import os
 from datetime import datetime, timezone
 
 from kickoff import f1blurb, f1grid
-from kickoff import around, awards, bigstuff, budget, ontoday, young_sports, youngguns, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
+from kickoff import around, awards, bigstuff, budget, nhl, ontoday, young_sports, youngguns, cricket, cricketcache, f1, football, football_season, ipl, mlb, nba, nfl, order, preview, render, tennis
 from kickoff import notes, settings, sportsnews
 from kickoff import state as state_files
-from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_tennis, feeds, jolpica, wikipedia
+from kickoff.sources import espn, espn_cricket, espn_mlb, espn_nba, espn_nfl, espn_nhl, espn_tennis, feeds, jolpica, wikipedia
 from kickoff.sources import cricket as cricket_source
 from kickoff.sources import other_sports
 
 FOOTBALL_STATE = ["tables", "clean_sheets", "injuries", "fpl", "news_seen", "costs", "top30", "seasons", "news_told"]
-STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb", "youngguns", "around", "sportsnews"]
+STATE_NAMES = FOOTBALL_STATE + ["cricket", "f1", "tennis", "nfl", "nba", "mlb", "nhl", "youngguns", "around", "sportsnews"]
 
 
 def load_state(directory=None):
@@ -132,6 +132,7 @@ def real_adapters(client=None, env=None):
         _simple("nfl", "NFL", _with_extras(lambda now, day, s: nfl.run(now, day, s, espn_nfl.Source()), "nfl", "football", "NFL", client), "nfl"),
         _simple("nba", "NBA", _with_extras(lambda now, day, s: nba.run(now, day, s, espn_nba.Source()), "nba", "basketball", "NBA", client), "nba"),
         _simple("mlb", "MLB", _with_extras(lambda now, day, s: mlb.run(now, day, s, espn_mlb.Source()), "mlb", "baseball", "MLB", client), "mlb"),
+        _simple("nhl", "NHL", lambda now, day, s: nhl.run(now, day, s, espn_nhl.Source()), "nhl"),
         ("around", "Other Sports", around_go),
         ("sportsnews", "Other sports news", sportsnews_go),
     ]

@@ -8,6 +8,9 @@ Only the games' own tags are used (White, Black, Result, ratings), so every line
 so the tier 5 paths are tested on made-up games with the real layout."""
 import re
 from datetime import timedelta, timezone, datetime
+from zoneinfo import ZoneInfo
+
+from kickoff.render import esc
 
 RECENT = timedelta(days=3)
 ELITE_TIER = 5
@@ -65,6 +68,99 @@ def _num(x):
 def _utc(ms):
     return datetime.fromtimestamp(ms / 1000, tz=timezone.utc)
 
+SHOWN = {"1-0": "1\u20130", "0-1": "0\u20131", "1/2-1/2": "\u00bd\u2013\u00bd"}
+CLASSICAL = re.compile(r"^game\s*(\d+)", re.I)
+MATCH_GAMES = 14          # a World Championship match: 14 classical games, first to 7.5 (FIDE regulations, 2026)
+WIN_POINTS = 7.5
+
+
+def short(name):
+    """The name people say: 'Gukesh, D' -> Gukesh, 'Gukesh Dommaraju' -> Gukesh (a listed Indian star by his well-known name), 'Javokhir Sindarov' -> Sindarov (the last word)."""
+    if "," in name:
+        return name.split(",")[0].strip()
+    m = INDIAN_STARS.search(name)
+    if m:
+        return m.group(1).title()
+    return name.split()[-1] if name.split() else name
+
+
+def is_match(tour):
+    """A two-player match (the World Championship), not a tournament: Lichess's info says 'Match' or names the pair as 'A vs B'."""
+    info = tour.get("info") or {}
+    return info.get("format") == "Match" or " vs " in (info.get("players") or "")
+
+
+def _points(x):
+    return f"{x:g}".replace(".5", "\u00bd") if x % 1 else f"{x:g}"
+
+
+def match_table(title, games, tiebreak_day=""):
+    """The match as one table, built like the NBA League Leaders table: the title, a gold score row, then # · White · result · Black, a grey note at the foot.
+    games: [(game number, parse_pgn game)] of the finished classical games in order."""
+    first = games[0][1]
+    a, b = short(first["white"]), short(first["black"])
+    pts = {a: 0.0, b: 0.0}
+    rows = ""
+    for n, g in games:
+        w, k = short(g["white"]), short(g["black"])
+        x, y = POINTS[g["result"]]
+        pts[w] = pts.get(w, 0.0) + x
+        pts[k] = pts.get(k, 0.0) + y
+        rows += f'<tr><td class="n">{n}</td><td>{esc(w)}</td><td>{SHOWN[g["result"]]}</td><td>{esc(k)}</td></tr>'
+    left = MATCH_GAMES - len(games)
+    top, low = max(pts.values()), min(pts.values())
+    if top >= WIN_POINTS:
+        who = max(pts, key=pts.get)
+        note = f"{esc(who)} wins the match"
+    elif left == 0:
+        note = "Level after 14 games: tiebreaks" + (f" on {esc(tiebreak_day)}" if tiebreak_day else "")
+    else:
+        note = f"First to 7\u00bd \u00b7 {left} game{'s' if left != 1 else ''} to play"
+    score = f"{esc(a)} {_points(pts[a])} \u2013 {_points(pts[b])} {esc(b)}"
+    return (f'<div class="pts f1 nba lead chm"><div class="table-wrap"><table><colgroup><col style="width:12%"><col style="width:34%"><col style="width:20%"><col style="width:34%"></colgroup>'
+            f'<thead><tr><th class="tt" colspan="4">{esc(title)}</th></tr></thead><tbody><tr class="grp"><td colspan="4">{score}</td></tr>{rows}'
+            f'<tr><td class="note" colspan="4">{note}</td></tr></tbody></table></div></div>')
+
+
+def match_blocks(source, now):
+    """[(html, unique id, link)]: the table for each running two-player match whose latest game finished in the last three days. The id carries the number of games played, so a
+    table comes once per new game and a rest day shows nothing. Never raises."""
+    try:
+        top = source.top()
+    except Exception:
+        return []
+    items = list(top.get("active") or [])
+    out = []
+    for it in items:
+        tour, rnd = it.get("tour") or {}, it.get("round") or {}
+        done = rnd.get("finishedAt")
+        if (tour.get("tier") or 0) < ELITE_TIER or not rnd.get("finished") or not done or not (timedelta(0) <= now - _utc(done) <= RECENT):
+            continue
+        try:
+            full = source.tour(tour["id"])
+            if not is_match(full.get("tour") or tour):
+                continue
+            games = []
+            for x in full.get("rounds", []):
+                m = CLASSICAL.match(x.get("name", ""))
+                if m and x.get("finished"):
+                    got = parse_pgn(source.round_pgn(x["id"]))
+                    if got:
+                        games.append((int(m.group(1)), got[0]))
+            if not games:
+                continue
+            games.sort(key=lambda t: t[0])
+            last = [x for x in full.get("rounds", []) if CLASSICAL.match(x.get("name", ""))]
+            day = ""
+            if last and last[-1].get("startsAt"):
+                day = (_utc(last[-1]["startsAt"]).astimezone(ZoneInfo("Europe/Zurich")) + timedelta(days=1)).strftime("%-d %b")
+            name = re.sub(r"\s*\|.*$", "", tour.get("name", "")).strip()
+            title = re.sub(r"^FIDE\s+|\s+20\d\d$", "", name).replace("Chess Championship", "Championship") or name
+            out.append((match_table(title, games, day), f"chess:{tour['id']}:table:{len(games)}", rnd.get("url") or f"https://lichess.org/broadcast/{tour.get('slug', '')}"))
+        except Exception:
+            continue
+    return out
+
 
 def run(source, now):
     """[(line, unique id, link)] from Lichess. source.top() -> {"active": [...], "past": [...]} as the API gives it; source.round_pgn(round id) -> text; source.tour(tour id) -> {"rounds": [...]}.
@@ -83,6 +179,8 @@ def run(source, now):
         done = rnd.get("finishedAt")
         if tier < STAR_TIER or not rnd.get("finished") or not done or not (timedelta(0) <= now - _utc(done) <= RECENT):
             continue
+        if tier >= ELITE_TIER and (is_match(tour) or re.search(r"world (chess )?championship", tour.get("name", ""), re.I)):
+            continue                       # a world championship match has its own table (match_table): no second line saying the same
         try:
             games = parse_pgn(source.round_pgn(rnd["id"]))
         except Exception:
