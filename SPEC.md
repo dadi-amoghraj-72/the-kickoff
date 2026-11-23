@@ -181,7 +181,7 @@ Each sport under its own gold heading; a sport with nothing is left out. Structu
 ## 14. 23 Nov Additions: Chess Match, NHL Leaders
 
 - **World Chess Championship (Gukesh v Sindarov, 24 Nov to 11 Dec, tiebreaks 12 Dec; D, 2026-11-23):** from Lichess's broadcast (a tier 5 event whose info says "Match").
-  - **On Today:** each game's own start time in SGT (10pm), in Don't Miss (Gukesh is D's player): "Chess: Gukesh v Sindarov · World Championship, Game 3". Rest days show nothing.
+  - **On Today:** each game's own start time in SGT (10pm), in Don't Miss, which always keeps a chess game even when other games score higher (Gukesh is D's player): "Chess: Gukesh v Sindarov · World Championship, Game 3". Rest days show nothing.
   - **In The Week Ahead (Mondays):** only the NEXT game (the first one after today), so the line changes each time the next game changes. Never all fourteen.
   - **Match table (Other Sports, under Chess):** built like the NBA League Leaders table (same classes, so the same spacing rules): the title "World Championship", a gold score row ("Gukesh 2 – 1 Sindarov", halves as ½), then game · White · result · Black for every finished classical game, and a grey foot ("First to 7½ · 11 games to play", "Gukesh wins the match", or "Level after 14 games: tiebreaks on 12 Dec"). It comes once per new game (id carries the number of games played), so a rest day shows nothing.
   - **No duplicates:** the generic Chess lines (decisive games, round-robin winner, Indian star wins) skip a match; the table is the one report. The Wikipedia "major" for the championship is the only other line (the final result).

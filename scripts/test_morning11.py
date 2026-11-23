@@ -39,15 +39,17 @@ class FakeLichess:
         self.played = played
 
     def rounds(self):
-        return [{"id": f"r{i + 1}", "name": f"Game {i + 1}", "startsAt": s, "finished": i < self.played} for i, s in enumerate(STARTS)]
+        return [({"id": f"r{i + 1}", "name": f"Game {i + 1}", "startsAt": s, "finished": True, "finishedAt": s + 5 * 3600 * 1000} if i < self.played
+                 else {"id": f"r{i + 1}", "name": f"Game {i + 1}", "startsAt": s}) for i, s in enumerate(STARTS)]
 
     def top(self):
         tour = {"id": "t1", "name": "FIDE World Chess Championship 2026", "slug": "wcc", "tier": 5, "info": INFO, "url": "https://lichess.org/broadcast/wcc/t1", "dates": [STARTS[0], STARTS[-1]]}
-        rnd = {"id": f"r{self.played}", "name": f"Game {self.played}", "finished": self.played > 0, "finishedAt": STARTS[max(self.played - 1, 0)] + 5 * 3600 * 1000, "url": "https://lichess.org/x"}
+        nxt = min(self.played, len(STARTS) - 1)          # Lichess lists the CURRENT round (the next one), never the one just played
+        rnd = {"id": f"r{nxt + 1}", "name": f"Game {nxt + 1}", "startsAt": STARTS[nxt], "url": "https://lichess.org/x"}
         return {"active": [{"tour": tour, "round": rnd}], "past": []}
 
     def tour(self, tid):
-        return {"tour": self.top()["active"][0]["tour"], "rounds": self.rounds()}
+        return {"tour": FakeLichess.top(self)["active"][0]["tour"], "rounds": self.rounds()}
 
     def round_pgn(self, rid):
         return pgn(*RESULTS[int(rid[1:])])
@@ -68,6 +70,9 @@ check("rows list game, White, result, Black in game order", re.findall(r'<td cla
 check("the foot says first to 7½ and 11 games to play", "First to 7½ · 11 games to play" in h, h[-300:])
 check("the same table is not made on a day with no new game (rest day, old round)", chess_live.match_blocks(FakeLichess(3), after3 + timedelta(days=5)) == [])
 check("no line for the match in the generic Around lines (no duplicate)", chess_live.run(FakeLichess(3), after3) == [], chess_live.run(FakeLichess(3), after3))
+many = [(i, chess_live.parse_pgn(pgn("Gukesh, D", "Sindarov, J", "1/2-1/2"))[0]) for i in range(1, 16)]
+check("tiebreak rounds never print a negative games-to-play", "-1" not in chess_live.match_table("World Championship", many[:14], "12 Dec") and "to play" not in chess_live.match_table("World Championship", many[:14], "12 Dec"))
+check("a match whose tour moved to Lichess's past list still gets its table", len(chess_live.match_blocks(type("S", (FakeLichess,), {"top": lambda self: {"active": [], "past": {"currentPageResults": [FakeLichess.top(self)["active"][0]]}}})(3), after3)) == 1)
 check("a match tour is recognised from Lichess's info", chess_live.is_match({"info": INFO}) and not chess_live.is_match({"info": {"format": "Round-robin", "players": ""}}))
 check("names: Gukesh, Sindarov", chess_live.short("Gukesh Dommaraju") == "Gukesh" and chess_live.short("Javokhir Sindarov") == "Sindarov" and chess_live.short("Gukesh, D") == "Gukesh")
 won = [(i, chess_live.parse_pgn(pgn("Gukesh, D", "Sindarov, J", "1-0"))[0]) for i in range(1, 9)]
@@ -138,6 +143,9 @@ secs = order.assemble({"nhl": {"title": "NHL", "html": "<p>x</p>"}, "nba": {"tit
 check("NHL comes after the NBA", [s["id"] for s in secs] == ["nba", "nhl"], secs)
 js = (ROOT / "kickoff/static/rail-icons.js").read_text()
 check("a puck-and-stick icon is on the rail for the NHL section", "hockey: {" in js and 'nhl: "hockey"' in js)
+
+crowd = [fixtures.fixture("football", "PL", f"Premier League: A{i} v B{i}", now + timedelta(hours=i + 1), 40 + i, True, "knockout") for i in range(4)]
+check("Don't Miss keeps the chess game even when four bigger games compete", any(f["sport"] == "chess" for f in ontoday.dont_miss(crowd + got)) and len(ontoday.dont_miss(crowd + got)) == 3)
 
 print(f"\n{sum(results)}/{len(results)} passed")
 sys.exit(0 if all(results) else 1)

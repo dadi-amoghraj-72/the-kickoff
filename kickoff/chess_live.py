@@ -107,7 +107,7 @@ def match_table(title, games, tiebreak_day=""):
         pts[w] = pts.get(w, 0.0) + x
         pts[k] = pts.get(k, 0.0) + y
         rows += f'<tr><td class="n">{n}</td><td>{esc(w)}</td><td>{SHOWN[g["result"]]}</td><td>{esc(k)}</td></tr>'
-    left = MATCH_GAMES - len(games)
+    left = max(MATCH_GAMES - len(games), 0)
     top, low = max(pts.values()), min(pts.values())
     if top >= WIN_POINTS:
         who = max(pts, key=pts.get)
@@ -123,40 +123,46 @@ def match_table(title, games, tiebreak_day=""):
 
 
 def match_blocks(source, now):
-    """[(html, unique id, link)]: the table for each running two-player match whose latest game finished in the last three days. The id carries the number of games played, so a
-    table comes once per new game and a rest day shows nothing. Never raises."""
+    """[(html, unique id, link)]: the table for each two-player match (tier 5, active or just finished) whose latest classical game finished in the last three days. Lichess's list
+    shows a tournament's CURRENT round (ongoing or next), never the one just played, so the games come from the tournament's own round list, where a finished round carries
+    finished and finishedAt. The id carries the number of games played: one table per new game, nothing on a rest day. Never raises."""
     try:
         top = source.top()
     except Exception:
         return []
-    items = list(top.get("active") or [])
-    out = []
+    past = top.get("past")
+    items = list(top.get("active") or []) + list((past.get("currentPageResults") if isinstance(past, dict) else past) or [])
+    out, seen_tours = [], set()
     for it in items:
-        tour, rnd = it.get("tour") or {}, it.get("round") or {}
-        done = rnd.get("finishedAt")
-        if (tour.get("tier") or 0) < ELITE_TIER or not rnd.get("finished") or not done or not (timedelta(0) <= now - _utc(done) <= RECENT):
+        tour = it.get("tour") or {}
+        if (tour.get("tier") or 0) < ELITE_TIER or tour.get("id") in seen_tours:
             continue
+        seen_tours.add(tour.get("id"))
         try:
             full = source.tour(tour["id"])
             if not is_match(full.get("tour") or tour):
                 continue
+            classical = [(int(CLASSICAL.match(x["name"]).group(1)), x) for x in full.get("rounds", []) if CLASSICAL.match(x.get("name", ""))]
+            done = [(n, x) for n, x in classical if x.get("finished") and x.get("finishedAt")]
+            if not done or not (timedelta(0) <= now - _utc(max(x["finishedAt"] for _, x in done)) <= RECENT):
+                continue
             games = []
-            for x in full.get("rounds", []):
-                m = CLASSICAL.match(x.get("name", ""))
-                if m and x.get("finished"):
-                    got = parse_pgn(source.round_pgn(x["id"]))
-                    if got:
-                        games.append((int(m.group(1)), got[0]))
+            for n, x in sorted(done, key=lambda t: t[0]):
+                got = parse_pgn(source.round_pgn(x["id"]))
+                if got:
+                    games.append((n, got[0]))
             if not games:
                 continue
-            games.sort(key=lambda t: t[0])
-            last = [x for x in full.get("rounds", []) if CLASSICAL.match(x.get("name", ""))]
+            games = games[:MATCH_GAMES]
             day = ""
-            if last and last[-1].get("startsAt"):
-                day = (_utc(last[-1]["startsAt"]).astimezone(ZoneInfo("Europe/Zurich")) + timedelta(days=1)).strftime("%-d %b")
+            if classical:
+                last = max(classical, key=lambda t: t[0])[1]
+                if last.get("startsAt"):
+                    day = (_utc(last["startsAt"]).astimezone(ZoneInfo("Europe/Zurich")) + timedelta(days=1)).strftime("%-d %b")
             name = re.sub(r"\s*\|.*$", "", tour.get("name", "")).strip()
             title = re.sub(r"^FIDE\s+|\s+20\d\d$", "", name).replace("Chess Championship", "Championship") or name
-            out.append((match_table(title, games, day), f"chess:{tour['id']}:table:{len(games)}", rnd.get("url") or f"https://lichess.org/broadcast/{tour.get('slug', '')}"))
+            link = (full.get("tour") or tour).get("url") or f"https://lichess.org/broadcast/{tour.get('slug', '')}"
+            out.append((match_table(title, games, day), f"chess:{tour['id']}:table:{len(games)}", link))
         except Exception:
             continue
     return out

@@ -67,7 +67,10 @@ def is_big(f):
 
 def dont_miss(chosen, cap=MAX_DONT_MISS):
     """Up to `cap` big games, the most important first by score, then shown in time order."""
-    best = sorted((f for f in chosen if is_big(f)), key=lambda f: (-f["score"], f.get("ranks", 99), f["when"]))[:cap]      # equal scores: the higher-placed clubs first
+    ranked = sorted((f for f in chosen if is_big(f)), key=lambda f: (-f["score"], f.get("ranks", 99), f["when"]))      # equal scores: the higher-placed clubs first
+    best = ranked[:cap]
+    for must in (f for f in ranked if f["sport"] == "chess" and f not in best):          # the world championship game always has a place (D, 2026-11-23): it replaces the lowest pick
+        best = best[:cap - 1] + [must]
     return sorted(best, key=lambda f: f["when"])
 
 
