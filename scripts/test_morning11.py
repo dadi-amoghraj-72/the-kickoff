@@ -30,8 +30,10 @@ def pgn(white, black, result):
 
 # Game 1 Tue 24 Nov 22:00 SGT = 14:00 UTC; rounds every day except the rest days (Fri 27 Nov)
 STARTS = [ms(2026, 11, 24, 14), ms(2026, 11, 25, 14), ms(2026, 11, 26, 14), ms(2026, 11, 28, 14), ms(2026, 11, 29, 14)]
-INFO = {"format": "Match", "players": "Gukesh Dommaraju vs Javokhir Sindarov", "timeZone": "Europe/Zurich"}
-RESULTS = {1: ("Gukesh, Dommaraju", "Sindarov, Javokhir", "1/2-1/2"), 2: ("Sindarov, Javokhir", "Gukesh, Dommaraju", "0-1"), 3: ("Gukesh, Dommaraju", "Sindarov, Javokhir", "1/2-1/2")}
+INFO = {"format": "Match", "players": "Gukesh Dommaraju vs Javokhir Sindarov", "timeZone": "Europe/Zurich", "location": "Geneva, Switzerland"}
+# Lichess's real layout: the pairing is listed before the game ("Gukesh D", result '*'); Sindarov has White in game 1
+PAIRS = {1: ("Sindarov, Javokhir", "Gukesh D"), 2: ("Gukesh D", "Sindarov, Javokhir"), 3: ("Sindarov, Javokhir", "Gukesh D"), 4: ("Gukesh D", "Sindarov, Javokhir"), 5: ("Sindarov, Javokhir", "Gukesh D")}
+RESULTS = {1: "1/2-1/2", 2: "1-0", 3: "1/2-1/2"}          # game 2: Gukesh (White) wins
 
 
 class FakeLichess:
@@ -52,33 +54,45 @@ class FakeLichess:
         return {"tour": FakeLichess.top(self)["active"][0]["tour"], "rounds": self.rounds()}
 
     def round_pgn(self, rid):
-        return pgn(*RESULTS[int(rid[1:])])
+        n = int(rid[1:])
+        return pgn(*PAIRS[n], RESULTS[n] if n <= self.played else "*")
 
     def chess(self):
         t = self.top()["active"][0]["tour"]
         return [{"name": t["name"], "players": INFO["players"], "url": t["url"], "rounds": self.rounds()}]
 
 
-# ---- the match table
-after3 = datetime(2026, 11, 27, 0, 0, tzinfo=timezone.utc)                 # the morning after game 3
+# ---- the match table (D, 2026-11-24: every game, date, fixed columns, colours, venue)
+after3 = datetime(2026, 11, 26, 23, 30, tzinfo=timezone.utc)                 # 7:30 SGT on 27 Nov, the morning after game 3 (a rest day)
 blocks = chess_live.match_blocks(FakeLichess(3), after3)
-check("one table for the running match, once per new game", len(blocks) == 1 and blocks[0][1] == "chess:t1:table:3", blocks and blocks[0][1])
+check("one table for the running match, every edition (id carries the day)", len(blocks) == 1 and blocks[0][1] == "chess:t1:table:2026-11-27", blocks and blocks[0][1])
 h = blocks[0][0] if blocks else ""
-check("the title is short: 'World Championship'", ">World Championship<" in h, h[:300])
-check("the gold score row reads 'Gukesh 1½ – 1½ Sindarov'" if False else "the score row counts the games: Gukesh 2 – 1 Sindarov", "Gukesh 2 – 1 Sindarov" in h.replace("½", "").replace("2½", "2") or "Gukesh 2" in h, h)
-check("rows list game, White, result, Black in game order", re.findall(r'<td class="n">(\d)</td><td>(\w+)</td><td>([^<]+)</td><td>(\w+)</td>', h) == [("1", "Gukesh", "½–½", "Sindarov"), ("2", "Sindarov", "0–1", "Gukesh"), ("3", "Gukesh", "½–½", "Sindarov")], re.findall(r"<tr>.*?</tr>", h))
+check("the title and a grey line with the venue and dates (the fake has 5 games, so it ends 30 Nov)", ">World Championship<span class=prog>Geneva · 24 Nov – 30 Nov</span>" in h, h[:400])
+check("the gold score row: Gukesh 2 – 1 Sindarov", "Gukesh 2 – 1 Sindarov" in h, h)
+rows = re.findall(r'<tr><td class="n">(\w+)</td><td class="d">([^<]*)</td><td class="pl l( w)?">(\w+)<span class="c">\((\w)\)</span></td><td class="s([^"]*)">([^<]+)</td><td class="pl r( w)?">(\w+)<span class="c">\((\w)\)</span></td></tr>', h)
+check("every game is listed, played or not (5 here)", len(rows) == 5, rows)
+check("Gukesh is always left, Sindarov always right", all(x[3] == "Gukesh" and x[8] == "Sindarov" for x in rows), rows)
+check("colours from Lichess's pairing: game 1 Gukesh (B) v Sindarov (W), game 2 Gukesh (W)", rows[0][4] == "B" and rows[0][9] == "W" and rows[1][4] == "W", rows[:2])
+check("the score is read from Gukesh's side and his win is gold", rows[1][6] == "1–0" and rows[1][2] == " w" and rows[1][7] == "", rows[1])
+check("draws are ½–½ with no gold", rows[0][6] == "½–½" and rows[0][2] == rows[0][7] == "", rows[0])
+check("the dates are the SGT dates", [x[1] for x in rows] == ["24 Nov", "25 Nov", "26 Nov", "28 Nov", "29 Nov"], [x[1] for x in rows])
+check("games still to come show a grey dash (next game more than a day away: rest day)", rows[3][5] == " up" and rows[3][6] == "–", rows[3])
+morning1 = datetime(2026, 11, 23, 23, 30, tzinfo=timezone.utc)
+h1 = chess_live.match_blocks(FakeLichess(0), morning1)[0][0]
+check("on game day the next game shows its time (10pm) in gold", '<td class="s next">10pm</td>' in h1 and h1.count("s next") == 1, h1)
+check("before game 1 the score is 0 – 0 and 14 games to play", "Gukesh 0 – 0 Sindarov" in h1 and "First to 7½ · 14 games to play" in h1, h1[-300:])
 check("the foot says first to 7½ and 11 games to play", "First to 7½ · 11 games to play" in h, h[-300:])
-check("the same table is not made on a day with no new game (rest day, old round)", chess_live.match_blocks(FakeLichess(3), after3 + timedelta(days=5)) == [])
+check("nothing two days before the first game", chess_live.match_blocks(FakeLichess(0), morning1 - timedelta(days=2)) == [])
 check("no line for the match in the generic Around lines (no duplicate)", chess_live.run(FakeLichess(3), after3) == [], chess_live.run(FakeLichess(3), after3))
-many = [(i, chess_live.parse_pgn(pgn("Gukesh, D", "Sindarov, J", "1/2-1/2"))[0]) for i in range(1, 16)]
-check("tiebreak rounds never print a negative games-to-play", "-1" not in chess_live.match_table("World Championship", many[:14], "12 Dec") and "to play" not in chess_live.match_table("World Championship", many[:14], "12 Dec"))
+won = [{"label": str(i), "tb": False, "starts": STARTS[0] + i * 86400000, "white": "Gukesh D", "black": "Sindarov, Javokhir", "result": "1-0"} for i in range(1, 9)]
+check("7½ points ends the match", "Gukesh wins the match" in chess_live.match_table("World Championship", "", won, morning1))
+level = [{"label": str(i), "tb": False, "starts": STARTS[0] + i * 86400000, "white": "Gukesh D", "black": "Sindarov, Javokhir", "result": "1/2-1/2"} for i in range(1, 15)]
+lt = chess_live.match_table("World Championship", "", level, morning1)
+check("level after 14: tiebreaks next, never a negative count", "tiebreaks next" in lt and "-1" not in lt, lt[-200:])
+check("halves print as ½ and 2½", chess_live._points(0.5) == "½" and chess_live._points(2.5) == "2½" and chess_live._points(3.0) == "3" and chess_live._points(0.0) == "0")
 check("a match whose tour moved to Lichess's past list still gets its table", len(chess_live.match_blocks(type("S", (FakeLichess,), {"top": lambda self: {"active": [], "past": {"currentPageResults": [FakeLichess.top(self)["active"][0]]}}})(3), after3)) == 1)
 check("a match tour is recognised from Lichess's info", chess_live.is_match({"info": INFO}) and not chess_live.is_match({"info": {"format": "Round-robin", "players": ""}}))
 check("names: Gukesh, Sindarov", chess_live.short("Gukesh Dommaraju") == "Gukesh" and chess_live.short("Javokhir Sindarov") == "Sindarov" and chess_live.short("Gukesh, D") == "Gukesh")
-won = [(i, chess_live.parse_pgn(pgn("Gukesh, D", "Sindarov, J", "1-0"))[0]) for i in range(1, 9)]
-check("7½ points ends the match", "Gukesh wins the match" in chess_live.match_table("World Championship", won, "12 Dec"))
-level = [(i, chess_live.parse_pgn(pgn("Gukesh, D", "Sindarov, J", "1/2-1/2"))[0]) for i in range(1, 15)]
-check("level after 14: tiebreak day named", "tiebreaks on 12 Dec" in chess_live.match_table("World Championship", level, "12 Dec"), chess_live.match_table("World Championship", level, "12 Dec")[-200:])
 
 # ---- On Today and the week ahead
 now = datetime(2026, 11, 23, 23, 30, tzinfo=timezone.utc)                    # 7:30 SGT, Tue 24 Nov

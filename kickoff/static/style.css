@@ -512,9 +512,24 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
 /* NBA League Leaders (Fridays, D 2026-11-10): one table, a gold sub-row per stat */
 .lead tr.grp td { color: var(--gold); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding-top: 12px; }
 .lead td:first-child { padding-left: 12px; }
-.pts.f1.nba.chm td:nth-child(3) { text-align: center; padding-left: 3px; font-variant-numeric: tabular-nums; }   /* the chess match table (D, 2026-11-23): game, White, result, Black */
-.pts.f1.nba.chm tr.grp td { text-transform: none; font-size: 15px; text-align: center; letter-spacing: 0; padding-left: 8px; }
-.pts.f1.nba.chm td.note { color: var(--muted); font-size: 13px; font-weight: 400; text-align: left; padding: 8px 12px 10px; }
+/* The chess match table (D, 2026-11-24): every game; # · date (grey) · left player (W/B) · score · right player (W/B); winners gold, the next game's time gold */
+.pts.f1.chm table { font-size: 14px; }
+.pts.f1.chm th.tt { font-size: 16px; padding: 12px 8px 10px; white-space: normal; }
+.pts.f1.chm th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 13px; color: var(--muted); }
+.pts.f1.chm tr.grp td { color: var(--gold); font-weight: 600; font-size: 15px; text-align: center; padding: 10px 8px; }
+.pts.f1.chm td { padding: 8px 3px; }
+.pts.f1.chm td:first-child { padding-left: 8px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pts.f1.chm td:last-child { padding-right: 8px; }
+.pts.f1.chm td.d { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.pts.f1.chm td.pl { font-weight: 600; white-space: nowrap; }
+.pts.f1.chm td.pl.l { text-align: right; }
+.pts.f1.chm td.pl.r { text-align: left; }
+.pts.f1.chm td.pl .c { color: var(--muted); font-size: 11px; font-weight: 400; margin-left: 3px; }
+.pts.f1.chm td.pl.w { color: var(--gold); }
+.pts.f1.chm td.s { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pts.f1.chm td.s.up { color: var(--muted); }
+.pts.f1.chm td.s.next { color: var(--gold); font-weight: 600; }
+.pts.f1.chm td.note { color: var(--muted); font-size: 13px; font-weight: 400; text-align: left; padding: 8px 12px 10px; }
 .stake { margin: 6px 0 18px; font-size: 15px; }
 .stake .g { color: var(--gold); font-weight: 600; }   /* Nations League: the teams whose place is decided (D, 2026-11-13) */
 

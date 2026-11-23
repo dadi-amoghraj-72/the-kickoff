@@ -12,6 +12,8 @@ from zoneinfo import ZoneInfo
 
 from kickoff.render import esc
 
+SGT = ZoneInfo("Asia/Singapore")
+
 RECENT = timedelta(days=3)
 ELITE_TIER = 5
 STAR_TIER = 4
@@ -91,41 +93,86 @@ def is_match(tour):
 
 
 def _points(x):
-    return f"{x:g}".replace(".5", "\u00bd") if x % 1 else f"{x:g}"
+    """2.5 -> '2½', 0.5 -> '½', 3.0 -> '3'."""
+    whole = int(x)
+    return (f"{whole}" if whole else "") + "\u00bd" if x % 1 else f"{whole}"
 
 
-def match_table(title, games, tiebreak_day=""):
-    """The match as one table, built like the NBA League Leaders table: the title, a gold score row, then # · White · result · Black, a grey note at the foot.
-    games: [(game number, parse_pgn game)] of the finished classical games in order."""
-    first = games[0][1]
-    a, b = short(first["white"]), short(first["black"])
-    pts = {a: 0.0, b: 0.0}
-    rows = ""
-    for n, g in games:
-        w, k = short(g["white"]), short(g["black"])
-        x, y = POINTS[g["result"]]
-        pts[w] = pts.get(w, 0.0) + x
-        pts[k] = pts.get(k, 0.0) + y
-        rows += f'<tr><td class="n">{n}</td><td>{esc(w)}</td><td>{SHOWN[g["result"]]}</td><td>{esc(k)}</td></tr>'
-    left = max(MATCH_GAMES - len(games), 0)
-    top, low = max(pts.values()), min(pts.values())
-    if top >= WIN_POINTS:
-        who = max(pts, key=pts.get)
-        note = f"{esc(who)} wins the match"
-    elif left == 0:
-        note = "Level after 14 games: tiebreaks" + (f" on {esc(tiebreak_day)}" if tiebreak_day else "")
+def pairing(text):
+    """(white, black, result or None) of a round's first game, also before it is played: Lichess lists the pairing (and so the colours) in advance with result '*'."""
+    chunk = re.split(r"\n\s*\n(?=\[Event )", text.strip())[0] if text.strip() else ""
+    tags = dict(re.findall(r'\[(\w+) "([^"]*)"\]', chunk))
+    if not (tags.get("White") and tags.get("Black")):
+        return None
+    return tags["White"], tags["Black"], tags.get("Result") if tags.get("Result") in POINTS else None
+
+
+def _sgt(ms):
+    return _utc(ms).astimezone(SGT)
+
+
+def _clock(t):
+    h = t.hour % 12 or 12
+    return f"{h}:{t.minute:02d}{'am' if t.hour < 12 else 'pm'}" if t.minute else f"{h}{'am' if t.hour < 12 else 'pm'}"
+
+
+def match_table(title, sub, games, now):
+    """The whole match as one table (D, 2026-11-24): the title with a grey line under it (venue and dates), the gold running score, then EVERY game, played or not:
+    # · date (grey) · Gukesh (W/B) · score · Sindarov (W/B). The two players keep their columns (the Indian star on the left), the colour is a small grey (W) or (B) from
+    Lichess's own pairing, the score is read from the left player's side, a decisive game's winner is gold, the next game within 24 hours shows its time in gold, a game
+    still to come shows a grey dash. A grey foot: first to 7½ and the games to play, the winner, or the tiebreaks. games: [{"n", "starts" (ms), "white", "black", "result"}]."""
+    names = [short(x) for g in games for x in (g["white"], g["black"])]
+    pair = list(dict.fromkeys(names))[:2]
+    if len(pair) < 2:
+        return ""
+    left, right = sorted(pair, key=lambda x: (not INDIAN_STARS.search(x), pair.index(x)))
+    pts = {left: 0.0, right: 0.0}
+    tb = {left: 0.0, right: 0.0}
+    rows, nxt = "", None
+    for g in games:
+        w, b = short(g["white"]), short(g["black"])
+        res = g["result"]
+        mark = {w: "W", b: "B"}
+        cls = {left: "", right: ""}
+        if res:
+            x, y = POINTS[res]
+            got = {w: x, b: y}
+            (tb if g["tb"] else pts)[w] += x
+            (tb if g["tb"] else pts)[b] += y
+            score = f'<td class="s">{_points(got[left])}\u2013{_points(got[right])}</td>'
+            if got[left] != got[right]:
+                cls[left if got[left] > got[right] else right] = " w"
+        elif nxt is None and g.get("starts") and timedelta(0) <= _utc(g["starts"]) - now <= timedelta(hours=24):
+            nxt = g
+            score = f'<td class="s next">{_clock(_sgt(g["starts"]))}</td>'
+        else:
+            score = '<td class="s up">\u2013</td>'
+        if g.get("starts") and _utc(g["starts"]) > now:
+            nxt = nxt or g
+        date_ = _sgt(g["starts"]).strftime("%-d %b") if g.get("starts") else ""
+        rows += (f'<tr><td class="n">{esc(g["label"])}</td><td class="d">{date_}</td>'
+                 f'<td class="pl l{cls[left]}">{esc(left)}<span class="c">({mark[left]})</span></td>{score}'
+                 f'<td class="pl r{cls[right]}">{esc(right)}<span class="c">({mark[right]})</span></td></tr>')
+    played = sum(1 for g in games if g["result"] and not g["tb"])
+    left_n = max(MATCH_GAMES - played, 0)
+    if max(pts.values()) >= WIN_POINTS:
+        note = f"{esc(max(pts, key=pts.get))} wins the match"
+    elif any(g["tb"] and g["result"] for g in games):
+        note = f"Tiebreaks: {esc(left)} {_points(tb[left])} \u2013 {_points(tb[right])} {esc(right)}"
+    elif left_n == 0:
+        note = "Level after 14 games: tiebreaks next"
     else:
-        note = f"First to 7\u00bd \u00b7 {left} game{'s' if left != 1 else ''} to play"
-    score = f"{esc(a)} {_points(pts[a])} \u2013 {_points(pts[b])} {esc(b)}"
-    return (f'<div class="pts f1 nba lead chm"><div class="table-wrap"><table><colgroup><col style="width:12%"><col style="width:34%"><col style="width:20%"><col style="width:34%"></colgroup>'
-            f'<thead><tr><th class="tt" colspan="4">{esc(title)}</th></tr></thead><tbody><tr class="grp"><td colspan="4">{score}</td></tr>{rows}'
-            f'<tr><td class="note" colspan="4">{note}</td></tr></tbody></table></div></div>')
+        note = f"First to 7\u00bd \u00b7 {left_n} game{'s' if left_n != 1 else ''} to play"
+    score_row = f"{esc(left)} {_points(pts[left])} \u2013 {_points(pts[right])} {esc(right)}"
+    return (f'<div class="pts f1 chm"><div class="table-wrap"><table><colgroup><col style="width:7%"><col style="width:15%"><col style="width:30%"><col style="width:16%"><col style="width:32%"></colgroup>'
+            f'<thead><tr><th class="tt" colspan="5">{esc(title)}{f"<span class=prog>{esc(sub)}</span>" if sub else ""}</th></tr></thead>'
+            f'<tbody><tr class="grp"><td colspan="5">{score_row}</td></tr>{rows}<tr><td class="note" colspan="5">{note}</td></tr></tbody></table></div></div>')
 
 
 def match_blocks(source, now):
-    """[(html, unique id, link)]: the table for each two-player match (tier 5, active or just finished) whose latest classical game finished in the last three days. Lichess's list
-    shows a tournament's CURRENT round (ongoing or next), never the one just played, so the games come from the tournament's own round list, where a finished round carries
-    finished and finishedAt. The id carries the number of games played: one table per new game, nothing on a rest day. Never raises."""
+    """[(html, unique id, link)]: the table of each two-player match (tier 5), in EVERY edition from the day before the first game until the morning after the last game
+    played (D, 2026-11-24). Lichess's list shows a tournament's current round, so the games come from the tournament's own round list; each round's PGN gives the pairing
+    (colours) even before it is played. Never raises."""
     try:
         top = source.top()
     except Exception:
@@ -140,29 +187,51 @@ def match_blocks(source, now):
         seen_tours.add(tour.get("id"))
         try:
             full = source.tour(tour["id"])
-            if not is_match(full.get("tour") or tour):
+            info_tour = full.get("tour") or tour
+            if not is_match(info_tour):
                 continue
-            classical = [(int(CLASSICAL.match(x["name"]).group(1)), x) for x in full.get("rounds", []) if CLASSICAL.match(x.get("name", ""))]
-            done = [(n, x) for n, x in classical if x.get("finished") and x.get("finishedAt")]
-            if not done or not (timedelta(0) <= now - _utc(max(x["finishedAt"] for _, x in done)) <= RECENT):
+            rounds = [x for x in full.get("rounds", []) if x.get("startsAt")]
+            if not rounds:
+                continue
+            first = min(x["startsAt"] for x in rounds)
+            finished = [x["finishedAt"] for x in rounds if x.get("finished") and x.get("finishedAt")]
+            to_come = [x for x in rounds if not x.get("finished") and _utc(x["startsAt"]) > now]
+            if now < _utc(first) - timedelta(hours=36):
                 continue
             games = []
-            for n, x in sorted(done, key=lambda t: t[0]):
-                got = parse_pgn(source.round_pgn(x["id"]))
-                if got:
-                    games.append((n, got[0]))
+            for x in rounds:
+                m = CLASSICAL.match(x.get("name", ""))
+                p = pairing(source.round_pgn(x["id"]))
+                if not p:
+                    continue
+                games.append({"label": m.group(1) if m else "TB", "tb": not m, "starts": x["startsAt"], "white": p[0], "black": p[1], "result": p[2] if x.get("finished") or p[2] else None})
             if not games:
                 continue
-            games = games[:MATCH_GAMES]
-            day = ""
-            if classical:
-                last = max(classical, key=lambda t: t[0])[1]
-                if last.get("startsAt"):
-                    day = (_utc(last["startsAt"]).astimezone(ZoneInfo("Europe/Zurich")) + timedelta(days=1)).strftime("%-d %b")
+            decided = False
+            pts = {}
+            for g in games:
+                if g["result"] and not g["tb"]:
+                    x_, y_ = POINTS[g["result"]]
+                    pts[short(g["white"])] = pts.get(short(g["white"]), 0) + x_
+                    pts[short(g["black"])] = pts.get(short(g["black"]), 0) + y_
+            decided = bool(pts) and max(pts.values()) >= WIN_POINTS
+            if decided:
+                games = [g for g in games if g["result"]]          # once decided, the games never played are dropped
+            last_done = _utc(max(finished)) if finished else None
+            if (decided or not to_come) and not (last_done and now - last_done <= timedelta(hours=36)):
+                continue                                   # the match is over: the final table once, the morning after
+            info = info_tour.get("info") or {}
+            place = (info.get("location") or "").split(",")[0].strip()
+            classical = [g for g in games if not g["tb"]]
+            end_day = (_utc(max(g["starts"] for g in classical)).astimezone(ZoneInfo(info.get("timeZone") or "Europe/Zurich")) + timedelta(days=1)) if classical else None
+            span = f"{_sgt(first).strftime('%-d %b')} \u2013 {end_day.strftime('%-d %b')}" if end_day else ""
+            sub = " \u00b7 ".join(x for x in (place, span) if x)
             name = re.sub(r"\s*\|.*$", "", tour.get("name", "")).strip()
             title = re.sub(r"^FIDE\s+|\s+20\d\d$", "", name).replace("Chess Championship", "Championship") or name
-            link = (full.get("tour") or tour).get("url") or f"https://lichess.org/broadcast/{tour.get('slug', '')}"
-            out.append((match_table(title, games, day), f"chess:{tour['id']}:table:{len(games)}", link))
+            link = info_tour.get("url") or f"https://lichess.org/broadcast/{tour.get('slug', '')}"
+            html_ = match_table(title, sub, games, now)
+            if html_:
+                out.append((html_, f"chess:{tour['id']}:table:{(now + timedelta(hours=8)).date().isoformat()}", link))
         except Exception:
             continue
     return out
