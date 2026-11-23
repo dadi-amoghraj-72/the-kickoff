@@ -131,11 +131,14 @@ def match_table(title, sub, games, now):
     rows = ""
     started = any(g["result"] for g in games)
     nxt = next((g for g in games if not g["result"] and g.get("starts") and _utc(g["starts"]) > now), None)
+    months = {_sgt(g["starts"]).strftime("%b") for g in games if g.get("starts")}
+    one_letter = len({m[0] for m in months}) == len(months)       # 24N, 03D (D, 2026-11-24); two months with one initial (Jun, Jul) keep '03 Jun'
     for g in games:
         w, b = short(g["white"]), short(g["black"])
         res = g["result"]
         mark = {w: "W", b: "B"}
         win = {left: "", right: ""}
+        row_cls = ""
         if res:
             x, y = POINTS[res]
             got = {w: x, b: y}
@@ -144,12 +147,18 @@ def match_table(title, sub, games, now):
             score = f'<td class="cm-sc">{_points(got[left])}\u2013{_points(got[right])}</td>'
             if got[left] != got[right]:
                 win[left if got[left] > got[right] else right] = " cm-win"
-        elif started and g is nxt and timedelta(0) <= _utc(g["starts"]) - now <= timedelta(hours=24):
-            score = f'<td class="cm-sc cm-next">{_clock(_sgt(g["starts"]))}</td>'      # the next game's time, only once the match has begun (D, 2026-11-24)
+        elif g is nxt and started:
+            score = f'<td class="cm-sc cm-next">{_clock(_sgt(g["starts"]))}</td>'      # the next game's time, once the match has begun
         else:
-            score = '<td class="cm-sc cm-up">\u2013</td>'
-        date_ = _sgt(g["starts"]).strftime("%-d %b") if g.get("starts") else ""
-        rows += (f'<tr><td class="cm-no">{esc(g["label"])}</td><td class="cm-dt">{date_}</td>'
+            score = '<td class="cm-sc">\u2013</td>'
+            if g is not nxt:
+                row_cls = ' class="cm-fut"'                      # not played yet and not next: the whole row faded (D, 2026-11-24)
+        if g.get("starts"):
+            t = _sgt(g["starts"])
+            date_ = f"{t.day:02d}{t.strftime('%b')[0]}" if one_letter else t.strftime("%d %b")
+        else:
+            date_ = ""
+        rows += (f'<tr{row_cls}><td class="cm-no">{esc(g["label"])}</td><td class="cm-dt">{date_}</td>'
                  f'<td class="cm-nm{win[left]}">{esc(left)}</td><td class="cm-cl">({mark[left]})</td>{score}'
                  f'<td class="cm-nm{win[right]}">{esc(right)}</td><td class="cm-cl">({mark[right]})</td></tr>')
     played = sum(1 for g in games if g["result"] and not g["tb"])
@@ -163,7 +172,7 @@ def match_table(title, sub, games, now):
     else:
         note = f"First to 7\u00bd \u00b7 {left_n} game{'s' if left_n != 1 else ''} to play"
     score_row = f"{esc(left)} {_points(pts[left])} \u2013 {_points(pts[right])} {esc(right)}"
-    return (f'<div class="pts f1 chm"><div class="table-wrap"><table><colgroup><col style="width:8%"><col style="width:17%"><col style="width:20%"><col style="width:8%"><col style="width:13%"><col style="width:23%"><col style="width:11%"></colgroup>'
+    return (f'<div class="pts f1 chm"><div class="table-wrap"><table><colgroup><col style="width:8%"><col style="width:13%"><col style="width:21%"><col style="width:9%"><col style="width:15%"><col style="width:24%"><col style="width:10%"></colgroup>'
             f'<thead><tr><th class="tt" colspan="7">{esc(title)}{f"<span class=prog>{esc(sub)}</span>" if sub else ""}</th></tr></thead>'
             f'<tbody><tr class="grp"><td colspan="7">{score_row}</td></tr>{rows}<tr><td class="note" colspan="7">{note}</td></tr></tbody></table></div></div>')
 

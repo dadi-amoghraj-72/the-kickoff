@@ -519,10 +519,11 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
 .pts.f1.chm th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 13px; color: var(--muted); }
 .pts.f1.chm tr.grp td { color: var(--gold); font-weight: 600; font-size: 15px; text-align: center; padding: 10px 8px; }
 .pts.f1.chm td, .pts.f1.chm td:first-child, .pts.f1.chm td:last-child { padding: 8px 1px; text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.pts.f1.chm td.cm-no, .pts.f1.chm td.cm-dt, .pts.f1.chm td.cm-cl, .pts.f1.chm td.cm-up { color: var(--muted); }
+.pts.f1.chm td.cm-no, .pts.f1.chm td.cm-dt, .pts.f1.chm td.cm-cl { color: var(--muted); }
 .pts.f1.chm td.cm-nm { font-weight: 600; }
 .pts.f1.chm td.cm-cl { font-size: 11px; }
-.pts.f1.chm td.cm-no { padding-left: 6px; }
+.pts.f1.chm td.cm-no { padding-left: 6px; font-size: 11px; }
+.pts.f1.chm tr.cm-fut td { color: var(--muted); font-weight: 400; opacity: 0.5; }          /* a game not played yet and not next: the whole row faded, 'not revealed yet' (D, 2026-11-24) */
 .pts.f1.chm td.cm-win { color: var(--gold); }
 .pts.f1.chm td.cm-next { color: var(--gold); font-weight: 600; }
 .pts.f1.chm td.note { color: var(--muted); font-size: 13px; font-weight: 400; text-align: left; padding: 8px 12px 10px; white-space: normal; }
