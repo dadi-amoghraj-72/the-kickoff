@@ -5677,6 +5677,614 @@
       ],
       "status": "India won by 22 runs"
     },
+    "espn-1539442": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 2,
+              "fours": 0,
+              "mark": "(c)",
+              "name": "Tom Latham",
+              "out": " b Bumrah",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 13,
+              "fours": 0,
+              "mark": "",
+              "name": "Devon Conway",
+              "out": "c †Pant b Kamboj",
+              "r": 4,
+              "sixes": 0,
+              "sr": 30.76
+            },
+            {
+              "b": 335,
+              "fours": 21,
+              "mark": "",
+              "name": "Henry Nicholls",
+              "out": "not out",
+              "r": 175,
+              "sixes": 0,
+              "sr": 52.23
+            },
+            {
+              "b": 50,
+              "fours": 2,
+              "mark": "",
+              "name": "Rachin Ravindra",
+              "out": "c †Pant b Deep",
+              "r": 15,
+              "sixes": 0,
+              "sr": 30.0
+            },
+            {
+              "b": 8,
+              "fours": 0,
+              "mark": "",
+              "name": "Daryl Mitchell",
+              "out": "c Jaiswal b Bumrah",
+              "r": 1,
+              "sixes": 0,
+              "sr": 12.5
+            },
+            {
+              "b": 22,
+              "fours": 0,
+              "mark": "",
+              "name": "Tom Blundell",
+              "out": "c Shubman Gill b Bumrah",
+              "r": 5,
+              "sixes": 0,
+              "sr": 22.72
+            },
+            {
+              "b": 216,
+              "fours": 14,
+              "mark": "",
+              "name": "Glenn Phillips",
+              "out": " b Deep",
+              "r": 118,
+              "sixes": 0,
+              "sr": 54.62
+            },
+            {
+              "b": 44,
+              "fours": 2,
+              "mark": "",
+              "name": "Nathan Smith",
+              "out": "lbw b Krishna",
+              "r": 14,
+              "sixes": 0,
+              "sr": 31.81
+            },
+            {
+              "b": 21,
+              "fours": 1,
+              "mark": "",
+              "name": "Kyle Jamieson",
+              "out": "c Rahul b Deep",
+              "r": 11,
+              "sixes": 0,
+              "sr": 52.38
+            },
+            {
+              "b": 9,
+              "fours": 0,
+              "mark": "",
+              "name": "Matt Henry",
+              "out": "lbw b Bumrah",
+              "r": 1,
+              "sixes": 0,
+              "sr": 11.11
+            },
+            {
+              "b": 12,
+              "fours": 0,
+              "mark": "",
+              "name": "Jacob Duffy",
+              "out": "c †Pant b Kamboj",
+              "r": 4,
+              "sixes": 0,
+              "sr": 33.33
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 3.17,
+              "m": 8,
+              "name": "Jasprit Bumrah",
+              "nb": 2,
+              "o": 29.0,
+              "r": 92,
+              "w": 4,
+              "wd": 0
+            },
+            {
+              "eco": 3.0,
+              "m": 5,
+              "name": "Anshul Kamboj",
+              "nb": 1,
+              "o": 23.0,
+              "r": 69,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 2.3,
+              "m": 7,
+              "name": "Akash Deep",
+              "nb": 3,
+              "o": 23.0,
+              "r": 53,
+              "w": 3,
+              "wd": 0
+            },
+            {
+              "eco": 3.84,
+              "m": 2,
+              "name": "Prasidh Krishna",
+              "nb": 0,
+              "o": 26.0,
+              "r": 100,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 2.25,
+              "m": 2,
+              "name": "Washington Sundar",
+              "nb": 0,
+              "o": 20.0,
+              "r": 45,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "India",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 13,
+            "nb": 6,
+            "total": 20,
+            "w": 1
+          },
+          "fow": "",
+          "label": "1st innings",
+          "overs": 121.0,
+          "runs": 368,
+          "team": "New Zealand",
+          "wickets": 10
+        },
+        {
+          "batting": [
+            {
+              "b": 89,
+              "fours": 16,
+              "mark": "",
+              "name": "Yashasvi Jaiswal",
+              "out": "c †Blundell b Henry",
+              "r": 85,
+              "sixes": 0,
+              "sr": 95.5
+            },
+            {
+              "b": 290,
+              "fours": 9,
+              "mark": "",
+              "name": "KL Rahul",
+              "out": " b Smith",
+              "r": 136,
+              "sixes": 2,
+              "sr": 46.89
+            },
+            {
+              "b": 175,
+              "fours": 10,
+              "mark": "",
+              "name": "Devdutt Padikkal",
+              "out": " b Jamieson",
+              "r": 80,
+              "sixes": 0,
+              "sr": 45.71
+            },
+            {
+              "b": 146,
+              "fours": 9,
+              "mark": "(c)",
+              "name": "Shubman Gill",
+              "out": " b Duffy",
+              "r": 98,
+              "sixes": 2,
+              "sr": 67.12
+            },
+            {
+              "b": 153,
+              "fours": 10,
+              "mark": "",
+              "name": "Rishabh Pant",
+              "out": "c Smith b Ravindra",
+              "r": 128,
+              "sixes": 6,
+              "sr": 83.66
+            },
+            {
+              "b": 42,
+              "fours": 6,
+              "mark": "",
+              "name": "Anshul Kamboj",
+              "out": "c Conway b Phillips",
+              "r": 38,
+              "sixes": 1,
+              "sr": 90.47
+            },
+            {
+              "b": 79,
+              "fours": 7,
+              "mark": "",
+              "name": "Dhruv Jurel",
+              "out": "st †Blundell b Phillips",
+              "r": 78,
+              "sixes": 1,
+              "sr": 98.73
+            },
+            {
+              "b": 26,
+              "fours": 2,
+              "mark": "",
+              "name": "Washington Sundar",
+              "out": "c & b Ravindra",
+              "r": 24,
+              "sixes": 0,
+              "sr": 92.3
+            },
+            {
+              "b": 5,
+              "fours": 0,
+              "mark": "",
+              "name": "Akash Deep",
+              "out": "c Latham b Phillips",
+              "r": 13,
+              "sixes": 2,
+              "sr": 260.0
+            },
+            {
+              "b": 5,
+              "fours": 1,
+              "mark": "",
+              "name": "Jasprit Bumrah",
+              "out": "not out",
+              "r": 7,
+              "sixes": 0,
+              "sr": 140.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 2.84,
+              "m": 7,
+              "name": "Matt Henry",
+              "nb": 0,
+              "o": 33.0,
+              "r": 94,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 2.83,
+              "m": 6,
+              "name": "Kyle Jamieson",
+              "nb": 0,
+              "o": 31.0,
+              "r": 88,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 6.09,
+              "m": 1,
+              "name": "Jacob Duffy",
+              "nb": 7,
+              "o": 33.0,
+              "r": 201,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 2.89,
+              "m": 4,
+              "name": "Nathan Smith",
+              "nb": 4,
+              "o": 29.0,
+              "r": 84,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 6.41,
+              "m": 0,
+              "name": "Glenn Phillips",
+              "nb": 3,
+              "o": 24.0,
+              "r": 154,
+              "w": 3,
+              "wd": 1
+            },
+            {
+              "eco": 4.4,
+              "m": 0,
+              "name": "Rachin Ravindra",
+              "nb": 0,
+              "o": 10.0,
+              "r": 44,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 6.5,
+              "m": 0,
+              "name": "Daryl Mitchell",
+              "nb": 0,
+              "o": 6.0,
+              "r": 39,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "New Zealand",
+          "declared": true,
+          "dnb": [],
+          "extras": {
+            "b_lb": 16,
+            "nb": 14,
+            "total": 33,
+            "w": 3
+          },
+          "fow": "",
+          "label": "1st innings",
+          "overs": 166.0,
+          "runs": 720,
+          "team": "India",
+          "wickets": 9
+        },
+        {
+          "batting": [
+            {
+              "b": 2,
+              "fours": 0,
+              "mark": "(c)",
+              "name": "Tom Latham",
+              "out": "c †Pant b Bumrah",
+              "r": 0,
+              "sixes": 0,
+              "sr": 0.0
+            },
+            {
+              "b": 165,
+              "fours": 7,
+              "mark": "",
+              "name": "Devon Conway",
+              "out": "c †Pant b Sundar",
+              "r": 65,
+              "sixes": 0,
+              "sr": 39.39
+            },
+            {
+              "b": 59,
+              "fours": 3,
+              "mark": "",
+              "name": "Henry Nicholls",
+              "out": "c Jurel b Krishna",
+              "r": 31,
+              "sixes": 0,
+              "sr": 52.54
+            },
+            {
+              "b": 129,
+              "fours": 4,
+              "mark": "",
+              "name": "Rachin Ravindra",
+              "out": "c Rahul b Krishna",
+              "r": 37,
+              "sixes": 0,
+              "sr": 28.68
+            },
+            {
+              "b": 186,
+              "fours": 4,
+              "mark": "",
+              "name": "Daryl Mitchell",
+              "out": "not out",
+              "r": 49,
+              "sixes": 1,
+              "sr": 26.34
+            },
+            {
+              "b": 54,
+              "fours": 1,
+              "mark": "",
+              "name": "Tom Blundell",
+              "out": "c †Pant b Kamboj",
+              "r": 15,
+              "sixes": 0,
+              "sr": 27.77
+            },
+            {
+              "b": 126,
+              "fours": 2,
+              "mark": "",
+              "name": "Glenn Phillips",
+              "out": "not out",
+              "r": 26,
+              "sixes": 0,
+              "sr": 20.63
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 2.1,
+              "m": 7,
+              "name": "Jasprit Bumrah",
+              "nb": 0,
+              "o": 20.0,
+              "r": 42,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 2.35,
+              "m": 6,
+              "name": "Akash Deep",
+              "nb": 0,
+              "o": 20.0,
+              "r": 47,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 2.04,
+              "m": 5,
+              "name": "Anshul Kamboj",
+              "nb": 0,
+              "o": 22.0,
+              "r": 45,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 1.21,
+              "m": 10,
+              "name": "Prasidh Krishna",
+              "nb": 0,
+              "o": 19.0,
+              "r": 23,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 1.85,
+              "m": 14,
+              "name": "Washington Sundar",
+              "nb": 1,
+              "o": 35.0,
+              "r": 65,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 2.0,
+              "m": 0,
+              "name": "Devdutt Padikkal",
+              "nb": 0,
+              "o": 1.0,
+              "r": 2,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 2.0,
+              "m": 0,
+              "name": "Yashasvi Jaiswal",
+              "nb": 0,
+              "o": 2.0,
+              "r": 4,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 1.0,
+              "m": 0,
+              "name": "Dhruv Jurel",
+              "nb": 0,
+              "o": 1.0,
+              "r": 1,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "India",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 14,
+            "nb": 1,
+            "total": 16,
+            "w": 1
+          },
+          "fow": "",
+          "label": "2nd innings",
+          "overs": 120.0,
+          "runs": 239,
+          "team": "New Zealand",
+          "wickets": 5
+        }
+      ],
+      "potm": [
+        {
+          "name": "Henry Nicholls",
+          "team": "New Zealand"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "India",
+          "balls": 335,
+          "fours": 21,
+          "kind": "century",
+          "match": "New Zealand vs India, 1st Test, India tour of New Zealand 2026/27",
+          "name": "Henry Nicholls",
+          "not_out": true,
+          "result": "Match drawn",
+          "runs": 175,
+          "sixes": 0,
+          "team": "New Zealand"
+        },
+        {
+          "against": "India",
+          "balls": 216,
+          "fours": 14,
+          "kind": "century",
+          "match": "New Zealand vs India, 1st Test, India tour of New Zealand 2026/27",
+          "name": "Glenn Phillips",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 118,
+          "sixes": 0,
+          "team": "New Zealand"
+        },
+        {
+          "against": "New Zealand",
+          "balls": 290,
+          "fours": 9,
+          "kind": "century",
+          "match": "New Zealand vs India, 1st Test, India tour of New Zealand 2026/27",
+          "name": "KL Rahul",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 136,
+          "sixes": 2,
+          "team": "India"
+        },
+        {
+          "against": "New Zealand",
+          "balls": 153,
+          "fours": 10,
+          "kind": "century",
+          "match": "New Zealand vs India, 1st Test, India tour of New Zealand 2026/27",
+          "name": "Rishabh Pant",
+          "not_out": false,
+          "result": "Match drawn",
+          "runs": 128,
+          "sixes": 6,
+          "team": "India"
+        }
+      ],
+      "status": "Match drawn"
+    },
     "espn-1543956": {
       "innings": [
         {
@@ -16683,6 +17291,7 @@
     "espn-1539439",
     "espn-1539440",
     "espn-1539441",
+    "espn-1539442",
     "espn-1543956",
     "espn-1543957",
     "espn-1543958",
@@ -16712,6 +17321,7 @@
   ],
   "status": {
     "espn-1525662": "Bangladesh trail by 57 runs",
+    "espn-1525663": "South Africa trail by 3 runs",
     "espn-1539442": "New Zealand trail by 213 runs",
     "espn-1550711": "Pakistan lead by 45 runs",
     "espn-1550712": "Sri Lanka lead by 82 runs",
@@ -16721,7 +17331,8 @@
   },
   "test_done": {
     "espn-1525662": 4,
-    "espn-1539442": 2,
+    "espn-1525663": 1,
+    "espn-1539442": 3,
     "espn-1550711": 3,
     "espn-1550712": 4,
     "espn-1553296": 4,
@@ -16729,6 +17340,47 @@
     "espn-1555124": 4
   },
   "test_figs": {
+    "espn-1525663": [
+      {
+        "bat": {
+          "Ebadot Hossain": 0,
+          "Jaker Ali": 1,
+          "Khaled Ahmed": 0,
+          "Litton Das": 8,
+          "Mahfijul Islam": 23,
+          "Mominul Haque": 18,
+          "Najmul Hossain Shanto": 4,
+          "Shoriful Islam": 2,
+          "Tanzid Hasan": 3,
+          "Taskin Ahmed": 2,
+          "Towhid Hridoy": 19
+        },
+        "bowl": {
+          "Anrich Nortje": 2,
+          "Kagiso Rabada": 3,
+          "Marco Jansen": 3,
+          "Simon Harmer": 1,
+          "Wiaan Mulder": 1
+        },
+        "runs": 91,
+        "wkts": 10
+      },
+      {
+        "bat": {
+          "Aiden Markram": 21,
+          "Marques Ackerman": 46,
+          "Zubayr Hamza": 9
+        },
+        "bowl": {
+          "Ebadot Hossain": 1,
+          "Khaled Ahmed": 0,
+          "Shoriful Islam": 0,
+          "Taskin Ahmed": 0
+        },
+        "runs": 88,
+        "wkts": 1
+      }
+    ],
     "espn-1539442": [
       {
         "bat": {
@@ -16781,29 +17433,33 @@
       },
       {
         "bat": {
-          "Daryl Mitchell": 4,
+          "Daryl Mitchell": 49,
           "Devon Conway": 65,
+          "Glenn Phillips": 26,
           "Henry Nicholls": 31,
           "Rachin Ravindra": 37,
-          "Tom Blundell": 0,
+          "Tom Blundell": 15,
           "Tom Latham": 0
         },
         "bowl": {
           "Akash Deep": 0,
-          "Anshul Kamboj": 0,
+          "Anshul Kamboj": 1,
           "Devdutt Padikkal": 0,
+          "Dhruv Jurel": 0,
           "Jasprit Bumrah": 1,
           "Prasidh Krishna": 2,
-          "Washington Sundar": 1
+          "Washington Sundar": 1,
+          "Yashasvi Jaiswal": 0
         },
-        "runs": 139,
-        "wkts": 4
+        "runs": 239,
+        "wkts": 5
       }
     ]
   },
   "test_sig": {
     "espn-1525662": "[{'inning': 'Bangladesh Inning 1', 'r': 400, 'w': 10, 'o': 101.2}, {'inning': 'South Africa Inning 1', 'r': 557, 'w': 10, 'o': 124.1}, {'inning': 'Bangladesh Inning 2', 'r': 168, 'w': 10, 'o': 55.3}, {'inning': 'South Africa Inning 2', 'r': 12, 'w': 1, 'o': 1.3}]",
-    "espn-1539442": "[{'inning': 'New Zealand Inning 1', 'r': 368, 'w': 10, 'o': 121.0}, {'inning': 'India Inning 1', 'r': 720, 'w': 9, 'o': 166.0}, {'inning': 'New Zealand Inning 2', 'r': 139, 'w': 4, 'o': 63.0}]",
+    "espn-1525663": "[{'inning': 'Bangladesh Inning 1', 'r': 91, 'w': 10, 'o': 33.3}, {'inning': 'South Africa Inning 1', 'r': 88, 'w': 1, 'o': 17.0}]",
+    "espn-1539442": "[{'inning': 'New Zealand Inning 1', 'r': 368, 'w': 10, 'o': 121.0}, {'inning': 'India Inning 1', 'r': 720, 'w': 9, 'o': 166.0}, {'inning': 'New Zealand Inning 2', 'r': 239, 'w': 5, 'o': 120.0}]",
     "espn-1550711": "[{'inning': 'Pakistan Inning 1', 'r': 434, 'w': 9, 'o': 106.3}, {'inning': 'Sri Lanka Inning 1', 'r': 446, 'w': 10, 'o': 117.2}, {'inning': 'Pakistan Inning 2', 'r': 284, 'w': 8, 'o': 84.5}]",
     "espn-1550712": "[{'inning': 'Sri Lanka Inning 1', 'r': 98, 'w': 10, 'o': 35.3}, {'inning': 'Pakistan Inning 1', 'r': 325, 'w': 10, 'o': 87.5}, {'inning': 'Sri Lanka Inning 2', 'r': 316, 'w': 10, 'o': 95.0}, {'inning': 'Pakistan Inning 2', 'r': 90, 'w': 2, 'o': 13.0}]",
     "espn-1553296": "[{'inning': 'West Indies Inning 1', 'r': 356, 'w': 10, 'o': 106.4}, {'inning': 'Bangladesh Inning 1', 'r': 386, 'w': 9, 'o': 111.5}, {'inning': 'West Indies Inning 2', 'r': 398, 'w': 6, 'o': 93.0}, {'inning': 'Bangladesh Inning 2', 'r': 184, 'w': 4, 'o': 59.0}]",

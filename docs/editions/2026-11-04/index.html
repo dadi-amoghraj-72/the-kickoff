@@ -512,6 +512,24 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
 /* NBA League Leaders (Fridays, D 2026-11-10): one table, a gold sub-row per stat */
 .lead tr.grp td { color: var(--gold); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding-top: 12px; }
 .lead td:first-child { padding-left: 12px; }
+/* The chess match table (D, 2026-11-24): every game; # · date · player · (W/B) · score · player · (W/B), each in its own column and CENTRED so every column lines up
+   straight down; one size for the whole row; winners gold, the next game's time gold. Own cm- class names: the match board's .pl.r / .pl.y colour names red and yellow. */
+.pts.f1.chm table { font-size: 14px; }
+.pts.f1.chm th.tt { font-size: 16px; padding: 12px 8px 10px; white-space: normal; }
+.pts.f1.chm th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 13px; color: var(--muted); }
+.pts.f1.chm tr.grp td { color: var(--gold); font-weight: 600; font-size: 15px; text-align: center; padding: 10px 8px; }
+.pts.f1.chm td, .pts.f1.chm td:first-child, .pts.f1.chm td:last-child { padding: 8px 1px; text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pts.f1.chm td.cm-no, .pts.f1.chm td.cm-dt, .pts.f1.chm td.cm-cl { color: var(--muted); }
+.pts.f1.chm td.cm-nm { font-weight: 600; }
+.pts.f1.chm td.cm-cl { font-size: 11px; }
+.pts.f1.chm td.cm-no { padding-left: 6px; font-size: 11px; }
+.pts.f1.chm tr.cm-fut td { color: var(--muted); font-weight: 400; opacity: 0.5; }          /* a game not played yet and not next: the whole row faded, 'not revealed yet' (D, 2026-11-24) */
+.pts.f1.chm td.cm-win { color: var(--gold); }
+.pts.f1.chm td.cm-next { color: var(--gold); font-weight: 600; }
+.pts.f1.chm td.note { color: var(--muted); font-size: 13px; font-weight: 400; text-align: left; padding: 8px 12px 10px; white-space: normal; }
+/* NHL Leaders (D, 2026-11-24): # · player · team · value, each centred in its own column, the player column only as wide as it needs */
+.pts.f1.nhl td, .pts.f1.nhl td:first-child, .pts.f1.nhl td:last-child, .pts.f1.nhl td.n { text-align: center; padding: 8px 2px; }
+.pts.f1.nhl tr.grp td { text-align: left; padding: 12px 8px 6px 12px; }
 .stake { margin: 6px 0 18px; font-size: 15px; }
 .stake .g { color: var(--gold); font-weight: 600; }   /* Nations League: the teams whose place is decided (D, 2026-11-13) */
 
@@ -587,6 +605,7 @@ window.RAIL_ICONS = {
   badminton: { spin: false, svg: '<path d="M8.5 13L5.4 2.5h13.2L15.5 13z" fill="currentColor"/><path d="M9.2 5.5l1.2 7M12 5.5v7M14.8 5.5l-1.2 7" stroke="var(--pitch)" stroke-width="1" fill="none"/><path d="M8.5 14.2h7v2.2a3.5 3.5 0 0 1-7 0z" fill="currentColor"/>' },
   darts: { spin: false, svg: '<circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/>' },
   chess: { spin: false, svg: '<rect x="11" y="1.5" width="2" height="5" fill="currentColor"/><rect x="9.2" y="3.2" width="5.6" height="1.8" fill="currentColor"/><circle cx="12" cy="10.2" r="3.2" fill="currentColor"/><path d="M6.8 21.5h10.4v-2.2c0-3-2.4-4.2-3.2-6.2h-4c-.8 2-3.2 3.2-3.2 6.2z" fill="currentColor"/>' },
+  hockey: { spin: false, svg: '<path d="M5 2.4 11 16.2h6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M14.6 19.6v1.6c0 1 1.8 1.8 4 1.8s4-.8 4-1.8v-1.6z" fill="currentColor"/><ellipse cx="18.6" cy="19.6" rx="4" ry="1.8" fill="currentColor"/><ellipse cx="18.6" cy="19.2" rx="4" ry="1.6" fill="none" stroke="var(--pitch)" stroke-width="0.8"/>' },
   trophy: { spin: false, svg: '<path d="M7 3h10v5.2a5 5 0 0 1-10 0z" fill="currentColor"/><path d="M7 5H3.8v2.2c0 1.8 1.4 3.2 3.4 3.4M17 5h3.2v2.2c0 1.8-1.4 3.2-3.4 3.4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M10.6 13.4h2.8v4h-2.8zM7.6 17.4h8.8v3.4H7.6z" fill="currentColor"/>' },
   clock: { spin: false, svg: '<circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 6.4V12l3.6 2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>' },
   swimming: { spin: false, svg: '<circle cx="18.6" cy="11.6" r="2.4" fill="currentColor"/><path d="M2.2 15.4 6.2 13.8 15.2 12.8" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M12.6 12.6Q15 4.2 22 8.6" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" fill="none"/><path d="M1.8 19.4c1.7 0 1.7-1.6 3.4-1.6s1.7 1.6 3.4 1.6 1.7-1.6 3.4-1.6 1.7 1.6 3.4 1.6 1.7-1.6 3.4-1.6 1.7 1.6 3.4 1.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none"/>' },
@@ -594,7 +613,7 @@ window.RAIL_ICONS = {
   star: { spin: false, svg: '<polygon points="12,2 14.9,8.6 22,9.3 16.7,14 18.2,21 12,17.4 5.8,21 7.3,14 2,9.3 9.1,8.6" fill="currentColor"/>' }
 };
 /* Which drawing leads the bar in which section (by section id), and in Other Sports which one for each sport's gold heading (by its text). Anything unlisted gets the chess king. */
-window.RAIL_SECTION_ICON = { "big-stuff": "trophy", "on-today": "clock", arsenal: "cannon", football: "football", cricket: "cricket", nba: "basketball", nfl: "nfl", mlb: "baseball", f1: "f1",
+window.RAIL_SECTION_ICON = { "big-stuff": "trophy", "on-today": "clock", arsenal: "cannon", football: "football", cricket: "cricket", nba: "basketball", nfl: "nfl", mlb: "baseball", nhl: "hockey", f1: "f1",
   tennis: "tennis", tour: "tennis", "young-guns": "star", "other-sports": "chess", stories: "chess", quiet: "trophy" };
 window.RAIL_SPORT_ICON = { rugby: "rugby", golf: "golf", ufc: "ufc", badminton: "badminton", darts: "darts", chess: "chess", athletics: "athletics", swimming: "swimming" };
 
