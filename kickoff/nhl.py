@@ -30,7 +30,7 @@ def leaders_html(by_stat):
                         for i, x in enumerate(top, 1))
     if not rows:
         return ""
-    return (f'<div class="pts f1 nba lead"><div class="table-wrap"><table><colgroup><col style="width:12%"><col style="width:52%"><col style="width:16%"><col style="width:20%"></colgroup>'
+    return (f'<div class="pts f1 nba lead nhl"><div class="table-wrap"><table><colgroup><col style="width:14%"><col style="width:44%"><col style="width:21%"><col style="width:21%"></colgroup>'
             f'<thead><tr><th class="tt" colspan="4">NHL Leaders</th></tr></thead><tbody>{rows}</tbody></table></div></div>')
 
 

@@ -512,24 +512,23 @@ table.ms tr.res td { padding-top: 10px; padding-bottom: 10px; }
 /* NBA League Leaders (Fridays, D 2026-11-10): one table, a gold sub-row per stat */
 .lead tr.grp td { color: var(--gold); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; padding-top: 12px; }
 .lead td:first-child { padding-left: 12px; }
-/* The chess match table (D, 2026-11-24): every game; # · date (grey) · left player (W/B) · score · right player (W/B); winners gold, the next game's time gold */
+/* The chess match table (D, 2026-11-24): every game; # · date · player · (W/B) · score · player · (W/B), each in its own column and CENTRED so every column lines up
+   straight down; one size for the whole row; winners gold, the next game's time gold. Own cm- class names: the match board's .pl.r / .pl.y colour names red and yellow. */
 .pts.f1.chm table { font-size: 14px; }
 .pts.f1.chm th.tt { font-size: 16px; padding: 12px 8px 10px; white-space: normal; }
 .pts.f1.chm th.tt .prog { display: block; margin-top: 3px; font-weight: 400; font-size: 13px; color: var(--muted); }
 .pts.f1.chm tr.grp td { color: var(--gold); font-weight: 600; font-size: 15px; text-align: center; padding: 10px 8px; }
-.pts.f1.chm td { padding: 8px 3px; }
-.pts.f1.chm td:first-child { padding-left: 8px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.pts.f1.chm td:last-child { padding-right: 8px; }
-.pts.f1.chm td.d { color: var(--muted); font-size: 12px; white-space: nowrap; }
-.pts.f1.chm td.pl { font-weight: 600; white-space: nowrap; }
-.pts.f1.chm td.pl.l { text-align: right; }
-.pts.f1.chm td.pl.r { text-align: left; }
-.pts.f1.chm td.pl .c { color: var(--muted); font-size: 11px; font-weight: 400; margin-left: 3px; }
-.pts.f1.chm td.pl.w { color: var(--gold); }
-.pts.f1.chm td.s { text-align: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.pts.f1.chm td.s.up { color: var(--muted); }
-.pts.f1.chm td.s.next { color: var(--gold); font-weight: 600; }
-.pts.f1.chm td.note { color: var(--muted); font-size: 13px; font-weight: 400; text-align: left; padding: 8px 12px 10px; }
+.pts.f1.chm td, .pts.f1.chm td:first-child, .pts.f1.chm td:last-child { padding: 8px 1px; text-align: center; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pts.f1.chm td.cm-no, .pts.f1.chm td.cm-dt, .pts.f1.chm td.cm-cl, .pts.f1.chm td.cm-up { color: var(--muted); }
+.pts.f1.chm td.cm-nm { font-weight: 600; }
+.pts.f1.chm td.cm-cl { font-size: 11px; }
+.pts.f1.chm td.cm-no { padding-left: 6px; }
+.pts.f1.chm td.cm-win { color: var(--gold); }
+.pts.f1.chm td.cm-next { color: var(--gold); font-weight: 600; }
+.pts.f1.chm td.note { color: var(--muted); font-size: 13px; font-weight: 400; text-align: left; padding: 8px 12px 10px; white-space: normal; }
+/* NHL Leaders (D, 2026-11-24): # · player · team · value, each centred in its own column, the player column only as wide as it needs */
+.pts.f1.nhl td, .pts.f1.nhl td:first-child, .pts.f1.nhl td:last-child, .pts.f1.nhl td.n { text-align: center; padding: 8px 2px; }
+.pts.f1.nhl tr.grp td { text-align: left; padding: 12px 8px 6px 12px; }
 .stake { margin: 6px 0 18px; font-size: 15px; }
 .stake .g { color: var(--gold); font-weight: 600; }   /* Nations League: the teams whose place is decided (D, 2026-11-13) */
 
