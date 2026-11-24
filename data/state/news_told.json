@@ -46,15 +46,6 @@
       ]
     },
     {
-      "at": "2026-11-17T23:15:00+00:00",
-      "club": "Arsenal",
-      "kind": "transfer_confirmed",
-      "names": [
-        "Declan",
-        "Rice"
-      ]
-    },
-    {
       "at": "2026-11-21T23:26:44.623451+00:00",
       "club": "Arsenal",
       "kind": "injury",
@@ -116,6 +107,17 @@
         "Forest",
         "Kluivert",
         "Nottingham"
+      ]
+    },
+    {
+      "at": "2026-11-24T23:37:58.726019+00:00",
+      "club": "Bayern Munich",
+      "kind": "injury",
+      "names": [
+        "Eberl",
+        "Jamal",
+        "Max",
+        "Musiala"
       ]
     }
   ]

@@ -4,6 +4,11 @@
     "reported": false,
     "status": "d"
   },
+  "106": {
+    "news_added": "2026-11-08T14:30:09.097484Z",
+    "reported": true,
+    "status": "s"
+  },
   "109": {
     "news_added": null,
     "reported": false,
@@ -74,57 +79,7 @@
     "reported": false,
     "status": "a"
   },
-  "226": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "229": {
-    "news_added": "2026-11-23T21:00:06.268052Z",
-    "reported": true,
-    "status": "s"
-  },
-  "230": {
-    "news_added": "2026-11-05T16:57:40.272082Z",
-    "reported": false,
-    "status": "a"
-  },
-  "233": {
-    "news_added": "2026-10-24T19:00:09.907289Z",
-    "reported": false,
-    "status": "a"
-  },
-  "236": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
   "237": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "239": {
-    "news_added": "2026-09-06T18:00:08.301702Z",
-    "reported": false,
-    "status": "a"
-  },
-  "242": {
-    "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "244": {
-    "news_added": "2026-09-17T08:30:08.942299Z",
-    "reported": false,
-    "status": "a"
-  },
-  "246": {
-    "news_added": "2026-09-16T18:00:09.541933Z",
-    "reported": false,
-    "status": "a"
-  },
-  "249": {
     "news_added": null,
     "reported": false,
     "status": "a"
@@ -164,11 +119,6 @@
     "reported": false,
     "status": "a"
   },
-  "368": {
-    "news_added": "2026-10-17T15:00:08.293301Z",
-    "reported": false,
-    "status": "a"
-  },
   "372": {
     "news_added": null,
     "reported": false,
@@ -194,11 +144,6 @@
     "reported": false,
     "status": "a"
   },
-  "391": {
-    "news_added": "2026-11-07T21:30:08.752464Z",
-    "reported": false,
-    "status": "a"
-  },
   "4": {
     "news_added": null,
     "reported": false,
@@ -206,11 +151,6 @@
   },
   "40": {
     "news_added": null,
-    "reported": false,
-    "status": "a"
-  },
-  "401": {
-    "news_added": "2026-10-19T22:30:08.721497Z",
     "reported": false,
     "status": "a"
   },
@@ -231,11 +171,6 @@
   },
   "418": {
     "news_added": "2026-11-11T01:00:09.173434Z",
-    "reported": false,
-    "status": "a"
-  },
-  "419": {
-    "news_added": "2026-10-31T14:00:08.592593Z",
     "reported": false,
     "status": "a"
   },
@@ -274,22 +209,17 @@
     "reported": false,
     "status": "a"
   },
-  "502": {
-    "news_added": "2026-10-19T22:30:08.861525Z",
-    "reported": false,
-    "status": "a"
-  },
-  "503": {
-    "news_added": "2026-08-21T15:00:07.610517Z",
-    "reported": false,
-    "status": "a"
-  },
   "504": {
     "news_added": null,
     "reported": false,
     "status": "a"
   },
-  "522": {
+  "566": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "57": {
     "news_added": null,
     "reported": false,
     "status": "a"
@@ -299,13 +229,73 @@
     "reported": false,
     "status": "a"
   },
-  "627": {
+  "60": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "61": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "64": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "67": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "68": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "73": {
+    "news_added": "2026-08-15T16:30:07.029928Z",
+    "reported": false,
+    "status": "a"
+  },
+  "79": {
     "news_added": null,
     "reported": false,
     "status": "a"
   },
   "8": {
     "news_added": "2026-10-24T18:30:08.735545Z",
+    "reported": false,
+    "status": "a"
+  },
+  "82": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "86": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "87": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "88": {
+    "news_added": null,
+    "reported": false,
+    "status": "a"
+  },
+  "94": {
+    "news_added": "2026-10-10T16:30:08.848962Z",
+    "reported": false,
+    "status": "a"
+  },
+  "98": {
+    "news_added": "2026-10-17T16:30:09.272910Z",
     "reported": false,
     "status": "a"
   }

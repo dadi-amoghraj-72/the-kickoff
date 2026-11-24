@@ -4444,6 +4444,347 @@
       ],
       "status": "Australia won by 3 wkts (1b rem)"
     },
+    "espn-1528707": {
+      "innings": [
+        {
+          "batting": [
+            {
+              "b": 9,
+              "fours": 0,
+              "mark": "(c)",
+              "name": "Mitchell Marsh",
+              "out": "c & b Crocombe",
+              "r": 15,
+              "sixes": 2,
+              "sr": 166.66
+            },
+            {
+              "b": 13,
+              "fours": 1,
+              "mark": "",
+              "name": "Jake Fraser-McGurk",
+              "out": "c Brook b Curran",
+              "r": 27,
+              "sixes": 3,
+              "sr": 207.69
+            },
+            {
+              "b": 3,
+              "fours": 0,
+              "mark": "",
+              "name": "Sam Harper",
+              "out": "run out (Coles)",
+              "r": 3,
+              "sixes": 0,
+              "sr": 100.0
+            },
+            {
+              "b": 35,
+              "fours": 4,
+              "mark": "",
+              "name": "Nikhil Chaudhary",
+              "out": "c Coles b Curran",
+              "r": 45,
+              "sixes": 1,
+              "sr": 128.57
+            },
+            {
+              "b": 5,
+              "fours": 1,
+              "mark": "",
+              "name": "Tim David",
+              "out": "c Coles b Overton",
+              "r": 6,
+              "sixes": 0,
+              "sr": 120.0
+            },
+            {
+              "b": 17,
+              "fours": 1,
+              "mark": "",
+              "name": "Lachlan Shaw",
+              "out": "c Salt b Rashid",
+              "r": 10,
+              "sixes": 0,
+              "sr": 58.82
+            },
+            {
+              "b": 25,
+              "fours": 4,
+              "mark": "",
+              "name": "Joel Davies",
+              "out": "run out (Curran/†Cox)",
+              "r": 39,
+              "sixes": 1,
+              "sr": 156.0
+            },
+            {
+              "b": 8,
+              "fours": 2,
+              "mark": "",
+              "name": "Jack Edwards",
+              "out": "c Brook b Crocombe",
+              "r": 18,
+              "sixes": 1,
+              "sr": 225.0
+            },
+            {
+              "b": 4,
+              "fours": 0,
+              "mark": "",
+              "name": "Ben Dwarshuis",
+              "out": "not out",
+              "r": 18,
+              "sixes": 3,
+              "sr": 450.0
+            },
+            {
+              "b": 1,
+              "fours": 0,
+              "mark": "",
+              "name": "Adam Zampa",
+              "out": "not out",
+              "r": 1,
+              "sixes": 0,
+              "sr": 100.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 9.33,
+              "m": 0,
+              "name": "James Coles",
+              "nb": 0,
+              "o": 3.0,
+              "r": 28,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 13.33,
+              "m": 0,
+              "name": "Henry Crocombe",
+              "nb": 0,
+              "o": 3.0,
+              "r": 40,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 7.25,
+              "m": 0,
+              "name": "Sam Curran",
+              "nb": 0,
+              "o": 4.0,
+              "r": 29,
+              "w": 2,
+              "wd": 0
+            },
+            {
+              "eco": 14.0,
+              "m": 0,
+              "name": "Jamie Overton",
+              "nb": 0,
+              "o": 2.0,
+              "r": 28,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 6.5,
+              "m": 0,
+              "name": "Adil Rashid",
+              "nb": 0,
+              "o": 4.0,
+              "r": 26,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 8.25,
+              "m": 0,
+              "name": "Liam Dawson",
+              "nb": 0,
+              "o": 4.0,
+              "r": 33,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "England",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 0,
+            "nb": 0,
+            "total": 2,
+            "w": 2
+          },
+          "fow": "",
+          "label": "",
+          "overs": 20.0,
+          "runs": 184,
+          "team": "Australia",
+          "wickets": 8
+        },
+        {
+          "batting": [
+            {
+              "b": 30,
+              "fours": 5,
+              "mark": "",
+              "name": "Phil Salt",
+              "out": "c & b Dwarshuis",
+              "r": 58,
+              "sixes": 4,
+              "sr": 193.33
+            },
+            {
+              "b": 32,
+              "fours": 4,
+              "mark": "",
+              "name": "Aneurin Donald",
+              "out": "c Edwards b Meredith",
+              "r": 85,
+              "sixes": 9,
+              "sr": 265.62
+            },
+            {
+              "b": 9,
+              "fours": 1,
+              "mark": "(c)",
+              "name": "Harry Brook",
+              "out": "not out",
+              "r": 10,
+              "sixes": 0,
+              "sr": 111.11
+            },
+            {
+              "b": 8,
+              "fours": 1,
+              "mark": "",
+              "name": "Tom Banton",
+              "out": "not out",
+              "r": 26,
+              "sixes": 3,
+              "sr": 325.0
+            }
+          ],
+          "bowling": [
+            {
+              "eco": 19.5,
+              "m": 0,
+              "name": "Joel Davies",
+              "nb": 0,
+              "o": 2.0,
+              "r": 39,
+              "w": 0,
+              "wd": 4
+            },
+            {
+              "eco": 6.0,
+              "m": 0,
+              "name": "Riley Meredith",
+              "nb": 0,
+              "o": 3.0,
+              "r": 18,
+              "w": 1,
+              "wd": 1
+            },
+            {
+              "eco": 16.5,
+              "m": 0,
+              "name": "Jack Edwards",
+              "nb": 0,
+              "o": 2.0,
+              "r": 33,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 27.42,
+              "m": 0,
+              "name": "Nikhil Chaudhary",
+              "nb": 0,
+              "o": 1.1,
+              "r": 32,
+              "w": 0,
+              "wd": 0
+            },
+            {
+              "eco": 9.5,
+              "m": 0,
+              "name": "Ben Dwarshuis",
+              "nb": 0,
+              "o": 2.0,
+              "r": 19,
+              "w": 1,
+              "wd": 0
+            },
+            {
+              "eco": 14.33,
+              "m": 0,
+              "name": "Adam Zampa",
+              "nb": 0,
+              "o": 3.0,
+              "r": 43,
+              "w": 0,
+              "wd": 0
+            }
+          ],
+          "bowling_team": "Australia",
+          "declared": false,
+          "dnb": [],
+          "extras": {
+            "b_lb": 4,
+            "nb": 0,
+            "total": 9,
+            "w": 5
+          },
+          "fow": "",
+          "label": "",
+          "overs": 13.1,
+          "runs": 188,
+          "team": "England",
+          "wickets": 2
+        }
+      ],
+      "potm": [
+        {
+          "name": "Aneurin Donald",
+          "team": "England"
+        }
+      ],
+      "standouts": [
+        {
+          "against": "Australia",
+          "balls": 30,
+          "fours": 5,
+          "kind": "fifty",
+          "match": "Australia vs England, 2nd T20I, England tour of Australia 2026/27",
+          "name": "Phil Salt",
+          "not_out": false,
+          "result": "England won by 8 wkts (41b rem)",
+          "runs": 58,
+          "sixes": 4,
+          "team": "England"
+        },
+        {
+          "against": "Australia",
+          "balls": 32,
+          "fours": 4,
+          "kind": "fifty",
+          "match": "Australia vs England, 2nd T20I, England tour of Australia 2026/27",
+          "name": "Aneurin Donald",
+          "not_out": false,
+          "result": "England won by 8 wkts (41b rem)",
+          "runs": 85,
+          "sixes": 9,
+          "team": "England"
+        }
+      ],
+      "status": "England won by 8 wkts (41b rem)"
+    },
     "espn-1539438": {
       "innings": [
         {
@@ -17234,6 +17575,9 @@
     "espn-1525662|Ryan Rickelton|bat100",
     "espn-1525662|Simon Harmer|5w",
     "espn-1525662|Towhid Hridoy|bat100",
+    "espn-1525663|Marques Ackerman|bat100",
+    "espn-1525663|Marques Ackerman|bat150",
+    "espn-1525663|Wiaan Mulder|bat100",
     "espn-1528703|Mahli Beardman|5w",
     "espn-1528704|Tom Banton|bat100",
     "espn-1528705|Ben Duckett|bat100",
@@ -17287,6 +17631,7 @@
     "espn-1528704",
     "espn-1528705",
     "espn-1528706",
+    "espn-1528707",
     "espn-1539438",
     "espn-1539439",
     "espn-1539440",
@@ -17321,7 +17666,7 @@
   ],
   "status": {
     "espn-1525662": "Bangladesh trail by 57 runs",
-    "espn-1525663": "South Africa trail by 3 runs",
+    "espn-1525663": "South Africa lead by 403 runs",
     "espn-1539442": "New Zealand trail by 213 runs",
     "espn-1550711": "Pakistan lead by 45 runs",
     "espn-1550712": "Sri Lanka lead by 82 runs",
@@ -17368,17 +17713,26 @@
       {
         "bat": {
           "Aiden Markram": 21,
-          "Marques Ackerman": 46,
-          "Zubayr Hamza": 9
+          "Marco Jansen": 67,
+          "Marques Ackerman": 150,
+          "Matthew Breetzke": 20,
+          "Ryan Rickelton": 20,
+          "Simon Harmer": 0,
+          "Tony de Zorzi": 66,
+          "Wiaan Mulder": 100,
+          "Zubayr Hamza": 27
         },
         "bowl": {
           "Ebadot Hossain": 1,
-          "Khaled Ahmed": 0,
-          "Shoriful Islam": 0,
-          "Taskin Ahmed": 0
+          "Khaled Ahmed": 2,
+          "Mominul Haque": 0,
+          "Najmul Hossain Shanto": 0,
+          "Shoriful Islam": 2,
+          "Taskin Ahmed": 1,
+          "Towhid Hridoy": 1
         },
-        "runs": 88,
-        "wkts": 1
+        "runs": 494,
+        "wkts": 7
       }
     ],
     "espn-1539442": [
@@ -17458,7 +17812,7 @@
   },
   "test_sig": {
     "espn-1525662": "[{'inning': 'Bangladesh Inning 1', 'r': 400, 'w': 10, 'o': 101.2}, {'inning': 'South Africa Inning 1', 'r': 557, 'w': 10, 'o': 124.1}, {'inning': 'Bangladesh Inning 2', 'r': 168, 'w': 10, 'o': 55.3}, {'inning': 'South Africa Inning 2', 'r': 12, 'w': 1, 'o': 1.3}]",
-    "espn-1525663": "[{'inning': 'Bangladesh Inning 1', 'r': 91, 'w': 10, 'o': 33.3}, {'inning': 'South Africa Inning 1', 'r': 88, 'w': 1, 'o': 17.0}]",
+    "espn-1525663": "[{'inning': 'Bangladesh Inning 1', 'r': 91, 'w': 10, 'o': 33.3}, {'inning': 'South Africa Inning 1', 'r': 494, 'w': 7, 'o': 115.0}]",
     "espn-1539442": "[{'inning': 'New Zealand Inning 1', 'r': 368, 'w': 10, 'o': 121.0}, {'inning': 'India Inning 1', 'r': 720, 'w': 9, 'o': 166.0}, {'inning': 'New Zealand Inning 2', 'r': 239, 'w': 5, 'o': 120.0}]",
     "espn-1550711": "[{'inning': 'Pakistan Inning 1', 'r': 434, 'w': 9, 'o': 106.3}, {'inning': 'Sri Lanka Inning 1', 'r': 446, 'w': 10, 'o': 117.2}, {'inning': 'Pakistan Inning 2', 'r': 284, 'w': 8, 'o': 84.5}]",
     "espn-1550712": "[{'inning': 'Sri Lanka Inning 1', 'r': 98, 'w': 10, 'o': 35.3}, {'inning': 'Pakistan Inning 1', 'r': 325, 'w': 10, 'o': 87.5}, {'inning': 'Sri Lanka Inning 2', 'r': 316, 'w': 10, 'o': 95.0}, {'inning': 'Pakistan Inning 2', 'r': 90, 'w': 2, 'o': 13.0}]",
