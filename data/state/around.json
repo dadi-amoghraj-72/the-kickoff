@@ -59,7 +59,9 @@
     "rugby:604885",
     "chess:KRwFQhHE",
     "chess:IckNcjqS:final",
-    "chess:qfkdt8mn:table:2026-11-26"
+    "chess:qfkdt8mn:table:2026-11-26",
+    "chess:qfkdt8mn:table:2026-11-27",
+    "https://www.straitstimes.com/sport/football/germanys-freigang-ruled-out-of-womens-world-cup-after-whereabouts-failures-ban"
   ],
   "stories": {},
   "told": [
@@ -70,6 +72,10 @@
     {
       "at": "2026-11-22T23:30:06Z",
       "text": "Gerwyn Price won the Grand Slam of Darts final 16-11 against Gian van Veen in Wolverhampton, his first major title in four years."
+    },
+    {
+      "at": "2026-11-26T23:41:47Z",
+      "text": "German forward Laura Freigang received a 16-month suspension for three missed anti-doping whereabouts checks, so she will miss next year's women's World Cup, the German football federation announced."
     }
   ],
   "ufc": {
