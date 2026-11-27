@@ -873,7 +873,7 @@
    "status": "England won by 8 wkts (41b rem)"
   },
   "espn-1528708": {
-   "built": "2026-11-27T19:18:51Z",
+   "built": "2026-11-27T22:40:05Z",
    "potm": [
     {
      "name": "Jamie Overton",
@@ -1260,721 +1260,8 @@
    ],
    "status": "England won by 7 wkts (43b rem) (DLS)"
   },
-  "espn-1539442": {
-   "built": "2026-11-23T22:40:05Z",
-   "potm": [
-    {
-     "name": "Henry Nicholls",
-     "team": "New Zealand"
-    }
-   ],
-   "scorecard": [
-    {
-     "batting": [
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Tom Latham"
-       },
-       "dismissal-text": "b Bumrah",
-       "m": 3,
-       "mark": "(c)",
-       "r": 0,
-       "sr": 0.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 13,
-       "batsman": {
-        "name": "Devon Conway"
-       },
-       "dismissal-text": "c †Pant b Kamboj",
-       "m": 19,
-       "mark": "",
-       "r": 4,
-       "sr": 30.76
-      },
-      {
-       "4s": 21,
-       "6s": 0,
-       "b": 335,
-       "batsman": {
-        "name": "Henry Nicholls"
-       },
-       "dismissal-text": "not out",
-       "m": 589,
-       "mark": "",
-       "r": 175,
-       "sr": 52.23
-      },
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 50,
-       "batsman": {
-        "name": "Rachin Ravindra"
-       },
-       "dismissal-text": "c †Pant b Akash Deep",
-       "m": 75,
-       "mark": "",
-       "r": 15,
-       "sr": 30.0
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 8,
-       "batsman": {
-        "name": "Daryl Mitchell"
-       },
-       "dismissal-text": "c Jaiswal b Bumrah",
-       "m": 11,
-       "mark": "",
-       "r": 1,
-       "sr": 12.5
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 22,
-       "batsman": {
-        "name": "Tom Blundell"
-       },
-       "dismissal-text": "c Shubman Gill b Bumrah",
-       "m": 38,
-       "mark": "†",
-       "r": 5,
-       "sr": 22.72
-      },
-      {
-       "4s": 14,
-       "6s": 0,
-       "b": 216,
-       "batsman": {
-        "name": "Glenn Phillips"
-       },
-       "dismissal-text": "b Akash Deep",
-       "m": 305,
-       "mark": "",
-       "r": 118,
-       "sr": 54.62
-      },
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 44,
-       "batsman": {
-        "name": "Nathan Smith"
-       },
-       "dismissal-text": "lbw b Prasidh Krishna",
-       "m": 72,
-       "mark": "",
-       "r": 14,
-       "sr": 31.81
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 21,
-       "batsman": {
-        "name": "Kyle Jamieson"
-       },
-       "dismissal-text": "c Rahul b Akash Deep",
-       "m": 28,
-       "mark": "",
-       "r": 11,
-       "sr": 52.38
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 9,
-       "batsman": {
-        "name": "Matt Henry"
-       },
-       "dismissal-text": "lbw b Bumrah",
-       "m": 9,
-       "mark": "",
-       "r": 1,
-       "sr": 11.11
-      },
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 12,
-       "batsman": {
-        "name": "Jacob Duffy"
-       },
-       "dismissal-text": "c †Pant b Kamboj",
-       "m": 24,
-       "mark": "",
-       "r": 4,
-       "sr": 33.33
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Jasprit Bumrah"
-       },
-       "eco": 3.17,
-       "m": 8,
-       "nb": 2,
-       "o": 29.0,
-       "r": 92,
-       "w": 4,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Anshul Kamboj"
-       },
-       "eco": 3.0,
-       "m": 5,
-       "nb": 1,
-       "o": 23.0,
-       "r": 69,
-       "w": 2,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Akash Deep"
-       },
-       "eco": 2.3,
-       "m": 7,
-       "nb": 3,
-       "o": 23.0,
-       "r": 53,
-       "w": 3,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Prasidh Krishna"
-       },
-       "eco": 3.84,
-       "m": 2,
-       "nb": 0,
-       "o": 26.0,
-       "r": 100,
-       "w": 1,
-       "wd": 1
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Washington Sundar"
-       },
-       "eco": 2.25,
-       "m": 2,
-       "nb": 0,
-       "o": 20.0,
-       "r": 45,
-       "w": 0,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [],
-      "extras": {
-       "lb": 9,
-       "nb": 6,
-       "total": 20,
-       "w": 5
-      },
-      "fow": "1-2 (Latham, 0.3), 2-12 (Conway, 3.2), 3-51 (Ravindra, 19.1), 4-52 (Mitchell, 20.6), 5-70 (Blundell, 28.2), 6-286 (Phillips, 93.6), 7-318 (Smith, 109.1), 8-343 (Jamieson, 115.1), 9-348 (Henry, 116.5), 10-368 (Duffy, 120.6)",
-      "total": {
-       "o": 121.0,
-       "r": 368,
-       "rr": 3.04,
-       "w": 10
-      }
-     },
-     "inning": "New Zealand 1st Innings"
-    },
-    {
-     "batting": [
-      {
-       "4s": 16,
-       "6s": 0,
-       "b": 89,
-       "batsman": {
-        "name": "Yashasvi Jaiswal"
-       },
-       "dismissal-text": "c †Blundell b Henry",
-       "m": 137,
-       "mark": "",
-       "r": 85,
-       "sr": 95.5
-      },
-      {
-       "4s": 9,
-       "6s": 2,
-       "b": 290,
-       "batsman": {
-        "name": "KL Rahul"
-       },
-       "dismissal-text": "b Smith",
-       "m": 492,
-       "mark": "",
-       "r": 136,
-       "sr": 46.89
-      },
-      {
-       "4s": 10,
-       "6s": 0,
-       "b": 175,
-       "batsman": {
-        "name": "Devdutt Padikkal"
-       },
-       "dismissal-text": "b Jamieson",
-       "m": 256,
-       "mark": "",
-       "r": 80,
-       "sr": 45.71
-      },
-      {
-       "4s": 9,
-       "6s": 2,
-       "b": 146,
-       "batsman": {
-        "name": "Shubman Gill"
-       },
-       "dismissal-text": "b Duffy",
-       "m": 195,
-       "mark": "(c)",
-       "r": 98,
-       "sr": 67.12
-      },
-      {
-       "4s": 10,
-       "6s": 6,
-       "b": 153,
-       "batsman": {
-        "name": "Rishabh Pant"
-       },
-       "dismissal-text": "c Smith b Ravindra",
-       "m": 225,
-       "mark": "†",
-       "r": 128,
-       "sr": 83.66
-      },
-      {
-       "4s": 6,
-       "6s": 1,
-       "b": 42,
-       "batsman": {
-        "name": "Anshul Kamboj"
-       },
-       "dismissal-text": "c Conway b Phillips",
-       "m": 66,
-       "mark": "",
-       "r": 38,
-       "sr": 90.47
-      },
-      {
-       "4s": 7,
-       "6s": 1,
-       "b": 79,
-       "batsman": {
-        "name": "Dhruv Jurel"
-       },
-       "dismissal-text": "st †Blundell b Phillips",
-       "m": 121,
-       "mark": "",
-       "r": 78,
-       "sr": 98.73
-      },
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 26,
-       "batsman": {
-        "name": "Washington Sundar"
-       },
-       "dismissal-text": "c & b Ravindra",
-       "m": 42,
-       "mark": "",
-       "r": 24,
-       "sr": 92.3
-      },
-      {
-       "4s": 0,
-       "6s": 2,
-       "b": 5,
-       "batsman": {
-        "name": "Akash Deep"
-       },
-       "dismissal-text": "c Latham b Phillips",
-       "m": 4,
-       "mark": "",
-       "r": 13,
-       "sr": 260.0
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 5,
-       "batsman": {
-        "name": "Jasprit Bumrah"
-       },
-       "dismissal-text": "not out",
-       "m": 9,
-       "mark": "",
-       "r": 7,
-       "sr": 140.0
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Matt Henry"
-       },
-       "eco": 2.84,
-       "m": 7,
-       "nb": 0,
-       "o": 33.0,
-       "r": 94,
-       "w": 1,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Kyle Jamieson"
-       },
-       "eco": 2.83,
-       "m": 6,
-       "nb": 0,
-       "o": 31.0,
-       "r": 88,
-       "w": 1,
-       "wd": 1
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Jacob Duffy"
-       },
-       "eco": 6.09,
-       "m": 1,
-       "nb": 7,
-       "o": 33.0,
-       "r": 201,
-       "w": 1,
-       "wd": 1
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Nathan Smith"
-       },
-       "eco": 2.89,
-       "m": 4,
-       "nb": 4,
-       "o": 29.0,
-       "r": 84,
-       "w": 1,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Glenn Phillips"
-       },
-       "eco": 6.41,
-       "m": 0,
-       "nb": 3,
-       "o": 24.0,
-       "r": 154,
-       "w": 3,
-       "wd": 1
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Rachin Ravindra"
-       },
-       "eco": 4.4,
-       "m": 0,
-       "nb": 0,
-       "o": 10.0,
-       "r": 44,
-       "w": 2,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Daryl Mitchell"
-       },
-       "eco": 6.5,
-       "m": 0,
-       "nb": 0,
-       "o": 6.0,
-       "r": 39,
-       "w": 0,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [
-       "Krishna"
-      ],
-      "extras": {
-       "b": 9,
-       "lb": 7,
-       "nb": 14,
-       "total": 33,
-       "w": 3
-      },
-      "fow": "1-130 (Jaiswal, 27.5), 2-295 (Padikkal, 82.6), 3-386 (Rahul, 103.3), 4-486 (Gill, 124.4), 5-554 (Kamboj, 138.5), 6-629 (Pant, 152.5), 7-683 (Sundar, 162.4), 8-696 (Deep, 163.4), 9-720 (Jurel, 165.6)",
-      "total": {
-       "o": 166.0,
-       "r": 720,
-       "rr": 4.33,
-       "w": 9
-      }
-     },
-     "inning": "India 1st Innings"
-    },
-    {
-     "batting": [
-      {
-       "4s": 0,
-       "6s": 0,
-       "b": 2,
-       "batsman": {
-        "name": "Tom Latham"
-       },
-       "dismissal-text": "c †Pant b Bumrah",
-       "m": 2,
-       "mark": "(c)",
-       "r": 0,
-       "sr": 0.0
-      },
-      {
-       "4s": 7,
-       "6s": 0,
-       "b": 165,
-       "batsman": {
-        "name": "Devon Conway"
-       },
-       "dismissal-text": "c †Pant b Washington Sundar",
-       "m": 257,
-       "mark": "",
-       "r": 65,
-       "sr": 39.39
-      },
-      {
-       "4s": 3,
-       "6s": 0,
-       "b": 59,
-       "batsman": {
-        "name": "Henry Nicholls"
-       },
-       "dismissal-text": "c Jurel b Prasidh Krishna",
-       "m": 103,
-       "mark": "",
-       "r": 31,
-       "sr": 52.54
-      },
-      {
-       "4s": 4,
-       "6s": 0,
-       "b": 129,
-       "batsman": {
-        "name": "Rachin Ravindra"
-       },
-       "dismissal-text": "c Rahul b Prasidh Krishna",
-       "m": 173,
-       "mark": "",
-       "r": 37,
-       "sr": 28.68
-      },
-      {
-       "4s": 4,
-       "6s": 1,
-       "b": 186,
-       "batsman": {
-        "name": "Daryl Mitchell"
-       },
-       "dismissal-text": "not out",
-       "m": 299,
-       "mark": "",
-       "r": 49,
-       "sr": 26.34
-      },
-      {
-       "4s": 1,
-       "6s": 0,
-       "b": 54,
-       "batsman": {
-        "name": "Tom Blundell"
-       },
-       "dismissal-text": "c †Pant b Kamboj",
-       "m": 78,
-       "mark": "†",
-       "r": 15,
-       "sr": 27.77
-      },
-      {
-       "4s": 2,
-       "6s": 0,
-       "b": 126,
-       "batsman": {
-        "name": "Glenn Phillips"
-       },
-       "dismissal-text": "not out",
-       "m": 193,
-       "mark": "",
-       "r": 26,
-       "sr": 20.63
-      }
-     ],
-     "bowling": [
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Jasprit Bumrah"
-       },
-       "eco": 2.1,
-       "m": 7,
-       "nb": 0,
-       "o": 20.0,
-       "r": 42,
-       "w": 1,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Akash Deep"
-       },
-       "eco": 2.35,
-       "m": 6,
-       "nb": 0,
-       "o": 20.0,
-       "r": 47,
-       "w": 0,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Anshul Kamboj"
-       },
-       "eco": 2.04,
-       "m": 5,
-       "nb": 0,
-       "o": 22.0,
-       "r": 45,
-       "w": 1,
-       "wd": 1
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Prasidh Krishna"
-       },
-       "eco": 1.21,
-       "m": 10,
-       "nb": 0,
-       "o": 19.0,
-       "r": 23,
-       "w": 2,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Washington Sundar"
-       },
-       "eco": 1.85,
-       "m": 14,
-       "nb": 1,
-       "o": 35.0,
-       "r": 65,
-       "w": 1,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Devdutt Padikkal"
-       },
-       "eco": 2.0,
-       "m": 0,
-       "nb": 0,
-       "o": 1.0,
-       "r": 2,
-       "w": 0,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Yashasvi Jaiswal"
-       },
-       "eco": 2.0,
-       "m": 0,
-       "nb": 0,
-       "o": 2.0,
-       "r": 4,
-       "w": 0,
-       "wd": 0
-      },
-      {
-       "0s": 0,
-       "bowler": {
-        "name": "Dhruv Jurel"
-       },
-       "eco": 1.0,
-       "m": 0,
-       "nb": 0,
-       "o": 1.0,
-       "r": 1,
-       "w": 0,
-       "wd": 0
-      }
-     ],
-     "espn": {
-      "dnb": [
-       "Smith",
-       "Jamieson",
-       "Henry",
-       "Duffy"
-      ],
-      "extras": {
-       "b": 10,
-       "nb": 1,
-       "total": 16,
-       "w": 5
-      },
-      "fow": "1-0 (Latham, 0.2), 2-60 (Nicholls, 22.1), 3-132 (Conway, 55.5), 4-139 (Ravindra, 59.6), 5-176 (Blundell, 76.6)",
-      "total": {
-       "o": 120.0,
-       "r": 239,
-       "rr": 1.99,
-       "w": 5
-      }
-     },
-     "inning": "New Zealand 2nd Innings"
-    }
-   ],
-   "status": "Match drawn"
-  },
   "espn-1539443": {
-   "built": "2026-11-27T19:18:51Z",
+   "built": "2026-11-27T22:40:05Z",
    "potm": [],
    "scorecard": [
     {
@@ -2047,28 +1334,41 @@
       {
        "4s": 6,
        "6s": 0,
-       "b": 117,
+       "b": 135,
        "batsman": {
         "name": "Tom Blundell"
        },
        "dismissal-text": "not out",
        "m": null,
        "mark": "†",
-       "r": 53,
-       "sr": 45.29
+       "r": 55,
+       "sr": 40.74
       },
       {
        "4s": 5,
        "6s": 0,
-       "b": 64,
+       "b": 67,
        "batsman": {
         "name": "Glenn Phillips"
+       },
+       "dismissal-text": "c †Pant b Kamboj",
+       "m": null,
+       "mark": "",
+       "r": 36,
+       "sr": 53.73
+      },
+      {
+       "4s": 2,
+       "6s": 0,
+       "b": 25,
+       "batsman": {
+        "name": "Nathan Smith"
        },
        "dismissal-text": "not out",
        "m": null,
        "mark": "",
-       "r": 36,
-       "sr": 56.25
+       "r": 13,
+       "sr": 52.0
       }
      ],
      "bowling": [
@@ -2077,11 +1377,11 @@
        "bowler": {
         "name": "Jasprit Bumrah"
        },
-       "eco": 1.94,
-       "m": 4,
+       "eco": 1.86,
+       "m": 6,
        "nb": 0,
-       "o": 19.0,
-       "r": 37,
+       "o": 23.0,
+       "r": 43,
        "w": 0,
        "wd": 0
       },
@@ -2090,12 +1390,12 @@
        "bowler": {
         "name": "Anshul Kamboj"
        },
-       "eco": 3.29,
+       "eco": 3.21,
        "m": 5,
-       "nb": 0,
-       "o": 17.0,
-       "r": 56,
-       "w": 1,
+       "nb": 1,
+       "o": 20.3,
+       "r": 66,
+       "w": 2,
        "wd": 0
       },
       {
@@ -2142,25 +1442,25 @@
       "dnb": [],
       "extras": {
        "b": 8,
-       "lb": 5,
-       "nb": 7,
-       "total": 20
+       "lb": 6,
+       "nb": 8,
+       "total": 22
       },
-      "fow": "1-77 (Conway, 25.6), 2-110 (Latham, 41.3), 3-110 (Nicholls, 42.1), 4-110 (Ravindra, 43.6), 5-184 (Mitchell, 64.4)",
+      "fow": "1-77 (Conway, 25.6), 2-110 (Latham, 41.3), 3-110 (Nicholls, 42.1), 4-110 (Ravindra, 43.6), 5-184 (Mitchell, 64.4), 6-247 (Phillips, 86.2)",
       "total": {
-       "o": 85.0,
-       "r": 246,
-       "rr": 2.89,
-       "w": 5
+       "o": 92.3,
+       "r": 263,
+       "rr": 2.84,
+       "w": 6
       }
      },
      "inning": "New Zealand 1st Innings"
     }
    ],
-   "status": "Day 1: India won toss & fielded"
+   "status": "Day 2  Session 1: India won toss & fielded"
   },
   "espn-1543979": {
-   "built": "2026-11-27T19:18:51Z",
+   "built": "2026-11-27T22:40:05Z",
    "potm": [
     {
      "name": "Freya Kemp",
@@ -2591,7 +1891,7 @@
    "status": "Scorchers won by 17 runs"
   }
  },
- "ran": "2026-11-27T19:18:51Z",
+ "ran": "2026-11-27T22:40:05Z",
  "series": {
   "espn-1525663": {
    "built": "2026-11-24T22:40:05Z",
@@ -2738,233 +2038,8 @@
     }
    ]
   },
-  "espn-1539442": {
-   "built": "2026-11-23T22:40:05Z",
-   "rows": [
-    {
-     "date": "Oct 22 2026",
-     "format": "T20I",
-     "n": "1st",
-     "result": "India won by 4 wkts (2b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "225/4"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "230/6"
-      }
-     ],
-     "venue": "Christchurch"
-    },
-    {
-     "date": "Oct 24 2026",
-     "format": "T20I",
-     "n": "2nd",
-     "result": "India won by 4 wkts (1b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "180/5"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "181/6"
-      }
-     ],
-     "venue": "Christchurch"
-    },
-    {
-     "date": "Oct 27 2026",
-     "format": "T20I",
-     "n": "3rd",
-     "result": "India won by 6 wkts (40b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "198/3"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "199/4"
-      }
-     ],
-     "venue": "Wellington"
-    },
-    {
-     "date": "Oct 30 2026",
-     "format": "T20I",
-     "n": "4th",
-     "result": "New Zealand won by 87 runs",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "259/7"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "172/9"
-      }
-     ],
-     "venue": "Auckland"
-    },
-    {
-     "date": "Nov 1 2026",
-     "format": "T20I",
-     "n": "5th",
-     "result": "New Zealand won by 7 wkts (12b rem)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "191/8"
-      },
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "195/3"
-      }
-     ],
-     "venue": "Hamilton"
-    },
-    {
-     "date": "Nov 4 2026",
-     "format": "ODI",
-     "n": "1st",
-     "result": "India won by 5 wkts (56b rem) (DLS)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "185"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "143/5"
-      }
-     ],
-     "venue": "Auckland"
-    },
-    {
-     "date": "Nov 7 2026",
-     "format": "ODI",
-     "n": "2nd",
-     "result": "India won by 4 runs (DLS)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "134"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "113/7"
-      }
-     ],
-     "venue": "Wellington"
-    },
-    {
-     "date": "Nov 10 2026",
-     "format": "ODI",
-     "n": "3rd",
-     "result": "No result (abandoned with a toss)",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": ""
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": ""
-      }
-     ],
-     "venue": "Hamilton"
-    },
-    {
-     "date": "Nov 13 2026",
-     "format": "ODI",
-     "n": "4th",
-     "result": "New Zealand won by 244 runs",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "333"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "89"
-      }
-     ],
-     "venue": "Mount Maunganui"
-    },
-    {
-     "date": "Nov 15 2026",
-     "format": "ODI",
-     "n": "5th",
-     "result": "India won by 22 runs",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "209"
-      },
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "187"
-      }
-     ],
-     "venue": "Mount Maunganui"
-    },
-    {
-     "date": "Nov 19-23 2026",
-     "format": "Test",
-     "n": "1st",
-     "result": "Match drawn",
-     "starts": null,
-     "teams": [
-      {
-       "abbr": "NZ",
-       "name": "New Zealand",
-       "score": "368 & 239/5"
-      },
-      {
-       "abbr": "IND",
-       "name": "India",
-       "score": "720/9d"
-      }
-     ],
-     "venue": "Wellington"
-    }
-   ]
-  },
   "espn-1539443": {
-   "built": "2026-11-27T19:18:51Z",
+   "built": "2026-11-27T22:40:05Z",
    "rows": [
     {
      "date": "Oct 22 2026",
@@ -3191,7 +2266,7 @@
  },
  "tables": {
   "WBBL": {
-   "built": "2026-11-27T19:18:51Z",
+   "built": "2026-11-27T22:40:05Z",
    "rows": [
     {
      "l": 1,
