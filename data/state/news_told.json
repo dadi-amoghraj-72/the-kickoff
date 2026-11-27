@@ -1,33 +1,6 @@
 {
   "told": [
     {
-      "at": "2026-11-20T23:15:00+00:00",
-      "club": "Manchester United",
-      "kind": "manager_appointed",
-      "names": [
-        "Mauricio",
-        "Pochettino"
-      ]
-    },
-    {
-      "at": "2026-11-20T23:15:00+00:00",
-      "club": "Arsenal",
-      "kind": "injury",
-      "names": [
-        "Bukayo",
-        "Saka"
-      ]
-    },
-    {
-      "at": "2026-11-20T23:15:00+00:00",
-      "club": "Bayern Munich",
-      "kind": "injury",
-      "names": [
-        "Harry",
-        "Kane"
-      ]
-    },
-    {
       "at": "2026-11-21T23:26:44.623451+00:00",
       "club": "Arsenal",
       "kind": "injury",
@@ -100,6 +73,45 @@
         "Jamal",
         "Max",
         "Musiala"
+      ]
+    },
+    {
+      "at": "2026-11-27T23:40:32.099431+00:00",
+      "club": "Arsenal",
+      "kind": "manager_sacked",
+      "names": [
+        "Renee",
+        "Slegers"
+      ]
+    },
+    {
+      "at": "2026-11-27T23:40:32.099431+00:00",
+      "club": "Manchester United",
+      "kind": "transfer_confirmed",
+      "names": [
+        "Bruno",
+        "Fernandes"
+      ]
+    },
+    {
+      "at": "2026-11-27T23:40:32.099431+00:00",
+      "club": "Arsenal",
+      "kind": "manager_sacked",
+      "names": [
+        "Renée",
+        "Slegers",
+        "Women"
+      ]
+    },
+    {
+      "at": "2026-11-27T23:40:32.099431+00:00",
+      "club": "Manchester United",
+      "kind": "transfer_confirmed",
+      "names": [
+        "Bruno",
+        "Fernandes",
+        "Man",
+        "Utd"
       ]
     }
   ]
