@@ -42,11 +42,16 @@ print(f"saved {cricketcache.PATH.relative_to(ROOT)}")
 if "--push" in sys.argv:
     def git(*a):
         return subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True)
-    git("pull", "--rebase", "--autostash")
+    pulled = git("pull", "--rebase", "--autostash")
+    if pulled.returncode != 0:
+        print("PULL FAILED: " + (pulled.stdout + pulled.stderr).strip()[:400])
     git("add", "data/cricket_cache.json")
     done = git("commit", "-m", f"Cricket cache ({day})")
     if done.returncode != 0 and "nothing to commit" in (done.stdout + done.stderr):
         print("nothing new to push")
+    elif done.returncode != 0:
+        print("COMMIT FAILED: " + (done.stdout + done.stderr).strip()[:400])
+        sys.exit(1)
     else:
         pushed = git("push", "origin", "main")
         print("pushed" if pushed.returncode == 0 else "committed but the push failed: " + pushed.stderr.strip()[:200])
