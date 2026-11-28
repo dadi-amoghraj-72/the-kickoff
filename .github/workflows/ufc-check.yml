@@ -9,11 +9,11 @@ permissions:
 
 jobs:
   check:
-    runs-on: ubuntu-24.04            # pinned: ubuntu-latest (Ubuntu 26.04) has no Python 3.9
+    runs-on: ubuntu-24.04            # pinned so the runner image does not change under us
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.15"
       - run: python scripts/ufc_check.py

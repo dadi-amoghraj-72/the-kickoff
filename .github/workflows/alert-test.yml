@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   fail-on-purpose:
-    runs-on: ubuntu-24.04            # pinned: ubuntu-latest (Ubuntu 26.04) has no Python 3.9
+    runs-on: ubuntu-24.04            # pinned so the runner image does not change under us
     timeout-minutes: 5
     env:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.9"
+          python-version: "3.15"
       - name: Fail on purpose
         run: |
           echo "This step fails deliberately to test the alert."
